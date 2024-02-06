@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import {Providers} from './providers'
 import Link from 'next/link'
+import NavbarNUI from '../components/navbars/NavbarNUI'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -16,13 +17,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang='en'>
+    <html  lang='en'>
       <body className={inter.className}>
         <Providers>
           <header className='py-6'>
-            
+            <NavbarNUI></NavbarNUI>
 
-            
           </header>
           <main>{children}</main>
           <footer></footer>
