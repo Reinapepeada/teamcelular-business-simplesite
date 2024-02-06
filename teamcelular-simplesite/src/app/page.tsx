@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 import { Button } from '@nextui-org/button'
 import { Card, CardBody } from '@nextui-org/card'
 
