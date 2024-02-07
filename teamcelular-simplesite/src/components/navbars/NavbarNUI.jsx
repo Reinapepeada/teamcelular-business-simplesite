@@ -1,40 +1,51 @@
-''
+"";
 import React from "react";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react";
+import {
+    Navbar,
+    NavbarBrand,
+    NavbarContent,
+    NavbarItem,
+    Link,
+    Button,
+} from "@nextui-org/react";
+import ThemeSwitcher from "../switch/ThemeSwitcher";
 
 export default function NavbarNUI() {
-  return (
-    <Navbar className="black">
-      <NavbarBrand>
-        <p className="font-bold text-inherit">ACME</p>
-      </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page">
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
-          </Link>
-        </NavbarItem>
-      </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
-          </Button>
-        </NavbarItem>
-      </NavbarContent>
-    </Navbar>
-  );
+    return (
+        <Navbar className="black" position="sticky" maxWidth="2xl">
+            <NavbarBrand>
+                <p className="font-bold text-inherit">Team Celular</p>
+            </NavbarBrand>
+            <NavbarContent className="hidden sm:flex gap-4" justify="center">
+                <NavbarItem isActive>
+                    <Link href="#">Reparaciones</Link>
+                </NavbarItem>
+                <NavbarItem>
+                    <Link color="foreground" href="#" aria-current="page">
+                        Productos
+                    </Link>
+                </NavbarItem>
+                <NavbarItem>
+                    <Link color="foreground" href="#">
+                        Contacto
+                    </Link>
+                </NavbarItem>
+                <NavbarItem>
+                    <Link color="foreground" href="#">
+                        Sobre Nosotros
+                    </Link>
+                </NavbarItem>
+            </NavbarContent>
+            <NavbarContent justify="end">
+                <NavbarItem>
+                    <Button as={Link} color="warning" href="#" variant="flat">
+                        Contacto Rapido
+                    </Button>
+                </NavbarItem>
+            </NavbarContent>
+            <NavbarItem>
+                <ThemeSwitcher></ThemeSwitcher>
+            </NavbarItem>
+        </Navbar>
+    );
 }
