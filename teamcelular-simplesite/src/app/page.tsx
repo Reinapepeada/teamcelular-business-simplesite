@@ -1,10 +1,11 @@
-import ReparacionCelular from '@/components/animations/ReparacionCelulares'
-import { Button } from '@nextui-org/button'
-import { Card, CardBody } from '@nextui-org/card'
+import BannerHome from "@/components/banners/BannerHome"
 
 
 export default function Home() {
   return (
-    <ReparacionCelular />
+    <div>
+      <BannerHome />
+    </div>
+    
   )
 }
