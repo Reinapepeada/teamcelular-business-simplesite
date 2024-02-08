@@ -8,21 +8,26 @@ const oswald = Oswald({ subsets: ["latin"], weight:'400' });
 
 export default function BannerHome() {
     return (
-        <section className="mx-auto">
-            <div className="absolute
+        <section className="flex flex-col 
+        
+        justify-center
+        items-center
+        space-y-4
+        ">
+
+            <div className="object-cover flex justify-center 
             
-            z-2
-            flex
-            justify-center
-            w-full
-            
+            w-3/4
+            md:w-1/2
+            xl:w-1/4
             ">
-
-            <h2 className={`${oswald.className} `} >La EFICIENCIA es nuestro norte.</h2>
-            </div>
-
-            <div className="object-cover flex justify-center ">
                 <ReparacionCelular />
+            </div>
+            <div className="space-y-1 flex flex-col items-start md:flex md:flex-row md:space-x-2 md:items-end">
+
+            <h2 className={`${oswald.className} text-5xl light:text-black`} >La</h2>
+            <h2 className={`${oswald.className} text-5xl light:text-black`} >EFICIENCIA</h2>
+            <h2 className={`${oswald.className} text-5xl light:text-black`} >es nuestro norte.</h2>
             </div>
         </section>
     );

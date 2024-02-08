@@ -38,7 +38,7 @@ export default function NavbarNUI() {
             </NavbarContent>
             <NavbarContent justify="end">
                 <NavbarItem>
-                    <Button as={Link} color="warning" href="#" variant="flat">
+                    <Button  as={Link} color="primary" href="#" variant="shadow">
                         Contacto Rapido
                     </Button>
                 </NavbarItem>

@@ -21,8 +21,8 @@ const ReparacionCelular = () => {
           alt="Reparacion de Celulares"
           src="/celu.png"
           as={NextImage}
-          width={300}
-          height={300}
+          width={10000}
+          height={10000}
         />
       </motion.div>      
    
