@@ -21,12 +21,15 @@ export default function CoverLeguend() {
                     Your checklist for better sleep
                 </h4>
             </CardHeader>
-            <Image
-                removeWrapper
-                alt="Relaxing app background"
-                className="z-0 w-full h-full object-cover"
-                src="/images/card-example-5.jpeg"
-            />
+            <video autoPlay 
+            
+            loop
+            muted
+            className="w-full h-full object-cover"
+            >
+                
+                <source src="interposerVideo.mp4" type="video/mp4" />
+            </video>
             <CardFooter className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">
                 <div className="flex flex-grow gap-2 items-center">
                     <Image

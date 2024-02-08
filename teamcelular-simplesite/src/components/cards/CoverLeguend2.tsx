@@ -19,12 +19,15 @@ export default function CoverLeguend() {
                 </p>
                 <h4 className="text-black font-medium text-2xl">Acme camera</h4>
             </CardHeader>
-            <Image
-                removeWrapper
-                alt="Card example background"
-                className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
-                src="/images/card-example-6.jpeg"
-            />
+            <video autoPlay 
+            
+            loop
+            muted
+            className="w-full h-full object-cover"
+            >
+                
+                <source src="microscopioVideo.mp4" type="video/mp4" />
+            </video>
             <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
                 <div>
                     <p className="text-black text-tiny">Available soon.</p>

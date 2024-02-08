@@ -4,6 +4,8 @@ import { Inter } from 'next/font/google'
 import {Providers} from './providers'
 import NavbarNUI from '../components/navbars/NavbarNUI'
 const inter = Inter({ subsets: ['latin'] })
+// importo la fuente de google
+
 
 export const metadata: Metadata = {
   title: 'Create Next App',
