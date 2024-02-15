@@ -14,6 +14,11 @@ export default function NavbarNUI() {
     return (
         <Navbar className="black" position="sticky" maxWidth="2xl">
             <NavbarBrand>
+                <img className="
+                
+                w-9 h-12 m-3
+                " 
+                src="/images/teamcelular.png" alt="Team Celular" />
                 <p className="font-bold text-inherit">Team Celular</p>
             </NavbarBrand>
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
