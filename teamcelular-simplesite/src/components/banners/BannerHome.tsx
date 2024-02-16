@@ -20,13 +20,13 @@ export default function BannerHome() {
             md:space-x-0
             md:w-3/4
         ">
-            <div className={`${oswald.className} text-8xl m-2 light:text-black`}>
+            <div className={`${oswald.className} text-7xl m-2 light:text-black`}>
                 <h1>Servicio Tecnico Profesional</h1>
             </div>
-            <div className="flex flex-col space-x-5 items-center justify-end xl:flex-row">
+            <div className="flex flex-col items-center justify-end xl:flex-row">
                 <div
                     className="object-cover flex justify-center 
-            
+                    m-3
                     w-3/4
                     md:w-1/2
                     xl:w-1/4
@@ -38,17 +38,17 @@ export default function BannerHome() {
                 justify-center
                 items-center
                 space-y-4">
-                    <div className="space-y-1 flex flex-col items-baseline md:space-x-2 md:items-baseline">
+                    <div className="space-y-1 flex justify-center flex-col items-baseline md:space-x-2 md:items-baseline">
                         <h2
-                            className={`${oswald.className} text-5xl light:text-black`}>
+                            className={`${oswald.className} text-4xl light:text-black`}>
                             La
                         </h2>
                         <h2
-                            className={`${oswald.className} text-5xl light:text-black`}>
+                            className={`${oswald.className} text-4xl light:text-black`}>
                             EFICIENCIA
                         </h2>
                         <h2
-                            className={`${oswald.className} text-5xl light:text-black`}>
+                            className={`${oswald.className} text-4xl light:text-black`}>
                             es nuestro norte.
                         </h2>
                     </div>

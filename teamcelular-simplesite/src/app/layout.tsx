@@ -21,7 +21,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <link rel="icon" href="/images/teamcelular.png" sizes="any" />
-            <body className={inter.className}>
+            <body className={`${inter.className} flex flex-col justify-center items-center`}>
                 <Providers>
                     <header className="py-6">
                         <NavbarNUI></NavbarNUI>
