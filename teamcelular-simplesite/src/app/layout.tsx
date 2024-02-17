@@ -23,7 +23,7 @@ export default function RootLayout({
             <link rel="icon" href="/images/teamcelular.png" sizes="any" />
             <body className={`${inter.className} flex flex-col justify-center items-center`}>
                 <Providers>
-                    <header className="py-6">
+                    <header >
                         <NavbarNUI></NavbarNUI>
                     </header>
                     <main>{children}</main>
