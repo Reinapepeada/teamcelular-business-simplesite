@@ -12,11 +12,11 @@ import ThemeSwitcher from "../switch/ThemeSwitcher";
 
 export default function NavbarNUI() {
     return (
-        <Navbar className="black" position="sticky" maxWidth="2xl">
+        <Navbar className="black m-5" position="sticky" maxWidth="2xl">
             <NavbarBrand>
                 <img className="
                 
-                w-9 h-12 m-3
+                w-11 h-15 m-3
                 " 
                 src="/images/teamcelular.png" alt="Team Celular" />
                 <p className="font-bold text-inherit">Team Celular</p>
