@@ -8,6 +8,9 @@ import {
     Button,
 } from "@nextui-org/react";
 
+import { BsWhatsapp, BsFillLightningChargeFill } from "react-icons/bs";
+import Link from "next/link";
+
 export default function BannerCards() {
     return (
         <div className="w-full md:w-3/4 text-center gap-2 grid grid-cols-12 grid-rows-2 px-8">
@@ -33,7 +36,7 @@ export default function BannerCards() {
                         Toda clase de Equipos
                     </p>
                     <h4 className="text-white font-medium text-2xl">
-                        Reparamos todo tipo de dispositivos
+                        Reparamos todos tus dispositivos
                     </h4>
                 </CardHeader>
                 <Image
@@ -79,14 +82,19 @@ export default function BannerCards() {
                 />
                 <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
                     <div>
-                        <p className="text-black text-sm">Comunicate con nuestro Equipo</p>
+                        <p className="text-black text-sm">
+                            Comunicate con nuestro Equipo
+                        </p>
                     </div>
                     <Button
-                        className="text-tiny"
+                        className="text-md"
+                        as={Link}
                         color="primary"
                         radius="full"
+                        href="https://wa.me/5491151034595?text=Muy%20buen%20d%C3%ADa%21%20Tengo%20una%20duda."
                         size="sm">
-                        Chatea con Nosotros
+                        ¡Quitate dudas!
+                        <BsWhatsapp className="inline-block" />
                     </Button>
                 </CardFooter>
             </Card>
@@ -119,15 +127,23 @@ export default function BannerCards() {
                             src="/images/breathing-app-icon.jpeg"
                         />
                         <div className="flex flex-col">
-                            <p className="text-tiny text-white/60">
-                                
+                            <p className="text-sm text-white/60">
+                                Te mandamos el presupuesto personalizado
                             </p>
-                            
                         </div>
                     </div>
-                    <Button radius="full" size="sm">
-                    Cotiza tu Reparacion
-                    </Button>
+                    
+                        <Button
+                            className="text-md"
+                            as={Link}
+                            radius="full"
+                            size="sm"
+                            color="primary"
+                            href="/presupuesto-reparacion"
+                            >
+                            <BsFillLightningChargeFill />
+                            Cotiza tu Reparacion
+                        </Button>
                 </CardFooter>
             </Card>
         </div>

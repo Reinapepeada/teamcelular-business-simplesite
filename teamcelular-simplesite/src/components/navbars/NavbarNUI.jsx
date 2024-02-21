@@ -9,16 +9,17 @@ import {
     Button,
 } from "@nextui-org/react";
 import ThemeSwitcher from "../switch/ThemeSwitcher";
+import { BsWhatsapp } from "react-icons/bs";
 
 export default function NavbarNUI() {
     return (
-        <Navbar className="black m-5" position="sticky" maxWidth="2xl">
+        <Navbar className="black m-5" maxWidth="2xl">
             <NavbarBrand>
-                <img className="
-                
-                w-11 h-15 m-3
-                " 
-                src="/images/teamcelular.png" alt="Team Celular" />
+                <img
+                    className="w-11 h-15 m-3"
+                    src="/images/teamcelular.png"
+                    alt="Team Celular"
+                />
                 <p className="font-bold text-inherit">Team Celular</p>
             </NavbarBrand>
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
@@ -43,8 +44,13 @@ export default function NavbarNUI() {
             </NavbarContent>
             <NavbarContent justify="end">
                 <NavbarItem>
-                    <Button  as={Link} color="primary" href="#" variant="shadow">
+                    <Button
+                        as={Link}
+                        color="primary"
+                        href="https://wa.me/5491151034595?text=Muy%20buen%20d%C3%ADa%21%20Tengo%20una%20duda."
+                        variant="shadow">
                         Contacto Rapido
+                        <BsWhatsapp />
                     </Button>
                 </NavbarItem>
             </NavbarContent>

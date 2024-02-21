@@ -23,7 +23,9 @@ export default function ThemeSwitcher() {
             color="success"
             startContent={<SunIcon />}
             endContent={<MoonIcon />}
-            onChange={() => setTheme(theme === "dark" ? "light" : "dark")}>
+            onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="hidden sm:flex"
+            >
             {theme}
         </Switch>
     );

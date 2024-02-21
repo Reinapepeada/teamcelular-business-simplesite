@@ -14,12 +14,12 @@ import {
 
 export default function FooterNUI() {
     return (
-        <footer className="flex bg-footer-background place-center text-white justify-center py-9">
-            <div className="flex flex-col justify-center w-2/3 m-4 ">
-                <div className="flex flex-col md:flex-row md:text-start justify-between items-center text-center my-4">
+        <footer className="flex bg-footer-background w-full place-center text-white justify-center p-9">
+            <div className="flex flex-col justify-center w-10/12 m-4">
+                <div className="flex flex-col space-y-16 justify-between items-center text-center my-12 xl:flex-row xl:text-start xl:space-x-12">
                     <Card shadow="lg">
-                        <CardHeader className="text-2xl font-bold m-2">
-                            Recibe ofertas exclusivas y novedades
+                        <CardHeader className="text-xl font-bold m-2">
+                            Recibe ofertas exclusivas novedades
                         </CardHeader>
                         <CardBody className="text-sm p-4 space-y-4">
                             <p className="ml-1">Suscribite a nuestro CLUB</p>
@@ -28,12 +28,12 @@ export default function FooterNUI() {
                         </CardBody>
                     </Card>
                     <Divider
-                        className="hidden md:inline"
+                        className="hidden xl:inline"
                         orientation="vertical"
                     />
-                    <div className="flex flex-col items-center md:space-x-12 md:flex-row md:items-start">
+                    <div className="flex flex-col items-center justify-center space-y-4 md:space-x-12 md:flex-row md:items-baseline">
                         <div className="flex flex-col justify-center items-center md:items-start">
-                            <h6 className="text-2xl font-bold">Servicios</h6>
+                            <h6 className="text-3xl font-bold">Servicios</h6>
                             <div className={`${sora.className} space-y-2 mt-2`}>
                                 <h6 className="text-sm">Reparaciones</h6>
                                 <h6 className="text-sm">Gremio</h6>
@@ -43,7 +43,7 @@ export default function FooterNUI() {
                             </div>
                         </div>
                         <div className="flex flex-col justify-center items-center md:items-start">
-                            <h6 className="text-2xl font-bold">Productos</h6>
+                            <h6 className="text-3xl font-bold">Productos</h6>
                             <div className={`${sora.className} space-y-2 mt-2`}>
                                 <h6 className="text-sm">Accesorios</h6>
                                 <h6 className="text-sm">Electronica</h6>
@@ -51,7 +51,7 @@ export default function FooterNUI() {
                             </div>
                         </div>
                         <div className="flex flex-col justify-center items-center md:items-start">
-                            <h6 className="text-2xl font-bold">Locales</h6>
+                            <h6 className="text-3xl font-bold">Locales</h6>
                             <div className={`${sora.className} space-y-2 mt-2`}>
                                 <h6 className="text-sm">Ubicaciones</h6>
                                 <h6 className="text-sm">Citas</h6>
@@ -59,7 +59,7 @@ export default function FooterNUI() {
                             </div>
                         </div>
                         <div className="flex flex-col justify-center items-center md:items-start">
-                            <h6 className="text-2xl font-bold">Condiciones</h6>
+                            <h6 className="text-3xl font-bold">Condiciones</h6>
                             <div className={`${sora.className} space-y-2 mt-2`}>
                                 <h6 className="text-sm">
                                     Términos y condiciones
