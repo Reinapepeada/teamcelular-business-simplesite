@@ -1,7 +1,12 @@
 "use client";
 import React from "react";
+// fonts
 import { Sora } from "next/font/google";
 const sora = Sora({ subsets: ["latin"], weight: "300" });
+// icons
+import { BsFacebook, BsInstagram, BsWhatsapp } from "react-icons/bs";
+//Elements 
+import Link from "next/link";
 
 import {
     Card,
@@ -82,21 +87,12 @@ export default function FooterNUI() {
                 <div className="flex flex-row justify-between m-5">
                     <p className="text-md">© 2024 Team Celular</p>
                     <div className="flex flex-row justify-end items-center space-x-4">
-                        <img
-                            src="/images/facebook.png"
-                            alt="facebook"
-                            className="h-6"
-                        />
-                        <img
-                            src="/images/insta.png"
-                            alt="instagram"
-                            className="h-6"
-                        />
-                        <img
-                            src="/images/whatsapp.png"
-                            alt="twitter"
-                            className="h-6"
-                        />
+                        <Link href="https://wa.me/5491151034595?text=Muy%20buen%20d%C3%ADa%21%20Tengo%20una%20duda.">
+                            <BsWhatsapp size={25} />
+                        </Link>
+
+                        <BsInstagram size={25} />
+                        <BsFacebook size={25} />
                     </div>
                 </div>
             </div>

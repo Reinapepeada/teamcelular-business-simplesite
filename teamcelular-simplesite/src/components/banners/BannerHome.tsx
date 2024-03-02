@@ -11,13 +11,13 @@ export default function BannerHome() {
             flex-col
             justify-center
             items-center
-            p-8
             space-y-10
             md:flex-row
             md:space-y-8
             md:w-3/4
         ">
-            <div className={`${oswald.className} text-7xl p-2 m-2 light:text-black`}>
+            <div
+                className={`${oswald.className} text-7xl p-2 m-2 light:text-black`}>
                 <h1>Servicio Tecnico Profesional</h1>
             </div>
             <div className="flex flex-col items-center justify-end xl:flex-row">

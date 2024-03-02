@@ -21,13 +21,11 @@ export default function RootLayout({
     return (
         <html lang="en">
             <link rel="icon" href="/images/teamcelular.png" sizes="any" />
-            <body className={`${inter.className} flex flex-col justify-center items-center`}>
+            <body
+                className={`${inter.className} flex flex-col justify-center items-center`}>
                 <Providers>
-                    <header >
-                        <NavbarNUI></NavbarNUI>
-                    </header>
-                    <main>{children}</main>
-
+                    <NavbarNUI></NavbarNUI>
+                    <main className="flex justify-center">{children}</main>
                     <FooterNUI></FooterNUI>
                 </Providers>
             </body>
