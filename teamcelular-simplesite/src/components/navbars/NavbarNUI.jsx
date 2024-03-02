@@ -28,7 +28,7 @@ export default function NavbarNUI() {
     ];
 
     return (
-        <Navbar disableAnimation isBordered>
+        <Navbar disableAnimation isBordered maxWidth="2xl">
             <NavbarContent className="sm:hidden" justify="start">
                 <NavbarMenuToggle />
             </NavbarContent>
@@ -36,7 +36,7 @@ export default function NavbarNUI() {
             <NavbarContent className="sm:hidden pr-3 " justify="center">
                 <NavbarBrand>
                     <img
-                        className="w-11 h-15 m-1"
+                        className="w-11 h-15 "
                         src="/images/teamcelular.png"
                         alt="Team Celular"
                     />
@@ -76,13 +76,16 @@ export default function NavbarNUI() {
                 </NavbarItem>
             </NavbarContent>
 
-            <NavbarContent className="px-0" justify="end">
+            <NavbarContent className="" justify="end">
                 <NavbarItem>
                     <Button
                         as={Link}
+
                         color="primary"
                         href="https://wa.me/5491151034595?text=Muy%20buen%20d%C3%ADa%21%20Tengo%20una%20duda."
-                        variant="shadow">
+                        variant="shadow"
+                        size="md"
+                        >
                         Contacto
                         <BsWhatsapp />
                     </Button>

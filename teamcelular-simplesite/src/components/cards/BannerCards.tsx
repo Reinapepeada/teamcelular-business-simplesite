@@ -15,7 +15,7 @@ export default function BannerCards() {
     return (
         <div className="w-full  md:w-3/4 text-center gap-2 grid grid-cols-12 grid-rows-2 ">
             <Card className="col-span-12 md:col-span-4 h-[300px]">
-                <CardHeader className="absolute z-10 top-1 flex-col !items-start">
+                <CardHeader className="absolute z-10  flex-col !items-start">
                     <p className="text-tiny text-white/60 uppercase font-bold">
                         Repuestos Calidad
                     </p>
@@ -31,7 +31,7 @@ export default function BannerCards() {
                 />
             </Card>
             <Card isBlurred className="col-span-12 sm:col-span-4 h-[300px]">
-                <CardHeader className="absolute z-10 top-1 flex-col !items-start">
+                <CardHeader className="absolute bg-black/30 z-10  flex-col !items-start">
                     <p className="text-tiny text-white/60 uppercase font-bold">
                         Toda clase de Equipos
                     </p>
@@ -47,7 +47,7 @@ export default function BannerCards() {
                 />
             </Card>
             <Card className="col-span-12 sm:col-span-4 h-[300px]">
-                <CardHeader className="absolute z-10 top-1 flex-col !items-start">
+                <CardHeader className="absolute bg-black/10  z-10  flex-col !items-start">
                     <p className="text-tiny text-white/75 uppercase font-bold">
                         Herramientas Profesionales
                     </p>
@@ -66,7 +66,7 @@ export default function BannerCards() {
             <Card
                 isFooterBlurred
                 className="w-full h-[300px] col-span-12 sm:col-span-5">
-                <CardHeader className="absolute z-10 top-1 flex-col items-start">
+                <CardHeader className="absolute bg-black/20 z-10  flex-col items-start">
                     <p className="text-tiny text-white/70 uppercase font-bold">
                         Atencion al Cliente
                     </p>
@@ -81,27 +81,27 @@ export default function BannerCards() {
                     src="/images/equipoCall.jpg"
                 />
                 <CardFooter className="absolute justify-center space-y-2 bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 ">
-                <div className="flex flex-col space-y-2 justify-center items-center">
+                    <div className="flex flex-col space-y-2 justify-center items-center">
                         <p className="text-black text-sm">
                             Comunicate con nuestro Equipo
                         </p>
-                    <Button
-                        className="text-xl p-4"
-                        as={Link}
-                        color="primary"
-                        radius="full"
-                        href="https://wa.me/5491151034595?text=Muy%20buen%20d%C3%ADa%21%20Tengo%20una%20duda."
-                        size="md">
-                        ¡Quitate dudas!
-                        <BsWhatsapp className="inline-block" />
-                    </Button>
+                        <Button
+                            className="text-xl p-4"
+                            as={Link}
+                            color="primary"
+                            radius="full"
+                            href="https://wa.me/5491151034595?text=Muy%20buen%20d%C3%ADa%21%20Tengo%20una%20duda."
+                            size="md">
+                            <BsWhatsapp className="inline-block" />
+                            ¡Quitate dudas!
+                        </Button>
                     </div>
                 </CardFooter>
             </Card>
             <Card
                 isFooterBlurred
                 className="w-full h-[300px] col-span-12 sm:col-span-7">
-                <CardHeader className="absolute z-10 top-1 flex-col items-start">
+                <CardHeader className="absolute bg-black/20 z-10  flex-col items-start">
                     <p className="text-tiny text-white/70 uppercase font-bold">
                         Microelectronica
                     </p>
