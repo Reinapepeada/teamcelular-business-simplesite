@@ -1,14 +1,14 @@
 import React from "react";
-import { Input } from "@nextui-org/react";
+import RepairsForm from "@/components/forms/RepairsForm"; // Fix the casing of the import statement
+import { Oswald } from "next/font/google";
+const oswald = Oswald({ subsets: ["latin"], weight: "500" });
 
 export default function CreadorPresupuestos() {
-    return (
-        <section className="w-full">
-            <h1>Formulario de Presupuesto de Equipo</h1>
+  return (
+    <section className="flex flex-col justify-center items-center">
+      <h1 className={`${oswald.className} text-6xl p-2 m-2 light:text-black m-32`}>Formulario de Presupuesto de Equipo</h1>
 
-            <Input type="text" label="Nombre" />
-            <Input type="email" label="Email" />
-            <Input type="email" label="Email" placeholder="Enter your email" />
-        </section>
-    );
+      <RepairsForm></RepairsForm>
+    </section>
+  );
 }
