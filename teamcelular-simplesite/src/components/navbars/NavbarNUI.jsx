@@ -60,17 +60,17 @@ export default function NavbarNUI() {
                     <Link href="#">Reparaciones</Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link color="foreground" href="#" aria-current="page">
+                    <Link color="foreground" href="/productos" aria-current="page">
                         Productos
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link color="foreground" href="#">
+                    <Link color="foreground" href="/contacto">
                         Contacto
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link color="foreground" href="#">
+                    <Link color="foreground" href="/sobrenosotros">
                         Sobre Nosotros
                     </Link>
                 </NavbarItem>
