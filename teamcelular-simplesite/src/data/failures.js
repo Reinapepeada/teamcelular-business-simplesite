@@ -1,28 +1,22 @@
 import React from "react";
-export const animals = [
-  {label: "Pantalla dañada", value: "cat", description: "The second most popular pet in the world"},
-  {label: "Bateria dañada", value: "dog", description: "The most popular pet in the world"},
-  {label: "", value: "elephant", description: "The largest land animal"},
-  {label: "Lion", value: "lion", description: "The king of the jungle"},
-  {label: "Tiger", value: "tiger", description: "The largest cat species"},
-  {label: "Giraffe", value: "giraffe", description: "The tallest land animal"},
-  {
-    label: "Dolphin",
-    value: "dolphin",
-    description: "A widely distributed and diverse group of aquatic mammals",
-  },
-  {label: "Penguin", value: "penguin", description: "A group of aquatic flightless birds"},
-  {label: "Zebra", value: "zebra", description: "A several species of African equids"},
-  {
-    label: "Shark",
-    value: "shark",
-    description: "A group of elasmobranch fish characterized by a cartilaginous skeleton",
-  },
-  {
-    label: "Whale",
-    value: "whale",
-    description: "Diverse group of fully aquatic placental marine mammals",
-  },
-  {label: "Otter", value: "otter", description: "A carnivorous mammal in the subfamily Lutrinae"},
-  {label: "Crocodile", value: "crocodile", description: "A large semiaquatic reptile"},
+export const failures = [
+  {label: "Pantalla dañada", value: "pantalla dañada"},
+  {label: "Bateria dañada", value: "bateria dañada"},
+  {label: "Boton de encendido dañado", value: "boton de encendido dañado"},
+  {label: "Boton de volumen dañado", value: "boton de volumen dañado"},
+  {label: "Boton de home dañado", value: "boton de home dañado"},
+  {label: "Camara Dañada", value: "camara dañada"},
+  {label: "Microfono dañado", value: "microfono dañado"},
+  {label: "Altavoz dañado", value: "altavoz dañado"},
+  {label: "Ficha de carga dañada", value: "ficha de carga dañada"},
+  {label: "No enciende", value: "no enciende"},
+  {label: "No carga", value: "no carga"},
+  {label: "No da imagen", value: "no da imagen"},
+  {label: "No da sonido", value: "no da sonido"},
+  {label: "No da señal", value: "no da señal"},
+  {label: "No funciona el touch", value: "no funciona el touch"},
+  {label: "No funciona el wifi", value: "no funciona el wifi"},
+  {label: "No funciona el bluetooth", value: "no funciona el bluetooth"},
+  {label: "No funciona el gps", value: "no funciona el gps"},
+
 ];
