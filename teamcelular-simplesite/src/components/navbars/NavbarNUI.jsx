@@ -28,39 +28,45 @@ export default function NavbarNUI() {
     ];
 
     return (
-        <Navbar disableAnimation isBordered maxWidth="2xl">
+        <Navbar isBordered maxWidth="2xl">
             <NavbarContent className="sm:hidden" justify="start">
                 <NavbarMenuToggle />
             </NavbarContent>
 
             <NavbarContent className="sm:hidden pr-3 " justify="center">
                 <NavbarBrand>
-                    <img
-                        className="w-11 h-15 "
-                        src="/images/teamcelular.png"
-                        alt="Team Celular"
-                    />
-                    <p className="font-bold text-inherit">Team Celular</p>
+                    <Link href="/" className="text-inherit">
+                        <img
+                            className="w-11 h-15 "
+                            src="/images/teamcelular.png"
+                            alt="Team Celular"
+                        />
+                        <p className="font-bold text-white text-inherit">Team Celular</p>
+                    </Link>
                 </NavbarBrand>
             </NavbarContent>
             <NavbarContent className="hidden pr-3 sm:flex " justify="start">
                 <NavbarBrand>
-                    <img
-                        className="w-11 h-15 m-1"
-                        src="/images/teamcelular.png"
-                        alt="Team Celular"
-                    />
-                    <p className="font-bold text-inherit">Team Celular</p>
+                    <Link className="text-inherit" href="/">
+                        <img
+                            className="w-11 h-15 m-1"
+                            src="/images/teamcelular.png"
+                            alt="Team Celular"
+                        />
+                        <p className="font-bold text-inherit">Team Celular</p>
+                    </Link>
                 </NavbarBrand>
             </NavbarContent>
 
-               
             <NavbarContent className="hidden  sm:flex gap-4" justify="center">
                 <NavbarItem isActive>
-                    <Link href="#">Reparaciones</Link>
+                    <Link href="/presupuesto-reparacion">Reparaciones</Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link color="foreground" href="/productos" aria-current="page">
+                    <Link
+                        color="foreground"
+                        href="/productos"
+                        aria-current="page">
                         Productos
                     </Link>
                 </NavbarItem>
@@ -80,12 +86,10 @@ export default function NavbarNUI() {
                 <NavbarItem>
                     <Button
                         as={Link}
-
                         color="primary"
                         href="https://wa.me/5491151034595?text=Muy%20buen%20d%C3%ADa%21%20Tengo%20una%20duda."
                         variant="shadow"
-                        size="md"
-                        >
+                        size="md">
                         Contacto
                         <BsWhatsapp />
                     </Button>
