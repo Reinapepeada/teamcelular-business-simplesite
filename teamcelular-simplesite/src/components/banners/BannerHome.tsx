@@ -21,9 +21,10 @@ export default function BannerHome() {
                 className={`${oswald.className} text-6xl p-2 m-2 light:text-black`}>
                 <h1>Servicio Tecnico Profesional</h1>
                 <Button
-                    className="w-1/2 bg-gradient-to-r from-primary to-secondary"
+                    className="w-1/2 bg-gradient-to-r from-primary to-secondary text-lg"
                     radius="sm"
                     variant="shadow"
+                    
                     >
                     Contactanos
                 </Button>

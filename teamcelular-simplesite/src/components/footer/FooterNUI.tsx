@@ -23,7 +23,7 @@ export default function FooterNUI() {
             <div className="flex flex-col justify-center w-10/12 m-4">
                 <div className="flex flex-col space-y-16 justify-between items-center text-center my-12 xl:flex-row xl:text-start xl:space-x-12">
                     <Card shadow="lg">
-                        <CardHeader className="text-xl font-bold m-2">
+                        <CardHeader className="text-xl font-bold mx-1">
                             Recibe ofertas exclusivas novedades
                         </CardHeader>
                         <CardBody className="text-sm p-4 space-y-4">
