@@ -19,7 +19,7 @@ export default function BannerHome() {
         ">
             <div
                 className={`${oswald.className} text-6xl p-2 m-2 light:text-black`}>
-                <h1>Servicio Tecnico Profesional</h1>
+                <h1>Servicio Técnico Profesional</h1>
                 <Button
                     className="w-1/2 bg-gradient-to-r from-primary to-secondary text-lg"
                     radius="sm"
