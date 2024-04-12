@@ -26,11 +26,11 @@ export default function Contacto() {
                         <div className="space-y-4 md:mr-32 my-5 md:w-1/2 ">
                             <div className="flex flex-col">
                                 <h2 className="font-bold text-xl">Dirección</h2>
-                                <p className="text-lg">Av. Corrientes 1234</p>
+                                <p className="text-lg">Calle Paragua 2451, CABA</p>
                             </div>
                             <div className="flex flex-col">
                                 <h2 className="font-bold text-xl">Teléfono</h2>
-                                <p className="text-lg"> 1234-5678</p>
+                                <p className="text-lg"> +54 11 6117-2193</p>
                             </div>
                             <div className="flex flex-col">
                                 <h2 className="font-bold text-xl">Email</h2>
@@ -43,7 +43,7 @@ export default function Contacto() {
                                     Horario de atención
                                 </h2>
                                 <p className="text-lg">
-                                    Lunes a Viernes de 10 a 18hs
+                                    Lunes a Viernes de 10:30 a 18hs
                                 </p>
                             </div>
                         </div>
