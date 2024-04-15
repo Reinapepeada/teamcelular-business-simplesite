@@ -5,6 +5,7 @@ import { Providers } from "./providers";
 import NavbarNUI from "../components/navbars/NavbarNUI";
 import FooterNUI from "@/components/footer/FooterNUI";
 const inter = Inter({ subsets: ["latin"] });
+import BackgroundBeams from "../components/animations/BackgroundMeteors";
 // importo la fuente de google
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({
                 className={`${inter.className} `}>
                 <Providers>
                     <NavbarNUI></NavbarNUI>
+                    <BackgroundBeams />
                     <main className="flex justify-center">{children}</main>
                     <FooterNUI></FooterNUI>
                 </Providers>

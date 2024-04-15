@@ -4,6 +4,7 @@ import { Oswald } from "next/font/google";
 import { Button } from "@nextui-org/react";
 const oswald = Oswald({ subsets: ["latin"], weight: "500" });
 
+
 export default function BannerHome() {
     return (
         <div
@@ -16,7 +17,10 @@ export default function BannerHome() {
             md:flex-row
             md:space-y-8
             md:w-3/4
-        ">
+            ">
+            
+            
+            
             <div
                 className={`${oswald.className} text-6xl p-2 m-2 light:text-black`}>
                 <h1>Servicio Técnico Profesional</h1>
