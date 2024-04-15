@@ -9,7 +9,7 @@ import BackgroundBeams from "../components/animations/BackgroundMeteors";
 // importo la fuente de google
 
 export const metadata: Metadata = {
-    title: "Team Celular | Home",
+    title: "Team Celular",
     description:
         "Team Celular es una empresa de reparación de celulares en la Ciudad Autonoma de Buenos Aires, Argentina.",
 };
