@@ -15,16 +15,10 @@ import { BsWhatsapp } from "react-icons/bs";
 
 export default function NavbarNUI() {
     const menuItems = [
-        "Profile",
-        "Dashboard",
-        "Activity",
-        "Analytics",
-        "System",
-        "Deployments",
-        "My Settings",
-        "Team Settings",
-        "Help & Feedback",
-        "Log Out",
+        "Reparaciones",
+        "Productos",
+        "Contacto",
+        "Sobre Nosotros",
     ];
 
     return (
@@ -111,8 +105,9 @@ export default function NavbarNUI() {
                                     ? "danger"
                                     : "foreground"
                             }
-                            href="#"
-                            size="lg">
+                            href={index === 0 ? "/presupuesto-reparacion" : index === 1 ? "/productos" : index === 2 ? "/contacto" : "/sobrenosotros"   }
+                            size="lg"
+                        >
                             {item}
                         </Link>
                     </NavbarMenuItem>
