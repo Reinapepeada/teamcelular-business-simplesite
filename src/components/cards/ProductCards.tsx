@@ -14,24 +14,26 @@ export default function BentoGridSecondDemo() {
         <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
             {items.map((item, i) => (
                 <BentoGridItem
-                    key={i}
-                    title={item.title}
-                    description={item.description}
-                    header={
-                        <div className="relative h-48">
-                            <Image
-                                src={item.header}
-                                alt={item.title}
-                                className="object-cover w-full h-full rounded-xl"
-                            />
-                        </div>
-                    }
-                    className={item.className}
-                    icon={item.icon}
-                />
-            ))}
-        </BentoGrid>
-    );
+                key={i}
+                title={item.title}
+                description={item.description}
+                header={
+                    <div className="relative h-48">
+                        <Image
+                            src={item.header}
+                            alt={item.title}
+                            width={500} // Añade un valor para la anchura
+                            height={300} // Añade un valor para la altura
+                            className="object-cover w-full h-full rounded-xl"
+                        />
+                    </div>
+                }
+                className={item.className}
+                icon={item.icon}
+            />
+        ))}
+    </BentoGrid>
+);
 }
 
 const items = [

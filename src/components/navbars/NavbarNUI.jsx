@@ -31,11 +31,11 @@ export default function NavbarNUI() {
                 <NavbarBrand>
                     <Link href="/" className="text-inherit">
                         <Image
-                            className="w-11 h-15 "
+                            className="w-11 h-15"
                             src="/images/teamcelular.png"
                             alt="Team Celular"
                         />
-                        <p className="font-bold text-white text-inherit">
+                        <p className="font-bold text-white text-xl text-inherit">
                             Team Celular
                         </p>
                     </Link>
@@ -45,11 +45,11 @@ export default function NavbarNUI() {
                 <NavbarBrand>
                     <Link className="text-inherit" href="/">
                         <Image
-                            className="w-11 h-15 m-1"
+                            className="w-11 h-15 mr-2"
                             src="/images/teamcelular.png"
                             alt="Team Celular"
                         />
-                        <p className="font-bold text-inherit">Team Celular</p>
+                        <p className="font-bold text-xl text-inherit">Team Celular</p>
                     </Link>
                 </NavbarBrand>
             </NavbarContent>
