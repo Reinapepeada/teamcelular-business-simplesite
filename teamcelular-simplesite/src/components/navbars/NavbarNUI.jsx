@@ -35,7 +35,9 @@ export default function NavbarNUI() {
                             src="/images/teamcelular.png"
                             alt="Team Celular"
                         />
-                        <p className="font-bold text-white text-inherit">Team Celular</p>
+                        <p className="font-bold text-white text-inherit">
+                            Team Celular
+                        </p>
                     </Link>
                 </NavbarBrand>
             </NavbarContent>
@@ -54,7 +56,9 @@ export default function NavbarNUI() {
 
             <NavbarContent className="hidden  sm:flex gap-4" justify="center">
                 <NavbarItem isActive>
-                    <Link href="/presupuesto-reparacion">Reparaciones</Link>
+                    <Link href="/presupuesto-reparacion"
+                    color="primary"
+                    >Reparaciones</Link>
                 </NavbarItem>
                 <NavbarItem>
                     <Link
@@ -98,16 +102,17 @@ export default function NavbarNUI() {
                     <NavbarMenuItem key={`${item}-${index}`}>
                         <Link
                             className="w-full"
-                            color={
-                                index === 2
-                                    ? "warning"
-                                    : index === menuItems.length - 1
-                                    ? "danger"
-                                    : "foreground"
+                            color={index === 0 ? "primary" : "foreground"}
+                            href={
+                                index === 0
+                                    ? "/presupuesto-reparacion"
+                                    : index === 1
+                                    ? "/productos"
+                                    : index === 2
+                                    ? "/contacto"
+                                    : "/sobrenosotros"
                             }
-                            href={index === 0 ? "/presupuesto-reparacion" : index === 1 ? "/productos" : index === 2 ? "/contacto" : "/sobrenosotros"   }
-                            size="lg"
-                        >
+                            size="lg">
                             {item}
                         </Link>
                     </NavbarMenuItem>
