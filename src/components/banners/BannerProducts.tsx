@@ -1,6 +1,7 @@
 "use client";
 import { TypewriterEffectSmooth } from "@/components/animations/typewriter-effect";
 import Link from "next/link";
+import { Button } from "@nextui-org/react";
 
 export default function TypewriterEffectSmoothDemo() {
   const words = [
@@ -28,16 +29,15 @@ export default function TypewriterEffectSmoothDemo() {
       </p>
       <TypewriterEffectSmooth words={words} />
       <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4">
-        <Link href="/tienda">
-        <button className="w-40 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm">
+        
+        <Button as={Link} href="/tienda" className="w-40 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm">
           Nuestra Tienda
-        </button>
-        </Link>
-        <Link href="/tienda">
-        <button className="w-40 h-10 rounded-xl bg-white text-black border border-black  text-sm">
+        </Button>
+        
+        
+        <Button as={Link} href="/tienda"  className="w-40 h-10 rounded-xl bg-white text-black border border-black  text-sm">
           Newsletter
-        </button>
-        </Link>
+        </Button>
       </div>
     </div>
   );

@@ -22,8 +22,8 @@ export default function BentoGridSecondDemo() {
                                 src={item.header}
                                 alt={item.title}
                                 className="object-cover w-full h-full rounded-xl"
-                                width={300}
-                                height={200}
+                                width={700}
+                                height={400}
                             />
                         </div>
                     }

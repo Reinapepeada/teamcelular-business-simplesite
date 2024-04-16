@@ -33,7 +33,8 @@ export default function NavbarNUI() {
                         <Image
                             className="w-11 h-15"
                             src="/images/teamcelular.png"
-                            alt="Team Celular"
+                            alt="Team Celular"width={100}
+                            height={200}
                         />
                         <p className="font-bold text-white text-xl text-inherit">
                             Team Celular
@@ -47,7 +48,8 @@ export default function NavbarNUI() {
                         <Image
                             className="w-11 h-15 mr-2"
                             src="/images/teamcelular.png"
-                            alt="Team Celular"
+                            alt="Team Celular"width={100}
+                            height={200}
                         />
                         <p className="font-bold text-xl text-inherit">Team Celular</p>
                     </Link>

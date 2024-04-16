@@ -28,6 +28,8 @@ export default function BannerCards() {
                     alt="Card background"
                     className="z-0 w-full h-full object-cover"
                     src="/images/celuPorDentro.jpg"
+                    width={500}
+                    height={350}
                 />
             </Card>
             <Card isBlurred className="col-span-12 sm:col-span-4 h-[300px]">
@@ -44,6 +46,8 @@ export default function BannerCards() {
                     alt="Card background"
                     className="z-0 w-full h-full object-cover"
                     src="/images/dispositivoshdpro.jpeg"
+                    width={500}
+                    height={350}
                 />
             </Card>
             <Card className="col-span-12 sm:col-span-4 h-[300px]">
@@ -79,6 +83,8 @@ export default function BannerCards() {
                     alt="Card example background"
                     className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
                     src="/images/equipoCall.jpg"
+                    width={500}
+                    height={300}
                 />
                 <CardFooter className="absolute justify-center space-y-2 bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 ">
                     <div className="flex flex-col space-y-2 justify-center items-center">

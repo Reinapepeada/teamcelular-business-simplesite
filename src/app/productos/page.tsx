@@ -7,9 +7,6 @@ export default function productos() {
     <div className='w-full m-5 space-y-10'>
       <BannerProducts  />
       <ProductCards />
-      
-      
-
     </div>
   )
 }

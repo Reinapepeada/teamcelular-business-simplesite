@@ -7,6 +7,7 @@ const sora = Sora({ subsets: ["latin"], weight: "300" });
 import { BsFacebook, BsInstagram, BsWhatsapp } from "react-icons/bs";
 //Elements 
 import Link from "next/link";
+import {Tooltip} from "@nextui-org/react";
 
 import {
     Card,
@@ -28,8 +29,10 @@ export default function FooterNUI() {
                         </CardHeader>
                         <CardBody className="text-sm p-4 space-y-4">
                             <p className="ml-1">Suscribite a nuestro CLUB</p>
-                            <Input type="text" placeholder="Ingresa tu email" />
+                            <Input isDisabled type="text" placeholder="Ingresa tu email" />
+                            <Tooltip  color="primary"  content="Estamos trabajando para darte descuentos." placement="bottom" showArrow={true}>
                             <Button className="">Suscribirme</Button>
+                            </Tooltip>
                         </CardBody>
                     </Card>
                     <Divider
