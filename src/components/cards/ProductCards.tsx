@@ -14,26 +14,27 @@ export default function BentoGridSecondDemo() {
         <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
             {items.map((item, i) => (
                 <BentoGridItem
-                key={i}
-                title={item.title}
-                description={item.description}
-                header={
-                    <div className="relative h-48">
-                        <Image
-                            src={item.header}
-                            alt={item.title}
-                            width={500} // Añade un valor para la anchura
-                            height={300} // Añade un valor para la altura
-                            className="object-cover w-full h-full rounded-xl"
-                        />
-                    </div>
-                }
-                className={item.className}
-                icon={item.icon}
-            />
-        ))}
-    </BentoGrid>
-);
+                    key={i}
+                    title={item.title}
+                    description={item.description}
+                    header={
+                        <div className="relative h-48">
+                            <Image
+                                src={item.header}
+                                alt={item.title}
+                                className="object-cover w-full h-full rounded-xl"
+                                width={300}
+                                height={200}
+                            />
+                        </div>
+                    }
+                    className={item.className}
+                    icon={item.icon}
+                    link={item.link}
+                />
+            ))}
+        </BentoGrid>
+    );
 }
 
 const items = [
@@ -43,6 +44,7 @@ const items = [
       header: "/images/fundaOtter.jpeg", // Ruta de la imagen para fundas y protectores.
       className: "md:col-span-2",
       icon: <IconShieldCheck className="h-4 w-4 text-neutral-500" />, // Icono de una funda o escudo de protección.
+      link: "/tienda/fundas-y-protectores",
     },
     {
       title: "Cargadores y cables",
@@ -50,6 +52,7 @@ const items = [
       header: "/images/cargadores.jpg", // Ruta de la imagen para cargadores y cables.
       className: "md:col-span-1",
       icon: <IconPlug className="h-4 w-4 text-neutral-500" />, // Icono de un cargador o enchufe.
+      link: "/tienda/cargadores-y-cables",
     },
     {
       title: "Auriculares y accesorios de audio",
@@ -57,6 +60,7 @@ const items = [
       header: "/images/aurisBlue.jpg", // Ruta de la imagen para auriculares y accesorios de audio.
       className: "md:col-span-1",
       icon: <IconHeadphones className="h-4 w-4 text-neutral-500" />, // Icono de unos auriculares.
+      link: "/tienda/auriculares-y-audio",
     },
     {
       title: "Piezas para Desktop y Notebook",
@@ -64,5 +68,6 @@ const items = [
       header: "/images/componentes-pc-gaming.webp", // Ruta de la imagen para piezas de computadora.
       className: "md:col-span-2",
       icon: <IconCpu className="h-4 w-4 text-neutral-500" />, // Ejemplo de un icono de placa base.
+      link: "/tienda/piezas-para-desktop-y-notebook",
     },
 ];
