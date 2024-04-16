@@ -1,6 +1,7 @@
 import { cn } from "@/utils/cn";
 import React from "react";
 import { BentoGrid, BentoGridItem } from "./bento-grid";
+import  Image  from "next/image";
 
 import {
   IconHeadphones,
@@ -18,7 +19,7 @@ export default function BentoGridSecondDemo() {
                     description={item.description}
                     header={
                         <div className="relative h-48">
-                            <img
+                            <Image
                                 src={item.header}
                                 alt={item.title}
                                 className="object-cover w-full h-full rounded-xl"

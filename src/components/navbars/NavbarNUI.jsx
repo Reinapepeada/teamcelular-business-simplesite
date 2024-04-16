@@ -8,7 +8,7 @@ import {
     NavbarContent,
     NavbarItem,
     Link,
-    Button,
+    Button,Image
 } from "@nextui-org/react";
 import ThemeSwitcher from "../switch/ThemeSwitcher";
 import { BsWhatsapp } from "react-icons/bs";
@@ -30,7 +30,7 @@ export default function NavbarNUI() {
             <NavbarContent className="sm:hidden pr-3 " justify="center">
                 <NavbarBrand>
                     <Link href="/" className="text-inherit">
-                        <img
+                        <Image
                             className="w-11 h-15 "
                             src="/images/teamcelular.png"
                             alt="Team Celular"
@@ -44,7 +44,7 @@ export default function NavbarNUI() {
             <NavbarContent className="hidden pr-3 sm:flex " justify="start">
                 <NavbarBrand>
                     <Link className="text-inherit" href="/">
-                        <img
+                        <Image
                             className="w-11 h-15 m-1"
                             src="/images/teamcelular.png"
                             alt="Team Celular"
