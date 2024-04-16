@@ -17,7 +17,7 @@ const SobreNosotros = () => {
             layout="fill"
             objectFit="cover"
             className="rounded-lg"
-            isBlurred
+            isblurred
           />
         </div>
         <div className="space-y-6">
