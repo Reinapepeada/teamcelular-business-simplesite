@@ -27,7 +27,7 @@ export default function NavbarNUI() {
                 <NavbarMenuToggle />
             </NavbarContent>
 
-            <NavbarContent className="sm:hidden pr-3 " justify="center">
+            <NavbarContent className="sm:hidden " justify="center">
                 <NavbarBrand>
                     <Link href="/" className="text-inherit">
                         <Image
