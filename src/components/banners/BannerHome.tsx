@@ -2,6 +2,7 @@ import React from "react";
 import ReparacionCelular from "@/components/animations/ReparacionCelulares";
 import { Oswald } from "next/font/google";
 import { Button } from "@nextui-org/react";
+import Link from "next/link";
 const oswald = Oswald({ subsets: ["latin"], weight: "500" });
 
 
@@ -28,7 +29,8 @@ export default function BannerHome() {
                     className="w-1/2 bg-gradient-to-r from-primary to-secondary text-lg"
                     radius="sm"
                     variant="shadow"
-                    
+                    as={Link}
+                    href="/contacto"
                     >
                     Contactanos
                 </Button>
