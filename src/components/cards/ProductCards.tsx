@@ -1,4 +1,3 @@
-import { cn } from "@/utils/cn";
 import React from "react";
 import { BentoGrid, BentoGridItem } from "./bento-grid";
 import  Image  from "next/image";
