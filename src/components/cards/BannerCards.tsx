@@ -63,6 +63,7 @@ export default function BannerCards() {
                     autoPlay
                     loop
                     muted
+                    playsInline
                     className="w-full h-full object-cover">
                     <source src="/videos/microscopio.mp4" type="video/mp4" />
                 </video>
@@ -119,6 +120,7 @@ export default function BannerCards() {
                     autoPlay
                     loop
                     muted
+                    playsInline
                     className="w-full h-full object-cover">
                     <source
                         src="/videos/interposerReballing.mp4"
