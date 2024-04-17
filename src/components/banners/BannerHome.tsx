@@ -32,7 +32,7 @@ export default function BannerHome() {
                     as={Link}
                     href="/contacto"
                     >
-                    Contactanos
+                    Contáctanos
                 </Button>
             </div>
             <div className="flex flex-col items-center justify-end xl:flex-row">

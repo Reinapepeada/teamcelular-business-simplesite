@@ -8,7 +8,8 @@ import {
     NavbarContent,
     NavbarItem,
     Link,
-    Button,Image
+    Button,
+    Image,
 } from "@nextui-org/react";
 import ThemeSwitcher from "../switch/ThemeSwitcher";
 import { BsWhatsapp } from "react-icons/bs";
@@ -33,7 +34,8 @@ export default function NavbarNUI() {
                         <Image
                             className="w-11 h-15"
                             src="/images/teamcelular.png"
-                            alt="Team Celular"width={100}
+                            alt="Team Celular"
+                            width={100}
                             height={200}
                         />
                         <p className="font-bold text-white text-xl text-inherit">
@@ -42,25 +44,29 @@ export default function NavbarNUI() {
                     </Link>
                 </NavbarBrand>
             </NavbarContent>
-            <NavbarContent className="hidden pr-3 sm:flex " justify="start">
-                <NavbarBrand>
+
+            <NavbarContent  justify="start">
+                <NavbarBrand className="hidden pr-3 sm:flex ">
                     <Link className="text-inherit" href="/">
                         <Image
                             className="w-11 h-15 mr-2"
                             src="/images/teamcelular.png"
-                            alt="Team Celular"width={100}
+                            alt="Team Celular"
+                            width={100}
                             height={200}
                         />
-                        <p className="font-bold text-xl text-inherit">Team Celular</p>
+                        <p className="font-bold text-xl text-inherit">
+                            Team Celular
+                        </p>
                     </Link>
                 </NavbarBrand>
             </NavbarContent>
 
             <NavbarContent className="hidden  sm:flex gap-4" justify="center">
                 <NavbarItem isActive>
-                    <Link href="/presupuesto-reparacion"
-                    color="primary"
-                    >Reparaciones</Link>
+                    <Link href="/presupuesto-reparacion" color="primary">
+                        Reparaciones
+                    </Link>
                 </NavbarItem>
                 <NavbarItem>
                     <Link
@@ -89,9 +95,10 @@ export default function NavbarNUI() {
                         color="primary"
                         href="https://wa.me/5491151034595?text=Muy%20buen%20d%C3%ADa%21%20Tengo%20una%20duda."
                         variant="shadow"
-                        size="md">
-                        Contacto
-                        <BsWhatsapp />
+                        size="md"
+                        className="flex items-center justify-center">
+                        <p className="hidden sm:flex">Preguntas</p>
+                        <BsWhatsapp size={20} />
                     </Button>
                 </NavbarItem>
                 <NavbarItem>
