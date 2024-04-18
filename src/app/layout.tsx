@@ -6,6 +6,7 @@ import NavbarNUI from "../components/navbars/NavbarNUI";
 import FooterNUI from "@/components/footer/FooterNUI";
 const inter = Inter({ subsets: ["latin"] });
 import BackgroundBeams from "../components/animations/BackgroundMeteors";
+import Plugins from "@/components/vercel/Plugins";
 // importo la fuente de google
 
 export const metadata: Metadata = {
@@ -24,6 +25,7 @@ export default function RootLayout({
             <link rel="icon" href="/images/teamcelular.png" sizes="any" />
             <body
                 className={`${inter.className} `}>
+                <Plugins />
                 <Providers>
                     <NavbarNUI></NavbarNUI>
                     <BackgroundBeams />
