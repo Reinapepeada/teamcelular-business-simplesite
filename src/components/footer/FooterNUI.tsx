@@ -5,9 +5,9 @@ import { Sora } from "next/font/google";
 const sora = Sora({ subsets: ["latin"], weight: "300" });
 // icons
 import { BsFacebook, BsInstagram, BsWhatsapp } from "react-icons/bs";
-//Elements 
+//Elements
 import Link from "next/link";
-import {Tooltip} from "@nextui-org/react";
+import { Tooltip } from "@nextui-org/react";
 
 import {
     Card,
@@ -29,9 +29,17 @@ export default function FooterNUI() {
                         </CardHeader>
                         <CardBody className="text-sm p-4 space-y-4">
                             <p className="ml-1">Suscribite a nuestro CLUB</p>
-                            <Input isDisabled type="text" placeholder="Ingresa tu email" />
-                            <Tooltip  color="primary"  content="Estamos trabajando para darte descuentos." placement="bottom" showArrow={true}>
-                            <Button className="">Suscribirme</Button>
+                            <Input
+                                isDisabled
+                                type="text"
+                                placeholder="Ingresa tu email"
+                            />
+                            <Tooltip
+                                color="primary"
+                                content="Estamos trabajando para darte descuentos."
+                                placement="bottom"
+                                showArrow={true}>
+                                <Button className="">Suscribirme</Button>
                             </Tooltip>
                         </CardBody>
                     </Card>
@@ -93,9 +101,12 @@ export default function FooterNUI() {
                         <Link href="https://wa.me/5491151034595?text=Muy%20buen%20d%C3%ADa%21%20Tengo%20una%20duda.">
                             <BsWhatsapp size={25} />
                         </Link>
-
-                        <BsInstagram size={25} />
-                        <BsFacebook size={25} />
+                        <Link href="https://www.instagram.com/teamcelular.arg/?hl=es">
+                            <BsInstagram size={25} />
+                        </Link>
+                        <Link href=" https://www.facebook.com/TeamCelular/?locale=es_LA">
+                            <BsFacebook size={25} />
+                        </Link>
                     </div>
                 </div>
             </div>
