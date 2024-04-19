@@ -8,12 +8,13 @@ const inter = Inter({ subsets: ["latin"] });
 import BackgroundBeams from "../components/animations/BackgroundMeteors";
 import Plugins from "@/components/vercel/Plugins";
 import Head from "next/head";
+import FaviconSwitch from "@/components/switch/FaviconSwitch";
 // importo la fuente de google
 
 export const metadata: Metadata = {
     title: "Team Celular",
     description:
-        "Team Celular es una empresa de reparación de celulares en la Ciudad Autonoma de Buenos Aires, Argentina.",
+        "Team Celular es una empresa de reparación de celulares | computadoras en la Ciudad Autonoma de Buenos Aires, Argentina.",
 };
 
 export default function RootLayout({
@@ -61,7 +62,7 @@ export default function RootLayout({
                     content="-34.597532;-58.402662"></meta>
                 <meta name="ICBM" content="-34.597532, -58.402662"></meta>
             </Head>
-            <link rel="icon" href="/images/teamcelular.png" sizes="any" />
+            <FaviconSwitch />
             <body className={`${inter.className} `}>
                 <Providers>
                     <NavbarNUI></NavbarNUI>

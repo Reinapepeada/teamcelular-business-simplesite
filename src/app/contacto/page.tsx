@@ -27,7 +27,7 @@ export default function Contacto() {
                         </div>
                         <div className="flex flex-col">
                             <h2 className="font-bold text-xl">Teléfono</h2>
-                            <p className="text-lg"> +54 11 6117-2193</p>
+                            <p className="text-lg"> +54 11 5103-4595</p>
                         </div>
                         <div className="flex flex-col">
                             <h2 className="font-bold text-xl">Email</h2>
