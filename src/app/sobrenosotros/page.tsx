@@ -1,5 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
+import {Metadata} from 'next'
+
+
+export const metadata: Metadata = {
+  title: 'Sobre Nosotros',
+  description: 'Conoce más sobre nuestra empresa y nuestra misión, visión y valores.',
+
+}
 
 const SobreNosotros = () => {
   return (
@@ -17,7 +25,6 @@ const SobreNosotros = () => {
             layout="fill"
             objectFit="cover"
             className="rounded-lg"
-            isblurred
           />
         </div>
         <div className="space-y-6">

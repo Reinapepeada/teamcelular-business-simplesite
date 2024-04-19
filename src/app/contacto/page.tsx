@@ -5,6 +5,12 @@ import {
     CardBody,
     Divider,
 } from "@nextui-org/react";
+import {Metadata} from 'next'
+
+export const metadata: Metadata = {
+    title: 'Contacto',
+    description: '¿Tenés alguna duda? ¡Usa estos datos para encontrarnos!',
+}
 
 export default function Contacto() {
     return (

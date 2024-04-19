@@ -5,8 +5,8 @@ const oswald = Oswald({ subsets: ["latin"], weight: "500" });
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Presupuesto la instante | Reparacion de celulares y computadoras en Buenos Aires | Team Celular",
-  description: "Crea un presupuesto para reparar tu equipo de manera rápida y sencilla.",
+  title: "Presupuesto al instante | Reparacion de celulares",
+  description: "Reparamos tu equipo en el dia. ¡Rápido y fácil!",
 };
 export default function CreadorPresupuestos() {
   return (
