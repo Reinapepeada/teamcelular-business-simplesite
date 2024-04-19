@@ -18,7 +18,6 @@ export const metadata: Metadata = {
         "Hacemos reparaciones en el dia, con garantia y al mejor precio. Reparamos celulares, tablets, notebooks y computadoras. Tambien puedes encontrar los mejores accesorios y repuestos.",
 
     twitter: {
-        site: "@teamcelular",
         card: "summary_large_image",
     },
     };
