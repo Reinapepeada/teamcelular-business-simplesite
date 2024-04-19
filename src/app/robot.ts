@@ -5,8 +5,7 @@ export default function robot():MetadataRoute.Robots {
         rules: [
             {
                 userAgent: "*",
-                allow: "/",
-                disallow: ["/productos", "/contacto", "/presupuesto-reparacion"],
+                allow: "/", // Allow all robots to crawl all pages
             },
         ],
         sitemap:`${process.env.NEXT_PUBLIC_URL}/sitemap.xml`,
