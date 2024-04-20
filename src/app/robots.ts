@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 
-export default function robot():MetadataRoute.Robots {
+export default function Robots():MetadataRoute.Robots {
     return {
         rules: [
             {
