@@ -20,6 +20,14 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
     },
+    keywords: [
+
+        "reparacion de celulares",
+        "arreglo de celulares",
+        "a51",
+        "moto g20"
+    ],
+
     };
 
 export default function RootLayout({
