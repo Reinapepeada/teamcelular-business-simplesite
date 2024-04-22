@@ -52,8 +52,8 @@ export default function NavbarNUI() {
                             className="w-11 h-15 mr-2"
                             src="/images/teamcelular.png"
                             alt="Team Celular"
-                            width={100}
-                            height={200}
+                            width={483}
+                            height={612}
                         />
                         <p className="font-bold text-xl text-inherit">
                             Team Celular
