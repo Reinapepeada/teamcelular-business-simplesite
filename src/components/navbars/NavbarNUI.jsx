@@ -9,10 +9,10 @@ import {
     NavbarItem,
     Link,
     Button,
-    Image,
 } from "@nextui-org/react";
 import ThemeSwitcher from "../switch/ThemeSwitcher";
 import { BsWhatsapp } from "react-icons/bs";
+import Image from "next/image";
 
 export default function NavbarNUI() {
     const menuItems = [

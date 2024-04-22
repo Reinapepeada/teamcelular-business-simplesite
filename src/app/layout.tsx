@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 
     twitter: {
         card: "summary_large_image",
+        title: "Team Celular",
     },
     keywords: [
         "reparacion de celulares",
@@ -30,6 +31,7 @@ export const metadata: Metadata = {
         url: "https://teamcelular.com.ar",
         authors: ["Team Celular"],
         emails:["teamcelular.arg@gmail.com"]
+        
     },
 
     };

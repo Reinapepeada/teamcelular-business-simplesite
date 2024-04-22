@@ -4,9 +4,9 @@ import {
     CardHeader,
     CardBody,
     CardFooter,
-    Image,
     Button,
 } from "@nextui-org/react";
+import Image from "next/image";
 
 import { BsWhatsapp, BsFillLightningChargeFill } from "react-icons/bs";
 import Link from "next/link";
@@ -24,7 +24,6 @@ export default function BannerCards() {
                     </h4>
                 </CardHeader>
                 <Image
-                    removeWrapper
                     alt="Card background"
                     className="z-0 w-full h-full object-cover"
                     src="/images/celuPorDentro.jpg"
@@ -42,7 +41,6 @@ export default function BannerCards() {
                     </h4>
                 </CardHeader>
                 <Image
-                    removeWrapper
                     alt="Card background"
                     className="z-0 w-full h-full object-cover"
                     src="/images/dispositivoshdpro.jpeg"
@@ -80,7 +78,6 @@ export default function BannerCards() {
                     </h4>
                 </CardHeader>
                 <Image
-                    removeWrapper
                     alt="Card example background"
                     className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
                     src="/images/equipoCall.jpg"
