@@ -12,9 +12,10 @@ const ReparacionCelular = () => {
         <Image
           alt="Reparacion de Celulares"
           src="/celu.png"
+          loading='eager'
           as={NextImage}
-          width={1000}
-          height={1000}
+          width={500}
+          height={500}
         />
           
    

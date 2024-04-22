@@ -41,7 +41,7 @@ export default function BannerHome() {
                     m-3
                     w-10/12
                     md:w-1/2
-                    xl:w-1/4
+                    xl:w-1/3
                 ">
                     <ReparacionCelular />
                 </div>
