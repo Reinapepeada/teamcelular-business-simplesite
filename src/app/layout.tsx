@@ -10,6 +10,7 @@ import Plugins from "@/components/vercel/Plugins";
 // importo la fuente de google
 
 export const metadata: Metadata = {
+    metadataBase: new URL('https://teamcelular.com'),
     title: {
         default: "Team Celular",
         template: "%s | Team Celular"
@@ -19,7 +20,6 @@ export const metadata: Metadata = {
 
     twitter: {
         card: "summary_large_image",
-        title: "Team Celular",
     },
     keywords: [
         "reparacion de celulares",

@@ -2,7 +2,6 @@ import React from "react";
 import {
     Card,
     CardHeader,
-    CardBody,
     CardFooter,
     Button,
 } from "@nextui-org/react";
@@ -17,7 +16,7 @@ export default function BannerCards() {
             <Card className="col-span-12 md:col-span-4 h-[300px]">
                 <CardHeader className="absolute z-10  flex-col !items-start">
                     <p className="text-tiny text-white/60 uppercase font-bold">
-                        Repuestos Calidad
+                        Repuestos de Calidad
                     </p>
                     <h4 className="text-white font-medium text-2xl">
                         Cambio de partes originales
@@ -33,11 +32,11 @@ export default function BannerCards() {
             </Card>
             <Card isBlurred className="col-span-12 sm:col-span-4 h-[300px]">
                 <CardHeader className="absolute bg-black/30 z-10  flex-col !items-start">
-                    <p className="text-tiny text-white/60 uppercase font-bold">
-                        Toda clase de Equipos
-                    </p>
+                    <h6 className="text-tiny text-white/60 uppercase font-bold">
+                        Celulares - Tablets - Notebooks
+                    </h6>
                     <h4 className="text-white font-medium text-2xl">
-                        Reparamos todos tus dispositivos
+                        Arreglo para todos tus dispositivos
                     </h4>
                 </CardHeader>
                 <Image
@@ -50,9 +49,9 @@ export default function BannerCards() {
             </Card>
             <Card className="col-span-12 sm:col-span-4 h-[300px]">
                 <CardHeader className="absolute bg-black/10  z-10  flex-col !items-start">
-                    <p className="text-tiny text-white/75 uppercase font-bold">
+                    <h6 className="text-tiny text-white/75 uppercase font-bold">
                         Herramientas Profesionales
-                    </p>
+                    </h6>
                     <h4 className="text-white font-medium text-2xl">
                         Ultima Tecnologia en Herramientas
                     </h4>
@@ -70,9 +69,9 @@ export default function BannerCards() {
                 isFooterBlurred
                 className="w-full h-[300px] col-span-12 sm:col-span-5">
                 <CardHeader className="absolute bg-black/20 z-10  flex-col items-start">
-                    <p className="text-tiny text-white/70 uppercase font-bold">
+                    <h6 className="text-tiny text-white/70 uppercase font-bold">
                         Atencion al Cliente
-                    </p>
+                    </h6>
                     <h4 className="text-white font-medium text-2xl">
                         Tenemos la mejor atencion para vos
                     </h4>
@@ -86,9 +85,9 @@ export default function BannerCards() {
                 />
                 <CardFooter className="absolute justify-center space-y-2 bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 ">
                     <div className="flex flex-col space-y-2 justify-center items-center">
-                        <p className="text-black text-sm">
+                        <h6 className="text-black text-sm">
                             Comunicate con nuestro Equipo
-                        </p>
+                        </h6>
                         <Button
                             className="text-xl p-4"
                             as={Link}
@@ -106,11 +105,11 @@ export default function BannerCards() {
                 isFooterBlurred
                 className="w-full h-[300px] col-span-12 sm:col-span-7">
                 <CardHeader className="absolute bg-black/20 z-10  flex-col items-start">
-                    <p className="text-tiny text-white/70 uppercase font-bold">
+                    <h6 className="text-tiny text-white/70 uppercase font-bold">
                         Microelectronica
-                    </p>
+                    </h6>
                     <h4 className="text-white font-medium text-2xl">
-                        Hacemos Reparaciones a Nivel Componente
+                        Hacemos Reparaciones a Nivel Componente placa
                     </h4>
                 </CardHeader>
                 <video
@@ -126,9 +125,9 @@ export default function BannerCards() {
                 </video>
                 <CardFooter className="absolute justify-center bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">
                     <div className="flex flex-col space-y-2 justify-center items-center">
-                        <p className="text-sm text-white/60">
-                            Te mandamos el presupuesto personalizado
-                        </p>
+                        <h6 className="text-sm text-white/60">
+                            Presupuesto personalizado
+                        </h6>
                         <Button
                             className="text-xl p-4"
                             as={Link}
@@ -137,7 +136,7 @@ export default function BannerCards() {
                             color="primary"
                             href="/presupuesto-reparacion">
                             <BsFillLightningChargeFill />
-                            Cotiza tu Reparacion
+                            Cotiza tu reparacion
                         </Button>
                     </div>
                 </CardFooter>
