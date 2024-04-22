@@ -21,12 +21,16 @@ export const metadata: Metadata = {
         card: "summary_large_image",
     },
     keywords: [
-
         "reparacion de celulares",
         "arreglo de celulares",
-        "a51",
-        "moto g20"
     ],
+    openGraph: {
+        locale: "es_AR",
+        countryName: "Argentina",
+        url: "https://teamcelular.com.ar",
+        authors: ["Team Celular"],
+        emails:["teamcelular.arg@gmail.com"]
+    },
 
     };
 
