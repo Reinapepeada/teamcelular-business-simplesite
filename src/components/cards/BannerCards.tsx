@@ -1,10 +1,5 @@
 import React from "react";
-import {
-    Card,
-    CardHeader,
-    CardFooter,
-    Button,
-} from "@nextui-org/react";
+import { Card, CardHeader, CardFooter, Button } from "@nextui-org/react";
 import Image from "next/image";
 
 import { BsWhatsapp, BsFillLightningChargeFill } from "react-icons/bs";
@@ -28,6 +23,8 @@ export default function BannerCards() {
                     src="/images/celuPorDentro.webp"
                     width={600}
                     height={600}
+                    quality={75} // Ajusta la calidad de la imagen
+                    sizes="(max-width: 1200px) 100vw, 600px" // Ajusta el tamaño de la imagen basado en el ancho de la ventana del navegador
                 />
             </Card>
             <Card isBlurred className="col-span-12 sm:col-span-4 h-[300px]">
@@ -45,6 +42,8 @@ export default function BannerCards() {
                     src="/images/dispositivoshdpro.webp"
                     width={600}
                     height={600}
+                    quality={75} // Ajusta la calidad de la imagen
+                    sizes="(max-width: 1200px) 100vw, 600px" // Ajusta el tamaño de la imagen basado en el ancho de la ventana del navegador
                 />
             </Card>
             <Card className="col-span-12 sm:col-span-4 h-[300px]">
@@ -82,6 +81,8 @@ export default function BannerCards() {
                     src="/images/equipoCall.webp"
                     width={600}
                     height={600}
+                    quality={75} // Ajusta la calidad de la imagen
+                    sizes="(max-width: 1200px) 100vw, 600px" // Ajusta el tamaño de la imagen basado en el ancho de la ventana del navegador
                 />
                 <CardFooter className="absolute justify-center space-y-2 bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 ">
                     <div className="flex flex-col space-y-2 justify-center items-center">
