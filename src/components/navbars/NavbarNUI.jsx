@@ -33,7 +33,7 @@ export default function NavbarNUI() {
                     <Link href="/" className="text-inherit">
                         <Image
                             className="w-11 h-15"
-                            src="/images/teamcelular.png"
+                            src="/images/teamcelular.webp"
                             alt="Team Celular"
                             width={100}
                             height={200}
@@ -50,7 +50,7 @@ export default function NavbarNUI() {
                     <Link className="text-inherit" href="/">
                         <Image
                             className="w-11 h-15 mr-2"
-                            src="/images/teamcelular.png"
+                            src="/images/teamcelular.webp"
                             alt="Team Celular"
                             width={483}
                             height={612}

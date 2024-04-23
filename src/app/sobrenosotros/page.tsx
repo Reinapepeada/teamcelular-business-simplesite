@@ -20,7 +20,7 @@ const SobreNosotros = () => {
         <div className="relative h-72 w-full mb-6">
           
           <Image
-            src="/images/empresaFamiliar.jpeg"
+            src="/images/empresaFamiliar.webp"
             alt="Nuestra oficina"
             layout="fill"
             objectFit="cover"
