@@ -1,4 +1,3 @@
-'use client'
 import React from 'react';
 import Image from 'next/image';
 
@@ -11,7 +10,7 @@ const ReparacionCelular = () => {
         <Image
           alt="Reparacion de Celulares"
           src="/celu.webp"
-          loading='eager'
+          loading='lazy'
           width={500}
           height={500}
         />   
