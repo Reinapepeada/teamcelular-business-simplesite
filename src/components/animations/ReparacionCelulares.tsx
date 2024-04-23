@@ -10,7 +10,6 @@ const ReparacionCelular = () => {
         <Image
           alt="Reparacion de Celulares"
           src="/celu.webp"
-          loading='lazy'
           width={500}
           height={500}
         />   
