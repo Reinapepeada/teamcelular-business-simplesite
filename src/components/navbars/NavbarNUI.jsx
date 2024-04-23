@@ -96,6 +96,7 @@ export default function NavbarNUI() {
                         href="https://wa.me/5491151034595?text=Muy%20buen%20d%C3%ADa%21%20Tengo%20una%20duda."
                         variant="shadow"
                         size="md"
+                        area-label="Whatsapp"
                         className="flex items-center justify-center">
                         <p className="hidden sm:flex">Preguntas</p>
                         <BsWhatsapp size={20} />

@@ -98,13 +98,13 @@ export default function FooterNUI() {
                 <div className="flex flex-row justify-between m-5">
                     <p className="text-md">© 2024 Team Celular</p>
                     <div className="flex flex-row justify-end items-center space-x-4">
-                        <Link href="https://wa.me/5491151034595?text=Muy%20buen%20d%C3%ADa%21%20Tengo%20una%20duda.">
+                        <Link area-label="Whatsapp" href="https://wa.me/5491151034595?text=Muy%20buen%20d%C3%ADa%21%20Tengo%20una%20duda.">
                             <BsWhatsapp size={25} />
                         </Link>
-                        <Link href="https://www.instagram.com/teamcelular.arg/?hl=es">
+                        <Link area-label="Instagram" href="https://www.instagram.com/teamcelular.arg/?hl=es">
                             <BsInstagram size={25} />
                         </Link>
-                        <Link href=" https://www.facebook.com/TeamCelular/?locale=es_LA">
+                        <Link area-label="Facebook" href=" https://www.facebook.com/TeamCelular/?locale=es_LA">
                             <BsFacebook size={25} />
                         </Link>
                     </div>
