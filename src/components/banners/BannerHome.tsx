@@ -3,8 +3,7 @@ import ReparacionCelular from "@/components/animations/ReparacionCelulares";
 import { Oswald } from "next/font/google";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
-const oswald = Oswald({ subsets: ["latin"], weight: "500" });
-
+const oswald = Oswald({ subsets: ["latin"], weight: "400" });
 
 export default function BannerHome() {
     return (
@@ -19,20 +18,16 @@ export default function BannerHome() {
             md:space-y-8
             md:w-3/4
             ">
-            
-            
-            
             <div
                 className={`${oswald.className} text-6xl p-2 m-2 light:text-black`}>
                 <h1>Servicio Técnico Profesional</h1>
                 <Button
-                    className="w-1/2 bg-gradient-to-r from-primary to-secondary text-lg"
+                    className="w-1/2 bg-gradient-to-r from-primary to-secondary text-xl"
                     radius="sm"
                     variant="shadow"
                     as={Link}
-                    href="/contacto"
-                    >
-                    Contáctanos
+                    href="/presupuesto-reparacion">
+                    Presupuesto
                 </Button>
             </div>
             <div className="flex flex-col items-center justify-end xl:flex-row">
@@ -47,23 +42,14 @@ export default function BannerHome() {
                 </div>
                 <div
                     className="flex flex-col 
-                justify-center
-                items-center
-                space-y-4">
-                    <div className="space-y-1 flex justify-center flex-col items-baseline md:space-x-2 md:items-baseline">
-                        <h2
-                            className={`${oswald.className} text-4xl light:text-black`}>
-                            La
-                        </h2>
-                        <h2
-                            className={`${oswald.className} text-4xl light:text-black`}>
-                            EFICIENCIA
-                        </h2>
-                        <h2
-                            className={`${oswald.className} text-4xl light:text-black`}>
-                            es nuestro norte.
-                        </h2>
-                    </div>
+                items-center justify-center text-center md:text-start md:w-1/4">
+                    <p
+                        className={`${oswald.className} text-4xl light:text-black`}>
+                        Tu
+                        <span className="text-primary"> comunicacion </span>
+                         es nuestra
+                        <span className="text-secondary"> prioridad.</span>
+                    </p>
                 </div>
             </div>
         </div>
