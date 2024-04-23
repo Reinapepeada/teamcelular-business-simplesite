@@ -46,9 +46,9 @@ export default function BannerHome() {
                     <p
                         className={`${oswald.className} text-4xl light:text-black`}>
                         Tu
-                        <span className="text-primary"> comunicacion </span>
+                        <span className="text-primary font-bold"> comunicacion </span>
                          es nuestra
-                        <span className="text-secondary"> prioridad.</span>
+                        <span className="text-secondary font-bold"> prioridad.</span>
                     </p>
                 </div>
             </div>

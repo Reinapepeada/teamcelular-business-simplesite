@@ -10,7 +10,7 @@ const ReparacionCelular = () => {
     
         <Image
           alt="Reparacion de Celulares"
-          src="/celu.png"
+          src="/celu.webp"
           loading='eager'
           width={500}
           height={500}
