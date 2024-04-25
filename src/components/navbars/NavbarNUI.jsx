@@ -34,7 +34,7 @@ export default function NavbarNUI() {
                         <Image
                             className="w-11 h-15"
                             src="/images/teamcelular.webp"
-                            alt="Team Celular"
+                            alt="Logo de Team Celular reparacion celulares"
                             width={100}
                             height={200}
                         />
