@@ -40,7 +40,7 @@ const items = [
     {
       title: "Fundas y protectores",
       description: "Protege tu dispositivo con estilo y funcionalidad.",
-      header: "/images/fundaOtter.jpeg", // Ruta de la imagen para fundas y protectores.
+      header: "/images/fundaOtter.webp", // Ruta de la imagen para fundas y protectores.
       className: "md:col-span-2",
       icon: <IconShieldCheck className="h-4 w-4 text-neutral-500" />, // Icono de una funda o escudo de protección.
       link: "/tienda/fundas-y-protectores",
@@ -48,7 +48,7 @@ const items = [
     {
       title: "Cargadores y cables",
       description: "Mantén tus dispositivos cargados y listos para usar.",
-      header: "/images/cargadores.jpg", // Ruta de la imagen para cargadores y cables.
+      header: "/images/cargadores.webp", // Ruta de la imagen para cargadores y cables.
       className: "md:col-span-1",
       icon: <IconPlug className="h-4 w-4 text-neutral-500" />, // Icono de un cargador o enchufe.
       link: "/tienda/cargadores-y-cables",
@@ -56,7 +56,7 @@ const items = [
     {
       title: "Auriculares y accesorios de audio",
       description: "Disfruta de tu música y llamadas con la mejor calidad de sonido.",
-      header: "/images/aurisBlue.jpg", // Ruta de la imagen para auriculares y accesorios de audio.
+      header: "/images/aurisBlue.webp", // Ruta de la imagen para auriculares y accesorios de audio.
       className: "md:col-span-1",
       icon: <IconHeadphones className="h-4 w-4 text-neutral-500" />, // Icono de unos auriculares.
       link: "/tienda/auriculares-y-audio",
