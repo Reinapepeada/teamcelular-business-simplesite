@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 📱 Tienda de Reparaciones de Celulares y Accesorios 🛠️
+¡Bienvenido/a a la Tienda de Reparaciones de Celulares y Accesorios! Este proyecto es una landing page desarrollada en Next.js utilizando NextUI y Tailwind CSS. La aplicación está desplegada en Vercel para una fácil visualización y acceso.
 
-## Getting Started
+## Descripción del Proyecto 🚀
+La Tienda de Reparaciones de Celulares y Accesorios es una plataforma diseñada para ofrecer servicios de reparación de celulares y venta de accesorios relacionados. La landing page presenta una interfaz limpia y fácil de navegar, que muestra información sobre los servicios de reparación disponibles, así como una selección de accesorios para celulares.
 
-First, run the development server:
+## Tecnologías Utilizadas 💻
+Next.js: Next.js es un framework de React que permite construir aplicaciones web de manera rápida y eficiente, con funcionalidades avanzadas como renderizado del lado del servidor y generación de sitios estáticos.
+NextUI: NextUI es una biblioteca de componentes para Next.js que facilita el diseño de interfaces de usuario consistentes y atractivas.
+Tailwind CSS: Tailwind CSS es un framework de utilidades CSS que permite diseñar rápidamente interfaces de usuario personalizadas sin tener que escribir CSS personalizado.
+Vercel: Vercel es una plataforma de alojamiento web que permite desplegar aplicaciones web de manera sencilla y rápida, con integraciones continuas y despliegue automático.
+Cómo Contribuir 🤝
+¡Agradecemos tus contribuciones a este proyecto! Si deseas mejorar la landing page, agregar nuevas características o solucionar problemas, siéntete libre de hacer un fork del repositorio y enviar un pull request con tus cambios.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Para contribuir, sigue estos pasos:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Haz un fork del repositorio.
+Clona tu fork a tu máquina local: git clone https://github.com/TU_USUARIO/tienda-reparaciones-celulares.git
+Crea una nueva rama para tu funcionalidad: git checkout -b nueva-funcionalidad
+Realiza tus cambios y haz commit: git commit -am 'Agrega nueva funcionalidad'
+Sube tus cambios a tu repositorio: git push origin nueva-funcionalidad
+Crea un nuevo pull request en GitHub.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Despliegue 🚀
+Este proyecto está desplegado en Vercel y puedes acceder a él.  https://teamcelular.com 
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Licencia 📝
+Este proyecto está bajo la licencia MIT.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### ¡Gracias por tu interés en nuestro proyecto!
