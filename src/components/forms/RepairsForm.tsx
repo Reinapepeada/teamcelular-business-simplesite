@@ -2,14 +2,13 @@
 import React, { useState } from "react";
 import {
     Input,
-    Select,
-    SelectItem,
     Textarea,
     Button,
     Checkbox,
     CheckboxGroup,
 } from "@nextui-org/react";
 import { BsWhatsapp } from "react-icons/bs";
+import Link from "next/link";
 
 export default function RepairForm() {
     const [brand, setBrand] = useState("");
@@ -73,7 +72,7 @@ export default function RepairForm() {
 
             <div className="flex flex-row justify-center items-center gap-4">
                 <Button 
-                as={"a"}
+                as={Link}
                 color="success"
                 href={`https://wa.me/5491151034595?text=${whatsappMessage}`}
                 size="lg"
