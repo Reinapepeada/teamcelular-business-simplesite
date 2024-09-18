@@ -1,5 +1,7 @@
+
 import "./globals.css";
 import type { Metadata } from "next";
+import { NextSeo } from "next-seo";
 import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 import NavbarNUI from "../components/navbars/NavbarNUI";
@@ -28,12 +30,16 @@ export const metadata: Metadata = {
     openGraph: {
         locale: "es_AR",
         countryName: "Argentina",
-        url: "https://teamcelular.com.ar",
+        url: "https://teamcelular.com",
         authors: ["Team Celular"],
         emails:["teamcelular.arg@gmail.com"]
         
     },
-
+    alternates: 
+        {
+            canonical: "https://teamcelular.com",
+        },
+    
     };
 
 export default function RootLayout({
@@ -45,6 +51,9 @@ export default function RootLayout({
         <html lang="es">
             
             <body className={`${inter.className} `}>
+                {/* <NextSeo
+                title="Team Celular"
+                /> */}
                 <Providers>
                     <NavbarNUI></NavbarNUI>
                     <BackgroundBeams />
