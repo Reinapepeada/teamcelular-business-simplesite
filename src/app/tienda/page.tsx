@@ -2,11 +2,8 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ShoppingCart, Star, X, ChevronDown, Plus, Minus, Search, Sun, Moon, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Star, X,  Search, ChevronLeft, ChevronRight } from 'lucide-react'
 import debounce from 'lodash/debounce';
-
-
-
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Slider } from "@/components/ui/slider"
@@ -49,9 +46,6 @@ interface Product {
   sales: number;
 }
 
-interface CartItem extends Product {
-  quantity: number;
-}
 
 const categories = [
   "All",
@@ -113,8 +107,6 @@ export default function TechShop() {
     }
   }, [])
 
-
-
   const pageNumbers = []
   const maxVisiblePages = 5
   
@@ -132,7 +124,7 @@ export default function TechShop() {
   return (
 <>
     
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row gap-8">
           <aside className="w-full md:w-1/4">
             <div className={`shadow rounded-lg p-6 sticky top-24 transition-colors duration-300`}>
