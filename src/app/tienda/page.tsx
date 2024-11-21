@@ -25,8 +25,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Badge } from "@/components/ui/badge"
-import { Switch } from "@/components/ui/switch"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import Cookies from 'js-cookie';
+import useCartStore from '@/store/cartStore';
 
 // Simulating a large number of products
 const generateProducts = (count: number) => {
@@ -76,13 +76,15 @@ export default function TechShop() {
   const [searchTerm, setSearchTerm] = useState<string>("")
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000])
   const [ratingFilter, setRatingFilter] = useState<number>(0)
-  const [cart, setCart] = useState<CartItem[]>([])
-  const [isCartOpen, setIsCartOpen] = useState<boolean>(false)
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
-  const [darkMode, setDarkMode] = useState<boolean>(false)
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [isSearchFocused, setIsSearchFocused] = useState<boolean>(false)
   const itemsPerPage = 12
+
+  const {
+    addToCart,
+  } = useCartStore();
+
 
   const filteredProducts = products.filter(product => 
     (currentCategory === "All" || product.category === currentCategory) &&
@@ -97,34 +99,6 @@ export default function TechShop() {
     currentPage * itemsPerPage
   )
 
-  const addToCart = (product: Product) => {
-    const existingItem = cart.find(item => item.id === product.id)
-    if (existingItem) {
-      setCart(cart.map(item => 
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-      ))
-    } else {
-      setCart([...cart, { ...product, quantity: 1 }])
-    }
-  }
-
-  const removeFromCart = (productId: number) => {
-    setCart(cart.filter(item => item.id !== productId))
-  }
-
-  const updateQuantity = (productId: number, newQuantity: number) => {
-    if (newQuantity === 0) {
-      removeFromCart(productId)
-    } else {
-      setCart(cart.map(item => 
-        item.id === productId ? { ...item, quantity: newQuantity } : item
-      ))
-    }
-  }
-
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0)
-  const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
-
   const debouncedSearch = useCallback(
     debounce((value: string) => {
       setSearchTerm(value)
@@ -132,6 +106,7 @@ export default function TechShop() {
     }, 300),
     []
   )
+
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     debouncedSearch(e.target.value)
@@ -147,12 +122,11 @@ export default function TechShop() {
     }
   }, [])
 
-  useEffect(() => {
-    document.body.classList.toggle('dark', darkMode)
-  }, [darkMode])
+
 
   const pageNumbers = []
   const maxVisiblePages = 5
+  
   let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2))
   let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1)
 
@@ -165,86 +139,12 @@ export default function TechShop() {
   }
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'dark bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'} transition-colors duration-300`}>
-      <header className={`${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-sm sticky top-0 z-10 transition-colors duration-300`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">TechShop</h1>
-          <div className="flex items-center space-x-4">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Switch
-                    checked={darkMode}
-                    onCheckedChange={setDarkMode}
-                    className="mr-2"
-                  />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>{darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-            {darkMode ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
-            <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
-              <SheetTrigger asChild>
-                <Button variant="outline" className="relative">
-                  <ShoppingCart className="h-5 w-5 mr-2" />
-                  Cart
-                  {totalItems > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-blue-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                      {totalItems}
-                    </span>
-                  )}
-                </Button>
-              </SheetTrigger>
-              <SheetContent>
-                <SheetHeader>
-                  <SheetTitle>Your Cart</SheetTitle>
-                  <SheetDescription>
-                    You have {totalItems} item(s) in your cart
-                  </SheetDescription>
-                </SheetHeader>
-                <div className="mt-8 space-y-4">
-                  {cart.map(item => (
-                    <div key={item.id} className="flex items-center justify-between py-4 border-b">
-                      <div className="flex items-center">
-                        <img src={item.image} alt={item.name} className="h-16 w-16 object-cover rounded" />
-                        <div className="ml-4">
-                          <h3 className="text-sm font-medium">{item.name}</h3>
-                          <p className="text-sm text-gray-500">${item.price}</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center">
-                        <Button variant="outline" size="icon" onClick={() => updateQuantity(item.id, item.quantity - 1)}>
-                          <Minus className="h-4 w-4" />
-                        </Button>
-                        <span className="mx-2">{item.quantity}</span>
-                        <Button variant="outline" size="icon" onClick={() => updateQuantity(item.id, item.quantity + 1)}>
-                          <Plus className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-8">
-                  <div className="flex justify-between text-base font-medium">
-                    <p>Subtotal</p>
-                    <p>${totalPrice.toFixed(2)}</p>
-                  </div>
-                  <Button className="w-full mt-6">
-                    Proceed to Checkout
-                  </Button>
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
-        </div>
-      </header>
-
+<>
+    
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row gap-8">
           <aside className="w-full md:w-1/4">
-            <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} shadow rounded-lg p-6 sticky top-24 transition-colors duration-300`}>
+            <div className={`shadow rounded-lg p-6 sticky top-24 transition-colors duration-300`}>
               <h2 className="text-lg font-semibold mb-4">Filters</h2>
               <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="category">
@@ -327,7 +227,7 @@ export default function TechShop() {
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} shadow rounded-lg overflow-hidden transition-colors duration-300 flex flex-col h-full group`}>
+                  <div className={`shadow rounded-lg overflow-hidden transition-colors duration-300 flex flex-col h-full group`}>
                     <div className="relative overflow-hidden">
                       <img 
                         src={product.image} 
@@ -343,7 +243,7 @@ export default function TechShop() {
                     <div className="p-4 flex-grow flex flex-col justify-between">
                       <div>
                         <h3 className="text-lg font-semibold mb-2 line-clamp-2 group-hover:text-blue-500 transition-colors duration-300">{product.name}</h3>
-                        <p className={`${darkMode ? 'text-gray-300' : 'text-gray-600'} mb-2`}>{product.category}</p>
+                        <p className={`mb-2`}>{product.category}</p>
                       </div>
                       <div>
                         <div className="flex items-center justify-between mb-2">
@@ -435,7 +335,7 @@ export default function TechShop() {
               initial={{ scale: 0.9, y: 50 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 50 }}
-              className={`${darkMode ? 'bg-gray-800' : 'bg-white'} p-6 rounded-lg max-w-2xl w-full transition-colors duration-300`}
+              className={` p-6 rounded-lg max-w-2xl w-full transition-colors duration-300`}
               onClick={e => e.stopPropagation()}
             >
               <div className="flex justify-between items-start mb-4">
@@ -445,13 +345,13 @@ export default function TechShop() {
                 </Button>
               </div>
               <img src={selectedProduct.image} alt={selectedProduct.name} className="w-full h-64 object-cover rounded-lg mb-4" />
-              <p className={`${darkMode ? 'text-gray-300' : 'text-gray-600'} mb-2`}>{selectedProduct.category}</p>
+              <p className={` mb-2`}>{selectedProduct.category}</p>
               <p className="text-3xl font-bold mb-4">${selectedProduct.price}</p>
               <div className="flex items-center mb-4">
                 <Star className="text-yellow-400 w-5 h-5 mr-1" />
                 <span className="text-lg">{selectedProduct.rating}</span>
               </div>
-              <p className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-6`}>Experience cutting-edge technology with the {selectedProduct.name}. This device offers unparalleled performance and features to meet all your tech needs.</p>
+              <p className={`mb-6`}>Experience cutting-edge technology with the {selectedProduct.name}. This device offers unparalleled performance and features to meet all your tech needs.</p>
               <Button 
                 className="w-full bg-blue-500 hover:bg-blue-600 text-white transition-colors duration-300" 
                 onClick={() => { addToCart(selectedProduct); setSelectedProduct(null); }}
@@ -462,6 +362,6 @@ export default function TechShop() {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </>
   )
 }

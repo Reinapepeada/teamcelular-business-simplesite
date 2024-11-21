@@ -13,6 +13,7 @@ import {
 import ThemeSwitcher from "../switch/ThemeSwitcher";
 import { BsWhatsapp } from "react-icons/bs";
 import Image from "next/image";
+import ResumeCartNav from "../cart/resume_cart_nav";
 
 export default function NavbarNUI() {
     const menuItems = [
@@ -105,6 +106,10 @@ export default function NavbarNUI() {
                 <NavbarItem>
                     <ThemeSwitcher></ThemeSwitcher>
                 </NavbarItem>
+                <NavbarItem>
+                  <ResumeCartNav/>
+                </NavbarItem>
+                  
             </NavbarContent>
 
             <NavbarMenu>
