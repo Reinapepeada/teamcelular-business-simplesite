@@ -39,7 +39,7 @@ const generateProducts = (count: number) => {
       category: categories[Math.floor(Math.random() * categories.length)],
       price: Math.floor(Math.random() * 1000) + 50,
       image: "/placeholder.svg",
-      rating: (Math.random() * 2 + 3).toFixed(1),
+      rating: parseFloat((Math.random() * 2 + 3).toFixed(1)),
       sales: Math.floor(Math.random() * 5000),
     })
   }
@@ -88,7 +88,7 @@ export default function TechShop() {
     (currentCategory === "All" || product.category === currentCategory) &&
     product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
     product.price >= priceRange[0] && product.price <= priceRange[1] &&
-    parseFloat(product.rating) >= ratingFilter
+    product.rating >= ratingFilter
   ).sort((a, b) => b.sales - a.sales)
 
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage)
