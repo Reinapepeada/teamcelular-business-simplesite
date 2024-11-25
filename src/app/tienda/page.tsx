@@ -70,6 +70,66 @@ export default function TechShop() {
     addToCart,
   } = useCartStore();
 
+  const accordionData = [
+    {
+      value: "category",
+      trigger: "Category",
+      content: (
+        <div className="space-y-2">
+          {categories.map(category => (
+            <Button
+              key={category}
+              variant={currentCategory === category ? "default" : "outline"}
+              className="w-full justify-start"
+              onClick={() => setCurrentCategory(category)}
+            >
+              {category}
+            </Button>
+          ))}
+        </div>
+      ),
+    },
+    {
+      value: "price",
+      trigger: "Price Range",
+      content: (
+        <>
+          <Slider
+            min={0}
+            max={1000}
+            step={10}
+            value={priceRange}
+            onValueChange={(value) => setPriceRange([value[0], value[1]])}
+            className="mt-2"
+          />
+          <div className="flex justify-between mt-2">
+            <span>${priceRange[0]}</span>
+            <span>${priceRange[1]}</span>
+          </div>
+        </>
+      ),
+    },
+    {
+      value: "rating",
+      trigger: "Minimum Rating",
+      content: (
+        <>
+          <Slider
+            min={0}
+            max={5}
+            step={0.1}
+            value={[ratingFilter]}
+            onValueChange={(value) => setRatingFilter(value[0])}
+            className="mt-2"
+          />
+          <div className="flex justify-between mt-2">
+            <span>{ratingFilter.toFixed(1)}</span>
+            <Star className="h-5 w-5 text-yellow-400" />
+          </div>
+        </>
+      ),
+    },
+  ];
 
   const filteredProducts = products.filter(product => 
     (currentCategory === "All" || product.category === currentCategory) &&
@@ -124,63 +184,18 @@ export default function TechShop() {
   return (
 <>
     
-      <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col md:flex-row gap-8">
+      <section className="max-w-screen-2xl w-full p-8 sm:px-6 lg:px-8 ">
+        <div className="flex flex-col  md:flex-row gap-8">
           <aside className="w-full md:w-1/4">
-            <div className={`shadow rounded-lg p-6 sticky top-24 transition-colors duration-300`}>
+            <div className={`shadow rounded-lg sticky transition-colors duration-300`}>
               <h2 className="text-lg font-semibold mb-4">Filters</h2>
-              <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="category">
-                  <AccordionTrigger>Category</AccordionTrigger>
-                  <AccordionContent>
-                    <div className="space-y-2">
-                      {categories.map(category => (
-                        <Button
-                          key={category}
-                          variant={currentCategory === category ? "default" : "outline"}
-                          className="w-full justify-start"
-                          onClick={() => setCurrentCategory(category)}
-                        >
-                          {category}
-                        </Button>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="price">
-                  <AccordionTrigger>Price Range</AccordionTrigger>
-                  <AccordionContent>
-                    <Slider
-                      min={0}
-                      max={1000}
-                      step={10}
-                      value={priceRange}
-                      onValueChange={(value) => setPriceRange([value[0], value[1]])}
-                      className="mt-2"
-                    />
-                    <div className="flex justify-between mt-2">
-                      <span>${priceRange[0]}</span>
-                      <span>${priceRange[1]}</span>
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="rating">
-                  <AccordionTrigger>Minimum Rating</AccordionTrigger>
-                  <AccordionContent>
-                    <Slider
-                      min={0}
-                      max={5}
-                      step={0.1}
-                      value={[ratingFilter]}
-                      onValueChange={(value) => setRatingFilter(value[0])}
-                      className="mt-2"
-                    />
-                    <div className="flex justify-between mt-2">
-                      <span>{ratingFilter.toFixed(1)}</span>
-                      <Star className="h-5 w-5 text-yellow-400" />
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
+              <Accordion type="single" collapsible>
+                {accordionData.map((item) => (
+                  <AccordionItem key={item.value} value={item.value}>
+                    <AccordionTrigger>{item.trigger}</AccordionTrigger>
+                    <AccordionContent>{item.content}</AccordionContent>
+                  </AccordionItem>
+                ))}
               </Accordion>
             </div>
           </aside>
@@ -303,7 +318,7 @@ export default function TechShop() {
             )}
           </div>
         </div>
-      </main>
+      </section>
 
       <AnimatePresence>
         {selectedProduct && (

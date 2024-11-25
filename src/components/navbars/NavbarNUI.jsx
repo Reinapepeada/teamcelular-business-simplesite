@@ -20,7 +20,8 @@ export default function NavbarNUI() {
         "Reparaciones",
         "Productos",
         "Contacto",
-        "Sobre Nosotros",
+        "Tienda",
+        "Sobre Nosotros"
     ];
 
     return (
@@ -39,9 +40,9 @@ export default function NavbarNUI() {
                             width={100}
                             height={200}
                         />
-                        <p className="font-bold text-white text-xl text-inherit">
+                        {/* <p className="font-bold text-white text-xl text-inherit">
                             Team Celular
-                        </p>
+                        </p> */}
                     </Link>
                 </NavbarBrand>
             </NavbarContent>
@@ -50,7 +51,7 @@ export default function NavbarNUI() {
                 <NavbarBrand className="hidden pr-3 sm:flex ">
                     <Link className="text-inherit" href="/">
                         <Image
-                            className="w-11 h-15 mr-2"
+                            className="h-11 w-15 mr-2"
                             src="/images/teamcelular.webp"
                             alt="Team Celular"
                             width={483}
@@ -90,7 +91,7 @@ export default function NavbarNUI() {
             </NavbarContent>
 
             <NavbarContent className="" justify="end">
-                <NavbarItem>
+                <NavbarItem className="flex items-center gap-2">
                     <Button
                         as={Link}
                         color="primary"
@@ -102,36 +103,40 @@ export default function NavbarNUI() {
                         <p className="hidden sm:flex">Preguntas</p>
                         <BsWhatsapp size={20} />
                     </Button>
+                  <ResumeCartNav/>
                 </NavbarItem>
                 <NavbarItem>
                     <ThemeSwitcher></ThemeSwitcher>
                 </NavbarItem>
                 <NavbarItem>
-                  <ResumeCartNav/>
                 </NavbarItem>
                   
             </NavbarContent>
 
             <NavbarMenu>
-                {menuItems.map((item, index) => (
-                    <NavbarMenuItem key={`${item}-${index}`}>
-                        <Link
-                            className="w-full"
-                            color={index === 0 ? "primary" : "foreground"}
-                            href={
-                                index === 0
-                                    ? "/presupuesto-reparacion"
-                                    : index === 1
-                                    ? "/productos"
-                                    : index === 2
-                                    ? "/contacto"
-                                    : "/sobrenosotros"
-                            }
-                            size="lg">
-                            {item}
-                        </Link>
-                    </NavbarMenuItem>
-                ))}
+                {menuItems.map((item, index) => {
+                    const getMenuLink = (idx) => {
+                        switch (idx) {
+                            case 0: return "/presupuesto-reparacion";
+                            case 1: return "/productos";
+                            case 2: return "/contacto";
+                            case 3: return "/tienda";
+                            default: return "/sobrenosotros";
+                        }
+                    };
+
+                    return (
+                        <NavbarMenuItem key={`${item}-${index}`}>
+                            <Link
+                                className="w-full"
+                                color={index === 0 ? "primary" : "foreground"}
+                                href={getMenuLink(index)}
+                                size="lg">
+                                {item}
+                            </Link>
+                        </NavbarMenuItem>
+                    );
+                })}
             </NavbarMenu>
         </Navbar>
     );
