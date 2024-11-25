@@ -418,7 +418,7 @@ export default function TechShop() {
                             initial={{ scale: 0.9, y: 50 }}
                             animate={{ scale: 1, y: 0 }}
                             exit={{ scale: 0.9, y: 50 }}
-                            className={` p-6 rounded-lg max-w-2xl w-full transition-colors duration-300`}
+                            className={` p-6 rounded-lg bg-background max-w-2xl w-full transition-colors duration-300`}
                             onClick={(e) => e.stopPropagation()}>
                             <div className="flex justify-between items-start mb-4">
                                 <h2 className="text-2xl font-bold">
@@ -430,10 +430,12 @@ export default function TechShop() {
                                     <X className="h-6 w-6" />
                                 </Button>
                             </div>
-                            <img
+                            <Image
                                 src={selectedProduct.image}
                                 alt={selectedProduct.name}
-                                className="w-full h-64 object-cover rounded-lg mb-4"
+                                width={400}
+                                height={400}
+                                className="w-full h-64 object-cover rounded-lg mb-4" 
                             />
                             <p className={` mb-2`}>
                                 {selectedProduct.category}
@@ -441,7 +443,7 @@ export default function TechShop() {
                             <p className="text-3xl font-bold mb-4">
                                 ${selectedProduct.price}
                             </p>
-                            <div className="flex items-center mb-4">
+                            <div className="flex items-center mb-4 ">
                                 <Star className="text-yellow-400 w-5 h-5 mr-1" />
                                 <span className="text-lg">
                                     {selectedProduct.rating}
