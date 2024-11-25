@@ -256,6 +256,8 @@ export default function TechShop() {
                                             <Image
                                                 src={product.image}
                                                 alt={product.name}
+                                                width={100}
+                                                height={100}
                                                 className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
                                             />
                                             {index === 0 && (
@@ -342,7 +344,10 @@ export default function TechShop() {
                                     {/* Page numbers - show fewer on mobile */}
                                     {pageNumbers
                                         .filter((number) => {
-                                            if (window.innerWidth < 640) {
+                                            if (
+                                                typeof window !== "undefined" &&
+                                                window.innerWidth < 640
+                                            ) {
                                                 return (
                                                     Math.abs(
                                                         number - currentPage
