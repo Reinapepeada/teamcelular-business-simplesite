@@ -21,18 +21,17 @@ export default function NavbarNUI() {
         "Productos",
         "Contacto",
         "Tienda",
-        "Sobre Nosotros"
+        "Sobre Nosotros",
     ];
 
     return (
         <Navbar isBordered maxWidth="2xl">
-            <NavbarContent className="sm:hidden" justify="start">
-                <NavbarMenuToggle />
-            </NavbarContent>
-
-            <NavbarContent className="sm:hidden " justify="center">
-                <NavbarBrand>
-                    <Link href="/" className="text-inherit">
+            <NavbarContent className="" justify="start">
+                <NavbarItem className="lg:hidden">
+                    <NavbarMenuToggle />
+                </NavbarItem>
+                <NavbarItem className="flex items-center">
+                    <Link href="/" className="text-inherit ">
                         <Image
                             className="w-11 h-15"
                             src="/images/teamcelular.webp"
@@ -40,31 +39,16 @@ export default function NavbarNUI() {
                             width={100}
                             height={200}
                         />
-                        {/* <p className="font-bold text-white text-xl text-inherit">
-                            Team Celular
-                        </p> */}
-                    </Link>
-                </NavbarBrand>
-            </NavbarContent>
-
-            <NavbarContent  justify="start">
-                <NavbarBrand className="hidden pr-3 sm:flex ">
-                    <Link className="text-inherit" href="/">
-                        <Image
-                            className="h-11 w-15 mr-2"
-                            src="/images/teamcelular.webp"
-                            alt="Team Celular"
-                            width={483}
-                            height={612}
-                        />
-                        <p className="font-bold text-xl text-inherit">
+                        <p className="font-bold text-white text-xl text-inherit hidden lg:flex">
                             Team Celular
                         </p>
                     </Link>
-                </NavbarBrand>
+                </NavbarItem>
             </NavbarContent>
 
-            <NavbarContent className="hidden  sm:flex gap-4" justify="center">
+    
+
+            <NavbarContent className="hidden  lg:flex gap-4" justify="center">
                 <NavbarItem isActive>
                     <Link href="/presupuesto-reparacion" color="primary">
                         Reparaciones
@@ -73,9 +57,9 @@ export default function NavbarNUI() {
                 <NavbarItem>
                     <Link
                         color="foreground"
-                        href="/productos"
+                        href="/tienda"
                         aria-current="page">
-                        Productos
+                        Tienda
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
@@ -103,25 +87,28 @@ export default function NavbarNUI() {
                         <p className="hidden sm:flex">Preguntas</p>
                         <BsWhatsapp size={20} />
                     </Button>
-                  <ResumeCartNav/>
+                    <ResumeCartNav />
                 </NavbarItem>
                 <NavbarItem>
                     <ThemeSwitcher></ThemeSwitcher>
                 </NavbarItem>
-                <NavbarItem>
-                </NavbarItem>
-                  
+                <NavbarItem></NavbarItem>
             </NavbarContent>
 
             <NavbarMenu>
                 {menuItems.map((item, index) => {
                     const getMenuLink = (idx) => {
                         switch (idx) {
-                            case 0: return "/presupuesto-reparacion";
-                            case 1: return "/productos";
-                            case 2: return "/contacto";
-                            case 3: return "/tienda";
-                            default: return "/sobrenosotros";
+                            case 0:
+                                return "/presupuesto-reparacion";
+                            case 1:
+                                return "/productos";
+                            case 2:
+                                return "/contacto";
+                            case 3:
+                                return "/tienda";
+                            default:
+                                return "/sobrenosotros";
                         }
                     };
 
