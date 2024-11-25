@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import useCartStore from "@/store/cartStore";
+import Image from "next/image";
 
 // Simulating a large number of products
 const generateProducts = (count: number) => {
@@ -171,15 +172,15 @@ export default function TechShop() {
         debouncedSearch(e.target.value);
     };
 
-    useEffect(() => {
-        const handleEsc = (event: KeyboardEvent) => {
-            if (event.key === "Escape") setSelectedProduct(null);
-        };
-        window.addEventListener("keydown", handleEsc);
-        return () => {
-            window.removeEventListener("keydown", handleEsc);
-        };
-    }, []);
+    // useEffect(() => {
+    //     const handleEsc = (event: KeyboardEvent) => {
+    //         if (event.key === "Escape") setSelectedProduct(null);
+    //     };
+    //     window.addEventListener("keydown", handleEsc);
+    //     return () => {
+    //         window.removeEventListener("keydown", handleEsc);
+    //     };
+    // }, []);
 
     const pageNumbers = [];
     const maxVisiblePages = 5;
@@ -252,7 +253,7 @@ export default function TechShop() {
                                     <div
                                         className={`shadow rounded-lg overflow-hidden transition-colors duration-300 flex flex-col h-full group`}>
                                         <div className="relative overflow-hidden">
-                                            <img
+                                            <Image
                                                 src={product.image}
                                                 alt={product.name}
                                                 className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
