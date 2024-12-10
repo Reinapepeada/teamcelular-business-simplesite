@@ -55,10 +55,10 @@ export default function RootLayout({
                 /> */}
                 <Providers>
                     <NavbarNUI></NavbarNUI>
-                    <BackgroundBeams />
                     <main className="flex justify-center">{children}</main>
-                    <Plugins />
                     <FooterNUI></FooterNUI>
+                    <Plugins />
+                    <BackgroundBeams />
                 </Providers>
             </body>
         </html>

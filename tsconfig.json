@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -18,9 +22,23 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "target": "ES2017"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/icons/MoonIcon.jsx", "src/app/not-found.tsx", "src/store/cartStore.ts", "src/components/cart/resume_cart_nav.jsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/components/icons/MoonIcon.jsx",
+    "src/app/not-found.tsx",
+    "src/store/cartStore.ts",
+    "src/components/cart/resume_cart_nav.jsx"
+, "src/app/admin/test/page.jsx", "src/app/admin/page.jsx", "src/app/admin/create-products/page.jsx"  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
