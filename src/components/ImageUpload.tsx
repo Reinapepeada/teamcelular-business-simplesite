@@ -86,12 +86,15 @@ export function ImageUpload({ onChange }: ImageUploadProps) {
     onChange(resizedFiles)
   }
 
-  const handleRemove = (index: number) => {
+  const handleRemove = async (index: number) => {
     setPreviews(prev => prev.filter((_, i) => i !== index))
-    onChange(previews.filter((_, i) => i !== index).map(url => {
-      const response = fetch(url)
-      return new File([response], "image.jpg", { type: "image/jpeg" })
+    const updatedPreviews = previews.filter((_, i) => i !== index)
+    const resizedFiles = await Promise.all(updatedPreviews.map(async (url) => {
+      const response = await fetch(url)
+      const blob = await response.blob()
+      return new File([blob], "image.jpg", { type: "image/jpeg" })
     }))
+    onChange(resizedFiles)
   }
 
   return (
