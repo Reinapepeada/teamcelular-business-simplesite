@@ -7,8 +7,9 @@ interface Params {
 
 export default async function Page({ params }: { params: Readonly<Params> }) {
   const slug = (await params).slug;
+
   return (
-    <ProductVariantForm slug={slug} />
+    <ProductVariantForm productId={slug} productName=""/>
   )
 }
 

@@ -84,7 +84,7 @@ export default function ProductForm() {
     } else {
       const variantOption = confirm("¿deseas agregar variantes al producto?")
       if (variantOption) {
-        redirect(`/admin/create-variants/${response.product_id}`)
+        redirect(`/admin/create-variants/${response.id}`)
       }
       else {
         redirect("/admin")

@@ -2,7 +2,8 @@ import { redirect } from 'next/navigation'
 
 // traer las varaiables de entorno
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL 
+export const imgBBKey = process.env.NEXT_PUBLIC_IMGBB_KEY
+export const apiUrl = process.env.NEXT_PUBLIC_API_URL 
 
 export async function createProduct(formData:any) {
     console.log(JSON.stringify(formData));
@@ -129,7 +130,7 @@ type variants={
     ]
   }
 
-export async function createProductVariants(formData:variants) {
+export async function createProductVariants(formData:any) {
     console.log(JSON.stringify(formData));
     // Aqui se envian aca se hace la req
     
@@ -143,11 +144,9 @@ export async function createProductVariants(formData:variants) {
             }
         });
         const data = await response.json();
-        if (data.createProductVariants == undefined) {
+        if (!data[0].id) {
             throw Error(data.message || "Create product variants failed");
-        } else {
-            redirect("/products");
-        }
+        } 
 }
 type variantUpdate = {
     color?: string,
@@ -179,4 +178,29 @@ export async function updateProductVariant (formData:variants) {
         } else {
             redirect("/products");
         }
+}
+
+export async function uploadImagesToimgBB(images: File[]): Promise<string[]> {
+    try {
+        const uploadedImages = await Promise.all(
+            images.map(async (image) => {
+                const formData = new FormData();
+                formData.append("image", image);
+                const response = await fetch(
+                    `https://api.imgbb.com/1/upload?key=${imgBBKey}`,
+                    {
+                        method: "POST",
+                        body: formData,
+                    }
+                );
+                const data = await response.json();
+                return data.data.url;
+            })
+        );
+        console.log("Images uploaded successfully:", uploadedImages);
+        return uploadedImages; // Return the uploaded images URLs
+    } catch (error) {
+        console.error("Error uploading images to imgBB:", error);
+        throw error; // Rethrow the error to handle it in the calling function
+    }
 }
