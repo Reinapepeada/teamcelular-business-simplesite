@@ -53,7 +53,6 @@ const formSchema = z.object({
   status: z.enum(['ACTIVE', 'INACTIVE']),
   category_id: z.number(),
   provider_id: z.number(),
-  images: z.array(z.instanceof(File)).optional(),
 })
 
 export default function ProductForm() {
