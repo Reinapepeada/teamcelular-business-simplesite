@@ -5,8 +5,8 @@ interface Params {
   slug: string;
 }
 
-export default async function Page({ params }: { params: Readonly<Params> }) {
-  const slug = (await params).slug;
+export default async function Page({ params }: Readonly<{ params: Params }>) {
+  const slug = params.slug;
 
   return (
     <ProductVariantForm productId={slug} productName=""/>
