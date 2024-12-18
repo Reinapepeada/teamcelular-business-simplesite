@@ -22,7 +22,7 @@ export async function loginAction(formData:any) {
         if (data.loginUser == undefined) {
             throw Error(data.message || "Login failed");
         } else {
-            cookies().set("token", data.loginUser, { secure: true });
+            (await cookies()).set("token", data.loginUser, { secure: true });
             // Puedes también realizar otras acciones con el token si es necesario
             console.log("Token guardado en las cookies", data.loginUser);
             return data;   
@@ -52,9 +52,9 @@ export async function signUp (formData:any) {
 }
 
 export async function logout() {
-    cookies().delete("token");
+    (await cookies()).delete("token");
     const cookiesList = cookies();
-    const hasCookie = cookiesList.has("token");
+    const hasCookie = (await cookiesList).has("token");
     if (hasCookie) {
         throw Error("Logout failed");
     } else {
@@ -113,7 +113,7 @@ export default async function GetUserDetails() {
             cache: 'no-store',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${cookies().get("token")}`
+                'Authorization': `Bearer ${(await cookies()).get("token")}`
             }
         }
     );
@@ -135,7 +135,7 @@ export async function UpdateUser(updateuser: any) {
             cache: 'no-store',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${cookies().get("token")}`
+                'Authorization': `Bearer ${(await cookies()).get("token")}`
             }
         }
     );
