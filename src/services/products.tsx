@@ -134,19 +134,25 @@ export async function createProductVariants(formData:any) {
     console.log(JSON.stringify(formData));
     // Aqui se envian aca se hace la req
     
-    let response = await fetch(`${apiUrl}/products/create/variant`
-        ,
-        { method: 'POST',
+    try {
+        let response = await fetch(`${apiUrl}/products/create/variant`, {
+            method: 'POST',
             body: JSON.stringify(formData),
             cache: 'no-store', 
             headers: { 
                 'Content-Type': 'application/json',
+               'AccessControlAllowOrigin': '*'
             }
         });
         const data = await response.json();
-        if (!data[0].id) {
-            throw Error(data.message || "Create product variants failed");
-        } 
+        // if (!data[0].id) {
+        //     throw Error(data.message || "Create product variants failed");
+        // } 
+        return data;
+    } catch (error) {
+        console.error('Error creating product variants:', error);
+        throw error; // Rethrow the error to handle it in the calling function
+    }
 }
 type variantUpdate = {
     color?: string,
@@ -159,7 +165,7 @@ type variantUpdate = {
     images?: string[]
 }
 
-export async function updateProductVariant (formData:variants) {
+export async function updateProductVariant (formData:variantUpdate) {
     console.log(JSON.stringify(formData));
     // Aqui se envian aca se hace la req
     

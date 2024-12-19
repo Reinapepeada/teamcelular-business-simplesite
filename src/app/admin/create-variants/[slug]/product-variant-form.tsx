@@ -18,6 +18,9 @@ import { toast } from "@/hooks/use-toast";
 import { ImageUpload } from "@/components/ImageUpload";
 // import services
 import { uploadImagesToimgBB,createProductVariants } from "@/services/products";
+import router from "next/router";
+import { redirect } from "next/navigation";
+import { ToastAction } from "@/components/ui/toast";
 
 interface Variant {
     tempId: number;
@@ -136,42 +139,64 @@ export default function ProductVariantForm({
         }
     };
 
-
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
-        const variantsToSubmit = variants.map(({ tempId, ...rest }) => rest);
-        // por cada variante cambio las imagenes por las urls
-        const variantsWithImages = await Promise.all(
-            variantsToSubmit.map(async (variant) => {
-                const imagesUrls = await uploadImagesToimgBB(variant.images);
-                console.log(imagesUrls)
-                return { ...variant, images: imagesUrls };
-            })
-        );
-        console.log("Variants with images:", variantsWithImages
-        );
-        
-
+    
         try {
-            // Simulate an API call
-            const response = await createProductVariants({ variants: variantsWithImages})
-            console.log("Variants submitted:", variantsWithImages);
+          const variantsToSubmit = variants.map(({ tempId, ...rest }) => rest);
+          
+          // Upload images for each variant
+          const variantsWithImages = await Promise.all(
+            variantsToSubmit.map(async (variant) => {
+              try {
+                const imagesUrls = await uploadImagesToimgBB(variant.images);
+                return { ...variant, images: imagesUrls };
+              } catch (error) {
+                console.error("Error uploading images:", error);
+                throw new Error("Failed to upload images for a variant");
+              }
+            })
+          );
+    
+          // Create product variants
+          const response = await createProductVariants({ variants: variantsWithImages });
+    
+          if (response.status_code!==400) {
+            console.log("Variants created successfully:", response);
             toast({
-                title: "Success",
-                description: "Variants have been saved successfully.",
+              title: "Success",
+              description: "Variants have been saved successfully. Redirecting to admin page...",
+              action: (
+                <ToastAction onClick={()=> redirect('/admin')} altText="go to admin">admin page</ToastAction>
+              ),
             });
+            
+            // Delay redirection to allow user to see the success message
+            setTimeout(() => {
+              redirect('/admin');
+            }, 10000);
+
+          } else {
+            throw new Error(response.msg || "Failed to create product variants");
+          }
         } catch (error) {
-            console.error("Error submitting variants:", error);
-            toast({
-                title: "Error",
-                description: "There was a problem saving the variants.",
-                variant: "destructive",
-            });
+          console.error("Error submitting variants:", error);
+          
+          let errorMessage = "There was a problem saving the variants.";
+          if (error instanceof Error) {
+            errorMessage = error.message;
+          }
+    
+          toast({
+            title: "Error",
+            description: errorMessage,
+            variant: "destructive",
+          });
         } finally {
-            setIsSubmitting(false);
+          setIsSubmitting(false);
         }
-    };
+      };
 
     const renderVariantForm = (variant: Variant) => (
         <motion.div
@@ -220,8 +245,10 @@ export default function ProductVariantForm({
                     <Select
                         onValueChange={(value) =>
                             handleSelectChange(variant.tempId, "unit", value)
-                        }>
-                        <SelectTrigger>
+                        }
+                        required
+                        >
+                            <SelectTrigger>
                             <SelectValue placeholder="Select Unit" />
                         </SelectTrigger>
                         <SelectContent className="bg-background">
@@ -241,7 +268,9 @@ export default function ProductVariantForm({
                     <Select
                         onValueChange={(value) =>
                             handleSelectChange(variant.tempId, "size_unit", value)
-                        }>
+                        }
+                        required
+                        >
                         <SelectTrigger>
                             <SelectValue placeholder="Select Size Unit" />
                         </SelectTrigger>

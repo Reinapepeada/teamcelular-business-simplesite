@@ -25,10 +25,10 @@ export default function NavbarNUI() {
     ];
 
     return (
-        <Navbar isBordered maxWidth="2xl">
+        <Navbar  maxWidth="2xl">
             <NavbarContent className="" justify="start">
                 <NavbarItem className="lg:hidden">
-                    <NavbarMenuToggle />
+                    <NavbarMenuToggle className="w-12 h-12" />
                 </NavbarItem>
                 <NavbarItem className="flex items-center">
                     <Link href="/" className="text-inherit ">
