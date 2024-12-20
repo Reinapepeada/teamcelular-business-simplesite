@@ -36,18 +36,20 @@ interface Variant {
 }
 
 interface ProductVariantFormProps {
-    productId: string;
-    productName: string;
+    readonly productId: string;
+    readonly productName: string;
 }
 
+let variantCounter = 0;
+
 const emptyVariant = (productId: string): Variant => ({
-    tempId: Date.now(),
+    tempId: ++variantCounter,
     product_id: productId,
     color: "",
     size: "",
-    unit:"",
-    branch_id:5,
-    size_unit:"",
+    unit: "",
+    branch_id: 5,
+    size_unit: "",
     stock: 0,
     min_stock: 0,
     images: [],
@@ -173,12 +175,13 @@ export default function ProductVariantForm({
             });
             
             // Delay redirection to allow user to see the success message
-            setTimeout(() => {
-              redirect('/admin');
-            }, 10000);
+            // setTimeout(() => {
+            //   redirect('/admin');
+            // }, 10000);
 
           } else {
-            throw new Error(response.msg || "Failed to create product variants");
+            console.log(response.detail);
+            throw new Error(response.detail);
           }
         } catch (error) {
           console.error("Error submitting variants:", error);
@@ -189,9 +192,9 @@ export default function ProductVariantForm({
           }
     
           toast({
+            variant: "destructive", 
             title: "Error",
-            description: errorMessage,
-            variant: "destructive",
+            description: errorMessage
           });
         } finally {
           setIsSubmitting(false);
@@ -224,7 +227,8 @@ export default function ProductVariantForm({
                     <Select
                         onValueChange={(value) =>
                             handleSelectChange(variant.tempId, "color", value)
-                        }>
+                        }
+                        >
                         <SelectTrigger>
                             <SelectValue placeholder="Select Color" />
                         </SelectTrigger>
