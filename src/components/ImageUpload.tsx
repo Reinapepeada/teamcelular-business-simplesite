@@ -59,7 +59,6 @@ export function ImageUpload({ onChange }: ImageUploadProps) {
             if (blob) {
               const resizedFile = new File([blob], file.name, {
                 type: 'image/jpeg',
-                lastModified: Date.now(),
               });
               resolve(resizedFile);
             }
