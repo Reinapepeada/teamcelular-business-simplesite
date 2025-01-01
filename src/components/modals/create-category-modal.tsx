@@ -1,87 +1,105 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { Loader2 } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Sparkles } from 'lucide-react'
 import { createCategory } from '@/services/categories'
 import { revalidatePathCreateProducts } from '@/services/revalidate'
-
+import { useToast } from "@/hooks/use-toast"
 
 export default function CreateCategoryModal({ isOpen, setIsOpen }: Readonly<{ isOpen: boolean, setIsOpen: (open: boolean) => void }>) {
   const [categoryName, setCategoryName] = useState('')
   const [categoryDescription, setCategoryDescription] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const { toast } = useToast()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-   const response= await createCategory({ name: categoryName, description: categoryDescription }) 
-    console.log(response)
-    if (response.id) {
-      revalidatePathCreateProducts()
-      setIsOpen(false)
+    setIsLoading(true)
+    try {
+      const response = await createCategory({ name: categoryName, description: categoryDescription })
+      if (response.id) {
+        await revalidatePathCreateProducts()
+        setIsOpen(false)
+        toast({
+          title: "Categoría creada",
+          description: `Tu categoría "${categoryName}" ha sido creada exitosamente.`,
+          duration: 5000,
+        })
+      }
+    } catch (error) {
+      console.error('Error al crear la categoría:', error)
+      toast({
+        title: "Error",
+        description: "No se pudo crear la categoría. Por favor, intenta de nuevo.",
+        variant: "destructive",
+        duration: 5000,
+      })
+    } finally {
+      setIsLoading(false)
     }
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
-      <AnimatePresence>
-        {isOpen && (
-          <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <DialogContent className="sm:max-w-[425px]">
-              <DialogHeader>
-                <DialogTitle className="text-2xl font-bold text-indigo-700 flex items-center gap-2">
-                  <Sparkles className="w-6 h-6 text-yellow-400" />
-                  Create Your Category
-                </DialogTitle>
-                <DialogDescription className="text-indigo-500">
-                  Enter a name for your new category. Make it memorable!
-                </DialogDescription>
-              </DialogHeader>
-              <motion.form
-                onSubmit={handleSubmit}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.3 }}
-                className="space-y-6 mt-4"
-              >
-                <div className="space-y-2">
-                  <Label htmlFor="categoryName" className="text-sm font-medium text-gray-700">
-                    Category Name
-                  </Label>
-                  <Input
-                    id="categoryName"
-                    value={categoryName}
-                    onChange={(e) => setCategoryName(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                    placeholder="Enter your category name"
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="categoryDescription" className="text-sm font-medium text-gray-700">
-                    Category Description
-                  </Label>
-                  <Input
-                    id="categoryDescription"
-                    value={categoryDescription}
-                    onChange={(e) => setCategoryDescription(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                    placeholder="Enter your category description"
-                    required
-                  />
-                </div>
-                <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700 text-white">
-                  Create Category
-                </Button>
-              </motion.form>
-            </DialogContent>
-          </Dialog>
-        )}
-      </AnimatePresence>
-    </div>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader className="space-y-2">
+          <DialogTitle className="text-xl font-semibold">
+            Crea tu Categoría
+          </DialogTitle>
+          <DialogDescription>
+            Ingresa un nombre y descripción para tu nueva categoría.
+          </DialogDescription>
+        </DialogHeader>
+        <form onSubmit={handleSubmit} className="space-y-4 pt-4">
+          <div className="space-y-2">
+            <Label htmlFor="categoryName" className="text-sm font-medium">
+              Nombre
+            </Label>
+            <Input
+              id="categoryName"
+              value={categoryName}
+              onChange={(e) => setCategoryName(e.target.value)}
+              className="w-full"
+              placeholder="Ingresa el nombre de tu categoría"
+              required
+              disabled={isLoading}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="categoryDescription" className="text-sm font-medium">
+              Descripción
+            </Label>
+            <Input
+              id="categoryDescription"
+              value={categoryDescription}
+              onChange={(e) => setCategoryDescription(e.target.value)}
+              className="w-full"
+              placeholder="Ingresa la descripción de tu categoría"
+              required
+              disabled={isLoading}
+            />
+          </div>
+          <Button 
+            type="submit" 
+            className="w-full"
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Creando...
+              </>
+            ) : (
+              'Crear Categoría'
+            )}
+          </Button>
+        </form>
+      </DialogContent>
+    </Dialog>
   )
 }
+
