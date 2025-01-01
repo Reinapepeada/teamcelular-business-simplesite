@@ -154,15 +154,15 @@ export default function ProductForm() {
 
 
   return (
-    <>
+    <div className='w-1/2 h-full m-3'>
     {showNewBrandForm && <CreateBrandModal isOpen={showNewBrandForm} setIsOpen={setShowNewBrandForm} />}
     {showNewCategoryForm && <CreateCategoryModal isOpen={showNewCategoryForm} setIsOpen={setShowNewCategoryForm} />}
     {showNewProviderForm && <CreateProviderModal isOpen={showNewProviderForm} setIsOpen={setShowNewProviderForm} />}
-      <Card className="w-full max-w-4xl mx-auto">
+    <Card className="">
       <CardHeader>
         <CardTitle>Product Information</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className='gap-4'>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 flex flex-col justify-center ">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -216,7 +216,7 @@ export default function ProductForm() {
                 name="brand_id"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Brand ID</FormLabel>
+                    <FormLabel>Brand </FormLabel>
                     <div className="flex items-center space-x-2">
                       <FormControl className="flex-grow">
                         <Select onValueChange={(value) => field.onChange(Number(value))} defaultValue={field.value.toString()}>
@@ -347,7 +347,7 @@ export default function ProductForm() {
                 name="category_id"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Category ID</FormLabel>
+                    <FormLabel>Category</FormLabel>
                     <div className="flex items-center space-x-2">
                       <FormControl className="flex-grow">
                         <Select onValueChange={(value) => field.onChange(Number(value))} defaultValue={field.value.toString()}>
@@ -376,7 +376,7 @@ export default function ProductForm() {
                 name="provider_id"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Provider ID</FormLabel>
+                    <FormLabel>Provider</FormLabel>
                     <div className="flex items-center space-x-2">
                       <FormControl className="flex-grow">
                         <Select onValueChange={(value) => field.onChange(Number(value))} defaultValue={field.value.toString()}>
@@ -406,6 +406,6 @@ export default function ProductForm() {
         </Form>
       </CardContent>
     </Card>
-    </>
+    </div>
   )
 }

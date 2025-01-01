@@ -37,8 +37,6 @@ export default function CreateProviderModal({ isOpen, setIsOpen }: Readonly<{ is
           duration: 5000,
         })
       }else{
-        // lanzar excepcion con el mensaje de error
-
         throw response.detail
       }
     } catch (error) {

@@ -20,7 +20,7 @@ export default function CreateBrandModal({ isOpen, setIsOpen }: Readonly<{ isOpe
     setIsLoading(true)
     try {
       const response = await createBrand({ name: brandName })
-      if (response.id) {
+      if (!response.detail) {
         await revalidatePathCreateProducts()
         setIsOpen(false)
         toast({
@@ -28,12 +28,14 @@ export default function CreateBrandModal({ isOpen, setIsOpen }: Readonly<{ isOpe
           description: `Tu marca "${brandName}" ha sido creada exitosamente.`,
           duration: 5000,
         })
+      }else{
+        throw response.detail
       }
     } catch (error) {
       console.error('Error al crear la marca:', error)
       toast({
         title: "Error",
-        description: "No se pudo crear la marca. Por favor, intenta de nuevo.",
+        description: "No se pudo crear la marca: "+error,
         variant: "destructive",
         duration: 5000,
       })

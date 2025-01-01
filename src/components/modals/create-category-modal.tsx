@@ -29,6 +29,8 @@ export default function CreateCategoryModal({ isOpen, setIsOpen }: Readonly<{ is
           description: `Tu categoría "${categoryName}" ha sido creada exitosamente.`,
           duration: 5000,
         })
+      }else{
+        throw response.detail
       }
     } catch (error) {
       console.error('Error al crear la categoría:', error)
