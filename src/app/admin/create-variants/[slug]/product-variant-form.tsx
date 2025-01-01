@@ -1,6 +1,6 @@
 "use client"
 
-import { useState} from "react";
+import { useEffect, useState} from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,9 +18,9 @@ import { toast } from "@/hooks/use-toast";
 import { ImageUpload } from "@/components/ImageUpload";
 // import services
 import { uploadImagesToimgBB,createProductVariants } from "@/services/products";
-import router from "next/router";
 import { redirect } from "next/navigation";
 import { ToastAction } from "@/components/ui/toast";
+import { getbranches } from "@/services/branches";
 
 interface Variant {
     tempId: number;
@@ -80,6 +80,16 @@ export default function ProductVariantForm({
         null
     );
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const[branches,setBranches]= useState([]);
+    const[showNewBranch,setShowNewbranch]= useState(false);
+
+    useEffect(()=>{
+        async function fetchBranches(){
+            const brands_server= await getbranches();
+            setBranches(brands_server)
+        }
+        fetchBranches()
+    },[showNewBranch])
 
     const handleInputChange = (
         tempId: number,
@@ -175,9 +185,9 @@ export default function ProductVariantForm({
             });
             
             // Delay redirection to allow user to see the success message
-            // setTimeout(() => {
-            //   redirect('/admin');
-            // }, 10000);
+            setTimeout(() => {
+              redirect('/admin');
+            }, 10000); 
 
           } else {
             console.log(response.detail);
@@ -323,6 +333,32 @@ export default function ProductVariantForm({
                         onChange={(e) => handleInputChange(variant.tempId, e)}
                         required
                     />
+                </div>
+                <div>
+                    <Label htmlFor={`branch-${variant.tempId}`}>
+                        Branch
+                    </Label>
+                    <Select
+                        onValueChange={(value) =>
+                            handleSelectChange(variant.tempId, "branch_id", value)
+                        }
+                        required
+                        >
+                            <SelectTrigger>
+                            <SelectValue placeholder="Select Branch" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-background">
+                            {branches.map((branch: any) => (
+                                <SelectItem
+                                    className="hover:bg-gray-600"
+                                    key={branch.id}
+                                    value={branch.id}>
+                                    {branch.name}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+
                 </div>
                 <div className="md:col-span-2">
                     <ImageUpload
