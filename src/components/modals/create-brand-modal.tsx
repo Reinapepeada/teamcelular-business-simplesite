@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Sparkles } from 'lucide-react'
 import { createBrand } from '@/services/brands'
-import { revalidatePath } from 'next/cache'
+import { revalidatePathCreateProducts } from '@/services/revalidate'
 
 
 export default function CreateBrandModal({ isOpen, setIsOpen }: Readonly<{ isOpen: boolean, setIsOpen: (open: boolean) => void }>) {
@@ -19,8 +19,8 @@ export default function CreateBrandModal({ isOpen, setIsOpen }: Readonly<{ isOpe
     const response= await createBrand({ name: brandName })
     console.log(response)
     if (response.id) {
+      revalidatePathCreateProducts()
       setIsOpen(false)
-      revalidatePath("/admin/create-products")
     }
   }
 
