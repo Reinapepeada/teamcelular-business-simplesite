@@ -7,17 +7,22 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Sparkles } from 'lucide-react'
+import { createCategory } from '@/services/categories'
+import { revalidatePathCreateProducts } from '@/services/revalidate'
 
 
 export default function CreateCategoryModal({ isOpen, setIsOpen }: Readonly<{ isOpen: boolean, setIsOpen: (open: boolean) => void }>) {
   const [categoryName, setCategoryName] = useState('')
+  const [categoryDescription, setCategoryDescription] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically send the categoryName to your backend
-    console.log('Category created:', categoryName)
-    setIsOpen(false)
-    setCategoryName('')
+   const response= await createCategory({ name: categoryName, description: categoryDescription }) 
+    console.log(response)
+    if (response.id) {
+      revalidatePathCreateProducts()
+      setIsOpen(false)
+    }
   }
 
   return (
@@ -53,6 +58,19 @@ export default function CreateCategoryModal({ isOpen, setIsOpen }: Readonly<{ is
                     onChange={(e) => setCategoryName(e.target.value)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                     placeholder="Enter your category name"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="categoryDescription" className="text-sm font-medium text-gray-700">
+                    Category Description
+                  </Label>
+                  <Input
+                    id="categoryDescription"
+                    value={categoryDescription}
+                    onChange={(e) => setCategoryDescription(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                    placeholder="Enter your category description"
                     required
                   />
                 </div>

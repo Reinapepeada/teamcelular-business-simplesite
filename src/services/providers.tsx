@@ -24,3 +24,29 @@ export async function getproviders() {
             return data;
         }
 }
+
+interface Provider {
+    name: string;
+    email: string;
+    phone: string;
+    address: string;
+}
+
+export async function createProvider({ name, email, phone, address}: Provider) {
+    // Aqui se envian aca se hace la req
+    let response = await fetch(`${apiUrl}/providers/create`
+        ,
+        { method: 'POST',
+            cache: 'no-store', 
+            headers: { 
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, email, phone, address})
+        });
+        const data = await response.json();
+        if (data == undefined) {
+            throw Error(data.message || "Create provider failed");
+        } else {
+            return data;
+        }
+}

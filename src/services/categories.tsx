@@ -24,3 +24,22 @@ export async function getcategories() {
             return data;
         }
 }
+
+export async function createCategory({ name, description }: { name: string; description: string }) {
+    // Aqui se envian aca se hace la req
+    let response = await fetch(`${apiUrl}/categories/create`,
+        {
+            method: 'POST',
+            cache: 'no-store',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, description })
+        });
+    const data = await response.json();
+    if (data == undefined) {
+        throw Error(data.message || "Create category failed");
+    } else {
+        return data;
+    }
+}
