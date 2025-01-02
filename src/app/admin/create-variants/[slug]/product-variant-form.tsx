@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,7 +17,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "@/hooks/use-toast";
 import { ImageUpload } from "@/components/ImageUpload";
 // import services
-import { uploadImagesToimgBB,createProductVariants } from "@/services/products";
+import {
+    uploadImagesToimgBB,
+    createProductVariants,
+} from "@/services/products";
 import { redirect } from "next/navigation";
 import { ToastAction } from "@/components/ui/toast";
 import { getbranches } from "@/services/branches";
@@ -27,10 +30,10 @@ interface Variant {
     product_id: string;
     color: string;
     size: string;
-    unit:string;
-    size_unit:string;
+    unit: string;
+    size_unit: string;
     stock: number;
-    branch_id:number;
+    branch_id: number;
     min_stock: number;
     images: File[];
 }
@@ -68,8 +71,8 @@ const colors = [
     "Negro",
     "Bordo",
 ];
-const units = ["kg","g","lb","cm","m","inch","xs","s","l","xl"];
-const sizeunits=["clothing","dimensions","weight","other"]
+const units = ["kg", "g", "lb", "cm", "m", "inch", "xs", "s", "l", "xl"];
+const sizeunits = ["clothing", "dimensions", "weight", "other"];
 
 export default function ProductVariantForm({
     productId,
@@ -80,16 +83,16 @@ export default function ProductVariantForm({
         null
     );
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const[branches,setBranches]= useState([]);
-    const[showNewBranch,setShowNewbranch]= useState(false);
+    const [branches, setBranches] = useState([]);
+    const [showNewBranch, setShowNewbranch] = useState(false);
 
-    useEffect(()=>{
-        async function fetchBranches(){
-            const brands_server= await getbranches();
-            setBranches(brands_server)
+    useEffect(() => {
+        async function fetchBranches() {
+            const brands_server = await getbranches();
+            setBranches(brands_server);
         }
-        fetchBranches()
-    },[showNewBranch])
+        fetchBranches();
+    }, [showNewBranch]);
 
     const handleInputChange = (
         tempId: number,
@@ -125,6 +128,17 @@ export default function ProductVariantForm({
         );
     };
 
+    const handleSelectBranchChange = (branch_id: string) => {
+        console.log(branch_id);
+        setVariants((prevVariants) =>
+            prevVariants.map((variant) =>
+                variant.tempId === variant.tempId
+                    ? { ...variant, branch_id: parseInt(branch_id) }
+                    : variant
+            )
+        );
+    };
+
     const handleImageChange = (tempId: number, files: File[]) => {
         setVariants((prevVariants) =>
             prevVariants.map((variant) =>
@@ -154,62 +168,74 @@ export default function ProductVariantForm({
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
-    
-        try {
-          const variantsToSubmit = variants.map(({ tempId, ...rest }) => rest);
-          
-          // Upload images for each variant
-          const variantsWithImages = await Promise.all(
-            variantsToSubmit.map(async (variant) => {
-              try {
-                const imagesUrls = await uploadImagesToimgBB(variant.images);
-                return { ...variant, images: imagesUrls };
-              } catch (error) {
-                console.error("Error uploading images:", error);
-                throw new Error("Failed to upload images for a variant");
-              }
-            })
-          );
-    
-          // Create product variants
-          const response = await createProductVariants({ variants: variantsWithImages });
-    
-          if (response.status_code!==400) {
-            console.log("Variants created successfully:", response);
-            toast({
-              title: "Success",
-              description: "Variants have been saved successfully. Redirecting to admin page...",
-              action: (
-                <ToastAction onClick={()=> redirect('/admin')} altText="go to admin">admin page</ToastAction>
-              ),
-            });
-            
-            // Delay redirection to allow user to see the success message
-            setTimeout(() => {
-              redirect('/admin');
-            }, 10000); 
 
-          } else {
-            console.log(response.detail);
-            throw new Error(response.detail);
-          }
+        try {
+            const variantsToSubmit = variants.map(
+                ({ tempId, ...rest }) => rest
+            );
+
+            // Upload images for each variant
+            const variantsWithImages = await Promise.all(
+                variantsToSubmit.map(async (variant) => {
+                    try {
+                        const imagesUrls = await uploadImagesToimgBB(
+                            variant.images
+                        );
+                        return { ...variant, images: imagesUrls };
+                    } catch (error) {
+                        console.error("Error uploading images:", error);
+                        throw new Error(
+                            "Failed to upload images for a variant"
+                        );
+                    }
+                })
+            );
+
+            // Create product variants
+            const response = await createProductVariants({
+                variants: variantsWithImages,
+            });
+
+            if (response.status_code !== 400) {
+                console.log("Variants created successfully:", response);
+                toast({
+                    title: "Success",
+                    description:
+                        "Variants have been saved successfully. Redirecting to admin page...",
+                    action: (
+                        <ToastAction
+                            onClick={() => redirect("/admin")}
+                            altText="go to admin">
+                            admin page
+                        </ToastAction>
+                    ),
+                });
+
+                // Delay redirection to allow user to see the success message
+                setTimeout(() => {
+                    redirect("/admin");
+                }, 10000);
+            } else {
+                console.log(response.detail);
+                throw new Error(response.detail);
+            }
         } catch (error) {
-          console.error("Error submitting variants:", error);
-          
-          let errorMessage = "There was a problem saving the variants.";
-          if (error instanceof Error) {
-            errorMessage = error.message;
-          }
-    
-          toast({
-            variant: "destructive", 
-            title: "Error",
-            description: errorMessage
-          });
+            console.error("Error submitting variants:", error);
+
+            let errorMessage = "There was a problem saving the variants.";
+            if (error instanceof Error) {
+                errorMessage = error.message;
+            }
+
+            toast({
+                variant: "destructive",
+                title: "Error",
+                description: errorMessage,
+            });
         } finally {
-          setIsSubmitting(false);
+            setIsSubmitting(false);
         }
-      };
+    };
 
     const renderVariantForm = (variant: Variant) => (
         <motion.div
@@ -237,8 +263,7 @@ export default function ProductVariantForm({
                     <Select
                         onValueChange={(value) =>
                             handleSelectChange(variant.tempId, "color", value)
-                        }
-                        >
+                        }>
                         <SelectTrigger>
                             <SelectValue placeholder="Select Color" />
                         </SelectTrigger>
@@ -260,9 +285,8 @@ export default function ProductVariantForm({
                         onValueChange={(value) =>
                             handleSelectChange(variant.tempId, "unit", value)
                         }
-                        required
-                        >
-                            <SelectTrigger>
+                        required>
+                        <SelectTrigger>
                             <SelectValue placeholder="Select Unit" />
                         </SelectTrigger>
                         <SelectContent className="bg-background">
@@ -278,13 +302,18 @@ export default function ProductVariantForm({
                     </Select>
                 </div>
                 <div>
-                    <Label htmlFor={`SizeUnit-${variant.tempId}`}>Size Unit</Label>
+                    <Label htmlFor={`SizeUnit-${variant.tempId}`}>
+                        Size Unit
+                    </Label>
                     <Select
                         onValueChange={(value) =>
-                            handleSelectChange(variant.tempId, "size_unit", value)
+                            handleSelectChange(
+                                variant.tempId,
+                                "size_unit",
+                                value
+                            )
                         }
-                        required
-                        >
+                        required>
                         <SelectTrigger>
                             <SelectValue placeholder="Select Size Unit" />
                         </SelectTrigger>
@@ -334,32 +363,7 @@ export default function ProductVariantForm({
                         required
                     />
                 </div>
-                <div>
-                    <Label htmlFor={`branch-${variant.tempId}`}>
-                        Branch
-                    </Label>
-                    <Select
-                        onValueChange={(value) =>
-                            handleSelectChange(variant.tempId, "branch_id", value)
-                        }
-                        required
-                        >
-                            <SelectTrigger>
-                            <SelectValue placeholder="Select Branch" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-background">
-                            {branches.map((branch: any) => (
-                                <SelectItem
-                                    className="hover:bg-gray-600"
-                                    key={branch.id}
-                                    value={branch.id}>
-                                    {branch.name}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
 
-                </div>
                 <div className="md:col-span-2">
                     <ImageUpload
                         onChange={(files) =>
@@ -429,6 +433,27 @@ export default function ProductVariantForm({
                     Product: {productName}
                 </h2>
                 <p className="text-sm text-muted-foreground">ID: {productId}</p>
+            </div>
+            <div>
+                <Label htmlFor={`branch-`}>Branch</Label>
+                <Select
+                    onValueChange={(value) => handleSelectBranchChange(value)}
+                    required
+                    defaultValue="5">
+                    <SelectTrigger>
+                        <SelectValue placeholder="Select Branch" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-background">
+                        {branches.map((branch: any) => (
+                            <SelectItem
+                                className="hover:bg-gray-600"
+                                key={branch.id}
+                                value={branch.id}>
+                                {branch.name}
+                            </SelectItem>
+                        ))}
+                    </SelectContent>
+                </Select>
             </div>
             <div className="space-y-4">
                 <AnimatePresence>
