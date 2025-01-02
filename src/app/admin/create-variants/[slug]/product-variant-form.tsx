@@ -24,6 +24,12 @@ import {
 import { redirect } from "next/navigation";
 import { ToastAction } from "@/components/ui/toast";
 import { getbranches } from "@/services/branches";
+import CreateBranchModal from "@/components/modals/create-branch-modal";
+
+interface Branch {
+    id: string;
+    name: string;
+}
 
 interface Variant {
     tempId: number;
@@ -196,7 +202,7 @@ export default function ProductVariantForm({
                 variants: variantsWithImages,
             });
 
-            if (response.status_code !== 400) {
+            if (!response.detail) {
                 console.log("Variants created successfully:", response);
                 toast({
                     title: "Success",
@@ -212,17 +218,17 @@ export default function ProductVariantForm({
                 });
 
                 // Delay redirection to allow user to see the success message
-                setTimeout(() => {
-                    redirect("/admin");
-                }, 10000);
+                // setTimeout(() => {
+                //     redirect("/admin");
+                // }, 10000);
             } else {
                 console.log(response.detail);
-                throw new Error(response.detail);
+                throw response.detail;
             }
         } catch (error) {
             console.error("Error submitting variants:", error);
 
-            let errorMessage = "There was a problem saving the variants.";
+            let errorMessage = "There was a problem saving the variants."+ error;
             if (error instanceof Error) {
                 errorMessage = error.message;
             }
@@ -424,68 +430,75 @@ export default function ProductVariantForm({
         </motion.div>
     );
 
+    const [showNewBranchForm, setShowNewBranchForm] = useState(false);
+    
     return (
-        <form
-            onSubmit={handleSubmit}
-            className="max-w-3xl mx-auto space-y-6 p-4">
-            <div className="mb-6">
-                <h2 className="text-2xl font-bold text-card-foreground">
-                    Product: {productName}
-                </h2>
-                <p className="text-sm text-muted-foreground">ID: {productId}</p>
-            </div>
-            <div>
-                <Label htmlFor={`branch-`}>Branch</Label>
-                <Select
-                    onValueChange={(value) => handleSelectBranchChange(value)}
-                    required
-                    defaultValue="5">
-                    <SelectTrigger>
-                        <SelectValue placeholder="Select Branch" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-background">
-                        {branches.map((branch: any) => (
-                            <SelectItem
-                                className="hover:bg-gray-600"
-                                key={branch.id}
-                                value={branch.id}>
-                                {branch.name}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
-            </div>
-            <div className="space-y-4">
-                <AnimatePresence>
-                    {variants.map((variant) =>
-                        editingVariantId === variant.tempId
-                            ? renderVariantForm(variant)
-                            : renderVariantSummary(variant)
+        <>
+            {showNewBranchForm && <CreateBranchModal isOpen={showNewBranchForm} setIsOpen={setShowNewBranchForm} />}
+            <form
+                onSubmit={handleSubmit}
+                className="max-w-3xl mx-auto space-y-6 p-4">
+                <div className="mb-6">
+                    <h2 className="text-2xl font-bold text-card-foreground">
+                        Product: {productName}
+                    </h2>
+                    <p className="text-sm text-muted-foreground">ID: {productId}</p>
+                </div>
+    
+                <div>
+                    <Label htmlFor={`branch-`}>Branch</Label>
+                    <div className="flex space-x-2">
+                        <Select
+                            onValueChange={(value) => handleSelectBranchChange(value)}
+                            required
+                            defaultValue={variants[0]?.branch_id.toString()}
+                            >
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select Branch" />
+                            </SelectTrigger>
+                            <SelectContent className='bg-background'>
+                            {branches.map((branchI: Branch) => (
+                                <SelectItem key={branchI.id} value={branchI.id.toString()}>{branchI.name}</SelectItem>
+                            ))}
+                            </SelectContent>
+                        </Select>
+                        <Button type="button" size="icon" onClick={()=>setShowNewBranchForm(true)}>
+                            <PlusCircle className="h-4 w-4" />
+                        </Button>
+                    </div>
+                </div>
+                <div className="space-y-4">
+                    <AnimatePresence>
+                        {variants.map((variant) =>
+                            editingVariantId === variant.tempId
+                                ? renderVariantForm(variant)
+                                : renderVariantSummary(variant)
+                        )}
+                    </AnimatePresence>
+                </div>
+                <Button
+                    type="button"
+                    variant="outline"
+                    onClick={addVariant}
+                    className="w-full">
+                    <PlusCircle className="mr-2 h-5 w-5" />
+                    Add Variant
+                </Button>
+                <Button
+                    type="submit"
+                    variant="default"
+                    className="w-full"
+                    disabled={isSubmitting}>
+                    {isSubmitting ? (
+                        <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Saving...
+                        </>
+                    ) : (
+                        "Save Variants"
                     )}
-                </AnimatePresence>
-            </div>
-            <Button
-                type="button"
-                variant="outline"
-                onClick={addVariant}
-                className="w-full">
-                <PlusCircle className="mr-2 h-5 w-5" />
-                Add Variant
-            </Button>
-            <Button
-                type="submit"
-                variant="default"
-                className="w-full"
-                disabled={isSubmitting}>
-                {isSubmitting ? (
-                    <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Saving...
-                    </>
-                ) : (
-                    "Save Variants"
-                )}
-            </Button>
-        </form>
+                </Button>
+            </form>
+        </>
     );
 }

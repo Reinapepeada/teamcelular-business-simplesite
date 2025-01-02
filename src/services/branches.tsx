@@ -24,3 +24,21 @@ export async function getbranches() {
             return data;
         }
 }
+
+export async function createBranch({ name, location }: { name: string; location: string }) {
+    let response = await fetch(`${apiUrl}/branches/create`
+        ,
+        { method: 'POST',
+            cache: 'no-store', 
+            headers: { 
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, location })
+        });
+        const data = await response.json();
+        if (data == undefined) {
+            throw Error(data.message || "Create branch failed");
+        } else {
+            return data;
+        }
+}

@@ -6,12 +6,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { createBrand } from '@/services/brands'
-import { revalidatePathCreateProducts } from '@/services/revalidate'
+import { createBranch } from '@/services/branches'
+import { revalidatePathCreateVariants } from '@/services/revalidate'
 import { useToast } from "@/hooks/use-toast"
 
-export default function CreateBrandModal({ isOpen, setIsOpen }: Readonly<{ isOpen: boolean, setIsOpen: (open: boolean) => void }>) {
-  const [brandName, setBrandName] = useState('')
+export default function CreateBranchModal({ isOpen, setIsOpen }: Readonly<{ isOpen: boolean, setIsOpen: (open: boolean) => void }>) {
+  const [branchName, setBranchName] = useState('')
+  const [branchAddress, setBranchAddress] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const { toast } = useToast()
 
@@ -19,24 +20,24 @@ export default function CreateBrandModal({ isOpen, setIsOpen }: Readonly<{ isOpe
     e.preventDefault()
     setIsLoading(true)
     try {
-      const response = await createBrand({ name: brandName })
+      const response = await createBranch({ name: branchName, location: branchAddress })
+      console.log('response:', response)
       if (!response.detail) {
-        await revalidatePathCreateProducts()
+        await revalidatePathCreateVariants()
         setIsOpen(false)
         toast({
-          title: "Marca creada",
-          description: `Tu marca "${brandName}" ha sido creada exitosamente.`,
+          title: "Almacen creada",
+          description: `Tu almacen "${branchName}" ha sido creada exitosamente.`,
           duration: 5000,
         })
       }else{
-        console.log('response:', response)
         throw response.detail
       }
     } catch (error) {
-      console.error('Error al crear la marca:', error)
+      console.error('Error al crear la almacen:', error)
       toast({
         title: "Error",
-        description: "No se pudo crear la marca: "+ error,
+        description: "No se pudo crear la almacen."+ error,
         variant: "destructive",
         duration: 5000,
       })
@@ -50,26 +51,38 @@ export default function CreateBrandModal({ isOpen, setIsOpen }: Readonly<{ isOpe
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader className="space-y-2">
           <DialogTitle className="text-xl font-semibold">
-            Crea tu Marca
+            Crea tu Almacen
           </DialogTitle>
           <DialogDescription>
-            Ingresa un nombre para tu nueva marca.
+            Ingresa un nombre y direccion para tu nueva Almacen.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4 pt-4">
           <div className="space-y-2">
-            <Label htmlFor="brandName" className="text-sm font-medium">
-              Nombre de la Marca
+            <Label htmlFor="branchName" className="text-sm font-medium">
+              Nombre
             </Label>
             <Input
-              id="brandName"
-              value={brandName}
-              onChange={(e) => setBrandName(e.target.value)}
+              id="branchName"
+              value={branchName}
+              onChange={(e) => setBranchName(e.target.value)}
               className="w-full"
-              placeholder="Ingresa el nombre de tu marca"
+              placeholder="Ingresa el nombre de tu categoría"
               required
-              minLength={2}
-              maxLength={50}
+              disabled={isLoading}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="branchAddress" className="text-sm font-medium">
+              Direccion
+            </Label>
+            <Input
+              id="branchAddress"
+              value={branchAddress}
+              onChange={(e) => setBranchAddress(e.target.value)}
+              className="w-full"
+              placeholder="Ingresa la direccion de tu categoría"
+              required
               disabled={isLoading}
             />
           </div>
@@ -84,7 +97,7 @@ export default function CreateBrandModal({ isOpen, setIsOpen }: Readonly<{ isOpe
                 Creando...
               </>
             ) : (
-              'Crear Marca'
+              'Crear Almacen'
             )}
           </Button>
         </form>
