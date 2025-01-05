@@ -228,7 +228,8 @@ export default function ProductVariantForm({
         } catch (error) {
             console.error("Error submitting variants:", error);
 
-            let errorMessage = "There was a problem saving the variants."+ error;
+            let errorMessage = "" + error;
+            
             if (error instanceof Error) {
                 errorMessage = error.message;
             }
