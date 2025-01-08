@@ -2,15 +2,7 @@
 import { create } from "zustand";
 import Cookies from "js-cookie";
 
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  price: number;
-  image: string;
-  rating: number;
-  sales: number;
-}
+import { Product } from "@/app/tienda/product";
 
 interface CartItem extends Product {
   quantity: number;
@@ -51,7 +43,7 @@ const useCartStore = create<CartState>((set, get) => ({
     const updatedCart = get().cart;
     set({
       totalItems: updatedCart.reduce((sum, item) => sum + item.quantity, 0),
-      totalPrice: updatedCart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+      totalPrice: updatedCart.reduce((sum, item) => sum + item.retail_price * item.quantity, 0),
     });
     Cookies.set("cart", JSON.stringify(updatedCart));
   },
@@ -64,7 +56,7 @@ const useCartStore = create<CartState>((set, get) => ({
     // Recalcula totales
     set({
       totalItems: updatedCart.reduce((sum, item) => sum + item.quantity, 0),
-      totalPrice: updatedCart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+      totalPrice: updatedCart.reduce((sum, item) => sum + item.retail_price * item.quantity, 0),
     });
     Cookies.set("cart", JSON.stringify(updatedCart));
   },
@@ -83,7 +75,7 @@ const useCartStore = create<CartState>((set, get) => ({
       // Recalcula totales
       set({
         totalItems: updatedCart.reduce((sum, item) => sum + item.quantity, 0),
-        totalPrice: updatedCart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+        totalPrice: updatedCart.reduce((sum, item) => sum + item.retail_price * item.quantity, 0),
       });
       Cookies.set("cart", JSON.stringify(updatedCart));
     }

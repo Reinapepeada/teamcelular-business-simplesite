@@ -16,42 +16,13 @@ import {
 import { Badge } from "@/components/ui/badge";
 import useCartStore from "@/store/cartStore";
 import Image from "next/image";
+import Link from "next/link";
 
-// Simulating a large number of products
-const generateProducts = (count: number) => {
-    const categories = [
-        "Smartphones",
-        "Tablets",
-        "Laptops",
-        "Accessories",
-        "Repair Tools",
-    ];
-    const products = [];
-    for (let i = 1; i <= count; i++) {
-        products.push({
-            id: i,
-            name: `Tech Product ${i}`,
-            category: categories[Math.floor(Math.random() * categories.length)],
-            price: Math.floor(Math.random() * 1000) + 50,
-            image: "/placeholder.svg",
-            rating: parseFloat((Math.random() * 2 + 3).toFixed(1)),
-            sales: Math.floor(Math.random() * 5000),
-        });
-    }
-    return products;
-};
 
-const products = generateProducts(1000); // Generating 1000 products for this example
+import { Product } from "./product";
+import { mockProducts } from "./muckData";
 
-interface Product {
-    id: number;
-    name: string;
-    category: string;
-    price: number;
-    image: string;
-    rating: number;
-    sales: number;
-}
+const products = mockProducts;
 
 const categories = [
     "All",
@@ -242,7 +213,7 @@ export default function TechShop() {
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                            {currentProducts.map((product, index) => (
+                            {products.map((product, index) => (
                                 <motion.div
                                     key={product.id}
                                     layout
@@ -250,65 +221,64 @@ export default function TechShop() {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -20 }}
                                     transition={{ duration: 0.3 }}>
-                                    <div
-                                        className={`shadow rounded-lg overflow-hidden transition-colors duration-300 flex flex-col h-full group`}>
-                                        <div className="relative overflow-hidden">
-                                            <Image
-                                                src={product.image}
-                                                alt={product.name}
-                                                width={100}
-                                                height={100}
-                                                className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                                            />
-                                            {index === 0 && (
-                                                <Badge className="absolute top-2 left-2 bg-yellow-400 text-yellow-900">
-                                                    Best Seller
-                                                </Badge>
-                                            )}
-                                        </div>
-                                        <div className="p-4 flex-grow flex flex-col justify-between">
-                                            <div>
-                                                <h3 className="text-lg font-semibold mb-2 line-clamp-2 group-hover:text-blue-500 transition-colors duration-300">
-                                                    {product.name}
-                                                </h3>
-                                                <p className={`mb-2`}>
-                                                    {product.category}
-                                                </p>
+                                    <Link href={`/product/${product.id}`} className="block h-full" onClick={(e) => e.stopPropagation()}>
+                                        <div className={`shadow rounded-lg overflow-hidden transition-colors duration-300 flex flex-col h-full group`}>
+                                            <div className="relative overflow-hidden">
+                                                <Image
+                                                    src={product.variants[0]?.images[0]?.image_url || "/placeholder.svg"}
+                                                    alt={product.name}
+                                                    width={300}
+                                                    height={300}
+                                                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                                                />
                                             </div>
-                                            <div>
-                                                <div className="flex items-center justify-between mb-2">
-                                                    <span className="text-2xl font-bold">
-                                                        ${product.price}
-                                                    </span>
-                                                    <div className="flex items-center">
-                                                        <Star className="text-yellow-400 w-5 h-5 mr-1" />
-                                                        <span>
-                                                            {product.rating}
-                                                        </span>
+                                            <div className="p-4 flex-grow flex flex-col justify-between">
+                                                <div>
+                                                    <h3 className="text-lg font-semibold mb-2 line-clamp-2 group-hover:text-blue-500 transition-colors duration-300">
+                                                        {product.name}
+                                                    </h3>
+                                                    <p className="text-sm text-gray-600 mb-1">{product.brand.name}</p>
+                                                    <p className="text-sm text-gray-500 mb-2">{product.category.name}</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-xl font-bold mb-2">
+                                                        ${(product.discount_percentage
+                                                            ? product.retail_price * (1 - product.discount_percentage / 100)
+                                                            : product.retail_price).toFixed(2)}
+                                                    </p>
+                                                    {product.discount_percentage && (
+                                                        <div className="flex items-center mb-2">
+                                                            <Badge className="bg-red-500 text-white">
+                                                                {product.discount_percentage}% OFF
+                                                            </Badge>
+                                                            <span className="ml-2 text-sm line-through text-gray-500">
+                                                                ${(product.retail_price / (1 - product.discount_percentage / 100)).toFixed(2)}
+                                                            </span>
+                                                        </div>
+                                                    )}
+                                                    <div className="flex flex-wrap gap-2 mb-3">
+                                                        {product.variants.map((variant, index) => (
+                                                            <span
+                                                                key={index}
+                                                                className="w-6 h-6 rounded-full border border-gray-300"
+                                                                style={{ backgroundColor: variant.color.toLowerCase() }}
+                                                                title={variant.color}
+                                                            ></span>
+                                                        ))}
                                                     </div>
-                                                </div>
-                                                <div className="flex justify-between">
                                                     <Button
-                                                        variant="outline"
-                                                        onClick={() =>
-                                                            setSelectedProduct(
-                                                                product
-                                                            )
-                                                        }
-                                                        className="flex-1 mr-2 transition-colors duration-300 hover:bg-blue-500 hover:text-white">
-                                                        Details
-                                                    </Button>
-                                                    <Button
-                                                        onClick={() =>
-                                                            addToCart(product)
-                                                        }
-                                                        className="flex-1 bg-blue-500 hover:bg-blue-600 text-white transition-colors duration-300">
-                                                        Add
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            addToCart(product);
+                                                        }}
+                                                        className="w-full mt-2 bg-blue-500 hover:bg-blue-600 text-white transition-colors duration-300"
+                                                    >
+                                                        Add to Cart
                                                     </Button>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </Link>
                                 </motion.div>
                             ))}
                         </div>
@@ -341,37 +311,23 @@ export default function TechShop() {
                                         <ChevronLeft className="h-6 w-6 md:h-4 md:w-4" />
                                     </Button>
 
-                                    {/* Page numbers - show fewer on mobile */}
-                                    {pageNumbers
-                                        .filter((number) => {
-                                            if (
-                                                typeof window !== "undefined" &&
-                                                window.innerWidth < 640
-                                            ) {
-                                                return (
-                                                    Math.abs(
-                                                        number - currentPage
-                                                    ) <= 1
-                                                );
+                                    {/* Page numbers */}
+                                    {pageNumbers.map((number) => (
+                                        <Button
+                                            key={number}
+                                            variant={
+                                                currentPage === number
+                                                    ? "default"
+                                                    : "outline"
                                             }
-                                            return true;
-                                        })
-                                        .map((number) => (
-                                            <Button
-                                                key={number}
-                                                variant={
-                                                    currentPage === number
-                                                        ? "default"
-                                                        : "outline"
-                                                }
-                                                onClick={() =>
-                                                    setCurrentPage(number)
-                                                }
-                                                size="lg"
-                                                className="min-w-[32px] md:min-w-[40px] p-3 md:p-2">
-                                                {number}
-                                            </Button>
-                                        ))}
+                                            onClick={() =>
+                                                setCurrentPage(number)
+                                            }
+                                            size="lg"
+                                            className="min-w-[32px] md:min-w-[40px] p-3 md:p-2">
+                                            {number}
+                                        </Button>
+                                    ))}
 
                                     {/* Next page button */}
                                     <Button
@@ -406,67 +362,7 @@ export default function TechShop() {
                 </div>
             </section>
 
-            <AnimatePresence>
-                {selectedProduct && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
-                        onClick={() => setSelectedProduct(null)}>
-                        <motion.div
-                            initial={{ scale: 0.9, y: 50 }}
-                            animate={{ scale: 1, y: 0 }}
-                            exit={{ scale: 0.9, y: 50 }}
-                            className={` p-6 rounded-lg bg-background max-w-2xl w-full transition-colors duration-300`}
-                            onClick={(e) => e.stopPropagation()}>
-                            <div className="flex justify-between items-start mb-4">
-                                <h2 className="text-2xl font-bold">
-                                    {selectedProduct.name}
-                                </h2>
-                                <Button
-                                    variant="ghost"
-                                    onClick={() => setSelectedProduct(null)}>
-                                    <X className="h-6 w-6" />
-                                </Button>
-                            </div>
-                            <Image
-                                src={selectedProduct.image}
-                                alt={selectedProduct.name}
-                                width={400}
-                                height={400}
-                                className="w-full h-64 object-cover rounded-lg mb-4" 
-                            />
-                            <p className={` mb-2`}>
-                                {selectedProduct.category}
-                            </p>
-                            <p className="text-3xl font-bold mb-4">
-                                ${selectedProduct.price}
-                            </p>
-                            <div className="flex items-center mb-4 ">
-                                <Star className="text-yellow-400 w-5 h-5 mr-1" />
-                                <span className="text-lg">
-                                    {selectedProduct.rating}
-                                </span>
-                            </div>
-                            <p className={`mb-6`}>
-                                Experience cutting-edge technology with the{" "}
-                                {selectedProduct.name}. This device offers
-                                unparalleled performance and features to meet
-                                all your tech needs.
-                            </p>
-                            <Button
-                                className="w-full bg-blue-500 hover:bg-blue-600 text-white transition-colors duration-300"
-                                onClick={() => {
-                                    addToCart(selectedProduct);
-                                    setSelectedProduct(null);
-                                }}>
-                                Add to Cart
-                            </Button>
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+
         </>
     );
 }
