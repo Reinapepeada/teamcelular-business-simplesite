@@ -52,23 +52,24 @@ export async function getProductById (product_id:number) {
         }
 }
 
-export async function getAllProductsPaginated (page:number, limit:number) {
-    console.log(page, limit);
+export async function getAllProductsPaginated (page:any=NaN, size:any=NaN) {
+    console.log(page, size);
     // Aqui se envian aca se hace la req
     
-    let response = await fetch(`${apiUrl}/products/get/all?page=${page}&limit=${limit}`
+    let response = await fetch(`${apiUrl}/products/?page=${page}&size=${size}`
         ,
         { method: 'GET',
-            cache: 'no-store', 
+            // cache: 'no-store', 
             headers: { 
                 'Content-Type': 'application/json',
             }
         });
         const data = await response.json();
-        if (data.getAllProductsPaginated == undefined) {
+        console.log(data)
+        if (data.products == undefined) {
             throw Error(data.message || "Get all products failed");
         } else {
-            return data.getAllProductsPaginated;
+            return data;
         }
 }
 
