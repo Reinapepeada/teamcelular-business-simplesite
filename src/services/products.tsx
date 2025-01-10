@@ -52,7 +52,9 @@ export async function getProductById (product_id:number) {
         }
 }
 
-export async function getAllProductsPaginated (page:any=NaN, size:any=NaN) {
+export async function getAllProductsPaginated (page:any=NaN, size:any=NaN,currentCategory:any,
+    searchTerm:any,
+    priceRang:any) {
     console.log(page, size);
     // Aqui se envian aca se hace la req
     
