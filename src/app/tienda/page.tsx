@@ -2,31 +2,18 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
-import { Slider } from "@/components/ui/slider";
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@/components/ui/accordion";
 import useCartStore from "@/store/cartStore";
 import Image from "next/image";
 import Link from "next/link";
 
 import { getAllProductsPaginated } from "@/services/products";
 import { debounce } from "lodash";
-
+// 
+import ProductFilters from "@/components/ProductFilters";
 // 
 import {Card, Skeleton, Button,Input } from "@nextui-org/react"
-// 
-const categories = [
-    "All",
-    "Smartphones",
-    "Tablets",
-    "Laptops",
-    "Accessories",
-    "Repair Tools",
-];
+import { useSearchParams } from "next/navigation";
+
 
 export default function TechShop() {
     const [currentCategory, setCurrentCategory] = useState<string>("All");
@@ -35,27 +22,32 @@ export default function TechShop() {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [products, setProducts] = useState<[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    
+    const searchParams = useSearchParams();
 
     const itemsPerPage = 12;
 
     const { addToCart } = useCartStore();
 
-    useEffect(() => {
-        async function getMainProducts() {
-            setIsLoading(true);
-            const response = await getAllProductsPaginated(
-                currentPage,
-                itemsPerPage,
-                currentCategory,
-                searchTerm,
-                priceRange
-            );
-            setProducts(response); // Set the product list
-            setCurrentPage(response.page); // Backend page starts from 0; adjust for 1-based UI
-            setIsLoading(false);
-        }
-        getMainProducts();
-    }, [currentPage, currentCategory, searchTerm, priceRange]);
+     // Llama al backend para obtener productos filtrados
+    // async function getMainProducts() {
+    //     setIsLoading(true);
+    //     const params = searchParams.toString();
+    //     const response = await getAllProductsPaginated(
+    //         currentPage,
+    //         itemsPerPage,
+    //         currentCategory,
+    //         searchTerm,
+    //         params
+    //     );
+    //     setProducts(response); // Set the product list
+    //     setCurrentPage(response.page); // Backend page starts from 0; adjust for 1-based UI
+    //     setIsLoading(false);
+    // }
+
+    // useEffect(() => {
+    //     getMainProducts();
+    // }, [searchParams]);
     
     const totalPages = products.total ? products.pages : 1; // Ensure it's based on the backend directly
 
@@ -86,55 +78,7 @@ export default function TechShop() {
     return (
         <section className="max-w-screen-2xl w-full p-8 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row gap-8">
-                <aside className="w-full md:w-1/4">
-                    <div className="shadow rounded-lg sticky transition-colors duration-300">
-                        <h2 className="text-lg font-semibold mb-4">Filters</h2>
-                        <Accordion type="single" collapsible>
-                            <AccordionItem value="category">
-                                <AccordionTrigger>Category</AccordionTrigger>
-                                <AccordionContent>
-                                    <div className="space-y-2">
-                                        {categories.map((category) => (
-                                            <Button
-                                                key={category}
-                                                variant={
-                                                    currentCategory === category
-                                                        ? "default"
-                                                        : "outline"
-                                                }
-                                                className="w-full justify-start"
-                                                onClick={() => {
-                                                    setCurrentCategory(category);
-                                                    setCurrentPage(1);
-                                                }}>
-                                                {category}
-                                            </Button>
-                                        ))}
-                                    </div>
-                                </AccordionContent>
-                            </AccordionItem>
-                            <AccordionItem value="price">
-                                <AccordionTrigger>Price</AccordionTrigger>
-                                <AccordionContent>
-                                    <Slider
-                                        min={0}
-                                        max={1000}
-                                        step={50}
-                                        value={priceRange}
-                                        onValueChange={(value) => {
-                                            setPriceRange([value[0], value[1]]);
-                                            setCurrentPage(1);
-                                        }}
-                                    />
-                                    <div className="flex justify-between text-sm">
-                                        <span>${priceRange[0]}</span>
-                                        <span>${priceRange[1]}</span>
-                                    </div>
-                                </AccordionContent>
-                            </AccordionItem>
-                        </Accordion>
-                    </div>
-                </aside>
+            <ProductFilters />
                 <div className="w-full md:w-3/4">
                     <Input
                         type="text"
