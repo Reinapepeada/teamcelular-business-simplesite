@@ -13,32 +13,22 @@ import {
 } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
 
-export async function getFilterOptions() {
-  // Simula una llamada a la API
-  await new Promise(resolve => setTimeout(resolve, 500));
+import { getbrands } from '@/services/brands';
+import { getcategories } from '@/services/categories';
 
+async function getFilterOptions() {
   return {
-    categories: [
-      { id: 'electronics', name: 'Electrónica' },
-      { id: 'fashion', name: 'Moda' },
-      { id: 'home', name: 'Hogar' },
-      { id: 'sports', name: 'Deportes' },
-    ],
-    brands: [
-      { id: 'apple', name: 'Apple' },
-      { id: 'samsung', name: 'Samsung' },
-      { id: 'nike', name: 'Nike' },
-      { id: 'adidas', name: 'Adidas' },
-      { id: 'ikea', name: 'IKEA' },
-    ],
     priceRange: {
       min: 0,
       max: 1000,
     },
   };
+
 }
 
-const ProductFilters = () => {
+
+export default function ProductFilters() {
+
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -57,15 +47,25 @@ const ProductFilters = () => {
     parseInt(searchParams.get("maxPrice") || "1000"),
   ])
 
+  const fetchFilterOptions = async () => {
+    const options = await getFilterOptions()
+    setSelectedPriceRange([options.priceRange.min, options.priceRange.max])
+  }
+
+  async function fetchBrands() {
+              const brands_server  = await getbrands();
+              setBrands(brands_server);
+  }
+  
+  async function fetchCategories() {
+      const categories_server  = await getcategories();
+      setCategories(categories_server);
+  }
+
   useEffect(() => {
-    const fetchFilterOptions = async () => {
-      const options = await getFilterOptions()
-      setCategories(options.categories)
-      setBrands(options.brands)
-      setPriceRange(options.priceRange)
-      setSelectedPriceRange([options.priceRange.min, options.priceRange.max])
-    }
     fetchFilterOptions()
+    fetchBrands()
+    fetchCategories()
   }, [])
 
   const handleCategoryChange = (categoryId) => {
@@ -211,4 +211,3 @@ const ProductFilters = () => {
   )
 }
 
-export default ProductFilters

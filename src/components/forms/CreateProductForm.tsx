@@ -88,8 +88,7 @@ const formSchema = z.object({
   }),
 })
 
-export default function 
-ProductForm() {
+export default function ProductForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

@@ -52,13 +52,11 @@ export async function getProductById (product_id:number) {
         }
 }
 
-export async function getAllProductsPaginated (page:any=NaN, size:any=NaN,currentCategory:any,
-    searchTerm:any,
-    priceRang:any) {
+export async function getAllProductsPaginated (page:any=NaN, size:any=NaN,params:any) {
     console.log(page, size);
     // Aqui se envian aca se hace la req
     
-    let response = await fetch(`${apiUrl}/products/?page=${page}&size=${size}`
+    let response = await fetch(`${apiUrl}/products/?page=${page}&size=${size}&${params}`
         ,
         { method: 'GET',
             // cache: 'no-store', 
