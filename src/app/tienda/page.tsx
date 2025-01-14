@@ -14,6 +14,7 @@ import { useSearchParams } from "next/navigation";
 
 // 
 import ProductsCardsStore from "@/components/ProductsCardsStore";
+import { Product } from "./product";
 
 
 export default function TechShop() {
@@ -24,13 +25,13 @@ export default function TechShop() {
     const [params, setParams] = useState<string>("");
     
     interface ProductsResponse {
-        products: [];
         total: number;
         pages: number;
         page: number;
     }
     
-    const [products, setProducts] = useState<ProductsResponse>({ products: [], total: 0, pages: 1, page: 1 });
+    const [productsPagination, setProductsPagination] = useState<ProductsResponse>({ total: 0, pages: 1, page: 1 });
+    const [products, setProducts] = useState<Product[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     
     const searchParams = useSearchParams();
@@ -45,6 +46,7 @@ export default function TechShop() {
         const params = searchParams.toString();
         if (params) {
             setParams(params);
+            setCurrentPage(1);
         }
 
         const response = await getAllProductsPaginated(
@@ -52,16 +54,23 @@ export default function TechShop() {
             itemsPerPage,
             params
         );
-        setProducts(response); // Set the product list
+
+        setProductsPagination({
+            total: response.total,
+            pages: response.pages,
+            page: response.page,
+        }); // Set the product list
+        setProducts(response.products);
         setCurrentPage(response.page); // Backend page starts from 0; adjust for 1-based UI
         setIsLoading(false);
     }
 
     useEffect(() => {
         getMainProducts();
+        
     }, [searchParams,currentPage]);
     
-    const totalPages = products.total ? products.pages : 1; // Ensure it's based on the backend directly
+    const totalPages = productsPagination.total ? productsPagination.pages : 1; // Ensure it's based on the backend directly
 
     const debouncedSearch = useCallback(
         debounce((value: string) => {
@@ -80,14 +89,14 @@ export default function TechShop() {
             <div className="flex flex-col md:flex-row gap-8">
                 <ProductFilters params={params} />
                 <div className="w-full md:w-3/4">
-                    <Input
+                    {/* <Input
                         type="text"
                         placeholder="Search products..."
                         onChange={handleSearchChange}
                         className="w-full pl-10 pr-4 py-2 rounded-full transition-all duration-300 focus:ring-2 focus:ring-blue-500"
-                    />
+                    /> */}
                     <ProductsCardsStore 
-                        products={products.products} 
+                        products={products}
                         setPage={setCurrentPage} 
                         isLoading={isLoading}
                         totalPages={totalPages} 
