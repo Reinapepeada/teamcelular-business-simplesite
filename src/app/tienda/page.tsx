@@ -72,18 +72,6 @@ export default function TechShop() {
         debouncedSearch(e.target.value);
     };
 
-    const goToPreviousPage = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
-        }
-    };
-
-    const goToNextPage = () => {
-        if (currentPage < totalPages) {
-            setCurrentPage(currentPage + 1);
-        }
-    };
-
     return (
         <section className="max-w-screen-2xl w-full p-8 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row gap-8">
@@ -97,15 +85,12 @@ export default function TechShop() {
                     />
                     <ProductsCardsStore 
                         products={products.products} 
-                        goToNextPage={goToNextPage} 
-                        goToPreviousPage={goToPreviousPage} 
-                        isLoading={isLoading} 
-                        currentPage={currentPage} 
+                        setPage={setCurrentPage} 
+                        isLoading={isLoading}
                         totalPages={totalPages} 
                         addToCart={addToCart}
                     />
                 </div>
-                
             </div>
         </section>
     );

@@ -1,13 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Card, Skeleton, Button } from "@nextui-org/react";
+import { Card, Skeleton, Button, Pagination } from "@nextui-org/react";
 import Link from "next/link";
 
 function ProductsCardsStore({
     products,
-    goToPreviousPage,
-    goToNextPage,
-    currentPage,
+    setPage,
     totalPages,
     isLoading,
     addToCart
@@ -91,17 +89,7 @@ function ProductsCardsStore({
                 )}
             </div>
             <div className="flex justify-center mt-4">
-                <Button disabled={currentPage === 1} onClick={goToPreviousPage}>
-                    Previous
-                </Button>
-                <span className="mx-4">
-                    Page {currentPage} of {totalPages}
-                </span>
-                <Button
-                    disabled={currentPage === totalPages}
-                    onClick={goToNextPage}>
-                    Next
-                </Button>
+                <Pagination isCompact showControls initialPage={1} total={totalPages} onChange={(page)=>{setPage(page) }}/>
             </div>
         </>
     );
