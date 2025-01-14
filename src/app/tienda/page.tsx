@@ -21,6 +21,7 @@ export default function TechShop() {
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const [params, setParams] = useState<string>("");
     
     interface ProductsResponse {
         products: [];
@@ -42,8 +43,10 @@ export default function TechShop() {
     async function getMainProducts() {
         setIsLoading(true);
         const params = searchParams.toString();
-        // si params no esta vacio, se setea el currentPage a 1
-        console.log(params);
+        if (params) {
+            setParams(params);
+        }
+
         const response = await getAllProductsPaginated(
             currentPage,
             itemsPerPage,
@@ -75,7 +78,7 @@ export default function TechShop() {
     return (
         <section className="max-w-screen-2xl w-full p-8 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row gap-8">
-                <ProductFilters />
+                <ProductFilters params={params} />
                 <div className="w-full md:w-3/4">
                     <Input
                         type="text"
