@@ -54,8 +54,8 @@ export async function getProductById (product_id:number) {
 
 export async function getAllProductsPaginated (page:any=NaN, size:any=NaN,params:any) {
     console.log(page, size);
-    // Aqui se envian aca se hace la req
-    
+    // se convierte a json
+        
     let response = await fetch(`${apiUrl}/products/?page=${page}&size=${size}&${params}`
         ,
         { method: 'GET',
