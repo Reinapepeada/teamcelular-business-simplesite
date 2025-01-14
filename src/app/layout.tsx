@@ -50,13 +50,10 @@ export default function RootLayout({
         <html lang="es" suppressHydrationWarning>
             
             <body className={`${inter.className} `}>
-                {/* <NextSeo
-                title="Team Celular"
-                /> */}
                 <ThemeProvider
                 attribute="class"
                 defaultTheme="system"
-                enableSystem
+                enableSystem={true}
                 disableTransitionOnChange
                 >
                     <NavbarNUI></NavbarNUI>
