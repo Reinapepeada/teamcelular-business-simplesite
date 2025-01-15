@@ -18,9 +18,7 @@ import { Product } from "./product";
 
 
 export default function TechShop() {
-    const [currentCategory, setCurrentCategory] = useState<string>("All");
     const [searchTerm, setSearchTerm] = useState<string>("");
-    const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [params, setParams] = useState<string>("");
     

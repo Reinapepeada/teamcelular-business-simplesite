@@ -9,9 +9,11 @@ import {
     DropdownTrigger,
     DropdownMenu,
     DropdownItem,
-    Button,
+    Button,Chip
 } from "@nextui-org/react";
 import Link from "next/link";
+
+import { ShoppingCart } from "lucide-react";
 
 function ProductsCardsStore({
     products,
@@ -45,8 +47,8 @@ function ProductsCardsStore({
                 <Dropdown>
                     <div className="flex items-center space-x-2">
                         <DropdownTrigger>
-                            <Button variant="flat" color="secondary">
-                                Sort by
+                            <Button variant="ghost" color="secondary">
+                                Ordenar
                             </Button>
                         </DropdownTrigger>
                         <p
@@ -132,25 +134,32 @@ function ProductsCardsStore({
                                     />
                                 </motion.div>
                                 <div className="text-left">
-                                    <h3 className="mt-2 text-lg font-semibold">
+                                    <h3 className="mt-2 mx-1 text-lg font-semibold">
                                         {product.name}
                                     </h3>
-                                    <p className="text-sm text-gray-500">
-                                        {product.brand.name}
-                                    </p>
-                                    <p className="text-xl font-bold text-blue-500">
+                                    <p className="text-xl text-left mt-3 mx-1 font-bold">
                                         ${product.retail_price}
                                     </p>
+                                    {/* categoria */}
+                                    <Chip variant="dot" color="secondary" className=" my-1">
+                                        {product.category.name}
+                                    </Chip>
+                                    <Chip variant="flat" color="warning" className=" my-1">
+                                        {product.brand.name}
+                                        </Chip>
+                                    
                                 </div>
                             </Link>
                             <div className="flex justify-center w-full">
                                 <Button
                                     onClick={() => addToCart(product)}
-                                    className="mt-2"
+                                    className="mt-4"
                                     variant="shadow"
+                                    size="sm"
                                     color="primary"
                                 >
-                                    Add to Cart
+                                    agregar 
+                                    <ShoppingCart className="h-5 w-5" />
                                 </Button>
                             </div>
                         </Card>

@@ -32,6 +32,25 @@ export async function createProduct(formData:any) {
     }
 }
 
+// traer el maximo y minimo de precio de los productos
+export async function getMinMaxPrice() {
+    // Aqui se envian aca se hace la req
+    let response = await fetch(`${apiUrl}/products/min-max-price`
+        ,
+        { method: 'GET',
+            // cache: 'no-store', 
+            headers: { 
+                'Content-Type': 'application/json',
+            }
+        });
+        const data = await response.json();
+        if (data == undefined) {
+            throw Error(data.message || "Get min max price failed");
+        } else {
+            return data;
+        }
+}
+
 export async function getProductById (product_id:number) {
     console.log(product_id);
     // Aqui se envian aca se hace la req
@@ -59,7 +78,7 @@ export async function getAllProductsPaginated (page:any=NaN, size:any=NaN,params
     let response = await fetch(`${apiUrl}/products/?page=${page}&size=${size}&${params}`
         ,
         { method: 'GET',
-            // cache: 'no-store', 
+            cache: 'no-store',
             headers: { 
                 'Content-Type': 'application/json',
             }

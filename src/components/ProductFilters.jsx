@@ -14,15 +14,9 @@ import { Chip } from "@nextui-org/react";
 
 import { getbrands } from "@/services/brands";
 import { getcategories } from "@/services/categories";
+import { getMinMaxPrice } from "@/services/products";
 
-async function getFilterOptions(params) {
-  return {
-    priceRange: {
-      min: 0,
-      max: 1000,
-    },
-  };
-}
+
 
 export default function ProductFilters(params) {
   const router = useRouter();
@@ -43,13 +37,14 @@ export default function ProductFilters(params) {
     parseInt(searchParams.get("maxPrice") || "1000"),
   ]);
 
-  const fetchFilterOptions = async () => {
-    const options = await getFilterOptions();
+  const rangePrice = async () => {
+    const priceRange = await getMinMaxPrice();
+    console.log(priceRange);
     setPriceRange({
-      min: options.priceRange.min,
-      max: options.priceRange.max,
+      min: priceRange.min,
+      max: priceRange.max,
     });
-    setSelectedPriceRange([options.priceRange.min, options.priceRange.max]);
+    setSelectedPriceRange([priceRange.min, priceRange.max]);
   };
 
   async function fetchBrands() {
@@ -69,7 +64,7 @@ export default function ProductFilters(params) {
   }
 
   useEffect(() => {
-    fetchFilterOptions();
+    rangePrice();
     fetchBrands();
     fetchCategories();
     checkParams(params);
@@ -177,14 +172,14 @@ export default function ProductFilters(params) {
               </div>
             ))}
         </AccordionItem>
-        <AccordionItem key="1" aria-label="Marcas" title="Marcas" subtitle={selectedBrands.length > 0 && (
+        <AccordionItem key="1" aria-label="Marca" title="Marca" subtitle={selectedBrands.length > 0 && (
           <div className="flex flex-wrap gap-2 my-2">
             {selectedBrands.map((name) => {
               return (
                 <Chip
                   key={name}
                   color="warning"
-                  variant="dot"
+                  variant="flat"
                   className="ml-1">
                   {name}
                 </Chip>
@@ -214,25 +209,18 @@ export default function ProductFilters(params) {
           ))}
         </AccordionItem>
         <AccordionItem value="price" title="Precio" subtitle={selectedPriceRange[0] !== priceRange.min || selectedPriceRange[1] !== priceRange.max ? (
-          <Chip
-            color="success"
-            variant="dot"
-            className="ml-2">
-            ${selectedPriceRange[0]} - $
-            {selectedPriceRange[1]}
-          </Chip>
+          <div className="flex flex-wrap gap-2 my-2">
+            <Chip
+              color="success"
+              variant="dot"
+              className="ml-2">
+              ${selectedPriceRange[0]} - $
+              {selectedPriceRange[1]}
+            </Chip>
+          </div>
         ) : null}>
-          <Slider
-            min={priceRange.min}
-            max={priceRange.max}
-            step={5}
-            value={selectedPriceRange}
-            onValueChange={handlePriceChange}
-            className="mt-2"
-          />
           <div className="flex justify-between mt-4 space-x-2">
             <Input
-              type="number"
               value={selectedPriceRange[0]}
               onChange={handleMinPriceChange}
               min={priceRange.min}
@@ -240,7 +228,6 @@ export default function ProductFilters(params) {
               className="w-1/2"
             />
             <Input
-              type="number"
               value={selectedPriceRange[1]}
               onChange={handleMaxPriceChange}
               min={selectedPriceRange[0]}
