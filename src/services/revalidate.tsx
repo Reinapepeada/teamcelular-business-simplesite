@@ -6,5 +6,5 @@ export async function revalidatePathCreateProducts() {
 }
 
 export async function revalidatePathCreateVariants() {
-  revalidatePath("/admin/create-variants/");
+  revalidatePath("/admin/create-variants/[slug]");
 }

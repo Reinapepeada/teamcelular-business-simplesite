@@ -57,7 +57,7 @@ const emptyVariant = (productId: string): Variant => ({
     color: "",
     size: "",
     unit: "",
-    branch_id: 5,
+    branch_id: 0,
     size_unit: "",
     stock: 0,
     min_stock: 0,
@@ -135,13 +135,12 @@ export default function ProductVariantForm({
     };
 
     const handleSelectBranchChange = (branch_id: string) => {
-        console.log(branch_id);
+        // en todas las variantes se coloca el mismo branch
         setVariants((prevVariants) =>
-            prevVariants.map((variant) =>
-                variant.tempId === variant.tempId
-                    ? { ...variant, branch_id: parseInt(branch_id) }
-                    : variant
-            )
+            prevVariants.map((variant) => ({
+                ...variant,
+                branch_id: parseInt(branch_id),
+            }))
         );
     };
 
@@ -452,7 +451,6 @@ export default function ProductVariantForm({
                         <Select
                             onValueChange={(value) => handleSelectBranchChange(value)}
                             required
-                            defaultValue={variants[0]?.branch_id.toString()}
                             >
                             <SelectTrigger>
                                 <SelectValue placeholder="Select Branch" />

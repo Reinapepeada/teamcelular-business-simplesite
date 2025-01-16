@@ -133,20 +133,21 @@ export default function ProductForm() {
   const [showNewCategoryForm, setShowNewCategoryForm] = useState(false);
   const [showNewProviderForm, setShowNewProviderForm] = useState(false);
 
+  async function fetchBrands() {
+      const brands_server  = await getbrands();
+      setBrands(brands_server);
+  }
+  
+  async function fetchCategories() {
+      const categories_server  = await getcategories();
+      setCategories(categories_server);
+  }
+  async function fetchProviders() {
+      const providers_server  = await getproviders();
+      setProviders(providers_server);
+  }
+  
     useEffect(() => {
-        async function fetchBrands() {
-            const brands_server  = await getbrands();
-            setBrands(brands_server);
-        }
-        
-        async function fetchCategories() {
-            const categories_server  = await getcategories();
-            setCategories(categories_server);
-        }
-        async function fetchProviders() {
-            const providers_server  = await getproviders();
-            setProviders(providers_server);
-        }
         fetchCategories();
         fetchProviders();
         fetchBrands();
