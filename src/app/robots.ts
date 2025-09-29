@@ -1,5 +1,7 @@
 import { MetadataRoute } from "next";
 
+const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+
 export default function Robots():MetadataRoute.Robots {
     return {
         rules: [
@@ -8,7 +10,7 @@ export default function Robots():MetadataRoute.Robots {
                 allow: "/", // Allow all robots to crawl all pages
             },
         ],
-        sitemap:`${process.env.NEXT_PUBLIC_BASE_URL}/sitemap.xml`,
+        sitemap:`${SITE_URL}/sitemap.xml`,
          
 
 

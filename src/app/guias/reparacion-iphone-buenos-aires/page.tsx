@@ -6,11 +6,6 @@ export const metadata: Metadata = {
   title: "Reparación de iPhone en Buenos Aires",
   description:
     "Paso a paso del servicio de reparación de iPhone en Team Celular: diagnóstico, repuestos originales y garantía escrita en CABA.",
-  keywords: [
-    "reparacion iphone buenos aires",
-    "cambio pantalla iphone caba",
-    "servicio tecnico apple argentina",
-  ],
 };
 
 const steps = [

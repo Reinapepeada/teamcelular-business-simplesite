@@ -6,7 +6,7 @@ interface StructuredDataProps {
   country?: string;
 }
 
-const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://teamcelular.com";
+const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 const BUSINESS_NAME = "Team Celular";
 const PHONE_NUMBER = "+54 11 5103-4595";
 const EMAIL = "teamcelular.arg@gmail.com";
@@ -111,7 +111,7 @@ function createLocalBusinessJson(city?: string, country?: string) {
       },
     ],
     sameAs: SAME_AS,
-    makesOffer: KEY_SERVICES.map((service) => ({
+    makesOffer: KEY_SERVICES.filter(service => service && service.trim()).map((service) => ({
       "@type": "Offer",
       itemOffered: {
         "@type": "Service",
@@ -126,14 +126,14 @@ function createLocalBusinessJson(city?: string, country?: string) {
       },
       url: `${SITE_URL}/presupuesto-reparacion`,
     })),
-    serviceArea: SERVICE_AREA.map((area) => ({
+    serviceArea: SERVICE_AREA.filter(area => area && area.trim()).map((area) => ({
       "@type": "AdministrativeArea",
       name: area,
     })),
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Catálogo de reparaciones de celulares",
-      itemListElement: KEY_SERVICES.map((service) => ({
+      itemListElement: KEY_SERVICES.filter(service => service && service.trim()).map((service) => ({
         "@type": "OfferCatalog",
         name: service,
       })),
@@ -172,7 +172,7 @@ function createFaqJson() {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "@id": `${SITE_URL}#faq`,
-    mainEntity: FAQ_ITEMS.map((item) => ({
+    mainEntity: FAQ_ITEMS.filter(item => item && item.question && item.answer).map((item) => ({
       "@type": "Question",
       name: item.question,
       acceptedAnswer: {
@@ -221,7 +221,7 @@ function createBreadcrumbJson() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "@id": `${SITE_URL}#breadcrumb`,
-    itemListElement: BREADCRUMB_ITEMS.map((item, index) => ({
+    itemListElement: BREADCRUMB_ITEMS.filter(item => item && item.name && item.url).map((item, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: item.name,

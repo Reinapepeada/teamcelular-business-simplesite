@@ -6,11 +6,6 @@ export const metadata: Metadata = {
   title: "Mantenimiento preventivo de celulares",
   description:
     "Buenas prácticas y checklist profesional para extender la vida útil de smartphones con el equipo de Team Celular en CABA.",
-  keywords: [
-    "mantenimiento preventivo celulares",
-    "cuidado smartphone caba",
-    "checklist servicio tecnico",
-  ],
 };
 
 const tips = [

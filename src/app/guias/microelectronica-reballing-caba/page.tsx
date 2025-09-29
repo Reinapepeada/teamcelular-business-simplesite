@@ -6,11 +6,6 @@ export const metadata: Metadata = {
   title: "Microelectrónica y reballing en CABA",
   description:
     "Conoce cómo llevamos adelante reparaciones de microelectrónica, reballing y recuperación de placas en nuestro laboratorio de Buenos Aires.",
-  keywords: [
-    "microelectronica caba",
-    "reballing placas celulares",
-    "reparacion placa base smartphone",
-  ],
 };
 
 const useCases = [

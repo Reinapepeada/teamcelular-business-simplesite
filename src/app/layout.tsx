@@ -12,7 +12,7 @@ import StructuredData from "@/components/seo/StructuredData";
 // importo la fuente de google
 
 export const metadata: Metadata = {
-    metadataBase: new URL('https://teamcelular.com'),
+    metadataBase: new URL("https://teamcelular.com/"),
     title: {
         default: "Team Celular",
         template: "%s | Team Celular"
@@ -23,19 +23,11 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
     },
-    keywords: [
-        "reparacion de celulares",
-        "servicio tecnico celulares capital federal",
-        "cambio de pantalla y bateria",
-        "microelectronica y reballing",
-        "soporte tecnico empresas celulares",
-    ],
+    keywords: "reparacion de celulares, servicio tecnico celulares capital federal, cambio de pantalla y bateria, microelectronica y reballing, soporte tecnico empresas celulares",
     openGraph: {
         locale: "es_AR",
         countryName: "Argentina",
         url: "https://teamcelular.com",
-        authors: ["Team Celular"],
-        emails:["teamcelular.arg@gmail.com"],
         siteName: "Team Celular",
         title: "Servicio técnico profesional de celulares en Buenos Aires",
         description:
@@ -68,7 +60,7 @@ export default function RootLayout({
                     <FooterNUI></FooterNUI>
                     <Plugins />
                     <BackgroundBeams />
-                    <StructuredData />
+                    {/* <StructuredData /> */}
                 </ThemeProvider>
             </body>
         </html>

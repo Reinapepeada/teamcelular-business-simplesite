@@ -1,24 +1,18 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { Suspense, useState, useEffect, useCallback, useMemo, useRef } from "react";
 import useCartStore from "@/store/cartStore";
-import Image from "next/image";
 
 import { getAllProductsPaginated } from "@/services/products";
-import { debounce } from "lodash";
-// 
 import ProductFilters from "@/components/ProductFilters";
-// 
-import {Input } from "@nextui-org/react"
 import { useSearchParams } from "next/navigation";
 
-// 
 import ProductsCardsStore from "@/components/ProductsCardsStore";
 import { Product } from "./product";
 
+const ITEMS_PER_PAGE = 12;
 
-export default function TechShop() {
-    const [searchTerm, setSearchTerm] = useState<string>("");
+function TechShopContent() {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [params, setParams] = useState<string>("");
     
@@ -31,26 +25,22 @@ export default function TechShop() {
     const [productsPagination, setProductsPagination] = useState<ProductsResponse>({ total: 0, pages: 1, page: 1 });
     const [products, setProducts] = useState<Product[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    
-    const searchParams = useSearchParams();
 
-    const itemsPerPage = 12;
+    const searchParams = useSearchParams();
+    const paramsString = useMemo(() => searchParams.toString(), [searchParams]);
 
     const { addToCart } = useCartStore();
 
-    //  Llama al backend para obtener productos filtrados
-    async function getMainProducts() {
+    const previousParamsRef = useRef<string | null>(null);
+
+    const fetchProducts = useCallback(async (page: number, query: string) => {
         setIsLoading(true);
-        const params = searchParams.toString();
-        if (params) {
-            setParams(params);
-            setCurrentPage(1);
-        }
+        setParams(query);
 
         const response = await getAllProductsPaginated(
-            currentPage,
-            itemsPerPage,
-            params
+            page,
+            ITEMS_PER_PAGE,
+            query
         );
 
         setProductsPagination({
@@ -61,26 +51,17 @@ export default function TechShop() {
         setProducts(response.products);
         setCurrentPage(response.page); // Backend page starts from 0; adjust for 1-based UI
         setIsLoading(false);
-    }
+    }, []);
 
     useEffect(() => {
-        getMainProducts();
-        
-    }, [searchParams,currentPage]);
+        const queryChanged = previousParamsRef.current !== paramsString;
+        const nextPage = queryChanged ? 1 : currentPage;
+
+        previousParamsRef.current = paramsString;
+        fetchProducts(nextPage, paramsString);
+    }, [currentPage, paramsString, fetchProducts]);
     
     const totalPages = productsPagination.total ? productsPagination.pages : 1; // Ensure it's based on the backend directly
-
-    const debouncedSearch = useCallback(
-        debounce((value: string) => {
-            setSearchTerm(value);
-            setCurrentPage(1);
-        }, 300),
-        []
-    );
-
-    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        debouncedSearch(e.target.value);
-    };
 
     return (
         <section className="max-w-screen-2xl w-full p-8 sm:px-6 lg:px-8">
@@ -103,5 +84,13 @@ export default function TechShop() {
                 </div>
             </div>
         </section>
+    );
+}
+
+export default function TechShop() {
+    return (
+        <Suspense fallback={<div className="flex w-full justify-center py-16 text-muted-foreground">Cargando tienda...</div>}>
+            <TechShopContent />
+        </Suspense>
     );
 }

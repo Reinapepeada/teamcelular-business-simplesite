@@ -6,11 +6,6 @@ export const metadata: Metadata = {
   title: "Soporte técnico para empresas y gremios",
   description:
     "Planes de mantenimiento, SLAs y beneficios de tercerizar el servicio técnico de dispositivos móviles con Team Celular.",
-  keywords: [
-    "soporte tecnico empresas celulares",
-    "mantenimiento flota smartphones",
-    "servicio tecnico gremios caba",
-  ],
 };
 
 const benefits = [

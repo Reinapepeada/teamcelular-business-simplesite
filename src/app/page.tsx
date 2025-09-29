@@ -64,10 +64,10 @@ export default function Home() {
       <BannerHome />
       <BannerCards />
 
-      <section className="w-full max-w-6xl space-y-10 text-center md:text-left">
-        <article className="grid gap-10 md:grid-cols-2 items-center">
+      <section className="w-full max-w-6xl space-y-12 text-center md:text-left">
+        <article className="grid gap-10 rounded-3xl border border-white/20 bg-white/90 p-10 shadow-xl backdrop-blur-lg transition dark:border-white/10 dark:bg-slate-950/70 md:grid-cols-2 md:items-center">
           <div className="space-y-6">
-            <h2 className="text-3xl font-bold text-primary">
+            <h2 className="text-3xl font-bold text-primary md:text-4xl">
               Reparación de celulares en Capital Federal
             </h2>
             <p className="text-lg leading-relaxed text-muted-foreground">
@@ -79,24 +79,24 @@ export default function Home() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/presupuesto-reparacion"
-                className="rounded-full bg-primary px-6 py-3 text-white font-semibold shadow hover:bg-primary/90"
+                className="rounded-full bg-gradient-to-r from-primary to-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/40 transition hover:shadow-primary/60"
               >
                 Solicitar presupuesto online
               </Link>
               <Link
                 href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20necesito%20una%20reparaci%C3%B3n"
-                className="rounded-full border border-primary px-6 py-3 font-semibold text-primary hover:bg-primary/10"
+                className="rounded-full border border-primary/40 px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10 dark:border-primary/60 dark:text-primary/80"
               >
                 Chatear con un especialista
               </Link>
             </div>
           </div>
-          <div className="space-y-6 bg-secondary/10 p-8 rounded-2xl border border-secondary/30">
-            <h3 className="text-2xl font-semibold">Servicios destacados</h3>
+          <div className="space-y-6 rounded-2xl border border-secondary/20 bg-gradient-to-br from-secondary/10 via-background to-primary/10 p-8 shadow-inner dark:border-secondary/30 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+            <h3 className="text-2xl font-semibold text-foreground">Servicios destacados</h3>
             <ul className="space-y-4 text-left">
               {services.map((service) => (
-                <li key={service.title} className="rounded-xl bg-white/60 p-4 shadow-sm">
-                  <h4 className="text-xl font-semibold text-secondary">
+                <li key={service.title} className="rounded-xl border border-white/40 bg-white/70 p-4 shadow-sm transition dark:border-white/10 dark:bg-slate-900/70">
+                  <h4 className="text-xl font-semibold text-secondary dark:text-secondary/80">
                     {service.title}
                   </h4>
                   <p className="mt-2 text-muted-foreground">{service.description}</p>
