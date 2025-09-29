@@ -24,6 +24,26 @@ Crea un nuevo pull request en GitHub.
 ## Despliegue 🚀
 Este proyecto está desplegado en Vercel y puedes acceder a él.  https://teamcelular.com 
 
+## SEO y descubrimiento por IA 📈
+- El sitio define metadatos enriquecidos (Open Graph, Twitter y keywords) enfocados en "reparación de celulares" para mejorar el posicionamiento en buscadores.
+- Se añadió marcado estructurado JSON-LD (LocalBusiness, Service y WebSite) para ayudar a Google, Bing y modelos como ChatGPT, Gemini o Claude a comprender la propuesta de valor y ofrecer respuestas relevantes.
+- Mantené actualizado el archivo `.env` con `NEXT_PUBLIC_BASE_URL` para que el sitemap y el `robots.txt` apunten a la URL correcta.
+- Para mantener la autoridad SEO, generá contenido original, obtené reseñas verificadas y actualizá periódicamente la información de servicios, horarios y precios.
+- Si lanzás nuevas secciones, recordá enlazarlas desde la página principal y agregarlas a `src/app/sitemap.ts` para facilitar el rastreo.
+- Ejecuta auditorías Lighthouse enfocadas en SEO cuando hagas cambios relevantes: `npm run seo:audit` genera reportes HTML y JSON en la carpeta `reports/`.
+
+### Estrategia off-site y directorios locales 🌐
+- Reclamá y optimizá tus perfiles en Google Business Profile, Bing Places, Yelp, Apple Maps y Páginas Amarillas. Asegurate de usar la misma NAP (Name, Address, Phone) que en el sitio.
+- Pedí reseñas auténticas a clientes satisfechos y respondé públicamente para mejorar señales de confianza.
+- Sumá enlaces de calidad desde cámaras de comercio, blogs de tecnología locales y medios especializados. Incluí enlaces hacia `https://teamcelular.com/presupuesto-reparacion` para reforzar la landing principal.
+- Documentá promociones y eventos en redes sociales enlazando al sitio para que los motores de búsqueda detecten actividad constante.
+
+### Preparación para modelos de lenguaje (LLM) 🤖
+- Mantén un resumen de servicios y horarios en páginas accesibles (por ejemplo `/guias` o un feed JSON) para que asistentes como ChatGPT puedan aprender sobre la marca.
+- Agregá campos `sameAs` y `knowsAbout` al JSON-LD cuando abras nuevos canales oficiales (LinkedIn, TikTok, etc.).
+- Verificá que las páginas clave (inicio, presupuesto, contacto) tengan contenido orientado a consultas conversacionales como "¿Dónde reparo mi celular en CABA?".
+- Si publicás artículos técnicos, enlazalos entre sí y hacia la landing principal usando texto descriptivo (anchor text) con palabras clave.
+
 ## Licencia 📝
 Este proyecto está bajo la licencia MIT.
 

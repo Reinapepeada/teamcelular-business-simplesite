@@ -8,6 +8,7 @@ import FooterNUI from "@/components/footer/FooterNUI";
 const inter = Inter({ subsets: ["latin"] });
 import BackgroundBeams from "../components/animations/BackgroundMeteors";
 import Plugins from "@/components/vercel/Plugins";
+import StructuredData from "@/components/seo/StructuredData";
 // importo la fuente de google
 
 export const metadata: Metadata = {
@@ -17,22 +18,28 @@ export const metadata: Metadata = {
         template: "%s | Team Celular"
     },
     description:
-        "Hacemos reparaciones en el dia, con garantia y al mejor precio. Reparamos celulares, tablets, notebooks y computadoras. Tambien puedes encontrar los mejores accesorios y repuestos.",
+        "Servicio técnico de reparación de celulares en CABA con repuestos originales, microelectrónica y soporte empresarial. Presupuestos en el día y garantía real.",
 
     twitter: {
         card: "summary_large_image",
     },
     keywords: [
         "reparacion de celulares",
-        "arreglo de celulares",
+        "servicio tecnico celulares capital federal",
+        "cambio de pantalla y bateria",
+        "microelectronica y reballing",
+        "soporte tecnico empresas celulares",
     ],
     openGraph: {
         locale: "es_AR",
         countryName: "Argentina",
         url: "https://teamcelular.com",
         authors: ["Team Celular"],
-        emails:["teamcelular.arg@gmail.com"]
-        
+        emails:["teamcelular.arg@gmail.com"],
+        siteName: "Team Celular",
+        title: "Servicio técnico profesional de celulares en Buenos Aires",
+        description:
+            "Laboratorio especializado en reparación de smartphones, tablets y notebooks con microelectrónica y garantía." 
     },
     alternates: 
         {
@@ -61,6 +68,7 @@ export default function RootLayout({
                     <FooterNUI></FooterNUI>
                     <Plugins />
                     <BackgroundBeams />
+                    <StructuredData />
                 </ThemeProvider>
             </body>
         </html>
