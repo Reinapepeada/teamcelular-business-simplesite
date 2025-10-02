@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -56,19 +56,19 @@ export default function ProductFilters(params) {
     const categories_server = await getcategories();
     setCategories(categories_server);
   }
-  async function checkParams(params) {
+  const checkParams = useCallback(async (params) => {
     console.log(params);
     console.log("selectedCategories", selectedCategories);
     console.log("selectedBrands", selectedBrands);
     console.log("selectedPriceRange", selectedPriceRange);
-  }
+  }, [selectedCategories, selectedBrands, selectedPriceRange]);
 
   useEffect(() => {
     rangePrice();
     fetchBrands();
     fetchCategories();
     checkParams(params);
-  }, []);
+  }, [checkParams, params]);
 
   const handleCategoryChange = (categoryId) => {
     setSelectedCategories((prev) =>

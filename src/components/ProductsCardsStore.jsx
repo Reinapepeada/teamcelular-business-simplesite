@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import {
     Card,
     Skeleton,
@@ -117,13 +118,15 @@ function ProductsCardsStore({
                                   <motion.div
                                       whileHover={{ scale: 1.05 }}
                                       className="w-full h-48 flex items-center justify-center overflow-hidden">
-                                      <img
+                                      <Image
                                           src={
                                               product?.variants[0]?.images[0]
                                                   ?.image_url ||
                                               "/placeholder.jpg"
                                           }
                                           alt={product.name}
+                                          width={192}
+                                          height={192}
                                           className="object-contain h-full"
                                       />
                                   </motion.div>

@@ -26,7 +26,7 @@ const BREADCRUMB_ITEMS = [
   { name: "Inicio", url: SITE_URL },
   { name: "Servicios", url: `${SITE_URL}/presupuesto-reparacion` },
   { name: "Tienda", url: `${SITE_URL}/tienda` },
-];
+].filter(item => item.name && item.url && item.name.trim() && item.url.trim());
 const SAME_AS = [
   "https://www.instagram.com/teamcelular.arg/",
   "https://www.facebook.com/TeamCelular/",
@@ -244,9 +244,9 @@ export default function StructuredData({
 
   return (
     <>
-      {data.map((entry) => (
+      {data.filter(entry => entry && (entry["@id"] || entry["@type"])).map((entry) => (
         <script
-          key={entry["@id"] ?? entry["@type"]}
+          key={entry["@id"] ?? entry["@type"] ?? Math.random()}
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(entry),

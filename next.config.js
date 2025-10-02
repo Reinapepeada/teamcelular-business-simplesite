@@ -6,9 +6,6 @@ module.exports = {
       {
         protocol: 'https',
         hostname: 'i.ibb.co',
-        port: '',
-        pathname: '',
-        search: '',
       },
     ],
   },

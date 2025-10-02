@@ -11,6 +11,7 @@ import {
 import { ShoppingCart, Plus, Minus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import useCartStore from "@/store/cartStore";
+import Image from "next/image";
 
 export default function ResumeCartNav() {
     const { cart, updateQuantity, clearCart } = useCartStore();
@@ -51,11 +52,13 @@ export default function ResumeCartNav() {
                                 key={item.id}
                                 className="flex items-center justify-between py-6 border-b">
                                 <div className="flex items-center">
-                                    <img
+                                    <Image
                                         src={
                                             item?.variants?.[0]?.images?.[0]?.image_url || "/placeholder.jpg"
                                         }
                                         alt={item.name}
+                                        width={80}
+                                        height={80}
                                         className="object-cover h-20 w-20 rounded-md"
                                     />
                                     <div className="ml-6">

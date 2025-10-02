@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { X, Plus } from 'lucide-react'
+import NextImage from "next/image"
 
 interface ImageUploadProps {
   onChange: (files: File[]) => void
@@ -102,9 +103,11 @@ export function ImageUpload({ onChange }: ImageUploadProps) {
       <div className="flex flex-wrap gap-2">
         {previews.map((preview, index) => (
           <div key={index} className="relative">
-            <img
+            <NextImage
               src={preview}
               alt={`Variant preview ${index + 1}`}
+              width={96}
+              height={96}
               className="w-24 h-24 object-cover rounded-md cursor-pointer"
               onClick={() => setFullSizeIndex(index)}
             />
@@ -139,9 +142,10 @@ export function ImageUpload({ onChange }: ImageUploadProps) {
           onClick={closeFullSizeImage}
         >
           <div className="relative max-w-full max-h-full w-full h-full flex items-center justify-center">
-            <img
+            <NextImage
               src={previews[fullSizeIndex]}
               alt={`Full size variant ${fullSizeIndex + 1}`}
+              fill
               className="max-w-full max-h-full object-contain"
             />
             <Button
