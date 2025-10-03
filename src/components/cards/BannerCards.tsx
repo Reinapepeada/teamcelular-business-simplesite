@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function BannerCards() {
     return (
-        <div className="grid w-full grid-cols-12 grid-rows-2 gap-4 text-center md:w-3/4">
+        <div className="mx-auto grid w-full max-w-6xl grid-cols-12 grid-rows-2 gap-6 text-center">
             <Card className="col-span-12 h-[300px] overflow-hidden border border-slate-200/40 bg-slate-900/70 shadow-xl md:col-span-4 dark:border-slate-800/60">
                 <CardHeader className="absolute z-10 flex-col !items-start gap-3 rounded-br-3xl bg-gradient-to-b from-slate-950/80 via-slate-900/20 to-transparent p-6">
                     <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">

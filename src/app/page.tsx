@@ -60,7 +60,7 @@ const faqs = [
 
 export default function Home() {
   return (
-    <section className="flex w-full max-w-7xl flex-col items-center gap-16 px-6 py-14 transition md:px-8">
+    <section className="flex w-full max-w-6xl flex-col items-center gap-16 px-6 py-14 transition md:px-8">
       <BannerHome />
       <BannerCards />
 
