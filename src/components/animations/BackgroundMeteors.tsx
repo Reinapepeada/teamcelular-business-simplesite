@@ -89,45 +89,80 @@ export const BackgroundBeams = React.memo(
             strokeWidth="0.5"
           ></path>
  
-          {paths.map((path, index) => (
-            <motion.path
-              key={`path-` + index}
-              d={path}
-              stroke={`url(#linearGradient-${index})`}
-              strokeOpacity="0.4"
-              strokeWidth="0.5"
-            ></motion.path>
-          ))}
-          <defs>
-            {paths.map((path, index) => (
-              <motion.linearGradient
-                id={`linearGradient-${index}`}
-                key={`gradient-${index}`}
-                initial={{
-                  x1: "0%",
-                  x2: "0%",
-                  y1: "0%",
-                  y2: "0%",
-                }}
+          {paths.map((path, index) => {
+            const speed = 5 + Math.random() * 8; // Velocidades más rápidas: 5-13s
+            const opacity = 0.4 + Math.random() * 0.5; // Opacidades más intensas: 0.4-0.9
+            
+            return (
+              <motion.path
+                key={`path-` + index}
+                d={path}
+                stroke={`url(#linearGradient-${index})`}
+                strokeWidth="0.6"
+                initial={{ strokeOpacity: 0 }}
                 animate={{
-                  x1: ["0%", "100%"],
-                  x2: ["0%", "95%"],
-                  y1: ["0%", "100%"],
-                  y2: ["0%", `${93 + Math.random() * 8}%`],
+                  strokeOpacity: [0, opacity, opacity * 0.9, opacity, 0],
                 }}
                 transition={{
-                  duration: Math.random() * 10 + 10,
+                  duration: speed,
                   ease: "easeInOut",
                   repeat: Infinity,
-                  delay: Math.random() * 10,
+                  delay: (index * 0.05) % 2.5, // Delays más cortos para más densidad
                 }}
-              >
-                <stop stopColor="#18CCFC" stopOpacity="0"></stop>
-                <stop stopColor="#18CCFC"></stop>
-                <stop offset="32.5%" stopColor="#6344F5"></stop>
-                <stop offset="100%" stopColor="#AE48FF" stopOpacity="0"></stop>
-              </motion.linearGradient>
-            ))}
+              />
+            );
+          })}
+          <defs>
+            {paths.map((path, index) => {
+              const colorVariants = [
+                // Variante azul-púrpura (primary colors)
+                { start: "#18CCFC", mid: "#6344F5", end: "#AE48FF" },
+                // Variante más intensa
+                { start: "#0EA5E9", mid: "#8B5CF6", end: "#D946EF" },
+                // Variante más suave
+                { start: "#38BDF8", mid: "#A78BFA", end: "#C084FC" },
+                // Variante verdosa
+                { start: "#10B981", mid: "#3B82F6", end: "#8B5CF6" },
+                // Variante rosa-morada
+                { start: "#EC4899", mid: "#A855F7", end: "#6366F1" },
+                // Variante cyan-azul
+                { start: "#06B6D4", mid: "#3B82F6", end: "#8B5CF6" },
+              ];
+              
+              const colors = colorVariants[index % colorVariants.length];
+              const speed = 8 + Math.random() * 12; // Más rápido: 8-20s
+              
+              return (
+                <motion.linearGradient
+                  id={`linearGradient-${index}`}
+                  key={`gradient-${index}`}
+                  initial={{
+                    x1: "0%",
+                    x2: "0%",
+                    y1: "0%",
+                    y2: "0%",
+                  }}
+                  animate={{
+                    x1: ["0%", "100%"],
+                    x2: ["0%", "95%"],
+                    y1: ["0%", "100%"],
+                    y2: ["0%", `${93 + Math.random() * 8}%`],
+                  }}
+                  transition={{
+                    duration: speed,
+                    ease: [0.43, 0.13, 0.23, 0.96], // Curva de aceleración custom
+                    repeat: Infinity,
+                    delay: Math.random() * 4, // Delays más cortos: 0-4s
+                  }}
+                >
+                  <stop stopColor={colors.start} stopOpacity="0"></stop>
+                  <stop offset="10%" stopColor={colors.start} stopOpacity="0.8"></stop>
+                  <stop offset="50%" stopColor={colors.mid}></stop>
+                  <stop offset="90%" stopColor={colors.end} stopOpacity="0.8"></stop>
+                  <stop offset="100%" stopColor={colors.end} stopOpacity="0"></stop>
+                </motion.linearGradient>
+              );
+            })}
  
             <radialGradient
               id="paint0_radial_242_278"

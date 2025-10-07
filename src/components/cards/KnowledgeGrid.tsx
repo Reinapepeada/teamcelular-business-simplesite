@@ -41,7 +41,7 @@ const ARTICLES: KnowledgeItem[] = [
 
 export default function KnowledgeGrid() {
   return (
-    <section className="relative w-full max-w-6xl space-y-10 overflow-hidden rounded-3xl border border-slate-200/40 bg-white/90 p-10 shadow-2xl transition md:w-11/12 dark:border-slate-800/60 dark:bg-slate-950/80 dark:shadow-[0_35px_60px_-25px_rgba(15,23,42,0.8)]">
+    <section className="relative w-full max-w-6xl space-y-10 overflow-hidden rounded-2xl border border-white/15 bg-white/5 p-10 shadow-lg backdrop-blur-2xl transition-all duration-300 ease-in-out hover:shadow-2xl dark:border-white/10 dark:bg-slate-900/30">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,#94a3b81a,transparent_65%)] dark:bg-[radial-gradient(circle_at_top,#0ea5e91a,transparent_65%)]" />
       <header className="space-y-3 text-center md:text-left">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-secondary/90 dark:text-secondary/70">
@@ -58,7 +58,7 @@ export default function KnowledgeGrid() {
         {ARTICLES.map((article) => (
           <article
             key={article.href}
-            className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/40 bg-white/90 p-7 text-left shadow-xl transition-all hover:-translate-y-1 hover:shadow-2xl dark:border-slate-800/60 dark:bg-slate-950/65">
+            className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/15 bg-white/5 p-7 text-left shadow-lg backdrop-blur-xl transition-all hover:-translate-y-1 hover:shadow-2xl dark:border-white/10 dark:bg-slate-900/30">
             <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
               <div className="absolute inset-x-8 top-0 h-1 rounded-full bg-gradient-to-r from-primary to-secondary" />
             </div>

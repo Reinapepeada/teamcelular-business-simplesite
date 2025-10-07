@@ -6,55 +6,55 @@ import Link from "next/link";
 
 const services = [
   {
-    title: "Reparación integral de celulares",
+    title: "Reparación el mismo día",
     description:
-      "Cambio de pantallas, baterías originales, módulos de carga, cámaras y sellado IP para mantener tu smartphone como nuevo.",
+      "Pantalla rota, batería que no dura, puerto de carga que no funciona. La mayoría de reparaciones las resolvemos en el día.",
   },
   {
-    title: "Laboratorio de microelectrónica",
+    title: "Problemas complicados de placa",
     description:
-      "Reballing de placas, reparación de circuitos integrados, recuperación de datos y soluciones en microsoldadura de alta precisión.",
+      "Celular mojado, que no enciende o con fallas raras. Tenemos microscopio y equipos especiales para reparaciones que otros talleres no pueden hacer.",
   },
   {
-    title: "Soporte corporativo y a gremios",
+    title: "Para empresas y organizaciones",
     description:
-      "Planes de mantenimiento para empresas, servicio técnico on-site y logística express para flotas de dispositivos móviles.",
+      "¿Tenés varios equipos? Armamos un plan a medida con descuentos, prioridad en la entrega y facturación A.",
   },
 ];
 
 const differentiators = [
   {
-    title: "Garantía escrita",
+    title: "Garantía de verdad",
     description:
-      "Todas las reparaciones cuentan con respaldo por escrito en mano de obra y repuestos certificados.",
+      "No es letra chica ni promesas. Te damos un papel firmado con 3 meses de garantía en todas las reparaciones.",
   },
   {
-    title: "Diagnóstico en el día",
+    title: "Presupuesto el mismo día",
     description:
-      "Recibimos tu equipo, lo evaluamos con instrumental profesional y enviamos presupuesto transparente en horas.",
+      "Traé tu equipo a la mañana y antes de la tarde te decimos cuánto sale y cuánto tarda. Sin sorpresas.",
   },
   {
-    title: "Atención omnicanal",
+    title: "Como vos prefieras",
     description:
-      "Coordiná tu reparación vía WhatsApp, formulario web o acercándote al laboratorio en Recoleta, CABA.",
+      "WhatsApp, llamada, mail o venís directo. Estamos en Recoleta y respondemos rápido por donde sea.",
   },
 ];
 
 const faqs = [
   {
-    question: "¿Qué marcas de celulares reparan?",
+    question: "¿Arreglan todo tipo de celulares?",
     answer:
-      "Trabajamos con Apple, Samsung, Motorola, Xiaomi, Huawei y más. Si tu modelo es especial, consultanos y validamos stock de repuestos al instante.",
+      "Sí. iPhone, Samsung, Motorola, Xiaomi y casi todas las marcas. Si tu modelo es muy raro, escribinos y te confirmamos en el momento si conseguimos el repuesto.",
   },
   {
-    question: "¿Realizan servicio técnico a domicilio?",
+    question: "¿Vienen a domicilio?",
     answer:
-      "Podemos retirar y entregar equipos en CABA y GBA de manera programada. También contamos con soporte remoto para software y configuraciones.",
+      "Por ahora no hacemos reparaciones a domicilio, pero podemos coordinar para buscar y entregar tu equipo si estás en CABA o zona norte.",
   },
   {
-    question: "¿Cómo solicito un presupuesto urgente?",
+    question: "¿Cuánto tarda un presupuesto?",
     answer:
-      "Completá el formulario de presupuesto o escribinos por WhatsApp las fallas del equipo. Te respondemos con una estimación y opciones de repuesto.",
+      "Si venís al taller, te lo damos en el momento. Si nos escribís por WhatsApp con fotos del problema, te respondemos el mismo día con un precio estimado.",
   },
 ];
 
@@ -65,37 +65,37 @@ export default function Home() {
       <BannerCards />
 
       <section className="w-full max-w-6xl space-y-14 text-center md:text-left">
-        <article className="grid gap-10 rounded-3xl border border-slate-200/40 bg-white/90 p-10 shadow-2xl backdrop-blur-xl transition dark:border-slate-800/60 dark:bg-slate-950/80 dark:shadow-[0_35px_60px_-25px_rgba(15,23,42,0.8)] md:grid-cols-2 md:items-center">
+        <article className="grid gap-10 rounded-2xl border border-white/15 bg-white/5 p-10 shadow-lg backdrop-blur-2xl transition-all duration-300 ease-in-out hover:shadow-2xl dark:border-white/10 dark:bg-slate-900/30 md:grid-cols-2 md:items-center">
           <div className="space-y-6 text-slate-800 dark:text-slate-200">
             <h2 className="text-3xl font-semibold text-primary md:text-4xl">
-              Reparación de celulares en Capital Federal
+              ¿Por qué elegirnos?
             </h2>
             <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-              Somos Team Celular, laboratorio especializado en reparación de celulares en el día, localizado en Recoleta. Nuestro equipo de técnicos certificados trabaja con instrumental de microelectrónica, repuestos 100% originales y protocolos de calidad que garantizan resultados duraderos.
+              Somos Team Celular, un taller familiar que se convirtió en referencia técnica en Buenos Aires. Trabajamos en Recoleta con repuestos originales y equipamiento profesional porque creemos que tu celular merece el mismo cuidado que le darías vos.
             </p>
             <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-              Atendemos dispositivos personales y flotas empresariales, brindamos diagnósticos transparentes y documentación para garantías, seguros o empresas de telefonía. ¡Tu comunicación es nuestra prioridad!
+              Arreglamos desde celulares personales hasta equipos de empresas. Te damos presupuesto sin compromiso, explicamos todo en castellano claro y respaldamos cada trabajo con garantía por escrito.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/presupuesto-reparacion"
                 className="rounded-full bg-gradient-to-r from-primary to-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
               >
-                Solicitar presupuesto online
+                Pedir presupuesto
               </Link>
               <Link
                 href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20necesito%20una%20reparaci%C3%B3n"
                 className="rounded-full border border-primary/40 px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary dark:border-primary/60 dark:text-primary/80"
               >
-                Chatear con un especialista
+                Escribinos por WhatsApp
               </Link>
             </div>
           </div>
-          <div className="space-y-6 rounded-2xl border border-slate-200/40 bg-slate-50/80 p-8 shadow-inner dark:border-slate-800/60 dark:bg-slate-950/60">
-            <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">Servicios destacados</h3>
+          <div className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
+            <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">Qué hacemos</h3>
             <ul className="space-y-4 text-left">
               {services.map((service) => (
-                <li key={service.title} className="rounded-xl border border-slate-200/40 bg-white/80 p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md dark:border-slate-800/60 dark:bg-slate-900/70">
+                <li key={service.title} className="rounded-xl border border-white/20 bg-white/10 p-4 shadow-sm backdrop-blur-lg transition hover:-translate-y-1 hover:shadow-md dark:border-white/15 dark:bg-slate-900/40">
                   <h4 className="text-xl font-semibold text-secondary dark:text-secondary/80">
                     {service.title}
                   </h4>
@@ -110,7 +110,7 @@ export default function Home() {
           {differentiators.map((item) => (
             <div
               key={item.title}
-              className="rounded-2xl border border-slate-200/40 bg-white/80 p-6 text-center shadow-lg transition hover:-translate-y-1 hover:shadow-xl dark:border-slate-800/60 dark:bg-slate-950/70"
+              className="rounded-2xl border border-white/15 bg-white/5 p-6 text-center shadow-lg backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
             >
               <h4 className="text-xl font-semibold text-primary">
                 {item.title}
@@ -120,17 +120,17 @@ export default function Home() {
           ))}
         </article>
 
-        <article className="rounded-3xl border border-slate-200/40 bg-gradient-to-r from-primary/10 via-white/90 to-secondary/10 p-10 shadow-2xl dark:border-slate-800/60 dark:from-primary/10 dark:via-slate-950/80 dark:to-secondary/10">
+        <article className="rounded-2xl border border-white/15 bg-white/5 p-10 shadow-lg backdrop-blur-2xl transition-all duration-300 ease-in-out hover:shadow-2xl dark:border-white/10 dark:bg-slate-900/30">
           <h3 className="text-2xl font-bold text-slate-900 md:text-left dark:text-white">
-            Cobertura y contacto inmediato
+            Dónde estamos y cómo contactarnos
           </h3>
           <div className="mt-6 grid gap-8 md:grid-cols-2">
             <div className="space-y-4">
               <p className="text-lg text-slate-600 dark:text-slate-300">
-                Cubrimos Capital Federal y zonas clave de Gran Buenos Aires como Palermo, Colegiales, Caballito, Belgrano, Microcentro y Núñez. Coordinamos envíos puerta a puerta y visitas técnicas para empresas.
+                Nuestro taller está en Recoleta, a pocas cuadras de la facultad de Derecho. Si estás en Palermo, Belgrano, Caballito o el centro, llegás fácil. También coordinamos retiros en CABA.
               </p>
               <p className="text-lg text-slate-600 dark:text-slate-300">
-                Latitud: -34.5975 | Longitud: -58.4030 — Visitá nuestro laboratorio en Paraguay 2451, Recoleta, o agendá un retiro programado para tus dispositivos.
+                La dirección exacta es Paraguay 2451, Recoleta. Atendemos de lunes a viernes de 10:30 a 18hs. Mejor avisá antes de venir para estar seguros que tengamos lugar.
               </p>
             </div>
             <div className="space-y-4">
@@ -163,7 +163,7 @@ export default function Home() {
             {faqs.map((faq) => (
               <div
                 key={faq.question}
-                className="group relative overflow-hidden rounded-2xl border border-slate-200/50 bg-white p-6 text-left shadow-lg transition hover:-translate-y-1 hover:shadow-xl dark:border-slate-800/60 dark:bg-slate-900"
+                className="group relative overflow-hidden rounded-2xl border border-white/15 bg-white/5 p-6 text-left shadow-lg backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
               >
                 <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                   <div className="absolute inset-x-6 top-0 h-1 rounded-full bg-gradient-to-r from-primary to-secondary" />
@@ -181,7 +181,7 @@ export default function Home() {
 
   <KnowledgeGrid />
 
-        <article className="relative overflow-hidden rounded-3xl border border-slate-200/50 bg-white p-10 text-center shadow-[0_40px_80px_-40px_rgba(15,23,42,0.35)] transition md:text-left dark:border-slate-800/60 dark:bg-slate-900">
+        <article className="relative overflow-hidden rounded-2xl border border-white/15 bg-white/5 p-10 text-center shadow-lg backdrop-blur-2xl transition-all duration-300 ease-in-out hover:shadow-2xl md:text-left dark:border-white/10 dark:bg-slate-900/30">
           <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-primary/5 via-white/60 to-secondary/5 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900" />
           <h3 className="text-2xl font-bold text-primary">
             ¿Listo para recuperar tu teléfono?
@@ -194,13 +194,13 @@ export default function Home() {
               href="/contacto"
               className="rounded-full bg-secondary px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-secondary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
             >
-              Visitar página de contacto
+              Ver formas de contacto
             </Link>
             <Link
               href="/sobrenosotros"
               className="rounded-full border border-secondary px-6 py-3 font-semibold text-secondary transition hover:bg-secondary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
             >
-              Conocer nuestro laboratorio
+              Conocé el taller
             </Link>
           </div>
         </article>

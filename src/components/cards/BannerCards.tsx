@@ -8,7 +8,7 @@ import Link from "next/link";
 export default function BannerCards() {
     return (
         <div className="mx-auto grid w-full max-w-6xl grid-cols-12 grid-rows-2 gap-6 text-center">
-            <Card className="col-span-12 h-[300px] overflow-hidden border border-slate-200/40 bg-slate-900/70 shadow-xl md:col-span-4 dark:border-slate-800/60">
+            <Card className="col-span-12 h-[300px] overflow-hidden rounded-2xl border border-white/15 bg-white/5 shadow-lg backdrop-blur-2xl transition-all duration-300 ease-in-out hover:shadow-2xl md:col-span-4 dark:border-white/10 dark:bg-slate-900/30">
                 <CardHeader className="absolute z-10 flex-col !items-start gap-3 rounded-br-3xl bg-gradient-to-b from-slate-950/80 via-slate-900/20 to-transparent p-6">
                     <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
                         Repuestos de Calidad
@@ -28,8 +28,8 @@ export default function BannerCards() {
                 />
             </Card>
             <Card
-                isBlurred
-                className="col-span-12 h-[300px] overflow-hidden border border-slate-200/40 bg-slate-900/80 shadow-xl sm:col-span-4 dark:border-slate-800/60">
+                
+                className="col-span-12 h-[300px] overflow-hidden rounded-2xl border border-white/15 bg-white/5 shadow-lg backdrop-blur-2xl transition-all duration-300 ease-in-out hover:shadow-2xl sm:col-span-4 dark:border-white/10 dark:bg-slate-900/30">
                 <CardHeader className="absolute z-10 flex-col !items-start gap-3 rounded-br-3xl bg-gradient-to-b from-slate-950/85 via-slate-900/30 to-transparent p-6">
                     <h6 className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
                         Celulares - Tablets - Notebooks
@@ -48,7 +48,7 @@ export default function BannerCards() {
                     sizes="(max-width: 1200px) 100vw, 600px" // Ajusta el tamaño de la imagen basado en el ancho de la ventana del navegador
                 />
             </Card>
-            <Card className="col-span-12 h-[300px] overflow-hidden border border-slate-200/40 bg-slate-900/80 shadow-xl sm:col-span-4 dark:border-slate-800/60">
+            <Card className="col-span-12 h-[300px] overflow-hidden rounded-2xl border border-white/15 bg-white/5 shadow-lg backdrop-blur-2xl transition-all duration-300 ease-in-out hover:shadow-2xl sm:col-span-4 dark:border-white/10 dark:bg-slate-900/30">
                 <CardHeader className="absolute z-10 flex-col !items-start gap-3 rounded-br-3xl bg-gradient-to-b from-slate-950/70 via-slate-900/15 to-transparent p-6">
                     <h6 className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
                         Herramientas Profesionales
@@ -68,7 +68,7 @@ export default function BannerCards() {
             </Card>
             <Card
                 isFooterBlurred
-                className="col-span-12 h-[300px] overflow-hidden border border-slate-200/40 bg-slate-900/80 shadow-xl sm:col-span-5 dark:border-slate-800/60">
+                className="col-span-12 h-[300px] overflow-hidden rounded-2xl border border-white/15 bg-white/5 shadow-lg backdrop-blur-2xl transition-all duration-300 ease-in-out hover:shadow-2xl sm:col-span-5 dark:border-white/10 dark:bg-slate-900/30">
                 <CardHeader className="absolute z-10 flex-col items-start gap-3 rounded-br-3xl bg-gradient-to-b from-slate-950/85 via-slate-900/35 to-transparent p-6">
                     <h6 className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
                         Atencion al Cliente
@@ -86,7 +86,7 @@ export default function BannerCards() {
                     quality={75} // Ajusta la calidad de la imagen
                     sizes="(max-width: 1200px) 100vw, 600px" // Ajusta el tamaño de la imagen basado en el ancho de la ventana del navegador
                 />
-                <CardFooter className="absolute bottom-0 z-10 flex-col items-center justify-center space-y-3 border-t border-white/40 bg-white/80 p-6 text-center dark:border-slate-700/60 dark:bg-slate-950/80">
+                <CardFooter className="absolute bottom-0 z-10 flex-col items-center justify-center space-y-3 border-t border-white/20 bg-white/10 p-6 text-center backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
                     <div className="flex flex-col items-center space-y-2">
                         <h6 className="text-sm font-semibold text-slate-800 dark:text-slate-200">
                             Comunicate con nuestro Equipo
@@ -106,7 +106,7 @@ export default function BannerCards() {
             </Card>
             <Card
                 isFooterBlurred
-                className="col-span-12 h-[300px] overflow-hidden border border-slate-200/40 bg-slate-900/80 shadow-xl sm:col-span-7 dark:border-slate-800/60">
+                className="col-span-12 h-[300px] overflow-hidden rounded-2xl border border-white/15 bg-white/5 shadow-lg backdrop-blur-2xl transition-all duration-300 ease-in-out hover:shadow-2xl sm:col-span-7 dark:border-white/10 dark:bg-slate-900/30">
                 <CardHeader className="absolute z-10 flex-col items-start gap-3 rounded-br-3xl bg-gradient-to-b from-slate-950/85 via-slate-900/30 to-transparent p-6">
                     <h6 className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
                         Microelectronica
@@ -126,7 +126,7 @@ export default function BannerCards() {
                         type="video/mp4"
                     />
                 </video>
-                <CardFooter className="absolute bottom-0 z-10 flex-col items-center justify-center space-y-3 border-t border-white/30 bg-black/40 p-6 text-center dark:border-slate-700/60 dark:bg-slate-950/75">
+                <CardFooter className="absolute bottom-0 z-10 flex-col items-center justify-center space-y-3 border-t border-white/20 bg-white/10 p-6 text-center backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
                     <div className="flex flex-col items-center space-y-2">
                         <h6 className="text-sm text-white/80">
                             Presupuesto personalizado
