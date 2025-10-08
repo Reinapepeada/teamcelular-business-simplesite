@@ -154,6 +154,21 @@ export default function BusinessSupportGuide() {
   return (
     <div className="flex w-full justify-center px-4 py-16">
       <article className="w-full max-w-6xl space-y-16">
+        {/* Breadcrumbs */}
+        <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+          <Link href="/" className="hover:text-primary transition">
+            Inicio
+          </Link>
+          <span>/</span>
+          <Link href="/guias" className="hover:text-primary transition">
+            Guías
+          </Link>
+          <span>/</span>
+          <span className="text-slate-900 dark:text-white font-semibold">
+            Soporte Empresas
+          </span>
+        </nav>
+
         {/* Hero Section */}
         <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-16">
           <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-primary via-secondary to-primary shadow-2xl">
@@ -194,7 +209,7 @@ export default function BusinessSupportGuide() {
               playsInline
               className="h-full w-full rounded-xl object-cover shadow-lg"
             >
-              <source src="/videos/microscopio.mp4" type="video/mp4" />
+              <source src="/videos/3866849-hd_1280_720_50fps.mp4" type="video/mp4" />
               Tu navegador no soporta el elemento de video.
             </video>
           </div>
@@ -442,6 +457,42 @@ export default function BusinessSupportGuide() {
           </div>
         </section>
 
+        {/* Related Articles */}
+        <section className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+            Artículos relacionados
+          </h2>
+          <div className="grid gap-4 md:grid-cols-3">
+            <Link
+              href="/guias/reparacion-iphone-buenos-aires"
+              className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
+            >
+              <h3 className="mb-2 font-bold text-primary">Reparación de iPhone</h3>
+              <p className="text-sm text-slate-700 dark:text-slate-300">
+                Servicio especializado para dispositivos iOS
+              </p>
+            </Link>
+            <Link
+              href="/guias/microelectronica-reballing-caba"
+              className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
+            >
+              <h3 className="mb-2 font-bold text-primary">Microelectrónica Avanzada</h3>
+              <p className="text-sm text-slate-700 dark:text-slate-300">
+                Reparaciones complejas de placas lógicas
+              </p>
+            </Link>
+            <Link
+              href="/guias/mantenimiento-preventivo-celulares"
+              className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
+            >
+              <h3 className="mb-2 font-bold text-primary">Mantenimiento Preventivo</h3>
+              <p className="text-sm text-slate-700 dark:text-slate-300">
+                Planes de cuidado para flotas corporativas
+              </p>
+            </Link>
+          </div>
+        </section>
+
         {/* Schema.org structured data for SEO */}
         <script
           type="application/ld+json"
@@ -450,6 +501,7 @@ export default function BusinessSupportGuide() {
               "@context": "https://schema.org",
               "@type": "Service",
               "name": "Servicio Técnico Corporativo de Celulares",
+              "description": "Servicio técnico especializado para empresas con SLA garantizado, logística puerta a puerta, planes preventivos y soporte para flotas de dispositivos móviles en CABA y GBA.",
               "provider": {
                 "@type": "LocalBusiness",
                 "name": "Team Celular",
@@ -473,13 +525,41 @@ export default function BusinessSupportGuide() {
                 },
                 "geoRadius": "50000",
               },
-              "description":
-                "Servicio técnico especializado para empresas con SLA garantizado, logística puerta a puerta, planes preventivos y soporte para flotas de dispositivos móviles en CABA y GBA.",
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Servicios corporativos",
+                "itemListElement": benefits.map((benefit) => ({
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": benefit.title,
+                    "description": benefit.detail,
+                  },
+                })),
+              },
               "offers": {
                 "@type": "Offer",
                 "availability": "https://schema.org/InStock",
                 "priceCurrency": "ARS",
               },
+            }),
+          }}
+        />
+        
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": faqBusiness.map((faq) => ({
+                "@type": "Question",
+                "name": faq.question,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": faq.answer,
+                },
+              })),
             }),
           }}
         />

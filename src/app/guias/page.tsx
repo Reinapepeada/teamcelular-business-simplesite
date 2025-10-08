@@ -1,6 +1,16 @@
 import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { 
+  FaApple, 
+  FaMicrochip, 
+  FaBuilding, 
+  FaTools,
+  FaArrowRight,
+  FaBookOpen,
+  FaClock,
+  FaChartLine
+} from "react-icons/fa";
 
 const ARTICLES = [
   {
@@ -10,6 +20,9 @@ const ARTICLES = [
     href: "/guias/reparacion-iphone-buenos-aires",
     category: "Reparaciones Apple",
     readingTime: "5 min",
+    Icon: FaApple,
+    datePublished: "2024-01-15",
+    keywords: ["reparación iPhone", "Apple", "CABA", "repuestos originales"],
   },
   {
     title: "Microelectrónica y reballing profesional",
@@ -18,6 +31,9 @@ const ARTICLES = [
     href: "/guias/microelectronica-reballing-caba",
     category: "Laboratorio",
     readingTime: "6 min",
+    Icon: FaMicrochip,
+    datePublished: "2024-02-20",
+    keywords: ["microelectrónica", "reballing", "BGA", "soldadura"],
   },
   {
     title: "Soporte técnico para empresas y gremios",
@@ -26,6 +42,9 @@ const ARTICLES = [
     href: "/guias/soporte-empresas-servicio-tecnico",
     category: "Empresas",
     readingTime: "4 min",
+    Icon: FaBuilding,
+    datePublished: "2024-03-10",
+    keywords: ["servicio técnico empresas", "SLA", "soporte corporativo"],
   },
   {
     title: "Mantenimiento preventivo de celulares",
@@ -34,90 +53,237 @@ const ARTICLES = [
     href: "/guias/mantenimiento-preventivo-celulares",
     category: "Tips de cuidado",
     readingTime: "4 min",
+    Icon: FaTools,
+    datePublished: "2024-04-05",
+    keywords: ["mantenimiento", "preventivo", "cuidado celular", "batería"],
   },
 ];
 
 export const metadata: Metadata = {
-  title: "Guías de reparación y mantenimiento",
+  title: "Guías Técnicas de Reparación de Celulares | Centro de Conocimiento Team Celular",
   description:
-    "Aprende con Team Celular sobre reparación de iPhone, microelectrónica, soporte corporativo y mantenimiento preventivo.",
+    "Guías profesionales sobre reparación de iPhone, microelectrónica, reballing BGA, soporte corporativo y mantenimiento preventivo. Aprende de expertos con más de 10 años en CABA.",
+  keywords: [
+    "guías reparación celulares",
+    "tutoriales iPhone",
+    "microelectrónica móviles",
+    "mantenimiento preventivo smartphones",
+    "soporte técnico empresas",
+    "reballing BGA",
+    "reparación profesional Buenos Aires",
+  ],
+  authors: [{ name: "Team Celular" }],
+  openGraph: {
+    title: "Centro de Conocimiento | Guías Técnicas Team Celular",
+    description:
+      "Aprende de expertos: reparación de iPhone, microelectrónica avanzada y soporte corporativo en Buenos Aires.",
+    type: "website",
+    locale: "es_AR",
+  },
 };
 
 export default function GuidesPage() {
   return (
-    <section className="relative w-11/12 max-w-6xl py-16">
-      <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-br from-primary/10 via-background to-secondary/10 blur-3xl dark:from-primary/5 dark:via-slate-950 dark:to-secondary/5" />
-      <div className="rounded-3xl border border-white/10 bg-white/80 p-10 shadow-2xl backdrop-blur-xl dark:border-white/5 dark:bg-slate-900/70">
-        <header className="space-y-6 text-center md:text-left">
+    <div className="flex w-full justify-center px-4 py-16">
+      <div className="w-full max-w-6xl space-y-12">
+        {/* Breadcrumbs */}
+        <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+          <Link href="/" className="hover:text-primary transition">
+            Inicio
+          </Link>
+          <span>/</span>
+          <span className="text-slate-900 dark:text-white font-semibold">Guías</span>
+        </nav>
+
+        {/* Hero Section */}
+        <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-16">
+          <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-primary via-secondary to-primary shadow-2xl">
+            <FaBookOpen className="text-5xl text-white" />
+          </div>
           <div className="inline-flex items-center gap-3 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-primary/90 dark:border-primary/40 dark:bg-primary/15 dark:text-primary/70">
-            <span className="h-2 w-2 rounded-full bg-primary" aria-hidden />
-            Knowledge Hub
+            <span className="h-2 w-2 rounded-full bg-primary animate-pulse" aria-hidden />
+            Centro de Conocimiento
           </div>
-          <div className="space-y-4">
-            <h1 className="text-4xl font-bold text-foreground md:text-5xl">
-              Guías de laboratorio para líderes y entusiastas tech
-            </h1>
-            <p className="text-lg text-muted-foreground md:max-w-3xl">
-              Impacta tus operaciones con procesos certificados de reparación, microelectrónica y
-              mantenimiento preventivo. Explorá nuestras notas técnicas y conectá con especialistas en minutos.
-            </p>
+          <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
+            Guías Técnicas de Reparación de Celulares
+          </h1>
+          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
+            Aprende con <strong className="text-primary">Team Celular</strong>: procesos certificados de reparación,
+            microelectrónica avanzada y mantenimiento preventivo. Conocimiento profesional basado en más de 10 años
+            de experiencia en Buenos Aires.
+          </p>
+          
+          {/* Stats */}
+          <div className="grid gap-6 md:grid-cols-3 mt-8">
+            <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
+              <div className="flex items-center justify-center mb-3">
+                <FaChartLine className="text-3xl text-primary" />
+              </div>
+              <div className="text-3xl font-bold text-primary">10+</div>
+              <div className="text-sm text-slate-600 dark:text-slate-400">Años de experiencia</div>
+            </div>
+            <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
+              <div className="flex items-center justify-center mb-3">
+                <FaTools className="text-3xl text-secondary" />
+              </div>
+              <div className="text-3xl font-bold text-secondary">{ARTICLES.length}</div>
+              <div className="text-sm text-slate-600 dark:text-slate-400">Guías disponibles</div>
+            </div>
+            <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
+              <div className="flex items-center justify-center mb-3">
+                <FaClock className="text-3xl text-primary" />
+              </div>
+              <div className="text-3xl font-bold text-primary">24h</div>
+              <div className="text-sm text-slate-600 dark:text-slate-400">Tiempo de respuesta</div>
+            </div>
           </div>
-          <div className="flex flex-wrap justify-center gap-4 md:justify-start">
+
+          <div className="flex flex-wrap justify-center gap-4 mt-8">
             <Link
               href="/presupuesto-reparacion"
-              className="rounded-full bg-gradient-to-r from-primary to-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/40 transition hover:shadow-2xl"
+              className="rounded-full bg-gradient-to-r from-primary to-secondary px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:shadow-xl"
             >
               Solicitar asesoría inmediata
             </Link>
             <Link
               href="/contacto"
-              className="rounded-full border border-primary/30 px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10 dark:border-primary/40 dark:text-primary/80"
+              className="rounded-full border-2 border-primary px-8 py-4 text-lg font-semibold text-primary transition hover:bg-primary/10"
             >
               Conversar con un ingeniero
             </Link>
           </div>
         </header>
-        <div className="mt-12 grid gap-8 md:grid-cols-2">
-          {ARTICLES.map((article) => (
-            <article
-              key={article.href}
-              className="group relative overflow-hidden rounded-3xl border border-white/40 bg-white/80 p-8 shadow-xl ring-1 ring-primary/10 transition-all hover:-translate-y-1 hover:ring-2 hover:ring-secondary/60 dark:border-slate-700/50 dark:bg-slate-900/70 dark:ring-secondary/20"
+
+        {/* Articles Grid */}
+        <section className="space-y-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-3">
+              Explora nuestras guías especializadas
+            </h2>
+            <p className="text-lg text-slate-600 dark:text-slate-300">
+              Contenido técnico profesional para usuarios avanzados y empresas
+            </p>
+          </div>
+          
+          <div className="grid gap-8 md:grid-cols-2">
+            {ARTICLES.map((article) => {
+              const Icon = article.Icon;
+              return (
+                <article
+                  key={article.href}
+                  className="group relative overflow-hidden rounded-2xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl transition hover:-translate-y-2 hover:shadow-2xl dark:border-white/10 dark:bg-slate-900/30"
+                >
+                  <div className="absolute right-6 top-6 h-32 w-32 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 blur-3xl opacity-0 transition-opacity group-hover:opacity-100" aria-hidden />
+                  
+                  <div className="relative space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-3xl text-white shadow-lg">
+                        <Icon />
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                        <FaClock className="text-primary" />
+                        {article.readingTime}
+                      </div>
+                    </div>
+                    
+                    <span className="inline-block rounded-full bg-secondary/20 px-3 py-1 text-xs font-semibold text-secondary">
+                      {article.category}
+                    </span>
+                    
+                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+                      {article.title}
+                    </h3>
+                    
+                    <p className="leading-relaxed text-slate-700 dark:text-slate-300">
+                      {article.description}
+                    </p>
+                    
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {article.keywords.slice(0, 3).map((keyword) => (
+                        <span
+                          key={keyword}
+                          className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs text-primary dark:border-primary/30 dark:bg-primary/10"
+                        >
+                          {keyword}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <Link
+                    href={article.href}
+                    className="mt-6 inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg transition group-hover:gap-3 group-hover:bg-primary dark:bg-primary dark:group-hover:bg-secondary"
+                  >
+                    Leer guía completa
+                    <FaArrowRight />
+                  </Link>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="rounded-2xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:from-slate-900/40 dark:via-slate-900/30 dark:to-slate-900/40 md:p-16">
+          <h2 className="mb-4 text-3xl font-bold text-slate-900 dark:text-white">
+            ¿Necesitás ayuda técnica especializada?
+          </h2>
+          <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
+            Nuestro equipo está disponible para consultas, diagnósticos y reparaciones profesionales en CABA y GBA.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link
+              href="/contacto"
+              className="rounded-full bg-secondary px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-secondary/90"
             >
-              <div className="absolute right-6 top-6 h-24 w-24 rounded-full bg-gradient-to-br from-primary/30 to-secondary/30 blur-2xl opacity-50 transition-opacity group-hover:opacity-80 dark:from-primary/20 dark:to-secondary/25" aria-hidden />
-              <div className="relative space-y-4">
-                <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-secondary/80 dark:text-secondary/60">
-                  <span className="rounded-full bg-secondary/70 px-3 py-1 text-[11px] normal-case tracking-normal text-white dark:bg-secondary/80">
-                    {article.category}
-                  </span>
-                  {article.readingTime}
-                </div>
-                <h2 className="text-2xl font-semibold text-foreground">
-                  {article.title}
-                </h2>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  {article.description}
-                </p>
-              </div>
-              <div className="mt-8 flex items-center justify-between text-sm font-semibold">
-                <Link
-                  href={article.href}
-                  className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2 text-white shadow-md transition group-hover:gap-3 dark:bg-primary"
-                >
-                  Leer guía detallada
-                  <span aria-hidden>→</span>
-                </Link>
-                <Link
-                  href="/guias"
-                  className="hidden items-center gap-2 text-primary/80 transition-colors hover:text-secondary md:flex"
-                >
-                  Compartir
-                  <span aria-hidden>↗</span>
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
+              Contactar expertos
+            </Link>
+            <Link
+              href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20necesito%20asesoría%20técnica"
+              className="rounded-full border-2 border-secondary px-8 py-4 text-lg font-semibold text-secondary transition hover:bg-secondary/10"
+            >
+              WhatsApp directo
+            </Link>
+          </div>
+        </section>
+
+        {/* Schema.org structured data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "CollectionPage",
+              "name": "Guías Técnicas de Reparación de Celulares",
+              "description": "Centro de conocimiento con guías profesionales sobre reparación de iPhone, microelectrónica, reballing BGA y soporte corporativo.",
+              "provider": {
+                "@type": "LocalBusiness",
+                "name": "Team Celular",
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "Paraguay 2451",
+                  "addressLocality": "Recoleta",
+                  "addressRegion": "CABA",
+                  "addressCountry": "AR",
+                },
+                "telephone": "+541151034595",
+              },
+              "hasPart": ARTICLES.map((article) => ({
+                "@type": "Article",
+                "headline": article.title,
+                "description": article.description,
+                "url": `https://teamcelular.com${article.href}`,
+                "datePublished": article.datePublished,
+                "author": {
+                  "@type": "Organization",
+                  "name": "Team Celular",
+                },
+                "keywords": article.keywords.join(", "),
+              })),
+            }),
+          }}
+        />
       </div>
-    </section>
+    </div>
   );
 }

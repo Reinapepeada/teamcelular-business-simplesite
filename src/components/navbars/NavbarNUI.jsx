@@ -18,9 +18,9 @@ import ResumeCartNav from "../cart/resume_cart_nav";
 export default function NavbarNUI() {
     const menuItems = [
         "Reparaciones",
-        "Productos",
-        "Contacto",
+        "Guías",
         "Tienda",
+        "Contacto",
         "Sobre Nosotros",
     ];
 
@@ -52,6 +52,14 @@ export default function NavbarNUI() {
                 <NavbarItem isActive>
                     <Link href="/presupuesto-reparacion" color="primary">
                         Reparaciones
+                    </Link>
+                </NavbarItem>
+                <NavbarItem>
+                    <Link
+                        color="foreground"
+                        href="/guias"
+                        aria-current="page">
+                        Guías
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
@@ -102,11 +110,11 @@ export default function NavbarNUI() {
                             case 0:
                                 return "/presupuesto-reparacion";
                             case 1:
-                                return "/productos";
+                                return "/guias";
                             case 2:
-                                return "/contacto";
-                            case 3:
                                 return "/tienda";
+                            case 3:
+                                return "/contacto";
                             default:
                                 return "/sobrenosotros";
                         }
