@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 // fonts
 import { Sora } from "next/font/google";
@@ -23,7 +22,6 @@ import {
 //Elements
 import Link from "next/link";
 import Image from "next/image";
-import { Divider } from "@nextui-org/react";
 
 const footerSections = {
   servicios: [
@@ -172,7 +170,7 @@ export default function FooterNUI() {
               </Link>
             ))}
 
-            <Divider className="my-4" />
+            <div className="h-px w-full bg-white/10 my-8" />
 
             <h4 className="text-lg font-bold mb-2 text-secondary">Recursos</h4>
             {footerSections.recursos.map((recurso, index) => (
@@ -233,7 +231,7 @@ export default function FooterNUI() {
           </div>
         </div>
 
-        <Divider className="my-8" />
+        <div className="h-px w-full bg-white/10 my-8" />
 
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-sm text-slate-400">
