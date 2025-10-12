@@ -35,29 +35,6 @@ const SAME_AS = [
   "https://maps.app.goo.gl/UjykhdoBFv4GmX7K8",
 ];
 
-const FAQ_ITEMS = [
-  {
-    question: "¿Cuánto tarda la reparación de un celular?",
-    answer:
-      "La mayoría de las reparaciones se resuelven en el día gracias a nuestro laboratorio equipado y stock de repuestos originales.",
-  },
-  {
-    question: "¿Ofrecen garantía sobre las reparaciones?",
-    answer:
-      "Sí, todas las reparaciones cuentan con garantía escrita sobre mano de obra y repuestos colocados.",
-  },
-  {
-    question: "¿Atienden empresas y gremios?",
-    answer:
-      "Brindamos soporte técnico presencial y remoto para empresas, gremios y service partners con acuerdos mensuales.",
-  },
-  {
-    question: "¿Puedo pedir presupuesto por WhatsApp?",
-    answer:
-      "Sí, recibimos consultas las 24 hs por WhatsApp al +54 9 11 5103-4595 y respondemos con los pasos a seguir.",
-  },
-];
-
 function createLocalBusinessJson(city?: string, country?: string) {
   return {
     "@context": "https://schema.org",
@@ -167,22 +144,6 @@ function createServiceJson() {
   };
 }
 
-function createFaqJson() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "@id": `${SITE_URL}#faq`,
-    mainEntity: FAQ_ITEMS.filter(item => item && item.question && item.answer).map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  };
-}
-
 function createAiDiscoveryJson() {
   return {
     "@context": "https://schema.org",
@@ -237,7 +198,6 @@ export default function StructuredData({
   const data = [
     createLocalBusinessJson(city, country),
     createServiceJson(),
-    createFaqJson(),
     createBreadcrumbJson(),
     createAiDiscoveryJson(),
   ];

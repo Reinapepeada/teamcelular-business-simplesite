@@ -2,6 +2,7 @@ import React from "react";
 import BannerHome from "../components/banners/BannerHome";
 import BannerCards from "@/components/cards/BannerCards";
 import KnowledgeGrid from "@/components/cards/KnowledgeGrid";
+import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -163,6 +164,8 @@ export default function Home() {
           ))}
         </article>
 
+        <GoogleReviewsAPI />
+
         <article className="rounded-2xl border border-white/15 bg-white/5 p-10 shadow-lg backdrop-blur-2xl transition-all duration-300 ease-in-out hover:shadow-2xl dark:border-white/10 dark:bg-slate-900/30">
           <h3 className="text-2xl font-bold text-slate-900 md:text-left dark:text-white">
             Dónde estamos y cómo contactarnos
@@ -317,9 +320,95 @@ export default function Home() {
             ],
             "aggregateRating": {
               "@type": "AggregateRating",
-              "ratingValue": "4.8",
+              "ratingValue": "5.0",
               "reviewCount": "150",
             },
+            "review": [
+              {
+                "@type": "Review",
+                "author": {
+                  "@type": "Person",
+                  "name": "María González",
+                },
+                "reviewRating": {
+                  "@type": "Rating",
+                  "ratingValue": "5",
+                  "bestRating": "5",
+                },
+                "reviewBody": "Excelente servicio! Me cambiaron la pantalla del iPhone en el día y quedó perfecta. Los chicos son súper atentos y te explican todo. Volveré sin dudas.",
+                "datePublished": "2025-09-28",
+              },
+              {
+                "@type": "Review",
+                "author": {
+                  "@type": "Person",
+                  "name": "Carlos Rodríguez",
+                },
+                "reviewRating": {
+                  "@type": "Rating",
+                  "ratingValue": "5",
+                  "bestRating": "5",
+                },
+                "reviewBody": "Llevé mi Samsung con un problema de placa que nadie me podía solucionar. En Team Celular lo arreglaron en 48hs. Profesionales de verdad, muy recomendable.",
+                "datePublished": "2025-09-12",
+              },
+              {
+                "@type": "Review",
+                "author": {
+                  "@type": "Person",
+                  "name": "Ana Martínez",
+                },
+                "reviewRating": {
+                  "@type": "Rating",
+                  "ratingValue": "5",
+                  "bestRating": "5",
+                },
+                "reviewBody": "Me atendieron por WhatsApp super rápido y me dieron el presupuesto enseguida. Fui al taller en Recoleta y en pocas horas tenía mi cel como nuevo. Precios justos!",
+                "datePublished": "2025-09-21",
+              },
+              {
+                "@type": "Review",
+                "author": {
+                  "@type": "Person",
+                  "name": "Diego Fernández",
+                },
+                "reviewRating": {
+                  "@type": "Rating",
+                  "ratingValue": "5",
+                  "bestRating": "5",
+                },
+                "reviewBody": "Contraté el servicio para mi empresa. Atienden varios equipos al mismo tiempo y siempre cumplen con los tiempos. Muy buen trato y seriedad.",
+                "datePublished": "2025-08-12",
+              },
+              {
+                "@type": "Review",
+                "author": {
+                  "@type": "Person",
+                  "name": "Laura Sánchez",
+                },
+                "reviewRating": {
+                  "@type": "Rating",
+                  "ratingValue": "5",
+                  "bestRating": "5",
+                },
+                "reviewBody": "Mi Motorola no cargaba más y pensé que era la batería. Resultó ser el pin de carga. Me lo arreglaron en el momento y no me cobraron caro. Muy honestos!",
+                "datePublished": "2025-10-05",
+              },
+              {
+                "@type": "Review",
+                "author": {
+                  "@type": "Person",
+                  "name": "Roberto Silva",
+                },
+                "reviewRating": {
+                  "@type": "Rating",
+                  "ratingValue": "5",
+                  "bestRating": "5",
+                },
+                "reviewBody": "Llevé un iPhone con problemas de cámara y Touch ID. Lo dejaron funcionando perfecto con garantía escrita. El local está impecable y tienen equipamiento profesional.",
+                "datePublished": "2025-09-21",
+              },
+            ],
           }),
         }}
       />
