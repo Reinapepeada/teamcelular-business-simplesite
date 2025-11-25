@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { createBrand } from '@/services/brands'
 import { revalidatePathCreateProducts } from '@/services/revalidate'
 import { useToast } from "@/hooks/use-toast"
+import { getToken } from '@/services/auth'
 
 export default function CreateBrandModal({ isOpen, setIsOpen }: Readonly<{ isOpen: boolean, setIsOpen: (open: boolean) => void }>) {
   const [brandName, setBrandName] = useState('')
@@ -18,25 +19,36 @@ export default function CreateBrandModal({ isOpen, setIsOpen }: Readonly<{ isOpe
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
+    
+    const token = getToken()
+    if (!token) {
+      toast({
+        title: "Error",
+        description: "Debes iniciar sesión para crear una marca.",
+        variant: "destructive",
+        duration: 5000,
+      })
+      setIsLoading(false)
+      return
+    }
+    
     try {
-      const response = await createBrand({ name: brandName })
-      if (!response.detail) {
-        await revalidatePathCreateProducts()
-        setIsOpen(false)
-        toast({
-          title: "Marca creada",
-          description: `Tu marca "${brandName}" ha sido creada exitosamente.`,
-          duration: 5000,
-        })
-      }else{
-        console.log('response:', response)
-        throw response.detail
-      }
+      const response = await createBrand({ name: brandName }, token)
+      console.log('response:', response)
+      
+      // Si llegamos aquí, se creó correctamente
+      await revalidatePathCreateProducts()
+      setIsOpen(false)
+      toast({
+        title: "Marca creada",
+        description: `Tu marca "${brandName}" ha sido creada exitosamente.`,
+        duration: 5000,
+      })
     } catch (error) {
       console.error('Error al crear la marca:', error)
       toast({
         title: "Error",
-        description: "No se pudo crear la marca: "+ error,
+        description: "No se pudo crear la marca: " + (error instanceof Error ? error.message : String(error)),
         variant: "destructive",
         duration: 5000,
       })

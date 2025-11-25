@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { createCategory } from '@/services/categories'
 import { revalidatePathCreateProducts } from '@/services/revalidate'
 import { useToast } from "@/hooks/use-toast"
+import { getToken } from '@/services/auth'
 
 export default function CreateCategoryModal({ isOpen, setIsOpen }: Readonly<{ isOpen: boolean, setIsOpen: (open: boolean) => void }>) {
   const [categoryName, setCategoryName] = useState('')
@@ -19,24 +20,36 @@ export default function CreateCategoryModal({ isOpen, setIsOpen }: Readonly<{ is
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
+    
+    const token = getToken()
+    if (!token) {
+      toast({
+        title: "Error",
+        description: "Debes iniciar sesión para crear una categoría.",
+        variant: "destructive",
+        duration: 5000,
+      })
+      setIsLoading(false)
+      return
+    }
+    
     try {
-      const response = await createCategory({ name: categoryName, description: categoryDescription })
-      if (response.id) {
-        await revalidatePathCreateProducts()
-        setIsOpen(false)
-        toast({
-          title: "Categoría creada",
-          description: `Tu categoría "${categoryName}" ha sido creada exitosamente.`,
-          duration: 5000,
-        })
-      }else{
-        throw response.detail
-      }
+      const response = await createCategory({ name: categoryName, description: categoryDescription }, token)
+      console.log('response:', response)
+      
+      // Si llegamos aquí, se creó correctamente
+      await revalidatePathCreateProducts()
+      setIsOpen(false)
+      toast({
+        title: "Categoría creada",
+        description: `Tu categoría "${categoryName}" ha sido creada exitosamente.`,
+        duration: 5000,
+      })
     } catch (error) {
       console.error('Error al crear la categoría:', error)
       toast({
         title: "Error",
-        description: "No se pudo crear la categoría. Por favor, intenta de nuevo.",
+        description: "No se pudo crear la categoría. " + (error instanceof Error ? error.message : String(error)),
         variant: "destructive",
         duration: 5000,
       })

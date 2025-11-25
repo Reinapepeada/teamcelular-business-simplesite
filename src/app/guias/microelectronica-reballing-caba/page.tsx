@@ -134,21 +134,6 @@ export default function MicroelectronicsGuide() {
   return (
     <div className="flex w-full justify-center px-4 py-16">
       <article className="w-full max-w-6xl space-y-16">
-        {/* Breadcrumbs */}
-        <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-          <Link href="/" className="hover:text-primary transition">
-            Inicio
-          </Link>
-          <span>/</span>
-          <Link href="/guias" className="hover:text-primary transition">
-            Guías
-          </Link>
-          <span>/</span>
-          <span className="text-slate-900 dark:text-white font-semibold">
-            Microelectrónica y Reballing
-          </span>
-        </nav>
-
         {/* Hero Section */}
         <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-16">
           <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-primary via-secondary to-primary shadow-2xl">
@@ -161,27 +146,7 @@ export default function MicroelectronicsGuide() {
             Reparación avanzada de placas lógicas y chips BGA con{" "}
             <strong className="text-primary">microscopio profesional</strong> y equipamiento certificado ESD. Somos referentes en Buenos Aires para recuperar dispositivos que otros talleres consideran sin solución.
           </p>
-          
-          {/* Quick Stats */}
-          <div className="grid gap-6 md:grid-cols-3 mt-8">
-            <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
-              <FaMicroscope className="mx-auto text-3xl text-primary mb-2" />
-              <div className="text-2xl font-bold text-primary">20x-45x</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">Microscopio profesional</div>
-            </div>
-            <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
-              <FaShieldAlt className="mx-auto text-3xl text-secondary mb-2" />
-              <div className="text-2xl font-bold text-secondary">3 meses</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">Garantía escrita</div>
-            </div>
-            <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
-              <FaCertificate className="mx-auto text-3xl text-primary mb-2" />
-              <div className="text-2xl font-bold text-primary">ESD</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">Certificado</div>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-4 mt-8">
+          <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/presupuesto-reparacion"
               className="rounded-full bg-gradient-to-r from-primary to-secondary px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:shadow-xl"
@@ -388,43 +353,7 @@ export default function MicroelectronicsGuide() {
           </p>
         </section>
 
-        {/* Related Articles */}
-        <section className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-            Artículos relacionados
-          </h2>
-          <div className="grid gap-4 md:grid-cols-3">
-            <Link
-              href="/guias/reparacion-iphone-buenos-aires"
-              className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
-            >
-              <h3 className="mb-2 font-bold text-primary">Reparación de iPhone</h3>
-              <p className="text-sm text-slate-700 dark:text-slate-300">
-                Servicio especializado con repuestos originales
-              </p>
-            </Link>
-            <Link
-              href="/guias/mantenimiento-preventivo-celulares"
-              className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
-            >
-              <h3 className="mb-2 font-bold text-primary">Mantenimiento Preventivo</h3>
-              <p className="text-sm text-slate-700 dark:text-slate-300">
-                Cuidados para prevenir daños en placas
-              </p>
-            </Link>
-            <Link
-              href="/guias/soporte-empresas-servicio-tecnico"
-              className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
-            >
-              <h3 className="mb-2 font-bold text-primary">Soporte Corporativo</h3>
-              <p className="text-sm text-slate-700 dark:text-slate-300">
-                Planes empresariales con SLA garantizado
-              </p>
-            </Link>
-          </div>
-        </section>
-
-        {/* Schema.org structured data */}
+        {/* Schema.org */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -432,7 +361,6 @@ export default function MicroelectronicsGuide() {
               "@context": "https://schema.org",
               "@type": "Service",
               "name": "Microelectrónica y Reballing BGA",
-              "description": "Laboratorio especializado en reparación de placas lógicas, reballing BGA, soldadura SMD y recuperación de dispositivos con daño a nivel chip.",
               "provider": {
                 "@type": "LocalBusiness",
                 "name": "Team Celular",
@@ -444,74 +372,10 @@ export default function MicroelectronicsGuide() {
                   "addressCountry": "AR",
                 },
                 "telephone": "+541151034595",
-                "email": "teamcelular.arg@gmail.com",
               },
               "serviceType": "Reparación de microelectrónica y reballing BGA",
-              "areaServed": {
-                "@type": "GeoCircle",
-                "geoMidpoint": {
-                  "@type": "GeoCoordinates",
-                  "latitude": "-34.5937",
-                  "longitude": "-58.3917",
-                },
-                "geoRadius": "50000",
-              },
-              "hasOfferCatalog": {
-                "@type": "OfferCatalog",
-                "name": "Servicios de microelectrónica",
-                "itemListElement": useCases.map((useCase) => ({
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": useCase.title,
-                    "description": useCase.description,
-                  },
-                })),
-              },
-            }),
-          }}
-        />
-        
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": faqMicro.map((faq) => ({
-                "@type": "Question",
-                "name": faq.question,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": faq.answer,
-                },
-              })),
-            }),
-          }}
-        />
-        
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "HowTo",
-              "name": "Proceso de Reballing BGA",
-              "description": "Guía paso a paso del proceso profesional de reballing de chips BGA en dispositivos móviles.",
-              "image": "https://teamcelular.com/images/teamcelular.webp",
-              "totalTime": "PT6H",
-              "supply": ["Chip BGA", "Bolas de soldadura", "Flux activado", "Stencil específico"],
-              "tool": ["Microscopio profesional", "Estación de reballing", "Preheater infrarrojo", "Multímetro"],
-              "step": reballingProcess.map((item, index) => ({
-                "@type": "HowToStep",
-                "position": index + 1,
-                "name": item.step,
-                "text": item.detail,
-              })),
-              "author": {
-                "@type": "Organization",
-                "name": "Team Celular",
-              },
+              "description":
+                "Laboratorio especializado en reparación de placas lógicas, reballing BGA, soldadura SMD y recuperación de dispositivos con daño a nivel chip.",
             }),
           }}
         />

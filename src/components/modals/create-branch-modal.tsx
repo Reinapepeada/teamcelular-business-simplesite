@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { createBranch } from '@/services/branches'
 import { revalidatePathCreateVariants } from '@/services/revalidate'
 import { useToast } from "@/hooks/use-toast"
+import { getToken } from '@/services/auth'
 
 export default function CreateBranchModal({ isOpen, setIsOpen }: Readonly<{ isOpen: boolean, setIsOpen: (open: boolean) => void }>) {
   const [branchName, setBranchName] = useState('')
@@ -19,25 +20,36 @@ export default function CreateBranchModal({ isOpen, setIsOpen }: Readonly<{ isOp
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
+    
+    const token = getToken()
+    if (!token) {
+      toast({
+        title: "Error",
+        description: "Debes iniciar sesión para crear una sucursal.",
+        variant: "destructive",
+        duration: 5000,
+      })
+      setIsLoading(false)
+      return
+    }
+    
     try {
-      const response = await createBranch({ name: branchName, location: branchAddress })
+      const response = await createBranch({ name: branchName, location: branchAddress }, token)
       console.log('response:', response)
-      if (!response.detail) {
-        await revalidatePathCreateVariants()
-        setIsOpen(false)
-        toast({
-          title: "Almacen creada",
-          description: `Tu almacen "${branchName}" ha sido creada exitosamente.`,
-          duration: 5000,
-        })
-      }else{
-        throw response.detail
-      }
+      
+      // Si llegamos aquí, se creó correctamente
+      await revalidatePathCreateVariants()
+      setIsOpen(false)
+      toast({
+        title: "Almacen creada",
+        description: `Tu almacen "${branchName}" ha sido creada exitosamente.`,
+        duration: 5000,
+      })
     } catch (error) {
       console.error('Error al crear la almacen:', error)
       toast({
         title: "Error",
-        description: "No se pudo crear la almacen."+ error,
+        description: "No se pudo crear la almacen. " + (error instanceof Error ? error.message : String(error)),
         variant: "destructive",
         duration: 5000,
       })

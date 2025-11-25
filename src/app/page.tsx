@@ -4,49 +4,6 @@ import BannerCards from "@/components/cards/BannerCards";
 import KnowledgeGrid from "@/components/cards/KnowledgeGrid";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import Link from "next/link";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Team Celular | Reparación de Celulares en Buenos Aires CABA | Servicio Técnico Profesional",
-  description: "Servicio técnico especializado en reparación de celulares en Recoleta, CABA. iPhone, Samsung, Motorola. Garantía escrita, repuestos originales. Presupuesto en 24hs. Más de 15 años de experiencia.",
-  keywords: [
-    "reparación celulares Buenos Aires",
-    "service técnico CABA",
-    "reparación iPhone Recoleta",
-    "taller celulares Recoleta",
-    "arreglo celulares CABA",
-    "microelectrónica Buenos Aires",
-    "cambio pantalla celular",
-    "batería celular original",
-    "reparación Samsung Recoleta",
-    "service técnico celulares",
-  ],
-  authors: [{ name: "Team Celular" }],
-  openGraph: {
-    title: "Team Celular | Reparación Profesional de Celulares CABA",
-    description: "Más de 15 años reparando celulares en Buenos Aires con garantía escrita. Servicio técnico especializado en Recoleta.",
-    type: "website",
-    locale: "es_AR",
-    siteName: "Team Celular",
-    images: [
-      {
-        url: "/images/teamcelular.webp",
-        width: 1200,
-        height: 630,
-        alt: "Team Celular - Reparación de Celulares en Buenos Aires",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Team Celular | Reparación de Celulares Buenos Aires",
-    description: "Servicio técnico especializado con más de 15 años de experiencia en CABA",
-    images: ["/images/teamcelular.webp"],
-  },
-  alternates: {
-    canonical: "https://teamcelular.com",
-  },
-};
 
 const services = [
   {

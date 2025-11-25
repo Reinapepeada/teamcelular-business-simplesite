@@ -23,18 +23,9 @@ import { getcategories } from '@/services/categories';
 import { getproviders } from '@/services/providers';
 import { createProduct } from '@/services/products'
 import { redirect } from 'next/navigation'
+import type { Brand, Category } from '@/app/tienda/product';
 
 // interfaces
-interface Brand {
-  id: number;
-  name: string;
-}
-
-interface Category {
-  id: number;
-  name: string;
-}
-
 interface Provider {
   id: number;
   name: string;
@@ -108,12 +99,11 @@ export default function ProductForm() {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const response = await createProduct(values)
-    console.log(response)
-    if (response.status_code) {
-      alert(response.detail)
-
-    } else {
+    try {
+      const response = await createProduct(values)
+      console.log(response)
+      
+      // Si llegamos aquí, el producto se creó exitosamente
       const variantOption = confirm("¿deseas agregar variantes al producto?")
       if (variantOption) {
         redirect(`/admin/create-variants/${response.id}`)
@@ -121,13 +111,15 @@ export default function ProductForm() {
       else {
         redirect("/admin")
       }
-
+    } catch (error) {
+      console.error("Error creating product:", error)
+      alert(error instanceof Error ? error.message : "Error al crear el producto")
     }
   }
   
-  const [brands, setBrands] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [providers, setProviders] = useState([]);
+  const [brands, setBrands] = useState<Brand[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [providers, setProviders] = useState<Provider[]>([]);
 
   const [showNewBrandForm, setShowNewBrandForm] = useState(false);
   const [showNewCategoryForm, setShowNewCategoryForm] = useState(false);
@@ -135,16 +127,16 @@ export default function ProductForm() {
 
   async function fetchBrands() {
       const brands_server  = await getbrands();
-      setBrands(brands_server);
+      setBrands(brands_server || []);
   }
   
   async function fetchCategories() {
       const categories_server  = await getcategories();
-      setCategories(categories_server);
+      setCategories(categories_server || []);
   }
   async function fetchProviders() {
       const providers_server  = await getproviders();
-      setProviders(providers_server);
+      setProviders(providers_server || []);
   }
   
     useEffect(() => {
