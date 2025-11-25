@@ -3,7 +3,7 @@ export type ProductStatus = 'ACTIVE' | 'INACTIVE' | 'DISCONTINUED';
 export type Color = 'ROJO' | 'AZUL' | 'VERDE' | 'AMARILLO' | 'NARANJA' | 'VIOLETA' | 'ROSADO' | 'MARRON' | 'GRIS' | 'BLANCO' | 'NEGRO' | 'BORDO';
 export type SizeUnit = 'CLOTHING' | 'DIMENSIONS' | 'WEIGHT' | 'OTHER';
 export type Unit = 'KG' | 'G' | 'LB' | 'CM' | 'M' | 'INCH' | 'XS' | 'S' | 'L' | 'XL' | 'XXL';
-export type WarrantyUnit = 'DAYS' | 'MONTHS' | 'YEARS';
+export type WarrantyUnit = 'DAYS' | 'WEEKS' | 'MONTHS' | 'YEARS';
 
 export interface ProductImage {
   id: number;

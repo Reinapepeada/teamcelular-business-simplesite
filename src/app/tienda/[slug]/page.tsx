@@ -163,9 +163,7 @@ export default function ProductDetailPage() {
     // Handle add to cart
     const handleAddToCart = () => {
         if (product) {
-            for (let i = 0; i < quantity; i++) {
-                addToCart(product);
-            }
+            addToCart(product, selectedVariant, quantity);
         }
     };
     

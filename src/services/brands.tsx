@@ -14,7 +14,7 @@ interface UpdateBrandDTO {
 }
 
 /**
- * Get all brands
+ * Get all brands (public)
  * GET /brands/get/all
  */
 export async function getbrands(): Promise<Brand[]> {
@@ -40,20 +40,27 @@ export async function getbrands(): Promise<Brand[]> {
 }
 
 /**
- * Create a new brand
+ * Create a new brand (requires Editor+ role)
  * POST /brands/create
  */
-export async function createBrand(brand: CreateBrandDTO): Promise<Brand> {
+export async function createBrand(brand: CreateBrandDTO, token: string): Promise<Brand> {
     const response = await fetch(`${apiUrl}/brands/create`, {
         method: 'POST',
         cache: 'no-store',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(brand)
     });
 
     if (!response.ok) {
+        if (response.status === 401) {
+            throw new Error('Sesión expirada. Inicia sesión nuevamente.');
+        }
+        if (response.status === 403) {
+            throw new Error('No tienes permisos para crear marcas.');
+        }
         const error = await response.json().catch(() => ({ detail: 'Unknown error' }));
         throw new Error(error.detail || 'Create brand failed');
     }
@@ -62,20 +69,27 @@ export async function createBrand(brand: CreateBrandDTO): Promise<Brand> {
 }
 
 /**
- * Update a brand
+ * Update a brand (requires Editor+ role)
  * PUT /brands/update?brand_id={id}
  */
-export async function updateBrand(brandId: number, data: UpdateBrandDTO): Promise<Brand> {
+export async function updateBrand(brandId: number, data: UpdateBrandDTO, token: string): Promise<Brand> {
     const response = await fetch(`${apiUrl}/brands/update?brand_id=${brandId}`, {
         method: 'PUT',
         cache: 'no-store',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(data)
     });
 
     if (!response.ok) {
+        if (response.status === 401) {
+            throw new Error('Sesión expirada. Inicia sesión nuevamente.');
+        }
+        if (response.status === 403) {
+            throw new Error('No tienes permisos para editar marcas.');
+        }
         const error = await response.json().catch(() => ({ detail: 'Unknown error' }));
         throw new Error(error.detail || 'Update brand failed');
     }
@@ -84,19 +98,26 @@ export async function updateBrand(brandId: number, data: UpdateBrandDTO): Promis
 }
 
 /**
- * Delete a brand
+ * Delete a brand (requires Admin+ role)
  * DELETE /brands/delete?brand_id={id}
  */
-export async function deleteBrand(brandId: number): Promise<{ msg: string }> {
+export async function deleteBrand(brandId: number, token: string): Promise<{ msg: string }> {
     const response = await fetch(`${apiUrl}/brands/delete?brand_id=${brandId}`, {
         method: 'DELETE',
         cache: 'no-store',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
         }
     });
 
     if (!response.ok) {
+        if (response.status === 401) {
+            throw new Error('Sesión expirada. Inicia sesión nuevamente.');
+        }
+        if (response.status === 403) {
+            throw new Error('No tienes permisos para eliminar marcas. Se requiere rol Admin o superior.');
+        }
         const error = await response.json().catch(() => ({ detail: 'Unknown error' }));
         throw new Error(error.detail || 'Delete brand failed');
     }

@@ -25,19 +25,15 @@ import { redirect } from "next/navigation";
 import { ToastAction } from "@/components/ui/toast";
 import { getbranches } from "@/services/branches";
 import CreateBranchModal from "@/components/modals/create-branch-modal";
-
-interface Branch {
-    id: string;
-    name: string;
-}
+import type { Branch, Color, SizeUnit, Unit, CreateVariantDTO } from "@/app/tienda/product";
 
 interface Variant {
     tempId: number;
-    product_id: string;
-    color: string;
+    product_id: number;
+    color: Color | null;
     size: string;
-    unit: string;
-    size_unit: string;
+    unit: Unit | null;
+    size_unit: SizeUnit | null;
     stock: number;
     branch_id: number;
     min_stock: number;
@@ -53,32 +49,48 @@ let variantCounter = 0;
 
 const emptyVariant = (productId: string): Variant => ({
     tempId: ++variantCounter,
-    product_id: productId,
-    color: "",
+    product_id: parseInt(productId, 10),
+    color: null,
     size: "",
-    unit: "",
+    unit: null,
     branch_id: 0,
-    size_unit: "",
+    size_unit: null,
     stock: 0,
     min_stock: 0,
     images: [],
 });
 
-const colors = [
-    "Rojo",
-    "Azul",
-    "Verde",
-    "Amarillo",
-    "Naranja",
-    "Rosa",
-    "Marron",
-    "Gris",
-    "Blanco",
-    "Negro",
-    "Bordo",
+const colors: { value: Color; label: string }[] = [
+    { value: "ROJO", label: "Rojo" },
+    { value: "AZUL", label: "Azul" },
+    { value: "VERDE", label: "Verde" },
+    { value: "AMARILLO", label: "Amarillo" },
+    { value: "NARANJA", label: "Naranja" },
+    { value: "ROSADO", label: "Rosa" },
+    { value: "MARRON", label: "Marrón" },
+    { value: "GRIS", label: "Gris" },
+    { value: "BLANCO", label: "Blanco" },
+    { value: "NEGRO", label: "Negro" },
+    { value: "BORDO", label: "Bordó" },
 ];
-const units = ["kg", "g", "lb", "cm", "m", "inch", "xs", "s", "l", "xl"];
-const sizeunits = ["clothing", "dimensions", "weight", "other"];
+const units: { value: Unit; label: string }[] = [
+    { value: "KG", label: "kg" },
+    { value: "G", label: "g" },
+    { value: "LB", label: "lb" },
+    { value: "CM", label: "cm" },
+    { value: "M", label: "m" },
+    { value: "INCH", label: "inch" },
+    { value: "XS", label: "XS" },
+    { value: "S", label: "S" },
+    { value: "L", label: "L" },
+    { value: "XL", label: "XL" },
+];
+const sizeunits: { value: SizeUnit; label: string }[] = [
+    { value: "CLOTHING", label: "Ropa" },
+    { value: "DIMENSIONS", label: "Dimensiones" },
+    { value: "WEIGHT", label: "Peso" },
+    { value: "OTHER", label: "Otro" },
+];
 
 export default function ProductVariantForm({
     productId,
@@ -89,13 +101,13 @@ export default function ProductVariantForm({
         null
     );
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [branches, setBranches] = useState([]);
+    const [branches, setBranches] = useState<Branch[]>([]);
     const [showNewBranch, setShowNewbranch] = useState(false);
 
     useEffect(() => {
         async function fetchBranches() {
             const brands_server = await getbranches();
-            setBranches(brands_server);
+            setBranches(brands_server || []);
         }
         fetchBranches();
     }, [showNewBranch]);
@@ -197,33 +209,27 @@ export default function ProductVariantForm({
             );
 
             // Create product variants
-            const response = await createProductVariants({
-                variants: variantsWithImages,
+            const response = await createProductVariants(variantsWithImages);
+
+            // Success - response is array of created variants
+            console.log("Variants created successfully:", response);
+            toast({
+                title: "Success",
+                description:
+                    "Variants have been saved successfully. Redirecting to admin page...",
+                action: (
+                    <ToastAction
+                        onClick={() => redirect("/admin")}
+                        altText="go to admin">
+                        admin page
+                    </ToastAction>
+                ),
             });
 
-            if (!response.detail) {
-                console.log("Variants created successfully:", response);
-                toast({
-                    title: "Success",
-                    description:
-                        "Variants have been saved successfully. Redirecting to admin page...",
-                    action: (
-                        <ToastAction
-                            onClick={() => redirect("/admin")}
-                            altText="go to admin">
-                            admin page
-                        </ToastAction>
-                    ),
-                });
-
-                // Delay redirection to allow user to see the success message
-                // setTimeout(() => {
-                //     redirect("/admin");
-                // }, 10000);
-            } else {
-                console.log(response.detail);
-                throw response.detail;
-            }
+            // Delay redirection to allow user to see the success message
+            // setTimeout(() => {
+            //     redirect("/admin");
+            // }, 10000);
         } catch (error) {
             console.error("Error submitting variants:", error);
 
@@ -274,12 +280,12 @@ export default function ProductVariantForm({
                             <SelectValue placeholder="Select Color" />
                         </SelectTrigger>
                         <SelectContent className="bg-background">
-                            {colors.map((color: any) => (
+                            {colors.map((color) => (
                                 <SelectItem
                                     className="hover:bg-gray-600"
-                                    key={color}
-                                    value={color}>
-                                    {color}
+                                    key={color.value}
+                                    value={color.value}>
+                                    {color.label}
                                 </SelectItem>
                             ))}
                         </SelectContent>
@@ -296,12 +302,12 @@ export default function ProductVariantForm({
                             <SelectValue placeholder="Select Unit" />
                         </SelectTrigger>
                         <SelectContent className="bg-background">
-                            {units.map((unit: any) => (
+                            {units.map((unit) => (
                                 <SelectItem
                                     className="hover:bg-gray-600"
-                                    key={unit}
-                                    value={unit}>
-                                    {unit}
+                                    key={unit.value}
+                                    value={unit.value}>
+                                    {unit.label}
                                 </SelectItem>
                             ))}
                         </SelectContent>
@@ -324,12 +330,12 @@ export default function ProductVariantForm({
                             <SelectValue placeholder="Select Size Unit" />
                         </SelectTrigger>
                         <SelectContent className="bg-background">
-                            {sizeunits.map((unit: any) => (
+                            {sizeunits.map((unit) => (
                                 <SelectItem
                                     className="hover:bg-gray-600"
-                                    key={unit}
-                                    value={unit}>
-                                    {unit}
+                                    key={unit.value}
+                                    value={unit.value}>
+                                    {unit.label}
                                 </SelectItem>
                             ))}
                         </SelectContent>

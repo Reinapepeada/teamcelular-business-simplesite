@@ -1,4 +1,3 @@
-import { redirect } from 'next/navigation'
 import type { 
     Product, 
     ProductsPaginatedResponse, 
@@ -9,6 +8,7 @@ import type {
     UpdateVariantDTO,
     ProductVariant
 } from '@/app/tienda/product'
+import { getToken } from '@/services/auth'
 
 // Environment variables
 export const imgBBKey = process.env.NEXT_PUBLIC_IMGBB_KEY
@@ -22,7 +22,7 @@ class ApiError extends Error {
     }
 }
 
-// Helper function for API requests
+// Helper function for API requests (public endpoints - GET)
 async function apiRequest<T>(
     endpoint: string, 
     options: RequestInit = {}
@@ -46,19 +46,58 @@ async function apiRequest<T>(
     return response.json();
 }
 
+// Helper function for authenticated API requests (protected endpoints - POST, PUT, DELETE)
+async function authenticatedApiRequest<T>(
+    endpoint: string, 
+    options: RequestInit = {}
+): Promise<T> {
+    const url = `${apiUrl}${endpoint}`;
+    const token = getToken();
+    
+    if (!token) {
+        throw new ApiError(401, 'No autenticado. Inicia sesión para continuar.');
+    }
+    
+    const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+    };
+
+    const response = await fetch(url, { 
+        ...options,
+        headers,
+        cache: 'no-store',
+    });
+    
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ detail: 'Unknown error' }));
+        
+        if (response.status === 401) {
+            throw new ApiError(401, 'Sesión expirada. Inicia sesión nuevamente.');
+        }
+        if (response.status === 403) {
+            throw new ApiError(403, 'No tienes permisos para realizar esta acción.');
+        }
+        
+        throw new ApiError(response.status, errorData.detail || `HTTP error! status: ${response.status}`);
+    }
+
+    return response.json();
+}
+
 // ============================================
 // PRODUCTS ENDPOINTS
 // ============================================
 
 /**
- * Create a new product
+ * Create a new product (requires Editor+ role)
  * POST /products/create
  */
 export async function createProduct(formData: CreateProductDTO): Promise<Product> {
     console.log('Creating product:', JSON.stringify(formData));
     
     try {
-        const data = await apiRequest<Product>('/products/create', {
+        const data = await authenticatedApiRequest<Product>('/products/create', {
             method: 'POST',
             body: JSON.stringify(formData),
         });
@@ -166,7 +205,7 @@ export async function getMinMaxPrice(): Promise<{ min: number; max: number }> {
 }
 
 /**
- * Update a product
+ * Update a product (requires Editor+ role)
  * PUT /products/update?product_id={id}
  */
 export async function updateProduct(
@@ -176,7 +215,7 @@ export async function updateProduct(
     console.log('Updating product:', productId, JSON.stringify(formData));
     
     try {
-        const data = await apiRequest<Product>(
+        const data = await authenticatedApiRequest<Product>(
             `/products/update?product_id=${productId}`,
             {
                 method: 'PUT',
@@ -191,14 +230,14 @@ export async function updateProduct(
 }
 
 /**
- * Delete a product
+ * Delete a product (requires Admin+ role)
  * DELETE /products/delete?product_id={id}
  */
 export async function deleteProduct(productId: number): Promise<{ msg: string }> {
     console.log('Deleting product:', productId);
     
     try {
-        const data = await apiRequest<{ msg: string }>(
+        const data = await authenticatedApiRequest<{ msg: string }>(
             `/products/delete?product_id=${productId}`,
             { method: 'DELETE' }
         );
@@ -214,7 +253,7 @@ export async function deleteProduct(productId: number): Promise<{ msg: string }>
 // ============================================
 
 /**
- * Create product variants (batch)
+ * Create product variants (batch) - requires Editor+ role
  * POST /products/create/variant
  */
 export async function createProductVariants(
@@ -223,7 +262,7 @@ export async function createProductVariants(
     console.log('Creating variants:', JSON.stringify({ variants }));
     
     try {
-        const data = await apiRequest<ProductVariant[]>('/products/create/variant', {
+        const data = await authenticatedApiRequest<ProductVariant[]>('/products/create/variant', {
             method: 'POST',
             body: JSON.stringify({ variants }),
         });
@@ -255,7 +294,7 @@ export async function getVariantsByProductId(productId: number): Promise<Product
 }
 
 /**
- * Update a variant
+ * Update a variant (requires Editor+ role)
  * PUT /products/update/variant?variant_id={id}
  */
 export async function updateProductVariant(
@@ -265,7 +304,7 @@ export async function updateProductVariant(
     console.log('Updating variant:', variantId, JSON.stringify(formData));
     
     try {
-        const data = await apiRequest<ProductVariant>(
+        const data = await authenticatedApiRequest<ProductVariant>(
             `/products/update/variant?variant_id=${variantId}`,
             {
                 method: 'PUT',
@@ -280,14 +319,14 @@ export async function updateProductVariant(
 }
 
 /**
- * Delete a variant
+ * Delete a variant (requires Admin+ role)
  * DELETE /products/delete/variant?variant_id={id}
  */
 export async function deleteProductVariant(variantId: number): Promise<{ msg: string }> {
     console.log('Deleting variant:', variantId);
     
     try {
-        const data = await apiRequest<{ msg: string }>(
+        const data = await authenticatedApiRequest<{ msg: string }>(
             `/products/delete/variant?variant_id=${variantId}`,
             { method: 'DELETE' }
         );

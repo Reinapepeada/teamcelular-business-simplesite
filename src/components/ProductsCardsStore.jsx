@@ -222,7 +222,7 @@ function ProductsCardsStore({
                               </Link>
                               <div className="flex justify-center w-full">
                                   <Button
-                                      onClick={() => addToCart(product)}
+                                      onClick={() => addToCart(product, null, 1)}
                                       className="mt-4"
                                       variant="shadow"
                                       size="sm"

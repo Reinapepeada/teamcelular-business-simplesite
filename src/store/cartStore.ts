@@ -1,93 +1,127 @@
 'use client'
 import { create } from "zustand";
-import Cookies from "js-cookie";
+import { persist, createJSONStorage } from "zustand/middleware";
+import { Product, ProductVariant } from "@/app/tienda/product";
 
-import { Product } from "@/app/tienda/product";
-
-interface CartItem extends Product {
-  quantity: number;
+// Item del carrito con variante seleccionada opcional
+export interface CartItem {
+    product: Product;
+    variant?: ProductVariant | null;
+    quantity: number;
+    // Key única para identificar el item (product_id + variant_id)
+    cartKey: string;
 }
 
 interface CartState {
-  cart: CartItem[];
-  totalItems: number;
-  totalPrice: number;
-  addToCart: (product: Product) => void;
-  removeFromCart: (productId: number) => void;
-  updateQuantity: (productId: number, newQuantity: number) => void;
+    cart: CartItem[];
+    totalItems: number;
+    totalPrice: number;
+    
+    // Acciones
+    addToCart: (product: Product, variant?: ProductVariant | null, quantity?: number) => void;
+    removeFromCart: (cartKey: string) => void;
+    updateQuantity: (cartKey: string, newQuantity: number) => void;
+    clearCart: () => void;
+    
+    // Utilidades
+    getItemByKey: (cartKey: string) => CartItem | undefined;
+    isInCart: (productId: number, variantId?: number) => boolean;
 }
 
-const initialCart = Cookies.get("cart") ? JSON.parse(Cookies.get("cart") as string) : [];
-const useCartStore = create<CartState>((set, get) => ({
-  cart: initialCart,
-  totalItems: 0,
-  totalPrice: 0,
+// Generar key única para el carrito
+function generateCartKey(productId: number, variantId?: number): string {
+    return variantId ? `${productId}-${variantId}` : `${productId}`;
+}
 
-  addToCart: (product) => {
-    const { cart } = get();
-    const existingItem = cart.find((item) => item.id === product.id);
+// Calcular totales
+function calculateTotals(cart: CartItem[]) {
+    return {
+        totalItems: cart.reduce((sum, item) => sum + item.quantity, 0),
+        totalPrice: cart.reduce((sum, item) => sum + item.product.retail_price * item.quantity, 0),
+    };
+}
 
-    if (existingItem) {
-      set({
-        cart: cart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        ),
-      });
-    } else {
-      set({ cart: [...cart, { ...product, quantity: 1 }] });
-    }
+const useCartStore = create<CartState>()(
+    persist(
+        (set, get) => ({
+            cart: [],
+            totalItems: 0,
+            totalPrice: 0,
 
-    // Recalcula totales
-    const updatedCart = get().cart;
-    set({
-      totalItems: updatedCart.reduce((sum, item) => sum + item.quantity, 0),
-      totalPrice: updatedCart.reduce((sum, item) => sum + item.retail_price * item.quantity, 0),
-    });
-    Cookies.set("cart", JSON.stringify(updatedCart));
-  },
+            addToCart: (product, variant = null, quantity = 1) => {
+                const { cart } = get();
+                const cartKey = generateCartKey(product.id, variant?.id);
+                const existingItem = cart.find((item) => item.cartKey === cartKey);
 
-  removeFromCart: (productId) => {
-    const { cart } = get();
-    const updatedCart = cart.filter((item) => item.id !== productId);
-    set({ cart: updatedCart });
+                let updatedCart: CartItem[];
 
-    // Recalcula totales
-    set({
-      totalItems: updatedCart.reduce((sum, item) => sum + item.quantity, 0),
-      totalPrice: updatedCart.reduce((sum, item) => sum + item.retail_price * item.quantity, 0),
-    });
-    Cookies.set("cart", JSON.stringify(updatedCart));
-  },
+                if (existingItem) {
+                    // Incrementar cantidad si ya existe
+                    updatedCart = cart.map((item) =>
+                        item.cartKey === cartKey
+                            ? { ...item, quantity: item.quantity + quantity }
+                            : item
+                    );
+                } else {
+                    // Agregar nuevo item
+                    updatedCart = [
+                        ...cart, 
+                        { 
+                            product, 
+                            variant, 
+                            quantity,
+                            cartKey 
+                        }
+                    ];
+                }
 
-  updateQuantity: (productId, newQuantity) => {
-    const { cart } = get();
+                const totals = calculateTotals(updatedCart);
+                set({ cart: updatedCart, ...totals });
+            },
 
-    if (newQuantity === 0) {
-      get().removeFromCart(productId);
-    } else {
-      const updatedCart = cart.map((item) =>
-        item.id === productId ? { ...item, quantity: newQuantity } : item
-      );
-      set({ cart: updatedCart });
+            removeFromCart: (cartKey) => {
+                const { cart } = get();
+                const updatedCart = cart.filter((item) => item.cartKey !== cartKey);
+                const totals = calculateTotals(updatedCart);
+                set({ cart: updatedCart, ...totals });
+            },
 
-      // Recalcula totales
-      set({
-        totalItems: updatedCart.reduce((sum, item) => sum + item.quantity, 0),
-        totalPrice: updatedCart.reduce((sum, item) => sum + item.retail_price * item.quantity, 0),
-      });
-      Cookies.set("cart", JSON.stringify(updatedCart));
-    }
-  },
+            updateQuantity: (cartKey, newQuantity) => {
+                const { cart, removeFromCart } = get();
 
-  clearCart: () => {
-    set({ cart: [] });
-    set({ totalItems: 0 });
-    set({ totalPrice: 0 });
-    Cookies.remove("cart");
-  },
+                if (newQuantity <= 0) {
+                    removeFromCart(cartKey);
+                    return;
+                }
 
-}));
+                const updatedCart = cart.map((item) =>
+                    item.cartKey === cartKey 
+                        ? { ...item, quantity: newQuantity } 
+                        : item
+                );
+                
+                const totals = calculateTotals(updatedCart);
+                set({ cart: updatedCart, ...totals });
+            },
+
+            clearCart: () => {
+                set({ cart: [], totalItems: 0, totalPrice: 0 });
+            },
+            
+            getItemByKey: (cartKey) => {
+                return get().cart.find((item) => item.cartKey === cartKey);
+            },
+            
+            isInCart: (productId, variantId) => {
+                const cartKey = generateCartKey(productId, variantId);
+                return get().cart.some((item) => item.cartKey === cartKey);
+            },
+        }),
+        {
+            name: 'cart-storage',
+            storage: createJSONStorage(() => localStorage),
+        }
+    )
+);
 
 export default useCartStore;

@@ -16,7 +16,7 @@ interface UpdateCategoryDTO {
 }
 
 /**
- * Get all categories
+ * Get all categories (public)
  * GET /categories/get/all
  */
 export async function getcategories(): Promise<Category[]> {
@@ -42,20 +42,30 @@ export async function getcategories(): Promise<Category[]> {
 }
 
 /**
- * Create a new category
+ * Create a new category (requires Editor+ role)
  * POST /categories/create
  */
-export async function createCategory({ name, description }: CreateCategoryDTO): Promise<Category> {
+export async function createCategory(
+    { name, description }: CreateCategoryDTO, 
+    token: string
+): Promise<Category> {
     const response = await fetch(`${apiUrl}/categories/create`, {
         method: 'POST',
         cache: 'no-store',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({ name, description })
     });
 
     if (!response.ok) {
+        if (response.status === 401) {
+            throw new Error('Sesión expirada. Inicia sesión nuevamente.');
+        }
+        if (response.status === 403) {
+            throw new Error('No tienes permisos para crear categorías.');
+        }
         const error = await response.json().catch(() => ({ detail: 'Unknown error' }));
         throw new Error(error.detail || 'Create category failed');
     }
@@ -64,20 +74,31 @@ export async function createCategory({ name, description }: CreateCategoryDTO): 
 }
 
 /**
- * Update a category
+ * Update a category (requires Editor+ role)
  * PUT /categories/update?category_id={id}
  */
-export async function updateCategory(categoryId: number, data: UpdateCategoryDTO): Promise<Category> {
+export async function updateCategory(
+    categoryId: number, 
+    data: UpdateCategoryDTO,
+    token: string
+): Promise<Category> {
     const response = await fetch(`${apiUrl}/categories/update?category_id=${categoryId}`, {
         method: 'PUT',
         cache: 'no-store',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(data)
     });
 
     if (!response.ok) {
+        if (response.status === 401) {
+            throw new Error('Sesión expirada. Inicia sesión nuevamente.');
+        }
+        if (response.status === 403) {
+            throw new Error('No tienes permisos para editar categorías.');
+        }
         const error = await response.json().catch(() => ({ detail: 'Unknown error' }));
         throw new Error(error.detail || 'Update category failed');
     }
@@ -86,19 +107,26 @@ export async function updateCategory(categoryId: number, data: UpdateCategoryDTO
 }
 
 /**
- * Delete a category
+ * Delete a category (requires Admin+ role)
  * DELETE /categories/delete?category_id={id}
  */
-export async function deleteCategory(categoryId: number): Promise<{ msg: string }> {
+export async function deleteCategory(categoryId: number, token: string): Promise<{ msg: string }> {
     const response = await fetch(`${apiUrl}/categories/delete?category_id=${categoryId}`, {
         method: 'DELETE',
         cache: 'no-store',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
         }
     });
 
     if (!response.ok) {
+        if (response.status === 401) {
+            throw new Error('Sesión expirada. Inicia sesión nuevamente.');
+        }
+        if (response.status === 403) {
+            throw new Error('No tienes permisos para eliminar categorías. Se requiere rol Admin o superior.');
+        }
         const error = await response.json().catch(() => ({ detail: 'Unknown error' }));
         throw new Error(error.detail || 'Delete category failed');
     }
