@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -10,10 +10,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Eye, EyeOff, Lock, User, Loader2, AlertCircle, ShieldCheck } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
-import { login, getCurrentAdmin, saveSession, AuthError } from "@/services/auth";
+import { useAuth } from "@/contexts/AuthContext";
+import { AuthError } from "@/services/auth";
 
 export default function AdminLoginPage() {
     const router = useRouter();
+    const { login, isAuthenticated } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -22,36 +24,28 @@ export default function AdminLoginPage() {
         password: "",
     });
 
+    // Si ya está autenticado, redirigir al admin
+    useEffect(() => {
+        if (isAuthenticated) {
+            router.push('/admin');
+        }
+    }, [isAuthenticated, router]);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
         setError(null);
 
         try {
-            // Intentar login con la API
-            const response = await login(credentials.identifier, credentials.password);
-            
-            // Obtener información del usuario
-            let user = null;
-            try {
-                user = await getCurrentAdmin(response.access_token);
-            } catch (userError) {
-                console.warn('No se pudo obtener información del usuario:', userError);
-            }
-
-            // Guardar sesión
-            saveSession(response.access_token, user);
+            // Usar el login del contexto que maneja todo
+            await login(credentials.identifier, credentials.password);
             
             toast({
                 title: "¡Bienvenido!",
-                description: user 
-                    ? `Inicio de sesión exitoso como ${user.username} (${user.role})`
-                    : "Inicio de sesión exitoso",
+                description: "Inicio de sesión exitoso. Redirigiendo...",
             });
             
-            router.push("/admin");
-            router.refresh();
-            
+            // La redirección se maneja en el contexto
         } catch (err) {
             console.error('Error de login:', err);
             

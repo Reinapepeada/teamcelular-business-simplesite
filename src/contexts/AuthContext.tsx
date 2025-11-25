@@ -19,7 +19,7 @@ interface AuthContextType {
     token: string | null;
     isLoading: boolean;
     isAuthenticated: boolean;
-    login: (username: string, password: string) => Promise<void>;
+    login: (identifier: string, password: string) => Promise<void>;
     logout: () => void;
     refreshUser: () => Promise<void>;
     hasRole: (role: 'SUPER_ADMIN' | 'ADMIN' | 'EDITOR') => boolean;
@@ -69,12 +69,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }, [checkSession]);
 
     // Login
-    const login = async (username: string, password: string) => {
+    const login = async (identifier: string, password: string) => {
         setIsLoading(true);
         
         try {
             // Llamar a la API de login
-            const response = await apiLogin(username, password);
+            const response = await apiLogin(identifier, password);
             const accessToken = response.access_token;
             
             // Obtener información del usuario
@@ -90,11 +90,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
             saveSession(accessToken, adminUser);
             setToken(accessToken);
             setUser(adminUser);
-            
-            // Redirigir al dashboard
-            router.push('/admin');
-        } finally {
             setIsLoading(false);
+            
+            // Pequeño delay para asegurar que el estado se actualice
+            await new Promise(resolve => setTimeout(resolve, 100));
+            
+            // Redirigir al dashboard usando window.location para forzar recarga completa
+            window.location.href = '/admin';
+        } catch (error) {
+            setIsLoading(false);
+            throw error;
         }
     };
 

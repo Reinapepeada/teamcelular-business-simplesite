@@ -13,23 +13,14 @@ import { PlusCircle } from 'lucide-react'
 // creaters modals
 import CreateBrandModal from "@/components/modals/create-brand-modal"
 import CreateCategoryModal from "@/components/modals/create-category-modal"
-import CreateProviderModal from "@/components/modals/create-provider-modal"
-
 
 // server actions
 import { useEffect, useState } from 'react'
 import { getbrands } from '@/services/brands';
 import { getcategories } from '@/services/categories';
-import { getproviders } from '@/services/providers';
 import { createProduct } from '@/services/products'
 import { redirect } from 'next/navigation'
 import type { Brand, Category } from '@/app/tienda/product';
-
-// interfaces
-interface Provider {
-  id: number;
-  name: string;
-}
 
 const formSchema = z.object({
   serial_number: z.string()
@@ -59,23 +50,17 @@ const formSchema = z.object({
   }),
 
   warranty_time: z.number(),
-  warranty_unit: z.enum(['DAYS', 'WEEKS', 'MONTHS', 'YEARS']),
+  warranty_unit: z.enum(['DAYS', 'MONTHS', 'YEARS']),
   cost: z.number()
   .gte(1,{
     message: 'Debes indicar el costo del producto'
     }),
-  wholesale_price: z.number().gte(1,{
-    message: 'Debes indicar el precio de venta al por mayor'
-  }),
   retail_price: z.number().gte(1,{
     message: 'Debes indicar el precio de venta al por menor'
   }),
   status: z.enum(['ACTIVE', 'INACTIVE']),
   category_id: z.number().gte(1,{ 
     message: 'Debes seleccionar una categoria'
-  }),
-  provider_id: z.number().gte(1,{
-    message: 'Debes seleccionar un proveedor'
   }),
 })
 
@@ -90,11 +75,9 @@ export default function ProductForm() {
       warranty_time: 0,
       warranty_unit: 'DAYS',
       cost: 0,
-      wholesale_price: 0,
       retail_price: 0,
       status: 'ACTIVE',
       category_id: 0,
-      provider_id: 0,
     },
   })
 
@@ -119,11 +102,9 @@ export default function ProductForm() {
   
   const [brands, setBrands] = useState<Brand[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
-  const [providers, setProviders] = useState<Provider[]>([]);
 
   const [showNewBrandForm, setShowNewBrandForm] = useState(false);
   const [showNewCategoryForm, setShowNewCategoryForm] = useState(false);
-  const [showNewProviderForm, setShowNewProviderForm] = useState(false);
 
   async function fetchBrands() {
       const brands_server  = await getbrands();
@@ -134,23 +115,17 @@ export default function ProductForm() {
       const categories_server  = await getcategories();
       setCategories(categories_server || []);
   }
-  async function fetchProviders() {
-      const providers_server  = await getproviders();
-      setProviders(providers_server || []);
-  }
   
     useEffect(() => {
         fetchCategories();
-        fetchProviders();
         fetchBrands();
-    }, [showNewBrandForm, showNewCategoryForm, showNewProviderForm]);
+    }, [showNewBrandForm, showNewCategoryForm]);
 
 
   return (
     <div className='w-1/2 h-full m-3'>
     {showNewBrandForm && <CreateBrandModal isOpen={showNewBrandForm} setIsOpen={setShowNewBrandForm} />}
     {showNewCategoryForm && <CreateCategoryModal isOpen={showNewCategoryForm} setIsOpen={setShowNewCategoryForm} />}
-    {showNewProviderForm && <CreateProviderModal isOpen={showNewProviderForm} setIsOpen={setShowNewProviderForm} />}
     <Card className="">
       <CardHeader>
         <CardTitle>Product Information</CardTitle>
@@ -260,7 +235,6 @@ export default function ProductForm() {
                       </FormControl>
                       <SelectContent className='bg-background'>
                         <SelectItem value="DAYS">Days</SelectItem>
-                        <SelectItem value="WEEKS">Weeks</SelectItem>
                         <SelectItem value="MONTHS">Months</SelectItem>
                         <SelectItem value="YEARS">Years</SelectItem>
                       </SelectContent>
@@ -271,26 +245,13 @@ export default function ProductForm() {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="cost"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Cost</FormLabel>
-                    <FormControl>
-                      <Input type="number" step="0.01" {...field} onChange={(e) => field.onChange(Number(e.target.value))} />
-                    </FormControl>
-                    <FormMessage className='text-red-700' />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="wholesale_price"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Wholesale Price</FormLabel>
+                    <FormLabel>Costo (interno)</FormLabel>
                     <FormControl>
                       <Input type="number" step="0.01" {...field} onChange={(e) => field.onChange(Number(e.target.value))} />
                     </FormControl>
@@ -303,7 +264,7 @@ export default function ProductForm() {
                 name="retail_price"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Retail Price</FormLabel>
+                    <FormLabel>Precio de Venta</FormLabel>
                     <FormControl>
                       <Input type="number" step="0.01" {...field} onChange={(e) => field.onChange(Number(e.target.value))} />
                     </FormControl>
@@ -313,7 +274,7 @@ export default function ProductForm() {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="status"
@@ -357,35 +318,6 @@ export default function ProductForm() {
                         </Select>
                       </FormControl>
                       <Button type="button" size="icon" onClick={()=>setShowNewCategoryForm(true)}>
-                        <PlusCircle className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    <FormMessage className='text-red-700' />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="provider_id"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Provider</FormLabel>
-                    <div className="flex items-center space-x-2">
-                      <FormControl className="flex-grow">
-                        <Select onValueChange={(value) => field.onChange(Number(value))} defaultValue={field.value.toString()}>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select provider" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent className='bg-background'>
-                            {providers.map((provider: Provider) => (
-                              <SelectItem key={provider.id} value={provider.id.toString()}>{provider.name}</SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-                      <Button type="button" size="icon" onClick={()=>setShowNewProviderForm(true)}>
                         <PlusCircle className="h-4 w-4" />
                       </Button>
                     </div>

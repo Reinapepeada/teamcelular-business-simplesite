@@ -62,7 +62,7 @@ const formSchema = z.object({
     brand_id: z.number().optional().nullable(),
     category_id: z.number().optional().nullable(),
     warranty_time: z.number().optional().nullable(),
-    warranty_unit: z.enum(["DAYS", "WEEKS", "MONTHS", "YEARS"]).optional().nullable(),
+    warranty_unit: z.enum(["DAYS", "MONTHS", "YEARS"]).optional().nullable(),
     cost: z.number().min(0, "Debe ser positivo"),
     retail_price: z.number().min(0, "Debe ser positivo"),
     status: z.enum(["ACTIVE", "INACTIVE", "DISCONTINUED"]),
