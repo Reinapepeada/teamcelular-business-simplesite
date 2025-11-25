@@ -103,6 +103,7 @@ export default function ProductVariantForm({
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [branches, setBranches] = useState<Branch[]>([]);
     const [showNewBranch, setShowNewbranch] = useState(false);
+    const [selectedBranchId, setSelectedBranchId] = useState<number>(0);
 
     useEffect(() => {
         async function fetchBranches() {
@@ -147,11 +148,13 @@ export default function ProductVariantForm({
     };
 
     const handleSelectBranchChange = (branch_id: string) => {
+        const id = parseInt(branch_id);
+        setSelectedBranchId(id);
         // en todas las variantes se coloca el mismo branch
         setVariants((prevVariants) =>
             prevVariants.map((variant) => ({
                 ...variant,
-                branch_id: parseInt(branch_id),
+                branch_id: id,
             }))
         );
     };
@@ -167,7 +170,7 @@ export default function ProductVariantForm({
     };
 
     const addVariant = () => {
-        const newVariant = emptyVariant(productId);
+        const newVariant = { ...emptyVariant(productId), branch_id: selectedBranchId };
         console.log("Adding variant:", newVariant);
         setVariants((prev) => [...prev, newVariant]);
         setEditingVariantId(newVariant.tempId);
@@ -187,6 +190,14 @@ export default function ProductVariantForm({
         setIsSubmitting(true);
 
         try {
+            if (variants.length === 0) {
+                throw new Error("Please add at least one variant");
+            }
+
+            if (variants.some(v => !v.branch_id || v.branch_id === 0)) {
+                throw new Error("Please select a branch for all variants");
+            }
+
             const variantsToSubmit = variants.map(
                 ({ tempId, ...rest }) => rest
             );
