@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -270,12 +271,13 @@ export default function AdminDashboard() {
                                         key={product.id}
                                         className="flex items-center gap-4 p-3 rounded-lg hover:bg-accent/50 transition-colors"
                                     >
-                                        <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center overflow-hidden">
+                                        <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center overflow-hidden relative">
                                             {product.variants?.[0]?.images?.[0]?.image_url ? (
-                                                <img
+                                                <Image
                                                     src={product.variants[0].images[0].image_url}
                                                     alt={product.name}
-                                                    className="w-full h-full object-cover"
+                                                    fill
+                                                    className="object-cover"
                                                 />
                                             ) : (
                                                 <Package className="w-6 h-6 text-muted-foreground" />

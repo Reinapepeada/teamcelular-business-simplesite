@@ -188,7 +188,7 @@ export function withAuth<P extends object>(
                     router.push('/admin'); // Redirigir a dashboard si no tiene permisos
                 }
             }
-        }, [isAuthenticated, isLoading, router, requiredRole, hasRole]);
+        }, [isAuthenticated, isLoading, router, hasRole]);
         
         if (isLoading) {
             return (

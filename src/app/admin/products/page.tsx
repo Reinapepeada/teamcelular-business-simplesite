@@ -352,12 +352,13 @@ export default function ProductsListPage() {
                                                     className="group"
                                                 >
                                                     <TableCell>
-                                                        <div className="w-12 h-12 rounded-lg bg-muted overflow-hidden">
+                                                        <div className="w-12 h-12 rounded-lg bg-muted overflow-hidden relative">
                                                             {product.variants?.[0]?.images?.[0]?.image_url ? (
-                                                                <img
+                                                                <Image
                                                                     src={product.variants[0].images[0].image_url}
                                                                     alt={product.name}
-                                                                    className="w-full h-full object-cover"
+                                                                    fill
+                                                                    className="object-cover"
                                                                 />
                                                             ) : (
                                                                 <div className="w-full h-full flex items-center justify-center">
@@ -443,12 +444,13 @@ export default function ProductsListPage() {
                                     <Card key={product.id}>
                                         <CardContent className="p-4">
                                             <div className="flex gap-4">
-                                                <div className="w-16 h-16 rounded-lg bg-muted overflow-hidden flex-shrink-0">
+                                                <div className="w-16 h-16 rounded-lg bg-muted overflow-hidden flex-shrink-0 relative">
                                                     {product.variants?.[0]?.images?.[0]?.image_url ? (
-                                                        <img
+                                                        <Image
                                                             src={product.variants[0].images[0].image_url}
                                                             alt={product.name}
-                                                            className="w-full h-full object-cover"
+                                                            fill
+                                                            className="object-cover"
                                                         />
                                                     ) : (
                                                         <div className="w-full h-full flex items-center justify-center">

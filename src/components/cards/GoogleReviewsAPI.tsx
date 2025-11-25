@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { FaStar, FaGoogle, FaSpinner, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
 interface GoogleReview {
@@ -169,11 +170,14 @@ export default function GoogleReviewsAPI() {
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-3">
                   {review.profile_photo_url ? (
-                    <img
-                      src={review.profile_photo_url}
-                      alt={review.author_name}
-                      className="w-12 h-12 rounded-full object-cover"
-                    />
+                    <div className="w-12 h-12 rounded-full overflow-hidden relative">
+                      <Image
+                        src={review.profile_photo_url}
+                        alt={review.author_name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
                   ) : (
                     <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-lg">
                       {review.author_name.charAt(0)}

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -608,12 +609,13 @@ export default function EditProductPage() {
                                             key={variant.id}
                                             className="flex items-center gap-3 p-3 rounded-lg border bg-card"
                                         >
-                                            <div className="w-10 h-10 rounded bg-muted flex items-center justify-center overflow-hidden">
+                                            <div className="w-10 h-10 rounded bg-muted flex items-center justify-center overflow-hidden relative">
                                                 {variant.images?.[0]?.image_url ? (
-                                                    <img
+                                                    <Image
                                                         src={variant.images[0].image_url}
                                                         alt=""
-                                                        className="w-full h-full object-cover"
+                                                        fill
+                                                        className="object-cover"
                                                     />
                                                 ) : (
                                                     <ImageIcon className="w-5 h-5 text-muted-foreground" />
@@ -651,12 +653,13 @@ export default function EditProductPage() {
                             <CardTitle className="text-lg">Vista Previa</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <div className="aspect-square rounded-lg bg-muted mb-4 overflow-hidden">
+                            <div className="aspect-square rounded-lg bg-muted mb-4 overflow-hidden relative">
                                 {product.variants?.[0]?.images?.[0]?.image_url ? (
-                                    <img
+                                    <Image
                                         src={product.variants[0].images[0].image_url}
                                         alt={product.name}
-                                        className="w-full h-full object-contain"
+                                        fill
+                                        className="object-contain"
                                     />
                                 ) : (
                                     <div className="w-full h-full flex items-center justify-center">
