@@ -113,14 +113,14 @@ function ProductsCardsStore({
                               key={product.id}
                               className="p-4 shadow rounded-lg border flex flex-col items-start">
                               <Link
-                                  href={`/product/${product.id}`}
+                                  href={`/tienda/${product.id}`}
                                   className="w-full">
                                   <motion.div
                                       whileHover={{ scale: 1.05 }}
                                       className="w-full h-48 flex items-center justify-center overflow-hidden">
                                       <Image
                                           src={
-                                              product?.variants[0]?.images[0]
+                                              product?.variants?.[0]?.images?.[0]
                                                   ?.image_url ||
                                               "/placeholder.jpg"
                                           }
@@ -180,9 +180,9 @@ function ProductsCardsStore({
                                       </div>
 
                                       {/* Escasez */}
-                                      {product.stock < 10 && (
+                                      {product.variants && product.variants.reduce((total, v) => total + (v.stock || 0), 0) < 10 && product.variants.reduce((total, v) => total + (v.stock || 0), 0) > 0 && (
                                           <p className="text-sm text-yellow-500 font-bold mx-1 animate-pulse">
-                                              ¡Últimas {product.stock} unidades!
+                                              ¡Últimas {product.variants.reduce((total, v) => total + (v.stock || 0), 0)} unidades!
                                           </p>
                                       )}
                                       {/* Calificación
@@ -201,18 +201,22 @@ function ProductsCardsStore({
                                     </div> */}
                                       {/* Categoría y marca */}
                                       <div className="flex flex-wrap gap-1 mt-1">
-                                          <Chip
-                                              variant="dot"
-                                              color="secondary"
-                                              className="my-1">
-                                              {product.category.name}
-                                          </Chip>
-                                          <Chip
-                                              variant="flat"
-                                              color="warning"
-                                              className="my-1">
-                                              {product.brand.name}
-                                          </Chip>
+                                          {product.category && (
+                                              <Chip
+                                                  variant="dot"
+                                                  color="secondary"
+                                                  className="my-1">
+                                                  {product.category.name}
+                                              </Chip>
+                                          )}
+                                          {product.brand && (
+                                              <Chip
+                                                  variant="flat"
+                                                  color="warning"
+                                                  className="my-1">
+                                                  {product.brand.name}
+                                              </Chip>
+                                          )}
                                       </div>
                                   </div>
                               </Link>

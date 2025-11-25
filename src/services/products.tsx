@@ -1,217 +1,321 @@
 import { redirect } from 'next/navigation'
+import type { 
+    Product, 
+    ProductsPaginatedResponse, 
+    PriceRangeResponse,
+    CreateProductDTO,
+    UpdateProductDTO,
+    CreateVariantDTO,
+    UpdateVariantDTO,
+    ProductVariant
+} from '@/app/tienda/product'
 
-// traer las varaiables de entorno
-
+// Environment variables
 export const imgBBKey = process.env.NEXT_PUBLIC_IMGBB_KEY
 export const apiUrl = process.env.NEXT_PUBLIC_API_URL 
 
-export async function createProduct(formData:any) {
-    console.log(JSON.stringify(formData));
-    // Aqui se envian aca se hace la req
-    console.log("llamando a la api")
+// Custom error class for API errors
+class ApiError extends Error {
+    constructor(public status: number, message: string) {
+        super(message);
+        this.name = 'ApiError';
+    }
+}
+
+// Helper function for API requests
+async function apiRequest<T>(
+    endpoint: string, 
+    options: RequestInit = {}
+): Promise<T> {
+    const url = `${apiUrl}${endpoint}`;
+    
+    const defaultOptions: RequestInit = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        cache: 'no-store',
+    };
+
+    const response = await fetch(url, { ...defaultOptions, ...options });
+    
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ detail: 'Unknown error' }));
+        throw new ApiError(response.status, errorData.detail || `HTTP error! status: ${response.status}`);
+    }
+
+    return response.json();
+}
+
+// ============================================
+// PRODUCTS ENDPOINTS
+// ============================================
+
+/**
+ * Create a new product
+ * POST /products/create
+ */
+export async function createProduct(formData: CreateProductDTO): Promise<Product> {
+    console.log('Creating product:', JSON.stringify(formData));
     
     try {
-        let response = await fetch(`${apiUrl}/products/create`, {
+        const data = await apiRequest<Product>('/products/create', {
             method: 'POST',
             body: JSON.stringify(formData),
-            cache: 'no-store',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*', // CORS header
-            },
         });
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        let data = await response.json();
         console.log('Product created successfully:', data);
         return data;
     } catch (error) {
         console.error('Error creating product:', error);
+        throw error;
     }
 }
 
-// traer el maximo y minimo de precio de los productos
-export async function getMinMaxPrice() {
-    // Aqui se envian aca se hace la req
-    let response = await fetch(`${apiUrl}/products/min-max-price`
-        ,
-        { method: 'GET',
-            // cache: 'no-store', 
-            headers: { 
-                'Content-Type': 'application/json',
-            }
-        });
-        const data = await response.json();
-        if (data == undefined) {
-            throw Error(data.message || "Get min max price failed");
-        } else {
-            return data;
-        }
-}
-
-export async function getProductById (product_id:number) {
-    console.log(product_id);
-    // Aqui se envian aca se hace la req
-    
-    let response = await fetch(`${apiUrl}/products/get?product_id=${product_id}`
-        ,
-        { method: 'GET',
-            cache: 'no-store', 
-            headers: { 
-                'Content-Type': 'application/json',
-            }
-        });
-        const data = await response.json();
-        if (data.getProductById == undefined) {
-            throw Error(data.message || "Get product failed");
-        } else {
-            return data.getProductById;
-        }
-}
-
-export async function getAllProductsPaginated (page:any=NaN, size:any=NaN,params:any) {
-    console.log(page, size);
-    // se convierte a json
-        
-    let response = await fetch(`${apiUrl}/products/?page=${page}&size=${size}&${params}`
-        ,
-        { method: 'GET',
-            cache: 'no-store',
-            headers: { 
-                'Content-Type': 'application/json',
-            }
-        });
-        const data = await response.json();
-        console.log(data)
-        if (data.products == undefined) {
-            throw Error(data.message || "Get all products failed");
-        } else {
-            return data;
-        }
-}
-
-export async function updateProduct (formData:any) {
-    console.log(JSON.stringify(formData));
-    // Aqui se envian aca se hace la req
-    
-    let response = await fetch(`${apiUrl}/products/update?product_id=${formData.product_id}`
-        ,
-        { method: 'PUT',
-            body: JSON.stringify(formData),
-            cache: 'no-store', 
-            headers: { 
-                'Content-Type': 'application/json',
-            }
-        });
-        const data = await response.json();
-        if (data.updateProduct == undefined) {
-            throw Error(data.message || "Update product failed");
-        } else {
-            redirect("/products");
-        }
-}
-
-export async function deleteProduct (formData:any) {
-    console.log(JSON.stringify(formData));
-    // Aqui se envian aca se hace la req
-    
-    let response = await fetch(`${apiUrl}/products/delete?product_id=${formData.product_id}`
-        ,
-        { method: 'DELETE',
-            body: JSON.stringify(formData),
-            cache: 'no-store', 
-            headers: { 
-                'Content-Type': 'application/json',
-            }
-        });
-        const data = await response.json();
-        if (data.deleteProduct == undefined) {
-            throw Error(data.message || "Delete product failed");
-        } else {
-            redirect("/products");
-        }
-}
-
-type variants={
-    "variants": [
-      {
-        "product_id": number,
-        "color": string,
-        "size": string,
-        "size_unit" : string,
-        "unit" : string,
-        "branch_id": number,
-        "stock": number,
-        "min_stock": number,
-        "images": [string]
-      }
-    ]
-  }
-
-export async function createProductVariants(formData:any) {
-    console.log(JSON.stringify(formData));
-    // Aqui se envian aca se hace la req
+/**
+ * Get product by ID
+ * GET /products/get/{product_id}
+ */
+export async function getProductById(productId: number): Promise<Product> {
+    console.log('Fetching product:', productId);
     
     try {
-        let response = await fetch(`${apiUrl}/products/create/variant`, {
-            method: 'POST',
-            body: JSON.stringify(formData),
-            cache: 'no-store', 
-            headers: { 
-                'Content-Type': 'application/json',
-               'AccessControlAllowOrigin': '*'
-            }
+        const data = await apiRequest<Product>(`/products/get/${productId}`, {
+            method: 'GET',
         });
-        const data = await response.json();
-        // if (!data[0].id) {
-        //     throw Error(data.message || "Create product variants failed");
-        // } 
+        return data;
+    } catch (error) {
+        console.error('Error fetching product:', error);
+        throw error;
+    }
+}
+
+/**
+ * Get all products (non-paginated)
+ * GET /products/all
+ */
+export async function getAllProducts(): Promise<Product[]> {
+    try {
+        const data = await apiRequest<Product[]>('/products/all', {
+            method: 'GET',
+        });
+        return data;
+    } catch (error) {
+        console.error('Error fetching all products:', error);
+        throw error;
+    }
+}
+
+/**
+ * Get products with pagination and filters
+ * GET /products/
+ * 
+ * @param page - Page number (starts at 1)
+ * @param size - Items per page (max 100)
+ * @param params - Query string with filters (categories, brands, minPrice, maxPrice)
+ */
+export async function getAllProductsPaginated(
+    page: number = 1, 
+    size: number = 10, 
+    params: string = ''
+): Promise<ProductsPaginatedResponse> {
+    console.log('Fetching paginated products:', { page, size, params });
+    
+    try {
+        const queryParams = new URLSearchParams();
+        queryParams.set('page', String(page));
+        queryParams.set('size', String(size));
+        
+        // Append additional params if provided
+        if (params) {
+            const additionalParams = new URLSearchParams(params);
+            additionalParams.forEach((value, key) => {
+                if (value) queryParams.set(key, value);
+            });
+        }
+
+        const data = await apiRequest<ProductsPaginatedResponse>(
+            `/products/?${queryParams.toString()}`,
+            { method: 'GET' }
+        );
+        
+        console.log('Products fetched:', data);
+        return data;
+    } catch (error) {
+        console.error('Error fetching paginated products:', error);
+        // Return empty response on error
+        return { products: [], total: 0, page: 1, size: size, pages: 0 };
+    }
+}
+
+/**
+ * Get min and max price range
+ * GET /products/min-max-price
+ */
+export async function getMinMaxPrice(): Promise<{ min: number; max: number }> {
+    try {
+        const data = await apiRequest<PriceRangeResponse>('/products/min-max-price', {
+            method: 'GET',
+        });
+        return {
+            min: parseFloat(data.min) || 0,
+            max: parseFloat(data.max) || 10000,
+        };
+    } catch (error) {
+        console.error('Error fetching price range:', error);
+        return { min: 0, max: 10000 };
+    }
+}
+
+/**
+ * Update a product
+ * PUT /products/update?product_id={id}
+ */
+export async function updateProduct(
+    productId: number, 
+    formData: UpdateProductDTO
+): Promise<Product> {
+    console.log('Updating product:', productId, JSON.stringify(formData));
+    
+    try {
+        const data = await apiRequest<Product>(
+            `/products/update?product_id=${productId}`,
+            {
+                method: 'PUT',
+                body: JSON.stringify(formData),
+            }
+        );
+        return data;
+    } catch (error) {
+        console.error('Error updating product:', error);
+        throw error;
+    }
+}
+
+/**
+ * Delete a product
+ * DELETE /products/delete?product_id={id}
+ */
+export async function deleteProduct(productId: number): Promise<{ msg: string }> {
+    console.log('Deleting product:', productId);
+    
+    try {
+        const data = await apiRequest<{ msg: string }>(
+            `/products/delete?product_id=${productId}`,
+            { method: 'DELETE' }
+        );
+        return data;
+    } catch (error) {
+        console.error('Error deleting product:', error);
+        throw error;
+    }
+}
+
+// ============================================
+// PRODUCT VARIANTS ENDPOINTS
+// ============================================
+
+/**
+ * Create product variants (batch)
+ * POST /products/create/variant
+ */
+export async function createProductVariants(
+    variants: CreateVariantDTO[]
+): Promise<ProductVariant[]> {
+    console.log('Creating variants:', JSON.stringify({ variants }));
+    
+    try {
+        const data = await apiRequest<ProductVariant[]>('/products/create/variant', {
+            method: 'POST',
+            body: JSON.stringify({ variants }),
+        });
+        console.log('Variants created successfully:', data);
         return data;
     } catch (error) {
         console.error('Error creating product variants:', error);
-        throw error; // Rethrow the error to handle it in the calling function
+        throw error;
     }
 }
-type variantUpdate = {
-    color?: string,
-    size?: string,
-    size_unit?: string,
-    unit?: string,
-    branch_id?: number,
-    stock?: number,
-    min_stock?: number,
-    images?: string[]
-}
 
-export async function updateProductVariant (formData:variantUpdate) {
-    console.log(JSON.stringify(formData));
-    // Aqui se envian aca se hace la req
+/**
+ * Get variants by product ID
+ * GET /products/get/variant?product_id={id}
+ */
+export async function getVariantsByProductId(productId: number): Promise<ProductVariant[]> {
+    console.log('Fetching variants for product:', productId);
     
-    let response = await fetch(`${apiUrl}/products/update/variant`
-        ,
-        { method: 'PUT',
-            body: JSON.stringify(formData),
-            cache: 'no-store', 
-            headers: { 
-                'Content-Type': 'application/json',
-            }
-        });
-        const data = await response.json();
-        if (data.updateProductVariant == undefined) {
-            throw Error(data.message || "Update product variant failed");
-        } else {
-            redirect("/products");
-        }
+    try {
+        const data = await apiRequest<ProductVariant[]>(
+            `/products/get/variant?product_id=${productId}`,
+            { method: 'GET' }
+        );
+        return data;
+    } catch (error) {
+        console.error('Error fetching variants:', error);
+        throw error;
+    }
 }
 
+/**
+ * Update a variant
+ * PUT /products/update/variant?variant_id={id}
+ */
+export async function updateProductVariant(
+    variantId: number,
+    formData: UpdateVariantDTO
+): Promise<ProductVariant> {
+    console.log('Updating variant:', variantId, JSON.stringify(formData));
+    
+    try {
+        const data = await apiRequest<ProductVariant>(
+            `/products/update/variant?variant_id=${variantId}`,
+            {
+                method: 'PUT',
+                body: JSON.stringify(formData),
+            }
+        );
+        return data;
+    } catch (error) {
+        console.error('Error updating variant:', error);
+        throw error;
+    }
+}
+
+/**
+ * Delete a variant
+ * DELETE /products/delete/variant?variant_id={id}
+ */
+export async function deleteProductVariant(variantId: number): Promise<{ msg: string }> {
+    console.log('Deleting variant:', variantId);
+    
+    try {
+        const data = await apiRequest<{ msg: string }>(
+            `/products/delete/variant?variant_id=${variantId}`,
+            { method: 'DELETE' }
+        );
+        return data;
+    } catch (error) {
+        console.error('Error deleting variant:', error);
+        throw error;
+    }
+}
+
+// ============================================
+// IMAGE UPLOAD
+// ============================================
+
+/**
+ * Upload images to imgBB
+ */
 export async function uploadImagesToimgBB(images: File[]): Promise<string[]> {
+    if (!imgBBKey) {
+        throw new Error('ImgBB API key not configured');
+    }
+
     try {
         const uploadedImages = await Promise.all(
             images.map(async (image) => {
                 const formData = new FormData();
                 formData.append("image", image);
+                
                 const response = await fetch(
                     `https://api.imgbb.com/1/upload?key=${imgBBKey}`,
                     {
@@ -219,14 +323,85 @@ export async function uploadImagesToimgBB(images: File[]): Promise<string[]> {
                         body: formData,
                     }
                 );
+                
+                if (!response.ok) {
+                    throw new Error(`ImgBB upload failed: ${response.status}`);
+                }
+                
                 const data = await response.json();
                 return data.data.url;
             })
         );
+        
         console.log("Images uploaded successfully:", uploadedImages);
-        return uploadedImages; // Return the uploaded images URLs
+        return uploadedImages;
     } catch (error) {
         console.error("Error uploading images to imgBB:", error);
-        throw error; // Rethrow the error to handle it in the calling function
+        throw error;
     }
+}
+
+// ============================================
+// UTILITY FUNCTIONS
+// ============================================
+
+/**
+ * Calculate total stock from all variants
+ */
+export function calculateTotalStock(variants: ProductVariant[]): number {
+    return variants.reduce((total, variant) => total + (variant.stock || 0), 0);
+}
+
+/**
+ * Get primary image from product variants
+ */
+export function getPrimaryImage(product: Product): string {
+    const firstVariantWithImage = product.variants?.find(
+        v => v.images && v.images.length > 0
+    );
+    return firstVariantWithImage?.images[0]?.image_url || '/placeholder.jpg';
+}
+
+/**
+ * Get all images from product variants
+ */
+export function getAllProductImages(product: Product): string[] {
+    const images: string[] = [];
+    product.variants?.forEach(variant => {
+        variant.images?.forEach(img => {
+            if (img.image_url && !images.includes(img.image_url)) {
+                images.push(img.image_url);
+            }
+        });
+    });
+    return images.length > 0 ? images : ['/placeholder.jpg'];
+}
+
+/**
+ * Format price for display
+ */
+export function formatPrice(price: number): string {
+    return price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+/**
+ * Get available colors from variants
+ */
+export function getAvailableColors(variants: ProductVariant[]): string[] {
+    const colors = new Set<string>();
+    variants.forEach(v => {
+        if (v.color) colors.add(v.color);
+    });
+    return Array.from(colors);
+}
+
+/**
+ * Get available sizes from variants
+ */
+export function getAvailableSizes(variants: ProductVariant[]): string[] {
+    const sizes = new Set<string>();
+    variants.forEach(v => {
+        if (v.size) sizes.add(v.size);
+    });
+    return Array.from(sizes);
 }
