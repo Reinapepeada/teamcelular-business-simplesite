@@ -36,19 +36,18 @@ export class AuthError extends Error {
 
 /**
  * Login usando la API real
- * POST /admin/login con form-data
+ * POST /admin/login con JSON body
  */
-export async function login(username: string, password: string): Promise<LoginResponse> {
-    const formData = new URLSearchParams();
-    formData.append('username', username);
-    formData.append('password', password);
-
+export async function login(identifier: string, password: string): Promise<LoginResponse> {
     const response = await fetch(`${API_URL}/admin/login`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
         },
-        body: formData.toString(),
+        body: JSON.stringify({
+            identifier,
+            password,
+        }),
     });
 
     if (!response.ok) {
