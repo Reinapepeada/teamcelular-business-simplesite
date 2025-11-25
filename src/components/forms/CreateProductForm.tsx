@@ -9,7 +9,17 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { PlusCircle } from 'lucide-react'
+import { PlusCircle, Loader2 } from 'lucide-react'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { useToast } from "@/hooks/use-toast"
+
 // creaters modals
 import CreateBrandModal from "@/components/modals/create-brand-modal"
 import CreateCategoryModal from "@/components/modals/create-category-modal"
@@ -19,7 +29,7 @@ import { useEffect, useState } from 'react'
 import { getbrands } from '@/services/brands';
 import { getcategories } from '@/services/categories';
 import { createProduct } from '@/services/products'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import type { Brand, Category } from '@/app/tienda/product';
 
 const formSchema = z.object({
@@ -65,6 +75,12 @@ const formSchema = z.object({
 })
 
 export default function ProductForm() {
+  const router = useRouter()
+  const { toast } = useToast()
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [createdProductId, setCreatedProductId] = useState<number | null>(null)
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -82,22 +98,37 @@ export default function ProductForm() {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true)
     try {
       const response = await createProduct(values)
-      console.log(response)
-      
-      // Si llegamos aquí, el producto se creó exitosamente
-      const variantOption = confirm("¿deseas agregar variantes al producto?")
-      if (variantOption) {
-        redirect(`/admin/create-variants/${response.id}`)
-      }
-      else {
-        redirect("/admin")
-      }
+      setCreatedProductId(response.id)
+      setShowSuccessDialog(true)
     } catch (error) {
       console.error("Error creating product:", error)
-      alert(error instanceof Error ? error.message : "Error al crear el producto")
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: error instanceof Error ? error.message : "Error al crear el producto",
+      })
+    } finally {
+      setIsSubmitting(false)
     }
+  }
+  
+  const handleAddVariants = () => {
+    if (createdProductId) {
+      router.push(`/admin/create-variants/${createdProductId}`)
+    }
+  }
+
+  const handleCreateAnother = () => {
+    form.reset()
+    setCreatedProductId(null)
+    setShowSuccessDialog(false)
+  }
+
+  const handleGoToList = () => {
+    router.push("/admin/products")
   }
   
   const [brands, setBrands] = useState<Brand[]>([]);
@@ -123,12 +154,38 @@ export default function ProductForm() {
 
 
   return (
-    <div className='w-1/2 h-full m-3'>
+    <div className='w-full max-w-4xl mx-auto p-4'>
     {showNewBrandForm && <CreateBrandModal isOpen={showNewBrandForm} setIsOpen={setShowNewBrandForm} />}
     {showNewCategoryForm && <CreateCategoryModal isOpen={showNewCategoryForm} setIsOpen={setShowNewCategoryForm} />}
+    
+    <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>¡Producto creado exitosamente!</DialogTitle>
+          <DialogDescription>
+            El producto se ha guardado correctamente. ¿Qué deseas hacer ahora?
+            <br /><br />
+            <strong>Nota:</strong> Para agregar imágenes al producto, debes crear al menos una variante.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter className="flex-col sm:flex-col gap-2">
+          <Button onClick={handleAddVariants} className="w-full">
+            <PlusCircle className="mr-2 h-4 w-4" />
+            Agregar Variantes e Imágenes
+          </Button>
+          <Button onClick={handleCreateAnother} variant="outline" className="w-full">
+            Crear otro producto
+          </Button>
+          <Button onClick={handleGoToList} variant="ghost" className="w-full">
+            Ir a la lista de productos
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+
     <Card className="">
       <CardHeader>
-        <CardTitle>Product Information</CardTitle>
+        <CardTitle>Información del Producto</CardTitle>
       </CardHeader>
       <CardContent className='gap-4'>
         <Form {...form}>
@@ -326,7 +383,16 @@ export default function ProductForm() {
                 )}
               />
             </div>
-            <Button type="submit" className="w-full lg:w-32 flex justify-center ">Submit</Button>
+            <Button type="submit" className="w-full lg:w-32 flex justify-center" disabled={isSubmitting}>
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Guardando...
+                </>
+              ) : (
+                "Crear Producto"
+              )}
+            </Button>
           </form>
         </Form>
       </CardContent>

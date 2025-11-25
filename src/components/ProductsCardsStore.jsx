@@ -136,47 +136,15 @@ function ProductsCardsStore({
                                       </h3>
                                       {/* Pricing Section */}
                                       <div className="mx-1">
-                                          {20 > 0 ? (
-                                              <>
-                                                  <p className="text-sm line-through text-gray-400 font-bold">
-                                                      $
-                                                      {product.retail_price
-                                                          .toFixed(0)
-                                                          .replace(
-                                                              /\B(?=(\d{3})+(?!\d))/g,
-                                                              "."
-                                                          )}
-                                                  </p>
-                                                  <p className="text-2xl text-red-600 font-bold">
-                                                      $
-                                                      {(
-                                                          product.retail_price *
-                                                          (1 -
-                                                              20 /
-                                                                  100)
-                                                      )
-                                                          .toFixed(0)
-                                                          .replace(
-                                                              /\B(?=(\d{3})+(?!\d))/g,
-                                                              "."
-                                                          )}
-                                                  </p>
-                                                  <p className="text-sm text-red-400 font-bold mx-1">
-                                                      ¡Descuento del{" "}
-                                                      {20}%!
-                                                  </p>
-                                              </>
-                                          ) : (
-                                              <p className="text-xl font-semibold text-gray-300">
-                                                  $
-                                                  {product.retail_price
-                                                      .toFixed(0)
-                                                      .replace(
-                                                          /\B(?=(\d{3})+(?!\d))/g,
-                                                          "."
-                                                      )}
-                                              </p>
-                                          )}
+                                          <p className="text-xl font-semibold text-gray-300">
+                                              $
+                                              {product.retail_price
+                                                  .toFixed(0)
+                                                  .replace(
+                                                      /\B(?=(\d{3})+(?!\d))/g,
+                                                      "."
+                                                  )}
+                                          </p>
                                       </div>
 
                                       {/* Escasez */}

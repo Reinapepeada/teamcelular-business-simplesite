@@ -199,8 +199,8 @@ export default function ProductDetailPage() {
         );
     }
     
-    // Calculate discount (example: 20% off)
-    const discount = 20;
+    // Calculate discount (example: 0% off)
+    const discount = 0;
     const originalPrice = product.retail_price;
     const discountedPrice = originalPrice * (1 - discount / 100);
     
