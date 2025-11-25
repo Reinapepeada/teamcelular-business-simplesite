@@ -3,12 +3,9 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider} from "./providers";
-import NavbarNUI from "../components/navbars/NavbarNUI";
-import FooterNUI from "@/components/footer/FooterNUI";
+import MainLayout from "@/components/layouts/MainLayout";
 const inter = Inter({ subsets: ["latin"] });
-import BackgroundBeams from "../components/animations/BackgroundMeteors";
 import Plugins from "@/components/vercel/Plugins";
-import StructuredData from "@/components/seo/StructuredData";
 // importo la fuente de google
 
 export const metadata: Metadata = {
@@ -54,12 +51,8 @@ export default function RootLayout({
                 enableSystem={true}
                 disableTransitionOnChange
                 >
-                    <NavbarNUI></NavbarNUI>
-                    <main className="flex justify-center">{children}</main>
-                    <FooterNUI></FooterNUI>
+                    <MainLayout>{children}</MainLayout>
                     <Plugins />
-                    <BackgroundBeams />
-                    <StructuredData />
                 </ThemeProvider>
             </body>
         </html>
