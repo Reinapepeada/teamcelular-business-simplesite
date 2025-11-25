@@ -18,7 +18,7 @@ export default function AdminLoginPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [credentials, setCredentials] = useState({
-        username: "",
+        identifier: "",
         password: "",
     });
 
@@ -29,7 +29,7 @@ export default function AdminLoginPage() {
 
         try {
             // Intentar login con la API
-            const response = await login(credentials.username, credentials.password);
+            const response = await login(credentials.identifier, credentials.password);
             
             // Obtener información del usuario
             let user = null;
@@ -132,20 +132,20 @@ export default function AdminLoginPage() {
                             )}
                             
                             <div className="space-y-2">
-                                <Label htmlFor="username">Usuario</Label>
+                                <Label htmlFor="identifier">Email o Usuario</Label>
                                 <div className="relative">
                                     <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                                     <Input
-                                        id="username"
+                                        id="identifier"
                                         type="text"
-                                        placeholder="Ingresa tu usuario"
+                                        placeholder="correo@ejemplo.com o usuario"
                                         className="pl-10"
-                                        value={credentials.username}
+                                        value={credentials.identifier}
                                         onChange={(e) => {
                                             setError(null);
                                             setCredentials(prev => ({
                                                 ...prev,
-                                                username: e.target.value
+                                                identifier: e.target.value
                                             }));
                                         }}
                                         disabled={isLoading}
