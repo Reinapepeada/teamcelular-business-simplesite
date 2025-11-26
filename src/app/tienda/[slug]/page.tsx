@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import Head from 'next/head';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -37,6 +38,9 @@ import {
     getAvailableSizes,
     calculateTotalStock
 } from '@/services/products';
+import ProductStructuredData from '@/components/seo/ProductStructuredData';
+
+const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || 'https://teamcelular.com';
 import type { Product, ProductVariant } from '@/app/tienda/product';
 import useCartStore from '@/store/cartStore';
 
@@ -205,7 +209,38 @@ export default function ProductDetailPage() {
     const discountedPrice = originalPrice * (1 - discount / 100);
     
     return (
-        <div className="max-w-screen-xl mx-auto px-4 py-8">
+        <>
+            <Head>
+                {product && (
+                    <>
+                        <link rel="canonical" href={`${SITE_URL}/tienda/${product.id}`} />
+                        <meta property="og:type" content="product" />
+                        <meta property="og:title" content={product.name} />
+                        <meta property="og:description" content={product.description || ''} />
+                        <meta property="og:url" content={`${SITE_URL}/tienda/${product.id}`} />
+                        {images && images[0] && (
+                            <meta property="og:image" content={images[0]} />
+                        )}
+                        <meta name="twitter:card" content="summary_large_image" />
+                        <meta name="twitter:title" content={product.name} />
+                        <meta name="twitter:description" content={product.description || ''} />
+                        {images && images[0] && (
+                            <meta name="twitter:image" content={images[0]} />
+                        )}
+
+                        {/* Geo meta tags for local SEO */}
+                        <meta name="geo.region" content="AR-C" />
+                        <meta name="geo.placename" content="Ciudad Autónoma de Buenos Aires" />
+                        <meta name="geo.position" content="-34.597528;-58.403048" />
+                        <meta name="ICBM" content="-34.597528, -58.403048" />
+                    </>
+                )}
+            </Head>
+
+            <div className="max-w-screen-xl mx-auto px-4 py-8">
+                {product && (
+                    <ProductStructuredData product={product} images={images} />
+                )}
             {/* Breadcrumb */}
             <nav className="flex items-center space-x-2 text-sm mb-6">
                 <Link href="/tienda" className="text-muted-foreground hover:text-primary transition-colors">
