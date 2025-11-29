@@ -111,14 +111,20 @@ function ProductsCardsStore({
                           </Card>
                       ))
                     : sortedProducts.map((product) => (
-                          <Card
+                          <Link
                               key={product.id}
-                              className="relative p-4 shadow rounded-lg border flex flex-col items-start cursor-pointer focus:outline-none focus:focus-ring"
+                              href={`/tienda/${product.id}`}
+                              aria-label={`Ver ${product.name}`}
+                              className="block"
                           >
-                              <Link
-                                  href={`/tienda/${product.id}`}
-                                  aria-label={`Ver ${product.name}`}
-                                  className="relative block w-full"
+                              <Card
+                                  className="relative p-4 shadow rounded-lg border flex flex-col items-start cursor-pointer focus:outline-none focus:focus-ring"
+                                  onClick={e => {
+                                      // Si el click es en el botón, no navegar
+                                      if (e.target.closest('button')) {
+                                          e.preventDefault();
+                                      }
+                                  }}
                               >
                                   <motion.div
                                       whileHover={{ scale: 1.05 }}
@@ -180,21 +186,22 @@ function ProductsCardsStore({
                                           )}
                                       </div>
                                   </div>
-                              </Link>
 
-                              <div className="flex justify-center w-full z-20">
-                                  <Button
-                                      onClick={(e) => { e.stopPropagation(); addToCart(product, null, 1); }}
-                                      aria-label={`Agregar ${product.name} al carrito`}
-                                      className="mt-4"
-                                      variant="shadow"
-                                      size="sm"
-                                      color="primary">
-                                      Agregar al
-                                      <ShoppingCart className="h-5 w-5" />
-                                  </Button>
-                              </div>
-                          </Card>
+                                  <div className="flex justify-center w-full z-20">
+                                      <Button
+                                          onClick={e => { e.stopPropagation(); addToCart(product, null, 1); }}
+                                          aria-label={`Agregar ${product.name} al carrito`}
+                                          className="mt-4"
+                                          variant="shadow"
+                                          size="sm"
+                                          color="primary"
+                                      >
+                                          Agregar al
+                                          <ShoppingCart className="h-5 w-5" />
+                                      </Button>
+                                  </div>
+                              </Card>
+                          </Link>
                       ))}
             </div>
             <div className="flex justify-center mt-4">
