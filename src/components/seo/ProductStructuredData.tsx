@@ -19,13 +19,17 @@ export default function ProductStructuredData({ product, images = [] }: ProductS
   if (!product) return null;
 
   const imageUrls = (images || []).map(toAbsolute).filter(Boolean) as string[];
+  const imageObjects = imageUrls.map((u) => ({
+    '@type': 'ImageObject',
+    url: u,
+  }));
   const aggregateRating = (product as any).rating ? {
     "@type": "AggregateRating",
     ratingValue: String((product as any).rating?.value || 4.5),
     reviewCount: String((product as any).rating?.count || 10),
   } : undefined;
 
-  const offers = {
+  const offers: any = {
     "@type": "Offer",
     priceCurrency: "ARS",
     price: String(product.retail_price || 0),
@@ -35,13 +39,18 @@ export default function ProductStructuredData({ product, images = [] }: ProductS
     url: `${SITE_URL}/tienda/${product.id}`,
   };
 
+  // Optional priceValidUntil
+  if (product.price_valid_until) {
+    offers.priceValidUntil = product.price_valid_until;
+  }
+
   const schema: any = {
     "@context": "https://schema.org/",
     "@type": "Product",
     name: product.name,
     description: product.description || undefined,
     sku: product.serial_number || undefined,
-    image: imageUrls.length ? imageUrls : undefined,
+    image: imageObjects.length ? imageObjects : undefined,
     brand: product.brand ? { "@type": "Brand", name: product.brand.name } : undefined,
     offers,
     aggregateRating,
