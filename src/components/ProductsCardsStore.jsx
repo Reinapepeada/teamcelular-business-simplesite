@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { motion } from "framer-motion";
 import Image from "next/image";
 import {
@@ -25,7 +25,7 @@ function ProductsCardsStore({
     isLoading,
     addToCart,
 }) {
-    const router = useRouter();
+    // router not needed when using <Link>
     const [sortBy, setSortBy] = useState(null);
     const [sortedProducts, setSortedProducts] = useState(products);
 
@@ -114,74 +114,73 @@ function ProductsCardsStore({
                           <Card
                               key={product.id}
                               className="relative p-4 shadow rounded-lg border flex flex-col items-start cursor-pointer focus:outline-none focus:focus-ring"
-                              onClick={() => router.push(`/tienda/${product.id}`)}
-                              onKeyDown={(e) => {
-                                  if (e.key === 'Enter') router.push(`/tienda/${product.id}`);
-                              }}
-                              role="button"
-                              tabIndex={0}
-                              aria-label={`Ver ${product.name}`}
                           >
-                              <motion.div
-                                  whileHover={{ scale: 1.05 }}
-                                  className="w-full h-48 flex items-center justify-center overflow-hidden bg-gray-100 dark:bg-gray-800 rounded-md">
-                                  <Image
-                                      src={
-                                          product?.variants?.[0]?.images?.[0]
-                                              ?.image_url ||
-                                          "/placeholder.jpg"
-                                      }
-                                      alt={product.name}
-                                      width={192}
-                                      height={192}
-                                      className="object-contain h-full"
-                                  />
-                              </motion.div>
+                              <Link
+                                  href={`/tienda/${product.id}`}
+                                  aria-label={`Ver ${product.name}`}
+                                  className="relative block w-full"
+                              >
+                                  <motion.div
+                                      whileHover={{ scale: 1.05 }}
+                                      className="w-full h-48 flex items-center justify-center overflow-hidden bg-gray-100 dark:bg-gray-800 rounded-md">
+                                      <Image
+                                          src={
+                                              product?.variants?.[0]?.images?.[0]
+                                                  ?.image_url ||
+                                              "/placeholder.jpg"
+                                          }
+                                          alt={product.name}
+                                          width={192}
+                                          height={192}
+                                          className="object-contain h-full"
+                                      />
+                                  </motion.div>
 
-                              <div className="text-left w-full mt-2 z-10">
-                                  <h3 className="mt-2 mx-1 text-lg font-semibold line-clamp-2">
-                                      {product.name}
-                                  </h3>
-                                  {/* Pricing Section */}
-                                  <div className="mx-1">
-                                      <p className="text-2xl font-bold text-primary">
-                                          $
-                                          {product.retail_price
-                                              .toFixed(0)
-                                              .replace(
-                                                  /\B(?=(\d{3})+(?!\d))/g,
-                                                  "."
-                                              )}
-                                      </p>
-                                  </div>
+                                  <div className="text-left w-full mt-2 z-10">
+                                      <h3 className="mt-2 mx-1 text-lg font-semibold line-clamp-2">
+                                          {product.name}
+                                      </h3>
+                                      {/* Pricing Section */}
+                                      <div className="mx-1">
+                                          <p className="text-2xl font-bold text-primary">
+                                              $
+                                              {product.retail_price
+                                                  .toFixed(0)
+                                                  .replace(
+                                                      /\B(?=(\d{3})+(?!\d))/g,
+                                                      "."
+                                                  )}
+                                          </p>
+                                      </div>
 
-                                  {/* Escasez */}
-                                  {product.variants && product.variants.reduce((total, v) => total + (v.stock || 0), 0) < 10 && product.variants.reduce((total, v) => total + (v.stock || 0), 0) > 0 && (
-                                      <p className="text-sm text-yellow-500 font-bold mx-1 animate-pulse">
-                                          ¡Últimas {product.variants.reduce((total, v) => total + (v.stock || 0), 0)} unidades!
-                                      </p>
-                                  )}
-
-                                  {/* Categoría y marca */}
-                                  <div className="flex flex-wrap gap-1 mt-1">
-                                      {product.category && (
-                                          <Chip
-                                              variant="dot"
-                                              color="secondary"
-                                              className="my-1">
-                                              {product.category.name}
-                                          </Chip>
+                                      {/* Escasez */}
+                                      {product.variants && product.variants.reduce((total, v) => total + (v.stock || 0), 0) < 10 && product.variants.reduce((total, v) => total + (v.stock || 0), 0) > 0 && (
+                                          <p className="text-sm text-yellow-500 font-bold mx-1 animate-pulse">
+                                              ¡Últimas {product.variants.reduce((total, v) => total + (v.stock || 0), 0)} unidades!
+                                          </p>
                                       )}
-                                      {product.brand && (
-                                          <Chip
-                                              variant="flat"
-                                              color="warning"
-                                              className="my-1">
-                                              {product.brand.name}
-                                          </Chip>
-                                      )}
+
+                                      {/* Categoría y marca */}
+                                      <div className="flex flex-wrap gap-1 mt-1">
+                                          {product.category && (
+                                              <Chip
+                                                  variant="dot"
+                                                  color="secondary"
+                                                  className="my-1">
+                                                  {product.category.name}
+                                              </Chip>
+                                          )}
+                                          {product.brand && (
+                                              <Chip
+                                                  variant="flat"
+                                                  color="warning"
+                                                  className="my-1">
+                                                  {product.brand.name}
+                                              </Chip>
+                                          )}
+                                      </div>
                                   </div>
-                              </div>
+                              </Link>
 
                               <div className="flex justify-center w-full z-20">
                                   <Button
