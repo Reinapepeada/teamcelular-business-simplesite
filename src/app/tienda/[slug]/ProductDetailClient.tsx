@@ -528,10 +528,10 @@ export default function ProductDetailClient({ productIdProp, productProp }: Prop
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
                             <Truck className="w-6 h-6 text-primary" />
-                            <div>
-                                <p className="text-sm font-medium">Envío gratis</p>
-                                <p className="text-xs text-muted-foreground">En compras +$50.000</p>
-                            </div>
+                                <div>
+                                    <p className="text-sm font-medium">Envío</p>
+                                    <p className="text-xs text-muted-foreground">En compras +$50.000</p>
+                                </div>
                         </div>
                         <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
                             <Shield className="w-6 h-6 text-primary" />

@@ -115,7 +115,7 @@ const values = [
     icon: FaHandshake,
     title: "Compromiso",
     description:
-      "Diagnóstico honesto y transparente. Si no podemos repararlo, te lo decimos sin costo.",
+      "Diagnóstico honesto y transparente. Si no podemos repararlo, te lo decimos.",
     color: "text-green-500",
     bgColor: "bg-green-500/10",
   },

@@ -51,7 +51,7 @@ const benefits = [
   {
     title: "Logística corporativa puerta a puerta",
     detail:
-      "Coordinamos retiros y entregas programadas en CABA, GBA Norte y GBA Sur sin costo adicional en planes corporativos. Disponibilidad de equipos de reemplazo (loaner) para garantizar continuidad operativa durante reparaciones complejas.",
+      "Coordinamos retiros y entregas programadas en CABA, GBA Norte y GBA Sur adicional en planes corporativos. Disponibilidad de equipos de reemplazo (loaner) para garantizar continuidad operativa durante reparaciones complejas.",
     Icon: FaTruck,
   },
   {
