@@ -20,24 +20,50 @@ import {
 } from "react-icons/fa";
 
 export const metadata: Metadata = {
-  title: "Servicio Técnico de Celulares para Empresas y Organizaciones | Team Celular",
+  title: "Servicio Técnico Celulares Empresas | Soporte Corporativo Buenos Aires",
   description:
-    "Soporte técnico corporativo especializado en reparación de dispositivos móviles con SLA garantizado, logística incluida y planes preventivos. Atendemos empresas, gremios y organizaciones en CABA y GBA con más de 10 años de experiencia.",
+    "⚡ Soporte técnico corporativo: SLA garantizado ✓ logística incluida ✓ planes preventivos ✓ Atendemos empresas, gremios y organizaciones en CABA y GBA. +10 años de experiencia.",
   keywords: [
-    "servicio técnico empresas",
+    "servicio técnico empresas Buenos Aires",
     "reparación celulares corporativos",
     "SLA dispositivos móviles",
-    "soporte técnico gremios",
-    "mantenimiento preventivo celulares",
-    "service desk móviles Buenos Aires",
-    "reparación celulares empresas CABA",
+    "soporte técnico gremios CABA",
+    "mantenimiento preventivo empresas",
+    "service desk móviles",
+    "reparación celulares empresas",
+    "soporte corporativo smartphones",
   ],
+  authors: [{ name: "Team Celular" }],
+  creator: "Team Celular",
+  publisher: "Team Celular",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
-    title: "Servicio Técnico Corporativo de Celulares | Team Celular",
+    title: "Servicio Técnico Corporativo Celulares | Buenos Aires",
     description:
-      "Soporte técnico especializado para empresas con SLA garantizado, logística puerta a puerta y planes preventivos en CABA y GBA.",
+      "Soporte técnico especializado para empresas con SLA garantizado, logística puerta a puerta y planes preventivos.",
     type: "article",
     locale: "es_AR",
+    url: "https://teamcelular.com/guias/soporte-empresas-servicio-tecnico",
+    siteName: "Team Celular",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Servicio Técnico Corporativo Celulares",
+    description: "Soporte empresarial con SLA garantizado y logística incluida.",
+  },
+  alternates: {
+    canonical: "https://teamcelular.com/guias/soporte-empresas-servicio-tecnico",
+  },
   },
 };
 

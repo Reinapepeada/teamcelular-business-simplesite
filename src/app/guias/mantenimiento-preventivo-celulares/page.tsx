@@ -18,25 +18,49 @@ import {
 } from "react-icons/fa";
 
 export const metadata: Metadata = {
-  title: "Mantenimiento Preventivo de Celulares | Guía Profesional Team Celular CABA",
+  title: "Mantenimiento Preventivo Celulares | Guía Completa 2024 CABA",
   description:
-    "Guía completa de mantenimiento preventivo para smartphones: checklist profesional, cuidado de batería, actualización de software y limpieza especializada. Servicios preventivos en Buenos Aires con garantía.",
+    "⚡ Guía profesional de mantenimiento preventivo: batería ✓ limpieza ✓ software ✓ Servicios preventivos en Buenos Aires. Extendé la vida útil de tu smartphone hasta 3 años más.",
   keywords: [
     "mantenimiento preventivo celulares",
-    "cuidado smartphone",
-    "salud batería iPhone",
+    "cuidado smartphone Buenos Aires",
+    "salud batería celular",
     "limpieza interna celular",
     "actualización software móvil",
-    "servicio preventivo Buenos Aires",
-    "extender vida útil celular",
+    "servicio preventivo CABA",
+    "extender vida útil smartphone",
+    "checklist mantenimiento celular",
   ],
   authors: [{ name: "Team Celular" }],
+  creator: "Team Celular",
+  publisher: "Team Celular",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
-    title: "Mantenimiento Preventivo de Celulares | Team Celular",
+    title: "Mantenimiento Preventivo Celulares | Guía Completa 2024",
     description:
-      "Aprende a cuidar tu smartphone con rutinas profesionales. Servicios preventivos en CABA con más de 10 años de experiencia.",
+      "Guía profesional de mantenimiento preventivo para smartphones. Servicios preventivos en CABA con garantía.",
     type: "article",
     locale: "es_AR",
+    url: "https://teamcelular.com/guias/mantenimiento-preventivo-celulares",
+    siteName: "Team Celular",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mantenimiento Preventivo Celulares | Guía 2024",
+    description: "Guía completa: batería, limpieza, software. Extendé la vida de tu smartphone.",
+  },
+  alternates: {
+    canonical: "https://teamcelular.com/guias/mantenimiento-preventivo-celulares",
   },
 };
 

@@ -33,11 +33,14 @@ const staticPages = [
   "presupuesto-reparacion",
   "sobrenosotros",
   "tienda",
+  "tienda/categorias/reparaciones",
   "guias",
   "guias/mantenimiento-preventivo-celulares",
   "guias/microelectronica-reballing-caba",
   "guias/reparacion-iphone-buenos-aires",
   "guias/soporte-empresas-servicio-tecnico",
+  "guias/cambio-bateria-celular",
+  "guias/reparacion-pantalla-celular",
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
