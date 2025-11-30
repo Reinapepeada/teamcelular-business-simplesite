@@ -230,7 +230,7 @@ export default function ProductDetailClient({ productIdProp, productProp }: Prop
     const discountedPrice = originalPrice * (1 - discount / 100);
     
     return (
-        <div className="max-w-screen-xl mx-auto px-4 py-8">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
             {/* Product structured data for SEO */}
             {product && (
                 <>
@@ -254,7 +254,7 @@ export default function ProductDetailClient({ productIdProp, productProp }: Prop
                 </>
             )}
             {/* Breadcrumb */}
-            <nav className="flex items-center space-x-2 text-sm mb-6">
+            <nav className="flex items-center space-x-2 text-xs sm:text-sm mb-4 sm:mb-6 overflow-x-auto pb-2">
                 <Link href="/tienda" className="text-muted-foreground hover:text-primary transition-colors">
                     Tienda
                 </Link>
@@ -273,7 +273,7 @@ export default function ProductDetailClient({ productIdProp, productProp }: Prop
                 <span className="font-medium">{product?.name}</span>
             </nav>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
                 {/* Image Gallery */}
                 <div className="space-y-4">
                     <div className="relative aspect-square rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800">
