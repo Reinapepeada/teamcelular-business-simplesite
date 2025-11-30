@@ -291,7 +291,6 @@ export default function IphoneRepairGuide() {
                 loop
                 muted
                 playsInline
-                loading="lazy"
                 preload="metadata"
                 className="h-full w-full object-cover"
                 poster="/images/celuPorDentro.webp"
