@@ -64,7 +64,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://teamcelular.com/guias/soporte-empresas-servicio-tecnico",
   },
-  },
 };
 
 const benefits = [
