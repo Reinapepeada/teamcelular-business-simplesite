@@ -118,14 +118,14 @@ function ProductsCardsStore({
                               <Link
                                   href={`/tienda/${product.id}`}
                                   aria-label={`Ver ${product.name}`}
-                                  className="absolute inset-0 z-10"
+                                  className="absolute inset-0 z-0"
                                   style={{ display: 'block' }}
                               >
                                   <span className="sr-only">Ir al producto</span>
                               </Link>
                               <motion.div
                                   whileHover={{ scale: 1.05 }}
-                                  className="w-full h-48 flex items-center justify-center overflow-hidden bg-gray-100 dark:bg-gray-800 rounded-md">
+                                  className="relative w-full h-48 flex items-center justify-center overflow-hidden bg-gray-100 dark:bg-gray-800 rounded-md z-10">
                                   <Image
                                       src={
                                           product?.variants?.[0]?.images?.[0]
@@ -139,7 +139,7 @@ function ProductsCardsStore({
                                   />
                               </motion.div>
 
-                              <div className="text-left w-full mt-2 z-0">
+                              <div className="relative text-left w-full mt-2 z-10">
                                   <h3 className="mt-2 mx-1 text-lg font-semibold line-clamp-2">
                                       {product.name}
                                   </h3>
