@@ -1,7 +1,30 @@
 import { MetadataRoute } from "next";
-import { getAllProducts, getAllProductImages } from '@/services/products';
+import { getAllProductImages } from '@/services/products';
+import type { Product } from '@/app/tienda/product';
+
+// Revalidate sitemap every 24 hours
+export const revalidate = 86400;
 
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+// Fetch products with cache for sitemap generation
+async function getAllProductsForSitemap(): Promise<Product[]> {
+  try {
+    const response = await fetch(`${apiUrl}/products/all`, {
+      next: { revalidate: 86400 }, // Cache for 24 hours
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching products for sitemap:', error);
+    return [];
+  }
+}
 
 const staticPages = [
   "",
@@ -30,7 +53,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Try to fetch all products and include them in the sitemap
   try {
-    const products = await getAllProducts();
+    const products = await getAllProductsForSitemap();
 
     const productEntries = products.map((p) => {
       // obtain images for sitemap and ensure absolute URLs
