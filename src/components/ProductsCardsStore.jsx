@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion } from "framer-motion";
 import Image from "next/image";
 import {
@@ -14,7 +14,6 @@ import {
     Button,
     Chip,
 } from "@nextui-org/react";
-// Link not used here; we'll handle navigation via router.push for full-card clicks
 
 import { ShoppingCart, Star } from "lucide-react";
 
@@ -25,7 +24,7 @@ function ProductsCardsStore({
     isLoading,
     addToCart,
 }) {
-    // router not needed when using <Link>
+    const router = useRouter();
     const [sortBy, setSortBy] = useState(null);
     const [sortedProducts, setSortedProducts] = useState(products);
 
@@ -113,19 +112,13 @@ function ProductsCardsStore({
                     : sortedProducts.map((product) => (
                           <Card
                               key={product.id}
-                              className="relative p-4 shadow rounded-lg border flex flex-col items-start cursor-pointer focus:outline-none focus:focus-ring"
+                              className="p-4 shadow rounded-lg border flex flex-col items-start cursor-pointer focus:outline-none focus:focus-ring"
+                              isPressable
+                              onPress={() => router.push(`/tienda/${product.id}`)}
                           >
-                              <Link
-                                  href={`/tienda/${product.id}`}
-                                  aria-label={`Ver ${product.name}`}
-                                  className="absolute inset-0 z-0"
-                                  style={{ display: 'block' }}
-                              >
-                                  <span className="sr-only">Ir al producto</span>
-                              </Link>
                               <motion.div
                                   whileHover={{ scale: 1.05 }}
-                                  className="relative w-full h-48 flex items-center justify-center overflow-hidden bg-gray-100 dark:bg-gray-800 rounded-md z-10">
+                                  className="w-full h-48 flex items-center justify-center overflow-hidden bg-gray-100 dark:bg-gray-800 rounded-md pointer-events-none">
                                   <Image
                                       src={
                                           product?.variants?.[0]?.images?.[0]
@@ -139,7 +132,7 @@ function ProductsCardsStore({
                                   />
                               </motion.div>
 
-                              <div className="relative text-left w-full mt-2 z-10">
+                              <div className="text-left w-full mt-2 pointer-events-none">
                                   <h3 className="mt-2 mx-1 text-lg font-semibold line-clamp-2">
                                       {product.name}
                                   </h3>
@@ -184,9 +177,12 @@ function ProductsCardsStore({
                                   </div>
                               </div>
 
-                              <div className="flex justify-center w-full z-20">
+                              <div className="flex justify-center w-full pointer-events-auto">
                                   <Button
-                                      onClick={e => { e.stopPropagation(); addToCart(product, null, 1); }}
+                                      onPress={(e) => {
+                                          e.stopPropagation();
+                                          addToCart(product, null, 1);
+                                      }}
                                       aria-label={`Agregar ${product.name} al carrito`}
                                       className="mt-4"
                                       variant="shadow"
