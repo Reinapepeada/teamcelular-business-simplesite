@@ -56,19 +56,11 @@ export default function ProductFilters(params) {
     const categories_server = await getcategories();
     setCategories(categories_server);
   }
-  const checkParams = useCallback(async (params) => {
-    console.log(params);
-    console.log("selectedCategories", selectedCategories);
-    console.log("selectedBrands", selectedBrands);
-    console.log("selectedPriceRange", selectedPriceRange);
-  }, [selectedCategories, selectedBrands, selectedPriceRange]);
-
   useEffect(() => {
     rangePrice();
     fetchBrands();
     fetchCategories();
-    checkParams(params);
-  }, [checkParams, params]);
+  }, []);
 
   const handleCategoryChange = (categoryId) => {
     setSelectedCategories((prev) =>

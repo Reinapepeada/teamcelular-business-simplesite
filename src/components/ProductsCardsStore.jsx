@@ -110,90 +110,91 @@ function ProductsCardsStore({
                           </Card>
                       ))
                     : sortedProducts.map((product) => (
-                          <Card
+                          <div
                               key={product.id}
-                              className="p-4 shadow rounded-lg border flex flex-col items-start cursor-pointer focus:outline-none focus:focus-ring"
-                              isPressable
-                              onPress={() => router.push(`/tienda/${product.id}`)}
+                              onClick={() => router.push(`/tienda/${product.id}`)}
+                              className="cursor-pointer"
                           >
-                              <motion.div
-                                  whileHover={{ scale: 1.05 }}
-                                  className="w-full h-48 flex items-center justify-center overflow-hidden bg-gray-100 dark:bg-gray-800 rounded-md pointer-events-none">
-                                  <Image
-                                      src={
-                                          product?.variants?.[0]?.images?.[0]
-                                              ?.image_url ||
-                                          "/placeholder.jpg"
-                                      }
-                                      alt={product.name}
-                                      width={192}
-                                      height={192}
-                                      className="object-contain h-full"
-                                  />
-                              </motion.div>
+                              <Card className="p-4 shadow rounded-lg border flex flex-col items-start h-full hover:shadow-lg transition-shadow">
+                                  <motion.div
+                                      whileHover={{ scale: 1.05 }}
+                                      className="w-full h-48 flex items-center justify-center overflow-hidden bg-gray-100 dark:bg-gray-800 rounded-md">
+                                      <Image
+                                          src={
+                                              product?.variants?.[0]?.images?.[0]
+                                                  ?.image_url ||
+                                              "/placeholder.jpg"
+                                          }
+                                          alt={product.name}
+                                          width={192}
+                                          height={192}
+                                          className="object-contain h-full"
+                                      />
+                                  </motion.div>
 
-                              <div className="text-left w-full mt-2 pointer-events-none">
-                                  <h3 className="mt-2 mx-1 text-lg font-semibold line-clamp-2">
-                                      {product.name}
-                                  </h3>
-                                  {/* Pricing Section */}
-                                  <div className="mx-1">
-                                      <p className="text-2xl font-bold text-primary">
-                                          $
-                                          {product.retail_price
-                                              .toFixed(0)
-                                              .replace(
-                                                  /\B(?=(\d{3})+(?!\d))/g,
-                                                  "."
-                                              )}
-                                      </p>
+                                  <div className="text-left w-full mt-2">
+                                      <h3 className="mt-2 mx-1 text-lg font-semibold line-clamp-2">
+                                          {product.name}
+                                      </h3>
+                                      {/* Pricing Section */}
+                                      <div className="mx-1">
+                                          <p className="text-2xl font-bold text-primary">
+                                              $
+                                              {product.retail_price
+                                                  .toFixed(0)
+                                                  .replace(
+                                                      /\B(?=(\d{3})+(?!\d))/g,
+                                                      "."
+                                                  )}
+                                          </p>
+                                      </div>
+
+                                      {/* Escasez */}
+                                      {product.variants && product.variants.reduce((total, v) => total + (v.stock || 0), 0) < 10 && product.variants.reduce((total, v) => total + (v.stock || 0), 0) > 0 && (
+                                          <p className="text-sm text-yellow-500 font-bold mx-1 animate-pulse">
+                                              ¡Últimas {product.variants.reduce((total, v) => total + (v.stock || 0), 0)} unidades!
+                                          </p>
+                                      )}
+
+                                      {/* Categoría y marca */}
+                                      <div className="flex flex-wrap gap-1 mt-1">
+                                          {product.category && (
+                                              <Chip
+                                                  variant="dot"
+                                                  color="secondary"
+                                                  className="my-1">
+                                                  {product.category.name}
+                                              </Chip>
+                                          )}
+                                          {product.brand && (
+                                              <Chip
+                                                  variant="flat"
+                                                  color="warning"
+                                                  className="my-1">
+                                                  {product.brand.name}
+                                              </Chip>
+                                          )}
+                                      </div>
                                   </div>
 
-                                  {/* Escasez */}
-                                  {product.variants && product.variants.reduce((total, v) => total + (v.stock || 0), 0) < 10 && product.variants.reduce((total, v) => total + (v.stock || 0), 0) > 0 && (
-                                      <p className="text-sm text-yellow-500 font-bold mx-1 animate-pulse">
-                                          ¡Últimas {product.variants.reduce((total, v) => total + (v.stock || 0), 0)} unidades!
-                                      </p>
-                                  )}
-
-                                  {/* Categoría y marca */}
-                                  <div className="flex flex-wrap gap-1 mt-1">
-                                      {product.category && (
-                                          <Chip
-                                              variant="dot"
-                                              color="secondary"
-                                              className="my-1">
-                                              {product.category.name}
-                                          </Chip>
-                                      )}
-                                      {product.brand && (
-                                          <Chip
-                                              variant="flat"
-                                              color="warning"
-                                              className="my-1">
-                                              {product.brand.name}
-                                          </Chip>
-                                      )}
+                                  <div className="flex justify-center w-full mt-auto">
+                                      <Button
+                                          onClick={(e) => {
+                                              e.stopPropagation();
+                                              addToCart(product, null, 1);
+                                          }}
+                                          aria-label={`Agregar ${product.name} al carrito`}
+                                          className="mt-4"
+                                          variant="shadow"
+                                          size="sm"
+                                          color="primary"
+                                      >
+                                          Agregar al
+                                          <ShoppingCart className="h-5 w-5" />
+                                      </Button>
                                   </div>
-                              </div>
-
-                              <div className="flex justify-center w-full pointer-events-auto">
-                                  <Button
-                                      onPress={(e) => {
-                                          e.stopPropagation();
-                                          addToCart(product, null, 1);
-                                      }}
-                                      aria-label={`Agregar ${product.name} al carrito`}
-                                      className="mt-4"
-                                      variant="shadow"
-                                      size="sm"
-                                      color="primary"
-                                  >
-                                      Agregar al
-                                      <ShoppingCart className="h-5 w-5" />
-                                  </Button>
-                              </div>
-                          </Card>
+                              </Card>
+                          </div>
                       ))}
             </div>
             <div className="flex justify-center mt-4">
