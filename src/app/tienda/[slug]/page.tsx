@@ -48,16 +48,33 @@ export async function generateMetadata({ params }: any) {
         if (imgMeta.width) ogImageObj.width = imgMeta.width;
         if (imgMeta.height) ogImageObj.height = imgMeta.height;
 
+        // Build keywords from product data
+        const keywords = [
+            product.name,
+            product.brand?.name,
+            product.category?.name,
+            'repuestos celulares',
+            'accesorios celulares',
+            'Buenos Aires',
+        ].filter(Boolean);
+
         return {
             title,
             description,
+            keywords,
             alternates: { canonical: url },
+            robots: {
+                index: true,
+                follow: true,
+            },
             openGraph: {
+                type: 'product',
                 title,
                 description,
                 url,
-                siteName: 'Teamcelular',
+                siteName: 'Team Celular',
                 images: [ogImageObj],
+                locale: 'es_AR',
             },
             twitter: {
                 card: 'summary_large_image',
@@ -71,6 +88,8 @@ export async function generateMetadata({ params }: any) {
                 'geo.placename': 'Buenos Aires',
                 'geo.position': `${lat};${lon}`,
                 ICBM: `${lat}, ${lon}`,
+                'product:price:amount': product.retail_price?.toString(),
+                'product:price:currency': 'ARS',
             },
         } as any;
     } catch (err) {

@@ -46,11 +46,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         })
         .filter(Boolean) as string[];
 
+      // Ensure valid ISO date format
+      let lastModified = now;
+      try {
+        if (p.updated_at) {
+          const date = new Date(p.updated_at);
+          if (!isNaN(date.getTime())) {
+            lastModified = date;
+          }
+        } else if (p.created_at) {
+          const date = new Date(p.created_at);
+          if (!isNaN(date.getTime())) {
+            lastModified = date;
+          }
+        }
+      } catch {
+        // Use current date if parsing fails
+        lastModified = now;
+      }
+
       return {
         url: `${SITE_URL}/tienda/${p.id}`,
         changeFrequency: ("weekly" as const),
         priority: 0.9,
-        lastModified: p.updated_at || p.created_at || now.toISOString(),
+        lastModified: lastModified,
         images,
       };
     });
