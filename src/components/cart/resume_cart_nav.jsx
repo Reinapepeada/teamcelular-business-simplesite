@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
     Sheet,
     SheetContent,
@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/sheet";
 import { ShoppingCart, Plus, Minus, X, Trash2, MessageCircle, Loader2, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -82,6 +83,7 @@ export default function ResumeCartNav() {
     const { cart, updateQuantity, removeFromCart, clearCart } = useCartStore();
     const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
     const [isSending, setIsSending] = useState(false);
+    const [isAnimating, setIsAnimating] = useState(false);
     const [customerInfo, setCustomerInfo] = useState({
         name: "",
         phone: "",
@@ -94,6 +96,15 @@ export default function ResumeCartNav() {
         (sum, item) => sum + item.product.retail_price * item.quantity,
         0
     );
+
+    // Detectar cuando se agrega algo al carrito
+    useEffect(() => {
+        if (totalItems > 0) {
+            setIsAnimating(true);
+            const timer = setTimeout(() => setIsAnimating(false), 600);
+            return () => clearTimeout(timer);
+        }
+    }, [totalItems]);
 
     // Generar mensaje de WhatsApp con el pedido
     const generateWhatsAppMessage = () => {
@@ -171,13 +182,29 @@ export default function ResumeCartNav() {
         <Sheet>
             <SheetTrigger asChild>
                 <Button variant="outline" className="relative">
-                    <ShoppingCart className="h-5 w-5 mr-2" />
+                    <motion.div
+                        animate={isAnimating ? {
+                            scale: [1, 1.15, 1],
+                        } : {}}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                    >
+                        <ShoppingCart className="h-5 w-5 mr-2" />
+                    </motion.div>
                     <span className="hidden sm:inline">Carrito</span>
-                    {totalItems > 0 && (
-                        <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                            {totalItems > 99 ? '99+' : totalItems}
-                        </span>
-                    )}
+                    <AnimatePresence mode="wait">
+                        {totalItems > 0 && (
+                            <motion.span
+                                key={totalItems}
+                                initial={{ scale: 0.5, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                exit={{ scale: 0.5, opacity: 0 }}
+                                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center"
+                            >
+                                {totalItems > 99 ? '99+' : totalItems}
+                            </motion.span>
+                        )}
+                    </AnimatePresence>
                 </Button>
             </SheetTrigger>
             <SheetContent className="flex flex-col h-full">

@@ -68,13 +68,13 @@ export async function generateMetadata({ params }: any) {
                 follow: true,
             },
             openGraph: {
-                type: 'product',
                 title,
                 description,
                 url,
                 siteName: 'Team Celular',
                 images: [ogImageObj],
                 locale: 'es_AR',
+                type: 'website',
             },
             twitter: {
                 card: 'summary_large_image',
@@ -82,7 +82,7 @@ export async function generateMetadata({ params }: any) {
                 description,
                 images: [absoluteImage],
             },
-            // Custom meta tags (geo)
+            // Custom meta tags (geo + product info)
             other: {
                 'geo.region': 'AR',
                 'geo.placename': 'Buenos Aires',
@@ -90,6 +90,9 @@ export async function generateMetadata({ params }: any) {
                 ICBM: `${lat}, ${lon}`,
                 'product:price:amount': product.retail_price?.toString(),
                 'product:price:currency': 'ARS',
+                'og:type': 'product',
+                'og:price:amount': product.retail_price?.toString(),
+                'og:price:currency': 'ARS',
             },
         } as any;
     } catch (err) {
