@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import ArticleSchema from "@/components/seo/ArticleSchema";
 import { 
   FaShieldAlt, 
   FaTruck, 
@@ -32,12 +33,33 @@ export const metadata: Metadata = {
     "service desk móviles Buenos Aires",
     "reparación celulares empresas CABA",
   ],
+  alternates: {
+    canonical: "https://teamcelular.com/guias/soporte-empresas-servicio-tecnico",
+  },
   openGraph: {
     title: "Servicio Técnico Corporativo de Celulares | Team Celular",
     description:
       "Soporte técnico especializado para empresas con SLA garantizado, logística puerta a puerta y planes preventivos en CABA y GBA.",
     type: "article",
+    url: "https://teamcelular.com/guias/soporte-empresas-servicio-tecnico",
     locale: "es_AR",
+    images: [
+      {
+        url: "https://teamcelular.com/images/teamcelular.webp",
+        width: 1200,
+        height: 630,
+        alt: "Servicio Técnico Corporativo - Team Celular",
+      },
+    ],
+    publishedTime: "2024-03-10T00:00:00Z",
+    modifiedTime: "2025-12-11T00:00:00Z",
+    section: "Guías Técnicas",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Servicio Técnico para Empresas | Team Celular",
+    description: "Soporte técnico especializado para empresas con SLA garantizado",
+    images: ["https://teamcelular.com/images/teamcelular.webp"],
   },
 };
 
@@ -153,6 +175,15 @@ const faqBusiness = [
 export default function BusinessSupportGuide() {
   return (
     <div className="flex w-full justify-center px-4 py-16">
+      <ArticleSchema
+        title="Servicio Técnico de Celulares para Empresas y Organizaciones | Team Celular"
+        description="Soporte técnico corporativo especializado en reparación de dispositivos móviles con SLA garantizado, logística incluida y planes preventivos en CABA y GBA."
+        publishedTime="2024-03-10T00:00:00Z"
+        modifiedTime="2025-12-11T00:00:00Z"
+        authorName="Team Celular"
+        image="https://teamcelular.com/images/teamcelular.webp"
+        url="https://teamcelular.com/guias/soporte-empresas-servicio-tecnico"
+      />
       <article className="w-full max-w-6xl space-y-16">
         {/* Hero Section */}
         <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-16">

@@ -33,11 +33,15 @@ export const metadata: Metadata = {
     "servicio técnico certificado",
     "historia team celular",
   ],
+  alternates: {
+    canonical: "https://teamcelular.com/sobrenosotros",
+  },
   openGraph: {
     title: "Sobre Nosotros | Team Celular",
     description:
       "Más de 15 años cuidando tus dispositivos con profesionalismo y garantía",
     type: "website",
+    url: "https://teamcelular.com/sobrenosotros",
     locale: "es_AR",
     images: [
       {

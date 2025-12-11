@@ -73,12 +73,30 @@ export const metadata: Metadata = {
     "reparación profesional Buenos Aires",
   ],
   authors: [{ name: "Team Celular" }],
+  alternates: {
+    canonical: "https://teamcelular.com/guias",
+  },
   openGraph: {
     title: "Centro de Conocimiento | Guías Técnicas Team Celular",
     description:
       "Aprende de expertos: reparación de iPhone, microelectrónica avanzada y soporte corporativo en Buenos Aires.",
     type: "website",
+    url: "https://teamcelular.com/guias",
     locale: "es_AR",
+    images: [
+      {
+        url: "https://teamcelular.com/images/teamcelular.webp",
+        width: 1200,
+        height: 630,
+        alt: "Team Celular - Guías Técnicas",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Guías Técnicas de Reparación | Team Celular",
+    description: "Aprende de expertos en reparación de celulares en Buenos Aires",
+    images: ["https://teamcelular.com/images/teamcelular.webp"],
   },
 };
 

@@ -11,6 +11,7 @@ import {
   FaCertificate,
   FaCamera
 } from "react-icons/fa";
+import ArticleSchema from "@/components/seo/ArticleSchema";
 
 export const metadata: Metadata = {
   title: "Microelectrónica y Reballing BGA en CABA | Laboratorio Certificado Team Celular",
@@ -25,12 +26,33 @@ export const metadata: Metadata = {
     "laboratorio ESD Argentina",
     "reparación placa lógica iPhone",
   ],
+  alternates: {
+    canonical: "https://teamcelular.com/guias/microelectronica-reballing-caba",
+  },
   openGraph: {
     title: "Microelectrónica y Reballing BGA | Laboratorio Team Celular",
     description:
       "Reparación avanzada de placas y chips BGA con microscopio y equipamiento profesional en CABA.",
     type: "article",
+    url: "https://teamcelular.com/guias/microelectronica-reballing-caba",
     locale: "es_AR",
+    images: [
+      {
+        url: "https://teamcelular.com/images/teamcelular.webp",
+        width: 1200,
+        height: 630,
+        alt: "Microelectrónica y Reballing BGA - Team Celular",
+      },
+    ],
+    publishedTime: "2024-02-20T00:00:00Z",
+    modifiedTime: "2025-12-11T00:00:00Z",
+    section: "Guías Técnicas",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Microelectrónica y Reballing BGA | Team Celular",
+    description: "Reparación avanzada de placas y chips BGA con equipamiento profesional",
+    images: ["https://teamcelular.com/images/teamcelular.webp"],
   },
 };
 
@@ -133,6 +155,15 @@ const faqMicro = [
 export default function MicroelectronicsGuide() {
   return (
     <div className="flex w-full justify-center px-4 py-16">
+      <ArticleSchema
+        title="Microelectrónica y Reballing BGA en CABA | Laboratorio Certificado Team Celular"
+        description="Servicio especializado de microelectrónica y reballing BGA en Buenos Aires. Reparación de placas, recuperación de chips, soldadura SMD con microscopio."
+        publishedTime="2024-02-20T00:00:00Z"
+        modifiedTime="2025-12-11T00:00:00Z"
+        authorName="Team Celular"
+        image="https://teamcelular.com/images/teamcelular.webp"
+        url="https://teamcelular.com/guias/microelectronica-reballing-caba"
+      />
       <article className="w-full max-w-6xl space-y-16">
         {/* Hero Section */}
         <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-16">

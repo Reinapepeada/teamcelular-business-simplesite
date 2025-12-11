@@ -27,6 +27,7 @@ import {
     Plus,
     ArrowLeft
 } from "lucide-react";
+import ProductSchema from "@/components/seo/ProductSchema";
 
 import { 
     getProductById, 
@@ -206,6 +207,7 @@ export default function ProductDetailPage() {
     
     return (
         <div className="max-w-screen-xl mx-auto px-4 py-8">
+            <ProductSchema product={product} />
             {/* Breadcrumb */}
             <nav className="flex items-center space-x-2 text-sm mb-6">
                 <Link href="/tienda" className="text-muted-foreground hover:text-primary transition-colors">

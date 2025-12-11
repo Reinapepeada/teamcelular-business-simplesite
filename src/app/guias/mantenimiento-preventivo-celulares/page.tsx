@@ -16,6 +16,7 @@ import {
   FaClock,
   FaChartLine,
 } from "react-icons/fa";
+import ArticleSchema from "@/components/seo/ArticleSchema";
 
 export const metadata: Metadata = {
   title: "Mantenimiento Preventivo de Celulares | Guía Profesional Team Celular CABA",
@@ -31,12 +32,33 @@ export const metadata: Metadata = {
     "extender vida útil celular",
   ],
   authors: [{ name: "Team Celular" }],
+  alternates: {
+    canonical: "https://teamcelular.com/guias/mantenimiento-preventivo-celulares",
+  },
   openGraph: {
     title: "Mantenimiento Preventivo de Celulares | Team Celular",
     description:
       "Aprende a cuidar tu smartphone con rutinas profesionales. Servicios preventivos en CABA con más de 10 años de experiencia.",
     type: "article",
+    url: "https://teamcelular.com/guias/mantenimiento-preventivo-celulares",
     locale: "es_AR",
+    images: [
+      {
+        url: "https://teamcelular.com/images/teamcelular.webp",
+        width: 1200,
+        height: 630,
+        alt: "Mantenimiento Preventivo de Celulares - Team Celular",
+      },
+    ],
+    publishedTime: "2024-04-05T00:00:00Z",
+    modifiedTime: "2025-12-11T00:00:00Z",
+    section: "Guías Técnicas",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mantenimiento Preventivo | Team Celular",
+    description: "Aprende a cuidar tu smartphone con rutinas profesionales",
+    images: ["https://teamcelular.com/images/teamcelular.webp"],
   },
 };
 
@@ -146,6 +168,15 @@ const faqMaintenance = [
 export default function PreventiveMaintenanceGuide() {
   return (
     <div className="flex w-full justify-center px-4 py-16">
+      <ArticleSchema
+        title="Mantenimiento Preventivo de Celulares | Team Celular"
+        description="Guía completa de mantenimiento preventivo para smartphones: checklist profesional, cuidado de batería, actualización de software y limpieza especializada."
+        publishedTime="2024-04-05T00:00:00Z"
+        modifiedTime="2025-12-11T00:00:00Z"
+        authorName="Team Celular"
+        image="https://teamcelular.com/images/teamcelular.webp"
+        url="https://teamcelular.com/guias/mantenimiento-preventivo-celulares"
+      />
       <article className="w-full max-w-6xl space-y-16">
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">

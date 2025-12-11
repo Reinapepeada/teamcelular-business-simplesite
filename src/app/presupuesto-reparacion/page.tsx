@@ -109,6 +109,21 @@ const promises = [
   },
 ];
 
+const quickResponseFaqs = [
+  {
+    question: "¿En cuánto tiempo confirman el presupuesto?",
+    answer: "Enviamos diagnóstico inicial en 2 horas hábiles; si falta info, te pedimos fotos y agendamos retiro.",
+  },
+  {
+    question: "¿Qué costo tiene el retiro en CABA?",
+    answer: "Dentro de la General Paz es sin cargo para reparaciones confirmadas; si desistís solo abonás el traslado ($6.000).",
+  },
+  {
+    question: "¿Cómo se paga la seña?",
+    answer: "Podés transferir o enviar link de pago; el saldo se abona al retirar o contra entrega.",
+  },
+];
+
 const popularRepairs = [
   {
     icon: FaMobileAlt,
@@ -313,6 +328,20 @@ export default function PresupuestoReparacionPage() {
                 </Card>
               );
             })}
+          </div>
+        </section>
+
+        <section className="mb-16 rounded-2xl border border-white/10 bg-white/5 p-8 shadow-lg backdrop-blur-xl dark:border-white/5 dark:bg-slate-900/30">
+          <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4 text-center">
+            Respuestas rápidas
+          </h3>
+          <div className="grid gap-6 md:grid-cols-3">
+            {quickResponseFaqs.map((item) => (
+              <article key={item.question} className="space-y-2 rounded-xl border border-white/10 bg-white/10 p-4 text-left text-sm leading-relaxed dark:border-white/5 dark:bg-slate-900/40">
+                <h4 className="font-semibold text-primary">{item.question}</h4>
+                <p className="text-slate-600 dark:text-slate-300">{item.answer}</p>
+              </article>
+            ))}
           </div>
         </section>
 

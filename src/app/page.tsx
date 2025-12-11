@@ -59,6 +59,24 @@ const faqs = [
   },
 ];
 
+const microFaqs = [
+  {
+    title: "Tiempos de respuesta",
+    question: "¿Cuánto tardan en contestar un presupuesto online?",
+    answer: "Respondemos formulario y WhatsApp en menos de 2 horas hábiles. Si el caso requiere diagnóstico físico, te agendamos el mismo día.",
+  },
+  {
+    title: "Garantía real",
+    question: "¿Qué cubre la garantía escrita?",
+    answer: "Incluye mano de obra y repuesto por 90 días; si falla lo reparamos sin costo o te devolvemos el dinero del repuesto.",
+  },
+  {
+    title: "Repuestos disponibles",
+    question: "¿Tienen stock para iPhone y Android?",
+    answer: "Tenemos pantallas, baterías y puertos de carga de las marcas más usadas; si falta algo lo importamos en 48 h.",
+  },
+];
+
 export default function Home() {
   return (
     <section className="flex w-full max-w-6xl flex-col items-center gap-16 px-6 py-14 transition md:px-8">
@@ -120,6 +138,16 @@ export default function Home() {
             </div>
           ))}
         </article>
+
+        <section className="grid gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 shadow-lg backdrop-blur-xl dark:border-white/5 dark:bg-slate-900/30 md:grid-cols-3">
+          {microFaqs.map((item) => (
+            <article key={item.title} className="space-y-2 rounded-xl border border-white/10 bg-white/10 p-4 text-left dark:border-white/5 dark:bg-slate-900/40">
+              <p className="text-sm font-semibold uppercase tracking-wide text-primary">{item.title}</p>
+              <h5 className="text-base font-semibold text-slate-900 dark:text-white">{item.question}</h5>
+              <p className="text-sm text-slate-600 dark:text-slate-300">{item.answer}</p>
+            </article>
+          ))}
+        </section>
 
         <GoogleReviewsAPI />
 

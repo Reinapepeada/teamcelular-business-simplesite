@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import ArticleSchema from "@/components/seo/ArticleSchema";
 import {
   FaApple,
   FaMobileAlt,
@@ -32,12 +33,33 @@ export const metadata: Metadata = {
     "service Apple Recoleta",
   ],
   authors: [{ name: "Team Celular" }],
+  alternates: {
+    canonical: "https://teamcelular.com/guias/reparacion-iphone-buenos-aires",
+  },
   openGraph: {
     title: "Reparación Profesional de iPhone | Team Celular Buenos Aires",
     description:
       "Servicio técnico especializado en iPhone con repuestos originales, garantía escrita y técnicos certificados en CABA.",
     type: "article",
+    url: "https://teamcelular.com/guias/reparacion-iphone-buenos-aires",
     locale: "es_AR",
+    images: [
+      {
+        url: "https://teamcelular.com/images/teamcelular.webp",
+        width: 1200,
+        height: 630,
+        alt: "Reparación de iPhone - Team Celular Buenos Aires",
+      },
+    ],
+    publishedTime: "2024-01-15T00:00:00Z",
+    modifiedTime: "2025-12-11T00:00:00Z",
+    section: "Guías Técnicas",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Reparación de iPhone | Team Celular Buenos Aires",
+    description: "Servicio técnico especializado en iPhone con repuestos originales y garantía escrita",
+    images: ["https://teamcelular.com/images/teamcelular.webp"],
   },
 };
 
@@ -192,6 +214,15 @@ const iphoneModels = [
 export default function IphoneRepairGuide() {
   return (
     <div className="flex w-full justify-center px-4 py-16">
+      <ArticleSchema
+        title="Reparación de iPhone en Buenos Aires | Servicio Técnico Oficial Team Celular CABA"
+        description="Servicio especializado de reparación de iPhone en Recoleta, CABA: pantallas OLED originales, baterías certificadas, microelectrónica avanzada y garantía escrita."
+        publishedTime="2024-01-15T00:00:00Z"
+        modifiedTime="2025-12-11T00:00:00Z"
+        authorName="Team Celular"
+        image="https://teamcelular.com/images/teamcelular.webp"
+        url="https://teamcelular.com/guias/reparacion-iphone-buenos-aires"
+      />
       <article className="w-full max-w-6xl space-y-16">
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">

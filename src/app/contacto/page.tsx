@@ -29,10 +29,14 @@ export const metadata: Metadata = {
     "presupuesto reparación celular",
     "whatsapp reparación celular",
   ],
+  alternates: {
+    canonical: "https://teamcelular.com/contacto",
+  },
   openGraph: {
     title: "Contacto | Team Celular Recoleta",
     description: "Visitanos en Paraguay 2451 o escribinos por WhatsApp para tu presupuesto",
     type: "website",
+    url: "https://teamcelular.com/contacto",
     locale: "es_AR",
     images: [
       {
@@ -95,6 +99,21 @@ const socialMedia = [
     handle: "/teamcelular",
     href: "https://www.facebook.com/teamcelular",
     color: "text-blue-600",
+  },
+];
+
+const contactQuickFaqs = [
+  {
+    question: "¿Necesito turno para acercarme?",
+    answer: "No, atendemos por orden de llegada, pero si escribís antes te confirmamos disponibilidad de banco de trabajo.",
+  },
+  {
+    question: "¿Cómo coordinan retiros en CABA?",
+    answer: "Programamos motos de lunes a viernes; confirmás la ventana horaria y seguimos todo por WhatsApp.",
+  },
+  {
+    question: "¿En qué casos respondemos por mail?",
+    answer: "Presupuestos corporativos y reportes técnicos completos se envían en PDF dentro de las 24 hs.",
   },
 ];
 
@@ -219,6 +238,20 @@ export default function Contacto() {
             );
           })}
         </div>
+
+        <section className="mb-16 rounded-2xl border border-white/10 bg-white/5 p-6 shadow-lg backdrop-blur-xl dark:border-white/5 dark:bg-slate-900/30">
+          <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4 text-center">
+            Dudas rápidas
+          </h3>
+          <div className="grid gap-4 md:grid-cols-3">
+            {contactQuickFaqs.map((item) => (
+              <article key={item.question} className="rounded-xl border border-white/10 bg-white/10 p-4 text-sm leading-relaxed text-slate-600 dark:border-white/5 dark:bg-slate-900/40 dark:text-slate-300">
+                <h4 className="font-semibold text-primary">{item.question}</h4>
+                <p>{item.answer}</p>
+              </article>
+            ))}
+          </div>
+        </section>
 
         {/* Ubicación y Mapa */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">

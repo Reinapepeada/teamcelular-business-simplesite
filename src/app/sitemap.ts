@@ -2,27 +2,54 @@ import { MetadataRoute } from "next";
 
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 
-const staticPages = [
-  "",
-  "productos",
-  "contacto",
-  "presupuesto-reparacion",
-  "sobrenosotros",
-  "tienda",
-  "guias",
-  "guias/mantenimiento-preventivo-celulares",
-  "guias/microelectronica-reballing-caba",
-  "guias/reparacion-iphone-buenos-aires",
-  "guias/soporte-empresas-servicio-tecnico",
+// Páginas principales con alta prioridad
+const mainPages = [
+  { path: "", priority: 1.0, changeFreq: "weekly" as const },
+  { path: "presupuesto-reparacion", priority: 0.95, changeFreq: "weekly" as const },
+  { path: "contacto", priority: 0.9, changeFreq: "monthly" as const },
+  { path: "tienda", priority: 0.9, changeFreq: "daily" as const },
+  { path: "productos", priority: 0.85, changeFreq: "daily" as const },
+  { path: "sobrenosotros", priority: 0.7, changeFreq: "monthly" as const },
+];
+
+// Guías y contenido educativo
+const guidePages = [
+  { path: "guias", priority: 0.8, changeFreq: "weekly" as const },
+  { path: "guias/reparacion-iphone-buenos-aires", priority: 0.85, changeFreq: "monthly" as const },
+  { path: "guias/microelectronica-reballing-caba", priority: 0.8, changeFreq: "monthly" as const },
+  { path: "guias/soporte-empresas-servicio-tecnico", priority: 0.75, changeFreq: "monthly" as const },
+  { path: "guias/mantenimiento-preventivo-celulares", priority: 0.75, changeFreq: "monthly" as const },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const lastModified = new Date().toISOString();
+  const currentDate = new Date();
+  
+  // Fecha de última modificación dinámica (fecha actual de build)
+  const lastMod = currentDate;
 
-  return staticPages.map((path) => ({
-    url: `${SITE_URL}/${path}`.replace(/\/$/, ""),
-    changeFrequency: path === "" ? ("monthly" as const) : ("weekly" as const),
-    priority: path === "" ? 1 : path.startsWith("guias") ? 0.7 : 0.8,
-    lastModified,
+  const mainSitemap = mainPages.map((page) => ({
+    url: page.path ? `${SITE_URL}/${page.path}` : SITE_URL,
+    lastModified: lastMod,
+    changeFrequency: page.changeFreq,
+    priority: page.priority,
+    alternates: {
+      languages: {
+        "es-AR": page.path ? `${SITE_URL}/${page.path}` : SITE_URL,
+      },
+    },
   }));
+
+  const guidesSitemap = guidePages.map((page) => ({
+    url: `${SITE_URL}/${page.path}`,
+    lastModified: lastMod,
+    changeFrequency: page.changeFreq,
+    priority: page.priority,
+    alternates: {
+      languages: {
+        "es-AR": `${SITE_URL}/${page.path}`,
+      },
+    },
+  }));
+
+  return [...mainSitemap, ...guidesSitemap];
 }
