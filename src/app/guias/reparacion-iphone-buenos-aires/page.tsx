@@ -19,27 +19,39 @@ import {
 } from "react-icons/fa";
 
 export const metadata: Metadata = {
-  title: "Reparación de iPhone en Buenos Aires | Servicio Técnico Oficial Team Celular CABA",
+  title: "Reparación iPhone Buenos Aires | Service Técnico Certificado CABA",
   description:
-    "Servicio especializado de reparación de iPhone en Recoleta, CABA: pantallas OLED originales, baterías certificadas, microelectrónica avanzada y garantía escrita. Diagnóstico en 24hs, repuestos originales y True Tone calibrado.",
+    "⚡ Reparación iPhone en Recoleta: pantallas OLED originales, baterías certificadas, True Tone preservado. Diagnóstico 24hs ✓ Garantía 6 meses ✓ Repuestos originales ✓ Service express 2-4hs",
   keywords: [
     "reparación iPhone Buenos Aires",
     "service iPhone CABA",
-    "pantalla iPhone original",
-    "batería iPhone certificada",
+    "cambio pantalla iPhone",
+    "batería iPhone original",
     "reparación placa iPhone",
     "True Tone iPhone",
     "Face ID reparación",
     "service Apple Recoleta",
+    "iPhone mojado recuperación",
+    "microelectrónica iPhone",
   ],
   authors: [{ name: "Team Celular" }],
-  alternates: {
-    canonical: "https://teamcelular.com/guias/reparacion-iphone-buenos-aires",
+  creator: "Team Celular",
+  publisher: "Team Celular",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   openGraph: {
-    title: "Reparación Profesional de iPhone | Team Celular Buenos Aires",
+    title: "Reparación iPhone Buenos Aires | Service Certificado CABA",
     description:
-      "Servicio técnico especializado en iPhone con repuestos originales, garantía escrita y técnicos certificados en CABA.",
+      "Service técnico especializado en iPhone: pantallas OLED originales, baterías certificadas, True Tone preservado. Garantía 6 meses. Diagnóstico en 24hs.",
     type: "article",
     url: "https://teamcelular.com/guias/reparacion-iphone-buenos-aires",
     locale: "es_AR",
@@ -245,12 +257,12 @@ export default function IphoneRepairGuide() {
             <FaApple className="text-5xl text-white" />
           </div>
           <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-            Reparación Profesional de iPhone en Buenos Aires
+            Reparación de iPhone en Buenos Aires | Service Técnico Certificado
           </h1>
           <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
-            Servicio técnico especializado en <strong className="text-primary">iPhone</strong> con repuestos
-            originales, garantía escrita y laboratorio certificado en Recoleta. Más de 10 años atendiendo
-            usuarios particulares y empresas en CABA y GBA.
+            Service técnico especializado en <strong className="text-primary">iPhone</strong> con <strong>repuestos
+            originales</strong>, <strong>garantía escrita 6 meses</strong> y laboratorio certificado en <strong>Recoleta, CABA</strong>. 
+            Más de 10 años reparando iPhone 6S a iPhone 15 Pro Max para particulares y empresas.
           </p>
           
           {/* Quick Stats */}
@@ -297,7 +309,9 @@ export default function IphoneRepairGuide() {
                 loop
                 muted
                 playsInline
+                preload="metadata"
                 className="h-full w-full object-cover"
+                poster="/images/celuPorDentro.webp"
               >
                 <source src="/videos/3866849-hd_1280_720_50fps.mp4" type="video/mp4" />
                 Tu navegador no soporta el elemento de video.
@@ -305,7 +319,7 @@ export default function IphoneRepairGuide() {
             </div>
             <div className="order-1 space-y-6 p-10 md:order-2">
               <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-                Expertos en reparación de iPhone
+                Service Técnico iPhone en Recoleta, CABA
               </h2>
               <div className="space-y-4 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
                 <p>

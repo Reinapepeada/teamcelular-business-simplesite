@@ -14,25 +14,37 @@ import {
 import ArticleSchema from "@/components/seo/ArticleSchema";
 
 export const metadata: Metadata = {
-  title: "Microelectrónica y Reballing BGA en CABA | Laboratorio Certificado Team Celular",
+  title: "Microelectrónica y Reballing BGA Buenos Aires | Laboratorio Certificado",
   description:
-    "Servicio especializado de microelectrónica y reballing BGA en Buenos Aires. Reparación de placas, recuperación de chips, soldadura SMD con microscopio. Laboratorio certificado ESD con garantía escrita.",
+    "⚡ Microelectrónica avanzada: reballing BGA ✓ reparación placas ✓ soldadura SMD ✓ Laboratorio ESD certificado en CABA. Recuperación de chips y datos con garantía.",
   keywords: [
-    "microelectrónica CABA",
-    "reballing BGA Buenos Aires",
-    "reparación de placas celulares",
+    "microelectrónica Buenos Aires",
+    "reballing BGA CABA",
+    "reparación placas celulares",
     "soldadura SMD microscopio",
     "recuperación chips BGA",
     "laboratorio ESD Argentina",
-    "reparación placa lógica iPhone",
+    "reparación placa lógica",
+    "recuperación datos celular",
   ],
-  alternates: {
-    canonical: "https://teamcelular.com/guias/microelectronica-reballing-caba",
+  authors: [{ name: "Team Celular" }],
+  creator: "Team Celular",
+  publisher: "Team Celular",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   openGraph: {
-    title: "Microelectrónica y Reballing BGA | Laboratorio Team Celular",
+    title: "Microelectrónica y Reballing BGA | Laboratorio Buenos Aires",
     description:
-      "Reparación avanzada de placas y chips BGA con microscopio y equipamiento profesional en CABA.",
+      "Reparación avanzada de placas y chips BGA con microscopio profesional. Laboratorio ESD certificado en CABA.",
     type: "article",
     url: "https://teamcelular.com/guias/microelectronica-reballing-caba",
     locale: "es_AR",

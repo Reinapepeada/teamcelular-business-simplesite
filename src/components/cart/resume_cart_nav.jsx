@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
     Sheet,
     SheetContent,
@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/sheet";
 import { ShoppingCart, Plus, Minus, X, Trash2, MessageCircle, Loader2, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -82,6 +83,7 @@ export default function ResumeCartNav() {
     const { cart, updateQuantity, removeFromCart, clearCart } = useCartStore();
     const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
     const [isSending, setIsSending] = useState(false);
+    const [isAnimating, setIsAnimating] = useState(false);
     const [customerInfo, setCustomerInfo] = useState({
         name: "",
         phone: "",
@@ -94,6 +96,15 @@ export default function ResumeCartNav() {
         (sum, item) => sum + item.product.retail_price * item.quantity,
         0
     );
+
+    // Detectar cuando se agrega algo al carrito
+    useEffect(() => {
+        if (totalItems > 0) {
+            setIsAnimating(true);
+            const timer = setTimeout(() => setIsAnimating(false), 600);
+            return () => clearTimeout(timer);
+        }
+    }, [totalItems]);
 
     // Generar mensaje de WhatsApp con el pedido
     const generateWhatsAppMessage = () => {
@@ -171,13 +182,29 @@ export default function ResumeCartNav() {
         <Sheet>
             <SheetTrigger asChild>
                 <Button variant="outline" className="relative">
-                    <ShoppingCart className="h-5 w-5 mr-2" />
+                    <motion.div
+                        animate={isAnimating ? {
+                            scale: [1, 1.15, 1],
+                        } : {}}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                    >
+                        <ShoppingCart className="h-5 w-5 mr-2" />
+                    </motion.div>
                     <span className="hidden sm:inline">Carrito</span>
-                    {totalItems > 0 && (
-                        <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                            {totalItems > 99 ? '99+' : totalItems}
-                        </span>
-                    )}
+                    <AnimatePresence mode="wait">
+                        {totalItems > 0 && (
+                            <motion.span
+                                key={totalItems}
+                                initial={{ scale: 0.5, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                exit={{ scale: 0.5, opacity: 0 }}
+                                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center"
+                            >
+                                {totalItems > 99 ? '99+' : totalItems}
+                            </motion.span>
+                        )}
+                    </AnimatePresence>
                 </Button>
             </SheetTrigger>
             <SheetContent className="flex flex-col h-full">
@@ -326,106 +353,111 @@ export default function ResumeCartNav() {
             
             {/* Modal de checkout con WhatsApp */}
             <Dialog open={isCheckoutOpen} onOpenChange={setIsCheckoutOpen}>
-                <DialogContent className="sm:max-w-[425px]">
+                <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
                     <DialogHeader>
-                        <DialogTitle className="flex items-center gap-2">
-                            <MessageCircle className="h-5 w-5 text-green-600" />
-                            Finalizar Pedido por WhatsApp
+                        <DialogTitle className="flex items-center gap-2 text-base sm:text-lg">
+                            <MessageCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
+                            <span className="line-clamp-2">Finalizar Pedido por WhatsApp</span>
                         </DialogTitle>
-                        <DialogDescription>
+                        <DialogDescription className="text-xs sm:text-sm">
                             Completa tus datos para enviar el pedido. Te responderemos lo antes posible.
                         </DialogDescription>
                     </DialogHeader>
                     
-                    <div className="space-y-4 py-4">
+                    <div className="space-y-3 sm:space-y-4 py-2 sm:py-4">
                         {/* Resumen del pedido */}
-                        <div className="bg-accent/50 rounded-lg p-3 space-y-2">
-                            <h4 className="font-medium text-sm">Resumen del pedido</h4>
-                            <div className="text-sm text-muted-foreground">
+                        <div className="bg-accent/50 rounded-lg p-2 sm:p-3 space-y-2">
+                            <h4 className="font-medium text-xs sm:text-sm">Resumen del pedido</h4>
+                            <div className="text-xs sm:text-sm text-muted-foreground max-h-32 overflow-y-auto">
                                 {cart.map((item) => (
-                                    <div key={item.cartKey} className="flex justify-between">
-                                        <span className="truncate flex-1 mr-2">
+                                    <div key={item.cartKey} className="flex justify-between gap-2 py-1">
+                                        <span className="truncate flex-1 min-w-0">
                                             {item.quantity}x {item.product.name}
                                         </span>
-                                        <span className="font-medium">
+                                        <span className="font-medium whitespace-nowrap">
                                             ${formatPrice(item.product.retail_price * item.quantity)}
                                         </span>
                                     </div>
                                 ))}
                             </div>
-                            <div className="border-t pt-2 flex justify-between font-bold">
+                            <div className="border-t pt-2 flex justify-between font-bold text-sm sm:text-base">
                                 <span>Total</span>
                                 <span className="text-primary">${formatPrice(totalPrice)}</span>
                             </div>
                         </div>
                         
                         {/* Formulario de datos */}
-                        <div className="space-y-3">
-                            <div className="space-y-2">
-                                <Label htmlFor="name">Nombre completo *</Label>
+                        <div className="space-y-2 sm:space-y-3">
+                            <div className="space-y-1 sm:space-y-2">
+                                <Label htmlFor="name" className="text-xs sm:text-sm">Nombre completo *</Label>
                                 <Input
                                     id="name"
                                     placeholder="Tu nombre"
                                     value={customerInfo.name}
                                     onChange={(e) => setCustomerInfo(prev => ({ ...prev, name: e.target.value }))}
+                                    className="text-sm"
                                 />
                             </div>
                             
-                            <div className="space-y-2">
-                                <Label htmlFor="phone">Teléfono *</Label>
+                            <div className="space-y-1 sm:space-y-2">
+                                <Label htmlFor="phone" className="text-xs sm:text-sm">Teléfono *</Label>
                                 <Input
                                     id="phone"
                                     type="tel"
                                     placeholder="11-1234-5678"
                                     value={customerInfo.phone}
                                     onChange={(e) => setCustomerInfo(prev => ({ ...prev, phone: e.target.value }))}
+                                    className="text-sm"
                                 />
                             </div>
                             
-                            <div className="space-y-2">
-                                <Label htmlFor="address">Dirección (opcional)</Label>
+                            <div className="space-y-1 sm:space-y-2">
+                                <Label htmlFor="address" className="text-xs sm:text-sm">Dirección (opcional)</Label>
                                 <Input
                                     id="address"
                                     placeholder="Tu dirección de envío"
                                     value={customerInfo.address}
                                     onChange={(e) => setCustomerInfo(prev => ({ ...prev, address: e.target.value }))}
+                                    className="text-sm"
                                 />
                             </div>
                             
-                            <div className="space-y-2">
-                                <Label htmlFor="notes">Notas adicionales (opcional)</Label>
+                            <div className="space-y-1 sm:space-y-2">
+                                <Label htmlFor="notes" className="text-xs sm:text-sm">Notas adicionales (opcional)</Label>
                                 <Textarea
                                     id="notes"
                                     placeholder="Algún comentario sobre tu pedido..."
                                     rows={2}
                                     value={customerInfo.notes}
                                     onChange={(e) => setCustomerInfo(prev => ({ ...prev, notes: e.target.value }))}
+                                    className="text-sm resize-none"
                                 />
                             </div>
                         </div>
                     </div>
                     
-                    <DialogFooter>
+                    <DialogFooter className="flex-col sm:flex-row gap-2">
                         <Button
                             variant="outline"
                             onClick={() => setIsCheckoutOpen(false)}
+                            className="w-full sm:w-auto text-sm"
                         >
                             Cancelar
                         </Button>
                         <Button
-                            className="bg-green-600 hover:bg-green-700"
+                            className="bg-green-600 hover:bg-green-700 w-full sm:w-auto text-sm"
                             onClick={handleSendWhatsApp}
                             disabled={!customerInfo.name || !customerInfo.phone || isSending}
                         >
                             {isSending ? (
                                 <>
                                     <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                                    Enviando...
+                                    <span>Enviando...</span>
                                 </>
                             ) : (
                                 <>
                                     <ExternalLink className="h-4 w-4 mr-2" />
-                                    Enviar a WhatsApp
+                                    <span>Enviar a WhatsApp</span>
                                 </>
                             )}
                         </Button>

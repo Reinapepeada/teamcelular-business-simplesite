@@ -9,7 +9,9 @@ import {
   FaArrowRight,
   FaBookOpen,
   FaClock,
-  FaChartLine
+  FaChartLine,
+  FaBatteryFull,
+  FaMobileAlt
 } from "react-icons/fa";
 
 const ARTICLES = [
@@ -57,29 +59,62 @@ const ARTICLES = [
     datePublished: "2024-04-05",
     keywords: ["mantenimiento", "preventivo", "cuidado celular", "batería"],
   },
+  {
+    title: "Cambio de batería de celular",
+    description:
+      "Guía completa sobre reemplazo de batería: tipos, señales de deterioro, proceso profesional y garantía.",
+    href: "/guias/cambio-bateria-celular",
+    category: "Reparaciones",
+    readingTime: "5 min",
+    Icon: FaBatteryFull,
+    datePublished: "2024-11-30",
+    keywords: ["cambio batería", "batería original", "batería certificada", "garantía"],
+  },
+  {
+    title: "Reparación de pantalla de celular",
+    description:
+      "Todo sobre cambio de pantalla: displays OLED originales, True Tone, Face ID y tipos de daños.",
+    href: "/guias/reparacion-pantalla-celular",
+    category: "Reparaciones",
+    readingTime: "6 min",
+    Icon: FaMobileAlt,
+    datePublished: "2024-11-30",
+    keywords: ["cambio pantalla", "display OLED", "True Tone", "pantalla original"],
+  },
 ];
 
 export const metadata: Metadata = {
   title: "Guías Técnicas de Reparación de Celulares | Centro de Conocimiento Team Celular",
   description:
-    "Guías profesionales sobre reparación de iPhone, microelectrónica, reballing BGA, soporte corporativo y mantenimiento preventivo. Aprende de expertos con más de 10 años en CABA.",
+    "6 guías profesionales: reparación iPhone, cambio de batería, pantalla, microelectrónica, reballing BGA, soporte corporativo y mantenimiento preventivo. Expertos con +10 años en CABA.",
   keywords: [
     "guías reparación celulares",
-    "tutoriales iPhone",
+    "cambio batería celular",
+    "cambio pantalla celular",
+    "reparación iPhone Buenos Aires",
     "microelectrónica móviles",
     "mantenimiento preventivo smartphones",
     "soporte técnico empresas",
     "reballing BGA",
-    "reparación profesional Buenos Aires",
   ],
   authors: [{ name: "Team Celular" }],
-  alternates: {
-    canonical: "https://teamcelular.com/guias",
+  creator: "Team Celular",
+  publisher: "Team Celular",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   openGraph: {
-    title: "Centro de Conocimiento | Guías Técnicas Team Celular",
+    title: "Centro de Conocimiento | 6 Guías Técnicas Team Celular",
     description:
-      "Aprende de expertos: reparación de iPhone, microelectrónica avanzada y soporte corporativo en Buenos Aires.",
+      "Aprende de expertos: reparación iPhone, cambio de batería y pantalla, microelectrónica avanzada y soporte corporativo en Buenos Aires.",
     type: "website",
     url: "https://teamcelular.com/guias",
     locale: "es_AR",

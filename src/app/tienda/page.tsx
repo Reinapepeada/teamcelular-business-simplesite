@@ -47,9 +47,8 @@ function TechShopContent() {
             total: response.total,
             pages: response.pages,
             page: response.page,
-        }); // Set the product list
+        });
         setProducts(response.products);
-        setCurrentPage(response.page); // Backend page starts from 0; adjust for 1-based UI
         setIsLoading(false);
     }, []);
 

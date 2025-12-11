@@ -1,6 +1,30 @@
 import { MetadataRoute } from "next";
+import { getAllProductImages } from '@/services/products';
+import type { Product } from '@/app/tienda/product';
+
+// Revalidate sitemap every 24 hours
+export const revalidate = 86400;
 
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+// Fetch products with cache for sitemap generation
+async function getAllProductsForSitemap(): Promise<Product[]> {
+  try {
+    const response = await fetch(`${apiUrl}/products/all`, {
+      next: { revalidate: 86400 }, // Cache for 24 hours
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching products for sitemap:', error);
+    return [];
+  }
+}
 
 // Páginas principales con alta prioridad
 const mainPages = [

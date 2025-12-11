@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation';
 import { motion } from "framer-motion";
 import Image from "next/image";
 import {
@@ -13,9 +14,9 @@ import {
     Button,
     Chip,
 } from "@nextui-org/react";
-import Link from "next/link";
 
 import { ShoppingCart, Star } from "lucide-react";
+import CartNotification from "@/components/cart/CartNotification";
 
 function ProductsCardsStore({
     products,
@@ -24,8 +25,30 @@ function ProductsCardsStore({
     isLoading,
     addToCart,
 }) {
+    const router = useRouter();
     const [sortBy, setSortBy] = useState(null);
     const [sortedProducts, setSortedProducts] = useState(products);
+    const [navigatingTo, setNavigatingTo] = useState(null);
+    const [showNotification, setShowNotification] = useState(false);
+    const [addedProductName, setAddedProductName] = useState("");
+
+    const handleCardClick = (productId) => {
+        setNavigatingTo(productId);
+        router.push(`/tienda/${productId}`);
+    };
+
+    const handleAddToCart = (e, product) => {
+        e.preventDefault();
+        e.stopPropagation();
+        addToCart(product, null, 1);
+        // Reset notification state first
+        setShowNotification(false);
+        // Then trigger it again with new product
+        setTimeout(() => {
+            setAddedProductName(product.name);
+            setShowNotification(true);
+        }, 10);
+    };
 
     useEffect(() => {
         let updatedProducts = [...products];
@@ -43,6 +66,7 @@ function ProductsCardsStore({
 
     return (
         <>
+            <CartNotification show={showNotification} productName={addedProductName} />
             {/* Contenedor del sort */}
             <div className="flex justify-between items-center mt-4">
                 <h2 className="text-xl font-bold">Productos</h2>
@@ -109,97 +133,124 @@ function ProductsCardsStore({
                           </Card>
                       ))
                     : sortedProducts.map((product) => (
-                          <Card
+                          <div
                               key={product.id}
-                              className="p-4 shadow rounded-lg border flex flex-col items-start">
-                              <Link
-                                  href={`/tienda/${product.id}`}
-                                  className="w-full">
-                                  <motion.div
-                                      whileHover={{ scale: 1.05 }}
-                                      className="w-full h-48 flex items-center justify-center overflow-hidden">
-                                      <Image
-                                          src={
-                                              product?.variants?.[0]?.images?.[0]
-                                                  ?.image_url ||
-                                              "/placeholder.jpg"
-                                          }
-                                          alt={product.name}
-                                          width={192}
-                                          height={192}
-                                          className="object-contain h-full"
-                                      />
-                                  </motion.div>
-                                  <div className="text-left">
-                                      <h3 className="mt-2 mx-1 text-lg font-semibold">
-                                          {product.name}
-                                      </h3>
-                                      {/* Pricing Section */}
-                                      <div className="mx-1">
-                                          <p className="text-xl font-semibold text-gray-300">
-                                              $
-                                              {product.retail_price
-                                                  .toFixed(0)
-                                                  .replace(
-                                                      /\B(?=(\d{3})+(?!\d))/g,
-                                                      "."
-                                                  )}
-                                          </p>
+                              className={`cursor-pointer ${navigatingTo === product.id ? 'pointer-events-none' : ''}`}
+                              onClick={() => handleCardClick(product.id)}
+                              onTouchEnd={(e) => {
+                                  e.preventDefault();
+                                  handleCardClick(product.id);
+                              }}
+                              role="article"
+                              tabIndex={0}
+                              onKeyDown={(e) => {
+                                  if (e.key === 'Enter' || e.key === ' ') {
+                                      e.preventDefault();
+                                      handleCardClick(product.id);
+                                  }
+                              }}
+                          >
+                              <Card 
+                                  className={`p-4 shadow rounded-lg border flex flex-col items-start h-full hover:shadow-lg transition-all relative ${
+                                      navigatingTo === product.id ? 'opacity-60' : ''
+                                  }`}
+                              >
+                                  {navigatingTo === product.id && (
+                                      <div className="absolute inset-0 flex items-center justify-center bg-background/30 backdrop-blur-[2px] rounded-lg pointer-events-none z-10">
+                                          <motion.div
+                                              animate={{ rotate: 360 }}
+                                              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                                          >
+                                              <ShoppingCart className="h-8 w-8 text-primary" />
+                                          </motion.div>
                                       </div>
+                                  )}
+                              <motion.div
+                                  whileHover={{ scale: 1.05 }}
+                                  className="w-full h-48 flex items-center justify-center overflow-hidden bg-gray-100 dark:bg-gray-800 rounded-md">
+                                  <Image
+                                      src={
+                                          product?.variants?.[0]?.images?.[0]
+                                              ?.image_url ||
+                                          "/placeholder.jpg"
+                                      }
+                                      alt={product.name}
+                                      width={192}
+                                      height={192}
+                                      className="object-contain h-full"
+                                  />
+                              </motion.div>
 
-                                      {/* Escasez */}
-                                      {product.variants && product.variants.reduce((total, v) => total + (v.stock || 0), 0) < 10 && product.variants.reduce((total, v) => total + (v.stock || 0), 0) > 0 && (
-                                          <p className="text-sm text-yellow-500 font-bold mx-1 animate-pulse">
-                                              ¡Últimas {product.variants.reduce((total, v) => total + (v.stock || 0), 0)} unidades!
-                                          </p>
-                                      )}
-                                      {/* Calificación
-                                    <div className="flex items-center mx-1 mt-1">
-                                        {[...Array(5)].map((_, i) => (
-                                            <Star
-                                                key={i}
-                                                size={16}
-                                                fill={i < product.rating ? "#FFD700" : "none"}
-                                                stroke="#FFD700"
-                                            />
-                                        ))}
-                                        <span className="text-sm text-gray-500 ml-2">
-                                            ({product.reviewCount} reseñas)
-                                        </span>
-                                    </div> */}
-                                      {/* Categoría y marca */}
-                                      <div className="flex flex-wrap gap-1 mt-1">
-                                          {product.category && (
-                                              <Chip
-                                                  variant="dot"
-                                                  color="secondary"
-                                                  className="my-1">
-                                                  {product.category.name}
-                                              </Chip>
-                                          )}
-                                          {product.brand && (
-                                              <Chip
-                                                  variant="flat"
-                                                  color="warning"
-                                                  className="my-1">
-                                                  {product.brand.name}
-                                              </Chip>
-                                          )}
-                                      </div>
+                              <div className="text-left w-full mt-2">
+                                  <h3 className="mt-2 mx-1 text-lg font-semibold line-clamp-2">
+                                      {product.name}
+                                  </h3>
+                                  {/* Pricing Section */}
+                                  <div className="mx-1">
+                                      <p className="text-2xl font-bold text-primary">
+                                          $
+                                          {product.retail_price
+                                              .toFixed(0)
+                                              .replace(
+                                                  /\B(?=(\d{3})+(?!\d))/g,
+                                                  "."
+                                              )}
+                                      </p>
                                   </div>
-                              </Link>
-                              <div className="flex justify-center w-full">
-                                  <Button
-                                      onClick={() => addToCart(product, null, 1)}
-                                      className="mt-4"
-                                      variant="shadow"
-                                      size="sm"
-                                      color="primary">
-                                      Agregar al
-                                      <ShoppingCart className="h-5 w-5" />
-                                  </Button>
+
+                                  {/* Escasez */}
+                                  {product.variants && product.variants.reduce((total, v) => total + (v.stock || 0), 0) < 10 && product.variants.reduce((total, v) => total + (v.stock || 0), 0) > 0 && (
+                                      <p className="text-sm text-yellow-500 font-bold mx-1 animate-pulse">
+                                          ¡Últimas {product.variants.reduce((total, v) => total + (v.stock || 0), 0)} unidades!
+                                      </p>
+                                  )}
+
+                                  {/* Categoría y marca */}
+                                  <div className="flex flex-wrap gap-1 mt-1">
+                                      {product.category && (
+                                          <Chip
+                                              variant="dot"
+                                              color="secondary"
+                                              className="my-1">
+                                              {product.category.name}
+                                          </Chip>
+                                      )}
+                                      {product.brand && (
+                                          <Chip
+                                              variant="flat"
+                                              color="warning"
+                                              className="my-1">
+                                              {product.brand.name}
+                                          </Chip>
+                                      )}
+                                  </div>
                               </div>
-                          </Card>
+
+                                  <div className="flex justify-center w-full mt-auto relative z-20">
+                                      <Button
+                                          onPress={(e) => {
+                                              if (e) {
+                                                  e.stopPropagation?.();
+                                              }
+                                              addToCart(product, null, 1);
+                                              setShowNotification(false);
+                                              setTimeout(() => {
+                                                  setAddedProductName(product.name);
+                                                  setShowNotification(true);
+                                              }, 10);
+                                          }}
+                                          aria-label={`Agregar ${product.name} al carrito`}
+                                          className="mt-4"
+                                          variant="shadow"
+                                          size="sm"
+                                          color="primary"
+                                      >
+                                          Agregar al
+                                          <ShoppingCart className="h-5 w-5" />
+                                      </Button>
+                                  </div>
+                              </Card>
+                          </div>
                       ))}
             </div>
             <div className="flex justify-center mt-4">
