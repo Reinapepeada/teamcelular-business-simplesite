@@ -1,37 +1,8 @@
-import React from 'react';
 import ProductDetailClient from './ProductDetailClient';
 import { getProductById, getPrimaryImage } from '@/services/products';
 import { fetchWithCache } from '@/lib/serverCache';
 import probe from 'probe-image-size';
 
-import React, { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-    Button, 
-    Chip, 
-    Skeleton, 
-    Card,
-    Divider,
-    Badge
-} from "@nextui-org/react";
-import { 
-    ShoppingCart, 
-    Heart, 
-    Share2, 
-    ChevronLeft, 
-    ChevronRight,
-    Shield,
-    Truck,
-    RotateCcw,
-    Check,
-    Minus,
-    Plus,
-    ArrowLeft
-} from "lucide-react";
-import ProductSchema from "@/components/seo/ProductSchema";
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || 'https://teamcelular.com';
 const DEFAULT_LAT = process.env.NEXT_PUBLIC_BUSINESS_LAT || '-34.6037';
 const DEFAULT_LON = process.env.NEXT_PUBLIC_BUSINESS_LON || '-58.3816';

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { motion } from "framer-motion";
 import Image from "next/image";
 import {
@@ -14,9 +14,9 @@ import {
     Button,
     Chip,
 } from "@nextui-org/react";
+// Link not used here; we'll handle navigation via router.push for full-card clicks
 
 import { ShoppingCart, Star } from "lucide-react";
-import CartNotification from "@/components/cart/CartNotification";
 
 function ProductsCardsStore({
     products,
@@ -25,30 +25,9 @@ function ProductsCardsStore({
     isLoading,
     addToCart,
 }) {
-    const router = useRouter();
+    // router not needed when using <Link>
     const [sortBy, setSortBy] = useState(null);
     const [sortedProducts, setSortedProducts] = useState(products);
-    const [navigatingTo, setNavigatingTo] = useState(null);
-    const [showNotification, setShowNotification] = useState(false);
-    const [addedProductName, setAddedProductName] = useState("");
-
-    const handleCardClick = (productId) => {
-        setNavigatingTo(productId);
-        router.push(`/tienda/${productId}`);
-    };
-
-    const handleAddToCart = (e, product) => {
-        e.preventDefault();
-        e.stopPropagation();
-        addToCart(product, null, 1);
-        // Reset notification state first
-        setShowNotification(false);
-        // Then trigger it again with new product
-        setTimeout(() => {
-            setAddedProductName(product.name);
-            setShowNotification(true);
-        }, 10);
-    };
 
     useEffect(() => {
         let updatedProducts = [...products];
@@ -66,7 +45,6 @@ function ProductsCardsStore({
 
     return (
         <>
-            <CartNotification show={showNotification} productName={addedProductName} />
             {/* Contenedor del sort */}
             <div className="flex justify-between items-center mt-4">
                 <h2 className="text-xl font-bold">Productos</h2>
@@ -133,38 +111,18 @@ function ProductsCardsStore({
                           </Card>
                       ))
                     : sortedProducts.map((product) => (
-                          <div
+                          <Card
                               key={product.id}
-                              className={`cursor-pointer ${navigatingTo === product.id ? 'pointer-events-none' : ''}`}
-                              onClick={() => handleCardClick(product.id)}
-                              onTouchEnd={(e) => {
-                                  e.preventDefault();
-                                  handleCardClick(product.id);
-                              }}
-                              role="article"
-                              tabIndex={0}
-                              onKeyDown={(e) => {
-                                  if (e.key === 'Enter' || e.key === ' ') {
-                                      e.preventDefault();
-                                      handleCardClick(product.id);
-                                  }
-                              }}
+                              className="relative p-4 shadow rounded-lg border flex flex-col items-start cursor-pointer focus:outline-none focus:focus-ring"
                           >
-                              <Card 
-                                  className={`p-4 shadow rounded-lg border flex flex-col items-start h-full hover:shadow-lg transition-all relative ${
-                                      navigatingTo === product.id ? 'opacity-60' : ''
-                                  }`}
+                              <Link
+                                  href={`/tienda/${product.id}`}
+                                  aria-label={`Ver ${product.name}`}
+                                  className="absolute inset-0 z-10"
+                                  style={{ display: 'block' }}
                               >
-                                  {navigatingTo === product.id && (
-                                      <div className="absolute inset-0 flex items-center justify-center bg-background/30 backdrop-blur-[2px] rounded-lg pointer-events-none z-10">
-                                          <motion.div
-                                              animate={{ rotate: 360 }}
-                                              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                                          >
-                                              <ShoppingCart className="h-8 w-8 text-primary" />
-                                          </motion.div>
-                                      </div>
-                                  )}
+                                  <span className="sr-only">Ir al producto</span>
+                              </Link>
                               <motion.div
                                   whileHover={{ scale: 1.05 }}
                                   className="w-full h-48 flex items-center justify-center overflow-hidden bg-gray-100 dark:bg-gray-800 rounded-md">
@@ -181,7 +139,7 @@ function ProductsCardsStore({
                                   />
                               </motion.div>
 
-                              <div className="text-left w-full mt-2">
+                              <div className="text-left w-full mt-2 z-0">
                                   <h3 className="mt-2 mx-1 text-lg font-semibold line-clamp-2">
                                       {product.name}
                                   </h3>
@@ -226,31 +184,20 @@ function ProductsCardsStore({
                                   </div>
                               </div>
 
-                                  <div className="flex justify-center w-full mt-auto relative z-20">
-                                      <Button
-                                          onPress={(e) => {
-                                              if (e) {
-                                                  e.stopPropagation?.();
-                                              }
-                                              addToCart(product, null, 1);
-                                              setShowNotification(false);
-                                              setTimeout(() => {
-                                                  setAddedProductName(product.name);
-                                                  setShowNotification(true);
-                                              }, 10);
-                                          }}
-                                          aria-label={`Agregar ${product.name} al carrito`}
-                                          className="mt-4"
-                                          variant="shadow"
-                                          size="sm"
-                                          color="primary"
-                                      >
-                                          Agregar al
-                                          <ShoppingCart className="h-5 w-5" />
-                                      </Button>
-                                  </div>
-                              </Card>
-                          </div>
+                              <div className="flex justify-center w-full z-20">
+                                  <Button
+                                      onClick={e => { e.stopPropagation(); addToCart(product, null, 1); }}
+                                      aria-label={`Agregar ${product.name} al carrito`}
+                                      className="mt-4"
+                                      variant="shadow"
+                                      size="sm"
+                                      color="primary"
+                                  >
+                                      Agregar al
+                                      <ShoppingCart className="h-5 w-5" />
+                                  </Button>
+                              </div>
+                          </Card>
                       ))}
             </div>
             <div className="flex justify-center mt-4">
