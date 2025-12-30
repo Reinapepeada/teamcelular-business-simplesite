@@ -98,7 +98,7 @@ export async function generateMetadata({ params }: any) {
                 siteName: 'Team Celular',
                 images: [ogImageObj],
                 locale: 'es_AR',
-                type: 'product',
+                type: 'website',
             },
             twitter: {
                 card: 'summary_large_image',
@@ -114,7 +114,6 @@ export async function generateMetadata({ params }: any) {
                 ICBM: `${lat}, ${lon}`,
                 'product:price:amount': product.retail_price?.toString(),
                 'product:price:currency': 'ARS',
-                'og:type': 'product',
                 'og:price:amount': product.retail_price?.toString(),
                 'og:price:currency': 'ARS',
             },
