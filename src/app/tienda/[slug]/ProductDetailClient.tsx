@@ -266,6 +266,7 @@ export default function ProductDetailClient({ productIdProp, productProp }: Prop
                                     fill
                                     className="object-contain p-4"
                                     priority
+                                    sizes="(max-width: 1024px) 100vw, 50vw"
                                 />
                             </motion.div>
                         </AnimatePresence>
@@ -316,6 +317,7 @@ export default function ProductDetailClient({ productIdProp, productProp }: Prop
                                         alt={`${product.name} - ${index + 1}`}
                                         fill
                                         className="object-cover"
+                                        sizes="80px"
                                     />
                                 </button>
                             ))}
@@ -545,6 +547,7 @@ export default function ProductDetailClient({ productIdProp, productProp }: Prop
                                             width={60}
                                             height={60}
                                             className="rounded-lg object-cover"
+                                            sizes="60px"
                                         />
                                     )}
                                     <div>

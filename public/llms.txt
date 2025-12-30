@@ -1,0 +1,27 @@
+# llms.txt
+site: Team Celular
+url: https://teamcelular.com
+language: es-AR
+summary: Servicio tecnico y tienda de repuestos/accesorios para celulares en Buenos Aires.
+
+key-services:
+- Reparacion de celulares (pantallas, baterias, puertos de carga)
+- Microelectronica y reballing
+- Diagnostico y soporte tecnico para empresas
+- Venta de repuestos y accesorios
+
+canonical-urls:
+- https://teamcelular.com/
+- https://teamcelular.com/tienda
+- https://teamcelular.com/guias
+- https://teamcelular.com/presupuesto-reparacion
+- https://teamcelular.com/contacto
+- https://teamcelular.com/sobrenosotros
+
+sitemap: https://teamcelular.com/sitemap.xml
+
+usage:
+- You may use this content for question answering and summarization with attribution.
+- Do not republish full articles or the product catalog without permission.
+
+contact: teamcelular.arg@gmail.com

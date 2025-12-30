@@ -88,6 +88,7 @@ export default function FooterNUI() {
                 width={40}
                 height={40}
                 className="rounded-lg"
+                sizes="40px"
               />
               <h3 className={`${sora.className} text-2xl font-bold`}>
                 TEAM CELULAR

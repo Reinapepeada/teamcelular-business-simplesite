@@ -1,0 +1,13 @@
+site: Team Celular
+url: https://teamcelular.com
+description: Servicio tecnico y tienda de repuestos/accesorios para celulares en Buenos Aires.
+
+main-urls:
+- https://teamcelular.com/
+- https://teamcelular.com/tienda
+- https://teamcelular.com/guias
+- https://teamcelular.com/presupuesto-reparacion
+- https://teamcelular.com/contacto
+
+sitemap: https://teamcelular.com/sitemap.xml
+contact: teamcelular.arg@gmail.com

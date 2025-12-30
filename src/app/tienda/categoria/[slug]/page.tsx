@@ -27,16 +27,38 @@ export async function generateMetadata({ params }: any) {
       : 'Categoría de productos en Teamcelular.';
 
     const url = `${SITE_URL}/tienda/categoria/${slug}`;
+    const fallbackImage = `${SITE_URL}/images/teamcelular.webp`;
 
     return {
       title,
       description,
-      alternates: { canonical: url },
+      alternates: {
+        canonical: url,
+        languages: {
+          "es-AR": url,
+        },
+      },
       openGraph: {
         title,
         description,
         url,
         siteName: 'Teamcelular',
+        type: 'website',
+        locale: 'es_AR',
+        images: [
+          {
+            url: fallbackImage,
+            width: 1200,
+            height: 630,
+            alt: `Categoría ${categoryName || 'Productos'} - Teamcelular`,
+          },
+        ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: [fallbackImage],
       },
     } as any;
   } catch (err) {

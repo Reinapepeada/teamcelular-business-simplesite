@@ -3,10 +3,11 @@ import { BentoGrid, BentoGridItem } from "./bento-grid";
 import  Image  from "next/image";
 
 import {
-  IconHeadphones,
-  IconPlug,
-  IconShieldCheck,IconCpu
-} from "@tabler/icons-react";
+  Headphones,
+  Plug,
+  ShieldCheck,
+  Cpu
+} from "lucide-react";
 
 export default function BentoGridSecondDemo() {
     return (
@@ -24,6 +25,7 @@ export default function BentoGridSecondDemo() {
                                 className="object-cover w-full h-full rounded-xl"
                                 width={700}
                                 height={400}
+                                sizes="(max-width: 768px) 100vw, 50vw"
                             />
                         </div>
                     }
@@ -42,7 +44,7 @@ const items = [
       description: "Protege tu dispositivo con estilo y funcionalidad.",
       header: "/images/fundaOtter.webp", // Ruta de la imagen para fundas y protectores.
       className: "md:col-span-2",
-      icon: <IconShieldCheck className="h-4 w-4 text-neutral-500" />, // Icono de una funda o escudo de protección.
+      icon: <ShieldCheck className="h-4 w-4 text-neutral-500" />, // Icono de una funda o escudo de protección.
       link: "/tienda/fundas-y-protectores",
     },
     {
@@ -50,7 +52,7 @@ const items = [
       description: "Mantén tus dispositivos cargados y listos para usar.",
       header: "/images/cargadores.webp", // Ruta de la imagen para cargadores y cables.
       className: "md:col-span-1",
-      icon: <IconPlug className="h-4 w-4 text-neutral-500" />, // Icono de un cargador o enchufe.
+      icon: <Plug className="h-4 w-4 text-neutral-500" />, // Icono de un cargador o enchufe.
       link: "/tienda/cargadores-y-cables",
     },
     {
@@ -58,7 +60,7 @@ const items = [
       description: "Disfruta de tu música y llamadas con la mejor calidad de sonido.",
       header: "/images/aurisBlue.webp", // Ruta de la imagen para auriculares y accesorios de audio.
       className: "md:col-span-1",
-      icon: <IconHeadphones className="h-4 w-4 text-neutral-500" />, // Icono de unos auriculares.
+      icon: <Headphones className="h-4 w-4 text-neutral-500" />, // Icono de unos auriculares.
       link: "/tienda/auriculares-y-audio",
     },
     {
@@ -66,7 +68,7 @@ const items = [
       description: "Repara o mejora tu computadora con las mejores piezas.",
       header: "/images/componentes-pc-gaming.webp", // Ruta de la imagen para piezas de computadora.
       className: "md:col-span-2",
-      icon: <IconCpu className="h-4 w-4 text-neutral-500" />, // Ejemplo de un icono de placa base.
+      icon: <Cpu className="h-4 w-4 text-neutral-500" />, // Ejemplo de un icono de placa base.
       link: "/tienda/piezas-para-desktop-y-notebook",
     },
 ];

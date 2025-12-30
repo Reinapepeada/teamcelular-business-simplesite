@@ -156,6 +156,7 @@ function ProductsCardsStore({
                                       width={192}
                                       height={192}
                                       className="object-contain h-full"
+                                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                                   />
                               </motion.div>
 

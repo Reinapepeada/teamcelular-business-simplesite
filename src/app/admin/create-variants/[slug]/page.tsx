@@ -4,9 +4,9 @@ import { getProductById } from "@/services/products";
 export default async function Page({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }) {
-  const slug = params.slug;
+  const { slug } = await params;
   let productName = "";
 
   try {

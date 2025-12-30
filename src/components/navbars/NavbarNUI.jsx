@@ -38,6 +38,7 @@ export default function NavbarNUI() {
                             alt="Logo de Team Celular reparacion celulares"
                             width={100}
                             height={200}
+                            sizes="44px"
                         />
                         <p className="font-bold text-white text-xl text-inherit hidden lg:flex">
                             Team Celular
