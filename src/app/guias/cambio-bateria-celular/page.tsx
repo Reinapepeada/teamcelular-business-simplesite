@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import ArticleSchema from "@/components/seo/ArticleSchema";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import {
   FaBatteryFull,
   FaBatteryHalf,
@@ -16,10 +18,12 @@ import {
   FaApple,
 } from "react-icons/fa";
 
+const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+
 export const metadata: Metadata = {
   title: "Cambio de Batería Celular Buenos Aires | Service Certificado CABA",
   description:
-    "⚡ Cambio de batería celular: baterías originales ✓ certificadas ✓ garantía 6 meses ✓ Service en 1-2hs. iPhone, Samsung, Motorola. Diagnóstico gratis en Recoleta, CABA.",
+    "Cambio de batería celular con baterías originales y certificadas, garantía de 6 meses y service en 1-2 hs. iPhone, Samsung, Motorola. Diagnóstico gratis en Recoleta, CABA.",
   keywords: [
     "cambio batería celular Buenos Aires",
     "batería iPhone original",
@@ -180,6 +184,22 @@ const faqBattery = [
 export default function BatteryReplacementGuide() {
   return (
     <div className="flex w-full justify-center px-4 py-16">
+      <ArticleSchema
+        title="Cambio de batería celular en Buenos Aires | Service Certificado Team Celular"
+        description="Cambio de batería con repuestos originales y certificados. Garantía escrita y service express en 1-2 horas. Atención iPhone, Samsung y Motorola en CABA."
+        publishedTime="2024-11-30T00:00:00Z"
+        modifiedTime="2025-12-11T00:00:00Z"
+        authorName="Team Celular"
+        image="https://teamcelular.com/images/teamcelular.webp"
+        url="https://teamcelular.com/guias/cambio-bateria-celular"
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Inicio", url: `${SITE_URL}/` },
+          { name: "Guías", url: `${SITE_URL}/guias` },
+          { name: "Cambio de batería", url: `${SITE_URL}/guias/cambio-bateria-celular` },
+        ]}
+      />
       <article className="w-full max-w-6xl space-y-16">
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">

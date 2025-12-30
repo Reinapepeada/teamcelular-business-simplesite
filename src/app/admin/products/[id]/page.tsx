@@ -48,6 +48,7 @@ import {
     ImageIcon,
 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { PRODUCT_DESCRIPTION_MAX } from "@/lib/product-constants";
 
 import { getProductById, updateProduct, deleteProductVariant } from "@/services/products";
 import { getbrands } from "@/services/brands";
@@ -59,7 +60,7 @@ import CreateCategoryModal from "@/components/modals/create-category-modal";
 const formSchema = z.object({
     serial_number: z.string().min(1, "Requerido"),
     name: z.string().min(1, "Requerido").max(100),
-    description: z.string().optional(),
+    description: z.string().max(PRODUCT_DESCRIPTION_MAX).optional(),
     brand_id: z.number().optional().nullable(),
     category_id: z.number().optional().nullable(),
     warranty_time: z.number().optional().nullable(),
@@ -330,9 +331,16 @@ export default function EditProductPage() {
                                                     <Textarea
                                                         {...field}
                                                         value={field.value || ""}
-                                                        rows={4}
+                                                        rows={6}
+                                                        maxLength={PRODUCT_DESCRIPTION_MAX}
                                                     />
                                                 </FormControl>
+                                                <FormDescription className="flex justify-between">
+                                                    <span>Max {PRODUCT_DESCRIPTION_MAX} chars</span>
+                                                    <span>
+                                                        {(field.value || "").length}/{PRODUCT_DESCRIPTION_MAX}
+                                                    </span>
+                                                </FormDescription>
                                                 <FormMessage />
                                             </FormItem>
                                         )}

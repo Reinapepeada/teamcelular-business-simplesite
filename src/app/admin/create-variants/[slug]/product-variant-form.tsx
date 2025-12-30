@@ -21,7 +21,7 @@ import {
     uploadImagesToimgBB,
     createProductVariants,
 } from "@/services/products";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { ToastAction } from "@/components/ui/toast";
 import { getbranches } from "@/services/branches";
 import CreateBranchModal from "@/components/modals/create-branch-modal";
@@ -96,13 +96,14 @@ export default function ProductVariantForm({
     productId,
     productName,
 }: ProductVariantFormProps) {
+    const router = useRouter();
     const [variants, setVariants] = useState<Variant[]>([]);
     const [editingVariantId, setEditingVariantId] = useState<number | null>(
         null
     );
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [branches, setBranches] = useState<Branch[]>([]);
-    const [showNewBranch, setShowNewbranch] = useState(false);
+    const [showNewBranchForm, setShowNewBranchForm] = useState(false);
     const [selectedBranchId, setSelectedBranchId] = useState<number>(0);
 
     useEffect(() => {
@@ -111,7 +112,7 @@ export default function ProductVariantForm({
             setBranches(brands_server || []);
         }
         fetchBranches();
-    }, [showNewBranch]);
+    }, [showNewBranchForm]);
 
     const handleInputChange = (
         tempId: number,
@@ -137,11 +138,11 @@ export default function ProductVariantForm({
         name: keyof Variant,
         value: string
     ) => {
-        console.log(value.toUpperCase());
+        const normalizedValue = value ? value.toUpperCase() : value;
         setVariants((prevVariants) =>
             prevVariants.map((variant) =>
                 variant.tempId === tempId
-                    ? { ...variant, [name]: value.toLocaleUpperCase() }
+                    ? { ...variant, [name]: normalizedValue }
                     : variant
             )
         );
@@ -171,7 +172,6 @@ export default function ProductVariantForm({
 
     const addVariant = () => {
         const newVariant = { ...emptyVariant(productId), branch_id: selectedBranchId };
-        console.log("Adding variant:", newVariant);
         setVariants((prev) => [...prev, newVariant]);
         setEditingVariantId(newVariant.tempId);
     };
@@ -220,17 +220,15 @@ export default function ProductVariantForm({
             );
 
             // Create product variants
-            const response = await createProductVariants(variantsWithImages);
+            await createProductVariants(variantsWithImages);
 
-            // Success - response is array of created variants
-            console.log("Variants created successfully:", response);
             toast({
                 title: "Success",
                 description:
                     "Variants have been saved successfully. Redirecting to admin page...",
                 action: (
                     <ToastAction
-                        onClick={() => redirect("/admin")}
+                        onClick={() => router.push("/admin")}
                         altText="go to admin">
                         admin page
                     </ToastAction>
@@ -284,6 +282,7 @@ export default function ProductVariantForm({
                 <div>
                     <Label htmlFor={`color-${variant.tempId}`}>Color</Label>
                     <Select
+                        value={variant.color || ""}
                         onValueChange={(value) =>
                             handleSelectChange(variant.tempId, "color", value)
                         }>
@@ -305,6 +304,7 @@ export default function ProductVariantForm({
                 <div>
                     <Label htmlFor={`Unit-${variant.tempId}`}>Unit</Label>
                     <Select
+                        value={variant.unit || ""}
                         onValueChange={(value) =>
                             handleSelectChange(variant.tempId, "unit", value)
                         }
@@ -329,6 +329,7 @@ export default function ProductVariantForm({
                         Size Unit
                     </Label>
                     <Select
+                        value={variant.size_unit || ""}
                         onValueChange={(value) =>
                             handleSelectChange(
                                 variant.tempId,
@@ -447,8 +448,6 @@ export default function ProductVariantForm({
         </motion.div>
     );
 
-    const [showNewBranchForm, setShowNewBranchForm] = useState(false);
-    
     return (
         <>
             {showNewBranchForm && <CreateBranchModal isOpen={showNewBranchForm} setIsOpen={setShowNewBranchForm} />}
@@ -466,6 +465,7 @@ export default function ProductVariantForm({
                     <Label htmlFor={`branch-`}>Branch</Label>
                     <div className="flex space-x-2">
                         <Select
+                            value={selectedBranchId ? selectedBranchId.toString() : ""}
                             onValueChange={(value) => handleSelectBranchChange(value)}
                             required
                             >

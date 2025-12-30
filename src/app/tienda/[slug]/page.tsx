@@ -1,11 +1,23 @@
 import ProductDetailClient from './ProductDetailClient';
-import { getProductById, getPrimaryImage } from '@/services/products';
+import { getAllProductImages, getProductById, getPrimaryImage } from '@/services/products';
+import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd';
+import ProductStructuredData from '@/components/seo/ProductStructuredData';
 import { fetchWithCache } from '@/lib/serverCache';
 import probe from 'probe-image-size';
 
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || 'https://teamcelular.com';
 const DEFAULT_LAT = process.env.NEXT_PUBLIC_BUSINESS_LAT || '-34.6037';
 const DEFAULT_LON = process.env.NEXT_PUBLIC_BUSINESS_LON || '-58.3816';
+
+function slugify(text = '') {
+    return text
+        .toString()
+        .normalize('NFD')
+        .replace(/\p{Diacritic}/gu, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+}
 
 /**
  * Server-side metadata generation for product pages.
@@ -33,7 +45,15 @@ export async function generateMetadata({ params }: any) {
         }
 
         const title = product.name || 'Producto';
-        const description = product.description || '';
+        const fallbackDescription = [
+            product.name,
+            product.brand?.name ? `Marca ${product.brand.name}` : null,
+            product.category?.name ? `Categoria ${product.category.name}` : null,
+            'Disponible en Team Celular.',
+        ]
+            .filter(Boolean)
+            .join('. ');
+        const description = product.description?.trim() || fallbackDescription || 'Producto en Team Celular.';
         const url = `${SITE_URL}/tienda/${product.id}`;
 
         // geo coordinates
@@ -61,7 +81,12 @@ export async function generateMetadata({ params }: any) {
             title,
             description,
             keywords,
-            alternates: { canonical: url },
+            alternates: {
+                canonical: url,
+                languages: {
+                    "es-AR": url,
+                },
+            },
             robots: {
                 index: true,
                 follow: true,
@@ -73,7 +98,7 @@ export async function generateMetadata({ params }: any) {
                 siteName: 'Team Celular',
                 images: [ogImageObj],
                 locale: 'es_AR',
-                type: 'website',
+                type: 'product',
             },
             twitter: {
                 card: 'summary_large_image',
@@ -98,7 +123,7 @@ export async function generateMetadata({ params }: any) {
         console.error('generateMetadata error:', err);
         return {
             title: 'Producto',
-            description: '',
+            description: 'Producto en Team Celular.',
         };
     }
 }
@@ -112,5 +137,32 @@ export default async function Page({ params }: any) {
         console.error('Server fetch product error:', err);
     }
 
-    return <ProductDetailClient productIdProp={id} productProp={product} />;
+    const images = product ? getAllProductImages(product) : [];
+    const breadcrumbItems = product
+        ? [
+              { name: 'Inicio', url: `${SITE_URL}/` },
+              { name: 'Tienda', url: `${SITE_URL}/tienda` },
+              ...(product.category?.name
+                  ? [
+                        {
+                            name: product.category.name,
+                            url: `${SITE_URL}/tienda/categoria/${slugify(product.category.name)}`,
+                        },
+                    ]
+                  : []),
+              { name: product.name, url: `${SITE_URL}/tienda/${product.id}` },
+          ]
+        : [];
+
+    return (
+        <>
+            {product && (
+                <>
+                    <ProductStructuredData product={product} images={images} />
+                    <BreadcrumbJsonLd items={breadcrumbItems} />
+                </>
+            )}
+            <ProductDetailClient productIdProp={id} productProp={product} />
+        </>
+    );
 }

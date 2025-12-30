@@ -23,7 +23,7 @@ import {
 export const metadata: Metadata = {
   title: "Servicio Técnico Celulares Empresas | Soporte Corporativo Buenos Aires",
   description:
-    "⚡ Soporte técnico corporativo: SLA garantizado ✓ logística incluida ✓ planes preventivos ✓ Atendemos empresas, gremios y organizaciones en CABA y GBA. +10 años de experiencia.",
+    "Soporte técnico corporativo con SLA garantizado, logística incluida y planes preventivos. Atendemos empresas, gremios y organizaciones en CABA y GBA. Más de 10 años de experiencia.",
   keywords: [
     "servicio técnico empresas Buenos Aires",
     "reparación celulares corporativos",

@@ -21,7 +21,7 @@ import {
 export const metadata: Metadata = {
   title: "Reparación iPhone Buenos Aires | Service Técnico Certificado CABA",
   description:
-    "⚡ Reparación iPhone en Recoleta: pantallas OLED originales, baterías certificadas, True Tone preservado. Diagnóstico 24hs ✓ Garantía 6 meses ✓ Repuestos originales ✓ Service express 2-4hs",
+    "Reparación iPhone en Recoleta: pantallas OLED originales, baterías certificadas, True Tone preservado. Diagnóstico en 24 hs. Garantía de 6 meses. Repuestos originales. Service express 2-4 hs.",
   keywords: [
     "reparación iPhone Buenos Aires",
     "service iPhone CABA",

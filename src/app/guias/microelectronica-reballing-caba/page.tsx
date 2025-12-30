@@ -16,7 +16,7 @@ import ArticleSchema from "@/components/seo/ArticleSchema";
 export const metadata: Metadata = {
   title: "Microelectrónica y Reballing BGA Buenos Aires | Laboratorio Certificado",
   description:
-    "⚡ Microelectrónica avanzada: reballing BGA ✓ reparación placas ✓ soldadura SMD ✓ Laboratorio ESD certificado en CABA. Recuperación de chips y datos con garantía.",
+    "Microelectrónica avanzada: reballing BGA, reparación de placas y soldadura SMD. Laboratorio ESD certificado en CABA. Recuperación de chips y datos con garantía.",
   keywords: [
     "microelectrónica Buenos Aires",
     "reballing BGA CABA",

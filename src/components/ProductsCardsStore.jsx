@@ -16,7 +16,7 @@ import {
 } from "@nextui-org/react";
 // Link not used here; we'll handle navigation via router.push for full-card clicks
 
-import { ShoppingCart, Star } from "lucide-react";
+import { Loader2, ShoppingCart, Star } from "lucide-react";
 
 function ProductsCardsStore({
     products,
@@ -28,6 +28,20 @@ function ProductsCardsStore({
     // router not needed when using <Link>
     const [sortBy, setSortBy] = useState(null);
     const [sortedProducts, setSortedProducts] = useState(products);
+    const [loadingProductId, setLoadingProductId] = useState(null);
+
+    const handleProductClick = (event, productId) => {
+        if (
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey ||
+            event.button === 1
+        ) {
+            return;
+        }
+        setLoadingProductId(productId);
+    };
 
     useEffect(() => {
         let updatedProducts = [...products];
@@ -119,10 +133,16 @@ function ProductsCardsStore({
                                   href={`/tienda/${product.id}`}
                                   aria-label={`Ver ${product.name}`}
                                   className="absolute inset-0 z-10"
+                                  onClick={(event) => handleProductClick(event, product.id)}
                                   style={{ display: 'block' }}
                               >
                                   <span className="sr-only">Ir al producto</span>
                               </Link>
+                              {loadingProductId === product.id && (
+                                  <div className="absolute inset-0 z-20 flex items-center justify-center bg-white/70 dark:bg-gray-900/60 backdrop-blur-sm rounded-lg">
+                                      <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                                  </div>
+                              )}
                               <motion.div
                                   whileHover={{ scale: 1.05 }}
                                   className="w-full h-48 flex items-center justify-center overflow-hidden bg-gray-100 dark:bg-gray-800 rounded-md">

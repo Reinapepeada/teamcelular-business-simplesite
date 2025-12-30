@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import ArticleSchema from "@/components/seo/ArticleSchema";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import {
   FaMobileAlt,
   FaTools,
@@ -16,10 +18,12 @@ import {
   FaChartLine,
 } from "react-icons/fa";
 
+const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+
 export const metadata: Metadata = {
   title: "Cambio de Pantalla Celular Buenos Aires | Display Original CABA",
   description:
-    "⚡ Cambio de pantalla celular: displays OLED originales ✓ True Tone preservado ✓ garantía 6 meses ✓ Service 2-4hs. iPhone, Samsung, Motorola. Recoleta, CABA.",
+    "Cambio de pantalla celular con displays OLED originales, True Tone preservado, garantía de 6 meses y service 2-4 hs. iPhone, Samsung, Motorola. Recoleta, CABA.",
   keywords: [
     "cambio pantalla celular Buenos Aires",
     "pantalla iPhone original",
@@ -217,6 +221,22 @@ const faqScreen = [
 export default function ScreenReplacementGuide() {
   return (
     <div className="flex w-full justify-center px-4 py-16">
+      <ArticleSchema
+        title="Cambio de pantalla celular en Buenos Aires | Display original Team Celular"
+        description="Cambio de pantalla con displays OLED originales, True Tone preservado y garantía escrita de 6 meses. Service express 2-4 horas en CABA."
+        publishedTime="2024-11-30T00:00:00Z"
+        modifiedTime="2025-12-11T00:00:00Z"
+        authorName="Team Celular"
+        image="https://teamcelular.com/images/teamcelular.webp"
+        url="https://teamcelular.com/guias/reparacion-pantalla-celular"
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Inicio", url: `${SITE_URL}/` },
+          { name: "Guías", url: `${SITE_URL}/guias` },
+          { name: "Cambio de pantalla", url: `${SITE_URL}/guias/reparacion-pantalla-celular` },
+        ]}
+      />
       <article className="w-full max-w-6xl space-y-16">
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">

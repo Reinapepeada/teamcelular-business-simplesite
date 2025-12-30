@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, type MouseEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -62,9 +62,10 @@ import {
     ChevronRight,
     Filter,
     RefreshCw,
+    Loader2,
 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
-import { getAllProductsPaginated, deleteProduct } from "@/services/products";
+import { calculateTotalStock, deleteProduct, getAllProductsPaginated } from "@/services/products";
 import { getcategories } from "@/services/categories";
 import { getbrands } from "@/services/brands";
 import type { Product, Category, Brand, ProductVariant } from "@/app/tienda/product";
@@ -87,6 +88,8 @@ export default function ProductsListPage() {
     const [selectedBrand, setSelectedBrand] = useState("");
     const [categories, setCategories] = useState<Category[]>([]);
     const [brands, setBrands] = useState<Brand[]>([]);
+    const [isNavigating, setIsNavigating] = useState(false);
+    const [navigatingLabel, setNavigatingLabel] = useState("");
     
     // Delete dialog
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -178,16 +181,25 @@ export default function ProductsListPage() {
         }
     };
 
+    const lowStockFilterActive = searchParams.get("filter") === "low-stock";
+    const lowStockProducts = lowStockFilterActive
+        ? products.filter((product) =>
+            product.variants?.some(
+                (variant) => (variant.stock || 0) <= (variant.min_stock ?? 5)
+            )
+        )
+        : products;
+
     // Filter products by search term (client-side)
-    const filteredProducts = products.filter(product =>
+    const filteredProducts = lowStockProducts.filter(product =>
         product.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         product.serial_number?.toLowerCase().includes(searchTerm.toLowerCase())
     );
+    const hasSearch = searchTerm.trim().length > 0;
 
     // Calculate total stock
-    const getTotalStock = (variants: ProductVariant[] | undefined) => {
-        return variants?.reduce((acc: number, v: ProductVariant) => acc + (v.stock || 0), 0) || 0;
-    };
+    const getTotalStock = (variants: ProductVariant[] | undefined) =>
+        calculateTotalStock(variants || []);
 
     // Get status badge
     const getStatusBadge = (status: string) => {
@@ -203,8 +215,30 @@ export default function ProductsListPage() {
         }
     };
 
+    const handleNavigateClick = (event: MouseEvent, label: string) => {
+        if (
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey ||
+            (event as MouseEvent).button === 1
+        ) {
+            return;
+        }
+        setNavigatingLabel(label);
+        setIsNavigating(true);
+    };
+
     return (
         <div className="space-y-6">
+            {isNavigating && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/70 backdrop-blur-sm">
+                    <div className="flex items-center gap-2 rounded-lg border bg-card px-4 py-3 shadow">
+                        <Loader2 className="h-5 w-5 animate-spin text-primary" />
+                        <span className="text-sm">{navigatingLabel || "Cargando producto..."}</span>
+                    </div>
+                </div>
+            )}
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
@@ -213,6 +247,12 @@ export default function ProductsListPage() {
                         Gestiona tu catálogo de productos
                     </p>
                 </div>
+                {lowStockFilterActive && (
+                    <Badge variant="outline" className="flex items-center gap-2">
+                        <Filter className="w-4 h-4" />
+                        Stock bajo
+                    </Badge>
+                )}
                 <Button asChild>
                     <Link href="/admin/create-products">
                         <PlusCircle className="w-4 h-4 mr-2" />
@@ -276,6 +316,15 @@ export default function ProductsListPage() {
                             </SelectContent>
                         </Select>
 
+                        {lowStockFilterActive && (
+                            <Button
+                                variant="outline"
+                                onClick={() => router.push("/admin/products")}
+                            >
+                                Quitar filtro
+                            </Button>
+                        )}
+
                         {/* Refresh */}
                         <Button 
                             variant="outline" 
@@ -293,7 +342,9 @@ export default function ProductsListPage() {
                 <CardHeader>
                     <CardTitle>Lista de Productos</CardTitle>
                     <CardDescription>
-                        {pagination.total} producto(s) en total
+                        {(hasSearch || lowStockFilterActive)
+                            ? `Mostrando ${filteredProducts.length} de ${pagination.total} producto(s)`
+                            : `${pagination.total} producto(s) en total`}
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -403,19 +454,34 @@ export default function ProductsListPage() {
                                                                 <DropdownMenuLabel>Acciones</DropdownMenuLabel>
                                                                 <DropdownMenuSeparator />
                                                                 <DropdownMenuItem asChild>
-                                                                    <Link href={`/tienda/${product.id}`}>
+                                                                    <Link
+                                                                        href={`/tienda/${product.id}`}
+                                                                        onClick={(event) =>
+                                                                            handleNavigateClick(event, "Abriendo producto...")
+                                                                        }
+                                                                    >
                                                                         <Eye className="w-4 h-4 mr-2" />
                                                                         Ver en tienda
                                                                     </Link>
                                                                 </DropdownMenuItem>
                                                                 <DropdownMenuItem asChild>
-                                                                    <Link href={`/admin/products/${product.id}`}>
+                                                                    <Link
+                                                                        href={`/admin/products/${product.id}`}
+                                                                        onClick={(event) =>
+                                                                            handleNavigateClick(event, "Abriendo producto...")
+                                                                        }
+                                                                    >
                                                                         <Edit className="w-4 h-4 mr-2" />
                                                                         Editar
                                                                     </Link>
                                                                 </DropdownMenuItem>
                                                                 <DropdownMenuItem asChild>
-                                                                    <Link href={`/admin/create-variants/${product.id}`}>
+                                                                    <Link
+                                                                        href={`/admin/create-variants/${product.id}`}
+                                                                        onClick={(event) =>
+                                                                            handleNavigateClick(event, "Abriendo variantes...")
+                                                                        }
+                                                                    >
                                                                         <Layers className="w-4 h-4 mr-2" />
                                                                         Variantes
                                                                     </Link>
@@ -480,7 +546,12 @@ export default function ProductsListPage() {
                                                     </DropdownMenuTrigger>
                                                     <DropdownMenuContent align="end">
                                                         <DropdownMenuItem asChild>
-                                                            <Link href={`/admin/products/${product.id}`}>
+                                                            <Link
+                                                                href={`/admin/products/${product.id}`}
+                                                                onClick={(event) =>
+                                                                    handleNavigateClick(event, "Abriendo producto...")
+                                                                }
+                                                            >
                                                                 <Edit className="w-4 h-4 mr-2" />
                                                                 Editar
                                                             </Link>

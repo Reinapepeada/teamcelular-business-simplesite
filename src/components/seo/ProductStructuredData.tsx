@@ -1,4 +1,3 @@
-"use client";
 import React from 'react';
 
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || 'https://teamcelular.com';

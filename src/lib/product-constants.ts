@@ -1,0 +1,2 @@
+export const PRODUCT_DESCRIPTION_MIN = 10;
+export const PRODUCT_DESCRIPTION_MAX = 2000;

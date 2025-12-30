@@ -8,6 +8,23 @@ export const revalidate = 86400;
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
+function slugify(text = "") {
+  return text
+    .toString()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function toAbsoluteUrl(url: string) {
+  if (!url) return "";
+  if (url.startsWith("http://") || url.startsWith("https://")) return url;
+  const normalized = url.startsWith("/") ? url : `/${url}`;
+  return `${SITE_URL}${normalized}`;
+}
+
 // Fetch products with cache for sitemap generation
 async function getAllProductsForSitemap(): Promise<Product[]> {
   try {
@@ -43,6 +60,8 @@ const guidePages = [
   { path: "guias/microelectronica-reballing-caba", priority: 0.8, changeFreq: "monthly" as const },
   { path: "guias/soporte-empresas-servicio-tecnico", priority: 0.75, changeFreq: "monthly" as const },
   { path: "guias/mantenimiento-preventivo-celulares", priority: 0.75, changeFreq: "monthly" as const },
+  { path: "guias/cambio-bateria-celular", priority: 0.75, changeFreq: "monthly" as const },
+  { path: "guias/reparacion-pantalla-celular", priority: 0.75, changeFreq: "monthly" as const },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -50,6 +69,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   
   // Fecha de última modificación dinámica (fecha actual de build)
   const lastMod = currentDate;
+  const products = await getAllProductsForSitemap();
+  const categoryMap = new Map<string, string>();
 
   const mainSitemap = mainPages.map((page) => ({
     url: page.path ? `${SITE_URL}/${page.path}` : SITE_URL,
@@ -75,5 +96,33 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   }));
 
-  return [...mainSitemap, ...guidesSitemap];
+  const productEntries = products.map((product) => {
+    if (product?.category?.name) {
+      const slug = slugify(product.category.name);
+      if (slug) {
+        categoryMap.set(slug, product.category.name);
+      }
+    }
+
+    const images = getAllProductImages(product)
+      .filter((image) => image && !image.includes("placeholder"))
+      .map((image) => toAbsoluteUrl(image));
+
+    return {
+      url: `${SITE_URL}/tienda/${product.id}`,
+      lastModified: product.updated_at ? new Date(product.updated_at) : lastMod,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+      images: images.length ? images : undefined,
+    };
+  });
+
+  const categoryEntries = Array.from(categoryMap.keys()).map((slug) => ({
+    url: `${SITE_URL}/tienda/categoria/${slug}`,
+    lastModified: lastMod,
+    changeFrequency: "weekly" as const,
+    priority: 0.7,
+  }));
+
+  return [...mainSitemap, ...guidesSitemap, ...categoryEntries, ...productEntries];
 }

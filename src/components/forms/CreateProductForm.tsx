@@ -31,6 +31,7 @@ import { getcategories } from '@/services/categories';
 import { createProduct } from '@/services/products'
 import { useRouter } from 'next/navigation'
 import type { Brand, Category } from '@/app/tienda/product';
+import { PRODUCT_DESCRIPTION_MAX, PRODUCT_DESCRIPTION_MIN } from '@/lib/product-constants';
 
 const formSchema = z.object({
   serial_number: z.string()
@@ -47,11 +48,11 @@ const formSchema = z.object({
   .transform(val => val.toLowerCase()),
 
   description: z.string()
-  .min(10,{
-    message: 'Description debe ser de al menos 10 caracteres'
+  .min(PRODUCT_DESCRIPTION_MIN,{
+    message: `Description debe ser de al menos ${PRODUCT_DESCRIPTION_MIN} caracteres`
   })
-  .max(500,{
-    message: 'Description debe ser de menos de 500 caracteres'
+  .max(PRODUCT_DESCRIPTION_MAX,{
+    message: `Description debe ser de menos de ${PRODUCT_DESCRIPTION_MAX} caracteres`
   })
   .transform(val => val.toLowerCase()),
 
@@ -227,9 +228,16 @@ export default function ProductForm() {
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <Textarea {...field} className="h-20" />
+                    <Textarea
+                      {...field}
+                      className="min-h-[140px]"
+                      maxLength={PRODUCT_DESCRIPTION_MAX}
+                    />
                   </FormControl>
-                  <FormDescription>Will be converted to lowercase</FormDescription>
+                  <FormDescription className="flex justify-between">
+                    <span>Max {PRODUCT_DESCRIPTION_MAX} chars</span>
+                    <span>{field.value?.length || 0}/{PRODUCT_DESCRIPTION_MAX}</span>
+                  </FormDescription>
                   <FormMessage className='text-red-700' />
                 </FormItem>
               )}

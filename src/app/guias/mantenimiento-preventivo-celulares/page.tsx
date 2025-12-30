@@ -21,7 +21,7 @@ import ArticleSchema from "@/components/seo/ArticleSchema";
 export const metadata: Metadata = {
   title: "Mantenimiento Preventivo Celulares | Guía Completa 2024 CABA",
   description:
-    "⚡ Guía profesional de mantenimiento preventivo: batería ✓ limpieza ✓ software ✓ Servicios preventivos en Buenos Aires. Extendé la vida útil de tu smartphone hasta 3 años más.",
+    "Guía profesional de mantenimiento preventivo: batería, limpieza, software y servicios preventivos en Buenos Aires. Extendé la vida útil de tu smartphone hasta 3 años más.",
   keywords: [
     "mantenimiento preventivo celulares",
     "cuidado smartphone Buenos Aires",

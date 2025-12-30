@@ -37,12 +37,8 @@ import {
     getAvailableSizes,
     calculateTotalStock
 } from '@/services/products';
-import ProductStructuredData from '@/components/seo/ProductStructuredData';
-import buildBreadcrumbSchema from '@/components/seo/breadcrumb';
 import type { Product, ProductVariant } from '@/app/tienda/product';
 import useCartStore from '@/store/cartStore';
-
-const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || 'https://teamcelular.com';
 
 function slugify(text = '') {
     return text
@@ -231,28 +227,6 @@ export default function ProductDetailClient({ productIdProp, productProp }: Prop
     
     return (
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
-            {/* Product structured data for SEO */}
-            {product && (
-                <>
-                    <ProductStructuredData product={product} images={images} />
-                    {/* BreadcrumbList JSON-LD */}
-                    <script
-                        type="application/ld+json"
-                        dangerouslySetInnerHTML={{
-                            __html: JSON.stringify(
-                                buildBreadcrumbSchema([
-                                    { name: 'Inicio', url: `${SITE_URL}/` },
-                                    { name: 'Tienda', url: `${SITE_URL}/tienda` },
-                                    ...(product.category
-                                        ? [{ name: product.category.name, url: `${SITE_URL}/tienda/categoria/${slugify(product.category.name)}` }]
-                                        : []),
-                                    { name: product.name, url: `${SITE_URL}/tienda/${product.id}` },
-                                ])
-                            ),
-                        }}
-                    />
-                </>
-            )}
             {/* Breadcrumb */}
             <nav className="flex items-center space-x-2 text-xs sm:text-sm mb-4 sm:mb-6 overflow-x-auto pb-2">
                 <Link href="/tienda" className="text-muted-foreground hover:text-primary transition-colors">
