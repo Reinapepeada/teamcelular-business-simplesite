@@ -36,6 +36,9 @@ export default function ProductFilters(params) {
     parseInt(searchParams.get("minPrice") || "0"),
     parseInt(searchParams.get("maxPrice") || "1000"),
   ]);
+  const [searchTerm, setSearchTerm] = useState(
+    searchParams.get("search") || ""
+  );
 
   const rangePrice = async () => {
     const priceRange = await getMinMaxPrice();
@@ -101,6 +104,9 @@ export default function ProductFilters(params) {
   const handleApplyFilters = () => {
     const params = new URLSearchParams();
 
+    const normalizedSearch = searchTerm.trim();
+    if (normalizedSearch) params.set("search", normalizedSearch);
+
     if (selectedCategories.length > 0)
       params.set("categories", selectedCategories.join(","));
     if (selectedBrands.length > 0)
@@ -120,12 +126,26 @@ export default function ProductFilters(params) {
     setSelectedCategories([]);
     setSelectedBrands([]);
     setSelectedPriceRange([priceRange.min, priceRange.max]);
+    setSearchTerm("");
     router.push("/tienda");
   };
 
   return (
     <aside className="w-full md:w-1/5 md:p-1 p-6 rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold mb-6">Filtros</h2>
+      <div className="mb-4">
+        <Input
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Buscar productos..."
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              event.preventDefault();
+              handleApplyFilters();
+            }
+          }}
+        />
+      </div>
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="categories" title="Categorías" subtitle={selectedCategories.length > 0 && (
           <div className="flex flex-wrap gap-2 my-2">
