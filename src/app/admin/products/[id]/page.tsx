@@ -49,6 +49,7 @@ import {
 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { PRODUCT_DESCRIPTION_MAX } from "@/lib/product-constants";
+import { buildProductSlug } from "@/lib/productSlug";
 
 import { getProductById, updateProduct, deleteProductVariant } from "@/services/products";
 import { getbrands } from "@/services/brands";
@@ -676,7 +677,7 @@ export default function EditProductPage() {
                                 )}
                             </div>
                             <Button className="w-full" variant="outline" asChild>
-                                <Link href={`/tienda/${productId}`} target="_blank">
+                                <Link href={`/tienda/${buildProductSlug(product)}`} target="_blank">
                                     Ver en la Tienda
                                 </Link>
                             </Button>

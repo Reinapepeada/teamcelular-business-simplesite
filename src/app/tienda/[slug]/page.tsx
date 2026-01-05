@@ -3,6 +3,8 @@ import { getAllProductImages, getProductById, getPrimaryImage } from '@/services
 import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd';
 import ProductStructuredData from '@/components/seo/ProductStructuredData';
 import { fetchWithCache } from '@/lib/serverCache';
+import { buildProductSlug, parseProductIdFromSlug } from '@/lib/productSlug';
+import { permanentRedirect } from 'next/navigation';
 import probe from 'probe-image-size';
 
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || 'https://teamcelular.com';
@@ -25,11 +27,11 @@ function slugify(text = '') {
  * and returns a Metadata object with OpenGraph + Twitter + canonical tags.
  */
 export async function generateMetadata({ params }: any) {
-    const id = Number(params.slug);
-    if (isNaN(id)) return {};
+    const productId = parseProductIdFromSlug(params?.slug);
+    if (!productId) return {};
 
     try {
-        const product = await fetchWithCache(`product:${id}`, () => getProductById(id), 1000 * 60 * 5);
+        const product = await fetchWithCache(`product:${productId}`, () => getProductById(productId), 1000 * 60 * 5);
         const image = getPrimaryImage(product) || '/placeholder.jpg';
         const absoluteImage = image.startsWith('http') ? image : `${SITE_URL}${image.startsWith('/') ? '' : '/'}${image}`;
 
@@ -54,7 +56,8 @@ export async function generateMetadata({ params }: any) {
             .filter(Boolean)
             .join('. ');
         const description = product.description?.trim() || fallbackDescription || 'Producto en Team Celular.';
-        const url = `${SITE_URL}/tienda/${product.id}`;
+        const productSlug = buildProductSlug(product);
+        const url = `${SITE_URL}/tienda/${productSlug}`;
 
         // geo coordinates
         const lat = process.env.NEXT_PUBLIC_BUSINESS_LAT || DEFAULT_LAT;
@@ -128,15 +131,26 @@ export async function generateMetadata({ params }: any) {
 }
 
 export default async function Page({ params }: any) {
-    const id = Number(params?.slug);
+    const productId = parseProductIdFromSlug(params?.slug);
     let product = null;
     try {
-        product = await fetchWithCache(`product:${id}`, () => getProductById(id), 1000 * 60 * 5);
+        if (productId) {
+            product = await fetchWithCache(`product:${productId}`, () => getProductById(productId), 1000 * 60 * 5);
+        }
     } catch (err) {
         console.error('Server fetch product error:', err);
     }
 
+    if (product) {
+        const requestedSlug = String(params?.slug ?? '');
+        const canonicalSlug = buildProductSlug(product);
+        if (canonicalSlug && requestedSlug !== canonicalSlug) {
+            permanentRedirect(`/tienda/${canonicalSlug}`);
+        }
+    }
+
     const images = product ? getAllProductImages(product) : [];
+    const productSlug = product ? buildProductSlug(product) : '';
     const breadcrumbItems = product
         ? [
               { name: 'Inicio', url: `${SITE_URL}/` },
@@ -149,7 +163,7 @@ export default async function Page({ params }: any) {
                         },
                     ]
                   : []),
-              { name: product.name, url: `${SITE_URL}/tienda/${product.id}` },
+              { name: product.name, url: `${SITE_URL}/tienda/${productSlug}` },
           ]
         : [];
 
@@ -157,11 +171,11 @@ export default async function Page({ params }: any) {
         <>
             {product && (
                 <>
-                    <ProductStructuredData product={product} images={images} />
-                    <BreadcrumbJsonLd items={breadcrumbItems} />
-                </>
-            )}
-            <ProductDetailClient productIdProp={id} productProp={product} />
+            <ProductStructuredData product={product} images={images} />
+            <BreadcrumbJsonLd items={breadcrumbItems} />
+        </>
+    )}
+    <ProductDetailClient productIdProp={productId ?? undefined} productProp={product} />
         </>
     );
 }

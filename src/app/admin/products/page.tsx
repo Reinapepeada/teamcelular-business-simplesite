@@ -69,6 +69,7 @@ import { calculateTotalStock, deleteProduct, getAllProductsPaginated } from "@/s
 import { getcategories } from "@/services/categories";
 import { getbrands } from "@/services/brands";
 import type { Product, Category, Brand, ProductVariant } from "@/app/tienda/product";
+import { buildProductSlug } from "@/lib/productSlug";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -455,7 +456,7 @@ export default function ProductsListPage() {
                                                                 <DropdownMenuSeparator />
                                                                 <DropdownMenuItem asChild>
                                                                     <Link
-                                                                        href={`/tienda/${product.id}`}
+                                                                        href={`/tienda/${buildProductSlug(product)}`}
                                                                         onClick={(event) =>
                                                                             handleNavigateClick(event, "Abriendo producto...")
                                                                         }

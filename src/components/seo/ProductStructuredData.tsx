@@ -1,4 +1,5 @@
 import React from 'react';
+import { buildProductSlug } from '@/lib/productSlug';
 
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || 'https://teamcelular.com';
 
@@ -18,6 +19,7 @@ export default function ProductStructuredData({ product, images = [] }: ProductS
   if (!product) return null;
 
   const imageUrls = (images || []).map(toAbsolute).filter(Boolean) as string[];
+  const productUrl = `${SITE_URL}/tienda/${buildProductSlug(product)}`;
   const imageObjects = imageUrls.map((u) => ({
     '@type': 'ImageObject',
     url: u,
@@ -35,7 +37,7 @@ export default function ProductStructuredData({ product, images = [] }: ProductS
     availability: (product.variants && product.variants.length && product.variants.some((v:any) => v.stock > 0))
       ? "https://schema.org/InStock"
       : "https://schema.org/OutOfStock",
-    url: `${SITE_URL}/tienda/${product.id}`,
+    url: productUrl,
   };
 
   // Optional priceValidUntil

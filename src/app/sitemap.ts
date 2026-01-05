@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { getAllProductImages } from '@/services/products';
 import type { Product } from '@/app/tienda/product';
+import { buildProductSlug } from '@/lib/productSlug';
 
 // Revalidate sitemap every 24 hours
 export const revalidate = 86400;
@@ -109,7 +110,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .map((image) => toAbsoluteUrl(image));
 
     return {
-      url: `${SITE_URL}/tienda/${product.id}`,
+      url: `${SITE_URL}/tienda/${buildProductSlug(product)}`,
       lastModified: product.updated_at ? new Date(product.updated_at) : lastMod,
       changeFrequency: "weekly" as const,
       priority: 0.8,

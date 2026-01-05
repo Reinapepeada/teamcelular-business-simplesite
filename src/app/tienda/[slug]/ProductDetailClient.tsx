@@ -37,6 +37,7 @@ import {
     getAvailableSizes,
     calculateTotalStock
 } from '@/services/products';
+import { parseProductIdFromSlug } from '@/lib/productSlug';
 import type { Product, ProductVariant } from '@/app/tienda/product';
 import useCartStore from '@/store/cartStore';
 
@@ -90,7 +91,8 @@ interface Props {
 export default function ProductDetailClient({ productIdProp, productProp }: Props) {
     const params = useParams();
     const router = useRouter();
-    const productId = productIdProp ?? parseInt(params?.slug as string);
+    const productIdFromSlug = parseProductIdFromSlug(params?.slug);
+    const productId = productIdProp ?? productIdFromSlug ?? NaN;
     
     const [product, setProduct] = useState<Product | null>(productProp || null);
     const [isLoading, setIsLoading] = useState(true);

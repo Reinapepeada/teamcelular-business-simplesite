@@ -14,6 +14,7 @@ import {
     Button,
     Chip,
 } from "@nextui-org/react";
+import { buildProductSlug } from "@/lib/productSlug";
 // Link not used here; we'll handle navigation via router.push for full-card clicks
 
 import { Loader2, ShoppingCart, Star } from "lucide-react";
@@ -130,7 +131,7 @@ function ProductsCardsStore({
                               className="relative p-4 shadow rounded-lg border flex flex-col items-start cursor-pointer focus:outline-none focus:focus-ring"
                           >
                               <Link
-                                  href={`/tienda/${product.id}`}
+                                  href={`/tienda/${buildProductSlug(product)}`}
                                   aria-label={`Ver ${product.name}`}
                                   className="absolute inset-0 z-10"
                                   onClick={(event) => handleProductClick(event, product.id)}

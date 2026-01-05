@@ -27,6 +27,7 @@ import {
 import useCartStore from "@/store/cartStore";
 import Image from "next/image";
 import Link from "next/link";
+import { buildProductSlug } from "@/lib/productSlug";
 
 // Número de WhatsApp de la tienda (sin el +)
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5491112345678";
@@ -256,7 +257,7 @@ export default function ResumeCartNav() {
                                     {/* Info */}
                                     <div className="flex-1 min-w-0">
                                         <Link 
-                                            href={`/tienda/${item.product.id}`}
+                                            href={`/tienda/${buildProductSlug(item.product)}`}
                                             className="text-sm font-medium line-clamp-2 hover:text-primary transition-colors"
                                         >
                                             {getItemName(item)}

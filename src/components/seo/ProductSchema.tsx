@@ -1,5 +1,6 @@
 import React from "react";
 import { Product } from "@/app/tienda/product";
+import { buildProductSlug } from "@/lib/productSlug";
 
 interface ProductSchemaProps {
   product: Product;
@@ -21,7 +22,7 @@ export default function ProductSchema({ product }: ProductSchemaProps) {
     },
     offers: {
       "@type": "Offer",
-      url: `https://teamcelular.com/tienda/${product.id}`,
+      url: `https://teamcelular.com/tienda/${buildProductSlug(product)}`,
       priceCurrency: "ARS",
       price: product.retail_price,
       availability: product.variants?.some((v) => v.stock > 0)
