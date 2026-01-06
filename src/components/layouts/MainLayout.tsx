@@ -21,7 +21,7 @@ export default function MainLayout({
     return (
         <>
             <NavbarNUI />
-            <main className="flex justify-center min-h-screen pb-24 md:pb-0">{children}</main>
+            <main className="flex justify-center min-h-screen pb-24 lg:pb-0">{children}</main>
             <FooterNUI />
             <BackgroundBeams />
             <StickyRepairCta />

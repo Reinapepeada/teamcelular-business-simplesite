@@ -87,17 +87,18 @@ export default function NavbarNUI() {
                 <NavbarItem className="flex items-center gap-2">
                     <Button
                         as={Link}
-                        color="primary"
+                        color="secondary"
                         href="/presupuesto-reparacion#solicitar-presupuesto"
                         variant="shadow"
-                        size="md">
-                        Pedir presupuesto
+                        size="md"
+                        className="hidden lg:flex bg-gradient-to-r from-primary to-secondary text-white font-semibold">
+                        Presupuesto
                     </Button>
                     <Button
                         as={Link}
-                        color="primary"
+                        color="success"
                         href="https://wa.me/5491151034595?text=Hola%21%20Quiero%20pedir%20un%20presupuesto%20de%20reparaci%C3%B3n."
-                        variant="shadow"
+                        variant="flat"
                         size="md"
                         aria-label="WhatsApp"
                         className="flex items-center justify-center">

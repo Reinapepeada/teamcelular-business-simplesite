@@ -18,7 +18,7 @@ export default function StickyRepairCta() {
   if (shouldHide) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 md:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-50 lg:hidden">
       <div className="mx-auto flex max-w-6xl gap-3 border-t border-white/10 bg-white/90 px-4 py-3 backdrop-blur dark:bg-slate-950/80">
         <Link
           href="/presupuesto-reparacion#solicitar-presupuesto"
@@ -40,4 +40,3 @@ export default function StickyRepairCta() {
     </div>
   );
 }
-
