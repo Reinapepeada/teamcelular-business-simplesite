@@ -23,7 +23,7 @@ import {
 export const metadata: Metadata = {
   title: "Servicio Técnico Celulares Empresas | Soporte Corporativo Buenos Aires",
   description:
-    "Soporte técnico corporativo con SLA garantizado, logística incluida y planes preventivos. Atendemos empresas, gremios y organizaciones en CABA y GBA. Más de 10 años de experiencia.",
+    "Soporte técnico corporativo con SLA garantizado, logística incluida y planes preventivos. Atendemos empresas, gremios y organizaciones en CABA. Más de 10 años de experiencia.",
   keywords: [
     "servicio técnico empresas Buenos Aires",
     "reparación celulares corporativos",
@@ -88,7 +88,7 @@ const benefits = [
   {
     title: "Logística corporativa puerta a puerta",
     detail:
-      "Coordinamos retiros y entregas programadas en CABA, GBA Norte y GBA Sur adicional en planes corporativos. Disponibilidad de equipos de reemplazo (loaner) para garantizar continuidad operativa durante reparaciones complejas.",
+      "Coordinamos retiros y entregas programadas dentro de CABA. Disponibilidad de equipos de reemplazo (loaner) para garantizar continuidad operativa durante reparaciones complejas.",
     Icon: FaTruck,
   },
   {
@@ -192,7 +192,7 @@ export default function BusinessSupportGuide() {
     <div className="flex w-full justify-center px-4 py-16">
       <ArticleSchema
         title="Servicio Técnico de Celulares para Empresas y Organizaciones | Team Celular"
-        description="Soporte técnico corporativo especializado en reparación de dispositivos móviles con SLA garantizado, logística incluida y planes preventivos en CABA y GBA."
+        description="Soporte técnico corporativo especializado en reparación de dispositivos móviles con SLA garantizado, logística incluida y planes preventivos en CABA."
         publishedTime="2024-03-10T00:00:00Z"
         modifiedTime="2025-12-11T00:00:00Z"
         authorName="Team Celular"
@@ -496,31 +496,14 @@ export default function BusinessSupportGuide() {
               "@context": "https://schema.org",
               "@type": "Service",
               "name": "Servicio Técnico Corporativo de Celulares",
-              "provider": {
-                "@type": "LocalBusiness",
-                "name": "Team Celular",
-                "address": {
-                  "@type": "PostalAddress",
-                  "streetAddress": "Paraguay 2451",
-                  "addressLocality": "Recoleta",
-                  "addressRegion": "CABA",
-                  "addressCountry": "AR",
-                },
-                "telephone": "+541151034595",
-                "email": "teamcelular.arg@gmail.com",
-              },
+              "provider": { "@id": "https://teamcelular.com#localbusiness" },
               "serviceType": "Reparación y mantenimiento de dispositivos móviles corporativos",
               "areaServed": {
-                "@type": "GeoCircle",
-                "geoMidpoint": {
-                  "@type": "GeoCoordinates",
-                  "latitude": "-34.5937",
-                  "longitude": "-58.3917",
-                },
-                "geoRadius": "50000",
+                "@type": "AdministrativeArea",
+                "name": "Ciudad Autónoma de Buenos Aires (CABA)"
               },
               "description":
-                "Servicio técnico especializado para empresas con SLA garantizado, logística puerta a puerta, planes preventivos y soporte para flotas de dispositivos móviles en CABA y GBA.",
+                "Servicio técnico especializado para empresas con SLA garantizado, logística puerta a puerta, planes preventivos y soporte para flotas de dispositivos móviles en CABA.",
               "offers": {
                 "@type": "Offer",
                 "availability": "https://schema.org/InStock",

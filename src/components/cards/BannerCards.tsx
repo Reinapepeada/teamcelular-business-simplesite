@@ -96,10 +96,10 @@ export default function BannerCards() {
                             as={Link}
                             color="primary"
                             radius="full"
-                            href="https://wa.me/5491151034595?text=Muy%20buen%20d%C3%ADa%21%20Tengo%20una%20duda."
+                            href="https://wa.me/5491151034595?text=Hola%21%20Quiero%20pedir%20un%20presupuesto%20de%20reparaci%C3%B3n."
                             size="md">
                             <BsWhatsapp className="inline-block" />
-                            ¡Quitate dudas!
+                            Pedir presupuesto por WhatsApp
                         </Button>
                     </div>
                 </CardFooter>

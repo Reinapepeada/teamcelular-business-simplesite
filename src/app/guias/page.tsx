@@ -285,7 +285,7 @@ export default function GuidesPage() {
             ¿Necesitás ayuda técnica especializada?
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
-            Nuestro equipo está disponible para consultas, diagnósticos y reparaciones profesionales en CABA y GBA.
+            Nuestro equipo está disponible para consultas, diagnósticos y reparaciones profesionales en CABA.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
@@ -312,18 +312,7 @@ export default function GuidesPage() {
               "@type": "CollectionPage",
               "name": "Guías Técnicas de Reparación de Celulares",
               "description": "Centro de conocimiento con guías profesionales sobre reparación de iPhone, microelectrónica, reballing BGA y soporte corporativo.",
-              "provider": {
-                "@type": "LocalBusiness",
-                "name": "Team Celular",
-                "address": {
-                  "@type": "PostalAddress",
-                  "streetAddress": "Paraguay 2451",
-                  "addressLocality": "Recoleta",
-                  "addressRegion": "CABA",
-                  "addressCountry": "AR",
-                },
-                "telephone": "+541151034595",
-              },
+              "provider": { "@id": "https://teamcelular.com#localbusiness" },
               "hasPart": ARTICLES.map((article) => ({
                 "@type": "Article",
                 "headline": article.title,

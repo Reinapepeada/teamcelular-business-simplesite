@@ -45,7 +45,7 @@ const items = [
       header: "/images/fundaOtter.webp", // Ruta de la imagen para fundas y protectores.
       className: "md:col-span-2",
       icon: <ShieldCheck className="h-4 w-4 text-neutral-500" />, // Icono de una funda o escudo de protección.
-      link: "/tienda/fundas-y-protectores",
+      link: "/tienda/categoria/fundas-y-protectores",
     },
     {
       title: "Cargadores y cables",
@@ -53,7 +53,7 @@ const items = [
       header: "/images/cargadores.webp", // Ruta de la imagen para cargadores y cables.
       className: "md:col-span-1",
       icon: <Plug className="h-4 w-4 text-neutral-500" />, // Icono de un cargador o enchufe.
-      link: "/tienda/cargadores-y-cables",
+      link: "/tienda/categoria/cargadores-y-cables",
     },
     {
       title: "Auriculares y accesorios de audio",
@@ -61,7 +61,7 @@ const items = [
       header: "/images/aurisBlue.webp", // Ruta de la imagen para auriculares y accesorios de audio.
       className: "md:col-span-1",
       icon: <Headphones className="h-4 w-4 text-neutral-500" />, // Icono de unos auriculares.
-      link: "/tienda/auriculares-y-audio",
+      link: "/tienda/categoria/auriculares-y-audio",
     },
     {
       title: "Piezas para Desktop y Notebook",
@@ -69,6 +69,6 @@ const items = [
       header: "/images/componentes-pc-gaming.webp", // Ruta de la imagen para piezas de computadora.
       className: "md:col-span-2",
       icon: <Cpu className="h-4 w-4 text-neutral-500" />, // Ejemplo de un icono de placa base.
-      link: "/tienda/piezas-para-desktop-y-notebook",
+      link: "/tienda/categoria/piezas-para-desktop-y-notebook",
     },
 ];

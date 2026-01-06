@@ -111,7 +111,7 @@ export default function FooterNUI() {
               </Link>
               <Link
                 aria-label="Instagram"
-                href="https://www.instagram.com/teamcelular"
+                href="https://www.instagram.com/teamcelular.arg/"
                 target="_blank"
                 className="hover:text-pink-400 transition-colors"
               >
@@ -119,7 +119,7 @@ export default function FooterNUI() {
               </Link>
               <Link
                 aria-label="Facebook"
-                href="https://www.facebook.com/teamcelular"
+                href="https://www.facebook.com/TeamCelular/"
                 target="_blank"
                 className="hover:text-blue-400 transition-colors"
               >

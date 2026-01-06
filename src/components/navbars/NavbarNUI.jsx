@@ -88,12 +88,20 @@ export default function NavbarNUI() {
                     <Button
                         as={Link}
                         color="primary"
-                        href="https://wa.me/5491151034595?text=Muy%20buen%20d%C3%ADa%21%20Tengo%20una%20duda."
+                        href="/presupuesto-reparacion#solicitar-presupuesto"
+                        variant="shadow"
+                        size="md">
+                        Pedir presupuesto
+                    </Button>
+                    <Button
+                        as={Link}
+                        color="primary"
+                        href="https://wa.me/5491151034595?text=Hola%21%20Quiero%20pedir%20un%20presupuesto%20de%20reparaci%C3%B3n."
                         variant="shadow"
                         size="md"
-                        area-label="Whatsapp"
+                        aria-label="WhatsApp"
                         className="flex items-center justify-center">
-                        <p className="hidden sm:flex">Preguntas</p>
+                        <p className="hidden sm:flex">WhatsApp</p>
                         <BsWhatsapp size={20} />
                     </Button>
                     <ResumeCartNav />

@@ -89,15 +89,15 @@ const socialMedia = [
   {
     icon: FaInstagram,
     name: "Instagram",
-    handle: "@teamcelular",
-    href: "https://www.instagram.com/teamcelular",
+    handle: "@teamcelular.arg",
+    href: "https://www.instagram.com/teamcelular.arg/",
     color: "text-pink-500",
   },
   {
     icon: FaFacebook,
     name: "Facebook",
     handle: "/teamcelular",
-    href: "https://www.facebook.com/teamcelular",
+    href: "https://www.facebook.com/TeamCelular/",
     color: "text-blue-600",
   },
 ];
@@ -390,54 +390,6 @@ export default function Contacto() {
       </div>
 
       {/* Schema.org Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Team Celular",
-            "image": "https://teamcelular.com/images/teamcelular.webp",
-            "description":
-              "Servicio técnico especializado en reparación de celulares en Recoleta, Buenos Aires",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Paraguay 2451",
-              "addressLocality": "Recoleta",
-              "addressRegion": "CABA",
-              "postalCode": "C1121",
-              "addressCountry": "AR",
-            },
-            "geo": {
-              "@type": "GeoCoordinates",
-              "latitude": "-34.597528",
-              "longitude": "-58.405237",
-            },
-            "url": "https://teamcelular.com",
-            "telephone": "+541151034595",
-            "email": "teamcelular.arg@gmail.com",
-            "openingHoursSpecification": [
-              {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Friday",
-                ],
-                "opens": "10:30",
-                "closes": "18:00",
-              },
-            ],
-            "sameAs": [
-              "https://www.instagram.com/teamcelular",
-              "https://www.facebook.com/teamcelular",
-            ],
-          }),
-        }}
-      />
-
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

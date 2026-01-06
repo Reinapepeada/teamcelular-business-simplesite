@@ -524,21 +524,7 @@ export default function PresupuestoReparacionPage() {
                 "Servicio de diagnóstico sin cargo y presupuesto online para reparación de celulares en Buenos Aires.",
               serviceType: "MobilePhoneRepair",
               url: "https://teamcelular.com/presupuesto-reparacion",
-              provider: {
-                "@type": "LocalBusiness",
-                name: "Team Celular",
-                image: "https://teamcelular.com/images/teamcelular.webp",
-                telephone: "+541151034595",
-                email: "teamcelular.arg@gmail.com",
-                address: {
-                  "@type": "PostalAddress",
-                  streetAddress: "Paraguay 2451",
-                  addressLocality: "Recoleta",
-                  addressRegion: "CABA",
-                  postalCode: "C1121",
-                  addressCountry: "AR",
-                },
-              },
+              provider: { "@id": "https://teamcelular.com#localbusiness" },
               areaServed: [
                 { "@type": "City", name: "Buenos Aires" },
                 { "@type": "City", name: "CABA" },

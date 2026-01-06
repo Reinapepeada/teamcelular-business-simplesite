@@ -257,7 +257,7 @@ export default function BatteryReplacementGuide() {
               Solicitar cambio de batería
             </Link>
             <Link
-              href="https://wa.me/5491151024595?text=Necesito%20cambiar%20la%20batería%20de%20mi%20celular"
+              href="https://wa.me/5491151034595?text=Necesito%20cambiar%20la%20bater%C3%ADa%20de%20mi%20celular"
               className="rounded-full border-2 border-green-500 px-8 py-4 text-lg font-semibold text-green-500 transition hover:bg-green-500/10"
             >
               WhatsApp directo

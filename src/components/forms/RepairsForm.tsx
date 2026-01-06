@@ -13,10 +13,22 @@ import Link from "next/link";
 export default function RepairForm() {
     const [brand, setBrand] = useState("");
     const [model, setModel] = useState("");
-    const [repairType, setRepairType] = useState([""]);
+    const [repairType, setRepairType] = useState<string[]>([]);
     const [description, setDescription] = useState("");
 
-    const whatsappMessage = `Hola! Buen Dia! Tengo un equipo el cual necesito que me presupuesten.%0AMarca: ${brand}%0AModelo: ${model}%0ATipo de reparación: ${repairType}%0ADescripción de la falla: ${description}`;
+    const whatsappMessage = [
+        "Hola! Quiero un presupuesto de reparación.",
+        brand ? `Marca: ${brand}` : null,
+        model ? `Modelo: ${model}` : null,
+        repairType.length ? `Falla: ${repairType.join(", ")}` : null,
+        description ? `Descripción: ${description}` : null,
+    ]
+        .filter(Boolean)
+        .join("\n");
+
+    const whatsappUrl = `https://wa.me/5491151034595?text=${encodeURIComponent(
+        whatsappMessage
+    )}`;
 
     return (
         <section className="flex flex-col w-10/12 md:w-3/4  gap-4">
@@ -42,23 +54,23 @@ export default function RepairForm() {
                     onValueChange={setRepairType}>
                     <div className="flex flex-col w-3/4 gap-4">
                         <div className="flex md:flex-row flex-col gap-3">
-                            <Checkbox value=" Pantalla">Pantalla</Checkbox>
-                            <Checkbox value=" Bateria">Bateria</Checkbox>
-                            <Checkbox value=" Carga">Carga</Checkbox>
-                            <Checkbox value=" Placa">Placa</Checkbox>
-                            <Checkbox value=" Boton">Boton</Checkbox>
+                            <Checkbox value="Pantalla">Pantalla</Checkbox>
+                            <Checkbox value="Batería">Batería</Checkbox>
+                            <Checkbox value="Carga">Carga</Checkbox>
+                            <Checkbox value="Placa">Placa</Checkbox>
+                            <Checkbox value="Botón">Botón</Checkbox>
                         </div>
                         <div className="flex md:flex-row flex-col gap-3">
-                            <Checkbox value=" Camara"> Camara</Checkbox>
-                            <Checkbox value=" Parlante"> Parlante</Checkbox>
-                            <Checkbox value=" Microfono"> Microfono</Checkbox>
-                            <Checkbox value=" Software"> Software</Checkbox>
-                            <Checkbox value=" Otro"> Otro</Checkbox>
+                            <Checkbox value="Cámara">Cámara</Checkbox>
+                            <Checkbox value="Parlante">Parlante</Checkbox>
+                            <Checkbox value="Micrófono">Micrófono</Checkbox>
+                            <Checkbox value="Software">Software</Checkbox>
+                            <Checkbox value="Otro">Otro</Checkbox>
                         </div>
                     </div>
                 </CheckboxGroup>
                 <p className="text-default-500 text-small">
-                    fallas: {repairType.filter(type => type.trim() !== "").join(", ")}
+                    fallas: {repairType.join(", ")}
                 </p>
             </div>
 
@@ -74,7 +86,9 @@ export default function RepairForm() {
                 <Button 
                 as={Link}
                 color="success"
-                href={`https://wa.me/5491151034595?text=${whatsappMessage}`}
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 size="lg"
                 >
                         Enviar a WhatsApp <BsWhatsapp />

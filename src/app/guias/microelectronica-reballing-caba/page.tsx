@@ -407,18 +407,7 @@ export default function MicroelectronicsGuide() {
               "@context": "https://schema.org",
               "@type": "Service",
               "name": "Microelectrónica y Reballing BGA",
-              "provider": {
-                "@type": "LocalBusiness",
-                "name": "Team Celular",
-                "address": {
-                  "@type": "PostalAddress",
-                  "streetAddress": "Paraguay 2451",
-                  "addressLocality": "Recoleta",
-                  "addressRegion": "CABA",
-                  "addressCountry": "AR",
-                },
-                "telephone": "+541151034595",
-              },
+              "provider": { "@id": "https://teamcelular.com#localbusiness" },
               "serviceType": "Reparación de microelectrónica y reballing BGA",
               "description":
                 "Laboratorio especializado en reparación de placas lógicas, reballing BGA, soldadura SMD y recuperación de dispositivos con daño a nivel chip.",

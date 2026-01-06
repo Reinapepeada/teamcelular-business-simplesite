@@ -14,18 +14,15 @@ const ADDRESS_CITY = "Ciudad Autónoma de Buenos Aires";
 const ADDRESS_REGION = "CABA";
 const ADDRESS_POSTAL = "C1121";
 const ADDRESS_COUNTRY = "AR";
-const SERVICE_AREA = ["Recoleta", "Palermo", "Balvanera", "Almagro"];
+const SERVICE_AREA = ["Ciudad Autónoma de Buenos Aires (CABA)"];
 const KEY_SERVICES = [
-  "Reparación de celulares en el día",
-  "Cambio de pantalla y baterías originales",
-  "Microelectrónica y reballing de placas",
-  "Soporte técnico para empresas y gremios",
+  "Cambio de batería",
+  "Cambio de módulo display / pantalla",
+  "Cambio de pin / ficha de carga",
+  "Reparación de placa (microelectrónica)",
+  "Cambio de flex de carga y flex de botón encendido",
+  "Cambio de tapa trasera",
 ];
-const BREADCRUMB_ITEMS = [
-  { name: "Inicio", url: SITE_URL },
-  { name: "Servicios", url: `${SITE_URL}/presupuesto-reparacion` },
-  { name: "Tienda", url: `${SITE_URL}/tienda` },
-].filter(item => item.name && item.url && item.name.trim() && item.url.trim());
 const SAME_AS = [
   "https://www.instagram.com/teamcelular.arg/",
   "https://www.facebook.com/TeamCelular/",
@@ -96,10 +93,7 @@ function createLocalBusinessJson(city?: string, country?: string) {
         serviceType: service,
         areaServed: SERVICE_AREA,
       },
-      availability: {
-        "@type": "ItemAvailability",
-        name: "InStoreOnly",
-      },
+      availability: "https://schema.org/InStoreOnly",
       url: `${SITE_URL}/presupuesto-reparacion`,
     })),
     serviceArea: SERVICE_AREA.filter(area => area && area.trim()).map((area) => ({
@@ -136,8 +130,8 @@ function createServiceJson() {
       priceCurrency: "ARS",
       availability: "https://schema.org/InStock",
       url: `${SITE_URL}/presupuesto-reparacion`,
-      eligibleRegion: SERVICE_AREA,
-      businessFunction: "ProvideService",
+      eligibleRegion: SERVICE_AREA.map((area) => ({ "@type": "AdministrativeArea", name: area })),
+      businessFunction: "https://schema.org/ProvideService",
     },
     termsOfService: `${SITE_URL}/sobrenosotros`,
   };
@@ -155,7 +149,10 @@ function createAiDiscoveryJson() {
     potentialAction: [
       {
         "@type": "SearchAction",
-        target: `${SITE_URL}/tienda?search={search_term_string}`,
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${SITE_URL}/tienda?search={search_term_string}`,
+        },
         "query-input": "required name=search_term_string",
       },
       {
@@ -176,20 +173,6 @@ function createAiDiscoveryJson() {
   };
 }
 
-function createBreadcrumbJson() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "@id": `${SITE_URL}#breadcrumb`,
-    itemListElement: BREADCRUMB_ITEMS.filter(item => item && item.name && item.url).map((item, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: item.name,
-      item: item.url,
-    })),
-  };
-}
-
 export default function StructuredData({
   city,
   country,
@@ -197,7 +180,6 @@ export default function StructuredData({
   const data = [
     createLocalBusinessJson(city, country),
     createServiceJson(),
-    createBreadcrumbJson(),
     createAiDiscoveryJson(),
   ];
 

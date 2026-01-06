@@ -294,7 +294,7 @@ export default function ScreenReplacementGuide() {
               Solicitar cambio de pantalla
             </Link>
             <Link
-              href="https://wa.me/5491151024595?text=Necesito%20cambiar%20la%20pantalla%20de%20mi%20celular"
+              href="https://wa.me/5491151034595?text=Necesito%20cambiar%20la%20pantalla%20de%20mi%20celular"
               className="rounded-full border-2 border-blue-500 px-8 py-4 text-lg font-semibold text-blue-500 transition hover:bg-blue-500/10"
             >
               WhatsApp directo

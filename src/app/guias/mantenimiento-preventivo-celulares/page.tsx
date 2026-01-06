@@ -458,7 +458,7 @@ export default function PreventiveMaintenanceGuide() {
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
             Agendá tu servicio de mantenimiento preventivo y extendé la vida útil de tu smartphone.
-            Atención en CABA y GBA con más de 10 años de experiencia.
+            Atención en CABA con más de 10 años de experiencia.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link

@@ -565,18 +565,7 @@ export default function IphoneRepairGuide() {
               "@type": "Service",
               "name": "Reparación de iPhone",
               "description": "Servicio técnico especializado en reparación de iPhone con repuestos originales y garantía escrita en Buenos Aires.",
-              "provider": {
-                "@type": "LocalBusiness",
-                "name": "Team Celular",
-                "address": {
-                  "@type": "PostalAddress",
-                  "streetAddress": "Paraguay 2451",
-                  "addressLocality": "Recoleta",
-                  "addressRegion": "CABA",
-                  "addressCountry": "AR",
-                },
-                "telephone": "+541151034595",
-              },
+              "provider": { "@id": "https://teamcelular.com#localbusiness" },
               "areaServed": {
                 "@type": "City",
                 "name": "Buenos Aires",

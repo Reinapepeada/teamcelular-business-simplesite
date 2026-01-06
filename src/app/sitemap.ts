@@ -52,6 +52,8 @@ const mainPages = [
   { path: "tienda", priority: 0.9, changeFreq: "daily" as const },
   { path: "productos", priority: 0.85, changeFreq: "daily" as const },
   { path: "sobrenosotros", priority: 0.7, changeFreq: "monthly" as const },
+  { path: "terminos", priority: 0.3, changeFreq: "yearly" as const },
+  { path: "privacidad", priority: 0.3, changeFreq: "yearly" as const },
 ];
 
 // Guías y contenido educativo
