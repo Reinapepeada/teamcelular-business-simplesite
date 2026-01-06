@@ -97,6 +97,9 @@ export const metadata: Metadata = {
     "soporte técnico empresas",
     "reballing BGA",
   ],
+  alternates: {
+    canonical: "https://teamcelular.com/guias",
+  },
   authors: [{ name: "Team Celular" }],
   creator: "Team Celular",
   publisher: "Team Celular",

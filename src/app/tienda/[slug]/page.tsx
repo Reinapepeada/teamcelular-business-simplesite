@@ -101,7 +101,7 @@ export async function generateMetadata({ params }: any) {
                 siteName: 'Team Celular',
                 images: [ogImageObj],
                 locale: 'es_AR',
-                type: 'website',
+                type: 'product',
             },
             twitter: {
                 card: 'summary_large_image',

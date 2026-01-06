@@ -27,6 +27,9 @@ export const metadata: Metadata = {
     "reparación placa lógica",
     "recuperación datos celular",
   ],
+  alternates: {
+    canonical: "https://teamcelular.com/guias/microelectronica-reballing-caba",
+  },
   authors: [{ name: "Team Celular" }],
   creator: "Team Celular",
   publisher: "Team Celular",

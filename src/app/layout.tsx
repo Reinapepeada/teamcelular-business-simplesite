@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     icons: {
         icon: [
             { url: "/favicon.ico", sizes: "any" },
-            { url: "/icon.svg", type: "image/svg+xml" },
+            { url: "/icon.ico", sizes: "any" },
         ],
         apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
     },
@@ -102,12 +102,6 @@ export const metadata: Metadata = {
                 type: "image/webp",
             },
         ],
-    },
-    alternates: {
-        canonical: SITE_URL,
-        languages: {
-            "es-AR": SITE_URL,
-        },
     },
     verification: {
         google: process.env.GOOGLE_SITE_VERIFICATION || "",

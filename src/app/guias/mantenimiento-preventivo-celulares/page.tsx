@@ -32,6 +32,9 @@ export const metadata: Metadata = {
     "extender vida útil smartphone",
     "checklist mantenimiento celular",
   ],
+  alternates: {
+    canonical: "https://teamcelular.com/guias/mantenimiento-preventivo-celulares",
+  },
   authors: [{ name: "Team Celular" }],
   creator: "Team Celular",
   publisher: "Team Celular",

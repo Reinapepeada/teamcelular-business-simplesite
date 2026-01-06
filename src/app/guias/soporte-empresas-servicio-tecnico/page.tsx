@@ -34,6 +34,9 @@ export const metadata: Metadata = {
     "reparación celulares empresas",
     "soporte corporativo smartphones",
   ],
+  alternates: {
+    canonical: "https://teamcelular.com/guias/soporte-empresas-servicio-tecnico",
+  },
   authors: [{ name: "Team Celular" }],
   creator: "Team Celular",
   publisher: "Team Celular",

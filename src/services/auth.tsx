@@ -36,19 +36,19 @@ export class AuthError extends Error {
 
 /**
  * Login usando la API real
- * POST /admin/login con JSON body
+ * POST /admin/login con body x-www-form-urlencoded (requerido por OAuth2PasswordRequestForm)
  */
 export async function login(identifier: string, password: string): Promise<LoginResponse> {
+    const formBody = new URLSearchParams();
+    formBody.append('username', identifier); // Backend espera "username" aunque sea un email
+    formBody.append('password', password);
+
     const response = await fetch(`${API_URL}/admin/login`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify({
-            // Backend expects "username" even when using an email as the identifier.
-            username: identifier,
-            password,
-        }),
+        body: formBody.toString(),
     });
 
     if (!response.ok) {

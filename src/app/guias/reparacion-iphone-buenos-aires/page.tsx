@@ -34,6 +34,9 @@ export const metadata: Metadata = {
     "iPhone mojado recuperación",
     "microelectrónica iPhone",
   ],
+  alternates: {
+    canonical: "https://teamcelular.com/guias/reparacion-iphone-buenos-aires",
+  },
   authors: [{ name: "Team Celular" }],
   creator: "Team Celular",
   publisher: "Team Celular",

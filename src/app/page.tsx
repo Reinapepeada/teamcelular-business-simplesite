@@ -4,6 +4,15 @@ import BannerCards from "@/components/cards/BannerCards";
 import KnowledgeGrid from "@/components/cards/KnowledgeGrid";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: SITE_URL,
+  },
+};
 
 const services = [
   {
