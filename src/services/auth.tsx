@@ -45,7 +45,8 @@ export async function login(identifier: string, password: string): Promise<Login
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            identifier,
+            // Backend expects "username" even when using an email as the identifier.
+            username: identifier,
             password,
         }),
     });
