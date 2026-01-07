@@ -27,7 +27,8 @@ function slugify(text = '') {
  * and returns a Metadata object with OpenGraph + Twitter + canonical tags.
  */
 export async function generateMetadata({ params }: any) {
-    const productId = parseProductIdFromSlug(params?.slug);
+    const { slug } = await params;
+    const productId = parseProductIdFromSlug(slug);
     if (!productId) return {};
 
     try {
@@ -101,7 +102,7 @@ export async function generateMetadata({ params }: any) {
                 siteName: 'Team Celular',
                 images: [ogImageObj],
                 locale: 'es_AR',
-                type: 'product',
+                type: 'website',
             },
             twitter: {
                 card: 'summary_large_image',
@@ -131,7 +132,8 @@ export async function generateMetadata({ params }: any) {
 }
 
 export default async function Page({ params }: any) {
-    const productId = parseProductIdFromSlug(params?.slug);
+    const { slug } = await params;
+    const productId = parseProductIdFromSlug(slug);
     let product = null;
     try {
         if (productId) {
@@ -142,7 +144,7 @@ export default async function Page({ params }: any) {
     }
 
     if (product) {
-        const requestedSlug = String(params?.slug ?? '');
+        const requestedSlug = String(slug ?? '');
         const canonicalSlug = buildProductSlug(product);
         if (canonicalSlug && requestedSlug !== canonicalSlug) {
             permanentRedirect(`/tienda/${canonicalSlug}`);

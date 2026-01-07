@@ -16,7 +16,7 @@ function slugify(text = '') {
 }
 
 export async function generateMetadata({ params }: any) {
-  const slug = params?.slug;
+  const { slug } = await params;
   try {
     const all = await getAllProducts();
     const products = all.filter(p => p.category && slugify(p.category.name) === String(slug));
@@ -68,7 +68,7 @@ export async function generateMetadata({ params }: any) {
 }
 
 export default async function Page({ params }: any) {
-  const slug = params?.slug;
+  const { slug } = await params;
   const all = await getAllProducts();
   const products = all.filter(p => p.category && slugify(p.category.name) === String(slug));
   const categoryName = products.length ? products[0]?.category?.name : null;
