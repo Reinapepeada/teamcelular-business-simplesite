@@ -17,7 +17,8 @@ import ResumeCartNav from "../cart/resume_cart_nav";
 
 export default function NavbarNUI() {
     const menuItems = [
-        "Reparaciones",
+        "Arreglo de celulares",
+        "Zonas",
         "Guías",
         "Tienda",
         "Contacto",
@@ -51,8 +52,13 @@ export default function NavbarNUI() {
 
             <NavbarContent className="hidden  lg:flex gap-4" justify="center">
                 <NavbarItem isActive>
-                    <Link href="/presupuesto-reparacion" color="primary">
-                        Reparaciones
+                    <Link href="/arreglo-de-celulares" color="primary">
+                        Arreglo de celulares
+                    </Link>
+                </NavbarItem>
+                <NavbarItem>
+                    <Link color="foreground" href="/zonas">
+                        Zonas
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
@@ -118,12 +124,14 @@ export default function NavbarNUI() {
                     const getMenuLink = (idx) => {
                         switch (idx) {
                             case 0:
-                                return "/presupuesto-reparacion";
+                                return "/arreglo-de-celulares";
                             case 1:
-                                return "/guias";
+                                return "/zonas";
                             case 2:
-                                return "/tienda";
+                                return "/guias";
                             case 3:
+                                return "/tienda";
+                            case 4:
                                 return "/contacto";
                             default:
                                 return "/sobrenosotros";

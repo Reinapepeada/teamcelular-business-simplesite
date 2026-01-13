@@ -47,6 +47,15 @@ async function getAllProductsForSitemap(): Promise<Product[]> {
 // Páginas principales con alta prioridad
 const mainPages = [
   { path: "", priority: 1.0, changeFreq: "weekly" as const },
+  { path: "arreglo-de-celulares", priority: 0.95, changeFreq: "weekly" as const },
+  { path: "zonas", priority: 0.8, changeFreq: "monthly" as const },
+  { path: "zonas/recoleta", priority: 0.8, changeFreq: "monthly" as const },
+  { path: "zonas/palermo", priority: 0.75, changeFreq: "monthly" as const },
+  { path: "zonas/belgrano", priority: 0.75, changeFreq: "monthly" as const },
+  { path: "zonas/caballito", priority: 0.75, changeFreq: "monthly" as const },
+  { path: "zonas/almagro", priority: 0.75, changeFreq: "monthly" as const },
+  { path: "zonas/balvanera", priority: 0.75, changeFreq: "monthly" as const },
+  { path: "zonas/microcentro", priority: 0.75, changeFreq: "monthly" as const },
   { path: "presupuesto-reparacion", priority: 0.95, changeFreq: "weekly" as const },
   { path: "contacto", priority: 0.9, changeFreq: "monthly" as const },
   { path: "tienda", priority: 0.9, changeFreq: "daily" as const },

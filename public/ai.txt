@@ -4,6 +4,9 @@ description: Servicio tecnico y tienda de repuestos/accesorios para celulares en
 
 main-urls:
 - https://teamcelular.com/
+- https://teamcelular.com/arreglo-de-celulares
+- https://teamcelular.com/zonas
+- https://teamcelular.com/zonas/recoleta
 - https://teamcelular.com/tienda
 - https://teamcelular.com/devoluciones
 - https://teamcelular.com/guias
