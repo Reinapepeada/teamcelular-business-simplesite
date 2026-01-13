@@ -28,7 +28,7 @@ export default function NavbarNUI() {
     return (
         <Navbar  maxWidth="2xl">
             <NavbarContent className="" justify="start">
-                <NavbarItem className="lg:hidden">
+                <NavbarItem className="nav:hidden">
                     <NavbarMenuToggle className="w-12 h-12" />
                 </NavbarItem>
                 <NavbarItem className="flex items-center">
@@ -50,7 +50,7 @@ export default function NavbarNUI() {
 
     
 
-            <NavbarContent className="hidden  lg:flex gap-4" justify="center">
+            <NavbarContent className="hidden nav:flex gap-4" justify="center">
                 <NavbarItem isActive>
                     <Link href="/arreglo-de-celulares" color="primary">
                         Arreglo de celulares
@@ -97,7 +97,7 @@ export default function NavbarNUI() {
                         href="/presupuesto-reparacion#solicitar-presupuesto"
                         variant="shadow"
                         size="md"
-                        className="hidden lg:flex bg-gradient-to-r from-primary to-secondary text-white font-semibold">
+                        className="hidden nav:flex bg-gradient-to-r from-primary to-secondary text-white font-semibold">
                         Presupuesto
                     </Button>
                     <Button
