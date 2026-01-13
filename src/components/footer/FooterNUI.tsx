@@ -246,6 +246,12 @@ export default function FooterNUI() {
                 Términos
               </Link>
               <Link
+                href="/devoluciones"
+                className="hover:text-white transition-colors"
+              >
+                Devoluciones
+              </Link>
+              <Link
                 href="/privacidad"
                 className="hover:text-white transition-colors"
               >
