@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/teamcelular.webp",
+        url: "https://teamcelular.com/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Reparación de iPhone - Team Celular Buenos Aires",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Reparación de iPhone | Team Celular Buenos Aires",
     description: "Servicio técnico especializado en iPhone con repuestos originales y garantía escrita",
-    images: ["https://teamcelular.com/images/teamcelular.webp"],
+    images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
 
@@ -235,7 +235,7 @@ export default function IphoneRepairGuide() {
         publishedTime="2024-01-15T00:00:00Z"
         modifiedTime="2025-12-11T00:00:00Z"
         authorName="Team Celular"
-        image="https://teamcelular.com/images/teamcelular.webp"
+        image="https://teamcelular.com/opengraph-image.png"
         url="https://teamcelular.com/guias/reparacion-iphone-buenos-aires"
       />
       <article className="w-full max-w-6xl space-y-16">

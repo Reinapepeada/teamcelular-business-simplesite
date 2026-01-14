@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: `${SITE_URL}/images/teamcelular.webp`,
+        url: `${SITE_URL}/opengraph-image.png`,
         width: 1200,
         height: 630,
         alt: "Cambio de batería en CABA - Team Celular",
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Cambio de Batería en CABA | Team Celular",
     description: "Presupuesto rápido y garantía escrita.",
-    images: [`${SITE_URL}/images/teamcelular.webp`],
+    images: [`${SITE_URL}/opengraph-image.png`],
   },
 };
 

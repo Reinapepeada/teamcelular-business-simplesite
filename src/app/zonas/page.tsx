@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: `${SITE_URL}/images/teamcelular.webp`,
+        url: `${SITE_URL}/opengraph-image.png`,
         width: 1200,
         height: 630,
         alt: "Team Celular - Zonas de servicio en CABA",
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     title: "Zonas de Servicio en CABA | Team Celular",
     description:
       "Arreglo de celulares por zonas en CABA. Presupuesto rápido por WhatsApp o formulario.",
-    images: [`${SITE_URL}/images/teamcelular.webp`],
+    images: [`${SITE_URL}/opengraph-image.png`],
   },
 };
 

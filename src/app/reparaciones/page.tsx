@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: `${SITE_URL}/images/teamcelular.webp`,
+        url: `${SITE_URL}/opengraph-image.png`,
         width: 1200,
         height: 630,
         alt: "Team Celular - Reparaciones en CABA",
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     title: "Reparaciones de Celulares en CABA | Team Celular",
     description:
       "Atención en CABA (Capital Federal). Presupuesto rápido por WhatsApp o formulario.",
-    images: [`${SITE_URL}/images/teamcelular.webp`],
+    images: [`${SITE_URL}/opengraph-image.png`],
   },
 };
 

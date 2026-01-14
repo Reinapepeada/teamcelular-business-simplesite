@@ -80,7 +80,7 @@ export const metadata: Metadata = {
         description:
             "Reparación profesional de celulares con repuestos originales y garantía escrita. Presupuestos sin cargo.",
         images: {
-            url: `${SITE_URL}/images/teamcelular.webp`,
+            url: `${SITE_URL}/opengraph-image.png`,
             alt: "Team Celular - Servicio Técnico de Celulares en Buenos Aires",
         },
     },
@@ -95,11 +95,11 @@ export const metadata: Metadata = {
             "Laboratorio especializado en reparación de smartphones, tablets y notebooks con microelectrónica avanzada, repuestos originales y garantía escrita en Buenos Aires.",
         images: [
             {
-                url: `${SITE_URL}/images/teamcelular.webp`,
+                url: `${SITE_URL}/opengraph-image.png`,
                 width: 1200,
                 height: 630,
                 alt: "Team Celular - Laboratorio de Reparación de Celulares en Buenos Aires",
-                type: "image/webp",
+                type: "image/png",
             },
         ],
     },

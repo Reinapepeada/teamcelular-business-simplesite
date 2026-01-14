@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: `${SITE_URL}/images/teamcelular.webp`,
+        url: `${SITE_URL}/opengraph-image.png`,
         width: 1200,
         height: 630,
         alt: "Team Celular - Política de Privacidad",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "Política de Privacidad | Team Celular",
     description:
       "Política de privacidad y tratamiento de datos personales de Team Celular (Buenos Aires).",
-    images: [`${SITE_URL}/images/teamcelular.webp`],
+    images: [`${SITE_URL}/opengraph-image.png`],
   },
 };
 

@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: `${SITE_URL}/images/teamcelular.webp`,
+        url: `${SITE_URL}/opengraph-image.png`,
         width: 1200,
         height: 630,
         alt: `Team Celular - Arreglo de celulares en ${ZONE_NAME} (CABA)`,
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     title: `Arreglo de Celulares en ${ZONE_NAME} (CABA) | Team Celular`,
     description:
       "Arreglo de celulares con garantía escrita. Presupuesto rápido por WhatsApp o formulario.",
-    images: [`${SITE_URL}/images/teamcelular.webp`],
+    images: [`${SITE_URL}/opengraph-image.png`],
   },
 };
 

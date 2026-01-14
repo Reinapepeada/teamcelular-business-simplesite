@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://teamcelular.com/images/teamcelular.webp",
+        url: "https://teamcelular.com/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Laboratorio de Team Celular en Recoleta",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     title: "Pedí tu presupuesto de reparación en Team Celular",
     description:
       "Respuesta en menos de 24 hs con garantía escrita y repuestos premium.",
-    images: ["https://teamcelular.com/images/teamcelular.webp"],
+    images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
 

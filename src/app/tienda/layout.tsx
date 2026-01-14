@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/teamcelular.webp",
+        url: "https://teamcelular.com/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Tienda Online - Team Celular",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Tienda Online | Team Celular",
     description: "Accesorios y repuestos de calidad para tu celular",
-    images: ["https://teamcelular.com/images/teamcelular.webp"],
+    images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
 

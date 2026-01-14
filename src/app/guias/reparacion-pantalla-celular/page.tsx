@@ -227,7 +227,7 @@ export default function ScreenReplacementGuide() {
         publishedTime="2024-11-30T00:00:00Z"
         modifiedTime="2025-12-11T00:00:00Z"
         authorName="Team Celular"
-        image="https://teamcelular.com/images/teamcelular.webp"
+        image="https://teamcelular.com/opengraph-image.png"
         url="https://teamcelular.com/guias/reparacion-pantalla-celular"
       />
       <BreadcrumbJsonLd

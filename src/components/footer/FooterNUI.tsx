@@ -1,7 +1,4 @@
 import React from "react";
-// fonts
-import { Sora } from "next/font/google";
-const sora = Sora({ subsets: ["latin"], weight: "300" });
 // icons
 import {
   BsFacebook,
@@ -83,16 +80,31 @@ export default function FooterNUI() {
           <div className="flex flex-col space-y-4">
             <div className="flex items-center space-x-3 mb-2">
               <Image
-                src="/celu.webp"
-                alt="Team Celular Logo"
-                width={40}
-                height={40}
-                className="rounded-lg"
+                src="/images/brand/isotipo.png"
+                alt="Isotipo de Team Celular"
+                width={1317}
+                height={1617}
+                className="h-10 w-auto"
                 sizes="40px"
               />
-              <h3 className={`${sora.className} text-2xl font-bold`}>
-                TEAM CELULAR
-              </h3>
+              <div className="flex items-center">
+                <Image
+                  src="/images/brand/logotipo-light.png"
+                  alt="Team Celular"
+                  width={1599}
+                  height={437}
+                  className="h-10 w-auto dark:hidden"
+                  sizes="160px"
+                />
+                <Image
+                  src="/images/brand/logotipo-dark.png"
+                  alt="Team Celular"
+                  width={1599}
+                  height={467}
+                  className="hidden h-10 w-auto dark:block"
+                  sizes="160px"
+                />
+              </div>
             </div>
             <p className="text-sm text-slate-300">
               Más de 15 años de experiencia en reparación profesional de

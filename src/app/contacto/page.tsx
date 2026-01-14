@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/teamcelular.webp",
+        url: "https://teamcelular.com/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Team Celular - Contacto",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Contacto | Team Celular Recoleta",
     description: "Visitanos en Paraguay 2451 o escribinos por WhatsApp",
-    images: ["https://teamcelular.com/images/teamcelular.webp"],
+    images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
 

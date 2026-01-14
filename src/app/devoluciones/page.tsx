@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: `${SITE_URL}/images/teamcelular.webp`,
+        url: `${SITE_URL}/opengraph-image.png`,
         width: 1200,
         height: 630,
         alt: "Team Celular - Política de Devoluciones",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "Política de Devoluciones y Reembolsos | Team Celular",
     description:
       "Política de devoluciones, reembolsos y derecho de arrepentimiento para compras en Team Celular (Argentina).",
-    images: [`${SITE_URL}/images/teamcelular.webp`],
+    images: [`${SITE_URL}/opengraph-image.png`],
   },
 };
 

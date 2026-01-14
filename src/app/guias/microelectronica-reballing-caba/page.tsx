@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/teamcelular.webp",
+        url: "https://teamcelular.com/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Microelectrónica y Reballing BGA - Team Celular",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Microelectrónica y Reballing BGA | Team Celular",
     description: "Reparación avanzada de placas y chips BGA con equipamiento profesional",
-    images: ["https://teamcelular.com/images/teamcelular.webp"],
+    images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
 
@@ -176,7 +176,7 @@ export default function MicroelectronicsGuide() {
         publishedTime="2024-02-20T00:00:00Z"
         modifiedTime="2025-12-11T00:00:00Z"
         authorName="Team Celular"
-        image="https://teamcelular.com/images/teamcelular.webp"
+        image="https://teamcelular.com/opengraph-image.png"
         url="https://teamcelular.com/guias/microelectronica-reballing-caba"
       />
       <article className="w-full max-w-6xl space-y-16">

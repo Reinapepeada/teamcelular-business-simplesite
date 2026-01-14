@@ -32,18 +32,25 @@ export default function NavbarNUI() {
                     <NavbarMenuToggle className="w-12 h-12" />
                 </NavbarItem>
                 <NavbarItem className="flex items-center">
-                    <Link href="/" className="text-inherit ">
+                    <Link href="/" className="flex items-center gap-3 text-inherit">
                         <Image
-                            className="w-11 h-15"
-                            src="/images/teamcelular.webp"
-                            alt="Logo de Team Celular reparacion celulares"
-                            width={100}
-                            height={200}
-                            sizes="44px"
+                            className="h-10 w-auto dark:hidden"
+                            src="/images/brand/imagotipo-light.png"
+                            alt="Team Celular"
+                            width={1725}
+                            height={591}
+                            sizes="(max-width: 640px) 140px, 170px"
+                            priority
                         />
-                        <p className="font-bold text-white text-xl text-inherit hidden lg:flex">
-                            Team Celular
-                        </p>
+                        <Image
+                            className="hidden h-10 w-auto dark:block"
+                            src="/images/brand/imagotipo-dark.png"
+                            alt="Team Celular"
+                            width={1725}
+                            height={591}
+                            sizes="(max-width: 640px) 140px, 170px"
+                            priority
+                        />
                     </Link>
                 </NavbarItem>
             </NavbarContent>

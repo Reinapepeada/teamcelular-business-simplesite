@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: any) {
       : 'Categoría de productos en Teamcelular.';
 
     const url = `${SITE_URL}/tienda/categoria/${slug}`;
-    const fallbackImage = `${SITE_URL}/images/teamcelular.webp`;
+    const fallbackImage = `${SITE_URL}/opengraph-image.png`;
 
     return {
       title,

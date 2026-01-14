@@ -123,7 +123,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/teamcelular.webp",
+        url: "https://teamcelular.com/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Team Celular - Guías Técnicas",
@@ -134,7 +134,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Guías Técnicas de Reparación | Team Celular",
     description: "Aprende de expertos en reparación de celulares en Buenos Aires",
-    images: ["https://teamcelular.com/images/teamcelular.webp"],
+    images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
 

@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/teamcelular.webp",
+        url: "https://teamcelular.com/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Servicio Técnico Corporativo - Team Celular",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Servicio Técnico para Empresas | Team Celular",
     description: "Soporte técnico especializado para empresas con SLA garantizado",
-    images: ["https://teamcelular.com/images/teamcelular.webp"],
+    images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
 
@@ -196,7 +196,7 @@ export default function BusinessSupportGuide() {
         publishedTime="2024-03-10T00:00:00Z"
         modifiedTime="2025-12-11T00:00:00Z"
         authorName="Team Celular"
-        image="https://teamcelular.com/images/teamcelular.webp"
+        image="https://teamcelular.com/opengraph-image.png"
         url="https://teamcelular.com/guias/soporte-empresas-servicio-tecnico"
       />
       <article className="w-full max-w-6xl space-y-16">
