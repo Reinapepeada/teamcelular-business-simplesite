@@ -22,6 +22,7 @@ import {
     User,
     Shield,
     Loader2,
+    Upload,
 } from "lucide-react";
 
 interface NavItem {
@@ -50,6 +51,11 @@ const navItems: NavItem[] = [
                 label: "Crear Producto",
                 href: "/admin/create-products",
                 icon: <PlusCircle className="w-4 h-4" />,
+            },
+            {
+                label: "Carga Masiva",
+                href: "/admin/bulk-upload",
+                icon: <Upload className="w-4 h-4" />,
             },
         ],
     },

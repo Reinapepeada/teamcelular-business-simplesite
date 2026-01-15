@@ -444,3 +444,166 @@ export function getAvailableSizes(variants: ProductVariant[]): string[] {
     });
     return Array.from(sizes);
 }
+
+// ============================================
+// BULK UPLOAD ENDPOINTS
+// ============================================
+
+export interface BulkUploadError {
+    row: number;
+    serial_number?: string;
+    error: string;
+}
+
+export interface BulkUploadWarning {
+    row: number;
+    message: string;
+}
+
+export interface BulkUploadResult {
+    total_rows: number;
+    successful: number;
+    failed: number;
+    skipped: number;
+    updated_products: number;
+    updated_variants: number;
+    created_products?: string[];
+    created_variants?: string[];
+    skipped_products?: string[];
+    updated_products_list?: string[];
+    updated_variants_list?: string[];
+    errors?: BulkUploadError[];
+    warnings?: BulkUploadWarning[];
+}
+
+/**
+ * Download bulk upload template (public)
+ * GET /product/bulk-upload/template
+ */
+export async function downloadBulkUploadTemplate(): Promise<void> {
+    const url = `${apiUrl}/product/bulk-upload/template`;
+    
+    try {
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            throw new ApiError(response.status, 'No se pudo descargar el template');
+        }
+
+        const blob = await response.blob();
+        const downloadUrl = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.download = 'template_carga_productos.xlsx';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        window.URL.revokeObjectURL(downloadUrl);
+    } catch (error) {
+        console.error('Error downloading template:', error);
+        throw error;
+    }
+}
+
+/**
+ * Export existing products (requires authentication)
+ * GET /product/bulk-upload/export
+ */
+export async function exportProducts(): Promise<void> {
+    const token = getToken();
+    
+    if (!token) {
+        throw new ApiError(401, 'No autenticado. Inicia sesión para continuar.');
+    }
+
+    const url = `${apiUrl}/product/bulk-upload/export`;
+    
+    try {
+        const response = await fetch(url, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+        
+        if (!response.ok) {
+            if (response.status === 401) {
+                throw new ApiError(401, 'Sesión expirada. Inicia sesión nuevamente.');
+            }
+            if (response.status === 403) {
+                throw new ApiError(403, 'No tienes permisos para exportar productos.');
+            }
+            throw new ApiError(response.status, 'No se pudo exportar los productos');
+        }
+
+        const blob = await response.blob();
+        const downloadUrl = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        
+        // Get filename from Content-Disposition header if available
+        const contentDisposition = response.headers.get('Content-Disposition');
+        let filename = 'productos_exportados.xlsx';
+        
+        if (contentDisposition) {
+            const matches = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/.exec(contentDisposition);
+            if (matches != null && matches[1]) {
+                filename = matches[1].replace(/['"]/g, '');
+            }
+        }
+        
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        window.URL.revokeObjectURL(downloadUrl);
+    } catch (error) {
+        console.error('Error exporting products:', error);
+        throw error;
+    }
+}
+
+/**
+ * Upload bulk products from Excel file (requires authentication)
+ * POST /product/bulk-upload
+ */
+export async function uploadBulkProducts(
+    file: File,
+    skipErrors: boolean = true
+): Promise<BulkUploadResult> {
+    const token = getToken();
+    
+    if (!token) {
+        throw new ApiError(401, 'No autenticado. Inicia sesión para continuar.');
+    }
+
+    const url = `${apiUrl}/product/bulk-upload?skip_errors=${skipErrors}`;
+    const formData = new FormData();
+    formData.append('file', file);
+    
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            body: formData,
+        });
+        
+        if (!response.ok) {
+            if (response.status === 401) {
+                throw new ApiError(401, 'Sesión expirada. Inicia sesión nuevamente.');
+            }
+            if (response.status === 403) {
+                throw new ApiError(403, 'No tienes permisos para cargar productos.');
+            }
+            
+            const errorData = await response.json().catch(() => ({ detail: 'Error procesando el archivo' }));
+            throw new ApiError(response.status, errorData.detail || 'Error procesando el archivo');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error uploading bulk products:', error);
+        throw error;
+    }
+}
