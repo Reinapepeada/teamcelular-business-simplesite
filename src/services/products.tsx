@@ -481,7 +481,7 @@ export interface BulkUploadResult {
  * GET /product/bulk-upload/template
  */
 export async function downloadBulkUploadTemplate(): Promise<void> {
-    const url = `${apiUrl}/product/bulk-upload/template`;
+    const url = `${apiUrl}/products/bulk-upload/template`;
     
     try {
         const response = await fetch(url);
@@ -516,7 +516,7 @@ export async function exportProducts(): Promise<void> {
         throw new ApiError(401, 'No autenticado. Inicia sesión para continuar.');
     }
 
-    const url = `${apiUrl}/product/bulk-upload/export`;
+    const url = `${apiUrl}/products/bulk-upload/export`;
     
     try {
         const response = await fetch(url, {
@@ -576,7 +576,7 @@ export async function uploadBulkProducts(
         throw new ApiError(401, 'No autenticado. Inicia sesión para continuar.');
     }
 
-    const url = `${apiUrl}/product/bulk-upload?skip_errors=${skipErrors}`;
+    const url = `${apiUrl}/products/bulk-upload?skip_errors=${skipErrors}`;
     const formData = new FormData();
     formData.append('file', file);
     
