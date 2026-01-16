@@ -27,7 +27,7 @@ export const metadata: Metadata = {
         template: "%s | Team Celular",
     },
     description:
-        "Servicio técnico especializado en reparación de celulares en Recoleta, CABA. Repuestos originales, microelectrónica avanzada, soporte empresarial y garantía escrita. Presupuestos sin cargo en el día.",
+        "Servicio técnico especializado en celulares en Recoleta, CABA. Repuestos originales, microelectrónica avanzada y garantía escrita. Presupuestos sin cargo.",
     keywords: [
         "reparación celulares Buenos Aires",
         "servicio técnico celulares CABA",
