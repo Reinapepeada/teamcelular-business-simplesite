@@ -2,7 +2,7 @@
 site: Team Celular
 url: https://teamcelular.com
 language: es-AR
-summary: Servicio tecnico y tienda de repuestos/accesorios para celulares en Buenos Aires.
+summary: Servicio técnico y tienda de repuestos/accesorios para celulares en Buenos Aires (Recoleta, CABA). Atención a barrios cercanos y soporte a empresas.
 
 key-services:
 - Reparacion de celulares (pantallas, baterias, puertos de carga)
@@ -12,11 +12,26 @@ key-services:
 
 canonical-urls:
 - https://teamcelular.com/
+- https://teamcelular.com/arreglo-de-celulares
+- https://teamcelular.com/tecnico-de-celulares
 - https://teamcelular.com/tienda
 - https://teamcelular.com/guias
+- https://teamcelular.com/zonas
+- https://teamcelular.com/zonas/recoleta
+- https://teamcelular.com/zonas/palermo
+- https://teamcelular.com/zonas/belgrano
+- https://teamcelular.com/zonas/caballito
 - https://teamcelular.com/presupuesto-reparacion
 - https://teamcelular.com/contacto
 - https://teamcelular.com/sobrenosotros
+
+high-value-guides:
+- https://teamcelular.com/guias/reparacion-iphone-buenos-aires
+- https://teamcelular.com/guias/reparacion-pantalla-celular
+- https://teamcelular.com/guias/cambio-bateria-celular
+- https://teamcelular.com/guias/microelectronica-reballing-caba
+- https://teamcelular.com/guias/soporte-empresas-servicio-tecnico
+- https://teamcelular.com/guias/mantenimiento-preventivo-celulares
 
 sitemap: https://teamcelular.com/sitemap.xml
 

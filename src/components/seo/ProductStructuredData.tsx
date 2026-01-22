@@ -24,11 +24,6 @@ export default function ProductStructuredData({ product, images = [] }: ProductS
     '@type': 'ImageObject',
     url: u,
   }));
-  const aggregateRating = (product as any).rating ? {
-    "@type": "AggregateRating",
-    ratingValue: String((product as any).rating?.value || 4.5),
-    reviewCount: String((product as any).rating?.count || 10),
-  } : undefined;
 
   const offers: any = {
     "@type": "Offer",
@@ -54,7 +49,6 @@ export default function ProductStructuredData({ product, images = [] }: ProductS
     image: imageObjects.length ? imageObjects : undefined,
     brand: product.brand ? { "@type": "Brand", name: product.brand.name } : undefined,
     offers,
-    aggregateRating,
   };
 
   return (

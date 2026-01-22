@@ -12,6 +12,7 @@ import {
   FaCamera
 } from "react-icons/fa";
 import ArticleSchema from "@/components/seo/ArticleSchema";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Microelectrónica y Reballing BGA Buenos Aires | Laboratorio Certificado",
@@ -70,6 +71,10 @@ export const metadata: Metadata = {
     images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
+
+const SITE_URL =
+  process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+const PAGE_URL = `${SITE_URL}/guias/microelectronica-reballing-caba`;
 
 const useCases = [
   {
@@ -177,9 +182,16 @@ export default function MicroelectronicsGuide() {
         modifiedTime="2025-12-11T00:00:00Z"
         authorName="Team Celular"
         image="https://teamcelular.com/opengraph-image.png"
-        url="https://teamcelular.com/guias/microelectronica-reballing-caba"
+        url={PAGE_URL}
       />
       <article className="w-full max-w-6xl space-y-16">
+        <BreadcrumbJsonLd
+          items={[
+            { name: "Inicio", url: `${SITE_URL}/` },
+            { name: "Guías", url: `${SITE_URL}/guias` },
+            { name: "Microelectrónica", url: PAGE_URL },
+          ]}
+        />
         {/* Hero Section */}
         <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-16">
           <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-primary via-secondary to-primary shadow-2xl">

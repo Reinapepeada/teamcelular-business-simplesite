@@ -14,6 +14,8 @@ export default function Robots(): MetadataRoute.Robots {
           "/api/",
           "/_next/",
           "/private/",
+          "/cart/",
+          "/checkout/",
           "/*.json$",
         ],
       },

@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Metadata } from "next";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import { Button, Card, Divider } from "@nextui-org/react";
 import {
   FaClipboardList,
@@ -20,6 +21,10 @@ import {
 
 import RepairsForm from "@/components/forms/RepairsForm";
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+const PAGE_URL = `${SITE_URL}/presupuesto-reparacion`;
+
 export const metadata: Metadata = {
   title: "Presupuesto Reparación de Celulares en Buenos Aires | Team Celular",
   description:
@@ -33,13 +38,13 @@ export const metadata: Metadata = {
     "retiro reparación celulares",
   ],
   alternates: {
-    canonical: "https://teamcelular.com/presupuesto-reparacion",
+    canonical: PAGE_URL,
   },
   openGraph: {
     title: "Presupuesto Reparación de Celulares en Buenos Aires | Team Celular",
     description:
       "24 hs de respuesta, garantía escrita y soporte personalizado para reparar tu celular.",
-    url: "https://teamcelular.com/presupuesto-reparacion",
+    url: PAGE_URL,
     locale: "es_AR",
     type: "website",
     images: [
@@ -193,6 +198,37 @@ const faqs = [
 ];
 
 export default function PresupuestoReparacionPage() {
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${PAGE_URL}#service`,
+    name: "Presupuesto de reparación de celulares en CABA",
+    serviceType: "Presupuesto y diagnóstico de reparación de celulares",
+    url: PAGE_URL,
+    areaServed: [
+      { "@type": "City", name: "Recoleta" },
+      { "@type": "City", name: "CABA" },
+      { "@type": "City", name: "Buenos Aires" },
+    ],
+    provider: { "@id": `${SITE_URL}#localbusiness` },
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "ARS",
+      availability: "https://schema.org/InStock",
+      url: PAGE_URL,
+    },
+  };
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  };
+
   return (
     <section className="relative w-full min-h-screen overflow-hidden">
       {/* Breadcrumbs */}
@@ -207,6 +243,13 @@ export default function PresupuestoReparacionPage() {
           <li className="text-primary font-semibold">Presupuesto de Reparación</li>
         </ol>
       </nav>
+
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Inicio", url: `${SITE_URL}/` },
+          { name: "Presupuesto", url: PAGE_URL },
+        ]}
+      />
 
       <div className="container mx-auto px-4 pb-16 md:pb-24">
         {/* Hero */}
@@ -621,6 +664,15 @@ export default function PresupuestoReparacionPage() {
           }}
         />
       </div>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
     </section>
   );
 }

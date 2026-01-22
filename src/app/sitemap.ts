@@ -58,6 +58,7 @@ const mainPages = [
   { path: "zonas/microcentro", priority: 0.75, changeFreq: "monthly" as const },
   { path: "presupuesto-reparacion", priority: 0.95, changeFreq: "weekly" as const },
   { path: "contacto", priority: 0.9, changeFreq: "monthly" as const },
+  { path: "tecnico-de-celulares", priority: 0.9, changeFreq: "weekly" as const },
   { path: "tienda", priority: 0.9, changeFreq: "daily" as const },
   { path: "productos", priority: 0.85, changeFreq: "daily" as const },
   { path: "sobrenosotros", priority: 0.7, changeFreq: "monthly" as const },

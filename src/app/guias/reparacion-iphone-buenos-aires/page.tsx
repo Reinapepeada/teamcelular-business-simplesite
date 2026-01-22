@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import {
   FaApple,
   FaMobileAlt,
@@ -77,6 +78,10 @@ export const metadata: Metadata = {
     images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
+
+const SITE_URL =
+  process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+const PAGE_URL = `${SITE_URL}/guias/reparacion-iphone-buenos-aires`;
 
 const repairProcess = [
   {
@@ -236,9 +241,16 @@ export default function IphoneRepairGuide() {
         modifiedTime="2025-12-11T00:00:00Z"
         authorName="Team Celular"
         image="https://teamcelular.com/opengraph-image.png"
-        url="https://teamcelular.com/guias/reparacion-iphone-buenos-aires"
+        url={PAGE_URL}
       />
       <article className="w-full max-w-6xl space-y-16">
+        <BreadcrumbJsonLd
+          items={[
+            { name: "Inicio", url: `${SITE_URL}/` },
+            { name: "Guías", url: `${SITE_URL}/guias` },
+            { name: "Reparación iPhone", url: PAGE_URL },
+          ]}
+        />
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
           <Link href="/" className="hover:text-primary transition">

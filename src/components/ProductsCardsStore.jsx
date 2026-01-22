@@ -25,6 +25,7 @@ function ProductsCardsStore({
     totalPages,
     isLoading,
     addToCart,
+    currentPage,
 }) {
     // router not needed when using <Link>
     const [sortBy, setSortBy] = useState(null);
@@ -226,7 +227,8 @@ function ProductsCardsStore({
                 <Pagination
                     isCompact
                     showControls
-                    initialPage={1}
+                    initialPage={currentPage || 1}
+                    page={currentPage || 1}
                     total={totalPages}
                     onChange={(page) => setPage(page)}
                 />

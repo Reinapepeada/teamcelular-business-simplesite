@@ -17,6 +17,7 @@ import {
   FaChartLine,
 } from "react-icons/fa";
 import ArticleSchema from "@/components/seo/ArticleSchema";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Mantenimiento Preventivo Celulares | Guía Completa 2024 CABA",
@@ -75,6 +76,10 @@ export const metadata: Metadata = {
     images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
+
+const SITE_URL =
+  process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+const PAGE_URL = `${SITE_URL}/guias/mantenimiento-preventivo-celulares`;
 
 const maintenanceTips = [
   {
@@ -189,9 +194,16 @@ export default function PreventiveMaintenanceGuide() {
         modifiedTime="2025-12-11T00:00:00Z"
         authorName="Team Celular"
         image="https://teamcelular.com/opengraph-image.png"
-        url="https://teamcelular.com/guias/mantenimiento-preventivo-celulares"
+        url={PAGE_URL}
       />
       <article className="w-full max-w-6xl space-y-16">
+        <BreadcrumbJsonLd
+          items={[
+            { name: "Inicio", url: `${SITE_URL}/` },
+            { name: "Guías", url: `${SITE_URL}/guias` },
+            { name: "Mantenimiento preventivo", url: PAGE_URL },
+          ]}
+        />
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
           <Link href="/" className="hover:text-primary transition">

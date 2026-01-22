@@ -123,6 +123,12 @@ export default function ZonasPage() {
             Ver arreglo de celulares
           </Link>
           <Link
+            href="/tecnico-de-celulares"
+            className="rounded-full border border-secondary/50 px-8 py-4 text-base font-semibold text-secondary transition hover:bg-secondary/10"
+          >
+            Técnico de celulares
+          </Link>
+          <Link
             href="/presupuesto-reparacion#solicitar-presupuesto"
             className="rounded-full border border-primary/40 px-8 py-4 text-base font-semibold text-primary transition hover:bg-primary/10 dark:border-primary/60 dark:text-primary/80"
           >

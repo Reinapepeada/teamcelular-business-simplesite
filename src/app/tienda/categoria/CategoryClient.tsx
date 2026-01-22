@@ -17,6 +17,7 @@ export default function CategoryClient({ products }: { products: any[] }) {
         totalPages={1}
         isLoading={false}
         addToCart={addToCart}
+        currentPage={1}
       />
     </div>
   );

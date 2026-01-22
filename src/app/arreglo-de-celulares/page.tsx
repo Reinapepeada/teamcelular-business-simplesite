@@ -180,6 +180,12 @@ export default function ArregloDeCelularesPage() {
           >
             Pedir presupuesto
           </Link>
+          <Link
+            href="/tecnico-de-celulares"
+            className="rounded-full border border-secondary/50 px-8 py-4 text-base font-semibold text-secondary transition hover:bg-secondary/10"
+          >
+            Técnico de celulares
+          </Link>
           <a
             href={whatsappUrl}
             target="_blank"

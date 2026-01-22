@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import { 
   FaApple, 
   FaMicrochip, 
@@ -142,6 +143,12 @@ export default function GuidesPage() {
   return (
     <div className="flex w-full justify-center px-4 py-16">
       <div className="w-full max-w-6xl space-y-12">
+        <BreadcrumbJsonLd
+          items={[
+            { name: "Inicio", url: "https://teamcelular.com/" },
+            { name: "Guías", url: "https://teamcelular.com/guias" },
+          ]}
+        />
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
           <Link href="/" className="hover:text-primary transition">
