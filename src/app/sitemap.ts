@@ -28,6 +28,11 @@ function toAbsoluteUrl(url: string) {
 
 // Fetch products with cache for sitemap generation
 async function getAllProductsForSitemap(): Promise<Product[]> {
+  if (!apiUrl) {
+    console.warn("Sitemap: NEXT_PUBLIC_API_URL is not set; skipping products fetch.");
+    return [];
+  }
+
   try {
     const response = await fetch(`${apiUrl}/products/all`, {
       next: { revalidate: 86400 }, // Cache for 24 hours
