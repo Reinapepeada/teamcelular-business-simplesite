@@ -1,7 +1,9 @@
 import React from 'react';
+import { cache } from 'react';
+import { notFound } from 'next/navigation';
 import CategoryClient from '../CategoryClient';
 import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd';
-import { getAllProducts } from '@/services/products';
+import { apiUrl } from '@/services/products';
 
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || 'https://teamcelular.com';
 
@@ -18,14 +20,16 @@ function slugify(text = '') {
 export async function generateMetadata({ params }: any) {
   const { slug } = await params;
   try {
-    const all = await getAllProducts();
-    const products = all.filter(p => p.category && slugify(p.category.name) === String(slug));
-    const categoryName = products.length ? products[0]?.category?.name : null;
-    const title = categoryName ? `Tienda · ${categoryName}` : 'Tienda';
-    const description = categoryName
-      ? `Productos en la categoría ${categoryName} — Teamcelular.`
-      : 'Categoría de productos en Teamcelular.';
+    const data = await getCategoryData(String(slug));
+    if (!data?.categoryName) {
+      return {
+        title: 'Categoría no encontrada',
+        robots: { index: false, follow: false },
+      } as any;
+    }
 
+    const title = `Tienda · ${data.categoryName}`;
+    const description = `Productos en la categoría ${data.categoryName} — Teamcelular.`;
     const url = `${SITE_URL}/tienda/categoria/${slug}`;
     const fallbackImage = `${SITE_URL}/opengraph-image.png`;
 
@@ -50,7 +54,7 @@ export async function generateMetadata({ params }: any) {
             url: fallbackImage,
             width: 1200,
             height: 630,
-            alt: `Categoría ${categoryName || 'Productos'} - Teamcelular`,
+            alt: `Categoría ${data.categoryName} - Teamcelular`,
           },
         ],
       },
@@ -69,10 +73,16 @@ export async function generateMetadata({ params }: any) {
 
 export default async function Page({ params }: any) {
   const { slug } = await params;
-  const all = await getAllProducts();
-  const products = all.filter(p => p.category && slugify(p.category.name) === String(slug));
-  const categoryName = products.length ? products[0]?.category?.name : null;
+  const data = await getCategoryData(String(slug));
+  if (!data?.categoryName) {
+    notFound();
+  }
+  const products = data.products;
+  const categoryName = data.categoryName;
   const url = `${SITE_URL}/tienda/categoria/${slug}`;
+  const intro = categoryName
+    ? `Descubrí ${products.length} productos disponibles en la categoría ${categoryName}. Envíos en CABA y asesoramiento personalizado.`
+    : 'Explorá productos de esta categoría con repuestos y accesorios seleccionados.';
 
   return (
     <div className="max-w-screen-xl mx-auto px-4 py-8">
@@ -86,8 +96,48 @@ export default async function Page({ params }: any) {
           ]}
         />
       )}
-      <h1 className="text-3xl font-bold mb-6">{categoryName || 'Categoría'}</h1>
-      <CategoryClient products={products} />
+      <h1 className="text-3xl font-bold mb-3">{categoryName || 'Categoría'}</h1>
+      <p className="text-slate-600 dark:text-slate-300 mb-6">{intro}</p>
+      {products.length > 0 ? (
+        <CategoryClient products={products} />
+      ) : (
+        <p className="text-sm text-slate-500 dark:text-slate-400">
+          Por el momento no hay productos disponibles en esta categoría.
+        </p>
+      )}
     </div>
   );
 }
+
+const getCategoryData = cache(async (slug: string) => {
+  if (!apiUrl) return null;
+
+  try {
+    const categoriesResponse = await fetch(`${apiUrl}/categories/get/all`, {
+      next: { revalidate: 86400 },
+    });
+    if (!categoriesResponse.ok) return null;
+    const categories = await categoriesResponse.json();
+    const category = categories.find((cat: any) => slugify(cat.name) === slug);
+    if (!category?.name) return null;
+
+    const queryParams = new URLSearchParams();
+    queryParams.set('page', '1');
+    queryParams.set('size', '24');
+    queryParams.set('categories', category.name);
+
+    const productsResponse = await fetch(
+      `${apiUrl}/products/?${queryParams.toString()}`,
+      { next: { revalidate: 3600 } }
+    );
+    if (!productsResponse.ok) {
+      return { categoryName: category.name, products: [] };
+    }
+
+    const data = await productsResponse.json();
+    return { categoryName: category.name, products: data.products || [] };
+  } catch (error) {
+    console.error('Category fetch error', error);
+    return null;
+  }
+});

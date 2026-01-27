@@ -1,11 +1,11 @@
 import ProductDetailClient from './ProductDetailClient';
+import { cache } from 'react';
 import { getAllProductImages, getProductById, getPrimaryImage } from '@/services/products';
 import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd';
 import ProductStructuredData from '@/components/seo/ProductStructuredData';
 import { fetchWithCache } from '@/lib/serverCache';
 import { buildProductSlug, parseProductIdFromSlug } from '@/lib/productSlug';
-import { permanentRedirect } from 'next/navigation';
-import probe from 'probe-image-size';
+import { permanentRedirect, notFound } from 'next/navigation';
 
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || 'https://teamcelular.com';
 const DEFAULT_LAT = process.env.NEXT_PUBLIC_BUSINESS_LAT || '-34.6037';
@@ -21,10 +21,17 @@ function slugify(text = '') {
         .replace(/^-+|-+$/g, '');
 }
 
+const getProductData = cache(async (productId: number) => {
+    return fetchWithCache(
+        `product:${productId}`,
+        () => getProductById(productId),
+        1000 * 60 * 5
+    );
+});
+
 /**
  * Server-side metadata generation for product pages.
- * Uses the public `getProductById` helper to fetch product data at request/build time
- * and returns a Metadata object with OpenGraph + Twitter + canonical tags.
+ * Uses shared cached fetch to avoid duplicate requests.
  */
 export async function generateMetadata({ params }: any) {
     const { slug } = await params;
@@ -32,20 +39,9 @@ export async function generateMetadata({ params }: any) {
     if (!productId) return {};
 
     try {
-        const product = await fetchWithCache(`product:${productId}`, () => getProductById(productId), 1000 * 60 * 5);
+        const product = await getProductData(productId);
         const image = getPrimaryImage(product) || '/placeholder.jpg';
         const absoluteImage = image.startsWith('http') ? image : `${SITE_URL}${image.startsWith('/') ? '' : '/'}${image}`;
-
-        // Probe image dimensions server-side when possible
-        let imgMeta: { width?: number; height?: number } = {};
-        try {
-            const res = await probe(absoluteImage);
-            imgMeta.width = res.width;
-            imgMeta.height = res.height;
-        } catch (e) {
-            // ignore probe errors and fallback to defaults
-            console.warn('probe image failed', e);
-        }
 
         const title = product.name || 'Producto';
         const fallbackDescription = [
@@ -68,8 +64,6 @@ export async function generateMetadata({ params }: any) {
             url: absoluteImage,
             alt: product.name || 'Imagen del producto',
         };
-        if (imgMeta.width) ogImageObj.width = imgMeta.width;
-        if (imgMeta.height) ogImageObj.height = imgMeta.height;
 
         // Build keywords from product data
         const keywords = [
@@ -125,8 +119,9 @@ export async function generateMetadata({ params }: any) {
     } catch (err) {
         console.error('generateMetadata error:', err);
         return {
-            title: 'Producto',
-            description: 'Producto en Team Celular.',
+            title: 'Producto no encontrado',
+            description: 'Producto no disponible en Team Celular.',
+            robots: { index: false, follow: false },
         };
     }
 }
@@ -137,10 +132,14 @@ export default async function Page({ params }: any) {
     let product = null;
     try {
         if (productId) {
-            product = await fetchWithCache(`product:${productId}`, () => getProductById(productId), 1000 * 60 * 5);
+            product = await getProductData(productId);
         }
     } catch (err) {
         console.error('Server fetch product error:', err);
+    }
+
+    if (!product) {
+        notFound();
     }
 
     if (product) {
@@ -177,7 +176,10 @@ export default async function Page({ params }: any) {
             <BreadcrumbJsonLd items={breadcrumbItems} />
         </>
     )}
-    <ProductDetailClient productIdProp={productId ?? undefined} productProp={product} />
+    <ProductDetailClient
+        productIdProp={productId ?? undefined}
+        productProp={product}
+    />
         </>
     );
 }

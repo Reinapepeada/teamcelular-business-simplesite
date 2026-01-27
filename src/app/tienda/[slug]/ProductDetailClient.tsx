@@ -86,9 +86,11 @@ const colorNames: Record<string, string> = {
 interface Props {
     productIdProp?: number;
     productProp?: Product | null;
+    showHeader?: boolean;
+    showGallery?: boolean;
 }
 
-export default function ProductDetailClient({ productIdProp, productProp }: Props) {
+export default function ProductDetailClient({ productIdProp, productProp, showHeader = true, showGallery = true }: Props) {
     const params = useParams();
     const router = useRouter();
     const productIdFromSlug = parseProductIdFromSlug(params?.slug);
@@ -251,81 +253,83 @@ export default function ProductDetailClient({ productIdProp, productProp }: Prop
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
                 {/* Image Gallery */}
-                <div className="space-y-4">
-                    <div className="relative aspect-square rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800">
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={selectedImageIndex}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.3 }}
-                                className="absolute inset-0"
-                            >
-                                <Image
-                                    src={images[selectedImageIndex]}
-                                    alt={product.name}
-                                    fill
-                                    className="object-contain p-4"
-                                    priority
-                                    sizes="(max-width: 1024px) 100vw, 50vw"
-                                />
-                            </motion.div>
-                        </AnimatePresence>
+                {showGallery && (
+                    <div className="space-y-4">
+                        <div className="relative aspect-square rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800">
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={selectedImageIndex}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="absolute inset-0"
+                                >
+                                    <Image
+                                        src={images[selectedImageIndex]}
+                                        alt={product.name}
+                                        fill
+                                        className="object-contain p-4"
+                                        priority
+                                        sizes="(max-width: 1024px) 100vw, 50vw"
+                                    />
+                                </motion.div>
+                            </AnimatePresence>
+                            
+                            {/* Navigation arrows */}
+                            {images.length > 1 && (
+                                <>
+                                    <button
+                                        onClick={prevImage}
+                                        className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 shadow-lg hover:bg-white dark:hover:bg-gray-800 transition-colors"
+                                    >
+                                        <ChevronLeft className="w-5 h-5" />
+                                    </button>
+                                    <button
+                                        onClick={nextImage}
+                                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 shadow-lg hover:bg-white dark:hover:bg-gray-800 transition-colors"
+                                    >
+                                        <ChevronRight className="w-5 h-5" />
+                                    </button>
+                                </>
+                            )}
+                            
+                            {/* Discount badge */}
+                            {discount > 0 && (
+                                <div className="absolute top-4 left-4">
+                                    <Chip color="danger" variant="solid" size="sm">
+                                        -{discount}%
+                                    </Chip>
+                                </div>
+                            )}
+                        </div>
                         
-                        {/* Navigation arrows */}
+                        {/* Thumbnails */}
                         {images.length > 1 && (
-                            <>
-                                <button
-                                    onClick={prevImage}
-                                    className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 shadow-lg hover:bg-white dark:hover:bg-gray-800 transition-colors"
-                                >
-                                    <ChevronLeft className="w-5 h-5" />
-                                </button>
-                                <button
-                                    onClick={nextImage}
-                                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 shadow-lg hover:bg-white dark:hover:bg-gray-800 transition-colors"
-                                >
-                                    <ChevronRight className="w-5 h-5" />
-                                </button>
-                            </>
-                        )}
-                        
-                        {/* Discount badge */}
-                        {discount > 0 && (
-                            <div className="absolute top-4 left-4">
-                                <Chip color="danger" variant="solid" size="sm">
-                                    -{discount}%
-                                </Chip>
+                            <div className="flex gap-2 overflow-x-auto pb-2">
+                                {images.map((img, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => setSelectedImageIndex(index)}
+                                        className={`relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 border-2 transition-colors ${
+                                            selectedImageIndex === index 
+                                                ? 'border-primary' 
+                                                : 'border-transparent hover:border-gray-300'
+                                        }`}
+                                    >
+                                        <Image
+                                            src={img}
+                                            alt={`${product.name} - ${index + 1}`}
+                                            fill
+                                            className="object-cover"
+                                            sizes="80px"
+                                        />
+                                    </button>
+                                ))}
                             </div>
                         )}
                     </div>
-                    
-                    {/* Thumbnails */}
-                    {images.length > 1 && (
-                        <div className="flex gap-2 overflow-x-auto pb-2">
-                            {images.map((img, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => setSelectedImageIndex(index)}
-                                    className={`relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 border-2 transition-colors ${
-                                        selectedImageIndex === index 
-                                            ? 'border-primary' 
-                                            : 'border-transparent hover:border-gray-300'
-                                    }`}
-                                >
-                                    <Image
-                                        src={img}
-                                        alt={`${product.name} - ${index + 1}`}
-                                        fill
-                                        className="object-cover"
-                                        sizes="80px"
-                                    />
-                                </button>
-                            ))}
-                        </div>
-                    )}
-                </div>
+                )}
                 
                 {/* Product Info */}
                 <div className="space-y-6">
@@ -348,40 +352,44 @@ export default function ProductDetailClient({ productIdProp, productProp }: Prop
                         )}
                     </div>
                     
-                    {/* Title */}
-                    <h1 className="text-3xl font-bold">{product.name}</h1>
-                    
-                    {/* SKU */}
-                    <p className="text-sm text-muted-foreground">
-                        SKU: {product.serial_number}
-                    </p>
-                    
-                    {/* Price */}
-                    <div className="space-y-1">
-                        {discount > 0 ? (
-                            <>
-                                <p className="text-lg line-through text-gray-400">
-                                    ${formatPrice(originalPrice)}
-                                </p>
-                                <p className="text-4xl font-bold text-red-600">
-                                    ${formatPrice(discountedPrice)}
-                                </p>
-                                <p className="text-sm text-green-600 font-medium">
-                                    ¡Ahorrás ${formatPrice(originalPrice - discountedPrice)}!
-                                </p>
-                            </>
-                        ) : (
-                            <p className="text-4xl font-bold">
-                                ${formatPrice(originalPrice)}
+                    {showHeader && (
+                        <>
+                            {/* Title */}
+                            <h1 className="text-3xl font-bold">{product.name}</h1>
+
+                            {/* SKU */}
+                            <p className="text-sm text-muted-foreground">
+                                SKU: {product.serial_number}
                             </p>
-                        )}
-                    </div>
-                    
-                    {/* Description */}
-                    {product.description && (
-                        <p className="text-muted-foreground leading-relaxed">
-                            {product.description}
-                        </p>
+
+                            {/* Price */}
+                            <div className="space-y-1">
+                                {discount > 0 ? (
+                                    <>
+                                        <p className="text-lg line-through text-gray-400">
+                                            ${formatPrice(originalPrice)}
+                                        </p>
+                                        <p className="text-4xl font-bold text-red-600">
+                                            ${formatPrice(discountedPrice)}
+                                        </p>
+                                        <p className="text-sm text-green-600 font-medium">
+                                            ¡Ahorrás ${formatPrice(originalPrice - discountedPrice)}!
+                                        </p>
+                                    </>
+                                ) : (
+                                    <p className="text-4xl font-bold">
+                                        ${formatPrice(originalPrice)}
+                                    </p>
+                                )}
+                            </div>
+
+                            {/* Description */}
+                            {product.description && (
+                                <p className="text-muted-foreground leading-relaxed">
+                                    {product.description}
+                                </p>
+                            )}
+                        </>
                     )}
                     
                     <Divider />

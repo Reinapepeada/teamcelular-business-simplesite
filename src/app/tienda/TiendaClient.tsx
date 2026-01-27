@@ -37,6 +37,7 @@ export default function TiendaClient({
   const router = useRouter();
   const paramsString = useMemo(() => searchParams.toString(), [searchParams]);
   const previousParamsRef = useRef<string | null>(null);
+  const hasHydratedRef = useRef(false);
 
   const currentPage = useMemo(() => {
     const pageValue = Number(searchParams.get("page") || initialPagination.page || 1);
@@ -46,16 +47,22 @@ export default function TiendaClient({
   const { addToCart } = useCartStore();
 
   useEffect(() => {
-    const queryChanged = previousParamsRef.current !== paramsString;
-    previousParamsRef.current = paramsString;
-
     const queryParams = new URLSearchParams(paramsString);
     const page = Number(queryParams.get("page") || currentPage || 1);
     queryParams.delete("page");
     const query = queryParams.toString();
 
     const isInitial = query === initialQuery && page === initialPagination.page;
-    if (!queryChanged && isInitial) return;
+    if (isInitial && !hasHydratedRef.current) {
+      hasHydratedRef.current = true;
+      previousParamsRef.current = paramsString;
+      return;
+    }
+
+    const queryChanged = previousParamsRef.current !== paramsString;
+    previousParamsRef.current = paramsString;
+    hasHydratedRef.current = true;
+    if (!queryChanged && page === productsPagination.page) return;
 
     setIsLoading(true);
     getAllProductsPaginated(page, ITEMS_PER_PAGE, query)

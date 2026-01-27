@@ -28,11 +28,6 @@ function toAbsoluteUrl(url: string) {
 
 // Fetch products with cache for sitemap generation
 async function getAllProductsForSitemap(): Promise<Product[]> {
-  if (!apiUrl) {
-    console.warn("Sitemap: NEXT_PUBLIC_API_URL is not set; skipping products fetch.");
-    return [];
-  }
-
   try {
     const response = await fetch(`${apiUrl}/products/all`, {
       next: { revalidate: 86400 }, // Cache for 24 hours
@@ -65,7 +60,6 @@ const mainPages = [
   { path: "contacto", priority: 0.9, changeFreq: "monthly" as const },
   { path: "tecnico-de-celulares", priority: 0.9, changeFreq: "weekly" as const },
   { path: "tienda", priority: 0.9, changeFreq: "daily" as const },
-  { path: "productos", priority: 0.85, changeFreq: "daily" as const },
   { path: "sobrenosotros", priority: 0.7, changeFreq: "monthly" as const },
   { path: "devoluciones", priority: 0.3, changeFreq: "yearly" as const },
   { path: "terminos", priority: 0.3, changeFreq: "yearly" as const },
@@ -85,15 +79,13 @@ const guidePages = [
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const currentDate = new Date();
-  
-  // Fecha de última modificación dinámica (fecha actual de build)
   const lastMod = currentDate;
   const products = await getAllProductsForSitemap();
   const categoryMap = new Map<string, string>();
+  const categoryLastMod = new Map<string, Date>();
 
   const mainSitemap = mainPages.map((page) => ({
     url: page.path ? `${SITE_URL}/${page.path}` : SITE_URL,
-    lastModified: lastMod,
     changeFrequency: page.changeFreq,
     priority: page.priority,
     alternates: {
@@ -105,7 +97,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const guidesSitemap = guidePages.map((page) => ({
     url: `${SITE_URL}/${page.path}`,
-    lastModified: lastMod,
     changeFrequency: page.changeFreq,
     priority: page.priority,
     alternates: {
@@ -120,6 +111,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const slug = slugify(product.category.name);
       if (slug) {
         categoryMap.set(slug, product.category.name);
+        const updatedAt = product.updated_at ? new Date(product.updated_at) : lastMod;
+        const existing = categoryLastMod.get(slug);
+        if (!existing || updatedAt > existing) {
+          categoryLastMod.set(slug, updatedAt);
+        }
       }
     }
 
@@ -138,7 +134,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const categoryEntries = Array.from(categoryMap.keys()).map((slug) => ({
     url: `${SITE_URL}/tienda/categoria/${slug}`,
-    lastModified: lastMod,
+    lastModified: categoryLastMod.get(slug) || lastMod,
     changeFrequency: "weekly" as const,
     priority: 0.7,
   }));

@@ -103,17 +103,16 @@ function buildItemListJsonLd(products: Product[]) {
 export default async function TiendaPage({
     searchParams,
 }: {
-    searchParams: Promise<Record<string, string | string[] | undefined>>;
+    searchParams: Record<string, string | string[] | undefined>;
 }) {
-    const resolvedSearchParams = (await searchParams) || {};
-    const pageParam = Array.isArray(resolvedSearchParams.page)
-        ? resolvedSearchParams.page[0]
-        : resolvedSearchParams.page;
+    const pageParam = Array.isArray(searchParams.page)
+        ? searchParams.page[0]
+        : searchParams.page;
     const page = Number(pageParam || 1);
     const safePage = Number.isFinite(page) && page > 0 ? page : 1;
 
     const queryParams = new URLSearchParams();
-    Object.entries(resolvedSearchParams).forEach(([key, value]) => {
+    Object.entries(searchParams).forEach(([key, value]) => {
         if (key === "page") return;
         if (Array.isArray(value)) {
             value.forEach((v) => v && queryParams.append(key, v));
