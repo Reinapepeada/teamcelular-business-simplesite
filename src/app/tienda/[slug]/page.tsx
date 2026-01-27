@@ -1,5 +1,4 @@
 import ProductDetailClient from './ProductDetailClient';
-import { cache } from 'react';
 import { getAllProductImages, getProductById, getPrimaryImage } from '@/services/products';
 import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd';
 import ProductStructuredData from '@/components/seo/ProductStructuredData';
@@ -21,13 +20,13 @@ function slugify(text = '') {
         .replace(/^-+|-+$/g, '');
 }
 
-const getProductData = cache(async (productId: number) => {
+const getProductData = async (productId: number) => {
     return fetchWithCache(
         `product:${productId}`,
         () => getProductById(productId),
         1000 * 60 * 5
     );
-});
+};
 
 /**
  * Server-side metadata generation for product pages.
