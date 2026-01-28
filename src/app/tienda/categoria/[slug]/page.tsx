@@ -1,5 +1,3 @@
-import React from 'react';
-import { cache } from 'react';
 import { notFound } from 'next/navigation';
 import CategoryClient from '../CategoryClient';
 import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd';
@@ -109,7 +107,7 @@ export default async function Page({ params }: any) {
   );
 }
 
-const getCategoryData = cache(async (slug: string) => {
+const getCategoryData = async (slug: string) => {
   if (!apiUrl) return null;
 
   try {
@@ -140,4 +138,4 @@ const getCategoryData = cache(async (slug: string) => {
     console.error('Category fetch error', error);
     return null;
   }
-});
+};
