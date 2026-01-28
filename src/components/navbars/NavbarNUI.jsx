@@ -34,7 +34,7 @@ export default function NavbarNUI() {
                 <NavbarItem className="flex items-center">
                     <Link href="/" className="flex items-center gap-3 text-inherit">
                         <Image
-                            className="h-10 w-auto dark:hidden"
+                            className="hidden h-10 w-auto dark:hidden sm:block"
                             src="/images/brand/imagotipo-light.png"
                             alt="Team Celular"
                             width={1725}
@@ -43,12 +43,30 @@ export default function NavbarNUI() {
                             priority
                         />
                         <Image
-                            className="hidden h-10 w-auto dark:block"
+                            className="hidden h-10 w-auto dark:block sm:block"
                             src="/images/brand/imagotipo-dark.png"
                             alt="Team Celular"
                             width={1725}
                             height={591}
                             sizes="(max-width: 640px) 140px, 170px"
+                            priority
+                        />
+                        <Image
+                            className="h-10 w-auto dark:hidden sm:hidden"
+                            src="/images/ISOTIPO/SVG/ISOTIPO_light.svg"
+                            alt="Team Celular"
+                            width={256}
+                            height={256}
+                            sizes="40px"
+                            priority
+                        />
+                        <Image
+                            className="hidden h-10 w-auto dark:block sm:hidden"
+                            src="/images/ISOTIPO/SVG/ISOTIPO_black.svg"
+                            alt="Team Celular"
+                            width={256}
+                            height={256}
+                            sizes="40px"
                             priority
                         />
                     </Link>

@@ -22,7 +22,7 @@ import {
 export const metadata: Metadata = {
   title: "Reparación iPhone Buenos Aires | Service Técnico Certificado CABA",
   description:
-    "Reparación iPhone en Recoleta: pantallas OLED originales, baterías certificadas, True Tone preservado. Diagnóstico en 24 hs. Garantía de 6 meses. Repuestos originales. Service express 2-4 hs.",
+    "Reparación iPhone en Recoleta: pantallas OLED originales, baterías certificadas, True Tone preservado. Diagnóstico en 24 hs. Garantía de 3 meses. Repuestos originales. Service express 2-4 hs.",
   keywords: [
     "reparación iPhone Buenos Aires",
     "service iPhone CABA",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Reparación iPhone Buenos Aires | Service Certificado CABA",
     description:
-      "Service técnico especializado en iPhone: pantallas OLED originales, baterías certificadas, True Tone preservado. Garantía 6 meses. Diagnóstico en 24hs.",
+      "Service técnico especializado en iPhone: pantallas OLED originales, baterías certificadas, True Tone preservado. Garantía 3 meses. Diagnóstico en 24hs.",
     type: "article",
     url: "https://teamcelular.com/guias/reparacion-iphone-buenos-aires",
     locale: "es_AR",
@@ -108,7 +108,7 @@ const repairProcess = [
   {
     step: "4. Control de calidad y garantía",
     detail:
-      "Ejecutamos test completo de diagnóstico, verificamos sellado IP68 (resistencia al agua), calibramos todos los sensores y entregamos informe técnico final con garantía escrita de 3 a 6 meses según el tipo de reparación.",
+      "Ejecutamos test completo de diagnóstico, verificamos sellado IP68 (resistencia al agua), calibramos todos los sensores y entregamos informe técnico final con garantía escrita de 1 a 3 meses según el tipo de reparación.",
     Icon: FaCheckCircle,
     duration: "20 min",
   },
@@ -121,7 +121,7 @@ const commonRepairs = [
       "Pantallas originales o calidad AAA+ con True Tone calibrado, 3D Touch funcional y Face ID preservado.",
     Icon: FaMobileAlt,
     timeframe: "2-4 horas",
-    warranty: "6 meses",
+    warranty: "3 meses",
   },
   {
     title: "Reemplazo de batería certificada",
@@ -129,7 +129,7 @@ const commonRepairs = [
       "Baterías originales con chip de autenticación, ciclo optimizado y certificación de salud al 100%.",
     Icon: FaBatteryFull,
     timeframe: "1-2 horas",
-    warranty: "6 meses",
+    warranty: "3 meses",
   },
   {
     title: "Reparación de módulo de carga",
@@ -185,7 +185,7 @@ const whyChooseUs = [
     Icon: FaClock,
   },
   {
-    title: "Garantía escrita de 3-6 meses",
+    title: "Garantía escrita de 1-3 meses",
     description:
       "Todas nuestras reparaciones incluyen garantía por escrito con cobertura total de mano de obra y repuestos.",
     Icon: FaShieldAlt,
@@ -276,7 +276,7 @@ export default function IphoneRepairGuide() {
           </h1>
           <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
             Service técnico especializado en <strong className="text-primary">iPhone</strong> con <strong>repuestos
-            originales</strong>, <strong>garantía escrita 6 meses</strong> y laboratorio certificado en <strong>Recoleta, CABA</strong>. 
+            originales</strong>, <strong>garantía escrita 3 meses</strong> y laboratorio certificado en <strong>Recoleta, CABA</strong>. 
             Más de 10 años reparando iPhone 6S a iPhone 15 Pro Max para particulares y empresas.
           </p>
           
@@ -289,7 +289,7 @@ export default function IphoneRepairGuide() {
             </div>
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
               <FaShieldAlt className="mx-auto text-3xl text-secondary mb-2" />
-              <div className="text-2xl font-bold text-secondary">6 meses</div>
+              <div className="text-2xl font-bold text-secondary">3 meses</div>
               <div className="text-sm text-slate-600 dark:text-slate-400">Garantía escrita</div>
             </div>
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
@@ -352,8 +352,8 @@ export default function IphoneRepairGuide() {
                   <li>Diagnóstico profesional en menos de 24 horas</li>
                   <li>Repuestos originales con garantía de autenticidad</li>
                   <li>True Tone y Face ID preservados</li>
-                  <li>Garantía escrita de 3 a 6 meses</li>
-                  <li>Servicio express en 2-4 horas</li>
+                  <li>Garantía escrita de 1 a 3 meses</li>
+                  <li>Servicio express en 3-6 horas</li>
                 </ul>
               </div>
             </div>

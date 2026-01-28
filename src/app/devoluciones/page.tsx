@@ -135,8 +135,8 @@ export default function DevolucionesPage() {
           evaluar el caso y ofrecerte la solución que corresponda (cambio,
           reparación, nota de crédito o reembolso), de acuerdo con la normativa
           aplicable. Cuando corresponda, rige la garantía legal (Ley 24.240):
-          <strong> 6 meses para productos nuevos</strong> y{" "}
-          <strong>3 meses para productos usados</strong>.
+          <strong> 3 meses para productos nuevos</strong> y{" "}
+          <strong>30 dias para productos usados</strong>.
         </p>
 
         <h2>4. Reembolsos</h2>

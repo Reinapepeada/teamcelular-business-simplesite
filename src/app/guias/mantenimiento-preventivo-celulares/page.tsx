@@ -85,9 +85,9 @@ const maintenanceTips = [
   {
     title: "Controlar la salud de la batería",
     detail:
-      "Revisá los ciclos de carga cada 6 meses y evitá descensos por debajo del 20%. Si la salud de la batería cae bajo 80%, es momento de programar un reemplazo preventivo para evitar apagones inesperados y pérdida de datos.",
+      "Revisá los ciclos de carga cada 3 meses y evitá descensos por debajo del 20%. Si la salud de la batería cae bajo 80%, es momento de programar un reemplazo preventivo para evitar apagones inesperados y pérdida de datos.",
     Icon: FaBatteryFull,
-    frequency: "Cada 6 meses",
+    frequency: "Cada 3 meses",
   },
   {
     title: "Actualizar software y parches de seguridad",
@@ -145,7 +145,7 @@ const maintenancePlan = [
   {
     title: "Plan Semestral - Mantenimiento Completo",
     description: "Incluye limpieza profesional, revisión de batería, diagnóstico de sensores y reporte técnico detallado.",
-    price: "Desde $18.000 c/6 meses",
+    price: "Desde $18.000 c/3 meses",
     Icon: FaTools,
   },
   {

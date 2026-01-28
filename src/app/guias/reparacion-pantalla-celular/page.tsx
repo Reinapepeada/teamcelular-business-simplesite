@@ -23,7 +23,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelula
 export const metadata: Metadata = {
   title: "Cambio de Pantalla Celular Buenos Aires | Display Original CABA",
   description:
-    "Cambio de pantalla celular con displays OLED originales, True Tone preservado, garantía de 6 meses y service 2-4 hs. iPhone, Samsung, Motorola. Recoleta, CABA.",
+    "Cambio de pantalla celular con displays OLED originales, True Tone preservado, garantía de 3 meses y service 2-4 hs. iPhone, Samsung, Motorola. Recoleta, CABA.",
   keywords: [
     "cambio pantalla celular Buenos Aires",
     "pantalla iPhone original",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Cambio de Pantalla Celular Buenos Aires | Display Original",
     description:
-      "Cambio de pantalla con displays OLED originales. True Tone preservado. Garantía 6 meses. Service express 2-4hs.",
+      "Cambio de pantalla con displays OLED originales. True Tone preservado. Garantía 3 meses. Service express 2-4hs.",
     type: "article",
     locale: "es_AR",
     url: "https://teamcelular.com/guias/reparacion-pantalla-celular",
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Cambio de Pantalla Celular Buenos Aires",
-    description: "Displays OLED originales con True Tone. Garantía 6 meses. Service 2-4hs.",
+    description: "Displays OLED originales con True Tone. Garantía 3 meses. Service 2-4hs.",
   },
   alternates: {
     canonical: "https://teamcelular.com/guias/reparacion-pantalla-celular",
@@ -134,7 +134,7 @@ const screenTypes = [
       "Excelente calidad de imagen",
       "Touch sensible y preciso",
       "Certificaciones CE, FCC, RoHS",
-      "Garantía 6 meses",
+      "Garantía 3 meses",
       "Precio competitivo"
     ],
     cons: [
@@ -150,7 +150,7 @@ const screenTypes = [
     pros: [
       "Compatible con modelos LCD",
       "Buena relación calidad-precio",
-      "Garantía 3-6 meses",
+      "Garantía 1-3 meses",
       "Colores aceptables"
     ],
     cons: [
@@ -210,7 +210,7 @@ const faqScreen = [
   },
   {
     question: "¿La pantalla nueva viene con garantía?",
-    answer: "Sí, todas nuestras pantallas incluyen garantía escrita de 6 meses (originales) o 3-6 meses (AAA+) que cubre: defectos de fabricación, touch defectuoso, manchas o líneas que aparezcan, despegado de pantalla y problemas de backlight. La garantía NO cubre: nuevos golpes, caídas, líquidos, presión excesiva, modificaciones por terceros o uso de protectores incompatibles. Entregamos certificado de garantía con número de serie de la pantalla instalada y fotografías del estado post-reparación.",
+    answer: "Sí, todas nuestras pantallas incluyen garantía escrita de 1 a 3 meses (originales) o 1 a 2 meses (AAA+) que cubre: defectos de fabricación, touch defectuoso, manchas o líneas que aparezcan, despegado de pantalla y problemas de backlight. La garantía NO cubre: nuevos golpes, caídas, líquidos, presión excesiva, modificaciones por terceros o uso de protectores incompatibles. Entregamos certificado de garantía con número de serie de la pantalla instalada y fotografías del estado post-reparación.",
   },
   {
     question: "¿Puedo usar el celular normalmente después del cambio?",
@@ -223,7 +223,7 @@ export default function ScreenReplacementGuide() {
     <div className="flex w-full justify-center px-4 py-16">
       <ArticleSchema
         title="Cambio de pantalla celular en Buenos Aires | Display original Team Celular"
-        description="Cambio de pantalla con displays OLED originales, True Tone preservado y garantía escrita de 6 meses. Service express 2-4 horas en CABA."
+        description="Cambio de pantalla con displays OLED originales, True Tone preservado y garantía escrita de 3 meses. Service express 2-4 horas en CABA."
         publishedTime="2024-11-30T00:00:00Z"
         modifiedTime="2025-12-11T00:00:00Z"
         authorName="Team Celular"
@@ -263,7 +263,7 @@ export default function ScreenReplacementGuide() {
           </h1>
           <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
             Reemplazo de pantalla con <strong className="text-primary">displays OLED originales</strong>, 
-            <strong> True Tone preservado</strong>, garantía escrita de <strong>6 meses</strong> y servicio 
+            <strong> True Tone preservado</strong>, garantía escrita de <strong>3 meses</strong> y servicio 
             express en <strong>2-4 horas</strong>. Reparamos iPhone, Samsung, Motorola y todas las marcas en Recoleta, CABA.
           </p>
 
@@ -276,7 +276,7 @@ export default function ScreenReplacementGuide() {
             </div>
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
               <FaShieldAlt className="mx-auto text-3xl text-secondary mb-2" />
-              <div className="text-2xl font-bold text-secondary">6 meses</div>
+              <div className="text-2xl font-bold text-secondary">3 meses</div>
               <div className="text-sm text-slate-600 dark:text-slate-400">Garantía escrita</div>
             </div>
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">

@@ -175,7 +175,7 @@ Cada guía tiene su color distintivo:
 ## 🏆 Ventajas Competitivas Destacadas
 
 1. **True Tone preservado** (iPhone)
-2. **Garantía 6 meses** (vs 3 meses promedio)
+2. **Garantía 3 meses** (vs 3 meses promedio)
 3. **Diagnóstico 24hs** (vs 48-72hs)
 4. **Repuestos originales certificados**
 5. **Service express 2-4hs**

@@ -78,38 +78,19 @@ export default function FooterNUI() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Columna 1: Team Celular Info */}
           <div className="flex flex-col space-y-4">
-            <div className="flex items-center space-x-3 mb-2">
-              <Image
-                src="/images/brand/isotipo.png"
-                alt="Isotipo de Team Celular"
-                width={1317}
-                height={1617}
-                className="h-10 w-auto"
-                sizes="40px"
-              />
-              <div className="flex items-center">
+              <div className="flex flex-col">
                 <Image
-                  src="/images/brand/logotipo-light.png"
+                  src="/images/IMAGOTIPO/PNG/IMAGOTIPO_6.png"
                   alt="Team Celular"
-                  width={1599}
-                  height={437}
-                  className="h-10 w-auto dark:hidden"
-                  sizes="160px"
+                  width={300}
+                  height={300}
+                  className="h-auto w-48 mb-2"
                 />
-                <Image
-                  src="/images/brand/logotipo-dark.png"
-                  alt="Team Celular"
-                  width={1599}
-                  height={467}
-                  className="hidden h-10 w-auto dark:block"
-                  sizes="160px"
-                />
+                <p className="text-sm text-slate-200  ">
+                  Más de 15 años de experiencia en reparación profesional de
+                  celulares en Buenos Aires.
+                </p>
               </div>
-            </div>
-            <p className="text-sm text-slate-300">
-              Más de 15 años de experiencia en reparación profesional de
-              celulares en Buenos Aires.
-            </p>
 
             {/* Redes Sociales */}
             <div className="flex space-x-4 pt-4">
@@ -144,8 +125,8 @@ export default function FooterNUI() {
               <BsClock className="mt-1 flex-shrink-0 text-primary" />
               <div>
                 <p className="font-semibold">Horario de Atención</p>
-                <p className="text-slate-300">Lunes a Viernes</p>
-                <p className="text-slate-300">10:30 - 18:00hs</p>
+                <p className="text-slate-200">Lunes a Viernes</p>
+                <p className="text-slate-200">10:30 - 18:00hs</p>
               </div>
             </div>
           </div>
@@ -159,7 +140,7 @@ export default function FooterNUI() {
                 <Link
                   key={index}
                   href={service.href}
-                  className="flex items-center space-x-2 text-sm text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200"
+                  className="flex items-center space-x-2 text-sm text-slate-200 hover:text-white hover:translate-x-1 transition-all duration-200"
                 >
                   <Icon className="text-primary" />
                   <span>{service.name}</span>
@@ -177,7 +158,7 @@ export default function FooterNUI() {
               <Link
                 key={index}
                 href={guia.href}
-                className="text-sm text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200"
+                className="text-sm text-slate-200 hover:text-white hover:translate-x-1 transition-all duration-200"
               >
                 {guia.name}
               </Link>
@@ -190,7 +171,7 @@ export default function FooterNUI() {
               <Link
                 key={index}
                 href={recurso.href}
-                className="text-sm text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-200"
+                className="text-sm text-slate-200 hover:text-white hover:translate-x-1 transition-all duration-200"
               >
                 {recurso.name}
               </Link>
@@ -205,8 +186,8 @@ export default function FooterNUI() {
               <BsGeoAlt className="mt-1 flex-shrink-0 text-primary" />
               <div>
                 <p className="font-semibold">Dirección</p>
-                <p className="text-slate-300">Paraguay 2451</p>
-                <p className="text-slate-300">Recoleta, CABA</p>
+                <p className="text-slate-200">Paraguay 2451</p>
+                <p className="text-slate-200">Recoleta, CABA</p>
               </div>
             </div>
 
@@ -216,7 +197,7 @@ export default function FooterNUI() {
                 <p className="font-semibold">Teléfono</p>
                 <Link
                   href="tel:+5491151034595"
-                  className="text-slate-300 hover:text-white transition-colors"
+                  className="text-slate-200 hover:text-white transition-colors"
                 >
                   +54 11 5103-4595
                 </Link>
@@ -229,7 +210,7 @@ export default function FooterNUI() {
                 <p className="font-semibold">Email</p>
                 <Link
                   href="mailto:teamcelular.arg@gmail.com"
-                  className="text-slate-300 hover:text-white transition-colors break-all"
+                  className="text-slate-200 hover:text-white transition-colors break-all"
                 >
                   teamcelular.arg@gmail.com
                 </Link>
@@ -247,7 +228,7 @@ export default function FooterNUI() {
         <div className="h-px w-full bg-white/10 my-8" />
 
         {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-sm text-slate-400">
+        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-sm text-slate-200">
           <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
             <p>© 2025 Team Celular. Todos los derechos reservados.</p>
             <div className="flex space-x-4">
@@ -272,7 +253,7 @@ export default function FooterNUI() {
             </div>
           </div>
 
-          <p className="text-slate-500 text-xs">
+          <p className="text-slate-200 text-xs">
             Hecho con ❤️ en Buenos Aires, Argentina
           </p>
         </div>
