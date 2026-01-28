@@ -34,7 +34,7 @@ export default function NavbarNUI() {
                 <NavbarItem className="flex items-center">
                     <Link href="/" className="flex items-center gap-3 text-inherit">
                         <Image
-                            className="hidden h-10 w-auto dark:hidden sm:block"
+                            className="hidden h-10 w-auto sm:block dark:sm:hidden"
                             src="/images/brand/imagotipo-light.png"
                             alt="Team Celular"
                             width={1725}
@@ -43,7 +43,7 @@ export default function NavbarNUI() {
                             priority
                         />
                         <Image
-                            className="hidden h-10 w-auto dark:block sm:block"
+                            className="hidden h-10 w-auto sm:hidden dark:sm:block"
                             src="/images/brand/imagotipo-dark.png"
                             alt="Team Celular"
                             width={1725}
@@ -52,7 +52,7 @@ export default function NavbarNUI() {
                             priority
                         />
                         <Image
-                            className="h-10 w-auto dark:hidden sm:hidden"
+                            className="h-14 w-auto sm:hidden dark:hidden"
                             src="/images/ISOTIPO/SVG/ISOTIPO_light.svg"
                             alt="Team Celular"
                             width={256}
@@ -61,7 +61,7 @@ export default function NavbarNUI() {
                             priority
                         />
                         <Image
-                            className="hidden h-10 w-auto dark:block sm:hidden"
+                            className="hidden h-14 w-auto sm:hidden dark:block dark:sm:hidden"
                             src="/images/ISOTIPO/SVG/ISOTIPO_black.svg"
                             alt="Team Celular"
                             width={256}
