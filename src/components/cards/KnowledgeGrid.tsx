@@ -41,16 +41,16 @@ const ARTICLES: KnowledgeItem[] = [
 
 export default function KnowledgeGrid() {
   return (
-    <section className="relative w-full max-w-6xl space-y-10 overflow-hidden rounded-2xl border border-white/15 bg-white/5 p-10 shadow-lg backdrop-blur-2xl transition-all duration-300 ease-in-out hover:shadow-2xl dark:border-white/10 dark:bg-slate-900/30">
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,#94a3b81a,transparent_65%)] dark:bg-[radial-gradient(circle_at_top,#0ea5e91a,transparent_65%)]" />
-      <header className="space-y-3 text-center md:text-left">
+    <section className="relative w-full max-w-[92rem] space-y-10 overflow-hidden rounded-2xl border border-slate-200/70 bg-white/70 p-10 shadow-md transition-all duration-300 ease-in-out hover:shadow-xl dark:border-white/10 dark:bg-slate-900/50">
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,#94a3b81f,transparent_65%)] dark:bg-[radial-gradient(circle_at_top,#0ea5e91f,transparent_65%)]" />
+      <header className="space-y-4 text-center md:text-left">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-secondary/90 dark:text-secondary/70">
           Insights del laboratorio
         </p>
-        <h2 className="text-3xl font-bold text-slate-900 md:text-4xl dark:text-white">
+        <h2 className="text-3xl font-bold tracking-tight text-slate-900 md:text-[2.2rem] dark:text-white">
           Consejos expertos para prolongar la vida de tus dispositivos
         </h2>
-        <p className="mx-auto max-w-3xl text-base text-slate-600 md:mx-0 dark:text-slate-300">
+        <p className="mx-auto max-w-3xl text-[1.02rem] leading-7 text-slate-700 md:mx-0 dark:text-slate-300">
           Historias reales, protocolos y buenas prácticas de nuestro laboratorio en CABA. Cada guía enlaza a recursos operativos y opciones de contacto directo.
         </p>
       </header>
@@ -58,19 +58,19 @@ export default function KnowledgeGrid() {
         {ARTICLES.map((article) => (
           <article
             key={article.href}
-            className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/15 bg-white/5 p-7 text-left shadow-lg backdrop-blur-xl transition-all hover:-translate-y-1 hover:shadow-2xl dark:border-white/10 dark:bg-slate-900/30">
+            className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white/85 p-6 text-left shadow-md transition-all hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-slate-900/55 md:p-7">
             <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
               <div className="absolute inset-x-8 top-0 h-1 rounded-full bg-gradient-to-r from-primary to-secondary" />
             </div>
-            <div className="space-y-5">
+            <div className="space-y-4">
               <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-secondary/90 dark:text-secondary/70">
                 <span className="h-2 w-2 rounded-full bg-secondary/80" aria-hidden />
                 {article.readingTime}
               </p>
-              <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
+              <h3 className="text-xl font-semibold leading-snug text-slate-900 dark:text-slate-100 md:text-2xl">
                 {article.title}
               </h3>
-              <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              <p className="text-[0.95rem] leading-6 text-slate-700 dark:text-slate-300">
                 {article.summary}
               </p>
             </div>
@@ -85,7 +85,7 @@ export default function KnowledgeGrid() {
               </Link>
               <Link
                 href="/presupuesto-reparacion"
-                className="hidden text-primary transition-colors hover:text-secondary md:flex md:items-center md:gap-2">
+                className="hidden rounded-full border border-slate-300 bg-white/75 px-4 py-2 text-slate-700 transition hover:bg-white dark:border-white/20 dark:bg-slate-900/50 dark:text-slate-100 dark:hover:bg-slate-900 md:flex md:items-center md:gap-2">
                 Reservar diagnóstico
                 <span aria-hidden>↗</span>
               </Link>

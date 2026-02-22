@@ -86,7 +86,7 @@ export default function GoogleReviewsAPI() {
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center gap-3">
             <FaGoogle className="text-4xl text-primary" />
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 md:text-[2.2rem] dark:text-white">
               Lo que dicen nuestros clientes
             </h2>
           </div>
@@ -107,11 +107,11 @@ export default function GoogleReviewsAPI() {
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center gap-3">
             <FaGoogle className="text-4xl text-primary" />
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 md:text-[2.2rem] dark:text-white">
               Lo que dicen nuestros clientes
             </h2>
           </div>
-          <div className="p-8 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 rounded-2xl shadow-lg">
+          <div className="rounded-2xl border border-slate-200/70 bg-white/70 p-8 shadow-md dark:border-white/10 dark:bg-slate-900/50">
             <p className="text-lg text-slate-600 dark:text-slate-400">
               Las reseñas no están disponibles en este momento.
             </p>
@@ -123,7 +123,7 @@ export default function GoogleReviewsAPI() {
                 href="https://share.google/EyVELq4ujwgdGKEEJ"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-white dark:bg-slate-800 border-2 border-primary px-6 py-3 font-semibold text-primary transition hover:bg-primary hover:text-white shadow-lg hover:shadow-xl"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-6 py-3 font-semibold text-white shadow-lg transition hover:shadow-xl"
               >
                 <FaGoogle />
                 Ver reseñas en Google
@@ -142,7 +142,7 @@ export default function GoogleReviewsAPI() {
       <div className="text-center space-y-4">
         <div className="flex items-center justify-center gap-3">
           <FaGoogle className="text-4xl text-primary" />
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900 md:text-[2.2rem] dark:text-white">
             Lo que dicen nuestros clientes
           </h2>
         </div>
@@ -153,18 +153,18 @@ export default function GoogleReviewsAPI() {
             ({user_ratings_total} reseñas en Google)
           </span>
         </div>
-        <p className="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
+        <p className="max-w-3xl mx-auto text-[1.02rem] leading-7 text-slate-700 dark:text-slate-300">
           La confianza de nuestros clientes es lo que nos impulsa a seguir mejorando cada día.
           Estas son algunas de las opiniones reales de quienes confiaron en nosotros.
         </p>
       </div>
 
       {/* Grid responsive: 1 col mobile, 2 cols tablet, 5 cols desktop */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
         {reviews.slice(0, 5).map((review, index) => (
           <div
             key={index}
-            className="p-6 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 rounded-2xl shadow-lg"
+            className="rounded-2xl border border-slate-200/75 bg-white/75 p-5 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-slate-900/55"
           >
             <div className="space-y-4">
               <div className="flex items-start justify-between">
@@ -184,7 +184,7 @@ export default function GoogleReviewsAPI() {
                     </div>
                   )}
                   <div>
-                    <h4 className="font-semibold text-slate-900 dark:text-white">
+                    <h4 className="text-[0.98rem] font-semibold leading-snug text-slate-900 dark:text-white">
                       {review.author_name}
                     </h4>
                     <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -197,7 +197,7 @@ export default function GoogleReviewsAPI() {
 
               <StarRating rating={review.rating} />
 
-              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              <p className="text-[0.92rem] leading-6 text-slate-600 dark:text-slate-300">
                 &ldquo;{review.text}&rdquo;
               </p>
             </div>
@@ -207,10 +207,10 @@ export default function GoogleReviewsAPI() {
 
       <div className="text-center">
         <a
-          href="https://g.page/r/CZcZRTXuPnxSEBM/review"
+          href="https://www.google.com/search?sca_esv=9624f88e5d8f48a2&sxsrf=ANbL-n6PeKIqm41-bypsB-8HWDe7zFQalg:1771801721760&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOXEE8cC5R2ZYv4fXETPwAQ_JiykyTTHr0oxDxZtD8WSXZVUA8OJCZms9nfxGPg4g-4NYVf2hADghUJ9PwquRPKZ1OkM6cS4CtSrNj4eOc4Uy6Eo-NUm93lZz-nFxWLJzPj4rj8BiTRaZ549Idwxp3wqfzJNfJTNLhnDHazg_E2kkHZJKjQ%3D%3D&q=Team+celular+%7C+Reparacion+de+celulares+%7C+Reparacion+de+computadoras+Opiniones&sa=X&ved=2ahUKEwjZufPhm-6SAxWxqpUCHT-THJQQ0bkNegQIJxAH&biw=1745&bih=828&dpr=1.1"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full bg-white dark:bg-slate-800 border-2 border-primary px-6 py-3 font-semibold text-primary transition hover:bg-primary hover:text-white shadow-lg hover:shadow-xl"
+          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-6 py-3 font-semibold text-white shadow-lg transition hover:shadow-xl"
         >
           <FaGoogle />
           Ver todas las reseñas en Google

@@ -86,96 +86,106 @@ const microFaqs = [
   },
 ];
 
+const primaryCtaClass =
+  "rounded-full bg-gradient-to-r from-primary to-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary";
+
+const neutralCtaClass =
+  "rounded-full border border-slate-300 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary dark:border-white/20 dark:bg-slate-900/60 dark:text-slate-100 dark:hover:bg-slate-900";
+
+const brandOutlineCtaClass =
+  "rounded-full border border-primary/35 bg-white/70 px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary dark:border-primary/60 dark:bg-slate-900/45 dark:text-primary";
+
 export default function Home() {
   return (
-    <section className="flex w-full max-w-6xl flex-col items-center gap-16 px-6 py-14 transition md:px-8">
+    <section className="flex w-full max-w-[92rem] flex-col items-center gap-16 px-6 py-14 transition md:px-8 2xl:px-10">
       <BannerHome />
       <BannerCards />
 
-      <section className="w-full max-w-6xl space-y-14 text-center md:text-left">
-        <article className="grid gap-10 rounded-2xl border border-white/15 bg-white/5 p-10 shadow-lg backdrop-blur-2xl transition-all duration-300 ease-in-out hover:shadow-2xl dark:border-white/10 dark:bg-slate-900/30 md:grid-cols-2 md:items-center">
+      <section className="w-full max-w-[92rem] space-y-12 text-center md:text-left lg:space-y-14">
+        <article className="grid gap-10 rounded-2xl border border-slate-200/70 bg-white/70 p-8 shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl dark:border-white/10 dark:bg-slate-900/55 md:grid-cols-2 md:items-center lg:p-10">
           <div className="space-y-6 text-slate-800 dark:text-slate-200">
-            <h2 className="text-3xl font-semibold text-primary md:text-4xl">
+            <h2 className="text-3xl font-semibold tracking-tight text-primary md:text-[2.35rem]">
               ¿Por qué elegirnos?
             </h2>
-            <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-300">
+            <p className="text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
               Somos Team Celular, un taller familiar que se convirtió en referencia técnica en Buenos Aires. Trabajamos en Recoleta con repuestos originales y equipamiento profesional porque creemos que tu celular merece el mismo cuidado que le darías vos.
             </p>
-            <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-300">
+            <p className="text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
               Arreglamos desde celulares personales hasta equipos de empresas. Te damos presupuesto sin compromiso, explicamos todo en castellano claro y respaldamos cada trabajo con garantía por escrito.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/presupuesto-reparacion"
-                className="rounded-full bg-gradient-to-r from-primary to-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+                className={primaryCtaClass}
               >
                 Pedir presupuesto
               </Link>
               <Link
                 href="/tecnico-de-celulares"
-                className="rounded-full border border-secondary/50 px-6 py-3 text-sm font-semibold text-secondary transition hover:bg-secondary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+                className="rounded-full border border-secondary/50 bg-white/70 px-6 py-3 text-sm font-semibold text-secondary transition hover:bg-secondary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary dark:border-secondary/50 dark:bg-slate-900/40"
               >
                 Técnico de celulares
               </Link>
               <Link
                 href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20necesito%20una%20reparaci%C3%B3n"
-                className="rounded-full border border-primary/40 px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary dark:border-primary/60 dark:text-primary/80"
+                className={brandOutlineCtaClass}
               >
                 Escribinos por WhatsApp
               </Link>
             </div>
           </div>
-          <div className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
+          <div className="space-y-5 rounded-2xl border border-slate-200/80 bg-white/80 p-8 shadow-md dark:border-white/10 dark:bg-slate-900/45">
             <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">Qué hacemos</h3>
             <ul className="space-y-4 text-left">
               {services.map((service) => (
-                <li key={service.title} className="rounded-xl border border-white/20 bg-white/10 p-4 shadow-sm backdrop-blur-lg transition hover:-translate-y-1 hover:shadow-md dark:border-white/15 dark:bg-slate-900/40">
-                  <h4 className="text-xl font-semibold text-secondary dark:text-secondary/80">
+                <li key={service.title} className="rounded-xl border border-slate-200/80 bg-white/90 p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md dark:border-white/10 dark:bg-slate-900/55">
+                  <h4 className="text-lg font-semibold text-secondary dark:text-secondary/80 md:text-xl">
                     {service.title}
                   </h4>
-                  <p className="mt-2 text-slate-600 dark:text-slate-300">{service.description}</p>
+                  <p className="mt-2 text-slate-700 dark:text-slate-300">{service.description}</p>
                 </li>
               ))}
             </ul>
           </div>
         </article>
 
-        <article className="grid gap-8 md:grid-cols-3">
-          {differentiators.map((item) => (
+        <article className="grid gap-6 md:grid-cols-3">
+          {differentiators.map((item, index) => (
             <div
               key={item.title}
-              className="rounded-2xl border border-white/15 bg-white/5 p-6 text-center shadow-lg backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
+              className="relative overflow-hidden rounded-2xl border border-slate-200/75 bg-white/75 p-6 text-center shadow-md transition hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-slate-900/50"
             >
-              <h4 className="text-xl font-semibold text-primary">
+              <div className={`pointer-events-none absolute inset-x-0 top-0 h-1 ${index % 2 === 0 ? "bg-gradient-to-r from-primary/70 to-secondary/50" : "bg-gradient-to-r from-secondary/70 to-primary/50"}`} />
+              <h4 className="text-[1.15rem] font-semibold leading-snug text-primary">
                 {item.title}
               </h4>
-              <p className="mt-3 text-slate-600 dark:text-slate-300">{item.description}</p>
+              <p className="mt-3 text-slate-700 dark:text-slate-300">{item.description}</p>
             </div>
           ))}
         </article>
 
-        <section className="grid gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 shadow-lg backdrop-blur-xl dark:border-white/5 dark:bg-slate-900/30 md:grid-cols-3">
+        <section className="grid gap-4 rounded-2xl border border-slate-200/70 bg-white/55 p-6 shadow-md dark:border-white/10 dark:bg-slate-900/35 md:grid-cols-3">
           {microFaqs.map((item) => (
-            <article key={item.title} className="space-y-2 rounded-xl border border-white/10 bg-white/10 p-4 text-left dark:border-white/5 dark:bg-slate-900/40">
+            <article key={item.title} className="space-y-2.5 rounded-xl border border-slate-200/80 bg-white/85 p-4 text-left shadow-sm dark:border-white/10 dark:bg-slate-900/50">
               <p className="text-sm font-semibold uppercase tracking-wide text-primary">{item.title}</p>
-              <h5 className="text-base font-semibold text-slate-900 dark:text-white">{item.question}</h5>
-              <p className="text-sm text-slate-600 dark:text-slate-300">{item.answer}</p>
+              <h5 className="text-[1.03rem] font-semibold leading-snug text-slate-900 dark:text-white">{item.question}</h5>
+              <p className="text-sm text-slate-700 dark:text-slate-300">{item.answer}</p>
             </article>
           ))}
         </section>
 
         <GoogleReviewsAPI />
 
-        <article className="rounded-2xl border border-white/15 bg-white/5 p-10 shadow-lg backdrop-blur-2xl transition-all duration-300 ease-in-out hover:shadow-2xl dark:border-white/10 dark:bg-slate-900/30">
-          <h3 className="text-2xl font-bold text-slate-900 md:text-left dark:text-white">
+        <article className="rounded-2xl border border-slate-200/70 bg-white/70 p-8 shadow-md transition-all duration-300 ease-in-out hover:shadow-xl dark:border-white/10 dark:bg-slate-900/50 lg:p-10">
+          <h3 className="text-2xl font-bold tracking-tight text-slate-900 md:text-left md:text-[2rem] dark:text-white">
             Dónde estamos y cómo contactarnos
           </h3>
           <div className="mt-6 grid gap-8 md:grid-cols-2">
             <div className="space-y-4">
-              <p className="text-lg text-slate-600 dark:text-slate-300">
+              <p className="text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
                 Nuestro taller está en Recoleta, a pocas cuadras de la facultad de Derecho. Si estás en Palermo, Belgrano, Caballito o el centro, llegás fácil. También coordinamos retiros en CABA.
               </p>
-              <p className="text-lg text-slate-600 dark:text-slate-300">
+              <p className="text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
                 La dirección exacta es Paraguay 2451, Recoleta. Atendemos de lunes a viernes de 10:30 a 18hs. Mejor avisá antes de venir para estar seguros que tengamos lugar.
               </p>
             </div>
@@ -202,22 +212,22 @@ export default function Home() {
         </article>
 
         <article className="space-y-6">
-          <h3 className="text-2xl font-bold text-slate-900 md:text-left dark:text-white">
+          <h3 className="text-2xl font-bold tracking-tight text-slate-900 md:text-left md:text-[2rem] dark:text-white">
             Preguntas frecuentes sobre reparación de celulares
           </h3>
           <div className="grid gap-4 md:grid-cols-3">
             {faqs.map((faq) => (
               <div
                 key={faq.question}
-                className="group relative overflow-hidden rounded-2xl border border-white/15 bg-white/5 p-6 text-left shadow-lg backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
+                className="group relative overflow-hidden rounded-2xl border border-slate-200/75 bg-white/80 p-5 text-left shadow-md transition hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-slate-900/50 lg:p-6"
               >
                 <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                   <div className="absolute inset-x-6 top-0 h-1 rounded-full bg-gradient-to-r from-primary to-secondary" />
                 </div>
-                <h4 className="text-lg font-semibold text-secondary dark:text-secondary/90">
+                <h4 className="text-[1.05rem] font-semibold leading-snug text-secondary dark:text-secondary/90">
                   {faq.question}
                 </h4>
-                <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
+                <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">
                   {faq.answer}
                 </p>
               </div>
@@ -227,24 +237,24 @@ export default function Home() {
 
   <KnowledgeGrid />
 
-        <article className="relative overflow-hidden rounded-2xl border border-white/15 bg-white/5 p-10 text-center shadow-lg backdrop-blur-2xl transition-all duration-300 ease-in-out hover:shadow-2xl md:text-left dark:border-white/10 dark:bg-slate-900/30">
-          <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-primary/5 via-white/60 to-secondary/5 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900" />
-          <h3 className="text-2xl font-bold text-primary">
+        <article className="relative overflow-hidden rounded-2xl border border-slate-200/70 bg-white/75 p-8 text-center shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl md:text-left dark:border-white/10 dark:bg-slate-900/55 lg:p-10">
+          <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-primary/8 via-white/70 to-secondary/8 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900" />
+          <h3 className="text-2xl font-bold tracking-tight text-primary md:text-[2rem]">
             ¿Listo para recuperar tu teléfono?
           </h3>
-          <p className="mt-4 text-lg text-slate-600 dark:text-slate-300">
+          <p className="mt-4 text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
             Dejanos un mensaje detallando la falla, elegí el canal que prefieras y reservá tu turno en minutos. Somos el servicio técnico de referencia en reparación de celulares de Buenos Aires.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-4 md:justify-start">
             <Link
               href="/contacto"
-              className="rounded-full bg-secondary px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-secondary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+              className={primaryCtaClass}
             >
               Ver formas de contacto
             </Link>
             <Link
               href="/sobrenosotros"
-              className="rounded-full border border-secondary px-6 py-3 font-semibold text-secondary transition hover:bg-secondary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+              className={neutralCtaClass}
             >
               Conocé el taller
             </Link>
