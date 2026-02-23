@@ -77,7 +77,7 @@ export default function KnowledgeGrid() {
             <div className="mt-8 flex items-center justify-between text-sm font-semibold">
               <Link
                 href={article.href}
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-5 py-3 text-white shadow-lg transition-all group-hover:gap-3 group-hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-white shadow-lg transition-all hover:bg-primary/90 group-hover:gap-3 group-hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
                 Leer guía completa
                 <span aria-hidden className="text-lg">
                   →

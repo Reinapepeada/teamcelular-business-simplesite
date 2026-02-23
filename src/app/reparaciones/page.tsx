@@ -98,7 +98,7 @@ export default function ReparacionesPage() {
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Link
             href="/presupuesto-reparacion#solicitar-presupuesto"
-            className="rounded-full bg-gradient-to-r from-primary to-secondary px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+            className="rounded-full bg-primary px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
           >
             Pedir presupuesto
           </Link>

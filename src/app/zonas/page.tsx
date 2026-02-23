@@ -118,7 +118,7 @@ export default function ZonasPage() {
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Link
             href="/arreglo-de-celulares"
-            className="rounded-full bg-gradient-to-r from-primary to-secondary px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:shadow-xl"
+            className="rounded-full bg-primary px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
           >
             Ver arreglo de celulares
           </Link>

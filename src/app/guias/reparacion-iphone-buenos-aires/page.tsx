@@ -302,7 +302,7 @@ export default function IphoneRepairGuide() {
           <div className="flex flex-wrap justify-center gap-4 mt-8">
             <Link
               href="/presupuesto-reparacion"
-              className="rounded-full bg-gradient-to-r from-primary to-secondary px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:shadow-xl"
+              className="rounded-full bg-primary px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
             >
               Solicitar presupuesto
             </Link>

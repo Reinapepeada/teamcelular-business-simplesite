@@ -234,7 +234,7 @@ export default function PreventiveMaintenanceGuide() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/contacto"
-              className="rounded-full bg-gradient-to-r from-primary to-secondary px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:shadow-xl"
+              className="rounded-full bg-primary px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
             >
               Agendar servicio preventivo
             </Link>

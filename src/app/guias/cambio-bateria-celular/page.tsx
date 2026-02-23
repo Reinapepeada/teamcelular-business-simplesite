@@ -252,7 +252,7 @@ export default function BatteryReplacementGuide() {
           <div className="flex flex-wrap justify-center gap-4 mt-8">
             <Link
               href="/presupuesto-reparacion"
-              className="rounded-full bg-gradient-to-r from-green-500 to-green-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:shadow-xl"
+              className="rounded-full bg-green-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-green-700 hover:shadow-xl"
             >
               Solicitar cambio de batería
             </Link>

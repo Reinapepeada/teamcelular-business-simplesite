@@ -123,7 +123,7 @@ export default function GoogleReviewsAPI() {
                 href="https://share.google/EyVELq4ujwgdGKEEJ"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-6 py-3 font-semibold text-white shadow-lg transition hover:shadow-xl"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
               >
                 <FaGoogle />
                 Ver reseñas en Google
@@ -210,7 +210,7 @@ export default function GoogleReviewsAPI() {
           href="https://www.google.com/search?sca_esv=9624f88e5d8f48a2&sxsrf=ANbL-n6PeKIqm41-bypsB-8HWDe7zFQalg:1771801721760&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOXEE8cC5R2ZYv4fXETPwAQ_JiykyTTHr0oxDxZtD8WSXZVUA8OJCZms9nfxGPg4g-4NYVf2hADghUJ9PwquRPKZ1OkM6cS4CtSrNj4eOc4Uy6Eo-NUm93lZz-nFxWLJzPj4rj8BiTRaZ549Idwxp3wqfzJNfJTNLhnDHazg_E2kkHZJKjQ%3D%3D&q=Team+celular+%7C+Reparacion+de+celulares+%7C+Reparacion+de+computadoras+Opiniones&sa=X&ved=2ahUKEwjZufPhm-6SAxWxqpUCHT-THJQQ0bkNegQIJxAH&biw=1745&bih=828&dpr=1.1"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-6 py-3 font-semibold text-white shadow-lg transition hover:shadow-xl"
+          className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
         >
           <FaGoogle />
           Ver todas las reseñas en Google

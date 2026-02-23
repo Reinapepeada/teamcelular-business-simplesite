@@ -158,7 +158,7 @@ export default function BannerCards() {
                             href="/presupuesto-reparacion"
                             radius="full"
                             size="sm"
-                            className="w-full bg-gradient-to-r from-primary to-secondary font-semibold text-white shadow-md transition hover:opacity-95 sm:w-fit"
+                            className="w-full bg-primary font-semibold text-white shadow-md transition hover:bg-primary/90 sm:w-fit"
                         >
                             <BsFillLightningChargeFill className="inline-block text-base" />
                             Cotiza tu reparacion
