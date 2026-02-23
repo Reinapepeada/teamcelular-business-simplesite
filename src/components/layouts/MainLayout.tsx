@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import NavbarNUI from "@/components/navbars/NavbarNUI";
@@ -9,10 +10,6 @@ const BackgroundBeams = dynamic(
     () => import("@/components/animations/BackgroundMeteors"),
     { ssr: false },
 );
-const StickyRepairCta = dynamic(
-    () => import("@/components/cta/StickyRepairCta"),
-    { ssr: false },
-);
 
 export default function MainLayout({
     children,
@@ -20,7 +17,20 @@ export default function MainLayout({
     readonly children: React.ReactNode;
 }) {
     const pathname = usePathname();
+    const [showDesktopEffects, setShowDesktopEffects] = useState(false);
     const isAdmin = pathname?.startsWith("/admin");
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia("(min-width: 1024px)");
+        const updateVisibility = () => setShowDesktopEffects(mediaQuery.matches);
+
+        updateVisibility();
+        mediaQuery.addEventListener("change", updateVisibility);
+
+        return () => {
+            mediaQuery.removeEventListener("change", updateVisibility);
+        };
+    }, []);
 
     if (isAdmin) {
         return <>{children}</>;
@@ -29,10 +39,9 @@ export default function MainLayout({
     return (
         <>
             <NavbarNUI />
-            <main className="flex justify-center min-h-screen pb-24 lg:pb-0">{children}</main>
+            <main className="flex min-h-screen justify-center">{children}</main>
             <FooterNUI />
-            <BackgroundBeams />
-            <StickyRepairCta />
+            {showDesktopEffects ? <BackgroundBeams /> : null}
         </>
     );
 }
