@@ -1,5 +1,4 @@
 import React from "react";
-// icons
 import {
   BsFacebook,
   BsInstagram,
@@ -16,131 +15,126 @@ import {
   FaBuilding,
   FaShieldAlt,
 } from "react-icons/fa";
-//Elements
 import Link from "next/link";
 import Image from "next/image";
 
 const footerSections = {
   servicios: [
     {
-      name: "Reparación de iPhone",
+      name: "Reparacion de iPhone",
       href: "/guias/reparacion-iphone-buenos-aires",
       icon: FaApple,
     },
     {
-      name: "Reparación de Celulares",
+      name: "Reparacion de celulares",
       href: "/presupuesto-reparacion",
       icon: FaMobileAlt,
     },
     {
-      name: "Microelectrónica y Reballing",
+      name: "Microelectronica y reballing",
       href: "/guias/microelectronica-reballing-caba",
       icon: FaTools,
     },
     {
-      name: "Soporte para Empresas",
+      name: "Soporte para empresas",
       href: "/guias/soporte-empresas-servicio-tecnico",
       icon: FaBuilding,
     },
     {
-      name: "Mantenimiento Preventivo",
+      name: "Mantenimiento preventivo",
       href: "/guias/mantenimiento-preventivo-celulares",
       icon: FaShieldAlt,
     },
   ],
   guias: [
-    { name: "Todas las Guías", href: "/guias" },
-    { name: "Reparación iPhone", href: "/guias/reparacion-iphone-buenos-aires" },
-    { name: "Microelectrónica", href: "/guias/microelectronica-reballing-caba" },
+    { name: "Todas las guias", href: "/guias" },
+    { name: "Reparacion iPhone", href: "/guias/reparacion-iphone-buenos-aires" },
+    { name: "Microelectronica", href: "/guias/microelectronica-reballing-caba" },
     {
-      name: "Mantenimiento Preventivo",
+      name: "Mantenimiento preventivo",
       href: "/guias/mantenimiento-preventivo-celulares",
     },
     {
-      name: "Soporte Empresas",
+      name: "Soporte empresas",
       href: "/guias/soporte-empresas-servicio-tecnico",
     },
   ],
   recursos: [
-    { name: "Tienda Online", href: "/tienda" },
-    { name: "Solicitar Presupuesto", href: "/presupuesto-reparacion" },
-    { name: "Sobre Nosotros", href: "/sobrenosotros" },
+    { name: "Tienda online", href: "/tienda" },
+    { name: "Solicitar presupuesto", href: "/presupuesto-reparacion" },
+    { name: "Sobre nosotros", href: "/sobrenosotros" },
     { name: "Contacto", href: "/contacto" },
   ],
 };
 
 export default function FooterNUI() {
-  return (
-    <footer className="relative bg-footer-background w-full text-white mt-16 overflow-hidden">
-      {/* Contenido del Footer */}
-      <div className="relative z-10 container mx-auto px-4 py-12">
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {/* Columna 1: Team Celular Info */}
-          <div className="flex flex-col space-y-4">
-              <div className="flex flex-col">
-                <Image
-                  src="/images/IMAGOTIPO/PNG/IMAGOTIPO_6.png"
-                  alt="Team Celular"
-                  width={300}
-                  height={300}
-                  className="h-auto w-48 mb-2"
-                />
-                <p className="text-sm text-slate-200  ">
-                  Más de 15 años de experiencia en reparación profesional de
-                  celulares en Buenos Aires.
-                </p>
-              </div>
+  const currentYear = new Date().getFullYear();
 
-            {/* Redes Sociales */}
-            <div className="flex space-x-4 pt-4">
+  return (
+    <footer className="relative mt-16 w-full overflow-hidden bg-footer-background text-white">
+      <div className="relative z-10 container mx-auto px-4 py-12">
+        <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div className="flex flex-col space-y-4">
+            <div className="flex flex-col">
+              <Image
+                src="/images/IMAGOTIPO/PNG/IMAGOTIPO_6.png"
+                alt="Team Celular"
+                width={300}
+                height={300}
+                className="mb-2 h-auto w-48"
+              />
+              <p className="text-sm text-slate-200">
+                Mas de 15 anos de experiencia en reparacion profesional de
+                celulares en Buenos Aires.
+              </p>
+            </div>
+
+            <div className="flex space-x-3 pt-4">
               <Link
                 aria-label="WhatsApp"
-                href="https://wa.me/5491151034595?text=Hola%21%20Necesito%20información"
+                href="https://wa.me/5491151034595?text=Hola%21%20Necesito%20informacion"
                 target="_blank"
-                className="hover:text-green-400 transition-colors"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full transition-colors hover:bg-white/10 hover:text-green-400"
               >
-                <BsWhatsapp size={24} />
+                <BsWhatsapp size={22} />
               </Link>
               <Link
                 aria-label="Instagram"
                 href="https://www.instagram.com/teamcelular.arg/"
                 target="_blank"
-                className="hover:text-pink-400 transition-colors"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full transition-colors hover:bg-white/10 hover:text-pink-400"
               >
-                <BsInstagram size={24} />
+                <BsInstagram size={22} />
               </Link>
               <Link
                 aria-label="Facebook"
                 href="https://www.facebook.com/TeamCelular/"
                 target="_blank"
-                className="hover:text-blue-400 transition-colors"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full transition-colors hover:bg-white/10 hover:text-blue-400"
               >
-                <BsFacebook size={24} />
+                <BsFacebook size={22} />
               </Link>
             </div>
 
-            {/* Horarios */}
-            <div className="flex items-start space-x-2 text-sm pt-2">
+            <div className="flex items-start space-x-2 pt-2 text-sm">
               <BsClock className="mt-1 flex-shrink-0 text-primary" />
               <div>
-                <p className="font-semibold">Horario de Atención</p>
-                <p className="text-slate-200">Lunes a Viernes</p>
-                <p className="text-slate-200">10:30 - 18:00hs</p>
+                <p className="font-semibold">Horario de atencion</p>
+                <p className="text-slate-200">Lunes a viernes</p>
+                <p className="text-slate-200">10:30 - 18:00 hs</p>
               </div>
             </div>
           </div>
 
-          {/* Columna 2: Servicios */}
           <div className="flex flex-col space-y-3">
-            <h4 className="text-lg font-bold mb-2 text-primary">Servicios</h4>
-            {footerSections.servicios.map((service, index) => {
+            <h4 className="mb-2 text-lg font-bold text-primary">Servicios</h4>
+            {footerSections.servicios.map((service) => {
               const Icon = service.icon;
               return (
                 <Link
-                  key={index}
+                  key={service.href}
                   href={service.href}
-                  className="flex items-center space-x-2 text-sm text-slate-200 hover:text-white hover:translate-x-1 transition-all duration-200"
+                  className="flex min-h-9 items-center space-x-2 text-sm text-slate-200 transition-all duration-200 hover:translate-x-1 hover:text-white"
                 >
                   <Icon className="text-primary" />
                   <span>{service.name}</span>
@@ -149,43 +143,39 @@ export default function FooterNUI() {
             })}
           </div>
 
-          {/* Columna 3: Guías y Recursos */}
           <div className="flex flex-col space-y-3">
-            <h4 className="text-lg font-bold mb-2 text-secondary">
-              Guías Técnicas
-            </h4>
-            {footerSections.guias.map((guia, index) => (
+            <h4 className="mb-2 text-lg font-bold text-secondary">Guias tecnicas</h4>
+            {footerSections.guias.map((guia) => (
               <Link
-                key={index}
+                key={guia.href}
                 href={guia.href}
-                className="text-sm text-slate-200 hover:text-white hover:translate-x-1 transition-all duration-200"
+                className="inline-flex min-h-9 items-center text-sm text-slate-200 transition-all duration-200 hover:translate-x-1 hover:text-white"
               >
                 {guia.name}
               </Link>
             ))}
 
-            <div className="h-px w-full bg-white/10 my-8" />
+            <div className="my-6 h-px w-full bg-white/10" />
 
-            <h4 className="text-lg font-bold mb-2 text-secondary">Recursos</h4>
-            {footerSections.recursos.map((recurso, index) => (
+            <h4 className="mb-2 text-lg font-bold text-secondary">Recursos</h4>
+            {footerSections.recursos.map((recurso) => (
               <Link
-                key={index}
+                key={recurso.href}
                 href={recurso.href}
-                className="text-sm text-slate-200 hover:text-white hover:translate-x-1 transition-all duration-200"
+                className="inline-flex min-h-9 items-center text-sm text-slate-200 transition-all duration-200 hover:translate-x-1 hover:text-white"
               >
                 {recurso.name}
               </Link>
             ))}
           </div>
 
-          {/* Columna 4: Contacto */}
           <div className="flex flex-col space-y-4">
-            <h4 className="text-lg font-bold mb-2 text-primary">Contacto</h4>
+            <h4 className="mb-2 text-lg font-bold text-primary">Contacto</h4>
 
             <div className="flex items-start space-x-3 text-sm">
               <BsGeoAlt className="mt-1 flex-shrink-0 text-primary" />
               <div>
-                <p className="font-semibold">Dirección</p>
+                <p className="font-semibold">Direccion</p>
                 <p className="text-slate-200">Paraguay 2451</p>
                 <p className="text-slate-200">Recoleta, CABA</p>
               </div>
@@ -194,10 +184,10 @@ export default function FooterNUI() {
             <div className="flex items-start space-x-3 text-sm">
               <BsTelephone className="mt-1 flex-shrink-0 text-primary" />
               <div>
-                <p className="font-semibold">Teléfono</p>
+                <p className="font-semibold">Telefono</p>
                 <Link
                   href="tel:+5491151034595"
-                  className="text-slate-200 hover:text-white transition-colors"
+                  className="text-slate-200 transition-colors hover:text-white"
                 >
                   +54 11 5103-4595
                 </Link>
@@ -210,52 +200,50 @@ export default function FooterNUI() {
                 <p className="font-semibold">Email</p>
                 <Link
                   href="mailto:teamcelular.arg@gmail.com"
-                  className="text-slate-200 hover:text-white transition-colors break-all"
+                  className="break-all text-slate-200 transition-colors hover:text-white"
                 >
                   teamcelular.arg@gmail.com
                 </Link>
               </div>
             </div>
 
-            <Link href="/contacto" className="pt-2">
-              <button className="w-full bg-primary hover:bg-primary/80 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
-                Ver Ubicación
-              </button>
+            <Link
+              href="/contacto"
+              className="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-primary px-4 py-2 font-semibold text-white transition-colors duration-200 hover:bg-primary/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              Ver ubicacion
             </Link>
           </div>
         </div>
 
-        <div className="h-px w-full bg-white/10 my-8" />
+        <div className="my-8 h-px w-full bg-white/10" />
 
-        {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-sm text-slate-200">
-          <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
-            <p>© 2025 Team Celular. Todos los derechos reservados.</p>
+        <div className="flex flex-col items-center justify-between space-y-4 text-sm text-slate-200 md:flex-row md:space-y-0">
+          <div className="flex flex-col items-center space-y-2 md:flex-row md:space-x-4 md:space-y-0">
+            <p>© {currentYear} Team Celular. Todos los derechos reservados.</p>
             <div className="flex space-x-4">
               <Link
                 href="/terminos"
-                className="hover:text-white transition-colors"
+                className="inline-flex min-h-8 items-center transition-colors hover:text-white"
               >
-                Términos
+                Terminos
               </Link>
               <Link
                 href="/devoluciones"
-                className="hover:text-white transition-colors"
+                className="inline-flex min-h-8 items-center transition-colors hover:text-white"
               >
                 Devoluciones
               </Link>
               <Link
                 href="/privacidad"
-                className="hover:text-white transition-colors"
+                className="inline-flex min-h-8 items-center transition-colors hover:text-white"
               >
                 Privacidad
               </Link>
             </div>
           </div>
 
-          <p className="text-slate-200 text-xs">
-            Hecho con ❤️ en Buenos Aires, Argentina
-          </p>
+          <p className="text-xs text-slate-200">Hecho en Buenos Aires, Argentina</p>
         </div>
       </div>
     </footer>

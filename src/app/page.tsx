@@ -2,17 +2,65 @@ import React from "react";
 import BannerHome from "../components/banners/BannerHome";
 import BannerCards from "@/components/cards/BannerCards";
 import KnowledgeGrid from "@/components/cards/KnowledgeGrid";
-import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import type { Metadata } from "next";
 
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 
 export const metadata: Metadata = {
+  title: "Reparacion de celulares en Buenos Aires | Team Celular",
+  description:
+    "Servicio tecnico especializado en reparacion de celulares y laptops en Recoleta, CABA. Diagnostico en el dia, garantia escrita y atencion por WhatsApp.",
+  keywords: [
+    "reparacion de celulares Buenos Aires",
+    "servicio tecnico celulares CABA",
+    "reparacion de laptops Buenos Aires",
+    "gestion de reparaciones celulares y laptops",
+    "servicio tecnico para empresas",
+    "control y diagnostico de equipos",
+  ],
   alternates: {
     canonical: SITE_URL,
   },
+  openGraph: {
+    type: "website",
+    locale: "es_AR",
+    url: SITE_URL,
+    siteName: "Team Celular",
+    title: "Reparacion de celulares en Buenos Aires | Team Celular",
+    description:
+      "Diagnostico en el dia, repuestos de calidad y garantia escrita para celulares y laptops.",
+    images: [
+      {
+        url: `${SITE_URL}/opengraph-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "Team Celular - Servicio tecnico en Buenos Aires",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Reparacion de celulares en Buenos Aires | Team Celular",
+    description:
+      "Servicio tecnico con garantia escrita y respuesta comercial en menos de 2 horas habiles.",
+    images: [`${SITE_URL}/opengraph-image.png`],
+  },
 };
+
+const GoogleReviewsAPI = dynamic(
+  () => import("@/components/cards/GoogleReviewsAPI"),
+  {
+    loading: () => (
+      <article className="rounded-2xl border border-slate-200/70 bg-white/70 p-8 text-center shadow-md dark:border-white/10 dark:bg-slate-900/50">
+        <p className="text-base text-slate-600 dark:text-slate-300">
+          Cargando reseñas de Google...
+        </p>
+      </article>
+    ),
+  },
+);
 
 const services = [
   {
@@ -93,15 +141,15 @@ const neutralCtaClass =
   "rounded-full border border-slate-300 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary dark:border-white/20 dark:bg-slate-900/60 dark:text-slate-100 dark:hover:bg-slate-900";
 
 const brandOutlineCtaClass =
-  "rounded-full border border-primary/35 bg-white/70 px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary dark:border-primary/60 dark:bg-slate-900/45 dark:text-primary";
+  "rounded-full border border-primary/45 bg-white/85 px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary dark:border-primary/70 dark:bg-primary/20 dark:text-white dark:hover:bg-primary/30";
 
 export default function Home() {
   return (
-    <section className="flex w-full max-w-[92rem] flex-col items-center gap-16 px-6 py-14 transition md:px-8 2xl:px-10">
+    <section className="flex w-full max-w-[100rem] flex-col items-center gap-16 px-6 py-14 transition md:px-8 2xl:px-10">
       <BannerHome />
       <BannerCards />
 
-      <section className="w-full max-w-[92rem] space-y-12 text-center md:text-left lg:space-y-14">
+      <section className="w-full max-w-[100rem] space-y-12 text-center md:text-left lg:space-y-14">
         <article className="grid gap-10 rounded-2xl border border-slate-200/70 bg-white/70 p-8 shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl dark:border-white/10 dark:bg-slate-900/55 md:grid-cols-2 md:items-center lg:p-10">
           <div className="space-y-6 text-slate-800 dark:text-slate-200">
             <h2 className="text-3xl font-semibold tracking-tight text-primary md:text-[2.35rem]">
@@ -122,7 +170,7 @@ export default function Home() {
               </Link>
               <Link
                 href="/tecnico-de-celulares"
-                className="rounded-full border border-secondary/50 bg-white/70 px-6 py-3 text-sm font-semibold text-secondary transition hover:bg-secondary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary dark:border-secondary/50 dark:bg-slate-900/40"
+                className="rounded-full border border-secondary/60 bg-white/85 px-6 py-3 text-sm font-semibold text-slate-800 transition hover:bg-secondary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary dark:border-secondary/70 dark:bg-secondary/20 dark:text-white dark:hover:bg-secondary/30"
               >
                 Técnico de celulares
               </Link>
@@ -139,7 +187,7 @@ export default function Home() {
             <ul className="space-y-4 text-left">
               {services.map((service) => (
                 <li key={service.title} className="rounded-xl border border-slate-200/80 bg-white/90 p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md dark:border-white/10 dark:bg-slate-900/55">
-                  <h4 className="text-lg font-semibold text-secondary dark:text-secondary/80 md:text-xl">
+                  <h4 className="text-lg font-semibold text-secondary dark:text-slate-100 md:text-xl">
                     {service.title}
                   </h4>
                   <p className="mt-2 text-slate-700 dark:text-slate-300">{service.description}</p>
@@ -156,7 +204,7 @@ export default function Home() {
               className="relative overflow-hidden rounded-2xl border border-slate-200/75 bg-white/75 p-6 text-center shadow-md transition hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-slate-900/50"
             >
               <div className={`pointer-events-none absolute inset-x-0 top-0 h-1 ${index % 2 === 0 ? "bg-gradient-to-r from-primary/70 to-secondary/50" : "bg-gradient-to-r from-secondary/70 to-primary/50"}`} />
-              <h4 className="text-[1.15rem] font-semibold leading-snug text-primary">
+              <h4 className="text-[1.15rem] font-semibold leading-snug text-primary dark:text-slate-100">
                 {item.title}
               </h4>
               <p className="mt-3 text-slate-700 dark:text-slate-300">{item.description}</p>
@@ -167,8 +215,8 @@ export default function Home() {
         <section className="grid gap-4 rounded-2xl border border-slate-200/70 bg-white/55 p-6 shadow-md dark:border-white/10 dark:bg-slate-900/35 md:grid-cols-3">
           {microFaqs.map((item) => (
             <article key={item.title} className="space-y-2.5 rounded-xl border border-slate-200/80 bg-white/85 p-4 text-left shadow-sm dark:border-white/10 dark:bg-slate-900/50">
-              <p className="text-sm font-semibold uppercase tracking-wide text-primary">{item.title}</p>
-              <h5 className="text-[1.03rem] font-semibold leading-snug text-slate-900 dark:text-white">{item.question}</h5>
+              <p className="text-sm font-semibold uppercase tracking-wide text-primary dark:text-sky-300">{item.title}</p>
+              <h4 className="text-[1.03rem] font-semibold leading-snug text-slate-900 dark:text-white">{item.question}</h4>
               <p className="text-sm text-slate-700 dark:text-slate-300">{item.answer}</p>
             </article>
           ))}
@@ -195,10 +243,10 @@ export default function Home() {
               </p>
               <ul className="space-y-2 text-left text-muted-foreground">
                 <li>
-                  Tel: <Link href="tel:+541151034595" className="font-semibold text-primary transition hover:text-secondary">+54 11 5103-4595</Link>
+                  Tel: <Link href="tel:+541151034595" className="font-semibold text-primary transition hover:text-secondary dark:text-sky-300 dark:hover:text-sky-200">+54 11 5103-4595</Link>
                 </li>
                 <li>
-                  Email: <Link href="mailto:teamcelular.arg@gmail.com" className="font-semibold text-primary transition hover:text-secondary">teamcelular.arg@gmail.com</Link>
+                  Email: <Link href="mailto:teamcelular.arg@gmail.com" className="font-semibold text-primary transition hover:text-secondary dark:text-sky-300 dark:hover:text-sky-200">teamcelular.arg@gmail.com</Link>
                 </li>
                 <li>
                   Laboratorio: Paraguay 2451, Recoleta, CABA.
@@ -224,7 +272,7 @@ export default function Home() {
                 <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                   <div className="absolute inset-x-6 top-0 h-1 rounded-full bg-gradient-to-r from-primary to-secondary" />
                 </div>
-                <h4 className="text-[1.05rem] font-semibold leading-snug text-secondary dark:text-secondary/90">
+                <h4 className="text-[1.05rem] font-semibold leading-snug text-secondary dark:text-white">
                   {faq.question}
                 </h4>
                 <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">

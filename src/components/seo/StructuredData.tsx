@@ -137,6 +137,27 @@ function createServiceJson() {
   };
 }
 
+function createOrganizationJson() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${SITE_URL}#organization`,
+    name: BUSINESS_NAME,
+    url: SITE_URL,
+    logo: `${SITE_URL}/icon.ico`,
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        telephone: PHONE_NUMBER,
+        email: EMAIL,
+        availableLanguage: ["es", "en"],
+      },
+    ],
+    sameAs: SAME_AS,
+  };
+}
+
 function createAiDiscoveryJson() {
   return {
     "@context": "https://schema.org",
@@ -180,14 +201,15 @@ export default function StructuredData({
   const data = [
     createLocalBusinessJson(city, country),
     createServiceJson(),
+    createOrganizationJson(),
     createAiDiscoveryJson(),
   ];
 
   return (
     <>
-      {data.filter(entry => entry && (entry["@id"] || entry["@type"])).map((entry) => (
+      {data.filter(entry => entry && (entry["@id"] || entry["@type"])).map((entry, index) => (
         <script
-          key={entry["@id"] ?? entry["@type"] ?? Math.random()}
+          key={entry["@id"] ?? `${entry["@type"]}-${index}`}
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(entry),

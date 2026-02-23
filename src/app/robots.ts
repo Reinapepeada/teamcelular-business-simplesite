@@ -3,34 +3,17 @@ import { MetadataRoute } from "next";
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 
-export default function Robots(): MetadataRoute.Robots {
+export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
-        disallow: [
-          "/admin/",
-          "/api/",
-          "/private/",
-          "/cart/",
-          "/checkout/",
-          "/*.json$",
-        ],
-      },
-      {
-        userAgent: "Googlebot",
-        allow: "/",
-        disallow: ["/admin/", "/api/"],
+        disallow: ["/admin/", "/api/", "/private/", "/cart/", "/checkout/"],
       },
       {
         userAgent: "Googlebot-Image",
-        allow: ["/images/", "/public/"],
-      },
-      {
-        userAgent: "Bingbot",
-        allow: "/",
-        disallow: ["/admin/", "/api/"],
+        allow: ["/images/", "/icons/"],
       },
       {
         userAgent: "GPTBot",
@@ -50,27 +33,6 @@ export default function Robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "Google-Extended",
-        allow: "/",
-      },
-      {
-        userAgent: "Applebot",
-        allow: "/",
-        crawlDelay: 10,
-      },
-      {
-        userAgent: "FacebookBot",
-        allow: "/",
-      },
-      {
-        userAgent: "PerplexityBot",
-        allow: "/",
-      },
-      {
-        userAgent: "ClaudeBot",
-        allow: "/",
-      },
-      {
-        userAgent: "Amazonbot",
         allow: "/",
       },
     ],

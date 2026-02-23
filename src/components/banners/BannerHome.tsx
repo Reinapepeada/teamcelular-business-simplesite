@@ -13,7 +13,7 @@ const trustSignals = [
 
 export default function BannerHome() {
     return (
-        <section className="relative w-full max-w-[92rem] overflow-hidden rounded-2xl border border-white/10 bg-black/5 px-6 py-8 shadow-lg backdrop-blur-[2px] transition-all duration-300 ease-in-out hover:shadow-2xl dark:border-white/5 dark:bg-slate-900/10 md:px-10 md:py-12">
+        <section className="relative w-full max-w-[100rem] overflow-hidden rounded-2xl border border-white/10 bg-black/5 px-6 py-8 shadow-lg backdrop-blur-[2px] transition-all duration-300 ease-in-out hover:shadow-2xl dark:border-white/5 dark:bg-slate-900/10 md:px-10 md:py-12">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.05),transparent_60%),radial-gradient(circle_at_bottom_right,rgba(99,68,245,0.02),transparent_70%)] opacity-50 mix-blend-screen" />
             <div className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(circle_at_center,transparent_60%,black_100%)]">
                 <div className="pointer-events-none absolute inset-px rounded-2xl border border-white/15 opacity-10" />
@@ -81,6 +81,9 @@ export default function BannerHome() {
                             alt="Técnico reparando un smartphone en el laboratorio"
                             width={1200}
                             height={1400}
+                            quality={82}
+                            sizes="(max-width: 1024px) 100vw, 46vw"
+                            fetchPriority="high"
                             className="h-[23rem] w-full object-cover sm:h-[30rem]"
                             priority
                         />

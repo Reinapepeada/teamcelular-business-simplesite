@@ -1,10 +1,18 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import dynamic from "next/dynamic";
 import NavbarNUI from "@/components/navbars/NavbarNUI";
 import FooterNUI from "@/components/footer/FooterNUI";
-import BackgroundBeams from "@/components/animations/BackgroundMeteors";
-import StickyRepairCta from "@/components/cta/StickyRepairCta";
+
+const BackgroundBeams = dynamic(
+    () => import("@/components/animations/BackgroundMeteors"),
+    { ssr: false },
+);
+const StickyRepairCta = dynamic(
+    () => import("@/components/cta/StickyRepairCta"),
+    { ssr: false },
+);
 
 export default function MainLayout({
     children,

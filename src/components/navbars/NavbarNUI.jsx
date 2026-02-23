@@ -29,7 +29,10 @@ export default function NavbarNUI() {
         <Navbar  maxWidth="2xl">
             <NavbarContent className="" justify="start">
                 <NavbarItem className="nav:hidden">
-                    <NavbarMenuToggle className="w-12 h-12" />
+                    <NavbarMenuToggle
+                        className="h-12 w-12"
+                        aria-label="Abrir menú de navegación"
+                    />
                 </NavbarItem>
                 <NavbarItem className="flex items-center">
                     <Link href="/" className="flex items-center gap-3 text-inherit">
@@ -40,7 +43,6 @@ export default function NavbarNUI() {
                             width={1725}
                             height={591}
                             sizes="(max-width: 640px) 140px, 170px"
-                            priority
                         />
                         <Image
                             className="hidden h-10 w-auto sm:hidden dark:sm:block"
@@ -49,7 +51,6 @@ export default function NavbarNUI() {
                             width={1725}
                             height={591}
                             sizes="(max-width: 640px) 140px, 170px"
-                            priority
                         />
                         <Image
                             className="h-14 w-auto sm:hidden dark:hidden"
@@ -58,7 +59,6 @@ export default function NavbarNUI() {
                             width={256}
                             height={256}
                             sizes="40px"
-                            priority
                         />
                         <Image
                             className="hidden h-14 w-auto sm:hidden dark:block dark:sm:hidden"
@@ -67,7 +67,6 @@ export default function NavbarNUI() {
                             width={256}
                             height={256}
                             sizes="40px"
-                            priority
                         />
                     </Link>
                 </NavbarItem>

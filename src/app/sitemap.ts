@@ -7,7 +7,7 @@ import { buildProductSlug } from '@/lib/productSlug';
 export const revalidate = 86400;
 
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+const apiUrl = process.env.NEXT_PUBLIC_API_URL?.trim() || process.env.API_URL?.trim();
 
 function slugify(text = "") {
   return text
@@ -28,8 +28,13 @@ function toAbsoluteUrl(url: string) {
 
 // Fetch products with cache for sitemap generation
 async function getAllProductsForSitemap(): Promise<Product[]> {
+  if (!apiUrl) {
+    return [];
+  }
+
   try {
-    const response = await fetch(`${apiUrl}/products/all`, {
+    const endpoint = new URL("/products/all", apiUrl).toString();
+    const response = await fetch(endpoint, {
       next: { revalidate: 86400 }, // Cache for 24 hours
     });
     
@@ -37,9 +42,9 @@ async function getAllProductsForSitemap(): Promise<Product[]> {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     
-    return response.json();
-  } catch (error) {
-    console.error('Error fetching products for sitemap:', error);
+    const data = await response.json();
+    return Array.isArray(data) ? data : [];
+  } catch {
     return [];
   }
 }
@@ -86,6 +91,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const mainSitemap = mainPages.map((page) => ({
     url: page.path ? `${SITE_URL}/${page.path}` : SITE_URL,
+    lastModified: lastMod,
     changeFrequency: page.changeFreq,
     priority: page.priority,
     alternates: {
@@ -97,6 +103,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const guidesSitemap = guidePages.map((page) => ({
     url: `${SITE_URL}/${page.path}`,
+    lastModified: lastMod,
     changeFrequency: page.changeFreq,
     priority: page.priority,
     alternates: {

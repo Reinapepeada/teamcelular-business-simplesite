@@ -23,6 +23,7 @@ export default function ThemeSwitcher() {
             color="success"
             startContent={<SunIcon />}
             endContent={<MoonIcon />}
+            aria-label="Cambiar entre tema claro y oscuro"
             onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
             className="hidden sm:flex"
         />

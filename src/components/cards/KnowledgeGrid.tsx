@@ -41,10 +41,10 @@ const ARTICLES: KnowledgeItem[] = [
 
 export default function KnowledgeGrid() {
   return (
-    <section className="relative w-full max-w-[92rem] space-y-10 overflow-hidden rounded-2xl border border-slate-200/70 bg-white/70 p-10 shadow-md transition-all duration-300 ease-in-out hover:shadow-xl dark:border-white/10 dark:bg-slate-900/50">
+    <section className="relative w-full max-w-[100rem] space-y-10 overflow-hidden rounded-2xl border border-slate-200/70 bg-white/70 p-10 shadow-md transition-all duration-300 ease-in-out hover:shadow-xl dark:border-white/10 dark:bg-slate-900/50">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,#94a3b81f,transparent_65%)] dark:bg-[radial-gradient(circle_at_top,#0ea5e91f,transparent_65%)]" />
       <header className="space-y-4 text-center md:text-left">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-secondary/90 dark:text-secondary/70">
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-secondary/90 dark:text-sky-300">
           Insights del laboratorio
         </p>
         <h2 className="text-3xl font-bold tracking-tight text-slate-900 md:text-[2.2rem] dark:text-white">
@@ -63,8 +63,8 @@ export default function KnowledgeGrid() {
               <div className="absolute inset-x-8 top-0 h-1 rounded-full bg-gradient-to-r from-primary to-secondary" />
             </div>
             <div className="space-y-4">
-              <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-secondary/90 dark:text-secondary/70">
-                <span className="h-2 w-2 rounded-full bg-secondary/80" aria-hidden />
+              <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-secondary/90 dark:text-sky-300">
+                <span className="h-2 w-2 rounded-full bg-secondary/80 dark:bg-sky-300" aria-hidden />
                 {article.readingTime}
               </p>
               <h3 className="text-xl font-semibold leading-snug text-slate-900 dark:text-slate-100 md:text-2xl">

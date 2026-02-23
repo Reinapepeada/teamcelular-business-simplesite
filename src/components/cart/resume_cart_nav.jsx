@@ -182,7 +182,15 @@ export default function ResumeCartNav() {
     return (
         <Sheet>
             <SheetTrigger asChild>
-                <Button variant="outline" className="relative">
+                <Button
+                    variant="outline"
+                    className="relative"
+                    aria-label={
+                        totalItems > 0
+                            ? `Abrir carrito con ${totalItems} artículos`
+                            : "Abrir carrito"
+                    }
+                >
                     <motion.div
                         animate={isAnimating ? {
                             scale: [1, 1.15, 1],
@@ -272,6 +280,7 @@ export default function ResumeCartNav() {
                                                 variant="outline"
                                                 size="icon"
                                                 className="h-7 w-7"
+                                                aria-label={`Reducir cantidad de ${item.product.name}`}
                                                 onClick={() =>
                                                     updateQuantity(
                                                         item.cartKey,
@@ -288,6 +297,7 @@ export default function ResumeCartNav() {
                                                 variant="outline"
                                                 size="icon"
                                                 className="h-7 w-7"
+                                                aria-label={`Aumentar cantidad de ${item.product.name}`}
                                                 onClick={() =>
                                                     updateQuantity(
                                                         item.cartKey, 
@@ -302,6 +312,7 @@ export default function ResumeCartNav() {
                                                 variant="ghost"
                                                 size="icon"
                                                 className="h-7 w-7 ml-auto text-destructive hover:text-destructive"
+                                                aria-label={`Eliminar ${item.product.name} del carrito`}
                                                 onClick={() => removeFromCart(item.cartKey)}
                                             >
                                                 <X className="h-4 w-4" />

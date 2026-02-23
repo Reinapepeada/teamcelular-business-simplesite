@@ -184,9 +184,9 @@ export default function GoogleReviewsAPI() {
                     </div>
                   )}
                   <div>
-                    <h4 className="text-[0.98rem] font-semibold leading-snug text-slate-900 dark:text-white">
+                    <p className="text-[0.98rem] font-semibold leading-snug text-slate-900 dark:text-white">
                       {review.author_name}
-                    </h4>
+                    </p>
                     <p className="text-xs text-slate-500 dark:text-slate-400">
                       {review.relative_time_description}
                     </p>

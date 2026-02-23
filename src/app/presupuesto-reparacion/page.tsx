@@ -240,7 +240,7 @@ export default function PresupuestoReparacionPage() {
             </Link>
           </li>
           <li>/</li>
-          <li className="text-primary font-semibold">Presupuesto de Reparación</li>
+          <li className="font-semibold text-primary dark:text-sky-300">Presupuesto de Reparación</li>
         </ol>
       </nav>
 
@@ -255,7 +255,7 @@ export default function PresupuestoReparacionPage() {
         {/* Hero */}
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-start mb-20">
           <div>
-            <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-semibold text-primary">
+            <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-semibold text-primary dark:bg-sky-500/20 dark:text-sky-200">
               Presupuesto sin cargo en menos de 24 hs
             </span>
             <h1 className="mt-6 text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-slate-900 dark:text-white">
@@ -290,7 +290,7 @@ export default function PresupuestoReparacionPage() {
                 <Button
                   size="lg"
                   variant="bordered"
-                  className="border-primary text-primary hover:bg-primary/10"
+                  className="border-primary text-primary hover:bg-primary/10 dark:border-sky-400/70 dark:text-sky-100 dark:hover:bg-sky-500/20"
                   startContent={<FaWhatsapp />}
                 >
                   Hablar por WhatsApp
@@ -304,7 +304,7 @@ export default function PresupuestoReparacionPage() {
           </div>
 
           <Card className="p-8 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50">
-            <h2 className="text-2xl font-bold text-primary">
+            <h2 className="text-2xl font-bold text-primary dark:text-sky-200">
               ¿Por qué pedir tu presupuesto online?
             </h2>
             <Divider className="my-6" />
@@ -317,7 +317,7 @@ export default function PresupuestoReparacionPage() {
                 const Icon = item.icon;
                 return (
                   <div key={index} className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-sky-500/20 dark:text-sky-200">
                       <Icon className="text-xl" />
                     </div>
                     <div>
@@ -355,10 +355,10 @@ export default function PresupuestoReparacionPage() {
                   className="p-6 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-2xl transition-all duration-300"
                 >
                   <div className="flex items-center justify-between mb-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-sky-500/20 dark:text-sky-200">
                       <Icon className="text-xl" />
                     </div>
-                    <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                    <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary dark:bg-sky-500/20 dark:text-sky-200">
                       {step.timing}
                     </span>
                   </div>
@@ -381,7 +381,7 @@ export default function PresupuestoReparacionPage() {
           <div className="grid gap-6 md:grid-cols-3">
             {quickResponseFaqs.map((item) => (
               <article key={item.question} className="space-y-2 rounded-xl border border-white/10 bg-white/10 p-4 text-left text-sm leading-relaxed dark:border-white/5 dark:bg-slate-900/40">
-                <h4 className="font-semibold text-primary">{item.question}</h4>
+                <h4 className="font-semibold text-primary dark:text-sky-200">{item.question}</h4>
                 <p className="text-slate-600 dark:text-slate-300">{item.answer}</p>
               </article>
             ))}
@@ -393,7 +393,7 @@ export default function PresupuestoReparacionPage() {
           <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-start">
             <Card className="p-8 bg-white/90 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 shadow-xl">
               <div className="mb-6">
-                <h2 className="text-3xl font-bold text-primary">
+                <h2 className="text-3xl font-bold text-primary dark:text-sky-200">
                   Contanos la falla de tu equipo
                 </h2>
                 <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
@@ -425,7 +425,7 @@ export default function PresupuestoReparacionPage() {
                         {...linkProps}
                         className="flex items-center gap-3 rounded-xl border border-white/10 bg-slate-900/10 px-4 py-3 text-sm text-slate-200 transition hover:border-primary/60 hover:bg-primary/10"
                       >
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-sky-500/20 dark:text-sky-200">
                           <Icon className="text-lg" />
                         </div>
                         <div>
@@ -451,7 +451,7 @@ export default function PresupuestoReparacionPage() {
                     const Icon = promise.icon;
                     return (
                       <div key={index} className="flex items-start gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-sky-500/20 dark:text-sky-200">
                           <Icon className="text-lg" />
                         </div>
                         <div>
@@ -487,7 +487,7 @@ export default function PresupuestoReparacionPage() {
                   key={index}
                   className="p-6 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-all duration-300"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-sky-500/20 dark:text-sky-200">
                     <Icon className="text-xl" />
                   </div>
                   <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
@@ -516,7 +516,7 @@ export default function PresupuestoReparacionPage() {
                 key={index}
                 className="p-6 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50"
               >
-                <h3 className="text-lg font-semibold text-primary mb-2">
+                <h3 className="mb-2 text-lg font-semibold text-primary dark:text-sky-200">
                   {faq.question}
                 </h3>
                 <p className="text-sm text-slate-600 dark:text-slate-300">
@@ -530,7 +530,7 @@ export default function PresupuestoReparacionPage() {
         {/* Final CTA */}
         <Card className="relative overflow-hidden p-10 text-center bg-white/90 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50">
           <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-primary/5 via-white/60 to-secondary/5 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900" />
-          <h3 className="text-3xl font-bold text-primary mb-4">
+          <h3 className="mb-4 text-3xl font-bold text-primary dark:text-sky-200">
             ¿Listo para devolverle la vida a tu celular?
           </h3>
           <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-6">
@@ -546,7 +546,7 @@ export default function PresupuestoReparacionPage() {
               <Button
                 size="lg"
                 variant="bordered"
-                className="border-secondary text-secondary hover:bg-secondary/10"
+                className="border-secondary text-secondary hover:bg-secondary/10 dark:border-sky-400/70 dark:text-sky-100 dark:hover:bg-sky-500/20"
                 startContent={<FaWhatsapp />}
               >
                 WhatsApp directo
