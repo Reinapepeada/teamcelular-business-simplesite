@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import { 
@@ -83,6 +84,33 @@ const ARTICLES = [
     keywords: ["cambio pantalla", "display OLED", "True Tone", "pantalla original"],
   },
 ];
+
+const articleVisuals: Record<string, { cover: string; tone: string }> = {
+  "/guias/reparacion-iphone-buenos-aires": {
+    cover: "/images/celuPorDentro.webp",
+    tone: "from-sky-500/55 via-sky-500/15 to-transparent",
+  },
+  "/guias/microelectronica-reballing-caba": {
+    cover: "/images/teamcelular.webp",
+    tone: "from-violet-500/55 via-violet-500/15 to-transparent",
+  },
+  "/guias/soporte-empresas-servicio-tecnico": {
+    cover: "/images/empresaFamiliar.webp",
+    tone: "from-emerald-500/55 via-emerald-500/15 to-transparent",
+  },
+  "/guias/mantenimiento-preventivo-celulares": {
+    cover: "/images/dispositivoshdpro.webp",
+    tone: "from-cyan-500/55 via-cyan-500/15 to-transparent",
+  },
+  "/guias/cambio-bateria-celular": {
+    cover: "/images/cargadores.webp",
+    tone: "from-green-500/60 via-green-500/15 to-transparent",
+  },
+  "/guias/reparacion-pantalla-celular": {
+    cover: "/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp",
+    tone: "from-blue-600/55 via-blue-500/15 to-transparent",
+  },
+};
 
 export const metadata: Metadata = {
   title: "Guías Técnicas de Reparación de Celulares | Centro de Conocimiento Team Celular",
@@ -231,22 +259,53 @@ export default function GuidesPage() {
           <div className="grid gap-8 md:grid-cols-2">
             {ARTICLES.map((article) => {
               const Icon = article.Icon;
+              const visual = articleVisuals[article.href] ?? {
+                cover: "/images/teamcelular.webp",
+                tone: "from-primary/60 via-primary/20 to-transparent",
+              };
+              const updatedDate = new Intl.DateTimeFormat("es-AR", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              }).format(new Date(article.datePublished));
+
               return (
                 <article
                   key={article.href}
-                  className="group relative overflow-hidden rounded-2xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl transition hover:-translate-y-2 hover:shadow-2xl dark:border-white/10 dark:bg-slate-900/30"
+                  className="group relative overflow-hidden rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-xl transition hover:-translate-y-2 hover:shadow-2xl dark:border-white/10 dark:bg-slate-900/30"
                 >
-                  <div className="absolute right-6 top-6 h-32 w-32 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 blur-3xl opacity-0 transition-opacity group-hover:opacity-100" aria-hidden />
+                  <div
+                    aria-hidden
+                    className="absolute right-6 top-6 h-32 w-32 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 blur-3xl opacity-0 transition-opacity group-hover:opacity-100"
+                  />
+
+                  <div className="relative -mx-6 -mt-6 mb-6 h-44 overflow-hidden border-b border-white/15">
+                    <Image
+                      src={visual.cover}
+                      alt={article.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-t ${visual.tone}`} />
+                    <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/45 to-transparent" />
+                    <div className="absolute bottom-3 left-4 inline-flex items-center gap-2 rounded-full bg-black/45 px-3 py-1 text-xs font-semibold text-white">
+                      <FaClock className="text-[11px]" />
+                      {article.readingTime}
+                    </div>
+                  </div>
                   
                   <div className="relative space-y-4">
                     <div className="flex items-center justify-between">
                       <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-3xl text-white shadow-lg">
                         <Icon />
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-                        <FaClock className="text-primary" />
-                        {article.readingTime}
-                      </div>
+                      <time
+                        dateTime={article.datePublished}
+                        className="rounded-full border border-slate-300/80 bg-white/70 px-3 py-1 text-xs font-medium text-slate-700 dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-300"
+                      >
+                        {updatedDate}
+                      </time>
                     </div>
                     
                     <span className="inline-block rounded-full bg-secondary/20 px-3 py-1 text-xs font-semibold text-secondary">

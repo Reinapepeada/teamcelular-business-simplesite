@@ -44,7 +44,8 @@ async function getAllProductsForSitemap(): Promise<Product[]> {
     
     const data = await response.json();
     return Array.isArray(data) ? data : [];
-  } catch {
+  } catch (error) {
+    console.error('Error fetching products for sitemap:', error);
     return [];
   }
 }
@@ -53,6 +54,15 @@ async function getAllProductsForSitemap(): Promise<Product[]> {
 const mainPages = [
   { path: "", priority: 1.0, changeFreq: "weekly" as const },
   { path: "arreglo-de-celulares", priority: 0.95, changeFreq: "weekly" as const },
+  { path: "reparaciones", priority: 0.95, changeFreq: "weekly" as const },
+  { path: "reparaciones/cambio-bateria-caba", priority: 0.9, changeFreq: "weekly" as const },
+  { path: "reparaciones/cambio-pantalla-caba", priority: 0.9, changeFreq: "weekly" as const },
+  { path: "reparaciones/cambio-pin-carga-caba", priority: 0.9, changeFreq: "weekly" as const },
+  { path: "reparaciones/reparacion-placa-caba", priority: 0.9, changeFreq: "weekly" as const },
+  { path: "reparaciones/cambio-flex-caba", priority: 0.85, changeFreq: "weekly" as const },
+  { path: "reparaciones/cambio-tapa-caba", priority: 0.85, changeFreq: "weekly" as const },
+  { path: "sucursales", priority: 0.85, changeFreq: "monthly" as const },
+  { path: "sucursales/caba/recoleta", priority: 0.9, changeFreq: "monthly" as const },
   { path: "zonas", priority: 0.8, changeFreq: "monthly" as const },
   { path: "zonas/recoleta", priority: 0.8, changeFreq: "monthly" as const },
   { path: "zonas/palermo", priority: 0.75, changeFreq: "monthly" as const },
@@ -144,6 +154,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: categoryLastMod.get(slug) || lastMod,
     changeFrequency: "weekly" as const,
     priority: 0.7,
+    alternates: {
+      languages: {
+        "es-AR": `${SITE_URL}/tienda/categoria/${slug}`,
+      },
+    },
   }));
 
   return [...mainSitemap, ...guidesSitemap, ...categoryEntries, ...productEntries];

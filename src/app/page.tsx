@@ -169,6 +169,12 @@ export default function Home() {
                 Pedir presupuesto
               </Link>
               <Link
+                href="/reparaciones"
+                className={neutralCtaClass}
+              >
+                Ver reparaciones
+              </Link>
+              <Link
                 href="/tecnico-de-celulares"
                 className="rounded-full border border-secondary/60 bg-white/85 px-6 py-3 text-sm font-semibold text-slate-800 transition hover:bg-secondary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary dark:border-secondary/70 dark:bg-secondary/20 dark:text-white dark:hover:bg-secondary/30"
               >

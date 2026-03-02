@@ -3,17 +3,41 @@ import { MetadataRoute } from "next";
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 
-export default function robots(): MetadataRoute.Robots {
+export default function Robots(): MetadataRoute.Robots {
+  const sharedDisallow = [
+    "/admin/",
+    "/api/",
+    "/private/",
+    "/cart/",
+    "/checkout/",
+    "/tienda?*",
+    "/tienda/categoria/*?*",
+    "/*?*utm_*",
+    "/*?*gclid=*",
+    "/*?*fbclid=*",
+    "/*.json$",
+  ];
+
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/admin/", "/api/", "/private/", "/cart/", "/checkout/"],
+        disallow: sharedDisallow,
+      },
+      {
+        userAgent: "Googlebot",
+        allow: "/",
+        disallow: sharedDisallow,
       },
       {
         userAgent: "Googlebot-Image",
-        allow: ["/images/", "/icons/"],
+        allow: ["/images/", "/videos/"],
+      },
+      {
+        userAgent: "Bingbot",
+        allow: "/",
+        disallow: sharedDisallow,
       },
       {
         userAgent: "GPTBot",
@@ -33,6 +57,27 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "Google-Extended",
+        allow: "/",
+      },
+      {
+        userAgent: "Applebot",
+        allow: "/",
+        crawlDelay: 10,
+      },
+      {
+        userAgent: "FacebookBot",
+        allow: "/",
+      },
+      {
+        userAgent: "PerplexityBot",
+        allow: "/",
+      },
+      {
+        userAgent: "ClaudeBot",
+        allow: "/",
+      },
+      {
+        userAgent: "Amazonbot",
         allow: "/",
       },
     ],

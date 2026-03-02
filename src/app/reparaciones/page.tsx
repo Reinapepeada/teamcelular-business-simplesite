@@ -1,58 +1,69 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { FaShieldAlt, FaStopwatch, FaTools } from "react-icons/fa";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import StickyLocalCta from "@/components/cro/StickyLocalCta";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 
 const REPAIR_SERVICES = [
   {
-    title: "Cambio de batería",
+    title: "Cambio de bateria",
     description:
-      "Baterías originales o certificadas. Diagnóstico y presupuesto rápido. Atención en CABA.",
+      "Baterias originales o certificadas. Diagnostico y presupuesto rapido. Atencion en CABA.",
     href: "/reparaciones/cambio-bateria-caba",
   },
   {
-    title: "Cambio de pantalla / módulo display",
+    title: "Cambio de pantalla / modulo display",
     description:
-      "Cambio de módulo completo (display + touch) con repuestos premium. CABA.",
+      "Cambio de modulo completo (display + touch) con repuestos premium. CABA.",
     href: "/reparaciones/cambio-pantalla-caba",
   },
   {
     title: "Cambio de pin / ficha de carga",
     description:
-      "Problemas de carga, falso contacto o no reconoce cargador. Atención en CABA.",
+      "Problemas de carga, falso contacto o no reconoce cargador. Atencion en CABA.",
     href: "/reparaciones/cambio-pin-carga-caba",
   },
   {
-    title: "Reparación de placa (microelectrónica)",
+    title: "Reparacion de placa (microelectronica)",
     description:
-      "Fallas complejas: no enciende, se reinicia, mojado, corto, etc. CABA.",
+      "Fallas complejas: no enciende, se reinicia, mojado o corto. Diagnostico de laboratorio.",
     href: "/reparaciones/reparacion-placa-caba",
   },
   {
-    title: "Cambio de flex (carga / botón encendido)",
+    title: "Cambio de flex (carga / boton encendido)",
     description:
-      "Flex de carga, botón power, volumen u otros flex. Diagnóstico y reemplazo. CABA.",
+      "Flex de carga, boton power, volumen u otros flex. Diagnostico y reemplazo en CABA.",
     href: "/reparaciones/cambio-flex-caba",
   },
   {
     title: "Cambio de tapa trasera",
     description:
-      "Tapa rota, levantada o marcada. Reemplazo con terminación prolija. CABA.",
+      "Tapa rota, levantada o marcada. Reemplazo con terminacion prolija en CABA.",
     href: "/reparaciones/cambio-tapa-caba",
   },
 ];
 
 export const metadata: Metadata = {
-  title: "Reparaciones de Celulares en CABA | Presupuesto Rápido | Team Celular",
+  title: "Reparaciones de Celulares en CABA | Presupuesto Rapido | Team Celular",
   description:
-    "Reparaciones de celulares en CABA (Capital Federal). Cambio de batería, pantalla, pin de carga, flex, tapa trasera y reparación de placa. Presupuesto rápido por WhatsApp o formulario.",
-  alternates: { canonical: `${SITE_URL}/reparaciones` },
+    "Reparaciones de celulares en CABA. Cambio de bateria, pantalla, pin de carga, flex, tapa trasera y reparacion de placa. Presupuesto rapido por WhatsApp o formulario.",
+  alternates: {
+    canonical: `${SITE_URL}/reparaciones`,
+    languages: {
+      "es-AR": `${SITE_URL}/reparaciones`,
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     title: "Reparaciones de Celulares en CABA | Team Celular",
     description:
-      "Atención en CABA (Capital Federal). Presupuesto rápido para reparación de celulares: batería, pantalla, pin de carga, flex, tapa trasera y placa.",
+      "Atencion en CABA. Presupuesto rapido para reparacion de celulares: bateria, pantalla, pin de carga, flex, tapa trasera y placa.",
     url: `${SITE_URL}/reparaciones`,
     type: "website",
     locale: "es_AR",
@@ -69,14 +80,17 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Reparaciones de Celulares en CABA | Team Celular",
     description:
-      "Atención en CABA (Capital Federal). Presupuesto rápido por WhatsApp o formulario.",
+      "Atencion en CABA. Presupuesto rapido por WhatsApp o formulario.",
     images: [`${SITE_URL}/opengraph-image.png`],
   },
 };
 
 export default function ReparacionesPage() {
+  const whatsappUrl =
+    "https://wa.me/5491151034595?text=Hola%21%20Quiero%20pedir%20un%20presupuesto%20de%20reparacion%20en%20CABA.";
+
   return (
-    <section className="w-full max-w-6xl px-6 py-14 md:px-8">
+    <section className="w-full max-w-6xl px-6 py-14 pb-28 md:px-8 md:pb-20">
       <BreadcrumbJsonLd
         items={[
           { name: "Inicio", url: `${SITE_URL}/` },
@@ -84,34 +98,79 @@ export default function ReparacionesPage() {
         ]}
       />
 
-      <header className="mx-auto max-w-3xl text-center">
-        <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-          Reparaciones de celulares en CABA
-        </h1>
-        <p className="mt-5 text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          Taller en Recoleta, con atención para toda{" "}
-          <strong>CABA (Capital Federal)</strong>. Trabajamos con{" "}
-          <strong>todas las marcas</strong> (iPhone, Samsung, Motorola, Xiaomi y
-          más).
-        </p>
-
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <Link
-            href="/presupuesto-reparacion#solicitar-presupuesto"
-            className="rounded-full bg-primary px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
-          >
-            Pedir presupuesto
-          </Link>
-          <Link
-            href="/contacto"
-            className="rounded-full border border-primary/40 px-8 py-4 text-base font-semibold text-primary transition hover:bg-primary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary dark:border-primary/60 dark:text-primary/80"
-          >
-            Ver contacto y ubicación
-          </Link>
+      <header className="relative overflow-hidden rounded-3xl border border-white/15 bg-slate-900 p-8 text-white shadow-2xl md:p-12">
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-[radial-gradient(circle_at_14%_14%,rgba(14,165,233,0.32),transparent_40%),radial-gradient(circle_at_86%_86%,rgba(99,102,241,0.25),transparent_38%)]"
+        />
+        <div className="relative z-10 mx-auto max-w-4xl text-center">
+          <p className="inline-flex rounded-full border border-white/35 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/90">
+            Servicios de alto intento local
+          </p>
+          <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
+            Reparaciones de celulares en CABA
+          </h1>
+          <p className="mt-5 text-lg leading-relaxed text-slate-100/90">
+            Taller en Recoleta con atencion para toda CABA. Trabajamos iPhone,
+            Samsung, Motorola, Xiaomi y mas, con diagnostico tecnico y garantia
+            por escrito.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Link
+              href="/presupuesto-reparacion#solicitar-presupuesto"
+              className="rounded-full bg-white px-8 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
+            >
+              Pedir presupuesto
+            </Link>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-white/35 px-8 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+            >
+              WhatsApp directo
+            </a>
+            <Link
+              href="/sucursales/caba/recoleta"
+              className="rounded-full border border-white/35 px-8 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+            >
+              Ver sucursal
+            </Link>
+          </div>
         </div>
       </header>
 
-      <section className="mt-12 grid gap-6 md:grid-cols-2">
+      <section className="mt-10 grid gap-4 md:grid-cols-3">
+        <article className="rounded-2xl border border-white/15 bg-white/5 p-5 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
+          <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-white">
+            <FaTools className="text-primary" />
+            Diagnostico real
+          </h2>
+          <p className="mt-2 text-slate-600 dark:text-slate-300">
+            Confirmamos la falla antes de presupuestar para evitar cambios innecesarios.
+          </p>
+        </article>
+        <article className="rounded-2xl border border-white/15 bg-white/5 p-5 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
+          <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-white">
+            <FaStopwatch className="text-primary" />
+            Tiempos claros
+          </h2>
+          <p className="mt-2 text-slate-600 dark:text-slate-300">
+            Te informamos plazos estimados segun modelo, stock y complejidad tecnica.
+          </p>
+        </article>
+        <article className="rounded-2xl border border-white/15 bg-white/5 p-5 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
+          <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-white">
+            <FaShieldAlt className="text-primary" />
+            Garantia por escrito
+          </h2>
+          <p className="mt-2 text-slate-600 dark:text-slate-300">
+            Cada reparacion incluye condiciones de cobertura explicadas de forma simple.
+          </p>
+        </article>
+      </section>
+
+      <section className="mt-10 grid gap-6 md:grid-cols-2">
         {REPAIR_SERVICES.map((service) => (
           <Link
             key={service.href}
@@ -121,41 +180,44 @@ export default function ReparacionesPage() {
             <h2 className="text-2xl font-semibold text-slate-900 transition group-hover:text-primary dark:text-white">
               {service.title}
             </h2>
-            <p className="mt-3 text-slate-600 dark:text-slate-300">
-              {service.description}
-            </p>
-            <p className="mt-6 text-sm font-semibold text-primary">
-              Ver servicio →
-            </p>
+            <p className="mt-3 text-slate-600 dark:text-slate-300">{service.description}</p>
+            <p className="mt-6 text-sm font-semibold text-primary">Ver servicio →</p>
           </Link>
         ))}
       </section>
 
-      <section className="mt-12 rounded-2xl border border-white/15 bg-white/5 p-8 text-center shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
+      <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 text-center shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          ¿Querés un presupuesto hoy?
+          Queres resolverlo hoy?
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">
-          Contanos marca, modelo y la falla. Te respondemos rápido con opciones
-          y tiempos estimados.
+          Contanos marca, modelo y falla. Te respondemos rapido con opciones y
+          tiempos estimados.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-4">
           <Link
             href="/presupuesto-reparacion#solicitar-presupuesto"
-            className="rounded-full bg-secondary px-8 py-4 font-semibold text-white shadow-lg transition hover:bg-secondary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+            className="rounded-full bg-secondary px-8 py-4 font-semibold text-white shadow-lg transition hover:bg-secondary/90"
           >
             Ir al formulario
           </Link>
           <a
-            href="https://wa.me/5491151034595?text=Hola%21%20Quiero%20pedir%20un%20presupuesto%20de%20reparaci%C3%B3n%20en%20CABA."
+            href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border border-secondary px-8 py-4 font-semibold text-secondary transition hover:bg-secondary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+            className="rounded-full border border-secondary px-8 py-4 font-semibold text-secondary transition hover:bg-secondary/10"
           >
             WhatsApp directo
           </a>
         </div>
       </section>
+
+      <StickyLocalCta
+        whatsappUrl={whatsappUrl}
+        budgetHref="/presupuesto-reparacion#solicitar-presupuesto"
+        phoneHref="tel:+541151034595"
+        primaryLabel="Cotizar"
+      />
 
       <script
         type="application/ld+json"
@@ -166,7 +228,7 @@ export default function ReparacionesPage() {
             "@id": `${SITE_URL}/reparaciones#collection`,
             name: "Reparaciones de celulares en CABA",
             url: `${SITE_URL}/reparaciones`,
-            about: "Reparación de celulares en Ciudad Autónoma de Buenos Aires (CABA)",
+            about: "Reparacion de celulares en Ciudad Autonoma de Buenos Aires",
             hasPart: REPAIR_SERVICES.map((s) => ({
               "@type": "WebPage",
               name: s.title,
@@ -178,4 +240,3 @@ export default function ReparacionesPage() {
     </section>
   );
 }
-

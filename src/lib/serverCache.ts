@@ -22,8 +22,10 @@ export async function fetchWithCache<T>(key: string, fetcher: () => Promise<T>, 
   return value;
 }
 
-export default {
+const serverCache = {
   getCache,
   setCache,
   fetchWithCache,
 };
+
+export default serverCache;

@@ -3,10 +3,10 @@ import ServiceLandingPage, {
 } from "../serviceLanding";
 import { SERVICE_CONFIGS } from "../serviceConfigs";
 
-const config = SERVICE_CONFIGS["cambio-bateria-caba"];
+const config = SERVICE_CONFIGS["cambio-pin-carga-caba"];
 
 export const metadata = buildServiceMetadata(config);
 
-export default function CambioBateriaCabaPage() {
+export default function CambioPinCargaCabaPage() {
   return <ServiceLandingPage config={config} />;
 }

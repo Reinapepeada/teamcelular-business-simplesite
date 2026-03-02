@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
     title: {
         default: "Team Celular | Servicio Técnico de Celulares en Buenos Aires",
-        template: "%s | Team Celular",
+        template: "%s",
     },
     description:
         "Servicio técnico especializado en celulares en Recoleta, CABA. Repuestos originales, microelectrónica avanzada y garantía escrita. Presupuestos sin cargo.",

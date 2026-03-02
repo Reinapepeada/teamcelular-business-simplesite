@@ -27,7 +27,7 @@ const footerSections = {
     },
     {
       name: "Reparacion de celulares",
-      href: "/presupuesto-reparacion",
+      href: "/reparaciones",
       icon: FaMobileAlt,
     },
     {
@@ -60,6 +60,8 @@ const footerSections = {
     },
   ],
   recursos: [
+    { name: "Reparaciones", href: "/reparaciones" },
+    { name: "Sucursales", href: "/sucursales" },
     { name: "Tienda online", href: "/tienda" },
     { name: "Solicitar presupuesto", href: "/presupuesto-reparacion" },
     { name: "Sobre nosotros", href: "/sobrenosotros" },
@@ -71,7 +73,15 @@ export default function FooterNUI() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative mt-16 w-full overflow-hidden bg-footer-background text-white">
+    <footer className="relative mt-16 w-full overflow-hidden border-t border-white/10 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(14,165,233,0.2),transparent_34%),radial-gradient(circle_at_86%_84%,rgba(16,185,129,0.18),transparent_36%)]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(148,163,184,0.14)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.14)_1px,transparent_1px)] [background-size:34px_34px]"
+      />
       <div className="relative z-10 container mx-auto px-4 py-12">
         <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col space-y-4">

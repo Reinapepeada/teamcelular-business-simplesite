@@ -278,10 +278,12 @@ export default function BatteryReplacementGuide() {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {batterySignals.map((signal) => {
               const Icon = signal.Icon;
-              const severityColor = 
-                signal.severity === "Crítica" ? "text-red-500" :
-                signal.severity === "Alta" ? "text-orange-500" :
-                "text-yellow-500";
+              const severityStyles =
+                signal.severity === "Crítica"
+                  ? { text: "text-red-500", bg: "bg-red-500/10" }
+                  : signal.severity === "Alta"
+                  ? { text: "text-orange-500", bg: "bg-orange-500/10" }
+                  : { text: "text-yellow-500", bg: "bg-yellow-500/10" };
               
               return (
                 <div
@@ -289,10 +291,10 @@ export default function BatteryReplacementGuide() {
                   className="rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
                 >
                   <div className="mb-4 flex items-center justify-between">
-                    <div className={`flex h-12 w-12 items-center justify-center rounded-full bg-${severityColor}/10 text-2xl ${severityColor}`}>
+                    <div className={`flex h-12 w-12 items-center justify-center rounded-full text-2xl ${severityStyles.bg} ${severityStyles.text}`}>
                       <Icon />
                     </div>
-                    <span className={`rounded-full px-3 py-1 text-xs font-semibold ${severityColor}`}>
+                    <span className={`rounded-full px-3 py-1 text-xs font-semibold ${severityStyles.text}`}>
                       {signal.severity}
                     </span>
                   </div>
@@ -477,3 +479,4 @@ export default function BatteryReplacementGuide() {
     </div>
   );
 }
+

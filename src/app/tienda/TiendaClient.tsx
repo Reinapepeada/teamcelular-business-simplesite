@@ -75,7 +75,13 @@ export default function TiendaClient({
         setProducts(response.products || []);
       })
       .finally(() => setIsLoading(false));
-  }, [paramsString, currentPage, initialQuery, initialPagination.page]);
+  }, [
+    paramsString,
+    currentPage,
+    initialQuery,
+    initialPagination.page,
+    productsPagination.page,
+  ]);
 
   const totalPages = productsPagination.total ? productsPagination.pages : 1;
 

@@ -19,12 +19,14 @@ import ResumeCartNav from "../cart/resume_cart_nav";
 
 const MAIN_LINKS = [
     { href: "/arreglo-de-celulares", label: "Arreglo" },
+    { href: "/reparaciones", label: "Reparaciones" },
     { href: "/tienda", label: "Tienda" },
     { href: "/guias", label: "Guias" },
-    { href: "/zonas", label: "Zonas" },
+    { href: "/sucursales", label: "Sucursales" },
 ];
 
 const SECONDARY_LINKS = [
+    { href: "/zonas", label: "Zonas" },
     { href: "/contacto", label: "Contacto" },
     { href: "/sobrenosotros", label: "Sobre nosotros" },
 ];
