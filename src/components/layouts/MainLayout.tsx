@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import NavbarNUI from "@/components/navbars/NavbarNUI";
 import FooterNUI from "@/components/footer/FooterNUI";
-import StickyRepairCta from "@/components/cta/StickyRepairCta";
 
 const BackgroundBeams = dynamic(
     () => import("@/components/animations/BackgroundMeteors"),
@@ -42,7 +41,6 @@ export default function MainLayout({
             <NavbarNUI />
             <main className="flex min-h-screen justify-center">{children}</main>
             <FooterNUI />
-            <StickyRepairCta />
             {showDesktopEffects ? <BackgroundBeams /> : null}
         </>
     );
