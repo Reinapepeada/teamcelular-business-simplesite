@@ -1,87 +1,109 @@
-import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
-import { 
-  FaApple, 
-  FaMicrochip, 
-  FaBuilding, 
-  FaTools,
+import {
+  FaApple,
   FaArrowRight,
-  FaBookOpen,
-  FaClock,
-  FaChartLine,
   FaBatteryFull,
-  FaMobileAlt
+  FaBookOpen,
+  FaBuilding,
+  FaChartLine,
+  FaClock,
+  FaMicrochip,
+  FaMobileAlt,
+  FaTools,
 } from "react-icons/fa";
+import { SiSamsung, SiXiaomi } from "react-icons/si";
 
 const ARTICLES = [
   {
-    title: "Reparación de iPhone en Buenos Aires",
+    title: "Reparacion de iPhone en Buenos Aires",
     description:
-      "Proceso detallado para diagnosticar y reparar iPhone con repuestos originales y garantía escrita.",
+      "Service tecnico premium para iPhone con diagnostico claro, repuestos certificados y garantia escrita.",
     href: "/guias/reparacion-iphone-buenos-aires",
-    category: "Reparaciones Apple",
-    readingTime: "5 min",
+    category: "Landing por marca",
+    readingTime: "6 min",
     Icon: FaApple,
     datePublished: "2024-01-15",
-    keywords: ["reparación iPhone", "Apple", "CABA", "repuestos originales"],
+    keywords: ["reparacion iPhone", "service Apple", "CABA", "true tone"],
   },
   {
-    title: "Microelectrónica y reballing profesional",
+    title: "Reparacion de Samsung Galaxy en Buenos Aires",
     description:
-      "Cómo gestionamos reparaciones avanzadas en placas y chips para recuperar equipos complejos.",
+      "Guia completa para Galaxy S, A y Z Fold: pantalla AMOLED, bateria, puerto USB-C y placa logica.",
+    href: "/guias/reparacion-samsung-buenos-aires",
+    category: "Landing por marca",
+    readingTime: "6 min",
+    Icon: SiSamsung,
+    datePublished: "2026-03-12",
+    keywords: ["reparacion Samsung", "Galaxy S", "Galaxy A", "service Samsung"],
+  },
+  {
+    title: "Reparacion de Xiaomi, Redmi y POCO",
+    description:
+      "Diagnostico para equipos Xiaomi con foco en pantalla, bateria, carga rapida y microelectronica.",
+    href: "/guias/reparacion-xiaomi-buenos-aires",
+    category: "Landing por marca",
+    readingTime: "6 min",
+    Icon: SiXiaomi,
+    datePublished: "2026-03-12",
+    keywords: ["reparacion Xiaomi", "reparacion Redmi", "service POCO", "carga rapida"],
+  },
+  {
+    title: "Microelectronica y reballing profesional",
+    description:
+      "Como abordamos reparaciones avanzadas de placa y chips para recuperar equipos complejos.",
     href: "/guias/microelectronica-reballing-caba",
     category: "Laboratorio",
     readingTime: "6 min",
     Icon: FaMicrochip,
     datePublished: "2024-02-20",
-    keywords: ["microelectrónica", "reballing", "BGA", "soldadura"],
+    keywords: ["microelectronica", "reballing", "BGA", "placa logica"],
   },
   {
-    title: "Soporte técnico para empresas y gremios",
+    title: "Soporte tecnico para empresas y gremios",
     description:
-      "Beneficios de tercerizar el mantenimiento de dispositivos móviles con SLAs claros.",
+      "Beneficios de tercerizar mantenimiento de dispositivos moviles con SLAs y trazabilidad.",
     href: "/guias/soporte-empresas-servicio-tecnico",
     category: "Empresas",
     readingTime: "4 min",
     Icon: FaBuilding,
     datePublished: "2024-03-10",
-    keywords: ["servicio técnico empresas", "SLA", "soporte corporativo"],
+    keywords: ["soporte tecnico empresas", "SLA", "servicio corporativo"],
   },
   {
     title: "Mantenimiento preventivo de celulares",
     description:
-      "Buenas prácticas para extender la vida útil de smartphones y tablets con asistencia profesional.",
+      "Buenas practicas para extender vida util de smartphones y reducir fallas recurrentes.",
     href: "/guias/mantenimiento-preventivo-celulares",
-    category: "Tips de cuidado",
+    category: "Cuidado",
     readingTime: "4 min",
     Icon: FaTools,
     datePublished: "2024-04-05",
-    keywords: ["mantenimiento", "preventivo", "cuidado celular", "batería"],
+    keywords: ["mantenimiento celular", "preventivo", "vida util"],
   },
   {
-    title: "Cambio de batería de celular",
+    title: "Cambio de bateria de celular",
     description:
-      "Guía completa sobre reemplazo de batería: tipos, señales de deterioro, proceso profesional y garantía.",
+      "Guia sobre deterioro de bateria, criterios de reemplazo y ventajas de piezas certificadas.",
     href: "/guias/cambio-bateria-celular",
     category: "Reparaciones",
     readingTime: "5 min",
     Icon: FaBatteryFull,
     datePublished: "2024-11-30",
-    keywords: ["cambio batería", "batería original", "batería certificada", "garantía"],
+    keywords: ["cambio bateria", "bateria certificada", "autonomia celular"],
   },
   {
-    title: "Reparación de pantalla de celular",
+    title: "Reparacion de pantalla de celular",
     description:
-      "Todo sobre cambio de pantalla: displays OLED originales, True Tone, Face ID y tipos de daños.",
+      "Todo sobre cambio de pantalla, tipos de panel, calidad de repuestos y control post reparacion.",
     href: "/guias/reparacion-pantalla-celular",
     category: "Reparaciones",
     readingTime: "6 min",
     Icon: FaMobileAlt,
     datePublished: "2024-11-30",
-    keywords: ["cambio pantalla", "display OLED", "True Tone", "pantalla original"],
+    keywords: ["cambio pantalla", "display OLED", "pantalla celular"],
   },
 ];
 
@@ -89,6 +111,15 @@ const articleVisuals: Record<string, { cover: string; tone: string }> = {
   "/guias/reparacion-iphone-buenos-aires": {
     cover: "/images/celuPorDentro.webp",
     tone: "from-sky-500/55 via-sky-500/15 to-transparent",
+  },
+  "/guias/reparacion-samsung-buenos-aires": {
+    cover:
+      "/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp",
+    tone: "from-blue-600/55 via-blue-500/15 to-transparent",
+  },
+  "/guias/reparacion-xiaomi-buenos-aires": {
+    cover: "/images/dispositivoshdpro.webp",
+    tone: "from-emerald-600/55 via-emerald-500/15 to-transparent",
   },
   "/guias/microelectronica-reballing-caba": {
     cover: "/images/teamcelular.webp",
@@ -99,7 +130,7 @@ const articleVisuals: Record<string, { cover: string; tone: string }> = {
     tone: "from-emerald-500/55 via-emerald-500/15 to-transparent",
   },
   "/guias/mantenimiento-preventivo-celulares": {
-    cover: "/images/dispositivoshdpro.webp",
+    cover: "/images/equipoCall.webp",
     tone: "from-cyan-500/55 via-cyan-500/15 to-transparent",
   },
   "/guias/cambio-bateria-celular": {
@@ -107,24 +138,24 @@ const articleVisuals: Record<string, { cover: string; tone: string }> = {
     tone: "from-green-500/60 via-green-500/15 to-transparent",
   },
   "/guias/reparacion-pantalla-celular": {
-    cover: "/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp",
-    tone: "from-blue-600/55 via-blue-500/15 to-transparent",
+    cover: "/videos/pexels-mart-production-7709089.jpg",
+    tone: "from-indigo-600/55 via-indigo-500/15 to-transparent",
   },
 };
 
 export const metadata: Metadata = {
-  title: "Guías Técnicas de Reparación de Celulares | Centro de Conocimiento Team Celular",
+  title: "Guias Tecnicas de Reparacion de Celulares | Team Celular",
   description:
-    "6 guías profesionales: reparación iPhone, cambio de batería, pantalla, microelectrónica, reballing BGA, soporte corporativo y mantenimiento preventivo. Expertos con +10 años en CABA.",
+    "8 guias tecnicas con enfoque comercial y real: iPhone, Samsung, Xiaomi, bateria, pantalla, microelectronica y soporte para empresas en CABA.",
   keywords: [
-    "guías reparación celulares",
-    "cambio batería celular",
+    "guias reparacion celulares",
+    "reparacion iPhone buenos aires",
+    "reparacion Samsung galaxy",
+    "reparacion Xiaomi redmi poco",
+    "cambio bateria celular",
     "cambio pantalla celular",
-    "reparación iPhone Buenos Aires",
-    "microelectrónica móviles",
-    "mantenimiento preventivo smartphones",
-    "soporte técnico empresas",
-    "reballing BGA",
+    "microelectronica moviles",
+    "soporte tecnico empresas",
   ],
   alternates: {
     canonical: "https://teamcelular.com/guias",
@@ -138,15 +169,15 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   openGraph: {
-    title: "Centro de Conocimiento | 6 Guías Técnicas Team Celular",
+    title: "Centro de Guias Tecnicas | Team Celular",
     description:
-      "Aprende de expertos: reparación iPhone, cambio de batería y pantalla, microelectrónica avanzada y soporte corporativo en Buenos Aires.",
+      "Aprende y cotiza reparaciones reales para iPhone, Samsung y Xiaomi con enfoque tecnico y comercial en CABA.",
     type: "website",
     url: "https://teamcelular.com/guias",
     locale: "es_AR",
@@ -155,14 +186,15 @@ export const metadata: Metadata = {
         url: "https://teamcelular.com/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "Team Celular - Guías Técnicas",
+        alt: "Guias tecnicas Team Celular",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Guías Técnicas de Reparación | Team Celular",
-    description: "Aprende de expertos en reparación de celulares en Buenos Aires",
+    title: "Guias de Reparacion de Celulares | Team Celular",
+    description:
+      "Contenido tecnico para usuarios y empresas: iPhone, Samsung, Xiaomi y microelectronica.",
     images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
@@ -174,93 +206,103 @@ export default function GuidesPage() {
         <BreadcrumbJsonLd
           items={[
             { name: "Inicio", url: "https://teamcelular.com/" },
-            { name: "Guías", url: "https://teamcelular.com/guias" },
+            { name: "Guias", url: "https://teamcelular.com/guias" },
           ]}
         />
-        {/* Breadcrumbs */}
+
         <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-          <Link href="/" className="hover:text-primary transition">
+          <Link href="/" className="transition hover:text-primary">
             Inicio
           </Link>
           <span>/</span>
-          <span className="text-slate-900 dark:text-white font-semibold">Guías</span>
+          <span className="font-semibold text-slate-900 dark:text-white">
+            Guias
+          </span>
         </nav>
 
-        {/* Hero Section */}
         <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-16">
           <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-primary via-secondary to-primary shadow-2xl">
             <FaBookOpen className="text-5xl text-white" />
           </div>
           <div className="inline-flex items-center gap-3 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-primary/90 dark:border-primary/40 dark:bg-primary/15 dark:text-primary/70">
-            <span className="h-2 w-2 rounded-full bg-primary animate-pulse" aria-hidden />
-            Centro de Conocimiento
+            <span
+              className="h-2 w-2 animate-pulse rounded-full bg-primary"
+              aria-hidden
+            />
+            Hub de contenido tecnico y comercial
           </div>
           <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-            Guías Técnicas de Reparación de Celulares
+            Guias Tecnicas de Reparacion de Celulares
           </h1>
           <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
-            Aprende con <strong className="text-primary">Team Celular</strong>: procesos certificados de reparación,
-            microelectrónica avanzada y mantenimiento preventivo. Conocimiento profesional basado en más de 10 años
-            de experiencia en Buenos Aires.
+            Guias practicas de reparacion por marca, fallas frecuentes y
+            criterios tecnicos para tomar decisiones con informacion real antes
+            de cotizar.
           </p>
-          
-          {/* Stats */}
-          <div className="grid gap-6 md:grid-cols-3 mt-8">
+
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
-              <div className="flex items-center justify-center mb-3">
+              <div className="mb-3 flex items-center justify-center">
                 <FaChartLine className="text-3xl text-primary" />
               </div>
               <div className="text-3xl font-bold text-primary">10+</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">Años de experiencia</div>
+              <div className="text-sm text-slate-600 dark:text-slate-400">
+                Anos de experiencia
+              </div>
             </div>
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
-              <div className="flex items-center justify-center mb-3">
+              <div className="mb-3 flex items-center justify-center">
                 <FaTools className="text-3xl text-secondary" />
               </div>
-              <div className="text-3xl font-bold text-secondary">{ARTICLES.length}</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">Guías disponibles</div>
+              <div className="text-3xl font-bold text-secondary">
+                {ARTICLES.length}
+              </div>
+              <div className="text-sm text-slate-600 dark:text-slate-400">
+                Guias disponibles
+              </div>
             </div>
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
-              <div className="flex items-center justify-center mb-3">
+              <div className="mb-3 flex items-center justify-center">
                 <FaClock className="text-3xl text-primary" />
               </div>
-              <div className="text-3xl font-bold text-primary">24h</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">Tiempo de respuesta</div>
+              <div className="text-3xl font-bold text-primary">24 h</div>
+              <div className="text-sm text-slate-600 dark:text-slate-400">
+                Respuesta de diagnostico
+              </div>
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-4 mt-8">
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link
               href="/presupuesto-reparacion"
               className="rounded-full bg-primary px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
             >
-              Solicitar asesoría inmediata
+              Solicitar asesoria inmediata
             </Link>
             <Link
               href="/contacto"
               className="rounded-full border-2 border-primary px-8 py-4 text-lg font-semibold text-primary transition hover:bg-primary/10"
             >
-              Conversar con un ingeniero
+              Hablar con un tecnico
             </Link>
           </div>
         </header>
 
-        {/* Articles Grid */}
         <section className="space-y-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-3">
-              Explora nuestras guías especializadas
+            <h2 className="mb-3 text-3xl font-bold text-slate-900 dark:text-white">
+              Explora nuestras guias especializadas
             </h2>
             <p className="text-lg text-slate-600 dark:text-slate-300">
-              Contenido técnico profesional para usuarios avanzados y empresas
+              Contenido tecnico y util para usuarios y empresas.
             </p>
           </div>
-          
+
           <div className="grid gap-8 md:grid-cols-2">
             {ARTICLES.map((article) => {
               const Icon = article.Icon;
               const visual = articleVisuals[article.href] ?? {
-                cover: "/images/teamcelular.webp",
+                cover: "/images/fondofooter.webp",
                 tone: "from-primary/60 via-primary/20 to-transparent",
               };
               const updatedDate = new Intl.DateTimeFormat("es-AR", {
@@ -294,7 +336,7 @@ export default function GuidesPage() {
                       {article.readingTime}
                     </div>
                   </div>
-                  
+
                   <div className="relative space-y-4">
                     <div className="flex items-center justify-between">
                       <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-3xl text-white shadow-lg">
@@ -307,19 +349,19 @@ export default function GuidesPage() {
                         {updatedDate}
                       </time>
                     </div>
-                    
+
                     <span className="inline-block rounded-full bg-secondary/20 px-3 py-1 text-xs font-semibold text-secondary">
                       {article.category}
                     </span>
-                    
+
                     <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
                       {article.title}
                     </h3>
-                    
+
                     <p className="leading-relaxed text-slate-700 dark:text-slate-300">
                       {article.description}
                     </p>
-                    
+
                     <div className="flex flex-wrap gap-2 pt-2">
                       {article.keywords.slice(0, 3).map((keyword) => (
                         <span
@@ -331,12 +373,12 @@ export default function GuidesPage() {
                       ))}
                     </div>
                   </div>
-                  
+
                   <Link
                     href={article.href}
                     className="mt-6 inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg transition group-hover:gap-3 group-hover:bg-primary dark:bg-primary dark:group-hover:bg-secondary"
                   >
-                    Leer guía completa
+                    Leer guia completa
                     <FaArrowRight />
                   </Link>
                 </article>
@@ -345,13 +387,13 @@ export default function GuidesPage() {
           </div>
         </section>
 
-        {/* CTA Section */}
         <section className="rounded-2xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:from-slate-900/40 dark:via-slate-900/30 dark:to-slate-900/40 md:p-16">
           <h2 className="mb-4 text-3xl font-bold text-slate-900 dark:text-white">
-            ¿Necesitás ayuda técnica especializada?
+            Necesitas un diagnostico profesional?
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
-            Nuestro equipo está disponible para consultas, diagnósticos y reparaciones profesionales en CABA.
+            Nuestro equipo responde consultas y cotizaciones para iPhone,
+            Samsung y Xiaomi con enfoque tecnico y comercial.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
@@ -361,7 +403,7 @@ export default function GuidesPage() {
               Contactar expertos
             </Link>
             <Link
-              href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20necesito%20asesoría%20técnica"
+              href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20quiero%20asesoria%20tecnica%20para%20reparar%20mi%20celular"
               className="rounded-full border-2 border-secondary px-8 py-4 text-lg font-semibold text-secondary transition hover:bg-secondary/10"
             >
               WhatsApp directo
@@ -369,27 +411,27 @@ export default function GuidesPage() {
           </div>
         </section>
 
-        {/* Schema.org structured data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "CollectionPage",
-              "name": "Guías Técnicas de Reparación de Celulares",
-              "description": "Centro de conocimiento con guías profesionales sobre reparación de iPhone, microelectrónica, reballing BGA y soporte corporativo.",
-              "provider": { "@id": "https://teamcelular.com#localbusiness" },
-              "hasPart": ARTICLES.map((article) => ({
+              name: "Guias tecnicas de reparacion de celulares",
+              description:
+                "Centro de contenido de Team Celular con guias de reparacion por marca, microelectronica y soporte corporativo.",
+              provider: { "@id": "https://teamcelular.com#localbusiness" },
+              hasPart: ARTICLES.map((article) => ({
                 "@type": "Article",
-                "headline": article.title,
-                "description": article.description,
-                "url": `https://teamcelular.com${article.href}`,
-                "datePublished": article.datePublished,
-                "author": {
+                headline: article.title,
+                description: article.description,
+                url: `https://teamcelular.com${article.href}`,
+                datePublished: article.datePublished,
+                author: {
                   "@type": "Organization",
-                  "name": "Team Celular",
+                  name: "Team Celular",
                 },
-                "keywords": article.keywords.join(", "),
+                keywords: article.keywords.join(", "),
               })),
             }),
           }}

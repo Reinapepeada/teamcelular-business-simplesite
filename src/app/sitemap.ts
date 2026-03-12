@@ -50,7 +50,7 @@ async function getAllProductsForSitemap(): Promise<Product[]> {
   }
 }
 
-// Páginas principales con alta prioridad
+// Paginas principales con alta prioridad
 const mainPages = [
   { path: "", priority: 1.0, changeFreq: "weekly" as const },
   { path: "arreglo-de-celulares", priority: 0.95, changeFreq: "weekly" as const },
@@ -81,10 +81,12 @@ const mainPages = [
   { path: "privacidad", priority: 0.3, changeFreq: "yearly" as const },
 ];
 
-// Guías y contenido educativo
+// Guias y contenido educativo
 const guidePages = [
   { path: "guias", priority: 0.8, changeFreq: "weekly" as const },
   { path: "guias/reparacion-iphone-buenos-aires", priority: 0.85, changeFreq: "monthly" as const },
+  { path: "guias/reparacion-samsung-buenos-aires", priority: 0.84, changeFreq: "monthly" as const },
+  { path: "guias/reparacion-xiaomi-buenos-aires", priority: 0.84, changeFreq: "monthly" as const },
   { path: "guias/microelectronica-reballing-caba", priority: 0.8, changeFreq: "monthly" as const },
   { path: "guias/soporte-empresas-servicio-tecnico", priority: 0.75, changeFreq: "monthly" as const },
   { path: "guias/mantenimiento-preventivo-celulares", priority: 0.75, changeFreq: "monthly" as const },

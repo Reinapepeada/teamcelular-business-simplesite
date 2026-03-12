@@ -9,12 +9,23 @@ import {
   FaMicrochip,
   FaMobileAlt,
 } from "react-icons/fa";
+import { SiSamsung, SiXiaomi } from "react-icons/si";
 
 const quickGuideLinks = [
   {
     href: "/guias/reparacion-iphone-buenos-aires",
     label: "iPhone",
     Icon: FaApple,
+  },
+  {
+    href: "/guias/reparacion-samsung-buenos-aires",
+    label: "Samsung",
+    Icon: SiSamsung,
+  },
+  {
+    href: "/guias/reparacion-xiaomi-buenos-aires",
+    label: "Xiaomi",
+    Icon: SiXiaomi,
   },
   {
     href: "/guias/reparacion-pantalla-celular",
@@ -66,7 +77,7 @@ export default function GuidesLayout({
               Guias Team Celular
             </p>
             <p className="text-sm text-slate-700 dark:text-slate-300">
-              Guias practicas con procesos reales de laboratorio, tiempos y garantia.
+              Guias por marca y por falla con procesos reales, tiempos y garantia.
             </p>
           </div>
 
