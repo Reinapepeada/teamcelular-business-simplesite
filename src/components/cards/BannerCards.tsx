@@ -92,7 +92,7 @@ export default function BannerCards() {
                 <Image
                     alt="Asesoramiento personalizado del equipo"
                     className={mediaBase}
-                    src="/images/equipoCall.webp"
+                    src="/images/card_atencion_cliente_home.webp"
                     width={900}
                     height={900}
                     quality={75}

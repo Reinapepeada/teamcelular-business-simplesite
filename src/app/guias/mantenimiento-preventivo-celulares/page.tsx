@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/opengraph-image.png",
+        url: "https://teamcelular.com/images/guia_mantenimiento.webp",
         width: 1200,
         height: 630,
         alt: "Mantenimiento Preventivo de Celulares - Team Celular",
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mantenimiento Preventivo | Team Celular",
     description: "Aprende a cuidar tu smartphone con rutinas profesionales",
-    images: ["https://teamcelular.com/opengraph-image.png"],
+    images: ["https://teamcelular.com/images/guia_mantenimiento.webp"],
   },
 };
 
@@ -193,7 +193,7 @@ export default function PreventiveMaintenanceGuide() {
         publishedTime="2024-04-05T00:00:00Z"
         modifiedTime="2025-12-11T00:00:00Z"
         authorName="Team Celular"
-        image="https://teamcelular.com/opengraph-image.png"
+        image="https://teamcelular.com/images/guia_mantenimiento.webp"
         url={PAGE_URL}
       />
       <article className="w-full max-w-6xl space-y-16">
@@ -533,7 +533,7 @@ export default function PreventiveMaintenanceGuide() {
               "@type": "HowTo",
               "name": "Mantenimiento Preventivo de Celulares",
               "description": "Guía completa de mantenimiento preventivo para smartphones con checklist profesional y consejos de expertos.",
-              "image": "https://teamcelular.com/opengraph-image.png",
+              "image": "https://teamcelular.com/images/guia_mantenimiento.webp",
               "totalTime": "PT6M",
               "supply": ["Smartphone", "Paño de microfibra", "Software de diagnóstico"],
               "tool": ["Aire comprimido", "IPA 99%", "Microscopio (para servicio profesional)"],

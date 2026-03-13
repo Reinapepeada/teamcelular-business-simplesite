@@ -35,12 +35,12 @@ export default function TiendaClient({
 
   const searchParams = useSearchParams();
   const router = useRouter();
-  const paramsString = useMemo(() => searchParams.toString(), [searchParams]);
+  const paramsString = useMemo(() => searchParams?.toString() ?? "", [searchParams]);
   const previousParamsRef = useRef<string | null>(null);
   const hasHydratedRef = useRef(false);
 
   const currentPage = useMemo(() => {
-    const pageValue = Number(searchParams.get("page") || initialPagination.page || 1);
+    const pageValue = Number(searchParams?.get("page") || initialPagination.page || 1);
     return Number.isFinite(pageValue) && pageValue > 0 ? pageValue : 1;
   }, [searchParams, initialPagination.page]);
 

@@ -56,11 +56,20 @@ export const metadata: Metadata = {
     locale: "es_AR",
     url: "https://teamcelular.com/guias/cambio-bateria-celular",
     siteName: "Team Celular",
+    images: [
+      {
+        url: "https://teamcelular.com/images/guia_cambio_bateria.webp",
+        width: 1200,
+        height: 630,
+        alt: "Cambio de bateria de celular en Team Celular",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Cambio de Batería Celular Buenos Aires",
     description: "Baterías originales con garantía 3 meses. Service express 1-2hs.",
+    images: ["https://teamcelular.com/images/guia_cambio_bateria.webp"],
   },
   alternates: {
     canonical: "https://teamcelular.com/guias/cambio-bateria-celular",
@@ -190,7 +199,7 @@ export default function BatteryReplacementGuide() {
         publishedTime="2024-11-30T00:00:00Z"
         modifiedTime="2025-12-11T00:00:00Z"
         authorName="Team Celular"
-        image="https://teamcelular.com/opengraph-image.png"
+        image="https://teamcelular.com/images/guia_cambio_bateria.webp"
         url="https://teamcelular.com/guias/cambio-bateria-celular"
       />
       <BreadcrumbJsonLd

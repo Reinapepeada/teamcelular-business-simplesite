@@ -56,11 +56,20 @@ export const metadata: Metadata = {
     locale: "es_AR",
     url: "https://teamcelular.com/guias/reparacion-pantalla-celular",
     siteName: "Team Celular",
+    images: [
+      {
+        url: "https://teamcelular.com/images/guia_cambio_modulo.webp",
+        width: 1200,
+        height: 630,
+        alt: "Cambio de pantalla de celular en Team Celular",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Cambio de Pantalla Celular Buenos Aires",
     description: "Displays OLED originales con True Tone. Garantía 3 meses. Service 2-4hs.",
+    images: ["https://teamcelular.com/images/guia_cambio_modulo.webp"],
   },
   alternates: {
     canonical: "https://teamcelular.com/guias/reparacion-pantalla-celular",
@@ -227,7 +236,7 @@ export default function ScreenReplacementGuide() {
         publishedTime="2024-11-30T00:00:00Z"
         modifiedTime="2025-12-11T00:00:00Z"
         authorName="Team Celular"
-        image="https://teamcelular.com/opengraph-image.png"
+        image="https://teamcelular.com/images/guia_cambio_modulo.webp"
         url="https://teamcelular.com/guias/reparacion-pantalla-celular"
       />
       <BreadcrumbJsonLd

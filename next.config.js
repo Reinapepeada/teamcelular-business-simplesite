@@ -27,6 +27,7 @@ module.exports = {
   reactStrictMode: true,
   poweredByHeader: false,
   images: {
+    qualities: [75, 82],
     remotePatterns: [
       {
         protocol: "https",

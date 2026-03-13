@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp",
+        url: "https://teamcelular.com/images/guia_samsung.webp",
         width: 1200,
         height: 630,
         alt: "Reparacion tecnica de Samsung Galaxy en Team Celular",
@@ -77,9 +77,7 @@ export const metadata: Metadata = {
     title: "Service Samsung en CABA | Team Celular",
     description:
       "Reparacion de Samsung Galaxy S, A y Z Fold con diagnostico tecnico y garantia.",
-    images: [
-      "https://teamcelular.com/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp",
-    ],
+    images: ["https://teamcelular.com/images/guia_samsung.webp"],
   },
 };
 
@@ -273,7 +271,7 @@ export default function SamsungRepairGuidePage() {
         publishedTime="2026-03-12T00:00:00Z"
         modifiedTime="2026-03-12T00:00:00Z"
         authorName="Team Celular"
-        image="https://teamcelular.com/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp"
+        image="https://teamcelular.com/images/guia_samsung.webp"
         url={PAGE_URL}
       />
 

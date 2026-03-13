@@ -107,39 +107,30 @@ const ARTICLES = [
   },
 ];
 
-const articleVisuals: Record<string, { cover: string; tone: string }> = {
+const articleVisuals: Record<string, { cover: string }> = {
   "/guias/reparacion-iphone-buenos-aires": {
-    cover: "/images/celuPorDentro.webp",
-    tone: "from-sky-500/55 via-sky-500/15 to-transparent",
+    cover: "/images/guia_iphone.webp",
   },
   "/guias/reparacion-samsung-buenos-aires": {
-    cover:
-      "/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp",
-    tone: "from-blue-600/55 via-blue-500/15 to-transparent",
+    cover: "/images/guia_samsung.webp",
   },
   "/guias/reparacion-xiaomi-buenos-aires": {
-    cover: "/images/dispositivoshdpro.webp",
-    tone: "from-emerald-600/55 via-emerald-500/15 to-transparent",
+    cover: "/images/guia_xiaomi.webp",
   },
   "/guias/microelectronica-reballing-caba": {
-    cover: "/images/teamcelular.webp",
-    tone: "from-violet-500/55 via-violet-500/15 to-transparent",
+    cover: "/images/guia_microelectronica.webp",
   },
   "/guias/soporte-empresas-servicio-tecnico": {
-    cover: "/images/empresaFamiliar.webp",
-    tone: "from-emerald-500/55 via-emerald-500/15 to-transparent",
+    cover: "/images/guia_corporativo.webp",
   },
   "/guias/mantenimiento-preventivo-celulares": {
-    cover: "/images/equipoCall.webp",
-    tone: "from-cyan-500/55 via-cyan-500/15 to-transparent",
+    cover: "/images/guia_mantenimiento.webp",
   },
   "/guias/cambio-bateria-celular": {
-    cover: "/images/cargadores.webp",
-    tone: "from-green-500/60 via-green-500/15 to-transparent",
+    cover: "/images/guia_cambio_bateria.webp",
   },
   "/guias/reparacion-pantalla-celular": {
-    cover: "/videos/pexels-mart-production-7709089.jpg",
-    tone: "from-indigo-600/55 via-indigo-500/15 to-transparent",
+    cover: "/images/guia_cambio_modulo.webp",
   },
 };
 
@@ -183,10 +174,10 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/opengraph-image.png",
+        url: "https://teamcelular.com/images/banner_guias.webp",
         width: 1200,
         height: 630,
-        alt: "Guias tecnicas Team Celular",
+        alt: "Centro de guias tecnicas Team Celular",
       },
     ],
   },
@@ -195,7 +186,7 @@ export const metadata: Metadata = {
     title: "Guias de Reparacion de Celulares | Team Celular",
     description:
       "Contenido tecnico para usuarios y empresas: iPhone, Samsung, Xiaomi y microelectronica.",
-    images: ["https://teamcelular.com/opengraph-image.png"],
+    images: ["https://teamcelular.com/images/banner_guias.webp"],
   },
 };
 
@@ -220,71 +211,120 @@ export default function GuidesPage() {
           </span>
         </nav>
 
-        <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-16">
-          <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-primary via-secondary to-primary shadow-2xl">
-            <FaBookOpen className="text-5xl text-white" />
-          </div>
-          <div className="inline-flex items-center gap-3 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-primary/90 dark:border-primary/40 dark:bg-primary/15 dark:text-primary/70">
-            <span
-              className="h-2 w-2 animate-pulse rounded-full bg-primary"
-              aria-hidden
-            />
-            Hub de contenido tecnico y comercial
-          </div>
-          <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-            Guias Tecnicas de Reparacion de Celulares
-          </h1>
-          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
-            Guias practicas de reparacion por marca, fallas frecuentes y
-            criterios tecnicos para tomar decisiones con informacion real antes
-            de cotizar.
-          </p>
+        <header className="relative overflow-hidden rounded-3xl border border-slate-200/80 bg-white/90 shadow-xl dark:border-white/10 dark:bg-slate-900/50">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.08),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.08),transparent_30%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.12),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.1),transparent_30%)]"
+          />
+          <div className="relative space-y-8 p-8 text-left md:p-12">
+            <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
+              <div className="space-y-4">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                    <FaBookOpen className="text-sm" />
+                    Guias Team Celular
+                  </span>
+                  <span className="rounded-full border border-slate-300/80 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700 dark:border-white/15 dark:bg-slate-950/70 dark:text-slate-200">
+                    Recoleta - CABA
+                  </span>
+                </div>
+                <div className="w-fit rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-600 dark:border-white/10 dark:bg-slate-950/60 dark:text-slate-300">
+                  Contenido tecnico con criterio comercial real
+                </div>
+              </div>
 
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
-              <div className="mb-3 flex items-center justify-center">
-                <FaChartLine className="text-3xl text-primary" />
-              </div>
-              <div className="text-3xl font-bold text-primary">10+</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">
-                Anos de experiencia
-              </div>
-            </div>
-            <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
-              <div className="mb-3 flex items-center justify-center">
-                <FaTools className="text-3xl text-secondary" />
-              </div>
-              <div className="text-3xl font-bold text-secondary">
-                {ARTICLES.length}
-              </div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">
-                Guias disponibles
-              </div>
-            </div>
-            <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
-              <div className="mb-3 flex items-center justify-center">
-                <FaClock className="text-3xl text-primary" />
-              </div>
-              <div className="text-3xl font-bold text-primary">24 h</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">
-                Respuesta de diagnostico
+              <div className="w-full max-w-[260px] rounded-3xl border border-slate-200/80 bg-white p-5 shadow-lg dark:border-white/10 dark:bg-slate-950/70">
+                <Image
+                  src="/images/brand/imagotipo-dark.png"
+                  alt="Team Celular"
+                  width={280}
+                  height={88}
+                  priority
+                  sizes="280px"
+                  className="h-auto w-full dark:hidden"
+                />
+                <Image
+                  src="/images/brand/imagotipo-light.png"
+                  alt="Team Celular"
+                  width={280}
+                  height={88}
+                  priority
+                  sizes="280px"
+                  className="hidden h-auto w-full dark:block"
+                />
               </div>
             </div>
-          </div>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link
-              href="/presupuesto-reparacion"
-              className="rounded-full bg-primary px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
-            >
-              Solicitar asesoria inmediata
-            </Link>
-            <Link
-              href="/contacto"
-              className="rounded-full border-2 border-primary px-8 py-4 text-lg font-semibold text-primary transition hover:bg-primary/10"
-            >
-              Hablar con un tecnico
-            </Link>
+            <div className="space-y-4">
+              <h1 className="max-w-3xl text-4xl font-black tracking-tight text-slate-900 dark:text-white md:text-5xl">
+                Guias tecnicas hechas desde el laboratorio.
+              </h1>
+              <p className="max-w-3xl text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+                Reunimos procesos, fallas frecuentes y criterios de repuesto
+                para iPhone, Samsung, Xiaomi, microelectronica y soporte para
+                empresas con una mirada clara de taller real.
+              </p>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-3">
+              <div className="rounded-2xl border border-slate-200/80 bg-slate-50 p-5 dark:border-white/10 dark:bg-slate-950/55">
+                <div className="mb-3 flex items-center gap-3">
+                  <FaChartLine className="text-2xl text-primary" />
+                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+                    Trayectoria
+                  </span>
+                </div>
+                <div className="text-3xl font-black text-slate-900 dark:text-white">
+                  10+
+                </div>
+                <div className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+                  Anos reparando equipos reales
+                </div>
+              </div>
+              <div className="rounded-2xl border border-slate-200/80 bg-slate-50 p-5 dark:border-white/10 dark:bg-slate-950/55">
+                <div className="mb-3 flex items-center gap-3">
+                  <FaTools className="text-2xl text-secondary" />
+                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+                    Cobertura
+                  </span>
+                </div>
+                <div className="text-3xl font-black text-slate-900 dark:text-white">
+                  {ARTICLES.length}
+                </div>
+                <div className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+                  Guias activas por marca y falla
+                </div>
+              </div>
+              <div className="rounded-2xl border border-slate-200/80 bg-slate-50 p-5 dark:border-white/10 dark:bg-slate-950/55">
+                <div className="mb-3 flex items-center gap-3">
+                  <FaClock className="text-2xl text-primary" />
+                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+                    Respuesta
+                  </span>
+                </div>
+                <div className="text-3xl font-black text-slate-900 dark:text-white">
+                  24 h
+                </div>
+                <div className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+                  Diagnostico y criterio tecnico
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href="/presupuesto-reparacion"
+                className="rounded-full bg-primary px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
+              >
+                Solicitar asesoria inmediata
+              </Link>
+              <Link
+                href="/contacto"
+                className="rounded-full border-2 border-primary px-8 py-4 text-base font-semibold text-primary transition hover:bg-primary/10"
+              >
+                Hablar con un tecnico
+              </Link>
+            </div>
           </div>
         </header>
 
@@ -303,7 +343,6 @@ export default function GuidesPage() {
               const Icon = article.Icon;
               const visual = articleVisuals[article.href] ?? {
                 cover: "/images/fondofooter.webp",
-                tone: "from-primary/60 via-primary/20 to-transparent",
               };
               const updatedDate = new Intl.DateTimeFormat("es-AR", {
                 day: "2-digit",
@@ -314,43 +353,36 @@ export default function GuidesPage() {
               return (
                 <article
                   key={article.href}
-                  className="group relative overflow-hidden rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-xl transition hover:-translate-y-2 hover:shadow-2xl dark:border-white/10 dark:bg-slate-900/30"
+                  className="group overflow-hidden rounded-2xl border border-slate-200/80 bg-white/85 p-4 shadow-lg transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/50 md:p-5"
                 >
-                  <div
-                    aria-hidden
-                    className="absolute right-6 top-6 h-32 w-32 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 blur-3xl opacity-0 transition-opacity group-hover:opacity-100"
-                  />
-
-                  <div className="relative -mx-6 -mt-6 mb-6 h-44 overflow-hidden border-b border-white/15">
+                  <div className="relative mb-5 h-48 overflow-hidden rounded-xl border border-slate-200/80 bg-slate-100 dark:border-white/10 dark:bg-slate-950/40">
                     <Image
                       src={visual.cover}
                       alt={article.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                      className="object-cover transition duration-500 group-hover:scale-[1.02]"
                     />
-                    <div className={`absolute inset-0 bg-gradient-to-t ${visual.tone}`} />
-                    <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/45 to-transparent" />
-                    <div className="absolute bottom-3 left-4 inline-flex items-center gap-2 rounded-full bg-black/45 px-3 py-1 text-xs font-semibold text-white">
+                    <div className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-full bg-white/92 px-3 py-1 text-xs font-semibold text-slate-900 shadow-sm dark:bg-slate-950/85 dark:text-white">
                       <FaClock className="text-[11px]" />
                       {article.readingTime}
                     </div>
                   </div>
 
-                  <div className="relative space-y-4">
+                  <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-3xl text-white shadow-lg">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-900 text-2xl text-white dark:bg-white dark:text-slate-900">
                         <Icon />
                       </div>
                       <time
                         dateTime={article.datePublished}
-                        className="rounded-full border border-slate-300/80 bg-white/70 px-3 py-1 text-xs font-medium text-slate-700 dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-300"
+                        className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700 dark:border-white/10 dark:bg-slate-950/60 dark:text-slate-300"
                       >
                         {updatedDate}
                       </time>
                     </div>
 
-                    <span className="inline-block rounded-full bg-secondary/20 px-3 py-1 text-xs font-semibold text-secondary">
+                    <span className="inline-block rounded-full border border-primary/15 bg-primary/8 px-3 py-1 text-xs font-semibold text-primary dark:border-primary/20 dark:bg-primary/10">
                       {article.category}
                     </span>
 
@@ -420,6 +452,7 @@ export default function GuidesPage() {
               name: "Guias tecnicas de reparacion de celulares",
               description:
                 "Centro de contenido de Team Celular con guias de reparacion por marca, microelectronica y soporte corporativo.",
+              image: "https://teamcelular.com/images/banner_guias.webp",
               provider: { "@id": "https://teamcelular.com#localbusiness" },
               hasPart: ARTICLES.map((article) => ({
                 "@type": "Article",

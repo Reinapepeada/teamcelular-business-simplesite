@@ -83,7 +83,7 @@ function AdminSidebar({
 }: { 
     isOpen: boolean; 
     onClose: () => void;
-    pathname: string;
+    pathname: string | null;
 }) {
     const router = useRouter();
     const { user, logout } = useAuth();

@@ -76,7 +76,8 @@ type FormValues = z.infer<typeof formSchema>;
 export default function EditProductPage() {
     const params = useParams();
     const router = useRouter();
-    const productId = parseInt(params.id as string);
+    const rawProductId = Array.isArray(params?.id) ? params.id[0] : params?.id;
+    const productId = Number(rawProductId);
 
     const [product, setProduct] = useState<any>(null);
     const [isLoading, setIsLoading] = useState(true);

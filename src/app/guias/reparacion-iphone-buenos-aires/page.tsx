@@ -25,7 +25,6 @@ const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 const GoogleReviewsAPI = dynamic(
   () => import("@/components/cards/GoogleReviewsAPI"),
   {
-    ssr: false,
     loading: () => (
       <div className="rounded-2xl border border-white/15 bg-white/5 p-8 text-center backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-primary">
@@ -81,7 +80,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/celuPorDentro.webp",
+        url: "https://teamcelular.com/images/guia_iphone.webp",
         width: 1200,
         height: 630,
         alt: "Laboratorio de reparacion de iPhone en Team Celular",
@@ -96,7 +95,7 @@ export const metadata: Metadata = {
     title: "Reparacion de iPhone en CABA | Team Celular",
     description:
       "Diagnostico en 24 horas, repuestos certificados y garantia escrita para iPhone.",
-    images: ["https://teamcelular.com/images/celuPorDentro.webp"],
+    images: ["https://teamcelular.com/images/guia_iphone.webp"],
   },
 };
 
@@ -296,7 +295,7 @@ export default function IphoneRepairGuidePage() {
         publishedTime="2024-01-15T00:00:00Z"
         modifiedTime="2026-03-12T00:00:00Z"
         authorName="Team Celular"
-        image="https://teamcelular.com/images/celuPorDentro.webp"
+        image="https://teamcelular.com/images/guia_iphone.webp"
         url={PAGE_URL}
       />
 

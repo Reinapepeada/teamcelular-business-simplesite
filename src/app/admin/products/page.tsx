@@ -182,7 +182,7 @@ export default function ProductsListPage() {
         }
     };
 
-    const lowStockFilterActive = searchParams.get("filter") === "low-stock";
+    const lowStockFilterActive = searchParams?.get("filter") === "low-stock";
     const lowStockProducts = lowStockFilterActive
         ? products.filter((product) =>
             product.variants?.some(

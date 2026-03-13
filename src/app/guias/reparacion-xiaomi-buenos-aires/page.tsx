@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/dispositivoshdpro.webp",
+        url: "https://teamcelular.com/images/guia_xiaomi.webp",
         width: 1200,
         height: 630,
         alt: "Servicio tecnico para Xiaomi Redmi y POCO en Team Celular",
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
     title: "Service Xiaomi en CABA | Team Celular",
     description:
       "Reparacion de Xiaomi, Redmi y POCO con repuestos premium y garantia escrita.",
-    images: ["https://teamcelular.com/images/dispositivoshdpro.webp"],
+    images: ["https://teamcelular.com/images/guia_xiaomi.webp"],
   },
 };
 
@@ -269,7 +269,7 @@ export default function XiaomiRepairGuidePage() {
         publishedTime="2026-03-12T00:00:00Z"
         modifiedTime="2026-03-12T00:00:00Z"
         authorName="Team Celular"
-        image="https://teamcelular.com/images/dispositivoshdpro.webp"
+        image="https://teamcelular.com/images/guia_xiaomi.webp"
         url={PAGE_URL}
       />
 
