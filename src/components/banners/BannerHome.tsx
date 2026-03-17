@@ -1,9 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"], weight: ["600", "700", "800"] });
 
 const trustSignals = [
     { value: "10+ años", label: "reparando celulares" },
@@ -27,7 +24,7 @@ export default function BannerHome() {
                         Servicio técnico en Recoleta
                     </p>
 
-                    <h1 className={`${inter.className} max-w-xl text-4xl font-extrabold leading-[1.03] tracking-tight text-slate-900 sm:text-5xl lg:text-[3.2rem] dark:text-white`}>
+                    <h1 className="max-w-xl text-4xl font-extrabold leading-[1.03] tracking-tight text-slate-900 sm:text-5xl lg:text-[3.2rem] dark:text-white">
                         Arreglamos tu celular el mismo día
                     </h1>
 
@@ -83,7 +80,6 @@ export default function BannerHome() {
                             height={1400}
                             quality={82}
                             sizes="(max-width: 1024px) 100vw, 46vw"
-                            fetchPriority="high"
                             className="h-[23rem] w-full object-cover sm:h-[30rem]"
                             priority
                         />

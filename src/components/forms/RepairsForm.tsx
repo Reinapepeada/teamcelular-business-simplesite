@@ -1,99 +1,94 @@
-"use client";
-import React, { useState } from "react";
-import {
-    Input,
-    Textarea,
-    Button,
-    Checkbox,
-    CheckboxGroup,
-} from "@nextui-org/react";
-import { BsWhatsapp } from "react-icons/bs";
-import Link from "next/link";
+const repairOptions = [
+    "Pantalla",
+    "Bateria",
+    "Carga",
+    "Placa",
+    "Boton",
+    "Camara",
+    "Parlante",
+    "Microfono",
+    "Software",
+    "Otro",
+];
 
-export default function RepairForm() {
-    const [brand, setBrand] = useState("");
-    const [model, setModel] = useState("");
-    const [repairType, setRepairType] = useState<string[]>([]);
-    const [description, setDescription] = useState("");
-
-    const whatsappMessage = [
-        "Hola! Quiero un presupuesto de reparación.",
-        brand ? `Marca: ${brand}` : null,
-        model ? `Modelo: ${model}` : null,
-        repairType.length ? `Falla: ${repairType.join(", ")}` : null,
-        description ? `Descripción: ${description}` : null,
-    ]
-        .filter(Boolean)
-        .join("\n");
-
-    const whatsappUrl = `https://wa.me/5491151034595?text=${encodeURIComponent(
-        whatsappMessage
-    )}`;
-
+export default function RepairsForm() {
     return (
-        <section className="flex flex-col w-10/12 md:w-3/4  gap-4">
-            <div className="flex flex-col md:flex-row justify-center items-center gap-4">
-                <Input
-                    type="text"
-                    label="Marca"
-                    value={brand}
-                    onChange={(e) => setBrand(e.target.value)}
-                />
-                <Input
-                    type="text"
-                    label="Modelo"
-                    value={model}
-                    onChange={(e) => setModel(e.target.value)}
-                />
+        <form action="/api/repair-lead" method="post" className="space-y-6">
+            <div className="grid gap-4 md:grid-cols-2">
+                <label className="space-y-2 text-sm font-medium text-slate-900">
+                    <span>Marca</span>
+                    <input
+                        type="text"
+                        name="brand"
+                        required
+                        className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
+                    />
+                </label>
+                <label className="space-y-2 text-sm font-medium text-slate-900">
+                    <span>Modelo</span>
+                    <input
+                        type="text"
+                        name="model"
+                        required
+                        className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
+                    />
+                </label>
             </div>
-            <div className="flex flex-col gap-3">
-                <CheckboxGroup
-                    label="Seleccione la falla del equipo"
-                    color="warning"
-                    value={repairType}
-                    onValueChange={setRepairType}>
-                    <div className="flex flex-col w-3/4 gap-4">
-                        <div className="flex md:flex-row flex-col gap-3">
-                            <Checkbox value="Pantalla">Pantalla</Checkbox>
-                            <Checkbox value="Batería">Batería</Checkbox>
-                            <Checkbox value="Carga">Carga</Checkbox>
-                            <Checkbox value="Placa">Placa</Checkbox>
-                            <Checkbox value="Botón">Botón</Checkbox>
-                        </div>
-                        <div className="flex md:flex-row flex-col gap-3">
-                            <Checkbox value="Cámara">Cámara</Checkbox>
-                            <Checkbox value="Parlante">Parlante</Checkbox>
-                            <Checkbox value="Micrófono">Micrófono</Checkbox>
-                            <Checkbox value="Software">Software</Checkbox>
-                            <Checkbox value="Otro">Otro</Checkbox>
-                        </div>
-                    </div>
-                </CheckboxGroup>
-                <p className="text-default-500 text-small">
-                    fallas: {repairType.join(", ")}
+
+            <fieldset className="space-y-3">
+                <legend className="text-sm font-semibold text-slate-900">
+                    Selecciona la falla del equipo
+                </legend>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    {repairOptions.map((option) => (
+                        <label
+                            key={option}
+                            className="flex min-h-11 items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 transition hover:border-primary/40 hover:bg-primary/5"
+                        >
+                            <input
+                                type="checkbox"
+                                name="repairType"
+                                value={option}
+                                className="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary"
+                            />
+                            <span>{option}</span>
+                        </label>
+                    ))}
+                </div>
+            </fieldset>
+
+            <label className="block space-y-2 text-sm font-medium text-slate-900">
+                <span>Descripcion de la falla</span>
+                <textarea
+                    name="description"
+                    rows={5}
+                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
+                    placeholder="Contanos cuando empezo, si se golpeo, si tuvo humedad o cualquier detalle util."
+                />
+            </label>
+
+            <label className="block space-y-2 text-sm font-medium text-slate-900">
+                <span>Medio de contacto preferido</span>
+                <input
+                    type="text"
+                    name="contact"
+                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
+                    placeholder="WhatsApp, llamada o email"
+                />
+            </label>
+
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <button
+                    type="submit"
+                    className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition hover:bg-primary/90"
+                >
+                    Enviar a WhatsApp
+                </button>
+                <p className="text-sm leading-6 text-slate-600">
+                    Armamos el mensaje automaticamente y te llevamos directo al
+                    chat para cerrar el pedido sin friccion.
                 </p>
             </div>
-
-            <div className="flex flex-row  justify-center items-center gap-4">
-                <Textarea
-                    label="Descripción de la falla"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
-            </div>
-
-            <div className="flex flex-row justify-center items-center gap-4">
-                <Button 
-                as={Link}
-                color="success"
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                size="lg"
-                >
-                        Enviar a WhatsApp <BsWhatsapp />
-                </Button>
-            </div>
-        </section>
+        </form>
     );
 }

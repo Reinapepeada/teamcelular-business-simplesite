@@ -77,6 +77,7 @@ export default function KnowledgeGrid() {
             <div className="mt-8 flex items-center justify-between text-sm font-semibold">
               <Link
                 href={article.href}
+                prefetch={false}
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-white shadow-lg transition-all hover:bg-primary/90 group-hover:gap-3 group-hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
                 Leer guía completa
                 <span aria-hidden className="text-lg">
@@ -85,6 +86,7 @@ export default function KnowledgeGrid() {
               </Link>
               <Link
                 href="/presupuesto-reparacion"
+                prefetch={false}
                 className="hidden rounded-full border border-slate-300 bg-white/75 px-4 py-2 text-slate-700 transition hover:bg-white dark:border-white/20 dark:bg-slate-900/50 dark:text-slate-100 dark:hover:bg-slate-900 md:flex md:items-center md:gap-2">
                 Reservar diagnóstico
                 <span aria-hidden>↗</span>

@@ -2,8 +2,6 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import { ThemeProvider } from "./providers";
-import MainLayout from "@/components/layouts/MainLayout";
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 import Plugins from "@/components/vercel/Plugins";
 import StructuredData from "@/components/seo/StructuredData";
@@ -120,19 +118,11 @@ export default function RootLayout({
     readonly children: React.ReactNode;
 }) {
     return (
-        <html lang="es" suppressHydrationWarning>
-            
+        <html lang="es">
             <body className={`${inter.className} `}>
                 <StructuredData />
-                <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem={true}
-                disableTransitionOnChange
-                >
-                    <MainLayout>{children}</MainLayout>
-                    <Plugins />
-                </ThemeProvider>
+                {children}
+                <Plugins />
             </body>
         </html>
     );

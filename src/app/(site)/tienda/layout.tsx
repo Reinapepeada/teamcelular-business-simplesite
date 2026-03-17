@@ -1,9 +1,10 @@
 import { Metadata } from "next";
+import StoreCartSheet from "@/components/store/StoreCartSheet";
 
 export const metadata: Metadata = {
   title: "Tienda Online | Accesorios y Repuestos para Celulares | Team Celular",
   description:
-    "Comprá accesorios, fundas, cargadores, cables y repuestos para celulares con envío a todo CABA. Productos de calidad con garantía en Team Celular Buenos Aires.",
+    "Compra accesorios, fundas, cargadores, cables y repuestos para celulares con envio a todo CABA. Productos de calidad con garantia en Team Celular Buenos Aires.",
   keywords: [
     "tienda celulares Buenos Aires",
     "accesorios celular online",
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
     "cables USB-C Lightning",
     "protector pantalla vidrio templado",
     "repuestos celulares Argentina",
-    "auriculares inalámbricos",
+    "auriculares inalambricos",
   ],
   alternates: {
     canonical: "https://teamcelular.com/tienda",
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Tienda Online | Team Celular Buenos Aires",
     description:
-      "Accesorios y repuestos de calidad para tu celular con envío a todo CABA",
+      "Accesorios y repuestos de calidad para tu celular con envio a todo CABA",
     type: "website",
     url: "https://teamcelular.com/tienda",
     locale: "es_AR",
@@ -46,5 +47,10 @@ export default function TiendaLayout({
 }: {
   readonly children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <StoreCartSheet />
+    </>
+  );
 }

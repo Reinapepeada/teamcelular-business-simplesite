@@ -1,8 +1,8 @@
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import {
   FaApple,
   FaBatteryFull,
@@ -21,22 +21,6 @@ const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 const PAGE_PATH = "/guias/reparacion-iphone-buenos-aires";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
-
-const GoogleReviewsAPI = dynamic(
-  () => import("@/components/cards/GoogleReviewsAPI"),
-  {
-    loading: () => (
-      <div className="rounded-2xl border border-white/15 bg-white/5 p-8 text-center backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-primary">
-          Prueba social en carga
-        </p>
-        <p className="mt-2 text-slate-700 dark:text-slate-300">
-          Cargando resenas verificables desde Google...
-        </p>
-      </div>
-    ),
-  },
-);
 
 export const metadata: Metadata = {
   title: "Reparacion de iPhone en Buenos Aires | Servicio Tecnico Premium CABA",
@@ -428,6 +412,7 @@ export default function IphoneRepairGuidePage() {
               Mostramos opiniones verificables de Google para que evalues la confianza del servicio con evidencia publica.
             </p>
           </div>
+          {/* @ts-expect-error Async Server Component */}
           <GoogleReviewsAPI />
         </section>
 

@@ -3,85 +3,21 @@ import { MetadataRoute } from "next";
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 
-export default function Robots(): MetadataRoute.Robots {
-  const sharedDisallow = [
-    "/admin/",
-    "/api/",
-    "/private/",
-    "/cart/",
-    "/checkout/",
-    "/tienda?*",
-    "/tienda/categoria/*?*",
-    "/*?*utm_*",
-    "/*?*gclid=*",
-    "/*?*fbclid=*",
-    "/*.json$",
-  ];
-
+export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
-        disallow: sharedDisallow,
-      },
-      {
-        userAgent: "Googlebot",
-        allow: "/",
-        disallow: sharedDisallow,
-      },
-      {
-        userAgent: "Googlebot-Image",
-        allow: ["/images/", "/videos/"],
-      },
-      {
-        userAgent: "Bingbot",
-        allow: "/",
-        disallow: sharedDisallow,
-      },
-      {
-        userAgent: "GPTBot",
-        allow: "/",
-      },
-      {
-        userAgent: "ChatGPT-User",
-        allow: "/",
-      },
-      {
-        userAgent: "CCBot",
-        allow: "/",
-      },
-      {
-        userAgent: "anthropic-ai",
-        allow: "/",
-      },
-      {
-        userAgent: "Google-Extended",
-        allow: "/",
+        disallow: ["/admin", "/api", "/private", "/cart", "/checkout"],
       },
       {
         userAgent: "Applebot",
         allow: "/",
+        disallow: ["/admin", "/api", "/private", "/cart", "/checkout"],
         crawlDelay: 10,
       },
-      {
-        userAgent: "FacebookBot",
-        allow: "/",
-      },
-      {
-        userAgent: "PerplexityBot",
-        allow: "/",
-      },
-      {
-        userAgent: "ClaudeBot",
-        allow: "/",
-      },
-      {
-        userAgent: "Amazonbot",
-        allow: "/",
-      },
     ],
-    sitemap: [`${SITE_URL}/sitemap.xml`],
-    host: SITE_URL,
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }

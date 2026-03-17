@@ -1,28 +1,19 @@
-import React from "react";
-
 interface StructuredDataProps {
   city?: string;
   country?: string;
 }
 
-const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+const SITE_URL =
+  process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 const BUSINESS_NAME = "Team Celular";
 const PHONE_NUMBER = "+54 11 5103-4595";
 const EMAIL = "teamcelular.arg@gmail.com";
 const ADDRESS_STREET = "Paraguay 2451";
-const ADDRESS_CITY = "Ciudad Autónoma de Buenos Aires";
+const ADDRESS_CITY = "Ciudad Autonoma de Buenos Aires";
 const ADDRESS_REGION = "CABA";
 const ADDRESS_POSTAL = "C1121";
 const ADDRESS_COUNTRY = "AR";
-const SERVICE_AREA = ["Ciudad Autónoma de Buenos Aires (CABA)"];
-const KEY_SERVICES = [
-  "Cambio de batería",
-  "Cambio de módulo display / pantalla",
-  "Cambio de pin / ficha de carga",
-  "Reparación de placa (microelectrónica)",
-  "Cambio de flex de carga y flex de botón encendido",
-  "Cambio de tapa trasera",
-];
+const SERVICE_AREA = ["Ciudad Autonoma de Buenos Aires", "Recoleta"];
 const SAME_AS = [
   "https://www.instagram.com/teamcelular.arg/",
   "https://www.facebook.com/TeamCelular/",
@@ -34,14 +25,14 @@ const SAME_AS = [
 function createLocalBusinessJson(city?: string, country?: string) {
   return {
     "@context": "https://schema.org",
-    "@type": "ElectronicsStore",
+    "@type": "LocalBusiness",
     "@id": `${SITE_URL}#localbusiness`,
-    url: SITE_URL,
     name: BUSINESS_NAME,
-    description:
-      "Servicio técnico profesional de reparación de celulares, tablets y notebooks con garantía, repuestos originales y soluciones exprés.",
+    url: SITE_URL,
     image: `${SITE_URL}/opengraph-image.png`,
     logo: `${SITE_URL}/icon.ico`,
+    description:
+      "Servicio tecnico especializado en reparacion de celulares, microelectronica y venta de accesorios en Recoleta, CABA.",
     telephone: PHONE_NUMBER,
     email: EMAIL,
     priceRange: "$$",
@@ -58,82 +49,20 @@ function createLocalBusinessJson(city?: string, country?: string) {
       latitude: -34.597528,
       longitude: -58.403048,
     },
-    hasMap: "https://maps.app.goo.gl/3rCgYamQ4e9S4WkA9",
-    contactPoint: [
-      {
-        "@type": "ContactPoint",
-        contactType: "customer service",
-        telephone: PHONE_NUMBER,
-        email: EMAIL,
-        areaServed: SERVICE_AREA,
-        availableLanguage: ["es", "en"],
-      },
-    ],
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-        ],
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         opens: "10:30",
         closes: "18:00",
       },
     ],
+    hasMap: "https://maps.app.goo.gl/3rCgYamQ4e9S4WkA9",
     sameAs: SAME_AS,
-    makesOffer: KEY_SERVICES.filter(service => service && service.trim()).map((service) => ({
-      "@type": "Offer",
-      itemOffered: {
-        "@type": "Service",
-        name: service,
-        providerMobility: "stationary",
-        serviceType: service,
-        areaServed: SERVICE_AREA,
-      },
-      availability: "https://schema.org/InStoreOnly",
-      url: `${SITE_URL}/presupuesto-reparacion`,
-    })),
-    serviceArea: SERVICE_AREA.filter(area => area && area.trim()).map((area) => ({
+    areaServed: SERVICE_AREA.map((area) => ({
       "@type": "AdministrativeArea",
       name: area,
     })),
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Catálogo de reparaciones de celulares",
-      itemListElement: KEY_SERVICES.filter(service => service && service.trim()).map((service) => ({
-        "@type": "OfferCatalog",
-        name: service,
-      })),
-    },
-  };
-}
-
-function createServiceJson() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": `${SITE_URL}#cellphone-repair-service`,
-    name: "Reparación profesional de celulares en CABA",
-    serviceType: "Reparación de celulares y microelectrónica",
-    provider: {
-      "@type": "LocalBusiness",
-      name: BUSINESS_NAME,
-      url: SITE_URL,
-      telephone: PHONE_NUMBER,
-    },
-    areaServed: SERVICE_AREA,
-    offers: {
-      "@type": "Offer",
-      priceCurrency: "ARS",
-      availability: "https://schema.org/InStock",
-      url: `${SITE_URL}/presupuesto-reparacion`,
-      eligibleRegion: SERVICE_AREA.map((area) => ({ "@type": "AdministrativeArea", name: area })),
-      businessFunction: "https://schema.org/ProvideService",
-    },
-    termsOfService: `${SITE_URL}/sobrenosotros`,
   };
 }
 
@@ -145,28 +74,30 @@ function createOrganizationJson() {
     name: BUSINESS_NAME,
     url: SITE_URL,
     logo: `${SITE_URL}/icon.ico`,
+    email: EMAIL,
+    telephone: PHONE_NUMBER,
+    sameAs: SAME_AS,
     contactPoint: [
       {
         "@type": "ContactPoint",
         contactType: "customer service",
         telephone: PHONE_NUMBER,
         email: EMAIL,
+        areaServed: "AR",
         availableLanguage: ["es", "en"],
       },
     ],
-    sameAs: SAME_AS,
   };
 }
 
-function createAiDiscoveryJson() {
+function createWebsiteJson() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": `${SITE_URL}#website`,
     url: SITE_URL,
     name: BUSINESS_NAME,
-    description:
-      "Sitio oficial de Team Celular, especialistas en reparación de smartphones, tablets y notebooks en Buenos Aires.",
+    inLanguage: "es-AR",
     potentialAction: [
       {
         "@type": "SearchAction",
@@ -177,19 +108,10 @@ function createAiDiscoveryJson() {
         "query-input": "required name=search_term_string",
       },
       {
-        "@type": "ContactAction",
-        name: "Solicitar presupuesto de reparación",
-        target: `${SITE_URL}/presupuesto-reparacion`,
-        "query-input": "optional name=servicio",
+        "@type": "CommunicateAction",
+        target: `${SITE_URL}/contacto`,
+        name: "Consultar servicio tecnico",
       },
-    ],
-    inLanguage: "es",
-    sameAs: SAME_AS,
-    knowsAbout: [
-      "reparación de celulares",
-      "reballing de placas",
-      "soporte técnico para empresas",
-      "service técnico express",
     ],
   };
 }
@@ -199,17 +121,16 @@ export default function StructuredData({
   country,
 }: StructuredDataProps) {
   const data = [
-    createLocalBusinessJson(city, country),
-    createServiceJson(),
     createOrganizationJson(),
-    createAiDiscoveryJson(),
+    createWebsiteJson(),
+    createLocalBusinessJson(city, country),
   ];
 
   return (
     <>
-      {data.filter(entry => entry && (entry["@id"] || entry["@type"])).map((entry, index) => (
+      {data.map((entry) => (
         <script
-          key={entry["@id"] ?? `${entry["@type"]}-${index}`}
+          key={entry["@id"]}
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(entry),
