@@ -25,7 +25,7 @@ const PAGE_URL = `${SITE_URL}/presupuesto-reparacion`;
 export const metadata: Metadata = {
     title: "Presupuesto de reparación de celulares en Buenos Aires | Team Celular",
     description:
-        "Solicitá tu presupuesto online sin cargo y recibí respuesta en menos de 24 horas. Laboratorio en Recoleta con garantía escrita y repuestos premium.",
+        "Solicitá tu presupuesto online y coordiná la revisión técnica. El costo suele variar entre ARS 15.000 y ARS 25.000 según equipo y falla.",
     keywords: [
         "presupuesto reparación celulares",
         "servicio técnico celulares buenos aires",
@@ -184,9 +184,9 @@ const faqs = [
             "La mayoría se responde dentro de las primeras 12 horas hábiles. Casos complejos pueden tardar hasta 24 horas.",
     },
     {
-        question: "¿El diagnóstico tiene costo?",
+        question: "¿La revisión técnica tiene costo?",
         answer:
-            "No. El diagnóstico inicial es sin cargo. Solo pagás si aprobás el trabajo.",
+            "Sí. La revisión técnica suele variar entre ARS 15.000 y ARS 25.000 según marca, modelo y tipo de falla. Te lo informamos antes de ingresar el equipo.",
     },
     {
         question: "¿Qué garantía ofrecen?",
@@ -224,7 +224,7 @@ export default function PresupuestoReparacionPage() {
                 <header className="grid gap-10 rounded-3xl border border-slate-200 bg-white p-8 shadow-lg lg:grid-cols-[1.05fr_0.95fr] lg:p-12">
                     <div>
                         <span className="inline-flex rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-                            Presupuesto sin cargo
+                            Revisión técnica arancelada
                         </span>
                         <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 md:text-5xl">
                             Pedí tu presupuesto online y recuperá tu celular con
@@ -240,8 +240,9 @@ export default function PresupuestoReparacionPage() {
                             <li className="flex items-start gap-3">
                                 <FaCheckCircle className="mt-1 text-primary" />
                                 <span>
-                                    Diagnóstico sin cargo y presupuesto antes de
-                                    tocar el equipo.
+                                    Revisión técnica con costo informado antes de
+                                    tocar el equipo. El valor suele variar entre
+                                    ARS 15.000 y ARS 25.000.
                                 </span>
                             </li>
                             <li className="flex items-start gap-3">
@@ -634,5 +635,6 @@ export default function PresupuestoReparacionPage() {
         </section>
     );
 }
+
 
 

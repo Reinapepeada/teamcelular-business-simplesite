@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { 
@@ -156,7 +156,7 @@ const faqMicro = [
   },
   {
     question: "¿Cuánto tarda una reparación de microelectrónica?",
-    answer: "Depende de la complejidad. Un reballing simple puede tomar 4-6 horas. Reparaciones complejas con reconstrucción de pistas o múltiples chips pueden requerir 2-3 días. Siempre hacemos diagnóstico previo sin cargo para darte un tiempo estimado preciso.",
+    answer: "Depende de la complejidad. Un reballing simple puede tomar 4-6 horas. Reparaciones complejas con reconstrucción de pistas o múltiples chips pueden requerir 2-3 días. Siempre hacemos revisión técnica previa arancelada. El valor suele variar entre ARS 15.000 y ARS 25.000 para darte un tiempo estimado preciso.",
   },
   {
     question: "¿Tienen garantía las reparaciones de placa?",
@@ -386,7 +386,7 @@ export default function MicroelectronicsGuide() {
             ¿Tu equipo necesita reparación de placa lógica?
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
-            Hacemos diagnóstico sin cargo. Si tiene solución, te damos presupuesto detallado con tiempos y garantía por escrito. Si no, te lo decimos honestamente.
+            La revisión técnica tiene un costo que suele variar entre ARS 15.000 y ARS 25.000. Si tiene solución, te damos presupuesto detallado con tiempos y garantía por escrito. Si no, te lo decimos honestamente.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
@@ -430,3 +430,4 @@ export default function MicroelectronicsGuide() {
     </div>
   );
 }
+

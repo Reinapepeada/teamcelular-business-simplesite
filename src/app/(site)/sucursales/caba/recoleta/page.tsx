@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import {
   FaMapMarkerAlt,
@@ -256,7 +256,7 @@ export default function SucursalRecoletaPage() {
             "Reparacion de pin de carga",
             "Microelectronica y reparacion de placa",
             "Reparacion de tablets y notebooks",
-            "Diagnostico y presupuesto sin cargo",
+            "Revisión técnica arancelada y presupuesto detallado",
           ].map((service) => (
             <div
               key={service}
@@ -323,3 +323,4 @@ export default function SucursalRecoletaPage() {
     </section>
   );
 }
+

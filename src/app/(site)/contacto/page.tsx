@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import {
@@ -17,7 +17,7 @@ import {
 export const metadata: Metadata = {
     title: "Contacto | Team Celular | Reparación de celulares en Recoleta CABA",
     description:
-        "Visitanos en Paraguay 2451, Recoleta, CABA. Atención de lunes a viernes de 10:30 a 18:00. WhatsApp y presupuesto sin cargo.",
+        "Visitanos en Paraguay 2451, Recoleta, CABA. Atención de lunes a viernes de 10:30 a 18:00. WhatsApp y coordinación de revisión técnica.",
     keywords: [
         "contacto team celular",
         "reparación celulares recoleta",
@@ -138,9 +138,9 @@ const faqs = [
             "No es obligatorio, pero escribir antes acelera la recepción del equipo y evita esperas.",
     },
     {
-        question: "Hacen presupuestos sin cargo?",
+        question: "¿La revisión técnica tiene costo?",
         answer:
-            "Sí. Todos los presupuestos son sin cargo y sin compromiso.",
+            "Sí. La revisión técnica suele variar entre ARS 15.000 y ARS 25.000 según marca, modelo y tipo de falla. Te lo confirmamos antes de ingresar el equipo.",
     },
     {
         question: "¿Cuánto tarda una reparación típica?",
@@ -425,3 +425,4 @@ export default function ContactoPage() {
         </section>
     );
 }
+

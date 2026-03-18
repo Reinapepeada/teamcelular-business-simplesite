@@ -1,4 +1,4 @@
-
+﻿
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
         template: "%s",
     },
     description:
-        "Servicio técnico especializado en celulares en Recoleta, CABA. Repuestos originales, microelectrónica avanzada y garantía escrita. Presupuestos sin cargo.",
+        "Servicio técnico especializado en celulares en Recoleta, CABA. Repuestos originales, microelectrónica avanzada y garantía escrita. Revisión técnica entre ARS 15.000 y ARS 25.000.",
     keywords: [
         "reparación celulares Buenos Aires",
         "servicio técnico celulares CABA",
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
         creator: "@teamcelular",
         title: "Team Celular | Servicio Técnico de Celulares en Buenos Aires",
         description:
-            "Reparación profesional de celulares con repuestos originales y garantía escrita. Presupuestos sin cargo.",
+            "Reparación profesional de celulares con repuestos originales y garantía escrita. Revisión técnica entre ARS 15.000 y ARS 25.000.",
         images: {
             url: `${SITE_URL}/opengraph-image.png`,
             alt: "Team Celular - Servicio Técnico de Celulares en Buenos Aires",
@@ -127,3 +127,4 @@ export default function RootLayout({
         </html>
     );
 }
+

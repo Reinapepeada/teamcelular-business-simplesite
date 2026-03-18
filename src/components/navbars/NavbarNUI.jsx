@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -215,7 +215,7 @@ export default function NavbarNUI() {
                                 Recoleta - CABA
                             </p>
                             <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
-                                Laboratorio técnico, presupuesto sin cargo y respuesta comercial rápida.
+                                Laboratorio técnico, revisión técnica entre ARS 15.000 y ARS 25.000 y respuesta comercial rápida.
                             </p>
                         </div>
 
@@ -271,3 +271,4 @@ export default function NavbarNUI() {
         </header>
     );
 }
+

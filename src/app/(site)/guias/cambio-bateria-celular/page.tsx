@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
@@ -23,7 +23,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelula
 export const metadata: Metadata = {
   title: "Cambio de Batería Celular Buenos Aires | Service Certificado CABA",
   description:
-    "Cambio de batería celular con baterías originales y certificadas, garantía de 3 meses y service en 1-2 hs. iPhone, Samsung, Motorola. Diagnóstico gratis en Recoleta, CABA.",
+    "Cambio de batería celular con baterías originales y certificadas, garantía de 3 meses y service en 1-2 hs. iPhone, Samsung, Motorola. Revisión técnica arancelada en Recoleta, CABA.",
   keywords: [
     "cambio batería celular Buenos Aires",
     "batería iPhone original",
@@ -488,4 +488,5 @@ export default function BatteryReplacementGuide() {
     </div>
   );
 }
+
 
