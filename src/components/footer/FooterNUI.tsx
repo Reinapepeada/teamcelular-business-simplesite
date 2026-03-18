@@ -21,17 +21,17 @@ import Image from "next/image";
 const footerSections = {
   servicios: [
     {
-      name: "Reparación de iPhone",
+      name: "Reparacion de iPhone",
       href: "/guias/reparacion-iphone-buenos-aires",
       icon: FaApple,
     },
     {
-      name: "Reparación de celulares",
+      name: "Reparacion de celulares",
       href: "/reparaciones",
       icon: FaMobileAlt,
     },
     {
-      name: "Microelectrónica y reballing",
+      name: "Microelectronica y reballing",
       href: "/guias/microelectronica-reballing-caba",
       icon: FaTools,
     },
@@ -47,9 +47,9 @@ const footerSections = {
     },
   ],
   guias: [
-    { name: "Todas las guías", href: "/guias" },
-    { name: "Reparación iPhone", href: "/guias/reparacion-iphone-buenos-aires" },
-    { name: "Microelectrónica", href: "/guias/microelectronica-reballing-caba" },
+    { name: "Todas las guias", href: "/guias" },
+    { name: "Reparacion iPhone", href: "/guias/reparacion-iphone-buenos-aires" },
+    { name: "Microelectronica", href: "/guias/microelectronica-reballing-caba" },
     {
       name: "Mantenimiento preventivo",
       href: "/guias/mantenimiento-preventivo-celulares",
@@ -94,7 +94,7 @@ export default function FooterNUI() {
                 className="mb-2 h-auto w-48"
               />
               <p className="text-sm text-slate-200">
-                Más de 15 años de experiencia en reparación profesional de
+                Mas de 15 anos de experiencia en reparacion profesional de
                 celulares en Buenos Aires.
               </p>
             </div>
@@ -132,7 +132,7 @@ export default function FooterNUI() {
             <div className="flex items-start space-x-2 pt-2 text-sm">
               <BsClock className="mt-1 flex-shrink-0 text-primary" />
               <div>
-                <p className="font-semibold">Horario de atención</p>
+                <p className="font-semibold">Horario de atencion</p>
                 <p className="text-slate-200">Lunes a viernes</p>
                 <p className="text-slate-200">10:30 - 18:00 hs</p>
               </div>
@@ -158,7 +158,7 @@ export default function FooterNUI() {
           </div>
 
           <div className="flex flex-col space-y-3">
-            <h4 className="mb-2 text-lg font-bold text-secondary">Guías técnicas</h4>
+            <h4 className="mb-2 text-lg font-bold text-secondary">Guias tecnicas</h4>
             {footerSections.guias.map((guia) => (
               <Link
                 key={guia.href}
@@ -191,7 +191,7 @@ export default function FooterNUI() {
             <div className="flex items-start space-x-3 text-sm">
               <BsGeoAlt className="mt-1 flex-shrink-0 text-primary" />
               <div>
-                <p className="font-semibold">Dirección</p>
+                <p className="font-semibold">Direccion</p>
                 <p className="text-slate-200">Paraguay 2451</p>
                 <p className="text-slate-200">Recoleta, CABA</p>
               </div>
@@ -200,7 +200,7 @@ export default function FooterNUI() {
             <div className="flex items-start space-x-3 text-sm">
               <BsTelephone className="mt-1 flex-shrink-0 text-primary" />
               <div>
-                <p className="font-semibold">Teléfono</p>
+                <p className="font-semibold">Telefono</p>
                 <Link
                   href="tel:+5491151034595"
                   className="text-slate-200 transition-colors hover:text-white"
@@ -227,7 +227,7 @@ export default function FooterNUI() {
               href="/contacto"
               className="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-primary px-4 py-2 font-semibold text-white transition-colors duration-200 hover:bg-primary/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-              Ver ubicación
+              Ver ubicacion
             </Link>
           </div>
         </div>
@@ -243,7 +243,7 @@ export default function FooterNUI() {
                 prefetch={false}
                 className="inline-flex min-h-8 items-center transition-colors hover:text-white"
               >
-                Términos
+                Terminos
               </Link>
               <Link
                 href="/devoluciones"

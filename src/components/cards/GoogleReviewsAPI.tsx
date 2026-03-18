@@ -23,37 +23,6 @@ function StarRating({ rating }: { rating: number }) {
     return <div className="flex items-center gap-1">{stars}</div>;
 }
 
-export function GoogleReviewsFallback() {
-    return (
-        <article className="space-y-8">
-            <div className="space-y-4 text-center">
-                <div className="flex items-center justify-center gap-3">
-                    <FaGoogle className="text-4xl text-primary" />
-                    <h2 className="text-3xl font-bold tracking-tight text-slate-900 md:text-[2.2rem] dark:text-white">
-                        Lo que dicen nuestros clientes
-                    </h2>
-                </div>
-                <div className="mx-auto max-w-3xl text-[1.02rem] leading-7 text-slate-700 dark:text-slate-300">
-                    Estamos cargando las reseñas verificadas de Google.
-                </div>
-            </div>
-
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-                {Array.from({ length: 3 }).map((_, index) => (
-                    <div
-                        key={index}
-                        className="rounded-2xl border border-slate-200/75 bg-white/75 p-5 shadow-md"
-                    >
-                        <div className="h-5 w-24 animate-pulse rounded-full bg-slate-200" />
-                        <div className="mt-4 h-4 w-32 animate-pulse rounded-full bg-slate-200" />
-                        <div className="mt-5 h-20 animate-pulse rounded-2xl bg-slate-200" />
-                    </div>
-                ))}
-            </div>
-        </article>
-    );
-}
-
 export default async function GoogleReviewsAPI() {
     const placeData = await getGoogleReviews();
 
@@ -69,10 +38,10 @@ export default async function GoogleReviewsAPI() {
                     </div>
                     <div className="rounded-2xl border border-slate-200/70 bg-white/70 p-8 shadow-md dark:border-white/10 dark:bg-slate-900/50">
                         <p className="text-lg text-slate-600 dark:text-slate-400">
-                            Las reseñas no están disponibles en este momento.
+                            Las resenas no estan disponibles en este momento.
                         </p>
                         <p className="mt-2 text-sm text-slate-500 dark:text-slate-500">
-                            Podés ver todas las opiniones directamente en nuestro
+                            Podes ver todas las opiniones directamente en nuestro
                             perfil de Google.
                         </p>
                         <div className="mt-6">
@@ -83,7 +52,7 @@ export default async function GoogleReviewsAPI() {
                                 className="inline-flex min-h-11 items-center gap-2 rounded-full bg-primary px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
                             >
                                 <FaGoogle />
-                                Ver reseñas en Google
+                                Ver resenas en Google
                             </a>
                         </div>
                     </div>
@@ -109,12 +78,12 @@ export default async function GoogleReviewsAPI() {
                         {rating.toFixed(1)}
                     </span>
                     <span className="text-slate-600 dark:text-slate-400">
-                        ({user_ratings_total} reseñas en Google)
+                        ({user_ratings_total} resenas en Google)
                     </span>
                 </div>
                 <p className="mx-auto max-w-3xl text-[1.02rem] leading-7 text-slate-700 dark:text-slate-300">
                     La confianza de nuestros clientes sostiene cada presupuesto,
-                    cada reparación y cada derivación que recibimos en Recoleta.
+                    cada reparacion y cada derivacion que recibimos en Recoleta.
                 </p>
             </div>
 
@@ -172,7 +141,7 @@ export default async function GoogleReviewsAPI() {
                     className="inline-flex min-h-11 items-center gap-2 rounded-full bg-primary px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
                 >
                     <FaGoogle />
-                    Ver todas las reseñas en Google
+                    Ver todas las resenas en Google
                 </a>
             </div>
         </article>

@@ -118,8 +118,8 @@ export default function RootLayout({
     readonly children: React.ReactNode;
 }) {
     return (
-        <html lang="es" suppressHydrationWarning>
-            <body className={`${inter.className} bg-white text-slate-950 dark:bg-slate-950 dark:text-slate-50`}>
+        <html lang="es">
+            <body className={`${inter.className} `}>
                 <StructuredData />
                 {children}
                 <Plugins />

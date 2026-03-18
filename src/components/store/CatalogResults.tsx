@@ -68,7 +68,7 @@ function CatalogPagination({
 
     return (
         <nav
-            aria-label="Paginación de productos"
+            aria-label="Paginacion de productos"
             className="mt-10 flex flex-wrap items-center justify-center gap-2"
         >
             <Link
@@ -198,7 +198,7 @@ function ProductCard({ product }: { product: Product }) {
 
                 {stock > 0 && stock < 10 ? (
                     <p className="mt-2 text-sm font-medium text-amber-700">
-                        Últimas {stock} unidades
+                        Ultimas {stock} unidades
                     </p>
                 ) : stock > 0 ? (
                     <p className="mt-2 text-sm text-emerald-700">Stock disponible</p>
@@ -271,19 +271,19 @@ export default async function CatalogResults({
             <div className="flex flex-col gap-3 border-b border-slate-100 pb-5 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                     <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
-                        Catálogo
+                        Catalogo
                     </p>
                     <h2 className="mt-2 text-2xl font-semibold text-slate-950">
                         {title}
                     </h2>
                     <p className="mt-2 text-sm text-slate-600">
                         {total} resultado{total === 1 ? "" : "s"}
-                    {currentPage > 1 ? ` en la página ${currentPage}` : ""}.
+                        {currentPage > 1 ? ` en la pagina ${currentPage}` : ""}.
                     </p>
                 </div>
                 <p className="text-sm text-slate-500">
                     {forcedCategoryName
-                        ? `Categoría: ${forcedCategoryName}`
+                        ? `Categoria: ${forcedCategoryName}`
                         : "Entrega y retiro en CABA."}
                 </p>
             </div>
@@ -318,7 +318,7 @@ export default async function CatalogResults({
                         href={basePath}
                         className="mt-5 inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-white transition hover:bg-primary/90"
                     >
-                        Ver todo el catálogo
+                        Ver todo el catalogo
                     </Link>
                 </div>
             )}

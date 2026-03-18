@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
@@ -27,17 +27,17 @@ export async function generateMetadata({
   const filters = normalizeCatalogFilters((await searchParams) ?? {});
   const shouldIndex = isCatalogIndexable(filters);
 
-    return {
-      title: "Tienda Online | Accesorios y Repuestos para Celulares | Team Celular",
-      description:
-      "Compra accesorios, fundas, cargadores, cables y repuestos para celulares con envío a todo CABA. Productos con garantía y asesoramiento en Team Celular.",
+  return {
+    title: "Tienda Online | Accesorios y Repuestos para Celulares | Team Celular",
+    description:
+      "Compra accesorios, fundas, cargadores, cables y repuestos para celulares con envio a todo CABA. Productos con garantia y asesoramiento en Team Celular.",
     alternates: {
       canonical: PAGE_URL,
     },
     openGraph: {
       title: "Tienda Online | Team Celular Buenos Aires",
       description:
-        "Accesorios y repuestos de calidad para tu celular con envío a todo CABA.",
+        "Accesorios y repuestos de calidad para tu celular con envio a todo CABA.",
       type: "website",
       url: PAGE_URL,
       locale: "es_AR",
@@ -99,17 +99,17 @@ export default async function TiendaPage({
                 Tienda Team Celular
               </p>
               <h1 className="max-w-3xl text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
-                Accesorios y repuestos para celulares con retiro en Recoleta y envío en CABA
+                Accesorios y repuestos para celulares con retiro en Recoleta y envio en CABA
               </h1>
               <p className="max-w-3xl text-base leading-7 text-slate-600">
                 Compra cables, cargadores, fundas, templados y repuestos con
-                asesoramiento real. Si no encontrás lo que buscás, te ayudamos
+                asesoramiento real. Si no encuentras lo que buscas, te ayudamos
                 por WhatsApp para validar compatibilidad antes de comprar.
               </p>
             </div>
             <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5">
               <p className="text-sm font-semibold text-slate-900">
-                Atención comercial
+                Atencion comercial
               </p>
               <ul className="mt-3 space-y-2 text-sm text-slate-600">
                 <li>Retiro por Paraguay 2451, Recoleta.</li>
@@ -121,7 +121,7 @@ export default async function TiendaPage({
                   href="/contacto"
                   className="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-300 px-4 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary"
                 >
-                  Ver ubicación
+                  Ver ubicacion
                 </Link>
                 <Link
                   href="/presupuesto-reparacion"
@@ -148,12 +148,10 @@ export default async function TiendaPage({
             filters={filters}
             siteUrl={SITE_URL}
             title="Productos para compra inmediata"
-            emptyMessage="No encontramos productos con esos filtros. Probá otra marca, categoría o rango de precio."
+            emptyMessage="No encontramos productos con esos filtros. Prueba otra marca, categoria o rango de precio."
           />
         </Suspense>
       </section>
     </div>
   );
 }
-
-

@@ -47,10 +47,10 @@ export default function CatalogFilters({
                     Filtros
                 </p>
                 <h2 className="text-xl font-semibold text-slate-950">
-                    Ajustá la búsqueda
+                    Ajusta la busqueda
                 </h2>
                 <p className="text-sm text-slate-600">
-                    Filtra por marca, categoría, precio o una palabra clave.
+                    Filtra por marca, categoria, precio o una palabra clave.
                 </p>
             </div>
 
@@ -60,7 +60,7 @@ export default function CatalogFilters({
                         <ActiveFilter>{forcedCategoryName}</ActiveFilter>
                     ) : null}
                     {filters.search ? (
-                        <ActiveFilter>Búsqueda: {filters.search}</ActiveFilter>
+                        <ActiveFilter>Busqueda: {filters.search}</ActiveFilter>
                     ) : null}
                     {filters.categories.map((category) => (
                         <ActiveFilter key={category}>{category}</ActiveFilter>
@@ -118,7 +118,7 @@ export default function CatalogFilters({
                 {!forcedCategoryName ? (
                     <fieldset className="space-y-3">
                         <legend className="text-sm font-medium text-slate-900">
-                            Categorías
+                            Categorias
                         </legend>
                         <div className="max-h-64 space-y-2 overflow-y-auto pr-1">
                             {options.categories.map((category) => (
@@ -143,7 +143,7 @@ export default function CatalogFilters({
                 ) : (
                     <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
                         <p className="text-sm font-medium text-slate-900">
-                            Categoría actual
+                            Categoria actual
                         </p>
                         <p className="mt-1 text-sm text-slate-600">
                             {forcedCategoryName}
@@ -184,7 +184,7 @@ export default function CatalogFilters({
                                 htmlFor="catalog-min-price"
                                 className="text-xs font-medium uppercase tracking-[0.16em] text-slate-500"
                             >
-                                Mínimo
+                                Minimo
                             </label>
                             <input
                                 id="catalog-min-price"
@@ -202,7 +202,7 @@ export default function CatalogFilters({
                                 htmlFor="catalog-max-price"
                                 className="text-xs font-medium uppercase tracking-[0.16em] text-slate-500"
                             >
-                                Máximo
+                                Maximo
                             </label>
                             <input
                                 id="catalog-max-price"
