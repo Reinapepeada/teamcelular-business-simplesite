@@ -58,12 +58,12 @@ export default function NavbarNUI() {
     }, []);
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/95 backdrop-blur dark:border-white/10 dark:bg-slate-950/92">
+        <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/92 shadow-[0_8px_24px_-20px_rgba(15,23,42,0.35)] backdrop-blur-xl dark:border-slate-800/80 dark:bg-gradient-to-b dark:from-slate-950/96 dark:to-slate-900/96 dark:shadow-[0_10px_30px_-18px_rgba(2,6,23,0.9)]">
             <div className="mx-auto flex min-h-[76px] w-full max-w-[100rem] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center gap-3">
                     <Link href="/" className="flex items-center gap-3 text-inherit">
                         <Image
-                            className="hidden h-10 w-auto dark:hidden sm:block"
+                            className="hidden h-10 w-auto sm:block dark:hidden"
                             src="/images/brand/imagotipo-dark.png"
                             alt="Team Celular"
                             width={1725}
@@ -72,7 +72,7 @@ export default function NavbarNUI() {
                             priority
                         />
                         <Image
-                            className="hidden h-10 w-auto sm:dark:block"
+                            className="hidden h-10 w-auto sm:hidden dark:sm:block"
                             src="/images/brand/imagotipo-light.png"
                             alt="Team Celular"
                             width={1725}
@@ -81,7 +81,7 @@ export default function NavbarNUI() {
                             priority
                         />
                         <Image
-                            className="h-12 w-auto dark:hidden sm:hidden"
+                            className="h-11 w-auto sm:hidden dark:hidden"
                             src="/images/ISOTIPO/SVG/ISOTIPO_black.svg"
                             alt="Team Celular"
                             width={256}
@@ -89,7 +89,7 @@ export default function NavbarNUI() {
                             sizes="40px"
                         />
                         <Image
-                            className="hidden h-12 w-auto dark:block sm:hidden"
+                            className="hidden h-11 w-auto sm:hidden dark:block"
                             src="/images/ISOTIPO/SVG/ISOTIPO_light.svg"
                             alt="Team Celular"
                             width={256}
@@ -98,14 +98,6 @@ export default function NavbarNUI() {
                         />
                     </Link>
 
-                    <div className="hidden xl:block">
-                        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-                            Recoleta - CABA
-                        </p>
-                        <p className="text-sm text-slate-600 dark:text-slate-300">
-                            Servicio técnico y presupuesto por WhatsApp
-                        </p>
-                    </div>
                 </div>
 
                 <nav className="hidden items-center gap-5 lg:flex">
@@ -118,8 +110,8 @@ export default function NavbarNUI() {
                                 href={item.href}
                                 className={`flex min-h-11 items-center py-2 text-sm font-medium transition ${
                                     active
-                                        ? "text-primary"
-                                        : "text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white"
+                                        ? "text-primary dark:text-sky-300"
+                                        : "text-slate-700 hover:text-slate-950 dark:text-slate-200/90 dark:hover:text-white"
                                 }`}
                             >
                                 {item.label}
@@ -133,8 +125,8 @@ export default function NavbarNUI() {
                             onClick={() => setDesktopMenuOpen((current) => !current)}
                             className={`flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition ${
                                 desktopMenuOpen
-                                    ? "bg-slate-100 text-slate-950 dark:bg-slate-800 dark:text-white"
-                                    : "text-slate-700 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white"
+                                    ? "bg-slate-100 text-slate-950 dark:bg-slate-800/80 dark:text-white"
+                                    : "text-slate-700 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-200 dark:hover:bg-slate-800/70 dark:hover:text-white"
                             }`}
                             aria-expanded={desktopMenuOpen}
                             aria-haspopup="menu"
@@ -147,7 +139,7 @@ export default function NavbarNUI() {
                         </button>
 
                         {desktopMenuOpen ? (
-                            <div className="absolute right-0 top-[calc(100%+0.5rem)] z-20 w-60 rounded-[1.4rem] border border-slate-200 bg-white p-3 shadow-xl dark:border-white/10 dark:bg-slate-900">
+                            <div className="absolute right-0 top-[calc(100%+0.5rem)] z-20 w-60 rounded-[1.4rem] border border-slate-200/85 bg-white/96 p-3 shadow-xl dark:border-slate-700/80 dark:bg-slate-900/95 dark:shadow-[0_16px_32px_-18px_rgba(2,6,23,0.95)]">
                                 <ul className="space-y-1">
                                     {SECONDARY_LINKS.map((item) => {
                                         const active = isActivePath(pathname, item.href);
@@ -159,8 +151,8 @@ export default function NavbarNUI() {
                                                     prefetch={false}
                                                     className={`flex min-h-11 items-center rounded-xl px-3 py-2 text-sm transition ${
                                                         active
-                                                            ? "bg-slate-100 font-medium text-primary dark:bg-slate-800"
-                                                            : "text-slate-700 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white"
+                                                            ? "bg-slate-100 font-medium text-primary dark:bg-slate-800/70 dark:text-sky-300"
+                                                            : "text-slate-700 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-200 dark:hover:bg-slate-800/70 dark:hover:text-white"
                                                     }`}
                                                 >
                                                     {item.label}
@@ -186,7 +178,7 @@ export default function NavbarNUI() {
                         href={WHATSAPP_URL}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100 dark:border-emerald-400/25 dark:bg-emerald-500/10 dark:text-emerald-300 dark:hover:bg-emerald-500/15"
+                        className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-emerald-500/35 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100 dark:border-emerald-400/35 dark:bg-emerald-500/15 dark:text-emerald-200 dark:hover:bg-emerald-500/25"
                     >
                         <BsWhatsapp className="text-lg" aria-hidden />
                         WhatsApp
@@ -196,7 +188,7 @@ export default function NavbarNUI() {
                 <button
                     type="button"
                     onClick={() => setMobileMenuOpen((current) => !current)}
-                    className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 lg:hidden dark:border-white/15 dark:bg-slate-900 dark:text-white dark:hover:border-white/25 dark:hover:bg-slate-800"
+                    className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 lg:hidden dark:border-slate-700/80 dark:bg-slate-900/80 dark:text-white dark:hover:border-slate-600 dark:hover:bg-slate-800"
                     aria-expanded={mobileMenuOpen}
                     aria-controls="mobile-site-menu"
                 >
@@ -207,19 +199,10 @@ export default function NavbarNUI() {
             {mobileMenuOpen ? (
                 <div
                     id="mobile-site-menu"
-                    className="border-t border-slate-200/80 bg-white px-4 py-4 lg:hidden dark:border-white/10 dark:bg-slate-950"
+                    className="border-t border-slate-200/80 bg-white/96 px-4 py-4 backdrop-blur-lg lg:hidden dark:border-slate-700/80 dark:bg-slate-950/95"
                 >
                     <div className="mx-auto w-full max-w-[100rem] space-y-3">
-                        <div className="rounded-2xl bg-slate-50 p-4 dark:bg-slate-900/80">
-                            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-                                Recoleta - CABA
-                            </p>
-                            <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
-                                Laboratorio técnico, revisión técnica entre ARS 15.000 y ARS 25.000 y respuesta comercial rápida.
-                            </p>
-                        </div>
-
-                        <div className="flex items-center justify-between rounded-2xl border border-slate-200 px-4 py-3 dark:border-white/10">
+                        <div className="flex items-center justify-between rounded-2xl border border-slate-200 px-4 py-3 dark:border-slate-700/80">
                             <span className="text-sm font-medium text-slate-700 dark:text-slate-200">
                                 Tema
                             </span>
@@ -238,7 +221,7 @@ export default function NavbarNUI() {
                                             className={`flex min-h-11 items-center rounded-xl px-3 py-2 text-sm font-medium transition ${
                                                 active
                                                     ? "bg-slate-900 text-white dark:bg-white dark:text-slate-950"
-                                                    : "text-slate-700 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white"
+                                                    : "text-slate-700 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-200 dark:hover:bg-slate-800/70 dark:hover:text-white"
                                             }`}
                                         >
                                             {item.label}
@@ -259,7 +242,7 @@ export default function NavbarNUI() {
                                 href={WHATSAPP_URL}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100 dark:border-emerald-400/25 dark:bg-emerald-500/10 dark:text-emerald-300 dark:hover:bg-emerald-500/15"
+                                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-emerald-500/35 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100 dark:border-emerald-400/35 dark:bg-emerald-500/15 dark:text-emerald-200 dark:hover:bg-emerald-500/25"
                             >
                                 <BsWhatsapp className="text-lg" aria-hidden />
                                 Abrir WhatsApp
@@ -271,4 +254,3 @@ export default function NavbarNUI() {
         </header>
     );
 }
-

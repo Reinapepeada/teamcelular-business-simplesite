@@ -9,10 +9,10 @@ export function ThemeProvider({
   ...props
 }: React.ComponentProps<typeof NextThemesProvider>) {
   return (
-    <NextUIProvider>
-      <NextThemesProvider {...props}>
+    <NextThemesProvider {...props}>
+      <NextUIProvider>
         {children}
-      </NextThemesProvider>
-    </NextUIProvider>
+      </NextUIProvider>
+    </NextThemesProvider>
   )
 }

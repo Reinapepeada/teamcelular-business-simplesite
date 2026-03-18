@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 import Plugins from "@/components/vercel/Plugins";
 import StructuredData from "@/components/seo/StructuredData";
+import { ThemeProvider } from "@/app/providers";
 
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 
@@ -118,13 +119,20 @@ export default function RootLayout({
     readonly children: React.ReactNode;
 }) {
     return (
-        <html lang="es">
-            <body className={`${inter.className} `}>
-                <StructuredData />
-                {children}
-                <Plugins />
+        <html lang="es" suppressHydrationWarning>
+            <body className={`${inter.className} bg-white text-slate-950 dark:bg-slate-950 dark:text-slate-50`}>
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="light"
+                    enableSystem={false}
+                    storageKey="teamcelular-theme"
+                    disableTransitionOnChange
+                >
+                    <StructuredData />
+                    {children}
+                    <Plugins />
+                </ThemeProvider>
             </body>
         </html>
     );
 }
-
