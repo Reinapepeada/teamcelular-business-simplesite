@@ -15,41 +15,41 @@ export default function RepairsForm() {
     return (
         <form action="/api/repair-lead" method="post" className="space-y-6">
             <div className="grid gap-4 md:grid-cols-2">
-                <label className="space-y-2 text-sm font-medium text-slate-900">
+                <label className="space-y-2 text-sm font-medium text-slate-900 dark:text-slate-100">
                     <span>Marca</span>
                     <input
                         type="text"
                         name="brand"
                         required
-                        className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
+                        className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
                     />
                 </label>
-                <label className="space-y-2 text-sm font-medium text-slate-900">
+                <label className="space-y-2 text-sm font-medium text-slate-900 dark:text-slate-100">
                     <span>Modelo</span>
                     <input
                         type="text"
                         name="model"
                         required
-                        className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
+                        className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
                     />
                 </label>
             </div>
 
             <fieldset className="space-y-3">
-                <legend className="text-sm font-semibold text-slate-900">
+                <legend className="text-sm font-semibold text-slate-900 dark:text-slate-100">
                     Selecciona la falla del equipo
                 </legend>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                     {repairOptions.map((option) => (
                         <label
                             key={option}
-                            className="flex min-h-11 items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 transition hover:border-primary/40 hover:bg-primary/5"
+                            className="flex min-h-11 items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 transition hover:border-primary/40 hover:bg-primary/5 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800/70"
                         >
                             <input
                                 type="checkbox"
                                 name="repairType"
                                 value={option}
-                                className="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary"
+                                className="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary dark:border-slate-600 dark:bg-slate-900"
                             />
                             <span>{option}</span>
                         </label>
@@ -57,22 +57,22 @@ export default function RepairsForm() {
                 </div>
             </fieldset>
 
-            <label className="block space-y-2 text-sm font-medium text-slate-900">
+            <label className="block space-y-2 text-sm font-medium text-slate-900 dark:text-slate-100">
                 <span>Descripcion de la falla</span>
                 <textarea
                     name="description"
                     rows={5}
-                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
+                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
                     placeholder="Contanos cuando empezo, si se golpeo, si tuvo humedad o cualquier detalle util."
                 />
             </label>
 
-            <label className="block space-y-2 text-sm font-medium text-slate-900">
+            <label className="block space-y-2 text-sm font-medium text-slate-900 dark:text-slate-100">
                 <span>Medio de contacto preferido</span>
                 <input
                     type="text"
                     name="contact"
-                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
+                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
                     placeholder="WhatsApp, llamada o email"
                 />
             </label>
@@ -84,7 +84,7 @@ export default function RepairsForm() {
                 >
                     Enviar a WhatsApp
                 </button>
-                <p className="text-sm leading-6 text-slate-600">
+                <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">
                     Armamos el mensaje automaticamente y te llevamos directo al
                     chat para cerrar el pedido sin friccion.
                 </p>

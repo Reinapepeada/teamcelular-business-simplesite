@@ -32,15 +32,15 @@ export default async function GoogleReviewsAPI() {
                 <div className="space-y-4 text-center">
                     <div className="flex items-center justify-center gap-3">
                         <FaGoogle className="text-4xl text-primary" />
-                        <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-[2.2rem] dark:text-white">
+                        <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-[2.2rem]">
                             Lo que dicen nuestros clientes
                         </h2>
                     </div>
-                    <div className="rounded-2xl border border-slate-200/70 bg-white/70 dark:bg-slate-900/70 p-8 shadow-md dark:border-white/10 dark:bg-slate-900/50">
+                    <div className="rounded-2xl border border-slate-200/70 bg-white/70 p-8 shadow-md dark:border-white/10 dark:bg-slate-900/70">
                         <p className="text-lg text-slate-600 dark:text-slate-400">
                             Las resenas no estan disponibles en este momento.
                         </p>
-                        <p className="mt-2 text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500">
+                        <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
                             Podes ver todas las opiniones directamente en nuestro
                             perfil de Google.
                         </p>
@@ -68,7 +68,7 @@ export default async function GoogleReviewsAPI() {
             <div className="space-y-4 text-center">
                 <div className="flex items-center justify-center gap-3">
                     <FaGoogle className="text-4xl text-primary" />
-                    <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-[2.2rem] dark:text-white">
+                    <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-[2.2rem]">
                         Lo que dicen nuestros clientes
                     </h2>
                 </div>
@@ -91,7 +91,7 @@ export default async function GoogleReviewsAPI() {
                 {reviews.slice(0, 3).map((review, index) => (
                     <article
                         key={`${review.author_name}-${index}`}
-                        className="rounded-2xl border border-slate-200/75 bg-white/75 dark:bg-slate-900/75 p-5 shadow-md transition hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-slate-900/55"
+                        className="rounded-2xl border border-slate-200/75 bg-white/75 p-5 shadow-md transition hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-slate-900/75"
                     >
                         <div className="space-y-4">
                             <div className="flex items-start justify-between gap-3">
@@ -112,7 +112,7 @@ export default async function GoogleReviewsAPI() {
                                         </div>
                                     )}
                                     <div>
-                                        <p className="text-[0.98rem] font-semibold leading-snug text-slate-900 dark:text-slate-100 dark:text-white">
+                                        <p className="text-[0.98rem] font-semibold leading-snug text-slate-900 dark:text-slate-100">
                                             {review.author_name}
                                         </p>
                                         <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -125,7 +125,7 @@ export default async function GoogleReviewsAPI() {
 
                             <StarRating rating={review.rating} />
 
-                            <p className="text-[0.92rem] leading-6 text-slate-600 dark:text-slate-400 dark:text-slate-300">
+                            <p className="text-[0.92rem] leading-6 text-slate-600 dark:text-slate-300">
                                 &ldquo;{review.text}&rdquo;
                             </p>
                         </div>

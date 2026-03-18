@@ -99,21 +99,21 @@ export default function StoreCartSheet() {
             <aside
                 id="store-cart-sheet"
                 aria-label="Resumen del carrito"
-                className={`fixed bottom-0 right-0 z-50 flex h-[85vh] w-full max-w-md flex-col rounded-t-[2rem] border border-slate-200 bg-white shadow-2xl transition-transform duration-300 sm:top-0 sm:h-full sm:rounded-l-[2rem] sm:rounded-tr-none ${
+                className={`fixed bottom-0 right-0 z-50 flex h-[85vh] w-full max-w-md flex-col rounded-t-[2rem] border border-slate-200 bg-white shadow-2xl transition-transform duration-300 dark:border-slate-700 dark:bg-slate-950 sm:top-0 sm:h-full sm:rounded-l-[2rem] sm:rounded-tr-none ${
                     open ? "translate-y-0 sm:translate-x-0" : "translate-y-full sm:translate-x-full"
                 }`}
             >
-                <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
+                <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4 dark:border-slate-700">
                     <div>
-                        <p className="text-lg font-semibold text-slate-950">Tu carrito</p>
-                        <p className="text-sm text-slate-600">
+                        <p className="text-lg font-semibold text-slate-950 dark:text-slate-50">Tu carrito</p>
+                        <p className="text-sm text-slate-600 dark:text-slate-400">
                             {totalItems} articulo{totalItems === 1 ? "" : "s"}
                         </p>
                     </div>
                     <button
                         type="button"
                         onClick={() => setOpen(false)}
-                        className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-slate-300 text-slate-700 transition hover:border-slate-400 hover:bg-slate-50"
+                        className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-slate-300 text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:border-slate-500 dark:hover:bg-slate-800"
                     >
                         Cerrar
                     </button>
@@ -121,11 +121,11 @@ export default function StoreCartSheet() {
 
                 <div className="flex-1 space-y-4 overflow-y-auto px-5 py-5">
                     {cart.length === 0 ? (
-                        <div className="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-6 text-center">
-                            <p className="text-lg font-semibold text-slate-900">
+                        <div className="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-6 text-center dark:border-slate-700 dark:bg-slate-900/70">
+                            <p className="text-lg font-semibold text-slate-900 dark:text-slate-100">
                                 Todavia no agregaste productos
                             </p>
-                            <p className="mt-2 text-sm text-slate-600">
+                            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
                                 Usa el carrito para pedir accesorios o repuestos por WhatsApp.
                             </p>
                         </div>
@@ -133,10 +133,10 @@ export default function StoreCartSheet() {
                         cart.map((item) => (
                             <article
                                 key={item.cartKey}
-                                className="rounded-3xl border border-slate-200 p-4"
+                                className="rounded-3xl border border-slate-200 p-4 dark:border-slate-700"
                             >
                                 <div className="flex gap-4">
-                                    <div className="relative h-20 w-20 flex-none overflow-hidden rounded-2xl bg-slate-50">
+                                    <div className="relative h-20 w-20 flex-none overflow-hidden rounded-2xl bg-slate-50 dark:bg-slate-900">
                                         <Image
                                             src={getProductImage(item)}
                                             alt={item.product.name}
@@ -150,15 +150,15 @@ export default function StoreCartSheet() {
                                             href={`/tienda/${buildProductSlug(item.product)}`}
                                             prefetch={false}
                                             onClick={() => setOpen(false)}
-                                            className="line-clamp-2 text-sm font-semibold text-slate-950 transition hover:text-primary"
+                                            className="line-clamp-2 text-sm font-semibold text-slate-950 transition hover:text-primary dark:text-slate-50"
                                         >
                                             {item.product.name}
                                         </Link>
-                                        <p className="mt-1 text-sm text-slate-600">
+                                        <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
                                             ${formatPrice(item.product.retail_price)} c/u
                                         </p>
                                         {item.variant?.color || item.variant?.size ? (
-                                            <p className="mt-1 text-xs text-slate-500">
+                                            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
                                                 {[item.variant?.color, item.variant?.size]
                                                     .filter(Boolean)
                                                     .join(" / ")}
@@ -166,9 +166,9 @@ export default function StoreCartSheet() {
                                         ) : null}
                                     </div>
                                 </div>
-
+                                
                                 <div className="mt-4 flex items-center justify-between gap-3">
-                                    <div className="flex items-center rounded-full border border-slate-300">
+                                    <div className="flex items-center rounded-full border border-slate-300 dark:border-slate-600">
                                         <button
                                             type="button"
                                             onClick={() =>
@@ -177,12 +177,12 @@ export default function StoreCartSheet() {
                                                     item.quantity - 1,
                                                 )
                                             }
-                                            className="inline-flex min-h-11 min-w-11 items-center justify-center text-slate-700 transition hover:bg-slate-50"
+                                            className="inline-flex min-h-11 min-w-11 items-center justify-center text-slate-700 transition hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800"
                                             aria-label={`Reducir cantidad de ${item.product.name}`}
                                         >
                                             -
                                         </button>
-                                        <span className="min-w-10 text-center text-sm font-semibold text-slate-900">
+                                        <span className="min-w-10 text-center text-sm font-semibold text-slate-900 dark:text-slate-100">
                                             {item.quantity}
                                         </span>
                                         <button
@@ -193,29 +193,29 @@ export default function StoreCartSheet() {
                                                     item.quantity + 1,
                                                 )
                                             }
-                                            className="inline-flex min-h-11 min-w-11 items-center justify-center text-slate-700 transition hover:bg-slate-50"
+                                            className="inline-flex min-h-11 min-w-11 items-center justify-center text-slate-700 transition hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800"
                                             aria-label={`Aumentar cantidad de ${item.product.name}`}
                                         >
                                             +
                                         </button>
                                     </div>
-                                    <button
-                                        type="button"
-                                        onClick={() => removeFromCart(item.cartKey)}
-                                        className="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-300 px-4 text-sm font-medium text-slate-700 transition hover:border-rose-300 hover:bg-rose-50 hover:text-rose-700"
-                                    >
-                                        Quitar
-                                    </button>
+                                        <button
+                                            type="button"
+                                            onClick={() => removeFromCart(item.cartKey)}
+                                            className="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-300 px-4 text-sm font-medium text-slate-700 transition hover:border-rose-300 hover:bg-rose-50 hover:text-rose-700 dark:border-slate-600 dark:text-slate-300 dark:hover:border-rose-400 dark:hover:bg-rose-900/20 dark:hover:text-rose-300"
+                                        >
+                                            Quitar
+                                        </button>
                                 </div>
                             </article>
                         ))
                     )}
                 </div>
 
-                <div className="border-t border-slate-200 px-5 py-4">
-                    <div className="flex items-center justify-between text-sm text-slate-600">
+                <div className="border-t border-slate-200 px-5 py-4 dark:border-slate-700">
+                    <div className="flex items-center justify-between text-sm text-slate-600 dark:text-slate-400">
                         <span>Total estimado</span>
-                        <span className="text-lg font-semibold text-slate-950">
+                        <span className="text-lg font-semibold text-slate-950 dark:text-slate-50">
                             ${formatPrice(totalPrice)}
                         </span>
                     </div>
@@ -231,7 +231,7 @@ export default function StoreCartSheet() {
                             className={`inline-flex min-h-12 items-center justify-center rounded-full px-5 text-sm font-semibold transition ${
                                 cart.length > 0
                                     ? "bg-primary text-white hover:bg-primary/90"
-                                    : "bg-slate-200 text-slate-500"
+                                    : "bg-slate-200 text-slate-500 dark:bg-slate-800 dark:text-slate-500"
                             }`}
                             onClick={() => setOpen(false)}
                             aria-disabled={cart.length === 0}
@@ -242,7 +242,7 @@ export default function StoreCartSheet() {
                             type="button"
                             onClick={clearCart}
                             disabled={cart.length === 0}
-                            className="inline-flex min-h-12 items-center justify-center rounded-full border border-slate-300 px-5 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
+                            className="inline-flex min-h-12 items-center justify-center rounded-full border border-slate-300 px-5 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-600 dark:text-slate-300 dark:hover:border-slate-500 dark:hover:bg-slate-800"
                         >
                             Vaciar carrito
                         </button>
