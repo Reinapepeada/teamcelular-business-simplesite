@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { BsChevronDown, BsList, BsWhatsapp, BsX } from "react-icons/bs";
 import Image from "next/image";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 import ThemeSwitcher, {
     ThemeSwitcherInline,
 } from "@/components/switch/ThemeSwitcher";
@@ -34,9 +35,15 @@ function isActivePath(pathname, href) {
 
 export default function NavbarNUI() {
     const pathname = usePathname();
+    const { resolvedTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
     const [desktopMenuOpen, setDesktopMenuOpen] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const desktopMenuRef = useRef(null);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     useEffect(() => {
         setDesktopMenuOpen(false);
@@ -57,14 +64,22 @@ export default function NavbarNUI() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
+    const isDark = mounted && resolvedTheme === "dark";
+    const desktopLogo = isDark
+        ? "/images/brand/imagotipo-light.png"
+        : "/images/brand/imagotipo-dark.png";
+    const mobileLogo = isDark
+        ? "/images/ISOTIPO/SVG/ISOTIPO_light.svg"
+        : "/images/ISOTIPO/SVG/ISOTIPO_black.svg";
+
     return (
         <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/92 shadow-[0_8px_24px_-20px_rgba(15,23,42,0.35)] backdrop-blur-xl dark:border-slate-800/80 dark:bg-gradient-to-b dark:from-slate-950/96 dark:to-slate-900/96 dark:shadow-[0_10px_30px_-18px_rgba(2,6,23,0.9)]">
             <div className="mx-auto flex min-h-[76px] w-full max-w-[100rem] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center gap-3">
                     <Link href="/" className="flex items-center gap-3 text-inherit">
                         <Image
-                            className="hidden h-10 w-auto sm:block dark:hidden"
-                            src="/images/brand/imagotipo-dark.png"
+                            className="hidden h-10 w-auto sm:block"
+                            src={desktopLogo}
                             alt="Team Celular"
                             width={1725}
                             height={591}
@@ -72,25 +87,8 @@ export default function NavbarNUI() {
                             priority
                         />
                         <Image
-                            className="hidden h-10 w-auto sm:hidden dark:sm:block"
-                            src="/images/brand/imagotipo-light.png"
-                            alt="Team Celular"
-                            width={1725}
-                            height={591}
-                            sizes="(max-width: 640px) 140px, 170px"
-                            priority
-                        />
-                        <Image
-                            className="h-11 w-auto sm:hidden dark:hidden"
-                            src="/images/ISOTIPO/SVG/ISOTIPO_black.svg"
-                            alt="Team Celular"
-                            width={256}
-                            height={256}
-                            sizes="40px"
-                        />
-                        <Image
-                            className="hidden h-11 w-auto sm:hidden dark:block"
-                            src="/images/ISOTIPO/SVG/ISOTIPO_light.svg"
+                            className="h-11 w-auto sm:hidden"
+                            src={mobileLogo}
                             alt="Team Celular"
                             width={256}
                             height={256}
