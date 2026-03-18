@@ -66,11 +66,11 @@ export default function NavbarNUI() {
 
     const isDark = mounted && resolvedTheme === "dark";
     const desktopLogo = isDark
-        ? "/images/brand/imagotipo-light.png"
-        : "/images/brand/imagotipo-dark.png";
+        ? "/images/brand/imagotipo-dark.png"
+        : "/images/brand/imagotipo-light.png";
     const mobileLogo = isDark
-        ? "/images/ISOTIPO/SVG/ISOTIPO_light.svg"
-        : "/images/ISOTIPO/SVG/ISOTIPO_black.svg";
+        ? "/images/ISOTIPO/SVG/ISOTIPO_black.svg"
+        : "/images/ISOTIPO/SVG/ISOTIPO_light.svg";
 
     return (
         <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/92 shadow-[0_8px_24px_-20px_rgba(15,23,42,0.35)] backdrop-blur-xl dark:border-slate-800/80 dark:bg-gradient-to-b dark:from-slate-950/96 dark:to-slate-900/96 dark:shadow-[0_10px_30px_-18px_rgba(2,6,23,0.9)]">
