@@ -233,7 +233,7 @@ export default function GuidesPage() {
                 </div>
               </div>
 
-              <div className="w-full max-w-[260px] rounded-3xl border border-slate-200/80 bg-white dark:bg-slate-900 p-5 shadow-lg dark:border-white/10 dark:bg-slate-950/70">
+              <div className="w-full max-w-[260px] rounded-3xl border border-slate-200/80 bg-white p-5 shadow-lg dark:border-white/10 dark:bg-slate-950/70">
                 <Image
                   src="/images/brand/imagotipo-light.png"
                   alt="Team Celular"
