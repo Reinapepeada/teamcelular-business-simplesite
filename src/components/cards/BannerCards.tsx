@@ -68,7 +68,7 @@ export default function BannerCards() {
                 <Image
                     alt="Laboratorio de microelectronica con equipamiento profesional"
                     className={mediaBase}
-                    src="/images/guia_microelectronica.webp"
+                    src="/images/micro_diagnos_fino.webp"
                     width={900}
                     height={900}
                     quality={75}
@@ -124,7 +124,7 @@ export default function BannerCards() {
                 <Image
                     alt="Tecnico trabajando en microelectronica"
                     className={mediaBase}
-                    src="/images/empresaFamiliar.webp"
+                    src="/images/reparacion_placa.webp"
                     width={900}
                     height={900}
                     quality={75}
