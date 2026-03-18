@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
@@ -18,86 +18,86 @@ import { SiSamsung, SiXiaomi } from "react-icons/si";
 
 const ARTICLES = [
   {
-    title: "Reparacion de iPhone en Buenos Aires",
+    title: "Reparación de iPhone en Buenos Aires",
     description:
-      "Service tecnico premium para iPhone con diagnostico claro, repuestos certificados y garantia escrita.",
+      "Servicio técnico premium para iPhone con diagnóstico claro, repuestos certificados y garantía escrita.",
     href: "/guias/reparacion-iphone-buenos-aires",
     category: "Landing por marca",
     readingTime: "6 min",
     Icon: FaApple,
     datePublished: "2024-01-15",
-    keywords: ["reparacion iPhone", "service Apple", "CABA", "true tone"],
+    keywords: ["reparación iPhone", "service Apple", "CABA", "true tone"],
   },
   {
-    title: "Reparacion de Samsung Galaxy en Buenos Aires",
+    title: "Reparación de Samsung Galaxy en Buenos Aires",
     description:
-      "Guia completa para Galaxy S, A y Z Fold: pantalla AMOLED, bateria, puerto USB-C y placa logica.",
+      "Guía completa para Galaxy S, A y Z Fold: pantalla AMOLED, batería, puerto USB-C y placa lógica.",
     href: "/guias/reparacion-samsung-buenos-aires",
     category: "Landing por marca",
     readingTime: "6 min",
     Icon: SiSamsung,
     datePublished: "2026-03-12",
-    keywords: ["reparacion Samsung", "Galaxy S", "Galaxy A", "service Samsung"],
+    keywords: ["reparación Samsung", "Galaxy S", "Galaxy A", "service Samsung"],
   },
   {
-    title: "Reparacion de Xiaomi, Redmi y POCO",
+    title: "Reparación de Xiaomi, Redmi y POCO",
     description:
-      "Diagnostico para equipos Xiaomi con foco en pantalla, bateria, carga rapida y microelectronica.",
+      "Diagnóstico para equipos Xiaomi con foco en pantalla, batería, carga rápida y microelectrónica.",
     href: "/guias/reparacion-xiaomi-buenos-aires",
     category: "Landing por marca",
     readingTime: "6 min",
     Icon: SiXiaomi,
     datePublished: "2026-03-12",
-    keywords: ["reparacion Xiaomi", "reparacion Redmi", "service POCO", "carga rapida"],
+    keywords: ["reparación Xiaomi", "reparación Redmi", "service POCO", "carga rápida"],
   },
   {
-    title: "Microelectronica y reballing profesional",
+    title: "Microelectrónica y reballing profesional",
     description:
-      "Como abordamos reparaciones avanzadas de placa y chips para recuperar equipos complejos.",
+      "Cómo abordamos reparaciones avanzadas de placa y chips para recuperar equipos complejos.",
     href: "/guias/microelectronica-reballing-caba",
     category: "Laboratorio",
     readingTime: "6 min",
     Icon: FaMicrochip,
     datePublished: "2024-02-20",
-    keywords: ["microelectronica", "reballing", "BGA", "placa logica"],
+    keywords: ["microelectrónica", "reballing", "BGA", "placa lógica"],
   },
   {
-    title: "Soporte tecnico para empresas y gremios",
+    title: "Soporte técnico para empresas y gremios",
     description:
-      "Beneficios de tercerizar mantenimiento de dispositivos moviles con SLAs y trazabilidad.",
+      "Beneficios de tercerizar mantenimiento de dispositivos móviles con SLAs y trazabilidad.",
     href: "/guias/soporte-empresas-servicio-tecnico",
     category: "Empresas",
     readingTime: "4 min",
     Icon: FaBuilding,
     datePublished: "2024-03-10",
-    keywords: ["soporte tecnico empresas", "SLA", "servicio corporativo"],
+    keywords: ["soporte técnico empresas", "SLA", "servicio corporativo"],
   },
   {
     title: "Mantenimiento preventivo de celulares",
     description:
-      "Buenas practicas para extender vida util de smartphones y reducir fallas recurrentes.",
+      "Buenas prácticas para extender vida útil de smartphones y reducir fallas recurrentes.",
     href: "/guias/mantenimiento-preventivo-celulares",
     category: "Cuidado",
     readingTime: "4 min",
     Icon: FaTools,
     datePublished: "2024-04-05",
-    keywords: ["mantenimiento celular", "preventivo", "vida util"],
+    keywords: ["mantenimiento celular", "preventivo", "vida útil"],
   },
   {
-    title: "Cambio de bateria de celular",
+    title: "Cambio de batería de celular",
     description:
-      "Guia sobre deterioro de bateria, criterios de reemplazo y ventajas de piezas certificadas.",
+      "Guía sobre deterioro de batería, criterios de reemplazo y ventajas de piezas certificadas.",
     href: "/guias/cambio-bateria-celular",
     category: "Reparaciones",
     readingTime: "5 min",
     Icon: FaBatteryFull,
     datePublished: "2024-11-30",
-    keywords: ["cambio bateria", "bateria certificada", "autonomia celular"],
+    keywords: ["cambio batería", "batería certificada", "autonomia celular"],
   },
   {
-    title: "Reparacion de pantalla de celular",
+    title: "Reparación de pantalla de celular",
     description:
-      "Todo sobre cambio de pantalla, tipos de panel, calidad de repuestos y control post reparacion.",
+      "Todo sobre cambio de pantalla, tipos de panel, calidad de repuestos y control post reparación.",
     href: "/guias/reparacion-pantalla-celular",
     category: "Reparaciones",
     readingTime: "6 min",
@@ -135,18 +135,18 @@ const articleVisuals: Record<string, { cover: string }> = {
 };
 
 export const metadata: Metadata = {
-  title: "Guias Tecnicas de Reparacion de Celulares | Team Celular",
+  title: "Guías técnicas de reparación de celulares | Team Celular",
   description:
-    "8 guias tecnicas con enfoque comercial y real: iPhone, Samsung, Xiaomi, bateria, pantalla, microelectronica y soporte para empresas en CABA.",
+    "8 guías técnicas con enfoque comercial y real: iPhone, Samsung, Xiaomi, batería, pantalla, microelectrónica y soporte para empresas en CABA.",
   keywords: [
-    "guias reparacion celulares",
-    "reparacion iPhone buenos aires",
-    "reparacion Samsung galaxy",
-    "reparacion Xiaomi redmi poco",
-    "cambio bateria celular",
+    "guías reparación celulares",
+    "reparación iPhone buenos aires",
+    "reparación Samsung galaxy",
+    "reparación Xiaomi redmi poco",
+    "cambio batería celular",
     "cambio pantalla celular",
-    "microelectronica moviles",
-    "soporte tecnico empresas",
+    "microelectrónica móviles",
+    "soporte técnico empresas",
   ],
   alternates: {
     canonical: "https://teamcelular.com/guias",
@@ -166,9 +166,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Centro de Guias Tecnicas | Team Celular",
+    title: "Centro de guías técnicas | Team Celular",
     description:
-      "Aprende y cotiza reparaciones reales para iPhone, Samsung y Xiaomi con enfoque tecnico y comercial en CABA.",
+      "Aprendé y cotizá reparaciones reales para iPhone, Samsung y Xiaomi con enfoque técnico y comercial en CABA.",
     type: "website",
     url: "https://teamcelular.com/guias",
     locale: "es_AR",
@@ -177,15 +177,15 @@ export const metadata: Metadata = {
         url: "https://teamcelular.com/images/banner_guias.webp",
         width: 1200,
         height: 630,
-        alt: "Centro de guias tecnicas Team Celular",
+        alt: "Centro de guías técnicas Team Celular",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Guias de Reparacion de Celulares | Team Celular",
+    title: "Guías de reparación de celulares | Team Celular",
     description:
-      "Contenido tecnico para usuarios y empresas: iPhone, Samsung, Xiaomi y microelectronica.",
+      "Contenido técnico para usuarios y empresas: iPhone, Samsung, Xiaomi y microelectrónica.",
     images: ["https://teamcelular.com/images/banner_guias.webp"],
   },
 };
@@ -197,7 +197,7 @@ export default function GuidesPage() {
         <BreadcrumbJsonLd
           items={[
             { name: "Inicio", url: "https://teamcelular.com/" },
-            { name: "Guias", url: "https://teamcelular.com/guias" },
+            { name: "Guías", url: "https://teamcelular.com/guias" },
           ]}
         />
 
@@ -207,7 +207,7 @@ export default function GuidesPage() {
           </Link>
           <span>/</span>
           <span className="font-semibold text-slate-900 dark:text-white">
-            Guias
+            Guías
           </span>
         </nav>
 
@@ -222,14 +222,14 @@ export default function GuidesPage() {
                 <div className="flex flex-wrap items-center gap-3">
                   <span className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
                     <FaBookOpen className="text-sm" />
-                    Guias Team Celular
+                    Guías Team Celular
                   </span>
                   <span className="rounded-full border border-slate-300/80 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700 dark:border-white/15 dark:bg-slate-950/70 dark:text-slate-200">
                     Recoleta - CABA
                   </span>
                 </div>
                 <div className="w-fit rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-600 dark:border-white/10 dark:bg-slate-950/60 dark:text-slate-300">
-                  Contenido tecnico con criterio comercial real
+                  Contenido técnico con criterio comercial real
                 </div>
               </div>
 
@@ -257,11 +257,11 @@ export default function GuidesPage() {
 
             <div className="space-y-4">
               <h1 className="max-w-3xl text-4xl font-black tracking-tight text-slate-900 dark:text-white md:text-5xl">
-                Guias tecnicas hechas desde el laboratorio.
+                Guías técnicas hechas desde el laboratorio.
               </h1>
               <p className="max-w-3xl text-lg leading-relaxed text-slate-700 dark:text-slate-300">
                 Reunimos procesos, fallas frecuentes y criterios de repuesto
-                para iPhone, Samsung, Xiaomi, microelectronica y soporte para
+                para iPhone, Samsung, Xiaomi, microelectrónica y soporte para
                 empresas con una mirada clara de taller real.
               </p>
             </div>
@@ -278,7 +278,7 @@ export default function GuidesPage() {
                   10+
                 </div>
                 <div className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-                  Anos reparando equipos reales
+                  Años reparando equipos reales
                 </div>
               </div>
               <div className="rounded-2xl border border-slate-200/80 bg-slate-50 p-5 dark:border-white/10 dark:bg-slate-950/55">
@@ -292,7 +292,7 @@ export default function GuidesPage() {
                   {ARTICLES.length}
                 </div>
                 <div className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-                  Guias activas por marca y falla
+                  Guías activas por marca y falla
                 </div>
               </div>
               <div className="rounded-2xl border border-slate-200/80 bg-slate-50 p-5 dark:border-white/10 dark:bg-slate-950/55">
@@ -306,7 +306,7 @@ export default function GuidesPage() {
                   24 h
                 </div>
                 <div className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-                  Diagnostico y criterio tecnico
+                  Diagnóstico y criterio técnico
                 </div>
               </div>
             </div>
@@ -316,13 +316,13 @@ export default function GuidesPage() {
                 href="/presupuesto-reparacion"
                 className="rounded-full bg-primary px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
               >
-                Solicitar asesoria inmediata
+                Solicitar asesoría inmediata
               </Link>
               <Link
                 href="/contacto"
                 className="rounded-full border-2 border-primary px-8 py-4 text-base font-semibold text-primary transition hover:bg-primary/10"
               >
-                Hablar con un tecnico
+                Hablar con un técnico
               </Link>
             </div>
           </div>
@@ -331,10 +331,10 @@ export default function GuidesPage() {
         <section className="space-y-8">
           <div className="text-center">
             <h2 className="mb-3 text-3xl font-bold text-slate-900 dark:text-white">
-              Explora nuestras guias especializadas
+              Explora nuestras guías especializadas
             </h2>
             <p className="text-lg text-slate-600 dark:text-slate-300">
-              Contenido tecnico y util para usuarios y empresas.
+              Contenido técnico y útil para usuarios y empresas.
             </p>
           </div>
 
@@ -410,7 +410,7 @@ export default function GuidesPage() {
                     href={article.href}
                     className="mt-6 inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg transition group-hover:gap-3 group-hover:bg-primary dark:bg-primary dark:group-hover:bg-secondary"
                   >
-                    Leer guia completa
+                    Leer guía completa
                     <FaArrowRight />
                   </Link>
                 </article>
@@ -421,11 +421,11 @@ export default function GuidesPage() {
 
         <section className="rounded-2xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:from-slate-900/40 dark:via-slate-900/30 dark:to-slate-900/40 md:p-16">
           <h2 className="mb-4 text-3xl font-bold text-slate-900 dark:text-white">
-            Necesitas un diagnostico profesional?
+            ¿Necesitás un diagnóstico profesional?
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
             Nuestro equipo responde consultas y cotizaciones para iPhone,
-            Samsung y Xiaomi con enfoque tecnico y comercial.
+            Samsung y Xiaomi con enfoque técnico y comercial.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
@@ -449,9 +449,9 @@ export default function GuidesPage() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "CollectionPage",
-              name: "Guias tecnicas de reparacion de celulares",
+              name: "Guías técnicas de reparación de celulares",
               description:
-                "Centro de contenido de Team Celular con guias de reparacion por marca, microelectronica y soporte corporativo.",
+                "Centro de contenido de Team Celular con guías de reparación por marca, microelectrónica y soporte corporativo.",
               image: "https://teamcelular.com/images/banner_guias.webp",
               provider: { "@id": "https://teamcelular.com#localbusiness" },
               hasPart: ARTICLES.map((article) => ({
@@ -473,3 +473,4 @@ export default function GuidesPage() {
     </div>
   );
 }
+

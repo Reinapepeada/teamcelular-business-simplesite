@@ -18,11 +18,11 @@ export async function POST(request: Request) {
     .filter(Boolean);
 
   const message = [
-    "Hola! Quiero pedir un presupuesto de reparacion.",
+    "Hola! Quiero pedir un presupuesto de reparación.",
     brand ? `Marca: ${brand}` : null,
     model ? `Modelo: ${model}` : null,
     repairTypes.length ? `Falla: ${repairTypes.join(", ")}` : null,
-    description ? `Descripcion: ${description}` : null,
+    description ? `Descripción: ${description}` : null,
     contact ? `Contacto preferido: ${contact}` : null,
   ]
     .filter(Boolean)

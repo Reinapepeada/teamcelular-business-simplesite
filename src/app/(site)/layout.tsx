@@ -1,9 +1,14 @@
 import MainLayout from "@/components/layouts/MainLayout";
+import SiteThemeProvider from "@/components/providers/SiteThemeProvider";
 
 export default function SiteLayout({
     children,
 }: {
     readonly children: React.ReactNode;
 }) {
-    return <MainLayout>{children}</MainLayout>;
+    return (
+        <SiteThemeProvider>
+            <MainLayout>{children}</MainLayout>
+        </SiteThemeProvider>
+    );
 }

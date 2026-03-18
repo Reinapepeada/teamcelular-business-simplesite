@@ -15,16 +15,16 @@ import {
 } from "react-icons/fa";
 
 export const metadata: Metadata = {
-    title: "Contacto | Team Celular | Reparacion de Celulares en Recoleta CABA",
+    title: "Contacto | Team Celular | Reparación de celulares en Recoleta CABA",
     description:
-        "Visitanos en Paraguay 2451, Recoleta, CABA. Atencion de lunes a viernes de 10:30 a 18:00. WhatsApp y presupuesto sin cargo.",
+        "Visitanos en Paraguay 2451, Recoleta, CABA. Atención de lunes a viernes de 10:30 a 18:00. WhatsApp y presupuesto sin cargo.",
     keywords: [
         "contacto team celular",
-        "reparacion celulares recoleta",
+        "reparación celulares recoleta",
         "taller celulares paraguay 2451",
-        "servicio tecnico caba contacto",
-        "presupuesto reparacion celular",
-        "whatsapp reparacion celular",
+        "servicio técnico caba contacto",
+        "presupuesto reparación celular",
+        "whatsapp reparación celular",
     ],
     alternates: {
         canonical: "https://teamcelular.com/contacto",
@@ -58,13 +58,13 @@ const contactMethods = [
         icon: FaWhatsapp,
         title: "WhatsApp",
         value: "+54 11 5103-4595",
-        description: "Respuesta comercial rapida",
+        description: "Respuesta comercial rápida",
         href: "https://wa.me/5491151034595",
         tone: "bg-emerald-50 text-emerald-700 border-emerald-200",
     },
     {
         icon: FaPhone,
-        title: "Telefono",
+        title: "Teléfono",
         value: "+54 11 5103-4595",
         description: "Llamadas de 10:30 a 18:00",
         href: "tel:+5491151034595",
@@ -74,7 +74,7 @@ const contactMethods = [
         icon: FaEnvelope,
         title: "Email",
         value: "teamcelular.arg@gmail.com",
-        description: "Ideal para consultas tecnicas largas",
+        description: "Ideal para consultas técnicas largas",
         href: "mailto:teamcelular.arg@gmail.com",
         tone: "bg-violet-50 text-violet-700 border-violet-200",
     },
@@ -97,19 +97,19 @@ const socialMedia = [
 
 const quickFaqs = [
     {
-        question: "Necesito turno para acercarme?",
+        question: "¿Necesito turno para acercarme?",
         answer:
-            "No. Atendemos por orden de llegada, aunque si escribis antes te confirmamos disponibilidad de banco de trabajo.",
+            "No. Atendemos por orden de llegada, aunque si escribís antes te confirmamos disponibilidad de banco de trabajo.",
     },
     {
-        question: "Coordinan retiros en CABA?",
+        question: "¿Coordinan retiros en CABA?",
         answer:
-            "Si. Programamos motos de lunes a viernes segun carga operativa y zona.",
+            "Sí. Programamos motos de lunes a viernes según carga operativa y zona.",
     },
     {
-        question: "Cuando conviene escribir por mail?",
+        question: "¿Cuándo conviene escribir por mail?",
         answer:
-            "Para presupuestos corporativos, reportes tecnicos o consultas con mucho detalle.",
+            "Para presupuestos corporativos, reportes técnicos o consultas con mucho detalle.",
     },
 ];
 
@@ -117,7 +117,7 @@ const transportInfo = [
     {
         icon: FaSubway,
         title: "Subte",
-        description: "Linea D - Estacion Callao, a unos 5 minutos caminando.",
+        description: "Línea D - Estación Callao, a unos 5 minutos caminando.",
     },
     {
         icon: FaBus,
@@ -126,31 +126,31 @@ const transportInfo = [
     },
     {
         icon: FaMapMarkerAlt,
-        title: "Ubicacion",
+        title: "Ubicación",
         description: "Paraguay 2451, Recoleta, CABA.",
     },
 ];
 
 const faqs = [
     {
-        question: "Necesito turno previo?",
+        question: "¿Necesito turno previo?",
         answer:
-            "No es obligatorio, pero escribir antes acelera la recepcion del equipo y evita esperas.",
+            "No es obligatorio, pero escribir antes acelera la recepción del equipo y evita esperas.",
     },
     {
         question: "Hacen presupuestos sin cargo?",
         answer:
-            "Si. Todos los presupuestos son sin cargo y sin compromiso.",
+            "Sí. Todos los presupuestos son sin cargo y sin compromiso.",
     },
     {
-        question: "Cuanto tarda una reparacion tipica?",
+        question: "¿Cuánto tarda una reparación típica?",
         answer:
-            "Pantalla o bateria suelen resolverse en el dia. Casos complejos pueden tomar entre 24 y 72 horas.",
+            "Pantalla o batería suelen resolverse en el día. Casos complejos pueden tomar entre 24 y 72 horas.",
     },
     {
-        question: "Ofrecen garantia?",
+        question: "¿Ofrecen garantía?",
         answer:
-            "Si. Todas las reparaciones se entregan con garantia escrita segun repuesto y tipo de trabajo.",
+            "Sí. Todas las reparaciones se entregan con garantía escrita según repuesto y tipo de trabajo.",
     },
 ];
 
@@ -182,7 +182,7 @@ export default function ContactoPage() {
                             Contacto directo con el laboratorio
                         </h1>
                         <p className="mt-4 text-lg leading-8 text-slate-600">
-                            Si queres venir al taller, pedir presupuesto o
+                            Si querés venir al taller, pedir presupuesto o
                             coordinar retiro, estos son los canales correctos y
                             los horarios reales.
                         </p>
@@ -240,7 +240,7 @@ export default function ContactoPage() {
 
                 <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-md">
                     <h2 className="text-2xl font-bold text-slate-900">
-                        Dudas rapidas antes de venir
+                        Dudas rápidas antes de venir
                     </h2>
                     <div className="mt-6 grid gap-4 md:grid-cols-3">
                         {quickFaqs.map((item) => (
@@ -267,13 +267,13 @@ export default function ContactoPage() {
                             </div>
                             <div>
                                 <h2 className="text-2xl font-bold text-slate-900">
-                                    Nuestra ubicacion
+                                    Nuestra ubicación
                                 </h2>
                                 <p className="mt-2 text-lg text-slate-700">
                                     Paraguay 2451, Recoleta
                                 </p>
                                 <p className="text-slate-600">
-                                    Ciudad Autonoma de Buenos Aires, Argentina
+                                    Ciudad Autónoma de Buenos Aires, Argentina
                                 </p>
                             </div>
                         </div>
@@ -284,13 +284,13 @@ export default function ContactoPage() {
                             </div>
                             <div>
                                 <h3 className="text-xl font-bold text-slate-900">
-                                    Horarios de atencion
+                                    Horarios de atención
                                 </h3>
                                 <p className="mt-2 text-slate-700">
                                     Lunes a Viernes: 10:30 - 18:00
                                 </p>
                                 <p className="text-sm text-slate-500">
-                                    Sabados y domingos: cerrado
+                                    Sábados y domingos: cerrado
                                 </p>
                             </div>
                         </div>
@@ -302,12 +302,12 @@ export default function ContactoPage() {
                             className="mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-primary/90"
                         >
                             <FaDirections aria-hidden />
-                            Como llegar en Google Maps
+                            Cómo llegar en Google Maps
                         </Link>
 
                         <div className="mt-8 space-y-4">
                             <h3 className="text-lg font-bold text-slate-900">
-                                Como llegar
+                                Cómo llegar
                             </h3>
                             {transportInfo.map((transport) => {
                                 const Icon = transport.icon;
@@ -416,7 +416,7 @@ export default function ContactoPage() {
                             "@type": "ContactPage",
                             name: "Contacto - Team Celular",
                             description:
-                                "Informacion de contacto y ubicacion de Team Celular en Recoleta, Buenos Aires",
+                                "Información de contacto y ubicación de Team Celular en Recoleta, Buenos Aires",
                             url: "https://teamcelular.com/contacto",
                         }),
                     }}

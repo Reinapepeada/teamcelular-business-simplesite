@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Suspense } from "react";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
@@ -45,7 +45,7 @@ export async function generateMetadata({
 
   if (!category) {
     return {
-      title: "Categoria no encontrada | Team Celular",
+      title: "Categoría no encontrada | Team Celular",
       robots: { index: false, follow: false },
     };
   }
@@ -65,7 +65,7 @@ export async function generateMetadata({
 
   return {
     title: `${category.name} | Tienda Team Celular`,
-    description: `Explora productos de ${category.name} disponibles en Team Celular con retiro en Recoleta y envio en CABA.`,
+    description: `Explora productos de ${category.name} disponibles en Team Celular con retiro en Recoleta y envío en CABA.`,
     alternates: {
       canonical: categoryUrl,
       languages: {
@@ -95,7 +95,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title: `${category.name} | Tienda Team Celular`,
-      description: `Productos de ${category.name} con retiro en Recoleta y envio en CABA.`,
+      description: `Productos de ${category.name} con retiro en Recoleta y envío en CABA.`,
       images: [`${SITE_URL}/opengraph-image.png`],
     },
   };
@@ -157,14 +157,14 @@ export default async function CategoryPage({
       <section className="mx-auto max-w-screen-2xl px-4 pb-8 sm:px-6 lg:px-8">
         <div className="rounded-[2rem] border border-slate-200 bg-white px-6 py-8 shadow-sm sm:px-8">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-            Categoria destacada
+            Categoría destacada
           </p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
             {category.name}
           </h1>
           <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
-            Filtra por marca, precio o busqueda puntual dentro de {category.name}.
-            Si necesitas validar compatibilidad, te asesoramos por WhatsApp antes
+            Filtra por marca, precio o búsqueda puntual dentro de {category.name}.
+            Si necesitás validar compatibilidad, te asesoramos por WhatsApp antes
             de comprar.
           </p>
         </div>
@@ -188,10 +188,11 @@ export default async function CategoryPage({
             forcedCategoryName={category.name}
             siteUrl={SITE_URL}
             title={`Productos en ${category.name}`}
-            emptyMessage={`No encontramos productos en ${category.name} con esos filtros. Prueba otra marca o rango de precio.`}
+            emptyMessage={`No encontramos productos en ${category.name} con esos filtros. Probá otra marca o rango de precio.`}
           />
         </Suspense>
       </section>
     </div>
   );
 }
+

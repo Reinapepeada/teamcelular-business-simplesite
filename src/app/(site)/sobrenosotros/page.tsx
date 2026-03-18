@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -19,15 +19,15 @@ import {
 } from "react-icons/fa";
 
 export const metadata: Metadata = {
-    title: "Sobre Nosotros | Team Celular | 15 Anos de Experiencia",
+    title: "Sobre Nosotros | Team Celular | 15 Años de experiencia",
     description:
-        "Empresa familiar con mas de 15 anos de experiencia en reparacion de celulares y microelectronica en Recoleta, CABA.",
+        "Empresa familiar con más de 15 años de experiencia en reparación de celulares y microelectrónica en Recoleta, CABA.",
     keywords: [
         "sobre team celular",
-        "empresa familiar reparacion celulares",
-        "15 anos experiencia tecnica",
-        "laboratorio microelectronica caba",
-        "servicio tecnico certificado",
+        "empresa familiar reparación celulares",
+        "15 años experiencia técnica",
+        "laboratorio microelectrónica caba",
+        "servicio técnico certificado",
         "historia team celular",
     ],
     alternates: {
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Sobre Nosotros | Team Celular",
         description:
-            "Mas de 15 anos cuidando dispositivos con profesionalismo y garantia escrita",
+            "Más de 15 años cuidando dispositivos con profesionalismo y garantía escrita",
         type: "website",
         url: "https://teamcelular.com/sobrenosotros",
         locale: "es_AR",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "Sobre Nosotros | Team Celular",
-        description: "15 anos de experiencia en reparacion profesional",
+        description: "15 años de experiencia en reparación profesional",
         images: ["https://teamcelular.com/images/empresaFamiliar.webp"],
     },
 };
@@ -63,21 +63,21 @@ const timeline = [
         location: "Venezuela",
         title: "Nuestros comienzos",
         description:
-            "Empezamos como un taller familiar especializado en reparacion de dispositivos moviles.",
+            "Empezamos como un taller familiar especializado en reparación de dispositivos móviles.",
     },
     {
         year: "2012",
         location: "Venezuela",
-        title: "Expansion tecnica",
+        title: "Expansión técnica",
         description:
-            "Sumamos microelectronica y reparacion a nivel placa para resolver fallas que otros no tomaban.",
+            "Sumamos microelectrónica y reparación a nivel placa para resolver fallas que otros no tomaban.",
     },
     {
         year: "2015",
-        location: "Panama",
-        title: "Internacionalizacion",
+        location: "Panamá",
+        title: "Internacionalización",
         description:
-            "Abrimos una operacion en Panama y consolidamos metodologia y trazabilidad.",
+            "Abrimos una operación en Panamá y consolidamos metodología y trazabilidad.",
     },
     {
         year: "2018",
@@ -91,7 +91,7 @@ const timeline = [
         location: "Recoleta",
         title: "Referencia local",
         description:
-            "Con miles de equipos reparados, nos consolidamos como laboratorio tecnico de confianza en CABA.",
+            "Con miles de equipos reparados, nos consolidamos como laboratorio técnico de confianza en CABA.",
     },
 ];
 
@@ -104,7 +104,7 @@ const values = [
     },
     {
         icon: FaLightbulb,
-        title: "Innovacion",
+        title: "Innovación",
         description:
             "Microscopios, estaciones de soldadura y herramientas de laboratorio actualizadas.",
     },
@@ -112,13 +112,13 @@ const values = [
         icon: FaHandshake,
         title: "Compromiso",
         description:
-            "Diagnostico honesto y explicacion clara antes de intervenir cualquier equipo.",
+            "Diagnóstico honesto y explicación clara antes de intervenir cualquier equipo.",
     },
     {
         icon: FaShieldAlt,
         title: "Integridad",
         description:
-            "Garantia escrita y criterio tecnico para cuidar tu inversion y tu informacion.",
+            "Garantía escrita y criterio técnico para cuidar tu inversión y tu información.",
     },
 ];
 
@@ -126,12 +126,12 @@ const differentiators = [
     {
         icon: FaCertificate,
         title: "Protocolos ESD",
-        description: "Proteccion antiestatica y trazabilidad en el banco de trabajo.",
+        description: "Protección antiestática y trazabilidad en el banco de trabajo.",
     },
     {
         icon: FaMicroscope,
-        title: "Microelectronica avanzada",
-        description: "Diagnostico a nivel componente y reballing para casos complejos.",
+        title: "Microelectrónica avanzada",
+        description: "Diagnóstico a nivel componente y reballing para casos complejos.",
     },
     {
         icon: FaTools,
@@ -151,14 +151,14 @@ const differentiators = [
     {
         icon: FaStar,
         title: "Experiencia internacional",
-        description: "Mas de 15 anos reparando en Venezuela, Panama y Argentina.",
+        description: "Más de 15 años reparando en Venezuela, Panamá y Argentina.",
     },
 ];
 
 const stats = [
-    { icon: FaClock, value: "15+", label: "Anos de experiencia" },
+    { icon: FaClock, value: "15+", label: "Años de experiencia" },
     { icon: FaUsers, value: "10.000+", label: "Equipos reparados" },
-    { icon: FaGlobe, value: "3", label: "Paises" },
+    { icon: FaGlobe, value: "3", label: "Países" },
     { icon: FaStar, value: "4.8", label: "Calificacion promedio" },
 ];
 
@@ -182,8 +182,8 @@ export default function SobreNosotrosPage() {
                             Empresa familiar
                         </span>
                         <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 md:text-5xl">
-                            Mas de 15 anos cuidando dispositivos con criterio
-                            tecnico y trato humano
+                            Más de 15 años cuidando dispositivos con criterio
+                            técnico y trato humano
                         </h1>
                         <p className="mt-4 text-lg leading-8 text-slate-600">
                             Desde nuestros inicios como taller familiar hasta el
@@ -226,7 +226,7 @@ export default function SobreNosotrosPage() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
                         <div className="absolute inset-x-0 bottom-0 p-8 text-white md:p-10">
                             <h2 className="text-3xl font-bold">
-                                Una historia de trabajo tecnico sostenido
+                                Una historia de trabajo técnico sostenido
                             </h2>
                             <p className="mt-2 max-w-2xl text-base leading-7 text-white/85">
                                 Pasamos por distintos mercados y etapas, pero el
@@ -243,7 +243,7 @@ export default function SobreNosotrosPage() {
                             Nuestra historia
                         </h2>
                         <p className="mt-2 text-lg text-slate-600">
-                            Hitos que marcaron como evoluciono el taller.
+                            Hitos que marcaron cómo evolucionó el taller.
                         </p>
                     </div>
                     <div className="grid gap-6 lg:grid-cols-2">
@@ -279,7 +279,7 @@ export default function SobreNosotrosPage() {
                         </h2>
                         <p className="mt-2 text-lg text-slate-600">
                             Principios que se ven en cada presupuesto y en cada
-                            reparacion.
+                            reparación.
                         </p>
                     </div>
                     <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
@@ -308,7 +308,7 @@ export default function SobreNosotrosPage() {
                 <section className="space-y-6">
                     <div className="text-center">
                         <h2 className="text-3xl font-bold text-slate-900">
-                            Por que elegirnos
+                            Por qué elegirnos
                         </h2>
                         <p className="mt-2 text-lg text-slate-600">
                             Lo que hace distinta la experiencia de Team Celular.
@@ -348,13 +348,13 @@ export default function SobreNosotrosPage() {
                                 <FaHeart className="text-xl" />
                             </div>
                             <h2 className="text-2xl font-bold text-slate-900">
-                                Nuestra mision
+                                Nuestra misión
                             </h2>
                         </div>
                         <p className="mt-5 leading-7 text-slate-600">
-                            Brindar soluciones tecnicas confiables para equipos
-                            que la gente necesita recuperar rapido y bien. Nos
-                            enfocamos en calidad de ejecucion, claridad comercial
+                            Brindar soluciones técnicas confiables para equipos
+                            que la gente necesita recuperar rápido y bien. Nos
+                            enfocamos en calidad de ejecución, claridad comercial
                             y seguimiento real.
                         </p>
                     </article>
@@ -365,12 +365,12 @@ export default function SobreNosotrosPage() {
                                 <FaGlobe className="text-xl" />
                             </div>
                             <h2 className="text-2xl font-bold text-slate-900">
-                                Nuestra vision
+                                Nuestra visión
                             </h2>
                         </div>
                         <p className="mt-5 leading-7 text-slate-600">
-                            Ser referencia en soluciones tecnicas para celulares,
-                            microelectronica y soporte especializado en Buenos
+                            Ser referencia en soluciones técnicas para celulares,
+                            microelectrónica y soporte especializado en Buenos
                             Aires, con una experiencia sobria, confiable y medible.
                         </p>
                     </article>
@@ -378,10 +378,10 @@ export default function SobreNosotrosPage() {
 
                 <section className="rounded-3xl border border-slate-200 bg-white p-10 text-center shadow-lg">
                     <h2 className="text-3xl font-bold text-slate-900">
-                        Queres conocer nuestro laboratorio?
+                        ¿Querés conocer nuestro laboratorio?
                     </h2>
                     <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-600">
-                        Visitanos en Paraguay 2451, Recoleta, y te mostramos como
+                        Visitanos en Paraguay 2451, Recoleta, y te mostramos cómo
                         trabajamos para devolverle la vida a tu equipo.
                     </p>
                     <div className="mt-6 flex flex-wrap justify-center gap-4">
@@ -401,7 +401,7 @@ export default function SobreNosotrosPage() {
                             href="/guias"
                             className="inline-flex min-h-12 items-center justify-center rounded-full border border-primary px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10"
                         >
-                            Ver guias tecnicas
+                            Ver guías técnicas
                         </Link>
                     </div>
                 </section>
@@ -414,17 +414,17 @@ export default function SobreNosotrosPage() {
                             "@type": "AboutPage",
                             name: "Sobre Nosotros - Team Celular",
                             description:
-                                "Historia y valores de Team Celular, empresa familiar con mas de 15 anos de experiencia en reparacion de dispositivos moviles",
+                                "Historia y valores de Team Celular, empresa familiar con más de 15 años de experiencia en reparación de dispositivos móviles",
                             url: "https://teamcelular.com/sobrenosotros",
                             mainEntity: {
                                 "@type": "Organization",
                                 name: "Team Celular",
                                 foundingDate: "2009",
                                 description:
-                                    "Empresa familiar especializada en reparacion de celulares y microelectronica con presencia en Venezuela, Panama y Argentina",
+                                    "Empresa familiar especializada en reparación de celulares y microelectrónica con presencia en Venezuela, Panamá y Argentina",
                                 areaServed: [
                                     { "@type": "Country", name: "Venezuela" },
-                                    { "@type": "Country", name: "Panama" },
+                                    { "@type": "Country", name: "Panamá" },
                                     { "@type": "Country", name: "Argentina" },
                                 ],
                             },
@@ -435,3 +435,4 @@ export default function SobreNosotrosPage() {
         </section>
     );
 }
+

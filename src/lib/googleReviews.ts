@@ -13,6 +13,8 @@ export interface PlaceDetails {
     reviews: GoogleReview[];
 }
 
+const GOOGLE_REVIEWS_TIMEOUT_MS = 4000;
+
 export async function getGoogleReviews(): Promise<PlaceDetails | null> {
     const apiKey = process.env.GOOGLE_PLACES_API_KEY;
     const placeId = process.env.GOOGLE_PLACE_ID;
@@ -22,10 +24,16 @@ export async function getGoogleReviews(): Promise<PlaceDetails | null> {
     }
 
     try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(
+            () => controller.abort(),
+            GOOGLE_REVIEWS_TIMEOUT_MS,
+        );
         const response = await fetch(
             `https://places.googleapis.com/v1/places/${placeId}?languageCode=es`,
             {
                 method: "GET",
+                signal: controller.signal,
                 headers: {
                     "Content-Type": "application/json",
                     "X-Goog-Api-Key": apiKey,
@@ -37,6 +45,7 @@ export async function getGoogleReviews(): Promise<PlaceDetails | null> {
                 next: { revalidate: 432000 },
             },
         );
+        clearTimeout(timeoutId);
 
         if (!response.ok) {
             return null;
@@ -67,7 +76,9 @@ export async function getGoogleReviews(): Promise<PlaceDetails | null> {
             reviews,
         };
     } catch (error) {
-        console.error("Error loading Google reviews", error);
+        if (error instanceof Error && error.name !== "AbortError") {
+            console.error("Error loading Google reviews", error);
+        }
         return null;
     }
 }

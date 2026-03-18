@@ -1,12 +1,12 @@
 const repairOptions = [
     "Pantalla",
-    "Bateria",
+    "Batería",
     "Carga",
     "Placa",
-    "Boton",
-    "Camara",
+    "Botón",
+    "Cámara",
     "Parlante",
-    "Microfono",
+    "Micrófono",
     "Software",
     "Otro",
 ];
@@ -37,7 +37,7 @@ export default function RepairsForm() {
 
             <fieldset className="space-y-3">
                 <legend className="text-sm font-semibold text-slate-900">
-                    Selecciona la falla del equipo
+                    Seleccioná la falla del equipo
                 </legend>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                     {repairOptions.map((option) => (
@@ -58,12 +58,12 @@ export default function RepairsForm() {
             </fieldset>
 
             <label className="block space-y-2 text-sm font-medium text-slate-900">
-                <span>Descripcion de la falla</span>
+                <span>Descripción de la falla</span>
                 <textarea
                     name="description"
                     rows={5}
                     className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
-                    placeholder="Contanos cuando empezo, si se golpeo, si tuvo humedad o cualquier detalle util."
+                    placeholder="Contanos cuándo empezó, si se golpeó, si tuvo humedad o cualquier detalle útil."
                 />
             </label>
 
@@ -85,8 +85,8 @@ export default function RepairsForm() {
                     Enviar a WhatsApp
                 </button>
                 <p className="text-sm leading-6 text-slate-600">
-                    Armamos el mensaje automaticamente y te llevamos directo al
-                    chat para cerrar el pedido sin friccion.
+                    Armamos el mensaje automáticamente y te llevamos directo al
+                    chat para cerrar el pedido sin fricción.
                 </p>
             </div>
         </form>

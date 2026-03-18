@@ -1,24 +1,27 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Link from "next/link";
 import BannerHome from "@/components/banners/BannerHome";
 import BannerCards from "@/components/cards/BannerCards";
-import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
+import GoogleReviewsAPI, {
+    GoogleReviewsFallback,
+} from "@/components/cards/GoogleReviewsAPI";
 import KnowledgeGrid from "@/components/cards/KnowledgeGrid";
 
 const SITE_URL =
     process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 
 export const metadata: Metadata = {
-    title: "Reparacion de celulares en Buenos Aires | Team Celular",
+    title: "Reparación de celulares en Buenos Aires | Team Celular",
     description:
-        "Servicio tecnico especializado en reparacion de celulares y laptops en Recoleta, CABA. Diagnostico en el dia, garantia escrita y atencion por WhatsApp.",
+        "Servicio técnico especializado en reparación de celulares y laptops en Recoleta, CABA. Diagnóstico en el día, garantía escrita y atención por WhatsApp.",
     keywords: [
-        "reparacion de celulares Buenos Aires",
-        "servicio tecnico celulares CABA",
-        "reparacion de laptops Buenos Aires",
-        "gestion de reparaciones celulares y laptops",
-        "servicio tecnico para empresas",
-        "control y diagnostico de equipos",
+        "reparación de celulares Buenos Aires",
+        "servicio técnico celulares CABA",
+        "reparación de laptops Buenos Aires",
+        "gestión de reparaciones celulares y laptops",
+        "servicio técnico para empresas",
+        "control y diagnóstico de equipos",
     ],
     alternates: {
         canonical: SITE_URL,
@@ -28,99 +31,99 @@ export const metadata: Metadata = {
         locale: "es_AR",
         url: SITE_URL,
         siteName: "Team Celular",
-        title: "Reparacion de celulares en Buenos Aires | Team Celular",
+        title: "Reparación de celulares en Buenos Aires | Team Celular",
         description:
-            "Diagnostico en el dia, repuestos de calidad y garantia escrita para celulares y laptops.",
+            "Diagnóstico en el día, repuestos de calidad y garantía escrita para celulares y laptops.",
         images: [
             {
                 url: `${SITE_URL}/opengraph-image.png`,
                 width: 1200,
                 height: 630,
-                alt: "Team Celular - Servicio tecnico en Buenos Aires",
+                alt: "Team Celular - Servicio técnico en Buenos Aires",
             },
         ],
     },
     twitter: {
         card: "summary_large_image",
-        title: "Reparacion de celulares en Buenos Aires | Team Celular",
+        title: "Reparación de celulares en Buenos Aires | Team Celular",
         description:
-            "Servicio tecnico con garantia escrita y respuesta comercial en menos de 2 horas habiles.",
+            "Servicio técnico con garantía escrita y respuesta comercial en menos de 2 horas hábiles.",
         images: [`${SITE_URL}/opengraph-image.png`],
     },
 };
 
 const services = [
     {
-        title: "Reparacion el mismo dia",
+        title: "Reparación el mismo día",
         description:
-            "Pantalla rota, bateria que no dura y puerto de carga dañado. La mayoria de las reparaciones se resuelven en el dia.",
+            "Pantalla rota, batería que no dura y puerto de carga dañado. La mayoría de las reparaciones se resuelven en el día.",
     },
     {
         title: "Problemas complejos de placa",
         description:
-            "Celulares mojados, que no encienden o con fallas intermitentes. Tenemos microscopio y equipamiento para microelectronica real.",
+            "Celulares mojados, que no encienden o con fallas intermitentes. Tenemos microscopio y equipamiento para microelectrónica real.",
     },
     {
         title: "Soporte para empresas",
         description:
-            "Armamos planes a medida con prioridad operativa, descuentos por volumen y facturacion A para equipos de trabajo.",
+            "Armamos planes a medida con prioridad operativa, descuentos por volumen y facturación A para equipos de trabajo.",
     },
 ];
 
 const differentiators = [
     {
-        title: "Garantia escrita",
+        title: "Garantía escrita",
         description:
-            "Cada reparacion sale documentada. Sin letra chica ni promesas vagas.",
+            "Cada reparación sale documentada. Sin letra chica ni promesas vagas.",
     },
     {
-        title: "Diagnostico claro",
+        title: "Diagnóstico claro",
         description:
             "Explicamos falla, alcance del trabajo y tiempos reales antes de intervenir el equipo.",
     },
     {
-        title: "Atencion cercana",
+        title: "Atención cercana",
         description:
-            "WhatsApp, llamada o visita directa al laboratorio. Respondemos rapido y sin vueltas.",
+            "WhatsApp, llamada o visita directa al laboratorio. Respondemos rápido y sin vueltas.",
     },
 ];
 
 const microFaqs = [
     {
         title: "Tiempo de respuesta",
-        question: "Cuanto tardan en contestar un presupuesto online?",
+        question: "¿Cuánto tardan en contestar un presupuesto online?",
         answer:
-            "Respondemos formulario y WhatsApp en menos de 2 horas habiles. Si requiere diagnostico fisico, lo coordinamos el mismo dia.",
+            "Respondemos formulario y WhatsApp en menos de 2 horas hábiles. Si requiere diagnóstico físico, lo coordinamos el mismo día.",
     },
     {
-        title: "Garantia real",
-        question: "Que cubre la garantia escrita?",
+        title: "Garantía real",
+        question: "¿Qué cubre la garantía escrita?",
         answer:
-            "Incluye mano de obra y repuesto por 90 dias. Si falla, lo revisamos sin costo.",
+            "Incluye mano de obra y repuesto por 90 días. Si falla, lo revisamos sin costo.",
     },
     {
         title: "Stock y repuestos",
-        question: "Tienen repuestos para iPhone y Android?",
+        question: "¿Tienen repuestos para iPhone y Android?",
         answer:
-            "Trabajamos con stock de las marcas mas consultadas y conseguimos piezas faltantes segun modelo y disponibilidad.",
+            "Trabajamos con stock de las marcas más consultadas y conseguimos piezas faltantes según modelo y disponibilidad.",
     },
 ];
 
 const faqs = [
     {
-        question: "Arreglan todo tipo de celulares?",
+        question: "¿Arreglan todo tipo de celulares?",
         answer:
-            "Trabajamos con iPhone, Samsung, Motorola, Xiaomi y la mayoria de las marcas actuales. Si tu modelo es poco comun, te confirmamos disponibilidad antes de avanzar.",
+            "Trabajamos con iPhone, Samsung, Motorola, Xiaomi y la mayoría de las marcas actuales. Si tu modelo es poco común, te confirmamos disponibilidad antes de avanzar.",
     },
     {
-        question: "Hacen retiro dentro de CABA?",
+        question: "¿Hacen retiro dentro de CABA?",
         answer:
-            "Podemos coordinar retiro y entrega en CABA segun disponibilidad operativa del dia.",
+            "Podemos coordinar retiro y entrega en CABA según disponibilidad operativa del día.",
     },
     {
-        question: "Cuanto tarda un presupuesto?",
+        question: "¿Cuánto tarda un presupuesto?",
         answer:
-            "En taller, suele ser inmediato. Por WhatsApp o formulario, te respondemos el mismo dia con un estimado y los siguientes pasos.",
+            "En taller, suele ser inmediato. Por WhatsApp o formulario, te respondemos el mismo día con un estimado y los siguientes pasos.",
     },
 ];
 
@@ -134,24 +137,23 @@ export default function Home() {
     return (
         <section className="flex w-full max-w-[100rem] flex-col items-center gap-16 px-6 py-14 md:px-8 2xl:px-10">
             <BannerHome />
-            <BannerCards />
 
             <section className="w-full max-w-[100rem] space-y-12 text-center md:text-left lg:space-y-14">
                 <article className="grid gap-10 rounded-2xl border border-slate-200/70 bg-white/70 p-8 shadow-lg md:grid-cols-2 md:items-center lg:p-10">
                     <div className="space-y-6">
                         <h2 className="text-3xl font-semibold tracking-tight text-primary md:text-[2.35rem]">
-                            Por que elegir Team Celular
+                            Por qué elegir Team Celular
                         </h2>
                         <p className="text-[1.03rem] leading-7 text-slate-700">
-                            Somos un laboratorio tecnico en Recoleta enfocado en
-                            reparar rapido, diagnosticar bien y explicar claro.
+                            Somos un laboratorio técnico en Recoleta enfocado en
+                            reparar rápido, diagnosticar bien y explicar claro.
                             Trabajamos con repuestos de calidad y criterio
                             comercial honesto.
                         </p>
                         <p className="text-[1.03rem] leading-7 text-slate-700">
                             Atendemos equipos personales, casos complejos de
-                            placa y tambien soporte para empresas. Cada trabajo
-                            sale con garantia escrita y seguimiento real.
+                            placa y también soporte para empresas. Cada trabajo
+                            sale con garantía escrita y seguimiento real.
                         </p>
                         <div className="flex flex-wrap gap-4">
                             <Link
@@ -170,7 +172,7 @@ export default function Home() {
                                 href="/tecnico-de-celulares"
                                 className="rounded-full border border-secondary/60 bg-white/85 px-6 py-3 text-sm font-semibold text-slate-800 transition hover:bg-secondary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
                             >
-                                Tecnico de celulares
+                                Técnico de celulares
                             </Link>
                             <Link
                                 href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20necesito%20una%20reparacion"
@@ -185,7 +187,7 @@ export default function Home() {
 
                     <div className="space-y-5 rounded-2xl border border-slate-200/80 bg-white/85 p-8 shadow-md">
                         <h3 className="text-2xl font-semibold text-slate-900">
-                            Que hacemos
+                            Qué hacemos
                         </h3>
                         <ul className="space-y-4 text-left">
                             {services.map((service) => (
@@ -247,33 +249,37 @@ export default function Home() {
                     ))}
                 </section>
 
-                {/* @ts-expect-error Async Server Component */}
-                <GoogleReviewsAPI />
+                <BannerCards />
+
+                <Suspense fallback={<GoogleReviewsFallback />}>
+                    {/* @ts-expect-error Async Server Component */}
+                    <GoogleReviewsAPI />
+                </Suspense>
 
                 <article className="rounded-2xl border border-slate-200/70 bg-white/70 p-8 shadow-md lg:p-10">
                     <h2 className="text-2xl font-bold tracking-tight text-slate-900 md:text-[2rem]">
-                        Donde estamos y como contactarnos
+                        Dónde estamos y cómo contactarnos
                     </h2>
                     <div className="mt-6 grid gap-8 md:grid-cols-2">
                         <div className="space-y-4">
                             <p className="text-[1.03rem] leading-7 text-slate-700">
-                                Nuestro laboratorio esta en Paraguay 2451,
-                                Recoleta, con llegada facil desde Palermo,
+                                Nuestro laboratorio está en Paraguay 2451,
+                                Recoleta, con llegada fácil desde Palermo,
                                 Belgrano, Caballito, Microcentro y otras zonas
                                 de CABA.
                             </p>
                             <p className="text-[1.03rem] leading-7 text-slate-700">
                                 Atendemos de lunes a viernes de 10:30 a 18:00 y
-                                coordinamos retiros segun disponibilidad.
+                                coordinamos retiros según disponibilidad.
                             </p>
                         </div>
                         <div className="space-y-4">
                             <p className="font-semibold text-slate-900">
-                                Vias de contacto
+                                Vías de contacto
                             </p>
                             <ul className="space-y-2 text-left text-slate-600">
                                 <li>
-                                    Tel:{" "}
+                                    Teléfono:{" "}
                                     <Link
                                         href="tel:+541151034595"
                                         className="font-semibold text-primary transition hover:text-secondary"
@@ -299,7 +305,7 @@ export default function Home() {
 
                 <section className="space-y-6">
                     <h2 className="text-2xl font-bold tracking-tight text-slate-900 md:text-[2rem]">
-                        Preguntas frecuentes sobre reparacion de celulares
+                        Preguntas frecuentes sobre reparación de celulares
                     </h2>
                     <div className="grid gap-4 md:grid-cols-3">
                         {faqs.map((faq) => (
@@ -326,25 +332,22 @@ export default function Home() {
                 <article className="relative overflow-hidden rounded-2xl border border-slate-200/70 bg-white/75 p-8 text-center shadow-lg md:text-left lg:p-10">
                     <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-primary/8 via-white/70 to-secondary/8" />
                     <h2 className="text-2xl font-bold tracking-tight text-primary md:text-[2rem]">
-                        Listo para recuperar tu telefono?
+                        ¿Listo para recuperar tu teléfono?
                     </h2>
                     <p className="mt-4 text-[1.03rem] leading-7 text-slate-700">
-                        Dejanos un mensaje con la falla, elegi tu canal de
+                        Dejanos un mensaje con la falla, elegí tu canal de
                         contacto y coordinamos el siguiente paso sin perder
                         tiempo.
                     </p>
                     <div className="mt-6 flex flex-wrap justify-center gap-4 md:justify-start">
-                        <Link
-                            href="/contacto"
-                            className={primaryCtaClass}
-                        >
+                        <Link href="/contacto" className={primaryCtaClass}>
                             Ver formas de contacto
                         </Link>
                         <Link
                             href="/sobrenosotros"
                             className={neutralCtaClass}
                         >
-                            Conoce el taller
+                            Conocé el taller
                         </Link>
                     </div>
                 </article>

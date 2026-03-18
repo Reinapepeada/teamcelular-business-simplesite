@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import RepairsForm from "@/components/forms/RepairsForm";
@@ -23,24 +23,24 @@ const SITE_URL =
 const PAGE_URL = `${SITE_URL}/presupuesto-reparacion`;
 
 export const metadata: Metadata = {
-    title: "Presupuesto Reparacion de Celulares en Buenos Aires | Team Celular",
+    title: "Presupuesto de reparación de celulares en Buenos Aires | Team Celular",
     description:
-        "Solicita tu presupuesto online sin cargo y recibi respuesta en menos de 24 horas. Laboratorio en Recoleta con garantia escrita y repuestos premium.",
+        "Solicitá tu presupuesto online sin cargo y recibí respuesta en menos de 24 horas. Laboratorio en Recoleta con garantía escrita y repuestos premium.",
     keywords: [
-        "presupuesto reparacion celulares",
-        "servicio tecnico celulares buenos aires",
+        "presupuesto reparación celulares",
+        "servicio técnico celulares buenos aires",
         "presupuesto iphone pantalla",
         "arreglo celular recoleta",
         "microelectronica caba",
-        "retiro reparacion celulares",
+        "retiro reparación celulares",
     ],
     alternates: {
         canonical: PAGE_URL,
     },
     openGraph: {
-        title: "Presupuesto Reparacion de Celulares en Buenos Aires | Team Celular",
+        title: "Presupuesto de reparación de celulares en Buenos Aires | Team Celular",
         description:
-            "24 horas de respuesta, garantia escrita y soporte personalizado para reparar tu celular.",
+            "24 horas de respuesta, garantía escrita y soporte personalizado para reparar tu celular.",
         url: PAGE_URL,
         locale: "es_AR",
         type: "website",
@@ -55,9 +55,9 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Pedi tu presupuesto de reparacion en Team Celular",
+        title: "Pedí tu presupuesto de reparación en Team Celular",
         description:
-            "Respuesta en menos de 24 horas con garantia escrita y repuestos premium.",
+            "Respuesta en menos de 24 horas con garantía escrita y repuestos premium.",
         images: ["https://teamcelular.com/opengraph-image.png"],
     },
 };
@@ -67,28 +67,28 @@ const processSteps = [
         icon: FaClipboardList,
         title: "Completa el formulario",
         description:
-            "Contanos la marca, modelo y problema del equipo. Cuanto mas contexto nos des, mejor.",
+            "Contanos la marca, modelo y problema del equipo. Cuanto más contexto nos des, mejor.",
         timing: "2 minutos",
     },
     {
         icon: FaClock,
-        title: "Recibi tu diagnostico inicial",
+        title: "Recibí tu diagnóstico inicial",
         description:
-            "En menos de 24 horas habiles un tecnico te responde por WhatsApp o email.",
+            "En menos de 24 horas hábiles un técnico te responde por WhatsApp o email.",
         timing: "< 24 hs",
     },
     {
         icon: FaTools,
         title: "Traelo o coordinamos retiro",
         description:
-            "Podes acercarte al laboratorio en Recoleta o coordinar retiro en CABA segun disponibilidad.",
-        timing: "Mismo dia",
+            "Podés acercarte al laboratorio en Recoleta o coordinar retiro en CABA según disponibilidad.",
+        timing: "Mismo día",
     },
     {
         icon: FaSmile,
-        title: "Retira con garantia",
+        title: "Retirá con garantía",
         description:
-            "Entregamos el equipo probado y con garantia escrita segun el trabajo realizado.",
+            "Entregamos el equipo probado y con garantía escrita según el trabajo realizado.",
         timing: "24-72 hs",
     },
 ];
@@ -96,14 +96,14 @@ const processSteps = [
 const promises = [
     {
         icon: FaShieldAlt,
-        title: "Garantia escrita",
-        description: "Todos los trabajos incluyen respaldo y documentacion.",
+        title: "Garantía escrita",
+        description: "Todos los trabajos incluyen respaldo y documentación.",
     },
     {
         icon: FaCheckCircle,
         title: "Repuestos premium",
         description:
-            "Trabajamos con originales y alternativas de primera linea segun el caso.",
+            "Trabajamos con originales y alternativas de primera línea según el caso.",
     },
     {
         icon: FaTruck,
@@ -114,19 +114,19 @@ const promises = [
 
 const quickResponseFaqs = [
     {
-        question: "En cuanto tiempo confirman el presupuesto?",
+        question: "¿En cuánto tiempo confirman el presupuesto?",
         answer:
-            "La mayoria se responde el mismo dia. Si falta contexto, pedimos fotos o chequeo fisico.",
+            "La mayoría se responde el mismo día. Si falta contexto, pedimos fotos o chequeo físico.",
     },
     {
-        question: "El retiro en CABA tiene costo?",
+        question: "¿El retiro en CABA tiene costo?",
         answer:
-            "Se coordina segun zona y disponibilidad. Para reparaciones confirmadas puede quedar bonificado.",
+            "Se coordina según zona y disponibilidad. Para reparaciones confirmadas puede quedar bonificado.",
     },
     {
-        question: "Como se paga la sena?",
+        question: "¿Cómo se paga la seña?",
         answer:
-            "Podes transferir o pedir link de pago. El saldo se abona al retirar o contra entrega.",
+            "Podés transferir o pedir link de pago. El saldo se abona al retirar o contra entrega.",
     },
 ];
 
@@ -138,32 +138,32 @@ const popularRepairs = [
     },
     {
         icon: FaBatteryHalf,
-        title: "Bateria y carga",
-        details: "Cambio de bateria, pin de carga, limpieza de puertos y humedad.",
+        title: "Batería y carga",
+        details: "Cambio de batería, pin de carga, limpieza de puertos y humedad.",
     },
     {
         icon: FaCamera,
-        title: "Camaras y sensores",
-        details: "Reemplazo de camaras, flex, sensores y calibraciones.",
+        title: "Cámaras y sensores",
+        details: "Reemplazo de cámaras, flex, sensores y calibraciones.",
     },
     {
         icon: FaTools,
-        title: "Microelectronica",
-        details: "Reballing BGA, fallas de placa y recuperacion avanzada.",
+        title: "Microelectrónica",
+        details: "Reballing BGA, fallas de placa y recuperación avanzada.",
     },
 ];
 
 const supportChannels = [
     {
         icon: FaWhatsapp,
-        title: "Atencion inmediata",
+        title: "Atención inmediata",
         description: "+54 11 5103-4595",
         href: "https://wa.me/5491151034595?text=Hola!%20Necesito%20un%20presupuesto",
         external: true,
     },
     {
         icon: FaPhoneAlt,
-        title: "Consultas tecnicas",
+        title: "Consultas técnicas",
         description: "Lunes a viernes de 10:30 a 18:00",
         href: "tel:+5491151034595",
         external: false,
@@ -179,24 +179,24 @@ const supportChannels = [
 
 const faqs = [
     {
-        question: "Cuanto demora el presupuesto?",
+        question: "¿Cuánto demora el presupuesto?",
         answer:
-            "La mayoria se responde dentro de las primeras 12 horas habiles. Casos complejos pueden tardar hasta 24 horas.",
+            "La mayoría se responde dentro de las primeras 12 horas hábiles. Casos complejos pueden tardar hasta 24 horas.",
     },
     {
-        question: "El diagnostico tiene costo?",
+        question: "¿El diagnóstico tiene costo?",
         answer:
-            "No. El diagnostico inicial es sin cargo. Solo pagas si aprobas el trabajo.",
+            "No. El diagnóstico inicial es sin cargo. Solo pagás si aprobás el trabajo.",
     },
     {
-        question: "Que garantia ofrecen?",
+        question: "¿Qué garantía ofrecen?",
         answer:
-            "Garantia escrita de 90 a 180 dias segun tipo de reparacion y repuesto utilizado.",
+            "Garantía escrita de 90 a 180 días según tipo de reparación y repuesto utilizado.",
     },
     {
-        question: "Puedo enviar fotos o videos?",
+        question: "¿Puedo enviar fotos o videos?",
         answer:
-            "Si. Despues de completar el formulario seguimos por WhatsApp si hace falta mas contexto.",
+            "Sí. Después de completar el formulario seguimos por WhatsApp si hace falta más contexto.",
     },
 ];
 
@@ -217,7 +217,7 @@ export default function PresupuestoReparacionPage() {
                     </Link>
                     <span>/</span>
                     <span className="font-semibold text-slate-900">
-                        Presupuesto de reparacion
+                        Presupuesto de reparación
                     </span>
                 </nav>
 
@@ -227,12 +227,12 @@ export default function PresupuestoReparacionPage() {
                             Presupuesto sin cargo
                         </span>
                         <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 md:text-5xl">
-                            Pedi tu presupuesto online y recupera tu celular con
-                            un plan tecnico claro
+                            Pedí tu presupuesto online y recuperá tu celular con
+                            un plan técnico claro
                         </h1>
                         <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
                             Somos laboratorio en Recoleta con enfoque real en
-                            microelectronica, repuestos premium y seguimiento por
+                            microelectrónica, repuestos premium y seguimiento por
                             WhatsApp.
                         </p>
 
@@ -240,21 +240,21 @@ export default function PresupuestoReparacionPage() {
                             <li className="flex items-start gap-3">
                                 <FaCheckCircle className="mt-1 text-primary" />
                                 <span>
-                                    Diagnostico sin cargo y presupuesto antes de
+                                    Diagnóstico sin cargo y presupuesto antes de
                                     tocar el equipo.
                                 </span>
                             </li>
                             <li className="flex items-start gap-3">
                                 <FaCheckCircle className="mt-1 text-primary" />
                                 <span>
-                                    Repuestos originales o premium segun tu caso
+                                    Repuestos originales o premium según tu caso
                                     y objetivo.
                                 </span>
                             </li>
                             <li className="flex items-start gap-3">
                                 <FaCheckCircle className="mt-1 text-primary" />
                                 <span>
-                                    Seguimiento comercial y tecnico por WhatsApp.
+                                    Seguimiento comercial y técnico por WhatsApp.
                                 </span>
                             </li>
                         </ul>
@@ -278,13 +278,13 @@ export default function PresupuestoReparacionPage() {
                         </div>
 
                         <p className="mt-4 text-sm text-slate-500">
-                            Horario de atencion: lunes a viernes de 10:30 a 18:00.
+                            Horario de atención: lunes a viernes de 10:30 a 18:00.
                         </p>
                     </div>
 
                     <aside className="rounded-3xl border border-slate-200 bg-slate-50 p-8">
                         <h2 className="text-2xl font-bold text-slate-900">
-                            Por que pedir tu presupuesto online
+                            Por qué pedir tu presupuesto online
                         </h2>
                         <div className="mt-6 space-y-6">
                             {[
@@ -293,19 +293,19 @@ export default function PresupuestoReparacionPage() {
                                     title: "Tiempo de respuesta",
                                     value: "12 hs promedio",
                                     description:
-                                        "Un tecnico dedicado te responde en menos de 24 horas habiles.",
+                                        "Un técnico dedicado te responde en menos de 24 horas hábiles.",
                                 },
                                 {
                                     icon: FaShieldAlt,
-                                    title: "Garantia",
-                                    value: "90 a 180 dias",
+                                    title: "Garantía",
+                                    value: "90 a 180 días",
                                     description:
-                                        "Segun el tipo de reparacion y el repuesto utilizado.",
+                                        "Según el tipo de reparación y el repuesto utilizado.",
                                 },
                                 {
                                     icon: FaSmile,
                                     title: "Confianza",
-                                    value: "Resenas verificables",
+                                    value: "Reseñas verificables",
                                     description:
                                         "Prueba social real y experiencia de laboratorio local.",
                                 },
@@ -337,7 +337,7 @@ export default function PresupuestoReparacionPage() {
                 <section className="space-y-6">
                     <div className="text-center">
                         <h2 className="text-3xl font-bold text-slate-900">
-                            Asi funciona el servicio
+                            Así funciona el servicio
                         </h2>
                         <p className="mt-2 text-lg text-slate-600">
                             Un proceso simple para pedir presupuesto y avanzar
@@ -374,7 +374,7 @@ export default function PresupuestoReparacionPage() {
 
                 <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-md">
                     <h2 className="text-center text-2xl font-bold text-slate-900">
-                        Respuestas rapidas
+                        Respuestas rápidas
                     </h2>
                     <div className="mt-6 grid gap-6 md:grid-cols-3">
                         {quickResponseFaqs.map((item) => (
@@ -403,14 +403,14 @@ export default function PresupuestoReparacionPage() {
                                 Contanos la falla de tu equipo
                             </h2>
                             <p className="mt-2 text-sm leading-6 text-slate-600">
-                                Cuanto mas contexto envies, mas preciso sera el
+                                Cuanto más contexto envíes, más preciso será el
                                 presupuesto inicial.
                             </p>
                         </div>
                         <RepairsForm />
                         <p className="mt-6 text-xs leading-5 text-slate-500">
-                            Al enviar tus datos aceptas que te contactemos por
-                            los medios proporcionados. No compartimos informacion
+                            Al enviar tus datos aceptás que te contactemos por
+                            los medios proporcionados. No compartimos información
                             con terceros.
                         </p>
                     </article>
@@ -418,10 +418,10 @@ export default function PresupuestoReparacionPage() {
                     <aside className="space-y-6">
                         <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md">
                             <h2 className="text-xl font-bold text-slate-900">
-                                Necesitas ayuda urgente?
+                                ¿Necesitás ayuda urgente?
                             </h2>
                             <p className="mt-2 text-sm leading-6 text-slate-600">
-                                Elegi el canal que prefieras y un especialista te
+                                Elegí el canal que prefieras y un especialista te
                                 ayuda a coordinar retiro o visita al laboratorio.
                             </p>
                             <div className="mt-5 space-y-3">
@@ -489,10 +489,10 @@ export default function PresupuestoReparacionPage() {
                 <section className="space-y-6">
                     <div className="text-center">
                         <h2 className="text-3xl font-bold text-slate-900">
-                            Reparaciones mas solicitadas
+                            Reparaciones más solicitadas
                         </h2>
                         <p className="mt-2 text-lg text-slate-600">
-                            Algunas de las consultas que recibimos todos los dias
+                            Algunas de las consultas que recibimos todos los días
                             en el laboratorio.
                         </p>
                     </div>
@@ -542,11 +542,11 @@ export default function PresupuestoReparacionPage() {
 
                 <section className="rounded-3xl border border-slate-200 bg-white p-10 text-center shadow-lg">
                     <h2 className="text-3xl font-bold text-slate-900">
-                        Listo para devolverle la vida a tu celular?
+                        ¿Listo para devolverle la vida a tu celular?
                     </h2>
                     <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-600">
-                        Completa el formulario y recibi tu presupuesto
-                        personalizado en menos de 24 horas habiles.
+                        Completa el formulario y recibí tu presupuesto
+                        personalizado en menos de 24 horas hábiles.
                     </p>
                     <div className="mt-6 flex flex-wrap justify-center gap-4">
                         <Link
@@ -574,9 +574,9 @@ export default function PresupuestoReparacionPage() {
                             "@context": "https://schema.org",
                             "@type": "Service",
                             "@id": `${PAGE_URL}#service`,
-                            name: "Presupuesto de reparacion de celulares en CABA",
+                            name: "Presupuesto de reparación de celulares en CABA",
                             serviceType:
-                                "Presupuesto y diagnostico de reparacion de celulares",
+                                "Presupuesto y diagnóstico de reparación de celulares",
                             url: PAGE_URL,
                             areaServed: [
                                 { "@type": "City", name: "Recoleta" },
@@ -601,7 +601,7 @@ export default function PresupuestoReparacionPage() {
                         __html: JSON.stringify({
                             "@context": "https://schema.org",
                             "@type": "HowTo",
-                            name: "Como solicitar un presupuesto de reparacion",
+                            name: "Cómo solicitar un presupuesto de reparación",
                             totalTime: "PT72H",
                             step: processSteps.map((step, index) => ({
                                 "@type": "HowToStep",
@@ -634,3 +634,5 @@ export default function PresupuestoReparacionPage() {
         </section>
     );
 }
+
+

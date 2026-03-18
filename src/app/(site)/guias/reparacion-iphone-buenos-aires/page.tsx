@@ -1,8 +1,11 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
-import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
+import GoogleReviewsAPI, {
+  GoogleReviewsFallback,
+} from "@/components/cards/GoogleReviewsAPI";
 import {
   FaApple,
   FaBatteryFull,
@@ -412,8 +415,10 @@ export default function IphoneRepairGuidePage() {
               Mostramos opiniones verificables de Google para que evalues la confianza del servicio con evidencia publica.
             </p>
           </div>
-          {/* @ts-expect-error Async Server Component */}
-          <GoogleReviewsAPI />
+          <Suspense fallback={<GoogleReviewsFallback />}>
+            {/* @ts-expect-error Async Server Component */}
+            <GoogleReviewsAPI />
+          </Suspense>
         </section>
 
         <section className="space-y-7">

@@ -9,11 +9,11 @@ const BUSINESS_NAME = "Team Celular";
 const PHONE_NUMBER = "+54 11 5103-4595";
 const EMAIL = "teamcelular.arg@gmail.com";
 const ADDRESS_STREET = "Paraguay 2451";
-const ADDRESS_CITY = "Ciudad Autonoma de Buenos Aires";
+const ADDRESS_CITY = "Ciudad Autónoma de Buenos Aires";
 const ADDRESS_REGION = "CABA";
 const ADDRESS_POSTAL = "C1121";
 const ADDRESS_COUNTRY = "AR";
-const SERVICE_AREA = ["Ciudad Autonoma de Buenos Aires", "Recoleta"];
+const SERVICE_AREA = ["Ciudad Autónoma de Buenos Aires", "Recoleta"];
 const SAME_AS = [
   "https://www.instagram.com/teamcelular.arg/",
   "https://www.facebook.com/TeamCelular/",
@@ -32,7 +32,7 @@ function createLocalBusinessJson(city?: string, country?: string) {
     image: `${SITE_URL}/opengraph-image.png`,
     logo: `${SITE_URL}/icon.ico`,
     description:
-      "Servicio tecnico especializado en reparacion de celulares, microelectronica y venta de accesorios en Recoleta, CABA.",
+      "Servicio técnico especializado en reparación de celulares, microelectrónica y venta de accesorios en Recoleta, CABA.",
     telephone: PHONE_NUMBER,
     email: EMAIL,
     priceRange: "$$",
@@ -110,7 +110,7 @@ function createWebsiteJson() {
       {
         "@type": "CommunicateAction",
         target: `${SITE_URL}/contacto`,
-        name: "Consultar servicio tecnico",
+        name: "Consultar servicio técnico",
       },
     ],
   };
