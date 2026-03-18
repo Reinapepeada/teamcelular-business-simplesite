@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import Link from "next/link";
 
 interface KnowledgeItem {
@@ -41,16 +41,16 @@ const ARTICLES: KnowledgeItem[] = [
 
 export default function KnowledgeGrid() {
   return (
-    <section className="relative w-full max-w-[100rem] space-y-10 overflow-hidden rounded-2xl border border-slate-200/70 bg-white/70 p-10 shadow-md transition-all duration-300 ease-in-out hover:shadow-xl dark:border-white/10 dark:bg-slate-900/50">
+    <section className="relative w-full max-w-[100rem] space-y-10 overflow-hidden rounded-2xl border border-slate-200/70 bg-white/70 dark:bg-slate-900/70 p-10 shadow-md transition-all duration-300 ease-in-out hover:shadow-xl dark:border-white/10 dark:bg-slate-900/50">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,#94a3b81f,transparent_65%)] dark:bg-[radial-gradient(circle_at_top,#0ea5e91f,transparent_65%)]" />
       <header className="space-y-4 text-center md:text-left">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-secondary/90 dark:text-sky-300">
           Insights del laboratorio
         </p>
-        <h2 className="text-3xl font-bold tracking-tight text-slate-900 md:text-[2.2rem] dark:text-white">
+        <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-[2.2rem] dark:text-white">
           Consejos expertos para prolongar la vida de tus dispositivos
         </h2>
-        <p className="mx-auto max-w-3xl text-[1.02rem] leading-7 text-slate-700 md:mx-0 dark:text-slate-300">
+        <p className="mx-auto max-w-3xl text-[1.02rem] leading-7 text-slate-700 dark:text-slate-300 md:mx-0 dark:text-slate-300">
           Historias reales, protocolos y buenas prácticas de nuestro laboratorio en CABA. Cada guía enlaza a recursos operativos y opciones de contacto directo.
         </p>
       </header>
@@ -58,7 +58,7 @@ export default function KnowledgeGrid() {
         {ARTICLES.map((article) => (
           <article
             key={article.href}
-            className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white/85 p-6 text-left shadow-md transition-all hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-slate-900/55 md:p-7">
+            className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white/85 dark:bg-slate-900/85 p-6 text-left shadow-md transition-all hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-slate-900/55 md:p-7">
             <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
               <div className="absolute inset-x-8 top-0 h-1 rounded-full bg-gradient-to-r from-primary to-secondary" />
             </div>
@@ -87,7 +87,7 @@ export default function KnowledgeGrid() {
               <Link
                 href="/presupuesto-reparacion"
                 prefetch={false}
-                className="hidden rounded-full border border-slate-300 bg-white/75 px-4 py-2 text-slate-700 transition hover:bg-white dark:border-white/20 dark:bg-slate-900/50 dark:text-slate-100 dark:hover:bg-slate-900 md:flex md:items-center md:gap-2">
+                className="hidden rounded-full border border-slate-300 dark:border-slate-600 bg-white/75 dark:bg-slate-900/75 px-4 py-2 text-slate-700 dark:text-slate-300 transition hover:bg-white dark:border-white/20 dark:bg-slate-900/50 dark:text-slate-100 dark:hover:bg-slate-900 md:flex md:items-center md:gap-2">
                 Reservar diagnóstico
                 <span aria-hidden>↗</span>
               </Link>
@@ -98,3 +98,4 @@ export default function KnowledgeGrid() {
     </section>
   );
 }
+

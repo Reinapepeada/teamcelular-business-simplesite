@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import BannerHome from "@/components/banners/BannerHome";
 import BannerCards from "@/components/cards/BannerCards";
@@ -128,7 +128,7 @@ const primaryCtaClass =
     "rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary";
 
 const neutralCtaClass =
-    "rounded-full border border-slate-300 bg-white/85 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary";
+    "rounded-full border border-slate-300 dark:border-slate-600 bg-white/85 dark:bg-slate-900/85 px-6 py-3 text-sm font-semibold text-slate-700 dark:text-slate-300 transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary";
 
 export default function Home() {
     return (
@@ -137,18 +137,18 @@ export default function Home() {
             <BannerCards />
 
             <section className="w-full max-w-[100rem] space-y-12 text-center md:text-left lg:space-y-14">
-                <article className="grid gap-10 rounded-2xl border border-slate-200/70 bg-white/70 p-8 shadow-lg md:grid-cols-2 md:items-center lg:p-10">
+                <article className="grid gap-10 rounded-2xl border border-slate-200/70 bg-white/70 dark:bg-slate-900/70 p-8 shadow-lg md:grid-cols-2 md:items-center lg:p-10">
                     <div className="space-y-6">
                         <h2 className="text-3xl font-semibold tracking-tight text-primary md:text-[2.35rem]">
                             Por que elegir Team Celular
                         </h2>
-                        <p className="text-[1.03rem] leading-7 text-slate-700">
+                        <p className="text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
                             Somos un laboratorio tecnico en Recoleta enfocado en
                             reparar rapido, diagnosticar bien y explicar claro.
                             Trabajamos con repuestos de calidad y criterio
                             comercial honesto.
                         </p>
-                        <p className="text-[1.03rem] leading-7 text-slate-700">
+                        <p className="text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
                             Atendemos equipos personales, casos complejos de
                             placa y tambien soporte para empresas. Cada trabajo
                             sale con garantia escrita y seguimiento real.
@@ -168,7 +168,7 @@ export default function Home() {
                             </Link>
                             <Link
                                 href="/tecnico-de-celulares"
-                                className="rounded-full border border-secondary/60 bg-white/85 px-6 py-3 text-sm font-semibold text-slate-800 transition hover:bg-secondary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+                                className="rounded-full border border-secondary/60 bg-white/85 dark:bg-slate-900/85 px-6 py-3 text-sm font-semibold text-slate-800 dark:text-slate-200 transition hover:bg-secondary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
                             >
                                 Tecnico de celulares
                             </Link>
@@ -176,27 +176,27 @@ export default function Home() {
                                 href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20necesito%20una%20reparacion"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="rounded-full border border-primary/45 bg-white/85 px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                                className="rounded-full border border-primary/45 bg-white/85 dark:bg-slate-900/85 px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                             >
                                 Escribinos por WhatsApp
                             </Link>
                         </div>
                     </div>
 
-                    <div className="space-y-5 rounded-2xl border border-slate-200/80 bg-white/85 p-8 shadow-md">
-                        <h3 className="text-2xl font-semibold text-slate-900">
+                    <div className="space-y-5 rounded-2xl border border-slate-200/80 bg-white/85 dark:bg-slate-900/85 p-8 shadow-md">
+                        <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
                             Que hacemos
                         </h3>
                         <ul className="space-y-4 text-left">
                             {services.map((service) => (
                                 <li
                                     key={service.title}
-                                    className="rounded-xl border border-slate-200/80 bg-white p-4 shadow-sm"
+                                    className="rounded-xl border border-slate-200/80 bg-white dark:bg-slate-900 p-4 shadow-sm"
                                 >
                                     <h4 className="text-lg font-semibold text-secondary md:text-xl">
                                         {service.title}
                                     </h4>
-                                    <p className="mt-2 text-slate-700">
+                                    <p className="mt-2 text-slate-700 dark:text-slate-300">
                                         {service.description}
                                     </p>
                                 </li>
@@ -209,7 +209,7 @@ export default function Home() {
                     {differentiators.map((item, index) => (
                         <article
                             key={item.title}
-                            className="relative overflow-hidden rounded-2xl border border-slate-200/75 bg-white/75 p-6 text-center shadow-md"
+                            className="relative overflow-hidden rounded-2xl border border-slate-200/75 bg-white/75 dark:bg-slate-900/75 p-6 text-center shadow-md"
                         >
                             <div
                                 className={`pointer-events-none absolute inset-x-0 top-0 h-1 ${
@@ -221,26 +221,26 @@ export default function Home() {
                             <h3 className="text-[1.15rem] font-semibold leading-snug text-primary">
                                 {item.title}
                             </h3>
-                            <p className="mt-3 text-slate-700">
+                            <p className="mt-3 text-slate-700 dark:text-slate-300">
                                 {item.description}
                             </p>
                         </article>
                     ))}
                 </section>
 
-                <section className="grid gap-4 rounded-2xl border border-slate-200/70 bg-white/60 p-6 shadow-md md:grid-cols-3">
+                <section className="grid gap-4 rounded-2xl border border-slate-200/70 bg-white/60 dark:bg-slate-900/60 p-6 shadow-md md:grid-cols-3">
                     {microFaqs.map((item) => (
                         <article
                             key={item.title}
-                            className="space-y-2.5 rounded-xl border border-slate-200/80 bg-white p-4 text-left shadow-sm"
+                            className="space-y-2.5 rounded-xl border border-slate-200/80 bg-white dark:bg-slate-900 p-4 text-left shadow-sm"
                         >
                             <p className="text-sm font-semibold uppercase tracking-wide text-primary">
                                 {item.title}
                             </p>
-                            <h3 className="text-[1.03rem] font-semibold leading-snug text-slate-900">
+                            <h3 className="text-[1.03rem] font-semibold leading-snug text-slate-900 dark:text-slate-100">
                                 {item.question}
                             </h3>
-                            <p className="text-sm text-slate-700">
+                            <p className="text-sm text-slate-700 dark:text-slate-300">
                                 {item.answer}
                             </p>
                         </article>
@@ -250,28 +250,28 @@ export default function Home() {
                 {/* @ts-expect-error Async Server Component */}
                 <GoogleReviewsAPI />
 
-                <article className="rounded-2xl border border-slate-200/70 bg-white/70 p-8 shadow-md lg:p-10">
-                    <h2 className="text-2xl font-bold tracking-tight text-slate-900 md:text-[2rem]">
+                <article className="rounded-2xl border border-slate-200/70 bg-white/70 dark:bg-slate-900/70 p-8 shadow-md lg:p-10">
+                    <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-[2rem]">
                         Donde estamos y como contactarnos
                     </h2>
                     <div className="mt-6 grid gap-8 md:grid-cols-2">
                         <div className="space-y-4">
-                            <p className="text-[1.03rem] leading-7 text-slate-700">
+                            <p className="text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
                                 Nuestro laboratorio esta en Paraguay 2451,
                                 Recoleta, con llegada facil desde Palermo,
                                 Belgrano, Caballito, Microcentro y otras zonas
                                 de CABA.
                             </p>
-                            <p className="text-[1.03rem] leading-7 text-slate-700">
+                            <p className="text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
                                 Atendemos de lunes a viernes de 10:30 a 18:00 y
                                 coordinamos retiros segun disponibilidad.
                             </p>
                         </div>
                         <div className="space-y-4">
-                            <p className="font-semibold text-slate-900">
+                            <p className="font-semibold text-slate-900 dark:text-slate-100">
                                 Vias de contacto
                             </p>
-                            <ul className="space-y-2 text-left text-slate-600">
+                            <ul className="space-y-2 text-left text-slate-600 dark:text-slate-400">
                                 <li>
                                     Tel:{" "}
                                     <Link
@@ -298,14 +298,14 @@ export default function Home() {
                 </article>
 
                 <section className="space-y-6">
-                    <h2 className="text-2xl font-bold tracking-tight text-slate-900 md:text-[2rem]">
+                    <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-[2rem]">
                         Preguntas frecuentes sobre reparacion de celulares
                     </h2>
                     <div className="grid gap-4 md:grid-cols-3">
                         {faqs.map((faq) => (
                             <article
                                 key={faq.question}
-                                className="group relative overflow-hidden rounded-2xl border border-slate-200/75 bg-white/80 p-5 text-left shadow-md lg:p-6"
+                                className="group relative overflow-hidden rounded-2xl border border-slate-200/75 bg-white/80 dark:bg-slate-900/80 p-5 text-left shadow-md lg:p-6"
                             >
                                 <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                                     <div className="absolute inset-x-6 top-0 h-1 rounded-full bg-gradient-to-r from-primary to-secondary" />
@@ -313,7 +313,7 @@ export default function Home() {
                                 <h3 className="text-[1.05rem] font-semibold leading-snug text-secondary">
                                     {faq.question}
                                 </h3>
-                                <p className="mt-3 text-sm text-slate-700">
+                                <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">
                                     {faq.answer}
                                 </p>
                             </article>
@@ -323,12 +323,12 @@ export default function Home() {
 
                 <KnowledgeGrid />
 
-                <article className="relative overflow-hidden rounded-2xl border border-slate-200/70 bg-white/75 p-8 text-center shadow-lg md:text-left lg:p-10">
+                <article className="relative overflow-hidden rounded-2xl border border-slate-200/70 bg-white/75 dark:bg-slate-900/75 p-8 text-center shadow-lg md:text-left lg:p-10">
                     <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-primary/8 via-white/70 to-secondary/8" />
                     <h2 className="text-2xl font-bold tracking-tight text-primary md:text-[2rem]">
                         Listo para recuperar tu telefono?
                     </h2>
-                    <p className="mt-4 text-[1.03rem] leading-7 text-slate-700">
+                    <p className="mt-4 text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
                         Dejanos un mensaje con la falla, elegi tu canal de
                         contacto y coordinamos el siguiente paso sin perder
                         tiempo.
@@ -371,3 +371,4 @@ export default function Home() {
         </section>
     );
 }
+

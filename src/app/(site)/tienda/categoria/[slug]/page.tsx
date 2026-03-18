@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Suspense } from "react";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
@@ -131,9 +131,9 @@ export default async function CategoryPage({
   const suspenseKey = `${category.name}:${JSON.stringify(filters)}`;
 
   return (
-    <div className="w-full bg-slate-50 pb-16">
+    <div className="w-full bg-slate-50 dark:bg-slate-800/70 pb-16">
       <div className="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
-        <nav className="flex items-center gap-2 text-sm text-slate-600">
+        <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
           <Link href="/" className="transition hover:text-primary">
             Inicio
           </Link>
@@ -142,7 +142,7 @@ export default async function CategoryPage({
             Tienda
           </Link>
           <span>/</span>
-          <span className="font-semibold text-slate-950">{category.name}</span>
+          <span className="font-semibold text-slate-950 dark:text-slate-50">{category.name}</span>
         </nav>
       </div>
 
@@ -155,14 +155,14 @@ export default async function CategoryPage({
       />
 
       <section className="mx-auto max-w-screen-2xl px-4 pb-8 sm:px-6 lg:px-8">
-        <div className="rounded-[2rem] border border-slate-200 bg-white px-6 py-8 shadow-sm sm:px-8">
+        <div className="rounded-[2rem] border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 px-6 py-8 shadow-sm sm:px-8">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
             Categoria destacada
           </p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 dark:text-slate-50 sm:text-4xl">
             {category.name}
           </h1>
-          <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
+          <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600 dark:text-slate-400">
             Filtra por marca, precio o busqueda puntual dentro de {category.name}.
             Si necesitas validar compatibilidad, te asesoramos por WhatsApp antes
             de comprar.
@@ -195,3 +195,4 @@ export default async function CategoryPage({
     </div>
   );
 }
+

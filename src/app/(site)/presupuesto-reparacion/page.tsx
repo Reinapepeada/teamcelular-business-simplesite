@@ -211,32 +211,32 @@ export default function PresupuestoReparacionPage() {
                     ]}
                 />
 
-                <nav className="flex items-center gap-2 text-sm text-slate-600">
+                <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
                     <Link href="/" className="transition hover:text-primary">
                         Inicio
                     </Link>
                     <span>/</span>
-                    <span className="font-semibold text-slate-900">
+                    <span className="font-semibold text-slate-900 dark:text-slate-100">
                         Presupuesto de reparación
                     </span>
                 </nav>
 
-                <header className="grid gap-10 rounded-3xl border border-slate-200 bg-white p-8 shadow-lg lg:grid-cols-[1.05fr_0.95fr] lg:p-12">
+                <header className="grid gap-10 rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-lg lg:grid-cols-[1.05fr_0.95fr] lg:p-12">
                     <div>
                         <span className="inline-flex rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                             Revisión técnica arancelada
                         </span>
-                        <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 md:text-5xl">
+                        <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
                             Pedí tu presupuesto online y recuperá tu celular con
                             un plan técnico claro
                         </h1>
-                        <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+                        <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
                             Somos laboratorio en Recoleta con enfoque real en
                             microelectrónica, repuestos premium y seguimiento por
                             WhatsApp.
                         </p>
 
-                        <ul className="mt-6 space-y-3 text-slate-700">
+                        <ul className="mt-6 space-y-3 text-slate-700 dark:text-slate-300">
                             <li className="flex items-start gap-3">
                                 <FaCheckCircle className="mt-1 text-primary" />
                                 <span>
@@ -278,13 +278,13 @@ export default function PresupuestoReparacionPage() {
                             </Link>
                         </div>
 
-                        <p className="mt-4 text-sm text-slate-500">
+                        <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">
                             Horario de atención: lunes a viernes de 10:30 a 18:00.
                         </p>
                     </div>
 
-                    <aside className="rounded-3xl border border-slate-200 bg-slate-50 p-8">
-                        <h2 className="text-2xl font-bold text-slate-900">
+                    <aside className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-8">
+                        <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                             Por qué pedir tu presupuesto online
                         </h2>
                         <div className="mt-6 space-y-6">
@@ -318,13 +318,13 @@ export default function PresupuestoReparacionPage() {
                                             <Icon className="text-xl" />
                                         </div>
                                         <div>
-                                            <p className="text-sm font-semibold text-slate-500">
+                                            <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">
                                                 {item.title}
                                             </p>
-                                            <p className="text-xl font-bold text-slate-900">
+                                            <p className="text-xl font-bold text-slate-900 dark:text-slate-100">
                                                 {item.value}
                                             </p>
-                                            <p className="text-sm text-slate-600">
+                                            <p className="text-sm text-slate-600 dark:text-slate-400">
                                                 {item.description}
                                             </p>
                                         </div>
@@ -337,10 +337,10 @@ export default function PresupuestoReparacionPage() {
 
                 <section className="space-y-6">
                     <div className="text-center">
-                        <h2 className="text-3xl font-bold text-slate-900">
+                        <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
                             Así funciona el servicio
                         </h2>
-                        <p className="mt-2 text-lg text-slate-600">
+                        <p className="mt-2 text-lg text-slate-600 dark:text-slate-400">
                             Un proceso simple para pedir presupuesto y avanzar
                             sin perder tiempo.
                         </p>
@@ -351,7 +351,7 @@ export default function PresupuestoReparacionPage() {
                             return (
                                 <article
                                     key={step.title}
-                                    className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md"
+                                    className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-md"
                                 >
                                     <div className="flex items-center justify-between">
                                         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -361,10 +361,10 @@ export default function PresupuestoReparacionPage() {
                                             {step.timing}
                                         </span>
                                     </div>
-                                    <h3 className="mt-4 text-lg font-bold text-slate-900">
+                                    <h3 className="mt-4 text-lg font-bold text-slate-900 dark:text-slate-100">
                                         {step.title}
                                     </h3>
-                                    <p className="mt-2 text-sm leading-6 text-slate-600">
+                                    <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
                                         {step.description}
                                     </p>
                                 </article>
@@ -373,20 +373,20 @@ export default function PresupuestoReparacionPage() {
                     </div>
                 </section>
 
-                <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-md">
-                    <h2 className="text-center text-2xl font-bold text-slate-900">
+                <section className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md">
+                    <h2 className="text-center text-2xl font-bold text-slate-900 dark:text-slate-100">
                         Respuestas rápidas
                     </h2>
                     <div className="mt-6 grid gap-6 md:grid-cols-3">
                         {quickResponseFaqs.map((item) => (
                             <article
                                 key={item.question}
-                                className="rounded-2xl border border-slate-200 bg-slate-50 p-5"
+                                className="rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-5"
                             >
                                 <h3 className="font-semibold text-primary">
                                     {item.question}
                                 </h3>
-                                <p className="mt-3 text-sm leading-6 text-slate-600">
+                                <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
                                     {item.answer}
                                 </p>
                             </article>
@@ -398,18 +398,18 @@ export default function PresupuestoReparacionPage() {
                     id="solicitar-presupuesto"
                     className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]"
                 >
-                    <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-xl">
+                    <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-xl">
                         <div className="mb-6">
-                            <h2 className="text-3xl font-bold text-slate-900">
+                            <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
                                 Contanos la falla de tu equipo
                             </h2>
-                            <p className="mt-2 text-sm leading-6 text-slate-600">
+                            <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
                                 Cuanto más contexto envíes, más preciso será el
                                 presupuesto inicial.
                             </p>
                         </div>
                         <RepairsForm />
-                        <p className="mt-6 text-xs leading-5 text-slate-500">
+                        <p className="mt-6 text-xs leading-5 text-slate-500 dark:text-slate-400">
                             Al enviar tus datos aceptás que te contactemos por
                             los medios proporcionados. No compartimos información
                             con terceros.
@@ -417,11 +417,11 @@ export default function PresupuestoReparacionPage() {
                     </article>
 
                     <aside className="space-y-6">
-                        <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md">
-                            <h2 className="text-xl font-bold text-slate-900">
+                        <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-md">
+                            <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">
                                 ¿Necesitás ayuda urgente?
                             </h2>
-                            <p className="mt-2 text-sm leading-6 text-slate-600">
+                            <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
                                 Elegí el canal que prefieras y un especialista te
                                 ayuda a coordinar retiro o visita al laboratorio.
                             </p>
@@ -440,16 +440,16 @@ export default function PresupuestoReparacionPage() {
                                                     ? "noopener noreferrer"
                                                     : undefined
                                             }
-                                            className="flex min-h-14 items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 transition hover:border-primary/40 hover:bg-primary/5"
+                                            className="flex min-h-14 items-center gap-3 rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 px-4 py-3 transition hover:border-primary/40 hover:bg-primary/5"
                                         >
                                             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
                                                 <Icon className="text-lg" />
                                             </div>
                                             <div>
-                                                <p className="font-semibold text-slate-900">
+                                                <p className="font-semibold text-slate-900 dark:text-slate-100">
                                                     {channel.title}
                                                 </p>
-                                                <p className="text-xs text-slate-600">
+                                                <p className="text-xs text-slate-600 dark:text-slate-400">
                                                     {channel.description}
                                                 </p>
                                             </div>
@@ -459,8 +459,8 @@ export default function PresupuestoReparacionPage() {
                             </div>
                         </article>
 
-                        <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md">
-                            <h2 className="text-xl font-bold text-slate-900">
+                        <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-md">
+                            <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">
                                 Lo que te prometemos
                             </h2>
                             <div className="mt-5 space-y-4">
@@ -472,10 +472,10 @@ export default function PresupuestoReparacionPage() {
                                                 <Icon className="text-lg" />
                                             </div>
                                             <div>
-                                                <p className="font-semibold text-slate-900">
+                                                <p className="font-semibold text-slate-900 dark:text-slate-100">
                                                     {promise.title}
                                                 </p>
-                                                <p className="text-sm text-slate-600">
+                                                <p className="text-sm text-slate-600 dark:text-slate-400">
                                                     {promise.description}
                                                 </p>
                                             </div>
@@ -489,10 +489,10 @@ export default function PresupuestoReparacionPage() {
 
                 <section className="space-y-6">
                     <div className="text-center">
-                        <h2 className="text-3xl font-bold text-slate-900">
+                        <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
                             Reparaciones más solicitadas
                         </h2>
-                        <p className="mt-2 text-lg text-slate-600">
+                        <p className="mt-2 text-lg text-slate-600 dark:text-slate-400">
                             Algunas de las consultas que recibimos todos los días
                             en el laboratorio.
                         </p>
@@ -503,15 +503,15 @@ export default function PresupuestoReparacionPage() {
                             return (
                                 <article
                                     key={repair.title}
-                                    className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md"
+                                    className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-md"
                                 >
                                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
                                         <Icon className="text-xl" />
                                     </div>
-                                    <h3 className="mt-4 text-lg font-bold text-slate-900">
+                                    <h3 className="mt-4 text-lg font-bold text-slate-900 dark:text-slate-100">
                                         {repair.title}
                                     </h3>
-                                    <p className="mt-2 text-sm leading-6 text-slate-600">
+                                    <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
                                         {repair.details}
                                     </p>
                                 </article>
@@ -520,20 +520,20 @@ export default function PresupuestoReparacionPage() {
                     </div>
                 </section>
 
-                <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-md">
-                    <h2 className="text-center text-3xl font-bold text-slate-900">
+                <section className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md">
+                    <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-slate-100">
                         Preguntas frecuentes
                     </h2>
                     <div className="mt-6 grid gap-6 md:grid-cols-2">
                         {faqs.map((faq) => (
                             <article
                                 key={faq.question}
-                                className="rounded-2xl border border-slate-200 bg-slate-50 p-5"
+                                className="rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-5"
                             >
                                 <h3 className="text-lg font-semibold text-primary">
                                     {faq.question}
                                 </h3>
-                                <p className="mt-3 text-sm leading-6 text-slate-600">
+                                <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
                                     {faq.answer}
                                 </p>
                             </article>
@@ -541,11 +541,11 @@ export default function PresupuestoReparacionPage() {
                     </div>
                 </section>
 
-                <section className="rounded-3xl border border-slate-200 bg-white p-10 text-center shadow-lg">
-                    <h2 className="text-3xl font-bold text-slate-900">
+                <section className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-10 text-center shadow-lg">
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
                         ¿Listo para devolverle la vida a tu celular?
                     </h2>
-                    <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-600">
+                    <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
                         Completa el formulario y recibí tu presupuesto
                         personalizado en menos de 24 horas hábiles.
                     </p>
@@ -635,6 +635,7 @@ export default function PresupuestoReparacionPage() {
         </section>
     );
 }
+
 
 
 

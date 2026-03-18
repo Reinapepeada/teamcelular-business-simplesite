@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BsFillLightningChargeFill, BsWhatsapp } from "react-icons/bs";
@@ -111,7 +111,7 @@ export default function BannerCards() {
                             href="https://wa.me/5491151034595?text=Hola%21%20Quiero%20pedir%20un%20presupuesto%20de%20reparaci%C3%B3n."
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-white px-4 py-3 font-semibold text-slate-900 shadow-md transition hover:bg-slate-100 sm:w-fit"
+                            className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-white dark:bg-slate-900 px-4 py-3 font-semibold text-slate-900 dark:text-slate-100 shadow-md transition hover:bg-slate-100 dark:hover:bg-slate-800 sm:w-fit"
                         >
                             <BsWhatsapp className="text-lg" aria-hidden />
                             Pedir presupuesto por WhatsApp
@@ -157,3 +157,4 @@ export default function BannerCards() {
         </section>
     );
 }
+

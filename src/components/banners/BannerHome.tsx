@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -24,15 +24,15 @@ export default function BannerHome() {
                         Servicio técnico en Recoleta
                     </p>
 
-                    <h1 className="max-w-xl text-4xl font-extrabold leading-[1.03] tracking-tight text-slate-900 sm:text-5xl lg:text-[3.2rem] dark:text-white">
+                    <h1 className="max-w-xl text-4xl font-extrabold leading-[1.03] tracking-tight text-slate-900 dark:text-slate-100 sm:text-5xl lg:text-[3.2rem] dark:text-white">
                         Arreglamos tu celular el mismo día
                     </h1>
 
                     <div className="max-w-xl space-y-2">
-                        <p className="text-base leading-7 text-slate-700 sm:text-[1.03rem] dark:text-slate-300">
+                        <p className="text-base leading-7 text-slate-700 dark:text-slate-300 sm:text-[1.03rem] dark:text-slate-300">
                             Repuestos originales, diagnóstico y garantía real.
                         </p>
-                        <p className="text-base leading-7 text-slate-700 sm:text-[1.03rem] dark:text-slate-300">
+                        <p className="text-base leading-7 text-slate-700 dark:text-slate-300 sm:text-[1.03rem] dark:text-slate-300">
                             Porque sabemos que sin tu celular, tu día no es el mismo.
                         </p>
                     </div>
@@ -46,7 +46,7 @@ export default function BannerHome() {
                         </Link>
                         <Link
                             href="/tienda"
-                            className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white/80 px-7 py-3 text-sm font-semibold text-slate-700 transition hover:bg-white dark:border-white/20 dark:bg-slate-900/60 dark:text-slate-100 dark:hover:bg-slate-900"
+                            className="inline-flex items-center justify-center rounded-full border border-slate-300 dark:border-slate-600 bg-white/80 dark:bg-slate-900/80 px-7 py-3 text-sm font-semibold text-slate-700 dark:text-slate-300 transition hover:bg-white dark:border-white/20 dark:bg-slate-900/60 dark:text-slate-100 dark:hover:bg-slate-900"
                         >
                             Ver productos
                         </Link>
@@ -56,9 +56,9 @@ export default function BannerHome() {
                         {trustSignals.map((item) => (
                             <div
                                 key={item.value}
-                                className="rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 text-left shadow-sm backdrop-blur dark:border-white/10 dark:bg-slate-900/60"
+                                className="rounded-2xl border border-slate-200/80 bg-white/80 dark:bg-slate-900/80 px-4 py-3 text-left shadow-sm backdrop-blur dark:border-white/10 dark:bg-slate-900/60"
                             >
-                                <p className="text-xl font-bold leading-none text-slate-900 dark:text-white">
+                                <p className="text-xl font-bold leading-none text-slate-900 dark:text-slate-100 dark:text-white">
                                     {item.value}
                                 </p>
                                 <p className="text-[11px] uppercase tracking-[0.11em] text-slate-500 dark:text-slate-400">
@@ -72,7 +72,7 @@ export default function BannerHome() {
                 <div className="relative mx-auto w-full max-w-[34rem] xl:max-w-[38rem] 2xl:max-w-[42rem]">
                     <div className="pointer-events-none absolute -right-10 -top-10 h-44 w-44 rounded-full bg-secondary/20 blur-3xl dark:bg-secondary/25" />
 
-                    <div className="relative overflow-hidden rounded-[2.3rem] border border-slate-200/80 bg-white shadow-[0_25px_70px_-40px_rgba(15,23,42,0.55)] dark:border-white/10 dark:bg-slate-950">
+                    <div className="relative overflow-hidden rounded-[2.3rem] border border-slate-200/80 bg-white dark:bg-slate-900 shadow-[0_25px_70px_-40px_rgba(15,23,42,0.55)] dark:border-white/10 dark:bg-slate-950">
                         <Image
                             src="/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp"
                             alt="Técnico reparando un smartphone en el laboratorio"
@@ -86,11 +86,11 @@ export default function BannerHome() {
                         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent" />
                     </div>
 
-                    <div className="absolute bottom-4 left-5 rounded-2xl border border-white/70 bg-white/90 px-4 py-3 shadow-xl backdrop-blur-sm dark:border-white/15 dark:bg-slate-900/90">
+                    <div className="absolute bottom-4 left-5 rounded-2xl border border-white/70 bg-white/90 dark:bg-slate-900/90 px-4 py-3 shadow-xl backdrop-blur-sm dark:border-white/15 dark:bg-slate-900/90">
                         <p className="text-[0.66rem] font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
                             Respuesta comercial
                         </p>
-                        <p className="text-sm font-semibold text-slate-900 dark:text-white">
+                        <p className="text-sm font-semibold text-slate-900 dark:text-slate-100 dark:text-white">
                             <span className="text-primary">&lt; 2 horas</span> en horario laboral
                         </p>
                     </div>
@@ -99,3 +99,4 @@ export default function BannerHome() {
         </section>
     );
 }
+

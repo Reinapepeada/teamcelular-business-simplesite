@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -166,26 +166,26 @@ export default function SobreNosotrosPage() {
     return (
         <section className="w-full">
             <div className="mx-auto flex w-full max-w-[100rem] flex-col gap-12 px-4 py-12 sm:px-6 lg:px-8">
-                <nav className="flex items-center gap-2 text-sm text-slate-600">
+                <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
                     <Link href="/" className="transition hover:text-primary">
                         Inicio
                     </Link>
                     <span>/</span>
-                    <span className="font-semibold text-slate-900">
+                    <span className="font-semibold text-slate-900 dark:text-slate-100">
                         Sobre nosotros
                     </span>
                 </nav>
 
-                <header className="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg md:p-12">
+                <header className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-lg md:p-12">
                     <div className="mx-auto max-w-4xl text-center">
                         <span className="inline-flex rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                             Empresa familiar
                         </span>
-                        <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 md:text-5xl">
+                        <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
                             Mas de 15 anos cuidando dispositivos con criterio
                             tecnico y trato humano
                         </h1>
-                        <p className="mt-4 text-lg leading-8 text-slate-600">
+                        <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-400">
                             Desde nuestros inicios como taller familiar hasta el
                             laboratorio actual en Recoleta, la propuesta sigue
                             siendo la misma: reparar bien, explicar claro y
@@ -199,13 +199,13 @@ export default function SobreNosotrosPage() {
                             return (
                                 <article
                                     key={stat.label}
-                                    className="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center"
+                                    className="rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-6 text-center"
                                 >
                                     <Icon className="mx-auto text-3xl text-primary" />
-                                    <p className="mt-3 text-3xl font-black text-slate-900">
+                                    <p className="mt-3 text-3xl font-black text-slate-900 dark:text-slate-100">
                                         {stat.value}
                                     </p>
-                                    <p className="mt-1 text-sm text-slate-600">
+                                    <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
                                         {stat.label}
                                     </p>
                                 </article>
@@ -214,7 +214,7 @@ export default function SobreNosotrosPage() {
                     </div>
                 </header>
 
-                <section className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg">
+                <section className="relative overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 shadow-lg">
                     <div className="relative h-[360px] w-full md:h-[500px]">
                         <Image
                             src="/images/empresaFamiliar.webp"
@@ -239,10 +239,10 @@ export default function SobreNosotrosPage() {
 
                 <section className="space-y-6">
                     <div className="text-center">
-                        <h2 className="text-3xl font-bold text-slate-900">
+                        <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
                             Nuestra historia
                         </h2>
-                        <p className="mt-2 text-lg text-slate-600">
+                        <p className="mt-2 text-lg text-slate-600 dark:text-slate-400">
                             Hitos que marcaron como evoluciono el taller.
                         </p>
                     </div>
@@ -250,21 +250,21 @@ export default function SobreNosotrosPage() {
                         {timeline.map((event) => (
                             <article
                                 key={`${event.year}-${event.title}`}
-                                className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md"
+                                className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-md"
                             >
                                 <div className="flex items-center justify-between gap-4">
                                     <span className="text-3xl font-black text-primary">
                                         {event.year}
                                     </span>
-                                    <div className="flex items-center gap-2 text-sm text-slate-500">
+                                    <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
                                         <FaMapMarkerAlt />
                                         <span>{event.location}</span>
                                     </div>
                                 </div>
-                                <h3 className="mt-4 text-xl font-bold text-slate-900">
+                                <h3 className="mt-4 text-xl font-bold text-slate-900 dark:text-slate-100">
                                     {event.title}
                                 </h3>
-                                <p className="mt-3 text-sm leading-6 text-slate-600">
+                                <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
                                     {event.description}
                                 </p>
                             </article>
@@ -274,10 +274,10 @@ export default function SobreNosotrosPage() {
 
                 <section className="space-y-6">
                     <div className="text-center">
-                        <h2 className="text-3xl font-bold text-slate-900">
+                        <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
                             Nuestros valores
                         </h2>
-                        <p className="mt-2 text-lg text-slate-600">
+                        <p className="mt-2 text-lg text-slate-600 dark:text-slate-400">
                             Principios que se ven en cada presupuesto y en cada
                             reparacion.
                         </p>
@@ -288,15 +288,15 @@ export default function SobreNosotrosPage() {
                             return (
                                 <article
                                     key={value.title}
-                                    className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md"
+                                    className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-md"
                                 >
                                     <div className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
                                         <Icon className="text-2xl" />
                                     </div>
-                                    <h3 className="mt-5 text-xl font-bold text-slate-900">
+                                    <h3 className="mt-5 text-xl font-bold text-slate-900 dark:text-slate-100">
                                         {value.title}
                                     </h3>
-                                    <p className="mt-3 text-sm leading-6 text-slate-600">
+                                    <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
                                         {value.description}
                                     </p>
                                 </article>
@@ -307,10 +307,10 @@ export default function SobreNosotrosPage() {
 
                 <section className="space-y-6">
                     <div className="text-center">
-                        <h2 className="text-3xl font-bold text-slate-900">
+                        <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
                             Por que elegirnos
                         </h2>
-                        <p className="mt-2 text-lg text-slate-600">
+                        <p className="mt-2 text-lg text-slate-600 dark:text-slate-400">
                             Lo que hace distinta la experiencia de Team Celular.
                         </p>
                     </div>
@@ -320,17 +320,17 @@ export default function SobreNosotrosPage() {
                             return (
                                 <article
                                     key={item.title}
-                                    className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md"
+                                    className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-md"
                                 >
                                     <div className="flex items-start gap-4">
                                         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
                                             <Icon className="text-xl" />
                                         </div>
                                         <div>
-                                            <h3 className="text-lg font-bold text-slate-900">
+                                            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
                                                 {item.title}
                                             </h3>
-                                            <p className="mt-2 text-sm leading-6 text-slate-600">
+                                            <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
                                                 {item.description}
                                             </p>
                                         </div>
@@ -342,16 +342,16 @@ export default function SobreNosotrosPage() {
                 </section>
 
                 <section className="grid gap-8 md:grid-cols-2">
-                    <article className="rounded-3xl border border-primary/20 bg-white p-8 shadow-md">
+                    <article className="rounded-3xl border border-primary/20 bg-white dark:bg-slate-900 p-8 shadow-md">
                         <div className="flex items-center gap-3">
                             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white">
                                 <FaHeart className="text-xl" />
                             </div>
-                            <h2 className="text-2xl font-bold text-slate-900">
+                            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                                 Nuestra mision
                             </h2>
                         </div>
-                        <p className="mt-5 leading-7 text-slate-600">
+                        <p className="mt-5 leading-7 text-slate-600 dark:text-slate-400">
                             Brindar soluciones tecnicas confiables para equipos
                             que la gente necesita recuperar rapido y bien. Nos
                             enfocamos en calidad de ejecucion, claridad comercial
@@ -359,16 +359,16 @@ export default function SobreNosotrosPage() {
                         </p>
                     </article>
 
-                    <article className="rounded-3xl border border-secondary/20 bg-white p-8 shadow-md">
+                    <article className="rounded-3xl border border-secondary/20 bg-white dark:bg-slate-900 p-8 shadow-md">
                         <div className="flex items-center gap-3">
                             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-white">
                                 <FaGlobe className="text-xl" />
                             </div>
-                            <h2 className="text-2xl font-bold text-slate-900">
+                            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                                 Nuestra vision
                             </h2>
                         </div>
-                        <p className="mt-5 leading-7 text-slate-600">
+                        <p className="mt-5 leading-7 text-slate-600 dark:text-slate-400">
                             Ser referencia en soluciones tecnicas para celulares,
                             microelectronica y soporte especializado en Buenos
                             Aires, con una experiencia sobria, confiable y medible.
@@ -376,11 +376,11 @@ export default function SobreNosotrosPage() {
                     </article>
                 </section>
 
-                <section className="rounded-3xl border border-slate-200 bg-white p-10 text-center shadow-lg">
-                    <h2 className="text-3xl font-bold text-slate-900">
+                <section className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-10 text-center shadow-lg">
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
                         Queres conocer nuestro laboratorio?
                     </h2>
-                    <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-600">
+                    <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
                         Visitanos en Paraguay 2451, Recoleta, y te mostramos como
                         trabajamos para devolverle la vida a tu equipo.
                     </p>
@@ -435,3 +435,4 @@ export default function SobreNosotrosPage() {
         </section>
     );
 }
+

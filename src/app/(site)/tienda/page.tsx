@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Suspense } from "react";
 import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
@@ -73,14 +73,14 @@ export default async function TiendaPage({
   const suspenseKey = JSON.stringify(filters);
 
   return (
-    <div className="w-full bg-slate-50 pb-16">
+    <div className="w-full bg-slate-50 dark:bg-slate-800/70 pb-16">
       <div className="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
-        <nav className="flex items-center gap-2 text-sm text-slate-600">
+        <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
           <Link href="/" className="transition hover:text-primary">
             Inicio
           </Link>
           <span>/</span>
-          <span className="font-semibold text-slate-950">Tienda</span>
+          <span className="font-semibold text-slate-950 dark:text-slate-50">Tienda</span>
         </nav>
       </div>
 
@@ -92,26 +92,26 @@ export default async function TiendaPage({
       />
 
       <section className="mx-auto max-w-screen-2xl px-4 pb-8 sm:px-6 lg:px-8">
-        <div className="rounded-[2rem] border border-slate-200 bg-white px-6 py-8 shadow-sm sm:px-8">
+        <div className="rounded-[2rem] border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 px-6 py-8 shadow-sm sm:px-8">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
             <div className="space-y-4">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
                 Tienda Team Celular
               </p>
-              <h1 className="max-w-3xl text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
+              <h1 className="max-w-3xl text-3xl font-semibold tracking-tight text-slate-950 dark:text-slate-50 sm:text-4xl">
                 Accesorios y repuestos para celulares con retiro en Recoleta y envio en CABA
               </h1>
-              <p className="max-w-3xl text-base leading-7 text-slate-600">
+              <p className="max-w-3xl text-base leading-7 text-slate-600 dark:text-slate-400">
                 Compra cables, cargadores, fundas, templados y repuestos con
                 asesoramiento real. Si no encuentras lo que buscas, te ayudamos
                 por WhatsApp para validar compatibilidad antes de comprar.
               </p>
             </div>
-            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5">
-              <p className="text-sm font-semibold text-slate-900">
+            <div className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-5">
+              <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
                 Atencion comercial
               </p>
-              <ul className="mt-3 space-y-2 text-sm text-slate-600">
+              <ul className="mt-3 space-y-2 text-sm text-slate-600 dark:text-slate-400">
                 <li>Retiro por Paraguay 2451, Recoleta.</li>
                 <li>Enviamos en CABA y coordinamos por WhatsApp.</li>
                 <li>Consulta compatibilidad antes de cerrar la compra.</li>
@@ -119,7 +119,7 @@ export default async function TiendaPage({
               <div className="mt-4 flex flex-wrap gap-3">
                 <Link
                   href="/contacto"
-                  className="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-300 px-4 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary"
+                  className="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-300 dark:border-slate-600 px-4 text-sm font-semibold text-slate-700 dark:text-slate-300 transition hover:border-primary hover:text-primary"
                 >
                   Ver ubicacion
                 </Link>
@@ -155,3 +155,4 @@ export default async function TiendaPage({
     </div>
   );
 }
+

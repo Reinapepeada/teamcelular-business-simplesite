@@ -165,23 +165,23 @@ export default function ContactoPage() {
                     ]}
                 />
 
-                <nav className="flex items-center gap-2 text-sm text-slate-600">
+                <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
                     <Link href="/" className="transition hover:text-primary">
                         Inicio
                     </Link>
                     <span>/</span>
-                    <span className="font-semibold text-slate-900">Contacto</span>
+                    <span className="font-semibold text-slate-900 dark:text-slate-100">Contacto</span>
                 </nav>
 
-                <header className="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg md:p-12">
+                <header className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-lg md:p-12">
                     <div className="mx-auto max-w-3xl text-center">
                         <span className="inline-flex rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                             Recoleta - CABA
                         </span>
-                        <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 md:text-5xl">
+                        <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
                             Contacto directo con el laboratorio
                         </h1>
-                        <p className="mt-4 text-lg leading-8 text-slate-600">
+                        <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-400">
                             Si querés venir al taller, pedir presupuesto o
                             coordinar retiro, estos son los canales correctos y
                             los horarios reales.
@@ -217,20 +217,20 @@ export default function ContactoPage() {
                                 href={method.href}
                                 target={external ? "_blank" : undefined}
                                 rel={external ? "noopener noreferrer" : undefined}
-                                className="group h-full rounded-3xl border border-slate-200 bg-white p-6 shadow-md transition hover:-translate-y-1 hover:shadow-lg"
+                                className="group h-full rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-md transition hover:-translate-y-1 hover:shadow-lg"
                             >
                                 <div
                                     className={`inline-flex h-14 w-14 items-center justify-center rounded-2xl border ${method.tone}`}
                                 >
                                     <Icon className="text-2xl" />
                                 </div>
-                                <h2 className="mt-5 text-xl font-bold text-slate-900">
+                                <h2 className="mt-5 text-xl font-bold text-slate-900 dark:text-slate-100">
                                     {method.title}
                                 </h2>
-                                <p className="mt-2 font-semibold text-slate-800">
+                                <p className="mt-2 font-semibold text-slate-800 dark:text-slate-200">
                                     {method.value}
                                 </p>
-                                <p className="mt-2 text-sm leading-6 text-slate-600">
+                                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
                                     {method.description}
                                 </p>
                             </Link>
@@ -238,20 +238,20 @@ export default function ContactoPage() {
                     })}
                 </section>
 
-                <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-md">
-                    <h2 className="text-2xl font-bold text-slate-900">
+                <section className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md">
+                    <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                         Dudas rápidas antes de venir
                     </h2>
                     <div className="mt-6 grid gap-4 md:grid-cols-3">
                         {quickFaqs.map((item) => (
                             <article
                                 key={item.question}
-                                className="rounded-2xl border border-slate-200 bg-slate-50 p-5"
+                                className="rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-5"
                             >
                                 <h3 className="text-base font-semibold text-primary">
                                     {item.question}
                                 </h3>
-                                <p className="mt-3 text-sm leading-6 text-slate-600">
+                                <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
                                     {item.answer}
                                 </p>
                             </article>
@@ -260,16 +260,16 @@ export default function ContactoPage() {
                 </section>
 
                 <section className="grid gap-8 lg:grid-cols-[1fr_1.05fr]">
-                    <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-md">
+                    <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md">
                         <div className="flex items-start gap-4">
                             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                                 <FaMapMarkerAlt className="text-2xl" />
                             </div>
                             <div>
-                                <h2 className="text-2xl font-bold text-slate-900">
+                                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                                     Nuestra ubicación
                                 </h2>
-                                <p className="mt-2 text-lg text-slate-700">
+                                <p className="mt-2 text-lg text-slate-700 dark:text-slate-300">
                                     Paraguay 2451, Recoleta
                                 </p>
                                 <p className="text-slate-600">
@@ -283,13 +283,13 @@ export default function ContactoPage() {
                                 <FaClock className="text-2xl" />
                             </div>
                             <div>
-                                <h3 className="text-xl font-bold text-slate-900">
+                                <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
                                     Horarios de atención
                                 </h3>
-                                <p className="mt-2 text-slate-700">
+                                <p className="mt-2 text-slate-700 dark:text-slate-300">
                                     Lunes a Viernes: 10:30 - 18:00
                                 </p>
-                                <p className="text-sm text-slate-500">
+                                <p className="text-sm text-slate-500 dark:text-slate-400">
                                     Sábados y domingos: cerrado
                                 </p>
                             </div>
@@ -306,7 +306,7 @@ export default function ContactoPage() {
                         </Link>
 
                         <div className="mt-8 space-y-4">
-                            <h3 className="text-lg font-bold text-slate-900">
+                            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
                                 Cómo llegar
                             </h3>
                             {transportInfo.map((transport) => {
@@ -315,10 +315,10 @@ export default function ContactoPage() {
                                     <div key={transport.title} className="flex gap-3">
                                         <Icon className="mt-1 text-primary" />
                                         <div>
-                                            <p className="font-semibold text-slate-900">
+                                            <p className="font-semibold text-slate-900 dark:text-slate-100">
                                                 {transport.title}
                                             </p>
-                                            <p className="text-sm text-slate-600">
+                                            <p className="text-sm text-slate-600 dark:text-slate-400">
                                                 {transport.description}
                                             </p>
                                         </div>
@@ -328,7 +328,7 @@ export default function ContactoPage() {
                         </div>
                     </article>
 
-                    <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-md">
+                    <div className="overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 shadow-md">
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.262305984237!2d-58.40523692350382!3d-34.59752805717274!2m3!1f0!2f0!3f0!2m3!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccb9f6e9910cb%3A0xb492115ba59bc4f2!2sTeam%20celular%20%7C%20Reparacion%20de%20celulares%20%7C%20Reparacion%20de%20computadoras!5e0!3m2!1ses!2sar!4v1712864201522!5m2!1ses!2sar"
                             className="min-h-[560px] w-full"
@@ -339,8 +339,8 @@ export default function ContactoPage() {
                     </div>
                 </section>
 
-                <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-md">
-                    <h2 className="text-2xl font-bold text-slate-900">
+                <section className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md">
+                    <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                         Seguinos en redes sociales
                     </h2>
                     <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -352,14 +352,14 @@ export default function ContactoPage() {
                                     href={social.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex min-h-16 items-center gap-4 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 transition hover:border-primary/40 hover:bg-primary/5"
+                                    className="flex min-h-16 items-center gap-4 rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 px-5 py-4 transition hover:border-primary/40 hover:bg-primary/5"
                                 >
                                     <Icon className="text-2xl text-primary" />
                                     <div>
-                                        <p className="font-semibold text-slate-900">
+                                        <p className="font-semibold text-slate-900 dark:text-slate-100">
                                             {social.name}
                                         </p>
-                                        <p className="text-sm text-slate-600">
+                                        <p className="text-sm text-slate-600 dark:text-slate-400">
                                             {social.handle}
                                         </p>
                                     </div>
@@ -369,20 +369,20 @@ export default function ContactoPage() {
                     </div>
                 </section>
 
-                <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-md">
-                    <h2 className="text-2xl font-bold text-slate-900">
+                <section className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md">
+                    <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                         Preguntas frecuentes
                     </h2>
                     <div className="mt-6 grid gap-4 md:grid-cols-2">
                         {faqs.map((faq) => (
                             <article
                                 key={faq.question}
-                                className="rounded-2xl border border-slate-200 bg-slate-50 p-5"
+                                className="rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-5"
                             >
                                 <h3 className="text-lg font-semibold text-primary">
                                     {faq.question}
                                 </h3>
-                                <p className="mt-3 text-sm leading-6 text-slate-600">
+                                <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
                                     {faq.answer}
                                 </p>
                             </article>
@@ -425,4 +425,5 @@ export default function ContactoPage() {
         </section>
     );
 }
+
 
