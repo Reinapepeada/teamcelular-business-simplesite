@@ -136,6 +136,64 @@ export default function Home() {
             <BannerHome />
             <BannerCards />
 
+            <section className="w-full max-w-[100rem] space-y-6">
+                <div className="flex flex-col gap-3 text-center md:text-left">
+                    <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primary/90">
+                        Reparaciones que más se piden
+                    </p>
+                    <h2 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 md:text-[2.35rem]">
+                        Lo más buscado, bien explicado y listo para cotizar
+                    </h2>
+                    <p className="max-w-3xl text-[1.03rem] leading-7 text-slate-600 dark:text-slate-400">
+                        Si ya sabés qué le pasa al equipo, entrá directo a la reparación que corresponde. Si no, te ayudamos a elegir sin vueltas.
+                    </p>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-3">
+                    {[
+                        {
+                            title: "Cambio de pantalla",
+                            description:
+                                "Cuando el vidrio se rompe, aparecen líneas o el touch deja de responder, esta es la reparación que suele destrabar todo.",
+                            href: "/reparaciones/cambio-pantalla-caba",
+                            cta: "Ver cambio de pantalla",
+                        },
+                        {
+                            title: "Cambio de batería",
+                            description:
+                                "Si se apaga antes de tiempo, dura poco o se calienta, esta landing te lleva directo a la solución más común.",
+                            href: "/reparaciones/cambio-bateria-caba",
+                            cta: "Ver cambio de batería",
+                        },
+                        {
+                            title: "Cambio de pin de carga",
+                            description:
+                                "Cuando carga solo en cierta posición o hace falso contacto, conviene revisar este punto antes de seguir forzando el cable.",
+                            href: "/reparaciones/cambio-pin-carga-caba",
+                            cta: "Ver pin de carga",
+                        },
+                    ].map((item) => (
+                        <article
+                            key={item.title}
+                            className="rounded-2xl border border-slate-200/75 bg-white/80 p-6 shadow-md transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-700/70 dark:bg-slate-900/75"
+                        >
+                            <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
+                                {item.title}
+                            </h3>
+                            <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                                {item.description}
+                            </p>
+                            <Link
+                                href={item.href}
+                                className="mt-5 inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
+                            >
+                                {item.cta}
+                            </Link>
+                        </article>
+                    ))}
+                </div>
+            </section>
+
             <section className="w-full max-w-[100rem] space-y-12 text-center md:text-left lg:space-y-14">
                 <article className="grid gap-10 rounded-2xl border border-slate-200/70 bg-white/70 dark:bg-slate-900/70 p-8 shadow-lg md:grid-cols-2 md:items-center lg:p-10">
                     <div className="space-y-6">
