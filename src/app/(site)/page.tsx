@@ -11,7 +11,7 @@ const SITE_URL =
 export const metadata: Metadata = {
     title: "Reparacion de celulares en Buenos Aires | Team Celular",
     description:
-        "Servicio tecnico especializado en reparacion de celulares y laptops en Recoleta, CABA. Diagnostico en el dia, garantia escrita y atencion por WhatsApp.",
+        "Servicio técnico de celulares y laptops en Recoleta, CABA. Diagnóstico en el día, garantía escrita y atención rápida por WhatsApp.",
     keywords: [
         "reparacion de celulares Buenos Aires",
         "servicio tecnico celulares CABA",
@@ -28,9 +28,9 @@ export const metadata: Metadata = {
         locale: "es_AR",
         url: SITE_URL,
         siteName: "Team Celular",
-        title: "Reparacion de celulares en Buenos Aires | Team Celular",
+        title: "Reparación de celulares en Buenos Aires | Team Celular",
         description:
-            "Diagnostico en el dia, repuestos de calidad y garantia escrita para celulares y laptops.",
+            "Diagnóstico en el día, repuestos de calidad y garantía escrita para celulares y laptops.",
         images: [
             {
                 url: `${SITE_URL}/opengraph-image.png`,
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Reparacion de celulares en Buenos Aires | Team Celular",
+        title: "Reparación de celulares en Buenos Aires | Team Celular",
         description:
-            "Servicio tecnico con garantia escrita y respuesta comercial en menos de 2 horas habiles.",
+            "Servicio técnico con garantía escrita y respuesta comercial en menos de 2 horas hábiles.",
         images: [`${SITE_URL}/opengraph-image.png`],
     },
 };
@@ -170,7 +170,7 @@ export default function Home() {
                                 href="/tecnico-de-celulares"
                                 className="rounded-full border border-secondary/60 bg-white/85 dark:bg-slate-900/85 px-6 py-3 text-sm font-semibold text-slate-800 dark:text-slate-200 transition hover:bg-secondary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
                             >
-                                Tecnico de celulares
+                                Técnico de celulares
                             </Link>
                             <Link
                                 href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20necesito%20una%20reparacion"
@@ -252,19 +252,19 @@ export default function Home() {
 
                 <article className="rounded-2xl border border-slate-200/70 bg-white/70 dark:bg-slate-900/70 p-8 shadow-md lg:p-10">
                     <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-[2rem]">
-                        Donde estamos y como contactarnos
+                        Dónde estamos y cómo contactarnos
                     </h2>
                     <div className="mt-6 grid gap-8 md:grid-cols-2">
                         <div className="space-y-4">
                             <p className="text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
-                                Nuestro laboratorio esta en Paraguay 2451,
-                                Recoleta, con llegada facil desde Palermo,
+                                Nuestro laboratorio está en Paraguay 2451,
+                                Recoleta, con llegada fácil desde Palermo,
                                 Belgrano, Caballito, Microcentro y otras zonas
                                 de CABA.
                             </p>
                             <p className="text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
                                 Atendemos de lunes a viernes de 10:30 a 18:00 y
-                                coordinamos retiros segun disponibilidad.
+                                coordinamos retiros según disponibilidad.
                             </p>
                         </div>
                         <div className="space-y-4">
@@ -299,7 +299,7 @@ export default function Home() {
 
                 <section className="space-y-6">
                     <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-[2rem]">
-                        Preguntas frecuentes sobre reparacion de celulares
+                        Preguntas frecuentes sobre reparación de celulares
                     </h2>
                     <div className="grid gap-4 md:grid-cols-3">
                         {faqs.map((faq) => (
@@ -326,7 +326,7 @@ export default function Home() {
                 <article className="relative overflow-hidden rounded-2xl border border-slate-200/70 bg-white/75 dark:bg-slate-900/75 p-8 text-center shadow-lg md:text-left lg:p-10">
                     <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-primary/8 via-white/70 to-secondary/8" />
                     <h2 className="text-2xl font-bold tracking-tight text-primary md:text-[2rem]">
-                        Listo para recuperar tu telefono?
+                        ¿Listo para recuperar tu teléfono?
                     </h2>
                     <p className="mt-4 text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
                         Dejanos un mensaje con la falla, elegi tu canal de

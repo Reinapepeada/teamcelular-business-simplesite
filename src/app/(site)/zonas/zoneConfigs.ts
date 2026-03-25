@@ -6,12 +6,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     zoneName: "Recoleta",
     metaTitle: "Arreglo de Celulares en Recoleta (CABA) | Team Celular",
     metaDescription:
-      "Arreglo de celulares en Recoleta, CABA: pantalla, bateria, pin de carga, camaras, audio y microelectronica. Taller en Paraguay 2451 con garantia escrita.",
+      "Arreglo de celulares en Recoleta, CABA: pantalla, batería, pin de carga, cámaras, audio y microelectrónica. Taller en Paraguay 2451 con garantía escrita.",
     socialDescription:
-      "Pantalla, bateria, carga y placa en Recoleta. Presupuesto rapido con garantia por escrito.",
+      "Pantalla, batería, carga y placa en Recoleta. Presupuesto rápido y garantía por escrito.",
     heroBadge: "Atencion local en Recoleta",
     heroIntro:
-      "Si estas en Recoleta y buscas arreglo de celulares, te atendemos en nuestro taller con diagnostico profesional, repuestos de calidad y garantia por escrito.",
+      "Si estás en Recoleta y buscás arreglo de celulares, te atendemos en nuestro taller con diagnóstico profesional, repuestos de calidad y garantía por escrito.",
     heroImage: "/images/teamcelular.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(56,189,248,0.3),transparent_44%)]",
@@ -40,7 +40,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       "Si carga intermitente, validamos pin, flex y estado de bateria antes de cotizar.",
     ],
     transportTip:
-      "Nuestro laboratorio esta en Paraguay 2451 (Recoleta). Si estas cerca, podes acercarte caminando; si venis en transporte publico, te pasamos la ruta por WhatsApp.",
+      "Nuestro laboratorio está en Paraguay 2451 (Recoleta). Si estás cerca, podés venir caminando; si venís en transporte público, te pasamos la ruta por WhatsApp.",
     nearbyZones: [
       { name: "Palermo", slug: "palermo" },
       { name: "Belgrano", slug: "belgrano" },
@@ -71,12 +71,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     zoneName: "Palermo",
     metaTitle: "Arreglo de Celulares en Palermo (CABA) | Team Celular",
     metaDescription:
-      "Arreglo de celulares para Palermo, CABA: pantalla, bateria, pin de carga y microelectronica. Taller en Recoleta con garantia escrita y presupuesto rapido.",
+      "Arreglo de celulares para Palermo, CABA: pantalla, batería, pin de carga y microelectrónica. Taller en Recoleta con garantía escrita y presupuesto rápido.",
     socialDescription:
       "Servicio tecnico para Palermo con presupuesto rapido por WhatsApp y garantia por escrito.",
     heroBadge: "Cobertura Palermo",
     heroIntro:
-      "Atendemos clientes de Palermo con foco en resolucion rapida para equipos de uso diario: pantalla, bateria, carga y fallas de placa.",
+      "Atendemos clientes de Palermo con foco en resolución rápida para equipos de uso diario: pantalla, batería, carga y fallas de placa.",
     heroImage: "/images/dispositivoshdpro.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(59,130,246,0.32),transparent_44%)]",
@@ -398,12 +398,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     zoneName: "Microcentro",
     metaTitle: "Arreglo de Celulares en Microcentro (CABA) | Team Celular",
     metaDescription:
-      "Arreglo de celulares para Microcentro, CABA: pantalla, bateria, carga y microelectronica. Taller en Recoleta con garantia por escrito y presupuesto rapido.",
+      "Arreglo de celulares para Microcentro, CABA: pantalla, batería, carga y microelectrónica. Taller en Recoleta con garantía por escrito y presupuesto rápido.",
     socialDescription:
       "Servicio tecnico para Microcentro con foco en tiempos rapidos para equipos de trabajo.",
     heroBadge: "Cobertura Microcentro",
     heroIntro:
-      "Si tu celular es herramienta de trabajo en Microcentro, priorizamos diagnostico rapido, presupuesto claro y tiempos realistas para minimizar impacto operativo.",
+      "Si tu celular es herramienta de trabajo en Microcentro, priorizamos diagnóstico rápido, presupuesto claro y tiempos realistas para minimizar el impacto operativo.",
     heroImage: "/images/empresaFamiliar.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(20,184,166,0.32),transparent_44%)]",
