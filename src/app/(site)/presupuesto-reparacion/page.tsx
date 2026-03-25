@@ -25,7 +25,7 @@ const PAGE_URL = `${SITE_URL}/presupuesto-reparacion`;
 export const metadata: Metadata = {
     title: "Presupuesto de reparación de celulares en Buenos Aires | Team Celular",
     description:
-        "Solicitá tu presupuesto online y coordiná la revisión técnica. El costo suele variar entre ARS 15.000 y ARS 25.000 según equipo y falla.",
+        "Pedí tu presupuesto online y recibí una respuesta clara antes de mover tu equipo. Revisión técnica según marca, modelo y tipo de falla.",
     keywords: [
         "presupuesto reparación celulares",
         "servicio técnico celulares buenos aires",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Presupuesto de reparación de celulares en Buenos Aires | Team Celular",
         description:
-            "24 horas de respuesta, garantía escrita y soporte personalizado para reparar tu celular.",
+            "Respuesta clara, garantía escrita y soporte personalizado para reparar tu celular.",
         url: PAGE_URL,
         locale: "es_AR",
         type: "website",
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Pedí tu presupuesto de reparación en Team Celular",
         description:
-            "Respuesta en menos de 24 horas con garantía escrita y repuestos premium.",
+            "Respuesta clara, garantía escrita y repuestos premium según el caso.",
         images: ["https://teamcelular.com/opengraph-image.png"],
     },
 };
@@ -224,16 +224,15 @@ export default function PresupuestoReparacionPage() {
                 <header className="grid gap-10 rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-lg lg:grid-cols-[1.05fr_0.95fr] lg:p-12">
                     <div>
                         <span className="inline-flex rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-                            Revisión técnica arancelada
+                            Presupuesto claro y sin vueltas
                         </span>
                         <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
-                            Pedí tu presupuesto y recibí una respuesta técnica
-                            clara para arreglar tu celular
+                            Pedí tu presupuesto y sabé qué conviene hacer con tu celular
                         </h1>
                         <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
-                            Somos laboratorio en Recoleta con foco en
-                            microelectrónica, repuestos premium y seguimiento
-                            real por WhatsApp para que avances sin perder tiempo.
+                            Somos laboratorio en Recoleta. Te damos una respuesta
+                            técnica clara, con tiempos reales y seguimiento por
+                            WhatsApp para que no tengas que adivinar.
                         </p>
 
                         <ul className="mt-6 space-y-3 text-slate-700 dark:text-slate-300">
@@ -260,12 +259,12 @@ export default function PresupuestoReparacionPage() {
                             </li>
                         </ul>
 
-                        <div className="mt-8 flex flex-wrap gap-4">
+                        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                             <Link
                                 href="#solicitar-presupuesto"
                                 className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-primary/90"
                             >
-                                Solicitar presupuesto
+                                Pedir presupuesto ahora
                             </Link>
                             <Link
                                 href="https://wa.me/5491151034595?text=Hola!%20Quiero%20pedir%20presupuesto%20para%20mi%20equipo"
@@ -279,36 +278,36 @@ export default function PresupuestoReparacionPage() {
                         </div>
 
                         <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">
-                            Horario de atención: lunes a viernes de 10:30 a 18:00.
+                            Respuesta comercial de lunes a viernes de 10:30 a 18:00.
                         </p>
                     </div>
 
                     <aside className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-8">
                         <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-                            Por qué pedir tu presupuesto online
+                            Por qué te conviene pedirlo online
                         </h2>
                         <div className="mt-6 space-y-6">
                             {[
                                 {
                                     icon: FaClock,
                                     title: "Tiempo de respuesta",
-                                    value: "12 hs promedio",
+                                    value: "Mismo día o al siguiente",
                                     description:
-                                        "Un técnico dedicado te responde en menos de 24 horas hábiles.",
+                                        "Te respondemos rápido para que no quedes esperando sin saber qué hacer.",
                                 },
                                 {
                                     icon: FaShieldAlt,
                                     title: "Garantía",
                                     value: "90 a 180 días",
                                     description:
-                                        "Según el tipo de reparación y el repuesto utilizado.",
+                                        "Según la reparación y el repuesto utilizado, todo queda explicado por escrito.",
                                 },
                                 {
                                     icon: FaSmile,
                                     title: "Confianza",
                                     value: "Reseñas verificables",
                                     description:
-                                        "Prueba social real y experiencia de laboratorio local.",
+                                        "Te mostramos experiencia real de laboratorio y clientes que ya pasaron por acá.",
                                 },
                             ].map((item) => {
                                 const Icon = item.icon;

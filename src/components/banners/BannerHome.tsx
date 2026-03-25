@@ -48,8 +48,9 @@ export default function BannerHome() {
                             href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20necesito%20una%20reparacion"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center rounded-full border border-primary/45 bg-white/85 px-7 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                            className="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-500/35 bg-emerald-50 px-7 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 dark:border-emerald-400/35 dark:bg-emerald-500/15 dark:text-emerald-200 dark:hover:bg-emerald-500/25"
                         >
+                            <BsWhatsapp className="text-lg" aria-hidden />
                             WhatsApp directo
                         </Link>
                         <Link

@@ -59,6 +59,25 @@ export default function NavbarNUI() {
 
     return (
         <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/92 shadow-[0_8px_24px_-20px_rgba(15,23,42,0.35)] backdrop-blur-xl dark:border-slate-800/80 dark:bg-gradient-to-b dark:from-slate-950/96 dark:to-slate-900/96 dark:shadow-[0_10px_30px_-18px_rgba(2,6,23,0.9)]">
+            <div className="border-b border-slate-200/60 px-4 py-2 sm:hidden dark:border-slate-800/70">
+                <div className="mx-auto flex w-full max-w-[100rem] gap-2">
+                    <Link
+                        href="/presupuesto-reparacion#solicitar-presupuesto"
+                        className="inline-flex flex-1 items-center justify-center rounded-full bg-primary px-4 py-2 text-xs font-semibold text-white shadow-sm"
+                    >
+                        Presupuesto
+                    </Link>
+                    <Link
+                        href={WHATSAPP_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-emerald-500/35 bg-emerald-50 px-4 py-2 text-xs font-semibold text-emerald-700 dark:border-emerald-400/35 dark:bg-emerald-500/15 dark:text-emerald-200"
+                    >
+                        <BsWhatsapp className="text-sm" aria-hidden />
+                        WhatsApp
+                    </Link>
+                </div>
+            </div>
             <div className="mx-auto flex min-h-[76px] w-full max-w-[100rem] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center gap-3">
                     <Link href="/" className="flex items-center gap-3 text-inherit">

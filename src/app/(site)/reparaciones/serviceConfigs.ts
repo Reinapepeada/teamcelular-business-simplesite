@@ -19,7 +19,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "bateria celular se descarga rapido",
     ],
     intro:
-      "Si tu bateria dura poco, se apaga con porcentaje o se calienta, hacemos diagnostico y presupuesto rapido. Atencion en CABA con taller en Recoleta.",
+      "Si tu batería dura poco, se apaga con porcentaje o se calienta, te damos un diagnóstico claro y una salida concreta sin vueltas. Atendemos en CABA desde nuestro taller en Recoleta.",
     whatsappText:
       "Hola! Quiero un presupuesto para cambio de bateria en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de bateria (CABA)",
@@ -29,36 +29,36 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "Cambio de bateria para celulares en CABA con repuestos certificados y garantia escrita.",
     highlights: [
       {
-        title: "Diagnostico claro",
-        desc: "Confirmamos si la falla es bateria, software o consumo anormal.",
+        title: "Diagnóstico claro",
+        desc: "Primero vemos si el problema es batería, software o consumo anormal antes de cambiar nada.",
       },
       {
         title: "Repuestos certificados",
-        desc: "Opciones original, premium o certificada segun modelo y necesidad.",
+        desc: "Te ofrecemos la opción que más convenga según modelo, uso y presupuesto.",
       },
       {
-        title: "Garantia escrita",
-        desc: "Te entregamos garantia por escrito segun el servicio realizado.",
+        title: "Garantía escrita",
+        desc: "La reparación sale documentada con alcance y plazo claro desde el inicio.",
       },
     ],
     brandsText:
       "Trabajamos iPhone, Samsung, Motorola, Xiaomi, Huawei, OnePlus, Google Pixel y mas.",
     faqs: [
       {
-        q: "Cuanto tarda el cambio de bateria?",
-        a: "Depende del modelo y stock. En muchos casos se resuelve en el dia.",
+        q: "¿Cuánto tarda el cambio de batería?",
+        a: "Depende del modelo y stock. En muchos casos se resuelve en el día.",
       },
       {
-        q: "Trabajan con todas las marcas?",
-        a: "Si. Si el modelo es poco comun, confirmamos disponibilidad al cotizar.",
+        q: "¿Trabajan con todas las marcas?",
+        a: "Sí. Si el modelo es poco común, confirmamos disponibilidad al cotizar.",
       },
       {
-        q: "Que garantia tiene el cambio?",
-        a: "Entregamos garantia escrita con detalle de cobertura y plazo.",
+        q: "¿Qué garantía tiene el cambio?",
+        a: "Entregamos garantía escrita con detalle de cobertura y plazo.",
       },
       {
-        q: "Si se descarga rapido pero carga bien, igual conviene cambiarla?",
-        a: "En muchos casos si. Primero validamos si la causa es bateria, software o placa.",
+        q: "¿Si se descarga rápido pero carga bien, igual conviene cambiarla?",
+        a: "En muchos casos sí. Primero validamos si la causa es batería, software o placa.",
       },
     ],
   },
@@ -80,7 +80,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "touch no responde celular",
     ],
     intro:
-      "Si tu equipo tiene vidrio roto, lineas, manchas o touch sin respuesta, hacemos cambio de pantalla con pruebas completas de funcionamiento.",
+      "Si tu equipo tiene vidrio roto, líneas, manchas o el touch no responde, hacemos el cambio de pantalla con prueba completa para que no te lleves sorpresas.",
     whatsappText:
       "Hola! Quiero un presupuesto para cambio de pantalla en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de pantalla (CABA)",
@@ -91,35 +91,35 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     highlights: [
       {
         title: "Test funcional completo",
-        desc: "Probamos brillo, touch, camaras, sensores y carga antes de entregar.",
+        desc: "Probamos brillo, touch, cámaras, sensores y carga antes de entregarte el equipo.",
       },
       {
         title: "Repuestos premium",
-        desc: "Te indicamos opciones segun calidad, disponibilidad y presupuesto.",
+        desc: "Te marcamos la opción que mejor cierre entre calidad, disponibilidad y presupuesto.",
       },
       {
         title: "Entrega clara",
-        desc: "Confirmamos tiempo y costo final antes de abrir el equipo.",
+        desc: "Antes de abrir el equipo te dejamos claro tiempo y costo estimado.",
       },
     ],
     brandsText:
       "Trabajamos iPhone, Samsung, Motorola, Xiaomi y otras marcas Android.",
     faqs: [
       {
-        q: "Cambian solo el vidrio o el modulo completo?",
-        a: "Depende del modelo y dano. Te indicamos la opcion tecnica correcta antes de avanzar.",
+        q: "¿Cambian solo el vidrio o el módulo completo?",
+        a: "Depende del modelo y del daño. Te decimos cuál opción conviene antes de avanzar.",
       },
       {
-        q: "Se pierde Face ID o huella al cambiar pantalla?",
-        a: "No deberia perderse en una reparacion correcta. Hacemos test completo al finalizar.",
+        q: "¿Se pierde Face ID o huella al cambiar pantalla?",
+        a: "No debería perderse en una reparación correcta. Igual hacemos test completo al finalizar.",
       },
       {
-        q: "Cuanto demora el cambio de pantalla?",
-        a: "Muchos casos se resuelven en el dia, sujeto a modelo y stock.",
+        q: "¿Cuánto demora el cambio de pantalla?",
+        a: "Muchos casos se resuelven en el día, según modelo y stock.",
       },
       {
-        q: "La pantalla nueva tiene garantia?",
-        a: "Si, entregamos garantia escrita segun repuesto y tipo de trabajo.",
+        q: "¿La pantalla nueva tiene garantía?",
+        a: "Sí, entregamos garantía escrita según el repuesto y el tipo de trabajo.",
       },
     ],
   },
