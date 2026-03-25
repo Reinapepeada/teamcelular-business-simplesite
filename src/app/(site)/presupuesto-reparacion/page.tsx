@@ -227,13 +227,13 @@ export default function PresupuestoReparacionPage() {
                             Revisión técnica arancelada
                         </span>
                         <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
-                            Pedí tu presupuesto online y recuperá tu celular con
-                            un plan técnico claro
+                            Pedí tu presupuesto y recibí una respuesta técnica
+                            clara para arreglar tu celular
                         </h1>
                         <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
-                            Somos laboratorio en Recoleta con enfoque real en
-                            microelectrónica, repuestos premium y seguimiento por
-                            WhatsApp.
+                            Somos laboratorio en Recoleta con foco en
+                            microelectrónica, repuestos premium y seguimiento
+                            real por WhatsApp para que avances sin perder tiempo.
                         </p>
 
                         <ul className="mt-6 space-y-3 text-slate-700 dark:text-slate-300">

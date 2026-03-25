@@ -164,14 +164,17 @@ export default function ArregloDeCelularesPage() {
       />
 
       <header className="rounded-2xl border border-white/15 bg-white/5 p-10 text-center shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-12">
-        <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-          Arreglo de celulares en Recoleta, CABA (con garantía)
+        <span className="inline-flex rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+          Reparación de celulares con garantía
+        </span>
+        <h1 className="mt-6 text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
+          Arreglo de celulares en Recoleta con diagnóstico serio y respuesta rápida
         </h1>
         <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          Taller en <strong>Recoleta</strong>, con atención para toda{" "}
-          <strong>CABA</strong>. Reparaciones frecuentes (pantalla, batería y
-          carga) y soluciones avanzadas de <strong>microelectrónica</strong> para
-          fallas complejas de placa.
+          Taller en <strong>Recoleta</strong> para toda <strong>CABA</strong>.
+          Te ayudamos con pantalla, batería, carga, cámaras y placa, con
+          asesoramiento real para que no pierdas tiempo ni plata en una reparación
+          mal hecha.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Link
@@ -179,12 +182,6 @@ export default function ArregloDeCelularesPage() {
             className="rounded-full bg-primary px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
           >
             Pedir presupuesto
-          </Link>
-          <Link
-            href="/tecnico-de-celulares"
-            className="rounded-full border border-secondary/50 px-8 py-4 text-base font-semibold text-secondary transition hover:bg-secondary/10"
-          >
-            Técnico de celulares
           </Link>
           <a
             href={whatsappUrl}

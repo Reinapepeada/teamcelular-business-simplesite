@@ -187,7 +187,7 @@ export default function ContactoPage() {
                             los horarios reales.
                         </p>
                         <div className="mt-8 flex flex-wrap justify-center gap-4">
-                            <Link
+                            <a
                                 href="https://wa.me/5491151034595"
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -195,7 +195,7 @@ export default function ContactoPage() {
                             >
                                 <FaWhatsapp aria-hidden />
                                 Escribinos por WhatsApp
-                            </Link>
+                            </a>
                             <Link
                                 href="/presupuesto-reparacion"
                                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-primary px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10"
