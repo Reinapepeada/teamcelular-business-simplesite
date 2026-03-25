@@ -35,9 +35,9 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
     ],
     localScenarios: [
-      "Si tu equipo se mojo, apaga el telefono y no lo cargues antes de traerlo.",
-      "Si hay lineas, manchas o touch parcial, suele requerir cambio de modulo completo.",
-      "Si carga intermitente, validamos pin, flex y estado de bateria antes de cotizar.",
+      "Si tu equipo se mojó, apagalo y no intentes cargarlo antes de traerlo; eso suele empeorar el daño.",
+      "Si ves líneas, manchas o el touch responde a medias, normalmente ya estamos hablando de cambio de módulo.",
+      "Cuando la carga entra y sale, revisamos pin, flex y batería antes de pasarte un número.",
     ],
     transportTip:
       "Nuestro laboratorio está en Paraguay 2451 (Recoleta). Si estás cerca, podés venir caminando; si venís en transporte público, te pasamos la ruta por WhatsApp.",
@@ -76,7 +76,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       "Servicio tecnico para Palermo con presupuesto rapido por WhatsApp y garantia por escrito.",
     heroBadge: "Cobertura Palermo",
     heroIntro:
-      "Atendemos clientes de Palermo con foco en resolución rápida para equipos de uso diario: pantalla, batería, carga y fallas de placa.",
+      "Si estás en Palermo y se te rompió el celular, te ayudamos a destrabarlo rápido: revisamos pantalla, batería, carga y también fallas de placa cuando el problema no es tan obvio.",
     heroImage: "/images/dispositivoshdpro.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(59,130,246,0.32),transparent_44%)]",
@@ -84,18 +84,18 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       "Hola! Quiero un presupuesto para arreglo de celular desde Palermo. Marca y modelo:",
     highlights: [
       {
-        title: "Pantalla y touch",
-        desc: "Modulo completo con pruebas de brillo, tactil y sensores antes de entrega.",
+        title: "Pantalla que quedó mal",
+        desc: "Si el display tiene líneas, manchas o el touch responde a medias, lo revisamos completo antes de darte un camino.",
         icon: "screen",
       },
       {
-        title: "Bateria y carga",
-        desc: "Revisamos consumo, pin y bateria para evitar cambiar piezas innecesarias.",
+        title: "Batería que ya no rinde",
+        desc: "Cuando el equipo se descarga rápido o se apaga solo, miramos consumo, batería y puerto de carga para no cambiar por cambiar.",
         icon: "battery",
       },
       {
-        title: "Casos complejos",
-        desc: "Si se reinicia o no enciende, hacemos diagnostico de placa con microscopio.",
+        title: "Fallas que confunden",
+        desc: "Si reinicia, no enciende o hace cosas raras, vamos a placa y diagnóstico fino para detectar la causa de verdad.",
         icon: "chip",
       },
     ],
@@ -105,7 +105,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       "En Android suele entrar modulo display y problemas de energia por uso intensivo.",
     ],
     transportTip:
-      "Desde Palermo suele ser comodo Subte D hasta Callao y caminar unas cuadras. Si venis en auto, recomendamos validar trafico antes de salir.",
+      "Desde Palermo suele ser cómodo venir por Subte D hasta Callao y caminar unas cuadras. Si venís en auto, revisá el tráfico antes de salir para no perder tiempo.",
     nearbyZones: [
       { name: "Recoleta", slug: "recoleta" },
       { name: "Belgrano", slug: "belgrano" },
@@ -114,20 +114,20 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     focusServices: ["pantalla", "bateria", "pin de carga", "microelectronica"],
     faqs: [
       {
-        q: "Atienden Palermo aunque el taller este en Recoleta?",
-        a: "Si. Atendemos Palermo todos los dias habiles y coordinamos por WhatsApp para reducir tiempos.",
+        q: "¿Atienden clientes de Palermo aunque el taller esté en Recoleta?",
+        a: "Sí. Palermo entra todos los días y coordinamos por WhatsApp para que no tengas que dar vueltas de más.",
       },
       {
-        q: "Que demora tiene una reparacion comun?",
-        a: "Pantalla, bateria o carga suelen resolverse en el dia segun stock y cola de trabajo.",
+        q: "¿Qué demora tiene una reparación común?",
+        a: "Pantalla, batería o carga suelen resolverse en el día si tenemos stock y el equipo no trae una falla extra escondida.",
       },
       {
-        q: "Se puede pedir cotizacion sin ir?",
-        a: "Si. Te damos un presupuesto orientativo con marca, modelo y sintomas. Si hace falta, pedimos revision fisica.",
+        q: "¿Puedo pedir cotización sin ir?",
+        a: "Sí. Con marca, modelo y síntomas te damos una orientación clara. Si hace falta revisión física, te lo decimos de frente.",
       },
       {
-        q: "Trabajan garantia por escrito?",
-        a: "Si. Todas las reparaciones se entregan con garantia escrita y detalle de cobertura.",
+        q: "¿Trabajan con garantía por escrito?",
+        a: "Sí. La reparación sale con garantía escrita y alcance bien explicado.",
       },
     ],
   },
@@ -141,7 +141,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       "Soporte tecnico para Belgrano con reparaciones de pantalla, bateria, carga y placa.",
     heroBadge: "Cobertura Belgrano",
     heroIntro:
-      "Si estas en Belgrano, te ayudamos con reparaciones de alto uso: pantalla, bateria, conectores y placa, con proceso claro desde el presupuesto.",
+      "Si estás en Belgrano y el equipo te está fallando, te ayudamos a recuperar uso normal con una revisión clara de pantalla, batería, conectores y placa.",
     heroImage: "/images/celuPorDentro.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(14,165,233,0.32),transparent_44%)]",
@@ -149,28 +149,28 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       "Hola! Quiero un presupuesto para arreglo de celular desde Belgrano. Marca y modelo:",
     highlights: [
       {
-        title: "Pantallas premium",
-        desc: "Display sin imagen, lineas o touch fallando: reemplazo y test funcional completo.",
+        title: "Pantalla sin vueltas",
+        desc: "Si el display quedó en negro, con rayas o el touch empezó a fallar, lo revisamos antes de prometerte cualquier cosa.",
         icon: "screen",
       },
       {
         title: "Carga y conectores",
-        desc: "Pin, flex y conectores con solucion prolija para evitar falsos contactos.",
+        desc: "Cuando el pin está flojo o la carga entra y sale, buscamos la causa real para que no vuelvas por lo mismo.",
         icon: "repair",
       },
       {
-        title: "Diagnostico de placa",
-        desc: "Cuando hay fallas intermitentes, revisamos hardware y software para detectar la causa real.",
+        title: "Diagnóstico de placa",
+        desc: "Si se reinicia, se apaga o da fallas raras, vamos a hardware y software para no adivinar.",
         icon: "chip",
       },
     ],
     localScenarios: [
-      "Muchos casos de Belgrano llegan por pantalla rota y bateria degradada.",
-      "En equipos de uso laboral, es comun desgaste de pin de carga y flex.",
-      "Golpes fuertes o humedad pueden derivar en trabajos de microelectronica.",
+      "En Belgrano vemos mucho equipo de uso diario con pantalla rota y batería ya muy gastada.",
+      "También aparecen pines de carga flojos por uso fuerte y por cargarlos todos los días al límite.",
+      "Si hubo golpe o humedad, revisamos la placa para decirte si conviene reparar o no.",
     ],
     transportTip:
-      "Desde Belgrano suele resultar practico venir por Subte D hacia Callao y completar el tramo final a pie o en colectivo.",
+      "Desde Belgrano suele ser práctico venir por Subte D hacia Callao y completar el último tramo a pie o en colectivo.",
     nearbyZones: [
       { name: "Palermo", slug: "palermo" },
       { name: "Recoleta", slug: "recoleta" },
@@ -179,20 +179,20 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     focusServices: ["pantalla", "bateria", "carga", "diagnostico placa"],
     faqs: [
       {
-        q: "Reparan celulares para Belgrano?",
-        a: "Si. Atendemos clientes de Belgrano y toda CABA con taller fisico en Recoleta.",
+        q: "¿Reparan celulares para Belgrano?",
+        a: "Sí. Atendemos Belgrano y toda CABA desde nuestro taller en Recoleta.",
       },
       {
-        q: "Que pasa si el equipo no enciende?",
-        a: "Hacemos diagnostico tecnico para confirmar si la falla es de placa, energia o componente puntual.",
+        q: "¿Qué pasa si el equipo no enciende?",
+        a: "Hacemos diagnóstico técnico para ver si el problema está en placa, energía o en un componente puntual.",
       },
       {
-        q: "Puedo cotizar por WhatsApp?",
-        a: "Si. Te respondemos con una estimacion inicial y pasos siguientes segun el caso.",
+        q: "¿Puedo cotizar por WhatsApp?",
+        a: "Sí. Te damos una estimación inicial y te contamos los pasos según el caso.",
       },
       {
-        q: "Entregan garantia por escrito?",
-        a: "Si. Queda asentada en cada reparacion con alcance y plazo.",
+        q: "¿Entregan garantía por escrito?",
+        a: "Sí. Cada reparación sale con garantía escrita y plazo claro.",
       },
     ],
   },
@@ -206,7 +206,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       "Servicio tecnico para Caballito con foco en pantalla, energia, carga y microelectronica.",
     heroBadge: "Cobertura Caballito",
     heroIntro:
-      "Brindamos soporte tecnico para Caballito con enfoque en tiempo de resolucion y transparencia: te explicamos opciones antes de reparar.",
+      "Si estás en Caballito y necesitás resolver el celular sin perder tiempo, te explicamos bien el problema y te damos una salida concreta antes de tocar el equipo.",
     heroImage:
       "/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp",
     heroGlowClass:
@@ -215,18 +215,18 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       "Hola! Quiero un presupuesto para arreglo de celular desde Caballito. Marca y modelo:",
     highlights: [
       {
-        title: "Cambio de pantalla",
-        desc: "Pantalla rota, touch parcial o manchas: reemplazo con control de calidad.",
+        title: "Pantalla maltratada",
+        desc: "Si el equipo quedó con manchas, líneas o el touch responde cuando quiere, revisamos todo el módulo.",
         icon: "screen",
       },
       {
         title: "Carga y flex",
-        desc: "Resolvemos carga intermitente, falso contacto y flex dañados segun modelo.",
+        desc: "Cuando entra y sale la carga o el pin quedó flojo, buscamos la causa para dejarlo bien de una.",
         icon: "repair",
       },
       {
-        title: "Placa y energia",
-        desc: "No enciende, se reinicia o consume de mas: diagnostico tecnico de fondo.",
+        title: "Placa y energía",
+        desc: "Si no enciende, se reinicia o consume más de la cuenta, hacemos diagnóstico técnico de fondo.",
         icon: "chip",
       },
     ],
@@ -245,20 +245,20 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     focusServices: ["pantalla", "bateria", "pin de carga", "placa"],
     faqs: [
       {
-        q: "Atienden Caballito todos los dias habiles?",
-        a: "Si, atendemos de lunes a viernes y coordinamos por WhatsApp para agilizar el ingreso.",
+        q: "¿Atienden Caballito todos los días hábiles?",
+        a: "Sí, atendemos de lunes a viernes y coordinamos por WhatsApp para agilizar el ingreso.",
       },
       {
-        q: "Puedo pedir presupuesto sin moverme de Caballito?",
-        a: "Si. Con marca, modelo y falla te damos una estimacion inicial por WhatsApp.",
+        q: "¿Puedo pedir presupuesto sin moverme de Caballito?",
+        a: "Sí. Con marca, modelo y falla te damos una estimación inicial por WhatsApp.",
       },
       {
-        q: "Hacen reparaciones en el dia?",
-        a: "Varias si, especialmente pantalla, bateria o carga. Casos de placa requieren mas tiempo.",
+        q: "¿Hacen reparaciones en el día?",
+        a: "Varias sí, sobre todo pantalla, batería o carga. Los casos de placa llevan más tiempo.",
       },
       {
-        q: "Que incluye la garantia?",
-        a: "Incluye cobertura del trabajo realizado segun tipo de reparacion y repuesto instalado.",
+        q: "¿Qué incluye la garantía?",
+        a: "Cubre el trabajo realizado según el tipo de reparación y el repuesto instalado.",
       },
     ],
   },
@@ -296,12 +296,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
     ],
     localScenarios: [
-      "En Almagro entran muchos equipos por pantalla rota y bateria de baja autonomia.",
-      "Cuando hay carga intermitente, suele ser pin desgastado o flex afectado.",
-      "Si hubo humedad o corto, revisamos placa para medir viabilidad de reparacion.",
+      "En Almagro entran muchos equipos por pantalla rota y batería con poca autonomía.",
+      "Cuando la carga entra y sale, muchas veces el pin está gastado o el flex ya no da más.",
+      "Si hubo humedad o corto, revisamos la placa antes de decirte si la reparación conviene o no.",
     ],
     transportTip:
-      "Desde Almagro podes llegar por subte y colectivo hacia Recoleta. En la pagina de contacto tenes el mapa para ruta exacta.",
+      "Desde Almagro podés llegar por subte o colectivo hacia Recoleta. En la página de contacto tenés el mapa para no perderte.",
     nearbyZones: [
       { name: "Caballito", slug: "caballito" },
       { name: "Balvanera", slug: "balvanera" },
@@ -362,12 +362,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
     ],
     localScenarios: [
-      "En Balvanera/Once se repiten equipos con carga desgastada por uso continuo.",
-      "Si el telefono se mojo, es clave apagarlo y traerlo rapido para reducir corrosion.",
-      "Fallas intermitentes se revisan con diagnostico tecnico para separar software y hardware.",
+      "En Balvanera y Once se repiten equipos con carga gastada por uso continuo y cables que ya no hacen buen contacto.",
+      "Si el teléfono se mojó, apagalo y traelo rápido: mientras más tarde, más se corroe adentro.",
+      "Las fallas intermitentes las miramos con diagnóstico técnico para no mezclar software con hardware.",
     ],
     transportTip:
-      "Desde Once/Balvanera llegas rapido en colectivo o combinando subte. Te compartimos el punto exacto para evitar vueltas.",
+      "Desde Once o Balvanera llegás rápido en colectivo o combinando subte. Te compartimos el punto exacto para evitar vueltas de más.",
     nearbyZones: [
       { name: "Almagro", slug: "almagro" },
       { name: "Caballito", slug: "caballito" },
@@ -427,12 +427,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
     ],
     localScenarios: [
-      "En Microcentro se repite desgaste de bateria y carga por uso intensivo.",
-      "Cuando el equipo es de trabajo, se prioriza diagnostico rapido y comunicacion clara.",
-      "Tambien tratamos fallas de placa en equipos que no encienden o reinician.",
+      "En Microcentro se repite desgaste de batería y carga porque el equipo suele ir y venir todo el día.",
+      "Cuando el celular es herramienta de trabajo, la prioridad es responder rápido y no marearte con vueltas.",
+      "También vemos fallas de placa en equipos que no encienden o se reinician sin explicación clara.",
     ],
     transportTip:
-      "Desde Microcentro podes venir por Subte D hacia Callao y completar el ultimo tramo hacia Paraguay 2451 (Recoleta).",
+      "Desde Microcentro podés venir por Subte D hacia Callao y completar el último tramo hasta Paraguay 2451, Recoleta.",
     nearbyZones: [
       { name: "Balvanera / Once", slug: "balvanera" },
       { name: "Recoleta", slug: "recoleta" },
