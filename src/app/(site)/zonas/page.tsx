@@ -107,12 +107,12 @@ export default function ZonasPage() {
 
       <header className="mx-auto max-w-3xl text-center">
         <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-          Zonas de servicio en CABA
+          Zonas donde arreglamos celulares en CABA
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          Estamos en <strong>Recoleta</strong> y atendemos consultas y
-          reparaciones para toda <strong>CABA</strong>. Estas páginas te ayudan a
-          encontrar rápido lo que necesitás según tu zona.
+          Estamos en <strong>Recoleta</strong> y trabajamos con consultas y
+          reparaciones para toda <strong>CABA</strong>. Si estás cerca de una de
+          estas zonas, te mostramos la página más útil para avanzar rápido.
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-4">

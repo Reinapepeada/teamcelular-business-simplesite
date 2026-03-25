@@ -37,7 +37,7 @@ export default function RepairsForm() {
 
             <fieldset className="space-y-3">
                 <legend className="text-sm font-semibold text-slate-900 dark:text-slate-100">
-                    Selecciona la falla del equipo
+                    Contanos qué le pasa al equipo
                 </legend>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                     {repairOptions.map((option) => (
@@ -58,12 +58,12 @@ export default function RepairsForm() {
             </fieldset>
 
             <label className="block space-y-2 text-sm font-medium text-slate-900 dark:text-slate-100">
-                <span>Descripcion de la falla</span>
+                <span>Descripción de la falla</span>
                 <textarea
                     name="description"
                     rows={5}
                     className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
-                    placeholder="Contanos cuando empezo, si se golpeo, si tuvo humedad o cualquier detalle util."
+                    placeholder="Contanos cuándo empezó, si se golpeó, si tuvo humedad o cualquier detalle que ayude."
                 />
             </label>
 
@@ -82,11 +82,11 @@ export default function RepairsForm() {
                     type="submit"
                     className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition hover:bg-primary/90"
                 >
-                    Enviar a WhatsApp
+                    Pedir presupuesto por WhatsApp
                 </button>
                 <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">
-                    Armamos el mensaje automaticamente y te llevamos directo al
-                    chat para cerrar el pedido sin friccion.
+                    Armamos el mensaje automáticamente y te llevamos directo al
+                    chat para que no tengas que repetir todo dos veces.
                 </p>
             </div>
         </form>

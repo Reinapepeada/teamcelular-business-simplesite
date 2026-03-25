@@ -140,18 +140,18 @@ export default function Home() {
                 <article className="grid gap-10 rounded-2xl border border-slate-200/70 bg-white/70 dark:bg-slate-900/70 p-8 shadow-lg md:grid-cols-2 md:items-center lg:p-10">
                     <div className="space-y-6">
                         <h2 className="text-3xl font-semibold tracking-tight text-primary md:text-[2.35rem]">
-                            Por que elegir Team Celular
+                            Por qué nos eligen en Team Celular
                         </h2>
                         <p className="text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
-                            Somos un laboratorio tecnico en Recoleta enfocado en
-                            reparar rapido, diagnosticar bien y explicar claro.
-                            Trabajamos con repuestos de calidad y criterio
-                            comercial honesto.
+                            Somos un laboratorio técnico en Recoleta. Nos
+                            tomamos el trabajo en serio: diagnosticamos con
+                            criterio, reparamos sin vueltas y explicamos cada
+                            paso con palabras claras.
                         </p>
                         <p className="text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
-                            Atendemos equipos personales, casos complejos de
-                            placa y tambien soporte para empresas. Cada trabajo
-                            sale con garantia escrita y seguimiento real.
+                            Atendemos celulares de uso personal y también equipos
+                            de empresas. Cada trabajo sale con garantía escrita y
+                            seguimiento real, no con promesas vacías.
                         </p>
                         <div className="flex flex-wrap gap-4">
                             <Link
