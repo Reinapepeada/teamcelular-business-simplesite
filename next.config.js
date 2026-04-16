@@ -26,6 +26,15 @@ const securityHeaders = [
 module.exports = {
   reactStrictMode: true,
   poweredByHeader: false,
+  experimental: {
+    optimizePackageImports: [
+      "react-icons",
+      "@nextui-org/react",
+      "framer-motion",
+      "lucide-react",
+      "@tabler/icons-react",
+    ],
+  },
   images: {
     qualities: [75, 82],
     remotePatterns: [

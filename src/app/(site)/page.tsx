@@ -1,17 +1,18 @@
-﻿import type { Metadata } from "next";
-import Link from "next/link";
+﻿import Link from "next/link";
 import BannerHome from "@/components/banners/BannerHome";
 import BannerCards from "@/components/cards/BannerCards";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import KnowledgeGrid from "@/components/cards/KnowledgeGrid";
+import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
+import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 
-const SITE_URL =
-    process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+const SITE_URL = getSiteUrl();
 
-export const metadata: Metadata = {
-    title: "Reparacion de celulares en Buenos Aires | Team Celular",
+export const metadata = buildWebsiteMetadata({
+    path: "/",
+    title: "Servicio Tecnico de Celulares en Recoleta, CABA | Team Celular",
     description:
-        "Servicio técnico de celulares y laptops en Recoleta, CABA. Diagnóstico en el día, garantía escrita y atención rápida por WhatsApp.",
+        "Reparacion de celulares y laptops con diagnostico en el dia, garantia escrita y atencion rapida por WhatsApp en Recoleta, CABA.",
     keywords: [
         "reparacion de celulares Buenos Aires",
         "servicio tecnico celulares CABA",
@@ -20,34 +21,17 @@ export const metadata: Metadata = {
         "servicio tecnico para empresas",
         "control y diagnostico de equipos",
     ],
-    alternates: {
-        canonical: SITE_URL,
+    languages: {
+        "es-AR": "/",
     },
-    openGraph: {
-        type: "website",
-        locale: "es_AR",
-        url: SITE_URL,
-        siteName: "Team Celular",
-        title: "Reparación de celulares en Buenos Aires | Team Celular",
-        description:
-            "Diagnóstico en el día, repuestos de calidad y garantía escrita para celulares y laptops.",
-        images: [
-            {
-                url: `${SITE_URL}/opengraph-image.png`,
-                width: 1200,
-                height: 630,
-                alt: "Team Celular - Servicio tecnico en Buenos Aires",
-            },
-        ],
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: "Reparación de celulares en Buenos Aires | Team Celular",
-        description:
-            "Servicio técnico con garantía escrita y respuesta comercial en menos de 2 horas hábiles.",
-        images: [`${SITE_URL}/opengraph-image.png`],
-    },
-};
+    openGraphTitle: "Servicio Tecnico de Celulares en Recoleta, CABA | Team Celular",
+    openGraphDescription:
+        "Pantalla, bateria, carga y microelectronica con diagnostico en el dia y garantia escrita.",
+    openGraphImageAlt: "Team Celular - Servicio tecnico en Buenos Aires",
+    twitterTitle: "Servicio Tecnico de Celulares en Recoleta, CABA | Team Celular",
+    twitterDescription:
+        "Diagnostico en el dia, garantia escrita y respuesta comercial en menos de 2 horas habiles.",
+});
 
 const services = [
     {
@@ -134,11 +118,10 @@ export default function Home() {
     return (
         <section className="flex w-full max-w-[100rem] flex-col items-center gap-16 px-6 py-14 md:px-8 2xl:px-10">
             <BannerHome />
-            <BannerCards />
 
             <section className="w-full max-w-[100rem] space-y-6">
                 <div className="flex flex-col gap-3 text-center md:text-left">
-                    <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primary/90">
+                    <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-900 dark:text-sky-300">
                         Reparaciones que más se piden
                     </p>
                     <h2 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 md:text-[2.35rem]">
@@ -194,6 +177,8 @@ export default function Home() {
                 </div>
             </section>
 
+            <BannerCards />
+
             <section className="w-full max-w-[100rem] space-y-12 text-center md:text-left lg:space-y-14">
                 <article className="grid gap-10 rounded-2xl border border-slate-200/70 bg-white/70 dark:bg-slate-900/70 p-8 shadow-lg md:grid-cols-2 md:items-center lg:p-10">
                     <div className="space-y-6">
@@ -212,32 +197,26 @@ export default function Home() {
                             seguimiento real, no con promesas vacías.
                         </p>
                         <div className="flex flex-wrap gap-4">
-                            <Link
-                                href="/presupuesto-reparacion"
+                            <TrackedCtaLink
+                                href="/presupuesto-reparacion#solicitar-presupuesto"
+                                ctaName="home_value_budget"
+                                ctaLocation="home_value_section"
+                                ctaVariant="primary"
                                 className={primaryCtaClass}
                             >
                                 Pedir presupuesto
-                            </Link>
-                            <Link
-                                href="/reparaciones"
+                            </TrackedCtaLink>
+                            <TrackedCtaLink
+                                href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20necesito%20una%20reparacion"
+                                ctaName="home_value_whatsapp"
+                                ctaLocation="home_value_section"
+                                ctaVariant="whatsapp"
+                                external
+                                target="_blank"
                                 className={neutralCtaClass}
                             >
-                                Ver reparaciones
-                            </Link>
-                            <Link
-                                href="/tecnico-de-celulares"
-                                className="rounded-full border border-secondary/60 bg-white/85 dark:bg-slate-900/85 px-6 py-3 text-sm font-semibold text-slate-800 dark:text-slate-200 transition hover:bg-secondary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
-                            >
-                                Técnico de celulares
-                            </Link>
-                            <Link
-                                href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20necesito%20una%20reparacion"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="rounded-full border border-primary/45 bg-white/85 dark:bg-slate-900/85 px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-                            >
                                 Escribinos por WhatsApp
-                            </Link>
+                            </TrackedCtaLink>
                         </div>
                     </div>
 

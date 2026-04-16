@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import {
   FaBatteryFull,
   FaBatteryHalf,
@@ -242,8 +243,8 @@ export default function BatteryReplacementGuide() {
           {/* Quick Stats */}
           <div className="grid gap-6 md:grid-cols-3 mt-8">
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
-              <FaClock className="mx-auto text-3xl text-green-500 mb-2" />
-              <div className="text-2xl font-bold text-green-500">1-2hs</div>
+              <FaClock className="mx-auto mb-2 text-3xl text-green-700 dark:text-green-300" />
+              <div className="text-2xl font-bold text-green-700 dark:text-green-300">1-2hs</div>
               <div className="text-sm text-slate-600 dark:text-slate-400">Service express</div>
             </div>
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
@@ -252,8 +253,8 @@ export default function BatteryReplacementGuide() {
               <div className="text-sm text-slate-600 dark:text-slate-400">Garantía escrita</div>
             </div>
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
-              <FaCertificate className="mx-auto text-3xl text-green-500 mb-2" />
-              <div className="text-2xl font-bold text-green-500">100%</div>
+              <FaCertificate className="mx-auto mb-2 text-3xl text-green-700 dark:text-green-300" />
+              <div className="text-2xl font-bold text-green-700 dark:text-green-300">100%</div>
               <div className="text-sm text-slate-600 dark:text-slate-400">Baterías certificadas</div>
             </div>
           </div>
@@ -261,13 +262,13 @@ export default function BatteryReplacementGuide() {
           <div className="flex flex-wrap justify-center gap-4 mt-8">
             <Link
               href="/presupuesto-reparacion"
-              className="rounded-full bg-green-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-green-700 hover:shadow-xl"
+              className="rounded-full bg-green-700 px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-green-800 hover:shadow-xl"
             >
               Solicitar cambio de batería
             </Link>
             <Link
               href="https://wa.me/5491151034595?text=Necesito%20cambiar%20la%20bater%C3%ADa%20de%20mi%20celular"
-              className="rounded-full border-2 border-green-500 px-8 py-4 text-lg font-semibold text-green-500 transition hover:bg-green-500/10"
+              className="rounded-full border-2 border-green-700 px-8 py-4 text-lg font-semibold text-green-800 transition hover:bg-green-100 dark:border-green-500 dark:text-green-200 dark:hover:bg-green-900/30"
             >
               WhatsApp directo
             </Link>
@@ -289,10 +290,10 @@ export default function BatteryReplacementGuide() {
               const Icon = signal.Icon;
               const severityStyles =
                 signal.severity === "Crítica"
-                  ? { text: "text-red-500", bg: "bg-red-500/10" }
+                  ? { text: "text-red-700 dark:text-red-300", bg: "bg-red-100 dark:bg-red-900/40" }
                   : signal.severity === "Alta"
-                  ? { text: "text-orange-500", bg: "bg-orange-500/10" }
-                  : { text: "text-yellow-500", bg: "bg-yellow-500/10" };
+                  ? { text: "text-orange-700 dark:text-orange-300", bg: "bg-orange-100 dark:bg-orange-900/40" }
+                  : { text: "text-yellow-700 dark:text-yellow-300", bg: "bg-yellow-100 dark:bg-yellow-900/40" };
               
               return (
                 <div
@@ -339,7 +340,7 @@ export default function BatteryReplacementGuide() {
               >
                 {battery.recommended && (
                   <div className="mb-4 flex justify-center">
-                    <span className="rounded-full bg-green-500 px-3 py-1 text-xs font-semibold text-white">
+                    <span className="rounded-full bg-green-800 px-3 py-1 text-xs font-semibold text-white">
                       ✓ Recomendado
                     </span>
                   </div>
@@ -364,7 +365,7 @@ export default function BatteryReplacementGuide() {
                 {battery.cons && (
                   <ul className="space-y-2">
                     {battery.cons.map((con) => (
-                      <li key={con} className="flex items-center gap-2 text-sm text-red-500">
+                      <li key={con} className="flex items-center gap-2 text-sm text-red-700 dark:text-red-300">
                         <FaExclamationTriangle className="flex-shrink-0" />
                         {con}
                       </li>
@@ -398,7 +399,7 @@ export default function BatteryReplacementGuide() {
                     <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-green-600 text-3xl text-white shadow-lg">
                       <Icon />
                     </div>
-                    <span className="flex items-center gap-2 rounded-full bg-green-500/10 px-3 py-1 text-sm font-semibold text-green-500">
+                    <span className="flex items-center gap-2 rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-800 dark:bg-green-900/40 dark:text-green-200">
                       <FaClock />
                       {process.duration}
                     </span>
@@ -453,7 +454,7 @@ export default function BatteryReplacementGuide() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/presupuesto-reparacion"
-              className="rounded-full bg-green-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-green-700"
+              className="rounded-full bg-green-700 px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-green-800"
             >
               Solicitar presupuesto
             </Link>
@@ -465,6 +466,8 @@ export default function BatteryReplacementGuide() {
             </Link>
           </div>
         </section>
+
+        <GuideInterlinkSection currentGuide="/guias/cambio-bateria-celular" />
 
         {/* Schema.org */}
         <script

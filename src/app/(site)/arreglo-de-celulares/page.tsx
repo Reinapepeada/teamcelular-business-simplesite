@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
+import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+const SITE_URL = getSiteUrl();
 const PAGE_URL = `${SITE_URL}/arreglo-de-celulares`;
 
 const services = [
@@ -53,8 +54,16 @@ const zones = [
 
 const faqs = [
   {
-    q: "¿Hacen arreglo de celulares en el día?",
-    a: "En muchos casos sí (pantalla, batería o pin de carga). Si el equipo requiere diagnóstico de placa o repuesto especial, te informamos tiempos estimados antes de avanzar.",
+    q: "¿Sirve esta página si todavía no sé la falla exacta?",
+    a: "Sí. Esta landing está pensada para consultas generales. Con marca, modelo y síntomas te orientamos rápido sobre el siguiente paso.",
+  },
+  {
+    q: "¿Qué arreglos suelen resolverse en el día?",
+    a: "Pantalla, batería y pin de carga suelen salir en el día según stock y estado del equipo. Siempre confirmamos tiempo real antes de abrirlo.",
+  },
+  {
+    q: "¿Cuándo conviene ir a la página de técnico de celulares?",
+    a: "Si tenés reinicios, equipo mojado, falla de placa o querés segunda opinión técnica, conviene revisar la landing de técnico especialista para casos complejos.",
   },
   {
     q: "¿Dónde están ubicados?",
@@ -65,25 +74,19 @@ const faqs = [
     a: "Entregamos garantía por escrito. El plazo depende del tipo de reparación y del repuesto utilizado; te lo detallamos en el presupuesto.",
   },
   {
-    q: "¿Trabajan iPhone y Samsung?",
-    a: "Sí. También trabajamos Motorola, Xiaomi y otras marcas. Si tu modelo es poco común, te confirmamos disponibilidad de repuesto al momento de cotizar.",
-  },
-  {
-    q: "¿Cuánto cuesta un arreglo de celular?",
-    a: "Depende de la marca, el modelo y la falla. Podés pedir un presupuesto por WhatsApp o por el formulario y te respondemos con opciones y tiempos estimados.",
-  },
-  {
     q: "¿Cómo pido presupuesto rápido?",
     a: "Podés ir directo al formulario o escribirnos por WhatsApp con la marca, el modelo y una descripción (si podés, sumá fotos).",
   },
 ];
 
-export const metadata: Metadata = {
-  title: "Arreglo de Celulares en Recoleta (CABA) | iPhone y Samsung | Team Celular",
+export const metadata: Metadata = buildWebsiteMetadata({
+  path: "/arreglo-de-celulares",
+  title: "Arreglo de Celulares en Recoleta (CABA) | Soluciones rápidas | Team Celular",
   description:
-    "Arreglo de celulares en Recoleta, CABA. Pantalla, batería, pin de carga, cámaras, audio y reparaciones de placa (microelectrónica) con garantía escrita. Presupuesto rápido por WhatsApp o formulario.",
+    "Arreglo de celulares en Recoleta para fallas cotidianas: pantalla, batería, carga, cámaras y audio. Presupuesto rápido con respuesta clara por WhatsApp o formulario.",
   keywords: [
     "arreglo de celulares recoleta",
+    "arreglo de celular rapido caba",
     "reparación de celulares recoleta",
     "arreglo celular caba",
     "cambio pantalla celular recoleta",
@@ -91,31 +94,21 @@ export const metadata: Metadata = {
     "servicio técnico celulares recoleta",
     "microelectrónica celulares caba",
   ],
-  alternates: { canonical: PAGE_URL },
-  openGraph: {
-    title: "Arreglo de Celulares en Recoleta (CABA) | Team Celular",
-    description:
-      "Arreglo y reparación de celulares en Recoleta, CABA con garantía por escrito. Pantalla, batería, carga y placa.",
-    url: PAGE_URL,
-    type: "website",
-    locale: "es_AR",
-    images: [
-      {
-        url: `${SITE_URL}/opengraph-image.png`,
-        width: 1200,
-        height: 630,
-        alt: "Team Celular - Arreglo de celulares en Recoleta (CABA)",
-      },
-    ],
+  robots: {
+    index: true,
+    follow: true,
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Arreglo de Celulares en Recoleta (CABA) | Team Celular",
-    description:
-      "Arreglo de celulares con garantía escrita. Presupuesto rápido por WhatsApp o formulario.",
-    images: [`${SITE_URL}/opengraph-image.png`],
+  languages: {
+    "es-AR": "/arreglo-de-celulares",
   },
-};
+  openGraphTitle: "Arreglo de Celulares en Recoleta (CABA) | Team Celular",
+  openGraphDescription:
+    "Arreglo y reparación de celulares en Recoleta, CABA con garantía por escrito. Pantalla, batería, carga y placa.",
+  openGraphImageAlt: "Team Celular - Arreglo de celulares en Recoleta (CABA)",
+  twitterTitle: "Arreglo de Celulares en Recoleta (CABA) | Team Celular",
+  twitterDescription:
+    "Arreglo de celulares con garantía escrita. Presupuesto rápido por WhatsApp o formulario.",
+});
 
 export default function ArregloDeCelularesPage() {
   const whatsappUrl = `https://wa.me/5491151034595?text=${encodeURIComponent(
@@ -164,40 +157,47 @@ export default function ArregloDeCelularesPage() {
       />
 
       <header className="rounded-2xl border border-white/15 bg-white/5 p-10 text-center shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-12">
-        <span className="inline-flex rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-          Reparación de celulares con garantía
+        <span className="inline-flex rounded-full bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
+          Servicio general por falla cotidiana
         </span>
         <h1 className="mt-6 text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-          Arreglo de celulares en Recoleta con diagnóstico serio y respuesta rápida
+          Arreglo de celulares en Recoleta para resolver fallas cotidianas
         </h1>
         <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          Taller en <strong>Recoleta</strong> para toda <strong>CABA</strong>.
-          Te ayudamos con pantalla, batería, carga, cámaras y placa, con
-          asesoramiento real para que no pierdas tiempo ni plata en una reparación
-          mal hecha.
+          Si se rompió la pantalla, no carga bien o la batería no dura, esta
+          es la página indicada para empezar rápido. Estamos en <strong>Recoleta</strong>
+          y atendemos consultas de toda <strong>CABA</strong> con presupuesto claro.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <Link
+          <TrackedCtaLink
             href="/presupuesto-reparacion#solicitar-presupuesto"
+            ctaName="arreglo_hero_budget"
+            ctaLocation="arreglo_hero"
+            ctaVariant="primary"
             className="rounded-full bg-primary px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
           >
             Pedir presupuesto
-          </Link>
-          <a
+          </TrackedCtaLink>
+          <TrackedCtaLink
             href={whatsappUrl}
+            ctaName="arreglo_hero_whatsapp"
+            ctaLocation="arreglo_hero"
+            ctaVariant="whatsapp"
+            external
             target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-primary/40 px-8 py-4 text-base font-semibold text-primary transition hover:bg-primary/10 dark:border-primary/60 dark:text-primary/80"
+            className="rounded-full border border-emerald-700 bg-emerald-700 px-8 py-4 text-base font-semibold text-white transition hover:bg-emerald-800"
           >
             WhatsApp directo
-          </a>
-          <Link
-            href="/contacto"
-            className="rounded-full border border-secondary/50 px-8 py-4 text-base font-semibold text-secondary transition hover:bg-secondary/10"
-          >
-            Ver ubicación
-          </Link>
+          </TrackedCtaLink>
         </div>
+        <p className="mt-5 text-sm text-slate-600 dark:text-slate-300">
+          Si necesitás un enfoque más técnico para fallas complejas de placa,
+          revisá{" "}
+          <Link href="/tecnico-de-celulares" className="font-semibold text-primary underline-offset-4 hover:underline">
+            Técnico de celulares en Recoleta
+          </Link>
+          .
+        </p>
       </header>
 
       <section className="mt-10 grid gap-6 md:grid-cols-3">
@@ -227,6 +227,36 @@ export default function ArregloDeCelularesPage() {
             </p>
           </div>
         ))}
+      </section>
+
+      <section className="mt-8 rounded-2xl border border-white/15 bg-white/5 p-6 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
+          ¿Tu caso parece más complejo?
+        </h2>
+        <p className="mt-2 text-slate-600 dark:text-slate-300">
+          Si el equipo no enciende, se reinicia solo o tuvo humedad, te conviene
+          pasar a la landing de técnico especialista para una evaluación más profunda.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <TrackedCtaLink
+            href="/tecnico-de-celulares"
+            ctaName="arreglo_complex_case_tecnico"
+            ctaLocation="arreglo_complex_case"
+            ctaVariant="secondary"
+            className="rounded-full border border-primary/40 px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary/10"
+          >
+            Ver técnico especialista
+          </TrackedCtaLink>
+          <TrackedCtaLink
+            href="/reparaciones/reparacion-placa-caba"
+            ctaName="arreglo_complex_case_board"
+            ctaLocation="arreglo_complex_case"
+            ctaVariant="secondary"
+            className="rounded-full border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
+          >
+            Reparación de placa en CABA
+          </TrackedCtaLink>
+        </div>
       </section>
 
       <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
@@ -335,7 +365,7 @@ export default function ArregloDeCelularesPage() {
               key={faq.q}
               className="rounded-xl border border-white/10 bg-white/10 p-5 text-sm leading-relaxed text-slate-700 dark:border-white/5 dark:bg-slate-900/40 dark:text-slate-300"
             >
-              <h3 className="font-semibold text-primary">{faq.q}</h3>
+              <h3 className="font-semibold text-slate-900 dark:text-slate-100">{faq.q}</h3>
               <p className="mt-2">{faq.a}</p>
             </article>
           ))}

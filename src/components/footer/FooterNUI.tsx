@@ -140,7 +140,7 @@ export default function FooterNUI() {
           </div>
 
           <div className="flex flex-col space-y-3">
-            <h4 className="mb-2 text-lg font-bold text-primary">Servicios</h4>
+            <h2 className="mb-2 text-lg font-bold text-primary">Servicios</h2>
             {footerSections.servicios.map((service) => {
               const Icon = service.icon;
               return (
@@ -158,7 +158,7 @@ export default function FooterNUI() {
           </div>
 
           <div className="flex flex-col space-y-3">
-            <h4 className="mb-2 text-lg font-bold text-secondary">Guias tecnicas</h4>
+            <h2 className="mb-2 text-lg font-bold text-secondary">Guias tecnicas</h2>
             {footerSections.guias.map((guia) => (
               <Link
                 key={guia.href}
@@ -172,7 +172,7 @@ export default function FooterNUI() {
 
             <div className="my-6 h-px w-full bg-white/10" />
 
-            <h4 className="mb-2 text-lg font-bold text-secondary">Recursos</h4>
+            <h2 className="mb-2 text-lg font-bold text-secondary">Recursos</h2>
             {footerSections.recursos.map((recurso) => (
               <Link
                 key={recurso.href}
@@ -186,7 +186,7 @@ export default function FooterNUI() {
           </div>
 
           <div className="flex flex-col space-y-4">
-            <h4 className="mb-2 text-lg font-bold text-primary">Contacto</h4>
+            <h2 className="mb-2 text-lg font-bold text-primary">Contacto</h2>
 
             <div className="flex items-start space-x-3 text-sm">
               <BsGeoAlt className="mt-1 flex-shrink-0 text-primary" />

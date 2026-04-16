@@ -5,8 +5,10 @@ import ProductStructuredData from '@/components/seo/ProductStructuredData';
 import { fetchWithCache } from '@/lib/serverCache';
 import { buildProductSlug, parseProductIdFromSlug } from '@/lib/productSlug';
 import { permanentRedirect, notFound } from 'next/navigation';
+import type { Metadata } from 'next';
+import { buildWebsiteMetadata, getSiteUrl } from '@/lib/seoMetadata';
 
-const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || 'https://teamcelular.com';
+const SITE_URL = getSiteUrl();
 const DEFAULT_LAT = process.env.NEXT_PUBLIC_BUSINESS_LAT || '-34.6037';
 const DEFAULT_LON = process.env.NEXT_PUBLIC_BUSINESS_LON || '-58.3816';
 
@@ -32,37 +34,34 @@ const getProductData = async (productId: number) => {
  * Server-side metadata generation for product pages.
  * Uses shared cached fetch to avoid duplicate requests.
  */
-export async function generateMetadata({ params }: any) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
     const productId = parseProductIdFromSlug(slug);
-    if (!productId) return {};
+    if (!productId) {
+        return buildWebsiteMetadata({
+            path: '/tienda',
+            title: 'Producto no encontrado | Team Celular',
+            description: 'Producto no disponible en Team Celular.',
+            robots: { index: false, follow: false },
+        });
+    }
 
     try {
         const product = await getProductData(productId);
         const image = getPrimaryImage(product) || '/placeholder.jpg';
         const absoluteImage = image.startsWith('http') ? image : `${SITE_URL}${image.startsWith('/') ? '' : '/'}${image}`;
 
-        const title = product.name || 'Producto';
-        const fallbackDescription = [
-            product.name,
-            product.brand?.name ? `Marca ${product.brand.name}` : null,
-            product.category?.name ? `Categoria ${product.category.name}` : null,
-            'Disponible en Team Celular.',
-        ]
-            .filter(Boolean)
-            .join('. ');
-        const description = product.description?.trim() || fallbackDescription || 'Producto en Team Celular.';
+        const brandName = product.brand?.name?.trim();
+        const categoryName = product.category?.name?.trim();
+        const title = `${product.name || 'Producto'} | Team Celular`;
+        const fallbackDescription = `Compra ${product.name || 'este producto'}${brandName ? ` de ${brandName}` : ''}${categoryName ? ` en ${categoryName}` : ''} con retiro en Recoleta y envio en CABA. Validamos compatibilidad por WhatsApp antes de comprar.`;
+        const description = product.description?.trim() || fallbackDescription;
         const productSlug = buildProductSlug(product);
-        const url = `${SITE_URL}/tienda/${productSlug}`;
+        const canonicalPath = `/tienda/${productSlug}`;
 
         // geo coordinates
         const lat = process.env.NEXT_PUBLIC_BUSINESS_LAT || DEFAULT_LAT;
         const lon = process.env.NEXT_PUBLIC_BUSINESS_LON || DEFAULT_LON;
-
-        const ogImageObj: any = {
-            url: absoluteImage,
-            alt: product.name || 'Imagen del producto',
-        };
 
         // Build keywords from product data
         const keywords = [
@@ -72,37 +71,30 @@ export async function generateMetadata({ params }: any) {
             'repuestos celulares',
             'accesorios celulares',
             'Buenos Aires',
-        ].filter(Boolean);
+        ].filter((keyword): keyword is string => Boolean(keyword));
 
-        return {
+        const seoMetadata = buildWebsiteMetadata({
+            path: canonicalPath,
             title,
             description,
             keywords,
-            alternates: {
-                canonical: url,
-                languages: {
-                    "es-AR": url,
-                },
-            },
             robots: {
                 index: true,
                 follow: true,
             },
-            openGraph: {
-                title,
-                description,
-                url,
-                siteName: 'Team Celular',
-                images: [ogImageObj],
-                locale: 'es_AR',
-                type: 'website',
+            languages: {
+                'es-AR': canonicalPath,
             },
-            twitter: {
-                card: 'summary_large_image',
-                title,
-                description,
-                images: [absoluteImage],
-            },
+            openGraphTitle: title,
+            openGraphDescription: description,
+            openGraphImagePath: absoluteImage,
+            openGraphImageAlt: product.name || 'Imagen del producto',
+            twitterTitle: title,
+            twitterDescription: description,
+        });
+
+        return {
+            ...seoMetadata,
             // Custom meta tags (geo + product info)
             other: {
                 'geo.region': 'AR',
@@ -114,18 +106,19 @@ export async function generateMetadata({ params }: any) {
                 'og:price:amount': product.retail_price?.toString(),
                 'og:price:currency': 'ARS',
             },
-        } as any;
+        } as Metadata;
     } catch (err) {
         console.error('generateMetadata error:', err);
-        return {
-            title: 'Producto no encontrado',
+        return buildWebsiteMetadata({
+            path: '/tienda',
+            title: 'Producto no encontrado | Team Celular',
             description: 'Producto no disponible en Team Celular.',
             robots: { index: false, follow: false },
-        };
+        });
     }
 }
 
-export default async function Page({ params }: any) {
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
     const productId = parseProductIdFromSlug(slug);
     let product = null;

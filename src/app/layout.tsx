@@ -6,8 +6,9 @@ const inter = Inter({ subsets: ["latin"], display: "swap" });
 import Plugins from "@/components/vercel/Plugins";
 import StructuredData from "@/components/seo/StructuredData";
 import { ThemeProvider } from "@/app/providers";
+import { getSiteUrl } from "@/lib/seoMetadata";
 
-const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+const SITE_URL = getSiteUrl();
 
 export const viewport: Viewport = {
     width: "device-width",

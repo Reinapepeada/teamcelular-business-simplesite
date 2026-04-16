@@ -11,9 +11,10 @@ import {
 } from "react-icons/fa";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import StickyLocalCta from "@/components/cro/StickyLocalCta";
+import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
+import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+const SITE_URL = getSiteUrl();
 
 type ServiceVisual = {
   cover: string;
@@ -90,6 +91,135 @@ const WORKFLOW = [
   },
 ];
 
+type RelatedGuide = {
+  href: string;
+  title: string;
+  description: string;
+};
+
+const DEFAULT_RELATED_GUIDES: RelatedGuide[] = [
+  {
+    href: "/guias/reparacion-pantalla-celular",
+    title: "Guia de pantalla",
+    description: "Como evaluar dano de modulo y elegir repuesto segun uso real.",
+  },
+  {
+    href: "/guias/cambio-bateria-celular",
+    title: "Guia de bateria",
+    description: "Senales de desgaste y criterios para reemplazo sin gastar de mas.",
+  },
+  {
+    href: "/guias/microelectronica-reballing-caba",
+    title: "Guia de microelectronica",
+    description: "Cuando conviene diagnostico de placa y que esperar de un caso complejo.",
+  },
+];
+
+const SERVICE_RELATED_GUIDES: Record<string, RelatedGuide[]> = {
+  "cambio-pantalla-caba": [
+    {
+      href: "/guias/reparacion-pantalla-celular",
+      title: "Guia de pantalla",
+      description: "Diferencias entre modulo, vidrio y criterios de calidad post-reparacion.",
+    },
+    {
+      href: "/guias/reparacion-iphone-buenos-aires",
+      title: "Guia iPhone",
+      description: "Buenas practicas para conservar funciones delicadas en Apple.",
+    },
+    {
+      href: "/guias/reparacion-samsung-buenos-aires",
+      title: "Guia Samsung",
+      description: "Escenarios frecuentes de AMOLED, touch y calibracion final.",
+    },
+  ],
+  "cambio-bateria-caba": [
+    {
+      href: "/guias/cambio-bateria-celular",
+      title: "Guia de bateria",
+      description: "Como detectar desgaste real y evitar cambios innecesarios.",
+    },
+    {
+      href: "/guias/mantenimiento-preventivo-celulares",
+      title: "Guia de mantenimiento",
+      description: "Rutinas para alargar autonomia y reducir nuevas fallas.",
+    },
+    {
+      href: "/guias/reparacion-xiaomi-buenos-aires",
+      title: "Guia Xiaomi",
+      description: "Referencia util para equipos con carga rapida y consumo irregular.",
+    },
+  ],
+  "cambio-pin-carga-caba": [
+    {
+      href: "/guias/reparacion-samsung-buenos-aires",
+      title: "Guia Samsung",
+      description: "Casos comunes de USB-C, humedad y falso contacto en Galaxy.",
+    },
+    {
+      href: "/guias/reparacion-xiaomi-buenos-aires",
+      title: "Guia Xiaomi",
+      description: "Recomendaciones para puertos exigidos por carga rapida diaria.",
+    },
+    {
+      href: "/guias/mantenimiento-preventivo-celulares",
+      title: "Guia de mantenimiento",
+      description: "Cuidados simples para evitar dano progresivo en conectores.",
+    },
+  ],
+  "reparacion-placa-caba": [
+    {
+      href: "/guias/microelectronica-reballing-caba",
+      title: "Guia de microelectronica",
+      description: "Proceso real para placa, reballing y evaluacion de viabilidad.",
+    },
+    {
+      href: "/guias/soporte-empresas-servicio-tecnico",
+      title: "Guia de soporte empresas",
+      description: "Como gestionar casos criticos cuando el equipo es de trabajo.",
+    },
+    {
+      href: "/guias/reparacion-iphone-buenos-aires",
+      title: "Guia iPhone",
+      description: "Escenarios tipicos de placa y recuperacion en dispositivos Apple.",
+    },
+  ],
+  "cambio-flex-caba": [
+    {
+      href: "/guias/reparacion-pantalla-celular",
+      title: "Guia de pantalla",
+      description: "Cuando una falla de display puede estar ligada a flex o conectores.",
+    },
+    {
+      href: "/guias/reparacion-iphone-buenos-aires",
+      title: "Guia iPhone",
+      description: "Referencia para fallas de botones, camara y modulos internos.",
+    },
+    {
+      href: "/guias/reparacion-samsung-buenos-aires",
+      title: "Guia Samsung",
+      description: "Checklist tecnico para sintomas intermitentes en equipos Galaxy.",
+    },
+  ],
+  "cambio-tapa-caba": [
+    {
+      href: "/guias/reparacion-pantalla-celular",
+      title: "Guia de pantalla",
+      description: "Que revisar cuando hay golpes combinados en frente y parte trasera.",
+    },
+    {
+      href: "/guias/mantenimiento-preventivo-celulares",
+      title: "Guia de mantenimiento",
+      description: "Buenas practicas para conservar terminacion y estructura del equipo.",
+    },
+    {
+      href: "/guias/reparacion-iphone-buenos-aires",
+      title: "Guia iPhone",
+      description: "Referencia para equipos con tapa trasera quebrada y uso intensivo.",
+    },
+  ],
+};
+
 export interface ServiceHighlight {
   title: string;
   desc: string;
@@ -120,44 +250,24 @@ export interface ServiceLandingConfig {
 }
 
 export function buildServiceMetadata(config: ServiceLandingConfig): Metadata {
-  const serviceUrl = `${SITE_URL}/reparaciones/${config.slug}`;
-
-  return {
+  return buildWebsiteMetadata({
+    path: `/reparaciones/${config.slug}`,
     title: config.metaTitle,
     description: config.metaDescription,
     keywords: config.keywords,
-    alternates: {
-      canonical: serviceUrl,
-      languages: {
-        "es-AR": serviceUrl,
-      },
-    },
     robots: {
       index: true,
       follow: true,
     },
-    openGraph: {
-      title: config.socialTitle,
-      description: config.socialDescription,
-      url: serviceUrl,
-      type: "website",
-      locale: "es_AR",
-      images: [
-        {
-          url: `${SITE_URL}/opengraph-image.png`,
-          width: 1200,
-          height: 630,
-          alt: `${config.serviceName} - Team Celular`,
-        },
-      ],
+    languages: {
+      "es-AR": `/reparaciones/${config.slug}`,
     },
-    twitter: {
-      card: "summary_large_image",
-      title: config.socialTitle,
-      description: config.socialDescription,
-      images: [`${SITE_URL}/opengraph-image.png`],
-    },
-  };
+    openGraphTitle: config.socialTitle,
+    openGraphDescription: config.socialDescription,
+    openGraphImageAlt: `${config.serviceName} - Team Celular`,
+    twitterTitle: config.socialTitle,
+    twitterDescription: config.socialDescription,
+  });
 }
 
 export default function ServiceLandingPage({
@@ -170,6 +280,7 @@ export default function ServiceLandingPage({
     config.whatsappText
   )}`;
   const visual = SERVICE_VISUALS[config.slug] ?? DEFAULT_VISUAL;
+  const relatedGuides = SERVICE_RELATED_GUIDES[config.slug] ?? DEFAULT_RELATED_GUIDES;
 
   const serviceJsonLd = {
     "@context": "https://schema.org",
@@ -238,27 +349,30 @@ export default function ServiceLandingPage({
               {config.intro}
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link
+              <TrackedCtaLink
                 href="/presupuesto-reparacion#solicitar-presupuesto"
+                ctaName="service_hero_budget"
+                ctaLocation={`service_hero_${config.slug}`}
+                ctaVariant="primary"
                 className="inline-flex min-h-11 items-center rounded-full bg-white px-6 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
               >
                 Pedir presupuesto
-              </Link>
-              <a
+              </TrackedCtaLink>
+              <TrackedCtaLink
                 href={whatsappUrl}
+                ctaName="service_hero_whatsapp"
+                ctaLocation={`service_hero_${config.slug}`}
+                ctaVariant="whatsapp"
+                external
                 target="_blank"
-                rel="noopener noreferrer"
                 className="inline-flex min-h-11 items-center rounded-full border border-white/40 bg-white/10 px-6 text-sm font-semibold text-white transition hover:bg-white/20"
               >
                 WhatsApp directo
-              </a>
-              <Link
-                href="/sucursales/caba/recoleta"
-                className="inline-flex min-h-11 items-center rounded-full border border-white/30 px-6 text-sm font-semibold text-white transition hover:bg-white/15"
-              >
-                Ver sucursal Recoleta
-              </Link>
+              </TrackedCtaLink>
             </div>
+            <p className="text-sm text-slate-200/90">
+              Taller en Recoleta y reseñas públicas en Google para validar experiencia real.
+            </p>
           </div>
 
           <aside className="md:col-span-2">
@@ -353,6 +467,54 @@ export default function ServiceLandingPage({
 
       <section className="mt-10 rounded-3xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+          Guias recomendadas para este servicio
+        </h2>
+        <p className="mt-2 text-slate-600 dark:text-slate-300">
+          Si queres comparar opciones antes de decidir, estas lecturas te dan contexto tecnico y comercial real.
+        </p>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          {relatedGuides.map((guide) => (
+            <TrackedCtaLink
+              key={guide.href}
+              href={guide.href}
+              ctaName={`service_related_guide_${config.slug}`}
+              ctaLocation={`service_related_guides_${config.slug}`}
+              ctaVariant="secondary"
+              className="rounded-2xl border border-white/15 bg-white/70 p-5 transition hover:-translate-y-0.5 hover:border-primary/40 dark:border-white/10 dark:bg-slate-900/45"
+            >
+              <span className="block text-base font-semibold text-slate-900 dark:text-white">
+                {guide.title}
+              </span>
+              <span className="mt-2 block text-sm text-slate-600 dark:text-slate-300">
+                {guide.description}
+              </span>
+            </TrackedCtaLink>
+          ))}
+        </div>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <TrackedCtaLink
+            href="/guias"
+            ctaName="service_related_guides_hub"
+            ctaLocation={`service_related_guides_${config.slug}`}
+            ctaVariant="secondary"
+            className="rounded-full border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
+          >
+            Ver todas las guias
+          </TrackedCtaLink>
+          <TrackedCtaLink
+            href="/presupuesto-reparacion#solicitar-presupuesto"
+            ctaName="service_related_guides_budget"
+            ctaLocation={`service_related_guides_${config.slug}`}
+            ctaVariant="primary"
+            className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
+          >
+            Pedir diagnostico
+          </TrackedCtaLink>
+        </div>
+      </section>
+
+      <section className="mt-10 rounded-3xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
           Preguntas frecuentes
         </h2>
         <div className="mt-6 space-y-3">
@@ -379,20 +541,26 @@ export default function ServiceLandingPage({
           para que sepas si conviene reparar y en que plazo.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <a
+          <TrackedCtaLink
             href={whatsappUrl}
+            ctaName="service_bottom_whatsapp"
+            ctaLocation={`service_bottom_${config.slug}`}
+            ctaVariant="whatsapp"
+            external
             target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center rounded-full bg-emerald-500 px-6 text-sm font-semibold text-white transition hover:bg-emerald-600"
+            className="inline-flex min-h-11 items-center rounded-full bg-emerald-700 px-6 text-sm font-semibold text-white transition hover:bg-emerald-800"
           >
             Iniciar por WhatsApp
-          </a>
-          <Link
+          </TrackedCtaLink>
+          <TrackedCtaLink
             href="/presupuesto-reparacion#solicitar-presupuesto"
+            ctaName="service_bottom_form"
+            ctaLocation={`service_bottom_${config.slug}`}
+            ctaVariant="secondary"
             className="inline-flex min-h-11 items-center rounded-full border border-white/40 px-6 text-sm font-semibold text-white transition hover:bg-white/10"
           >
             Completar formulario
-          </Link>
+          </TrackedCtaLink>
         </div>
       </section>
 

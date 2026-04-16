@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import {
   FaBatteryFull,
   FaBolt,
@@ -298,11 +299,11 @@ export default function XiaomiRepairGuidePage() {
 
         <header className="space-y-8 rounded-3xl border border-white/20 bg-white/5 p-8 backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-14">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/70 bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
               <SiXiaomi />
               Especialistas por marca
             </span>
-            <span className="rounded-full border border-emerald-400/30 bg-emerald-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-emerald-500">
+            <span className="rounded-full border border-emerald-700/80 bg-emerald-700 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white">
               Recoleta - CABA
             </span>
           </div>
@@ -360,7 +361,7 @@ export default function XiaomiRepairGuidePage() {
                 }`}
               >
                 {item.label}
-                <span className="ml-2 text-xs opacity-80">{item.helper}</span>
+                <span className="ml-2 text-xs font-medium">{item.helper}</span>
               </Link>
             ))}
           </div>
@@ -402,7 +403,7 @@ export default function XiaomiRepairGuidePage() {
                     <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-2xl text-white">
                       <Icon />
                     </div>
-                    <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                    <span className="rounded-full bg-primary px-3 py-1 text-xs font-semibold text-white">
                       {step.duration}
                     </span>
                   </div>
@@ -445,7 +446,7 @@ export default function XiaomiRepairGuidePage() {
                     {service.detail}
                   </p>
                   <div className="mt-4 flex items-center justify-between text-xs font-semibold">
-                    <span className="rounded-full bg-primary/10 px-3 py-1 text-primary">
+                    <span className="rounded-full bg-primary px-3 py-1 text-white">
                       {service.eta}
                     </span>
                     <span className="rounded-full bg-secondary/10 px-3 py-1 text-secondary">
@@ -498,7 +499,7 @@ export default function XiaomiRepairGuidePage() {
             {xiaomiModels.map((model) => (
               <span
                 key={model}
-                className="rounded-full border border-primary/25 bg-primary/5 px-3 py-2 text-xs font-semibold text-primary dark:border-primary/35 dark:bg-primary/10"
+                className="rounded-full border border-primary/40 bg-primary/15 px-3 py-2 text-xs font-semibold text-slate-800 dark:border-primary/40 dark:bg-primary/20 dark:text-slate-100"
               >
                 {model}
               </span>
@@ -602,6 +603,8 @@ export default function XiaomiRepairGuidePage() {
             </Link>
           </div>
         </section>
+
+        <GuideInterlinkSection currentGuide="/guias/reparacion-xiaomi-buenos-aires" />
 
         <script
           type="application/ld+json"

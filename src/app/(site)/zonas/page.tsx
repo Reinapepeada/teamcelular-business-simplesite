@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+const SITE_URL = getSiteUrl();
 const PAGE_URL = `${SITE_URL}/zonas`;
 
 const ZONES = [
@@ -51,35 +51,26 @@ const ZONES = [
   },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildWebsiteMetadata({
+  path: "/zonas",
   title: "Zonas de Servicio en CABA | Arreglo de Celulares | Team Celular",
   description:
     "Zonas de servicio de Team Celular en CABA: Palermo, Belgrano, Caballito, Almagro, Balvanera y Microcentro. Taller en Recoleta con garantía escrita y presupuesto rápido.",
-  alternates: { canonical: PAGE_URL },
-  openGraph: {
-    title: "Zonas de Servicio en CABA | Team Celular",
-    description:
-      "Arreglo de celulares en CABA por zonas. Taller en Recoleta con garantía escrita y presupuesto rápido.",
-    url: PAGE_URL,
-    type: "website",
-    locale: "es_AR",
-    images: [
-      {
-        url: `${SITE_URL}/opengraph-image.png`,
-        width: 1200,
-        height: 630,
-        alt: "Team Celular - Zonas de servicio en CABA",
-      },
-    ],
+  robots: {
+    index: true,
+    follow: true,
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Zonas de Servicio en CABA | Team Celular",
-    description:
-      "Arreglo de celulares por zonas en CABA. Presupuesto rápido por WhatsApp o formulario.",
-    images: [`${SITE_URL}/opengraph-image.png`],
+  languages: {
+    "es-AR": "/zonas",
   },
-};
+  openGraphTitle: "Zonas de Servicio en CABA | Team Celular",
+  openGraphDescription:
+    "Arreglo de celulares en CABA por zonas. Taller en Recoleta con garantía escrita y presupuesto rápido.",
+  openGraphImageAlt: "Team Celular - Zonas de servicio en CABA",
+  twitterTitle: "Zonas de Servicio en CABA | Team Celular",
+  twitterDescription:
+    "Arreglo de celulares por zonas en CABA. Presupuesto rápido por WhatsApp o formulario.",
+});
 
 export default function ZonasPage() {
   const collectionJsonLd = {

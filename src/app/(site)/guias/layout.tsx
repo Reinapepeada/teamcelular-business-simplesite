@@ -72,7 +72,7 @@ export default function GuidesLayout({
       <section className="relative z-10 border-b border-slate-200/80 bg-white/75 backdrop-blur-md dark:border-slate-800/70 dark:bg-slate-950/45">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-4 md:flex-row md:items-center md:justify-between">
           <div className="space-y-1">
-            <p className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+            <p className="inline-flex items-center gap-2 rounded-full border border-primary/70 bg-primary px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm">
               <FaBookOpen className="text-[10px]" />
               Guias Team Celular
             </p>
@@ -99,7 +99,7 @@ export default function GuidesLayout({
               href="https://wa.me/5491151034595?text=Hola%20Team%20Celular%2C%20quiero%20ayuda%20con%20una%20reparacion"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-10 items-center gap-2 rounded-full bg-emerald-500 px-4 text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 transition hover:bg-emerald-600"
+              className="inline-flex min-h-10 items-center gap-2 rounded-full bg-emerald-700 px-4 text-sm font-semibold text-white shadow-lg shadow-emerald-900/30 transition hover:bg-emerald-800"
             >
               <BsWhatsapp className="text-base" />
               Hablar por WhatsApp

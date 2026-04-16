@@ -1,0 +1,79 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      # - "feature/*"
+      # - "hotfix/*"
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_run:
+    workflows: ['Security Checks']
+    types:
+      - completed
+
+jobs:
+  ci:
+    name: CI Pipeline
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.11.1'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Formateo del código
+      - name: Run Prettier (format code)
+        run: npm run format
+
+      # Instalación de Semgrep
+      - name: Install Semgrep
+        run: pip install semgrep
+
+      # Linter para asegurar calidad de código
+      - name: Run ESLint (code linting on changed files)
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            BASE="${{ github.event.before }}"
+            HEAD="${{ github.sha }}"
+          elif [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE="${{ github.event.pull_request.base.sha }}"
+            HEAD="${{ github.event.pull_request.head.sha }}"
+          else
+            BASE="$(git rev-parse HEAD^)"
+            HEAD="$(git rev-parse HEAD)"
+          fi
+
+          FILES=$(git diff --name-only "$BASE" "$HEAD" -- '*.js' '*.jsx' '*.ts' '*.tsx' | tr '\n' ' ')
+          if [ -z "$FILES" ]; then
+            echo "No JS/TS files changed."
+            exit 0
+          fi
+
+          npx eslint $FILES
+
+      # Análisis de código estático
+      - name: Run Semgrep Scan
+        run: semgrep --config=auto
+
+      # Ejecución de pruebas con reporte de cobertura
+      - name: Run Tests
+        run: npm test -- --coverage
+
+      # Verifica que la aplicación pueda compilarse correctamente
+      - name: Build Application
+        run: npm run build

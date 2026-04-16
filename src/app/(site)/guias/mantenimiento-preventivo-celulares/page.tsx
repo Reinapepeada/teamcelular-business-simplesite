@@ -18,6 +18,7 @@ import {
 } from "react-icons/fa";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 
 export const metadata: Metadata = {
   title: "Mantenimiento Preventivo Celulares | Guía Completa 2024 CABA",
@@ -317,7 +318,7 @@ export default function PreventiveMaintenanceGuide() {
                     <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-3xl text-white shadow-lg">
                       <Icon />
                     </div>
-                    <span className="flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
+                    <span className="flex items-center gap-2 rounded-full bg-primary px-3 py-1 text-sm font-semibold text-white">
                       <FaClock />
                       {tip.frequency}
                     </span>
@@ -523,6 +524,8 @@ export default function PreventiveMaintenanceGuide() {
             </Link>
           </div>
         </section>
+
+        <GuideInterlinkSection currentGuide="/guias/mantenimiento-preventivo-celulares" />
 
         {/* Schema.org structured data */}
         <script

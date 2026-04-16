@@ -3,9 +3,9 @@ import Link from "next/link";
 import { FaShieldAlt, FaStopwatch, FaTools } from "react-icons/fa";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import StickyLocalCta from "@/components/cro/StickyLocalCta";
+import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+const SITE_URL = getSiteUrl();
 
 const REPAIR_SERVICES = [
   {
@@ -46,44 +46,26 @@ const REPAIR_SERVICES = [
   },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildWebsiteMetadata({
+  path: "/reparaciones",
   title: "Reparaciones de Celulares en CABA | Presupuesto Rapido | Team Celular",
   description:
     "Reparaciones de celulares en CABA. Cambio de bateria, pantalla, pin de carga, flex, tapa trasera y reparacion de placa. Presupuesto rapido por WhatsApp o formulario.",
-  alternates: {
-    canonical: `${SITE_URL}/reparaciones`,
-    languages: {
-      "es-AR": `${SITE_URL}/reparaciones`,
-    },
-  },
   robots: {
     index: true,
     follow: true,
   },
-  openGraph: {
-    title: "Reparaciones de Celulares en CABA | Team Celular",
-    description:
-      "Atencion en CABA. Presupuesto rapido para reparacion de celulares: bateria, pantalla, pin de carga, flex, tapa trasera y placa.",
-    url: `${SITE_URL}/reparaciones`,
-    type: "website",
-    locale: "es_AR",
-    images: [
-      {
-        url: `${SITE_URL}/opengraph-image.png`,
-        width: 1200,
-        height: 630,
-        alt: "Team Celular - Reparaciones en CABA",
-      },
-    ],
+  languages: {
+    "es-AR": "/reparaciones",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Reparaciones de Celulares en CABA | Team Celular",
-    description:
-      "Atencion en CABA. Presupuesto rapido por WhatsApp o formulario.",
-    images: [`${SITE_URL}/opengraph-image.png`],
-  },
-};
+  openGraphTitle: "Reparaciones de Celulares en CABA | Team Celular",
+  openGraphDescription:
+    "Atencion en CABA. Presupuesto rapido para reparacion de celulares: bateria, pantalla, pin de carga, flex, tapa trasera y placa.",
+  openGraphImageAlt: "Team Celular - Reparaciones en CABA",
+  twitterTitle: "Reparaciones de Celulares en CABA | Team Celular",
+  twitterDescription:
+    "Atencion en CABA. Presupuesto rapido por WhatsApp o formulario.",
+});
 
 export default function ReparacionesPage() {
   const whatsappUrl =

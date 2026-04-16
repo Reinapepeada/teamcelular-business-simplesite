@@ -13,9 +13,10 @@ import {
 } from "react-icons/fa";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import StickyLocalCta from "@/components/cro/StickyLocalCta";
+import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
+import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+const SITE_URL = getSiteUrl();
 
 type HighlightIcon = "screen" | "battery" | "chip" | "speed" | "business" | "repair";
 
@@ -64,55 +65,134 @@ export interface ZoneLandingConfig {
   faqs: ZoneFaq[];
 }
 
+type ZoneRelatedGuide = {
+  href: string;
+  title: string;
+  description: string;
+};
+
+const GUIDE_SIGNAL_MAP: Array<{ token: string; guide: ZoneRelatedGuide }> = [
+  {
+    token: "pantalla",
+    guide: {
+      href: "/guias/reparacion-pantalla-celular",
+      title: "Guia de pantalla",
+      description: "Como validar dano de modulo y evitar reemplazos de baja duracion.",
+    },
+  },
+  {
+    token: "bateria",
+    guide: {
+      href: "/guias/cambio-bateria-celular",
+      title: "Guia de bateria",
+      description: "Senales reales de desgaste y recomendaciones por tipo de uso.",
+    },
+  },
+  {
+    token: "carga",
+    guide: {
+      href: "/guias/reparacion-samsung-buenos-aires",
+      title: "Guia Samsung",
+      description: "Casos frecuentes de USB-C, carga intermitente y diagnostico tecnico.",
+    },
+  },
+  {
+    token: "pin",
+    guide: {
+      href: "/guias/reparacion-xiaomi-buenos-aires",
+      title: "Guia Xiaomi",
+      description: "Referencia util para fallas de carga en equipos de uso intensivo.",
+    },
+  },
+  {
+    token: "placa",
+    guide: {
+      href: "/guias/microelectronica-reballing-caba",
+      title: "Guia de microelectronica",
+      description: "Cuando conviene revision de placa y como se evalua viabilidad.",
+    },
+  },
+  {
+    token: "microelectronica",
+    guide: {
+      href: "/guias/microelectronica-reballing-caba",
+      title: "Guia de microelectronica",
+      description: "Proceso de laboratorio para equipos que no encienden o reinician.",
+    },
+  },
+  {
+    token: "diagnostico",
+    guide: {
+      href: "/guias/mantenimiento-preventivo-celulares",
+      title: "Guia de mantenimiento",
+      description: "Checklist para reducir fallas repetidas y extender vida util.",
+    },
+  },
+];
+
+const GUIDE_FALLBACK: ZoneRelatedGuide[] = [
+  {
+    href: "/guias/reparacion-iphone-buenos-aires",
+    title: "Guia iPhone",
+    description: "Escenarios reales de reparacion en equipos Apple en CABA.",
+  },
+  {
+    href: "/guias/reparacion-samsung-buenos-aires",
+    title: "Guia Samsung",
+    description: "Fallas comunes en Galaxy y criterios de reparacion por prioridad.",
+  },
+  {
+    href: "/guias/reparacion-xiaomi-buenos-aires",
+    title: "Guia Xiaomi",
+    description: "Diagnostico practico para Redmi, POCO y Xiaomi con carga rapida.",
+  },
+];
+
 function pageUrl(slug: string) {
   return `${SITE_URL}/zonas/${slug}`;
 }
 
-export function buildZoneMetadata(config: ZoneLandingConfig): Metadata {
-  const url = pageUrl(config.slug);
-  const title = config.metaTitle;
-  const description = config.metaDescription;
+function getZoneRelatedGuides(focusServices: string[]) {
+  const normalized = focusServices.join(" ").toLowerCase();
+  const selected = new Map<string, ZoneRelatedGuide>();
 
-  return {
-    title,
-    description,
-    alternates: {
-      canonical: url,
-      languages: {
-        "es-AR": url,
-      },
-    },
+  GUIDE_SIGNAL_MAP.forEach((entry) => {
+    if (normalized.includes(entry.token)) {
+      selected.set(entry.guide.href, entry.guide);
+    }
+  });
+
+  GUIDE_FALLBACK.forEach((guide) => {
+    if (!selected.has(guide.href) && selected.size < 3) {
+      selected.set(guide.href, guide);
+    }
+  });
+
+  return Array.from(selected.values()).slice(0, 3);
+}
+
+export function buildZoneMetadata(config: ZoneLandingConfig): Metadata {
+  return buildWebsiteMetadata({
+    path: `/zonas/${config.slug}`,
+    title: config.metaTitle,
+    description: config.metaDescription,
     robots: {
       index: true,
       follow: true,
     },
-    openGraph: {
-      title,
-      description: config.socialDescription,
-      url,
-      type: "website",
-      locale: "es_AR",
-      images: [
-        {
-          url: `${SITE_URL}/opengraph-image.png`,
-          width: 1200,
-          height: 630,
-          alt: `Team Celular - Arreglo de celulares en ${config.zoneName}`,
-        },
-      ],
+    languages: {
+      "es-AR": `/zonas/${config.slug}`,
     },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description: config.socialDescription,
-      images: [`${SITE_URL}/opengraph-image.png`],
-    },
-  };
+    openGraphDescription: config.socialDescription,
+    openGraphImageAlt: `Team Celular - Arreglo de celulares en ${config.zoneName}`,
+    twitterDescription: config.socialDescription,
+  });
 }
 
 export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig }) {
   const url = pageUrl(config.slug);
   const displayZone = config.zoneAlias || config.zoneName;
+  const relatedGuides = getZoneRelatedGuides(config.focusServices);
   const whatsappUrl = `https://wa.me/5491151034595?text=${encodeURIComponent(
     config.whatsappText
   )}`;
@@ -187,27 +267,30 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
               {config.heroIntro}
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link
+              <TrackedCtaLink
                 href="/presupuesto-reparacion#solicitar-presupuesto"
+                ctaName="zone_hero_budget"
+                ctaLocation={`zone_hero_${config.slug}`}
+                ctaVariant="primary"
                 className="inline-flex min-h-11 items-center rounded-full bg-white px-6 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
               >
                 Pedir presupuesto
-              </Link>
-              <a
+              </TrackedCtaLink>
+              <TrackedCtaLink
                 href={whatsappUrl}
+                ctaName="zone_hero_whatsapp"
+                ctaLocation={`zone_hero_${config.slug}`}
+                ctaVariant="whatsapp"
+                external
                 target="_blank"
-                rel="noopener noreferrer"
                 className="inline-flex min-h-11 items-center rounded-full border border-white/40 bg-white/10 px-6 text-sm font-semibold text-white transition hover:bg-white/20"
               >
                 WhatsApp directo
-              </a>
-              <Link
-                href="/contacto"
-                className="inline-flex min-h-11 items-center rounded-full border border-white/35 px-6 text-sm font-semibold text-white transition hover:bg-white/10"
-              >
-                Ver ubicacion
-              </Link>
+              </TrackedCtaLink>
             </div>
+            <p className="text-sm text-slate-200/90">
+              Atención presencial en Recoleta y derivación rápida para toda CABA.
+            </p>
           </div>
 
           <aside className="md:col-span-2">
@@ -267,7 +350,7 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
           {config.focusServices.map((service) => (
             <span
               key={service}
-              className="rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-primary"
+              className="rounded-full border border-slate-300 bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
             >
               {service}
             </span>
@@ -293,6 +376,54 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
           >
             Ver sucursal Recoleta
           </Link>
+        </div>
+      </section>
+
+      <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+          Guias tecnicas recomendadas para {displayZone}
+        </h2>
+        <p className="mt-3 text-slate-600 dark:text-slate-300">
+          Si queres comparar opciones antes de traer el equipo, estas lecturas te ayudan a decidir mejor.
+        </p>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          {relatedGuides.map((guide) => (
+            <TrackedCtaLink
+              key={guide.href}
+              href={guide.href}
+              ctaName={`zone_related_guide_${config.slug}_${guide.href.replace("/guias/", "").replaceAll("-", "_")}`}
+              ctaLocation={`zone_related_guides_${config.slug}`}
+              ctaVariant="secondary"
+              className="rounded-2xl border border-white/15 bg-white/70 p-5 transition hover:-translate-y-0.5 hover:border-primary/40 dark:border-white/10 dark:bg-slate-900/45"
+            >
+              <span className="block text-base font-semibold text-slate-900 dark:text-white">
+                {guide.title}
+              </span>
+              <span className="mt-2 block text-sm text-slate-600 dark:text-slate-300">
+                {guide.description}
+              </span>
+            </TrackedCtaLink>
+          ))}
+        </div>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <TrackedCtaLink
+            href="/guias"
+            ctaName="zone_related_guides_hub"
+            ctaLocation={`zone_related_guides_${config.slug}`}
+            ctaVariant="secondary"
+            className="rounded-full border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
+          >
+            Ver todas las guias
+          </TrackedCtaLink>
+          <TrackedCtaLink
+            href="/presupuesto-reparacion#solicitar-presupuesto"
+            ctaName="zone_related_guides_budget"
+            ctaLocation={`zone_related_guides_${config.slug}`}
+            ctaVariant="primary"
+            className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
+          >
+            Pedir diagnostico
+          </TrackedCtaLink>
         </div>
       </section>
 

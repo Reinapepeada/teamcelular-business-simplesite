@@ -13,6 +13,7 @@ import {
 } from "react-icons/fa";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 
 export const metadata: Metadata = {
   title: "Microelectrónica y Reballing BGA Buenos Aires | Laboratorio Certificado",
@@ -342,9 +343,9 @@ export default function MicroelectronicsGuide() {
               <div className="space-y-4">
                 {reballingProcess.map((item, index) => (
                   <div key={index} className="rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
-                    <h4 className="mb-2 font-bold text-secondary dark:text-secondary/90">
+                    <h3 className="mb-2 font-bold text-secondary dark:text-secondary/90">
                       {item.step}
-                    </h4>
+                    </h3>
                     <p className="text-sm text-slate-700 dark:text-slate-300">{item.detail}</p>
                   </div>
                 ))}
@@ -410,6 +411,8 @@ export default function MicroelectronicsGuide() {
             con convenios de mantenimiento y capacitaciones técnicas.
           </p>
         </section>
+
+        <GuideInterlinkSection currentGuide="/guias/microelectronica-reballing-caba" />
 
         {/* Schema.org */}
         <script

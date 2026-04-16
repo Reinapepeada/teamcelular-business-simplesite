@@ -4,6 +4,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { 
   FaShieldAlt, 
   FaTruck, 
@@ -499,6 +500,8 @@ export default function BusinessSupportGuide() {
             </Link>
           </div>
         </section>
+
+        <GuideInterlinkSection currentGuide="/guias/soporte-empresas-servicio-tecnico" />
 
         {/* Schema.org structured data for SEO */}
         <script

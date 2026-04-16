@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import {
   FaMobileAlt,
   FaTools,
@@ -304,7 +305,7 @@ export default function ScreenReplacementGuide() {
             </Link>
             <Link
               href="https://wa.me/5491151034595?text=Necesito%20cambiar%20la%20pantalla%20de%20mi%20celular"
-              className="rounded-full border-2 border-blue-500 px-8 py-4 text-lg font-semibold text-blue-500 transition hover:bg-blue-500/10"
+              className="rounded-full border-2 border-blue-700 px-8 py-4 text-lg font-semibold text-blue-800 transition hover:bg-blue-100 dark:border-blue-500 dark:text-blue-200"
             >
               WhatsApp directo
             </Link>
@@ -330,10 +331,10 @@ export default function ScreenReplacementGuide() {
                   className="rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
                 >
                   <div className="mb-4 flex items-center justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10 text-2xl text-blue-500">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-2xl text-blue-800 dark:bg-blue-900/40 dark:text-blue-200">
                       <Icon />
                     </div>
-                    <span className="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-semibold text-blue-500">
+                    <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-800 dark:bg-blue-900/40 dark:text-blue-200">
                       {damage.severity}
                     </span>
                   </div>
@@ -387,7 +388,7 @@ export default function ScreenReplacementGuide() {
                   <div className="space-y-2">
                     <p className="text-sm font-semibold text-slate-900 dark:text-white">Desventajas:</p>
                     {screen.cons.map((con) => (
-                      <div key={con} className="flex items-start gap-2 text-sm text-orange-500">
+                      <div key={con} className="flex items-start gap-2 text-sm text-orange-700 dark:text-orange-300">
                         <FaExclamationTriangle className="flex-shrink-0 mt-0.5" />
                         <span>{con}</span>
                       </div>
@@ -428,7 +429,7 @@ export default function ScreenReplacementGuide() {
                         <h3 className="text-xl font-bold text-secondary dark:text-secondary/90">
                           {process.step}
                         </h3>
-                        <span className="flex items-center gap-2 rounded-full bg-blue-500/10 px-3 py-1 text-sm font-semibold text-blue-500">
+                        <span className="flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-800 dark:bg-blue-900/40 dark:text-blue-200">
                           <FaClock />
                           {process.duration}
                         </span>
@@ -494,6 +495,8 @@ export default function ScreenReplacementGuide() {
             </Link>
           </div>
         </section>
+
+        <GuideInterlinkSection currentGuide="/guias/reparacion-pantalla-celular" />
 
         {/* Schema.org */}
         <script

@@ -1,7 +1,8 @@
-﻿import type { Metadata } from "next";
-import Link from "next/link";
+﻿import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import RepairsForm from "@/components/forms/RepairsForm";
+import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
+import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import {
     FaBatteryHalf,
     FaCamera,
@@ -18,14 +19,14 @@ import {
     FaWhatsapp,
 } from "react-icons/fa";
 
-const SITE_URL =
-    process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+const SITE_URL = getSiteUrl();
 const PAGE_URL = `${SITE_URL}/presupuesto-reparacion`;
 
-export const metadata: Metadata = {
-    title: "Presupuesto de reparación de celulares en Buenos Aires | Team Celular",
+export const metadata = buildWebsiteMetadata({
+    path: "/presupuesto-reparacion",
+    title: "Presupuesto de Reparacion de Celular en CABA | Team Celular",
     description:
-        "Pedí tu presupuesto online y recibí una respuesta clara antes de mover tu equipo. Revisión técnica según marca, modelo y tipo de falla.",
+        "Envia marca, modelo y falla para recibir presupuesto claro por WhatsApp: precio estimado, tiempo de trabajo y garantia escrita.",
     keywords: [
         "presupuesto reparación celulares",
         "servicio técnico celulares buenos aires",
@@ -34,33 +35,18 @@ export const metadata: Metadata = {
         "microelectronica caba",
         "retiro reparación celulares",
     ],
-    alternates: {
-        canonical: PAGE_URL,
+    languages: {
+        "es-AR": "/presupuesto-reparacion",
     },
-    openGraph: {
-        title: "Presupuesto de reparación de celulares en Buenos Aires | Team Celular",
-        description:
-            "Respuesta clara, garantía escrita y soporte personalizado para reparar tu celular.",
-        url: PAGE_URL,
-        locale: "es_AR",
-        type: "website",
-        images: [
-            {
-                url: "https://teamcelular.com/opengraph-image.png",
-                width: 1200,
-                height: 630,
-                alt: "Laboratorio de Team Celular en Recoleta",
-            },
-        ],
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: "Pedí tu presupuesto de reparación en Team Celular",
-        description:
-            "Respuesta clara, garantía escrita y repuestos premium según el caso.",
-        images: ["https://teamcelular.com/opengraph-image.png"],
-    },
-};
+    openGraphTitle:
+        "Presupuesto de Reparacion de Celular en CABA | Team Celular",
+    openGraphDescription:
+        "Te respondemos con precio estimado, tiempos y alcance real de la reparacion antes de mover tu equipo.",
+    openGraphImageAlt: "Laboratorio de Team Celular en Recoleta",
+    twitterTitle: "Presupuesto de Reparacion de Celular en CABA | Team Celular",
+    twitterDescription:
+        "Presupuesto claro por WhatsApp con garantia escrita y opciones segun tu tipo de falla.",
+});
 
 const processSteps = [
     {
@@ -166,7 +152,7 @@ const supportChannels = [
         title: "Consultas técnicas",
         description: "Lunes a viernes de 10:30 a 18:00",
         href: "tel:+5491151034595",
-        external: false,
+        external: true,
     },
     {
         icon: FaMapMarkerAlt,
@@ -223,7 +209,7 @@ export default function PresupuestoReparacionPage() {
 
                 <header className="grid gap-10 rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-lg lg:grid-cols-[1.05fr_0.95fr] lg:p-12">
                     <div>
-                        <span className="inline-flex rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+                        <span className="inline-flex rounded-full bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
                             Presupuesto claro y sin vueltas
                         </span>
                         <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
@@ -260,21 +246,27 @@ export default function PresupuestoReparacionPage() {
                         </ul>
 
                         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                            <Link
+                            <TrackedCtaLink
                                 href="#solicitar-presupuesto"
+                                ctaName="budget_hero_form"
+                                ctaLocation="presupuesto_hero"
+                                ctaVariant="primary"
                                 className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-primary/90"
                             >
                                 Pedir presupuesto ahora
-                            </Link>
-                            <Link
+                            </TrackedCtaLink>
+                            <TrackedCtaLink
                                 href="https://wa.me/5491151034595?text=Hola!%20Quiero%20pedir%20presupuesto%20para%20mi%20equipo"
+                                ctaName="budget_hero_whatsapp"
+                                ctaLocation="presupuesto_hero"
+                                ctaVariant="whatsapp"
+                                external
                                 target="_blank"
-                                rel="noopener noreferrer"
                                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-primary px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10"
                             >
                                 <FaWhatsapp aria-hidden />
                                 Hablar por WhatsApp
-                            </Link>
+                            </TrackedCtaLink>
                         </div>
 
                         <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">
@@ -334,68 +326,10 @@ export default function PresupuestoReparacionPage() {
                     </aside>
                 </header>
 
-                <section className="space-y-6">
-                    <div className="text-center">
-                        <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
-                            Así funciona el servicio
-                        </h2>
-                        <p className="mt-2 text-lg text-slate-600 dark:text-slate-400">
-                            Un proceso simple para pedir presupuesto y avanzar
-                            sin perder tiempo.
-                        </p>
-                    </div>
-                    <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-                        {processSteps.map((step) => {
-                            const Icon = step.icon;
-                            return (
-                                <article
-                                    key={step.title}
-                                    className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-md"
-                                >
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-                                            <Icon className="text-xl" />
-                                        </div>
-                                        <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                                            {step.timing}
-                                        </span>
-                                    </div>
-                                    <h3 className="mt-4 text-lg font-bold text-slate-900 dark:text-slate-100">
-                                        {step.title}
-                                    </h3>
-                                    <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
-                                        {step.description}
-                                    </p>
-                                </article>
-                            );
-                        })}
-                    </div>
-                </section>
-
-                <section className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md">
-                    <h2 className="text-center text-2xl font-bold text-slate-900 dark:text-slate-100">
-                        Respuestas rápidas
-                    </h2>
-                    <div className="mt-6 grid gap-6 md:grid-cols-3">
-                        {quickResponseFaqs.map((item) => (
-                            <article
-                                key={item.question}
-                                className="rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-5"
-                            >
-                                <h3 className="font-semibold text-primary">
-                                    {item.question}
-                                </h3>
-                                <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
-                                    {item.answer}
-                                </p>
-                            </article>
-                        ))}
-                    </div>
-                </section>
-
+                <div className="flex flex-col gap-12">
                 <section
                     id="solicitar-presupuesto"
-                    className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]"
+                    className="order-1 grid gap-8 lg:order-3 lg:grid-cols-[1.1fr_0.9fr]"
                 >
                     <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-xl">
                         <div className="mb-6">
@@ -428,16 +362,21 @@ export default function PresupuestoReparacionPage() {
                                 {supportChannels.map((channel) => {
                                     const Icon = channel.icon;
                                     return (
-                                        <Link
+                                        <TrackedCtaLink
                                             key={channel.title}
                                             href={channel.href}
+                                            ctaName={`budget_support_${channel.title.toLowerCase().replace(/\s+/g, "_")}`}
+                                            ctaLocation="presupuesto_support"
+                                            ctaVariant={
+                                                channel.title.includes("WhatsApp")
+                                                    ? "whatsapp"
+                                                    : channel.href.startsWith("tel:")
+                                                        ? "phone"
+                                                        : "secondary"
+                                            }
+                                            external={channel.external}
                                             target={
                                                 channel.external ? "_blank" : undefined
-                                            }
-                                            rel={
-                                                channel.external
-                                                    ? "noopener noreferrer"
-                                                    : undefined
                                             }
                                             className="flex min-h-14 items-center gap-3 rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 px-4 py-3 transition hover:border-primary/40 hover:bg-primary/5"
                                         >
@@ -452,7 +391,7 @@ export default function PresupuestoReparacionPage() {
                                                     {channel.description}
                                                 </p>
                                             </div>
-                                        </Link>
+                                        </TrackedCtaLink>
                                     );
                                 })}
                             </div>
@@ -485,6 +424,66 @@ export default function PresupuestoReparacionPage() {
                         </article>
                     </aside>
                 </section>
+
+                <section className="order-2 space-y-6 lg:order-1">
+                    <div className="text-center">
+                        <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
+                            Así funciona el servicio
+                        </h2>
+                        <p className="mt-2 text-lg text-slate-600 dark:text-slate-400">
+                            Un proceso simple para pedir presupuesto y avanzar
+                            sin perder tiempo.
+                        </p>
+                    </div>
+                    <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+                        {processSteps.map((step) => {
+                            const Icon = step.icon;
+                            return (
+                                <article
+                                    key={step.title}
+                                    className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-md"
+                                >
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                                            <Icon className="text-xl" />
+                                        </div>
+                                        <span className="rounded-full bg-primary px-3 py-1 text-xs font-semibold text-white">
+                                            {step.timing}
+                                        </span>
+                                    </div>
+                                    <h3 className="mt-4 text-lg font-bold text-slate-900 dark:text-slate-100">
+                                        {step.title}
+                                    </h3>
+                                    <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                                        {step.description}
+                                    </p>
+                                </article>
+                            );
+                        })}
+                    </div>
+                </section>
+
+                <section className="order-3 rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md lg:order-2">
+                    <h2 className="text-center text-2xl font-bold text-slate-900 dark:text-slate-100">
+                        Respuestas rápidas
+                    </h2>
+                    <div className="mt-6 grid gap-6 md:grid-cols-3">
+                        {quickResponseFaqs.map((item) => (
+                            <article
+                                key={item.question}
+                                className="rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-5"
+                            >
+                                <h3 className="font-semibold text-slate-900 dark:text-slate-100">
+                                    {item.question}
+                                </h3>
+                                <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                                    {item.answer}
+                                </p>
+                            </article>
+                        ))}
+                    </div>
+                </section>
+                </div>
 
                 <section className="space-y-6">
                     <div className="text-center">
@@ -529,7 +528,7 @@ export default function PresupuestoReparacionPage() {
                                 key={faq.question}
                                 className="rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-5"
                             >
-                                <h3 className="text-lg font-semibold text-primary">
+                                <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
                                     {faq.question}
                                 </h3>
                                 <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
@@ -549,21 +548,27 @@ export default function PresupuestoReparacionPage() {
                         personalizado en menos de 24 horas hábiles.
                     </p>
                     <div className="mt-6 flex flex-wrap justify-center gap-4">
-                        <Link
+                        <TrackedCtaLink
                             href="#solicitar-presupuesto"
+                            ctaName="budget_bottom_form"
+                            ctaLocation="presupuesto_bottom"
+                            ctaVariant="primary"
                             className="inline-flex min-h-12 items-center justify-center rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-secondary/90"
                         >
                             Empezar ahora
-                        </Link>
-                        <Link
+                        </TrackedCtaLink>
+                        <TrackedCtaLink
                             href="https://wa.me/5491151034595?text=Hola!%20Necesito%20un%20presupuesto"
+                            ctaName="budget_bottom_whatsapp"
+                            ctaLocation="presupuesto_bottom"
+                            ctaVariant="whatsapp"
+                            external
                             target="_blank"
-                            rel="noopener noreferrer"
                             className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-secondary px-6 py-3 text-sm font-semibold text-secondary transition hover:bg-secondary/10"
                         >
                             <FaWhatsapp aria-hidden />
                             WhatsApp directo
-                        </Link>
+                        </TrackedCtaLink>
                     </div>
                 </section>
 

@@ -15,9 +15,9 @@ import {
   type CatalogSearchParams,
 } from "@/lib/catalog";
 import { slugify } from "@/lib/productSlug";
+import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+const SITE_URL = getSiteUrl();
 
 function isCategoryPageIndexable(
   filters: Awaited<ReturnType<typeof normalizeCatalogFilters>>,
@@ -44,14 +44,17 @@ export async function generateMetadata({
   const category = await getCatalogCategoryBySlug(String(slug));
 
   if (!category) {
-    return {
+    return buildWebsiteMetadata({
+      path: "/tienda",
       title: "Categoria no encontrada | Team Celular",
+      description: "Esta categoria no esta disponible en Team Celular.",
       robots: { index: false, follow: false },
-    };
+    });
   }
 
   const canonicalSlug = slugify(category.name);
-  const categoryUrl = `${SITE_URL}/tienda/categoria/${canonicalSlug}`;
+  const canonicalPath = `/tienda/categoria/${canonicalSlug}`;
+  const categoryUrl = `${SITE_URL}${canonicalPath}`;
   const filters = normalizeCatalogFilters((await searchParams) ?? {});
   const categoryPage = await getCatalogPage(
     {
@@ -63,42 +66,26 @@ export async function generateMetadata({
   const hasProducts = (categoryPage.products || []).length > 0;
   const shouldIndex = hasProducts && isCategoryPageIndexable(filters);
 
-  return {
-    title: `${category.name} | Tienda Team Celular`,
-    description: `Explora productos de ${category.name} disponibles en Team Celular con retiro en Recoleta y envio en CABA.`,
-    alternates: {
-      canonical: categoryUrl,
-      languages: {
-        "es-AR": categoryUrl,
-      },
-    },
+  const snippetTitle = `${category.name} para Celulares en CABA | Team Celular`;
+  const snippetDescription = `Compra ${category.name} para celular con retiro en Recoleta y envio en CABA. Filtra por marca y precio con asesoramiento real.`;
+
+  return buildWebsiteMetadata({
+    path: canonicalPath,
+    title: snippetTitle,
+    description: snippetDescription,
     robots: {
       index: shouldIndex,
       follow: true,
     },
-    openGraph: {
-      title: `${category.name} | Tienda Team Celular`,
-      description: `Productos de ${category.name} con asesoramiento real y disponibilidad en CABA.`,
-      url: categoryUrl,
-      siteName: "Team Celular",
-      type: "website",
-      locale: "es_AR",
-      images: [
-        {
-          url: `${SITE_URL}/opengraph-image.png`,
-          width: 1200,
-          height: 630,
-          alt: `${category.name} - Team Celular`,
-        },
-      ],
+    languages: {
+      "es-AR": canonicalPath,
     },
-    twitter: {
-      card: "summary_large_image",
-      title: `${category.name} | Tienda Team Celular`,
-      description: `Productos de ${category.name} con retiro en Recoleta y envio en CABA.`,
-      images: [`${SITE_URL}/opengraph-image.png`],
-    },
-  };
+    openGraphTitle: snippetTitle,
+    openGraphDescription: `Productos de ${category.name} con asesoramiento real y disponibilidad en CABA.`,
+    openGraphImageAlt: `${category.name} - Team Celular`,
+    twitterTitle: snippetTitle,
+    twitterDescription: `Productos de ${category.name} con retiro en Recoleta y envio en CABA.`,
+  });
 }
 
 export default async function CategoryPage({

@@ -1,7 +1,7 @@
 ﻿import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { BsWhatsapp } from "react-icons/bs";
+import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 
 const trustSignals = [
     { value: "10+ años", label: "reparando celulares" },
@@ -31,35 +31,35 @@ export default function BannerHome() {
 
                     <div className="max-w-xl space-y-2">
                         <p className="text-base leading-7 text-slate-700 dark:text-slate-300 sm:text-[1.03rem]">
-                            Repuestos originales, diagnóstico y garantía real.
+                            Diagnóstico en el día, repuestos de calidad y garantía escrita.
                         </p>
                         <p className="text-base leading-7 text-slate-700 dark:text-slate-300 sm:text-[1.03rem]">
-                            Porque sabemos que sin tu celular, tu día no es el mismo.
+                            Contanos la falla y te orientamos por WhatsApp para que sepas el siguiente paso sin perder tiempo.
                         </p>
                     </div>
 
                     <div className="flex flex-col gap-3 sm:flex-row">
-                        <Link
-                            href="/presupuesto-reparacion"
+                        <TrackedCtaLink
+                            href="/presupuesto-reparacion#solicitar-presupuesto"
+                            ctaName="home_hero_budget"
+                            ctaLocation="home_hero"
+                            ctaVariant="primary"
                             className="inline-flex items-center justify-center rounded-full bg-primary px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/25 transition hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
                         >
                             Solicitar presupuesto
-                        </Link>
-                        <Link
+                        </TrackedCtaLink>
+                        <TrackedCtaLink
                             href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20necesito%20una%20reparacion"
+                            ctaName="home_hero_whatsapp"
+                            ctaLocation="home_hero"
+                            ctaVariant="whatsapp"
+                            external
                             target="_blank"
-                            rel="noopener noreferrer"
                             className="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-500/35 bg-emerald-50 px-7 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 dark:border-emerald-400/35 dark:bg-emerald-500/15 dark:text-emerald-200 dark:hover:bg-emerald-500/25"
                         >
                             <BsWhatsapp className="text-lg" aria-hidden />
                             WhatsApp directo
-                        </Link>
-                        <Link
-                            href="/tienda"
-                            className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white/80 px-7 py-3 text-sm font-semibold text-slate-700 transition hover:bg-white dark:border-white/20 dark:bg-slate-900/60 dark:text-slate-100 dark:hover:bg-slate-900"
-                        >
-                            Ver productos
-                        </Link>
+                        </TrackedCtaLink>
                     </div>
 
                     <div className="grid gap-3 sm:grid-cols-3">

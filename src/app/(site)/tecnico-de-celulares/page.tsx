@@ -1,66 +1,58 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
+import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
+const SITE_URL = getSiteUrl();
 const PAGE_URL = `${SITE_URL}/tecnico-de-celulares`;
 
 const faqs = [
   {
-    q: "¿Qué hace un técnico de celulares en Team Celular?",
-    a: "Realizamos diagnóstico, reparación y test completo del equipo: pantalla, batería, pin de carga, cámaras, audio y microelectrónica (placa) cuando corresponde.",
+    q: "¿Cuándo conviene un técnico especialista y no solo un arreglo rápido?",
+    a: "Cuando el equipo se reinicia, no enciende, tuvo humedad, ya fue abierto o tiene fallas intermitentes. En esos casos priorizamos diagnóstico técnico completo.",
   },
   {
-    q: "¿Atienden en Recoleta o trabajan a distancia?",
-    a: "Nuestro taller está en Recoleta (Paraguay 2451). También coordinamos presupuestos online y asistencia por WhatsApp para CABA.",
+    q: "¿Trabajan placa y microelectrónica?",
+    a: "Sí. Hacemos diagnóstico de placa, mediciones y reparación avanzada cuando el caso lo permite. También te damos alternativa si no conviene reparar.",
   },
   {
-    q: "¿Entregan garantía por escrito?",
-    a: "Sí. Todas las reparaciones incluyen garantía por escrito según el tipo de trabajo y repuesto utilizado.",
+    q: "¿El diagnóstico técnico tiene costo?",
+    a: "Se informa antes de ingresar el equipo. El costo depende del nivel de revisión y se descuenta en muchos casos si avanzás con la reparación.",
   },
   {
-    q: "¿Cuánto tarda una reparación típica?",
-    a: "Pantalla, batería o pin de carga pueden resolverse en el día según disponibilidad. Placa/microelectrónica requiere diagnóstico y tiempos estimados previos.",
+    q: "¿Pueden revisar equipos mal reparados en otro lugar?",
+    a: "Sí. Revisamos equipos con intervenciones previas, evaluamos riesgo real y te explicamos con claridad qué se puede recuperar y en qué plazo.",
   },
 ];
 
-export const metadata: Metadata = {
-  title: "Técnico de Celulares en Recoleta (CABA) | Team Celular",
+export const metadata: Metadata = buildWebsiteMetadata({
+  path: "/tecnico-de-celulares",
+  title: "Técnico de Celulares en Recoleta | Diagnóstico experto | Team Celular",
   description:
-    "Técnico de celulares en Recoleta, CABA. Diagnóstico profesional, reparación de pantalla, batería, pin de carga y microelectrónica con garantía escrita. Presupuesto rápido.",
+    "Técnico especialista en celulares en Recoleta para diagnóstico avanzado y fallas complejas de placa. Segunda opinión técnica, microelectrónica y garantía escrita.",
   keywords: [
-    "técnico de celulares",
-    "técnico de celulares Recoleta",
-    "servicio técnico celulares CABA",
-    "arreglo de celulares",
-    "reparación de celulares Buenos Aires",
+    "tecnico de celulares recoleta",
+    "diagnostico tecnico celular caba",
+    "microelectronica celulares buenos aires",
+    "reparacion de placa celular",
+    "segunda opinion tecnica celular",
   ],
-  alternates: { canonical: PAGE_URL },
-  openGraph: {
-    title: "Técnico de Celulares en Recoleta (CABA) | Team Celular",
-    description:
-      "Técnico de celulares con diagnóstico profesional y garantía escrita. Taller en Recoleta para CABA.",
-    url: PAGE_URL,
-    type: "website",
-    locale: "es_AR",
-    images: [
-      {
-        url: `${SITE_URL}/opengraph-image.png`,
-        width: 1200,
-        height: 630,
-        alt: "Técnico de celulares en Recoleta - Team Celular",
-      },
-    ],
+  robots: {
+    index: true,
+    follow: true,
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Técnico de Celulares en Recoleta | Team Celular",
-    description:
-      "Diagnóstico y reparación de celulares con garantía escrita en CABA.",
-    images: [`${SITE_URL}/opengraph-image.png`],
+  languages: {
+    "es-AR": "/tecnico-de-celulares",
   },
-};
+  openGraphTitle: "Técnico de Celulares en Recoleta (CABA) | Team Celular",
+  openGraphDescription:
+    "Técnico de celulares con diagnóstico profesional y garantía escrita. Taller en Recoleta para CABA.",
+  openGraphImageAlt: "Técnico de celulares en Recoleta - Team Celular",
+  twitterTitle: "Técnico de Celulares en Recoleta | Team Celular",
+  twitterDescription:
+    "Diagnóstico y reparación de celulares con garantía escrita en CABA.",
+});
 
 export default function TecnicoDeCelularesPage() {
   const whatsappUrl = `https://wa.me/5491151034595?text=${encodeURIComponent(
@@ -108,50 +100,61 @@ export default function TecnicoDeCelularesPage() {
       />
 
       <header className="rounded-2xl border border-white/15 bg-white/5 p-10 text-center shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-12">
+        <span className="inline-flex rounded-full bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
+          Enfoque técnico especialista
+        </span>
         <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-          Técnico de celulares en Recoleta (CABA)
+          Técnico de celulares en Recoleta para fallas complejas y diagnóstico experto
         </h1>
         <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          Diagnóstico profesional y reparación de celulares con garantía escrita.
-          Taller en <strong>Recoleta</strong> para clientes de toda <strong>CABA</strong>.
+          Si ya intentaste reparar y el problema volvió, o si tu equipo tiene
+          síntomas de placa, este es el camino correcto. Trabajamos en <strong>Recoleta</strong>
+          para clientes de toda <strong>CABA</strong> con criterio técnico real.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <Link
+          <TrackedCtaLink
             href="/presupuesto-reparacion#solicitar-presupuesto"
+            ctaName="tecnico_hero_budget"
+            ctaLocation="tecnico_hero"
+            ctaVariant="primary"
             className="rounded-full bg-primary px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
           >
-            Pedir presupuesto
-          </Link>
-          <a
+            Pedir diagnóstico
+          </TrackedCtaLink>
+          <TrackedCtaLink
             href={whatsappUrl}
+            ctaName="tecnico_hero_whatsapp"
+            ctaLocation="tecnico_hero"
+            ctaVariant="whatsapp"
+            external
             target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-primary/40 px-8 py-4 text-base font-semibold text-primary transition hover:bg-primary/10 dark:border-primary/60 dark:text-primary/80"
+            className="rounded-full border border-emerald-700 bg-emerald-700 px-8 py-4 text-base font-semibold text-white transition hover:bg-emerald-800"
           >
             WhatsApp directo
-          </a>
-          <Link
-            href="/contacto"
-            className="rounded-full border border-secondary/50 px-8 py-4 text-base font-semibold text-secondary transition hover:bg-secondary/10"
-          >
-            Ver ubicación
-          </Link>
+          </TrackedCtaLink>
         </div>
+        <p className="mt-5 text-sm text-slate-600 dark:text-slate-300">
+          Si tu falla es puntual (pantalla, batería o carga), podés ir directo a{" "}
+          <Link href="/arreglo-de-celulares" className="font-semibold text-primary underline-offset-4 hover:underline">
+            Arreglo de celulares
+          </Link>
+          .
+        </p>
       </header>
 
       <section className="mt-10 grid gap-6 md:grid-cols-3">
         {[
           {
             title: "Diagnóstico profesional",
-            desc: "Chequeo completo de pantalla, batería, carga, cámaras, audio y placa cuando corresponde.",
+            desc: "Chequeo técnico por síntomas, historial y pruebas para encontrar la causa raíz, no solo el síntoma.",
           },
           {
-            title: "Repuestos premium",
-            desc: "Opciones originales y alternativas premium con explicación clara de costos y tiempos.",
+            title: "Criterio técnico",
+            desc: "Te explicamos si conviene reparar, qué riesgo tiene y qué alternativa te deja mejor resultado costo-beneficio.",
           },
           {
-            title: "Garantía escrita",
-            desc: "Todos los trabajos incluyen garantía por escrito con cobertura de repuestos y mano de obra.",
+            title: "Trazabilidad y garantía",
+            desc: "Documentamos el trabajo y entregamos garantía por escrito según intervención y repuestos usados.",
           },
         ].map((item) => (
           <article
@@ -173,8 +176,8 @@ export default function TecnicoDeCelularesPage() {
           Servicios que resolvemos
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">
-          Pantalla, batería, pin de carga, cámaras, audio y microelectrónica.
-          Si no sabés qué tiene tu equipo, pedí diagnóstico.
+          Trabajamos fallas comunes y casos de mayor complejidad técnica. Si no
+          estás seguro de la falla, empezamos por diagnóstico y plan de acción.
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {[
@@ -195,6 +198,36 @@ export default function TecnicoDeCelularesPage() {
         </div>
       </section>
 
+      <section className="mt-8 rounded-2xl border border-white/15 bg-white/5 p-6 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
+          Elegí la ruta correcta según tu caso
+        </h2>
+        <p className="mt-2 text-slate-600 dark:text-slate-300">
+          Si tu problema es puntual y ya sabés la falla, podés ahorrar tiempo con
+          la landing general. Si es un caso incierto o complejo, seguí por diagnóstico.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <TrackedCtaLink
+            href="/arreglo-de-celulares"
+            ctaName="tecnico_route_arreglo"
+            ctaLocation="tecnico_route_selector"
+            ctaVariant="secondary"
+            className="rounded-full border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
+          >
+            Ir a arreglo general
+          </TrackedCtaLink>
+          <TrackedCtaLink
+            href="/reparaciones/reparacion-placa-caba"
+            ctaName="tecnico_route_board"
+            ctaLocation="tecnico_route_selector"
+            ctaVariant="secondary"
+            className="rounded-full border border-primary/40 px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary/10"
+          >
+            Ver reparación de placa
+          </TrackedCtaLink>
+        </div>
+      </section>
+
       <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
           Preguntas frecuentes
@@ -205,7 +238,7 @@ export default function TecnicoDeCelularesPage() {
               key={faq.q}
               className="rounded-xl border border-white/10 bg-white/10 p-5 text-sm leading-relaxed text-slate-700 dark:border-white/5 dark:bg-slate-900/40 dark:text-slate-300"
             >
-              <h3 className="font-semibold text-primary">{faq.q}</h3>
+              <h3 className="font-semibold text-slate-900 dark:text-slate-100">{faq.q}</h3>
               <p className="mt-2">{faq.a}</p>
             </article>
           ))}

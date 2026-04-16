@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { BsChevronDown, BsList, BsWhatsapp, BsX } from "react-icons/bs";
+import { track } from "@vercel/analytics";
 import Image from "next/image";
 import Link from "next/link";
 import ThemeSwitcher, {
@@ -25,6 +26,7 @@ const SECONDARY_LINKS = [
 
 const WHATSAPP_URL =
     "https://wa.me/5491151034595?text=Hola%21%20Quiero%20pedir%20un%20presupuesto%20de%20reparaci%C3%B3n.";
+const BUDGET_URL = "/presupuesto-reparacion#solicitar-presupuesto";
 
 function isActivePath(pathname, href) {
     if (!pathname) return false;
@@ -57,12 +59,29 @@ export default function NavbarNUI() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
+    function trackNavbarCta(ctaName, ctaLocation, ctaVariant, destination) {
+        track("cta_click", {
+            cta_name: ctaName,
+            cta_location: ctaLocation,
+            cta_variant: ctaVariant,
+            destination,
+        });
+    }
+
     return (
         <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/92 shadow-[0_8px_24px_-20px_rgba(15,23,42,0.35)] backdrop-blur-xl dark:border-slate-800/80 dark:bg-gradient-to-b dark:from-slate-950/96 dark:to-slate-900/96 dark:shadow-[0_10px_30px_-18px_rgba(2,6,23,0.9)]">
             <div className="border-b border-slate-200/60 px-4 py-2 sm:hidden dark:border-slate-800/70">
                 <div className="mx-auto flex w-full max-w-[100rem] gap-2">
                     <Link
-                        href="/presupuesto-reparacion#solicitar-presupuesto"
+                        href={BUDGET_URL}
+                        onClick={() =>
+                            trackNavbarCta(
+                                "navbar_budget",
+                                "navbar_mobile_top",
+                                "primary",
+                                BUDGET_URL,
+                            )
+                        }
                         className="inline-flex flex-1 items-center justify-center rounded-full bg-primary px-4 py-2 text-xs font-semibold text-white shadow-sm"
                     >
                         Presupuesto
@@ -71,6 +90,14 @@ export default function NavbarNUI() {
                         href={WHATSAPP_URL}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() =>
+                            trackNavbarCta(
+                                "navbar_whatsapp",
+                                "navbar_mobile_top",
+                                "whatsapp",
+                                WHATSAPP_URL,
+                            )
+                        }
                         className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-emerald-500/35 bg-emerald-50 px-4 py-2 text-xs font-semibold text-emerald-700 dark:border-emerald-400/35 dark:bg-emerald-500/15 dark:text-emerald-200"
                     >
                         <BsWhatsapp className="text-sm" aria-hidden />
@@ -192,7 +219,15 @@ export default function NavbarNUI() {
                 <div className="hidden items-center gap-2 sm:flex">
                     <ThemeSwitcher />
                     <Link
-                        href="/presupuesto-reparacion#solicitar-presupuesto"
+                        href={BUDGET_URL}
+                        onClick={() =>
+                            trackNavbarCta(
+                                "navbar_budget",
+                                "navbar_desktop",
+                                "primary",
+                                BUDGET_URL,
+                            )
+                        }
                         className="inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition hover:bg-primary/90"
                     >
                         Presupuesto
@@ -201,6 +236,14 @@ export default function NavbarNUI() {
                         href={WHATSAPP_URL}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() =>
+                            trackNavbarCta(
+                                "navbar_whatsapp",
+                                "navbar_desktop",
+                                "whatsapp",
+                                WHATSAPP_URL,
+                            )
+                        }
                         className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-emerald-500/35 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100 dark:border-emerald-400/35 dark:bg-emerald-500/15 dark:text-emerald-200 dark:hover:bg-emerald-500/25"
                     >
                         <BsWhatsapp className="text-lg" aria-hidden />
@@ -214,6 +257,7 @@ export default function NavbarNUI() {
                     className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 lg:hidden dark:border-slate-700/80 dark:bg-slate-900/80 dark:text-white dark:hover:border-slate-600 dark:hover:bg-slate-800"
                     aria-expanded={mobileMenuOpen}
                     aria-controls="mobile-site-menu"
+                    aria-label={mobileMenuOpen ? "Cerrar menu" : "Abrir menu"}
                 >
                     {mobileMenuOpen ? <BsX aria-hidden /> : <BsList aria-hidden />}
                 </button>
@@ -256,7 +300,15 @@ export default function NavbarNUI() {
 
                         <div className="grid gap-2 pt-2">
                             <Link
-                                href="/presupuesto-reparacion#solicitar-presupuesto"
+                                href={BUDGET_URL}
+                                onClick={() =>
+                                    trackNavbarCta(
+                                        "navbar_budget",
+                                        "navbar_mobile_drawer",
+                                        "primary",
+                                        BUDGET_URL,
+                                    )
+                                }
                                 className="inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition hover:bg-primary/90"
                             >
                                 Pedir presupuesto
@@ -265,6 +317,14 @@ export default function NavbarNUI() {
                                 href={WHATSAPP_URL}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                onClick={() =>
+                                    trackNavbarCta(
+                                        "navbar_whatsapp",
+                                        "navbar_mobile_drawer",
+                                        "whatsapp",
+                                        WHATSAPP_URL,
+                                    )
+                                }
                                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-emerald-500/35 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100 dark:border-emerald-400/35 dark:bg-emerald-500/15 dark:text-emerald-200 dark:hover:bg-emerald-500/25"
                             >
                                 <BsWhatsapp className="text-lg" aria-hidden />

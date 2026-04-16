@@ -35,7 +35,7 @@ export default function ZonasLayout({
       <section className="relative z-10 border-b border-slate-200/80 bg-white/80 backdrop-blur-md dark:border-slate-800/70 dark:bg-slate-950/45">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-4 md:flex-row md:items-center md:justify-between">
           <div className="space-y-1">
-            <p className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+            <p className="inline-flex items-center gap-2 rounded-full border border-primary/35 bg-primary/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-800 dark:text-slate-100">
               <FaMapMarkedAlt className="text-[10px]" />
               Cobertura CABA
             </p>
@@ -57,7 +57,7 @@ export default function ZonasLayout({
               href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20quiero%20presupuesto%20para%20mi%20zona"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-10 items-center gap-2 rounded-full bg-emerald-500 px-4 text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 transition hover:bg-emerald-600"
+              className="inline-flex min-h-10 items-center gap-2 rounded-full bg-emerald-700 px-4 text-sm font-semibold text-white shadow-lg shadow-emerald-700/25 transition hover:bg-emerald-800"
             >
               <BsWhatsapp className="text-base" />
               WhatsApp

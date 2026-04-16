@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { BsTelephone, BsWhatsapp } from "react-icons/bs";
 import { FaRegCalendarCheck } from "react-icons/fa";
+import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 
 interface StickyLocalCtaProps {
   whatsappUrl: string;
@@ -25,30 +25,40 @@ export default function StickyLocalCta({
           Te asesoramos por WhatsApp, llamada o presupuesto online.
         </p>
         <div className="mt-3 flex flex-col gap-2">
-          <a
+          <TrackedCtaLink
             href={whatsappUrl}
+            ctaName="sticky_whatsapp"
+            ctaLocation="sticky_local_cta"
+            ctaVariant="whatsapp"
+            external
             target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-emerald-500 px-4 text-sm font-semibold text-white transition hover:bg-emerald-600"
+            className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-emerald-700 px-4 text-sm font-semibold text-white transition hover:bg-emerald-800"
           >
             <BsWhatsapp className="text-base" />
             Hablar por WhatsApp
-          </a>
+          </TrackedCtaLink>
           <div className="flex gap-2">
-            <a
+            <TrackedCtaLink
               href={phoneHref}
+              ctaName="sticky_phone"
+              ctaLocation="sticky_local_cta"
+              ctaVariant="phone"
+              external
               className="inline-flex min-h-10 flex-1 items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-4 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
             >
               <BsTelephone className="text-sm" />
               Llamar
-            </a>
-            <Link
+            </TrackedCtaLink>
+            <TrackedCtaLink
               href={budgetHref}
+              ctaName="sticky_budget"
+              ctaLocation="sticky_local_cta"
+              ctaVariant="primary"
               className="inline-flex min-h-10 flex-1 items-center justify-center gap-2 rounded-full bg-primary px-4 text-sm font-semibold text-white transition hover:bg-primary/90"
             >
               <FaRegCalendarCheck className="text-sm" />
               Presupuesto
-            </Link>
+            </TrackedCtaLink>
           </div>
         </div>
       </div>
