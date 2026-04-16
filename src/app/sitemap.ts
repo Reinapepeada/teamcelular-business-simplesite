@@ -92,6 +92,10 @@ const guidePages = [
   { path: "guias/mantenimiento-preventivo-celulares", priority: 0.75, changeFreq: "monthly" as const },
   { path: "guias/cambio-bateria-celular", priority: 0.75, changeFreq: "monthly" as const },
   { path: "guias/reparacion-pantalla-celular", priority: 0.75, changeFreq: "monthly" as const },
+  { path: "guias/pin-de-carga-suelto-solucion", priority: 0.76, changeFreq: "monthly" as const },
+  { path: "guias/celular-mojado-que-hacer", priority: 0.76, changeFreq: "monthly" as const },
+  { path: "guias/face-id-touch-id-no-funciona", priority: 0.76, changeFreq: "monthly" as const },
+  { path: "guias/pantalla-con-lineas-causas-reparacion", priority: 0.76, changeFreq: "monthly" as const },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

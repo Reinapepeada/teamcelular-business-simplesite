@@ -47,6 +47,16 @@ const quickGuideLinks = [
     label: "Empresas",
     Icon: FaBuilding,
   },
+  {
+    href: "/guias/pin-de-carga-suelto-solucion",
+    label: "Pin de carga",
+    Icon: FaMobileAlt,
+  },
+  {
+    href: "/guias/celular-mojado-que-hacer",
+    label: "Celular mojado",
+    Icon: FaBookOpen,
+  },
 ];
 
 export default function GuidesLayout({

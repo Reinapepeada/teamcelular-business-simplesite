@@ -110,6 +110,50 @@ const ARTICLES = [
     datePublished: "2024-11-30",
     keywords: ["cambio pantalla", "display OLED", "pantalla celular"],
   },
+  {
+    title: "Pin de carga suelto: causas y solucion",
+    description:
+      "Aprende a diferenciar falso contacto, desgaste de conector o falla de placa para reparar con criterio.",
+    href: "/guias/pin-de-carga-suelto-solucion",
+    category: "Fallas frecuentes",
+    readingTime: "5 min",
+    Icon: FaTools,
+    datePublished: "2026-04-16",
+    keywords: ["pin de carga suelto", "celular no carga", "puerto USB"],
+  },
+  {
+    title: "Celular mojado: que hacer en las primeras 2 horas",
+    description:
+      "Protocolo urgente para reducir dano por liquidos y mejorar chances de recuperacion tecnica.",
+    href: "/guias/celular-mojado-que-hacer",
+    category: "Emergencia",
+    readingTime: "5 min",
+    Icon: FaBookOpen,
+    datePublished: "2026-04-16",
+    keywords: ["celular mojado", "que hacer", "reparacion por agua"],
+  },
+  {
+    title: "Face ID o Touch ID no funciona",
+    description:
+      "Checklist tecnico para identificar si la falla biometrica viene de sensor, flex o placa.",
+    href: "/guias/face-id-touch-id-no-funciona",
+    category: "Diagnostico avanzado",
+    readingTime: "6 min",
+    Icon: FaApple,
+    datePublished: "2026-04-16",
+    keywords: ["face id no funciona", "touch id", "reparacion iPhone"],
+  },
+  {
+    title: "Pantalla con lineas: causas y reparacion",
+    description:
+      "Como decidir entre cambio de display, ajuste de flex o revision de placa sin gastar de mas.",
+    href: "/guias/pantalla-con-lineas-causas-reparacion",
+    category: "Fallas frecuentes",
+    readingTime: "5 min",
+    Icon: FaMobileAlt,
+    datePublished: "2026-04-16",
+    keywords: ["pantalla con lineas", "display con rayas", "reparacion pantalla"],
+  },
 ];
 
 const articleVisuals: Record<string, { cover: string }> = {
@@ -135,6 +179,18 @@ const articleVisuals: Record<string, { cover: string }> = {
     cover: "/images/guia_cambio_bateria.webp",
   },
   "/guias/reparacion-pantalla-celular": {
+    cover: "/images/guia_cambio_modulo.webp",
+  },
+  "/guias/pin-de-carga-suelto-solucion": {
+    cover: "/images/guia_cambio_modulo.webp",
+  },
+  "/guias/celular-mojado-que-hacer": {
+    cover: "/images/guia_microelectronica.webp",
+  },
+  "/guias/face-id-touch-id-no-funciona": {
+    cover: "/images/guia_iphone.webp",
+  },
+  "/guias/pantalla-con-lineas-causas-reparacion": {
     cover: "/images/guia_cambio_modulo.webp",
   },
 };
@@ -195,6 +251,30 @@ const articleLinkTargets: Record<
     serviceLabel: "Servicio: cambio de pantalla",
     siblingHref: "/guias/cambio-bateria-celular",
     siblingLabel: "Guia hermana: bateria",
+  },
+  "/guias/pin-de-carga-suelto-solucion": {
+    serviceHref: "/reparaciones/cambio-pin-carga-caba",
+    serviceLabel: "Servicio: pin de carga",
+    siblingHref: "/guias/celular-mojado-que-hacer",
+    siblingLabel: "Guia hermana: celular mojado",
+  },
+  "/guias/celular-mojado-que-hacer": {
+    serviceHref: "/reparaciones/reparacion-placa-caba",
+    serviceLabel: "Servicio: reparacion de placa",
+    siblingHref: "/guias/microelectronica-reballing-caba",
+    siblingLabel: "Guia hermana: microelectronica",
+  },
+  "/guias/face-id-touch-id-no-funciona": {
+    serviceHref: "/reparaciones/reparacion-placa-caba",
+    serviceLabel: "Servicio: placa y sensores",
+    siblingHref: "/guias/reparacion-iphone-buenos-aires",
+    siblingLabel: "Guia hermana: reparacion iPhone",
+  },
+  "/guias/pantalla-con-lineas-causas-reparacion": {
+    serviceHref: "/reparaciones/cambio-pantalla-caba",
+    serviceLabel: "Servicio: cambio de pantalla",
+    siblingHref: "/guias/reparacion-pantalla-celular",
+    siblingLabel: "Guia hermana: guia de pantalla",
   },
 };
 
