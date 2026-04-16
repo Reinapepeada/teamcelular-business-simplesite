@@ -11,10 +11,9 @@ import {
     Tags, 
     Store, 
     Building2, 
-    TrendingUp,
+    LineChart,
     PlusCircle,
     ArrowRight,
-    DollarSign,
     ShoppingCart,
     AlertTriangle
 } from "lucide-react";
@@ -22,6 +21,7 @@ import { getAllProductsPaginated } from "@/services/products";
 import { getcategories } from "@/services/categories";
 import { getbrands } from "@/services/brands";
 import { getbranches } from "@/services/branches";
+import { getRepairLeads } from "@/services/leads";
 
 export default function AdminDashboard() {
     const [stats, setStats] = useState({
@@ -29,6 +29,7 @@ export default function AdminDashboard() {
         categories: 0,
         brands: 0,
         branches: 0,
+        leads: 0,
         lowStock: 0,
     });
     const [recentProducts, setRecentProducts] = useState([]);
@@ -37,11 +38,12 @@ export default function AdminDashboard() {
     useEffect(() => {
         async function fetchStats() {
             try {
-                const [productsData, categories, brands, branches] = await Promise.all([
+                const [productsData, categories, brands, branches, leadsSummary] = await Promise.all([
                     getAllProductsPaginated(1, 5, ""),
                     getcategories(),
                     getbrands(),
                     getbranches(),
+                    getRepairLeads({ page: 1, size: 1 }),
                 ]);
 
                 // Calcular productos con bajo stock
@@ -59,6 +61,7 @@ export default function AdminDashboard() {
                     categories: categories?.length || 0,
                     brands: brands?.length || 0,
                     branches: branches?.length || 0,
+                    leads: leadsSummary?.total || 0,
                     lowStock: lowStockCount,
                 });
                 setRecentProducts(productsData.products || []);
@@ -105,6 +108,14 @@ export default function AdminDashboard() {
             bgColor: "bg-orange-500/10",
             href: "/admin/branches",
         },
+        {
+            title: "Leads",
+            value: stats.leads,
+            icon: <LineChart className="w-6 h-6" />,
+            color: "text-cyan-600",
+            bgColor: "bg-cyan-500/10",
+            href: "/admin/leads",
+        },
     ];
 
     const quickActions = [
@@ -126,13 +137,19 @@ export default function AdminDashboard() {
             icon: <ShoppingCart className="w-5 h-5" />,
             href: "/tienda",
         },
+        {
+            title: "Panel de Leads",
+            description: "Monitorear conversión y seguimiento",
+            icon: <LineChart className="w-5 h-5" />,
+            href: "/admin/leads",
+        },
     ];
 
     if (isLoading) {
         return (
             <div className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {[...Array(4)].map((_, i) => (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                    {[...Array(5)].map((_, i) => (
                         <Card key={i} className="animate-pulse">
                             <CardContent className="p-6">
                                 <div className="h-16 bg-muted rounded"></div>
@@ -163,7 +180,7 @@ export default function AdminDashboard() {
             </div>
 
             {/* Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                 {statCards.map((stat, index) => (
                     <motion.div
                         key={stat.title}

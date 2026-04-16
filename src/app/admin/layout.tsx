@@ -12,6 +12,7 @@ import {
     Package,
     Tags,
     Building2,
+    LineChart,
     LogOut,
     Menu,
     X,
@@ -73,6 +74,11 @@ const navItems: NavItem[] = [
         label: "Sucursales",
         href: "/admin/branches",
         icon: <Building2 className="w-5 h-5" />,
+    },
+    {
+        label: "Leads",
+        href: "/admin/leads",
+        icon: <LineChart className="w-5 h-5" />,
     },
 ];
 

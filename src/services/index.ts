@@ -48,3 +48,12 @@ export {
     updateBranch,
     deleteBranch,
 } from './branches';
+
+// Leads
+export {
+    getRepairLeads,
+    getRepairLeadsMetrics,
+    getRepairLeadById,
+    updateRepairLeadStatus,
+    addRepairLeadNote,
+} from './leads';
