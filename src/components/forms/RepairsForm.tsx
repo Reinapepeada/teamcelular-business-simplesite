@@ -54,22 +54,65 @@ const contactChannelOptions = [
     { value: "email", label: "Email" },
 ] as const;
 
+const PHONE_CONTACT_REGEX = /^[+\d][\d\s()-]{7,19}$/;
+const EMAIL_CONTACT_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
 const LAST_STEP_INDEX = BUDGET_WIZARD_STEPS.length - 1;
+
+const contactFieldMeta = {
+    whatsapp: {
+        label: "WhatsApp de contacto",
+        placeholder: "Ej: +54 9 11 1234-5678",
+        helper: "Inclui codigo de area para responderte rapido.",
+        type: "tel" as const,
+        inputMode: "tel" as const,
+        autoComplete: "tel",
+    },
+    llamada: {
+        label: "Telefono para llamada",
+        placeholder: "Ej: 11 1234-5678",
+        helper: "Te llamamos en horario comercial.",
+        type: "tel" as const,
+        inputMode: "tel" as const,
+        autoComplete: "tel",
+    },
+    email: {
+        label: "Email de contacto",
+        placeholder: "Ej: nombre@correo.com",
+        helper: "Aca te enviamos el diagnostico inicial.",
+        type: "email" as const,
+        inputMode: "email" as const,
+        autoComplete: "email",
+    },
+} as const;
 
 export default function RepairsForm() {
     const [stepIndex, setStepIndex] = useState(0);
     const [brand, setBrand] = useState("");
     const [model, setModel] = useState("");
-    const [repairType, setRepairType] = useState("");
+    const [repairTypes, setRepairTypes] = useState<string[]>([]);
     const [urgency, setUrgency] = useState<(typeof urgencyOptions)[number]["value"]>("esta_semana");
     const [description, setDescription] = useState("");
     const [contactChannel, setContactChannel] = useState<(typeof contactChannelOptions)[number]["value"]>("whatsapp");
     const [contact, setContact] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [leadAttemptId, setLeadAttemptId] = useState("");
+
+    const selectedContactMeta = contactFieldMeta[contactChannel];
+    const repairTypeLabel = repairTypes.join(", ");
 
     const stepRef = useRef(stepIndex);
     const startedRef = useRef(false);
     const submittedRef = useRef(false);
+
+    useEffect(() => {
+        if (typeof window !== "undefined" && typeof window.crypto?.randomUUID === "function") {
+            setLeadAttemptId(window.crypto.randomUUID());
+            return;
+        }
+
+        setLeadAttemptId(`${Date.now()}-${Math.random().toString(36).slice(2, 10)}`);
+    }, []);
 
     useEffect(() => {
         track(
@@ -101,7 +144,7 @@ export default function RepairsForm() {
                     buildBudgetFunnelPayload({
                         stepIndex: stepRef.current,
                         extra: {
-                            repair_type: repairType || "sin_definir",
+                            repair_type: repairTypeLabel || "sin_definir",
                             urgency,
                             contact_channel: contactChannel,
                         },
@@ -109,22 +152,48 @@ export default function RepairsForm() {
                 );
             }
         };
-    }, [contactChannel, repairType, urgency]);
+    }, [contactChannel, repairTypeLabel, urgency]);
 
     function validateStep(index: number): string | null {
         if (index === 0 && (!brand.trim() || !model.trim())) {
             return "Completa marca y modelo para seguir.";
         }
 
-        if (index === 1 && !repairType.trim()) {
-            return "Selecciona la falla principal para continuar.";
+        if (index === 1 && repairTypes.length === 0) {
+            return "Selecciona al menos una falla para continuar.";
         }
 
-        if (index === LAST_STEP_INDEX && !contact.trim()) {
-            return "Necesitamos un dato de contacto para responderte.";
+        if (index === LAST_STEP_INDEX) {
+            const normalizedContact = contact.trim();
+
+            if (!normalizedContact) {
+                return "Necesitamos un dato de contacto para responderte.";
+            }
+
+            if (
+                (contactChannel === "whatsapp" || contactChannel === "llamada") &&
+                !PHONE_CONTACT_REGEX.test(normalizedContact)
+            ) {
+                return "Ingresa un telefono valido con codigo de area para continuar.";
+            }
+
+            if (contactChannel === "email" && !EMAIL_CONTACT_REGEX.test(normalizedContact)) {
+                return "Ingresa un email valido para continuar.";
+            }
         }
 
         return null;
+    }
+
+    function toggleRepairType(option: string) {
+        setRepairTypes((current) => {
+            if (current.includes(option)) {
+                return current.filter((item) => item !== option);
+            }
+
+            return [...current, option];
+        });
+        setErrorMessage("");
     }
 
     function handleBack() {
@@ -161,7 +230,7 @@ export default function RepairsForm() {
             buildBudgetFunnelPayload({
                 stepIndex,
                 extra: {
-                    repair_type: repairType || "sin_definir",
+                    repair_type: repairTypeLabel || "sin_definir",
                     urgency,
                     contact_channel: contactChannel,
                 },
@@ -185,7 +254,7 @@ export default function RepairsForm() {
             stepIndex,
             extra: {
                 lead_channel: "whatsapp_redirect",
-                repair_type: repairType || "sin_definir",
+                repair_type: repairTypeLabel || "sin_definir",
                 urgency,
                 contact_channel: contactChannel,
             },
@@ -241,23 +310,23 @@ export default function RepairsForm() {
             return (
                 <fieldset className="space-y-3">
                     <legend className="text-sm font-semibold text-slate-900 dark:text-slate-100">
-                        Selecciona la falla principal
+                        Selecciona una o varias fallas
                     </legend>
                     <p className="text-xs leading-5 text-slate-500 dark:text-slate-400">
-                        Si hay mas de una, elige la mas urgente. Luego la ampliamos por WhatsApp.
+                        Marca los sintomas principales. Luego afinamos detalles por WhatsApp.
+                    </p>
+                    <p className="text-xs font-medium text-slate-600 dark:text-slate-300">
+                        Seleccionadas: {repairTypes.length}
                     </p>
                     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                         {repairOptions.map((option) => {
-                            const selected = repairType === option;
+                            const selected = repairTypes.includes(option);
 
                             return (
                                 <button
                                     key={option}
                                     type="button"
-                                    onClick={() => {
-                                        setRepairType(option);
-                                        setErrorMessage("");
-                                    }}
+                                    onClick={() => toggleRepairType(option)}
                                     className={`flex min-h-11 items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-sm font-medium transition ${
                                         selected
                                             ? "border-primary bg-primary/10 text-primary"
@@ -270,6 +339,27 @@ export default function RepairsForm() {
                             );
                         })}
                     </div>
+                    {repairTypes.length > 0 ? (
+                        <div className="space-y-2">
+                            <p className="text-xs text-slate-500 dark:text-slate-400">
+                                Tocala para quitarla:
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                                {repairTypes.map((repairType) => (
+                                    <button
+                                        key={repairType}
+                                        type="button"
+                                        onClick={() => toggleRepairType(repairType)}
+                                        className="inline-flex min-h-8 items-center gap-2 rounded-full border border-primary/35 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary transition hover:border-primary hover:bg-primary/15"
+                                        aria-label={`Quitar ${repairType}`}
+                                    >
+                                        {repairType}
+                                        <span aria-hidden>x</span>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    ) : null}
                 </fieldset>
             );
         }
@@ -351,14 +441,19 @@ export default function RepairsForm() {
                 </fieldset>
 
                 <label className="block space-y-2 text-sm font-medium text-slate-900 dark:text-slate-100">
-                    <span>Dato de contacto</span>
+                    <span>{selectedContactMeta.label}</span>
                     <input
-                        type="text"
+                        type={selectedContactMeta.type}
+                        inputMode={selectedContactMeta.inputMode}
+                        autoComplete={selectedContactMeta.autoComplete}
                         value={contact}
                         onChange={(event) => setContact(event.target.value)}
-                        placeholder="Ej: WhatsApp al 11..., llamada o email"
+                        placeholder={selectedContactMeta.placeholder}
                         className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
                     />
+                    <span className="text-xs font-normal leading-5 text-slate-500 dark:text-slate-400">
+                        {selectedContactMeta.helper}
+                    </span>
                 </label>
 
                 <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 text-sm leading-6 text-slate-700 dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-300">
@@ -370,7 +465,7 @@ export default function RepairsForm() {
                             <strong>Equipo:</strong> {brand || "-"} {model || ""}
                         </li>
                         <li>
-                            <strong>Falla:</strong> {repairType || "-"}
+                            <strong>Fallas:</strong> {repairTypeLabel || "-"}
                         </li>
                         <li>
                             <strong>Urgencia:</strong> {selectedUrgency?.label || "-"}
@@ -392,8 +487,8 @@ export default function RepairsForm() {
             onSubmit={handleSubmit}
         >
             <p className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-700 dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-300">
-                Completa este wizard en menos de 90 segundos. Te respondemos por
-                WhatsApp con diagnostico inicial, tiempos y siguientes pasos.
+                Te toma menos de 1 minuto. Te respondemos por WhatsApp en hasta 2 horas habiles.
+                Si hace falta revision tecnica, confirmamos diagnostico inicial dentro de 24 horas habiles.
             </p>
 
             <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900/70">
@@ -448,7 +543,9 @@ export default function RepairsForm() {
 
             <input type="hidden" name="brand" value={brand} />
             <input type="hidden" name="model" value={model} />
-            <input type="hidden" name="repairType" value={repairType} />
+            {repairTypes.map((repairType) => (
+                <input key={repairType} type="hidden" name="repairType" value={repairType} />
+            ))}
             <input type="hidden" name="urgency" value={urgency} />
             <input type="hidden" name="description" value={description} />
             <input type="hidden" name="contactChannel" value={contactChannel} />
@@ -458,6 +555,7 @@ export default function RepairsForm() {
                 name="wizardSource"
                 value={`budget_wizard_${BUDGET_WIZARD_VERSION}`}
             />
+            <input type="hidden" name="leadAttemptId" value={leadAttemptId} />
 
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                 {stepIndex > 0 ? (
@@ -477,7 +575,7 @@ export default function RepairsForm() {
                         onClick={handleNext}
                         className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition hover:bg-primary/90"
                     >
-                        Siguiente paso
+                        Continuar
                         <FaArrowRight aria-hidden />
                     </button>
                 ) : (
@@ -486,13 +584,12 @@ export default function RepairsForm() {
                         className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/20 transition hover:bg-emerald-800"
                     >
                         <FaWhatsapp aria-hidden />
-                        Enviar y abrir WhatsApp
+                        Enviar datos y abrir WhatsApp
                     </button>
                 )}
 
                 <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">
-                    Armamos el mensaje automaticamente con tus datos y te
-                    llevamos directo al chat para continuar sin repetir todo.
+                    Enviamos todo una sola vez y te llevamos directo al chat.
                 </p>
             </div>
 

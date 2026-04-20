@@ -367,4 +367,187 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       },
     ],
   },
+  "cambio-camara-caba": {
+    slug: "cambio-camara-caba",
+    h1: "Cambio de camara en CABA",
+    metaTitle:
+      "Cambio de Camara en CABA | Camara Frontal y Trasera | Team Celular",
+    metaDescription:
+      "Cambio de camara en CABA para celular con camara borrosa, sin enfoque o sin imagen. Camara frontal y trasera con diagnostico tecnico y garantia escrita.",
+    socialTitle: "Cambio de Camara en CABA | Team Celular",
+    socialDescription:
+      "Reparacion y reemplazo de camara frontal y trasera en CABA con garantia escrita.",
+    keywords: [
+      "cambio camara celular CABA",
+      "camara celular borrosa",
+      "camara frontal no funciona",
+      "reparacion camara iPhone CABA",
+      "reparacion camara Samsung CABA",
+    ],
+    intro:
+      "Si tu camara enfoca mal, no abre o sale en negro, revisamos modulo, flex y conectores para resolver la falla real sin cambiar piezas de mas.",
+    whatsappText:
+      "Hola! Quiero un presupuesto para cambio de camara en CABA. Marca y modelo:",
+    breadcrumbLabel: "Cambio de camara (CABA)",
+    serviceName: "Cambio de camara en CABA",
+    serviceType: "Reemplazo de camara frontal y trasera",
+    serviceDescription:
+      "Servicio de reparacion y reemplazo de camara frontal o trasera para celulares en CABA.",
+    highlights: [
+      {
+        title: "Diagnostico por sintoma",
+        desc: "Verificamos si la falla esta en camara, flex, conector o placa antes de cotizar.",
+      },
+      {
+        title: "Repuestos compatibles",
+        desc: "Instalamos modulo segun modelo exacto para conservar calidad de imagen y estabilidad.",
+      },
+      {
+        title: "Pruebas completas",
+        desc: "Testeamos enfoque, video, flash y camara frontal/trasera antes de entregar.",
+      },
+    ],
+    brandsText:
+      "Trabajamos camaras de iPhone, Samsung, Motorola, Xiaomi y otras marcas segun disponibilidad.",
+    faqs: [
+      {
+        q: "La camara borrosa siempre se cambia?",
+        a: "No siempre. A veces hay suciedad interna o problema de software. Primero hacemos diagnostico.",
+      },
+      {
+        q: "Si no funciona la camara frontal, puede ser flex?",
+        a: "Si. En varios modelos la camara frontal comparte flex con otros sensores y se revisa todo el conjunto.",
+      },
+      {
+        q: "Cuanto tarda el cambio de camara?",
+        a: "Con repuesto en stock, muchos casos se resuelven en el dia.",
+      },
+      {
+        q: "Tiene garantia por escrito?",
+        a: "Si, cada trabajo se entrega con garantia escrita y condiciones claras.",
+      },
+    ],
+  },
+  "reparacion-audio-celular-caba": {
+    slug: "reparacion-audio-celular-caba",
+    h1: "Reparacion de audio en CABA",
+    metaTitle:
+      "Reparacion de Audio de Celular en CABA | Microfono y Parlante | Team Celular",
+    metaDescription:
+      "Reparacion de audio de celular en CABA: microfono bajo, parlante distorsionado, auricular sin sonido o altavoz que falla. Diagnostico y garantia escrita.",
+    socialTitle: "Reparacion de Audio de Celular en CABA | Team Celular",
+    socialDescription:
+      "Solucion para fallas de microfono, parlante y auricular en celulares con diagnostico tecnico.",
+    keywords: [
+      "reparacion audio celular CABA",
+      "microfono celular no funciona",
+      "parlante celular no se escucha",
+      "auricular iPhone sin sonido",
+      "service audio celular recoleta",
+    ],
+    intro:
+      "Si no te escuchan en llamadas, el parlante suena bajo o el audio sale distorsionado, evaluamos microfono, auricular, altavoz y placa para resolver el problema de fondo.",
+    whatsappText:
+      "Hola! Quiero un presupuesto para reparacion de audio de celular en CABA. Marca y modelo:",
+    breadcrumbLabel: "Reparacion de audio (CABA)",
+    serviceName: "Reparacion de audio de celular en CABA",
+    serviceType: "Reparacion de microfono, parlante y auricular",
+    serviceDescription:
+      "Servicio tecnico para resolver fallas de audio en celulares en CABA.",
+    highlights: [
+      {
+        title: "Diagnostico sin adivinar",
+        desc: "Separamos si la falla viene de modulo de audio, flex, suciedad o circuito en placa.",
+      },
+      {
+        title: "Llamadas y multimedia",
+        desc: "Probamos microfono, auricular, altavoz y grabacion para validar funcionamiento real.",
+      },
+      {
+        title: "Intervencion precisa",
+        desc: "Reparamos o reemplazamos solo el componente necesario para cuidar costo y tiempo.",
+      },
+    ],
+    brandsText:
+      "Atendemos iPhone y Android, incluyendo Samsung, Motorola y Xiaomi, segun falla y repuesto disponible.",
+    faqs: [
+      {
+        q: "Si no me escuchan, siempre es microfono roto?",
+        a: "No siempre. Puede ser obstruccion, humedad, flex o incluso problema de software.",
+      },
+      {
+        q: "El parlante distorsionado se puede reparar?",
+        a: "Si, en muchos casos se resuelve con limpieza tecnica o reemplazo del modulo de audio.",
+      },
+      {
+        q: "Cuanto tarda una reparacion de audio?",
+        a: "Con repuesto disponible, suele resolverse dentro del dia habil.",
+      },
+      {
+        q: "Que garantia tiene?",
+        a: "Se entrega garantia escrita con alcance y plazo segun la reparacion realizada.",
+      },
+    ],
+  },
+  "recuperacion-celular-mojado-caba": {
+    slug: "recuperacion-celular-mojado-caba",
+    h1: "Recuperacion de celular mojado en CABA",
+    metaTitle:
+      "Recuperacion de Celular Mojado en CABA | Dano por Liquidos | Team Celular",
+    metaDescription:
+      "Recuperacion de celular mojado en CABA con limpieza tecnica, secado controlado y diagnostico de placa. Actua rapido para mejorar chances de recuperacion.",
+    socialTitle: "Recuperacion de Celular Mojado en CABA | Team Celular",
+    socialDescription:
+      "Servicio tecnico urgente para dano por liquidos en celulares con diagnostico de laboratorio.",
+    keywords: [
+      "celular mojado reparacion CABA",
+      "reparacion dano por liquidos",
+      "celular se mojo no enciende",
+      "limpieza placa celular mojado",
+      "microelectronica celular mojado",
+    ],
+    intro:
+      "Si el equipo se mojo, cada hora cuenta. Revisamos corrosion, energia y modulos criticos para definir una recuperacion tecnica con el mayor porcentaje de exito posible.",
+    whatsappText:
+      "Hola! Quiero un presupuesto para recuperacion de celular mojado en CABA. Marca y modelo:",
+    breadcrumbLabel: "Celular mojado (CABA)",
+    serviceName: "Recuperacion de celular mojado en CABA",
+    serviceType: "Recuperacion por dano de liquidos y humedad",
+    serviceDescription:
+      "Servicio tecnico para recuperacion de celulares con dano por liquidos en CABA.",
+    highlights: [
+      {
+        title: "Accion urgente",
+        desc: "Atendemos prioridad por dano por liquidos para reducir avance de corrosion interna.",
+      },
+      {
+        title: "Limpieza de laboratorio",
+        desc: "Aplicamos limpieza tecnica y secado controlado para proteger conectores y circuitos.",
+      },
+      {
+        title: "Evaluacion real de viabilidad",
+        desc: "Te decimos si conviene reparar y que riesgo tiene cada alternativa antes de avanzar.",
+      },
+    ],
+    brandsText:
+      "Trabajamos iPhone y Android con protocolos de microelectronica segun nivel de dano por liquido.",
+    faqs: [
+      {
+        q: "Sirve poner el celular en arroz?",
+        a: "No es un metodo confiable. Puede demorar la intervencion y aumentar corrosion en placa.",
+      },
+      {
+        q: "Si prende despues de mojarse, igual hay que revisarlo?",
+        a: "Si. Muchos equipos vuelven a fallar por corrosion progresiva aunque enciendan al principio.",
+      },
+      {
+        q: "Cuanto tarda el diagnostico de un celular mojado?",
+        a: "El diagnostico inicial se realiza en el mismo dia habil para definir viabilidad tecnica.",
+      },
+      {
+        q: "Tiene garantia?",
+        a: "Si, se entrega garantia escrita segun alcance de la recuperacion y estado inicial del equipo.",
+      },
+    ],
+  },
 };

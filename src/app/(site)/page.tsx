@@ -74,7 +74,7 @@ const microFaqs = [
         title: "Tiempo de respuesta",
         question: "Cuanto tardan en contestar un presupuesto online?",
         answer:
-            "Respondemos formulario y WhatsApp en menos de 2 horas habiles. Si requiere diagnostico fisico, lo coordinamos el mismo dia.",
+            "Respondemos formulario y WhatsApp en hasta 2 horas habiles. Si requiere revision tecnica, confirmamos diagnostico inicial dentro de 24 horas habiles.",
     },
     {
         title: "Garantia real",
@@ -104,7 +104,7 @@ const faqs = [
     {
         question: "Cuanto tarda un presupuesto?",
         answer:
-            "En taller, suele ser inmediato. Por WhatsApp o formulario, te respondemos el mismo dia con un estimado y los siguientes pasos.",
+            "Por WhatsApp o formulario, respondemos en hasta 2 horas habiles. Si el caso requiere revision tecnica, confirmamos diagnostico inicial dentro de 24 horas habiles.",
     },
 ];
 
@@ -366,23 +366,31 @@ export default function Home() {
                         ¿Listo para recuperar tu teléfono?
                     </h2>
                     <p className="mt-4 text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
-                        Dejanos un mensaje con la falla, elegi tu canal de
-                        contacto y coordinamos el siguiente paso sin perder
-                        tiempo.
+                        Dejanos la falla y un dato de contacto. Te respondemos
+                        por WhatsApp en hasta 2 horas habiles para avanzar
+                        sin perder tiempo.
                     </p>
                     <div className="mt-6 flex flex-wrap justify-center gap-4 md:justify-start">
-                        <Link
-                            href="/contacto"
+                        <TrackedCtaLink
+                            href="/presupuesto-reparacion#solicitar-presupuesto"
+                            ctaName="home_bottom_budget"
+                            ctaLocation="home_bottom_section"
+                            ctaVariant="primary"
                             className={primaryCtaClass}
                         >
-                            Ver formas de contacto
-                        </Link>
-                        <Link
-                            href="/sobrenosotros"
+                            Pedir presupuesto ahora
+                        </TrackedCtaLink>
+                        <TrackedCtaLink
+                            href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20necesito%20una%20reparacion"
+                            ctaName="home_bottom_whatsapp"
+                            ctaLocation="home_bottom_section"
+                            ctaVariant="whatsapp"
+                            external
+                            target="_blank"
                             className={neutralCtaClass}
                         >
-                            Conoce el taller
-                        </Link>
+                            Hablar por WhatsApp
+                        </TrackedCtaLink>
                     </div>
                 </article>
             </section>

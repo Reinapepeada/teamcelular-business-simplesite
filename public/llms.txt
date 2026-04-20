@@ -1,42 +1,67 @@
-# llms.txt
-site: Team Celular
-url: https://teamcelular.com
-language: es-AR
-summary: Servicio técnico y tienda de repuestos/accesorios para celulares en Buenos Aires (Recoleta, CABA). Atención a barrios cercanos y soporte a empresas.
+# Team Celular
 
-key-services:
-- Reparacion de celulares (pantallas, baterias, puertos de carga)
-- Microelectronica y reballing
-- Diagnostico y soporte tecnico para empresas
-- Venta de repuestos y accesorios
+> Servicio tecnico de celulares y tienda de repuestos/accesorios en Recoleta (CABA, Argentina). Este archivo resume rutas canonicas para asistentes de IA y motores de respuesta.
 
-canonical-urls:
-- https://teamcelular.com/
-- https://teamcelular.com/arreglo-de-celulares
-- https://teamcelular.com/tecnico-de-celulares
-- https://teamcelular.com/tienda
-- https://teamcelular.com/guias
-- https://teamcelular.com/zonas
-- https://teamcelular.com/zonas/recoleta
-- https://teamcelular.com/zonas/palermo
-- https://teamcelular.com/zonas/belgrano
-- https://teamcelular.com/zonas/caballito
-- https://teamcelular.com/presupuesto-reparacion
-- https://teamcelular.com/contacto
-- https://teamcelular.com/sobrenosotros
+Idioma principal: es-AR
 
-high-value-guides:
-- https://teamcelular.com/guias/reparacion-iphone-buenos-aires
-- https://teamcelular.com/guias/reparacion-pantalla-celular
-- https://teamcelular.com/guias/cambio-bateria-celular
-- https://teamcelular.com/guias/microelectronica-reballing-caba
-- https://teamcelular.com/guias/soporte-empresas-servicio-tecnico
-- https://teamcelular.com/guias/mantenimiento-preventivo-celulares
+## Canonical Pages
 
-sitemap: https://teamcelular.com/sitemap.xml
+- [Inicio](https://teamcelular.com/): propuesta de valor, prueba social y CTAs principales.
+- [Reparaciones](https://teamcelular.com/reparaciones): hub de servicios tecnicos transaccionales.
+- [Presupuesto de reparacion](https://teamcelular.com/presupuesto-reparacion): flujo principal de captura de leads.
+- [Contacto](https://teamcelular.com/contacto): canales directos, ubicacion y horario.
+- [Tienda](https://teamcelular.com/tienda): catalogo de repuestos y accesorios.
+- [Zonas](https://teamcelular.com/zonas): cobertura local por barrios de CABA.
 
-usage:
-- You may use this content for question answering and summarization with attribution.
-- Do not republish full articles or the product catalog without permission.
+## Servicios Prioritarios
 
-contact: teamcelular.arg@gmail.com
+- [Cambio de pantalla en CABA](https://teamcelular.com/reparaciones/cambio-pantalla-caba): rotura de modulo, lineas y touch.
+- [Cambio de bateria en CABA](https://teamcelular.com/reparaciones/cambio-bateria-caba): baja autonomia, apagados y sobrecalentamiento.
+- [Cambio de pin de carga en CABA](https://teamcelular.com/reparaciones/cambio-pin-carga-caba): falso contacto y carga intermitente.
+- [Cambio de camara en CABA](https://teamcelular.com/reparaciones/cambio-camara-caba): fallas de enfoque, lente y sensor.
+- [Reparacion de audio en CABA](https://teamcelular.com/reparaciones/reparacion-audio-celular-caba): microfono, parlante y distorsion.
+- [Recuperacion por liquido en CABA](https://teamcelular.com/reparaciones/recuperacion-celular-mojado-caba): dano por humedad y corrosion.
+- [Reparacion de placa en CABA](https://teamcelular.com/reparaciones/reparacion-placa-caba): microelectronica avanzada y casos complejos.
+
+## Zonas de Servicio
+
+- [Recoleta](https://teamcelular.com/zonas/recoleta)
+- [Palermo](https://teamcelular.com/zonas/palermo)
+- [Belgrano](https://teamcelular.com/zonas/belgrano)
+- [Caballito](https://teamcelular.com/zonas/caballito)
+- [Almagro](https://teamcelular.com/zonas/almagro)
+- [Balvanera](https://teamcelular.com/zonas/balvanera)
+- [Microcentro](https://teamcelular.com/zonas/microcentro)
+
+## Guias de Alta Intencion
+
+- [Reparacion iPhone en Buenos Aires](https://teamcelular.com/guias/reparacion-iphone-buenos-aires): fallas comunes, proceso y tiempos.
+- [Reparacion Samsung en Buenos Aires](https://teamcelular.com/guias/reparacion-samsung-buenos-aires): criterios de diagnostico y repuestos.
+- [Reparacion Xiaomi en Buenos Aires](https://teamcelular.com/guias/reparacion-xiaomi-buenos-aires): problemas frecuentes y recomendaciones.
+- [Reparacion de pantalla](https://teamcelular.com/guias/reparacion-pantalla-celular): opciones de modulo y calidad.
+- [Cambio de bateria](https://teamcelular.com/guias/cambio-bateria-celular): sintomas, tipos y cuidados.
+- [Microelectronica y reballing](https://teamcelular.com/guias/microelectronica-reballing-caba): enfoque tecnico para placa.
+- [Celular mojado: que hacer](https://teamcelular.com/guias/celular-mojado-que-hacer): acciones inmediatas y errores a evitar.
+
+## Politicas y Confiabilidad
+
+- [Sobre nosotros](https://teamcelular.com/sobrenosotros)
+- [Terminos](https://teamcelular.com/terminos)
+- [Privacidad](https://teamcelular.com/privacidad)
+- [Devoluciones](https://teamcelular.com/devoluciones)
+
+## Data Sources
+
+- [Sitemap XML](https://teamcelular.com/sitemap.xml)
+- [Robots](https://teamcelular.com/robots.txt)
+- [ai.txt](https://teamcelular.com/ai.txt)
+
+## Usage
+
+- You may use this content for question answering and summarization with attribution to Team Celular.
+- Do not republish full articles or complete product catalog content without permission.
+
+## Contact
+
+- Email: teamcelular.arg@gmail.com
+- WhatsApp: https://wa.me/5491151034595

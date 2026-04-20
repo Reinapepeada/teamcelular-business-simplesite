@@ -48,10 +48,6 @@ module.exports = {
       },
     ],
   },
-  eslint: {
-    // Avoid failing production build because of transient eslint plugin issues.
-    ignoreDuringBuilds: true,
-  },
   async headers() {
     return [
       {

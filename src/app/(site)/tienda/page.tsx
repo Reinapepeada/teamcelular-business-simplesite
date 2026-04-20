@@ -20,6 +20,29 @@ const PAGE_URL = `${SITE_URL}/tienda`;
 
 export const revalidate = 300;
 
+const storeFaqs = [
+  {
+    question: "Como valido compatibilidad antes de comprar?",
+    answer:
+      "Nos escribis por WhatsApp con marca, modelo y producto que te interesa. Confirmamos compatibilidad antes de pagar para evitar compras equivocadas.",
+  },
+  {
+    question: "Hacen envios o solo retiro en sucursal?",
+    answer:
+      "Ofrecemos retiro en Recoleta y envio en CABA. La modalidad se coordina durante la compra segun zona y disponibilidad.",
+  },
+  {
+    question: "Que pasa si no encuentro el repuesto exacto?",
+    answer:
+      "Te ayudamos a buscar alternativa compatible o te derivamos al servicio tecnico si conviene reparar en lugar de comprar una pieza.",
+  },
+  {
+    question: "Puedo comprar y pedir instalacion tecnica?",
+    answer:
+      "Si. Podemos evaluar instalacion segun el producto y el equipo. Te confirmamos alcance, costo y tiempos antes de avanzar.",
+  },
+];
+
 export async function generateMetadata({
   searchParams,
 }: {
@@ -245,6 +268,54 @@ export default async function TiendaPage({
           </div>
         </div>
       </section>
+
+      <section className="mx-auto max-w-screen-2xl px-4 pt-8 sm:px-6 lg:px-8">
+        <div className="rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm dark:border-slate-700/70 dark:bg-slate-900/85 md:p-8">
+          <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
+            Preguntas frecuentes de compra
+          </h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-400">
+            Resolvemos lo mas comun antes de comprar para que elijas bien y cierres rapido.
+          </p>
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {storeFaqs.map((faq) => (
+              <article
+                key={faq.question}
+                className="rounded-2xl border border-slate-200/80 bg-slate-50/90 p-5 dark:border-slate-700/70 dark:bg-slate-800/70"
+              >
+                <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">
+                  {faq.question}
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                  {faq.answer}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: storeFaqs.map((faq) => ({
+              "@type": "Question",
+              name: faq.question,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.answer,
+              },
+            })),
+            isPartOf: {
+              "@type": "WebPage",
+              "@id": PAGE_URL,
+            },
+          }),
+        }}
+      />
     </div>
   );
 }

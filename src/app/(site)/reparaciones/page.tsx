@@ -27,6 +27,24 @@ const REPAIR_SERVICES = [
     href: "/reparaciones/cambio-pin-carga-caba",
   },
   {
+    title: "Cambio de camara (frontal / trasera)",
+    description:
+      "Camara borrosa, sin enfoque o en negro. Diagnostico y reemplazo en CABA.",
+    href: "/reparaciones/cambio-camara-caba",
+  },
+  {
+    title: "Reparacion de audio (microfono / parlante)",
+    description:
+      "No te escuchan en llamadas, audio bajo o distorsionado. Reparacion en CABA.",
+    href: "/reparaciones/reparacion-audio-celular-caba",
+  },
+  {
+    title: "Recuperacion de celular mojado",
+    description:
+      "Dano por liquidos, corrosion y fallas intermitentes. Servicio urgente con laboratorio.",
+    href: "/reparaciones/recuperacion-celular-mojado-caba",
+  },
+  {
     title: "Reparacion de placa (microelectronica)",
     description:
       "Fallas complejas: no enciende, se reinicia, mojado o corto. Diagnostico de laboratorio.",
@@ -50,7 +68,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: "/reparaciones",
   title: "Reparaciones de Celulares en CABA | Presupuesto Rapido | Team Celular",
   description:
-    "Reparaciones de celulares en CABA. Cambio de bateria, pantalla, pin de carga, flex, tapa trasera y reparacion de placa. Presupuesto rapido por WhatsApp o formulario.",
+    "Reparaciones de celulares en CABA. Cambio de bateria, pantalla, pin de carga, camara, audio, recuperacion de mojado, flex, tapa trasera y reparacion de placa.",
   robots: {
     index: true,
     follow: true,
@@ -60,7 +78,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   },
   openGraphTitle: "Reparaciones de Celulares en CABA | Team Celular",
   openGraphDescription:
-    "Atencion en CABA. Presupuesto rapido para reparacion de celulares: bateria, pantalla, pin de carga, flex, tapa trasera y placa.",
+    "Atencion en CABA. Presupuesto rapido para bateria, pantalla, pin de carga, camara, audio, equipos mojados, flex, tapa trasera y placa.",
   openGraphImageAlt: "Team Celular - Reparaciones en CABA",
   twitterTitle: "Reparaciones de Celulares en CABA | Team Celular",
   twitterDescription:

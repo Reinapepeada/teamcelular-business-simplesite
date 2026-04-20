@@ -87,6 +87,34 @@ export default function HighIntentGuidePage({
   const pageUrl = `${siteUrl}${pagePath}`;
   const imageUrl = toAbsoluteUrl(imagePath, siteUrl);
   const guideKey = pagePath.replace("/guias/", "").replaceAll("-", "_");
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${pageUrl}#faq`,
+    mainEntity: faq.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+  const howToJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "@id": `${pageUrl}#howto`,
+    name: planTitle,
+    description: planDescription,
+    image: imageUrl,
+    step: planSteps.map((item, index) => ({
+      "@type": "HowToStep",
+      position: index + 1,
+      name: item.title,
+      text: item.description,
+      url: `${pageUrl}#paso-${index + 1}`,
+    })),
+  };
 
   return (
     <div className="flex w-full justify-center px-4 py-16">
@@ -99,6 +127,14 @@ export default function HighIntentGuidePage({
           authorName="Team Celular"
           image={imageUrl}
           url={pageUrl}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
         />
 
         <BreadcrumbJsonLd
@@ -251,6 +287,7 @@ export default function HighIntentGuidePage({
             {planSteps.map((item, index) => (
               <li
                 key={item.title}
+                id={`paso-${index + 1}`}
                 className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-slate-900/85"
               >
                 <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">

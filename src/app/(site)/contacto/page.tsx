@@ -296,7 +296,7 @@ export default function ContactoPage() {
                         </div>
 
                         <Link
-                            href="https://www.google.com/maps/dir/?api=1&destination=Team+celular,Paraguay+2451,Buenos+Aires"
+                            href="https://maps.app.goo.gl/krFJfjDA4CuR83BK9"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-primary/90"

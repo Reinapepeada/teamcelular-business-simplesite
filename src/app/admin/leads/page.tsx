@@ -43,6 +43,7 @@ import {
 } from "@/services/leads";
 import {
     Activity,
+    AlertTriangle,
     CheckCircle2,
     ChevronLeft,
     ChevronRight,
@@ -92,6 +93,22 @@ interface TrendPoint {
     key: string;
     label: string;
     count: number;
+}
+
+interface ParetoAction {
+    id: string;
+    title: string;
+    leads: number;
+    share: number;
+    recommendation: string;
+}
+
+function toRate(part: number, total: number): number {
+    if (total <= 0) {
+        return 0;
+    }
+
+    return (part / total) * 100;
 }
 
 function formatDateTime(value: string): string {
@@ -418,12 +435,67 @@ export default function AdminLeadsPage() {
     const totalRealLeads = metrics.totalRealLeads || leadsTotal;
     const duplicatedLeads = Math.max(leadsTotal - totalRealLeads, 0);
     const convertedLeads = metrics.convertedLeads || statusCounts.converted;
+    const firstContactedLeads = Math.max(totalRealLeads - statusCounts.new, 0);
+    const qualifiedPipelineLeads =
+        statusCounts.qualified + statusCounts.converted + statusCounts.discarded;
     const conversionRate =
         metrics.conversionRate > 0
             ? metrics.conversionRate
             : totalRealLeads > 0
               ? (convertedLeads / totalRealLeads) * 100
               : 0;
+
+    const firstContactRate = toRate(firstContactedLeads, totalRealLeads);
+    const qualificationRate = toRate(qualifiedPipelineLeads, firstContactedLeads);
+    const closeRateFromQualified = toRate(convertedLeads, qualifiedPipelineLeads);
+
+    const paretoActions = useMemo<ParetoAction[]>(() => {
+        const bottlenecks = [
+            {
+                id: "new",
+                title: "Leads sin primer contacto",
+                leads: statusCounts.new,
+                recommendation:
+                    "Aplica SLA de primer contacto en menos de 10 minutos para WhatsApp y 30 minutos para llamada/email.",
+            },
+            {
+                id: "contacted",
+                title: "Contactados sin calificar",
+                leads: statusCounts.contacted,
+                recommendation:
+                    "Estandariza guion de 3 preguntas (falla, urgencia, presupuesto objetivo) para acelerar calificacion.",
+            },
+            {
+                id: "qualified",
+                title: "Calificados sin cierre",
+                leads: statusCounts.qualified,
+                recommendation:
+                    "Enviar 2 opciones de presupuesto (express y optimizada) con deadline de decision en 24h.",
+            },
+            {
+                id: "discarded",
+                title: "Descartes para recuperar",
+                leads: statusCounts.discarded,
+                recommendation:
+                    "Recontactar descartados de los ultimos 7 dias con propuesta de recuperacion y nuevo horario.",
+            },
+        ];
+
+        return bottlenecks
+            .filter((item) => item.leads > 0)
+            .map((item) => ({
+                ...item,
+                share: toRate(item.leads, totalRealLeads),
+            }))
+            .sort((a, b) => b.leads - a.leads)
+            .slice(0, 3);
+    }, [
+        statusCounts.contacted,
+        statusCounts.discarded,
+        statusCounts.new,
+        statusCounts.qualified,
+        totalRealLeads,
+    ]);
 
     const handleStatusUpdate = async (
         lead: RepairLead,
@@ -786,6 +858,80 @@ export default function AdminLeadsPage() {
                                 </div>
                             ))
                         )}
+                    </CardContent>
+                </Card>
+            </div>
+
+            <div className="grid gap-4 xl:grid-cols-3">
+                <Card className="xl:col-span-2">
+                    <CardHeader>
+                        <CardTitle>Embudo Operativo (Pareto)</CardTitle>
+                        <CardDescription>
+                            Detecta rapido donde se concentra la mayor perdida del proceso comercial.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent className="grid gap-4 md:grid-cols-3">
+                        <div className="rounded-lg border bg-muted/15 p-4">
+                            <p className="text-xs uppercase tracking-wide text-muted-foreground">Primer contacto</p>
+                            <p className="mt-1 text-2xl font-bold">{firstContactRate.toFixed(1)}%</p>
+                            <p className="mt-1 text-xs text-muted-foreground">
+                                {firstContactedLeads} de {totalRealLeads} leads reales ya recibieron gestion.
+                            </p>
+                        </div>
+
+                        <div className="rounded-lg border bg-muted/15 p-4">
+                            <p className="text-xs uppercase tracking-wide text-muted-foreground">Calificacion</p>
+                            <p className="mt-1 text-2xl font-bold">{qualificationRate.toFixed(1)}%</p>
+                            <p className="mt-1 text-xs text-muted-foreground">
+                                {qualifiedPipelineLeads} llegaron a etapa calificada o cierre.
+                            </p>
+                        </div>
+
+                        <div className="rounded-lg border bg-muted/15 p-4">
+                            <p className="text-xs uppercase tracking-wide text-muted-foreground">Cierre desde calificados</p>
+                            <p className="mt-1 text-2xl font-bold">{closeRateFromQualified.toFixed(1)}%</p>
+                            <p className="mt-1 text-xs text-muted-foreground">
+                                {convertedLeads} convertidos sobre base calificada.
+                            </p>
+                        </div>
+                    </CardContent>
+                </Card>
+
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                            <AlertTriangle className="h-4 w-4 text-amber-500" />
+                            Acciones 80/20 de hoy
+                        </CardTitle>
+                        <CardDescription>
+                            Ataca primero el cuello mas grande para mover conversion con menor esfuerzo.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                        {paretoActions.length === 0 ? (
+                            <p className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
+                                Aun no hay suficientes datos para priorizar acciones Pareto.
+                            </p>
+                        ) : (
+                            paretoActions.map((action, index) => (
+                                <div key={action.id} className="rounded-lg border bg-muted/15 p-3">
+                                    <div className="flex items-center justify-between gap-2">
+                                        <p className="text-sm font-semibold">
+                                            {index + 1}. {action.title}
+                                        </p>
+                                        <Badge variant="outline">{action.leads}</Badge>
+                                    </div>
+                                    <p className="mt-1 text-xs text-muted-foreground">
+                                        {action.share.toFixed(1)}% del total real filtrado.
+                                    </p>
+                                    <p className="mt-2 text-sm text-muted-foreground">{action.recommendation}</p>
+                                </div>
+                            ))
+                        )}
+
+                        <p className="text-xs text-muted-foreground">
+                            Tip: los fallbacks de formulario se registran en logs con <strong>fallbackReason</strong>.
+                        </p>
                     </CardContent>
                 </Card>
             </div>

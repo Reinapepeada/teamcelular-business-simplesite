@@ -117,7 +117,7 @@ export default function SucursalRecoletaPage() {
       latitude: -34.597528,
       longitude: -58.403048,
     },
-    hasMap: "https://maps.app.goo.gl/3rCgYamQ4e9S4WkA9",
+    hasMap: "https://maps.app.goo.gl/krFJfjDA4CuR83BK9",
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",

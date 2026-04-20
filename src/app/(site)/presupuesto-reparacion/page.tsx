@@ -60,8 +60,8 @@ const processSteps = [
         icon: FaClock,
         title: "Recibí tu diagnóstico inicial",
         description:
-            "En menos de 24 horas hábiles un técnico te responde por WhatsApp o email.",
-        timing: "< 24 hs",
+            "Respondemos por WhatsApp en hasta 2 horas habiles. Si requiere revision tecnica, confirmamos diagnostico inicial dentro de 24 horas habiles.",
+        timing: "2h / 24h",
     },
     {
         icon: FaTools,
@@ -102,7 +102,7 @@ const quickResponseFaqs = [
     {
         question: "¿En cuánto tiempo confirman el presupuesto?",
         answer:
-            "La mayoría se responde el mismo día. Si falta contexto, pedimos fotos o chequeo físico.",
+            "Respondemos por WhatsApp en hasta 2 horas habiles. Si falta contexto o requiere revision tecnica, confirmamos diagnostico inicial dentro de 24 horas habiles.",
     },
     {
         question: "¿El retiro en CABA tiene costo?",
@@ -167,7 +167,7 @@ const faqs = [
     {
         question: "¿Cuánto demora el presupuesto?",
         answer:
-            "La mayoría se responde dentro de las primeras 12 horas hábiles. Casos complejos pueden tardar hasta 24 horas.",
+            "Respondemos por WhatsApp en hasta 2 horas habiles. Si el caso requiere revision tecnica, confirmamos diagnostico inicial dentro de 24 horas habiles.",
     },
     {
         question: "¿La revisión técnica tiene costo?",
@@ -283,9 +283,9 @@ export default function PresupuestoReparacionPage() {
                                 {
                                     icon: FaClock,
                                     title: "Tiempo de respuesta",
-                                    value: "Mismo día o al siguiente",
+                                    value: "Hasta 2 horas habiles",
                                     description:
-                                        "Te respondemos rápido para que no quedes esperando sin saber qué hacer.",
+                                        "Si requiere revision tecnica, confirmamos diagnostico inicial dentro de 24 horas habiles.",
                                 },
                                 {
                                     icon: FaShieldAlt,
@@ -329,7 +329,7 @@ export default function PresupuestoReparacionPage() {
                 <div className="flex flex-col gap-12">
                 <section
                     id="solicitar-presupuesto"
-                    className="order-1 grid gap-8 lg:order-3 lg:grid-cols-[1.1fr_0.9fr]"
+                    className="order-1 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]"
                 >
                     <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-xl">
                         <div className="mb-6">
@@ -425,7 +425,7 @@ export default function PresupuestoReparacionPage() {
                     </aside>
                 </section>
 
-                <section className="order-2 space-y-6 lg:order-1">
+                <section className="order-2 space-y-6">
                     <div className="text-center">
                         <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
                             Así funciona el servicio
@@ -463,7 +463,7 @@ export default function PresupuestoReparacionPage() {
                     </div>
                 </section>
 
-                <section className="order-3 rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md lg:order-2">
+                <section className="order-3 rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md">
                     <h2 className="text-center text-2xl font-bold text-slate-900 dark:text-slate-100">
                         Respuestas rápidas
                     </h2>
@@ -544,8 +544,7 @@ export default function PresupuestoReparacionPage() {
                         ¿Listo para devolverle la vida a tu celular?
                     </h2>
                     <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
-                        Completa el formulario y recibí tu presupuesto
-                        personalizado en menos de 24 horas hábiles.
+                        Completa el formulario y te respondemos por WhatsApp en hasta 2 horas habiles.
                     </p>
                     <div className="mt-6 flex flex-wrap justify-center gap-4">
                         <TrackedCtaLink
@@ -592,9 +591,16 @@ export default function PresupuestoReparacionPage() {
                             offers: {
                                 "@type": "Offer",
                                 priceCurrency: "ARS",
-                                price: "0",
                                 availability: "https://schema.org/InStock",
                                 url: PAGE_URL,
+                                description:
+                                    "Revision tecnica arancelada. Rango informado antes del ingreso del equipo.",
+                                priceSpecification: {
+                                    "@type": "PriceSpecification",
+                                    priceCurrency: "ARS",
+                                    minPrice: 15000,
+                                    maxPrice: 25000,
+                                },
                             },
                         }),
                     }}

@@ -18,6 +18,7 @@ const SITE_URL = getSiteUrl();
 
 type ServiceVisual = {
   cover: string;
+  support?: string;
   glow: string;
   badge: string;
 };
@@ -58,6 +59,27 @@ const SERVICE_VISUALS: Record<string, ServiceVisual> = {
     glow:
       "bg-[radial-gradient(circle_at_86%_16%,rgba(244,114,182,0.3),transparent_42%)]",
     badge: "Estetica y terminacion",
+  },
+  "cambio-camara-caba": {
+    cover: "/images/landings/landing-cambio-camara-caba-hero.webp",
+    support: "/images/landings/landing-cambio-camara-caba-apoyo.webp",
+    glow:
+      "bg-[radial-gradient(circle_at_82%_18%,rgba(249,115,22,0.3),transparent_40%)]",
+    badge: "Camaras y sensores",
+  },
+  "reparacion-audio-celular-caba": {
+    cover: "/images/landings/landing-audio-celular-caba-hero.webp",
+    support: "/images/landings/landing-audio-celular-caba-apoyo.webp",
+    glow:
+      "bg-[radial-gradient(circle_at_84%_18%,rgba(6,182,212,0.32),transparent_42%)]",
+    badge: "Audio y microfonos",
+  },
+  "recuperacion-celular-mojado-caba": {
+    cover: "/images/landings/landing-celular-mojado-caba-hero.webp",
+    support: "/images/landings/landing-celular-mojado-caba-apoyo.webp",
+    glow:
+      "bg-[radial-gradient(circle_at_84%_18%,rgba(34,197,94,0.28),transparent_42%)]",
+    badge: "Danos por liquidos",
   },
 };
 
@@ -216,6 +238,57 @@ const SERVICE_RELATED_GUIDES: Record<string, RelatedGuide[]> = {
       href: "/guias/reparacion-iphone-buenos-aires",
       title: "Guia iPhone",
       description: "Referencia para equipos con tapa trasera quebrada y uso intensivo.",
+    },
+  ],
+  "cambio-camara-caba": [
+    {
+      href: "/guias/reparacion-iphone-buenos-aires",
+      title: "Guia iPhone",
+      description: "Referencias para sensores y modulos de camara en equipos Apple.",
+    },
+    {
+      href: "/guias/reparacion-samsung-buenos-aires",
+      title: "Guia Samsung",
+      description: "Casos frecuentes de camara en lineas Galaxy con uso intensivo.",
+    },
+    {
+      href: "/guias/reparacion-xiaomi-buenos-aires",
+      title: "Guia Xiaomi",
+      description: "Escenarios de enfoque, lente y estabilidad en camara Xiaomi.",
+    },
+  ],
+  "reparacion-audio-celular-caba": [
+    {
+      href: "/guias/pin-de-carga-suelto-solucion",
+      title: "Guia de pin de carga",
+      description: "Fallas que suelen convivir con problemas de audio y conectores.",
+    },
+    {
+      href: "/guias/mantenimiento-preventivo-celulares",
+      title: "Guia de mantenimiento",
+      description: "Buenas practicas para evitar deterioro de microfono y parlante.",
+    },
+    {
+      href: "/guias/celular-mojado-que-hacer",
+      title: "Guia de celular mojado",
+      description: "Protocolo util cuando el audio falla despues de humedad o liquidos.",
+    },
+  ],
+  "recuperacion-celular-mojado-caba": [
+    {
+      href: "/guias/celular-mojado-que-hacer",
+      title: "Guia de celular mojado",
+      description: "Pasos urgentes para reducir dano y mejorar chances de recuperacion.",
+    },
+    {
+      href: "/guias/microelectronica-reballing-caba",
+      title: "Guia de microelectronica",
+      description: "Cuando un caso por liquidos escala a diagnostico de placa.",
+    },
+    {
+      href: "/guias/face-id-touch-id-no-funciona",
+      title: "Guia de sensores",
+      description: "Referencia para fallas en sensores que aparecen despues de humedad.",
     },
   ],
 };
@@ -464,6 +537,52 @@ export default function ServiceLandingPage({
           ))}
         </div>
       </section>
+
+      {visual.support ? (
+        <section className="mt-10 grid gap-6 rounded-3xl border border-white/15 bg-white/5 p-6 shadow-xl backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:grid-cols-[1.15fr_0.85fr] md:items-center md:p-8">
+          <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-slate-900/40">
+            <Image
+              src={visual.support}
+              alt={`${config.serviceName} en laboratorio tecnico`}
+              width={1200}
+              height={900}
+              sizes="(max-width: 768px) 100vw, 60vw"
+              className="h-auto w-full object-cover"
+            />
+          </div>
+          <article className="space-y-4">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+              Diagnostico real, sin respuestas genericas
+            </h2>
+            <p className="text-slate-600 dark:text-slate-300">
+              Evaluamos sintomas, pruebas y contexto del equipo para darte una recomendacion
+              concreta. Si no conviene reparar, te lo decimos claro antes de avanzar.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <TrackedCtaLink
+                href={whatsappUrl}
+                ctaName="service_support_visual_whatsapp"
+                ctaLocation={`service_support_visual_${config.slug}`}
+                ctaVariant="whatsapp"
+                external
+                target="_blank"
+                className="inline-flex min-h-11 items-center rounded-full bg-emerald-700 px-5 text-sm font-semibold text-white transition hover:bg-emerald-800"
+              >
+                Consultar por WhatsApp
+              </TrackedCtaLink>
+              <TrackedCtaLink
+                href="/presupuesto-reparacion#solicitar-presupuesto"
+                ctaName="service_support_visual_budget"
+                ctaLocation={`service_support_visual_${config.slug}`}
+                ctaVariant="secondary"
+                className="inline-flex min-h-11 items-center rounded-full border border-slate-300 px-5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
+              >
+                Ver presupuesto
+              </TrackedCtaLink>
+            </div>
+          </article>
+        </section>
+      ) : null}
 
       <section className="mt-10 rounded-3xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">

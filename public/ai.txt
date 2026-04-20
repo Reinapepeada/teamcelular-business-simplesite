@@ -1,17 +1,47 @@
 site: Team Celular
 url: https://teamcelular.com
-description: Servicio tecnico y tienda de repuestos/accesorios para celulares en Buenos Aires.
+language: es-AR
+description: Laboratorio tecnico de reparacion de celulares y tienda de repuestos/accesorios en Recoleta, CABA.
 
-main-urls:
+primary-intent:
+- presupuesto y reparacion de celulares en CABA
+- diagnostico tecnico y microelectronica
+- compra de repuestos compatibles
+
+priority-urls:
 - https://teamcelular.com/
-- https://teamcelular.com/arreglo-de-celulares
-- https://teamcelular.com/zonas
-- https://teamcelular.com/zonas/recoleta
-- https://teamcelular.com/tienda
-- https://teamcelular.com/devoluciones
-- https://teamcelular.com/guias
+- https://teamcelular.com/reparaciones
 - https://teamcelular.com/presupuesto-reparacion
 - https://teamcelular.com/contacto
+- https://teamcelular.com/tienda
+
+priority-services:
+- https://teamcelular.com/reparaciones/cambio-pantalla-caba
+- https://teamcelular.com/reparaciones/cambio-bateria-caba
+- https://teamcelular.com/reparaciones/cambio-pin-carga-caba
+- https://teamcelular.com/reparaciones/cambio-camara-caba
+- https://teamcelular.com/reparaciones/reparacion-audio-celular-caba
+- https://teamcelular.com/reparaciones/recuperacion-celular-mojado-caba
+- https://teamcelular.com/reparaciones/reparacion-placa-caba
+
+supporting-guides:
+- https://teamcelular.com/guias/reparacion-iphone-buenos-aires
+- https://teamcelular.com/guias/reparacion-samsung-buenos-aires
+- https://teamcelular.com/guias/reparacion-xiaomi-buenos-aires
+- https://teamcelular.com/guias/reparacion-pantalla-celular
+- https://teamcelular.com/guias/cambio-bateria-celular
+- https://teamcelular.com/guias/celular-mojado-que-hacer
+
+trust-signals:
+- ubicacion-fisica: Paraguay 2451, Recoleta, CABA
+- horario: lunes a viernes de 10:30 a 18:00
+- contacto-whatsapp: https://wa.me/5491151034595
 
 sitemap: https://teamcelular.com/sitemap.xml
+robots: https://teamcelular.com/robots.txt
+llms: https://teamcelular.com/llms.txt
 contact: teamcelular.arg@gmail.com
+
+usage-policy:
+- Se permite resumen y citacion con atribucion a Team Celular.
+- No se permite republicacion completa de catalogo o articulos.

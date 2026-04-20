@@ -14,12 +14,13 @@ const ADDRESS_REGION = "CABA";
 const ADDRESS_POSTAL = "C1121";
 const ADDRESS_COUNTRY = "AR";
 const SERVICE_AREA = ["Ciudad Autonoma de Buenos Aires", "Recoleta"];
+const GOOGLE_MAPS_PROFILE_URL = "https://maps.app.goo.gl/krFJfjDA4CuR83BK9";
 const SAME_AS = [
   "https://www.instagram.com/teamcelular.arg/",
   "https://www.facebook.com/TeamCelular/",
   "https://wa.me/5491151034595",
   "https://www.linkedin.com/company/teamcelular/",
-  "https://maps.app.goo.gl/UjykhdoBFv4GmX7K8",
+  GOOGLE_MAPS_PROFILE_URL,
 ];
 
 function createLocalBusinessJson(city?: string, country?: string) {
@@ -57,7 +58,7 @@ function createLocalBusinessJson(city?: string, country?: string) {
         closes: "18:00",
       },
     ],
-    hasMap: "https://maps.app.goo.gl/3rCgYamQ4e9S4WkA9",
+    hasMap: GOOGLE_MAPS_PROFILE_URL,
     sameAs: SAME_AS,
     areaServed: SERVICE_AREA.map((area) => ({
       "@type": "AdministrativeArea",
