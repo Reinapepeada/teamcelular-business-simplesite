@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
@@ -160,22 +161,69 @@ export default function HighIntentGuidePage({
         </nav>
 
         <header className="overflow-hidden rounded-3xl border border-slate-200/80 bg-white/90 p-8 shadow-xl dark:border-white/10 dark:bg-slate-900/85 md:p-12">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="rounded-full border border-primary/30 bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white">
-              {badge}
-            </span>
-            <span className="rounded-full border border-slate-300/80 bg-slate-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700 dark:border-white/10 dark:bg-slate-950/60 dark:text-slate-300">
-              Lectura {readingTime}
-            </span>
+          <div className="grid items-center gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+            <div>
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="rounded-full border border-primary/30 bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white">
+                  {badge}
+                </span>
+                <span className="rounded-full border border-slate-300/80 bg-slate-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700 dark:border-white/10 dark:bg-slate-950/60 dark:text-slate-300">
+                  Lectura {readingTime}
+                </span>
+              </div>
+
+              <h1 className="mt-6 max-w-4xl text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
+                {title}
+              </h1>
+
+              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-700 dark:text-slate-300">
+                {heroDescription}
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <TrackedCtaLink
+                  href="/presupuesto-reparacion#solicitar-presupuesto"
+                  ctaName={`guide_high_intent_budget_${guideKey}`}
+                  ctaLocation="guide_high_intent_hero"
+                  ctaVariant="primary"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition hover:bg-primary/90"
+                >
+                  Pedir diagnostico y presupuesto
+                </TrackedCtaLink>
+                <TrackedCtaLink
+                  href={`https://wa.me/5491151034595?text=${encodeURIComponent(whatsappText)}`}
+                  ctaName={`guide_high_intent_whatsapp_${guideKey}`}
+                  ctaLocation="guide_high_intent_hero"
+                  ctaVariant="whatsapp"
+                  external
+                  target="_blank"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-800"
+                >
+                  <FaWhatsapp aria-hidden />
+                  Hablar por WhatsApp
+                </TrackedCtaLink>
+              </div>
+            </div>
+
+            <aside className="relative overflow-hidden rounded-2xl border border-slate-200/80 bg-slate-950/90 shadow-lg dark:border-white/10">
+              <Image
+                src={imagePath}
+                alt={`${pageLabel} en laboratorio Team Celular`}
+                width={1200}
+                height={900}
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="h-auto w-full object-cover"
+                priority
+              />
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-slate-950/10 to-transparent"
+              />
+              <div className="absolute bottom-3 left-3 rounded-full border border-white/35 bg-black/35 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm">
+                Diagnostico profesional en Recoleta
+              </div>
+            </aside>
           </div>
-
-          <h1 className="mt-6 max-w-4xl text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
-            {title}
-          </h1>
-
-          <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-700 dark:text-slate-300">
-            {heroDescription}
-          </p>
 
           <ul className="mt-6 grid gap-3 md:grid-cols-3">
             {heroPoints.map((point) => (
@@ -188,30 +236,6 @@ export default function HighIntentGuidePage({
               </li>
             ))}
           </ul>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <TrackedCtaLink
-              href="/presupuesto-reparacion#solicitar-presupuesto"
-              ctaName={`guide_high_intent_budget_${guideKey}`}
-              ctaLocation="guide_high_intent_hero"
-              ctaVariant="primary"
-              className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition hover:bg-primary/90"
-            >
-              Pedir diagnostico y presupuesto
-            </TrackedCtaLink>
-            <TrackedCtaLink
-              href={`https://wa.me/5491151034595?text=${encodeURIComponent(whatsappText)}`}
-              ctaName={`guide_high_intent_whatsapp_${guideKey}`}
-              ctaLocation="guide_high_intent_hero"
-              ctaVariant="whatsapp"
-              external
-              target="_blank"
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-800"
-            >
-              <FaWhatsapp aria-hidden />
-              Hablar por WhatsApp
-            </TrackedCtaLink>
-          </div>
         </header>
 
         <section className="space-y-5">

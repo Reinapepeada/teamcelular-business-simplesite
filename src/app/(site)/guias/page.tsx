@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
+import { BRAND_GUIDE_LIST } from "./brandGuideConfigs";
 import {
   FaApple,
   FaArrowRight,
@@ -154,6 +155,21 @@ const ARTICLES = [
     datePublished: "2026-04-16",
     keywords: ["pantalla con lineas", "display con rayas", "reparacion pantalla"],
   },
+  ...BRAND_GUIDE_LIST.map((item) => ({
+    title: `Reparacion de ${item.brand} en Buenos Aires`,
+    description:
+      `Guia practica para ${item.brand}: fallas frecuentes, diagnostico tecnico y siguiente paso recomendado en CABA.`,
+    href: item.path,
+    category: "Landing por marca",
+    readingTime: "5 min",
+    Icon: FaMobileAlt,
+    datePublished: "2026-04-20",
+    keywords: [
+      `reparacion ${item.brand.toLowerCase()}`,
+      `service ${item.brand.toLowerCase()} caba`,
+      "tecnico celulares recoleta",
+    ],
+  })),
 ];
 
 const articleVisuals: Record<string, { cover: string }> = {
@@ -193,6 +209,14 @@ const articleVisuals: Record<string, { cover: string }> = {
   "/guias/pantalla-con-lineas-causas-reparacion": {
     cover: "/images/guia_cambio_modulo.webp",
   },
+  ...Object.fromEntries(
+    BRAND_GUIDE_LIST.map((item) => [
+      item.path,
+      {
+        cover: item.imagePath,
+      },
+    ])
+  ),
 };
 
 const articleLinkTargets: Record<
@@ -476,7 +500,12 @@ export default function GuidesPage() {
               const visual = articleVisuals[article.href] ?? {
                 cover: "/images/fondofooter.webp",
               };
-              const links = articleLinkTargets[article.href];
+              const links = articleLinkTargets[article.href] ?? {
+                serviceHref: "/reparaciones",
+                serviceLabel: "Servicio: reparaciones en CABA",
+                siblingHref: "/presupuesto-reparacion#solicitar-presupuesto",
+                siblingLabel: "Paso siguiente: pedir presupuesto",
+              };
               const updatedDate = new Intl.DateTimeFormat("es-AR", {
                 day: "2-digit",
                 month: "short",

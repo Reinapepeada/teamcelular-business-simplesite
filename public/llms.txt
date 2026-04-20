@@ -43,6 +43,21 @@ Idioma principal: es-AR
 - [Microelectronica y reballing](https://teamcelular.com/guias/microelectronica-reballing-caba): enfoque tecnico para placa.
 - [Celular mojado: que hacer](https://teamcelular.com/guias/celular-mojado-que-hacer): acciones inmediatas y errores a evitar.
 
+## Guias por Marcas No Masivas
+
+- [Reparacion Google Pixel en Buenos Aires](https://teamcelular.com/guias/reparacion-google-pixel-buenos-aires): diagnostico de pantalla, camara y carga USB-C.
+- [Reparacion Honor en Buenos Aires](https://teamcelular.com/guias/reparacion-honor-buenos-aires): fallas frecuentes de bateria, display y conectores.
+- [Reparacion POCO en Buenos Aires](https://teamcelular.com/guias/reparacion-poco-buenos-aires): rendimiento, temperatura y carga rapida.
+- [Reparacion OPPO en Buenos Aires](https://teamcelular.com/guias/reparacion-oppo-buenos-aires): modulo, autonomia y estabilidad de carga.
+- [Reparacion Infinix en Buenos Aires](https://teamcelular.com/guias/reparacion-infinix-buenos-aires): pantallas, bateria y conectividad diaria.
+- [Reparacion ZTE en Buenos Aires](https://teamcelular.com/guias/reparacion-zte-buenos-aires): audio, pin de carga y reinicios intermitentes.
+- [Reparacion Tecno en Buenos Aires](https://teamcelular.com/guias/reparacion-tecno-buenos-aires): camara, display y consumo de energia.
+- [Reparacion Alcatel en Buenos Aires](https://teamcelular.com/guias/reparacion-alcatel-buenos-aires): evaluacion costo-beneficio para equipos de uso diario.
+- [Reparacion ASUS en Buenos Aires](https://teamcelular.com/guias/reparacion-asus-buenos-aires): linea Zenfone/ROG y fallas por estres termico.
+- [Reparacion OnePlus en Buenos Aires](https://teamcelular.com/guias/reparacion-oneplus-buenos-aires): pantalla premium, bateria y carga ultra rapida.
+- [Reparacion Huawei en Buenos Aires](https://teamcelular.com/guias/reparacion-huawei-buenos-aires): camara, sensores y estabilidad general.
+- [Reparacion TCL en Buenos Aires](https://teamcelular.com/guias/reparacion-tcl-buenos-aires): pantalla, bateria y carga en gama media.
+
 ## Politicas y Confiabilidad
 
 - [Sobre nosotros](https://teamcelular.com/sobrenosotros)

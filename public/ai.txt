@@ -32,6 +32,20 @@ supporting-guides:
 - https://teamcelular.com/guias/cambio-bateria-celular
 - https://teamcelular.com/guias/celular-mojado-que-hacer
 
+brand-guides-emerging:
+- https://teamcelular.com/guias/reparacion-google-pixel-buenos-aires
+- https://teamcelular.com/guias/reparacion-honor-buenos-aires
+- https://teamcelular.com/guias/reparacion-poco-buenos-aires
+- https://teamcelular.com/guias/reparacion-oppo-buenos-aires
+- https://teamcelular.com/guias/reparacion-infinix-buenos-aires
+- https://teamcelular.com/guias/reparacion-zte-buenos-aires
+- https://teamcelular.com/guias/reparacion-tecno-buenos-aires
+- https://teamcelular.com/guias/reparacion-alcatel-buenos-aires
+- https://teamcelular.com/guias/reparacion-asus-buenos-aires
+- https://teamcelular.com/guias/reparacion-oneplus-buenos-aires
+- https://teamcelular.com/guias/reparacion-huawei-buenos-aires
+- https://teamcelular.com/guias/reparacion-tcl-buenos-aires
+
 trust-signals:
 - ubicacion-fisica: Paraguay 2451, Recoleta, CABA
 - horario: lunes a viernes de 10:30 a 18:00
