@@ -61,25 +61,25 @@ const LAST_STEP_INDEX = BUDGET_WIZARD_STEPS.length - 1;
 
 const contactFieldMeta = {
     whatsapp: {
-        label: "WhatsApp de contacto (opcional)",
+        label: "WhatsApp de contacto",
         placeholder: "Ej: +54 9 11 1234-5678",
-        helper: "Si no queres dejar un contacto, podes seguir igual.",
+        helper: "Dejanos un medio para responderte mas rapido.",
         type: "tel" as const,
         inputMode: "tel" as const,
         autoComplete: "tel",
     },
     llamada: {
-        label: "Telefono para llamada (opcional)",
+        label: "Telefono para llamada",
         placeholder: "Ej: 11 1234-5678",
-        helper: "Dejalo si queres que te llamemos mas tarde.",
+        helper: "Dejanos un telefono para coordinar la llamada.",
         type: "tel" as const,
         inputMode: "tel" as const,
         autoComplete: "tel",
     },
     email: {
-        label: "Email de contacto (opcional)",
+        label: "Email de contacto",
         placeholder: "Ej: nombre@correo.com",
-        helper: "Aca te enviamos el diagnostico inicial si lo completas.",
+        helper: "Aca te enviamos el diagnostico inicial.",
         type: "email" as const,
         inputMode: "email" as const,
         autoComplete: "email",
