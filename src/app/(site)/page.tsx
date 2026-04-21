@@ -309,21 +309,29 @@ export default function Home() {
                             <ul className="space-y-2 text-left text-slate-600 dark:text-slate-400">
                                 <li>
                                     Tel:{" "}
-                                    <Link
+                                    <TrackedCtaLink
                                         href="tel:+541151034595"
+                                        ctaName="home_contact_phone"
+                                        ctaLocation="home_contact"
+                                        ctaVariant="phone"
+                                        external
                                         className="font-semibold text-primary transition hover:text-secondary"
                                     >
                                         +54 11 5103-4595
-                                    </Link>
+                                    </TrackedCtaLink>
                                 </li>
                                 <li>
                                     Email:{" "}
-                                    <Link
+                                    <TrackedCtaLink
                                         href="mailto:teamcelular.arg@gmail.com"
+                                        ctaName="home_contact_email"
+                                        ctaLocation="home_contact"
+                                        ctaVariant="email"
+                                        external
                                         className="font-semibold text-primary transition hover:text-secondary"
                                     >
                                         teamcelular.arg@gmail.com
-                                    </Link>
+                                    </TrackedCtaLink>
                                 </li>
                                 <li>Laboratorio: Paraguay 2451, Recoleta, CABA.</li>
                                 <li>Horario: Lunes a Viernes de 10:30 a 18:00.</li>

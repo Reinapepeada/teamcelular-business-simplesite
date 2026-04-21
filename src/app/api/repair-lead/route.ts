@@ -13,7 +13,7 @@ type LeadCreatePayload = {
   urgency: string;
   description?: string;
   contactChannel: string;
-  contact: string;
+  contact?: string;
   wizardSource?: string;
   metadata?: {
     ip?: string;
@@ -43,8 +43,7 @@ function hasRequiredFields(payload: LeadCreatePayload): boolean {
       payload.model &&
       payload.repairType &&
       payload.urgency &&
-      payload.contactChannel &&
-      payload.contact,
+      payload.contactChannel,
   );
 }
 
@@ -82,7 +81,7 @@ function buildIdempotencyKey(
     repairType: payload.repairType.toLowerCase(),
     urgency: payload.urgency,
     contactChannel: payload.contactChannel,
-    contact: payload.contact.toLowerCase(),
+    contact: payload.contact ? payload.contact.toLowerCase() : "",
     description: payload.description || null,
     wizardSource: payload.wizardSource || null,
     clientIp: clientIp || null,
@@ -173,7 +172,7 @@ export async function POST(request: Request) {
     urgency,
     description: description || undefined,
     contactChannel,
-    contact,
+    contact: contact || undefined,
     wizardSource: wizardSource || undefined,
     metadata: {
       ip: clientIp,

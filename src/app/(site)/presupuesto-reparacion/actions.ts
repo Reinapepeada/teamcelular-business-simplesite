@@ -14,7 +14,7 @@ type LeadCreatePayload = {
     urgency: string;
     description?: string;
     contactChannel: string;
-    contact: string;
+    contact?: string;
     wizardSource?: string;
 };
 
@@ -38,8 +38,7 @@ function hasRequiredFields(payload: LeadCreatePayload): boolean {
             payload.model &&
             payload.repairType &&
             payload.urgency &&
-            payload.contactChannel &&
-            payload.contact,
+            payload.contactChannel,
     );
 }
 
@@ -94,7 +93,7 @@ export async function submitRepairLead(formData: FormData) {
         urgency,
         description: description || undefined,
         contactChannel,
-        contact,
+        contact: contact || undefined,
         wizardSource: wizardSource || undefined,
     };
 

@@ -4,7 +4,14 @@ import Link from "next/link";
 import { track } from "@vercel/analytics";
 import type { MouseEventHandler, ReactNode } from "react";
 
-type CtaVariant = "primary" | "secondary" | "whatsapp" | "phone" | "other";
+type CtaVariant =
+  | "primary"
+  | "secondary"
+  | "whatsapp"
+  | "phone"
+  | "email"
+  | "instagram"
+  | "other";
 
 interface TrackedCtaLinkProps {
   href: string;

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { FaShieldAlt, FaStopwatch, FaTools } from "react-icons/fa";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import StickyLocalCta from "@/components/cro/StickyLocalCta";
 import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
@@ -155,14 +156,17 @@ export default function ReparacionesPage() {
             >
               Pedir presupuesto
             </Link>
-            <a
+            <TrackedCtaLink
               href={whatsappUrl}
+              ctaName="reparaciones_hero_whatsapp"
+              ctaLocation="reparaciones_hero"
+              ctaVariant="whatsapp"
+              external
               target="_blank"
-              rel="noopener noreferrer"
               className="rounded-full border border-white/35 px-8 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
             >
               WhatsApp directo
-            </a>
+            </TrackedCtaLink>
             <Link
               href="/sucursales/caba/recoleta"
               className="rounded-full border border-white/35 px-8 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
@@ -271,14 +275,17 @@ export default function ReparacionesPage() {
           >
             Ir al formulario
           </Link>
-          <a
+          <TrackedCtaLink
             href={whatsappUrl}
+            ctaName="reparaciones_bottom_whatsapp"
+            ctaLocation="reparaciones_bottom"
+            ctaVariant="whatsapp"
+            external
             target="_blank"
-            rel="noopener noreferrer"
             className="rounded-full border border-secondary px-8 py-4 font-semibold text-secondary transition hover:bg-secondary/10"
           >
             WhatsApp directo
-          </a>
+          </TrackedCtaLink>
         </div>
       </section>
 

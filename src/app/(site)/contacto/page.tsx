@@ -1,5 +1,6 @@
 ﻿import type { Metadata } from "next";
 import Link from "next/link";
+import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import {
     FaBus,
@@ -187,15 +188,18 @@ export default function ContactoPage() {
                             los horarios reales.
                         </p>
                         <div className="mt-8 flex flex-wrap justify-center gap-4">
-                            <a
+                            <TrackedCtaLink
                                 href="https://wa.me/5491151034595"
+                                ctaName="contact_hero_whatsapp"
+                                ctaLocation="contact_hero"
+                                ctaVariant="whatsapp"
+                                external
                                 target="_blank"
-                                rel="noopener noreferrer"
                                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-emerald-700"
                             >
                                 <FaWhatsapp aria-hidden />
                                 Escribinos por WhatsApp
-                            </a>
+                            </TrackedCtaLink>
                             <Link
                                 href="/presupuesto-reparacion"
                                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-primary px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10"
@@ -209,14 +213,26 @@ export default function ContactoPage() {
                 <section className="grid gap-6 md:grid-cols-3">
                     {contactMethods.map((method) => {
                         const Icon = method.icon;
-                        const external = method.href.startsWith("http");
+                        const external =
+                            method.href.startsWith("http") ||
+                            method.href.startsWith("tel:") ||
+                            method.href.startsWith("mailto:");
+                        const ctaVariant =
+                            method.title === "WhatsApp"
+                                ? "whatsapp"
+                                : method.title === "Teléfono"
+                                    ? "phone"
+                                    : "email";
 
                         return (
-                            <Link
+                            <TrackedCtaLink
                                 key={method.title}
                                 href={method.href}
-                                target={external ? "_blank" : undefined}
-                                rel={external ? "noopener noreferrer" : undefined}
+                                ctaName={`contact_${ctaVariant}`}
+                                ctaLocation="contact_methods"
+                                ctaVariant={ctaVariant}
+                                external={external}
+                                target={external && method.href.startsWith("http") ? "_blank" : undefined}
                                 className="group h-full rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-md transition hover:-translate-y-1 hover:shadow-lg"
                             >
                                 <div
@@ -233,7 +249,7 @@ export default function ContactoPage() {
                                 <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
                                     {method.description}
                                 </p>
-                            </Link>
+                            </TrackedCtaLink>
                         );
                     })}
                 </section>
@@ -346,12 +362,16 @@ export default function ContactoPage() {
                     <div className="mt-6 grid gap-4 sm:grid-cols-2">
                         {socialMedia.map((social) => {
                             const Icon = social.icon;
+                            const ctaVariant = social.name === "Instagram" ? "instagram" : "other";
                             return (
-                                <Link
+                                <TrackedCtaLink
                                     key={social.name}
                                     href={social.href}
+                                    ctaName={`contact_social_${social.name.toLowerCase()}`}
+                                    ctaLocation="contact_socials"
+                                    ctaVariant={ctaVariant}
+                                    external
                                     target="_blank"
-                                    rel="noopener noreferrer"
                                     className="flex min-h-16 items-center gap-4 rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 px-5 py-4 transition hover:border-primary/40 hover:bg-primary/5"
                                 >
                                     <Icon className="text-2xl text-primary" />
@@ -363,7 +383,7 @@ export default function ContactoPage() {
                                             {social.handle}
                                         </p>
                                     </div>
-                                </Link>
+                                </TrackedCtaLink>
                             );
                         })}
                     </div>

@@ -17,6 +17,7 @@ import {
 } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
+import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 
 const footerSections = {
   servicios: [
@@ -100,24 +101,30 @@ export default function FooterNUI() {
             </div>
 
             <div className="flex space-x-3 pt-4">
-              <Link
-                aria-label="WhatsApp"
+              <TrackedCtaLink
                 href="https://wa.me/5491151034595?text=Hola%21%20Necesito%20informacion"
+                ctaName="footer_whatsapp"
+                ctaLocation="footer_socials"
+                ctaVariant="whatsapp"
+                external
                 target="_blank"
-                rel="noopener noreferrer"
+                ariaLabel="WhatsApp"
                 className="inline-flex h-11 w-11 items-center justify-center rounded-full transition-colors hover:bg-white/10 hover:text-green-400"
               >
                 <BsWhatsapp size={22} />
-              </Link>
-              <Link
-                aria-label="Instagram"
+              </TrackedCtaLink>
+              <TrackedCtaLink
                 href="https://www.instagram.com/teamcelular.arg/"
+                ctaName="footer_instagram"
+                ctaLocation="footer_socials"
+                ctaVariant="instagram"
+                external
                 target="_blank"
-                rel="noopener noreferrer"
+                ariaLabel="Instagram"
                 className="inline-flex h-11 w-11 items-center justify-center rounded-full transition-colors hover:bg-white/10 hover:text-pink-400"
               >
                 <BsInstagram size={22} />
-              </Link>
+              </TrackedCtaLink>
               <Link
                 aria-label="Facebook"
                 href="https://www.facebook.com/TeamCelular/"
@@ -201,12 +208,16 @@ export default function FooterNUI() {
               <BsTelephone className="mt-1 flex-shrink-0 text-primary" />
               <div>
                 <p className="font-semibold">Telefono</p>
-                <Link
+                <TrackedCtaLink
                   href="tel:+5491151034595"
+                  ctaName="footer_phone"
+                  ctaLocation="footer_contact"
+                  ctaVariant="phone"
+                  external
                   className="text-slate-200 transition-colors hover:text-white"
                 >
                   +54 11 5103-4595
-                </Link>
+                </TrackedCtaLink>
               </div>
             </div>
 
@@ -214,12 +225,16 @@ export default function FooterNUI() {
               <BsEnvelope className="mt-1 flex-shrink-0 text-primary" />
               <div>
                 <p className="font-semibold">Email</p>
-                <Link
+                <TrackedCtaLink
                   href="mailto:teamcelular.arg@gmail.com"
+                  ctaName="footer_email"
+                  ctaLocation="footer_contact"
+                  ctaVariant="email"
+                  external
                   className="break-all text-slate-200 transition-colors hover:text-white"
                 >
                   teamcelular.arg@gmail.com
-                </Link>
+                </TrackedCtaLink>
               </div>
             </div>
 

@@ -61,25 +61,25 @@ const LAST_STEP_INDEX = BUDGET_WIZARD_STEPS.length - 1;
 
 const contactFieldMeta = {
     whatsapp: {
-        label: "WhatsApp de contacto",
+        label: "WhatsApp de contacto (opcional)",
         placeholder: "Ej: +54 9 11 1234-5678",
-        helper: "Inclui codigo de area para responderte rapido.",
+        helper: "Si no queres dejar un contacto, podes seguir igual.",
         type: "tel" as const,
         inputMode: "tel" as const,
         autoComplete: "tel",
     },
     llamada: {
-        label: "Telefono para llamada",
+        label: "Telefono para llamada (opcional)",
         placeholder: "Ej: 11 1234-5678",
-        helper: "Te llamamos en horario comercial.",
+        helper: "Dejalo si queres que te llamemos mas tarde.",
         type: "tel" as const,
         inputMode: "tel" as const,
         autoComplete: "tel",
     },
     email: {
-        label: "Email de contacto",
+        label: "Email de contacto (opcional)",
         placeholder: "Ej: nombre@correo.com",
-        helper: "Aca te enviamos el diagnostico inicial.",
+        helper: "Aca te enviamos el diagnostico inicial si lo completas.",
         type: "email" as const,
         inputMode: "email" as const,
         autoComplete: "email",
@@ -165,20 +165,17 @@ export default function RepairsForm() {
 
         if (index === LAST_STEP_INDEX) {
             const normalizedContact = contact.trim();
+            if (normalizedContact) {
+                if (
+                    (contactChannel === "whatsapp" || contactChannel === "llamada") &&
+                    !PHONE_CONTACT_REGEX.test(normalizedContact)
+                ) {
+                    return "Ingresa un telefono valido con codigo de area o deja el campo vacio.";
+                }
 
-            if (!normalizedContact) {
-                return "Necesitamos un dato de contacto para responderte.";
-            }
-
-            if (
-                (contactChannel === "whatsapp" || contactChannel === "llamada") &&
-                !PHONE_CONTACT_REGEX.test(normalizedContact)
-            ) {
-                return "Ingresa un telefono valido con codigo de area para continuar.";
-            }
-
-            if (contactChannel === "email" && !EMAIL_CONTACT_REGEX.test(normalizedContact)) {
-                return "Ingresa un email valido para continuar.";
+                if (contactChannel === "email" && !EMAIL_CONTACT_REGEX.test(normalizedContact)) {
+                    return "Ingresa un email valido o deja el campo vacio.";
+                }
             }
         }
 
