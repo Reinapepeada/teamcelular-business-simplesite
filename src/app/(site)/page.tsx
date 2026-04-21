@@ -12,12 +12,12 @@ export const metadata = buildWebsiteMetadata({
     path: "/",
     title: "Servicio Tecnico de Celulares en Recoleta, CABA | Team Celular",
     description:
-        "Reparacion de celulares y laptops con diagnostico en el dia, garantia escrita y atencion rapida por WhatsApp en Recoleta, CABA.",
+        "Reparacion de celulares y notebooks con diagnostico en el dia, garantia escrita y atencion rapida por WhatsApp en Recoleta, CABA.",
     keywords: [
         "reparacion de celulares Buenos Aires",
         "servicio tecnico celulares CABA",
-        "reparacion de laptops Buenos Aires",
-        "gestion de reparaciones celulares y laptops",
+        "reparacion de notebooks Buenos Aires",
+        "gestion de reparaciones celulares y notebooks",
         "servicio tecnico para empresas",
         "control y diagnostico de equipos",
     ],
