@@ -19,6 +19,7 @@ import {
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
+import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 
 export const metadata: Metadata = {
   title: "Mantenimiento Preventivo Celulares | Guía Completa 2024 CABA",
@@ -430,7 +431,7 @@ export default function PreventiveMaintenanceGuide() {
                   <li>Limpieza con ultrasonido y aire ionizado</li>
                   <li>Verificación bajo microscopio 20x-45x</li>
                   <li>Reporte fotográfico de cada etapa</li>
-                  <li>Garantía escrita de 3 meses</li>
+                  <li>{WARRANTY_SCOPE_MESSAGE}</li>
                 </ul>
               </div>
             </div>

@@ -2,6 +2,7 @@
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import RepairsForm from "@/components/forms/RepairsForm";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
+import { BUDGET_RESPONSE_MESSAGE, REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import {
     FaBatteryHalf,
@@ -24,9 +25,9 @@ const PAGE_URL = `${SITE_URL}/presupuesto-reparacion`;
 
 export const metadata = buildWebsiteMetadata({
     path: "/presupuesto-reparacion",
-    title: "Presupuesto de Reparacion de Celular en CABA | Team Celular",
+    title: "Pedir Presupuesto de Reparacion por WhatsApp en CABA | Team Celular",
     description:
-        "Envia marca, modelo y falla para recibir presupuesto claro por WhatsApp: precio estimado, tiempo de trabajo y garantia escrita.",
+        "Envia marca, modelo y falla para recibir cotizacion por WhatsApp con precio estimado, tiempo de trabajo y alcance tecnico antes de ingresar el equipo.",
     keywords: [
         "presupuesto reparación celulares",
         "servicio técnico celulares buenos aires",
@@ -39,13 +40,13 @@ export const metadata = buildWebsiteMetadata({
         "es-AR": "/presupuesto-reparacion",
     },
     openGraphTitle:
-        "Presupuesto de Reparacion de Celular en CABA | Team Celular",
+        "Pedir Presupuesto por WhatsApp en CABA | Team Celular",
     openGraphDescription:
-        "Te respondemos con precio estimado, tiempos y alcance real de la reparacion antes de mover tu equipo.",
+        "Landing transaccional para cotizar reparaciones con respuesta rapida y pasos claros.",
     openGraphImageAlt: "Laboratorio de Team Celular en Recoleta",
-    twitterTitle: "Presupuesto de Reparacion de Celular en CABA | Team Celular",
+    twitterTitle: "Pedir Presupuesto por WhatsApp en CABA | Team Celular",
     twitterDescription:
-        "Presupuesto claro por WhatsApp con garantia escrita y opciones segun tu tipo de falla.",
+        "Cotiza por WhatsApp con precio estimado, tiempos y opciones segun tu tipo de falla.",
 });
 
 const processSteps = [
@@ -59,8 +60,7 @@ const processSteps = [
     {
         icon: FaClock,
         title: "Recibí tu diagnóstico inicial",
-        description:
-            "Respondemos por WhatsApp en hasta 2 horas habiles. Si requiere revision tecnica, confirmamos diagnostico inicial dentro de 24 horas habiles.",
+        description: BUDGET_RESPONSE_MESSAGE,
         timing: "2h / 24h",
     },
     {
@@ -101,8 +101,7 @@ const promises = [
 const quickResponseFaqs = [
     {
         question: "¿En cuánto tiempo confirman el presupuesto?",
-        answer:
-            "Respondemos por WhatsApp en hasta 2 horas habiles. Si falta contexto o requiere revision tecnica, confirmamos diagnostico inicial dentro de 24 horas habiles.",
+        answer: BUDGET_RESPONSE_MESSAGE,
     },
     {
         question: "¿El retiro en CABA tiene costo?",
@@ -166,18 +165,15 @@ const supportChannels = [
 const faqs = [
     {
         question: "¿Cuánto demora el presupuesto?",
-        answer:
-            "Respondemos por WhatsApp en hasta 2 horas habiles. Si el caso requiere revision tecnica, confirmamos diagnostico inicial dentro de 24 horas habiles.",
+        answer: BUDGET_RESPONSE_MESSAGE,
     },
     {
         question: "¿La revisión técnica tiene costo?",
-        answer:
-            "Sí. La revisión técnica suele variar entre ARS 15.000 y ARS 25.000 según marca, modelo y tipo de falla. Te lo informamos antes de ingresar el equipo.",
+        answer: `Si. ${REVIEW_COST_MESSAGE} Te lo informamos antes de ingresar el equipo.`,
     },
     {
         question: "¿Qué garantía ofrecen?",
-        answer:
-            "Garantía escrita de 90 a 180 días según tipo de reparación y repuesto utilizado.",
+        answer: WARRANTY_SCOPE_MESSAGE,
     },
     {
         question: "¿Puedo enviar fotos o videos?",
@@ -284,15 +280,13 @@ export default function PresupuestoReparacionPage() {
                                     icon: FaClock,
                                     title: "Tiempo de respuesta",
                                     value: "Hasta 2 horas habiles",
-                                    description:
-                                        "Si requiere revision tecnica, confirmamos diagnostico inicial dentro de 24 horas habiles.",
+                                    description: BUDGET_RESPONSE_MESSAGE,
                                 },
                                 {
                                     icon: FaShieldAlt,
                                     title: "Garantía",
-                                    value: "90 a 180 días",
-                                    description:
-                                        "Según la reparación y el repuesto utilizado, todo queda explicado por escrito.",
+                                    value: "Segun trabajo y repuesto",
+                                    description: WARRANTY_SCOPE_MESSAGE,
                                 },
                                 {
                                     icon: FaSmile,

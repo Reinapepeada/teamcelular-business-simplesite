@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FaShieldAlt, FaStopwatch, FaTools } from "react-icons/fa";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import StickyLocalCta from "@/components/cro/StickyLocalCta";
+import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 
 const SITE_URL = getSiteUrl();
@@ -64,11 +65,35 @@ const REPAIR_SERVICES = [
   },
 ];
 
+const ROUTE_SELECTOR = [
+  {
+    title: "No se bien que falla tiene",
+    description:
+      "Si todavia no sabes la falla exacta, entra por la ruta general para cotizar rapido con sintomas.",
+    href: "/arreglo-de-celulares",
+    cta: "Ir a arreglo general",
+  },
+  {
+    title: "Es un caso complejo o de placa",
+    description:
+      "Para humedad, reinicios, no enciende o segunda opinion, conviene diagnostico avanzado.",
+    href: "/tecnico-de-celulares",
+    cta: "Ir a tecnico especialista",
+  },
+  {
+    title: "Quiero precio rapido",
+    description:
+      "Si ya tenes marca, modelo y falla, pedi presupuesto directo por formulario o WhatsApp.",
+    href: "/presupuesto-reparacion#solicitar-presupuesto",
+    cta: "Pedir presupuesto",
+  },
+];
+
 export const metadata: Metadata = buildWebsiteMetadata({
   path: "/reparaciones",
-  title: "Reparaciones de Celulares en CABA | Presupuesto Rapido | Team Celular",
+  title: "Catalogo de Reparaciones por Tipo de Falla en CABA | Team Celular",
   description:
-    "Reparaciones de celulares en CABA. Cambio de bateria, pantalla, pin de carga, camara, audio, recuperacion de mojado, flex, tapa trasera y reparacion de placa.",
+    "Explora servicios por tipo de falla en CABA: pantalla, bateria, carga, camara, audio, mojado y placa. Hub pensado para comparar opciones y elegir ruta.",
   robots: {
     index: true,
     follow: true,
@@ -76,13 +101,13 @@ export const metadata: Metadata = buildWebsiteMetadata({
   languages: {
     "es-AR": "/reparaciones",
   },
-  openGraphTitle: "Reparaciones de Celulares en CABA | Team Celular",
+  openGraphTitle: "Catalogo de Reparaciones en CABA | Team Celular",
   openGraphDescription:
-    "Atencion en CABA. Presupuesto rapido para bateria, pantalla, pin de carga, camara, audio, equipos mojados, flex, tapa trasera y placa.",
+    "Hub de servicios para elegir reparacion por falla y derivar a presupuesto o diagnostico avanzado.",
   openGraphImageAlt: "Team Celular - Reparaciones en CABA",
-  twitterTitle: "Reparaciones de Celulares en CABA | Team Celular",
+  twitterTitle: "Catalogo de Reparaciones en CABA | Team Celular",
   twitterDescription:
-    "Atencion en CABA. Presupuesto rapido por WhatsApp o formulario.",
+    "Navega servicios por tipo de falla y elige la ruta correcta para cotizar en CABA.",
 });
 
 export default function ReparacionesPage() {
@@ -104,16 +129,24 @@ export default function ReparacionesPage() {
           className="absolute inset-0 bg-[radial-gradient(circle_at_14%_14%,rgba(14,165,233,0.32),transparent_40%),radial-gradient(circle_at_86%_86%,rgba(99,102,241,0.25),transparent_38%)]"
         />
         <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <p className="inline-flex rounded-full border border-white/35 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/90">
-            Servicios de alto intento local
-          </p>
           <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
-            Reparaciones de celulares en CABA
+            Servicios de reparacion de celulares en CABA
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-slate-100/90">
             Taller en Recoleta con atencion para toda CABA. Trabajamos iPhone,
             Samsung, Motorola, Xiaomi y mas, con diagnostico tecnico y garantia
             por escrito.
+          </p>
+          <p className="mt-3 text-sm text-slate-200/90">
+            Si buscas una solucion por falla frecuente, puedes ir a{" "}
+            <Link href="/arreglo-de-celulares" className="font-semibold underline underline-offset-4">
+              Arreglo de celulares
+            </Link>
+            . Si necesitas segunda opinion o placa compleja, te conviene{" "}
+            <Link href="/tecnico-de-celulares" className="font-semibold underline underline-offset-4">
+              Tecnico de celulares
+            </Link>
+            .
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
@@ -165,9 +198,46 @@ export default function ReparacionesPage() {
             Garantia por escrito
           </h2>
           <p className="mt-2 text-slate-600 dark:text-slate-300">
-            Cada reparacion incluye condiciones de cobertura explicadas de forma simple.
+            {WARRANTY_SCOPE_MESSAGE}
           </p>
         </article>
+      </section>
+
+      <section className="mt-8 rounded-2xl border border-white/15 bg-white/5 p-6 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
+        <p className="text-sm text-slate-700 dark:text-slate-300">
+          {REVIEW_COST_MESSAGE}
+        </p>
+      </section>
+
+      <section className="mt-8 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+          Elegi la ruta correcta segun tu caso
+        </h2>
+        <p className="mt-2 text-slate-600 dark:text-slate-300">
+          Este hub es para navegar servicios por tipo de falla. Si tu caso necesita
+          otra entrada, te derivamos aca.
+        </p>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          {ROUTE_SELECTOR.map((item) => (
+            <article
+              key={item.href}
+              className="rounded-xl border border-white/10 bg-white/10 p-5 dark:border-white/5 dark:bg-slate-900/40"
+            >
+              <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">
+                {item.title}
+              </h3>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+                {item.description}
+              </p>
+              <Link
+                href={item.href}
+                className="mt-4 inline-flex text-sm font-semibold text-primary underline-offset-4 hover:underline"
+              >
+                {item.cta}
+              </Link>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="mt-10 grid gap-6 md:grid-cols-2">

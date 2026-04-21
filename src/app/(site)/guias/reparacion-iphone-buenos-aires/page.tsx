@@ -4,6 +4,7 @@ import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
+import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import {
   FaApple,
   FaBatteryFull,
@@ -130,7 +131,7 @@ const quickSteps = [
   {
     step: "Control de calidad + garantia",
     detail:
-      "Hacemos pruebas funcionales, estabilidad termica y carga real. Entregamos informe final con recomendaciones y garantia escrita de 90 dias para la reparacion realizada.",
+      `Hacemos pruebas funcionales, estabilidad termica y carga real. Entregamos informe final con recomendaciones. ${WARRANTY_SCOPE_MESSAGE}`,
     duration: "20 min",
     Icon: FaCheckCircle,
   },
@@ -142,7 +143,7 @@ const frequentRepairs = [
     description:
       "Display con brillo, color y respuesta tactil consistentes. Preservamos funciones compatibles con True Tone cuando el modulo original lo permite.",
     eta: "2-4 h",
-    warranty: "90 dias",
+    warranty: "Segun repuesto y trabajo",
     Icon: FaMobileAlt,
   },
   {
@@ -150,7 +151,7 @@ const frequentRepairs = [
     description:
       "Bateria premium con medicion de consumo y test de autonomia real para evitar apagados repentinos o calentamiento anormal.",
     eta: "1-2 h",
-    warranty: "90 dias",
+    warranty: "Segun repuesto y trabajo",
     Icon: FaBatteryFull,
   },
   {
@@ -158,7 +159,7 @@ const frequentRepairs = [
     description:
       "Reparamos modulo de carga Lightning o USB-C, microfono y flex inferior. Ideal para iPhone que cargan intermitente o no detectan cable.",
     eta: "2-3 h",
-    warranty: "90 dias",
+    warranty: "Segun repuesto y trabajo",
     Icon: FaBolt,
   },
   {
@@ -166,7 +167,7 @@ const frequentRepairs = [
     description:
       "Diagnostico por microelectronica para fallas de Face ID, camara selfie y sensor de proximidad en golpes o humedad.",
     eta: "3-6 h",
-    warranty: "90 dias",
+    warranty: "Segun repuesto y trabajo",
     Icon: FaShieldAlt,
   },
   {
@@ -174,7 +175,7 @@ const frequentRepairs = [
     description:
       "Cambio o reparacion de modulo de camaras con ajuste de foco, estabilizacion y limpieza interna para fotos nitidas.",
     eta: "2-4 h",
-    warranty: "90 dias",
+    warranty: "Segun repuesto y trabajo",
     Icon: FaCamera,
   },
   {
@@ -182,7 +183,7 @@ const frequentRepairs = [
     description:
       "Trabajo de microelectronica para equipos que no encienden, reinician o no toman carga luego de un golpe electrico o liquido.",
     eta: "24-48 h",
-    warranty: "90 dias",
+    warranty: "Segun repuesto y trabajo",
     Icon: FaMicrochip,
   },
 ];
@@ -261,8 +262,7 @@ const faq = [
   },
   {
     question: "La garantia cubre mano de obra y repuesto?",
-    answer:
-      "Si. Entregamos garantia escrita de 90 dias para la reparacion realizada, incluyendo componente instalado y trabajo tecnico.",
+    answer: `Si. ${WARRANTY_SCOPE_MESSAGE}`,
   },
   {
     question: "Que pasa si no quiero reparar luego del diagnostico?",
@@ -343,9 +343,9 @@ export default function IphoneRepairGuidePage() {
               <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
                 Garantia
               </p>
-              <p className="mt-2 text-3xl font-black text-secondary">90 dias</p>
+              <p className="mt-2 text-3xl font-black text-secondary">Variable</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-                Mano de obra y repuesto cubiertos
+                Segun repuesto y tipo de trabajo
               </p>
             </div>
             <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">

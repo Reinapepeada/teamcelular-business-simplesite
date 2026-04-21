@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
+import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import {
   FaMobileAlt,
   FaTools,
@@ -24,7 +25,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelula
 export const metadata: Metadata = {
   title: "Cambio de Pantalla Celular Buenos Aires | Display Original CABA",
   description:
-    "Cambio de pantalla celular con displays OLED originales, True Tone preservado, garantía de 3 meses y service 2-4 hs. iPhone, Samsung, Motorola. Recoleta, CABA.",
+    "Cambio de pantalla celular con displays OLED originales, True Tone preservado y garantia escrita segun repuesto y trabajo. Service 2-4 hs en Recoleta, CABA.",
   keywords: [
     "cambio pantalla celular Buenos Aires",
     "pantalla iPhone original",
@@ -52,7 +53,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Cambio de Pantalla Celular Buenos Aires | Display Original",
     description:
-      "Cambio de pantalla con displays OLED originales. True Tone preservado. Garantía 3 meses. Service express 2-4hs.",
+      "Cambio de pantalla con displays OLED originales y True Tone preservado. Garantia escrita segun repuesto y trabajo. Service express 2-4hs.",
     type: "article",
     locale: "es_AR",
     url: "https://teamcelular.com/guias/reparacion-pantalla-celular",
@@ -69,7 +70,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Cambio de Pantalla Celular Buenos Aires",
-    description: "Displays OLED originales con True Tone. Garantía 3 meses. Service 2-4hs.",
+    description: "Displays OLED originales con True Tone y garantia escrita segun repuesto y trabajo. Service 2-4hs.",
     images: ["https://teamcelular.com/images/guia_cambio_modulo.webp"],
   },
   alternates: {
@@ -144,7 +145,7 @@ const screenTypes = [
       "Excelente calidad de imagen",
       "Touch sensible y preciso",
       "Certificaciones CE, FCC, RoHS",
-      "Garantía 3 meses",
+      "Garantia escrita segun repuesto y trabajo",
       "Precio competitivo"
     ],
     cons: [
@@ -160,7 +161,7 @@ const screenTypes = [
     pros: [
       "Compatible con modelos LCD",
       "Buena relación calidad-precio",
-      "Garantía 1-3 meses",
+      "Garantia escrita segun repuesto y trabajo",
       "Colores aceptables"
     ],
     cons: [
@@ -220,7 +221,7 @@ const faqScreen = [
   },
   {
     question: "¿La pantalla nueva viene con garantía?",
-    answer: "Sí, todas nuestras pantallas incluyen garantía escrita de 1 a 3 meses (originales) o 1 a 2 meses (AAA+) que cubre: defectos de fabricación, touch defectuoso, manchas o líneas que aparezcan, despegado de pantalla y problemas de backlight. La garantía NO cubre: nuevos golpes, caídas, líquidos, presión excesiva, modificaciones por terceros o uso de protectores incompatibles. Entregamos certificado de garantía con número de serie de la pantalla instalada y fotografías del estado post-reparación.",
+    answer: `Si. ${WARRANTY_SCOPE_MESSAGE} Cubre defectos de fabricacion del repuesto y problemas vinculados al trabajo realizado. No cubre golpes nuevos, liquidos, presion excesiva, modificaciones por terceros ni uso inadecuado. Entregamos certificado con el detalle de cobertura.`,
   },
   {
     question: "¿Puedo usar el celular normalmente después del cambio?",
@@ -233,7 +234,7 @@ export default function ScreenReplacementGuide() {
     <div className="flex w-full justify-center px-4 py-16">
       <ArticleSchema
         title="Cambio de pantalla celular en Buenos Aires | Display original Team Celular"
-        description="Cambio de pantalla con displays OLED originales, True Tone preservado y garantía escrita de 3 meses. Service express 2-4 horas en CABA."
+        description="Cambio de pantalla con displays OLED originales, True Tone preservado y garantia escrita segun repuesto y trabajo. Service express 2-4 horas en CABA."
         publishedTime="2024-11-30T00:00:00Z"
         modifiedTime="2025-12-11T00:00:00Z"
         authorName="Team Celular"
@@ -273,7 +274,7 @@ export default function ScreenReplacementGuide() {
           </h1>
           <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
             Reemplazo de pantalla con <strong className="text-primary">displays OLED originales</strong>, 
-            <strong> True Tone preservado</strong>, garantía escrita de <strong>3 meses</strong> y servicio 
+            <strong> True Tone preservado</strong>, garantia escrita segun repuesto y trabajo, y servicio 
             express en <strong>2-4 horas</strong>. Reparamos iPhone, Samsung, Motorola y todas las marcas en Recoleta, CABA.
           </p>
 
@@ -286,8 +287,8 @@ export default function ScreenReplacementGuide() {
             </div>
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
               <FaShieldAlt className="mx-auto text-3xl text-secondary mb-2" />
-              <div className="text-2xl font-bold text-secondary">3 meses</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">Garantía escrita</div>
+              <div className="text-2xl font-bold text-secondary">Variable</div>
+              <div className="text-sm text-slate-600 dark:text-slate-400">Garantia segun trabajo y repuesto</div>
             </div>
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
               <FaCertificate className="mx-auto text-3xl text-blue-500 mb-2" />
@@ -478,7 +479,7 @@ export default function ScreenReplacementGuide() {
             ¿Tu pantalla está rota o no funciona?
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
-            Diagnóstico gratuito en 15 minutos. Service express en 2-4 horas con garantía escrita.
+            {REVIEW_COST_MESSAGE} Service express en 2-4 horas con garantia escrita segun repuesto y trabajo.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link

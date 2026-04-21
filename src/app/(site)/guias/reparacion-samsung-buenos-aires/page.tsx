@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
+import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import {
   FaBolt,
   FaCamera,
@@ -24,7 +25,7 @@ const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 export const metadata: Metadata = {
   title: "Reparacion de Samsung en Buenos Aires | Galaxy S A Z Fold Service CABA",
   description:
-    "Servicio tecnico Samsung en Recoleta: cambio de pantalla AMOLED, bateria, puerto USB-C, camaras y placa logica. Diagnostico en 24 horas y garantia escrita de 90 dias.",
+    "Servicio tecnico Samsung en Recoleta: cambio de pantalla AMOLED, bateria, puerto USB-C, camaras y placa logica. Diagnostico en 24 horas y garantia escrita segun repuesto y trabajo.",
   keywords: [
     "reparacion samsung buenos aires",
     "service samsung caba",
@@ -128,7 +129,7 @@ const processSteps = [
   {
     title: "QA final + entrega con garantia",
     description:
-      "Testeamos llamadas, camaras, datos moviles, carga rapida y rendimiento termico. Entregamos garantia escrita y recomendaciones de cuidado post reparacion.",
+      `Testeamos llamadas, camaras, datos moviles, carga rapida y rendimiento termico. Entregamos recomendaciones de cuidado post reparacion. ${WARRANTY_SCOPE_MESSAGE}`,
     duration: "20 min",
     Icon: FaCheckCircle,
   },
@@ -140,7 +141,7 @@ const repairServices = [
     detail:
       "Para Galaxy S y Note priorizamos paneles con buen contraste, tasa de refresco estable y respuesta tactil precisa.",
     eta: "2-4 h",
-    warranty: "90 dias",
+    warranty: "Segun repuesto y trabajo",
     Icon: FaMobileAlt,
   },
   {
@@ -148,7 +149,7 @@ const repairServices = [
     detail:
       "Reemplazo de bateria para equipos que se apagan en frio, bajan de 30% a 0% o pierden carga en reposo.",
     eta: "1-2 h",
-    warranty: "90 dias",
+    warranty: "Segun repuesto y trabajo",
     Icon: FaBolt,
   },
   {
@@ -156,7 +157,7 @@ const repairServices = [
     detail:
       "Solucion para carga intermitente, cable flojo o equipo que no negocia carga rapida. Incluye limpieza tecnica y test final.",
     eta: "2-3 h",
-    warranty: "90 dias",
+    warranty: "Segun repuesto y trabajo",
     Icon: FaShieldAlt,
   },
   {
@@ -164,7 +165,7 @@ const repairServices = [
     detail:
       "Reparamos modulos de camara en Galaxy S y A para recuperar nitidez, enfoque y estabilizacion segun cada equipo.",
     eta: "2-4 h",
-    warranty: "90 dias",
+    warranty: "Segun repuesto y trabajo",
     Icon: FaCamera,
   },
   {
@@ -172,7 +173,7 @@ const repairServices = [
     detail:
       "Microelectronica para equipos que no encienden, quedan en logo o presentan reinicios constantes despues de golpes o humedad.",
     eta: "24-48 h",
-    warranty: "90 dias",
+    warranty: "Segun repuesto y trabajo",
     Icon: FaMicrochip,
   },
   {
@@ -180,7 +181,7 @@ const repairServices = [
     detail:
       "Evaluamos pliegue, bisagra, cableados flex y panel interno para definir si conviene reparacion parcial o reemplazo completo.",
     eta: "24-72 h",
-    warranty: "90 dias",
+    warranty: "Segun repuesto y trabajo",
     Icon: FaWrench,
   },
 ];
@@ -199,9 +200,8 @@ const trustReasons = [
     Icon: FaTools,
   },
   {
-    title: "Garantia escrita de 90 dias",
-    description:
-      "La garantia aplica a mano de obra y repuesto instalado. Si aparece un problema cubierto, lo resolvemos.",
+    title: "Garantia escrita segun servicio",
+    description: WARRANTY_SCOPE_MESSAGE,
     Icon: FaShieldAlt,
   },
   {
@@ -258,8 +258,7 @@ const faq = [
   },
   {
     question: "Incluyen garantia luego de la reparacion?",
-    answer:
-      "Si. Entregamos garantia escrita de 90 dias para el trabajo realizado y el repuesto instalado.",
+    answer: `Si. ${WARRANTY_SCOPE_MESSAGE}`,
   },
 ];
 
@@ -336,7 +335,7 @@ export default function SamsungRepairGuidePage() {
               <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
                 Garantia
               </p>
-              <p className="mt-2 text-3xl font-black text-secondary">90 dias</p>
+              <p className="mt-2 text-3xl font-black text-secondary">Variable</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
                 Cobertura escrita de trabajo y repuesto
               </p>

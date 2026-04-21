@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
+import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 
 const SITE_URL = getSiteUrl();
@@ -81,9 +82,9 @@ const faqs = [
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: "/arreglo-de-celulares",
-  title: "Arreglo de Celulares en Recoleta (CABA) | Soluciones rápidas | Team Celular",
+  title: "Arreglo de Celulares en Recoleta | Fallas Frecuentes | Team Celular",
   description:
-    "Arreglo de celulares en Recoleta para fallas cotidianas: pantalla, batería, carga, cámaras y audio. Presupuesto rápido con respuesta clara por WhatsApp o formulario.",
+    "Arreglo de celulares en Recoleta para fallas frecuentes: pantalla, bateria, carga, camara y audio. Ruta rapida para cotizar sin mezclar con casos de diagnostico avanzado.",
   keywords: [
     "arreglo de celulares recoleta",
     "arreglo de celular rapido caba",
@@ -103,11 +104,11 @@ export const metadata: Metadata = buildWebsiteMetadata({
   },
   openGraphTitle: "Arreglo de Celulares en Recoleta (CABA) | Team Celular",
   openGraphDescription:
-    "Arreglo y reparación de celulares en Recoleta, CABA con garantía por escrito. Pantalla, batería, carga y placa.",
+    "Arreglo de celulares para fallas frecuentes en Recoleta. Si tu caso es complejo, te derivamos a diagnostico avanzado.",
   openGraphImageAlt: "Team Celular - Arreglo de celulares en Recoleta (CABA)",
   twitterTitle: "Arreglo de Celulares en Recoleta (CABA) | Team Celular",
   twitterDescription:
-    "Arreglo de celulares con garantía escrita. Presupuesto rápido por WhatsApp o formulario.",
+    "Arreglo de celulares para fallas frecuentes, con presupuesto claro por WhatsApp o formulario.",
 });
 
 export default function ArregloDeCelularesPage() {
@@ -191,7 +192,12 @@ export default function ArregloDeCelularesPage() {
           </TrackedCtaLink>
         </div>
         <p className="mt-5 text-sm text-slate-600 dark:text-slate-300">
-          Si necesitás un enfoque más técnico para fallas complejas de placa,
+          Si ya sabes la falla exacta y queres ver el catalogo por servicio,
+          entra en{" "}
+          <Link href="/reparaciones" className="font-semibold text-primary underline-offset-4 hover:underline">
+            Reparaciones en CABA
+          </Link>
+          . Si necesitás un enfoque más técnico para fallas complejas de placa,
           revisá{" "}
           <Link href="/tecnico-de-celulares" className="font-semibold text-primary underline-offset-4 hover:underline">
             Técnico de celulares en Recoleta
@@ -208,7 +214,7 @@ export default function ArregloDeCelularesPage() {
           },
           {
             title: "Garantía por escrito",
-            desc: "Respaldamos cada reparación. El plazo depende del trabajo y el repuesto, y queda detallado en el presupuesto.",
+            desc: WARRANTY_SCOPE_MESSAGE,
           },
           {
             title: "Recoleta / CABA",
@@ -237,7 +243,19 @@ export default function ArregloDeCelularesPage() {
           Si el equipo no enciende, se reinicia solo o tuvo humedad, te conviene
           pasar a la landing de técnico especialista para una evaluación más profunda.
         </p>
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+          {REVIEW_COST_MESSAGE}
+        </p>
         <div className="mt-4 flex flex-wrap gap-3">
+          <TrackedCtaLink
+            href="/reparaciones"
+            ctaName="arreglo_route_reparaciones"
+            ctaLocation="arreglo_complex_case"
+            ctaVariant="secondary"
+            className="rounded-full border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
+          >
+            Ver servicios por falla
+          </TrackedCtaLink>
           <TrackedCtaLink
             href="/tecnico-de-celulares"
             ctaName="arreglo_complex_case_tecnico"
@@ -252,7 +270,7 @@ export default function ArregloDeCelularesPage() {
             ctaName="arreglo_complex_case_board"
             ctaLocation="arreglo_complex_case"
             ctaVariant="secondary"
-            className="rounded-full border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
+            className="rounded-full border border-primary/40 px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary/10"
           >
             Reparación de placa en CABA
           </TrackedCtaLink>

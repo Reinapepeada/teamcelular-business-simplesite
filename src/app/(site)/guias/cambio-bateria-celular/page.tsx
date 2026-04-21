@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
+import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import {
   FaBatteryFull,
   FaBatteryHalf,
@@ -24,7 +25,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelula
 export const metadata: Metadata = {
   title: "Cambio de Batería Celular Buenos Aires | Service Certificado CABA",
   description:
-    "Cambio de batería celular con baterías originales y certificadas, garantía de 3 meses y service en 1-2 hs. iPhone, Samsung, Motorola. Revisión técnica arancelada en Recoleta, CABA.",
+    "Cambio de batería celular con baterías originales y certificadas, service en 1-2 hs y garantia escrita segun repuesto y trabajo. Revision tecnica arancelada en Recoleta, CABA.",
   keywords: [
     "cambio batería celular Buenos Aires",
     "batería iPhone original",
@@ -52,7 +53,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Cambio de Batería Celular Buenos Aires | Service Certificado",
     description:
-      "Cambio de batería con repuestos originales y certificados. Garantía 3 meses. Service express en 1-2 horas.",
+      "Cambio de bateria con repuestos originales y certificados. Service express en 1-2 horas y garantia segun repuesto y trabajo.",
     type: "article",
     locale: "es_AR",
     url: "https://teamcelular.com/guias/cambio-bateria-celular",
@@ -69,7 +70,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Cambio de Batería Celular Buenos Aires",
-    description: "Baterías originales con garantía 3 meses. Service express 1-2hs.",
+    description: "Baterias originales o certificadas con garantia escrita segun repuesto y trabajo. Service express 1-2hs.",
     images: ["https://teamcelular.com/images/guia_cambio_bateria.webp"],
   },
   alternates: {
@@ -120,14 +121,14 @@ const batteryTypes = [
   {
     type: "Batería Original",
     description: "Fabricada por el mismo proveedor del fabricante (Apple, Samsung). Incluye chip de autenticación y certificación de calidad.",
-    pros: ["100% compatible", "Chip de autenticación", "Garantía 6-12 meses", "Salud al 100%"],
+    pros: ["100% compatible", "Chip de autenticación", "Garantia escrita segun repuesto y trabajo", "Salud al 100%"],
     price: "$$$$",
     recommended: true,
   },
   {
     type: "Batería Certificada AAA+",
     description: "Aftermarket de alta calidad con certificación CE, FCC y RoHS. Capacidad igual o superior a la original.",
-    pros: ["Excelente calidad", "Certificaciones internacionales", "Garantía 3 meses", "Precio competitivo"],
+    pros: ["Excelente calidad", "Certificaciones internacionales", "Garantia escrita segun repuesto y trabajo", "Precio competitivo"],
     price: "$$$",
     recommended: true,
   },
@@ -171,7 +172,7 @@ const replacementProcess = [
 const faqBattery = [
   {
     question: "¿Cuánto dura una batería nueva de celular?",
-    answer: "Una batería original o certificada AAA+ dura entre 2-3 años con uso normal (300-500 ciclos de carga completos). La duración depende de los hábitos de carga: evitar descargas completas, no dejar cargando toda la noche y mantener el equipo entre 20-80% extiende significativamente la vida útil. En Team Celular ofrecemos garantía de 3 meses en todas las baterías instaladas.",
+    answer: `Una bateria original o certificada AAA+ dura entre 2-3 anos con uso normal (300-500 ciclos de carga completos). La duracion depende de los habitos de carga: evitar descargas completas, no dejar cargando toda la noche y mantener el equipo entre 20-80% extiende significativamente la vida util. ${WARRANTY_SCOPE_MESSAGE}`,
   },
   {
     question: "¿Pierdo datos al cambiar la batería?",
@@ -179,7 +180,7 @@ const faqBattery = [
   },
   {
     question: "¿Qué diferencia hay entre batería original y certificada?",
-    answer: "Las baterías originales son fabricadas por los mismos proveedores del fabricante (ej: ATL, Desay para Apple) e incluyen chip de autenticación. Las certificadas AAA+ son aftermarket de alta calidad con certificaciones CE, FCC y RoHS, capacidad igual o superior, pero sin chip oficial. Ambas tienen garantía de 3 meses. La diferencia de precio es del 30-40%. Para iPhone 12 en adelante recomendamos original para preservar funciones de salud de batería.",
+    answer: `Las baterias originales son fabricadas por los mismos proveedores del fabricante (ej: ATL, Desay para Apple) e incluyen chip de autenticacion. Las certificadas AAA+ son aftermarket de alta calidad con certificaciones CE, FCC y RoHS, capacidad igual o superior, pero sin chip oficial. ${WARRANTY_SCOPE_MESSAGE} La diferencia de precio suele ser del 30-40%. Para iPhone 12 en adelante recomendamos original para preservar funciones de salud de bateria.`,
   },
   {
     question: "¿Cuánto tiempo tarda el cambio de batería?",
@@ -187,7 +188,7 @@ const faqBattery = [
   },
   {
     question: "¿La batería nueva viene con garantía?",
-    answer: "Sí, todas nuestras baterías (originales y certificadas) incluyen garantía escrita de 3 meses que cubre: defectos de fabricación, hinchazón, pérdida prematura de capacidad y fallas de carga. La garantía NO cubre: daños por golpes, líquidos, uso de cargadores no certificados o modificaciones posteriores por terceros. Entregamos certificado de garantía con número de serie de la batería instalada.",
+    answer: `Si. ${WARRANTY_SCOPE_MESSAGE} La cobertura exacta se detalla en la orden de trabajo y en el certificado de garantia de la bateria instalada.`,
   },
 ];
 
@@ -236,7 +237,7 @@ export default function BatteryReplacementGuide() {
           </h1>
           <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
             Reemplazo de batería con <strong className="text-primary">repuestos originales y certificados</strong>, 
-            garantía escrita de <strong>3 meses</strong> y servicio express en <strong>1-2 horas</strong>. 
+            garantia escrita segun repuesto y trabajo, y servicio express en <strong>1-2 horas</strong>. 
             Atendemos iPhone, Samsung, Motorola y todas las marcas en Recoleta, CABA.
           </p>
 
@@ -249,8 +250,8 @@ export default function BatteryReplacementGuide() {
             </div>
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
               <FaShieldAlt className="mx-auto text-3xl text-secondary mb-2" />
-              <div className="text-2xl font-bold text-secondary">3 meses</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">Garantía escrita</div>
+              <div className="text-2xl font-bold text-secondary">Variable</div>
+              <div className="text-sm text-slate-600 dark:text-slate-400">Garantia segun trabajo y repuesto</div>
             </div>
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
               <FaCertificate className="mx-auto mb-2 text-3xl text-green-700 dark:text-green-300" />
@@ -449,7 +450,7 @@ export default function BatteryReplacementGuide() {
             ¿Tu celular necesita batería nueva?
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
-            Diagnóstico gratuito en menos de 15 minutos. Service express en 1-2 horas con garantía escrita.
+            {REVIEW_COST_MESSAGE} Service express en 1-2 horas con garantia escrita segun repuesto y trabajo.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link

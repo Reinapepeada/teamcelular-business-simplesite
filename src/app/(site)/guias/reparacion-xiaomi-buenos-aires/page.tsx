@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
+import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import {
   FaBatteryFull,
   FaBolt,
@@ -58,7 +59,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Reparacion de Xiaomi en Buenos Aires | Team Celular",
     description:
-      "Servicio tecnico para Xiaomi, Redmi y POCO con diagnostico en 24 horas y garantia de 90 dias en CABA.",
+      "Servicio tecnico para Xiaomi, Redmi y POCO con diagnostico en 24 horas y garantia escrita segun repuesto y trabajo en CABA.",
     type: "article",
     url: PAGE_URL,
     locale: "es_AR",
@@ -129,7 +130,7 @@ const processSteps = [
   {
     title: "Pruebas reales y garantia escrita",
     description:
-      "Verificamos carga rapida, consumo en reposo, red movil, camaras y audio para entregar un equipo utilizable y estable.",
+      `Verificamos carga rapida, consumo en reposo, red movil, camaras y audio para entregar un equipo utilizable y estable. ${WARRANTY_SCOPE_MESSAGE}`,
     duration: "20 min",
     Icon: FaCheckCircle,
   },
@@ -141,7 +142,7 @@ const repairServices = [
     detail:
       "Reemplazo de display con control de brillo, tactil y uniformidad de color en equipos Xiaomi 13/14, Redmi Note y POCO.",
     eta: "2-4 h",
-    warranty: "90 dias",
+    warranty: "Segun repuesto y trabajo",
     Icon: FaMobileAlt,
   },
   {
@@ -149,7 +150,7 @@ const repairServices = [
     detail:
       "Cambio de bateria para equipos con descarga acelerada, apagados inesperados o perdida de rendimiento en uso intenso.",
     eta: "1-2 h",
-    warranty: "90 dias",
+    warranty: "Segun repuesto y trabajo",
     Icon: FaBatteryFull,
   },
   {
@@ -157,7 +158,7 @@ const repairServices = [
     detail:
       "Solucion de carga intermitente, falso contacto y perdida de carga rapida en Xiaomi, Redmi y POCO.",
     eta: "2-3 h",
-    warranty: "90 dias",
+    warranty: "Segun repuesto y trabajo",
     Icon: FaBolt,
   },
   {
@@ -165,7 +166,7 @@ const repairServices = [
     detail:
       "Reparacion o cambio de modulo para recuperar enfoque, nitidez y estabilizacion en fotos y video.",
     eta: "2-4 h",
-    warranty: "90 dias",
+    warranty: "Segun repuesto y trabajo",
     Icon: FaCamera,
   },
   {
@@ -173,7 +174,7 @@ const repairServices = [
     detail:
       "Microelectronica para equipos que reinician en logo, no encienden o quedan sin red luego de caidas o humedad.",
     eta: "24-48 h",
-    warranty: "90 dias",
+    warranty: "Segun repuesto y trabajo",
     Icon: FaMicrochip,
   },
   {
@@ -181,7 +182,7 @@ const repairServices = [
     detail:
       "Reparacion de audio bajo, distorsionado o sin microfono en llamadas con test final de grabacion y reproduccion.",
     eta: "2-3 h",
-    warranty: "90 dias",
+    warranty: "Segun repuesto y trabajo",
     Icon: FaShieldAlt,
   },
 ];
@@ -200,9 +201,8 @@ const trustReasons = [
     Icon: FaCheckCircle,
   },
   {
-    title: "Garantia escrita de 90 dias",
-    description:
-      "La cobertura incluye repuesto y mano de obra de la reparacion indicada en la orden tecnica.",
+    title: "Garantia escrita segun servicio",
+    description: WARRANTY_SCOPE_MESSAGE,
     Icon: FaShieldAlt,
   },
   {
@@ -256,8 +256,7 @@ const faq = [
   },
   {
     question: "Que incluye la garantia?",
-    answer:
-      "Incluye repuesto y mano de obra del servicio realizado por 90 dias, segun lo detallado en la orden de reparacion.",
+    answer: WARRANTY_SCOPE_MESSAGE,
   },
 ];
 
@@ -333,7 +332,7 @@ export default function XiaomiRepairGuidePage() {
               <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
                 Garantia
               </p>
-              <p className="mt-2 text-3xl font-black text-secondary">90 dias</p>
+              <p className="mt-2 text-3xl font-black text-secondary">Variable</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
                 Cobertura escrita de reparacion
               </p>

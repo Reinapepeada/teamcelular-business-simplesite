@@ -4,15 +4,16 @@ import BannerCards from "@/components/cards/BannerCards";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import KnowledgeGrid from "@/components/cards/KnowledgeGrid";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
+import { BUDGET_RESPONSE_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 
 const SITE_URL = getSiteUrl();
 
 export const metadata = buildWebsiteMetadata({
     path: "/",
-    title: "Servicio Tecnico de Celulares en Recoleta, CABA | Team Celular",
+    title: "Servicio Tecnico de Celulares y Notebooks en Recoleta | Team Celular",
     description:
-        "Reparacion de celulares y notebooks con diagnostico en el dia, garantia escrita y atencion rapida por WhatsApp en Recoleta, CABA.",
+        "Servicio tecnico integral en Recoleta para celulares y notebooks: diagnostico inicial, reparacion con trazabilidad y atencion comercial rapida en CABA.",
     keywords: [
         "reparacion de celulares Buenos Aires",
         "servicio tecnico celulares CABA",
@@ -24,13 +25,13 @@ export const metadata = buildWebsiteMetadata({
     languages: {
         "es-AR": "/",
     },
-    openGraphTitle: "Servicio Tecnico de Celulares en Recoleta, CABA | Team Celular",
+    openGraphTitle: "Servicio Tecnico Integral en Recoleta | Team Celular",
     openGraphDescription:
-        "Pantalla, bateria, carga y microelectronica con diagnostico en el dia y garantia escrita.",
+        "Atencion tecnica para celulares y notebooks en CABA, con foco en diagnostico claro y resolucion confiable.",
     openGraphImageAlt: "Team Celular - Servicio tecnico en Buenos Aires",
-    twitterTitle: "Servicio Tecnico de Celulares en Recoleta, CABA | Team Celular",
+    twitterTitle: "Servicio Tecnico Integral en Recoleta | Team Celular",
     twitterDescription:
-        "Diagnostico en el dia, garantia escrita y respuesta comercial en menos de 2 horas habiles.",
+        "Base de entrada para celulares y notebooks en CABA: diagnostico claro, cobertura escrita y atencion rapida.",
 });
 
 const services = [
@@ -73,14 +74,12 @@ const microFaqs = [
     {
         title: "Tiempo de respuesta",
         question: "Cuanto tardan en contestar un presupuesto online?",
-        answer:
-            "Respondemos formulario y WhatsApp en hasta 2 horas habiles. Si requiere revision tecnica, confirmamos diagnostico inicial dentro de 24 horas habiles.",
+        answer: BUDGET_RESPONSE_MESSAGE,
     },
     {
         title: "Garantia real",
         question: "Que cubre la garantia escrita?",
-        answer:
-            "Incluye mano de obra y repuesto por 90 dias. Si falla, lo revisamos sin costo.",
+        answer: WARRANTY_SCOPE_MESSAGE,
     },
     {
         title: "Stock y repuestos",
@@ -103,8 +102,7 @@ const faqs = [
     },
     {
         question: "Cuanto tarda un presupuesto?",
-        answer:
-            "Por WhatsApp o formulario, respondemos en hasta 2 horas habiles. Si el caso requiere revision tecnica, confirmamos diagnostico inicial dentro de 24 horas habiles.",
+        answer: BUDGET_RESPONSE_MESSAGE,
     },
 ];
 

@@ -14,6 +14,7 @@ import {
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
+import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 
 export const metadata: Metadata = {
   title: "Microelectrónica y Reballing BGA Buenos Aires | Laboratorio Certificado",
@@ -161,7 +162,7 @@ const faqMicro = [
   },
   {
     question: "¿Tienen garantía las reparaciones de placa?",
-    answer: "Sí. Todas las reparaciones de microelectrónica incluyen 3 meses de garantía por escrito en los trabajos realizados (componentes reemplazados, soldaduras, etc.). La garantía NO cubre daños nuevos por líquidos, golpes o uso inadecuado posterior.",
+    answer: `Si. ${WARRANTY_SCOPE_MESSAGE} La cobertura no incluye danos nuevos por liquidos, golpes o uso inadecuado posterior.`,
   },
   {
     question: "¿Qué equipos pueden reparar a nivel microelectrónica?",
@@ -387,7 +388,7 @@ export default function MicroelectronicsGuide() {
             ¿Tu equipo necesita reparación de placa lógica?
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
-            La revisión técnica tiene un costo que suele variar entre ARS 15.000 y ARS 25.000. Si tiene solución, te damos presupuesto detallado con tiempos y garantía por escrito. Si no, te lo decimos honestamente.
+            {REVIEW_COST_MESSAGE} Si tiene solucion, te damos presupuesto detallado con tiempos y cobertura por escrito segun repuesto y trabajo. Si no, te lo decimos honestamente.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link

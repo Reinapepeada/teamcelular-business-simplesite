@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
+import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 
 const SITE_URL = getSiteUrl();
@@ -18,7 +19,7 @@ const faqs = [
   },
   {
     q: "¿El diagnóstico técnico tiene costo?",
-    a: "Se informa antes de ingresar el equipo. El costo depende del nivel de revisión y se descuenta en muchos casos si avanzás con la reparación.",
+    a: `Si. ${REVIEW_COST_MESSAGE} Se informa siempre antes de ingresar el equipo.`,
   },
   {
     q: "¿Pueden revisar equipos mal reparados en otro lugar?",
@@ -28,9 +29,9 @@ const faqs = [
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: "/tecnico-de-celulares",
-  title: "Técnico de Celulares en Recoleta | Diagnóstico experto | Team Celular",
+  title: "Tecnico de Celulares en Recoleta | Diagnostico Avanzado | Team Celular",
   description:
-    "Técnico especialista en celulares en Recoleta para diagnóstico avanzado y fallas complejas de placa. Segunda opinión técnica, microelectrónica y garantía escrita.",
+    "Tecnico especialista en celulares en Recoleta para diagnostico avanzado, placa compleja y segunda opinion tecnica. Ruta para casos inciertos o intervenidos.",
   keywords: [
     "tecnico de celulares recoleta",
     "diagnostico tecnico celular caba",
@@ -47,11 +48,11 @@ export const metadata: Metadata = buildWebsiteMetadata({
   },
   openGraphTitle: "Técnico de Celulares en Recoleta (CABA) | Team Celular",
   openGraphDescription:
-    "Técnico de celulares con diagnóstico profesional y garantía escrita. Taller en Recoleta para CABA.",
+    "Diagnostico avanzado para fallas complejas de celulares en CABA, con criterio tecnico y seguimiento real.",
   openGraphImageAlt: "Técnico de celulares en Recoleta - Team Celular",
   twitterTitle: "Técnico de Celulares en Recoleta | Team Celular",
   twitterDescription:
-    "Diagnóstico y reparación de celulares con garantía escrita en CABA.",
+    "Diagnostico avanzado de celulares en CABA para placa, humedad y segunda opinion tecnica.",
 });
 
 export default function TecnicoDeCelularesPage() {
@@ -138,6 +139,10 @@ export default function TecnicoDeCelularesPage() {
           <Link href="/arreglo-de-celulares" className="font-semibold text-primary underline-offset-4 hover:underline">
             Arreglo de celulares
           </Link>
+          {" "}o ver el catalogo completo en{" "}
+          <Link href="/reparaciones" className="font-semibold text-primary underline-offset-4 hover:underline">
+            Reparaciones en CABA
+          </Link>
           .
         </p>
       </header>
@@ -154,7 +159,7 @@ export default function TecnicoDeCelularesPage() {
           },
           {
             title: "Trazabilidad y garantía",
-            desc: "Documentamos el trabajo y entregamos garantía por escrito según intervención y repuestos usados.",
+            desc: WARRANTY_SCOPE_MESSAGE,
           },
         ].map((item) => (
           <article
@@ -206,7 +211,19 @@ export default function TecnicoDeCelularesPage() {
           Si tu problema es puntual y ya sabés la falla, podés ahorrar tiempo con
           la landing general. Si es un caso incierto o complejo, seguí por diagnóstico.
         </p>
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+          {REVIEW_COST_MESSAGE}
+        </p>
         <div className="mt-4 flex flex-wrap gap-3">
+          <TrackedCtaLink
+            href="/reparaciones"
+            ctaName="tecnico_route_reparaciones"
+            ctaLocation="tecnico_route_selector"
+            ctaVariant="secondary"
+            className="rounded-full border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
+          >
+            Ver servicios por falla
+          </TrackedCtaLink>
           <TrackedCtaLink
             href="/arreglo-de-celulares"
             ctaName="tecnico_route_arreglo"

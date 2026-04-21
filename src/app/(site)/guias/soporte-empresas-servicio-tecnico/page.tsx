@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
+import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import { 
   FaShieldAlt, 
   FaTruck, 
@@ -152,9 +153,9 @@ const slaFeatures = [
     Icon: FaClock,
   },
   {
-    title: "Garantía extendida corporativa",
+    title: "Garantia escrita corporativa",
     description:
-      "3 meses de garantía por escrito en todas las reparaciones, con opción de extensión a 6 o 12 meses en planes anuales.",
+      `${WARRANTY_SCOPE_MESSAGE} En planes anuales, definimos cobertura y alcance en el SLA firmado.`,
     Icon: FaShieldAlt,
   },
   {
