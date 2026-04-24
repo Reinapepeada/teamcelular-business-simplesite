@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
+import { formatArgentinaDate } from "@/lib/date";
 import { BRAND_GUIDE_LIST } from "./brandGuideConfigs";
 import {
   FaApple,
@@ -506,11 +507,7 @@ export default function GuidesPage() {
                 siblingHref: "/presupuesto-reparacion#solicitar-presupuesto",
                 siblingLabel: "Paso siguiente: pedir presupuesto",
               };
-              const updatedDate = new Intl.DateTimeFormat("es-AR", {
-                day: "2-digit",
-                month: "short",
-                year: "numeric",
-              }).format(new Date(article.datePublished));
+              const updatedDate = formatArgentinaDate(article.datePublished);
 
               return (
                 <article

@@ -35,6 +35,7 @@ import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PlusCircle, Search, Edit, Trash2, Loader2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { formatArgentinaDate } from "@/lib/date";
 import CreateCategoryModal from "@/components/modals/create-category-modal";
 import { deleteCategory, getcategories, updateCategory } from "@/services/categories";
 import { getToken } from "@/services/auth";
@@ -269,7 +270,7 @@ export default function CategoriesPage() {
                                             </TableCell>
                                             <TableCell className="text-sm text-muted-foreground">
                                                 {category.created_at
-                                                    ? new Date(category.created_at).toLocaleDateString()
+                                                    ? formatArgentinaDate(category.created_at)
                                                     : "-"}
                                             </TableCell>
                                             <TableCell className="text-right">

@@ -7,7 +7,8 @@ export type RepairLeadStatus =
     | "contacted"
     | "qualified"
     | "converted"
-    | "discarded";
+    | "discarded"
+    | "duplicated";
 
 export interface RepairLead {
     id: string;
@@ -18,11 +19,33 @@ export interface RepairLead {
     model: string;
     repairType: string;
     urgency: string;
+    description: string;
     contactChannel: string;
+    contact: string;
+    leadAttemptId: string;
+    wizardSource: string;
+    duplicateOf: string;
+    whatsappUrl: string;
+    utm: RepairLeadUtm | null;
+    metadata: RepairLeadMetadata | null;
     status: RepairLeadStatus;
     source: string;
     createdAt: string;
     updatedAt: string;
+}
+
+export interface RepairLeadUtm {
+    source: string;
+    medium: string;
+    campaign: string;
+    content: string;
+    term: string;
+}
+
+export interface RepairLeadMetadata {
+    ip: string;
+    userAgent: string;
+    referrer: string;
 }
 
 export interface RepairLeadStatusChange {
@@ -85,6 +108,78 @@ export interface RepairLeadsMetricsResponse {
     byDate: RepairLeadsDateBucket[];
 }
 
+export interface LeadInteraction {
+    interactionId: number;
+    eventName: string;
+    ctaName: string;
+    ctaLocation: string;
+    ctaVariant: string;
+    destination: string;
+    pagePath: string;
+    pageTitle: string;
+    leadId: string;
+    leadAttemptId: string;
+    formName: string;
+    formLocation: string;
+    formVersion: string;
+    stepIndex: number;
+    stepId: string;
+    stepLabel: string;
+    totalSteps: number;
+    brand: string;
+    model: string;
+    repairType: string;
+    urgency: string;
+    contactChannel: string;
+    contact: string;
+    description: string;
+    payloadJson: string;
+    ip: string;
+    userAgent: string;
+    referrer: string;
+    createdAt: string;
+}
+
+export interface LeadInteractionsQuery {
+    eventName?: string;
+    ctaVariant?: string;
+    ctaLocation?: string;
+    pagePath?: string;
+    leadAttemptId?: string;
+    dateFrom?: string;
+    dateTo?: string;
+    page?: number;
+    size?: number;
+}
+
+export interface LeadInteractionsListResponse {
+    items: LeadInteraction[];
+    total: number;
+    page: number;
+    size: number;
+    pages: number;
+}
+
+export interface LeadInteractionMetricBucket {
+    key: string;
+    value: number;
+}
+
+export interface LeadInteractionDateBucket {
+    date: string;
+    value: number;
+}
+
+export interface LeadInteractionsMetricsResponse {
+    totalInteractions: number;
+    byEvent: LeadInteractionMetricBucket[];
+    byCtaName: LeadInteractionMetricBucket[];
+    byCtaVariant: LeadInteractionMetricBucket[];
+    byPage: LeadInteractionMetricBucket[];
+    byLocation: LeadInteractionMetricBucket[];
+    byDate: LeadInteractionDateBucket[];
+}
+
 class LeadsApiError extends Error {
     status: number;
 
@@ -101,6 +196,7 @@ const KNOWN_STATUSES: RepairLeadStatus[] = [
     "qualified",
     "converted",
     "discarded",
+    "duplicated",
 ];
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -149,6 +245,46 @@ function normalizeStatus(value: unknown): RepairLeadStatus {
     return "new";
 }
 
+function normalizeUtm(raw: unknown): RepairLeadUtm | null {
+    const record = isRecord(raw) ? raw : {};
+
+    const source = asString(pickFirst(record, ["source", "utm_source", "utmSource"]), "");
+    const medium = asString(pickFirst(record, ["medium", "utm_medium", "utmMedium"]), "");
+    const campaign = asString(pickFirst(record, ["campaign", "utm_campaign", "utmCampaign"]), "");
+    const content = asString(pickFirst(record, ["content", "utm_content", "utmContent"]), "");
+    const term = asString(pickFirst(record, ["term", "utm_term", "utmTerm"]), "");
+
+    if (!source && !medium && !campaign && !content && !term) {
+        return null;
+    }
+
+    return {
+        source,
+        medium,
+        campaign,
+        content,
+        term,
+    };
+}
+
+function normalizeMetadata(raw: unknown): RepairLeadMetadata | null {
+    const record = isRecord(raw) ? raw : {};
+
+    const ip = asString(pickFirst(record, ["ip"]), "");
+    const userAgent = asString(pickFirst(record, ["user_agent", "userAgent"]), "");
+    const referrer = asString(pickFirst(record, ["referrer"]), "");
+
+    if (!ip && !userAgent && !referrer) {
+        return null;
+    }
+
+    return {
+        ip,
+        userAgent,
+        referrer,
+    };
+}
+
 function unwrapData(raw: unknown): unknown {
     if (!isRecord(raw)) {
         return raw;
@@ -167,11 +303,25 @@ function normalizeLead(raw: unknown): RepairLead {
 
     const idCandidate = pickFirst(record, ["id", "lead_id", "leadId"]);
     const nowIso = new Date().toISOString();
+    const contact = asString(pickFirst(record, ["contact", "phone", "phone_number", "phoneNumber"]), "");
+    const description = asString(pickFirst(record, ["description", "details", "note"]), "");
+    const whatsappUrl = asString(pickFirst(record, ["whatsapp_url", "whatsappUrl"]), "");
+    const leadAttemptId = asString(
+        pickFirst(record, ["lead_attempt_id", "leadAttemptId", "attempt_id", "attemptId"]),
+        ""
+    );
+    const wizardSource = asString(
+        pickFirst(record, ["wizard_source", "wizardSource"]),
+        ""
+    );
+    const duplicateOf = asString(pickFirst(record, ["duplicate_of", "duplicateOf"]), "");
+    const utm = normalizeUtm(pickFirst(record, ["utm", "utmData"]) ?? record);
+    const metadata = normalizeMetadata(pickFirst(record, ["metadata"]) ?? record);
 
     return {
         id: asString(idCandidate, `lead-${Date.now()}`),
         fullName: asString(pickFirst(record, ["full_name", "fullName", "name"]), "-"),
-        phone: asString(pickFirst(record, ["phone", "phone_number", "phoneNumber"]), "-"),
+        phone: contact || asString(pickFirst(record, ["phone", "phone_number", "phoneNumber"]), "-"),
         email: asString(pickFirst(record, ["email", "mail"]), ""),
         brand: asString(
             pickFirst(record, ["brand", "device_brand", "deviceBrand"]) ??
@@ -185,10 +335,18 @@ function normalizeLead(raw: unknown): RepairLead {
         ),
         repairType: asString(pickFirst(record, ["repair_type", "repairType", "issue"]), "-"),
         urgency: asString(pickFirst(record, ["urgency", "priority"]), "sin_urgencia"),
+        description,
         contactChannel: asString(
             pickFirst(record, ["contact_channel", "contactChannel", "channel"]),
             "whatsapp"
         ),
+        contact,
+        leadAttemptId,
+        wizardSource,
+        duplicateOf,
+        whatsappUrl,
+        utm,
+        metadata,
         status: normalizeStatus(pickFirst(record, ["status", "lead_status", "leadStatus"])),
         source: asString(pickFirst(record, ["source", "wizard_source", "wizardSource"]), "web"),
         createdAt: asString(pickFirst(record, ["created_at", "createdAt", "timestamp"]), nowIso),
@@ -392,6 +550,173 @@ function normalizeMetricsResponse(raw: unknown): RepairLeadsMetricsResponse {
     };
 }
 
+function normalizeInteraction(raw: unknown): LeadInteraction {
+    const record = isRecord(raw) ? raw : {};
+    const nowIso = new Date().toISOString();
+
+    return {
+        interactionId: asNumber(pickFirst(record, ["id", "interaction_id", "interactionId"]), 0),
+        eventName: asString(pickFirst(record, ["event_name", "eventName"]), "cta_click"),
+        ctaName: asString(pickFirst(record, ["cta_name", "ctaName"]), "sin_cta"),
+        ctaLocation: asString(pickFirst(record, ["cta_location", "ctaLocation"]), "sin_ubicacion"),
+        ctaVariant: asString(pickFirst(record, ["cta_variant", "ctaVariant"]), "other"),
+        destination: asString(pickFirst(record, ["destination"]), ""),
+        pagePath: asString(pickFirst(record, ["page_path", "pagePath"]), "/"),
+        pageTitle: asString(pickFirst(record, ["page_title", "pageTitle"]), ""),
+        leadId: asString(pickFirst(record, ["lead_id", "leadId"]), ""),
+        leadAttemptId: asString(pickFirst(record, ["lead_attempt_id", "leadAttemptId"]), ""),
+        formName: asString(pickFirst(record, ["form_name", "formName"]), ""),
+        formLocation: asString(pickFirst(record, ["form_location", "formLocation"]), ""),
+        formVersion: asString(pickFirst(record, ["form_version", "formVersion"]), ""),
+        stepIndex: asNumber(pickFirst(record, ["step_index", "stepIndex"]), 0),
+        stepId: asString(pickFirst(record, ["step_id", "stepId"]), ""),
+        stepLabel: asString(pickFirst(record, ["step_label", "stepLabel"]), ""),
+        totalSteps: asNumber(pickFirst(record, ["total_steps", "totalSteps"]), 0),
+        brand: asString(pickFirst(record, ["brand"]), ""),
+        model: asString(pickFirst(record, ["model"]), ""),
+        repairType: asString(pickFirst(record, ["repair_type", "repairType"]), ""),
+        urgency: asString(pickFirst(record, ["urgency"]), ""),
+        contactChannel: asString(pickFirst(record, ["contact_channel", "contactChannel"]), ""),
+        contact: asString(pickFirst(record, ["contact"]), ""),
+        description: asString(pickFirst(record, ["description"]), ""),
+        payloadJson: asString(pickFirst(record, ["payload_json", "payloadJson"]), "{}"),
+        ip: asString(pickFirst(record, ["ip"]), ""),
+        userAgent: asString(pickFirst(record, ["user_agent", "userAgent"]), ""),
+        referrer: asString(pickFirst(record, ["referrer"]), ""),
+        createdAt: asString(pickFirst(record, ["created_at", "createdAt"]), nowIso),
+    };
+}
+
+function normalizeInteractionListResponse(
+    raw: unknown,
+    fallbackPage: number,
+    fallbackSize: number
+): LeadInteractionsListResponse {
+    const unwrapped = unwrapData(raw);
+    const container = isRecord(unwrapped) ? unwrapped : {};
+
+    const listCandidate = Array.isArray(unwrapped)
+        ? unwrapped
+        : pickFirst(container, ["items", "interactions", "results", "rows", "data"]);
+
+    const items = Array.isArray(listCandidate)
+        ? listCandidate.map((interaction) => normalizeInteraction(interaction))
+        : [];
+
+    const total = asNumber(
+        pickFirst(container, ["total", "count", "total_count", "totalCount"]),
+        items.length
+    );
+    const page = asNumber(pickFirst(container, ["page", "current_page", "currentPage"]), fallbackPage);
+    const size = asNumber(pickFirst(container, ["size", "page_size", "pageSize", "limit"]), fallbackSize);
+    const pagesFallback = size > 0 ? Math.max(1, Math.ceil(total / size)) : 1;
+    const pages = asNumber(pickFirst(container, ["pages", "total_pages", "totalPages"]), pagesFallback);
+
+    return {
+        items,
+        total,
+        page,
+        size,
+        pages,
+    };
+}
+
+function normalizeInteractionMetricBucketList(
+    raw: unknown,
+    keyCandidates: string[]
+): LeadInteractionMetricBucket[] {
+    if (Array.isArray(raw)) {
+        return raw
+            .map((item, index) => {
+                const record = isRecord(item) ? item : {};
+                const key = asString(
+                    pickFirst(record, [...keyCandidates, "key", "label", "name"]),
+                    `bucket-${index}`
+                );
+                const value = asNumber(pickFirst(record, ["count", "value", "total"]), 0);
+
+                return { key, value };
+            })
+            .filter((bucket) => bucket.key.length > 0);
+    }
+
+    if (isRecord(raw)) {
+        return Object.entries(raw).map(([key, value]) => ({
+            key,
+            value: asNumber(value, 0),
+        }));
+    }
+
+    return [];
+}
+
+function normalizeInteractionDateMetricList(raw: unknown): LeadInteractionDateBucket[] {
+    return normalizeInteractionMetricBucketList(raw, ["date", "day"])
+        .map((bucket) => ({
+            date: bucket.key,
+            value: bucket.value,
+        }))
+        .sort((a, b) => {
+            const timeA = new Date(a.date).getTime();
+            const timeB = new Date(b.date).getTime();
+
+            if (Number.isNaN(timeA) || Number.isNaN(timeB)) {
+                return a.date.localeCompare(b.date);
+            }
+
+            return timeA - timeB;
+        });
+}
+
+function normalizeInteractionMetricsResponse(raw: unknown): LeadInteractionsMetricsResponse {
+    const unwrapped = unwrapData(raw);
+    const container = isRecord(unwrapped) ? unwrapped : {};
+
+    const byEvent = normalizeInteractionMetricBucketList(
+        pickFirst(container, ["byEvent", "by_event", "events", "event_breakdown"]),
+        ["event_name", "eventName", "event"]
+    );
+
+    const byCtaName = normalizeInteractionMetricBucketList(
+        pickFirst(container, ["byCtaName", "by_cta_name", "ctaNames", "cta_breakdown"]),
+        ["cta_name", "ctaName", "name"]
+    );
+
+    const byCtaVariant = normalizeInteractionMetricBucketList(
+        pickFirst(container, ["byCtaVariant", "by_cta_variant", "ctaVariants", "variant_breakdown"]),
+        ["cta_variant", "ctaVariant", "variant"]
+    );
+
+    const byPage = normalizeInteractionMetricBucketList(
+        pickFirst(container, ["byPage", "by_page", "pages", "page_breakdown"]),
+        ["page_path", "pagePath", "page"]
+    );
+
+    const byLocation = normalizeInteractionMetricBucketList(
+        pickFirst(container, ["byLocation", "by_location", "locations", "location_breakdown"]),
+        ["cta_location", "ctaLocation", "location"]
+    );
+
+    const byDate = normalizeInteractionDateMetricList(
+        pickFirst(container, ["byDate", "by_date", "dates", "date_breakdown"])
+    );
+
+    const totalInteractions = asNumber(
+        pickFirst(container, ["totalInteractions", "total_interactions", "total"]),
+        0
+    );
+
+    return {
+        totalInteractions,
+        byEvent,
+        byCtaName,
+        byCtaVariant,
+        byPage,
+        byLocation,
+        byDate,
+    };
+}
+
 function buildLeadsQueryParams(
     query: RepairLeadsQuery,
     includePagination: boolean
@@ -411,19 +736,73 @@ function buildLeadsQueryParams(
         params.set("repair_type", query.repairType);
     }
 
+    const normalizeDateBoundary = (value: string, isEndBoundary: boolean): string => {
+        const trimmed = value.trim();
+        if (!trimmed || trimmed.includes("T")) {
+            return trimmed;
+        }
+
+        return isEndBoundary ? `${trimmed}T23:59:59.999999` : `${trimmed}T00:00:00`;
+    };
+
     if (query.dateFrom) {
-        params.set("dateFrom", query.dateFrom);
-        params.set("date_from", query.dateFrom);
+        const normalizedDateFrom = normalizeDateBoundary(query.dateFrom, false);
+        params.set("dateFrom", normalizedDateFrom);
+        params.set("date_from", normalizedDateFrom);
     }
 
     if (query.dateTo) {
-        params.set("dateTo", query.dateTo);
-        params.set("date_to", query.dateTo);
+        const normalizedDateTo = normalizeDateBoundary(query.dateTo, true);
+        params.set("dateTo", normalizedDateTo);
+        params.set("date_to", normalizedDateTo);
     }
 
     if (includePagination) {
         const page = query.page ?? 1;
         const size = query.size ?? 20;
+        params.set("page", String(page));
+        params.set("size", String(size));
+    }
+
+    return params;
+}
+
+function buildInteractionQueryParams(
+    query: LeadInteractionsQuery,
+    includePagination: boolean
+): URLSearchParams {
+    const params = new URLSearchParams();
+
+    if (query.eventName) params.set("eventName", query.eventName);
+    if (query.ctaVariant) params.set("ctaVariant", query.ctaVariant);
+    if (query.ctaLocation) params.set("ctaLocation", query.ctaLocation);
+    if (query.pagePath) params.set("pagePath", query.pagePath);
+    if (query.leadAttemptId) params.set("leadAttemptId", query.leadAttemptId);
+
+    const normalizeDateBoundary = (value: string, isEndBoundary: boolean): string => {
+        const trimmed = value.trim();
+        if (!trimmed || trimmed.includes("T")) {
+            return trimmed;
+        }
+
+        return isEndBoundary ? `${trimmed}T23:59:59.999999` : `${trimmed}T00:00:00`;
+    };
+
+    if (query.dateFrom) {
+        const normalizedDateFrom = normalizeDateBoundary(query.dateFrom, false);
+        params.set("dateFrom", normalizedDateFrom);
+        params.set("date_from", normalizedDateFrom);
+    }
+
+    if (query.dateTo) {
+        const normalizedDateTo = normalizeDateBoundary(query.dateTo, true);
+        params.set("dateTo", normalizedDateTo);
+        params.set("date_to", normalizedDateTo);
+    }
+
+    if (includePagination) {
+        const page = query.page ?? 1;
+        const size = query.size ?? 10;
         params.set("page", String(page));
         params.set("size", String(size));
     }
@@ -578,4 +957,35 @@ export async function addRepairLeadNote(leadId: string, note: string): Promise<R
             createdBy: "Sistema",
         }
     );
+}
+
+export async function getLeadInteractions(
+    query: LeadInteractionsQuery = {}
+): Promise<LeadInteractionsListResponse> {
+    const params = buildInteractionQueryParams(query, true);
+    const page = query.page ?? 1;
+    const size = query.size ?? 10;
+
+    const response = await authenticatedLeadsRequest<unknown>(
+        `/v1/leads/interactions?${params.toString()}`,
+        { method: "GET" }
+    );
+
+    return normalizeInteractionListResponse(response, page, size);
+}
+
+export async function getLeadInteractionsMetrics(
+    query: LeadInteractionsQuery = {}
+): Promise<LeadInteractionsMetricsResponse> {
+    const params = buildInteractionQueryParams(query, false);
+    const queryString = params.toString();
+    const endpoint = queryString
+        ? `/v1/leads/interactions/metrics?${queryString}`
+        : "/v1/leads/interactions/metrics";
+
+    const response = await authenticatedLeadsRequest<unknown>(endpoint, {
+        method: "GET",
+    });
+
+    return normalizeInteractionMetricsResponse(response);
 }

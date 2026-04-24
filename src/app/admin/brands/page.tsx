@@ -34,6 +34,7 @@ import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PlusCircle, Search, Edit, Trash2, Loader2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { formatArgentinaDate } from "@/lib/date";
 import CreateBrandModal from "@/components/modals/create-brand-modal";
 import { deleteBrand, getbrands, updateBrand } from "@/services/brands";
 import { getToken } from "@/services/auth";
@@ -247,7 +248,7 @@ export default function BrandsPage() {
                                             <TableCell className="font-medium">{brand.name}</TableCell>
                                             <TableCell className="text-sm text-muted-foreground">
                                                 {brand.created_at
-                                                    ? new Date(brand.created_at).toLocaleDateString()
+                                                    ? formatArgentinaDate(brand.created_at)
                                                     : "-"}
                                             </TableCell>
                                             <TableCell className="text-right">

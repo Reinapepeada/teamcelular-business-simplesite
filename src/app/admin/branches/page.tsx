@@ -34,6 +34,7 @@ import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PlusCircle, Search, Edit, Trash2, Loader2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { formatArgentinaDate } from "@/lib/date";
 import CreateBranchModal from "@/components/modals/create-branch-modal";
 import { deleteBranch, getbranches, updateBranch } from "@/services/branches";
 import { getToken } from "@/services/auth";
@@ -264,7 +265,7 @@ export default function BranchesPage() {
                                             </TableCell>
                                             <TableCell className="text-sm text-muted-foreground">
                                                 {branch.created_at
-                                                    ? new Date(branch.created_at).toLocaleDateString()
+                                                    ? formatArgentinaDate(branch.created_at)
                                                     : "-"}
                                             </TableCell>
                                             <TableCell className="text-right">

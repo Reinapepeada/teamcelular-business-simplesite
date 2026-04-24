@@ -30,12 +30,18 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/hooks/use-toast";
+import { formatArgentinaDateShort, formatArgentinaDateTime } from "@/lib/date";
 import {
     addRepairLeadNote,
+    getLeadInteractions,
+    getLeadInteractionsMetrics,
     getRepairLeadById,
     getRepairLeads,
     getRepairLeadsMetrics,
     updateRepairLeadStatus,
+    type LeadInteraction,
+    type LeadInteractionsListResponse,
+    type LeadInteractionsMetricsResponse,
     type RepairLead,
     type RepairLeadDetail,
     type RepairLeadsMetricsResponse,
@@ -71,6 +77,7 @@ const STATUS_LABELS: Record<RepairLeadStatus, string> = {
     qualified: "Calificado",
     converted: "Convertido",
     discarded: "Descartado",
+    duplicated: "Duplicado",
 };
 
 const URGENCY_OPTIONS = [
@@ -112,17 +119,7 @@ function toRate(part: number, total: number): number {
 }
 
 function formatDateTime(value: string): string {
-    const date = new Date(value);
-    if (Number.isNaN(date.getTime())) {
-        return "-";
-    }
-
-    return date.toLocaleString("es-AR", {
-        day: "2-digit",
-        month: "short",
-        hour: "2-digit",
-        minute: "2-digit",
-    });
+    return formatArgentinaDateTime(value);
 }
 
 function humanizeToken(value: string): string {
@@ -138,6 +135,36 @@ function humanizeToken(value: string): string {
     return normalized.charAt(0).toUpperCase() + normalized.slice(1);
 }
 
+function formatLeadValue(value: string | null | undefined, fallback = "Sin dato"): string {
+    if (typeof value !== "string") {
+        return fallback;
+    }
+
+    const trimmed = value.trim();
+    return trimmed.length > 0 ? trimmed : fallback;
+}
+
+function DetailRow({
+    label,
+    value,
+    mono = false,
+}: {
+    label: string;
+    value: string | null | undefined;
+    mono?: boolean;
+}) {
+    return (
+        <div className="rounded-lg border bg-muted/15 px-3 py-2">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                {label}
+            </p>
+            <p className={`mt-1 text-sm ${mono ? "break-all font-mono" : ""}`}>
+                {formatLeadValue(value)}
+            </p>
+        </div>
+    );
+}
+
 function getStatusClassName(status: RepairLeadStatus): string {
     switch (status) {
         case "new":
@@ -150,6 +177,8 @@ function getStatusClassName(status: RepairLeadStatus): string {
             return "bg-emerald-100 text-emerald-700 hover:bg-emerald-100";
         case "discarded":
             return "bg-rose-100 text-rose-700 hover:bg-rose-100";
+        case "duplicated":
+            return "bg-slate-100 text-slate-700 hover:bg-slate-100";
         default:
             return "";
     }
@@ -189,10 +218,7 @@ function buildTrendDataFromMetrics(
             const date = new Date(entry.date);
             const label = Number.isNaN(date.getTime())
                 ? humanizeToken(entry.date)
-                : date.toLocaleDateString("es-AR", {
-                      day: "2-digit",
-                      month: "short",
-                  });
+                : formatArgentinaDateShort(entry.date);
 
             return {
                 key: `${entry.date}-${index}`,
@@ -294,6 +320,7 @@ export default function AdminLeadsPage() {
     const [repairTypeFilter, setRepairTypeFilter] = useState("");
     const [dateFrom, setDateFrom] = useState("");
     const [dateTo, setDateTo] = useState("");
+    const [ctaLocationFilter, setCtaLocationFilter] = useState("all");
     const [pageSize, setPageSize] = useState(20);
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -318,10 +345,27 @@ export default function AdminLeadsPage() {
         byContactChannel: [],
         byDate: [],
     });
+    const [interactionData, setInteractionData] = useState<LeadInteractionsListResponse>({
+        items: [],
+        total: 0,
+        page: 1,
+        size: 10,
+        pages: 1,
+    });
+    const [interactionMetrics, setInteractionMetrics] = useState<LeadInteractionsMetricsResponse>({
+        totalInteractions: 0,
+        byEvent: [],
+        byCtaName: [],
+        byCtaVariant: [],
+        byPage: [],
+        byLocation: [],
+        byDate: [],
+    });
 
     const [isLoading, setIsLoading] = useState(true);
     const [isRefreshing, setIsRefreshing] = useState(false);
     const [updatingLeadId, setUpdatingLeadId] = useState<string | null>(null);
+    const [selectedInteraction, setSelectedInteraction] = useState<LeadInteraction | null>(null);
 
     const [selectedLeadDetail, setSelectedLeadDetail] = useState<RepairLeadDetail | null>(null);
     const [isLoadingDetail, setIsLoadingDetail] = useState(false);
@@ -345,13 +389,25 @@ export default function AdminLeadsPage() {
                 dateTo: dateTo || undefined,
             };
 
-            const [tableResponse, analyticsResponse] = await Promise.all([
+            const [tableResponse, analyticsResponse, interactionResponse, interactionMetricsResponse] = await Promise.all([
                 getRepairLeads({
                     ...baseQuery,
                     page: currentPage,
                     size: pageSize,
                 }),
                 getRepairLeadsMetrics(baseQuery),
+                getLeadInteractions({
+                    dateFrom: dateFrom || undefined,
+                    dateTo: dateTo || undefined,
+                    ctaLocation: ctaLocationFilter === "all" ? undefined : ctaLocationFilter,
+                    page: 1,
+                    size: 10,
+                }),
+                getLeadInteractionsMetrics({
+                    dateFrom: dateFrom || undefined,
+                    dateTo: dateTo || undefined,
+                    ctaLocation: ctaLocationFilter === "all" ? undefined : ctaLocationFilter,
+                }),
             ]);
 
             setTableData({
@@ -361,6 +417,15 @@ export default function AdminLeadsPage() {
                 pages: tableResponse.pages,
             });
             setMetrics(analyticsResponse);
+            setInteractionData(interactionResponse);
+            setInteractionMetrics(interactionMetricsResponse);
+            setSelectedInteraction((current) => {
+                if (current && interactionResponse.items.some((item) => item.interactionId === current.interactionId)) {
+                    return current;
+                }
+
+                return interactionResponse.items[0] ?? null;
+            });
         } catch (error) {
             console.error("Error cargando leads:", error);
             toast({
@@ -378,6 +443,7 @@ export default function AdminLeadsPage() {
         dateFrom,
         dateTo,
         pageSize,
+        ctaLocationFilter,
         repairTypeFilter,
         statusFilter,
         urgencyFilter,
@@ -411,6 +477,7 @@ export default function AdminLeadsPage() {
             qualified: 0,
             converted: 0,
             discarded: 0,
+            duplicated: 0,
         };
 
         for (const bucket of metrics.byStatus) {
@@ -430,6 +497,47 @@ export default function AdminLeadsPage() {
     }, [metrics.byContactChannel]);
 
     const trendData = useMemo(() => buildTrendDataFromMetrics(metrics.byDate, 14), [metrics.byDate]);
+    const interactionTrendData = useMemo(
+        () => buildTrendDataFromMetrics(interactionMetrics.byDate, 14),
+        [interactionMetrics.byDate]
+    );
+    const interactionTotal = interactionMetrics.totalInteractions || interactionData.total;
+
+    const interactionVariantCounts = useMemo(() => {
+        const seed: Record<string, number> = {
+            whatsapp: 0,
+            phone: 0,
+            email: 0,
+            other: 0,
+        };
+
+        for (const bucket of interactionMetrics.byCtaVariant) {
+            const normalizedKey = bucket.key.toLowerCase();
+            if (normalizedKey in seed) {
+                seed[normalizedKey] += bucket.value;
+            } else {
+                seed.other += bucket.value;
+            }
+        }
+
+        return seed;
+    }, [interactionMetrics.byCtaVariant]);
+
+    const topInteractionCtas = useMemo(
+        () => interactionMetrics.byCtaName.slice(0, 5),
+        [interactionMetrics.byCtaName]
+    );
+
+    const topInteractionLocations = useMemo(
+        () => interactionMetrics.byLocation.slice(0, 5),
+        [interactionMetrics.byLocation]
+    );
+
+    const interactionLocationOptions = useMemo(() => {
+        return interactionMetrics.byLocation
+            .map((bucket) => ({ value: bucket.key, label: humanizeToken(bucket.key), total: bucket.value }))
+            .sort((a, b) => b.total - a.total);
+    }, [interactionMetrics.byLocation]);
 
     const leadsTotal = metrics.totalLeads || tableData.total;
     const totalRealLeads = metrics.totalRealLeads || leadsTotal;
@@ -572,6 +680,7 @@ export default function AdminLeadsPage() {
         setRepairTypeFilter("");
         setDateFrom("");
         setDateTo("");
+        setCtaLocationFilter("all");
         setCurrentPage(1);
     };
 
@@ -948,6 +1057,291 @@ export default function AdminLeadsPage() {
 
             <Card>
                 <CardHeader>
+                    <CardTitle>Interacciones registradas</CardTitle>
+                    <CardDescription>
+                        Clicks a WhatsApp, teléfono, email y envíos del wizard almacenados en base.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+                        <div className="rounded-xl border bg-muted/15 p-4">
+                            <p className="text-xs uppercase tracking-wide text-muted-foreground">Total interacciones</p>
+                            <p className="mt-1 text-3xl font-bold">{interactionTotal}</p>
+                            <p className="mt-1 text-xs text-muted-foreground">
+                                Usá el filtro de fechas de arriba para comparar periodos con más clicks.
+                            </p>
+                        </div>
+
+                        <div className="rounded-xl border bg-emerald-50 p-4 dark:bg-emerald-950/20">
+                            <p className="text-xs uppercase tracking-wide text-emerald-700/80 dark:text-emerald-300/80">WhatsApp</p>
+                            <p className="mt-1 text-3xl font-bold text-emerald-700 dark:text-emerald-300">
+                                {interactionVariantCounts.whatsapp || 0}
+                            </p>
+                            <p className="mt-1 text-xs text-emerald-700/75 dark:text-emerald-300/80">Clicks o salidas directas al chat.</p>
+                        </div>
+
+                        <div className="rounded-xl border bg-sky-50 p-4 dark:bg-sky-950/20">
+                            <p className="text-xs uppercase tracking-wide text-sky-700/80 dark:text-sky-300/80">Llamada</p>
+                            <p className="mt-1 text-3xl font-bold text-sky-700 dark:text-sky-300">
+                                {interactionVariantCounts.phone || 0}
+                            </p>
+                            <p className="mt-1 text-xs text-sky-700/75 dark:text-sky-300/80">Intenciones de contacto por teléfono.</p>
+                        </div>
+
+                        <div className="rounded-xl border bg-violet-50 p-4 dark:bg-violet-950/20">
+                            <p className="text-xs uppercase tracking-wide text-violet-700/80 dark:text-violet-300/80">Email</p>
+                            <p className="mt-1 text-3xl font-bold text-violet-700 dark:text-violet-300">
+                                {interactionVariantCounts.email || 0}
+                            </p>
+                            <p className="mt-1 text-xs text-violet-700/75 dark:text-violet-300/80">Mensajes y respuestas por correo.</p>
+                        </div>
+
+                        <div className="rounded-xl border bg-amber-50 p-4 dark:bg-amber-950/20">
+                            <p className="text-xs uppercase tracking-wide text-amber-700/80 dark:text-amber-300/80">Otros</p>
+                            <p className="mt-1 text-3xl font-bold text-amber-700 dark:text-amber-300">
+                                {interactionVariantCounts.other || 0}
+                            </p>
+                            <p className="mt-1 text-xs text-amber-700/75 dark:text-amber-300/80">Primary, secondary, Instagram y variantes genéricas.</p>
+                        </div>
+                    </div>
+
+                    <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_220px] md:items-end">
+                        <div>
+                            <h3 className="text-sm font-semibold">Filtrar por ubicación del click</h3>
+                            <p className="text-sm text-muted-foreground">
+                                Elegí desde qué CTA o bloque estás viendo los clicks para comparar qué ubicación convierte mejor.
+                            </p>
+                        </div>
+
+                        <Select
+                            value={ctaLocationFilter}
+                            onValueChange={(value) => {
+                                setCtaLocationFilter(value);
+                                setCurrentPage(1);
+                            }}
+                        >
+                            <SelectTrigger>
+                                <SelectValue placeholder="Ubicación del click" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="all">Todas las ubicaciones</SelectItem>
+                                {interactionLocationOptions.map((option) => (
+                                    <SelectItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    <div className="grid gap-4 xl:grid-cols-3">
+                        <div className="rounded-xl border p-4 xl:col-span-1">
+                            <h3 className="font-semibold">Por variante</h3>
+                            <div className="mt-3 space-y-3">
+                                {interactionMetrics.byCtaVariant.length === 0 ? (
+                                    <p className="text-sm text-muted-foreground">Sin datos para el rango filtrado.</p>
+                                ) : (
+                                    interactionMetrics.byCtaVariant.map((bucket) => {
+                                        const maxValue = Math.max(...interactionMetrics.byCtaVariant.map((item) => item.value), 1);
+                                        const width = (bucket.value / maxValue) * 100;
+
+                                        return (
+                                            <div key={bucket.key} className="space-y-1">
+                                                <div className="flex items-center justify-between text-sm">
+                                                    <span>{humanizeToken(bucket.key)}</span>
+                                                    <span className="font-medium">{bucket.value}</span>
+                                                </div>
+                                                <div className="h-2 rounded-full bg-muted">
+                                                    <div
+                                                        className="h-2 rounded-full bg-primary transition-all"
+                                                        style={{ width: `${width}%` }}
+                                                    />
+                                                </div>
+                                            </div>
+                                        );
+                                    })
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="rounded-xl border p-4 xl:col-span-1">
+                            <h3 className="font-semibold">CTAs con más clicks</h3>
+                            <div className="mt-3 space-y-4">
+                                <div>
+                                    <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Nombre del CTA</p>
+                                    <div className="mt-2 space-y-2">
+                                        {topInteractionCtas.length === 0 ? (
+                                            <p className="text-sm text-muted-foreground">Sin CTAs registrados.</p>
+                                        ) : (
+                                            topInteractionCtas.map((bucket) => (
+                                                <div key={bucket.key} className="flex items-center justify-between rounded-lg border bg-muted/20 px-3 py-2 text-sm">
+                                                    <span>{humanizeToken(bucket.key)}</span>
+                                                    <span className="font-semibold">{bucket.value}</span>
+                                                </div>
+                                            ))
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Ubicación del click</p>
+                                    <div className="mt-2 space-y-2">
+                                        {topInteractionLocations.length === 0 ? (
+                                            <p className="text-sm text-muted-foreground">Sin ubicaciones registradas.</p>
+                                        ) : (
+                                            topInteractionLocations.map((bucket) => (
+                                                <div key={bucket.key} className="rounded-lg border bg-muted/20 px-3 py-2 text-sm">
+                                                    <div className="flex items-center justify-between gap-3">
+                                                        <span className="truncate">{bucket.key}</span>
+                                                        <span className="font-semibold">{bucket.value}</span>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="rounded-xl border p-4 xl:col-span-1">
+                            <h3 className="font-semibold">Últimos detalles</h3>
+                            <p className="mt-1 text-xs text-muted-foreground">
+                                Click en una fila para inspeccionar el payload completo.
+                            </p>
+                            <div className="mt-3 grid gap-3">
+                                <DetailRow label="Lead attempt" value={selectedInteraction?.leadAttemptId} mono />
+                                <DetailRow label="CTA" value={selectedInteraction?.ctaName} />
+                                <DetailRow label="Ubicación" value={selectedInteraction?.ctaLocation} />
+                                <DetailRow label="Destino" value={selectedInteraction?.destination} mono />
+                                <DetailRow label="Página" value={selectedInteraction?.pagePath} mono />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="rounded-xl border p-4">
+                        <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+                            <div>
+                                <h3 className="font-semibold">Clicks por día</h3>
+                                <p className="text-sm text-muted-foreground">
+                                    Usa el rango actual para detectar períodos con más intención de contacto.
+                                </p>
+                            </div>
+                            <p className="text-xs text-muted-foreground">
+                                Fuente: interacciones registradas en base.
+                            </p>
+                        </div>
+                        <div className="mt-4">
+                            <TrendChart points={interactionTrendData} />
+                        </div>
+                    </div>
+
+                    <div className="overflow-x-auto rounded-xl border">
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Fecha</TableHead>
+                                    <TableHead>CTA</TableHead>
+                                    <TableHead>Ubicación</TableHead>
+                                    <TableHead>Variante</TableHead>
+                                    <TableHead>Página</TableHead>
+                                    <TableHead>Attempt</TableHead>
+                                    <TableHead className="text-right">Acciones</TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {isLoading ? (
+                                    <TableRow>
+                                        <TableCell colSpan={7}>
+                                            <div className="space-y-2 py-4">
+                                                {[...Array(4)].map((_, index) => (
+                                                    <Skeleton key={`interaction-skeleton-${index}`} className="h-10 w-full" />
+                                                ))}
+                                            </div>
+                                        </TableCell>
+                                    </TableRow>
+                                ) : interactionData.items.length === 0 ? (
+                                    <TableRow>
+                                        <TableCell colSpan={7}>
+                                            <div className="py-8 text-center text-sm text-muted-foreground">
+                                                Aún no hay interacciones para este rango.
+                                            </div>
+                                        </TableCell>
+                                    </TableRow>
+                                ) : (
+                                    interactionData.items.map((interaction) => (
+                                        <TableRow key={interaction.interactionId}>
+                                            <TableCell className="text-sm text-muted-foreground">
+                                                {formatDateTime(interaction.createdAt)}
+                                            </TableCell>
+                                            <TableCell>
+                                                <div>
+                                                    <p className="font-medium">{interaction.ctaName}</p>
+                                                    <p className="text-xs text-muted-foreground">{humanizeToken(interaction.eventName)}</p>
+                                                </div>
+                                            </TableCell>
+                                            <TableCell>
+                                                <p className="max-w-44 truncate text-sm">{formatLeadValue(interaction.ctaLocation, "Sin ubicación")}</p>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Badge variant="outline">{humanizeToken(interaction.ctaVariant)}</Badge>
+                                            </TableCell>
+                                            <TableCell className="max-w-56">
+                                                <p className="truncate text-sm">{interaction.pagePath}</p>
+                                            </TableCell>
+                                            <TableCell>
+                                                <p className="max-w-44 truncate text-sm text-muted-foreground">
+                                                    {formatLeadValue(interaction.leadAttemptId, "Sin attempt")}
+                                                </p>
+                                            </TableCell>
+                                            <TableCell className="text-right">
+                                                <Button
+                                                    variant="outline"
+                                                    size="sm"
+                                                    onClick={() => setSelectedInteraction(interaction)}
+                                                >
+                                                    Ver detalle
+                                                </Button>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))
+                                )}
+                            </TableBody>
+                        </Table>
+                    </div>
+
+                    {selectedInteraction ? (
+                        <div className="grid gap-4 lg:grid-cols-2">
+                            <div className="rounded-xl border p-4">
+                                <h3 className="font-semibold">Detalle de interacción</h3>
+                                <div className="mt-3 grid gap-3 md:grid-cols-2">
+                                    <DetailRow label="Evento" value={selectedInteraction.eventName} />
+                                    <DetailRow label="CTA" value={selectedInteraction.ctaName} />
+                                    <DetailRow label="Ubicación" value={selectedInteraction.ctaLocation} />
+                                    <DetailRow label="Variante" value={selectedInteraction.ctaVariant} />
+                                    <DetailRow label="Página" value={selectedInteraction.pagePath} mono />
+                                    <DetailRow label="Attempt" value={selectedInteraction.leadAttemptId} mono />
+                                    <DetailRow label="Marca" value={selectedInteraction.brand} />
+                                    <DetailRow label="Modelo" value={selectedInteraction.model} />
+                                    <DetailRow label="Falla" value={selectedInteraction.repairType} />
+                                    <DetailRow label="Canal" value={selectedInteraction.contactChannel} />
+                                    <DetailRow label="Destino" value={selectedInteraction.destination} mono />
+                                    <DetailRow label="Origen" value={selectedInteraction.referrer} mono />
+                                </div>
+                            </div>
+
+                            <div className="rounded-xl border p-4">
+                                <h3 className="font-semibold">Payload crudo</h3>
+                                <pre className="mt-3 max-h-80 overflow-auto rounded-lg bg-slate-950 p-4 text-xs leading-5 text-slate-100">
+                                    {selectedInteraction.payloadJson}
+                                </pre>
+                            </div>
+                        </div>
+                    ) : null}
+                </CardContent>
+            </Card>
+
+            <Card>
+                <CardHeader>
                     <CardTitle>Lista Operativa</CardTitle>
                     <CardDescription>
                         Mostrando {tableData.items.length} de {tableData.total} lead(s).
@@ -974,7 +1368,7 @@ export default function AdminLeadsPage() {
                                     <TableHeader>
                                         <TableRow>
                                             <TableHead>Fecha</TableHead>
-                                            <TableHead>Cliente / Equipo</TableHead>
+                                            <TableHead>Contacto / Equipo</TableHead>
                                             <TableHead>Falla</TableHead>
                                             <TableHead>Urgencia</TableHead>
                                             <TableHead>Canal</TableHead>
@@ -990,9 +1384,14 @@ export default function AdminLeadsPage() {
                                                 </TableCell>
                                                 <TableCell>
                                                     <div>
-                                                        <p className="font-medium">{lead.fullName}</p>
+                                                        <p className="font-medium">
+                                                            {formatLeadValue(lead.contact, "Sin contacto")}
+                                                        </p>
                                                         <p className="text-xs text-muted-foreground">
-                                                            {lead.brand} {lead.model} • {lead.phone}
+                                                            {lead.brand} {lead.model}
+                                                        </p>
+                                                        <p className="text-xs text-muted-foreground">
+                                                            {formatLeadValue(lead.wizardSource, "Origen web")}
                                                         </p>
                                                     </div>
                                                 </TableCell>
@@ -1127,14 +1526,22 @@ export default function AdminLeadsPage() {
                             <div className="space-y-6">
                                 <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
                                     <div className="rounded-lg border p-3">
-                                        <p className="text-xs text-muted-foreground">Cliente</p>
-                                        <p className="font-semibold">{selectedLeadDetail.lead.fullName}</p>
-                                        <p className="text-sm text-muted-foreground">{selectedLeadDetail.lead.phone}</p>
+                                        <p className="text-xs text-muted-foreground">Contacto</p>
+                                        <p className="font-semibold">
+                                            {formatLeadValue(selectedLeadDetail.lead.contact, "Sin contacto")}
+                                        </p>
+                                        <p className="text-sm text-muted-foreground">
+                                            {humanizeToken(selectedLeadDetail.lead.contactChannel)}
+                                        </p>
                                     </div>
                                     <div className="rounded-lg border p-3">
-                                        <p className="text-xs text-muted-foreground">Equipo</p>
-                                        <p className="font-semibold">{selectedLeadDetail.lead.brand} {selectedLeadDetail.lead.model}</p>
-                                        <p className="text-sm text-muted-foreground">{humanizeToken(selectedLeadDetail.lead.repairType)}</p>
+                                        <p className="text-xs text-muted-foreground">Equipo y falla</p>
+                                        <p className="font-semibold">
+                                            {selectedLeadDetail.lead.brand} {selectedLeadDetail.lead.model}
+                                        </p>
+                                        <p className="text-sm text-muted-foreground">
+                                            {humanizeToken(selectedLeadDetail.lead.repairType)}
+                                        </p>
                                     </div>
                                     <div className="rounded-lg border p-3">
                                         <p className="text-xs text-muted-foreground">Estado</p>
@@ -1142,16 +1549,102 @@ export default function AdminLeadsPage() {
                                             {STATUS_LABELS[selectedLeadDetail.lead.status]}
                                         </Badge>
                                         <p className="mt-2 text-sm text-muted-foreground">
+                                            Creado: {formatDateTime(selectedLeadDetail.lead.createdAt)}
+                                        </p>
+                                        <p className="text-sm text-muted-foreground">
                                             Actualizado: {formatDateTime(selectedLeadDetail.lead.updatedAt)}
                                         </p>
                                     </div>
                                     <div className="rounded-lg border p-3">
-                                        <p className="text-xs text-muted-foreground">Canal / Urgencia</p>
-                                        <div className="mt-1 flex flex-wrap gap-2">
-                                            <Badge variant="outline">{humanizeToken(selectedLeadDetail.lead.contactChannel)}</Badge>
-                                            <Badge className={getUrgencyClassName(selectedLeadDetail.lead.urgency)}>
-                                                {humanizeToken(selectedLeadDetail.lead.urgency)}
-                                            </Badge>
+                                        <p className="text-xs text-muted-foreground">Trazabilidad</p>
+                                        <p className="font-semibold">
+                                            {formatLeadValue(selectedLeadDetail.lead.leadAttemptId, "Sin attempt id")}
+                                        </p>
+                                        <p className="text-sm text-muted-foreground">
+                                            {formatLeadValue(selectedLeadDetail.lead.wizardSource, "Origen web")}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="grid gap-4 xl:grid-cols-3">
+                                    <div className="space-y-3 xl:col-span-2">
+                                        <div className="rounded-2xl border p-4">
+                                            <h3 className="font-semibold">Datos del lead</h3>
+                                            <div className="mt-3 grid gap-3 md:grid-cols-2">
+                                                <DetailRow label="Lead ID" value={selectedLeadDetail.lead.id} mono />
+                                                <DetailRow
+                                                    label="Attempt ID"
+                                                    value={selectedLeadDetail.lead.leadAttemptId}
+                                                    mono
+                                                />
+                                                <DetailRow label="Origen wizard" value={selectedLeadDetail.lead.wizardSource} />
+                                                <DetailRow label="Origen operativo" value={selectedLeadDetail.lead.source} />
+                                                <DetailRow label="Contacto" value={selectedLeadDetail.lead.contact} />
+                                                <DetailRow
+                                                    label="Canal"
+                                                    value={humanizeToken(selectedLeadDetail.lead.contactChannel)}
+                                                />
+                                                <DetailRow label="Estado" value={STATUS_LABELS[selectedLeadDetail.lead.status]} />
+                                                <DetailRow
+                                                    label="Duplicado de"
+                                                    value={selectedLeadDetail.lead.duplicateOf}
+                                                    mono
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="rounded-2xl border p-4">
+                                            <h3 className="font-semibold">Equipo y contexto</h3>
+                                            <div className="mt-3 grid gap-3 md:grid-cols-2">
+                                                <DetailRow label="Marca" value={selectedLeadDetail.lead.brand} />
+                                                <DetailRow label="Modelo" value={selectedLeadDetail.lead.model} />
+                                                <DetailRow
+                                                    label="Tipo de reparación"
+                                                    value={selectedLeadDetail.lead.repairType}
+                                                />
+                                                <DetailRow
+                                                    label="Urgencia"
+                                                    value={humanizeToken(selectedLeadDetail.lead.urgency)}
+                                                />
+                                                <DetailRow
+                                                    label="Descripción"
+                                                    value={selectedLeadDetail.lead.description}
+                                                />
+                                                <DetailRow
+                                                    label="WhatsApp generado"
+                                                    value={selectedLeadDetail.lead.whatsappUrl}
+                                                    mono
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-3">
+                                        <div className="rounded-2xl border p-4">
+                                            <h3 className="font-semibold">UTM</h3>
+                                            <div className="mt-3 space-y-3">
+                                                <DetailRow label="Source" value={selectedLeadDetail.lead.utm?.source} />
+                                                <DetailRow label="Medium" value={selectedLeadDetail.lead.utm?.medium} />
+                                                <DetailRow label="Campaign" value={selectedLeadDetail.lead.utm?.campaign} />
+                                                <DetailRow label="Content" value={selectedLeadDetail.lead.utm?.content} />
+                                                <DetailRow label="Term" value={selectedLeadDetail.lead.utm?.term} />
+                                            </div>
+                                        </div>
+
+                                        <div className="rounded-2xl border p-4">
+                                            <h3 className="font-semibold">Metadata</h3>
+                                            <div className="mt-3 space-y-3">
+                                                <DetailRow label="IP" value={selectedLeadDetail.lead.metadata?.ip} mono />
+                                                <DetailRow
+                                                    label="User agent"
+                                                    value={selectedLeadDetail.lead.metadata?.userAgent}
+                                                />
+                                                <DetailRow
+                                                    label="Referrer"
+                                                    value={selectedLeadDetail.lead.metadata?.referrer}
+                                                    mono
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

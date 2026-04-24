@@ -3,15 +3,12 @@
 import Link from "next/link";
 import { track } from "@vercel/analytics";
 import type { MouseEventHandler, ReactNode } from "react";
+import {
+  recordLeadInteraction,
+  type LeadInteractionCtaVariant,
+} from "@/lib/analytics/leadInteractions";
 
-type CtaVariant =
-  | "primary"
-  | "secondary"
-  | "whatsapp"
-  | "phone"
-  | "email"
-  | "instagram"
-  | "other";
+type CtaVariant = LeadInteractionCtaVariant;
 
 interface TrackedCtaLinkProps {
   href: string;
@@ -39,6 +36,14 @@ function trackCta(
     cta_name: ctaName,
     cta_location: ctaLocation,
     cta_variant: ctaVariant,
+    destination: href,
+  });
+
+  recordLeadInteraction({
+    eventName,
+    ctaName,
+    ctaLocation,
+    ctaVariant,
     destination: href,
   });
 }

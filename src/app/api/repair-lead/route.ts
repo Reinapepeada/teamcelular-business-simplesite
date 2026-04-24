@@ -14,6 +14,7 @@ type LeadCreatePayload = {
   description?: string;
   contactChannel: string;
   contact?: string;
+  leadAttemptId?: string;
   wizardSource?: string;
   metadata?: {
     ip?: string;
@@ -173,6 +174,7 @@ export async function POST(request: Request) {
     description: description || undefined,
     contactChannel,
     contact: contact || undefined,
+    leadAttemptId: leadAttemptId || undefined,
     wizardSource: wizardSource || undefined,
     metadata: {
       ip: clientIp,

@@ -9,6 +9,7 @@ import {
     BUDGET_WIZARD_VERSION,
     buildBudgetFunnelPayload,
 } from "@/lib/analytics/budgetFunnel";
+import { recordLeadInteraction } from "@/lib/analytics/leadInteractions";
 import {
     FaArrowLeft,
     FaArrowRight,
@@ -247,6 +248,8 @@ export default function RepairsForm() {
 
         submittedRef.current = true;
 
+        const currentStep = BUDGET_WIZARD_STEPS[stepIndex] || BUDGET_WIZARD_STEPS[LAST_STEP_INDEX];
+
         const submitPayload = buildBudgetFunnelPayload({
             stepIndex,
             extra: {
@@ -255,6 +258,29 @@ export default function RepairsForm() {
                 urgency,
                 contact_channel: contactChannel,
             },
+        });
+
+        recordLeadInteraction({
+            eventName: "lead_whatsapp_redirect",
+            ctaName: "budget_wizard_submit",
+            ctaLocation: "presupuesto_reparacion_wizard",
+            ctaVariant: "whatsapp",
+            destination: "whatsapp",
+            leadAttemptId,
+            formName: "repair_budget_wizard",
+            formLocation: "presupuesto_reparacion",
+            formVersion: BUDGET_WIZARD_VERSION,
+            stepIndex: stepIndex + 1,
+            stepId: currentStep.id,
+            stepLabel: currentStep.label,
+            totalSteps: BUDGET_WIZARD_STEPS.length,
+            brand,
+            model,
+            repairType: repairTypeLabel || "sin_definir",
+            urgency,
+            contactChannel,
+            contact,
+            description,
         });
 
         track(BUDGET_FUNNEL_EVENTS.submit, submitPayload);
