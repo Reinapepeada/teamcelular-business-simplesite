@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 
+const DEFAULT_API_BASE_URL = "https://fastapi-teamcelular-dev.up.railway.app";
 const API_BASE_URL =
-  (process.env.NEXT_PUBLIC_API_URL?.trim() || process.env.API_URL?.trim() || "").replace(/\/+$/, "");
+  (process.env.NEXT_PUBLIC_API_URL?.trim() || process.env.API_URL?.trim() || DEFAULT_API_BASE_URL).replace(/\/+$/, "");
 
 type LeadInteractionPayload = {
   eventName?: string;

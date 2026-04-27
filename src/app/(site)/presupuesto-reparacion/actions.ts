@@ -2,8 +2,9 @@
 
 import { redirect } from "next/navigation";
 
+const DEFAULT_API_BASE_URL = "https://fastapi-teamcelular-dev.up.railway.app";
 const API_BASE_URL =
-    (process.env.NEXT_PUBLIC_API_URL?.trim() || process.env.API_URL?.trim() || "").replace(/\/+$/, "");
+    (process.env.NEXT_PUBLIC_API_URL?.trim() || process.env.API_URL?.trim() || DEFAULT_API_BASE_URL).replace(/\/+$/, "");
 const FALLBACK_WHATSAPP_NUMBER =
     process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.replace(/\D+/g, "") || "5491151034595";
 

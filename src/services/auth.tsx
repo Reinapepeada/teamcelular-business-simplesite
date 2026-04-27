@@ -1,6 +1,6 @@
 "use client";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const API_URL = process.env.NEXT_PUBLIC_API_URL?.trim() || "https://fastapi-teamcelular-dev.up.railway.app";
 
 // Tipos de respuesta
 export interface LoginResponse {

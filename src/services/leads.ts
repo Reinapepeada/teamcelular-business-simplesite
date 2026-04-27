@@ -1,6 +1,7 @@
 import { getToken } from "@/services/auth";
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+const DEFAULT_API_URL = "https://fastapi-teamcelular-dev.up.railway.app";
+const apiUrl = (process.env.NEXT_PUBLIC_API_URL?.trim() || DEFAULT_API_URL).replace(/\/+$/, "");
 
 export type RepairLeadStatus =
     | "new"
@@ -844,10 +845,6 @@ async function authenticatedLeadsRequest<T>(
     endpoint: string,
     options: RequestInit = {}
 ): Promise<T> {
-    if (!apiUrl) {
-        throw new LeadsApiError(500, "NEXT_PUBLIC_API_URL no está configurada");
-    }
-
     const token = getToken();
 
     if (!token) {
