@@ -96,6 +96,41 @@ const CHANNEL_OPTIONS = [
 
 const PAGE_SIZE_OPTIONS = [10, 20, 50];
 
+const EMPTY_TABLE_DATA: { items: RepairLead[]; total: number; page: number; pages: number } = {
+    items: [],
+    total: 0,
+    page: 1,
+    pages: 1,
+};
+
+const EMPTY_LEADS_METRICS: RepairLeadsMetricsResponse = {
+    totalLeads: 0,
+    totalRealLeads: 0,
+    convertedLeads: 0,
+    conversionRate: 0,
+    byStatus: [],
+    byContactChannel: [],
+    byDate: [],
+};
+
+const EMPTY_INTERACTION_DATA: LeadInteractionsListResponse = {
+    items: [],
+    total: 0,
+    page: 1,
+    size: 10,
+    pages: 1,
+};
+
+const EMPTY_INTERACTION_METRICS: LeadInteractionsMetricsResponse = {
+    totalInteractions: 0,
+    byEvent: [],
+    byCtaName: [],
+    byCtaVariant: [],
+    byPage: [],
+    byLocation: [],
+    byDate: [],
+};
+
 interface TrendPoint {
     key: string;
     label: string;
@@ -142,6 +177,18 @@ function formatLeadValue(value: string | null | undefined, fallback = "Sin dato"
 
     const trimmed = value.trim();
     return trimmed.length > 0 ? trimmed : fallback;
+}
+
+function getRequestErrorMessage(error: unknown, fallback: string): string {
+    if (error instanceof Error && error.message.trim().length > 0) {
+        return error.message;
+    }
+
+    if (typeof error === "string" && error.trim().length > 0) {
+        return error;
+    }
+
+    return fallback;
 }
 
 function DetailRow({
@@ -324,48 +371,16 @@ export default function AdminLeadsPage() {
     const [pageSize, setPageSize] = useState(20);
     const [currentPage, setCurrentPage] = useState(1);
 
-    const [tableData, setTableData] = useState<{
-        items: RepairLead[];
-        total: number;
-        page: number;
-        pages: number;
-    }>({
-        items: [],
-        total: 0,
-        page: 1,
-        pages: 1,
-    });
-
-    const [metrics, setMetrics] = useState<RepairLeadsMetricsResponse>({
-        totalLeads: 0,
-        totalRealLeads: 0,
-        convertedLeads: 0,
-        conversionRate: 0,
-        byStatus: [],
-        byContactChannel: [],
-        byDate: [],
-    });
-    const [interactionData, setInteractionData] = useState<LeadInteractionsListResponse>({
-        items: [],
-        total: 0,
-        page: 1,
-        size: 10,
-        pages: 1,
-    });
-    const [interactionMetrics, setInteractionMetrics] = useState<LeadInteractionsMetricsResponse>({
-        totalInteractions: 0,
-        byEvent: [],
-        byCtaName: [],
-        byCtaVariant: [],
-        byPage: [],
-        byLocation: [],
-        byDate: [],
-    });
+    const [tableData, setTableData] = useState(EMPTY_TABLE_DATA);
+    const [metrics, setMetrics] = useState(EMPTY_LEADS_METRICS);
+    const [interactionData, setInteractionData] = useState(EMPTY_INTERACTION_DATA);
+    const [interactionMetrics, setInteractionMetrics] = useState(EMPTY_INTERACTION_METRICS);
 
     const [isLoading, setIsLoading] = useState(true);
     const [isRefreshing, setIsRefreshing] = useState(false);
     const [updatingLeadId, setUpdatingLeadId] = useState<string | null>(null);
     const [selectedInteraction, setSelectedInteraction] = useState<LeadInteraction | null>(null);
+    const [loadWarning, setLoadWarning] = useState<string | null>(null);
 
     const [selectedLeadDetail, setSelectedLeadDetail] = useState<RepairLeadDetail | null>(null);
     const [isLoadingDetail, setIsLoadingDetail] = useState(false);
@@ -389,7 +404,7 @@ export default function AdminLeadsPage() {
                 dateTo: dateTo || undefined,
             };
 
-            const [tableResponse, analyticsResponse, interactionResponse, interactionMetricsResponse] = await Promise.all([
+            const [tableResponse, analyticsResponse, interactionResponse, interactionMetricsResponse] = await Promise.allSettled([
                 getRepairLeads({
                     ...baseQuery,
                     page: currentPage,
@@ -410,24 +425,68 @@ export default function AdminLeadsPage() {
                 }),
             ]);
 
-            setTableData({
-                items: tableResponse.items,
-                total: tableResponse.total,
-                page: tableResponse.page,
-                pages: tableResponse.pages,
-            });
-            setMetrics(analyticsResponse);
-            setInteractionData(interactionResponse);
-            setInteractionMetrics(interactionMetricsResponse);
-            setSelectedInteraction((current) => {
-                if (current && interactionResponse.items.some((item) => item.interactionId === current.interactionId)) {
-                    return current;
-                }
+            const failedSections: string[] = [];
 
-                return interactionResponse.items[0] ?? null;
-            });
+            if (tableResponse.status === "fulfilled") {
+                setTableData({
+                    items: tableResponse.value.items,
+                    total: tableResponse.value.total,
+                    page: tableResponse.value.page,
+                    pages: tableResponse.value.pages,
+                });
+            } else {
+                setTableData(EMPTY_TABLE_DATA);
+                failedSections.push(`tabla de leads (${getRequestErrorMessage(tableResponse.reason, "sin detalle")})`);
+            }
+
+            if (analyticsResponse.status === "fulfilled") {
+                setMetrics(analyticsResponse.value);
+            } else {
+                setMetrics(EMPTY_LEADS_METRICS);
+                failedSections.push(`métricas (${getRequestErrorMessage(analyticsResponse.reason, "sin detalle")})`);
+            }
+
+            if (interactionResponse.status === "fulfilled") {
+                setInteractionData(interactionResponse.value);
+                setSelectedInteraction((current) => {
+                    if (
+                        current &&
+                        interactionResponse.value.items.some((item) => item.interactionId === current.interactionId)
+                    ) {
+                        return current;
+                    }
+
+                    return interactionResponse.value.items[0] ?? null;
+                });
+            } else {
+                setInteractionData(EMPTY_INTERACTION_DATA);
+                setSelectedInteraction(null);
+                setSelectedLeadDetail(null);
+                failedSections.push(`interacciones (${getRequestErrorMessage(interactionResponse.reason, "sin detalle")})`);
+            }
+
+            if (interactionMetricsResponse.status === "fulfilled") {
+                setInteractionMetrics(interactionMetricsResponse.value);
+            } else {
+                setInteractionMetrics(EMPTY_INTERACTION_METRICS);
+                failedSections.push(`métricas de interacciones (${getRequestErrorMessage(interactionMetricsResponse.reason, "sin detalle")})`);
+            }
+
+            if (failedSections.length > 0) {
+                const warning = `Se cargaron solo algunos bloques: ${failedSections.join(", ")}.`;
+                setLoadWarning(warning);
+                toast({
+                    variant: "destructive",
+                    title: "Carga parcial de leads",
+                    description: "La tabla puede verse incompleta. Reintentá actualizar si hace falta.",
+                });
+                console.warn("Carga parcial del panel de leads:", warning);
+            } else {
+                setLoadWarning(null);
+            }
         } catch (error) {
             console.error("Error cargando leads:", error);
+            setLoadWarning("No se pudieron cargar los datos del panel.");
             toast({
                 variant: "destructive",
                 title: "Error al cargar leads",
@@ -703,6 +762,22 @@ export default function AdminLeadsPage() {
                     Actualizar
                 </Button>
             </div>
+
+            {loadWarning ? (
+                <Card className="border-amber-300 bg-amber-50/70 dark:border-amber-900/50 dark:bg-amber-950/25">
+                    <CardContent className="flex items-start gap-3 pt-6">
+                        <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-700 dark:text-amber-300" />
+                        <div className="space-y-1">
+                            <p className="font-semibold text-amber-900 dark:text-amber-100">
+                                Carga parcial del panel
+                            </p>
+                            <p className="text-sm leading-6 text-amber-800 dark:text-amber-200">
+                                {loadWarning}
+                            </p>
+                        </div>
+                    </CardContent>
+                </Card>
+            ) : null}
 
             <Card>
                 <CardHeader>
