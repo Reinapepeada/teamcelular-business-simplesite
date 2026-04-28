@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { FormEvent } from "react";
 import { track } from "@vercel/analytics";
 import {
     BUDGET_FUNNEL_EVENTS,
@@ -239,9 +238,7 @@ export default function RepairsForm() {
         setStepIndex((current) => Math.min(current + 1, LAST_STEP_INDEX));
     }
 
-    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-
+    async function handleFinalSend() {
         if (isSubmitting) {
             return;
         }
@@ -256,7 +253,17 @@ export default function RepairsForm() {
         setErrorMessage("");
 
         try {
-            const formData = new FormData(event.currentTarget);
+            const formData = new FormData();
+            formData.set("brand", brand);
+            formData.set("model", model);
+            repairTypes.forEach((repairType) => formData.append("repairType", repairType));
+            formData.set("urgency", urgency);
+            formData.set("description", description);
+            formData.set("contactChannel", contactChannel);
+            formData.set("contact", contact);
+            formData.set("wizardSource", `budget_wizard_${BUDGET_WIZARD_VERSION}`);
+            formData.set("leadAttemptId", leadAttemptId);
+
             const response = await fetch("/api/repair-lead", {
                 method: "POST",
                 body: formData,
@@ -536,7 +543,7 @@ export default function RepairsForm() {
     }
 
     return (
-        <form className="space-y-6" onSubmit={handleSubmit}>
+        <div className="space-y-6">
             <p className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-700 dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-300">
                 Te toma menos de 1 minuto. Te respondemos por WhatsApp en hasta 2 horas habiles.
                 Si hace falta revision tecnica, confirmamos diagnostico inicial dentro de 24 horas habiles.
@@ -631,7 +638,8 @@ export default function RepairsForm() {
                     </button>
                 ) : (
                     <button
-                        type="submit"
+                        type="button"
+                        onClick={() => void handleFinalSend()}
                         disabled={isSubmitting}
                         className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/20 transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:opacity-70"
                     >
@@ -648,6 +656,6 @@ export default function RepairsForm() {
             <p className="text-xs leading-5 text-slate-500 dark:text-slate-400">
                 Solo usamos esta informacion para responder tu consulta tecnica.
             </p>
-        </form>
+        </div>
     );
 }
