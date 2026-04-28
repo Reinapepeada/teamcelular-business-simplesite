@@ -39,6 +39,29 @@ const frequentRepairs = [
   },
 ];
 
+const highIntentLinks = [
+  {
+    label: "Cambio de pantalla en CABA",
+    href: "/reparaciones/cambio-pantalla-caba",
+  },
+  {
+    label: "Cambio de bateria en CABA",
+    href: "/reparaciones/cambio-bateria-caba",
+  },
+  {
+    label: "Cambio de pin de carga en CABA",
+    href: "/reparaciones/cambio-pin-carga-caba",
+  },
+  {
+    label: "Reparacion iPhone en Buenos Aires",
+    href: "/guias/reparacion-iphone-buenos-aires",
+  },
+  {
+    label: "Reparacion Samsung en Buenos Aires",
+    href: "/guias/reparacion-samsung-buenos-aires",
+  },
+];
+
 const faqs = [
   {
     q: "Si busco reparacion de celulares cerca de mi, atienden en el dia?",
@@ -56,6 +79,12 @@ const faqs = [
     q: "La reparacion tiene garantia?",
     a: WARRANTY_SCOPE_MESSAGE,
   },
+];
+
+const localSignals = [
+  "Laboratorio fisico en Paraguay 2451, Recoleta (CABA).",
+  "Atencion comercial de lunes a viernes de 10:30 a 18:00.",
+  "Seguimiento por WhatsApp y garantia escrita por servicio.",
 ];
 
 export const metadata: Metadata = buildWebsiteMetadata({
@@ -115,6 +144,41 @@ export default function ReparacionCelularesCercaPage() {
         text: faq.a,
       },
     })),
+  };
+
+  const localBusinessJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `${SITE_URL}#localbusiness`,
+    name: "Team Celular",
+    image: `${SITE_URL}/images/brand/imagotipo-dark.png`,
+    url: `${SITE_URL}/sucursales/caba/recoleta`,
+    telephone: "+54 11 5103-4595",
+    priceRange: "$$",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Paraguay 2451",
+      addressLocality: "Recoleta",
+      addressRegion: "CABA",
+      postalCode: "C1121",
+      addressCountry: "AR",
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+        ],
+        opens: "10:30",
+        closes: "18:00",
+      },
+    ],
+    areaServed: ["Recoleta", "Palermo", "Belgrano", "Caballito", "CABA"],
+    sameAs: ["https://wa.me/5491151034595"],
   };
 
   return (
@@ -205,6 +269,48 @@ export default function ReparacionCelularesCercaPage() {
       </section>
 
       <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+          Señales locales para validar cercania real
+        </h2>
+        <ul className="mt-4 space-y-3 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+          {localSignals.map((signal) => (
+            <li key={signal} className="rounded-xl border border-white/10 bg-white/10 px-4 py-3 dark:border-white/5 dark:bg-slate-900/40">
+              {signal}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-5 flex flex-wrap gap-3">
+          <Link href="/sucursales/caba/recoleta" className="inline-flex font-semibold text-primary hover:underline">
+            Ver sucursal en Recoleta
+          </Link>
+          <span className="text-slate-400">•</span>
+          <Link href="/contacto" className="inline-flex font-semibold text-primary hover:underline">
+            Ver datos de contacto
+          </Link>
+        </div>
+      </section>
+
+      <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+          Rutas recomendadas para resolver la falla rapido
+        </h2>
+        <p className="mt-3 text-slate-600 dark:text-slate-300">
+          Si ya sabes el sintoma, entra directo en la pagina exacta para acelerar diagnostico y presupuesto.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-3">
+          {highIntentLinks.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-slate-800 transition hover:-translate-y-0.5 hover:shadow-md dark:border-white/5 dark:bg-slate-900/40 dark:text-slate-200"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Preguntas frecuentes</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {faqs.map((faq) => (
@@ -226,6 +332,10 @@ export default function ReparacionCelularesCercaPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
       />
     </section>
   );
