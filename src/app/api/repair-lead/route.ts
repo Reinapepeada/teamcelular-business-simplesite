@@ -26,11 +26,17 @@ type LeadCreatePayload = {
 
 type LeadCreateResponse = {
   data?: {
+    leadId?: string;
+    status?: string;
+    replayed?: boolean;
     whatsappUrl?: string;
   };
 };
 
 type LeadPersistenceResult = {
+  leadId: string | null;
+  status: string | null;
+  replayed: boolean;
   whatsappUrl: string | null;
   fallbackReason?: string;
 };
@@ -101,6 +107,9 @@ async function createLeadAndGetWhatsappUrl(
   if (!API_BASE_URL) {
     console.error("repair-lead route: API base URL is not configured");
     return {
+      leadId: null,
+      status: null,
+      replayed: false,
       whatsappUrl: null,
       fallbackReason: "api_base_url_missing",
     };
@@ -121,6 +130,9 @@ async function createLeadAndGetWhatsappUrl(
       const errorBody = await response.text().catch(() => "");
       console.error("repair-lead route: lead persistence failed", response.status, errorBody);
       return {
+        leadId: null,
+        status: null,
+        replayed: false,
         whatsappUrl: null,
         fallbackReason: `api_status_${response.status}`,
       };
@@ -129,17 +141,26 @@ async function createLeadAndGetWhatsappUrl(
     const body = (await response.json().catch(() => null)) as LeadCreateResponse | null;
     if (!body?.data?.whatsappUrl) {
       return {
+        leadId: null,
+        status: null,
+        replayed: false,
         whatsappUrl: null,
         fallbackReason: "api_response_without_whatsapp_url",
       };
     }
 
     return {
+      leadId: body.data.leadId || null,
+      status: body.data.status || null,
+      replayed: Boolean(body.data.replayed),
       whatsappUrl: body.data.whatsappUrl,
     };
   } catch (error) {
     console.error("repair-lead route: lead persistence request failed", error);
     return {
+      leadId: null,
+      status: null,
+      replayed: false,
       whatsappUrl: null,
       fallbackReason: "api_request_failed",
     };
@@ -201,17 +222,32 @@ export async function POST(request: Request) {
 
   let fallbackReason = "missing_required_fields";
   const missingRequiredFields = getMissingRequiredFields(payload);
+  let whatsappUrl = buildFallbackWhatsappUrl(message);
 
   if (hasRequiredFields(payload)) {
     const leadResult = await createLeadAndGetWhatsappUrl(payload, idempotencyKey);
     if (leadResult.whatsappUrl) {
-      return NextResponse.redirect(leadResult.whatsappUrl, { status: 303 });
+      whatsappUrl = leadResult.whatsappUrl;
+      const response = NextResponse.json(
+        {
+          success: true,
+          data: {
+            leadId: leadResult.leadId,
+            status: leadResult.status,
+            replayed: leadResult.replayed,
+            whatsappUrl,
+          },
+        },
+        { status: leadResult.replayed ? 200 : 201 },
+      );
+      response.headers.set("x-lead-fallback-reason", "none");
+      return response;
     }
 
     fallbackReason = leadResult.fallbackReason || "lead_persistence_failed";
   }
 
-  console.warn("repair-lead route: fallback whatsapp redirect", {
+  console.warn("repair-lead route: fallback whatsapp response", {
     fallbackReason,
     missingRequiredFields,
     brand,
@@ -223,8 +259,17 @@ export async function POST(request: Request) {
     idempotencyKeyPrefix: idempotencyKey.slice(0, 12),
   });
 
-  const fallbackResponse = NextResponse.redirect(buildFallbackWhatsappUrl(message), { status: 303 });
-  fallbackResponse.headers.set("x-lead-fallback-reason", fallbackReason);
-
-  return fallbackResponse;
+  return NextResponse.json(
+    {
+      success: true,
+      data: {
+          leadId: null,
+          status: null,
+          replayed: false,
+        whatsappUrl,
+        fallbackReason,
+      },
+    },
+    { status: hasRequiredFields(payload) ? 200 : 422 },
+  );
 }

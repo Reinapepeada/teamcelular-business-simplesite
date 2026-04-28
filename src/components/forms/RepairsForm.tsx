@@ -97,6 +97,7 @@ export default function RepairsForm() {
     const [contactChannel, setContactChannel] = useState<(typeof contactChannelOptions)[number]["value"]>("whatsapp");
     const [contact, setContact] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [leadAttemptId, setLeadAttemptId] = useState("");
 
     const selectedContactMeta = contactFieldMeta[contactChannel];
@@ -238,53 +239,85 @@ export default function RepairsForm() {
         setStepIndex((current) => Math.min(current + 1, LAST_STEP_INDEX));
     }
 
-    function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+
+        if (isSubmitting) {
+            return;
+        }
+
         const validationError = validateStep(LAST_STEP_INDEX);
         if (validationError) {
-            event.preventDefault();
             setErrorMessage(validationError);
             return;
         }
 
-        submittedRef.current = true;
+        setIsSubmitting(true);
+        setErrorMessage("");
 
-        const currentStep = BUDGET_WIZARD_STEPS[stepIndex] || BUDGET_WIZARD_STEPS[LAST_STEP_INDEX];
+        try {
+            const formData = new FormData(event.currentTarget);
+            const response = await fetch("/api/repair-lead", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    Accept: "application/json",
+                },
+                cache: "no-store",
+            });
 
-        const submitPayload = buildBudgetFunnelPayload({
-            stepIndex,
-            extra: {
-                lead_channel: "whatsapp_redirect",
-                repair_type: repairTypeLabel || "sin_definir",
+            const body = (await response.json().catch(() => null)) as
+                | { success?: boolean; data?: { whatsappUrl?: string; leadId?: string; status?: string; replayed?: boolean } }
+                | null;
+
+            if (!response.ok || !body?.data?.whatsappUrl) {
+                throw new Error("No pudimos preparar el enlace de WhatsApp.");
+            }
+
+            submittedRef.current = true;
+
+            const currentStep = BUDGET_WIZARD_STEPS[stepIndex] || BUDGET_WIZARD_STEPS[LAST_STEP_INDEX];
+            const submitPayload = buildBudgetFunnelPayload({
+                stepIndex,
+                extra: {
+                    lead_channel: "whatsapp_ready",
+                    repair_type: repairTypeLabel || "sin_definir",
+                    urgency,
+                    contact_channel: contactChannel,
+                },
+            });
+
+            track(BUDGET_FUNNEL_EVENTS.submit, submitPayload);
+
+            recordLeadInteraction({
+                eventName: "lead_form_submit",
+                ctaName: "budget_wizard_submit",
+                ctaLocation: "presupuesto_reparacion_wizard",
+                ctaVariant: "whatsapp",
+                destination: body.data.whatsappUrl,
+                leadAttemptId,
+                formName: "repair_budget_wizard",
+                formLocation: "presupuesto_reparacion",
+                formVersion: BUDGET_WIZARD_VERSION,
+                stepIndex: stepIndex + 1,
+                stepId: currentStep.id,
+                stepLabel: currentStep.label,
+                totalSteps: BUDGET_WIZARD_STEPS.length,
+                brand,
+                model,
+                repairType: repairTypeLabel || "sin_definir",
                 urgency,
-                contact_channel: contactChannel,
-            },
-        });
+                contactChannel,
+                contact,
+                description,
+            });
 
-        recordLeadInteraction({
-            eventName: "lead_whatsapp_redirect",
-            ctaName: "budget_wizard_submit",
-            ctaLocation: "presupuesto_reparacion_wizard",
-            ctaVariant: "whatsapp",
-            destination: "whatsapp",
-            leadAttemptId,
-            formName: "repair_budget_wizard",
-            formLocation: "presupuesto_reparacion",
-            formVersion: BUDGET_WIZARD_VERSION,
-            stepIndex: stepIndex + 1,
-            stepId: currentStep.id,
-            stepLabel: currentStep.label,
-            totalSteps: BUDGET_WIZARD_STEPS.length,
-            brand,
-            model,
-            repairType: repairTypeLabel || "sin_definir",
-            urgency,
-            contactChannel,
-            contact,
-            description,
-        });
-
-        track(BUDGET_FUNNEL_EVENTS.submit, submitPayload);
-        track(BUDGET_FUNNEL_EVENTS.redirect, submitPayload);
+            window.location.assign(body.data.whatsappUrl);
+        } catch {
+            setErrorMessage("No pudimos preparar el enlace de WhatsApp. Intentalo otra vez.");
+        } finally {
+            setIsSubmitting(false);
+        }
     }
 
     const progressPercentage = ((stepIndex + 1) / BUDGET_WIZARD_STEPS.length) * 100;
@@ -503,12 +536,7 @@ export default function RepairsForm() {
     }
 
     return (
-        <form
-            action="/api/repair-lead"
-            method="post"
-            className="space-y-6"
-            onSubmit={handleSubmit}
-        >
+        <form className="space-y-6" onSubmit={handleSubmit}>
             <p className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-700 dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-300">
                 Te toma menos de 1 minuto. Te respondemos por WhatsApp en hasta 2 horas habiles.
                 Si hace falta revision tecnica, confirmamos diagnostico inicial dentro de 24 horas habiles.
@@ -604,15 +632,16 @@ export default function RepairsForm() {
                 ) : (
                     <button
                         type="submit"
-                        className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/20 transition hover:bg-emerald-800"
+                        disabled={isSubmitting}
+                        className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/20 transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:opacity-70"
                     >
                         <FaWhatsapp aria-hidden />
-                        Enviar datos y abrir WhatsApp
+                        {isSubmitting ? "Guardando datos..." : "Enviar datos y abrir WhatsApp"}
                     </button>
                 )}
 
                 <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">
-                    Enviamos todo una sola vez y te llevamos directo al chat.
+                    Enviamos todo una sola vez y luego abrimos WhatsApp automáticamente.
                 </p>
             </div>
 
