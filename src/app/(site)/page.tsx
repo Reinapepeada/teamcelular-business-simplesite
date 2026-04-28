@@ -11,11 +11,13 @@ const SITE_URL = getSiteUrl();
 
 export const metadata = buildWebsiteMetadata({
     path: "/",
-    title: "Servicio Tecnico de Celulares y Notebooks en Recoleta | Team Celular",
+    title: "Reparacion de Celulares y Notebooks en Recoleta | Servicio Tecnico | Team Celular",
     description:
         "Servicio tecnico integral en Recoleta para celulares y notebooks: diagnostico inicial, reparacion con trazabilidad y atencion comercial rapida en CABA.",
     keywords: [
         "reparacion de celulares Buenos Aires",
+        "reparacion de celulares cerca de mi",
+        "arreglo de celulares cerca de mi",
         "servicio tecnico celulares CABA",
         "reparacion de notebooks Buenos Aires",
         "gestion de reparaciones celulares y notebooks",
@@ -361,6 +363,36 @@ export default function Home() {
                                 </p>
                             </article>
                         ))}
+                    </div>
+                </section>
+
+                <section className="rounded-2xl border border-slate-200/75 bg-white/80 dark:bg-slate-900/80 p-6 shadow-md">
+                    <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-[2rem]">
+                        ¿Buscas reparación de celulares cerca de tu zona?
+                    </h2>
+                    <p className="mt-3 max-w-3xl text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
+                        Si venis desde Palermo, Belgrano, Almagro, Caballito o Microcentro,
+                        armamos presupuesto rapido y te orientamos segun la falla para evitar demoras.
+                    </p>
+                    <div className="mt-5 flex flex-wrap gap-4">
+                        <TrackedCtaLink
+                            href="/reparacion-de-celulares-cerca-de-mi"
+                            ctaName="home_near_me_landing"
+                            ctaLocation="home_near_me_section"
+                            ctaVariant="secondary"
+                            className={neutralCtaClass}
+                        >
+                            Ver cobertura cerca de mi
+                        </TrackedCtaLink>
+                        <TrackedCtaLink
+                            href="/zonas"
+                            ctaName="home_zones_index"
+                            ctaLocation="home_near_me_section"
+                            ctaVariant="secondary"
+                            className={neutralCtaClass}
+                        >
+                            Ver todas las zonas
+                        </TrackedCtaLink>
                     </div>
                 </section>
 

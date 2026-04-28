@@ -54,6 +54,7 @@ async function getAllProductsForSitemap(): Promise<Product[]> {
 const mainPages = [
   { path: "", priority: 1.0, changeFreq: "weekly" as const },
   { path: "arreglo-de-celulares", priority: 0.95, changeFreq: "weekly" as const },
+  { path: "reparacion-de-celulares-cerca-de-mi", priority: 0.93, changeFreq: "weekly" as const },
   { path: "reparaciones", priority: 0.95, changeFreq: "weekly" as const },
   { path: "reparaciones/cambio-bateria-caba", priority: 0.9, changeFreq: "weekly" as const },
   { path: "reparaciones/cambio-pantalla-caba", priority: 0.9, changeFreq: "weekly" as const },

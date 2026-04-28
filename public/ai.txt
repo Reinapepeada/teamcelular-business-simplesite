@@ -10,6 +10,7 @@ primary-intent:
 
 priority-urls:
 - https://teamcelular.com/
+- https://teamcelular.com/reparacion-de-celulares-cerca-de-mi
 - https://teamcelular.com/reparaciones
 - https://teamcelular.com/presupuesto-reparacion
 - https://teamcelular.com/contacto

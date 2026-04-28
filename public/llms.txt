@@ -8,6 +8,7 @@ Idioma principal: es-AR
 
 - [Inicio](https://teamcelular.com/): propuesta de valor, prueba social y CTAs principales.
 - [Reparaciones](https://teamcelular.com/reparaciones): hub de servicios tecnicos transaccionales.
+- [Reparacion de celulares cerca de mi](https://teamcelular.com/reparacion-de-celulares-cerca-de-mi): landing local para busquedas de proximidad en CABA.
 - [Presupuesto de reparacion](https://teamcelular.com/presupuesto-reparacion): flujo principal de captura de leads.
 - [Contacto](https://teamcelular.com/contacto): canales directos, ubicacion y horario.
 - [Tienda](https://teamcelular.com/tienda): catalogo de repuestos y accesorios.
