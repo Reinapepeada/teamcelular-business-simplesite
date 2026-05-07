@@ -31,6 +31,10 @@ const faqs = [
     q: "Atienden clientes de otros barrios?",
     a: "Si. Esta sucursal atiende Recoleta y toda CABA.",
   },
+  {
+    q: "¿Dan garantía escrita?",
+    a: "Sí. Cada reparación se entrega con garantía escrita de 90 días sobre trabajo y repuesto instalado.",
+  },
 ];
 
 const trustSignals = [
@@ -41,7 +45,7 @@ const trustSignals = [
   },
   {
     title: "Garantia escrita por servicio",
-    desc: "Cada trabajo se entrega con condiciones de cobertura claras.",
+    desc: "Cada trabajo sale con garantía escrita de 90 días sobre trabajo y repuesto instalado.",
     Icon: FaShieldAlt,
   },
   {
@@ -52,9 +56,9 @@ const trustSignals = [
 ];
 
 export const metadata: Metadata = {
-  title: "Sucursal Recoleta (CABA) | Team Celular",
+  title: "Reparación de Celulares en Recoleta CABA | Team Celular",
   description:
-    "Ficha oficial de Team Celular Recoleta, CABA. Direccion, horarios, contacto, servicios, mapa y canales rapidos para presupuesto.",
+    "Reparación de celulares en Recoleta CABA — Team Celular, Paraguay 2451. Pantalla, batería y carga el mismo día con garantía escrita 90 días.",
   alternates: {
     canonical: PAGE_URL,
     languages: {
@@ -66,9 +70,9 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    title: "Sucursal Recoleta (CABA) | Team Celular",
+    title: "Reparación de Celulares en Recoleta CABA | Team Celular",
     description:
-      "Direccion, horarios y contacto de Team Celular Recoleta para reparacion de celulares, tablets y notebooks.",
+      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla, batería y carga el mismo día, diagnóstico técnico y garantía escrita 90 días. Lun–Vie 10:30–18:00.",
     url: PAGE_URL,
     type: "website",
     locale: "es_AR",
@@ -83,9 +87,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sucursal Recoleta (CABA) | Team Celular",
+    title: "Reparación de Celulares en Recoleta CABA | Team Celular",
     description:
-      "Ubicacion y contacto oficial de Team Celular Recoleta para soporte tecnico.",
+      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla y batería el mismo día, garantía escrita 90 días. Lun–Vie 10:30–18:00.",
     images: [`${SITE_URL}/opengraph-image.png`],
   },
 };
@@ -170,12 +174,12 @@ export default function SucursalRecoletaPage() {
               Sucursal oficial Team Celular
             </p>
             <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
-              Sucursal Recoleta (CABA)
+              Reparación de celulares en Recoleta CABA
             </h1>
             <p className="text-lg leading-relaxed text-slate-100/90">
-              Punto de atencion para reparacion de celulares, tablets y notebooks.
-              Atendemos clientes de Recoleta y toda CABA con diagnostico tecnico,
-              garantia escrita y seguimiento directo.
+              Team Celular, en Paraguay 2451 Recoleta, repara celulares con diagnóstico
+              el mismo día, pantalla y batería en 2–4 h, y garantía escrita de 90 días
+              sobre trabajo y repuesto. Atendemos toda CABA.
             </p>
             <div className="flex flex-wrap gap-3">
               <a

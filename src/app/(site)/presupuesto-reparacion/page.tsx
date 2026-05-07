@@ -25,9 +25,9 @@ const PAGE_URL = `${SITE_URL}/presupuesto-reparacion`;
 
 export const metadata = buildWebsiteMetadata({
     path: "/presupuesto-reparacion",
-    title: "Pedir Presupuesto de Reparacion por WhatsApp en CABA | Team Celular",
+    title: "Presupuesto Reparación Celulares en Recoleta CABA | Team Celular",
     description:
-        "Envia marca, modelo y falla para recibir cotizacion por WhatsApp con precio estimado, tiempo de trabajo y alcance tecnico antes de ingresar el equipo.",
+        "Cotizá tu reparación de celular en Team Celular, Recoleta CABA. Respuesta en 2 h por WhatsApp con precio, tiempo y garantía escrita 90 días.",
     keywords: [
         "presupuesto reparación celulares",
         "servicio técnico celulares buenos aires",
@@ -40,13 +40,13 @@ export const metadata = buildWebsiteMetadata({
         "es-AR": "/presupuesto-reparacion",
     },
     openGraphTitle:
-        "Pedir Presupuesto por WhatsApp en CABA | Team Celular",
+        "Presupuesto Reparación Celulares en Recoleta | Team Celular",
     openGraphDescription:
-        "Landing transaccional para cotizar reparaciones con respuesta rapida y pasos claros.",
+        "Presupuesto de reparación en Paraguay 2451, Recoleta CABA. Respuesta en 2 h por WhatsApp con precio, tiempo estimado y garantía escrita 90 días.",
     openGraphImageAlt: "Laboratorio de Team Celular en Recoleta",
-    twitterTitle: "Pedir Presupuesto por WhatsApp en CABA | Team Celular",
+    twitterTitle: "Presupuesto Reparación Celulares CABA | Team Celular",
     twitterDescription:
-        "Cotiza por WhatsApp con precio estimado, tiempos y opciones segun tu tipo de falla.",
+        "Cotizá por WhatsApp en 2 h. Pantalla, batería, carga y microelectrónica con garantía escrita 90 días. Paraguay 2451, Recoleta.",
 });
 
 const processSteps = [
@@ -209,12 +209,13 @@ export default function PresupuestoReparacionPage() {
                             Presupuesto claro y sin vueltas
                         </span>
                         <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
-                            Pedí tu presupuesto y sabé qué conviene hacer con tu celular
+                            Presupuesto de reparación de celulares en Recoleta CABA
                         </h1>
                         <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
-                            Somos laboratorio en Recoleta. Te damos una respuesta
-                            técnica clara, con tiempos reales y seguimiento por
-                            WhatsApp para que no tengas que adivinar.
+                            Team Celular, en Paraguay 2451 Recoleta, responde
+                            presupuestos en hasta 2 h por WhatsApp. Pantalla,
+                            batería, carga y microelectrónica con garantía escrita
+                            de 90 días sobre trabajo y repuesto.
                         </p>
 
                         <ul className="mt-6 space-y-3 text-slate-700 dark:text-slate-300">
@@ -285,7 +286,7 @@ export default function PresupuestoReparacionPage() {
                                 {
                                     icon: FaShieldAlt,
                                     title: "Garantía",
-                                    value: "Segun trabajo y repuesto",
+                                    value: "90 días escrita",
                                     description: WARRANTY_SCOPE_MESSAGE,
                                 },
                                 {
@@ -607,7 +608,7 @@ export default function PresupuestoReparacionPage() {
                             "@context": "https://schema.org",
                             "@type": "HowTo",
                             name: "Cómo solicitar un presupuesto de reparación",
-                            totalTime: "PT72H",
+                            totalTime: "PT2H",
                             step: processSteps.map((step, index) => ({
                                 "@type": "HowToStep",
                                 position: index + 1,

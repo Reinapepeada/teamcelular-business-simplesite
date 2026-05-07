@@ -38,10 +38,10 @@ export default function BannerHome() {
 
                     <div className="max-w-xl space-y-2.5">
                         <p className="text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-[1.03rem]">
-                            Diagnóstico en el día, repuestos de calidad y garantía escrita.
+                            Team Celular, en Paraguay 2451 Recoleta, diagnostica el mismo día, usa repuestos de calidad y entrega garantía escrita de 90 días sobre trabajo y repuesto.
                         </p>
                         <p className="text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-[1.03rem]">
-                            Contanos la falla y te orientamos por WhatsApp para que sepas el siguiente paso sin perder tiempo.
+                            Contanos la falla y te orientamos por WhatsApp en menos de 2 horas.
                         </p>
                     </div>
 

@@ -53,9 +53,9 @@ export async function generateMetadata({
 
   return buildWebsiteMetadata({
     path: "/tienda",
-    title: "Tienda de Repuestos y Accesorios para Celulares en CABA | Team Celular",
+    title: "Repuestos y Accesorios para Celulares en CABA | Team Celular",
     description:
-      "Compra repuestos, fundas, cargadores y cables para celular con retiro en Recoleta y envio en CABA. Validamos compatibilidad por WhatsApp.",
+      "Repuestos, fundas y cargadores para celular con retiro en Paraguay 2451, Recoleta CABA. Validamos compatibilidad por WhatsApp antes de comprar.",
     robots: {
       index: shouldIndex,
       follow: true,
@@ -63,12 +63,12 @@ export async function generateMetadata({
     languages: {
       "es-AR": "/tienda",
     },
-    openGraphTitle: "Tienda de Repuestos y Accesorios para Celulares en CABA | Team Celular",
+    openGraphTitle: "Repuestos y Accesorios para Celulares en CABA | Team Celular",
     openGraphDescription:
-      "Repuestos y accesorios con asesoramiento real, retiro en Recoleta y envio en CABA.",
-    openGraphImageAlt: "Tienda Online - Team Celular",
-    twitterTitle: "Tienda de Repuestos y Accesorios para Celulares en CABA | Team Celular",
-    twitterDescription: "Compra con asesoramiento real y valida compatibilidad por WhatsApp antes de pagar.",
+      "Team Celular, Paraguay 2451 Recoleta. Repuestos, fundas y cargadores con asesoramiento real y retiro en CABA.",
+    openGraphImageAlt: "Tienda de repuestos para celulares - Team Celular Recoleta",
+    twitterTitle: "Repuestos y Accesorios para Celulares en CABA | Team Celular",
+    twitterDescription: "Team Celular, Paraguay 2451 Recoleta. Validamos compatibilidad por WhatsApp antes de pagar.",
   });
 }
 
@@ -111,9 +111,10 @@ export default async function TiendaPage({
                 Accesorios y repuestos para celulares con retiro en Recoleta y envio en CABA
               </h1>
               <p className="max-w-3xl text-base leading-7 text-slate-600 dark:text-slate-400">
-                Compra cables, cargadores, fundas, templados y repuestos con
-                asesoramiento real. Si no encuentras lo que buscas, te ayudamos
-                por WhatsApp para validar compatibilidad antes de comprar.
+                Team Celular, en Paraguay 2451 Recoleta, ofrece cables, cargadores,
+                fundas, templados y repuestos con asesoramiento real. Validamos
+                compatibilidad por WhatsApp antes de comprar para evitar cambios
+                innecesarios.
               </p>
             </div>
             <div className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-5">

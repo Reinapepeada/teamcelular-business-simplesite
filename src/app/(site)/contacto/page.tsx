@@ -16,9 +16,9 @@ import {
 } from "react-icons/fa";
 
 export const metadata: Metadata = {
-    title: "Contacto | Team Celular | Reparación de celulares en Recoleta CABA",
+    title: "Team Celular | Paraguay 2451 Recoleta — Lun–Vie 10:30 a 18:00",
     description:
-        "Visitanos en Paraguay 2451, Recoleta, CABA. Atención de lunes a viernes de 10:30 a 18:00. WhatsApp y coordinación de revisión técnica.",
+        "Team Celular, Paraguay 2451 Recoleta CABA. Atención Lun–Vie 10:30–18:00, sin turno previo. WhatsApp +54 11 5103-4595 para presupuesto rápido.",
     keywords: [
         "contacto team celular",
         "reparación celulares recoleta",

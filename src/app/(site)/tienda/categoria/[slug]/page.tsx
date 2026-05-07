@@ -67,7 +67,8 @@ export async function generateMetadata({
   const shouldIndex = hasProducts && isCategoryPageIndexable(filters);
 
   const snippetTitle = `${category.name} para Celulares en CABA | Team Celular`;
-  const snippetDescription = `Compra ${category.name} para celular con retiro en Recoleta y envio en CABA. Filtra por marca y precio con asesoramiento real.`;
+  const rawCatDesc = `${category.name} para celulares — Team Celular, Paraguay 2451 Recoleta CABA. Retiro en el día, envio en CABA y compatibilidad validada por WhatsApp.`;
+  const snippetDescription = rawCatDesc.length > 155 ? rawCatDesc.slice(0, 152) + '...' : rawCatDesc;
 
   return buildWebsiteMetadata({
     path: canonicalPath,
@@ -81,10 +82,10 @@ export async function generateMetadata({
       "es-AR": canonicalPath,
     },
     openGraphTitle: snippetTitle,
-    openGraphDescription: `Productos de ${category.name} con asesoramiento real y disponibilidad en CABA.`,
-    openGraphImageAlt: `${category.name} - Team Celular`,
+    openGraphDescription: `Team Celular, Paraguay 2451 Recoleta. ${category.name} para celular con asesoramiento real y retiro en CABA.`,
+    openGraphImageAlt: `${category.name} para celulares - Team Celular Recoleta`,
     twitterTitle: snippetTitle,
-    twitterDescription: `Productos de ${category.name} con retiro en Recoleta y envio en CABA.`,
+    twitterDescription: `Team Celular, Paraguay 2451 Recoleta. ${category.name} con retiro el mismo día y envio en CABA.`,
   });
 }
 
@@ -150,9 +151,9 @@ export default async function CategoryPage({
             {category.name}
           </h1>
           <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600 dark:text-slate-400">
-            Filtra por marca, precio o busqueda puntual dentro de {category.name}.
-            Si necesitas validar compatibilidad, te asesoramos por WhatsApp antes
-            de comprar.
+            Team Celular, en Paraguay 2451 Recoleta, tiene {category.name} con retiro
+            en el día y envio en CABA. Filtra por marca o precio y validamos
+            compatibilidad por WhatsApp antes de comprar.
           </p>
         </div>
       </section>

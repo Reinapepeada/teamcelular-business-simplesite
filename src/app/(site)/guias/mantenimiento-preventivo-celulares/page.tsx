@@ -22,9 +22,9 @@ import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 
 export const metadata: Metadata = {
-  title: "Mantenimiento Preventivo Celulares | Guía Completa 2024 CABA",
+  title: "Mantenimiento Preventivo de Celulares en CABA | Team Celular",
   description:
-    "Guía profesional de mantenimiento preventivo: batería, limpieza, software y servicios preventivos en Buenos Aires. Extendé la vida útil de tu smartphone hasta 3 años más.",
+    "Mantenimiento preventivo de celulares en Team Celular, Recoleta CABA. Limpieza con ultrasonido, revisión de batería y garantía escrita 90 días.",
   keywords: [
     "mantenimiento preventivo celulares",
     "cuidado smartphone Buenos Aires",
@@ -53,9 +53,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Mantenimiento Preventivo Celulares | Guía Completa 2024",
+    title: "Mantenimiento Preventivo de Celulares en CABA | Team Celular",
     description:
-      "Guía profesional de mantenimiento preventivo para smartphones. Servicios preventivos en CABA con garantía.",
+      "Mantenimiento preventivo de celulares en Paraguay 2451, Recoleta CABA. Limpieza con ultrasonido, revisión de batería y garantía escrita 90 días.",
     type: "article",
     url: "https://teamcelular.com/guias/mantenimiento-preventivo-celulares",
     locale: "es_AR",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2024-04-05T00:00:00Z",
-    modifiedTime: "2025-12-11T00:00:00Z",
+    modifiedTime: "2026-05-07T00:00:00Z",
     section: "Guías Técnicas",
   },
   twitter: {
@@ -152,8 +152,8 @@ const maintenancePlan = [
   },
   {
     title: "Plan Corporativo - Flotas de Dispositivos",
-    description: "Servicio personalizado para empresas: visitas programadas, equipos de reemplazo (loaner) y reportería ejecutiva.",
-    price: "Cotización personalizada",
+    description: "Servicio técnico para empresas con flotas: visitas programadas mensuales, equipos de reemplazo (loaner) y reportes técnicos ejecutivos por dispositivo.",
+    price: "A convenir según flota",
     Icon: FaShieldAlt,
   },
 ];
@@ -177,12 +177,12 @@ const faqMaintenance = [
   {
     question: "¿Ofrecen planes de mantenimiento para empresas?",
     answer:
-      "Sí, diseñamos planes corporativos personalizados según el tamaño de tu flota y la criticidad operativa. Incluimos: visitas programadas mensuales/trimestrales, equipos de reemplazo durante mantenimientos, reportes ejecutivos con métricas de salud por dispositivo, capacitación de usuarios finales y soporte técnico prioritario vía WhatsApp Business y email.",
+      "Sí, diseñamos planes corporativos según el tamaño de la flota y la criticidad operativa. Incluimos: visitas programadas mensuales/trimestrales, equipos de reemplazo durante mantenimientos, reportes técnicos con métricas de salud por dispositivo, capacitación de usuarios y soporte prioritario vía WhatsApp Business y email.",
   },
   {
     question: "¿Puedo hacer mantenimiento preventivo en casa?",
     answer:
-      "Algunas tareas básicas sí: limpieza externa con paño de microfibra, actualización de software, configuración de backups automáticos y monitoreo de salud de batería desde ajustes del sistema. Sin embargo, para limpieza interna, reemplazo de componentes o diagnóstico avanzado, recomendamos trabajar con técnicos certificados para evitar daños permanentes o pérdida de resistencia al agua.",
+      "Algunas tareas básicas sí: limpieza externa con paño de microfibra, actualización de software, configuración de backups automáticos y monitoreo de salud de batería desde ajustes del sistema. Para limpieza interna, reemplazo de componentes o diagnóstico de placa, recomendamos trabajar con técnicos certificados para evitar daños permanentes o pérdida de resistencia al agua.",
   },
 ];
 
@@ -193,7 +193,7 @@ export default function PreventiveMaintenanceGuide() {
         title="Mantenimiento Preventivo de Celulares | Team Celular"
         description="Guía completa de mantenimiento preventivo para smartphones: checklist profesional, cuidado de batería, actualización de software y limpieza especializada."
         publishedTime="2024-04-05T00:00:00Z"
-        modifiedTime="2025-12-11T00:00:00Z"
+        modifiedTime="2026-05-07T00:00:00Z"
         authorName="Team Celular"
         image="https://teamcelular.com/images/guia_mantenimiento.webp"
         url={PAGE_URL}
@@ -227,11 +227,13 @@ export default function PreventiveMaintenanceGuide() {
             <FaTools className="text-5xl text-white" />
           </div>
           <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-            Mantenimiento Preventivo de Celulares
+            Mantenimiento Preventivo de Celulares en CABA
           </h1>
           <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
-            Guía profesional para <strong className="text-primary">extender la vida útil</strong> de tu smartphone y
-            evitar reparaciones costosas. Rutinas personalizadas para usuarios particulares y empresas en CABA.
+            Team Celular, en Paraguay 2451 Recoleta CABA, realiza mantenimiento
+            preventivo de celulares con limpieza interna por ultrasonido,
+            diagnóstico técnico y revisión de batería cada 6 meses. Cada servicio
+            dura entre 2 y 4 horas y sale con garantía escrita de 90 días.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
@@ -538,7 +540,7 @@ export default function PreventiveMaintenanceGuide() {
               "name": "Mantenimiento Preventivo de Celulares",
               "description": "Guía completa de mantenimiento preventivo para smartphones con checklist profesional y consejos de expertos.",
               "image": "https://teamcelular.com/images/guia_mantenimiento.webp",
-              "totalTime": "PT6M",
+              "totalTime": "PT120M",
               "supply": ["Smartphone", "Paño de microfibra", "Software de diagnóstico"],
               "tool": ["Aire comprimido", "IPA 99%", "Microscopio (para servicio profesional)"],
               "step": maintenanceTips.map((tip, index) => ({

@@ -25,9 +25,9 @@ const PAGE_PATH = "/guias/reparacion-iphone-buenos-aires";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 
 export const metadata: Metadata = {
-  title: "Reparacion de iPhone en Buenos Aires | Servicio Tecnico Premium CABA",
+  title: "Reparación de iPhone en Buenos Aires | Team Celular — Recoleta CABA",
   description:
-    "Servicio tecnico de iPhone en Recoleta, CABA. Pantalla, bateria, puerto de carga y placa logica con repuestos certificados, diagnostico el mismo dia y garantia escrita. iPhone 6 a 17 Pro Max.",
+    "Reparación de iPhone en Recoleta, CABA. Pantalla y batería en 2–4 h, diagnóstico el mismo día y garantía escrita 90 días. iPhone 8 a 17 Pro Max.",
   keywords: [
     "reparacion iphone buenos aires",
     "service iphone caba",
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2024-01-15T00:00:00Z",
-    modifiedTime: "2026-03-12T00:00:00Z",
+    modifiedTime: "2026-05-07T00:00:00Z",
     section: "Guias Tecnicas",
   },
   twitter: {
@@ -286,7 +286,7 @@ export default function IphoneRepairGuidePage() {
         title="Reparacion de iPhone en Buenos Aires | Servicio Tecnico Premium Team Celular"
         description="Guia completa para reparar iPhone en CABA con diagnostico profesional, repuestos certificados y garantia escrita."
         publishedTime="2024-01-15T00:00:00Z"
-        modifiedTime="2026-03-12T00:00:00Z"
+        modifiedTime="2026-05-07T00:00:00Z"
         authorName="Team Celular"
         image="https://teamcelular.com/images/guia_iphone.webp"
         url={PAGE_URL}
@@ -328,12 +328,12 @@ export default function IphoneRepairGuidePage() {
 
           <div className="space-y-4">
             <h1 className="text-4xl font-black tracking-tight text-slate-900 dark:text-white md:text-5xl">
-              Reparacion de iPhone en Buenos Aires con enfoque premium
+              Reparación de iPhone en Buenos Aires
             </h1>
             <p className="max-w-4xl text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-              Reparamos iPhone con proceso tecnico trazable, piezas certificadas y
-              garantia escrita. Si tu prioridad es recuperar rendimiento real y
-              evitar reparaciones repetidas, este servicio esta pensado para vos.
+              Team Celular, en Paraguay 2451 Recoleta CABA, repara iPhone con
+              diagnóstico el mismo día, pantalla y batería en 2–4 h, y garantía
+              escrita de 90 días sobre trabajo y repuesto. iPhone 8 a 17 Pro Max.
             </p>
           </div>
 
@@ -351,9 +351,9 @@ export default function IphoneRepairGuidePage() {
               <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
                 Garantia
               </p>
-              <p className="mt-2 text-3xl font-black text-secondary">Variable</p>
+              <p className="mt-2 text-3xl font-black text-secondary">90 días</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-                Segun repuesto y tipo de trabajo
+                Garantía escrita sobre trabajo y repuesto
               </p>
             </div>
             <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">

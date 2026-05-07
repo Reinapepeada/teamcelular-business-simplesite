@@ -12,9 +12,9 @@ const SITE_URL = getSiteUrl();
 
 export const metadata = buildWebsiteMetadata({
     path: "/",
-    title: "Reparacion de Celulares y Notebooks en Recoleta | Servicio Tecnico | Team Celular",
+    title: "Reparación de Celulares en Recoleta CABA | Team Celular",
     description:
-        "Servicio tecnico integral en Recoleta para celulares y notebooks: diagnostico inicial, reparacion con trazabilidad y atencion comercial rapida en CABA.",
+        "Reparación de celulares en Paraguay 2451, Recoleta CABA. Cambio de pantalla y batería en el día, diagnóstico mismo día y garantía escrita 90 días.",
     keywords: [
         "reparacion de celulares Buenos Aires",
         "reparacion de celulares cerca de mi",
@@ -28,13 +28,13 @@ export const metadata = buildWebsiteMetadata({
     languages: {
         "es-AR": "/",
     },
-    openGraphTitle: "Servicio Tecnico Integral en Recoleta | Team Celular",
+    openGraphTitle: "Reparación de Celulares en Recoleta | Team Celular",
     openGraphDescription:
-        "Atencion tecnica para celulares y notebooks en CABA, con foco en diagnostico claro y resolucion confiable.",
-    openGraphImageAlt: "Team Celular - Servicio tecnico en Buenos Aires",
-    twitterTitle: "Servicio Tecnico Integral en Recoleta | Team Celular",
+        "Team Celular, Paraguay 2451 Recoleta CABA. Cambio de pantalla y batería en el día, diagnóstico mismo día y garantía escrita 90 días.",
+    openGraphImageAlt: "Team Celular — Reparación de celulares en Recoleta, Buenos Aires",
+    twitterTitle: "Reparación de Celulares en Recoleta CABA | Team Celular",
     twitterDescription:
-        "Base de entrada para celulares y notebooks en CABA: diagnostico claro, cobertura escrita y atencion rapida.",
+        "Paraguay 2451, Recoleta. Pantalla y batería en el día, diagnóstico mismo día y garantía escrita 90 días. Lun–Vie 10:30–18:00.",
 });
 
 const services = [

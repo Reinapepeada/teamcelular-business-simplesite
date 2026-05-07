@@ -6,7 +6,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     zoneName: "Recoleta",
     metaTitle: "Arreglo de Celulares en Recoleta (CABA) | Team Celular",
     metaDescription:
-      "Arreglo de celulares en Recoleta, CABA: pantalla, batería, pin de carga, cámaras, audio y microelectrónica. Taller en Paraguay 2451 con garantía escrita.",
+      "Arreglo de celulares en Recoleta, CABA. Taller en Paraguay 2451 con diagnóstico el mismo día y garantía escrita de 90 días sobre trabajo y repuesto.",
     socialDescription:
       "Pantalla, batería, carga y placa en Recoleta. Presupuesto rápido y garantía por escrito.",
     heroBadge: "Atencion local en Recoleta",
@@ -58,7 +58,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
       {
         q: "Dan garantia por escrito?",
-        a: "Si. Te entregamos garantia por escrito con alcance y plazo segun la reparacion realizada.",
+        a: "Sí. Entregamos garantía escrita de 90 días sobre trabajo y repuesto instalado.",
       },
       {
         q: "Como pido presupuesto rapido?",
@@ -71,12 +71,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     zoneName: "Palermo",
     metaTitle: "Arreglo de Celulares en Palermo (CABA) | Team Celular",
     metaDescription:
-      "Arreglo de celulares para Palermo, CABA: pantalla, batería, pin de carga y microelectrónica. Taller en Recoleta con garantía escrita y presupuesto rápido.",
+      "Arreglo de celulares en Palermo, CABA — Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga el mismo día con garantía escrita 90 días.",
     socialDescription:
-      "Servicio tecnico para Palermo con presupuesto rapido por WhatsApp y garantia por escrito.",
+      "Team Celular, Recoleta CABA, atiende Palermo. Pantalla, batería y carga con garantía escrita 90 días.",
     heroBadge: "Cobertura Palermo",
     heroIntro:
-      "Si estás en Palermo y se te rompió el celular, te ayudamos a destrabarlo rápido: revisamos pantalla, batería, carga y también fallas de placa cuando el problema no es tan obvio.",
+      "Team Celular, en Paraguay 2451 Recoleta, atiende clientes de Palermo con diagnóstico el mismo día y garantía escrita de 90 días. Pantalla, batería, carga y fallas de placa sin vueltas.",
     heroImage: "/images/dispositivoshdpro.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(59,130,246,0.32),transparent_44%)]",
@@ -127,7 +127,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
       {
         q: "¿Trabajan con garantía por escrito?",
-        a: "Sí. La reparación sale con garantía escrita y alcance bien explicado.",
+        a: "Sí. La reparación sale con garantía escrita de 90 días sobre trabajo y repuesto.",
       },
     ],
   },
@@ -136,12 +136,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     zoneName: "Belgrano",
     metaTitle: "Arreglo de Celulares en Belgrano (CABA) | Team Celular",
     metaDescription:
-      "Arreglo de celulares para Belgrano, CABA: pantalla, bateria, carga y diagnostico de placa. Taller en Recoleta con garantia por escrito y presupuesto rapido.",
+      "Arreglo de celulares en Belgrano, CABA — Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga el mismo día, garantía escrita 90 días.",
     socialDescription:
-      "Soporte tecnico para Belgrano con reparaciones de pantalla, bateria, carga y placa.",
+      "Team Celular, Recoleta CABA, atiende Belgrano. Pantalla, batería y placa con garantía escrita 90 días.",
     heroBadge: "Cobertura Belgrano",
     heroIntro:
-      "Si estás en Belgrano y el equipo te está fallando, te ayudamos a recuperar uso normal con una revisión clara de pantalla, batería, conectores y placa.",
+      "Team Celular, en Paraguay 2451 Recoleta, atiende Belgrano con diagnóstico el mismo día. Pantalla, batería, carga y placa con garantía escrita de 90 días sobre trabajo y repuesto.",
     heroImage: "/images/celuPorDentro.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(14,165,233,0.32),transparent_44%)]",
@@ -192,7 +192,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
       {
         q: "¿Entregan garantía por escrito?",
-        a: "Sí. Cada reparación sale con garantía escrita y plazo claro.",
+        a: "Sí. Cada reparación sale con garantía escrita de 90 días sobre trabajo y repuesto.",
       },
     ],
   },
@@ -201,12 +201,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     zoneName: "Caballito",
     metaTitle: "Arreglo de Celulares en Caballito (CABA) | Team Celular",
     metaDescription:
-      "Arreglo de celulares para Caballito, CABA: pantalla, bateria, carga y reparacion de placa. Taller en Recoleta con garantia por escrito y presupuesto rapido.",
+      "Arreglo de celulares en Caballito, CABA. Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga el mismo día con garantía escrita 90 días.",
     socialDescription:
-      "Servicio tecnico para Caballito con foco en pantalla, energia, carga y microelectronica.",
+      "Team Celular, Recoleta CABA, atiende Caballito. Pantalla, batería y carga con garantía escrita 90 días.",
     heroBadge: "Cobertura Caballito",
     heroIntro:
-      "Si estás en Caballito y necesitás resolver el celular sin perder tiempo, te explicamos bien el problema y te damos una salida concreta antes de tocar el equipo.",
+      "Team Celular, en Paraguay 2451 Recoleta, atiende Caballito con diagnóstico el mismo día. Pantalla, batería y carga con garantía escrita de 90 días y presupuesto claro antes de intervenir.",
     heroImage:
       "/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp",
     heroGlowClass:
@@ -258,7 +258,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
       {
         q: "¿Qué incluye la garantía?",
-        a: "Cubre el trabajo realizado según el tipo de reparación y el repuesto instalado.",
+        a: "Cubre trabajo y repuesto instalado por 90 días. El alcance queda detallado por escrito al momento de entrega.",
       },
     ],
   },
@@ -267,12 +267,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     zoneName: "Almagro",
     metaTitle: "Arreglo de Celulares en Almagro (CABA) | Team Celular",
     metaDescription:
-      "Arreglo de celulares para Almagro, CABA: pantalla, bateria y pin de carga. Taller en Recoleta con garantia por escrito y presupuesto rapido.",
+      "Arreglo de celulares en Almagro — Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga el mismo día, garantía escrita 90 días.",
     socialDescription:
-      "Servicio tecnico para Almagro: pantalla, bateria, carga y diagnostico de placa.",
+      "Team Celular, Recoleta CABA, atiende Almagro. Pantalla, batería y carga con garantía escrita 90 días.",
     heroBadge: "Cobertura Almagro",
     heroIntro:
-      "Si estas en Almagro, resolvemos reparaciones frecuentes con diagnostico claro y seguimiento directo para que sepas tiempos reales.",
+      "Team Celular, en Paraguay 2451 Recoleta, atiende Almagro con diagnóstico el mismo día. Pantalla, batería y carga con garantía escrita de 90 días sobre trabajo y repuesto.",
     heroImage: "/images/equipoCall.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(16,185,129,0.3),transparent_44%)]",
@@ -333,12 +333,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     zoneAlias: "Balvanera / Once",
     metaTitle: "Arreglo de Celulares en Balvanera (CABA) | Team Celular",
     metaDescription:
-      "Arreglo de celulares para Balvanera/Once, CABA: pantalla, bateria, carga y microelectronica. Taller en Recoleta con garantia por escrito y presupuesto rapido.",
+      "Arreglo de celulares en Balvanera y Once, CABA. Team Celular, Paraguay 2451 Recoleta. Pantalla, carga y batería con garantía escrita 90 días.",
     socialDescription:
-      "Servicio tecnico para Balvanera/Once con reparaciones de alto uso y garantia escrita.",
+      "Team Celular, Recoleta CABA, atiende Balvanera y Once. Pantalla, batería y carga con garantía escrita 90 días.",
     heroBadge: "Cobertura Balvanera / Once",
     heroIntro:
-      "Para Balvanera y Once resolvemos fallas tipicas de uso intensivo: pantalla, bateria, carga y casos complejos de placa.",
+      "Team Celular, en Paraguay 2451 Recoleta, atiende Balvanera y Once con diagnóstico el mismo día. Pantalla, batería, carga y casos de placa con garantía escrita de 90 días.",
     heroImage: "/images/cargadores.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(245,158,11,0.32),transparent_44%)]",
@@ -356,8 +356,8 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
         icon: "battery",
       },
       {
-        title: "Reparacion avanzada",
-        desc: "Mojado, corto o no enciende: trabajamos placa segun viabilidad tecnica.",
+        title: "Reparación de placa",
+        desc: "Mojado, corto o no enciende: diagnóstico con equipamiento de laboratorio y presupuesto antes de intervenir.",
         icon: "chip",
       },
     ],
@@ -398,12 +398,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     zoneName: "Microcentro",
     metaTitle: "Arreglo de Celulares en Microcentro (CABA) | Team Celular",
     metaDescription:
-      "Arreglo de celulares para Microcentro, CABA: pantalla, batería, carga y microelectrónica. Taller en Recoleta con garantía por escrito y presupuesto rápido.",
+      "Arreglo de celulares en Microcentro — Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga el mismo día, garantía escrita 90 días.",
     socialDescription:
-      "Servicio tecnico para Microcentro con foco en tiempos rapidos para equipos de trabajo.",
+      "Team Celular, Recoleta CABA, atiende Microcentro. Diagnóstico el mismo día y garantía escrita 90 días.",
     heroBadge: "Cobertura Microcentro",
     heroIntro:
-      "Si tu celular es herramienta de trabajo en Microcentro, priorizamos diagnóstico rápido, presupuesto claro y tiempos realistas para minimizar el impacto operativo.",
+      "Team Celular, en Paraguay 2451 Recoleta, atiende Microcentro con diagnóstico el mismo día. Pantalla, batería y carga para equipos de trabajo con garantía escrita de 90 días.",
     heroImage: "/images/empresaFamiliar.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(20,184,166,0.32),transparent_44%)]",
@@ -454,7 +454,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
       {
         q: "Tienen garantia escrita?",
-        a: "Si. Cada reparacion se entrega con garantia por escrito y condiciones claras.",
+        a: "Sí. Cada reparación sale con garantía escrita de 90 días sobre trabajo y repuesto.",
       },
     ],
   },

@@ -54,7 +54,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         const brandName = product.brand?.name?.trim();
         const categoryName = product.category?.name?.trim();
         const title = `${product.name || 'Producto'} | Team Celular`;
-        const fallbackDescription = `Compra ${product.name || 'este producto'}${brandName ? ` de ${brandName}` : ''}${categoryName ? ` en ${categoryName}` : ''} con retiro en Recoleta y envio en CABA. Validamos compatibilidad por WhatsApp antes de comprar.`;
+        const rawFallback = `${product.name || 'este producto'}${brandName ? ` de ${brandName}` : ''}${categoryName ? ` — ${categoryName}` : ''} en Team Celular, Paraguay 2451 Recoleta CABA. Retiro en el día y envio en CABA.`;
+        const fallbackDescription = rawFallback.length > 155 ? rawFallback.slice(0, 152) + '...' : rawFallback;
         const description = product.description?.trim() || fallbackDescription;
         const productSlug = buildProductSlug(product);
         const canonicalPath = `/tienda/${productSlug}`;
@@ -70,6 +71,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             product.category?.name,
             'repuestos celulares',
             'accesorios celulares',
+            'Recoleta CABA',
             'Buenos Aires',
         ].filter((keyword): keyword is string => Boolean(keyword));
 
