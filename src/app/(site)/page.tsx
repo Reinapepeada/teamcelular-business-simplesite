@@ -1,10 +1,11 @@
 ﻿import Link from "next/link";
+import { BsCheckCircleFill } from "react-icons/bs";
 import BannerHome from "@/components/banners/BannerHome";
 import BannerCards from "@/components/cards/BannerCards";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import KnowledgeGrid from "@/components/cards/KnowledgeGrid";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
-import { BUDGET_RESPONSE_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
+import { BUDGET_RESPONSE_MESSAGE } from "@/lib/copyStandards";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 
 const SITE_URL = getSiteUrl();
@@ -56,38 +57,22 @@ const services = [
 
 const differentiators = [
     {
-        title: "Garantia escrita",
+        number: "01",
+        title: "Garantía documentada",
         description:
-            "Cada reparacion sale documentada. Sin letra chica ni promesas vagas.",
+            "Cada reparación sale con orden técnica y garantía escrita. Sin letra chica ni promesas que se evaporan.",
     },
     {
-        title: "Diagnostico claro",
+        number: "02",
+        title: "Diagnóstico antes de cobrar",
         description:
-            "Explicamos falla, alcance del trabajo y tiempos reales antes de intervenir el equipo.",
+            "Te explicamos qué falla, qué se reemplaza y cuánto tarda antes de tocar el equipo. Sin sorpresas.",
     },
     {
-        title: "Atencion cercana",
+        number: "03",
+        title: "Respuesta en el día",
         description:
-            "WhatsApp, llamada o visita directa al laboratorio. Respondemos rapido y sin vueltas.",
-    },
-];
-
-const microFaqs = [
-    {
-        title: "Tiempo de respuesta",
-        question: "Cuanto tardan en contestar un presupuesto online?",
-        answer: BUDGET_RESPONSE_MESSAGE,
-    },
-    {
-        title: "Garantia real",
-        question: "Que cubre la garantia escrita?",
-        answer: WARRANTY_SCOPE_MESSAGE,
-    },
-    {
-        title: "Stock y repuestos",
-        question: "Tienen repuestos para iPhone y Android?",
-        answer:
-            "Trabajamos con stock de las marcas mas consultadas y conseguimos piezas faltantes segun modelo y disponibilidad.",
+            "WhatsApp, llamada o visita directa al laboratorio en Paraguay 2451. Respondemos en menos de 2 horas en horario hábil.",
     },
 ];
 
@@ -224,64 +209,48 @@ export default function Home() {
                         <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
                             Que hacemos
                         </h3>
-                        <ul className="space-y-4 text-left">
+                        <ul className="space-y-3 text-left">
                             {services.map((service) => (
                                 <li
                                     key={service.title}
-                                    className="rounded-xl border border-slate-200/80 bg-white dark:bg-slate-900 p-4 shadow-sm"
+                                    className="flex gap-3 rounded-xl border border-slate-200/80 bg-white dark:border-slate-700/60 dark:bg-slate-900 p-4 shadow-sm"
                                 >
-                                    <h4 className="text-lg font-semibold text-secondary md:text-xl">
-                                        {service.title}
-                                    </h4>
-                                    <p className="mt-2 text-slate-700 dark:text-slate-300">
-                                        {service.description}
-                                    </p>
+                                    <BsCheckCircleFill className="mt-1 shrink-0 text-lg text-emerald-500" aria-hidden />
+                                    <div>
+                                        <h4 className="font-semibold text-slate-900 dark:text-slate-100">
+                                            {service.title}
+                                        </h4>
+                                        <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                                            {service.description}
+                                        </p>
+                                    </div>
                                 </li>
                             ))}
                         </ul>
                     </div>
                 </article>
 
-                <section className="grid gap-6 md:grid-cols-3">
-                    {differentiators.map((item, index) => (
-                        <article
-                            key={item.title}
-                            className="relative overflow-hidden rounded-2xl border border-slate-200/75 bg-white/75 dark:bg-slate-900/75 p-6 text-center shadow-md"
-                        >
+                <section className="rounded-2xl border border-slate-200/75 bg-white dark:border-slate-700/60 dark:bg-slate-900">
+                    <div className="divide-y divide-slate-100 dark:divide-slate-800">
+                        {differentiators.map((item) => (
                             <div
-                                className={`pointer-events-none absolute inset-x-0 top-0 h-1 ${
-                                    index % 2 === 0
-                                        ? "bg-gradient-to-r from-primary/70 to-secondary/50"
-                                        : "bg-gradient-to-r from-secondary/70 to-primary/50"
-                                }`}
-                            />
-                            <h3 className="text-[1.15rem] font-semibold leading-snug text-primary">
-                                {item.title}
-                            </h3>
-                            <p className="mt-3 text-slate-700 dark:text-slate-300">
-                                {item.description}
-                            </p>
-                        </article>
-                    ))}
-                </section>
-
-                <section className="grid gap-4 rounded-2xl border border-slate-200/70 bg-white/60 dark:bg-slate-900/60 p-6 shadow-md md:grid-cols-3">
-                    {microFaqs.map((item) => (
-                        <article
-                            key={item.title}
-                            className="space-y-2.5 rounded-xl border border-slate-200/80 bg-white dark:bg-slate-900 p-4 text-left shadow-sm"
-                        >
-                            <p className="text-sm font-semibold uppercase tracking-wide text-primary">
-                                {item.title}
-                            </p>
-                            <h3 className="text-[1.03rem] font-semibold leading-snug text-slate-900 dark:text-slate-100">
-                                {item.question}
-                            </h3>
-                            <p className="text-sm text-slate-700 dark:text-slate-300">
-                                {item.answer}
-                            </p>
-                        </article>
-                    ))}
+                                key={item.number}
+                                className="flex gap-5 px-6 py-5 md:px-8 md:py-6"
+                            >
+                                <span className="shrink-0 select-none text-3xl font-black leading-none text-primary/20 dark:text-primary/30">
+                                    {item.number}
+                                </span>
+                                <div>
+                                    <h3 className="text-[1.07rem] font-semibold text-slate-900 dark:text-slate-100">
+                                        {item.title}
+                                    </h3>
+                                    <p className="mt-1.5 text-[0.95rem] leading-6 text-slate-600 dark:text-slate-400">
+                                        {item.description}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </section>
 
                 {/* @ts-expect-error Async Server Component */}

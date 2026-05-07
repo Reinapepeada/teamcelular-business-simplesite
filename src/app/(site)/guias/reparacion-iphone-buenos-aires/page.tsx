@@ -27,11 +27,14 @@ const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 export const metadata: Metadata = {
   title: "Reparacion de iPhone en Buenos Aires | Servicio Tecnico Premium CABA",
   description:
-    "Reparacion de iPhone en Recoleta con repuestos certificados, preservacion de True Tone y Face ID, diagnostico en 24 horas y garantia escrita. Atendemos iPhone 8 a iPhone 16 Pro Max.",
+    "Servicio tecnico de iPhone en Recoleta, CABA. Pantalla, bateria, puerto de carga y placa logica con repuestos certificados, diagnostico el mismo dia y garantia escrita. iPhone 6 a 17 Pro Max.",
   keywords: [
     "reparacion iphone buenos aires",
     "service iphone caba",
-    "cambio pantalla iphone recoleta",
+    "cambio pantalla iphone",
+    "cambio pantalla iphone true tone",
+    "cambio ficha de carga iphone",
+    "cambio vidrio trasero iphone",
     "cambio bateria iphone original",
     "reparacion face id iphone",
     "reparacion placa iphone",
@@ -216,6 +219,11 @@ const trustBlocks = [
 ];
 
 const iphoneModels = [
+  "iPhone 17 Pro Max",
+  "iPhone 17 Pro",
+  "iPhone 17 Plus",
+  "iPhone 17",
+  "iPhone Air",
   "iPhone 16 Pro Max",
   "iPhone 16 Pro",
   "iPhone 16 Plus",
@@ -494,30 +502,32 @@ export default function IphoneRepairGuidePage() {
           </div>
         </section>
 
-        <section className="space-y-6 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
-          <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-white">
-            Por que esta landing de iPhone convierte mejor
-          </h2>
-          <div className="grid gap-4 md:grid-cols-2">
+        <section className="rounded-2xl border border-slate-200/80 bg-white dark:border-slate-700/60 dark:bg-slate-900">
+          <div className="border-b border-slate-100 px-8 py-5 dark:border-slate-800">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+              Por qué elegir Team Celular para tu iPhone
+            </h2>
+            <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-slate-400">
+              Cuatro puntos concretos que marcan la diferencia en cada trabajo.
+            </p>
+          </div>
+          <div className="divide-y divide-slate-100 dark:divide-slate-800">
             {trustBlocks.map((block) => {
               const Icon = block.Icon;
               return (
-                <article
-                  key={block.title}
-                  className="flex gap-4 rounded-2xl border border-white/20 bg-white/10 p-5 dark:border-white/15 dark:bg-slate-900/40"
-                >
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
-                    <Icon />
+                <div key={block.title} className="flex gap-4 px-8 py-5">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-lg text-primary">
+                    <Icon aria-hidden />
                   </div>
                   <div>
-                    <h3 className="font-bold text-slate-900 dark:text-white">
+                    <h3 className="font-semibold text-slate-900 dark:text-slate-100">
                       {block.title}
                     </h3>
-                    <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
+                    <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">
                       {block.description}
                     </p>
                   </div>
-                </article>
+                </div>
               );
             })}
           </div>

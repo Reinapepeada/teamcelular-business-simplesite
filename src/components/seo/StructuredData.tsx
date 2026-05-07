@@ -24,10 +24,17 @@ const SAME_AS = [
 ];
 
 function createLocalBusinessJson(city?: string, country?: string) {
+  const ratingValue = process.env.NEXT_PUBLIC_GOOGLE_RATING ? Number(process.env.NEXT_PUBLIC_GOOGLE_RATING) : null;
+  const ratingCount = process.env.NEXT_PUBLIC_GOOGLE_RATING_COUNT ? Number(process.env.NEXT_PUBLIC_GOOGLE_RATING_COUNT) : null;
+
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "@id": `${SITE_URL}#localbusiness`,
+    additionalType: [
+      "https://schema.org/ElectronicsStore",
+      "https://schema.org/AutoRepair",
+    ],
     name: BUSINESS_NAME,
     url: SITE_URL,
     image: `${SITE_URL}/opengraph-image.png`,
@@ -60,10 +67,28 @@ function createLocalBusinessJson(city?: string, country?: string) {
     ],
     hasMap: GOOGLE_MAPS_PROFILE_URL,
     sameAs: SAME_AS,
-    areaServed: SERVICE_AREA.map((area) => ({
-      "@type": "AdministrativeArea",
-      name: area,
-    })),
+    areaServed: [
+      ...SERVICE_AREA.map((area) => ({
+        "@type": "AdministrativeArea",
+        name: area,
+      })),
+      { "@type": "AdministrativeArea", name: "Palermo" },
+      { "@type": "AdministrativeArea", name: "Belgrano" },
+      { "@type": "AdministrativeArea", name: "Caballito" },
+      { "@type": "AdministrativeArea", name: "Almagro" },
+      { "@type": "AdministrativeArea", name: "Microcentro" },
+    ],
+    ...(ratingValue && ratingCount
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue,
+            reviewCount: ratingCount,
+            bestRating: 5,
+            worstRating: 1,
+          },
+        }
+      : {}),
   };
 }
 
