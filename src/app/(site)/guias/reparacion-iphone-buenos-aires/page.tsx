@@ -25,7 +25,7 @@ const PAGE_PATH = "/guias/reparacion-iphone-buenos-aires";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 
 export const metadata: Metadata = {
-  title: "Reparación de iPhone en Buenos Aires | Team Celular — Recoleta CABA",
+  title: "Reparación de iPhone en Buenos Aires, CABA | Team Celular",
   description:
     "Reparación de iPhone en Recoleta, CABA. Pantalla y batería en 2–4 h, diagnóstico el mismo día y garantía escrita 90 días. iPhone 8 a 17 Pro Max.",
   keywords: [
@@ -61,9 +61,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Reparacion de iPhone en Buenos Aires | Team Celular",
+    title: "Reparación de iPhone en Buenos Aires, CABA | Team Celular",
     description:
-      "Servicio tecnico especializado en iPhone con garantia escrita, repuestos premium y laboratorio de microelectronica en CABA.",
+      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla y batería en 2–4 h, diagnóstico el mismo día y garantía escrita 90 días. iPhone 8 a 17 Pro Max.",
     type: "article",
     url: PAGE_URL,
     locale: "es_AR",
@@ -76,14 +76,14 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2024-01-15T00:00:00Z",
-    modifiedTime: "2026-05-07T00:00:00Z",
+    modifiedTime: "2026-05-08T00:00:00Z",
     section: "Guias Tecnicas",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Reparacion de iPhone en CABA | Team Celular",
+    title: "Reparación de iPhone en CABA | Team Celular",
     description:
-      "Diagnostico en 24 horas, repuestos certificados y garantia escrita para iPhone.",
+      "Team Celular, Paraguay 2451 Recoleta. Pantalla y batería en 2–4 h, garantía escrita 90 días. iPhone 8 a 17 Pro Max.",
     images: ["https://teamcelular.com/images/guia_iphone.webp"],
   },
 };
@@ -146,7 +146,7 @@ const frequentRepairs = [
     description:
       "Display con brillo, color y respuesta tactil consistentes. Preservamos funciones compatibles con True Tone cuando el modulo original lo permite.",
     eta: "2-4 h",
-    warranty: "Segun repuesto y trabajo",
+    warranty: "Garantía 90 días",
     Icon: FaMobileAlt,
   },
   {
@@ -154,7 +154,7 @@ const frequentRepairs = [
     description:
       "Bateria premium con medicion de consumo y test de autonomia real para evitar apagados repentinos o calentamiento anormal.",
     eta: "1-2 h",
-    warranty: "Segun repuesto y trabajo",
+    warranty: "Garantía 90 días",
     Icon: FaBatteryFull,
   },
   {
@@ -162,7 +162,7 @@ const frequentRepairs = [
     description:
       "Reparamos modulo de carga Lightning o USB-C, microfono y flex inferior. Ideal para iPhone que cargan intermitente o no detectan cable.",
     eta: "2-3 h",
-    warranty: "Segun repuesto y trabajo",
+    warranty: "Garantía 90 días",
     Icon: FaBolt,
   },
   {
@@ -170,7 +170,7 @@ const frequentRepairs = [
     description:
       "Diagnostico por microelectronica para fallas de Face ID, camara selfie y sensor de proximidad en golpes o humedad.",
     eta: "3-6 h",
-    warranty: "Segun repuesto y trabajo",
+    warranty: "Garantía 90 días",
     Icon: FaShieldAlt,
   },
   {
@@ -178,7 +178,7 @@ const frequentRepairs = [
     description:
       "Cambio o reparacion de modulo de camaras con ajuste de foco, estabilizacion y limpieza interna para fotos nitidas.",
     eta: "2-4 h",
-    warranty: "Segun repuesto y trabajo",
+    warranty: "Garantía 90 días",
     Icon: FaCamera,
   },
   {
@@ -186,7 +186,7 @@ const frequentRepairs = [
     description:
       "Trabajo de microelectronica para equipos que no encienden, reinician o no toman carga luego de un golpe electrico o liquido.",
     eta: "24-48 h",
-    warranty: "Segun repuesto y trabajo",
+    warranty: "Garantía 90 días",
     Icon: FaMicrochip,
   },
 ];
@@ -286,7 +286,7 @@ export default function IphoneRepairGuidePage() {
         title="Reparacion de iPhone en Buenos Aires | Servicio Tecnico Premium Team Celular"
         description="Guia completa para reparar iPhone en CABA con diagnostico profesional, repuestos certificados y garantia escrita."
         publishedTime="2024-01-15T00:00:00Z"
-        modifiedTime="2026-05-07T00:00:00Z"
+        modifiedTime="2026-05-08T00:00:00Z"
         authorName="Team Celular"
         image="https://teamcelular.com/images/guia_iphone.webp"
         url={PAGE_URL}

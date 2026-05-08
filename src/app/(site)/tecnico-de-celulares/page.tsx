@@ -29,9 +29,9 @@ const faqs = [
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: "/tecnico-de-celulares",
-  title: "Tecnico de Celulares en Recoleta | Diagnostico Avanzado | Team Celular",
+  title: "Técnico de Celulares en Recoleta | Diagnóstico Avanzado | Team Celular",
   description:
-    "Tecnico especialista en celulares en Recoleta para diagnostico avanzado, placa compleja y segunda opinion tecnica. Ruta para casos inciertos o intervenidos.",
+    "Técnico de celulares en Recoleta, Paraguay 2451 CABA — Team Celular. Diagnóstico avanzado, placa y segunda opinión con garantía escrita 90 días.",
   keywords: [
     "tecnico de celulares recoleta",
     "diagnostico tecnico celular caba",
@@ -48,11 +48,11 @@ export const metadata: Metadata = buildWebsiteMetadata({
   },
   openGraphTitle: "Técnico de Celulares en Recoleta (CABA) | Team Celular",
   openGraphDescription:
-    "Diagnostico avanzado para fallas complejas de celulares en CABA, con criterio tecnico y seguimiento real.",
+    "Team Celular, Paraguay 2451 Recoleta. Diagnóstico avanzado de celulares en CABA: placa, humedad y segunda opinión técnica. Garantía escrita 90 días.",
   openGraphImageAlt: "Técnico de celulares en Recoleta - Team Celular",
   twitterTitle: "Técnico de Celulares en Recoleta | Team Celular",
   twitterDescription:
-    "Diagnostico avanzado de celulares en CABA para placa, humedad y segunda opinion tecnica.",
+    "Team Celular, Recoleta CABA. Técnico especialista en placa, humedad y segunda opinión técnica. Diagnóstico avanzado con garantía escrita 90 días.",
 });
 
 export default function TecnicoDeCelularesPage() {
@@ -108,9 +108,10 @@ export default function TecnicoDeCelularesPage() {
           Técnico de celulares en Recoleta para fallas complejas y diagnóstico experto
         </h1>
         <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          Si ya intentaste reparar y el problema volvió, o si tu equipo tiene
-          síntomas de placa, este es el camino correcto. Trabajamos en <strong>Recoleta</strong>
-          para clientes de toda <strong>CABA</strong> con criterio técnico real.
+          Team Celular, en <strong>Paraguay 2451 Recoleta CABA</strong>, diagnostica
+          fallas complejas de placa, humedad y equipos ya intervenidos. Si el equipo
+          no enciende, reinicia o fue mal reparado en otro lado, buscamos la causa
+          real con garantía escrita de <strong>90 días</strong> sobre trabajo y repuesto.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <TrackedCtaLink

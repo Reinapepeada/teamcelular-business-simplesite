@@ -72,7 +72,7 @@ const faqs = [
   },
   {
     q: "¿Qué garantía tiene el arreglo?",
-    a: "Entregamos garantía por escrito. El plazo depende del tipo de reparación y del repuesto utilizado; te lo detallamos en el presupuesto.",
+    a: "Entregamos garantía escrita de 90 días sobre trabajo y repuesto instalado. El alcance exacto se detalla en el presupuesto antes de avanzar.",
   },
   {
     q: "¿Cómo pido presupuesto rápido?",
@@ -84,7 +84,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: "/arreglo-de-celulares",
   title: "Arreglo de Celulares en Recoleta | Fallas Frecuentes | Team Celular",
   description:
-    "Arreglo de celulares en Recoleta para fallas frecuentes: pantalla, bateria, carga, camara y audio. Ruta rapida para cotizar sin mezclar con casos de diagnostico avanzado.",
+    "Arreglo de celulares en Recoleta, Paraguay 2451 CABA — Team Celular. Pantalla, batería y carga en el día, garantía escrita 90 días. Consultá sin turno.",
   keywords: [
     "arreglo de celulares recoleta",
     "arreglo de celular rapido caba",
@@ -104,11 +104,11 @@ export const metadata: Metadata = buildWebsiteMetadata({
   },
   openGraphTitle: "Arreglo de Celulares en Recoleta (CABA) | Team Celular",
   openGraphDescription:
-    "Arreglo de celulares para fallas frecuentes en Recoleta. Si tu caso es complejo, te derivamos a diagnostico avanzado.",
+    "Team Celular, Paraguay 2451 Recoleta CABA. Arreglo de celulares para fallas frecuentes: pantalla, batería y carga con garantía escrita 90 días.",
   openGraphImageAlt: "Team Celular - Arreglo de celulares en Recoleta (CABA)",
   twitterTitle: "Arreglo de Celulares en Recoleta (CABA) | Team Celular",
   twitterDescription:
-    "Arreglo de celulares para fallas frecuentes, con presupuesto claro por WhatsApp o formulario.",
+    "Team Celular, Paraguay 2451 Recoleta. Arreglo de celulares con garantía escrita 90 días. WhatsApp o formulario.",
 });
 
 export default function ArregloDeCelularesPage() {
@@ -165,9 +165,10 @@ export default function ArregloDeCelularesPage() {
           Arreglo de celulares en Recoleta para resolver fallas cotidianas
         </h1>
         <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          Si se rompió la pantalla, no carga bien o la batería no dura, esta
-          es la página indicada para empezar rápido. Estamos en <strong>Recoleta</strong>
-          y atendemos consultas de toda <strong>CABA</strong> con presupuesto claro.
+          Team Celular, en <strong>Paraguay 2451 Recoleta CABA</strong>, repara
+          celulares con diagnóstico el mismo día, presupuesto claro antes de
+          arrancar y garantía escrita de <strong>90 días</strong> sobre trabajo
+          y repuesto. Pantalla, batería y pin de carga suelen salir en el día.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <TrackedCtaLink

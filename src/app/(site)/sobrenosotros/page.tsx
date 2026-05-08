@@ -19,9 +19,9 @@ import {
 } from "react-icons/fa";
 
 export const metadata: Metadata = {
-    title: "Sobre Nosotros | Team Celular | 15 Anos de Experiencia",
+    title: "Sobre Team Celular | Laboratorio de Celulares en Recoleta, CABA",
     description:
-        "Empresa familiar con mas de 15 anos de experiencia en reparacion de celulares y microelectronica en Recoleta, CABA.",
+        "Team Celular, Paraguay 2451 Recoleta. Laboratorio familiar, 15+ años en reparación de celulares y microelectrónica con garantía escrita en cada trabajo.",
     keywords: [
         "sobre team celular",
         "empresa familiar reparacion celulares",
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
         canonical: "https://teamcelular.com/sobrenosotros",
     },
     openGraph: {
-        title: "Sobre Nosotros | Team Celular",
+        title: "Sobre Team Celular | Laboratorio de Celulares en Recoleta",
         description:
-            "Mas de 15 anos cuidando dispositivos con profesionalismo y garantia escrita",
+            "Team Celular, Paraguay 2451 Recoleta CABA. Laboratorio familiar con más de 15 años en reparación de celulares y microelectrónica con garantía escrita.",
         type: "website",
         url: "https://teamcelular.com/sobrenosotros",
         locale: "es_AR",
@@ -51,8 +51,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Sobre Nosotros | Team Celular",
-        description: "15 anos de experiencia en reparacion profesional",
+        title: "Sobre Team Celular | Laboratorio en Recoleta, CABA",
+        description: "Laboratorio familiar en Paraguay 2451 Recoleta. Más de 15 años en reparación de celulares y microelectrónica con garantía escrita.",
         images: ["https://teamcelular.com/images/empresaFamiliar.webp"],
     },
 };
@@ -98,27 +98,27 @@ const timeline = [
 const values = [
     {
         icon: FaAward,
-        title: "Excelencia",
+        title: "Diagnóstico antes que cambio",
         description:
-            "Buscamos resultados estables con repuestos y procedimientos profesionales.",
+            "Medimos y evaluamos antes de recomendar. No cambiamos piezas por descarte.",
     },
     {
         icon: FaLightbulb,
-        title: "Innovacion",
+        title: "Equipamiento real de laboratorio",
         description:
-            "Microscopios, estaciones de soldadura y herramientas de laboratorio actualizadas.",
+            "Microscopios, estaciones de soldadura y herramientas de precisión para trabajo fino.",
     },
     {
         icon: FaHandshake,
-        title: "Compromiso",
+        title: "Presupuesto claro antes de avanzar",
         description:
-            "Diagnostico honesto y explicacion clara antes de intervenir cualquier equipo.",
+            "Te explicamos la falla, el costo y el riesgo antes de tocar el equipo.",
     },
     {
         icon: FaShieldAlt,
-        title: "Integridad",
+        title: "Garantía escrita en cada trabajo",
         description:
-            "Garantia escrita y criterio tecnico para cuidar tu inversion y tu informacion.",
+            "90 días sobre trabajo y repuesto instalado, con alcance detallado por escrito al momento de entrega.",
     },
 ];
 
@@ -182,14 +182,15 @@ export default function SobreNosotrosPage() {
                             Empresa familiar
                         </span>
                         <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
-                            Mas de 15 anos cuidando dispositivos con criterio
-                            tecnico y trato humano
+                            Más de 15 años reparando celulares con criterio
+                            técnico y garantía escrita
                         </h1>
                         <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-400">
-                            Desde nuestros inicios como taller familiar hasta el
-                            laboratorio actual en Recoleta, la propuesta sigue
-                            siendo la misma: reparar bien, explicar claro y
-                            respaldar cada trabajo.
+                            Team Celular, en Paraguay 2451 Recoleta CABA, es un
+                            laboratorio familiar con más de 15 años reparando
+                            celulares y microelectrónica. La propuesta sigue siendo
+                            la misma: diagnóstico honesto, repuestos de calidad y
+                            garantía escrita de 90 días sobre cada trabajo.
                         </p>
                     </div>
 

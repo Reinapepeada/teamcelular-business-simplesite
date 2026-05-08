@@ -23,19 +23,19 @@ const frequentRepairs = [
     title: "Pantalla rota o touch sin respuesta",
     href: "/reparaciones/cambio-pantalla-caba",
     description:
-      "Cambio de modulo con prueba funcional para brillo, touch y sensores antes de entrega.",
+      "Cambio de módulo con prueba funcional para brillo, touch y sensores antes de entrega.",
   },
   {
-    title: "Bateria que dura poco o se apaga",
+    title: "Batería que dura poco o se apaga",
     href: "/reparaciones/cambio-bateria-caba",
     description:
-      "Diagnostico para confirmar desgaste real y reemplazo con garantia escrita.",
+      "Diagnóstico para confirmar desgaste real y reemplazo con garantía escrita 90 días.",
   },
   {
     title: "Celular que no carga bien",
     href: "/reparaciones/cambio-pin-carga-caba",
     description:
-      "Revision de pin/flex y solucion para carga intermitente o falso contacto.",
+      "Revisión de pin/flex y solución para carga intermitente o falso contacto.",
   },
 ];
 
@@ -64,34 +64,34 @@ const highIntentLinks = [
 
 const faqs = [
   {
-    q: "Si busco reparacion de celulares cerca de mi, atienden en el dia?",
-    a: "Pantalla, bateria y carga suelen resolverse en el dia segun stock y estado del equipo. Siempre confirmamos tiempo real antes de abrir el celular.",
+    q: "Si busco reparación de celulares cerca de mi, ¿atienden en el día?",
+    a: "Pantalla, batería y carga suelen resolverse en el día según stock y estado del equipo. Siempre confirmamos el tiempo real antes de abrir el celular.",
   },
   {
-    q: "Que zonas cubren cerca de Recoleta?",
+    q: "¿Qué zonas cubren cerca de Recoleta?",
     a: "Atendemos equipos de Recoleta, Palermo, Belgrano, Caballito, Almagro, Balvanera, Microcentro y otras zonas de CABA.",
   },
   {
-    q: "Cuanto tardan en responder un presupuesto?",
+    q: "¿Cuánto tardan en responder un presupuesto?",
     a: BUDGET_RESPONSE_MESSAGE,
   },
   {
-    q: "La reparacion tiene garantia?",
+    q: "¿La reparación tiene garantía?",
     a: WARRANTY_SCOPE_MESSAGE,
   },
 ];
 
 const localSignals = [
-  "Laboratorio fisico en Paraguay 2451, Recoleta (CABA).",
-  "Atencion comercial de lunes a viernes de 10:30 a 18:00.",
-  "Seguimiento por WhatsApp y garantia escrita por servicio.",
+  "Laboratorio físico en Paraguay 2451, Recoleta (CABA).",
+  "Atención comercial de lunes a viernes de 10:30 a 18:00, sin turno previo.",
+  "Seguimiento por WhatsApp y garantía escrita de 90 días en cada trabajo.",
 ];
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: "/reparacion-de-celulares-cerca-de-mi",
-  title: "Reparacion de Celulares Cerca de Mi en CABA | Team Celular",
+  title: "Reparación de Celulares Cerca de Mi en CABA | Team Celular",
   description:
-    "Si buscas reparacion de celulares cerca de mi en CABA, atendemos en Recoleta con diagnostico claro, tiempos reales y garantia escrita.",
+    "Reparación de celulares cerca de vos en CABA. Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga en el día. Garantía escrita 90 días.",
   keywords: [
     "reparacion de celulares cerca de mi",
     "arreglo de celulares cerca de mi",
@@ -104,13 +104,13 @@ export const metadata: Metadata = buildWebsiteMetadata({
   languages: {
     "es-AR": "/reparacion-de-celulares-cerca-de-mi",
   },
-  openGraphTitle: "Reparacion de Celulares Cerca de Mi en CABA | Team Celular",
+  openGraphTitle: "Reparación de Celulares Cerca de Mi en CABA | Team Celular",
   openGraphDescription:
-    "Laboratorio tecnico en Recoleta para reparar celulares con trazabilidad, garantia por escrito y respuesta comercial rapida.",
-  openGraphImageAlt: "Team Celular - Reparacion de celulares cerca de mi en CABA",
-  twitterTitle: "Reparacion de Celulares Cerca de Mi en CABA | Team Celular",
+    "Team Celular, Paraguay 2451 Recoleta CABA. Reparación de celulares cerca de vos con diagnóstico el mismo día y garantía escrita 90 días.",
+  openGraphImageAlt: "Team Celular - Reparación de celulares cerca de mi en CABA",
+  twitterTitle: "Reparación de Celulares Cerca de Mi en CABA | Team Celular",
   twitterDescription:
-    "Consulta por WhatsApp y te orientamos rapido con tiempos y opciones de reparacion reales.",
+    "Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga cerca de vos en CABA. Garantía escrita 90 días.",
 });
 
 export default function ReparacionCelularesCercaPage() {
@@ -195,12 +195,13 @@ export default function ReparacionCelularesCercaPage() {
           Cobertura local CABA
         </span>
         <h1 className="mt-6 text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-          Reparacion de celulares cerca de mi, con taller en Recoleta
+          Reparación de celulares cerca de vos, con taller en Recoleta, CABA
         </h1>
         <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          Si estas comparando opciones cercanas para reparar tu celular en CABA,
-          te damos un proceso claro: diagnostico, presupuesto y reparacion con
-          garantia escrita.
+          Team Celular, en <strong>Paraguay 2451 Recoleta CABA</strong>, repara
+          celulares con diagnóstico el mismo día, presupuesto claro sin compromiso
+          y garantía escrita de <strong>90 días</strong> sobre trabajo y repuesto.
+          Pantalla, batería y carga suelen salir en el día.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <TrackedCtaLink
@@ -253,7 +254,7 @@ export default function ReparacionCelularesCercaPage() {
           Barrios que atendemos en CABA
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">
-          Nuestro laboratorio esta en Recoleta, con atencion para barrios cercanos y toda CABA.
+          Nuestro laboratorio está en Recoleta, con atención para barrios cercanos y toda CABA.
         </p>
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {nearbyZones.map((zone) => (
@@ -292,10 +293,10 @@ export default function ReparacionCelularesCercaPage() {
 
       <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Rutas recomendadas para resolver la falla rapido
+          Rutas recomendadas para resolver la falla rápido
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">
-          Si ya sabes el sintoma, entra directo en la pagina exacta para acelerar diagnostico y presupuesto.
+          Si ya sabés el síntoma, entrá directo en la página exacta para acelerar diagnóstico y presupuesto.
         </p>
         <div className="mt-5 flex flex-wrap gap-3">
           {highIntentLinks.map((item) => (

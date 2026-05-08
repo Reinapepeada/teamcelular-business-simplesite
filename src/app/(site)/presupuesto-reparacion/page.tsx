@@ -27,7 +27,7 @@ export const metadata = buildWebsiteMetadata({
     path: "/presupuesto-reparacion",
     title: "Presupuesto Reparación Celulares en Recoleta CABA | Team Celular",
     description:
-        "Cotizá tu reparación de celular en Team Celular, Recoleta CABA. Respuesta en 2 h por WhatsApp con precio, tiempo y garantía escrita 90 días.",
+        "Presupuesto de reparación de celular en Recoleta CABA, sin compromiso. Respuesta en 2 h por WhatsApp con precio, tiempo y garantía escrita 90 días.",
     keywords: [
         "presupuesto reparación celulares",
         "servicio técnico celulares buenos aires",
@@ -74,7 +74,7 @@ const processSteps = [
         icon: FaSmile,
         title: "Retirá con garantía",
         description:
-            "Entregamos el equipo probado y con garantía escrita según el trabajo realizado.",
+            "Entregamos el equipo probado y con garantía escrita de 90 días sobre trabajo y repuesto instalado.",
         timing: "24-72 hs",
     },
 ];

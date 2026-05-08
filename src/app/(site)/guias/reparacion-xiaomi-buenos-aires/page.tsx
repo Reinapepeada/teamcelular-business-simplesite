@@ -24,9 +24,9 @@ const PAGE_PATH = "/guias/reparacion-xiaomi-buenos-aires";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 
 export const metadata: Metadata = {
-  title: "Reparacion de Xiaomi en Buenos Aires | Xiaomi Redmi POCO Service CABA",
+  title: "Reparación de Xiaomi, Redmi y POCO en Buenos Aires, CABA | Team Celular",
   description:
-    "Reparacion profesional de Xiaomi, Redmi y POCO en Recoleta: pantallas AMOLED, baterias de carga rapida, modulo de carga USB-C y placa logica. Diagnostico en 24 horas y garantia escrita.",
+    "Reparación de Xiaomi, Redmi y POCO en Recoleta, CABA — Team Celular, Paraguay 2451. Pantalla, batería y USB-C en el día con garantía escrita 90 días.",
   keywords: [
     "reparacion xiaomi buenos aires",
     "service xiaomi caba",
@@ -57,9 +57,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Reparacion de Xiaomi en Buenos Aires | Team Celular",
+    title: "Reparación de Xiaomi, Redmi y POCO en Buenos Aires, CABA | Team Celular",
     description:
-      "Servicio tecnico para Xiaomi, Redmi y POCO con diagnostico en 24 horas y garantia escrita segun repuesto y trabajo en CABA.",
+      "Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y turbo charge en el día, garantía escrita 90 días. Xiaomi, Redmi y POCO.",
     type: "article",
     url: PAGE_URL,
     locale: "es_AR",
@@ -72,14 +72,14 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2026-03-12T00:00:00Z",
-    modifiedTime: "2026-03-12T00:00:00Z",
+    modifiedTime: "2026-05-08T00:00:00Z",
     section: "Guias Tecnicas",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Service Xiaomi en CABA | Team Celular",
+    title: "Reparación de Xiaomi, Redmi y POCO en CABA | Team Celular",
     description:
-      "Reparacion de Xiaomi, Redmi y POCO con repuestos premium y garantia escrita.",
+      "Team Celular, Paraguay 2451 Recoleta. Pantalla AMOLED y batería en el día, garantía escrita 90 días. Xiaomi, Redmi y POCO.",
     images: ["https://teamcelular.com/images/guia_xiaomi.webp"],
   },
 };
@@ -142,7 +142,7 @@ const repairServices = [
     detail:
       "Reemplazo de display con control de brillo, tactil y uniformidad de color en equipos Xiaomi 13/14, Redmi Note y POCO.",
     eta: "2-4 h",
-    warranty: "Segun repuesto y trabajo",
+    warranty: "Garantía 90 días",
     Icon: FaMobileAlt,
   },
   {
@@ -150,7 +150,7 @@ const repairServices = [
     detail:
       "Cambio de bateria para equipos con descarga acelerada, apagados inesperados o perdida de rendimiento en uso intenso.",
     eta: "1-2 h",
-    warranty: "Segun repuesto y trabajo",
+    warranty: "Garantía 90 días",
     Icon: FaBatteryFull,
   },
   {
@@ -158,7 +158,7 @@ const repairServices = [
     detail:
       "Solucion de carga intermitente, falso contacto y perdida de carga rapida en Xiaomi, Redmi y POCO.",
     eta: "2-3 h",
-    warranty: "Segun repuesto y trabajo",
+    warranty: "Garantía 90 días",
     Icon: FaBolt,
   },
   {
@@ -166,7 +166,7 @@ const repairServices = [
     detail:
       "Reparacion o cambio de modulo para recuperar enfoque, nitidez y estabilizacion en fotos y video.",
     eta: "2-4 h",
-    warranty: "Segun repuesto y trabajo",
+    warranty: "Garantía 90 días",
     Icon: FaCamera,
   },
   {
@@ -174,7 +174,7 @@ const repairServices = [
     detail:
       "Microelectronica para equipos que reinician en logo, no encienden o quedan sin red luego de caidas o humedad.",
     eta: "24-48 h",
-    warranty: "Segun repuesto y trabajo",
+    warranty: "Garantía 90 días",
     Icon: FaMicrochip,
   },
   {
@@ -182,7 +182,7 @@ const repairServices = [
     detail:
       "Reparacion de audio bajo, distorsionado o sin microfono en llamadas con test final de grabacion y reproduccion.",
     eta: "2-3 h",
-    warranty: "Segun repuesto y trabajo",
+    warranty: "Garantía 90 días",
     Icon: FaShieldAlt,
   },
 ];
@@ -214,6 +214,9 @@ const trustReasons = [
 ];
 
 const xiaomiModels = [
+  "Xiaomi 15 Ultra",
+  "Xiaomi 15 Pro",
+  "Xiaomi 15",
   "Xiaomi 14 Ultra",
   "Xiaomi 14",
   "Xiaomi 13T Pro",
@@ -267,7 +270,7 @@ export default function XiaomiRepairGuidePage() {
         title="Reparacion de Xiaomi en Buenos Aires | Servicio Tecnico Team Celular"
         description="Guia completa de reparacion Xiaomi, Redmi y POCO con diagnostico en 24 horas, repuestos premium y garantia escrita."
         publishedTime="2026-03-12T00:00:00Z"
-        modifiedTime="2026-03-12T00:00:00Z"
+        modifiedTime="2026-05-08T00:00:00Z"
         authorName="Team Celular"
         image="https://teamcelular.com/images/guia_xiaomi.webp"
         url={PAGE_URL}
@@ -309,12 +312,13 @@ export default function XiaomiRepairGuidePage() {
 
           <div className="space-y-4">
             <h1 className="text-4xl font-black tracking-tight text-slate-900 dark:text-white md:text-5xl">
-              Reparacion de Xiaomi, Redmi y POCO en Buenos Aires
+              Reparación de Xiaomi, Redmi y POCO en Buenos Aires
             </h1>
             <p className="max-w-4xl text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-              Servicio tecnico para usuarios Xiaomi que necesitan resolver rapido
-              sin improvisacion. Tratamos cada equipo con diagnostico completo,
-              repuestos premium y garantia escrita para que vuelva a rendir de verdad.
+              Team Celular, en Paraguay 2451 Recoleta CABA, repara Xiaomi,
+              Redmi y POCO con diagnóstico el mismo día, pantalla y batería en
+              2–4 h, y garantía escrita de 90 días sobre trabajo y repuesto.
+              Xiaomi 13/14/15, Redmi Note y POCO.
             </p>
           </div>
 
@@ -332,9 +336,9 @@ export default function XiaomiRepairGuidePage() {
               <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
                 Garantia
               </p>
-              <p className="mt-2 text-3xl font-black text-secondary">Variable</p>
+              <p className="mt-2 text-3xl font-black text-secondary">90 días</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-                Cobertura escrita de reparacion
+                Garantía escrita sobre trabajo y repuesto
               </p>
             </div>
             <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">

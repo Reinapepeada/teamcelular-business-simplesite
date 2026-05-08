@@ -28,7 +28,7 @@ export const metadata = buildWebsiteMetadata({
     languages: {
         "es-AR": "/",
     },
-    openGraphTitle: "Reparación de Celulares en Recoleta | Team Celular",
+    openGraphTitle: "Reparación de Celulares en Recoleta CABA | Team Celular",
     openGraphDescription:
         "Team Celular, Paraguay 2451 Recoleta CABA. Cambio de pantalla y batería en el día, diagnóstico mismo día y garantía escrita 90 días.",
     openGraphImageAlt: "Team Celular — Reparación de celulares en Recoleta, Buenos Aires",
@@ -168,7 +168,7 @@ export default function Home() {
                 <article className="grid gap-10 rounded-2xl border border-slate-200/70 bg-white/70 dark:bg-slate-900/70 p-8 shadow-lg md:grid-cols-2 md:items-center lg:p-10">
                     <div className="space-y-6">
                         <h2 className="text-3xl font-semibold tracking-tight text-primary md:text-[2.35rem]">
-                            Por qué nos eligen en Team Celular
+                            Cómo trabajamos en Team Celular
                         </h2>
                         <p className="text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
                             Somos un laboratorio técnico en Recoleta. Nos

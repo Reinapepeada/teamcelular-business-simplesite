@@ -68,13 +68,14 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2024-04-05T00:00:00Z",
-    modifiedTime: "2026-05-07T00:00:00Z",
+    modifiedTime: "2026-05-08T00:00:00Z",
     section: "Guías Técnicas",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mantenimiento Preventivo | Team Celular",
-    description: "Aprende a cuidar tu smartphone con rutinas profesionales",
+    title: "Mantenimiento Preventivo de Celulares en CABA | Team Celular",
+    description:
+      "Team Celular, Paraguay 2451 Recoleta CABA. Limpieza interna, revisión de batería y diagnóstico preventivo con garantía escrita 90 días.",
     images: ["https://teamcelular.com/images/guia_mantenimiento.webp"],
   },
 };
@@ -193,7 +194,7 @@ export default function PreventiveMaintenanceGuide() {
         title="Mantenimiento Preventivo de Celulares | Team Celular"
         description="Guía completa de mantenimiento preventivo para smartphones: checklist profesional, cuidado de batería, actualización de software y limpieza especializada."
         publishedTime="2024-04-05T00:00:00Z"
-        modifiedTime="2026-05-07T00:00:00Z"
+        modifiedTime="2026-05-08T00:00:00Z"
         authorName="Team Celular"
         image="https://teamcelular.com/images/guia_mantenimiento.webp"
         url={PAGE_URL}

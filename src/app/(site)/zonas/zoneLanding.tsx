@@ -296,20 +296,20 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
           <aside className="md:col-span-2">
             <div className="rounded-2xl border border-white/20 bg-black/25 p-5 backdrop-blur-md">
               <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-white/75">
-                Senales locales de confianza
+                Señales locales de confianza
               </h2>
               <ul className="mt-4 space-y-3 text-sm text-white/90">
                 <li className="flex items-start gap-3">
                   <FaMapMarkedAlt className="mt-0.5 text-primary" />
-                  Taller fisico en Recoleta para atencion de toda CABA.
+                  Taller físico en Recoleta para atención de toda CABA.
                 </li>
                 <li className="flex items-start gap-3">
                   <FaShieldAlt className="mt-0.5 text-primary" />
-                  Garantia por escrito y explicacion clara antes de reparar.
+                  Garantía escrita de 90 días y explicación clara antes de reparar.
                 </li>
                 <li className="flex items-start gap-3">
                   <FaSubway className="mt-0.5 text-primary" />
-                  Coordinacion por WhatsApp para acortar tiempos de espera.
+                  Coordinación por WhatsApp para acortar tiempos de espera.
                 </li>
               </ul>
             </div>

@@ -16,9 +16,9 @@ import {
 } from "react-icons/fa";
 
 export const metadata: Metadata = {
-    title: "Team Celular | Paraguay 2451 Recoleta — Lun–Vie 10:30 a 18:00",
+    title: "Contacto | Reparación de Celulares en Recoleta, CABA | Team Celular",
     description:
-        "Team Celular, Paraguay 2451 Recoleta CABA. Atención Lun–Vie 10:30–18:00, sin turno previo. WhatsApp +54 11 5103-4595 para presupuesto rápido.",
+        "Taller de reparación de celulares en Recoleta, Paraguay 2451, CABA. WhatsApp +54 11 5103-4595. Lun–Vie 10:30–18:00. Garantía escrita 90 días.",
     keywords: [
         "contacto team celular",
         "reparación celulares recoleta",
@@ -31,9 +31,9 @@ export const metadata: Metadata = {
         canonical: "https://teamcelular.com/contacto",
     },
     openGraph: {
-        title: "Contacto | Team Celular Recoleta",
+        title: "Contacto | Reparación de Celulares Recoleta | Team Celular",
         description:
-            "Visitanos en Paraguay 2451 o escribinos por WhatsApp para tu presupuesto",
+            "Team Celular, Paraguay 2451 Recoleta CABA. Reparación de celulares con diagnóstico el mismo día y garantía escrita 90 días. WhatsApp +54 11 5103-4595.",
         type: "website",
         url: "https://teamcelular.com/contacto",
         locale: "es_AR",
@@ -48,8 +48,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Contacto | Team Celular Recoleta",
-        description: "Visitanos en Paraguay 2451 o escribinos por WhatsApp",
+        title: "Contacto | Reparación de Celulares Recoleta | Team Celular",
+        description: "Team Celular, Paraguay 2451 Recoleta. Reparación de celulares, diagnóstico el mismo día y garantía escrita 90 días.",
         images: ["https://teamcelular.com/opengraph-image.png"],
     },
 };
@@ -151,7 +151,7 @@ const faqs = [
     {
         question: "¿Ofrecen garantía?",
         answer:
-            "Sí. Todas las reparaciones se entregan con garantía escrita según repuesto y tipo de trabajo.",
+            "Sí. Todas las reparaciones se entregan con garantía escrita de 90 días sobre trabajo y repuesto instalado. El alcance exacto se informa por escrito antes de avanzar.",
     },
 ];
 
@@ -183,9 +183,10 @@ export default function ContactoPage() {
                             Contacto directo con el laboratorio
                         </h1>
                         <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-400">
-                            Si querés venir al taller, pedir presupuesto o
-                            coordinar retiro, estos son los canales correctos y
-                            los horarios reales.
+                            Team Celular, en Paraguay 2451 Recoleta CABA, atiende
+                            lunes a viernes de 10:30 a 18:00 sin turno previo.
+                            Podés venir al taller, escribir por WhatsApp o pedir
+                            presupuesto por formulario.
                         </p>
                         <div className="mt-8 flex flex-wrap justify-center gap-4">
                             <TrackedCtaLink

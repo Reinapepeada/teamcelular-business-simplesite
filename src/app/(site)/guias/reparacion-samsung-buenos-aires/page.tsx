@@ -23,9 +23,9 @@ const PAGE_PATH = "/guias/reparacion-samsung-buenos-aires";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 
 export const metadata: Metadata = {
-  title: "Reparacion de Samsung en Buenos Aires | Galaxy S A Z Fold Service CABA",
+  title: "Reparación de Samsung Galaxy en Buenos Aires, CABA | Team Celular",
   description:
-    "Servicio tecnico Samsung en Recoleta: cambio de pantalla AMOLED, bateria, puerto USB-C, camaras y placa logica. Diagnostico en 24 horas y garantia escrita segun repuesto y trabajo.",
+    "Reparación de Samsung Galaxy en Recoleta, CABA — Team Celular, Paraguay 2451. Pantalla AMOLED, batería y USB-C en el día con garantía escrita 90 días.",
   keywords: [
     "reparacion samsung buenos aires",
     "service samsung caba",
@@ -56,9 +56,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Reparacion de Samsung en Buenos Aires | Team Celular",
+    title: "Reparación de Samsung Galaxy en Buenos Aires, CABA | Team Celular",
     description:
-      "Reparacion profesional de celulares Samsung Galaxy con garantia escrita y laboratorio tecnico en CABA.",
+      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla AMOLED, batería y USB-C en el día, diagnóstico mismo día y garantía escrita 90 días. Galaxy S, A y Z.",
     type: "article",
     url: PAGE_URL,
     locale: "es_AR",
@@ -71,14 +71,14 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2026-03-12T00:00:00Z",
-    modifiedTime: "2026-03-12T00:00:00Z",
+    modifiedTime: "2026-05-08T00:00:00Z",
     section: "Guias Tecnicas",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Service Samsung en CABA | Team Celular",
+    title: "Reparación de Samsung Galaxy en CABA | Team Celular",
     description:
-      "Reparacion de Samsung Galaxy S, A y Z Fold con diagnostico tecnico y garantia.",
+      "Team Celular, Paraguay 2451 Recoleta. Pantalla AMOLED y batería en el día, garantía escrita 90 días. Galaxy S, A, Note y Z Fold.",
     images: ["https://teamcelular.com/images/guia_samsung.webp"],
   },
 };
@@ -141,7 +141,7 @@ const repairServices = [
     detail:
       "Para Galaxy S y Note priorizamos paneles con buen contraste, tasa de refresco estable y respuesta tactil precisa.",
     eta: "2-4 h",
-    warranty: "Segun repuesto y trabajo",
+    warranty: "Garantía 90 días",
     Icon: FaMobileAlt,
   },
   {
@@ -149,7 +149,7 @@ const repairServices = [
     detail:
       "Reemplazo de bateria para equipos que se apagan en frio, bajan de 30% a 0% o pierden carga en reposo.",
     eta: "1-2 h",
-    warranty: "Segun repuesto y trabajo",
+    warranty: "Garantía 90 días",
     Icon: FaBolt,
   },
   {
@@ -157,7 +157,7 @@ const repairServices = [
     detail:
       "Solucion para carga intermitente, cable flojo o equipo que no negocia carga rapida. Incluye limpieza tecnica y test final.",
     eta: "2-3 h",
-    warranty: "Segun repuesto y trabajo",
+    warranty: "Garantía 90 días",
     Icon: FaShieldAlt,
   },
   {
@@ -165,7 +165,7 @@ const repairServices = [
     detail:
       "Reparamos modulos de camara en Galaxy S y A para recuperar nitidez, enfoque y estabilizacion segun cada equipo.",
     eta: "2-4 h",
-    warranty: "Segun repuesto y trabajo",
+    warranty: "Garantía 90 días",
     Icon: FaCamera,
   },
   {
@@ -173,7 +173,7 @@ const repairServices = [
     detail:
       "Microelectronica para equipos que no encienden, quedan en logo o presentan reinicios constantes despues de golpes o humedad.",
     eta: "24-48 h",
-    warranty: "Segun repuesto y trabajo",
+    warranty: "Garantía 90 días",
     Icon: FaMicrochip,
   },
   {
@@ -181,7 +181,7 @@ const repairServices = [
     detail:
       "Evaluamos pliegue, bisagra, cableados flex y panel interno para definir si conviene reparacion parcial o reemplazo completo.",
     eta: "24-72 h",
-    warranty: "Segun repuesto y trabajo",
+    warranty: "Garantía 90 días",
     Icon: FaWrench,
   },
 ];
@@ -213,6 +213,10 @@ const trustReasons = [
 ];
 
 const samsungModels = [
+  "Galaxy S25 Ultra",
+  "Galaxy S25 Edge",
+  "Galaxy S25+",
+  "Galaxy S25",
   "Galaxy S24 Ultra",
   "Galaxy S24+",
   "Galaxy S24",
@@ -269,7 +273,7 @@ export default function SamsungRepairGuidePage() {
         title="Reparacion de Samsung en Buenos Aires | Servicio Tecnico Team Celular"
         description="Guia detallada de reparacion Samsung Galaxy con diagnostico profesional, repuestos premium y garantia escrita."
         publishedTime="2026-03-12T00:00:00Z"
-        modifiedTime="2026-03-12T00:00:00Z"
+        modifiedTime="2026-05-08T00:00:00Z"
         authorName="Team Celular"
         image="https://teamcelular.com/images/guia_samsung.webp"
         url={PAGE_URL}
@@ -311,13 +315,13 @@ export default function SamsungRepairGuidePage() {
 
           <div className="space-y-4">
             <h1 className="text-4xl font-black tracking-tight text-slate-900 dark:text-white md:text-5xl">
-              Reparacion de Samsung Galaxy en Buenos Aires
+              Reparación de Samsung Galaxy en Buenos Aires
             </h1>
             <p className="max-w-4xl text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-              Reparacion tecnica para Samsung Galaxy S, A, Note y Z Fold con
-              proceso transparente, diagnostico preciso y garantia escrita. El
-              objetivo es recuperar rendimiento real, no solo que el equipo
-              vuelva a prender.
+              Team Celular, en Paraguay 2451 Recoleta CABA, repara Samsung
+              Galaxy con diagnóstico el mismo día, pantalla AMOLED y batería en
+              2–4 h, y garantía escrita de 90 días sobre trabajo y repuesto.
+              Galaxy S, A, Note, Z Fold y Z Flip.
             </p>
           </div>
 
@@ -335,9 +339,9 @@ export default function SamsungRepairGuidePage() {
               <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
                 Garantia
               </p>
-              <p className="mt-2 text-3xl font-black text-secondary">Variable</p>
+              <p className="mt-2 text-3xl font-black text-secondary">90 días</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-                Cobertura escrita de trabajo y repuesto
+                Garantía escrita sobre trabajo y repuesto
               </p>
             </div>
             <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">

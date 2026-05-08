@@ -11,7 +11,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       "Pantalla, batería, carga y placa en Recoleta. Presupuesto rápido y garantía por escrito.",
     heroBadge: "Atencion local en Recoleta",
     heroIntro:
-      "Si estás en Recoleta y buscás arreglo de celulares, te atendemos en nuestro taller con diagnóstico profesional, repuestos de calidad y garantía por escrito.",
+      "Team Celular, en Paraguay 2451 Recoleta CABA, repara celulares con diagnóstico el mismo día, repuestos de calidad y garantía escrita de 90 días sobre trabajo y repuesto. Pantalla, batería, carga y placa sin vueltas.",
     heroImage: "/images/teamcelular.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(56,189,248,0.3),transparent_44%)]",
