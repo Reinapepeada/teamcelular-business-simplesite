@@ -3,18 +3,16 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
-import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import {
-  FaApple,
   FaBatteryFull,
   FaBolt,
   FaCamera,
   FaCheckCircle,
   FaClock,
-  FaMicrochip,
   FaMobileAlt,
+  FaMicrochip,
   FaShieldAlt,
   FaTools,
   FaWrench,
@@ -22,27 +20,24 @@ import {
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
-const PAGE_PATH = "/guias/reparacion-iphone-buenos-aires";
+const PAGE_PATH = "/guias/reparacion-motorola-buenos-aires";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 
 export const metadata: Metadata = {
-  title: "Reparación de iPhone en Buenos Aires, CABA | Team Celular",
+  title: "Reparación de Motorola en Buenos Aires, CABA | Team Celular",
   description:
-    "Reparación de iPhone en Recoleta, CABA. Pantalla y batería en 2–4 h, diagnóstico el mismo día y garantía escrita 90 días. iPhone 8 a 17 Pro Max.",
+    "Reparación de Motorola en Recoleta, CABA — Team Celular, Paraguay 2451. Pantalla, batería y pin de carga en el día. Moto G y Edge con garantía escrita 90 días.",
   keywords: [
-    "reparacion iphone buenos aires",
-    "service iphone caba",
-    "cambio pantalla iphone",
-    "cambio pantalla iphone true tone",
-    "cambio ficha de carga iphone",
-    "cambio vidrio trasero iphone",
-    "cambio bateria iphone original",
-    "reparacion face id iphone",
-    "reparacion placa iphone",
-    "service tecnico apple argentina",
-    "reparar iphone mojado caba",
-    "repuestos iphone certificados",
-    "diagnostico iphone 24 horas",
+    "reparacion motorola buenos aires",
+    "service motorola caba",
+    "cambio pantalla motorola",
+    "reparacion moto g caba",
+    "cambio bateria motorola recoleta",
+    "reparacion motorola edge",
+    "tecnico motorola buenos aires",
+    "arreglo motorola g84",
+    "cambio pin carga motorola",
+    "servicio tecnico motorola caba",
   ],
   alternates: {
     canonical: PAGE_URL,
@@ -62,30 +57,30 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Reparación de iPhone en Buenos Aires, CABA | Team Celular",
+    title: "Reparación de Motorola en Buenos Aires, CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla y batería en 2–4 h, diagnóstico el mismo día y garantía escrita 90 días. iPhone 8 a 17 Pro Max.",
+      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla, batería y pin de carga de Motorola en el día, garantía escrita 90 días. Moto G, Edge y E.",
     type: "article",
     url: PAGE_URL,
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/portada_iphone.webp",
+        url: "https://teamcelular.com/images/portada_moto.webp",
         width: 1200,
         height: 630,
-        alt: "Laboratorio de reparacion de iPhone en Team Celular",
+        alt: "Reparación técnica de Motorola en Team Celular, Recoleta CABA",
       },
     ],
-    publishedTime: "2024-01-15T00:00:00Z",
+    publishedTime: "2026-05-08T00:00:00Z",
     modifiedTime: "2026-05-08T00:00:00Z",
-    section: "Guias Tecnicas",
+    section: "Guías Técnicas",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Reparación de iPhone en CABA | Team Celular",
+    title: "Reparación de Motorola en CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta. Pantalla y batería en 2–4 h, garantía escrita 90 días. iPhone 8 a 17 Pro Max.",
-    images: ["https://teamcelular.com/images/portada_iphone.webp"],
+      "Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga de Motorola en el día. Garantía escrita 90 días.",
+    images: ["https://teamcelular.com/images/portada_moto.webp"],
   },
 };
 
@@ -94,13 +89,19 @@ const brandLinks = [
     href: "/guias/reparacion-iphone-buenos-aires",
     label: "iPhone",
     helper: "Apple con True Tone y Face ID",
-    active: true,
+    active: false,
   },
   {
     href: "/guias/reparacion-samsung-buenos-aires",
     label: "Samsung",
     helper: "Galaxy S, A, Z Fold y Z Flip",
     active: false,
+  },
+  {
+    href: "/guias/reparacion-motorola-buenos-aires",
+    label: "Motorola",
+    helper: "Moto G, Edge y E",
+    active: true,
   },
   {
     href: "/guias/reparacion-xiaomi-buenos-aires",
@@ -114,28 +115,27 @@ const quickSteps = [
   {
     step: "Ingreso y checklist técnico",
     detail:
-      "Validamos IMEI, estado estético y todas las funciones clave antes de abrir el equipo: cámaras, micrófono, carga, parlantes, WiFi, Bluetooth, Face ID o Touch ID.",
+      "Validamos IMEI, estado estético y funciones clave antes de abrir: pantalla, touch, cámaras, micrófono, parlantes, carga, WiFi y Bluetooth.",
     duration: "15 min",
     Icon: FaMobileAlt,
   },
   {
     step: "Diagnóstico de laboratorio",
     detail:
-      "Analizamos placa lógica, líneas de carga y consumo con instrumental de laboratorio. Si hay daño por líquido o golpe, documentamos fotos macro para un informe transparente.",
+      "Analizamos pin de carga, estado de batería y consumo con instrumental. Si hay daño por líquido o golpe fuerte, documentamos con fotos antes de cotizar.",
     duration: "30-45 min",
     Icon: FaTools,
   },
   {
     step: "Reparación y calibración",
     detail:
-      "Instalamos repuestos certificados y calibramos funciones delicadas de iPhone: True Tone, sensores de proximidad y rendimiento de batería para sostener la experiencia original.",
-    duration: "2-4 h",
+      "Instalamos repuestos certificados y verificamos calibración táctil, autonomía de batería y estabilidad de carga para sostener el uso diario.",
+    duration: "1-4 h",
     Icon: FaWrench,
   },
   {
     step: "Control de calidad + garantía",
-    detail:
-      `Hacemos pruebas funcionales, estabilidad térmica y carga real. Entregamos informe final con recomendaciones. ${WARRANTY_SCOPE_MESSAGE}`,
+    detail: `Hacemos pruebas funcionales, test de carga completa y estabilidad térmica. ${WARRANTY_SCOPE_MESSAGE}`,
     duration: "20 min",
     Icon: FaCheckCircle,
   },
@@ -143,49 +143,49 @@ const quickSteps = [
 
 const frequentRepairs = [
   {
-    title: "Cambio de pantalla OLED para iPhone",
+    title: "Cambio de pantalla Motorola",
     description:
-      "Display con brillo, color y respuesta táctil consistentes. Preservamos funciones compatibles con True Tone cuando el módulo original lo permite.",
+      "Módulo LCD o AMOLED con prueba de brillo, touch y sensores antes de entregar. Trabajamos Moto G series, Edge y variantes con pantalla curva.",
     eta: "2-4 h",
     warranty: "Garantía 90 días",
     Icon: FaMobileAlt,
   },
   {
-    title: "Reemplazo de batería certificada",
+    title: "Reemplazo de batería Motorola",
     description:
-      "Batería premium con medición de consumo y test de autonomía real para evitar apagados repentinos o calentamiento anormal.",
+      "Batería de calidad con test de autonomía real. Ideal para Moto G que dura menos de medio día o se apaga en forma repentina.",
     eta: "1-2 h",
     warranty: "Garantía 90 días",
     Icon: FaBatteryFull,
   },
   {
-    title: "Puerto de carga y audio inferior",
+    title: "Pin de carga USB-C Motorola",
     description:
-      "Reparamos módulo de carga Lightning o USB-C, micrófono y flex inferior. Ideal para iPhone que cargan intermitente o no detectan cable.",
-    eta: "2-3 h",
+      "Reparamos pin, flex de carga y micrófonos inferiores. Frecuente en Moto G14, G24, G54 y Edge por uso intensivo con carga rápida.",
+    eta: "1-3 h",
     warranty: "Garantía 90 días",
     Icon: FaBolt,
   },
   {
-    title: "Face ID, cámara frontal y sensores",
+    title: "Cámaras Motorola",
     description:
-      "Diagnóstico por microelectrónica para fallas de Face ID, cámara selfie y sensor de proximidad en golpes o humedad.",
-    eta: "3-6 h",
-    warranty: "Garantía 90 días",
-    Icon: FaShieldAlt,
-  },
-  {
-    title: "Cámaras traseras y estabilización",
-    description:
-      "Cambio o reparación de módulo de cámaras con ajuste de foco, estabilización y limpieza interna para fotos nítidas.",
-    eta: "2-4 h",
+      "Cambio o reparación de módulo trasero y frontal con ajuste de foco. Cubrimos Edge 40/50 y Moto G84/G85 con cámara de alta resolución.",
+    eta: "2-3 h",
     warranty: "Garantía 90 días",
     Icon: FaCamera,
   },
   {
-    title: "Placa lógica y recuperación avanzada",
+    title: "Botones, flex y audio",
     description:
-      "Trabajo de microelectrónica para equipos que no encienden, reinician o no toman carga luego de un golpe eléctrico o líquido.",
+      "Reparamos botón de encendido, volumen, flex de huellas dactilares, micrófono y parlante en toda la línea Moto G y Edge.",
+    eta: "1-3 h",
+    warranty: "Garantía 90 días",
+    Icon: FaShieldAlt,
+  },
+  {
+    title: "Placa y recuperación avanzada",
+    description:
+      "Diagnóstico y reparación de placa para Motorola que no enciende, reinicia o no toma carga luego de un golpe o daño por líquidos.",
     eta: "24-48 h",
     warranty: "Garantía 90 días",
     Icon: FaMicrochip,
@@ -196,125 +196,105 @@ const trustBlocks = [
   {
     title: "Diagnóstico claro antes de reparar",
     description:
-      "Recibís un informe simple: qué falla, qué se reemplaza, cuánto tarda y cuánto cuesta. Sin letras chicas ni sorpresas al retirar.",
+      "Recibís un informe: qué falla, qué se reemplaza, cuánto tarda y cuánto cuesta. Sin costos sorpresa al retirar.",
     Icon: FaCheckCircle,
   },
   {
     title: "Laboratorio en Recoleta con trazabilidad",
     description:
-      "Cada equipo se registra con orden técnica y checklist. Sabés en qué etapa está tu iPhone en todo momento.",
+      "Cada equipo se registra con orden técnica y checklist. Sabés en qué etapa está tu Motorola en todo momento.",
     Icon: FaClock,
   },
   {
-    title: "Piezas premium y procedimiento controlado",
+    title: "Repuestos de calidad, no de descarte",
     description:
-      "Evitamos repuestos de baja duración. Priorizamos estabilidad, autonomía y seguridad eléctrica en cada servicio.",
+      "Evitamos módulos de baja duración. Priorizamos estabilidad táctil, autonomía real y seguridad eléctrica en cada servicio.",
     Icon: FaShieldAlt,
   },
   {
-    title: "Respuesta rápida para urgencias reales",
+    title: "Respuesta en el día para casos frecuentes",
     description:
-      "Pantalla, batería y carga podemos resolverlos en el día según stock y cola de trabajo. Confirmamos tiempo antes de abrir el equipo.",
-    Icon: FaApple,
+      "Pantalla, batería y pin de carga de Motorola podemos resolverlos el mismo día según stock. Confirmamos plazo antes de abrir el equipo.",
+    Icon: FaTools,
   },
 ];
 
-const iphoneModels = [
-  "iPhone 17 Pro Max",
-  "iPhone 17 Pro",
-  "iPhone 17 Plus",
-  "iPhone 17",
-  "iPhone Air",
-  "iPhone 16 Pro Max",
-  "iPhone 16 Pro",
-  "iPhone 16 Plus",
-  "iPhone 16",
-  "iPhone 15 Pro Max",
-  "iPhone 15 Pro",
-  "iPhone 15 Plus",
-  "iPhone 15",
-  "iPhone 14 Pro Max",
-  "iPhone 14 Pro",
-  "iPhone 14 Plus",
-  "iPhone 14",
-  "iPhone 13 Pro Max",
-  "iPhone 13 Pro",
-  "iPhone 13",
-  "iPhone 12 Pro Max",
-  "iPhone 12 Pro",
-  "iPhone 12",
-  "iPhone 11 Pro Max",
-  "iPhone 11",
-  "iPhone XR",
-  "iPhone X",
-  "iPhone 8 Plus",
-  "iPhone 8",
-  "iPhone SE 2022",
-  "iPhone SE 2020",
+const motorolaModels = [
+  "Moto G85",
+  "Moto G84",
+  "Moto G54",
+  "Moto G34",
+  "Moto G24",
+  "Moto G14",
+  "Motorola Edge 50 Pro",
+  "Motorola Edge 50",
+  "Motorola Edge 40 Pro",
+  "Motorola Edge 40",
+  "Motorola Edge 30",
+  "Moto G82",
+  "Moto G72",
+  "Moto G52",
+  "Moto G32",
+  "Moto E13",
+  "Moto E22",
+  "Motorola ThinkPhone",
+  "Moto G200",
+  "Moto G60",
+  "Moto G30",
 ];
 
 const faq = [
   {
-    question: "¿Cuánto tarda la reparación de pantalla de iPhone?",
+    question: "¿Cuánto tarda el cambio de pantalla de un Motorola Moto G?",
     answer:
-      "En la mayoría de los casos entre 2 y 4 horas. Si hay daños adicionales en marco, sensores o cámaras, el tiempo puede extenderse porque priorizamos control de calidad y pruebas finales.",
+      "Entre 2 y 4 horas en la mayoría de modelos de la línea G. Si el marco o el sensor de huellas está integrado al módulo, puede tomar algo más. Confirmamos tiempo exacto al ingreso.",
   },
   {
-    question: "¿Pueden mantener True Tone después de cambiar pantalla?",
+    question: "¿Trabajan Motorola Edge con pantalla curva?",
     answer:
-      "Sí, cuando el módulo original permite lectura de datos de calibración. Si la pantalla llega totalmente destruida, te lo avisamos antes para que decidas con toda la información.",
+      "Sí. Los modelos Edge 30, 40 y 50 tienen pantalla curva que requiere herramientas específicas para el despegue. Diagnosticamos antes de cotizar para confirmar viabilidad según el nivel de daño.",
   },
   {
-    question: "¿Reparan iPhone con daño por agua o humedad?",
+    question: "¿El Moto G14/G24 tiene problemas frecuentes de pin de carga?",
     answer:
-      "Sí. Hacemos apertura técnica, limpieza y diagnóstico de corrosión en laboratorio. La clave es no enchufarlo ni intentar cargarlo antes de traerlo.",
+      "Sí, el puerto USB-C del Moto G14 y G24 presenta desgaste por uso intensivo con carga rápida. Revisamos pin y flex antes de confirmar si el problema es mecánico o eléctrico.",
   },
   {
-    question: "¿La garantía cubre mano de obra y repuesto?",
+    question: "¿La garantía cubre trabajo y repuesto?",
     answer: `Sí. ${WARRANTY_SCOPE_MESSAGE}`,
   },
   {
-    question: "¿Qué pasa si no quiero reparar luego del diagnóstico?",
+    question: "¿Reparan Motorola con daño por agua?",
     answer:
-      "Te llevás el informe técnico y el presupuesto detallado sin compromiso. El objetivo es que tomes una decisión informada.",
+      "Sí. Hacemos apertura técnica, limpieza y diagnóstico de corrosión en laboratorio. No enchufes ni cargues el equipo antes de traerlo — eso puede agravar el daño en placa.",
   },
   {
-    question: "¿El cambio de pantalla del iPhone 14 o 15 afecta al Face ID?",
+    question: "¿Cuánto cuesta el diagnóstico si no avanzo con la reparación?",
     answer:
-      "En iPhone 14 y 15 el Face ID está en el módulo frontal separado, por lo que un cambio de display correcto no lo afecta. Verificamos su funcionamiento antes y después de cada reemplazo.",
+      "El diagnóstico tiene costo fijo que se informa antes de abrir el equipo. Si avanzás con la reparación, ese valor se descuenta del trabajo final.",
   },
   {
-    question: "¿El iPhone 12 tiene problemas frecuentes de placa?",
+    question: "¿Atienden todos los modelos de Motorola?",
     answer:
-      "El iPhone 12 puede presentar fallas de placa relacionadas con el chip de batería (PMIC) o con el chip de carga inalámbrica luego de humedad. Diagnosticamos con instrumental antes de cotizar reparación.",
+      "Atendemos toda la línea Moto G (G14 a G85), Edge (30, 40, 50), Moto E y ThinkPhone. Para modelos muy antiguos confirmamos disponibilidad de repuesto antes de ingresar el equipo.",
   },
   {
-    question: "¿Cuánto tarda un cambio de batería de iPhone?",
+    question: "¿El cambio de batería requiere apagar funciones del sistema?",
     answer:
-      "Entre 1 y 2 horas en la mayoría de modelos. Incluye prueba de autonomía y verificación de consumo real. Si el equipo requiere adhesivo especial o tiene batería pegada (como en iPhone 14/15), puede tomar hasta 2,5 horas.",
-  },
-  {
-    question: "¿Trabajan iPhone X, XR, XS y generaciones anteriores?",
-    answer:
-      "Sí. Atendemos iPhone 8 en adelante, incluyendo XR, X, XS, XS Max con repuestos de calidad. Para modelos anteriores, consultá disponibilidad de repuesto antes de venir.",
-  },
-  {
-    question: "¿Cuánto cuesta el diagnóstico si no hago la reparación?",
-    answer:
-      "El diagnóstico tiene costo y se informa antes de abrir el equipo. Si avanzás con la reparación, ese costo se descuenta del trabajo final. Siempre confirmamos monto exacto al ingreso.",
+      "No en la línea Moto G. El reemplazo de batería no afecta funciones de software. Después del cambio hacemos test de autonomía y ciclo de carga para confirmar rendimiento.",
   },
 ];
 
-export default function IphoneRepairGuidePage() {
+export default function MotorolaRepairGuidePage() {
   return (
     <div className="flex w-full justify-center px-4 py-16">
       <ArticleSchema
-        title="Reparacion de iPhone en Buenos Aires | Servicio Tecnico Premium Team Celular"
-        description="Guia completa para reparar iPhone en CABA con diagnostico profesional, repuestos certificados y garantia escrita."
-        publishedTime="2024-01-15T00:00:00Z"
+        title="Reparación de Motorola en Buenos Aires | Servicio Técnico Team Celular"
+        description="Guía completa para reparar Motorola en CABA con diagnóstico profesional, repuestos de calidad y garantía escrita 90 días."
+        publishedTime="2026-05-08T00:00:00Z"
         modifiedTime="2026-05-08T00:00:00Z"
         authorName="Team Celular"
-        image="https://teamcelular.com/images/portada_iphone.webp"
+        image="https://teamcelular.com/images/portada_moto.webp"
         url={PAGE_URL}
       />
 
@@ -322,8 +302,8 @@ export default function IphoneRepairGuidePage() {
         <BreadcrumbJsonLd
           items={[
             { name: "Inicio", url: `${SITE_URL}/` },
-            { name: "Guias", url: `${SITE_URL}/guias` },
-            { name: "Reparacion de iPhone", url: PAGE_URL },
+            { name: "Guías", url: `${SITE_URL}/guias` },
+            { name: "Reparación de Motorola", url: PAGE_URL },
           ]}
         />
 
@@ -333,33 +313,32 @@ export default function IphoneRepairGuidePage() {
           </Link>
           <span>/</span>
           <Link href="/guias" className="transition hover:text-primary">
-            Guias
+            Guías
           </Link>
           <span>/</span>
           <span className="font-semibold text-slate-900 dark:text-white">
-            Reparación iPhone
+            Reparación Motorola
           </span>
         </nav>
 
         <header className="space-y-8 rounded-3xl border border-white/20 bg-white/5 p-8 backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-14">
           <div className="flex flex-wrap items-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/70 bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
-              <FaApple />
               Especialistas por marca
             </span>
             <span className="rounded-full border border-emerald-700/80 bg-emerald-700 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white">
-              Recoleta - CABA
+              Recoleta · CABA
             </span>
           </div>
 
           <div className="space-y-4">
             <h1 className="text-4xl font-black tracking-tight text-slate-900 dark:text-white md:text-5xl">
-              Reparación de iPhone en Buenos Aires
+              Reparación de Motorola en Buenos Aires
             </h1>
             <p className="max-w-4xl text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-              Team Celular, en Paraguay 2451 Recoleta CABA, repara iPhone con
+              Team Celular, en Paraguay 2451 Recoleta CABA, repara Motorola con
               diagnóstico el mismo día, pantalla y batería en 2–4 h, y garantía
-              escrita de 90 días sobre trabajo y repuesto. iPhone 8 a 17 Pro Max.
+              escrita de 90 días sobre trabajo y repuesto. Moto G, Edge y E.
             </p>
           </div>
 
@@ -368,14 +347,14 @@ export default function IphoneRepairGuidePage() {
               <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
                 Diagnóstico
               </p>
-              <p className="mt-2 text-3xl font-black text-primary">24 h</p>
+              <p className="mt-2 text-3xl font-black text-primary">Mismo día</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
                 Informe claro con pasos y presupuesto
               </p>
             </div>
             <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
               <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
-                Garantia
+                Garantía
               </p>
               <p className="mt-2 text-3xl font-black text-secondary">90 días</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
@@ -386,7 +365,7 @@ export default function IphoneRepairGuidePage() {
               <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
                 Tiempo express
               </p>
-              <p className="mt-2 text-3xl font-black text-primary">2-4 h</p>
+              <p className="mt-2 text-3xl font-black text-primary">1-4 h</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
                 Pantalla, batería y carga en el día
               </p>
@@ -415,49 +394,26 @@ export default function IphoneRepairGuidePage() {
               href="/presupuesto-reparacion"
               className="rounded-full bg-primary px-8 py-4 text-base font-bold text-white shadow-lg transition hover:bg-primary/90"
             >
-              Quiero presupuesto para mi iPhone
+              Quiero presupuesto para mi Motorola
             </Link>
             <Link
-              href="https://wa.me/5491151034595?text=Hola%20Team%20Celular%2C%20quiero%20cotizar%20una%20reparacion%20de%20iPhone"
+              href={`https://wa.me/5491151034595?text=${encodeURIComponent(
+                "Hola Team Celular, quiero cotizar una reparación de Motorola. Modelo y falla:"
+              )}`}
               className="rounded-full border-2 border-primary px-8 py-4 text-base font-bold text-primary transition hover:bg-primary/10"
             >
               Hablar por WhatsApp
             </Link>
           </div>
-
-          <div className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-slate-600 dark:text-slate-300">
-            <span className="rounded-full border border-primary/80 bg-primary px-3 py-1 text-white">
-              Reseñas reales de Google
-            </span>
-            <span className="rounded-full border border-secondary/25 bg-secondary/10 px-3 py-1 text-secondary">
-              Sin testimonios inventados
-            </span>
-            <span className="rounded-full border border-emerald-700/70 bg-emerald-700 px-3 py-1 text-white">
-              Actualizacion via API
-            </span>
-          </div>
         </header>
-
-        <section className="space-y-6 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Prueba social real antes de cotizar
-            </h2>
-            <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
-              Mostramos opiniones verificables de Google para que evalúes la confianza del servicio con evidencia pública.
-            </p>
-          </div>
-          {/* @ts-expect-error Async Server Component */}
-          <GoogleReviewsAPI />
-        </section>
 
         <section className="space-y-7">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Cómo trabajamos tu iPhone de punta a punta
+              Cómo trabajamos tu Motorola de punta a punta
             </h2>
             <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
-              Método orientado a resultado técnico y experiencia post-reparación
+              Método técnico para confirmar la falla real antes de tocar el equipo
             </p>
           </div>
           <div className="grid gap-5 md:grid-cols-2">
@@ -491,10 +447,10 @@ export default function IphoneRepairGuidePage() {
         <section className="space-y-7">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Reparaciones de iPhone más solicitadas en CABA
+              Reparaciones de Motorola más solicitadas en CABA
             </h2>
             <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
-              Servicios pensados para resolver rápido sin perder calidad
+              Servicios para Moto G, Edge y E con diagnóstico previo y garantía escrita
             </p>
           </div>
           <div className="grid gap-5 md:grid-cols-3">
@@ -531,7 +487,7 @@ export default function IphoneRepairGuidePage() {
         <section className="rounded-2xl border border-slate-200/80 bg-white dark:border-slate-700/60 dark:bg-slate-900">
           <div className="border-b border-slate-100 px-8 py-5 dark:border-slate-800">
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-              Por qué elegir Team Celular para tu iPhone
+              Por qué elegir Team Celular para tu Motorola
             </h2>
             <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-slate-400">
               Cuatro puntos concretos que marcan la diferencia en cada trabajo.
@@ -562,8 +518,8 @@ export default function IphoneRepairGuidePage() {
         <section className="grid gap-6 rounded-3xl border border-white/15 bg-white/5 p-6 shadow-xl backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:grid-cols-[1.15fr_0.85fr] md:items-center md:p-8">
           <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-slate-900/40">
             <Image
-              src="/images/guia_iphone.webp"
-              alt="Laboratorio de reparación iPhone en Team Celular, Recoleta CABA"
+              src="/images/guia_motorola.webp"
+              alt="Laboratorio de reparación Motorola Team Celular Recoleta CABA"
               width={1200}
               height={900}
               sizes="(max-width: 768px) 100vw, 60vw"
@@ -572,16 +528,18 @@ export default function IphoneRepairGuidePage() {
           </div>
           <article className="space-y-4">
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-              Diagnóstico real, sin reemplazos innecesarios
+              Diagnóstico real, sin respuestas genéricas
             </h2>
             <p className="text-slate-600 dark:text-slate-300">
-              Antes de abrir el iPhone medimos consumo, estado de placa y funciones críticas.
-              Si no conviene reparar, te lo decimos con informe técnico — sin cobrar de más
-              por un diagnóstico que ya tiene respuesta clara.
+              Evaluamos síntomas, pruebas y contexto del equipo para darte una recomendación
+              concreta. Si no conviene reparar el Motorola, te lo decimos claro antes de avanzar
+              — con informe técnico sin costo extra.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
-                href="https://wa.me/5491151034595?text=Hola%20Team%20Celular%2C%20quiero%20cotizar%20una%20reparacion%20de%20iPhone"
+                href={`https://wa.me/5491151034595?text=${encodeURIComponent(
+                  "Hola Team Celular, quiero cotizar una reparación de Motorola. Modelo y falla:"
+                )}`}
                 className="inline-flex min-h-11 items-center rounded-full bg-emerald-700 px-5 text-sm font-semibold text-white transition hover:bg-emerald-800"
               >
                 Consultar por WhatsApp
@@ -598,16 +556,16 @@ export default function IphoneRepairGuidePage() {
 
         <section className="space-y-5 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
           <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-white">
-            Modelos de iPhone que trabajamos
+            Modelos de Motorola que trabajamos
           </h2>
           <p className="text-center text-slate-600 dark:text-slate-300">
-            Cobertura para líneas actuales y generaciones anteriores con repuestos compatibles de calidad.
+            Cubrimos líneas actuales y generaciones anteriores con repuestos de calidad.
           </p>
           <div className="flex flex-wrap justify-center gap-2">
-            {iphoneModels.map((model) => (
+            {motorolaModels.map((model) => (
               <span
                 key={model}
-                  className="rounded-full border border-primary/40 bg-primary/15 px-3 py-2 text-xs font-semibold text-slate-800 dark:border-primary/40 dark:bg-primary/20 dark:text-slate-100"
+                className="rounded-full border border-primary/40 bg-primary/15 px-3 py-2 text-xs font-semibold text-slate-800 dark:border-primary/40 dark:bg-primary/20 dark:text-slate-100"
               >
                 {model}
               </span>
@@ -618,10 +576,10 @@ export default function IphoneRepairGuidePage() {
         <section className="space-y-7">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Preguntas frecuentes sobre reparación de iPhone
+              Preguntas frecuentes sobre reparación de Motorola
             </h2>
             <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
-              Respuestas concretas por modelo y falla para decidir rápido
+              Respuestas por modelo y falla para decidir rápido y con información real
             </p>
           </div>
           <div className="space-y-4">
@@ -643,10 +601,10 @@ export default function IphoneRepairGuidePage() {
 
         <section className="rounded-3xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-8 text-center backdrop-blur-2xl dark:border-white/10 dark:from-slate-900/45 dark:via-slate-900/30 dark:to-slate-900/45 md:p-12">
           <h2 className="text-3xl font-black text-slate-900 dark:text-white">
-            Servicio por marca: iPhone, Samsung y Xiaomi
+            Servicio por marca: Motorola, Samsung, iPhone y Xiaomi
           </h2>
           <p className="mx-auto mt-4 max-w-3xl text-lg text-slate-700 dark:text-slate-300">
-            Si comparás opciones, revisá también nuestras guías de Samsung y Xiaomi. Cada una tiene procesos, fallas típicas y criterios de repuesto adaptados a esa marca.
+            Cada guía tiene procesos, fallas típicas y criterios de repuesto adaptados a esa marca. Si tenés otro modelo, revisá la guía que corresponde.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link
@@ -654,6 +612,12 @@ export default function IphoneRepairGuidePage() {
               className="rounded-full border border-slate-300/80 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200"
             >
               Ver guía Samsung
+            </Link>
+            <Link
+              href="/guias/reparacion-iphone-buenos-aires"
+              className="rounded-full border border-slate-300/80 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200"
+            >
+              Ver guía iPhone
             </Link>
             <Link
               href="/guias/reparacion-xiaomi-buenos-aires"
@@ -676,42 +640,42 @@ export default function IphoneRepairGuidePage() {
           </h2>
           <div className="grid gap-4 md:grid-cols-3">
             <Link
-              href="/guias/reparacion-samsung-buenos-aires"
+              href="/reparaciones/cambio-pantalla-caba"
               className="rounded-2xl border border-white/20 bg-white/10 p-5 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
             >
               <h3 className="font-bold text-primary">
-                Reparación de Samsung en Buenos Aires
+                Cambio de pantalla en CABA
               </h3>
               <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                Fallas comunes de Galaxy S, A y Z Fold con tiempos reales.
+                Proceso y tiempos para módulo LCD y AMOLED con prueba funcional.
               </p>
             </Link>
             <Link
-              href="/guias/reparacion-xiaomi-buenos-aires"
+              href="/reparaciones/cambio-bateria-caba"
               className="rounded-2xl border border-white/20 bg-white/10 p-5 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
             >
               <h3 className="font-bold text-primary">
-                Reparación de Xiaomi, Redmi y POCO
+                Cambio de batería en CABA
               </h3>
               <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                Diagnóstico de carga rápida, pantalla y placa en equipos Xiaomi.
+                Diagnóstico de desgaste y reemplazo con test de autonomía real.
               </p>
             </Link>
             <Link
-              href="/guias/microelectronica-reballing-caba"
+              href="/reparaciones/cambio-pin-carga-caba"
               className="rounded-2xl border border-white/20 bg-white/10 p-5 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
             >
               <h3 className="font-bold text-primary">
-                Microelectrónica y reballing en CABA
+                Pin de carga USB-C en CABA
               </h3>
               <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                Casos complejos para equipos que no encienden o reinician.
+                Reparación de carga intermitente y falso contacto en Moto G.
               </p>
             </Link>
           </div>
         </section>
 
-        <GuideInterlinkSection currentGuide="/guias/reparacion-iphone-buenos-aires" />
+        <GuideInterlinkSection currentGuide="/guias/reparacion-motorola-buenos-aires" />
 
         <script
           type="application/ld+json"
@@ -719,9 +683,9 @@ export default function IphoneRepairGuidePage() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Service",
-              name: "Reparacion de iPhone en Buenos Aires",
+              name: "Reparación de Motorola en Buenos Aires",
               description:
-                "Servicio tecnico especializado en iPhone con diagnostico profesional, repuestos certificados y garantia escrita en CABA.",
+                "Servicio técnico especializado en Motorola con diagnóstico profesional, repuestos de calidad y garantía escrita 90 días en CABA.",
               provider: { "@id": "https://teamcelular.com#localbusiness" },
               areaServed: {
                 "@type": "City",
@@ -729,7 +693,7 @@ export default function IphoneRepairGuidePage() {
               },
               hasOfferCatalog: {
                 "@type": "OfferCatalog",
-                name: "Servicios de reparacion iPhone",
+                name: "Servicios de reparación Motorola",
                 itemListElement: frequentRepairs.map((repair) => ({
                   "@type": "Offer",
                   itemOffered: {

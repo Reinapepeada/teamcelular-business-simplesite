@@ -58,6 +58,17 @@ const ARTICLES = [
     keywords: ["reparacion Xiaomi", "reparacion Redmi", "service POCO", "carga rapida"],
   },
   {
+    title: "Reparación de Motorola en Buenos Aires",
+    description:
+      "Guía para Moto G, Edge y E: pantalla, batería, pin de carga y placa con diagnóstico el mismo día y garantía escrita 90 días.",
+    href: "/guias/reparacion-motorola-buenos-aires",
+    category: "Landing por marca",
+    readingTime: "6 min",
+    Icon: FaMobileAlt,
+    datePublished: "2026-05-08",
+    keywords: ["reparacion Motorola", "Moto G Buenos Aires", "service Motorola CABA"],
+  },
+  {
     title: "Microelectronica y reballing profesional",
     description:
       "Como abordamos reparaciones avanzadas de placa y chips para recuperar equipos complejos.",
@@ -175,13 +186,16 @@ const ARTICLES = [
 
 const articleVisuals: Record<string, { cover: string }> = {
   "/guias/reparacion-iphone-buenos-aires": {
-    cover: "/images/guia_iphone.webp",
+    cover: "/images/portada_iphone.webp",
   },
   "/guias/reparacion-samsung-buenos-aires": {
     cover: "/images/guia_samsung.webp",
   },
   "/guias/reparacion-xiaomi-buenos-aires": {
     cover: "/images/guia_xiaomi.webp",
+  },
+  "/guias/reparacion-motorola-buenos-aires": {
+    cover: "/images/portada_moto.webp",
   },
   "/guias/microelectronica-reballing-caba": {
     cover: "/images/guia_microelectronica.webp",
@@ -246,6 +260,12 @@ const articleLinkTargets: Record<
     serviceLabel: "Servicio: cambio de bateria",
     siblingHref: "/guias/reparacion-pantalla-celular",
     siblingLabel: "Guia hermana: pantallas",
+  },
+  "/guias/reparacion-motorola-buenos-aires": {
+    serviceHref: "/reparaciones/cambio-pantalla-caba",
+    serviceLabel: "Servicio: cambio de pantalla",
+    siblingHref: "/reparaciones/cambio-bateria-caba",
+    siblingLabel: "Servicio: cambio de batería",
   },
   "/guias/microelectronica-reballing-caba": {
     serviceHref: "/reparaciones/reparacion-placa-caba",
@@ -665,6 +685,9 @@ export default function GuidesPage() {
               </Link>
               <Link href="/guias/reparacion-samsung-buenos-aires" className="rounded-full border border-slate-300/80 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
                 Samsung
+              </Link>
+              <Link href="/guias/reparacion-motorola-buenos-aires" className="rounded-full border border-slate-300/80 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
+                Motorola
               </Link>
               <Link href="/guias/reparacion-xiaomi-buenos-aires" className="rounded-full border border-slate-300/80 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
                 Xiaomi

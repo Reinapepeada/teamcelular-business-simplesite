@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
@@ -492,6 +493,43 @@ export default function SamsungRepairGuidePage() {
               );
             })}
           </div>
+        </section>
+
+        <section className="grid gap-6 rounded-3xl border border-white/15 bg-white/5 p-6 shadow-xl backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:grid-cols-[1.15fr_0.85fr] md:items-center md:p-8">
+          <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-slate-900/40">
+            <Image
+              src="/images/samsung_portada.webp"
+              alt="Laboratorio de reparación Samsung Galaxy en Team Celular, Recoleta CABA"
+              width={1200}
+              height={900}
+              sizes="(max-width: 768px) 100vw, 60vw"
+              className="h-auto w-full object-cover"
+            />
+          </div>
+          <article className="space-y-4">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+              Diagnóstico real antes de tocar el equipo
+            </h2>
+            <p className="text-slate-600 dark:text-slate-300">
+              Evaluamos síntomas, consumo eléctrico y estado de placa antes de confirmar presupuesto.
+              Si el Galaxy no conviene reparar, te lo decimos con datos claros — sin cobrar de más
+              por un diagnóstico que ya tiene respuesta.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="https://wa.me/5491151034595?text=Hola%20Team%20Celular%2C%20quiero%20cotizar%20una%20reparacion%20de%20Samsung"
+                className="inline-flex min-h-11 items-center rounded-full bg-emerald-700 px-5 text-sm font-semibold text-white transition hover:bg-emerald-800"
+              >
+                Consultar por WhatsApp
+              </Link>
+              <Link
+                href="/presupuesto-reparacion#solicitar-presupuesto"
+                className="inline-flex min-h-11 items-center rounded-full border border-slate-300 px-5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
+              >
+                Ver presupuesto
+              </Link>
+            </div>
+          </article>
         </section>
 
         <section className="space-y-5 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">

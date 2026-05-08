@@ -5,6 +5,7 @@ type GuidePath =
   | "/guias/mantenimiento-preventivo-celulares"
   | "/guias/microelectronica-reballing-caba"
   | "/guias/reparacion-iphone-buenos-aires"
+  | "/guias/reparacion-motorola-buenos-aires"
   | "/guias/reparacion-pantalla-celular"
   | "/guias/reparacion-samsung-buenos-aires"
   | "/guias/reparacion-xiaomi-buenos-aires"
@@ -105,10 +106,10 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
           "Sintomas tipicos de Galaxy y tiempos de taller segun tipo de falla.",
       },
       {
-        href: "/guias/reparacion-xiaomi-buenos-aires",
-        title: "Reparacion de Xiaomi",
+        href: "/guias/reparacion-motorola-buenos-aires",
+        title: "Reparación de Motorola",
         description:
-          "Diagnostico de carga rapida, bateria y placa en Xiaomi, Redmi y POCO.",
+          "Guía para Moto G, Edge y E: pantalla, batería y pin de carga en el día.",
       },
       {
         href: "/guias/reparacion-pantalla-celular",
@@ -142,6 +143,30 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
       },
     ],
   },
+  "/guias/reparacion-motorola-buenos-aires": {
+    guidance:
+      "Si estás comparando marcas o buscás referencia por componente, estas guías te dan contexto técnico para decidir con información real.",
+    links: [
+      {
+        href: "/guias/reparacion-samsung-buenos-aires",
+        title: "Reparación de Samsung",
+        description:
+          "Fallas de Galaxy S, A y Z Fold con tiempos reales de taller.",
+      },
+      {
+        href: "/guias/reparacion-xiaomi-buenos-aires",
+        title: "Reparación de Xiaomi",
+        description:
+          "Diagnóstico de carga rápida, batería y placa en Redmi y POCO.",
+      },
+      {
+        href: "/guias/cambio-bateria-celular",
+        title: "Cambio de batería",
+        description:
+          "Ideal si notás pérdida de autonomía o inestabilidad térmica en Moto G.",
+      },
+    ],
+  },
   "/guias/reparacion-samsung-buenos-aires": {
     guidance:
       "Para tomar una decision completa, compara procesos entre marcas y revisa una guia por componente para alinear costo y resultado esperado.",
@@ -153,10 +178,10 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
           "Enfoque premium en Apple para diagnostico, repuestos y calibracion.",
       },
       {
-        href: "/guias/reparacion-xiaomi-buenos-aires",
-        title: "Reparacion de Xiaomi",
+        href: "/guias/reparacion-motorola-buenos-aires",
+        title: "Reparación de Motorola",
         description:
-          "Comparativo util si tambien evaluas Redmi o POCO en tu flota personal.",
+          "Guía para Moto G, Edge y E con foco en pantalla, batería y pin de carga.",
       },
       {
         href: "/guias/reparacion-pantalla-celular",
