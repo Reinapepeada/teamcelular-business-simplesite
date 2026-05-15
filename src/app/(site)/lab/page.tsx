@@ -132,14 +132,32 @@ export default function LabPage() {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${PAGE_URL}#service`,
-    name: "Ensamble SMD/THT y testing de placas electrónicas en Argentina",
+    name: "TC Lab · Ensamble SMD/THT y testing de placas electrónicas en Argentina",
+    description:
+      "TC Lab, división de Team Celular en Paraguay 2451 Recoleta CABA, ensambla placas electrónicas SMD y THT y realiza testing funcional para prototipos y series cortas. Sin mínimo de serie. Respuesta en días hábiles.",
     serviceType: "Ensamble electrónico y testing de PCB",
-    url: LAB_URL,
+    url: PAGE_URL,
+    sameAs: LAB_URL,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": PAGE_URL,
+    },
     areaServed: [
       { "@type": "Country", name: "Argentina" },
       { "@type": "City", name: "Buenos Aires" },
     ],
-    provider: { "@id": `${SITE_URL}#localbusiness` },
+    provider: {
+      "@type": "LocalBusiness",
+      "@id": `${SITE_URL}#localbusiness`,
+      name: "Team Celular",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Paraguay 2451",
+        addressLocality: "Recoleta",
+        addressRegion: "CABA",
+        addressCountry: "AR",
+      },
+    },
     offers: {
       "@type": "Offer",
       priceCurrency: "ARS",
@@ -403,7 +421,11 @@ export default function LabPage() {
           laboratorio de Team Celular: reballing BGA, reparación de placa lógica,
           recuperación de equipos con daño por líquidos y diagnóstico avanzado.
           El mismo instrumental, el mismo criterio técnico, aplicado a proyectos
-          de producto electrónico en Argentina.
+          de producto electrónico en Argentina. ¿Necesitás reparar un equipo
+          en lugar de ensamblar?{" "}
+          <Link href="/presupuesto-reparacion" className="font-semibold text-primary hover:underline">
+            Pedí diagnóstico en Team Celular
+          </Link>.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
