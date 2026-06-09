@@ -16,9 +16,9 @@ import {
 } from "react-icons/fa";
 
 export const metadata: Metadata = {
-    title: "Contacto | Reparación de Celulares en Recoleta, CABA | Team Celular",
+    title: "Contacto | Reparación de Celulares en CABA | Team Celular — Recoleta y Belgrano",
     description:
-        "Taller de reparación de celulares en Recoleta, Paraguay 2451, CABA. WhatsApp +54 11 5103-4595. Lun–Vie 10:30–18:00. Garantía escrita 90 días.",
+        "Team Celular tiene dos sucursales en CABA: Paraguay 2451 Recoleta y Amenábar 2030 Belgrano. WhatsApp +54 11 5103-4595. Lun–Vie 10:30–18:00. Garantía escrita 90 días.",
     keywords: [
         "contacto team celular",
         "reparación celulares recoleta",
@@ -31,9 +31,9 @@ export const metadata: Metadata = {
         canonical: "https://teamcelular.com/contacto",
     },
     openGraph: {
-        title: "Contacto | Reparación de Celulares Recoleta | Team Celular",
+        title: "Contacto | Reparación de Celulares en CABA | Team Celular",
         description:
-            "Team Celular, Paraguay 2451 Recoleta CABA. Reparación de celulares con diagnóstico el mismo día y garantía escrita 90 días. WhatsApp +54 11 5103-4595.",
+            "Team Celular, dos sucursales en CABA: Paraguay 2451 Recoleta y Amenábar 2030 Belgrano. Diagnóstico el mismo día y garantía escrita 90 días. WhatsApp +54 11 5103-4595.",
         type: "website",
         url: "https://teamcelular.com/contacto",
         locale: "es_AR",
@@ -48,8 +48,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Contacto | Reparación de Celulares Recoleta | Team Celular",
-        description: "Team Celular, Paraguay 2451 Recoleta. Reparación de celulares, diagnóstico el mismo día y garantía escrita 90 días.",
+        title: "Contacto | Reparación de Celulares en CABA | Team Celular",
+        description: "Team Celular, Paraguay 2451 Recoleta y Amenábar 2030 Belgrano. Reparación de celulares en CABA, diagnóstico el mismo día y garantía escrita 90 días.",
         images: ["https://teamcelular.com/opengraph-image.png"],
     },
 };
@@ -177,16 +177,13 @@ export default function ContactoPage() {
                 <header className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-lg md:p-12">
                     <div className="mx-auto max-w-3xl text-center">
                         <span className="inline-flex rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-                            Recoleta - CABA
+                            Recoleta y Belgrano · CABA
                         </span>
                         <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
-                            Contacto directo con el laboratorio
+                            Contacto directo con el laboratorio en CABA
                         </h1>
                         <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-400">
-                            Team Celular, en Paraguay 2451 Recoleta CABA, atiende
-                            lunes a viernes de 10:30 a 18:00 sin turno previo.
-                            Podés venir al taller, escribir por WhatsApp o pedir
-                            presupuesto por formulario.
+                            Team Celular tiene dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2030, Belgrano</strong>. Atendemos lunes a viernes de 10:30 a 18:00 sin turno previo. Podés venir al taller más cercano, escribir por WhatsApp o pedir presupuesto por formulario.
                         </p>
                         <div className="mt-8 flex flex-wrap justify-center gap-4">
                             <TrackedCtaLink
@@ -276,82 +273,123 @@ export default function ContactoPage() {
                     </div>
                 </section>
 
-                <section className="grid gap-8 lg:grid-cols-[1fr_1.05fr]">
-                    <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md">
-                        <div className="flex items-start gap-4">
-                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                                <FaMapMarkerAlt className="text-2xl" />
+                <section className="space-y-6">
+                    <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+                        Nuestras sucursales en CABA
+                    </h2>
+                    <div className="grid gap-6 lg:grid-cols-2">
+                        <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md">
+                            <div className="flex items-start gap-4">
+                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                                    <FaMapMarkerAlt className="text-2xl" />
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+                                        Sucursal Recoleta
+                                    </h3>
+                                    <p className="mt-1 text-lg text-slate-700 dark:text-slate-300">
+                                        Paraguay 2451, Recoleta
+                                    </p>
+                                    <p className="text-slate-600 dark:text-slate-400">
+                                        Ciudad Autónoma de Buenos Aires
+                                    </p>
+                                </div>
                             </div>
-                            <div>
-                                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-                                    Nuestra ubicación
-                                </h2>
-                                <p className="mt-2 text-lg text-slate-700 dark:text-slate-300">
-                                    Paraguay 2451, Recoleta
-                                </p>
-                                <p className="text-slate-600 dark:text-slate-400">
-                                    Ciudad Autónoma de Buenos Aires, Argentina
-                                </p>
+                            <div className="mt-6 flex items-start gap-4">
+                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary/10 text-secondary">
+                                    <FaClock className="text-2xl" />
+                                </div>
+                                <div>
+                                    <p className="font-semibold text-slate-900 dark:text-slate-100">Horarios</p>
+                                    <p className="mt-1 text-slate-700 dark:text-slate-300">Lunes a Viernes: 10:30 – 18:00</p>
+                                    <p className="text-sm text-slate-500 dark:text-slate-400">Sábados y domingos: cerrado</p>
+                                </div>
                             </div>
-                        </div>
-
-                        <div className="mt-8 flex items-start gap-4">
-                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary/10 text-secondary">
-                                <FaClock className="text-2xl" />
-                            </div>
-                            <div>
-                                <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
-                                    Horarios de atención
-                                </h3>
-                                <p className="mt-2 text-slate-700 dark:text-slate-300">
-                                    Lunes a Viernes: 10:30 - 18:00
-                                </p>
-                                <p className="text-sm text-slate-500 dark:text-slate-400">
-                                    Sábados y domingos: cerrado
-                                </p>
-                            </div>
-                        </div>
-
-                        <Link
-                            href="https://maps.app.goo.gl/krFJfjDA4CuR83BK9"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-primary/90"
-                        >
-                            <FaDirections aria-hidden />
-                            Cómo llegar en Google Maps
-                        </Link>
-
-                        <div className="mt-8 space-y-4">
-                            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
-                                Cómo llegar
-                            </h3>
-                            {transportInfo.map((transport) => {
-                                const Icon = transport.icon;
-                                return (
-                                    <div key={transport.title} className="flex gap-3">
-                                        <Icon className="mt-1 text-primary" />
-                                        <div>
-                                            <p className="font-semibold text-slate-900 dark:text-slate-100">
-                                                {transport.title}
-                                            </p>
-                                            <p className="text-sm text-slate-600 dark:text-slate-400">
-                                                {transport.description}
-                                            </p>
+                            <div className="mt-6 space-y-3">
+                                {transportInfo.map((transport) => {
+                                    const Icon = transport.icon;
+                                    return (
+                                        <div key={transport.title} className="flex gap-3">
+                                            <Icon className="mt-1 shrink-0 text-primary" />
+                                            <div>
+                                                <p className="font-semibold text-slate-900 dark:text-slate-100">{transport.title}</p>
+                                                <p className="text-sm text-slate-600 dark:text-slate-400">{transport.description}</p>
+                                            </div>
                                         </div>
+                                    );
+                                })}
+                            </div>
+                            <Link
+                                href="https://maps.app.goo.gl/krFJfjDA4CuR83BK9"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-primary/90"
+                            >
+                                <FaDirections aria-hidden />
+                                Cómo llegar — Recoleta
+                            </Link>
+                        </article>
+
+                        <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md">
+                            <div className="flex items-start gap-4">
+                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                                    <FaMapMarkerAlt className="text-2xl" />
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+                                        Sucursal Belgrano
+                                    </h3>
+                                    <p className="mt-1 text-lg text-slate-700 dark:text-slate-300">
+                                        Amenábar 2030, Belgrano
+                                    </p>
+                                    <p className="text-slate-600 dark:text-slate-400">
+                                        Ciudad Autónoma de Buenos Aires
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="mt-6 flex items-start gap-4">
+                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary/10 text-secondary">
+                                    <FaClock className="text-2xl" />
+                                </div>
+                                <div>
+                                    <p className="font-semibold text-slate-900 dark:text-slate-100">Horarios</p>
+                                    <p className="mt-1 text-slate-700 dark:text-slate-300">Lunes a Viernes: 10:30 – 18:00</p>
+                                    <p className="text-sm text-slate-500 dark:text-slate-400">Apertura: julio 2026</p>
+                                </div>
+                            </div>
+                            <div className="mt-6 space-y-3">
+                                <div className="flex gap-3">
+                                    <FaSubway className="mt-1 shrink-0 text-primary" />
+                                    <div>
+                                        <p className="font-semibold text-slate-900 dark:text-slate-100">Subte</p>
+                                        <p className="text-sm text-slate-600 dark:text-slate-400">Línea D – Estación Juramento, a pocas cuadras.</p>
                                     </div>
-                                );
-                            })}
-                        </div>
-                    </article>
+                                </div>
+                                <div className="flex gap-3">
+                                    <FaMapMarkerAlt className="mt-1 shrink-0 text-primary" />
+                                    <div>
+                                        <p className="font-semibold text-slate-900 dark:text-slate-100">Ubicación</p>
+                                        <p className="text-sm text-slate-600 dark:text-slate-400">Amenábar 2030, Belgrano, CABA. CP C1428.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <Link
+                                href="/sucursales/caba/belgrano"
+                                className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-primary px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10"
+                            >
+                                <FaDirections aria-hidden />
+                                Ver sucursal Belgrano
+                            </Link>
+                        </article>
+                    </div>
 
                     <div className="overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 shadow-md">
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.262305984237!2d-58.40523692350382!3d-34.59752805717274!2m3!1f0!2f0!3f0!2m3!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccb9f6e9910cb%3A0xb492115ba59bc4f2!2sTeam%20celular%20%7C%20Reparacion%20de%20celulares%20%7C%20Reparacion%20de%20computadoras!5e0!3m2!1ses!2sar!4v1712864201522!5m2!1ses!2sar"
-                            className="min-h-[560px] w-full"
+                            className="min-h-[400px] w-full"
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
-                            title="Mapa de Team Celular"
+                            title="Mapa Team Celular Recoleta — Paraguay 2451"
                         />
                     </div>
                 </section>
@@ -437,7 +475,7 @@ export default function ContactoPage() {
                             "@type": "ContactPage",
                             name: "Contacto - Team Celular",
                             description:
-                                "Información de contacto y ubicación de Team Celular en Recoleta, Buenos Aires",
+                                "Información de contacto y ubicación de Team Celular — dos sucursales en CABA: Paraguay 2451 Recoleta y Amenábar 2030 Belgrano.",
                             url: "https://teamcelular.com/contacto",
                         }),
                     }}

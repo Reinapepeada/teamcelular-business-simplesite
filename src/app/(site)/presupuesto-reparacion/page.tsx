@@ -25,9 +25,9 @@ const PAGE_URL = `${SITE_URL}/presupuesto-reparacion`;
 
 export const metadata = buildWebsiteMetadata({
     path: "/presupuesto-reparacion",
-    title: "Presupuesto Reparación Celulares en Recoleta CABA | Team Celular",
+    title: "Presupuesto Reparación Celulares CABA | Team Celular — Recoleta y Belgrano",
     description:
-        "Presupuesto de reparación de celular en Recoleta CABA, sin compromiso. Respuesta en 2 h por WhatsApp con precio, tiempo y garantía escrita 90 días.",
+        "Presupuesto de reparación de celular en CABA, sin compromiso. Team Celular en Paraguay 2451 Recoleta y Amenábar 2030 Belgrano. Respuesta en 2 h. Garantía escrita 90 días.",
     keywords: [
         "presupuesto reparación celulares",
         "servicio técnico celulares buenos aires",
@@ -40,13 +40,13 @@ export const metadata = buildWebsiteMetadata({
         "es-AR": "/presupuesto-reparacion",
     },
     openGraphTitle:
-        "Presupuesto Reparación Celulares en Recoleta | Team Celular",
+        "Presupuesto Reparación Celulares en CABA | Team Celular",
     openGraphDescription:
-        "Presupuesto de reparación en Paraguay 2451, Recoleta CABA. Respuesta en 2 h por WhatsApp con precio, tiempo estimado y garantía escrita 90 días.",
-    openGraphImageAlt: "Laboratorio de Team Celular en Recoleta",
+        "Team Celular, dos sucursales en CABA: Paraguay 2451 Recoleta y Amenábar 2030 Belgrano. Respuesta en 2 h por WhatsApp y garantía escrita 90 días.",
+    openGraphImageAlt: "Laboratorio de Team Celular en CABA",
     twitterTitle: "Presupuesto Reparación Celulares CABA | Team Celular",
     twitterDescription:
-        "Cotizá por WhatsApp en 2 h. Pantalla, batería, carga y microelectrónica con garantía escrita 90 días. Paraguay 2451, Recoleta.",
+        "Cotizá por WhatsApp en 2 h. Pantalla, batería, carga y microelectrónica. Dos sucursales en CABA: Recoleta y Belgrano. Garantía escrita 90 días.",
 });
 
 const processSteps = [
@@ -67,7 +67,7 @@ const processSteps = [
         icon: FaTools,
         title: "Traelo o coordinamos retiro",
         description:
-            "Podés acercarte al laboratorio en Recoleta o coordinar retiro en CABA según disponibilidad.",
+            "Podés acercarte a cualquiera de nuestras sucursales en CABA — Recoleta (Paraguay 2451) o Belgrano (Amenábar 2030) — o coordinar retiro según disponibilidad.",
         timing: "Mismo día",
     },
     {
@@ -156,8 +156,8 @@ const supportChannels = [
     {
         icon: FaMapMarkerAlt,
         title: "Visitanos",
-        description: "Paraguay 2451, Recoleta, CABA",
-        href: "/contacto",
+        description: "Recoleta (Paraguay 2451) · Belgrano (Amenábar 2030)",
+        href: "/sucursales",
         external: false,
     },
 ];
@@ -209,13 +209,10 @@ export default function PresupuestoReparacionPage() {
                             Presupuesto claro y sin vueltas
                         </span>
                         <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
-                            Presupuesto de reparación de celulares en Recoleta CABA
+                            Presupuesto de reparación de celulares en CABA
                         </h1>
                         <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
-                            Team Celular, en Paraguay 2451 Recoleta, responde
-                            presupuestos en hasta 2 h por WhatsApp. Pantalla,
-                            batería, carga y microelectrónica con garantía escrita
-                            de 90 días sobre trabajo y repuesto.
+                            Team Celular tiene dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2030, Belgrano</strong>. Respondemos presupuestos en hasta 2 h por WhatsApp. Pantalla, batería, carga y microelectrónica con garantía escrita de 90 días sobre trabajo y repuesto.
                         </p>
 
                         <ul className="mt-6 space-y-3 text-slate-700 dark:text-slate-300">
@@ -423,7 +420,7 @@ export default function PresupuestoReparacionPage() {
                 <section className="order-2 space-y-6">
                     <div className="text-center">
                         <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
-                            Así funciona el servicio
+                            ¿Cómo funciona el servicio de presupuesto?
                         </h2>
                         <p className="mt-2 text-lg text-slate-600 dark:text-slate-400">
                             Un proceso simple para pedir presupuesto y avanzar
@@ -483,7 +480,7 @@ export default function PresupuestoReparacionPage() {
                 <section className="space-y-6">
                     <div className="text-center">
                         <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
-                            Reparaciones más solicitadas
+                            ¿Qué reparaciones hacemos más?
                         </h2>
                         <p className="mt-2 text-lg text-slate-600 dark:text-slate-400">
                             Algunas de las consultas que recibimos todos los días

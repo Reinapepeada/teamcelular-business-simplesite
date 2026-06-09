@@ -361,7 +361,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     {
       question: `Reparan ${seed.brand} aunque no sea una marca tan comun?`,
       answer:
-        `Si. Atendemos equipos ${seed.brand} con protocolo tecnico y confirmamos viabilidad segun modelo, repuesto disponible y relacion costo-beneficio.`,
+        `Si. Reparamos ${seed.brand} en nuestros talleres en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030), CABA. Confirmamos viabilidad según modelo y repuesto disponible antes de intervenir.`,
     },
     {
       question: "Cuanto tarda el diagnostico?",
@@ -395,26 +395,26 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     pagePath,
     pageLabel,
     title,
-    heroDescription: `Si tu ${seed.brand} presenta fallas de pantalla, bateria, carga o placa, esta guia te ayuda a entender sintomas, diagnostico y siguiente paso recomendado en CABA.`,
+    heroDescription: `Team Celular, en Paraguay 2451 Recoleta y Amenábar 2030 Belgrano (CABA), repara ${seed.brand} con diagnóstico el mismo día y garantía escrita de 90 días sobre trabajo y repuesto. Esta guía explica las fallas más comunes, cómo las diagnosticamos y el paso recomendado según el estado del equipo.`,
     badge: seed.badge,
     readingTime: "5 min",
     publishedTime: "2026-04-20T00:00:00Z",
-    modifiedTime: "2026-04-20T00:00:00Z",
+    modifiedTime: "2026-06-09T00:00:00Z",
     imagePath: seed.imagePath,
     heroPoints: [
       `Diagnostico orientado a equipos ${seed.brand}.`,
       `Enfoque tecnico en ${seed.specialtyFocus}.`,
       `Punto critico frecuente: ${seed.knownWeakPoints[0]}.`,
     ],
-    symptomsTitle: `Fallas frecuentes en equipos ${seed.brand}`,
+    symptomsTitle: `¿Cuáles son las fallas más frecuentes en ${seed.brand}?`,
     symptomsDescription:
       `Estas senales son las mas reportadas en ${seed.brand} y conviene abordarlas antes de que escalen a placa.`,
     symptoms,
-    diagnosisTitle: `Como diagnosticamos un ${seed.brand}`,
+    diagnosisTitle: `¿Cómo diagnosticamos un ${seed.brand}?`,
     diagnosisDescription:
       `Aplicamos una secuencia tecnica para ${seed.brand}, separando sintoma visible de causa real sin cambiar piezas de mas.`,
     diagnostics,
-    planTitle: `Plan recomendado para reparar ${seed.brand}`,
+    planTitle: `¿Qué plan seguimos para reparar ${seed.brand}?`,
     planDescription:
       `El objetivo es estabilizar ${seed.brand} en uso diario, priorizando la falla que mas afecta rendimiento y autonomia.`,
     planSteps,
@@ -423,9 +423,9 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     whatsappText: `Hola Team Celular, necesito presupuesto para reparar mi ${seed.brand}`,
     metadata: buildWebsiteMetadata({
       path: pagePath,
-      title: `Reparacion de ${seed.brand} en CABA | Service Tecnico en Buenos Aires`,
+      title: `Reparación de ${seed.brand} en CABA | Team Celular — Recoleta y Belgrano`,
       description:
-        `Servicio tecnico para ${seed.brand} en Recoleta: pantalla, bateria, carga y diagnostico tecnico con orientacion clara para decidir.`,
+        `Reparación de ${seed.brand} en CABA. Team Celular, Recoleta y Belgrano. Pantalla, batería y carga con diagnóstico el mismo día. Garantía escrita 90 días.`,
       keywords: [
         ...seed.keywords,
         `reparacion ${seed.brand.toLowerCase()} buenos aires`,

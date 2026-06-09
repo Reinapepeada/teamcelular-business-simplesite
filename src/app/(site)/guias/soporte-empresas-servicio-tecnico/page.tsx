@@ -24,9 +24,9 @@ import {
 } from "react-icons/fa";
 
 export const metadata: Metadata = {
-  title: "Servicio Técnico Celulares Empresas | Soporte Corporativo Buenos Aires",
+  title: "Servicio Técnico de Celulares para Empresas en CABA | Team Celular",
   description:
-    "Soporte técnico corporativo con SLA garantizado, logística incluida y planes preventivos. Atendemos empresas, gremios y organizaciones en CABA. Más de 10 años de experiencia.",
+    "Soporte técnico de celulares para empresas en CABA — Team Celular. SLA, logística puerta a puerta y planes desde 5 dispositivos. Garantía escrita 90 días. Recoleta y Belgrano.",
   keywords: [
     "servicio técnico empresas Buenos Aires",
     "reparación celulares corporativos",
@@ -55,9 +55,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Servicio Técnico Corporativo Celulares | Buenos Aires",
+    title: "Servicio Técnico de Celulares para Empresas en CABA | Team Celular",
     description:
-      "Soporte técnico especializado para empresas con SLA garantizado, logística puerta a puerta y planes preventivos.",
+      "Team Celular, Paraguay 2451 Recoleta y Amenábar 2030 Belgrano, presta soporte técnico de celulares para empresas. SLA, logística puerta a puerta, desde 5 dispositivos. Garantía escrita 90 días.",
     type: "article",
     url: "https://teamcelular.com/guias/soporte-empresas-servicio-tecnico",
     locale: "es_AR",
@@ -70,13 +70,13 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2024-03-10T00:00:00Z",
-    modifiedTime: "2025-12-11T00:00:00Z",
+    modifiedTime: "2026-06-09T00:00:00Z",
     section: "Guías Técnicas",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Servicio Técnico para Empresas | Team Celular",
-    description: "Soporte técnico especializado para empresas con SLA garantizado",
+    title: "Servicio Técnico de Celulares para Empresas en CABA | Team Celular",
+    description: "Team Celular, Recoleta y Belgrano CABA. Soporte de celulares para empresas: SLA, logística puerta a puerta y garantía escrita 90 días.",
     images: ["https://teamcelular.com/images/guia_corporativo.webp"],
   },
 };
@@ -175,7 +175,7 @@ const faqBusiness = [
   {
     question: "¿Ofrecen servicio on-site o solo en taller?",
     answer:
-      "Nuestro servicio principal es en taller especializado en Recoleta, donde contamos con equipamiento profesional (microscopio, estación de reballing, cámara de diagnóstico). Para diagnósticos iniciales o mantenimientos preventivos programados, podemos coordinar visitas on-site en CABA sin cargo adicional en planes anuales.",
+      "Nuestro servicio se realiza en los talleres de Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030), donde contamos con equipamiento profesional: microscopio, estación de reballing y cámara de diagnóstico. Para diagnósticos iniciales o mantenimientos preventivos programados coordinamos visitas on-site en CABA sin cargo adicional en planes anuales.",
   },
   {
     question: "¿Qué marcas y modelos están incluidos en el soporte corporativo?",
@@ -216,17 +216,22 @@ export default function BusinessSupportGuide() {
         />
         {/* Hero Section */}
         <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-16">
+          <div className="flex flex-wrap justify-center gap-3 mb-4">
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/70 bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
+              Soporte corporativo
+            </span>
+            <span className="rounded-full border border-emerald-700/80 bg-emerald-700 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white">
+              Recoleta y Belgrano · CABA
+            </span>
+          </div>
           <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-primary via-secondary to-primary shadow-2xl">
             <FaBuilding className="text-5xl text-white" />
           </div>
           <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-            Servicio Técnico Corporativo de Celulares
+            Servicio Técnico de Celulares para Empresas en CABA
           </h1>
           <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
-            Soporte técnico especializado para empresas y organizaciones con{" "}
-            <strong className="text-primary">SLA garantizado</strong>, logística incluida y planes
-            de mantenimiento preventivo. Más de 10 años resolviendo las necesidades tecnológicas de
-            empresas en Buenos Aires.
+            Team Celular, en <strong>Paraguay 2451 Recoleta</strong> y <strong>Amenábar 2030 Belgrano</strong> (CABA), presta soporte técnico de celulares para empresas con flota desde 5 dispositivos. Diagnóstico en menos de 24 horas, SLA configurable (4 h crítico · 24 h estándar), logística puerta a puerta en CABA y garantía escrita de <strong>90 días</strong> sobre trabajo y repuesto. 10 años de experiencia en reparación avanzada.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
@@ -264,26 +269,22 @@ export default function BusinessSupportGuide() {
             </h2>
             <div className="space-y-4 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
             <p>
-              En entornos corporativos, la disponibilidad de dispositivos móviles es crítica para la
-              continuidad operativa. Un celular fuera de servicio significa un colaborador sin
-              herramientas de trabajo, pérdida de productividad y costos ocultos difíciles de
-              cuantificar.
+              Un celular fuera de servicio significa un colaborador sin herramientas, producción
+              detenida y costos que no aparecen en ningún presupuesto hasta que el problema ya ocurrió.
+              En flotas de 5 o más equipos, cada hora sin respuesta técnica multiplica ese impacto.
             </p>
             <p>
-              <strong className="text-primary">Team Celular</strong> desarrolló un servicio técnico
-              especializado para organizaciones que necesitan tiempos de respuesta predecibles,
-              reportería profesional y soporte técnico que entiende la urgencia del mundo
-              corporativo. No somos un service genérico: somos un laboratorio técnico con capacidad
-              de reparación avanzada y vocación de servicio empresarial.
+              <strong className="text-primary">Team Celular</strong>, con talleres en Recoleta (Paraguay 2451)
+              y Belgrano (Amenábar 2030), resuelve el diagnóstico en menos de 24 horas y trabaja con
+              SLA firmado para que los tiempos de reparación sean predecibles, no una promesa verbal.
+              Llevamos 10 años reparando dispositivos móviles con microscopio, instrumental de
+              laboratorio y garantía escrita.
             </p>
             <p>
-              Trabajamos bajo{" "}
-              <strong className="text-secondary">
-                acuerdos de nivel de servicio (SLA) personalizados
-              </strong>
-              , coordinamos logística puerta a puerta y entregamos reportes detallados para áreas de
-              IT, compras o compliance. Si tu empresa depende de celulares para operar, tenemos la
-              solución técnica que necesitás.
+              Coordinamos retiro y entrega en CABA, emitimos factura A o B, firmamos NDA sin cargo
+              adicional y generamos reportes mensuales para IT, compras o compliance. Si tu empresa
+              depende de celulares para operar, trabajamos bajo acuerdo con{" "}
+              <strong className="text-secondary">SLA configurable por criticidad de incidencia</strong>.
             </p>
             </div>
           </div>
@@ -293,7 +294,7 @@ export default function BusinessSupportGuide() {
         <section className="space-y-8">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Beneficios del servicio corporativo
+              ¿Qué incluye el servicio técnico corporativo?
             </h2>
             <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
               Diseñamos cada plan según las necesidades operativas de tu organización
@@ -326,7 +327,7 @@ export default function BusinessSupportGuide() {
         <section className="space-y-8 rounded-2xl border border-white/15 bg-white/5 p-10 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
           <div>
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Características de nuestros SLA
+              ¿Qué garantiza el SLA de Team Celular?
             </h2>
             <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
               Acuerdos de servicio transparentes y medibles
@@ -355,7 +356,7 @@ export default function BusinessSupportGuide() {
         <section className="space-y-8">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Industrias y sectores que asistimos
+              ¿A qué sectores atendemos?
             </h2>
             <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
               Adaptamos planes según el tipo de operación y volumen de dispositivos
@@ -401,7 +402,7 @@ export default function BusinessSupportGuide() {
                   <FaChartLine />
                 </div>
                 <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-                  Reportería profesional y compliance
+                  ¿Qué documentación entregamos por cada reparación?
                 </h2>
               </div>
               <div className="space-y-4 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
@@ -511,15 +512,41 @@ export default function BusinessSupportGuide() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Service",
-              "name": "Servicio Técnico Corporativo de Celulares",
-              "provider": { "@id": "https://teamcelular.com#localbusiness" },
+              "name": "Servicio Técnico de Celulares para Empresas en CABA",
               "serviceType": "Reparación y mantenimiento de dispositivos móviles corporativos",
               "areaServed": {
                 "@type": "AdministrativeArea",
                 "name": "Ciudad Autónoma de Buenos Aires (CABA)"
               },
               "description":
-                "Servicio técnico especializado para empresas con SLA garantizado, logística puerta a puerta, planes preventivos y soporte para flotas de dispositivos móviles en CABA.",
+                "Team Celular, en Paraguay 2451 Recoleta y Amenábar 2030 Belgrano (CABA), presta soporte técnico de celulares para empresas desde 5 dispositivos: SLA garantizado, logística puerta a puerta, planes preventivos y diagnóstico en menos de 24 horas.",
+              "provider": {
+                "@id": "https://teamcelular.com#localbusiness",
+                "location": [
+                  {
+                    "@type": "Place",
+                    "name": "Team Celular Recoleta",
+                    "address": {
+                      "@type": "PostalAddress",
+                      "streetAddress": "Paraguay 2451",
+                      "addressLocality": "Recoleta",
+                      "addressRegion": "CABA",
+                      "addressCountry": "AR"
+                    }
+                  },
+                  {
+                    "@type": "Place",
+                    "name": "Team Celular Belgrano",
+                    "address": {
+                      "@type": "PostalAddress",
+                      "streetAddress": "Amenábar 2030",
+                      "addressLocality": "Belgrano",
+                      "addressRegion": "CABA",
+                      "addressCountry": "AR"
+                    }
+                  }
+                ]
+              },
               "offers": {
                 "@type": "Offer",
                 "availability": "https://schema.org/InStock",

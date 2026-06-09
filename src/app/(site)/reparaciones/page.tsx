@@ -134,9 +134,9 @@ export default function ReparacionesPage() {
             Servicios de reparacion de celulares en CABA
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-slate-100/90">
-            Taller en Recoleta con atencion para toda CABA. Trabajamos iPhone,
-            Samsung, Motorola, Xiaomi y mas, con diagnostico tecnico y garantia
-            por escrito.
+            Team Celular tiene dos talleres en CABA: <strong>Recoleta (Paraguay 2451)</strong> y <strong>Belgrano (Amenábar 2030)</strong>. iPhone,
+            Samsung, Motorola, Xiaomi y más marcas con diagnóstico técnico y garantía
+            escrita de 90 días sobre trabajo y repuesto.
           </p>
           <p className="mt-3 text-sm text-slate-200/90">
             Si buscas una solucion por falla frecuente, puedes ir a{" "}
@@ -168,10 +168,10 @@ export default function ReparacionesPage() {
               WhatsApp directo
             </TrackedCtaLink>
             <Link
-              href="/sucursales/caba/recoleta"
+              href="/sucursales"
               className="rounded-full border border-white/35 px-8 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
             >
-              Ver sucursal
+              Ver sucursales
             </Link>
           </div>
         </div>

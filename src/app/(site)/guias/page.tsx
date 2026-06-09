@@ -179,7 +179,7 @@ const ARTICLES = [
     keywords: [
       `reparacion ${item.brand.toLowerCase()}`,
       `service ${item.brand.toLowerCase()} caba`,
-      "tecnico celulares recoleta",
+      "tecnico celulares caba",
     ],
   })),
 ];
@@ -402,7 +402,7 @@ export default function GuidesPage() {
                     Guias Team Celular
                   </span>
                   <span className="rounded-full border border-slate-300/80 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700 dark:border-white/15 dark:bg-slate-950/70 dark:text-slate-200">
-                    Recoleta - CABA
+                    Recoleta y Belgrano · CABA
                   </span>
                 </div>
                 <div className="w-fit rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-600 dark:border-white/10 dark:bg-slate-950/60 dark:text-slate-300">
@@ -434,12 +434,10 @@ export default function GuidesPage() {
 
             <div className="space-y-4">
               <h1 className="max-w-3xl text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
-                Guias tecnicas hechas desde el laboratorio.
+                Guías técnicas de Team Celular en CABA.
               </h1>
               <p className="max-w-3xl text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-                Reunimos procesos, fallas frecuentes y criterios de repuesto
-                para iPhone, Samsung, Xiaomi, microelectronica y soporte para
-                empresas con una mirada clara de taller real.
+                Team Celular, en Paraguay 2451 Recoleta y Amenábar 2030 Belgrano (CABA), publica guías sobre fallas frecuentes, diagnóstico técnico y criterios de repuesto para iPhone, Samsung, Xiaomi, Motorola, microelectrónica y soporte para empresas.
               </p>
             </div>
 
@@ -728,7 +726,7 @@ export default function GuidesPage() {
               "@type": "CollectionPage",
               name: "Guias tecnicas de reparacion de celulares",
               description:
-                "Centro de contenido de Team Celular con guias de reparacion por marca, microelectronica y soporte corporativo.",
+                "Centro de guías técnicas de Team Celular — Paraguay 2451 Recoleta y Amenábar 2030 Belgrano, CABA. Reparación por marca, microelectrónica y soporte corporativo.",
               image: `${SITE_URL}/images/banner_guias.webp`,
               provider: { "@id": `${SITE_URL}#localbusiness` },
               hasPart: ARTICLES.map((article) => ({

@@ -220,7 +220,7 @@ export default function HighIntentGuidePage({
                 className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-slate-950/10 to-transparent"
               />
               <div className="absolute bottom-3 left-3 rounded-full border border-white/35 bg-black/35 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm">
-                Diagnostico profesional en Recoleta
+                Recoleta y Belgrano · CABA
               </div>
             </aside>
           </div>

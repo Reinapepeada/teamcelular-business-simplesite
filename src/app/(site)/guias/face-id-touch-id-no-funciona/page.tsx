@@ -13,7 +13,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
   title: "Face ID o Touch ID no Funciona: Causas y Solucion | Team Celular",
   description:
-    "Face ID o Touch ID dejo de funcionar? Entiende causas frecuentes, que pruebas hacer y cuando conviene reparacion de flex, modulo o placa.",
+    "¿Face ID o Touch ID dejó de funcionar? Team Celular, Recoleta y Belgrano (CABA), diagnostica sensores biométricos el mismo día: flex, módulo o placa con criterio técnico.",
   keywords: [
     "face id no funciona",
     "touch id no funciona",
@@ -140,24 +140,24 @@ export default function FaceIdTouchIdGuidePage() {
       pagePath={PAGE_PATH}
       pageLabel="Face ID / Touch ID"
       title="Face ID o Touch ID no funciona: causas y solucion"
-      heroDescription="Las fallas biometricas pueden venir de software, flex, sensores o placa. Esta guia te ayuda a priorizar pruebas y decidir el siguiente paso tecnico."
+      heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2030 Belgrano (CABA), diagnostica Face ID y Touch ID el mismo día. Las fallas biométricas pueden venir de software, flex, sensores o placa — lo confirmamos antes de intervenir."
       badge="Diagnostico avanzado"
       readingTime="6 min"
       publishedTime="2026-04-16T00:00:00Z"
-      modifiedTime="2026-04-16T00:00:00Z"
+      modifiedTime="2026-06-09T00:00:00Z"
       imagePath="/images/guia_iphone.webp"
       heroPoints={[
         "Detecta la causa mas probable segun sintomas.",
         "Evita cambios de modulo sin diagnostico previo.",
         "Define cuando conviene pasar a microelectronica.",
       ]}
-      symptomsTitle="Sintomas habituales en sensores biometricos"
-      symptomsDescription="Estos escenarios son los que mas vemos en equipos que llegan a laboratorio."
+      symptomsTitle="¿Cuáles son los síntomas habituales en sensores biométricos?"
+      symptomsDescription="Estos escenarios son los que más vemos en equipos que llegan a laboratorio."
       symptoms={symptoms}
-      diagnosisTitle="Como se diagnostica en taller"
-      diagnosisDescription="El objetivo es confirmar origen real y evitar intervenciones que no solucionan el problema."
+      diagnosisTitle="¿Cómo diagnosticamos Face ID y Touch ID en taller?"
+      diagnosisDescription="El objetivo es confirmar el origen real y evitar intervenciones que no solucionan el problema."
       diagnostics={diagnostics}
-      planTitle="Ruta de solucion por niveles"
+      planTitle="¿Cuál es la ruta de solución recomendada?"
       planDescription="Se prioriza el camino menos invasivo y se escala solo si hace falta."
       planSteps={planSteps}
       faq={faq}

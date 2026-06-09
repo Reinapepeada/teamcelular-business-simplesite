@@ -13,7 +13,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
   title: "Pin de Carga Suelto: Causas y Solucion en CABA | Team Celular",
   description:
-    "Tu celular carga intermitente o solo en cierta posicion? Aprende a detectar pin flojo, flex dañado o falla de placa y que conviene reparar primero.",
+    "¿Tu celular carga intermitente? Team Celular, Recoleta y Belgrano (CABA), diagnostica pin de carga, flex y placa el mismo día. Reparación express con garantía escrita 90 días.",
   keywords: [
     "pin de carga suelto",
     "celular no carga bien",
@@ -140,25 +140,25 @@ export default function ChargingPortGuidePage() {
       pagePath={PAGE_PATH}
       pageLabel="Pin de carga suelto"
       title="Pin de carga suelto: causas, diagnostico y solucion"
-      heroDescription="Si tu equipo carga intermitente o solo en cierta posicion, esta guia te ayuda a identificar si es suciedad, desgaste del puerto o una falla mas profunda de placa."
+      heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2030 Belgrano (CABA), diagnostica pin de carga suelto con inspección microscópica el mismo día. Si es suciedad, desgaste de conector o falla de placa, lo confirmamos antes de cambiar piezas."
       badge="Falla frecuente"
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
-      modifiedTime="2026-04-16T00:00:00Z"
+      modifiedTime="2026-06-09T00:00:00Z"
       imagePath="/images/guia_cambio_modulo.webp"
       heroPoints={[
         "Checklist rapido para detectar la causa principal.",
         "Evita forzar el conector y agravar el daño.",
         "Define si conviene limpieza, cambio o microelectronica.",
       ]}
-      symptomsTitle="Senales de pin de carga comprometido"
+      symptomsTitle="¿Cuáles son las señales de pin de carga comprometido?"
       symptomsDescription="Estas pistas suelen aparecer antes de que el equipo deje de cargar por completo."
       symptoms={symptoms}
-      diagnosisTitle="Como diagnosticamos la falla"
-      diagnosisDescription="Separar el origen real evita gastos innecesarios y acelera la solucion correcta."
+      diagnosisTitle="¿Cómo diagnosticamos la falla de carga?"
+      diagnosisDescription="Separar el origen real evita gastos innecesarios y acelera la solución correcta."
       diagnostics={diagnostics}
-      planTitle="Plan de reparacion recomendado"
-      planDescription="El flujo cambia segun nivel de daño, pero siempre avanzamos de lo simple a lo complejo."
+      planTitle="¿Cuál es el plan de reparación recomendado?"
+      planDescription="El flujo cambia según nivel de daño, pero siempre avanzamos de lo simple a lo complejo."
       planSteps={planSteps}
       faq={faq}
       relatedLinks={relatedLinks}

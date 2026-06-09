@@ -25,7 +25,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelula
 export const metadata: Metadata = {
   title: "Cambio de Pantalla Celular Buenos Aires | Display Original CABA",
   description:
-    "Cambio de pantalla celular con displays OLED originales, True Tone preservado y garantia escrita segun repuesto y trabajo. Service 2-4 hs en Recoleta, CABA.",
+    "Cambio de pantalla celular en CABA. Team Celular, Recoleta y Belgrano. Displays OLED originales, True Tone preservado, 2-4 h y garantía escrita sobre trabajo y repuesto.",
   keywords: [
     "cambio pantalla celular Buenos Aires",
     "pantalla iPhone original",
@@ -217,7 +217,7 @@ const faqScreen = [
   },
   {
     question: "¿Cuánto tiempo tarda el cambio de pantalla?",
-    answer: "El servicio express toma 2-4 horas si tenemos el repuesto en stock. El proceso incluye: diagnóstico inicial (15 min), desmontaje (20 min), transferencia de componentes (20 min), instalación (25 min), calibración True Tone si aplica (15 min) y test completo (15 min). Para modelos menos comunes que requieren pedido de pantalla, el tiempo es de 24-48 horas. Ofrecemos servicio de espera en nuestro local de Recoleta con WiFi.",
+    answer: "El servicio express toma 2-4 horas si tenemos el repuesto en stock. El proceso incluye: diagnóstico inicial (15 min), desmontaje (20 min), transferencia de componentes (20 min), instalación (25 min), calibración True Tone si aplica (15 min) y test completo (15 min). Para modelos menos comunes que requieren pedido de pantalla, el tiempo es de 24-48 horas. Ofrecemos servicio de espera en nuestros locales de Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030) con WiFi.",
   },
   {
     question: "¿La pantalla nueva viene con garantía?",
@@ -236,7 +236,7 @@ export default function ScreenReplacementGuide() {
         title="Cambio de pantalla celular en Buenos Aires | Display original Team Celular"
         description="Cambio de pantalla con displays OLED originales, True Tone preservado y garantia escrita segun repuesto y trabajo. Service express 2-4 horas en CABA."
         publishedTime="2024-11-30T00:00:00Z"
-        modifiedTime="2025-12-11T00:00:00Z"
+        modifiedTime="2026-06-09T00:00:00Z"
         authorName="Team Celular"
         image="https://teamcelular.com/images/guia_cambio_modulo.webp"
         url="https://teamcelular.com/guias/reparacion-pantalla-celular"
@@ -275,7 +275,7 @@ export default function ScreenReplacementGuide() {
           <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
             Reemplazo de pantalla con <strong className="text-primary">displays OLED originales</strong>, 
             <strong> True Tone preservado</strong>, garantia escrita segun repuesto y trabajo, y servicio 
-            express en <strong>2-4 horas</strong>. Reparamos iPhone, Samsung, Motorola y todas las marcas en Recoleta, CABA.
+            express en <strong>2-4 horas</strong>. Reparamos iPhone, Samsung, Motorola y todas las marcas en dos talleres en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030).
           </p>
 
           {/* Quick Stats */}

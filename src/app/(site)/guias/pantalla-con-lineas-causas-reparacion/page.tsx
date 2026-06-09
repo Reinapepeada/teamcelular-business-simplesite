@@ -13,7 +13,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
   title: "Pantalla con Lineas en Celular: Causas y Reparacion | Team Celular",
   description:
-    "Tu pantalla muestra lineas verticales, parpadeo o manchas? Aprende a diferenciar dano de display, flex o placa para decidir la reparacion correcta.",
+    "Pantalla con líneas, parpadeo o manchas. Team Celular, Recoleta y Belgrano (CABA), diagnostica display, flex o placa. Cambio de módulo en el día y garantía escrita 90 días.",
   keywords: [
     "pantalla con lineas celular",
     "display con rayas verticales",
@@ -140,25 +140,25 @@ export default function ScreenLinesGuidePage() {
       pagePath={PAGE_PATH}
       pageLabel="Pantalla con lineas"
       title="Pantalla con lineas en celular: causas y reparacion"
-      heroDescription="Las lineas en pantalla no siempre significan el mismo problema. Esta guia te ayuda a diferenciar display dañado, flex defectuoso o falla de placa."
+      heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2030 Belgrano (CABA), diagnostica líneas en pantalla para identificar la causa real: display, flex o placa. Cambio de módulo en el día con garantía escrita de 90 días."
       badge="Decision de reparacion"
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
-      modifiedTime="2026-04-16T00:00:00Z"
+      modifiedTime="2026-06-09T00:00:00Z"
       imagePath="/images/guia_cambio_modulo.webp"
       heroPoints={[
         "Diferencia causa visual vs causa electrica.",
         "Evita reemplazar modulo sin validar placa.",
         "Prioriza una solucion con costo/beneficio real.",
       ]}
-      symptomsTitle="Sintomas frecuentes de pantalla con lineas"
-      symptomsDescription="Reconocer el patron de la falla ayuda a definir mejor el tipo de reparacion."
+      symptomsTitle="¿Cuáles son los síntomas frecuentes de pantalla con líneas?"
+      symptomsDescription="Reconocer el patrón de la falla ayuda a definir mejor el tipo de reparación."
       symptoms={symptoms}
-      diagnosisTitle="Diagnostico recomendado"
+      diagnosisTitle="¿Cómo diagnosticamos líneas en pantalla?"
       diagnosisDescription="El objetivo es ubicar la causa exacta para no cambiar piezas innecesarias."
       diagnostics={diagnostics}
-      planTitle="Plan de solucion por prioridad"
-      planDescription="Se corrige primero el componente con mayor probabilidad de exito y menor costo."
+      planTitle="¿Cómo reparamos la pantalla con líneas?"
+      planDescription="Se corrige primero el componente con mayor probabilidad de éxito y menor costo."
       planSteps={planSteps}
       faq={faq}
       relatedLinks={relatedLinks}

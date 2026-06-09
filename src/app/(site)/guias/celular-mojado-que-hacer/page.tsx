@@ -13,7 +13,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
   title: "Celular Mojado: Que Hacer en las Primeras 2 Horas | Team Celular",
   description:
-    "Se mojo tu celular? Guia de accion inmediata para reducir riesgo de corto, corrosion y perdida de datos. Aprende que hacer y que evitar en las primeras horas.",
+    "¿Se mojó tu celular? Team Celular, Recoleta y Belgrano (CABA), diagnostica daño por líquidos el mismo día. Actuá en las primeras 2 horas para reducir riesgo de corto y corrosión.",
   keywords: [
     "celular mojado que hacer",
     "telefono mojado solucion",
@@ -140,25 +140,25 @@ export default function WetPhoneGuidePage() {
       pagePath={PAGE_PATH}
       pageLabel="Celular mojado"
       title="Celular mojado: que hacer en las primeras 2 horas"
-      heroDescription="Actuar rapido y evitar errores comunes puede marcar la diferencia entre una recuperacion simple y una falla compleja de placa."
+      heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2030 Belgrano (CABA), recupera celulares con daño por líquidos con diagnóstico el mismo día. Actuá dentro de las primeras 2 horas para reducir riesgo de corto y corrosión en placa."
       badge="Emergencia tecnica"
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
-      modifiedTime="2026-04-16T00:00:00Z"
+      modifiedTime="2026-06-09T00:00:00Z"
       imagePath="/images/guia_microelectronica.webp"
       heroPoints={[
         "Pasos concretos para minimizar corto y corrosion.",
         "Errores frecuentes que debes evitar desde el minuto uno.",
         "Criterios para decidir si requiere laboratorio avanzado.",
       ]}
-      symptomsTitle="Senales de dano por liquidos"
-      symptomsDescription="No todos los sintomas aparecen al instante. Estas pistas ayudan a anticipar complicaciones."
+      symptomsTitle="¿Cuáles son las señales de daño por líquidos?"
+      symptomsDescription="No todos los síntomas aparecen al instante. Estas pistas ayudan a anticipar complicaciones."
       symptoms={symptoms}
-      diagnosisTitle="Que se evalua en laboratorio"
-      diagnosisDescription="Un diagnostico temprano permite frenar corrosion y recuperar funciones antes de que escale."
+      diagnosisTitle="¿Qué evaluamos en laboratorio?"
+      diagnosisDescription="Un diagnóstico temprano permite frenar corrosión y recuperar funciones antes de que escale."
       diagnostics={diagnostics}
-      planTitle="Protocolo recomendado de accion"
-      planDescription="Este orden reduce riesgos y mejora probabilidades de recuperacion del equipo."
+      planTitle="¿Qué hacer si el celular se mojó?"
+      planDescription="Este orden reduce riesgos y mejora probabilidades de recuperación del equipo."
       planSteps={planSteps}
       faq={faq}
       relatedLinks={relatedLinks}
