@@ -72,7 +72,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2026-05-08T00:00:00Z",
-    modifiedTime: "2026-05-08T00:00:00Z",
+    modifiedTime: "2026-06-09T00:00:00Z",
     section: "Guías Técnicas",
   },
   twitter: {
@@ -82,6 +82,13 @@ export const metadata: Metadata = {
       "Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga de Motorola en el día. Garantía escrita 90 días.",
     images: ["https://teamcelular.com/images/portada_moto.webp"],
   },
+};
+
+const repairLinks: Record<string, string> = {
+  "Cambio de pantalla Motorola": "/reparaciones/cambio-pantalla-caba",
+  "Reemplazo de batería Motorola": "/reparaciones/cambio-bateria-caba",
+  "Pin de carga USB-C Motorola": "/reparaciones/cambio-pin-carga-caba",
+  "Placa y recuperación avanzada": "/reparaciones/reparacion-placa-caba",
 };
 
 const brandLinks = [
@@ -200,9 +207,9 @@ const trustBlocks = [
     Icon: FaCheckCircle,
   },
   {
-    title: "Laboratorio en Recoleta con trazabilidad",
+    title: "Dos talleres en CABA con trazabilidad",
     description:
-      "Cada equipo se registra con orden técnica y checklist. Sabés en qué etapa está tu Motorola en todo momento.",
+      "Cada equipo se registra con orden técnica y checklist en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030). Sabés en qué etapa está tu Motorola en todo momento.",
     Icon: FaClock,
   },
   {
@@ -292,7 +299,7 @@ export default function MotorolaRepairGuidePage() {
         title="Reparación de Motorola en Buenos Aires | Servicio Técnico Team Celular"
         description="Guía completa para reparar Motorola en CABA con diagnóstico profesional, repuestos de calidad y garantía escrita 90 días."
         publishedTime="2026-05-08T00:00:00Z"
-        modifiedTime="2026-05-08T00:00:00Z"
+        modifiedTime="2026-06-09T00:00:00Z"
         authorName="Team Celular"
         image="https://teamcelular.com/images/portada_moto.webp"
         url={PAGE_URL}
@@ -327,7 +334,7 @@ export default function MotorolaRepairGuidePage() {
               Especialistas por marca
             </span>
             <span className="rounded-full border border-emerald-700/80 bg-emerald-700 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white">
-              Recoleta · CABA
+              Recoleta y Belgrano · CABA
             </span>
           </div>
 
@@ -336,8 +343,7 @@ export default function MotorolaRepairGuidePage() {
               Reparación de Motorola en Buenos Aires
             </h1>
             <p className="max-w-4xl text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-              Team Celular, en Paraguay 2451 Recoleta CABA, repara Motorola con
-              diagnóstico el mismo día, pantalla y batería en 2–4 h, y garantía
+              Team Celular repara Motorola en dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2030, Belgrano</strong>. Diagnóstico el mismo día, pantalla y batería en 2–4 h, y garantía
               escrita de 90 días sobre trabajo y repuesto. Moto G, Edge y E.
             </p>
           </div>
@@ -410,7 +416,7 @@ export default function MotorolaRepairGuidePage() {
         <section className="space-y-7">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Cómo trabajamos tu Motorola de punta a punta
+              ¿Cómo trabajamos tu Motorola de punta a punta?
             </h2>
             <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
               Método técnico para confirmar la falla real antes de tocar el equipo
@@ -447,7 +453,7 @@ export default function MotorolaRepairGuidePage() {
         <section className="space-y-7">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Reparaciones de Motorola más solicitadas en CABA
+              ¿Cuáles son las reparaciones de Motorola más frecuentes en CABA?
             </h2>
             <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
               Servicios para Moto G, Edge y E con diagnóstico previo y garantía escrita
@@ -478,6 +484,14 @@ export default function MotorolaRepairGuidePage() {
                       {repair.warranty}
                     </span>
                   </div>
+                  {repairLinks[repair.title] && (
+                    <Link
+                      href={repairLinks[repair.title]}
+                      className="mt-3 inline-flex text-xs font-semibold text-primary hover:underline"
+                    >
+                      Ver precio y detalles →
+                    </Link>
+                  )}
                 </article>
               );
             })}
@@ -487,7 +501,7 @@ export default function MotorolaRepairGuidePage() {
         <section className="rounded-2xl border border-slate-200/80 bg-white dark:border-slate-700/60 dark:bg-slate-900">
           <div className="border-b border-slate-100 px-8 py-5 dark:border-slate-800">
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-              Por qué elegir Team Celular para tu Motorola
+              ¿Por qué elegir Team Celular para tu Motorola?
             </h2>
             <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-slate-400">
               Cuatro puntos concretos que marcan la diferencia en cada trabajo.
@@ -513,6 +527,43 @@ export default function MotorolaRepairGuidePage() {
               );
             })}
           </div>
+        </section>
+
+        <section id="costos-reparacion-motorola" className="rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+            ¿Cuánto cuesta reparar un Motorola en CABA?
+          </h2>
+          <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
+            Precios orientativos en ARS — el valor exacto depende del modelo y el estado del equipo. Team Celular informa el costo de diagnóstico antes de abrir el equipo; si avanzás con la reparación, ese monto se descuenta del trabajo final.
+          </p>
+          <div className="mt-5 overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-white/20 dark:border-white/10">
+                  <th className="pb-2 text-left font-semibold text-slate-900 dark:text-white">Servicio</th>
+                  <th className="pb-2 text-right font-semibold text-slate-900 dark:text-white">Precio estimado ARS</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/10 dark:divide-white/5">
+                {[
+                  ["Diagnóstico técnico", "15.000 – 25.000"],
+                  ["Pantalla Moto G (LCD)", "50.000 – 100.000"],
+                  ["Pantalla Edge (AMOLED)", "90.000 – 200.000"],
+                  ["Batería", "35.000 – 65.000"],
+                  ["Pin de carga USB-C", "35.000 – 60.000"],
+                  ["Reparación de placa", "Consultar"],
+                ].map(([service, price]) => (
+                  <tr key={service}>
+                    <td className="py-2.5 text-slate-700 dark:text-slate-300">{service}</td>
+                    <td className="py-2.5 text-right font-semibold text-slate-900 dark:text-white">{price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-4 text-xs text-slate-500 dark:text-slate-400">
+            ⚠️ Precios orientativos sujetos a actualización. Consultá por WhatsApp o presupuesto online para valores exactos según modelo.
+          </p>
         </section>
 
         <section className="grid gap-6 rounded-3xl border border-white/15 bg-white/5 p-6 shadow-xl backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:grid-cols-[1.15fr_0.85fr] md:items-center md:p-8">
@@ -556,7 +607,7 @@ export default function MotorolaRepairGuidePage() {
 
         <section className="space-y-5 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
           <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-white">
-            Modelos de Motorola que trabajamos
+            ¿Qué modelos de Motorola reparamos?
           </h2>
           <p className="text-center text-slate-600 dark:text-slate-300">
             Cubrimos líneas actuales y generaciones anteriores con repuestos de calidad.
