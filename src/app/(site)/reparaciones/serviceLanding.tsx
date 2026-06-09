@@ -444,7 +444,7 @@ export default function ServiceLandingPage({
               </TrackedCtaLink>
             </div>
             <p className="text-sm text-slate-200/90">
-              Taller en Recoleta y reseñas públicas en Google para validar experiencia real.
+              Dos sucursales en CABA (Recoleta y Belgrano) con reseñas públicas en Google para validar experiencia real.
             </p>
           </div>
 
@@ -456,7 +456,7 @@ export default function ServiceLandingPage({
               <ul className="mt-4 space-y-3 text-sm text-white/90">
                 <li className="flex items-start gap-3">
                   <FaMapMarkerAlt className="mt-0.5 text-primary" />
-                  Taller físico en Paraguay 2451, Recoleta, con atención para toda CABA.
+                  Dos talleres en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030).
                 </li>
                 <li className="flex items-start gap-3">
                   <FaShieldAlt className="mt-0.5 text-primary" />
@@ -524,7 +524,7 @@ export default function ServiceLandingPage({
         <div className="mt-6 flex flex-wrap gap-3">
           {[
             "Diagnostico profesional",
-            "Taller en Recoleta",
+            "Recoleta y Belgrano",
             "Garantia escrita",
             "Seguimiento por WhatsApp",
           ].map((signal) => (

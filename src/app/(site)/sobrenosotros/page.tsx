@@ -88,10 +88,10 @@ const timeline = [
     },
     {
         year: "2025",
-        location: "Recoleta",
-        title: "Referencia local",
+        location: "Recoleta · Belgrano",
+        title: "Expansión en CABA",
         description:
-            "Con miles de equipos reparados, nos consolidamos como laboratorio tecnico de confianza en CABA.",
+            "Con miles de equipos reparados, abrimos segunda sucursal en Belgrano (Amenábar 2030) para cubrir más de CABA con el mismo nivel técnico.",
     },
 ];
 
@@ -186,9 +186,8 @@ export default function SobreNosotrosPage() {
                             técnico y garantía escrita
                         </h1>
                         <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-400">
-                            Team Celular, en Paraguay 2451 Recoleta CABA, es un
-                            laboratorio familiar con más de 15 años reparando
-                            celulares y microelectrónica. La propuesta sigue siendo
+                            Team Celular es un laboratorio familiar con más de 15 años reparando
+                            celulares y microelectrónica, con sucursales en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030), CABA. La propuesta sigue siendo
                             la misma: diagnóstico honesto, repuestos de calidad y
                             garantía escrita de 90 días sobre cada trabajo.
                         </p>
@@ -382,8 +381,7 @@ export default function SobreNosotrosPage() {
                         Queres conocer nuestro laboratorio?
                     </h2>
                     <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
-                        Visitanos en Paraguay 2451, Recoleta, y te mostramos como
-                        trabajamos para devolverle la vida a tu equipo.
+                        Dos laboratorios en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030). Vení cuando quieras y te mostramos cómo trabajamos.
                     </p>
                     <div className="mt-6 flex flex-wrap justify-center gap-4">
                         <Link
@@ -423,6 +421,30 @@ export default function SobreNosotrosPage() {
                                 foundingDate: "2009",
                                 description:
                                     "Empresa familiar especializada en reparacion de celulares y microelectronica con presencia en Venezuela, Panama y Argentina",
+                                location: [
+                                    {
+                                        "@type": "Place",
+                                        name: "Team Celular Recoleta",
+                                        address: {
+                                            "@type": "PostalAddress",
+                                            streetAddress: "Paraguay 2451",
+                                            addressLocality: "Recoleta",
+                                            addressRegion: "CABA",
+                                            addressCountry: "AR",
+                                        },
+                                    },
+                                    {
+                                        "@type": "Place",
+                                        name: "Team Celular Belgrano",
+                                        address: {
+                                            "@type": "PostalAddress",
+                                            streetAddress: "Amenábar 2030",
+                                            addressLocality: "Belgrano",
+                                            addressRegion: "CABA",
+                                            addressCountry: "AR",
+                                        },
+                                    },
+                                ],
                                 areaServed: [
                                     { "@type": "Country", name: "Venezuela" },
                                     { "@type": "Country", name: "Panama" },

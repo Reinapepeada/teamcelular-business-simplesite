@@ -263,14 +263,14 @@ export default function Home() {
                     <div className="mt-6 grid gap-8 md:grid-cols-2">
                         <div className="space-y-4">
                             <p className="text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
-                                Nuestro laboratorio está en Paraguay 2451,
-                                Recoleta, con llegada fácil desde Palermo,
-                                Belgrano, Caballito, Microcentro y otras zonas
-                                de CABA.
+                                Team Celular tiene dos sucursales en CABA:
+                                Paraguay 2451 en Recoleta y Amenábar 2030 en
+                                Belgrano. Ambas atienden de lunes a viernes de
+                                10:30 a 18:00.
                             </p>
                             <p className="text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
-                                Atendemos de lunes a viernes de 10:30 a 18:00 y
-                                coordinamos retiros según disponibilidad.
+                                Podés acercarte a la sucursal más cercana o
+                                coordinamos retiro según disponibilidad.
                             </p>
                         </div>
                         <div className="space-y-4">
@@ -304,7 +304,8 @@ export default function Home() {
                                         teamcelular.arg@gmail.com
                                     </TrackedCtaLink>
                                 </li>
-                                <li>Laboratorio: Paraguay 2451, Recoleta, CABA.</li>
+                                <li>Sucursal Recoleta: Paraguay 2451, CABA.</li>
+                                <li>Sucursal Belgrano: Amenábar 2030, CABA.</li>
                                 <li>Horario: Lunes a Viernes de 10:30 a 18:00.</li>
                             </ul>
                         </div>

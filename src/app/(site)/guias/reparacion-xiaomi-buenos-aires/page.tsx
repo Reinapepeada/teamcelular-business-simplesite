@@ -72,7 +72,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2026-03-12T00:00:00Z",
-    modifiedTime: "2026-05-08T00:00:00Z",
+    modifiedTime: "2026-06-08T00:00:00Z",
     section: "Guias Tecnicas",
   },
   twitter: {
@@ -186,6 +186,14 @@ const repairServices = [
     Icon: FaShieldAlt,
   },
 ];
+
+const repairLinks: Record<string, string> = {
+  "Pantalla AMOLED o IPS para Xiaomi": "/reparaciones/cambio-pantalla-caba",
+  "Bateria degradada y autonomia baja": "/reparaciones/cambio-bateria-caba",
+  "Pin de carga USB-C y turbo charge": "/reparaciones/cambio-pin-carga-caba",
+  "Camara trasera y camara selfie": "/reparaciones/cambio-camara-caba",
+  "Placa logica, PMIC y bootloop": "/reparaciones/reparacion-placa-caba",
+};
 
 const trustReasons = [
   {
@@ -306,7 +314,7 @@ export default function XiaomiRepairGuidePage() {
               Especialistas por marca
             </span>
             <span className="rounded-full border border-emerald-700/80 bg-emerald-700 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white">
-              Recoleta - CABA
+              Recoleta y Belgrano · CABA
             </span>
           </div>
 
@@ -315,7 +323,7 @@ export default function XiaomiRepairGuidePage() {
               Reparación de Xiaomi, Redmi y POCO en Buenos Aires
             </h1>
             <p className="max-w-4xl text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-              Team Celular, en Paraguay 2451 Recoleta CABA, repara Xiaomi,
+              Team Celular, con sucursales en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030) CABA, repara Xiaomi,
               Redmi y POCO con diagnóstico el mismo día, pantalla y batería en
               2–4 h, y garantía escrita de 90 días sobre trabajo y repuesto.
               Xiaomi 13/14/15, Redmi Note y POCO.
@@ -388,10 +396,10 @@ export default function XiaomiRepairGuidePage() {
         <section className="space-y-7">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Flujo de reparacion Xiaomi orientado a resultados
+              ¿Cómo es el proceso de reparación de Xiaomi en Team Celular?
             </h2>
             <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
-              Diagnostico tecnico para resolver la causa y no repetir fallas
+              Cuatro etapas para resolver la causa raíz y no repetir fallas
             </p>
           </div>
           <div className="grid gap-5 md:grid-cols-2">
@@ -425,10 +433,10 @@ export default function XiaomiRepairGuidePage() {
         <section className="space-y-7">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Reparaciones Xiaomi mas solicitadas
+              ¿Cuáles son las reparaciones de Xiaomi más comunes en Buenos Aires?
             </h2>
             <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
-              Servicios frecuentes para Xiaomi, Redmi y POCO en uso diario y laboral
+              Xiaomi, Redmi y POCO: seis fallas frecuentes que resolvemos cada semana
             </p>
           </div>
           <div className="grid gap-5 md:grid-cols-3">
@@ -456,15 +464,62 @@ export default function XiaomiRepairGuidePage() {
                       {service.warranty}
                     </span>
                   </div>
+                  {repairLinks[service.title] && (
+                    <Link
+                      href={repairLinks[service.title]}
+                      className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-primary transition hover:underline"
+                    >
+                      Ver precio y detalles →
+                    </Link>
+                  )}
                 </article>
               );
             })}
           </div>
         </section>
 
+        <section id="costos-reparacion-xiaomi" className="rounded-2xl border border-slate-200/80 bg-white dark:border-slate-700/60 dark:bg-slate-900">
+          <div className="border-b border-slate-100 px-8 py-5 dark:border-slate-800">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+              ¿Cuánto cuesta reparar un Xiaomi, Redmi o POCO en Buenos Aires?
+            </h2>
+            <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-slate-400">
+              Rangos orientativos para 2026. El precio exacto depende del modelo y el repuesto disponible.
+            </p>
+          </div>
+          <div className="divide-y divide-slate-100 dark:divide-slate-800">
+            {[
+              { servicio: "Diagnóstico técnico", modelos: "Todos los modelos", tiempo: "30–45 min", precio: "ARS 15.000–25.000" },
+              { servicio: "Pantalla AMOLED", modelos: "Xiaomi 13, 14, 15", tiempo: "2–4 h", precio: "ARS 80.000–180.000" },
+              { servicio: "Pantalla IPS", modelos: "Redmi Note, POCO", tiempo: "2–4 h", precio: "ARS 45.000–100.000" },
+              { servicio: "Cambio de batería", modelos: "Xiaomi, Redmi, POCO", tiempo: "1–2 h", precio: "ARS 35.000–70.000" },
+              { servicio: "Pin USB-C / turbo charge", modelos: "Todos", tiempo: "2–3 h", precio: "ARS 35.000–60.000" },
+              { servicio: "Placa / bootloop / PMIC", modelos: "Todos", tiempo: "24–48 h", precio: "Consultar" },
+            ].map((row) => (
+              <div key={`${row.servicio}-${row.modelos}`} className="grid grid-cols-2 gap-x-4 gap-y-1 px-6 py-4 text-sm md:grid-cols-4">
+                <span className="font-semibold text-slate-900 dark:text-slate-100">{row.servicio}</span>
+                <span className="text-slate-500 dark:text-slate-400">{row.modelos}</span>
+                <span className="text-slate-500 dark:text-slate-400">{row.tiempo}</span>
+                <span className="font-semibold text-primary">{row.precio}</span>
+              </div>
+            ))}
+          </div>
+          <div className="space-y-4 px-8 py-6">
+            <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">
+              Team Celular, con sucursales en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030) CABA, informa el costo de diagnóstico antes de abrir el equipo. Si avanzás con la reparación, ese monto se descuenta del trabajo final.
+            </p>
+            <Link
+              href="/presupuesto-reparacion#solicitar-presupuesto"
+              className="inline-flex min-h-10 items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
+            >
+              Pedir presupuesto exacto para mi Xiaomi
+            </Link>
+          </div>
+        </section>
+
         <section className="space-y-6 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
           <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-white">
-            Por que elegirnos para tu Xiaomi
+            Diagnóstico, repuestos y garantía: qué esperás al traer tu Xiaomi
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
             {trustReasons.map((reason) => {
@@ -493,7 +548,7 @@ export default function XiaomiRepairGuidePage() {
 
         <section className="space-y-5 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
           <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-white">
-            Modelos Xiaomi, Redmi y POCO que reparamos
+            ¿Qué modelos Xiaomi, Redmi y POCO reparan en Team Celular?
           </h2>
           <p className="text-center text-slate-600 dark:text-slate-300">
             Cobertura para gamas premium, media y entrada con foco en reparaciones rentables.

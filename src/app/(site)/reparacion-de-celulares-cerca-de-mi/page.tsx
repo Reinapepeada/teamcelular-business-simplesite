@@ -82,7 +82,7 @@ const faqs = [
 ];
 
 const localSignals = [
-  "Laboratorio físico en Paraguay 2451, Recoleta (CABA).",
+  "Sucursal Recoleta: Paraguay 2451, CABA. Sucursal Belgrano: Amenábar 2030, CABA.",
   "Atención comercial de lunes a viernes de 10:30 a 18:00, sin turno previo.",
   "Seguimiento por WhatsApp y garantía escrita de 90 días en cada trabajo.",
 ];
@@ -195,11 +195,10 @@ export default function ReparacionCelularesCercaPage() {
           Cobertura local CABA
         </span>
         <h1 className="mt-6 text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-          Reparación de celulares cerca de vos, con taller en Recoleta, CABA
+          Reparación de celulares cerca de vos, con talleres en Recoleta y Belgrano, CABA
         </h1>
         <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          Team Celular, en <strong>Paraguay 2451 Recoleta CABA</strong>, repara
-          celulares con diagnóstico el mismo día, presupuesto claro sin compromiso
+          Team Celular tiene dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2030, Belgrano</strong>. Diagnóstico el mismo día, presupuesto claro sin compromiso
           y garantía escrita de <strong>90 días</strong> sobre trabajo y repuesto.
           Pantalla, batería y carga suelen salir en el día.
         </p>
@@ -254,7 +253,7 @@ export default function ReparacionCelularesCercaPage() {
           Barrios que atendemos en CABA
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">
-          Nuestro laboratorio está en Recoleta, con atención para barrios cercanos y toda CABA.
+          Dos sucursales en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030), con atención para toda la ciudad.
         </p>
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {nearbyZones.map((zone) => (
@@ -282,7 +281,11 @@ export default function ReparacionCelularesCercaPage() {
         </ul>
         <div className="mt-5 flex flex-wrap gap-3">
           <Link href="/sucursales/caba/recoleta" className="inline-flex font-semibold text-primary hover:underline">
-            Ver sucursal en Recoleta
+            Ver sucursal Recoleta
+          </Link>
+          <span className="text-slate-400">•</span>
+          <Link href="/sucursales/caba/belgrano" className="inline-flex font-semibold text-primary hover:underline">
+            Ver sucursal Belgrano
           </Link>
           <span className="text-slate-400">•</span>
           <Link href="/contacto" className="inline-flex font-semibold text-primary hover:underline">

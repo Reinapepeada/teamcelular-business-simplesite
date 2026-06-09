@@ -134,24 +134,24 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
   belgrano: {
     slug: "belgrano",
     zoneName: "Belgrano",
-    metaTitle: "Arreglo de Celulares en Belgrano (CABA) | Team Celular",
+    metaTitle: "Arreglo de Celulares en Belgrano CABA | Team Celular — Amenábar 2030",
     metaDescription:
-      "Arreglo de celulares en Belgrano, CABA — Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga el mismo día, garantía escrita 90 días.",
+      "Reparación de celulares en Belgrano CABA — Team Celular, Amenábar 2030. Pantalla, batería y carga el mismo día con diagnóstico técnico y garantía escrita 90 días.",
     socialDescription:
-      "Team Celular, Recoleta CABA, atiende Belgrano. Pantalla, batería y placa con garantía escrita 90 días.",
-    heroBadge: "Cobertura Belgrano",
+      "Team Celular Belgrano, Amenábar 2030 CABA. Pantalla, batería y placa con diagnóstico el mismo día y garantía escrita 90 días.",
+    heroBadge: "Sucursal en Belgrano · Amenábar 2030",
     heroIntro:
-      "Team Celular, en Paraguay 2451 Recoleta, atiende Belgrano con diagnóstico el mismo día. Pantalla, batería, carga y placa con garantía escrita de 90 días sobre trabajo y repuesto.",
+      "Team Celular tiene sucursal en Amenábar 2030, Belgrano CABA. Reparamos celulares con diagnóstico el mismo día, pantalla y batería en 2–4 h, y garantía escrita de 90 días sobre trabajo y repuesto. Lunes a viernes 10:30–18:00.",
     heroImage: "/images/celuPorDentro.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(14,165,233,0.32),transparent_44%)]",
     whatsappText:
-      "Hola! Quiero un presupuesto para arreglo de celular desde Belgrano. Marca y modelo:",
+      "Hola! Quiero un presupuesto para arreglo de celular en Belgrano (Amenábar 2030). Marca y modelo:",
     highlights: [
       {
-        title: "Pantalla sin vueltas",
-        desc: "Si el display quedó en negro, con rayas o el touch empezó a fallar, lo revisamos antes de prometerte cualquier cosa.",
-        icon: "screen",
+        title: "Sucursal física en Belgrano",
+        desc: "Amenábar 2030, a pocas cuadras del Subte D Juramento. Sin viaje hasta Recoleta.",
+        icon: "business",
       },
       {
         title: "Carga y conectores",
@@ -160,7 +160,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
       {
         title: "Diagnóstico de placa",
-        desc: "Si se reinicia, se apaga o da fallas raras, vamos a hardware y software para no adivinar.",
+        desc: "Si se reinicia, se apaga o da fallas raras, vamos a hardware con instrumental de laboratorio para no adivinar.",
         icon: "chip",
       },
     ],
@@ -170,7 +170,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       "Si hubo golpe o humedad, revisamos la placa para decirte si conviene reparar o no.",
     ],
     transportTip:
-      "Desde Belgrano suele ser práctico venir por Subte D hacia Callao y completar el último tramo a pie o en colectivo.",
+      "La sucursal Belgrano está en Amenábar 2030, a pocas cuadras del Subte D (estación Juramento). También podés llegar en colectivo o en auto — hay estacionamiento disponible en la cuadra.",
     nearbyZones: [
       { name: "Palermo", slug: "palermo" },
       { name: "Recoleta", slug: "recoleta" },
@@ -179,20 +179,20 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     focusServices: ["pantalla", "bateria", "carga", "diagnostico placa"],
     faqs: [
       {
-        q: "¿Reparan celulares para Belgrano?",
-        a: "Sí. Atendemos Belgrano y toda CABA desde nuestro taller en Recoleta.",
+        q: "¿Dónde queda la sucursal de Belgrano?",
+        a: "En Amenábar 2030, Belgrano, CABA. Horario: lunes a viernes de 10:30 a 18:00.",
       },
       {
         q: "¿Qué pasa si el equipo no enciende?",
-        a: "Hacemos diagnóstico técnico para ver si el problema está en placa, energía o en un componente puntual.",
+        a: "Hacemos diagnóstico técnico para ver si el problema está en placa, energía o en un componente puntual. El diagnóstico se informa antes de intervenir.",
       },
       {
-        q: "¿Puedo cotizar por WhatsApp?",
-        a: "Sí. Te damos una estimación inicial y te contamos los pasos según el caso.",
+        q: "¿Puedo cotizar por WhatsApp antes de ir a Belgrano?",
+        a: "Sí. Escribinos con marca, modelo y falla para agilizar el diagnóstico y evitar esperas en sucursal.",
       },
       {
-        q: "¿Entregan garantía por escrito?",
-        a: "Sí. Cada reparación sale con garantía escrita de 90 días sobre trabajo y repuesto.",
+        q: "¿Entregan garantía por escrito en Belgrano?",
+        a: "Sí. Cada reparación sale con garantía escrita de 90 días sobre trabajo y repuesto instalado.",
       },
     ],
   },

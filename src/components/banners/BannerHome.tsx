@@ -33,12 +33,12 @@ export default function BannerHome() {
                     </div>
 
                     <h1 className="max-w-xl text-4xl font-extrabold leading-[1.05] tracking-tight text-slate-900 dark:text-slate-100 sm:text-5xl lg:text-[3.1rem]">
-                        Arreglamos tu celular el mismo día
+                        Arreglamos tu celular el mismo día en CABA
                     </h1>
 
                     <div className="max-w-xl space-y-2.5">
                         <p className="text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-[1.03rem]">
-                            Team Celular, en Paraguay 2451 Recoleta, diagnostica el mismo día, usa repuestos de calidad y entrega garantía escrita de 90 días sobre trabajo y repuesto.
+                            Team Celular tiene dos sucursales en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030). Diagnóstico el mismo día, repuestos de calidad y garantía escrita de 90 días sobre trabajo y repuesto.
                         </p>
                         <p className="text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-[1.03rem]">
                             Contanos la falla y te orientamos por WhatsApp en menos de 2 horas.

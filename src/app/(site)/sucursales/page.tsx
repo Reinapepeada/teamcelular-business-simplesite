@@ -9,9 +9,9 @@ const SITE_URL =
 const PAGE_URL = `${SITE_URL}/sucursales`;
 
 export const metadata: Metadata = {
-  title: "Sucursales Team Celular en CABA",
+  title: "Sucursales Team Celular en CABA | Recoleta y Belgrano",
   description:
-    "Conoce las sucursales de Team Celular. Servicio tecnico de celulares, tablets y notebooks con taller principal en Recoleta, CABA.",
+    "Sucursales de Team Celular en CABA: Paraguay 2451 Recoleta y Amenábar 2030 Belgrano. Reparación de celulares con diagnóstico el mismo día y garantía escrita 90 días.",
   alternates: {
     canonical: PAGE_URL,
     languages: {
@@ -62,6 +62,11 @@ export default function SucursalesPage() {
         name: "Sucursal Recoleta",
         url: `${SITE_URL}/sucursales/caba/recoleta`,
       },
+      {
+        "@type": "WebPage",
+        name: "Sucursal Belgrano",
+        url: `${SITE_URL}/sucursales/caba/belgrano`,
+      },
     ],
   };
 
@@ -84,12 +89,12 @@ export default function SucursalesPage() {
             Presencia local real
           </p>
           <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
-            Sucursales Team Celular
+            Sucursales Team Celular en CABA
           </h1>
           <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-100/90">
-            Estas son las ubicaciones oficiales para atencion, diagnostico y
-            reparacion. Nuestro laboratorio principal esta en Recoleta y atiende
-            clientes de toda CABA.
+            Team Celular tiene dos sucursales en CABA: Paraguay 2451 en Recoleta y
+            Amenábar 2030 en Belgrano. Diagnóstico el mismo día, garantía escrita de
+            90 días y atención de lunes a viernes 10:30–18:00.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
@@ -97,6 +102,12 @@ export default function SucursalesPage() {
               className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
             >
               Ver ficha Recoleta
+            </Link>
+            <Link
+              href="/sucursales/caba/belgrano"
+              className="rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+            >
+              Ver ficha Belgrano
             </Link>
             <Link
               href="/contacto"
@@ -136,14 +147,19 @@ export default function SucursalesPage() {
         </article>
       </section>
 
-      <section className="mt-8 grid gap-6">
+      <section className="mt-8 grid gap-6 md:grid-cols-2">
         <article className="rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
-          <h2 className="text-2xl font-semibold text-slate-900 dark:text-white">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+            Sucursal 1
+          </p>
+          <h2 className="mt-2 text-2xl font-semibold text-slate-900 dark:text-white">
             Recoleta (CABA)
           </h2>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+            Paraguay 2451 · Lun–Vie 10:30–18:00
+          </p>
           <p className="mt-3 text-slate-600 dark:text-slate-300">
-            Sucursal con atencion integral para pantalla, bateria, carga y
-            microelectronica. Tambien trabajamos tablets y notebooks.
+            Laboratorio principal con atención integral para pantalla, batería, carga y microelectrónica. También trabajamos tablets y notebooks.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
@@ -153,16 +169,39 @@ export default function SucursalesPage() {
               Ver ficha de sucursal
             </Link>
             <Link
-              href="/reparaciones"
-              className="rounded-full border border-secondary/50 px-6 py-3 text-sm font-semibold text-secondary transition hover:bg-secondary/10"
-            >
-              Ver servicios
-            </Link>
-            <Link
-              href="/zonas"
+              href="/zonas/recoleta"
               className="rounded-full border border-primary/40 px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10"
             >
-              Ver zonas atendidas
+              Ver zona Recoleta
+            </Link>
+          </div>
+        </article>
+
+        <article className="rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">
+            Sucursal 2
+          </p>
+          <h2 className="mt-2 text-2xl font-semibold text-slate-900 dark:text-white">
+            Belgrano (CABA)
+          </h2>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+            Amenábar 2030 · Lun–Vie 10:30–18:00
+          </p>
+          <p className="mt-3 text-slate-600 dark:text-slate-300">
+            Segunda sucursal en Belgrano con los mismos servicios: pantalla, batería, carga, placa y recuperación por agua. Diagnóstico el mismo día y garantía escrita 90 días.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link
+              href="/sucursales/caba/belgrano"
+              className="rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-secondary/90"
+            >
+              Ver ficha de sucursal
+            </Link>
+            <Link
+              href="/zonas/belgrano"
+              className="rounded-full border border-secondary/50 px-6 py-3 text-sm font-semibold text-secondary transition hover:bg-secondary/10"
+            >
+              Ver zona Belgrano
             </Link>
           </div>
         </article>

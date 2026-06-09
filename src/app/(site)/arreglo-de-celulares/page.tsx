@@ -68,7 +68,7 @@ const faqs = [
   },
   {
     q: "¿Dónde están ubicados?",
-    a: "Estamos en Paraguay 2451, Recoleta (CABA). Atendemos de lunes a viernes de 10:30 a 18:00 hs. Podés ver el mapa y cómo llegar en la página de contacto.",
+    a: "Tenemos dos sucursales en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030). Atendemos de lunes a viernes de 10:30 a 18:00 hs.",
   },
   {
     q: "¿Qué garantía tiene el arreglo?",
@@ -162,11 +162,10 @@ export default function ArregloDeCelularesPage() {
           Servicio general por falla cotidiana
         </span>
         <h1 className="mt-6 text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-          Arreglo de celulares en Recoleta para resolver fallas cotidianas
+          Arreglo de celulares en CABA para resolver fallas cotidianas
         </h1>
         <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          Team Celular, en <strong>Paraguay 2451 Recoleta CABA</strong>, repara
-          celulares con diagnóstico el mismo día, presupuesto claro antes de
+          Team Celular tiene dos sucursales en CABA: <strong>Recoleta (Paraguay 2451)</strong> y <strong>Belgrano (Amenábar 2030)</strong>. Diagnóstico el mismo día, presupuesto claro antes de
           arrancar y garantía escrita de <strong>90 días</strong> sobre trabajo
           y repuesto. Pantalla, batería y pin de carga suelen salir en el día.
         </p>
@@ -218,8 +217,8 @@ export default function ArregloDeCelularesPage() {
             desc: WARRANTY_SCOPE_MESSAGE,
           },
           {
-            title: "Recoleta / CABA",
-            desc: "Estamos en Paraguay 2451. Si estás en Palermo, Belgrano, Caballito o el centro, llegás fácil.",
+            title: "Recoleta y Belgrano",
+            desc: "Dos sucursales en CABA: Paraguay 2451 Recoleta y Amenábar 2030 Belgrano. Lun–Vie 10:30–18:00.",
           },
         ].map((item) => (
           <div
@@ -327,7 +326,7 @@ export default function ArregloDeCelularesPage() {
           Ubicación y horarios
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">
-          Paraguay 2451, Recoleta (CABA). Lunes a viernes de 10:30 a 18:00 hs.
+          Recoleta: Paraguay 2451, CABA — Belgrano: Amenábar 2030, CABA. Lunes a viernes 10:30–18:00.
         </p>
         <div className="mt-6 flex flex-wrap gap-4">
           <Link
@@ -350,7 +349,7 @@ export default function ArregloDeCelularesPage() {
           Zonas que atendemos en CABA
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">
-          Estamos en Recoleta y recibimos consultas y equipos de toda CABA. Si
+          Dos sucursales en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030). Si
           estás en alguno de estos barrios, mirá la página de tu zona:
         </p>
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

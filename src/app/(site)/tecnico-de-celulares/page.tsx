@@ -105,10 +105,10 @@ export default function TecnicoDeCelularesPage() {
           Enfoque técnico especialista
         </span>
         <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-          Técnico de celulares en Recoleta para fallas complejas y diagnóstico experto
+          Técnico de celulares en CABA para fallas complejas y diagnóstico experto
         </h1>
         <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          Team Celular, en <strong>Paraguay 2451 Recoleta CABA</strong>, diagnostica
+          Team Celular, con sucursales en <strong>Recoleta (Paraguay 2451)</strong> y <strong>Belgrano (Amenábar 2030)</strong>, diagnostica
           fallas complejas de placa, humedad y equipos ya intervenidos. Si el equipo
           no enciende, reinicia o fue mal reparado en otro lado, buscamos la causa
           real con garantía escrita de <strong>90 días</strong> sobre trabajo y repuesto.

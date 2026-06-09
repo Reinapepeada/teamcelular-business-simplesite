@@ -68,7 +68,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2024-04-05T00:00:00Z",
-    modifiedTime: "2026-05-08T00:00:00Z",
+    modifiedTime: "2026-06-08T00:00:00Z",
     section: "Guías Técnicas",
   },
   twitter: {
@@ -304,10 +304,10 @@ export default function PreventiveMaintenanceGuide() {
         <section className="space-y-8">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Checklist profesional de mantenimiento
+              ¿Qué debe incluir el mantenimiento preventivo de un celular?
             </h2>
             <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
-              Tareas esenciales para mantener tu dispositivo en óptimas condiciones
+              Cuatro tareas con frecuencia real para mantener batería, software y conectores en condiciones
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2">
@@ -346,11 +346,11 @@ export default function PreventiveMaintenanceGuide() {
               <FaExclamationTriangle />
             </div>
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Señales de advertencia que no debés ignorar
+              ¿Cuándo llevar el celular a revisión técnica?
             </h2>
           </div>
           <p className="text-lg text-slate-600 dark:text-slate-300">
-            Si notás alguno de estos síntomas, es momento de agendar una revisión técnica profesional
+            Estos síntomas indican que el equipo necesita diagnóstico antes de que la falla se vuelva más costosa
           </p>
           <div className="grid gap-4 md:grid-cols-2">
             {warningSignals.map((item) => {
@@ -377,10 +377,10 @@ export default function PreventiveMaintenanceGuide() {
         <section className="space-y-8">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Planes de mantenimiento preventivo
+              ¿Cuánto cuesta el mantenimiento preventivo de celulares en CABA?
             </h2>
             <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
-              Elegí el plan que mejor se adapte a tus necesidades
+              Team Celular, en Recoleta y Belgrano, ofrece tres niveles según frecuencia y tipo de equipo
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
@@ -422,7 +422,7 @@ export default function PreventiveMaintenanceGuide() {
             </div>
             <div className="order-1 space-y-6 p-10 md:order-2">
               <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-                Nuestro proceso de mantenimiento
+                ¿Cómo hacemos el mantenimiento preventivo en Team Celular?
               </h2>
               <div className="space-y-4 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
                 <p>
