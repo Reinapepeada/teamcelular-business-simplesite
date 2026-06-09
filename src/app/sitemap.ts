@@ -7,7 +7,11 @@ import { buildProductSlug } from '@/lib/productSlug';
 export const revalidate = 86400;
 
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
-const apiUrl = process.env.NEXT_PUBLIC_API_URL?.trim() || process.env.API_URL?.trim();
+const DEFAULT_API_URL = "https://fastapi-teamcelular-dev.up.railway.app";
+const apiUrl =
+  process.env.NEXT_PUBLIC_API_URL?.trim() ||
+  process.env.API_URL?.trim() ||
+  DEFAULT_API_URL;
 
 function slugify(text = "") {
   return text
@@ -45,7 +49,7 @@ async function getAllProductsForSitemap(): Promise<Product[]> {
     const data = await response.json();
     return Array.isArray(data) ? data : [];
   } catch (error) {
-    console.error('Error fetching products for sitemap:', error);
+    console.error("Error fetching products for sitemap:", error);
     return [];
   }
 }
@@ -67,6 +71,7 @@ const mainPages = [
   { path: "reparaciones/cambio-tapa-caba", priority: 0.85, changeFreq: "weekly" as const },
   { path: "sucursales", priority: 0.85, changeFreq: "monthly" as const },
   { path: "sucursales/caba/recoleta", priority: 0.9, changeFreq: "monthly" as const },
+  { path: "sucursales/caba/belgrano", priority: 0.88, changeFreq: "monthly" as const },
   { path: "zonas", priority: 0.8, changeFreq: "monthly" as const },
   { path: "zonas/recoleta", priority: 0.8, changeFreq: "monthly" as const },
   { path: "zonas/palermo", priority: 0.75, changeFreq: "monthly" as const },
@@ -79,6 +84,7 @@ const mainPages = [
   { path: "contacto", priority: 0.9, changeFreq: "monthly" as const },
   { path: "tecnico-de-celulares", priority: 0.9, changeFreq: "weekly" as const },
   { path: "tienda", priority: 0.9, changeFreq: "daily" as const },
+  { path: "lab", priority: 0.82, changeFreq: "monthly" as const },
   { path: "sobrenosotros", priority: 0.7, changeFreq: "monthly" as const },
   { path: "devoluciones", priority: 0.3, changeFreq: "yearly" as const },
   { path: "terminos", priority: 0.3, changeFreq: "yearly" as const },
@@ -91,6 +97,7 @@ const guidePages = [
   { path: "guias/reparacion-iphone-buenos-aires", priority: 0.85, changeFreq: "monthly" as const },
   { path: "guias/reparacion-samsung-buenos-aires", priority: 0.84, changeFreq: "monthly" as const },
   { path: "guias/reparacion-xiaomi-buenos-aires", priority: 0.84, changeFreq: "monthly" as const },
+  { path: "guias/reparacion-motorola-buenos-aires", priority: 0.84, changeFreq: "monthly" as const },
   { path: "guias/reparacion-google-pixel-buenos-aires", priority: 0.8, changeFreq: "monthly" as const },
   { path: "guias/reparacion-honor-buenos-aires", priority: 0.8, changeFreq: "monthly" as const },
   { path: "guias/reparacion-poco-buenos-aires", priority: 0.82, changeFreq: "monthly" as const },
