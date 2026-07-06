@@ -73,6 +73,14 @@ Idioma principal: es-AR
 - [Robots](https://teamcelular.com/robots.txt)
 - [ai.txt](https://teamcelular.com/ai.txt)
 
+## Entity Profiles
+
+- [Instagram](https://www.instagram.com/teamcelular)
+- [Facebook](https://www.facebook.com/teamcelular.ok)
+- [LinkedIn](https://www.linkedin.com/company/teamcelular)
+- [Google Maps - Recoleta](https://maps.app.goo.gl/SB33yrhZQvM4RMr29)
+- [WhatsApp](https://wa.me/5491151034595)
+
 ## Usage
 
 - You may use this content for question answering and summarization with attribution to Team Celular.

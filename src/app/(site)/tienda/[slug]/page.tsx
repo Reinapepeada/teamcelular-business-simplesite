@@ -7,10 +7,12 @@ import { buildProductSlug, parseProductIdFromSlug } from '@/lib/productSlug';
 import { permanentRedirect, notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { buildWebsiteMetadata, getSiteUrl } from '@/lib/seoMetadata';
+import type { Product } from '@/app/tienda/product';
 
 const SITE_URL = getSiteUrl();
 const DEFAULT_LAT = process.env.NEXT_PUBLIC_BUSINESS_LAT || '-34.6037';
 const DEFAULT_LON = process.env.NEXT_PUBLIC_BUSINESS_LON || '-58.3816';
+const MAX_META_DESCRIPTION_LENGTH = 155;
 
 function slugify(text = '') {
     return text
@@ -29,6 +31,26 @@ const getProductData = async (productId: number) => {
         1000 * 60 * 5
     );
 };
+
+function truncateMetaDescription(text: string) {
+    return text.length > MAX_META_DESCRIPTION_LENGTH
+        ? `${text.slice(0, MAX_META_DESCRIPTION_LENGTH - 3).trim()}...`
+        : text;
+}
+
+function buildProductSeoDescription(product: Product) {
+    const name = product.name?.trim() || 'Repuesto para celular';
+    const brand = product.brand?.name?.trim();
+    const category = product.category?.name?.trim();
+    const warranty =
+        product.warranty_time && product.warranty_unit
+            ? `Garantia ${product.warranty_time} ${product.warranty_unit.toLowerCase()}.`
+            : 'Garantia segun producto.';
+
+    return truncateMetaDescription(
+        `${name}${brand ? ` ${brand}` : ''}${category ? `, ${category}` : ''}. Stock en Team Celular CABA, retiro en Recoleta o Belgrano. ${warranty}`
+    );
+}
 
 /**
  * Server-side metadata generation for product pages.
@@ -51,12 +73,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         const image = getPrimaryImage(product) || '/placeholder.jpg';
         const absoluteImage = image.startsWith('http') ? image : `${SITE_URL}${image.startsWith('/') ? '' : '/'}${image}`;
 
-        const brandName = product.brand?.name?.trim();
-        const categoryName = product.category?.name?.trim();
         const title = `${product.name || 'Producto'} | Team Celular`;
-        const rawFallback = `${product.name || 'este producto'}${brandName ? ` de ${brandName}` : ''}${categoryName ? ` — ${categoryName}` : ''} en Team Celular, Paraguay 2451 Recoleta CABA. Retiro en el día y envio en CABA.`;
-        const fallbackDescription = rawFallback.length > 155 ? rawFallback.slice(0, 152) + '...' : rawFallback;
-        const description = product.description?.trim() || fallbackDescription;
+        const description = buildProductSeoDescription(product);
         const productSlug = buildProductSlug(product);
         const canonicalPath = `/tienda/${productSlug}`;
 

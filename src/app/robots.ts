@@ -20,6 +20,11 @@ export default function robots(): MetadataRoute.Robots {
         crawlDelay: 10,
       },
       {
+        userAgent: "Applebot-Extended",
+        allow: "/",
+        disallow: sharedDisallow,
+      },
+      {
         userAgent: "Google-Extended",
         allow: "/",
         disallow: sharedDisallow,
@@ -51,6 +56,31 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "Claude-SearchBot",
+        allow: "/",
+        disallow: sharedDisallow,
+      },
+      {
+        userAgent: "anthropic-ai",
+        allow: "/",
+        disallow: sharedDisallow,
+      },
+      {
+        userAgent: "Bytespider",
+        allow: "/",
+        disallow: sharedDisallow,
+      },
+      {
+        userAgent: "CCBot",
+        allow: "/",
+        disallow: sharedDisallow,
+      },
+      {
+        userAgent: "FacebookBot",
+        allow: "/",
+        disallow: sharedDisallow,
+      },
+      {
+        userAgent: "Amazonbot",
         allow: "/",
         disallow: sharedDisallow,
       },

@@ -88,35 +88,6 @@ export default function HighIntentGuidePage({
   const pageUrl = `${siteUrl}${pagePath}`;
   const imageUrl = toAbsoluteUrl(imagePath, siteUrl);
   const guideKey = pagePath.replace("/guias/", "").replaceAll("-", "_");
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "@id": `${pageUrl}#faq`,
-    mainEntity: faq.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  };
-  const howToJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    "@id": `${pageUrl}#howto`,
-    name: planTitle,
-    description: planDescription,
-    image: imageUrl,
-    step: planSteps.map((item, index) => ({
-      "@type": "HowToStep",
-      position: index + 1,
-      name: item.title,
-      text: item.description,
-      url: `${pageUrl}#paso-${index + 1}`,
-    })),
-  };
-
   return (
     <div className="flex w-full justify-center px-4 py-16">
       <div className="w-full max-w-6xl space-y-12">
@@ -129,15 +100,6 @@ export default function HighIntentGuidePage({
           image={imageUrl}
           url={pageUrl}
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
-        />
-
         <BreadcrumbJsonLd
           items={[
             { name: "Inicio", url: `${siteUrl}/` },

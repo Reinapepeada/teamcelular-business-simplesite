@@ -1,27 +1,9 @@
+import { BUSINESS_PROFILE, SITE_URL, businessId } from "@/lib/businessProfile";
+
 interface StructuredDataProps {
   city?: string;
   country?: string;
 }
-
-const SITE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
-const BUSINESS_NAME = "Team Celular";
-const PHONE_NUMBER = "+54 11 5103-4595";
-const EMAIL = "teamcelular.arg@gmail.com";
-const ADDRESS_STREET = "Paraguay 2451";
-const ADDRESS_CITY = "Ciudad Autonoma de Buenos Aires";
-const ADDRESS_REGION = "CABA";
-const ADDRESS_POSTAL = "C1121";
-const ADDRESS_COUNTRY = "AR";
-const SERVICE_AREA = ["Ciudad Autonoma de Buenos Aires", "Recoleta"];
-const GOOGLE_MAPS_PROFILE_URL = "https://maps.app.goo.gl/krFJfjDA4CuR83BK9";
-const SAME_AS = [
-  "https://www.instagram.com/teamcelular.arg/",
-  "https://www.facebook.com/TeamCelular/",
-  "https://wa.me/5491151034595",
-  "https://www.linkedin.com/company/teamcelular/",
-  GOOGLE_MAPS_PROFILE_URL,
-];
 
 function createLocalBusinessJson(city?: string, country?: string) {
   const ratingValue = process.env.NEXT_PUBLIC_GOOGLE_RATING ? Number(process.env.NEXT_PUBLIC_GOOGLE_RATING) : null;
@@ -30,53 +12,60 @@ function createLocalBusinessJson(city?: string, country?: string) {
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": `${SITE_URL}#localbusiness`,
+    "@id": businessId("localbusiness"),
     additionalType: [
       "https://schema.org/ElectronicsStore",
-      "https://schema.org/AutoRepair",
+      "https://schema.org/ProfessionalService",
     ],
-    name: BUSINESS_NAME,
+    name: BUSINESS_PROFILE.name,
     url: SITE_URL,
     image: `${SITE_URL}/opengraph-image.png`,
     logo: `${SITE_URL}/icon.ico`,
     description:
-      "Servicio tecnico especializado en reparacion de celulares, microelectronica y venta de accesorios en Recoleta, CABA.",
-    telephone: PHONE_NUMBER,
-    email: EMAIL,
+      "Laboratorio tecnico especializado en reparacion de celulares, microelectronica, reballing BGA, recuperacion por liquido y venta de repuestos en Recoleta y Belgrano, CABA.",
+    telephone: BUSINESS_PROFILE.phone,
+    email: BUSINESS_PROFILE.email,
     priceRange: "$$",
     address: {
       "@type": "PostalAddress",
-      streetAddress: ADDRESS_STREET,
-      addressLocality: city ?? ADDRESS_CITY,
-      addressRegion: ADDRESS_REGION,
-      postalCode: ADDRESS_POSTAL,
-      addressCountry: country ?? ADDRESS_COUNTRY,
+      streetAddress: BUSINESS_PROFILE.primaryAddress.street,
+      addressLocality: city ?? BUSINESS_PROFILE.primaryAddress.locality,
+      addressRegion: BUSINESS_PROFILE.primaryAddress.region,
+      postalCode: BUSINESS_PROFILE.primaryAddress.postalCode,
+      addressCountry: country ?? BUSINESS_PROFILE.primaryAddress.country,
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: -34.597528,
-      longitude: -58.403048,
+      latitude: BUSINESS_PROFILE.primaryAddress.latitude,
+      longitude: BUSINESS_PROFILE.primaryAddress.longitude,
     },
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "10:30",
-        closes: "18:00",
+        dayOfWeek: BUSINESS_PROFILE.hours.days,
+        opens: BUSINESS_PROFILE.hours.opens,
+        closes: BUSINESS_PROFILE.hours.closes,
       },
     ],
-    hasMap: GOOGLE_MAPS_PROFILE_URL,
-    sameAs: SAME_AS,
-    areaServed: [
-      ...SERVICE_AREA.map((area) => ({
+    hasMap: BUSINESS_PROFILE.primaryAddress.mapUrl,
+    sameAs: BUSINESS_PROFILE.sameAs,
+    knowsAbout: BUSINESS_PROFILE.knowsAbout,
+    areaServed: BUSINESS_PROFILE.serviceAreas.map((area) => ({
         "@type": "AdministrativeArea",
         name: area,
       })),
-      { "@type": "AdministrativeArea", name: "Palermo" },
-      { "@type": "AdministrativeArea", name: "Belgrano" },
-      { "@type": "AdministrativeArea", name: "Caballito" },
-      { "@type": "AdministrativeArea", name: "Almagro" },
-      { "@type": "AdministrativeArea", name: "Microcentro" },
+    department: [
+      {
+        "@type": "LocalBusiness",
+        name: "Team Celular Recoleta",
+        address: `${BUSINESS_PROFILE.primaryAddress.street}, ${BUSINESS_PROFILE.primaryAddress.neighborhood}, CABA`,
+        hasMap: BUSINESS_PROFILE.primaryAddress.mapUrl,
+      },
+      {
+        "@type": "LocalBusiness",
+        name: "Team Celular Belgrano",
+        address: `${BUSINESS_PROFILE.secondaryAddress.street}, ${BUSINESS_PROFILE.secondaryAddress.neighborhood}, CABA`,
+      },
     ],
     ...(ratingValue && ratingCount
       ? {
@@ -96,21 +85,22 @@ function createOrganizationJson() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": `${SITE_URL}#organization`,
-    name: BUSINESS_NAME,
+    "@id": businessId("organization"),
+    name: BUSINESS_PROFILE.name,
     url: SITE_URL,
     logo: `${SITE_URL}/icon.ico`,
-    email: EMAIL,
-    telephone: PHONE_NUMBER,
-    sameAs: SAME_AS,
+    email: BUSINESS_PROFILE.email,
+    telephone: BUSINESS_PROFILE.phone,
+    sameAs: BUSINESS_PROFILE.sameAs,
+    knowsAbout: BUSINESS_PROFILE.knowsAbout,
     contactPoint: [
       {
         "@type": "ContactPoint",
         contactType: "customer service",
-        telephone: PHONE_NUMBER,
-        email: EMAIL,
+        telephone: BUSINESS_PROFILE.phone,
+        email: BUSINESS_PROFILE.email,
         areaServed: "AR",
-        availableLanguage: ["es", "en"],
+        availableLanguage: ["es-AR", "en"],
       },
     ],
   };
@@ -120,10 +110,11 @@ function createWebsiteJson() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": `${SITE_URL}#website`,
+    "@id": businessId("website"),
     url: SITE_URL,
-    name: BUSINESS_NAME,
+    name: BUSINESS_PROFILE.name,
     inLanguage: "es-AR",
+    publisher: { "@id": businessId("organization") },
     potentialAction: [
       {
         "@type": "SearchAction",

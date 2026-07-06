@@ -77,7 +77,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2024-01-15T00:00:00Z",
-    modifiedTime: "2026-06-08T00:00:00Z",
+    modifiedTime: "2026-07-06T00:00:00Z",
     section: "Guias Tecnicas",
   },
   twitter: {
@@ -189,6 +189,39 @@ const frequentRepairs = [
     eta: "24-48 h",
     warranty: "Garantía 90 días",
     Icon: FaMicrochip,
+  },
+];
+
+const iphoneSymptomRows = [
+  {
+    symptom: "Pantalla con lineas, manchas o touch que falla",
+    urgency: "Alta si el tactil no responde o aparecen zonas negras",
+    typicalTime: "2-4 h si hay modulo compatible en stock",
+    nextStep: "Pedir cotizacion con modelo exacto y foto del dano",
+  },
+  {
+    symptom: "Bateria dura poco, se apaga o calienta",
+    urgency: "Media-alta si baja de golpe o se hincha",
+    typicalTime: "1-2 h segun modelo",
+    nextStep: "Solicitar diagnostico de consumo y salud de bateria",
+  },
+  {
+    symptom: "No carga, carga lento o hace falso contacto",
+    urgency: "Alta si no enciende o solo carga en una posicion",
+    typicalTime: "2-3 h para modulo de carga; mas si es placa",
+    nextStep: "Probar cable/fuente y consultar antes de seguir forzando",
+  },
+  {
+    symptom: "Se mojo, no prende o reinicia",
+    urgency: "Critica: no cargar ni aplicar calor",
+    typicalTime: "24-48 h para limpieza y diagnostico de placa",
+    nextStep: "Traerlo apagado lo antes posible para laboratorio",
+  },
+  {
+    symptom: "Face ID, camara o sensores fallan",
+    urgency: "Media; alta si afecta uso diario o seguridad",
+    typicalTime: "3-6 h si no requiere microelectronica avanzada",
+    nextStep: "Solicitar revision para diferenciar flex, modulo o placa",
   },
 ];
 
@@ -320,8 +353,15 @@ export default function IphoneRepairGuidePage() {
         title="Reparacion de iPhone en Buenos Aires | Servicio Tecnico Premium Team Celular"
         description="Guia completa para reparar iPhone en CABA con diagnostico profesional, repuestos certificados y garantia escrita."
         publishedTime="2024-01-15T00:00:00Z"
-        modifiedTime="2026-05-08T00:00:00Z"
+        modifiedTime="2026-07-06T00:00:00Z"
         authorName="Team Celular"
+        about={[
+          "reparacion de iPhone en Buenos Aires",
+          "service tecnico Apple en CABA",
+          "cambio de pantalla iPhone",
+          "cambio de bateria iPhone",
+          "microelectronica para iPhone",
+        ]}
         image="https://teamcelular.com/images/portada_iphone.webp"
         url={PAGE_URL}
       />
@@ -445,6 +485,57 @@ export default function IphoneRepairGuidePage() {
             </span>
           </div>
         </header>
+
+        <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
+          <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-primary">
+              Respuesta directa
+            </p>
+            <h2 className="mt-3 text-2xl font-black text-slate-900 dark:text-white">
+              Donde reparar un iPhone en Buenos Aires
+            </h2>
+            <p className="mt-4 text-base leading-7 text-slate-700 dark:text-slate-200">
+              Para reparar un iPhone en Buenos Aires, Team Celular atiende en Paraguay 2451,
+              Recoleta, y Amenabar 2030, Belgrano. Hacemos diagnostico el mismo dia,
+              cambios de pantalla o bateria en 2-4 h segun stock, y entregamos garantia
+              escrita de 90 dias sobre trabajo y repuesto.
+            </p>
+          </div>
+
+          <div className="overflow-hidden rounded-3xl border border-white/15 bg-white/5 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
+            <div className="border-b border-white/10 p-6">
+              <h2 className="text-2xl font-black text-slate-900 dark:text-white">
+                Que hacer segun la falla del iPhone
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                Usa esta tabla para decidir si conviene consultar por WhatsApp, traer el equipo
+                al laboratorio o evitar acciones que puedan empeorar la falla.
+              </p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-slate-200 text-left text-sm dark:divide-slate-700">
+                <thead className="bg-slate-950 text-white">
+                  <tr>
+                    <th scope="col" className="px-5 py-4 font-semibold">Sintoma</th>
+                    <th scope="col" className="px-5 py-4 font-semibold">Urgencia</th>
+                    <th scope="col" className="px-5 py-4 font-semibold">Tiempo tipico</th>
+                    <th scope="col" className="px-5 py-4 font-semibold">Siguiente paso</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
+                  {iphoneSymptomRows.map((row) => (
+                    <tr key={row.symptom} className="bg-white/70 dark:bg-slate-900/40">
+                      <td className="px-5 py-4 font-semibold text-slate-900 dark:text-white">{row.symptom}</td>
+                      <td className="px-5 py-4 text-slate-700 dark:text-slate-300">{row.urgency}</td>
+                      <td className="px-5 py-4 text-slate-700 dark:text-slate-300">{row.typicalTime}</td>
+                      <td className="px-5 py-4 text-slate-700 dark:text-slate-300">{row.nextStep}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
 
         <section className="space-y-6 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
           <div className="text-center">

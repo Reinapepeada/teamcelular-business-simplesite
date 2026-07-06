@@ -57,22 +57,43 @@ const services = [
 
 const differentiators = [
     {
-        number: "01",
         title: "Garantía documentada",
         description:
             "Cada reparación sale con orden técnica y garantía escrita. Sin letra chica ni promesas que se evaporan.",
     },
     {
-        number: "02",
         title: "Diagnóstico antes de cobrar",
         description:
             "Te explicamos qué falla, qué se reemplaza y cuánto tarda antes de tocar el equipo. Sin sorpresas.",
     },
     {
-        number: "03",
         title: "Respuesta en el día",
         description:
             "WhatsApp, llamada o visita directa al laboratorio en Paraguay 2451. Respondemos en menos de 2 horas en horario hábil.",
+    },
+];
+
+const priorityRepairs = [
+    {
+        title: "Cambio de pantalla",
+        description:
+            "Vidrio roto, líneas en pantalla o touch que no responde. Primero confirmamos modelo y calidad de módulo.",
+        href: "/reparaciones/cambio-pantalla-caba",
+        cta: "Ver pantalla",
+    },
+    {
+        title: "Cambio de batería",
+        description:
+            "Apagados, baja autonomía o temperatura anormal. Revisamos consumo antes de reemplazar.",
+        href: "/reparaciones/cambio-bateria-caba",
+        cta: "Ver batería",
+    },
+    {
+        title: "Pin de carga",
+        description:
+            "Falso contacto, carga lenta o equipo que no reconoce cable. No conviene forzarlo.",
+        href: "/reparaciones/cambio-pin-carga-caba",
+        cta: "Ver carga",
     },
 ];
 
@@ -117,43 +138,21 @@ export default function Home() {
                     </p>
                 </div>
 
-                <div className="grid gap-4 md:grid-cols-3">
-                    {[
-                        {
-                            title: "Cambio de pantalla",
-                            description:
-                                "Cuando el vidrio se rompe, aparecen líneas o el touch deja de responder, esta es la reparación que suele destrabar todo.",
-                            href: "/reparaciones/cambio-pantalla-caba",
-                            cta: "Ver cambio de pantalla",
-                        },
-                        {
-                            title: "Cambio de batería",
-                            description:
-                                "Si se apaga antes de tiempo, dura poco o se calienta, esta landing te lleva directo a la solución más común.",
-                            href: "/reparaciones/cambio-bateria-caba",
-                            cta: "Ver cambio de batería",
-                        },
-                        {
-                            title: "Cambio de pin de carga",
-                            description:
-                                "Cuando carga solo en cierta posición o hace falso contacto, conviene revisar este punto antes de seguir forzando el cable.",
-                            href: "/reparaciones/cambio-pin-carga-caba",
-                            cta: "Ver pin de carga",
-                        },
-                    ].map((item) => (
+                <div className="overflow-hidden rounded-xl border border-slate-900 bg-slate-950 text-white dark:border-slate-700">
+                    {priorityRepairs.map((item) => (
                         <article
                             key={item.title}
-                            className="rounded-2xl border border-slate-200/75 bg-white/80 p-6 shadow-md transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-700/70 dark:bg-slate-900/75"
+                            className="grid gap-4 border-b border-white/10 px-5 py-5 last:border-b-0 md:grid-cols-[12rem_1fr_auto] md:items-center md:px-7"
                         >
-                            <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
+                            <h3 className="text-xl font-semibold">
                                 {item.title}
                             </h3>
-                            <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                            <p className="max-w-3xl text-sm leading-6 text-slate-300">
                                 {item.description}
                             </p>
                             <Link
                                 href={item.href}
-                                className="mt-5 inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
+                                className="inline-flex min-h-11 items-center justify-center rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-slate-200"
                             >
                                 {item.cta}
                             </Link>
@@ -165,7 +164,7 @@ export default function Home() {
             <BannerCards />
 
             <section className="w-full max-w-[100rem] space-y-12 text-center md:text-left lg:space-y-14">
-                <article className="grid gap-10 rounded-2xl border border-slate-200/70 bg-white/70 dark:bg-slate-900/70 p-8 shadow-lg md:grid-cols-2 md:items-center lg:p-10">
+                <article className="grid gap-10 border-y border-slate-200 bg-white py-10 dark:border-slate-800 dark:bg-slate-950 md:grid-cols-[0.9fr_1.1fr] md:items-start">
                     <div className="space-y-6">
                         <h2 className="text-3xl font-semibold tracking-tight text-primary md:text-[2.35rem]">
                             Cómo trabajamos en Team Celular
@@ -205,15 +204,15 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <div className="space-y-5 rounded-2xl border border-slate-200/80 bg-white/85 dark:bg-slate-900/85 p-8 shadow-md">
+                    <div className="space-y-5 bg-slate-50 p-6 dark:bg-slate-900 md:p-8">
                         <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
                             Que hacemos
                         </h3>
-                        <ul className="space-y-3 text-left">
+                        <ul className="divide-y divide-slate-200 text-left dark:divide-slate-800">
                             {services.map((service) => (
                                 <li
                                     key={service.title}
-                                    className="flex gap-3 rounded-xl border border-slate-200/80 bg-white dark:border-slate-700/60 dark:bg-slate-900 p-4 shadow-sm"
+                                    className="flex gap-3 py-4"
                                 >
                                     <BsCheckCircleFill className="mt-1 shrink-0 text-lg text-emerald-500" aria-hidden />
                                     <div>
@@ -230,21 +229,18 @@ export default function Home() {
                     </div>
                 </article>
 
-                <section className="rounded-2xl border border-slate-200/75 bg-white dark:border-slate-700/60 dark:bg-slate-900">
-                    <div className="divide-y divide-slate-100 dark:divide-slate-800">
+                <section className="bg-slate-950 px-6 py-7 text-white dark:bg-slate-900 md:px-8">
+                    <div className="grid gap-7 md:grid-cols-3">
                         {differentiators.map((item) => (
                             <div
-                                key={item.number}
-                                className="flex gap-5 px-6 py-5 md:px-8 md:py-6"
+                                key={item.title}
+                                className="max-w-sm"
                             >
-                                <span className="shrink-0 select-none text-3xl font-black leading-none text-primary/20 dark:text-primary/30">
-                                    {item.number}
-                                </span>
                                 <div>
-                                    <h3 className="text-[1.07rem] font-semibold text-slate-900 dark:text-slate-100">
+                                    <h3 className="text-[1.07rem] font-semibold">
                                         {item.title}
                                     </h3>
-                                    <p className="mt-1.5 text-[0.95rem] leading-6 text-slate-600 dark:text-slate-400">
+                                    <p className="mt-2 text-[0.95rem] leading-6 text-slate-300">
                                         {item.description}
                                     </p>
                                 </div>
@@ -316,16 +312,13 @@ export default function Home() {
                     <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-[2rem]">
                         Preguntas frecuentes sobre reparación de celulares
                     </h2>
-                    <div className="grid gap-4 md:grid-cols-3">
+                    <div className="divide-y divide-slate-200 border-y border-slate-200 dark:divide-slate-800 dark:border-slate-800">
                         {faqs.map((faq) => (
                             <article
                                 key={faq.question}
-                                className="group relative overflow-hidden rounded-2xl border border-slate-200/75 bg-white/80 dark:bg-slate-900/80 p-5 text-left shadow-md lg:p-6"
+                                className="grid gap-3 py-5 text-left md:grid-cols-[18rem_1fr]"
                             >
-                                <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                                    <div className="absolute inset-x-6 top-0 h-1 rounded-full bg-gradient-to-r from-primary to-secondary" />
-                                </div>
-                                <h3 className="text-[1.05rem] font-semibold leading-snug text-secondary">
+                                <h3 className="text-[1.05rem] font-semibold leading-snug text-slate-900 dark:text-slate-100">
                                     {faq.question}
                                 </h3>
                                 <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">
@@ -336,7 +329,7 @@ export default function Home() {
                     </div>
                 </section>
 
-                <section className="rounded-2xl border border-slate-200/75 bg-white/80 dark:bg-slate-900/80 p-6 shadow-md">
+                <section className="rounded-xl bg-primary/10 p-6 dark:bg-primary/15">
                     <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-[2rem]">
                         ¿Buscas reparación de celulares cerca de tu zona?
                     </h2>
@@ -368,12 +361,11 @@ export default function Home() {
 
                 <KnowledgeGrid />
 
-                <article className="relative overflow-hidden rounded-2xl border border-slate-200/70 bg-white/75 dark:bg-slate-900/75 p-8 text-center shadow-lg md:text-left lg:p-10">
-                    <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-primary/8 via-white/70 to-secondary/8" />
+                <article className="relative overflow-hidden bg-slate-950 p-8 text-center text-white md:text-left lg:p-10">
                     <h2 className="text-2xl font-bold tracking-tight text-primary md:text-[2rem]">
                         ¿Listo para recuperar tu teléfono?
                     </h2>
-                    <p className="mt-4 text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
+                    <p className="mt-4 text-[1.03rem] leading-7 text-slate-300">
                         Dejanos la falla y un dato de contacto. Te respondemos
                         por WhatsApp en hasta 2 horas habiles para avanzar
                         sin perder tiempo.
@@ -403,25 +395,6 @@ export default function Home() {
                 </article>
             </section>
 
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "FAQPage",
-                        "@id": `${SITE_URL}/#faq`,
-                        mainEntity: faqs.map((faq) => ({
-                            "@type": "Question",
-                            name: faq.question,
-                            acceptedAnswer: {
-                                "@type": "Answer",
-                                text: faq.answer,
-                            },
-                        })),
-                    }),
-                }}
-            />
         </section>
     );
 }
-

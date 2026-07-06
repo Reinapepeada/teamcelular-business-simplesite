@@ -16,9 +16,15 @@ const serviceHints = [
     "Recuperación por agua",
 ];
 
+const intakeProofs = [
+    "Orden tecnica y garantia escrita",
+    "Respuesta por WhatsApp en horario habil",
+    "Diagnostico antes de abrir el equipo",
+];
+
 export default function BannerHome() {
     return (
-        <section className="relative w-full max-w-[100rem] overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-xl dark:border-slate-700/60 dark:bg-slate-900">
+        <section className="relative w-full max-w-[100rem] overflow-hidden border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
             {/* Brand accent top bar */}
             <div className="absolute inset-x-0 top-0 z-10 h-0.5 bg-gradient-to-r from-primary/80 via-secondary/60 to-primary/30" />
 
@@ -83,18 +89,18 @@ export default function BannerHome() {
                         </TrackedCtaLink>
                     </div>
 
-                    {/* Stat row */}
-                    <div className="flex flex-wrap gap-x-8 gap-y-3 border-t border-slate-200/80 pt-5 dark:border-slate-700/60">
-                        {stats.map((item) => (
-                            <div key={item.value} className="text-left">
-                                <p className="text-2xl font-extrabold leading-none text-primary">
-                                    {item.value}
-                                </p>
-                                <p className="mt-1 text-[11px] uppercase tracking-[0.12em] text-slate-500 dark:text-slate-400">
-                                    {item.label}
-                                </p>
-                            </div>
-                        ))}
+                    <div className="border-t border-slate-200/80 pt-5 dark:border-slate-700/60">
+                        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">
+                            Al ingresar tu equipo queda registrado con:
+                        </p>
+                        <ul className="grid gap-2 text-sm text-slate-700 dark:text-slate-300 sm:grid-cols-3">
+                            {intakeProofs.map((item) => (
+                                <li key={item} className="flex gap-2">
+                                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" aria-hidden />
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </div>
 
@@ -113,9 +119,9 @@ export default function BannerHome() {
                         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/25 via-transparent to-transparent lg:bg-gradient-to-l lg:from-slate-950/10 lg:via-transparent" />
 
                         {/* Floating badge */}
-                        <div className="absolute bottom-4 left-4 rounded-xl border border-white/80 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-sm dark:border-white/15 dark:bg-slate-900/95">
+                        <div className="absolute inset-x-0 bottom-0 bg-slate-950/72 px-5 py-4 text-sm font-medium text-white backdrop-blur-sm">
                             <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-                                Respuesta comercial
+                                Sucursales y horario
                             </p>
                             <p className="text-sm font-bold text-slate-900 dark:text-slate-100">
                                 <span className="text-primary">{"< 2 horas"}</span>{" "}

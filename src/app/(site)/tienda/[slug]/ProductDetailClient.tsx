@@ -51,6 +51,20 @@ function slugify(text = '') {
         .replace(/^-+|-+$/g, '');
 }
 
+function formatWarranty(product: Product) {
+    if (product.warranty_time && product.warranty_unit) {
+        const unitLabels: Record<string, string> = {
+            DAYS: 'dias',
+            MONTHS: 'meses',
+            YEARS: 'anos',
+        };
+
+        return `${product.warranty_time} ${unitLabels[product.warranty_unit] || product.warranty_unit.toLowerCase()}`;
+    }
+
+    return 'consultar antes de comprar';
+}
+
 // Color mapping for display
 const colorMap: Record<string, string> = {
     'NEGRO': '#000000',
@@ -226,6 +240,27 @@ export default function ProductDetailClient({ productIdProp, productProp }: Prop
     const discount = 0;
     const originalPrice = product.retail_price;
     const discountedPrice = originalPrice * (1 - discount / 100);
+    const brandName = product.brand?.name?.trim();
+    const categoryName = product.category?.name?.trim();
+    const warrantyLabel = formatWarranty(product);
+    const productContextRows = [
+        {
+            label: 'Compatibilidad',
+            value: `Confirmamos el modelo exacto antes de preparar ${product.name}.`,
+        },
+        {
+            label: 'Categoria',
+            value: categoryName ? `${categoryName}${brandName ? ` para ${brandName}` : ''}` : 'Repuesto o accesorio para celular.',
+        },
+        {
+            label: 'Garantia',
+            value: `Garantia de ${warrantyLabel} con comprobante de compra.`,
+        },
+        {
+            label: 'Retiro y consulta',
+            value: 'Retiro en Recoleta o Belgrano. Si tenes dudas, consultanos por WhatsApp antes de comprar.',
+        },
+    ];
     
     return (
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
@@ -533,6 +568,31 @@ export default function ProductDetailClient({ productIdProp, productProp }: Prop
                     </div>
                 </div>
             </div>
+
+            <section className="mt-10 rounded-2xl border border-default-200 bg-white/80 p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900/60 sm:p-6">
+                <div className="mb-5 max-w-3xl">
+                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+                        Antes de comprar
+                    </p>
+                    <h2 className="mt-2 text-2xl font-bold">
+                        Compatibilidad, garantia y retiro en CABA
+                    </h2>
+                    <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base">
+                        Esta ficha resume lo que necesitás validar para comprar {product.name}
+                        {brandName ? ` ${brandName}` : ''} sin errores: modelo compatible, stock real,
+                        garantia y punto de retiro. Si el repuesto requiere instalacion, el equipo tecnico
+                        puede confirmar la pieza correcta antes de avanzar.
+                    </p>
+                </div>
+                <div className="grid gap-3 md:grid-cols-2">
+                    {productContextRows.map((row) => (
+                        <div key={row.label} className="rounded-xl bg-gray-50 p-4 dark:bg-gray-800/60">
+                            <h3 className="text-sm font-semibold">{row.label}</h3>
+                            <p className="mt-2 text-sm leading-6 text-muted-foreground">{row.value}</p>
+                        </div>
+                    ))}
+                </div>
+            </section>
             
             {/* Product Details Section */}
             {product.variants.length > 0 && (

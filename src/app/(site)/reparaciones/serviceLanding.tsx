@@ -375,16 +375,6 @@ export default function ServiceLandingPage({
     },
   };
 
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: config.faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.q,
-      acceptedAnswer: { "@type": "Answer", text: faq.a },
-    })),
-  };
-
   return (
     <section className="w-full max-w-6xl px-6 py-14 pb-28 md:px-8 md:pb-20">
       <BreadcrumbJsonLd
@@ -693,10 +683,6 @@ export default function ServiceLandingPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
     </section>
   );
