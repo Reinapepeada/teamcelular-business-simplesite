@@ -24,9 +24,9 @@ const PAGE_PATH = "/guias/reparacion-motorola-buenos-aires";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 
 export const metadata: Metadata = {
-  title: "ReparaciÃ³n de Motorola en Buenos Aires, CABA | Team Celular",
+  title: "Reparación de Motorola en Buenos Aires, CABA | Team Celular",
   description:
-    "ReparaciÃ³n de Motorola en Recoleta, CABA â€” Team Celular, Paraguay 2451. Pantalla, baterÃ­a y pin de carga en el dÃ­a. Moto G y Edge con garantÃ­a escrita 90 dÃ­as.",
+    "Reparación de Motorola en Recoleta, CABA — Team Celular, Paraguay 2451. Pantalla, batería y pin de carga en el día. Moto G y Edge con garantía escrita 90 días.",
   keywords: [
     "reparacion motorola buenos aires",
     "service motorola caba",
@@ -57,9 +57,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "ReparaciÃ³n de Motorola en Buenos Aires, CABA | Team Celular",
+    title: "Reparación de Motorola en Buenos Aires, CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla, baterÃ­a y pin de carga de Motorola en el dÃ­a, garantÃ­a escrita 90 dÃ­as. Moto G, Edge y E.",
+      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla, batería y pin de carga de Motorola en el día, garantía escrita 90 días. Moto G, Edge y E.",
     type: "article",
     url: PAGE_URL,
     locale: "es_AR",
@@ -68,27 +68,27 @@ export const metadata: Metadata = {
         url: "https://teamcelular.com/images/portada_moto.webp",
         width: 1200,
         height: 630,
-        alt: "ReparaciÃ³n tÃ©cnica de Motorola en Team Celular, Recoleta CABA",
+        alt: "Reparación técnica de Motorola en Team Celular, Recoleta CABA",
       },
     ],
     publishedTime: "2026-05-08T00:00:00Z",
     modifiedTime: "2026-06-09T00:00:00Z",
-    section: "GuÃ­as TÃ©cnicas",
+    section: "Guías Técnicas",
   },
   twitter: {
     card: "summary_large_image",
-    title: "ReparaciÃ³n de Motorola en CABA | Team Celular",
+    title: "Reparación de Motorola en CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta. Pantalla, baterÃ­a y carga de Motorola en el dÃ­a. GarantÃ­a escrita 90 dÃ­as.",
+      "Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga de Motorola en el día. Garantía escrita 90 días.",
     images: ["https://teamcelular.com/images/portada_moto.webp"],
   },
 };
 
 const repairLinks: Record<string, string> = {
   "Cambio de pantalla Motorola": "/reparaciones/cambio-pantalla-caba",
-  "Reemplazo de baterÃ­a Motorola": "/reparaciones/cambio-bateria-caba",
+  "Reemplazo de batería Motorola": "/reparaciones/cambio-bateria-caba",
   "Pin de carga USB-C Motorola": "/reparaciones/cambio-pin-carga-caba",
-  "Placa y recuperaciÃ³n avanzada": "/reparaciones/reparacion-placa-caba",
+  "Placa y recuperación avanzada": "/reparaciones/reparacion-placa-caba",
 };
 
 const brandLinks = [
@@ -120,29 +120,29 @@ const brandLinks = [
 
 const quickSteps = [
   {
-    step: "Ingreso y checklist tÃ©cnico",
+    step: "Ingreso y checklist técnico",
     detail:
-      "Validamos IMEI, estado estÃ©tico y funciones clave antes de abrir: pantalla, touch, cÃ¡maras, micrÃ³fono, parlantes, carga, WiFi y Bluetooth.",
+      "Validamos IMEI, estado estético y funciones clave antes de abrir: pantalla, touch, cámaras, micrófono, parlantes, carga, WiFi y Bluetooth.",
     duration: "15 min",
     Icon: FaMobileAlt,
   },
   {
-    step: "DiagnÃ³stico de laboratorio",
+    step: "Diagnóstico de laboratorio",
     detail:
-      "Analizamos pin de carga, estado de baterÃ­a y consumo con instrumental. Si hay daÃ±o por lÃ­quido o golpe fuerte, documentamos con fotos antes de cotizar.",
+      "Analizamos pin de carga, estado de batería y consumo con instrumental. Si hay daño por líquido o golpe fuerte, documentamos con fotos antes de cotizar.",
     duration: "30-45 min",
     Icon: FaTools,
   },
   {
-    step: "ReparaciÃ³n y calibraciÃ³n",
+    step: "Reparación y calibración",
     detail:
-      "Instalamos repuestos certificados y verificamos calibraciÃ³n tÃ¡ctil, autonomÃ­a de baterÃ­a y estabilidad de carga para sostener el uso diario.",
+      "Instalamos repuestos certificados y verificamos calibración táctil, autonomía de batería y estabilidad de carga para sostener el uso diario.",
     duration: "1-4 h",
     Icon: FaWrench,
   },
   {
-    step: "Control de calidad + garantÃ­a",
-    detail: `Hacemos pruebas funcionales, test de carga completa y estabilidad tÃ©rmica. ${WARRANTY_SCOPE_MESSAGE}`,
+    step: "Control de calidad + garantía",
+    detail: `Hacemos pruebas funcionales, test de carga completa y estabilidad térmica. ${WARRANTY_SCOPE_MESSAGE}`,
     duration: "20 min",
     Icon: FaCheckCircle,
   },
@@ -152,76 +152,76 @@ const frequentRepairs = [
   {
     title: "Cambio de pantalla Motorola",
     description:
-      "MÃ³dulo LCD o AMOLED con prueba de brillo, touch y sensores antes de entregar. Trabajamos Moto G series, Edge y variantes con pantalla curva.",
+      "Módulo LCD o AMOLED con prueba de brillo, touch y sensores antes de entregar. Trabajamos Moto G series, Edge y variantes con pantalla curva.",
     eta: "2-4 h",
-    warranty: "GarantÃ­a 90 dÃ­as",
+    warranty: "Garantía 90 días",
     Icon: FaMobileAlt,
   },
   {
-    title: "Reemplazo de baterÃ­a Motorola",
+    title: "Reemplazo de batería Motorola",
     description:
-      "BaterÃ­a de calidad con test de autonomÃ­a real. Ideal para Moto G que dura menos de medio dÃ­a o se apaga en forma repentina.",
+      "Batería de calidad con test de autonomía real. Ideal para Moto G que dura menos de medio día o se apaga en forma repentina.",
     eta: "1-2 h",
-    warranty: "GarantÃ­a 90 dÃ­as",
+    warranty: "Garantía 90 días",
     Icon: FaBatteryFull,
   },
   {
     title: "Pin de carga USB-C Motorola",
     description:
-      "Reparamos pin, flex de carga y micrÃ³fonos inferiores. Frecuente en Moto G14, G24, G54 y Edge por uso intensivo con carga rÃ¡pida.",
+      "Reparamos pin, flex de carga y micrófonos inferiores. Frecuente en Moto G14, G24, G54 y Edge por uso intensivo con carga rápida.",
     eta: "1-3 h",
-    warranty: "GarantÃ­a 90 dÃ­as",
+    warranty: "Garantía 90 días",
     Icon: FaBolt,
   },
   {
-    title: "CÃ¡maras Motorola",
+    title: "Cámaras Motorola",
     description:
-      "Cambio o reparaciÃ³n de mÃ³dulo trasero y frontal con ajuste de foco. Cubrimos Edge 40/50 y Moto G84/G85 con cÃ¡mara de alta resoluciÃ³n.",
+      "Cambio o reparación de módulo trasero y frontal con ajuste de foco. Cubrimos Edge 40/50 y Moto G84/G85 con cámara de alta resolución.",
     eta: "2-3 h",
-    warranty: "GarantÃ­a 90 dÃ­as",
+    warranty: "Garantía 90 días",
     Icon: FaCamera,
   },
   {
     title: "Botones, flex y audio",
     description:
-      "Reparamos botÃ³n de encendido, volumen, flex de huellas dactilares, micrÃ³fono y parlante en toda la lÃ­nea Moto G y Edge.",
+      "Reparamos botón de encendido, volumen, flex de huellas dactilares, micrófono y parlante en toda la línea Moto G y Edge.",
     eta: "1-3 h",
-    warranty: "GarantÃ­a 90 dÃ­as",
+    warranty: "Garantía 90 días",
     Icon: FaShieldAlt,
   },
   {
-    title: "Placa y recuperaciÃ³n avanzada",
+    title: "Placa y recuperación avanzada",
     description:
-      "DiagnÃ³stico y reparaciÃ³n de placa para Motorola que no enciende, reinicia o no toma carga luego de un golpe o daÃ±o por lÃ­quidos.",
+      "Diagnóstico y reparación de placa para Motorola que no enciende, reinicia o no toma carga luego de un golpe o daño por líquidos.",
     eta: "24-48 h",
-    warranty: "GarantÃ­a 90 dÃ­as",
+    warranty: "Garantía 90 días",
     Icon: FaMicrochip,
   },
 ];
 
 const trustBlocks = [
   {
-    title: "DiagnÃ³stico claro antes de reparar",
+    title: "Diagnóstico claro antes de reparar",
     description:
-      "RecibÃ­s un informe: quÃ© falla, quÃ© se reemplaza, cuÃ¡nto tarda y cuÃ¡nto cuesta. Sin costos sorpresa al retirar.",
+      "Recibís un informe: qué falla, qué se reemplaza, cuánto tarda y cuánto cuesta. Sin costos sorpresa al retirar.",
     Icon: FaCheckCircle,
   },
   {
     title: "Dos talleres en CABA con trazabilidad",
     description:
-      "Cada equipo se registra con orden tÃ©cnica y checklist en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032). SabÃ©s en quÃ© etapa estÃ¡ tu Motorola en todo momento.",
+      "Cada equipo se registra con orden técnica y checklist en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032). Sabés en qué etapa está tu Motorola en todo momento.",
     Icon: FaClock,
   },
   {
     title: "Repuestos de calidad, no de descarte",
     description:
-      "Evitamos mÃ³dulos de baja duraciÃ³n. Priorizamos estabilidad tÃ¡ctil, autonomÃ­a real y seguridad elÃ©ctrica en cada servicio.",
+      "Evitamos módulos de baja duración. Priorizamos estabilidad táctil, autonomía real y seguridad eléctrica en cada servicio.",
     Icon: FaShieldAlt,
   },
   {
-    title: "Respuesta en el dÃ­a para casos frecuentes",
+    title: "Respuesta en el día para casos frecuentes",
     description:
-      "Pantalla, baterÃ­a y pin de carga de Motorola podemos resolverlos el mismo dÃ­a segÃºn stock. Confirmamos plazo antes de abrir el equipo.",
+      "Pantalla, batería y pin de carga de Motorola podemos resolverlos el mismo día según stock. Confirmamos plazo antes de abrir el equipo.",
     Icon: FaTools,
   },
 ];
@@ -252,43 +252,43 @@ const motorolaModels = [
 
 const faq = [
   {
-    question: "Â¿CuÃ¡nto tarda el cambio de pantalla de un Motorola Moto G?",
+    question: "¿Cuánto tarda el cambio de pantalla de un Motorola Moto G?",
     answer:
-      "Entre 2 y 4 horas en la mayorÃ­a de modelos de la lÃ­nea G. Si el marco o el sensor de huellas estÃ¡ integrado al mÃ³dulo, puede tomar algo mÃ¡s. Confirmamos tiempo exacto al ingreso.",
+      "Entre 2 y 4 horas en la mayoría de modelos de la línea G. Si el marco o el sensor de huellas está integrado al módulo, puede tomar algo más. Confirmamos tiempo exacto al ingreso.",
   },
   {
-    question: "Â¿Trabajan Motorola Edge con pantalla curva?",
+    question: "¿Trabajan Motorola Edge con pantalla curva?",
     answer:
-      "SÃ­. Los modelos Edge 30, 40 y 50 tienen pantalla curva que requiere herramientas especÃ­ficas para el despegue. Diagnosticamos antes de cotizar para confirmar viabilidad segÃºn el nivel de daÃ±o.",
+      "Sí. Los modelos Edge 30, 40 y 50 tienen pantalla curva que requiere herramientas específicas para el despegue. Diagnosticamos antes de cotizar para confirmar viabilidad según el nivel de daño.",
   },
   {
-    question: "Â¿El Moto G14/G24 tiene problemas frecuentes de pin de carga?",
+    question: "¿El Moto G14/G24 tiene problemas frecuentes de pin de carga?",
     answer:
-      "SÃ­, el puerto USB-C del Moto G14 y G24 presenta desgaste por uso intensivo con carga rÃ¡pida. Revisamos pin y flex antes de confirmar si el problema es mecÃ¡nico o elÃ©ctrico.",
+      "Sí, el puerto USB-C del Moto G14 y G24 presenta desgaste por uso intensivo con carga rápida. Revisamos pin y flex antes de confirmar si el problema es mecánico o eléctrico.",
   },
   {
-    question: "Â¿La garantÃ­a cubre trabajo y repuesto?",
-    answer: `SÃ­. ${WARRANTY_SCOPE_MESSAGE}`,
+    question: "¿La garantía cubre trabajo y repuesto?",
+    answer: `Sí. ${WARRANTY_SCOPE_MESSAGE}`,
   },
   {
-    question: "Â¿Reparan Motorola con daÃ±o por agua?",
+    question: "¿Reparan Motorola con daño por agua?",
     answer:
-      "SÃ­. Hacemos apertura tÃ©cnica, limpieza y diagnÃ³stico de corrosiÃ³n en laboratorio. No enchufes ni cargues el equipo antes de traerlo â€” eso puede agravar el daÃ±o en placa.",
+      "Sí. Hacemos apertura técnica, limpieza y diagnóstico de corrosión en laboratorio. No enchufes ni cargues el equipo antes de traerlo — eso puede agravar el daño en placa.",
   },
   {
-    question: "Â¿CuÃ¡nto cuesta el diagnÃ³stico si no avanzo con la reparaciÃ³n?",
+    question: "¿Cuánto cuesta el diagnóstico si no avanzo con la reparación?",
     answer:
-      "El diagnÃ³stico tiene costo fijo que se informa antes de abrir el equipo. Si avanzÃ¡s con la reparaciÃ³n, ese valor se descuenta del trabajo final.",
+      "El diagnóstico tiene costo fijo que se informa antes de abrir el equipo. Si avanzás con la reparación, ese valor se descuenta del trabajo final.",
   },
   {
-    question: "Â¿Atienden todos los modelos de Motorola?",
+    question: "¿Atienden todos los modelos de Motorola?",
     answer:
-      "Atendemos toda la lÃ­nea Moto G (G14 a G85), Edge (30, 40, 50), Moto E y ThinkPhone. Para modelos muy antiguos confirmamos disponibilidad de repuesto antes de ingresar el equipo.",
+      "Atendemos toda la línea Moto G (G14 a G85), Edge (30, 40, 50), Moto E y ThinkPhone. Para modelos muy antiguos confirmamos disponibilidad de repuesto antes de ingresar el equipo.",
   },
   {
-    question: "Â¿El cambio de baterÃ­a requiere apagar funciones del sistema?",
+    question: "¿El cambio de batería requiere apagar funciones del sistema?",
     answer:
-      "No en la lÃ­nea Moto G. El reemplazo de baterÃ­a no afecta funciones de software. DespuÃ©s del cambio hacemos test de autonomÃ­a y ciclo de carga para confirmar rendimiento.",
+      "No en la línea Moto G. El reemplazo de batería no afecta funciones de software. Después del cambio hacemos test de autonomía y ciclo de carga para confirmar rendimiento.",
   },
 ];
 
@@ -296,8 +296,8 @@ export default function MotorolaRepairGuidePage() {
   return (
     <div className="flex w-full justify-center px-4 py-16">
       <ArticleSchema
-        title="ReparaciÃ³n de Motorola en Buenos Aires | Servicio TÃ©cnico Team Celular"
-        description="GuÃ­a completa para reparar Motorola en CABA con diagnÃ³stico profesional, repuestos de calidad y garantÃ­a escrita 90 dÃ­as."
+        title="Reparación de Motorola en Buenos Aires | Servicio Técnico Team Celular"
+        description="Guía completa para reparar Motorola en CABA con diagnóstico profesional, repuestos de calidad y garantía escrita 90 días."
         publishedTime="2026-05-08T00:00:00Z"
         modifiedTime="2026-06-09T00:00:00Z"
         authorName="Team Celular"
@@ -309,8 +309,8 @@ export default function MotorolaRepairGuidePage() {
         <BreadcrumbJsonLd
           items={[
             { name: "Inicio", url: `${SITE_URL}/` },
-            { name: "GuÃ­as", url: `${SITE_URL}/guias` },
-            { name: "ReparaciÃ³n de Motorola", url: PAGE_URL },
+            { name: "Guías", url: `${SITE_URL}/guias` },
+            { name: "Reparación de Motorola", url: PAGE_URL },
           ]}
         />
 
@@ -320,11 +320,11 @@ export default function MotorolaRepairGuidePage() {
           </Link>
           <span>/</span>
           <Link href="/guias" className="transition hover:text-primary">
-            GuÃ­as
+            Guías
           </Link>
           <span>/</span>
           <span className="font-semibold text-slate-900 dark:text-white">
-            ReparaciÃ³n Motorola
+            Reparación Motorola
           </span>
         </nav>
 
@@ -334,37 +334,37 @@ export default function MotorolaRepairGuidePage() {
               Especialistas por marca
             </span>
             <span className="rounded-full border border-emerald-700/80 bg-emerald-700 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white">
-              Recoleta y Belgrano Â· CABA
+              Recoleta y Belgrano · CABA
             </span>
           </div>
 
           <div className="space-y-4">
             <h1 className="text-4xl font-black tracking-tight text-slate-900 dark:text-white md:text-5xl">
-              ReparaciÃ³n de Motorola en Buenos Aires
+              Reparación de Motorola en Buenos Aires
             </h1>
             <p className="max-w-4xl text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-              Team Celular repara Motorola en dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2032, Belgrano</strong>. DiagnÃ³stico el mismo dÃ­a, pantalla y baterÃ­a en 2â€“4 h, y garantÃ­a
-              escrita de 90 dÃ­as sobre trabajo y repuesto. Moto G, Edge y E.
+              Team Celular repara Motorola en dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2032, Belgrano</strong>. Diagnóstico el mismo día, pantalla y batería en 2–4 h, y garantía
+              escrita de 90 días sobre trabajo y repuesto. Moto G, Edge y E.
             </p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-3">
             <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
               <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
-                DiagnÃ³stico
+                Diagnóstico
               </p>
-              <p className="mt-2 text-3xl font-black text-primary">Mismo dÃ­a</p>
+              <p className="mt-2 text-3xl font-black text-primary">Mismo día</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
                 Informe claro con pasos y presupuesto
               </p>
             </div>
             <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
               <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
-                GarantÃ­a
+                Garantía
               </p>
-              <p className="mt-2 text-3xl font-black text-secondary">90 dÃ­as</p>
+              <p className="mt-2 text-3xl font-black text-secondary">90 días</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-                GarantÃ­a escrita sobre trabajo y repuesto
+                Garantía escrita sobre trabajo y repuesto
               </p>
             </div>
             <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
@@ -373,7 +373,7 @@ export default function MotorolaRepairGuidePage() {
               </p>
               <p className="mt-2 text-3xl font-black text-primary">1-4 h</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-                Pantalla, baterÃ­a y carga en el dÃ­a
+                Pantalla, batería y carga en el día
               </p>
             </div>
           </div>
@@ -404,7 +404,7 @@ export default function MotorolaRepairGuidePage() {
             </Link>
             <Link
               href={`https://wa.me/5491151034595?text=${encodeURIComponent(
-                "Hola Team Celular, quiero cotizar una reparaciÃ³n de Motorola. Modelo y falla:"
+                "Hola Team Celular, quiero cotizar una reparación de Motorola. Modelo y falla:"
               )}`}
               className="rounded-full border-2 border-primary px-8 py-4 text-base font-bold text-primary transition hover:bg-primary/10"
             >
@@ -416,10 +416,10 @@ export default function MotorolaRepairGuidePage() {
         <section className="space-y-7">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Â¿CÃ³mo trabajamos tu Motorola de punta a punta?
+              ¿Cómo trabajamos tu Motorola de punta a punta?
             </h2>
             <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
-              MÃ©todo tÃ©cnico para confirmar la falla real antes de tocar el equipo
+              Método técnico para confirmar la falla real antes de tocar el equipo
             </p>
           </div>
           <div className="grid gap-5 md:grid-cols-2">
@@ -453,10 +453,10 @@ export default function MotorolaRepairGuidePage() {
         <section className="space-y-7">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Â¿CuÃ¡les son las reparaciones de Motorola mÃ¡s frecuentes en CABA?
+              ¿Cuáles son las reparaciones de Motorola más frecuentes en CABA?
             </h2>
             <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
-              Servicios para Moto G, Edge y E con diagnÃ³stico previo y garantÃ­a escrita
+              Servicios para Moto G, Edge y E con diagnóstico previo y garantía escrita
             </p>
           </div>
           <div className="grid gap-5 md:grid-cols-3">
@@ -489,7 +489,7 @@ export default function MotorolaRepairGuidePage() {
                       href={repairLinks[repair.title]}
                       className="mt-3 inline-flex text-xs font-semibold text-primary hover:underline"
                     >
-                      Ver precio y detalles â†’
+                      Ver precio y detalles →
                     </Link>
                   )}
                 </article>
@@ -501,7 +501,7 @@ export default function MotorolaRepairGuidePage() {
         <section className="rounded-2xl border border-slate-200/80 bg-white dark:border-slate-700/60 dark:bg-slate-900">
           <div className="border-b border-slate-100 px-8 py-5 dark:border-slate-800">
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-              Â¿Por quÃ© elegir Team Celular para tu Motorola?
+              ¿Por qué elegir Team Celular para tu Motorola?
             </h2>
             <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-slate-400">
               Cuatro puntos concretos que marcan la diferencia en cada trabajo.
@@ -531,10 +531,10 @@ export default function MotorolaRepairGuidePage() {
 
         <section id="costos-reparacion-motorola" className="rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-            Â¿CuÃ¡nto cuesta reparar un Motorola en CABA?
+            ¿Cuánto cuesta reparar un Motorola en CABA?
           </h2>
           <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
-            Precios orientativos en ARS â€” el valor exacto depende del modelo y el estado del equipo. Team Celular informa el costo de diagnÃ³stico antes de abrir el equipo; si avanzÃ¡s con la reparaciÃ³n, ese monto se descuenta del trabajo final.
+            Precios orientativos en ARS — el valor exacto depende del modelo y el estado del equipo. Team Celular informa el costo de diagnóstico antes de abrir el equipo; si avanzás con la reparación, ese monto se descuenta del trabajo final.
           </p>
           <div className="mt-5 overflow-x-auto">
             <table className="w-full text-sm">
@@ -546,12 +546,12 @@ export default function MotorolaRepairGuidePage() {
               </thead>
               <tbody className="divide-y divide-white/10 dark:divide-white/5">
                 {[
-                  ["DiagnÃ³stico tÃ©cnico", "15.000 â€“ 25.000"],
-                  ["Pantalla Moto G (LCD)", "50.000 â€“ 100.000"],
-                  ["Pantalla Edge (AMOLED)", "90.000 â€“ 200.000"],
-                  ["BaterÃ­a", "35.000 â€“ 65.000"],
-                  ["Pin de carga USB-C", "35.000 â€“ 60.000"],
-                  ["ReparaciÃ³n de placa", "Consultar"],
+                  ["Diagnóstico técnico", "15.000 – 25.000"],
+                  ["Pantalla Moto G (LCD)", "50.000 – 100.000"],
+                  ["Pantalla Edge (AMOLED)", "90.000 – 200.000"],
+                  ["Batería", "35.000 – 65.000"],
+                  ["Pin de carga USB-C", "35.000 – 60.000"],
+                  ["Reparación de placa", "Consultar"],
                 ].map(([service, price]) => (
                   <tr key={service}>
                     <td className="py-2.5 text-slate-700 dark:text-slate-300">{service}</td>
@@ -562,7 +562,7 @@ export default function MotorolaRepairGuidePage() {
             </table>
           </div>
           <p className="mt-4 text-xs text-slate-500 dark:text-slate-400">
-            âš ï¸ Precios orientativos sujetos a actualizaciÃ³n. ConsultÃ¡ por WhatsApp o presupuesto online para valores exactos segÃºn modelo.
+            âš ï¸ Precios orientativos sujetos a actualización. Consultá por WhatsApp o presupuesto online para valores exactos según modelo.
           </p>
         </section>
 
@@ -570,7 +570,7 @@ export default function MotorolaRepairGuidePage() {
           <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-slate-900/40">
             <Image
               src="/images/guia_motorola.webp"
-              alt="Laboratorio de reparaciÃ³n Motorola Team Celular Recoleta CABA"
+              alt="Laboratorio de reparación Motorola Team Celular Recoleta CABA"
               width={1200}
               height={900}
               sizes="(max-width: 768px) 100vw, 60vw"
@@ -579,17 +579,17 @@ export default function MotorolaRepairGuidePage() {
           </div>
           <article className="space-y-4">
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-              DiagnÃ³stico real, sin respuestas genÃ©ricas
+              Diagnóstico real, sin respuestas genéricas
             </h2>
             <p className="text-slate-600 dark:text-slate-300">
-              Evaluamos sÃ­ntomas, pruebas y contexto del equipo para darte una recomendaciÃ³n
+              Evaluamos síntomas, pruebas y contexto del equipo para darte una recomendación
               concreta. Si no conviene reparar el Motorola, te lo decimos claro antes de avanzar
-              â€” con informe tÃ©cnico sin costo extra.
+              — con informe técnico sin costo extra.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
                 href={`https://wa.me/5491151034595?text=${encodeURIComponent(
-                  "Hola Team Celular, quiero cotizar una reparaciÃ³n de Motorola. Modelo y falla:"
+                  "Hola Team Celular, quiero cotizar una reparación de Motorola. Modelo y falla:"
                 )}`}
                 className="inline-flex min-h-11 items-center rounded-full bg-emerald-700 px-5 text-sm font-semibold text-white transition hover:bg-emerald-800"
               >
@@ -607,10 +607,10 @@ export default function MotorolaRepairGuidePage() {
 
         <section className="space-y-5 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
           <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-white">
-            Â¿QuÃ© modelos de Motorola reparamos?
+            ¿Qué modelos de Motorola reparamos?
           </h2>
           <p className="text-center text-slate-600 dark:text-slate-300">
-            Cubrimos lÃ­neas actuales y generaciones anteriores con repuestos de calidad.
+            Cubrimos líneas actuales y generaciones anteriores con repuestos de calidad.
           </p>
           <div className="flex flex-wrap justify-center gap-2">
             {motorolaModels.map((model) => (
@@ -627,10 +627,10 @@ export default function MotorolaRepairGuidePage() {
         <section className="space-y-7">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Preguntas frecuentes sobre reparaciÃ³n de Motorola
+              Preguntas frecuentes sobre reparación de Motorola
             </h2>
             <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
-              Respuestas por modelo y falla para decidir rÃ¡pido y con informaciÃ³n real
+              Respuestas por modelo y falla para decidir rápido y con información real
             </p>
           </div>
           <div className="space-y-4">
@@ -655,32 +655,32 @@ export default function MotorolaRepairGuidePage() {
             Servicio por marca: Motorola, Samsung, iPhone y Xiaomi
           </h2>
           <p className="mx-auto mt-4 max-w-3xl text-lg text-slate-700 dark:text-slate-300">
-            Cada guÃ­a tiene procesos, fallas tÃ­picas y criterios de repuesto adaptados a esa marca. Si tenÃ©s otro modelo, revisÃ¡ la guÃ­a que corresponde.
+            Cada guía tiene procesos, fallas típicas y criterios de repuesto adaptados a esa marca. Si tenés otro modelo, revisá la guía que corresponde.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link
               href="/guias/reparacion-samsung-buenos-aires"
               className="rounded-full border border-slate-300/80 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200"
             >
-              Ver guÃ­a Samsung
+              Ver guía Samsung
             </Link>
             <Link
               href="/guias/reparacion-iphone-buenos-aires"
               className="rounded-full border border-slate-300/80 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200"
             >
-              Ver guÃ­a iPhone
+              Ver guía iPhone
             </Link>
             <Link
               href="/guias/reparacion-xiaomi-buenos-aires"
               className="rounded-full border border-slate-300/80 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200"
             >
-              Ver guÃ­a Xiaomi
+              Ver guía Xiaomi
             </Link>
             <Link
               href="/presupuesto-reparacion"
               className="rounded-full bg-secondary px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-secondary/90"
             >
-              Pedir diagnÃ³stico ahora
+              Pedir diagnóstico ahora
             </Link>
           </div>
         </section>
@@ -698,7 +698,7 @@ export default function MotorolaRepairGuidePage() {
                 Cambio de pantalla en CABA
               </h3>
               <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                Proceso y tiempos para mÃ³dulo LCD y AMOLED con prueba funcional.
+                Proceso y tiempos para módulo LCD y AMOLED con prueba funcional.
               </p>
             </Link>
             <Link
@@ -706,10 +706,10 @@ export default function MotorolaRepairGuidePage() {
               className="rounded-2xl border border-white/20 bg-white/10 p-5 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
             >
               <h3 className="font-bold text-primary">
-                Cambio de baterÃ­a en CABA
+                Cambio de batería en CABA
               </h3>
               <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                DiagnÃ³stico de desgaste y reemplazo con test de autonomÃ­a real.
+                Diagnóstico de desgaste y reemplazo con test de autonomía real.
               </p>
             </Link>
             <Link
@@ -720,7 +720,7 @@ export default function MotorolaRepairGuidePage() {
                 Pin de carga USB-C en CABA
               </h3>
               <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                ReparaciÃ³n de carga intermitente y falso contacto en Moto G.
+                Reparación de carga intermitente y falso contacto en Moto G.
               </p>
             </Link>
           </div>
@@ -734,9 +734,9 @@ export default function MotorolaRepairGuidePage() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Service",
-              name: "ReparaciÃ³n de Motorola en Buenos Aires",
+              name: "Reparación de Motorola en Buenos Aires",
               description:
-                "Servicio tÃ©cnico especializado en Motorola con diagnÃ³stico profesional, repuestos de calidad y garantÃ­a escrita 90 dÃ­as en CABA.",
+                "Servicio técnico especializado en Motorola con diagnóstico profesional, repuestos de calidad y garantía escrita 90 días en CABA.",
               provider: { "@id": "https://teamcelular.com#localbusiness" },
               areaServed: {
                 "@type": "City",
@@ -744,7 +744,7 @@ export default function MotorolaRepairGuidePage() {
               },
               hasOfferCatalog: {
                 "@type": "OfferCatalog",
-                name: "Servicios de reparaciÃ³n Motorola",
+                name: "Servicios de reparación Motorola",
                 itemListElement: frequentRepairs.map((repair) => ({
                   "@type": "Offer",
                   itemOffered: {

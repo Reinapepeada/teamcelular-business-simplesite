@@ -135,8 +135,8 @@ export default function ReparacionesPage() {
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-slate-100/90">
             Team Celular tiene dos talleres en CABA: <strong>Recoleta (Paraguay 2451)</strong> y <strong>Belgrano (Amenábar 2032)</strong>. iPhone,
-            Samsung, Motorola, Xiaomi y mÃ¡s marcas con diagnÃ³stico tÃ©cnico y garantÃ­a
-            escrita de 90 dÃ­as sobre trabajo y repuesto.
+            Samsung, Motorola, Xiaomi y más marcas con diagnóstico técnico y garantía
+            escrita de 90 días sobre trabajo y repuesto.
           </p>
           <p className="mt-3 text-sm text-slate-200/90">
             Si buscas una solucion por falla frecuente, puedes ir a{" "}
@@ -255,7 +255,7 @@ export default function ReparacionesPage() {
               {service.title}
             </h2>
             <p className="mt-3 text-slate-600 dark:text-slate-300">{service.description}</p>
-            <p className="mt-6 text-sm font-semibold text-primary">Ver servicio â†’</p>
+            <p className="mt-6 text-sm font-semibold text-primary">Ver servicio →</p>
           </Link>
         ))}
       </section>

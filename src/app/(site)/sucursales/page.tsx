@@ -12,7 +12,7 @@ const PAGE_URL = `${SITE_URL}/sucursales`;
 export const metadata: Metadata = {
   title: "Sucursales Team Celular en CABA | Recoleta y Belgrano",
   description:
-    "Sucursales de Team Celular en CABA: Paraguay 2451 Recoleta y Amenábar 2032 Belgrano. ReparaciÃ³n de celulares con diagnÃ³stico el mismo dÃ­a y garantÃ­a escrita 90 dÃ­as.",
+    "Sucursales de Team Celular en CABA: Paraguay 2451 Recoleta y Amenábar 2032 Belgrano. Reparación de celulares con diagnóstico el mismo día y garantía escrita 90 días.",
   alternates: {
     canonical: PAGE_URL,
     languages: {
@@ -97,8 +97,8 @@ export default function SucursalesPage() {
           </h1>
           <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-100/90">
             Team Celular tiene dos sucursales en CABA: Paraguay 2451 en Recoleta y
-            Amenábar 2032 en Belgrano. DiagnÃ³stico el mismo dÃ­a, garantÃ­a escrita de
-            90 dÃ­as y atenciÃ³n de lunes a viernes 10:30â€“18:00.
+            Amenábar 2032 en Belgrano. Diagnóstico el mismo día, garantía escrita de
+            90 días y atención de lunes a viernes 10:30–18:00.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
@@ -160,10 +160,10 @@ export default function SucursalesPage() {
             Recoleta (CABA)
           </h2>
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-            Paraguay 2451 Â· Lunâ€“Vie 10:30â€“18:00
+            Paraguay 2451 · Lun–Vie 10:30–18:00
           </p>
           <p className="mt-3 text-slate-600 dark:text-slate-300">
-            Laboratorio principal con atenciÃ³n integral para pantalla, baterÃ­a, carga y microelectrÃ³nica. TambiÃ©n trabajamos tablets y notebooks.
+            Laboratorio principal con atención integral para pantalla, batería, carga y microelectrónica. También trabajamos tablets y notebooks.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
@@ -197,10 +197,10 @@ export default function SucursalesPage() {
             Belgrano (CABA)
           </h2>
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-            Amenábar 2032 Â· Lunâ€“Vie 10:30â€“18:00
+            Amenábar 2032 · Lun–Vie 10:30–18:00
           </p>
           <p className="mt-3 text-slate-600 dark:text-slate-300">
-            Segunda sucursal en Belgrano con los mismos servicios: pantalla, baterÃ­a, carga, placa y recuperaciÃ³n por agua. DiagnÃ³stico el mismo dÃ­a y garantÃ­a escrita 90 dÃ­as.
+            Segunda sucursal en Belgrano con los mismos servicios: pantalla, batería, carga, placa y recuperación por agua. Diagnóstico el mismo día y garantía escrita 90 días.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link

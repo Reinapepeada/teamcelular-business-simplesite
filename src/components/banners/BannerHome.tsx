@@ -4,16 +4,16 @@ import { BsWhatsapp, BsCheckCircleFill } from "react-icons/bs";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 
 const stats = [
-    { value: "10+", label: "aÃ±os reparando" },
+    { value: "10+", label: "años reparando" },
     { value: "< 2h", label: "respuesta WA" },
-    { value: "90 dÃ­as", label: "garantÃ­a escrita" },
+    { value: "90 días", label: "garantía escrita" },
 ];
 
 const serviceHints = [
     "Cambio de pantalla",
-    "Cambio de baterÃ­a",
-    "ReparaciÃ³n de placa",
-    "RecuperaciÃ³n por agua",
+    "Cambio de batería",
+    "Reparación de placa",
+    "Recuperación por agua",
 ];
 
 const intakeProofs = [
@@ -34,17 +34,17 @@ export default function BannerHome() {
                     <div className="flex items-center gap-2">
                         <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" aria-hidden />
                         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">
-                            Servicio tÃ©cnico en Recoleta Â· Abierto Lunâ€“Vie
+                            Servicio técnico en Recoleta · Abierto Lun–Vie
                         </p>
                     </div>
 
                     <h1 className="max-w-xl text-4xl font-extrabold leading-[1.05] tracking-tight text-slate-900 dark:text-slate-100 sm:text-5xl lg:text-[3.1rem]">
-                        Arreglamos tu celular el mismo dÃ­a en CABA
+                        Arreglamos tu celular el mismo día en CABA
                     </h1>
 
                     <div className="max-w-xl space-y-2.5">
                         <p className="text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-[1.03rem]">
-                            Team Celular tiene dos sucursales en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032). DiagnÃ³stico el mismo dÃ­a, repuestos de calidad y garantÃ­a escrita de 90 dÃ­as sobre trabajo y repuesto.
+                            Team Celular tiene dos sucursales en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032). Diagnóstico el mismo día, repuestos de calidad y garantía escrita de 90 días sobre trabajo y repuesto.
                         </p>
                         <p className="text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-[1.03rem]">
                             Contanos la falla y te orientamos por WhatsApp en menos de 2 horas.
@@ -109,7 +109,7 @@ export default function BannerHome() {
                     <div className="relative h-[15rem] sm:h-[22rem] lg:h-full lg:min-h-[28rem]">
                         <Image
                             src="/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp"
-                            alt="TÃ©cnico reparando un smartphone en el laboratorio de Team Celular, Recoleta"
+                            alt="Técnico reparando un smartphone en el laboratorio de Team Celular, Recoleta"
                             fill
                             quality={82}
                             sizes="(max-width: 1024px) 100vw, 46vw"
@@ -125,7 +125,7 @@ export default function BannerHome() {
                             </p>
                             <p className="text-sm font-bold text-slate-900 dark:text-slate-100">
                                 <span className="text-primary">{"< 2 horas"}</span>{" "}
-                                <span className="font-normal text-slate-500 dark:text-slate-400">Â· Lunâ€“Vie</span>
+                                <span className="font-normal text-slate-500 dark:text-slate-400">· Lun–Vie</span>
                             </p>
                         </div>
                     </div>

@@ -13,7 +13,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
   title: "Pantalla con Lineas en Celular: Causas y Reparacion | Team Celular",
   description:
-    "Pantalla con lÃ­neas, parpadeo o manchas. Team Celular, Recoleta y Belgrano (CABA), diagnostica display, flex o placa. Cambio de mÃ³dulo en el dÃ­a y garantÃ­a escrita 90 dÃ­as.",
+    "Pantalla con líneas, parpadeo o manchas. Team Celular, Recoleta y Belgrano (CABA), diagnostica display, flex o placa. Cambio de módulo en el día y garantía escrita 90 días.",
   keywords: [
     "pantalla con lineas celular",
     "display con rayas verticales",
@@ -140,7 +140,7 @@ export default function ScreenLinesGuidePage() {
       pagePath={PAGE_PATH}
       pageLabel="Pantalla con lineas"
       title="Pantalla con lineas en celular: causas y reparacion"
-      heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), diagnostica lÃ­neas en pantalla para identificar la causa real: display, flex o placa. Cambio de mÃ³dulo en el dÃ­a con garantÃ­a escrita de 90 dÃ­as."
+      heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), diagnostica líneas en pantalla para identificar la causa real: display, flex o placa. Cambio de módulo en el día con garantía escrita de 90 días."
       badge="Decision de reparacion"
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
@@ -151,14 +151,14 @@ export default function ScreenLinesGuidePage() {
         "Evita reemplazar modulo sin validar placa.",
         "Prioriza una solucion con costo/beneficio real.",
       ]}
-      symptomsTitle="Â¿CuÃ¡les son los sÃ­ntomas frecuentes de pantalla con lÃ­neas?"
-      symptomsDescription="Reconocer el patrÃ³n de la falla ayuda a definir mejor el tipo de reparaciÃ³n."
+      symptomsTitle="¿Cuáles son los síntomas frecuentes de pantalla con líneas?"
+      symptomsDescription="Reconocer el patrón de la falla ayuda a definir mejor el tipo de reparación."
       symptoms={symptoms}
-      diagnosisTitle="Â¿CÃ³mo diagnosticamos lÃ­neas en pantalla?"
+      diagnosisTitle="¿Cómo diagnosticamos líneas en pantalla?"
       diagnosisDescription="El objetivo es ubicar la causa exacta para no cambiar piezas innecesarias."
       diagnostics={diagnostics}
-      planTitle="Â¿CÃ³mo reparamos la pantalla con lÃ­neas?"
-      planDescription="Se corrige primero el componente con mayor probabilidad de Ã©xito y menor costo."
+      planTitle="¿Cómo reparamos la pantalla con líneas?"
+      planDescription="Se corrige primero el componente con mayor probabilidad de éxito y menor costo."
       planSteps={planSteps}
       faq={faq}
       relatedLinks={relatedLinks}

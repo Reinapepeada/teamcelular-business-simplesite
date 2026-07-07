@@ -13,7 +13,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
   title: "Celular Mojado: Que Hacer en las Primeras 2 Horas | Team Celular",
   description:
-    "Â¿Se mojÃ³ tu celular? Team Celular, Recoleta y Belgrano (CABA), diagnostica daÃ±o por lÃ­quidos el mismo dÃ­a. ActuÃ¡ en las primeras 2 horas para reducir riesgo de corto y corrosiÃ³n.",
+    "¿Se mojó tu celular? Team Celular, Recoleta y Belgrano (CABA), diagnostica daño por líquidos el mismo día. Actuá en las primeras 2 horas para reducir riesgo de corto y corrosión.",
   keywords: [
     "celular mojado que hacer",
     "telefono mojado solucion",
@@ -23,7 +23,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   ],
   openGraphTitle: "Celular Mojado: Que Hacer en las Primeras 2 Horas | Team Celular",
   openGraphDescription:
-    "Pasos urgentes para minimizar daÃ±o por liquidos y decidir cuando necesitas laboratorio de microelectronica.",
+    "Pasos urgentes para minimizar daño por liquidos y decidir cuando necesitas laboratorio de microelectronica.",
   openGraphImagePath: "/images/guia_microelectronica.webp",
   openGraphImageAlt: "Reparacion de celular mojado en laboratorio",
   twitterTitle: "Celular Mojado: Que Hacer en las Primeras 2 Horas",
@@ -43,7 +43,7 @@ const symptoms: GuideItem[] = [
   {
     title: "No enciende o reinicia solo",
     description:
-      "Puede haber corto temporal o daÃ±o en circuito de energia por humedad interna.",
+      "Puede haber corto temporal o daño en circuito de energia por humedad interna.",
   },
   {
     title: "Audio distorsionado",
@@ -94,7 +94,7 @@ const planSteps: GuideItem[] = [
   {
     title: "Evitar remedios caseros",
     description:
-      "No uses arroz, secador caliente ni alcohol comun. Pueden agravar el daÃ±o interno.",
+      "No uses arroz, secador caliente ni alcohol comun. Pueden agravar el daño interno.",
   },
   {
     title: "Llevarlo a diagnostico tecnico",
@@ -140,7 +140,7 @@ export default function WetPhoneGuidePage() {
       pagePath={PAGE_PATH}
       pageLabel="Celular mojado"
       title="Celular mojado: que hacer en las primeras 2 horas"
-      heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), recupera celulares con daÃ±o por lÃ­quidos con diagnÃ³stico el mismo dÃ­a. ActuÃ¡ dentro de las primeras 2 horas para reducir riesgo de corto y corrosiÃ³n en placa."
+      heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), recupera celulares con daño por líquidos con diagnóstico el mismo día. Actuá dentro de las primeras 2 horas para reducir riesgo de corto y corrosión en placa."
       badge="Emergencia tecnica"
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
@@ -151,14 +151,14 @@ export default function WetPhoneGuidePage() {
         "Errores frecuentes que debes evitar desde el minuto uno.",
         "Criterios para decidir si requiere laboratorio avanzado.",
       ]}
-      symptomsTitle="Â¿CuÃ¡les son las seÃ±ales de daÃ±o por lÃ­quidos?"
-      symptomsDescription="No todos los sÃ­ntomas aparecen al instante. Estas pistas ayudan a anticipar complicaciones."
+      symptomsTitle="¿Cuáles son las señales de daño por líquidos?"
+      symptomsDescription="No todos los síntomas aparecen al instante. Estas pistas ayudan a anticipar complicaciones."
       symptoms={symptoms}
-      diagnosisTitle="Â¿QuÃ© evaluamos en laboratorio?"
-      diagnosisDescription="Un diagnÃ³stico temprano permite frenar corrosiÃ³n y recuperar funciones antes de que escale."
+      diagnosisTitle="¿Qué evaluamos en laboratorio?"
+      diagnosisDescription="Un diagnóstico temprano permite frenar corrosión y recuperar funciones antes de que escale."
       diagnostics={diagnostics}
-      planTitle="Â¿QuÃ© hacer si el celular se mojÃ³?"
-      planDescription="Este orden reduce riesgos y mejora probabilidades de recuperaciÃ³n del equipo."
+      planTitle="¿Qué hacer si el celular se mojó?"
+      planDescription="Este orden reduce riesgos y mejora probabilidades de recuperación del equipo."
       planSteps={planSteps}
       faq={faq}
       relatedLinks={relatedLinks}

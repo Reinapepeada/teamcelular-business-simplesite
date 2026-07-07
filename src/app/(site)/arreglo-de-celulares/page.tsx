@@ -10,34 +10,34 @@ const PAGE_URL = `${SITE_URL}/arreglo-de-celulares`;
 
 const services = [
   {
-    title: "Pantalla / mÃ³dulo display",
+    title: "Pantalla / módulo display",
     description:
-      "Vidrio roto, sin imagen, lÃ­neas, manchas o touch que no responde. Reemplazo con repuestos premium y prueba completa.",
+      "Vidrio roto, sin imagen, líneas, manchas o touch que no responde. Reemplazo con repuestos premium y prueba completa.",
   },
   {
-    title: "BaterÃ­a",
+    title: "Batería",
     description:
-      "Se descarga rÃ¡pido, se apaga, se calienta o tarda en cargar. DiagnÃ³stico y cambio con garantÃ­a escrita.",
+      "Se descarga rápido, se apaga, se calienta o tarda en cargar. Diagnóstico y cambio con garantía escrita.",
   },
   {
     title: "Pin / ficha de carga",
     description:
-      "Falso contacto, no reconoce cargador o carga intermitente. Limpieza, reparaciÃ³n o reemplazo segÃºn el caso.",
+      "Falso contacto, no reconoce cargador o carga intermitente. Limpieza, reparación o reemplazo según el caso.",
   },
   {
-    title: "CÃ¡mara, audio y sensores",
+    title: "Cámara, audio y sensores",
     description:
-      "CÃ¡mara borrosa, micrÃ³fono bajo, parlante distorsionado o sensores con fallas. Reemplazo y calibraciÃ³n cuando corresponde.",
+      "Cámara borrosa, micrófono bajo, parlante distorsionado o sensores con fallas. Reemplazo y calibración cuando corresponde.",
   },
   {
-    title: "Placa (microelectrÃ³nica)",
+    title: "Placa (microelectrónica)",
     description:
       "No enciende, se reinicia, mojado, corto o fallas complejas. Laboratorio con microscopio y herramientas profesionales.",
   },
   {
     title: "Otros arreglos frecuentes",
     description:
-      "BotÃ³n power/volumen, flex, tapa trasera, conectores, limpieza de humedad y diagnÃ³stico de fallas raras.",
+      "Botón power/volumen, flex, tapa trasera, conectores, limpieza de humedad y diagnóstico de fallas raras.",
   },
 ];
 
@@ -55,28 +55,28 @@ const zones = [
 
 const faqs = [
   {
-    q: "Â¿Sirve esta pÃ¡gina si todavÃ­a no sÃ© la falla exacta?",
-    a: "SÃ­. Esta landing estÃ¡ pensada para consultas generales. Con marca, modelo y sÃ­ntomas te orientamos rÃ¡pido sobre el siguiente paso.",
+    q: "¿Sirve esta página si todavía no sé la falla exacta?",
+    a: "Sí. Esta landing está pensada para consultas generales. Con marca, modelo y síntomas te orientamos rápido sobre el siguiente paso.",
   },
   {
-    q: "Â¿QuÃ© arreglos suelen resolverse en el dÃ­a?",
-    a: "Pantalla, baterÃ­a y pin de carga suelen salir en el dÃ­a segÃºn stock y estado del equipo. Siempre confirmamos tiempo real antes de abrirlo.",
+    q: "¿Qué arreglos suelen resolverse en el día?",
+    a: "Pantalla, batería y pin de carga suelen salir en el día según stock y estado del equipo. Siempre confirmamos tiempo real antes de abrirlo.",
   },
   {
-    q: "Â¿CuÃ¡ndo conviene ir a la pÃ¡gina de tÃ©cnico de celulares?",
-    a: "Si tenÃ©s reinicios, equipo mojado, falla de placa o querÃ©s segunda opiniÃ³n tÃ©cnica, conviene revisar la landing de tÃ©cnico especialista para casos complejos.",
+    q: "¿Cuándo conviene ir a la página de técnico de celulares?",
+    a: "Si tenés reinicios, equipo mojado, falla de placa o querés segunda opinión técnica, conviene revisar la landing de técnico especialista para casos complejos.",
   },
   {
-    q: "Â¿DÃ³nde estÃ¡n ubicados?",
+    q: "¿Dónde están ubicados?",
     a: "Tenemos dos sucursales en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032). Atendemos de lunes a viernes de 10:30 a 18:00 hs.",
   },
   {
-    q: "Â¿QuÃ© garantÃ­a tiene el arreglo?",
-    a: "Entregamos garantÃ­a escrita de 90 dÃ­as sobre trabajo y repuesto instalado. El alcance exacto se detalla en el presupuesto antes de avanzar.",
+    q: "¿Qué garantía tiene el arreglo?",
+    a: "Entregamos garantía escrita de 90 días sobre trabajo y repuesto instalado. El alcance exacto se detalla en el presupuesto antes de avanzar.",
   },
   {
-    q: "Â¿CÃ³mo pido presupuesto rÃ¡pido?",
-    a: "PodÃ©s ir directo al formulario o escribirnos por WhatsApp con la marca, el modelo y una descripciÃ³n (si podÃ©s, sumÃ¡ fotos).",
+    q: "¿Cómo pido presupuesto rápido?",
+    a: "Podés ir directo al formulario o escribirnos por WhatsApp con la marca, el modelo y una descripción (si podés, sumá fotos).",
   },
 ];
 
@@ -84,16 +84,16 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: "/arreglo-de-celulares",
   title: "Arreglo de Celulares en Recoleta | Fallas Frecuentes | Team Celular",
   description:
-    "Arreglo de celulares en Recoleta, Paraguay 2451 CABA â€” Team Celular. Pantalla, baterÃ­a y carga en el dÃ­a, garantÃ­a escrita 90 dÃ­as. ConsultÃ¡ sin turno.",
+    "Arreglo de celulares en Recoleta, Paraguay 2451 CABA — Team Celular. Pantalla, batería y carga en el día, garantía escrita 90 días. Consultá sin turno.",
   keywords: [
     "arreglo de celulares recoleta",
     "arreglo de celular rapido caba",
-    "reparaciÃ³n de celulares recoleta",
+    "reparación de celulares recoleta",
     "arreglo celular caba",
     "cambio pantalla celular recoleta",
-    "cambio baterÃ­a celular recoleta",
-    "servicio tÃ©cnico celulares recoleta",
-    "microelectrÃ³nica celulares caba",
+    "cambio batería celular recoleta",
+    "servicio técnico celulares recoleta",
+    "microelectrónica celulares caba",
   ],
   robots: {
     index: true,
@@ -104,11 +104,11 @@ export const metadata: Metadata = buildWebsiteMetadata({
   },
   openGraphTitle: "Arreglo de Celulares en Recoleta (CABA) | Team Celular",
   openGraphDescription:
-    "Team Celular, Paraguay 2451 Recoleta CABA. Arreglo de celulares para fallas frecuentes: pantalla, baterÃ­a y carga con garantÃ­a escrita 90 dÃ­as.",
+    "Team Celular, Paraguay 2451 Recoleta CABA. Arreglo de celulares para fallas frecuentes: pantalla, batería y carga con garantía escrita 90 días.",
   openGraphImageAlt: "Team Celular - Arreglo de celulares en Recoleta (CABA)",
   twitterTitle: "Arreglo de Celulares en Recoleta (CABA) | Team Celular",
   twitterDescription:
-    "Team Celular, Paraguay 2451 Recoleta. Arreglo de celulares con garantÃ­a escrita 90 dÃ­as. WhatsApp o formulario.",
+    "Team Celular, Paraguay 2451 Recoleta. Arreglo de celulares con garantía escrita 90 días. WhatsApp o formulario.",
 });
 
 export default function ArregloDeCelularesPage() {
@@ -121,9 +121,9 @@ export default function ArregloDeCelularesPage() {
     "@type": "Service",
     "@id": `${PAGE_URL}#service`,
     name: "Arreglo de celulares en Recoleta (CABA)",
-    serviceType: "ReparaciÃ³n de celulares",
+    serviceType: "Reparación de celulares",
     description:
-      "Arreglo y reparaciÃ³n de celulares en Recoleta (CABA). Pantalla, baterÃ­a, pin de carga, cÃ¡maras, audio y reparaciones de placa con garantÃ­a escrita.",
+      "Arreglo y reparación de celulares en Recoleta (CABA). Pantalla, batería, pin de carga, cámaras, audio y reparaciones de placa con garantía escrita.",
     areaServed: [
       { "@type": "City", name: "Recoleta" },
       { "@type": "City", name: "CABA" },
@@ -165,9 +165,9 @@ export default function ArregloDeCelularesPage() {
           Arreglo de celulares en CABA para resolver fallas cotidianas
         </h1>
         <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          Team Celular tiene dos sucursales en CABA: <strong>Recoleta (Paraguay 2451)</strong> y <strong>Belgrano (Amenábar 2032)</strong>. DiagnÃ³stico el mismo dÃ­a, presupuesto claro antes de
-          arrancar y garantÃ­a escrita de <strong>90 dÃ­as</strong> sobre trabajo
-          y repuesto. Pantalla, baterÃ­a y pin de carga suelen salir en el dÃ­a.
+          Team Celular tiene dos sucursales en CABA: <strong>Recoleta (Paraguay 2451)</strong> y <strong>Belgrano (Amenábar 2032)</strong>. Diagnóstico el mismo día, presupuesto claro antes de
+          arrancar y garantía escrita de <strong>90 días</strong> sobre trabajo
+          y repuesto. Pantalla, batería y pin de carga suelen salir en el día.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <TrackedCtaLink
@@ -197,10 +197,10 @@ export default function ArregloDeCelularesPage() {
           <Link href="/reparaciones" className="font-semibold text-primary underline-offset-4 hover:underline">
             Reparaciones en CABA
           </Link>
-          . Si necesitÃ¡s un enfoque mÃ¡s tÃ©cnico para fallas complejas de placa,
-          revisÃ¡{" "}
+          . Si necesitás un enfoque más técnico para fallas complejas de placa,
+          revisá{" "}
           <Link href="/tecnico-de-celulares" className="font-semibold text-primary underline-offset-4 hover:underline">
-            TÃ©cnico de celulares en Recoleta
+            Técnico de celulares en Recoleta
           </Link>
           .
         </p>
@@ -209,16 +209,16 @@ export default function ArregloDeCelularesPage() {
       <section className="mt-10 grid gap-6 md:grid-cols-3">
         {[
           {
-            title: "Presupuesto rÃ¡pido",
-            desc: "Te respondemos con opciones y tiempos estimados. Si hace falta diagnÃ³stico de taller, te lo explicamos antes.",
+            title: "Presupuesto rápido",
+            desc: "Te respondemos con opciones y tiempos estimados. Si hace falta diagnóstico de taller, te lo explicamos antes.",
           },
           {
-            title: "GarantÃ­a por escrito",
+            title: "Garantía por escrito",
             desc: WARRANTY_SCOPE_MESSAGE,
           },
           {
             title: "Recoleta y Belgrano",
-            desc: "Dos sucursales en CABA: Paraguay 2451 Recoleta y Amenábar 2032 Belgrano. Lunâ€“Vie 10:30â€“18:00.",
+            desc: "Dos sucursales en CABA: Paraguay 2451 Recoleta y Amenábar 2032 Belgrano. Lun–Vie 10:30–18:00.",
           },
         ].map((item) => (
           <div
@@ -237,11 +237,11 @@ export default function ArregloDeCelularesPage() {
 
       <section className="mt-8 rounded-2xl border border-white/15 bg-white/5 p-6 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
-          Â¿Tu caso parece mÃ¡s complejo?
+          ¿Tu caso parece más complejo?
         </h2>
         <p className="mt-2 text-slate-600 dark:text-slate-300">
           Si el equipo no enciende, se reinicia solo o tuvo humedad, te conviene
-          pasar a la landing de tÃ©cnico especialista para una evaluaciÃ³n mÃ¡s profunda.
+          pasar a la landing de técnico especialista para una evaluación más profunda.
         </p>
         <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
           {REVIEW_COST_MESSAGE}
@@ -263,7 +263,7 @@ export default function ArregloDeCelularesPage() {
             ctaVariant="secondary"
             className="rounded-full border border-primary/40 px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary/10"
           >
-            Ver tÃ©cnico especialista
+            Ver técnico especialista
           </TrackedCtaLink>
           <TrackedCtaLink
             href="/reparaciones/reparacion-placa-caba"
@@ -272,18 +272,18 @@ export default function ArregloDeCelularesPage() {
             ctaVariant="secondary"
             className="rounded-full border border-primary/40 px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary/10"
           >
-            ReparaciÃ³n de placa en CABA
+            Reparación de placa en CABA
           </TrackedCtaLink>
         </div>
       </section>
 
       <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          QuÃ© arreglos hacemos
+          Qué arreglos hacemos
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">
-          Cubrimos la intenciÃ³n completa de â€œarreglo celularesâ€: desde fallas
-          comunes hasta casos complejos. Si no estÃ¡s seguro, pedÃ­ diagnÃ³stico.
+          Cubrimos la intención completa de “arreglo celulares?: desde fallas
+          comunes hasta casos complejos. Si no estás seguro, pedí diagnóstico.
         </p>
 
         <div className="mt-6 grid gap-4 md:grid-cols-2">
@@ -306,8 +306,8 @@ export default function ArregloDeCelularesPage() {
           Marcas que trabajamos
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">
-          Trabajamos con las marcas mÃ¡s comunes de Argentina. Si tu modelo es
-          poco comÃºn, escribinos y te confirmamos repuesto/disponibilidad.
+          Trabajamos con las marcas más comunes de Argentina. Si tu modelo es
+          poco común, escribinos y te confirmamos repuesto/disponibilidad.
         </p>
         <ul className="mt-4 flex flex-wrap gap-2">
           {brands.map((brand) => (
@@ -323,17 +323,17 @@ export default function ArregloDeCelularesPage() {
 
       <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          UbicaciÃ³n y horarios
+          Ubicación y horarios
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">
-          Recoleta: Paraguay 2451, CABA â€” Belgrano: Amenábar 2032, CABA. Lunes a viernes 10:30â€“18:00.
+          Recoleta: Paraguay 2451, CABA — Belgrano: Amenábar 2032, CABA. Lunes a viernes 10:30–18:00.
         </p>
         <div className="mt-6 flex flex-wrap gap-4">
           <Link
             href="/contacto"
             className="rounded-full bg-secondary px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-secondary/90"
           >
-            Ver mapa y cÃ³mo llegar
+            Ver mapa y cómo llegar
           </Link>
           <a
             href="tel:+541151034595"
@@ -350,7 +350,7 @@ export default function ArregloDeCelularesPage() {
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">
           Dos sucursales en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032). Si
-          estÃ¡s en alguno de estos barrios, mirÃ¡ la pÃ¡gina de tu zona:
+          estás en alguno de estos barrios, mirá la página de tu zona:
         </p>
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {zones.map((zone) => (

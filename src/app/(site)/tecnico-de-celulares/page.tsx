@@ -10,28 +10,28 @@ const PAGE_URL = `${SITE_URL}/tecnico-de-celulares`;
 
 const faqs = [
   {
-    q: "Â¿CuÃ¡ndo conviene un tÃ©cnico especialista y no solo un arreglo rÃ¡pido?",
-    a: "Cuando el equipo se reinicia, no enciende, tuvo humedad, ya fue abierto o tiene fallas intermitentes. En esos casos priorizamos diagnÃ³stico tÃ©cnico completo.",
+    q: "¿Cuándo conviene un técnico especialista y no solo un arreglo rápido?",
+    a: "Cuando el equipo se reinicia, no enciende, tuvo humedad, ya fue abierto o tiene fallas intermitentes. En esos casos priorizamos diagnóstico técnico completo.",
   },
   {
-    q: "Â¿Trabajan placa y microelectrÃ³nica?",
-    a: "SÃ­. Hacemos diagnÃ³stico de placa, mediciones y reparaciÃ³n avanzada cuando el caso lo permite. TambiÃ©n te damos alternativa si no conviene reparar.",
+    q: "¿Trabajan placa y microelectrónica?",
+    a: "Sí. Hacemos diagnóstico de placa, mediciones y reparación avanzada cuando el caso lo permite. También te damos alternativa si no conviene reparar.",
   },
   {
-    q: "Â¿El diagnÃ³stico tÃ©cnico tiene costo?",
+    q: "¿El diagnóstico técnico tiene costo?",
     a: `Si. ${REVIEW_COST_MESSAGE} Se informa siempre antes de ingresar el equipo.`,
   },
   {
-    q: "Â¿Pueden revisar equipos mal reparados en otro lugar?",
-    a: "SÃ­. Revisamos equipos con intervenciones previas, evaluamos riesgo real y te explicamos con claridad quÃ© se puede recuperar y en quÃ© plazo.",
+    q: "¿Pueden revisar equipos mal reparados en otro lugar?",
+    a: "Sí. Revisamos equipos con intervenciones previas, evaluamos riesgo real y te explicamos con claridad qué se puede recuperar y en qué plazo.",
   },
 ];
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: "/tecnico-de-celulares",
-  title: "TÃ©cnico de Celulares en Recoleta | DiagnÃ³stico Avanzado | Team Celular",
+  title: "Técnico de Celulares en Recoleta | Diagnóstico Avanzado | Team Celular",
   description:
-    "TÃ©cnico de celulares en Recoleta, Paraguay 2451 CABA â€” Team Celular. DiagnÃ³stico avanzado, placa y segunda opiniÃ³n con garantÃ­a escrita 90 dÃ­as.",
+    "Técnico de celulares en Recoleta, Paraguay 2451 CABA — Team Celular. Diagnóstico avanzado, placa y segunda opinión con garantía escrita 90 días.",
   keywords: [
     "tecnico de celulares recoleta",
     "diagnostico tecnico celular caba",
@@ -46,26 +46,26 @@ export const metadata: Metadata = buildWebsiteMetadata({
   languages: {
     "es-AR": "/tecnico-de-celulares",
   },
-  openGraphTitle: "TÃ©cnico de Celulares en Recoleta (CABA) | Team Celular",
+  openGraphTitle: "Técnico de Celulares en Recoleta (CABA) | Team Celular",
   openGraphDescription:
-    "Team Celular, Paraguay 2451 Recoleta. DiagnÃ³stico avanzado de celulares en CABA: placa, humedad y segunda opiniÃ³n tÃ©cnica. GarantÃ­a escrita 90 dÃ­as.",
-  openGraphImageAlt: "TÃ©cnico de celulares en Recoleta - Team Celular",
-  twitterTitle: "TÃ©cnico de Celulares en Recoleta | Team Celular",
+    "Team Celular, Paraguay 2451 Recoleta. Diagnóstico avanzado de celulares en CABA: placa, humedad y segunda opinión técnica. Garantía escrita 90 días.",
+  openGraphImageAlt: "Técnico de celulares en Recoleta - Team Celular",
+  twitterTitle: "Técnico de Celulares en Recoleta | Team Celular",
   twitterDescription:
-    "Team Celular, Recoleta CABA. TÃ©cnico especialista en placa, humedad y segunda opiniÃ³n tÃ©cnica. DiagnÃ³stico avanzado con garantÃ­a escrita 90 dÃ­as.",
+    "Team Celular, Recoleta CABA. Técnico especialista en placa, humedad y segunda opinión técnica. Diagnóstico avanzado con garantía escrita 90 días.",
 });
 
 export default function TecnicoDeCelularesPage() {
   const whatsappUrl = `https://wa.me/5491151034595?text=${encodeURIComponent(
-    "Hola! Necesito un tÃ©cnico de celulares en CABA. Marca y modelo:"
+    "Hola! Necesito un técnico de celulares en CABA. Marca y modelo:"
   )}`;
 
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${PAGE_URL}#service`,
-    name: "TÃ©cnico de celulares en Recoleta (CABA)",
-    serviceType: "Servicio tÃ©cnico y reparaciÃ³n de celulares",
+    name: "Técnico de celulares en Recoleta (CABA)",
+    serviceType: "Servicio técnico y reparación de celulares",
     url: PAGE_URL,
     areaServed: [
       { "@type": "City", name: "Recoleta" },
@@ -96,22 +96,22 @@ export default function TecnicoDeCelularesPage() {
       <BreadcrumbJsonLd
         items={[
           { name: "Inicio", url: `${SITE_URL}/` },
-          { name: "TÃ©cnico de celulares", url: PAGE_URL },
+          { name: "Técnico de celulares", url: PAGE_URL },
         ]}
       />
 
       <header className="rounded-2xl border border-white/15 bg-white/5 p-10 text-center shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-12">
         <span className="inline-flex rounded-full bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
-          Enfoque tÃ©cnico especialista
+          Enfoque técnico especialista
         </span>
         <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-          TÃ©cnico de celulares en CABA para fallas complejas y diagnÃ³stico experto
+          Técnico de celulares en CABA para fallas complejas y diagnóstico experto
         </h1>
         <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
           Team Celular, con sucursales en <strong>Recoleta (Paraguay 2451)</strong> y <strong>Belgrano (Amenábar 2032)</strong>, diagnostica
           fallas complejas de placa, humedad y equipos ya intervenidos. Si el equipo
           no enciende, reinicia o fue mal reparado en otro lado, buscamos la causa
-          real con garantÃ­a escrita de <strong>90 dÃ­as</strong> sobre trabajo y repuesto.
+          real con garantía escrita de <strong>90 días</strong> sobre trabajo y repuesto.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <TrackedCtaLink
@@ -121,7 +121,7 @@ export default function TecnicoDeCelularesPage() {
             ctaVariant="primary"
             className="rounded-full bg-primary px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
           >
-            Pedir diagnÃ³stico
+            Pedir diagnóstico
           </TrackedCtaLink>
           <TrackedCtaLink
             href={whatsappUrl}
@@ -136,7 +136,7 @@ export default function TecnicoDeCelularesPage() {
           </TrackedCtaLink>
         </div>
         <p className="mt-5 text-sm text-slate-600 dark:text-slate-300">
-          Si tu falla es puntual (pantalla, baterÃ­a o carga), podÃ©s ir directo a{" "}
+          Si tu falla es puntual (pantalla, batería o carga), podés ir directo a{" "}
           <Link href="/arreglo-de-celulares" className="font-semibold text-primary underline-offset-4 hover:underline">
             Arreglo de celulares
           </Link>
@@ -151,15 +151,15 @@ export default function TecnicoDeCelularesPage() {
       <section className="mt-10 grid gap-6 md:grid-cols-3">
         {[
           {
-            title: "DiagnÃ³stico profesional",
-            desc: "Chequeo tÃ©cnico por sÃ­ntomas, historial y pruebas para encontrar la causa raÃ­z, no solo el sÃ­ntoma.",
+            title: "Diagnóstico profesional",
+            desc: "Chequeo técnico por síntomas, historial y pruebas para encontrar la causa raíz, no solo el síntoma.",
           },
           {
-            title: "Criterio tÃ©cnico",
-            desc: "Te explicamos si conviene reparar, quÃ© riesgo tiene y quÃ© alternativa te deja mejor resultado costo-beneficio.",
+            title: "Criterio técnico",
+            desc: "Te explicamos si conviene reparar, qué riesgo tiene y qué alternativa te deja mejor resultado costo-beneficio.",
           },
           {
-            title: "Trazabilidad y garantÃ­a",
+            title: "Trazabilidad y garantía",
             desc: WARRANTY_SCOPE_MESSAGE,
           },
         ].map((item) => (
@@ -182,17 +182,17 @@ export default function TecnicoDeCelularesPage() {
           Servicios que resolvemos
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">
-          Trabajamos fallas comunes y casos de mayor complejidad tÃ©cnica. Si no
-          estÃ¡s seguro de la falla, empezamos por diagnÃ³stico y plan de acciÃ³n.
+          Trabajamos fallas comunes y casos de mayor complejidad técnica. Si no
+          estás seguro de la falla, empezamos por diagnóstico y plan de acción.
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {[
-            "Cambio de pantalla / mÃ³dulo display",
-            "Cambio de baterÃ­a y calibraciÃ³n",
-            "ReparaciÃ³n de pin de carga",
-            "CÃ¡maras, audio y sensores",
-            "MicroelectrÃ³nica (placa)",
-            "DiagnÃ³stico avanzado",
+            "Cambio de pantalla / módulo display",
+            "Cambio de batería y calibración",
+            "Reparación de pin de carga",
+            "Cámaras, audio y sensores",
+            "Microelectrónica (placa)",
+            "Diagnóstico avanzado",
           ].map((service) => (
             <div
               key={service}
@@ -206,11 +206,11 @@ export default function TecnicoDeCelularesPage() {
 
       <section className="mt-8 rounded-2xl border border-white/15 bg-white/5 p-6 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
-          ElegÃ­ la ruta correcta segÃºn tu caso
+          Elegí la ruta correcta según tu caso
         </h2>
         <p className="mt-2 text-slate-600 dark:text-slate-300">
-          Si tu problema es puntual y ya sabÃ©s la falla, podÃ©s ahorrar tiempo con
-          la landing general. Si es un caso incierto o complejo, seguÃ­ por diagnÃ³stico.
+          Si tu problema es puntual y ya sabés la falla, podés ahorrar tiempo con
+          la landing general. Si es un caso incierto o complejo, seguí por diagnóstico.
         </p>
         <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
           {REVIEW_COST_MESSAGE}
@@ -241,7 +241,7 @@ export default function TecnicoDeCelularesPage() {
             ctaVariant="secondary"
             className="rounded-full border border-primary/40 px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary/10"
           >
-            Ver reparaciÃ³n de placa
+            Ver reparación de placa
           </TrackedCtaLink>
         </div>
       </section>

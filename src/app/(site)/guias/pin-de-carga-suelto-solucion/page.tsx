@@ -13,7 +13,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
   title: "Pin de Carga Suelto: Causas y Solucion en CABA | Team Celular",
   description:
-    "Â¿Tu celular carga intermitente? Team Celular, Recoleta y Belgrano (CABA), diagnostica pin de carga, flex y placa el mismo dÃ­a. ReparaciÃ³n express con garantÃ­a escrita 90 dÃ­as.",
+    "¿Tu celular carga intermitente? Team Celular, Recoleta y Belgrano (CABA), diagnostica pin de carga, flex y placa el mismo día. Reparación express con garantía escrita 90 días.",
   keywords: [
     "pin de carga suelto",
     "celular no carga bien",
@@ -48,7 +48,7 @@ const symptoms: GuideItem[] = [
   {
     title: "No activa carga rapida",
     description:
-      "Cuando solo carga lento o desconecta al usar el equipo, puede haber daÃ±o en lineas de datos del flex de carga.",
+      "Cuando solo carga lento o desconecta al usar el equipo, puede haber daño en lineas de datos del flex de carga.",
   },
   {
     title: "Calienta al conectar",
@@ -61,7 +61,7 @@ const diagnostics: GuideItem[] = [
   {
     title: "Inspeccion microscopica",
     description:
-      "Revisamos estado fisico de pines, pistas y soldaduras para separar suciedad de daÃ±o real.",
+      "Revisamos estado fisico de pines, pistas y soldaduras para separar suciedad de daño real.",
   },
   {
     title: "Prueba cruzada de cable y cargador",
@@ -84,7 +84,7 @@ const planSteps: GuideItem[] = [
   {
     title: "Limpieza tecnica segura",
     description:
-      "Si el daÃ±o es superficial, limpiamos residuos sin daÃ±ar pines ni forzar el conector.",
+      "Si el daño es superficial, limpiamos residuos sin dañar pines ni forzar el conector.",
   },
   {
     title: "Reemplazo de pin o flex",
@@ -94,7 +94,7 @@ const planSteps: GuideItem[] = [
   {
     title: "Micro soldadura en placa",
     description:
-      "Si el daÃ±o llego a pistas o circuito de carga, se corrige en laboratorio de microelectronica.",
+      "Si el daño llego a pistas o circuito de carga, se corrige en laboratorio de microelectronica.",
   },
   {
     title: "Pruebas finales de estabilidad",
@@ -112,7 +112,7 @@ const faq: GuideFaqItem[] = [
   {
     question: "Usar el celular asi puede empeorar la falla?",
     answer:
-      "Si. Forzar el cable en mala posicion puede daÃ±ar pistas internas y pasar de una reparacion simple a una intervencion de placa.",
+      "Si. Forzar el cable en mala posicion puede dañar pistas internas y pasar de una reparacion simple a una intervencion de placa.",
   },
   {
     question: "El problema puede ser bateria y no el pin?",
@@ -140,7 +140,7 @@ export default function ChargingPortGuidePage() {
       pagePath={PAGE_PATH}
       pageLabel="Pin de carga suelto"
       title="Pin de carga suelto: causas, diagnostico y solucion"
-      heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), diagnostica pin de carga suelto con inspecciÃ³n microscÃ³pica el mismo dÃ­a. Si es suciedad, desgaste de conector o falla de placa, lo confirmamos antes de cambiar piezas."
+      heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), diagnostica pin de carga suelto con inspección microscópica el mismo día. Si es suciedad, desgaste de conector o falla de placa, lo confirmamos antes de cambiar piezas."
       badge="Falla frecuente"
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
@@ -148,17 +148,17 @@ export default function ChargingPortGuidePage() {
       imagePath="/images/guia_cambio_modulo.webp"
       heroPoints={[
         "Checklist rapido para detectar la causa principal.",
-        "Evita forzar el conector y agravar el daÃ±o.",
+        "Evita forzar el conector y agravar el daño.",
         "Define si conviene limpieza, cambio o microelectronica.",
       ]}
-      symptomsTitle="Â¿CuÃ¡les son las seÃ±ales de pin de carga comprometido?"
+      symptomsTitle="¿Cuáles son las señales de pin de carga comprometido?"
       symptomsDescription="Estas pistas suelen aparecer antes de que el equipo deje de cargar por completo."
       symptoms={symptoms}
-      diagnosisTitle="Â¿CÃ³mo diagnosticamos la falla de carga?"
-      diagnosisDescription="Separar el origen real evita gastos innecesarios y acelera la soluciÃ³n correcta."
+      diagnosisTitle="¿Cómo diagnosticamos la falla de carga?"
+      diagnosisDescription="Separar el origen real evita gastos innecesarios y acelera la solución correcta."
       diagnostics={diagnostics}
-      planTitle="Â¿CuÃ¡l es el plan de reparaciÃ³n recomendado?"
-      planDescription="El flujo cambia segÃºn nivel de daÃ±o, pero siempre avanzamos de lo simple a lo complejo."
+      planTitle="¿Cuál es el plan de reparación recomendado?"
+      planDescription="El flujo cambia según nivel de daño, pero siempre avanzamos de lo simple a lo complejo."
       planSteps={planSteps}
       faq={faq}
       relatedLinks={relatedLinks}
