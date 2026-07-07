@@ -18,6 +18,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
+import { BRANCHES, whatsappUrl } from "@/lib/businessProfile";
 
 const footerSections = {
   servicios: [
@@ -102,7 +103,7 @@ export default function FooterNUI() {
 
             <div className="flex space-x-3 pt-4">
               <TrackedCtaLink
-                href="https://wa.me/5491151034595?text=Hola%21%20Necesito%20informacion"
+                href={whatsappUrl()}
                 ctaName="footer_whatsapp"
                 ctaLocation="footer_socials"
                 ctaVariant="whatsapp"
@@ -198,9 +199,12 @@ export default function FooterNUI() {
             <div className="flex items-start space-x-3 text-sm">
               <BsGeoAlt className="mt-1 flex-shrink-0 text-primary" />
               <div>
-                <p className="font-semibold">Direccion</p>
-                <p className="text-slate-200">Paraguay 2451</p>
-                <p className="text-slate-200">Recoleta, CABA</p>
+                <p className="font-semibold">Sucursales</p>
+                {BRANCHES.map((branch) => (
+                  <p key={branch.slug} className="text-slate-200">
+                    {branch.shortName}: {branch.street}
+                  </p>
+                ))}
               </div>
             </div>
 

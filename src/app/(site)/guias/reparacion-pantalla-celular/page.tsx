@@ -25,14 +25,14 @@ const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelula
 export const metadata: Metadata = {
   title: "Cambio de Pantalla Celular Buenos Aires | Display Original CABA",
   description:
-    "Cambio de pantalla celular en CABA. Team Celular, Recoleta y Belgrano. Displays OLED originales, True Tone preservado, 2-4 h y garantía escrita sobre trabajo y repuesto.",
+    "Cambio de pantalla celular en CABA. Team Celular, Recoleta y Belgrano. Displays OLED originales, True Tone preservado, 2-4 h y garantÃ­a escrita sobre trabajo y repuesto.",
   keywords: [
     "cambio pantalla celular Buenos Aires",
     "pantalla iPhone original",
     "display Samsung OLED",
-    "reparación pantalla CABA",
+    "reparaciÃ³n pantalla CABA",
     "cambio modulo display",
-    "pantalla celular garantía",
+    "pantalla celular garantÃ­a",
     "True Tone iPhone",
     "cambio pantalla express",
   ],
@@ -91,11 +91,11 @@ const damageTypes = [
     description: "La pantalla se ve bien pero no responde al tacto, responde parcialmente o tiene zonas muertas.",
     Icon: FaFingerprint,
     severity: "Alta",
-    urgency: "Reparación urgente",
+    urgency: "ReparaciÃ³n urgente",
   },
   {
-    title: "Manchas o líneas en display",
-    description: "Manchas negras, líneas verticales/horizontales, pixeles muertos o colores distorsionados.",
+    title: "Manchas o lÃ­neas en display",
+    description: "Manchas negras, lÃ­neas verticales/horizontales, pixeles muertos o colores distorsionados.",
     Icon: FaEye,
     severity: "Media",
     urgency: "Puede empeorar con el tiempo",
@@ -104,19 +104,19 @@ const damageTypes = [
     title: "Pantalla negra (no enciende)",
     description: "El celular funciona (suena, vibra) pero la pantalla permanece negra o muy tenue.",
     Icon: FaMobileAlt,
-    severity: "Crítica",
-    urgency: "Reparación inmediata",
+    severity: "CrÃ­tica",
+    urgency: "ReparaciÃ³n inmediata",
   },
   {
     title: "Pantalla despegada o levantada",
-    description: "El display se separa del marco, puede ser por golpe, batería hinchada o adhesivo deteriorado.",
+    description: "El display se separa del marco, puede ser por golpe, baterÃ­a hinchada o adhesivo deteriorado.",
     Icon: FaExclamationTriangle,
     severity: "Alta",
-    urgency: "Riesgo de daño mayor",
+    urgency: "Riesgo de daÃ±o mayor",
   },
   {
     title: "Brillo bajo o parpadeo",
-    description: "Brillo muy bajo incluso al máximo, parpadeo constante o backlight intermitente.",
+    description: "Brillo muy bajo incluso al mÃ¡ximo, parpadeo constante o backlight intermitente.",
     Icon: FaEye,
     severity: "Media",
     urgency: "Puede ser pantalla o placa",
@@ -130,17 +130,17 @@ const screenTypes = [
     pros: [
       "100% compatible con el equipo",
       "True Tone / Always On Display preservado",
-      "Colores y brillo idénticos al original",
-      "Garantía 6-12 meses",
-      "Certificación de autenticidad"
+      "Colores y brillo idÃ©nticos al original",
+      "GarantÃ­a 6-12 meses",
+      "CertificaciÃ³n de autenticidad"
     ],
-    cons: ["Precio más alto"],
+    cons: ["Precio mÃ¡s alto"],
     price: "$$$$",
     recommended: "iPhone 12+, Samsung S20+",
   },
   {
     type: "Pantalla OLED AAA+ (Incell)",
-    description: "Aftermarket de alta calidad con tecnología OLED/Incell. Especificaciones similares a la original.",
+    description: "Aftermarket de alta calidad con tecnologÃ­a OLED/Incell. Especificaciones similares a la original.",
     pros: [
       "Excelente calidad de imagen",
       "Touch sensible y preciso",
@@ -157,16 +157,16 @@ const screenTypes = [
   },
   {
     type: "Pantalla LCD (TFT)",
-    description: "Tecnología LCD para modelos que originalmente traen LCD. Calidad AAA+.",
+    description: "TecnologÃ­a LCD para modelos que originalmente traen LCD. Calidad AAA+.",
     pros: [
       "Compatible con modelos LCD",
-      "Buena relación calidad-precio",
+      "Buena relaciÃ³n calidad-precio",
       "Garantia escrita segun repuesto y trabajo",
       "Colores aceptables"
     ],
     cons: [
       "Menor contraste que OLED",
-      "Ángulos de visión limitados"
+      "Ãngulos de visiÃ³n limitados"
     ],
     price: "$$",
     recommended: "iPhone 8, XR, 11, Samsung A10-A30",
@@ -175,32 +175,32 @@ const screenTypes = [
 
 const replacementProcess = [
   {
-    step: "1. Diagnóstico completo",
-    detail: "Verificamos que el problema sea realmente la pantalla y no la placa lógica. Probamos touch, Face ID/Touch ID, sensores de proximidad y cámaras. Fotografiamos el estado inicial.",
+    step: "1. DiagnÃ³stico completo",
+    detail: "Verificamos que el problema sea realmente la pantalla y no la placa lÃ³gica. Probamos touch, Face ID/Touch ID, sensores de proximidad y cÃ¡maras. Fotografiamos el estado inicial.",
     duration: "15-20 min",
     Icon: FaTools,
   },
   {
     step: "2. Desmontaje profesional",
-    detail: "Abrimos el equipo con herramientas especializadas, desconectamos batería por seguridad, removemos pantalla dañada y verificamos estado de conectores flex.",
+    detail: "Abrimos el equipo con herramientas especializadas, desconectamos baterÃ­a por seguridad, removemos pantalla daÃ±ada y verificamos estado de conectores flex.",
     duration: "20-30 min",
     Icon: FaMobileAlt,
   },
   {
     step: "3. Transferencia de componentes",
-    detail: "Transferimos módulos originales: cámara frontal, sensor de proximidad, altavoz auricular, placa Home/Face ID. Esto preserva funciones biométricas.",
+    detail: "Transferimos mÃ³dulos originales: cÃ¡mara frontal, sensor de proximidad, altavoz auricular, placa Home/Face ID. Esto preserva funciones biomÃ©tricas.",
     duration: "15-25 min",
     Icon: FaFingerprint,
   },
   {
-    step: "4. Instalación y calibración",
+    step: "4. InstalaciÃ³n y calibraciÃ³n",
     detail: "Instalamos pantalla nueva, conectamos todos los flex, aplicamos adhesivo resistente al agua. Calibramos True Tone con programador especializado (iPhone).",
     duration: "20-30 min",
     Icon: FaCheckCircle,
   },
   {
     step: "5. Test de calidad",
-    detail: "Probamos touch en todas las zonas, Face ID/Touch ID, sensores, brillo, colores, sellado y entregamos con garantía escrita.",
+    detail: "Probamos touch en todas las zonas, Face ID/Touch ID, sensores, brillo, colores, sellado y entregamos con garantÃ­a escrita.",
     duration: "15 min",
     Icon: FaShieldAlt,
   },
@@ -208,24 +208,24 @@ const replacementProcess = [
 
 const faqScreen = [
   {
-    question: "¿Se pierde Face ID o Touch ID al cambiar la pantalla?",
-    answer: "NO, si el cambio se hace correctamente. Face ID y Touch ID están vinculados a módulos específicos que se transfieren de la pantalla original a la nueva. En Team Celular transferimos TODOS los componentes originales: módulo Face ID completo (dot projector, flood illuminator, cámara infrarroja), botón Home con Touch ID, cámara frontal y sensores. La única excepción es si el módulo biométrico original está físicamente dañado, en ese caso Face ID/Touch ID no funcionará con ninguna pantalla.",
+    question: "Â¿Se pierde Face ID o Touch ID al cambiar la pantalla?",
+    answer: "NO, si el cambio se hace correctamente. Face ID y Touch ID estÃ¡n vinculados a mÃ³dulos especÃ­ficos que se transfieren de la pantalla original a la nueva. En Team Celular transferimos TODOS los componentes originales: mÃ³dulo Face ID completo (dot projector, flood illuminator, cÃ¡mara infrarroja), botÃ³n Home con Touch ID, cÃ¡mara frontal y sensores. La Ãºnica excepciÃ³n es si el mÃ³dulo biomÃ©trico original estÃ¡ fÃ­sicamente daÃ±ado, en ese caso Face ID/Touch ID no funcionarÃ¡ con ninguna pantalla.",
   },
   {
-    question: "¿Qué es True Tone y se puede mantener?",
-    answer: "True Tone es una tecnología de Apple que ajusta automáticamente la temperatura de color de la pantalla según la luz ambiente. Cada pantalla original tiene datos de calibración únicos. Para preservar True Tone, usamos programadores especializados (JC V1S, Qianli iCopy) que transfieren estos datos del módulo original a la pantalla nueva. Esto solo es posible si: 1) La pantalla original está funcional (aunque rota), 2) Usamos pantalla original o AAA+ compatible, 3) El módulo de calibración no está dañado. En iPhone 13+ Apple ha restringido aún más esta función.",
+    question: "Â¿QuÃ© es True Tone y se puede mantener?",
+    answer: "True Tone es una tecnologÃ­a de Apple que ajusta automÃ¡ticamente la temperatura de color de la pantalla segÃºn la luz ambiente. Cada pantalla original tiene datos de calibraciÃ³n Ãºnicos. Para preservar True Tone, usamos programadores especializados (JC V1S, Qianli iCopy) que transfieren estos datos del mÃ³dulo original a la pantalla nueva. Esto solo es posible si: 1) La pantalla original estÃ¡ funcional (aunque rota), 2) Usamos pantalla original o AAA+ compatible, 3) El mÃ³dulo de calibraciÃ³n no estÃ¡ daÃ±ado. En iPhone 13+ Apple ha restringido aÃºn mÃ¡s esta funciÃ³n.",
   },
   {
-    question: "¿Cuánto tiempo tarda el cambio de pantalla?",
-    answer: "El servicio express toma 2-4 horas si tenemos el repuesto en stock. El proceso incluye: diagnóstico inicial (15 min), desmontaje (20 min), transferencia de componentes (20 min), instalación (25 min), calibración True Tone si aplica (15 min) y test completo (15 min). Para modelos menos comunes que requieren pedido de pantalla, el tiempo es de 24-48 horas. Ofrecemos servicio de espera en nuestros locales de Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030) con WiFi.",
+    question: "Â¿CuÃ¡nto tiempo tarda el cambio de pantalla?",
+    answer: "El servicio express toma 2-4 horas si tenemos el repuesto en stock. El proceso incluye: diagnÃ³stico inicial (15 min), desmontaje (20 min), transferencia de componentes (20 min), instalaciÃ³n (25 min), calibraciÃ³n True Tone si aplica (15 min) y test completo (15 min). Para modelos menos comunes que requieren pedido de pantalla, el tiempo es de 24-48 horas. Ofrecemos servicio de espera en nuestros locales de Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032) con WiFi.",
   },
   {
-    question: "¿La pantalla nueva viene con garantía?",
+    question: "Â¿La pantalla nueva viene con garantÃ­a?",
     answer: `Si. ${WARRANTY_SCOPE_MESSAGE} Cubre defectos de fabricacion del repuesto y problemas vinculados al trabajo realizado. No cubre golpes nuevos, liquidos, presion excesiva, modificaciones por terceros ni uso inadecuado. Entregamos certificado con el detalle de cobertura.`,
   },
   {
-    question: "¿Puedo usar el celular normalmente después del cambio?",
-    answer: "Sí, pero recomendamos esperar 2-3 horas antes de uso intensivo para que el adhesivo cure completamente. Durante las primeras 24 horas: evitar presión excesiva en los bordes, no sumergir en agua (aunque tenga IP68), no aplicar protector de pantalla inmediatamente. Después de 24 horas el equipo está 100% funcional. Si instalamos pantalla original en iPhone, todas las funciones quedan idénticas a fábrica: True Tone, brillo automático, Night Shift, etc. Recomendamos usar funda y protector de pantalla de calidad.",
+    question: "Â¿Puedo usar el celular normalmente despuÃ©s del cambio?",
+    answer: "SÃ­, pero recomendamos esperar 2-3 horas antes de uso intensivo para que el adhesivo cure completamente. Durante las primeras 24 horas: evitar presiÃ³n excesiva en los bordes, no sumergir en agua (aunque tenga IP68), no aplicar protector de pantalla inmediatamente. DespuÃ©s de 24 horas el equipo estÃ¡ 100% funcional. Si instalamos pantalla original en iPhone, todas las funciones quedan idÃ©nticas a fÃ¡brica: True Tone, brillo automÃ¡tico, Night Shift, etc. Recomendamos usar funda y protector de pantalla de calidad.",
   },
 ];
 
@@ -244,7 +244,7 @@ export default function ScreenReplacementGuide() {
       <BreadcrumbJsonLd
         items={[
           { name: "Inicio", url: `${SITE_URL}/` },
-          { name: "Guías", url: `${SITE_URL}/guias` },
+          { name: "GuÃ­as", url: `${SITE_URL}/guias` },
           { name: "Cambio de pantalla", url: `${SITE_URL}/guias/reparacion-pantalla-celular` },
         ]}
       />
@@ -256,7 +256,7 @@ export default function ScreenReplacementGuide() {
           </Link>
           <span>/</span>
           <Link href="/guias" className="hover:text-primary transition">
-            Guías
+            GuÃ­as
           </Link>
           <span>/</span>
           <span className="text-slate-900 dark:text-white font-semibold">
@@ -275,7 +275,7 @@ export default function ScreenReplacementGuide() {
           <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
             Reemplazo de pantalla con <strong className="text-primary">displays OLED originales</strong>, 
             <strong> True Tone preservado</strong>, garantia escrita segun repuesto y trabajo, y servicio 
-            express en <strong>2-4 horas</strong>. Reparamos iPhone, Samsung, Motorola y todas las marcas en dos talleres en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030).
+            express en <strong>2-4 horas</strong>. Reparamos iPhone, Samsung, Motorola y todas las marcas en dos talleres en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).
           </p>
 
           {/* Quick Stats */}
@@ -313,14 +313,14 @@ export default function ScreenReplacementGuide() {
           </div>
         </header>
 
-        {/* Tipos de daños */}
+        {/* Tipos de daÃ±os */}
         <section className="space-y-8">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Tipos de daños en pantallas de celular
+              Tipos de daÃ±os en pantallas de celular
             </h2>
             <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
-              Identificá el problema de tu pantalla
+              IdentificÃ¡ el problema de tu pantalla
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -357,7 +357,7 @@ export default function ScreenReplacementGuide() {
               Tipos de pantallas que instalamos
             </h2>
             <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
-              Comparativa de calidad, tecnología y precio
+              Comparativa de calidad, tecnologÃ­a y precio
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
@@ -453,7 +453,7 @@ export default function ScreenReplacementGuide() {
               Preguntas frecuentes sobre cambio de pantalla
             </h2>
             <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
-              Respondemos las dudas más comunes
+              Respondemos las dudas mÃ¡s comunes
             </p>
           </div>
           <div className="space-y-4">
@@ -476,7 +476,7 @@ export default function ScreenReplacementGuide() {
         {/* CTA Final */}
         <section className="rounded-2xl border border-white/15 bg-gradient-to-br from-blue-500/10 via-white/5 to-blue-600/10 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:from-slate-900/40 dark:via-slate-900/30 dark:to-slate-900/40 md:p-16">
           <h2 className="mb-6 text-3xl font-bold text-slate-900 dark:text-white">
-            ¿Tu pantalla está rota o no funciona?
+            Â¿Tu pantalla estÃ¡ rota o no funciona?
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
             {REVIEW_COST_MESSAGE} Service express en 2-4 horas con garantia escrita segun repuesto y trabajo.

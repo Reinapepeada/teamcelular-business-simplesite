@@ -28,13 +28,13 @@ const SERVICE_VISUALS: Record<string, ServiceVisual> = {
     cover: "/images/cargadores.webp",
     glow:
       "bg-[radial-gradient(circle_at_80%_20%,rgba(34,197,94,0.35),transparent_40%)]",
-    badge: "Batería y energía",
+    badge: "BaterÃ­a y energÃ­a",
   },
   "cambio-pantalla-caba": {
     cover: "/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp",
     glow:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(59,130,246,0.35),transparent_42%)]",
-    badge: "Pantallas y módulos",
+    badge: "Pantallas y mÃ³dulos",
   },
   "cambio-pin-carga-caba": {
     cover: "/images/dispositivoshdpro.webp",
@@ -46,7 +46,7 @@ const SERVICE_VISUALS: Record<string, ServiceVisual> = {
     cover: "/images/teamcelular.webp",
     glow:
       "bg-[radial-gradient(circle_at_82%_16%,rgba(139,92,246,0.35),transparent_42%)]",
-    badge: "Microelectrónica",
+    badge: "MicroelectrÃ³nica",
   },
   "cambio-flex-caba": {
     cover: "/images/celuPorDentro.webp",
@@ -58,28 +58,28 @@ const SERVICE_VISUALS: Record<string, ServiceVisual> = {
     cover: "/images/fundaOtter.webp",
     glow:
       "bg-[radial-gradient(circle_at_86%_16%,rgba(244,114,182,0.3),transparent_42%)]",
-    badge: "Estética y terminación",
+    badge: "EstÃ©tica y terminaciÃ³n",
   },
   "cambio-camara-caba": {
     cover: "/images/landings/landing-cambio-camara-caba-hero.webp",
     support: "/images/landings/landing-cambio-camara-caba-apoyo.webp",
     glow:
       "bg-[radial-gradient(circle_at_82%_18%,rgba(249,115,22,0.3),transparent_40%)]",
-    badge: "Cámaras y sensores",
+    badge: "CÃ¡maras y sensores",
   },
   "reparacion-audio-celular-caba": {
     cover: "/images/landings/landing-audio-celular-caba-hero.webp",
     support: "/images/landings/landing-audio-celular-caba-apoyo.webp",
     glow:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(6,182,212,0.32),transparent_42%)]",
-    badge: "Audio y micrófonos",
+    badge: "Audio y micrÃ³fonos",
   },
   "recuperacion-celular-mojado-caba": {
     cover: "/images/landings/landing-celular-mojado-caba-hero.webp",
     support: "/images/landings/landing-celular-mojado-caba-apoyo.webp",
     glow:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(34,197,94,0.28),transparent_42%)]",
-    badge: "Daños por líquidos",
+    badge: "DaÃ±os por lÃ­quidos",
   },
 };
 
@@ -87,23 +87,23 @@ const DEFAULT_VISUAL: ServiceVisual = {
   cover: "/images/teamcelular.webp",
   glow:
     "bg-[radial-gradient(circle_at_84%_16%,rgba(56,189,248,0.32),transparent_42%)]",
-  badge: "Servicio técnico local",
+  badge: "Servicio tÃ©cnico local",
 };
 
 const WORKFLOW = [
   {
-    title: "1. Diagnóstico inicial",
-    desc: "Revisamos síntomas, equipo y prioridad para confirmar la falla real antes de cotizar.",
+    title: "1. DiagnÃ³stico inicial",
+    desc: "Revisamos sÃ­ntomas, equipo y prioridad para confirmar la falla real antes de cotizar.",
     Icon: FaTools,
   },
   {
     title: "2. Presupuesto claro",
-    desc: "Te explicamos opciones de repuesto, tiempos estimados y garantía de 90 días por escrito.",
+    desc: "Te explicamos opciones de repuesto, tiempos estimados y garantÃ­a de 90 dÃ­as por escrito.",
     Icon: FaClipboardCheck,
   },
   {
-    title: "3. Reparación profesional",
-    desc: "Trabajamos con herramientas de laboratorio y control de calidad técnico antes de entregar.",
+    title: "3. ReparaciÃ³n profesional",
+    desc: "Trabajamos con herramientas de laboratorio y control de calidad tÃ©cnico antes de entregar.",
     Icon: FaCheckCircle,
   },
   {
@@ -122,18 +122,18 @@ type RelatedGuide = {
 const DEFAULT_RELATED_GUIDES: RelatedGuide[] = [
   {
     href: "/guias/reparacion-pantalla-celular",
-    title: "Guía de pantalla",
-    description: "Cómo evaluar daño de módulo y elegir repuesto según uso real.",
+    title: "GuÃ­a de pantalla",
+    description: "CÃ³mo evaluar daÃ±o de mÃ³dulo y elegir repuesto segÃºn uso real.",
   },
   {
     href: "/guias/cambio-bateria-celular",
-    title: "Guía de batería",
-    description: "Señales de desgaste y criterios para reemplazo sin gastar de más.",
+    title: "GuÃ­a de baterÃ­a",
+    description: "SeÃ±ales de desgaste y criterios para reemplazo sin gastar de mÃ¡s.",
   },
   {
     href: "/guias/microelectronica-reballing-caba",
-    title: "Guía de microelectrónica",
-    description: "Cuándo conviene diagnóstico de placa y qué esperar de un caso complejo.",
+    title: "GuÃ­a de microelectrÃ³nica",
+    description: "CuÃ¡ndo conviene diagnÃ³stico de placa y quÃ© esperar de un caso complejo.",
   },
 ];
 
@@ -141,154 +141,154 @@ const SERVICE_RELATED_GUIDES: Record<string, RelatedGuide[]> = {
   "cambio-pantalla-caba": [
     {
       href: "/guias/reparacion-pantalla-celular",
-      title: "Guía de pantalla",
-      description: "Diferencias entre módulo, vidrio y criterios de calidad post-reparación.",
+      title: "GuÃ­a de pantalla",
+      description: "Diferencias entre mÃ³dulo, vidrio y criterios de calidad post-reparaciÃ³n.",
     },
     {
       href: "/guias/reparacion-iphone-buenos-aires",
-      title: "Guía iPhone",
-      description: "Buenas prácticas para conservar funciones delicadas en Apple.",
+      title: "GuÃ­a iPhone",
+      description: "Buenas prÃ¡cticas para conservar funciones delicadas en Apple.",
     },
     {
       href: "/guias/reparacion-samsung-buenos-aires",
-      title: "Guía Samsung",
-      description: "Escenarios frecuentes de AMOLED, touch y calibración final.",
+      title: "GuÃ­a Samsung",
+      description: "Escenarios frecuentes de AMOLED, touch y calibraciÃ³n final.",
     },
   ],
   "cambio-bateria-caba": [
     {
       href: "/guias/cambio-bateria-celular",
-      title: "Guía de batería",
-      description: "Cómo detectar desgaste real y evitar cambios innecesarios.",
+      title: "GuÃ­a de baterÃ­a",
+      description: "CÃ³mo detectar desgaste real y evitar cambios innecesarios.",
     },
     {
       href: "/guias/mantenimiento-preventivo-celulares",
-      title: "Guía de mantenimiento",
-      description: "Rutinas para alargar autonomía y reducir nuevas fallas.",
+      title: "GuÃ­a de mantenimiento",
+      description: "Rutinas para alargar autonomÃ­a y reducir nuevas fallas.",
     },
     {
       href: "/guias/reparacion-xiaomi-buenos-aires",
-      title: "Guía Xiaomi",
-      description: "Referencia útil para equipos con carga rápida y consumo irregular.",
+      title: "GuÃ­a Xiaomi",
+      description: "Referencia Ãºtil para equipos con carga rÃ¡pida y consumo irregular.",
     },
   ],
   "cambio-pin-carga-caba": [
     {
       href: "/guias/reparacion-samsung-buenos-aires",
-      title: "Guía Samsung",
+      title: "GuÃ­a Samsung",
       description: "Casos comunes de USB-C, humedad y falso contacto en Galaxy.",
     },
     {
       href: "/guias/reparacion-xiaomi-buenos-aires",
-      title: "Guía Xiaomi",
-      description: "Recomendaciones para puertos exigidos por carga rápida diaria.",
+      title: "GuÃ­a Xiaomi",
+      description: "Recomendaciones para puertos exigidos por carga rÃ¡pida diaria.",
     },
     {
       href: "/guias/mantenimiento-preventivo-celulares",
-      title: "Guía de mantenimiento",
-      description: "Cuidados simples para evitar daño progresivo en conectores.",
+      title: "GuÃ­a de mantenimiento",
+      description: "Cuidados simples para evitar daÃ±o progresivo en conectores.",
     },
   ],
   "reparacion-placa-caba": [
     {
       href: "/guias/microelectronica-reballing-caba",
-      title: "Guía de microelectrónica",
-      description: "Proceso real para placa, reballing y evaluación de viabilidad.",
+      title: "GuÃ­a de microelectrÃ³nica",
+      description: "Proceso real para placa, reballing y evaluaciÃ³n de viabilidad.",
     },
     {
       href: "/guias/soporte-empresas-servicio-tecnico",
-      title: "Guía de soporte empresas",
-      description: "Cómo gestionar casos críticos cuando el equipo es de trabajo.",
+      title: "GuÃ­a de soporte empresas",
+      description: "CÃ³mo gestionar casos crÃ­ticos cuando el equipo es de trabajo.",
     },
     {
       href: "/guias/reparacion-iphone-buenos-aires",
-      title: "Guía iPhone",
-      description: "Escenarios típicos de placa y recuperación en dispositivos Apple.",
+      title: "GuÃ­a iPhone",
+      description: "Escenarios tÃ­picos de placa y recuperaciÃ³n en dispositivos Apple.",
     },
   ],
   "cambio-flex-caba": [
     {
       href: "/guias/reparacion-pantalla-celular",
-      title: "Guía de pantalla",
-      description: "Cuándo una falla de display puede estar ligada a flex o conectores.",
+      title: "GuÃ­a de pantalla",
+      description: "CuÃ¡ndo una falla de display puede estar ligada a flex o conectores.",
     },
     {
       href: "/guias/reparacion-iphone-buenos-aires",
-      title: "Guía iPhone",
-      description: "Referencia para fallas de botones, cámara y módulos internos.",
+      title: "GuÃ­a iPhone",
+      description: "Referencia para fallas de botones, cÃ¡mara y mÃ³dulos internos.",
     },
     {
       href: "/guias/reparacion-samsung-buenos-aires",
-      title: "Guía Samsung",
-      description: "Checklist técnico para síntomas intermitentes en equipos Galaxy.",
+      title: "GuÃ­a Samsung",
+      description: "Checklist tÃ©cnico para sÃ­ntomas intermitentes en equipos Galaxy.",
     },
   ],
   "cambio-tapa-caba": [
     {
       href: "/guias/reparacion-pantalla-celular",
-      title: "Guía de pantalla",
-      description: "Qué revisar cuando hay golpes combinados en frente y parte trasera.",
+      title: "GuÃ­a de pantalla",
+      description: "QuÃ© revisar cuando hay golpes combinados en frente y parte trasera.",
     },
     {
       href: "/guias/mantenimiento-preventivo-celulares",
-      title: "Guía de mantenimiento",
-      description: "Buenas prácticas para conservar terminación y estructura del equipo.",
+      title: "GuÃ­a de mantenimiento",
+      description: "Buenas prÃ¡cticas para conservar terminaciÃ³n y estructura del equipo.",
     },
     {
       href: "/guias/reparacion-iphone-buenos-aires",
-      title: "Guía iPhone",
+      title: "GuÃ­a iPhone",
       description: "Referencia para equipos con tapa trasera quebrada y uso intensivo.",
     },
   ],
   "cambio-camara-caba": [
     {
       href: "/guias/reparacion-iphone-buenos-aires",
-      title: "Guía iPhone",
-      description: "Referencias para sensores y módulos de cámara en equipos Apple.",
+      title: "GuÃ­a iPhone",
+      description: "Referencias para sensores y mÃ³dulos de cÃ¡mara en equipos Apple.",
     },
     {
       href: "/guias/reparacion-samsung-buenos-aires",
-      title: "Guía Samsung",
-      description: "Casos frecuentes de cámara en líneas Galaxy con uso intensivo.",
+      title: "GuÃ­a Samsung",
+      description: "Casos frecuentes de cÃ¡mara en lÃ­neas Galaxy con uso intensivo.",
     },
     {
       href: "/guias/reparacion-xiaomi-buenos-aires",
-      title: "Guía Xiaomi",
-      description: "Escenarios de enfoque, lente y estabilidad en cámara Xiaomi.",
+      title: "GuÃ­a Xiaomi",
+      description: "Escenarios de enfoque, lente y estabilidad en cÃ¡mara Xiaomi.",
     },
   ],
   "reparacion-audio-celular-caba": [
     {
       href: "/guias/pin-de-carga-suelto-solucion",
-      title: "Guía de pin de carga",
+      title: "GuÃ­a de pin de carga",
       description: "Fallas que suelen convivir con problemas de audio y conectores.",
     },
     {
       href: "/guias/mantenimiento-preventivo-celulares",
-      title: "Guía de mantenimiento",
-      description: "Buenas prácticas para evitar deterioro de micrófono y parlante.",
+      title: "GuÃ­a de mantenimiento",
+      description: "Buenas prÃ¡cticas para evitar deterioro de micrÃ³fono y parlante.",
     },
     {
       href: "/guias/celular-mojado-que-hacer",
-      title: "Guía de celular mojado",
-      description: "Protocolo útil cuando el audio falla después de humedad o líquidos.",
+      title: "GuÃ­a de celular mojado",
+      description: "Protocolo Ãºtil cuando el audio falla despuÃ©s de humedad o lÃ­quidos.",
     },
   ],
   "recuperacion-celular-mojado-caba": [
     {
       href: "/guias/celular-mojado-que-hacer",
-      title: "Guía de celular mojado",
-      description: "Pasos urgentes para reducir daño y mejorar chances de recuperación.",
+      title: "GuÃ­a de celular mojado",
+      description: "Pasos urgentes para reducir daÃ±o y mejorar chances de recuperaciÃ³n.",
     },
     {
       href: "/guias/microelectronica-reballing-caba",
-      title: "Guía de microelectrónica",
-      description: "Cuándo un caso por líquidos escala a diagnóstico de placa.",
+      title: "GuÃ­a de microelectrÃ³nica",
+      description: "CuÃ¡ndo un caso por lÃ­quidos escala a diagnÃ³stico de placa.",
     },
     {
       href: "/guias/face-id-touch-id-no-funciona",
-      title: "Guía de sensores",
-      description: "Referencia para fallas en sensores que aparecen después de humedad.",
+      title: "GuÃ­a de sensores",
+      description: "Referencia para fallas en sensores que aparecen despuÃ©s de humedad.",
     },
   ],
 };
@@ -434,7 +434,7 @@ export default function ServiceLandingPage({
               </TrackedCtaLink>
             </div>
             <p className="text-sm text-slate-200/90">
-              Dos sucursales en CABA (Recoleta y Belgrano) con reseñas públicas en Google para validar experiencia real.
+              Dos sucursales en CABA (Recoleta y Belgrano) con reseÃ±as pÃºblicas en Google para validar experiencia real.
             </p>
           </div>
 
@@ -446,11 +446,11 @@ export default function ServiceLandingPage({
               <ul className="mt-4 space-y-3 text-sm text-white/90">
                 <li className="flex items-start gap-3">
                   <FaMapMarkerAlt className="mt-0.5 text-primary" />
-                  Dos talleres en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030).
+                  Dos talleres en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).
                 </li>
                 <li className="flex items-start gap-3">
                   <FaShieldAlt className="mt-0.5 text-primary" />
-                  Garantía escrita de 90 días sobre trabajo y repuesto instalado.
+                  GarantÃ­a escrita de 90 dÃ­as sobre trabajo y repuesto instalado.
                 </li>
                 <li className="flex items-start gap-3">
                   <FaStopwatch className="mt-0.5 text-primary" />
@@ -478,10 +478,10 @@ export default function ServiceLandingPage({
 
       <section className="mt-10 rounded-3xl border border-white/15 bg-white/5 p-8 shadow-xl backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Cómo trabajamos este servicio
+          CÃ³mo trabajamos este servicio
         </h2>
         <p className="mt-2 text-slate-600 dark:text-slate-300">
-          Proceso pensado para que sepas qué pasa con tu equipo en cada etapa.
+          Proceso pensado para que sepas quÃ© pasa con tu equipo en cada etapa.
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {WORKFLOW.map((step) => {
@@ -576,10 +576,10 @@ export default function ServiceLandingPage({
 
       <section className="mt-10 rounded-3xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Guías recomendadas para este servicio
+          GuÃ­as recomendadas para este servicio
         </h2>
         <p className="mt-2 text-slate-600 dark:text-slate-300">
-          Si querés comparar opciones antes de decidir, estas lecturas te dan contexto técnico y comercial real.
+          Si querÃ©s comparar opciones antes de decidir, estas lecturas te dan contexto tÃ©cnico y comercial real.
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           {relatedGuides.map((guide) => (
@@ -608,7 +608,7 @@ export default function ServiceLandingPage({
             ctaVariant="secondary"
             className="rounded-full border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
           >
-            Ver todas las guías
+            Ver todas las guÃ­as
           </TrackedCtaLink>
           <TrackedCtaLink
             href="/presupuesto-reparacion#solicitar-presupuesto"
@@ -617,7 +617,7 @@ export default function ServiceLandingPage({
             ctaVariant="primary"
             className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
           >
-            Pedir diagnóstico
+            Pedir diagnÃ³stico
           </TrackedCtaLink>
         </div>
       </section>
@@ -644,10 +644,10 @@ export default function ServiceLandingPage({
       </section>
 
       <section className="mt-10 rounded-2xl border border-white/15 bg-slate-900 p-8 text-center text-white shadow-lg">
-        <h2 className="text-2xl font-bold">¿Querés que lo revisemos hoy?</h2>
+        <h2 className="text-2xl font-bold">Â¿QuerÃ©s que lo revisemos hoy?</h2>
         <p className="mx-auto mt-3 max-w-2xl text-slate-200">
-          Escribinos con marca, modelo y falla. Te respondemos con orientación clara
-          para que sepas si conviene reparar, en qué plazo y con qué garantía.
+          Escribinos con marca, modelo y falla. Te respondemos con orientaciÃ³n clara
+          para que sepas si conviene reparar, en quÃ© plazo y con quÃ© garantÃ­a.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           <TrackedCtaLink

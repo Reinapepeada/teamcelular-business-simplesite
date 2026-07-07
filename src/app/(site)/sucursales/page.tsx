@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FaMapMarkedAlt, FaPhoneAlt, FaRegClock } from "react-icons/fa";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import StickyLocalCta from "@/components/cro/StickyLocalCta";
+import { getBranch, whatsappUrl as buildWhatsappUrl } from "@/lib/businessProfile";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
@@ -11,7 +12,7 @@ const PAGE_URL = `${SITE_URL}/sucursales`;
 export const metadata: Metadata = {
   title: "Sucursales Team Celular en CABA | Recoleta y Belgrano",
   description:
-    "Sucursales de Team Celular en CABA: Paraguay 2451 Recoleta y Amenábar 2030 Belgrano. Reparación de celulares con diagnóstico el mismo día y garantía escrita 90 días.",
+    "Sucursales de Team Celular en CABA: Paraguay 2451 Recoleta y Amenábar 2032 Belgrano. ReparaciÃ³n de celulares con diagnÃ³stico el mismo dÃ­a y garantÃ­a escrita 90 dÃ­as.",
   alternates: {
     canonical: PAGE_URL,
     languages: {
@@ -47,8 +48,11 @@ export const metadata: Metadata = {
 };
 
 export default function SucursalesPage() {
-  const whatsappUrl =
-    "https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20quiero%20coordinar%20atencion%20en%20sucursal";
+  const recoleta = getBranch("recoleta");
+  const belgrano = getBranch("belgrano");
+  const whatsappUrl = buildWhatsappUrl(
+    "Hola Team Celular, quiero coordinar atencion en sucursal.",
+  );
 
   const collectionJsonLd = {
     "@context": "https://schema.org",
@@ -93,8 +97,8 @@ export default function SucursalesPage() {
           </h1>
           <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-100/90">
             Team Celular tiene dos sucursales en CABA: Paraguay 2451 en Recoleta y
-            Amenábar 2030 en Belgrano. Diagnóstico el mismo día, garantía escrita de
-            90 días y atención de lunes a viernes 10:30–18:00.
+            Amenábar 2032 en Belgrano. DiagnÃ³stico el mismo dÃ­a, garantÃ­a escrita de
+            90 dÃ­as y atenciÃ³n de lunes a viernes 10:30â€“18:00.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
@@ -123,10 +127,10 @@ export default function SucursalesPage() {
         <article className="rounded-2xl border border-white/15 bg-white/5 p-5 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
           <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-white">
             <FaMapMarkedAlt className="text-primary" />
-            Direccion
+            Sucursales
           </h2>
           <p className="mt-2 text-slate-600 dark:text-slate-300">
-            Paraguay 2451, Recoleta, CABA.
+            Recoleta: Paraguay 2451. Belgrano: Amenabar 2032.
           </p>
         </article>
         <article className="rounded-2xl border border-white/15 bg-white/5 p-5 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
@@ -156,10 +160,10 @@ export default function SucursalesPage() {
             Recoleta (CABA)
           </h2>
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-            Paraguay 2451 · Lun–Vie 10:30–18:00
+            Paraguay 2451 Â· Lunâ€“Vie 10:30â€“18:00
           </p>
           <p className="mt-3 text-slate-600 dark:text-slate-300">
-            Laboratorio principal con atención integral para pantalla, batería, carga y microelectrónica. También trabajamos tablets y notebooks.
+            Laboratorio principal con atenciÃ³n integral para pantalla, baterÃ­a, carga y microelectrÃ³nica. TambiÃ©n trabajamos tablets y notebooks.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
@@ -168,6 +172,14 @@ export default function SucursalesPage() {
             >
               Ver ficha de sucursal
             </Link>
+            <a
+              href={buildWhatsappUrl(recoleta.whatsappText, recoleta.whatsapp)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-emerald-600/50 px-6 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50 dark:text-emerald-300 dark:hover:bg-emerald-500/10"
+            >
+              Cotizar en Recoleta
+            </a>
             <Link
               href="/zonas/recoleta"
               className="rounded-full border border-primary/40 px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10"
@@ -185,10 +197,10 @@ export default function SucursalesPage() {
             Belgrano (CABA)
           </h2>
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-            Amenábar 2030 · Lun–Vie 10:30–18:00
+            Amenábar 2032 Â· Lunâ€“Vie 10:30â€“18:00
           </p>
           <p className="mt-3 text-slate-600 dark:text-slate-300">
-            Segunda sucursal en Belgrano con los mismos servicios: pantalla, batería, carga, placa y recuperación por agua. Diagnóstico el mismo día y garantía escrita 90 días.
+            Segunda sucursal en Belgrano con los mismos servicios: pantalla, baterÃ­a, carga, placa y recuperaciÃ³n por agua. DiagnÃ³stico el mismo dÃ­a y garantÃ­a escrita 90 dÃ­as.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
@@ -197,6 +209,14 @@ export default function SucursalesPage() {
             >
               Ver ficha de sucursal
             </Link>
+            <a
+              href={buildWhatsappUrl(belgrano.whatsappText, belgrano.whatsapp)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-emerald-600/50 px-6 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50 dark:text-emerald-300 dark:hover:bg-emerald-500/10"
+            >
+              Cotizar en Belgrano
+            </a>
             <Link
               href="/zonas/belgrano"
               className="rounded-full border border-secondary/50 px-6 py-3 text-sm font-semibold text-secondary transition hover:bg-secondary/10"

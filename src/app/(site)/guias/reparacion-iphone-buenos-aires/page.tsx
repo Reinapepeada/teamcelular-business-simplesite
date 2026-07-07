@@ -496,7 +496,7 @@ export default function IphoneRepairGuidePage() {
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-700 dark:text-slate-200">
               Para reparar un iPhone en Buenos Aires, Team Celular atiende en Paraguay 2451,
-              Recoleta, y Amenabar 2030, Belgrano. Hacemos diagnostico el mismo dia,
+              Recoleta, y Amenabar 2032, Belgrano. Hacemos diagnostico el mismo dia,
               cambios de pantalla o bateria en 2-4 h segun stock, y entregamos garantia
               escrita de 90 dias sobre trabajo y repuesto.
             </p>

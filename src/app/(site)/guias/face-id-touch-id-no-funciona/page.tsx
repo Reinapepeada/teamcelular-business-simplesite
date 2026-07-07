@@ -13,7 +13,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
   title: "Face ID o Touch ID no Funciona: Causas y Solucion | Team Celular",
   description:
-    "¿Face ID o Touch ID dejó de funcionar? Team Celular, Recoleta y Belgrano (CABA), diagnostica sensores biométricos el mismo día: flex, módulo o placa con criterio técnico.",
+    "Â¿Face ID o Touch ID dejÃ³ de funcionar? Team Celular, Recoleta y Belgrano (CABA), diagnostica sensores biomÃ©tricos el mismo dÃ­a: flex, mÃ³dulo o placa con criterio tÃ©cnico.",
   keywords: [
     "face id no funciona",
     "touch id no funciona",
@@ -89,7 +89,7 @@ const planSteps: GuideItem[] = [
   {
     title: "Reparar o reemplazar flex/modulo",
     description:
-      "Si hay daño fisico en componentes asociados, se corrige con piezas compatibles de calidad.",
+      "Si hay daÃ±o fisico en componentes asociados, se corrige con piezas compatibles de calidad.",
   },
   {
     title: "Intervencion de microelectronica",
@@ -112,7 +112,7 @@ const faq: GuideFaqItem[] = [
   {
     question: "Siempre se puede recuperar Face ID?",
     answer:
-      "Depende del tipo de daño. Hay casos recuperables y otros donde el daño es irreversible en componentes clave.",
+      "Depende del tipo de daÃ±o. Hay casos recuperables y otros donde el daÃ±o es irreversible en componentes clave.",
   },
   {
     question: "Touch ID falla tambien por humedad?",
@@ -140,7 +140,7 @@ export default function FaceIdTouchIdGuidePage() {
       pagePath={PAGE_PATH}
       pageLabel="Face ID / Touch ID"
       title="Face ID o Touch ID no funciona: causas y solucion"
-      heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2030 Belgrano (CABA), diagnostica Face ID y Touch ID el mismo día. Las fallas biométricas pueden venir de software, flex, sensores o placa — lo confirmamos antes de intervenir."
+      heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), diagnostica Face ID y Touch ID el mismo dÃ­a. Las fallas biomÃ©tricas pueden venir de software, flex, sensores o placa â€” lo confirmamos antes de intervenir."
       badge="Diagnostico avanzado"
       readingTime="6 min"
       publishedTime="2026-04-16T00:00:00Z"
@@ -151,13 +151,13 @@ export default function FaceIdTouchIdGuidePage() {
         "Evita cambios de modulo sin diagnostico previo.",
         "Define cuando conviene pasar a microelectronica.",
       ]}
-      symptomsTitle="¿Cuáles son los síntomas habituales en sensores biométricos?"
-      symptomsDescription="Estos escenarios son los que más vemos en equipos que llegan a laboratorio."
+      symptomsTitle="Â¿CuÃ¡les son los sÃ­ntomas habituales en sensores biomÃ©tricos?"
+      symptomsDescription="Estos escenarios son los que mÃ¡s vemos en equipos que llegan a laboratorio."
       symptoms={symptoms}
-      diagnosisTitle="¿Cómo diagnosticamos Face ID y Touch ID en taller?"
+      diagnosisTitle="Â¿CÃ³mo diagnosticamos Face ID y Touch ID en taller?"
       diagnosisDescription="El objetivo es confirmar el origen real y evitar intervenciones que no solucionan el problema."
       diagnostics={diagnostics}
-      planTitle="¿Cuál es la ruta de solución recomendada?"
+      planTitle="Â¿CuÃ¡l es la ruta de soluciÃ³n recomendada?"
       planDescription="Se prioriza el camino menos invasivo y se escala solo si hace falta."
       planSteps={planSteps}
       faq={faq}

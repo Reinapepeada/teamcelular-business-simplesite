@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
@@ -184,7 +184,7 @@ const faqBattery = [
   },
   {
     question: "¿Cuánto tiempo tarda el cambio de batería?",
-    answer: "El servicio express toma 1-2 horas si contamos con el repuesto en stock. Incluye: diagnóstico inicial, desmontaje, instalación, calibración y test completo. Para modelos menos comunes que requieren pedido de batería, el tiempo es de 24-48 horas. Ofrecemos servicio de espera en nuestros locales de Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030) con WiFi.",
+    answer: "El servicio express toma 1-2 horas si contamos con el repuesto en stock. Incluye: diagnóstico inicial, desmontaje, instalación, calibración y test completo. Para modelos menos comunes que requieren pedido de batería, el tiempo es de 24-48 horas. Ofrecemos servicio de espera en nuestros locales de Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032) con WiFi.",
   },
   {
     question: "¿La batería nueva viene con garantía?",
@@ -238,7 +238,7 @@ export default function BatteryReplacementGuide() {
           <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
             Reemplazo de batería con <strong className="text-primary">repuestos originales y certificados</strong>, 
             garantia escrita segun repuesto y trabajo, y servicio express en <strong>1-2 horas</strong>. 
-            Atendemos iPhone, Samsung, Motorola y todas las marcas en dos talleres en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030).
+            Atendemos iPhone, Samsung, Motorola y todas las marcas en dos talleres en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).
           </p>
 
           {/* Quick Stats */}
@@ -342,7 +342,7 @@ export default function BatteryReplacementGuide() {
                 {battery.recommended && (
                   <div className="mb-4 flex justify-center">
                     <span className="rounded-full bg-green-800 px-3 py-1 text-xs font-semibold text-white">
-                      ✓ Recomendado
+                      ? Recomendado
                     </span>
                   </div>
                 )}

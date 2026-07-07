@@ -6,12 +6,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     zoneName: "Recoleta",
     metaTitle: "Arreglo de Celulares en Recoleta (CABA) | Team Celular",
     metaDescription:
-      "Arreglo de celulares en Recoleta, CABA. Taller en Paraguay 2451 con diagnóstico el mismo día y garantía escrita de 90 días sobre trabajo y repuesto.",
+      "Arreglo de celulares en Recoleta, CABA. Taller en Paraguay 2451 con diagnÃ³stico el mismo dÃ­a y garantÃ­a escrita de 90 dÃ­as sobre trabajo y repuesto.",
     socialDescription:
-      "Pantalla, batería, carga y placa en Recoleta. Presupuesto rápido y garantía por escrito.",
+      "Pantalla, baterÃ­a, carga y placa en Recoleta. Presupuesto rÃ¡pido y garantÃ­a por escrito.",
     heroBadge: "Atencion local en Recoleta",
     heroIntro:
-      "Team Celular, en Paraguay 2451 Recoleta CABA, repara celulares con diagnóstico el mismo día, repuestos de calidad y garantía escrita de 90 días sobre trabajo y repuesto. Pantalla, batería, carga y placa sin vueltas.",
+      "Team Celular, en Paraguay 2451 Recoleta CABA, repara celulares con diagnÃ³stico el mismo dÃ­a, repuestos de calidad y garantÃ­a escrita de 90 dÃ­as sobre trabajo y repuesto. Pantalla, baterÃ­a, carga y placa sin vueltas.",
     heroImage: "/images/teamcelular.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(56,189,248,0.3),transparent_44%)]",
@@ -35,12 +35,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
     ],
     localScenarios: [
-      "Si tu equipo se mojó, apagalo y no intentes cargarlo antes de traerlo; eso suele empeorar el daño.",
-      "Si ves líneas, manchas o el touch responde a medias, normalmente ya estamos hablando de cambio de módulo.",
-      "Cuando la carga entra y sale, revisamos pin, flex y batería antes de pasarte un número.",
+      "Si tu equipo se mojÃ³, apagalo y no intentes cargarlo antes de traerlo; eso suele empeorar el daÃ±o.",
+      "Si ves lÃ­neas, manchas o el touch responde a medias, normalmente ya estamos hablando de cambio de mÃ³dulo.",
+      "Cuando la carga entra y sale, revisamos pin, flex y baterÃ­a antes de pasarte un nÃºmero.",
     ],
     transportTip:
-      "Nuestro laboratorio está en Paraguay 2451 (Recoleta). Si estás cerca, podés venir caminando; si venís en transporte público, te pasamos la ruta por WhatsApp.",
+      "Nuestro laboratorio estÃ¡ en Paraguay 2451 (Recoleta). Si estÃ¡s cerca, podÃ©s venir caminando; si venÃ­s en transporte pÃºblico, te pasamos la ruta por WhatsApp.",
     nearbyZones: [
       { name: "Palermo", slug: "palermo" },
       { name: "Belgrano", slug: "belgrano" },
@@ -58,7 +58,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
       {
         q: "Dan garantia por escrito?",
-        a: "Sí. Entregamos garantía escrita de 90 días sobre trabajo y repuesto instalado.",
+        a: "SÃ­. Entregamos garantÃ­a escrita de 90 dÃ­as sobre trabajo y repuesto instalado.",
       },
       {
         q: "Como pido presupuesto rapido?",
@@ -71,12 +71,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     zoneName: "Palermo",
     metaTitle: "Arreglo de Celulares en Palermo (CABA) | Team Celular",
     metaDescription:
-      "Arreglo de celulares en Palermo, CABA — Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga el mismo día con garantía escrita 90 días.",
+      "Arreglo de celulares en Palermo, CABA â€” Team Celular, Paraguay 2451 Recoleta. Pantalla, baterÃ­a y carga el mismo dÃ­a con garantÃ­a escrita 90 dÃ­as.",
     socialDescription:
-      "Team Celular, Recoleta CABA, atiende Palermo. Pantalla, batería y carga con garantía escrita 90 días.",
+      "Team Celular, Recoleta CABA, atiende Palermo. Pantalla, baterÃ­a y carga con garantÃ­a escrita 90 dÃ­as.",
     heroBadge: "Cobertura Palermo",
     heroIntro:
-      "Team Celular tiene dos sucursales en CABA — Paraguay 2451 Recoleta y Amenábar 2030 Belgrano — y atiende clientes de Palermo con diagnóstico el mismo día y garantía escrita de 90 días. Pantalla, batería, carga y fallas de placa sin vueltas.",
+      "Team Celular tiene dos sucursales en CABA â€” Paraguay 2451 Recoleta y Amenábar 2032 Belgrano â€” y atiende clientes de Palermo con diagnÃ³stico el mismo dÃ­a y garantÃ­a escrita de 90 dÃ­as. Pantalla, baterÃ­a, carga y fallas de placa sin vueltas.",
     heroImage: "/images/dispositivoshdpro.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(59,130,246,0.32),transparent_44%)]",
@@ -84,28 +84,28 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       "Hola! Quiero un presupuesto para arreglo de celular desde Palermo. Marca y modelo:",
     highlights: [
       {
-        title: "Pantalla que quedó mal",
-        desc: "Si el display tiene líneas, manchas o el touch responde a medias, lo revisamos completo antes de darte un camino.",
+        title: "Pantalla que quedÃ³ mal",
+        desc: "Si el display tiene lÃ­neas, manchas o el touch responde a medias, lo revisamos completo antes de darte un camino.",
         icon: "screen",
       },
       {
-        title: "Batería que ya no rinde",
-        desc: "Cuando el equipo se descarga rápido o se apaga solo, miramos consumo, batería y puerto de carga para no cambiar por cambiar.",
+        title: "BaterÃ­a que ya no rinde",
+        desc: "Cuando el equipo se descarga rÃ¡pido o se apaga solo, miramos consumo, baterÃ­a y puerto de carga para no cambiar por cambiar.",
         icon: "battery",
       },
       {
         title: "Fallas que confunden",
-        desc: "Si reinicia, no enciende o hace cosas raras, vamos a placa y diagnóstico fino para detectar la causa de verdad.",
+        desc: "Si reinicia, no enciende o hace cosas raras, vamos a placa y diagnÃ³stico fino para detectar la causa de verdad.",
         icon: "chip",
       },
     ],
     localScenarios: [
-      "Muchos equipos llegan por caidas: pantalla rota, glass trasero o flex dañado.",
+      "Muchos equipos llegan por caidas: pantalla rota, glass trasero o flex daÃ±ado.",
       "En iPhone es comun ver bateria degradada y conectores de carga con desgaste.",
       "En Android suele entrar modulo display y problemas de energia por uso intensivo.",
     ],
     transportTip:
-      "Desde Palermo podés llegar a Recoleta (Paraguay 2451) por Subte D hasta Callao, o a Belgrano (Amenábar 2030) por Subte D hasta Juramento. Ambas opciones están a pocas cuadras de la estación.",
+      "Desde Palermo podÃ©s llegar a Recoleta (Paraguay 2451) por Subte D hasta Callao, o a Belgrano (Amenábar 2032) por Subte D hasta Juramento. Ambas opciones estÃ¡n a pocas cuadras de la estaciÃ³n.",
     nearbyZones: [
       { name: "Recoleta", slug: "recoleta" },
       { name: "Belgrano", slug: "belgrano" },
@@ -114,63 +114,63 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     focusServices: ["pantalla", "bateria", "pin de carga", "microelectronica"],
     faqs: [
       {
-        q: "¿Atienden clientes de Palermo?",
-        a: "Sí. Tenemos sucursales en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030). Palermo entra cómodo a cualquiera de las dos — coordinamos por WhatsApp para que no tengas que dar vueltas de más.",
+        q: "Â¿Atienden clientes de Palermo?",
+        a: "SÃ­. Tenemos sucursales en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032). Palermo entra cÃ³modo a cualquiera de las dos â€” coordinamos por WhatsApp para que no tengas que dar vueltas de mÃ¡s.",
       },
       {
-        q: "¿Qué demora tiene una reparación común?",
-        a: "Pantalla, batería o carga suelen resolverse en el día si tenemos stock y el equipo no trae una falla extra escondida.",
+        q: "Â¿QuÃ© demora tiene una reparaciÃ³n comÃºn?",
+        a: "Pantalla, baterÃ­a o carga suelen resolverse en el dÃ­a si tenemos stock y el equipo no trae una falla extra escondida.",
       },
       {
-        q: "¿Puedo pedir cotización sin ir?",
-        a: "Sí. Con marca, modelo y síntomas te damos una orientación clara. Si hace falta revisión física, te lo decimos de frente.",
+        q: "Â¿Puedo pedir cotizaciÃ³n sin ir?",
+        a: "SÃ­. Con marca, modelo y sÃ­ntomas te damos una orientaciÃ³n clara. Si hace falta revisiÃ³n fÃ­sica, te lo decimos de frente.",
       },
       {
-        q: "¿Trabajan con garantía por escrito?",
-        a: "Sí. La reparación sale con garantía escrita de 90 días sobre trabajo y repuesto.",
+        q: "Â¿Trabajan con garantÃ­a por escrito?",
+        a: "SÃ­. La reparaciÃ³n sale con garantÃ­a escrita de 90 dÃ­as sobre trabajo y repuesto.",
       },
     ],
   },
   belgrano: {
     slug: "belgrano",
     zoneName: "Belgrano",
-    metaTitle: "Arreglo de Celulares en Belgrano CABA | Team Celular — Amenábar 2030",
+    metaTitle: "Arreglo de Celulares en Belgrano CABA | Team Celular â€” Amenábar 2032",
     metaDescription:
-      "Reparación de celulares en Belgrano CABA — Team Celular, Amenábar 2030. Pantalla, batería y carga el mismo día con diagnóstico técnico y garantía escrita 90 días.",
+      "ReparaciÃ³n de celulares en Belgrano CABA â€” Team Celular, Amenábar 2032. Pantalla, baterÃ­a y carga el mismo dÃ­a con diagnÃ³stico tÃ©cnico y garantÃ­a escrita 90 dÃ­as.",
     socialDescription:
-      "Team Celular Belgrano, Amenábar 2030 CABA. Pantalla, batería y placa con diagnóstico el mismo día y garantía escrita 90 días.",
-    heroBadge: "Sucursal en Belgrano · Amenábar 2030",
+      "Team Celular Belgrano, Amenábar 2032 CABA. Pantalla, baterÃ­a y placa con diagnÃ³stico el mismo dÃ­a y garantÃ­a escrita 90 dÃ­as.",
+    heroBadge: "Sucursal en Belgrano Â· Amenábar 2032",
     heroIntro:
-      "Team Celular tiene sucursal en Amenábar 2030, Belgrano CABA. Reparamos celulares con diagnóstico el mismo día, pantalla y batería en 2–4 h, y garantía escrita de 90 días sobre trabajo y repuesto. Lunes a viernes 10:30–18:00.",
+      "Team Celular tiene sucursal en Amenábar 2032, Belgrano CABA. Reparamos celulares con diagnÃ³stico el mismo dÃ­a, pantalla y baterÃ­a en 2â€“4 h, y garantÃ­a escrita de 90 dÃ­as sobre trabajo y repuesto. Lunes a viernes 10:30â€“18:00.",
     heroImage: "/images/celuPorDentro.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(14,165,233,0.32),transparent_44%)]",
     whatsappText:
-      "Hola! Quiero un presupuesto para arreglo de celular en Belgrano (Amenábar 2030). Marca y modelo:",
+      "Hola! Quiero un presupuesto para arreglo de celular en Belgrano (Amenábar 2032). Marca y modelo:",
     highlights: [
       {
-        title: "Sucursal física en Belgrano",
-        desc: "Amenábar 2030, a pocas cuadras del Subte D Juramento. Sin viaje hasta Recoleta.",
+        title: "Sucursal fÃ­sica en Belgrano",
+        desc: "Amenábar 2032, a pocas cuadras del Subte D Juramento. Sin viaje hasta Recoleta.",
         icon: "business",
       },
       {
         title: "Carga y conectores",
-        desc: "Cuando el pin está flojo o la carga entra y sale, buscamos la causa real para que no vuelvas por lo mismo.",
+        desc: "Cuando el pin estÃ¡ flojo o la carga entra y sale, buscamos la causa real para que no vuelvas por lo mismo.",
         icon: "repair",
       },
       {
-        title: "Diagnóstico de placa",
+        title: "DiagnÃ³stico de placa",
         desc: "Si se reinicia, se apaga o da fallas raras, vamos a hardware con instrumental de laboratorio para no adivinar.",
         icon: "chip",
       },
     ],
     localScenarios: [
-      "En Belgrano vemos mucho equipo de uso diario con pantalla rota y batería ya muy gastada.",
-      "También aparecen pines de carga flojos por uso fuerte y por cargarlos todos los días al límite.",
+      "En Belgrano vemos mucho equipo de uso diario con pantalla rota y baterÃ­a ya muy gastada.",
+      "TambiÃ©n aparecen pines de carga flojos por uso fuerte y por cargarlos todos los dÃ­as al lÃ­mite.",
       "Si hubo golpe o humedad, revisamos la placa para decirte si conviene reparar o no.",
     ],
     transportTip:
-      "La sucursal Belgrano está en Amenábar 2030, a pocas cuadras del Subte D (estación Juramento). También podés llegar en colectivo o en auto — hay estacionamiento disponible en la cuadra.",
+      "La sucursal Belgrano estÃ¡ en Amenábar 2032, a pocas cuadras del Subte D (estaciÃ³n Juramento). TambiÃ©n podÃ©s llegar en colectivo o en auto â€” hay estacionamiento disponible en la cuadra.",
     nearbyZones: [
       { name: "Palermo", slug: "palermo" },
       { name: "Recoleta", slug: "recoleta" },
@@ -179,20 +179,20 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     focusServices: ["pantalla", "bateria", "carga", "diagnostico placa"],
     faqs: [
       {
-        q: "¿Dónde queda la sucursal de Belgrano?",
-        a: "En Amenábar 2030, Belgrano, CABA. Horario: lunes a viernes de 10:30 a 18:00.",
+        q: "Â¿DÃ³nde queda la sucursal de Belgrano?",
+        a: "En Amenábar 2032, Belgrano, CABA. Horario: lunes a viernes de 10:30 a 18:00.",
       },
       {
-        q: "¿Qué pasa si el equipo no enciende?",
-        a: "Hacemos diagnóstico técnico para ver si el problema está en placa, energía o en un componente puntual. El diagnóstico se informa antes de intervenir.",
+        q: "Â¿QuÃ© pasa si el equipo no enciende?",
+        a: "Hacemos diagnÃ³stico tÃ©cnico para ver si el problema estÃ¡ en placa, energÃ­a o en un componente puntual. El diagnÃ³stico se informa antes de intervenir.",
       },
       {
-        q: "¿Puedo cotizar por WhatsApp antes de ir a Belgrano?",
-        a: "Sí. Escribinos con marca, modelo y falla para agilizar el diagnóstico y evitar esperas en sucursal.",
+        q: "Â¿Puedo cotizar por WhatsApp antes de ir a Belgrano?",
+        a: "SÃ­. Escribinos con marca, modelo y falla para agilizar el diagnÃ³stico y evitar esperas en sucursal.",
       },
       {
-        q: "¿Entregan garantía por escrito en Belgrano?",
-        a: "Sí. Cada reparación sale con garantía escrita de 90 días sobre trabajo y repuesto instalado.",
+        q: "Â¿Entregan garantÃ­a por escrito en Belgrano?",
+        a: "SÃ­. Cada reparaciÃ³n sale con garantÃ­a escrita de 90 dÃ­as sobre trabajo y repuesto instalado.",
       },
     ],
   },
@@ -201,12 +201,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     zoneName: "Caballito",
     metaTitle: "Arreglo de Celulares en Caballito (CABA) | Team Celular",
     metaDescription:
-      "Arreglo de celulares en Caballito, CABA. Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga el mismo día con garantía escrita 90 días.",
+      "Arreglo de celulares en Caballito, CABA. Team Celular, Paraguay 2451 Recoleta. Pantalla, baterÃ­a y carga el mismo dÃ­a con garantÃ­a escrita 90 dÃ­as.",
     socialDescription:
-      "Team Celular, Recoleta CABA, atiende Caballito. Pantalla, batería y carga con garantía escrita 90 días.",
+      "Team Celular, Recoleta CABA, atiende Caballito. Pantalla, baterÃ­a y carga con garantÃ­a escrita 90 dÃ­as.",
     heroBadge: "Cobertura Caballito",
     heroIntro:
-      "Team Celular tiene dos sucursales en CABA — Paraguay 2451 Recoleta y Amenábar 2030 Belgrano — y atiende Caballito con diagnóstico el mismo día. Pantalla, batería y carga con garantía escrita de 90 días y presupuesto claro antes de intervenir.",
+      "Team Celular tiene dos sucursales en CABA â€” Paraguay 2451 Recoleta y Amenábar 2032 Belgrano â€” y atiende Caballito con diagnÃ³stico el mismo dÃ­a. Pantalla, baterÃ­a y carga con garantÃ­a escrita de 90 dÃ­as y presupuesto claro antes de intervenir.",
     heroImage:
       "/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp",
     heroGlowClass:
@@ -216,17 +216,17 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     highlights: [
       {
         title: "Pantalla maltratada",
-        desc: "Si el equipo quedó con manchas, líneas o el touch responde cuando quiere, revisamos todo el módulo.",
+        desc: "Si el equipo quedÃ³ con manchas, lÃ­neas o el touch responde cuando quiere, revisamos todo el mÃ³dulo.",
         icon: "screen",
       },
       {
         title: "Carga y flex",
-        desc: "Cuando entra y sale la carga o el pin quedó flojo, buscamos la causa para dejarlo bien de una.",
+        desc: "Cuando entra y sale la carga o el pin quedÃ³ flojo, buscamos la causa para dejarlo bien de una.",
         icon: "repair",
       },
       {
-        title: "Placa y energía",
-        desc: "Si no enciende, se reinicia o consume más de la cuenta, hacemos diagnóstico técnico de fondo.",
+        title: "Placa y energÃ­a",
+        desc: "Si no enciende, se reinicia o consume mÃ¡s de la cuenta, hacemos diagnÃ³stico tÃ©cnico de fondo.",
         icon: "chip",
       },
     ],
@@ -245,20 +245,20 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     focusServices: ["pantalla", "bateria", "pin de carga", "placa"],
     faqs: [
       {
-        q: "¿Atienden Caballito todos los días hábiles?",
-        a: "Sí, atendemos de lunes a viernes y coordinamos por WhatsApp para agilizar el ingreso.",
+        q: "Â¿Atienden Caballito todos los dÃ­as hÃ¡biles?",
+        a: "SÃ­, atendemos de lunes a viernes y coordinamos por WhatsApp para agilizar el ingreso.",
       },
       {
-        q: "¿Puedo pedir presupuesto sin moverme de Caballito?",
-        a: "Sí. Con marca, modelo y falla te damos una estimación inicial por WhatsApp.",
+        q: "Â¿Puedo pedir presupuesto sin moverme de Caballito?",
+        a: "SÃ­. Con marca, modelo y falla te damos una estimaciÃ³n inicial por WhatsApp.",
       },
       {
-        q: "¿Hacen reparaciones en el día?",
-        a: "Varias sí, sobre todo pantalla, batería o carga. Los casos de placa llevan más tiempo.",
+        q: "Â¿Hacen reparaciones en el dÃ­a?",
+        a: "Varias sÃ­, sobre todo pantalla, baterÃ­a o carga. Los casos de placa llevan mÃ¡s tiempo.",
       },
       {
-        q: "¿Qué incluye la garantía?",
-        a: "Cubre trabajo y repuesto instalado por 90 días. El alcance queda detallado por escrito al momento de entrega.",
+        q: "Â¿QuÃ© incluye la garantÃ­a?",
+        a: "Cubre trabajo y repuesto instalado por 90 dÃ­as. El alcance queda detallado por escrito al momento de entrega.",
       },
     ],
   },
@@ -267,12 +267,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     zoneName: "Almagro",
     metaTitle: "Arreglo de Celulares en Almagro (CABA) | Team Celular",
     metaDescription:
-      "Arreglo de celulares en Almagro — Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga el mismo día, garantía escrita 90 días.",
+      "Arreglo de celulares en Almagro â€” Team Celular, Paraguay 2451 Recoleta. Pantalla, baterÃ­a y carga el mismo dÃ­a, garantÃ­a escrita 90 dÃ­as.",
     socialDescription:
-      "Team Celular, Recoleta CABA, atiende Almagro. Pantalla, batería y carga con garantía escrita 90 días.",
+      "Team Celular, Recoleta CABA, atiende Almagro. Pantalla, baterÃ­a y carga con garantÃ­a escrita 90 dÃ­as.",
     heroBadge: "Cobertura Almagro",
     heroIntro:
-      "Team Celular tiene dos sucursales en CABA — Paraguay 2451 Recoleta y Amenábar 2030 Belgrano — y atiende Almagro con diagnóstico el mismo día. Pantalla, batería y carga con garantía escrita de 90 días sobre trabajo y repuesto.",
+      "Team Celular tiene dos sucursales en CABA â€” Paraguay 2451 Recoleta y Amenábar 2032 Belgrano â€” y atiende Almagro con diagnÃ³stico el mismo dÃ­a. Pantalla, baterÃ­a y carga con garantÃ­a escrita de 90 dÃ­as sobre trabajo y repuesto.",
     heroImage: "/images/equipoCall.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(16,185,129,0.3),transparent_44%)]",
@@ -296,12 +296,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
     ],
     localScenarios: [
-      "En Almagro entran muchos equipos por pantalla rota y batería con poca autonomía.",
-      "Cuando la carga entra y sale, muchas veces el pin está gastado o el flex ya no da más.",
-      "Si hubo humedad o corto, revisamos la placa antes de decirte si la reparación conviene o no.",
+      "En Almagro entran muchos equipos por pantalla rota y baterÃ­a con poca autonomÃ­a.",
+      "Cuando la carga entra y sale, muchas veces el pin estÃ¡ gastado o el flex ya no da mÃ¡s.",
+      "Si hubo humedad o corto, revisamos la placa antes de decirte si la reparaciÃ³n conviene o no.",
     ],
     transportTip:
-      "Desde Almagro podés llegar por subte o colectivo hacia Recoleta. En la página de contacto tenés el mapa para no perderte.",
+      "Desde Almagro podÃ©s llegar por subte o colectivo hacia Recoleta. En la pÃ¡gina de contacto tenÃ©s el mapa para no perderte.",
     nearbyZones: [
       { name: "Caballito", slug: "caballito" },
       { name: "Balvanera", slug: "balvanera" },
@@ -311,7 +311,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     faqs: [
       {
         q: "Atienden celulares de Almagro?",
-        a: "Si. Atendemos clientes de Almagro en nuestros talleres de Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030).",
+        a: "Si. Atendemos clientes de Almagro en nuestros talleres de Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).",
       },
       {
         q: "Como cotizo rapido?",
@@ -333,12 +333,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     zoneAlias: "Balvanera / Once",
     metaTitle: "Arreglo de Celulares en Balvanera (CABA) | Team Celular",
     metaDescription:
-      "Arreglo de celulares en Balvanera y Once, CABA. Team Celular, Paraguay 2451 Recoleta. Pantalla, carga y batería con garantía escrita 90 días.",
+      "Arreglo de celulares en Balvanera y Once, CABA. Team Celular, Paraguay 2451 Recoleta. Pantalla, carga y baterÃ­a con garantÃ­a escrita 90 dÃ­as.",
     socialDescription:
-      "Team Celular, Recoleta CABA, atiende Balvanera y Once. Pantalla, batería y carga con garantía escrita 90 días.",
+      "Team Celular, Recoleta CABA, atiende Balvanera y Once. Pantalla, baterÃ­a y carga con garantÃ­a escrita 90 dÃ­as.",
     heroBadge: "Cobertura Balvanera / Once",
     heroIntro:
-      "Team Celular tiene dos sucursales en CABA — Paraguay 2451 Recoleta y Amenábar 2030 Belgrano — y atiende Balvanera y Once con diagnóstico el mismo día. Pantalla, batería, carga y casos de placa con garantía escrita de 90 días.",
+      "Team Celular tiene dos sucursales en CABA â€” Paraguay 2451 Recoleta y Amenábar 2032 Belgrano â€” y atiende Balvanera y Once con diagnÃ³stico el mismo dÃ­a. Pantalla, baterÃ­a, carga y casos de placa con garantÃ­a escrita de 90 dÃ­as.",
     heroImage: "/images/cargadores.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(245,158,11,0.32),transparent_44%)]",
@@ -356,18 +356,18 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
         icon: "battery",
       },
       {
-        title: "Reparación de placa",
-        desc: "Mojado, corto o no enciende: diagnóstico con equipamiento de laboratorio y presupuesto antes de intervenir.",
+        title: "ReparaciÃ³n de placa",
+        desc: "Mojado, corto o no enciende: diagnÃ³stico con equipamiento de laboratorio y presupuesto antes de intervenir.",
         icon: "chip",
       },
     ],
     localScenarios: [
       "En Balvanera y Once se repiten equipos con carga gastada por uso continuo y cables que ya no hacen buen contacto.",
-      "Si el teléfono se mojó, apagalo y traelo rápido: mientras más tarde, más se corroe adentro.",
-      "Las fallas intermitentes las miramos con diagnóstico técnico para no mezclar software con hardware.",
+      "Si el telÃ©fono se mojÃ³, apagalo y traelo rÃ¡pido: mientras mÃ¡s tarde, mÃ¡s se corroe adentro.",
+      "Las fallas intermitentes las miramos con diagnÃ³stico tÃ©cnico para no mezclar software con hardware.",
     ],
     transportTip:
-      "Desde Once o Balvanera llegás rápido en colectivo o combinando subte. Te compartimos el punto exacto para evitar vueltas de más.",
+      "Desde Once o Balvanera llegÃ¡s rÃ¡pido en colectivo o combinando subte. Te compartimos el punto exacto para evitar vueltas de mÃ¡s.",
     nearbyZones: [
       { name: "Almagro", slug: "almagro" },
       { name: "Caballito", slug: "caballito" },
@@ -377,7 +377,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     faqs: [
       {
         q: "Atienden Balvanera y Once?",
-        a: "Si. Cubrimos ambas zonas con atencion en talleres fisicos en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030).",
+        a: "Si. Cubrimos ambas zonas con atencion en talleres fisicos en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).",
       },
       {
         q: "Que hago si se mojo el celular?",
@@ -389,7 +389,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
       {
         q: "Como llego al taller desde Once?",
-        a: "Tenemos dos sucursales: Paraguay 2451 Recoleta y Amenábar 2030 Belgrano. En la página de contacto tenés mapa y recorrido recomendado para cada una.",
+        a: "Tenemos dos sucursales: Paraguay 2451 Recoleta y Amenábar 2032 Belgrano. En la pÃ¡gina de contacto tenÃ©s mapa y recorrido recomendado para cada una.",
       },
     ],
   },
@@ -398,12 +398,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     zoneName: "Microcentro",
     metaTitle: "Arreglo de Celulares en Microcentro (CABA) | Team Celular",
     metaDescription:
-      "Arreglo de celulares en Microcentro — Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga el mismo día, garantía escrita 90 días.",
+      "Arreglo de celulares en Microcentro â€” Team Celular, Paraguay 2451 Recoleta. Pantalla, baterÃ­a y carga el mismo dÃ­a, garantÃ­a escrita 90 dÃ­as.",
     socialDescription:
-      "Team Celular, Recoleta CABA, atiende Microcentro. Diagnóstico el mismo día y garantía escrita 90 días.",
+      "Team Celular, Recoleta CABA, atiende Microcentro. DiagnÃ³stico el mismo dÃ­a y garantÃ­a escrita 90 dÃ­as.",
     heroBadge: "Cobertura Microcentro",
     heroIntro:
-      "Team Celular tiene dos sucursales en CABA — Paraguay 2451 Recoleta y Amenábar 2030 Belgrano — y atiende Microcentro con diagnóstico el mismo día. Pantalla, batería y carga para equipos de trabajo con garantía escrita de 90 días.",
+      "Team Celular tiene dos sucursales en CABA â€” Paraguay 2451 Recoleta y Amenábar 2032 Belgrano â€” y atiende Microcentro con diagnÃ³stico el mismo dÃ­a. Pantalla, baterÃ­a y carga para equipos de trabajo con garantÃ­a escrita de 90 dÃ­as.",
     heroImage: "/images/empresaFamiliar.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(20,184,166,0.32),transparent_44%)]",
@@ -417,7 +417,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
       {
         title: "Diagnostico tecnico",
-        desc: "Si hay reinicios, sin señal o sin imagen, revisamos para evitar cambios al azar.",
+        desc: "Si hay reinicios, sin seÃ±al o sin imagen, revisamos para evitar cambios al azar.",
         icon: "repair",
       },
       {
@@ -427,12 +427,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
     ],
     localScenarios: [
-      "En Microcentro se repite desgaste de batería y carga porque el equipo suele ir y venir todo el día.",
-      "Cuando el celular es herramienta de trabajo, la prioridad es responder rápido y no marearte con vueltas.",
-      "También vemos fallas de placa en equipos que no encienden o se reinician sin explicación clara.",
+      "En Microcentro se repite desgaste de baterÃ­a y carga porque el equipo suele ir y venir todo el dÃ­a.",
+      "Cuando el celular es herramienta de trabajo, la prioridad es responder rÃ¡pido y no marearte con vueltas.",
+      "TambiÃ©n vemos fallas de placa en equipos que no encienden o se reinician sin explicaciÃ³n clara.",
     ],
     transportTip:
-      "Desde Microcentro podés llegar a Recoleta (Paraguay 2451) por Subte D hasta Callao, o a Belgrano (Amenábar 2030) por Subte D hasta Juramento. Ambas opciones están a pocas cuadras de la estación.",
+      "Desde Microcentro podÃ©s llegar a Recoleta (Paraguay 2451) por Subte D hasta Callao, o a Belgrano (Amenábar 2032) por Subte D hasta Juramento. Ambas opciones estÃ¡n a pocas cuadras de la estaciÃ³n.",
     nearbyZones: [
       { name: "Balvanera / Once", slug: "balvanera" },
       { name: "Recoleta", slug: "recoleta" },
@@ -442,7 +442,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     faqs: [
       {
         q: "Atienden Microcentro?",
-        a: "Si. Tenemos dos talleres en CABA — Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030). Coordinamos ingreso por WhatsApp para que vengas directo sin esperar.",
+        a: "Si. Tenemos dos talleres en CABA â€” Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032). Coordinamos ingreso por WhatsApp para que vengas directo sin esperar.",
       },
       {
         q: "Pueden emitir factura para empresa?",
@@ -454,7 +454,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
       {
         q: "Tienen garantia escrita?",
-        a: "Sí. Cada reparación sale con garantía escrita de 90 días sobre trabajo y repuesto.",
+        a: "SÃ­. Cada reparaciÃ³n sale con garantÃ­a escrita de 90 dÃ­as sobre trabajo y repuesto.",
       },
     ],
   },

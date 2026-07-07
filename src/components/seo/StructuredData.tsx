@@ -1,4 +1,4 @@
-import { BUSINESS_PROFILE, SITE_URL, businessId } from "@/lib/businessProfile";
+import { BRANCHES, BUSINESS_PROFILE, SITE_URL, absoluteUrl, businessId } from "@/lib/businessProfile";
 
 interface StructuredDataProps {
   city?: string;
@@ -54,19 +54,27 @@ function createLocalBusinessJson(city?: string, country?: string) {
         "@type": "AdministrativeArea",
         name: area,
       })),
-    department: [
-      {
-        "@type": "LocalBusiness",
-        name: "Team Celular Recoleta",
-        address: `${BUSINESS_PROFILE.primaryAddress.street}, ${BUSINESS_PROFILE.primaryAddress.neighborhood}, CABA`,
-        hasMap: BUSINESS_PROFILE.primaryAddress.mapUrl,
+    department: BRANCHES.map((branch) => ({
+      "@type": "LocalBusiness",
+      "@id": `${absoluteUrl(branch.url)}#localbusiness`,
+      name: branch.name,
+      url: absoluteUrl(branch.url),
+      telephone: branch.phone,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: branch.street,
+        addressLocality: branch.neighborhood,
+        addressRegion: branch.region,
+        postalCode: branch.postalCode,
+        addressCountry: branch.country,
       },
-      {
-        "@type": "LocalBusiness",
-        name: "Team Celular Belgrano",
-        address: `${BUSINESS_PROFILE.secondaryAddress.street}, ${BUSINESS_PROFILE.secondaryAddress.neighborhood}, CABA`,
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: branch.latitude,
+        longitude: branch.longitude,
       },
-    ],
+      hasMap: branch.mapUrl,
+    })),
     ...(ratingValue && ratingCount
       ? {
           aggregateRating: {

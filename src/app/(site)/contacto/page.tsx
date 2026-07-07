@@ -1,7 +1,8 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import { getBranch, whatsappUrl } from "@/lib/businessProfile";
 import {
     FaBus,
     FaClock,
@@ -18,7 +19,7 @@ import {
 export const metadata: Metadata = {
     title: "Contacto | Reparación de Celulares en CABA | Team Celular — Recoleta y Belgrano",
     description:
-        "Team Celular tiene dos sucursales en CABA: Paraguay 2451 Recoleta y Amenábar 2030 Belgrano. WhatsApp +54 11 5103-4595. Lun–Vie 10:30–18:00. Garantía escrita 90 días.",
+        "Team Celular tiene dos sucursales en CABA: Paraguay 2451 Recoleta y Amenábar 2032 Belgrano. WhatsApp +54 11 5103-4595. Lun–Vie 10:30–18:00. Garantía escrita 90 días.",
     keywords: [
         "contacto team celular",
         "reparación celulares recoleta",
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Contacto | Reparación de Celulares en CABA | Team Celular",
         description:
-            "Team Celular, dos sucursales en CABA: Paraguay 2451 Recoleta y Amenábar 2030 Belgrano. Diagnóstico el mismo día y garantía escrita 90 días. WhatsApp +54 11 5103-4595.",
+            "Team Celular, dos sucursales en CABA: Paraguay 2451 Recoleta y Amenábar 2032 Belgrano. Diagnóstico el mismo día y garantía escrita 90 días. WhatsApp +54 11 5103-4595.",
         type: "website",
         url: "https://teamcelular.com/contacto",
         locale: "es_AR",
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "Contacto | Reparación de Celulares en CABA | Team Celular",
-        description: "Team Celular, Paraguay 2451 Recoleta y Amenábar 2030 Belgrano. Reparación de celulares en CABA, diagnóstico el mismo día y garantía escrita 90 días.",
+        description: "Team Celular, Paraguay 2451 Recoleta y Amenábar 2032 Belgrano. Reparación de celulares en CABA, diagnóstico el mismo día y garantía escrita 90 días.",
         images: ["https://teamcelular.com/opengraph-image.png"],
     },
 };
@@ -60,7 +61,7 @@ const contactMethods = [
         title: "WhatsApp",
         value: "+54 11 5103-4595",
         description: "Respuesta comercial rápida",
-        href: "https://wa.me/5491151034595",
+        href: whatsappUrl(),
         tone: "bg-emerald-50 text-emerald-700 border-emerald-200",
     },
     {
@@ -156,6 +157,9 @@ const faqs = [
 ];
 
 export default function ContactoPage() {
+    const recoleta = getBranch("recoleta");
+    const belgrano = getBranch("belgrano");
+
     return (
         <section className="w-full">
             <div className="mx-auto flex w-full max-w-[100rem] flex-col gap-12 px-4 py-12 sm:px-6 lg:px-8">
@@ -183,11 +187,11 @@ export default function ContactoPage() {
                             Contacto directo con el laboratorio en CABA
                         </h1>
                         <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-400">
-                            Team Celular tiene dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2030, Belgrano</strong>. Atendemos lunes a viernes de 10:30 a 18:00 sin turno previo. Podés venir al taller más cercano, escribir por WhatsApp o pedir presupuesto por formulario.
+                            Team Celular tiene dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2032, Belgrano</strong>. Atendemos lunes a viernes de 10:30 a 18:00 sin turno previo. Podés venir al taller más cercano, escribir por WhatsApp o pedir presupuesto por formulario.
                         </p>
                         <div className="mt-8 flex flex-wrap justify-center gap-4">
                             <TrackedCtaLink
-                                href="https://wa.me/5491151034595"
+                                href={whatsappUrl()}
                                 ctaName="contact_hero_whatsapp"
                                 ctaLocation="contact_hero"
                                 ctaVariant="whatsapp"
@@ -320,7 +324,7 @@ export default function ContactoPage() {
                                 })}
                             </div>
                             <Link
-                                href="https://maps.app.goo.gl/krFJfjDA4CuR83BK9"
+                                href={recoleta.mapUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-primary/90"
@@ -340,7 +344,7 @@ export default function ContactoPage() {
                                         Sucursal Belgrano
                                     </h3>
                                     <p className="mt-1 text-lg text-slate-700 dark:text-slate-300">
-                                        Amenábar 2030, Belgrano
+                                        Amenábar 2032, Belgrano
                                     </p>
                                     <p className="text-slate-600 dark:text-slate-400">
                                         Ciudad Autónoma de Buenos Aires
@@ -369,16 +373,18 @@ export default function ContactoPage() {
                                     <FaMapMarkerAlt className="mt-1 shrink-0 text-primary" />
                                     <div>
                                         <p className="font-semibold text-slate-900 dark:text-slate-100">Ubicación</p>
-                                        <p className="text-sm text-slate-600 dark:text-slate-400">Amenábar 2030, Belgrano, CABA. CP C1428.</p>
+                                        <p className="text-sm text-slate-600 dark:text-slate-400">Amenábar 2032, Belgrano, CABA. CP C1428.</p>
                                     </div>
                                 </div>
                             </div>
                             <Link
-                                href="/sucursales/caba/belgrano"
-                                className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-primary px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10"
+                                href={belgrano.mapUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-primary/90"
                             >
                                 <FaDirections aria-hidden />
-                                Ver sucursal Belgrano
+                                Cómo llegar — Belgrano
                             </Link>
                         </article>
                     </div>
@@ -475,7 +481,7 @@ export default function ContactoPage() {
                             "@type": "ContactPage",
                             name: "Contacto - Team Celular",
                             description:
-                                "Información de contacto y ubicación de Team Celular — dos sucursales en CABA: Paraguay 2451 Recoleta y Amenábar 2030 Belgrano.",
+                                "Información de contacto y ubicación de Team Celular — dos sucursales en CABA: Paraguay 2451 Recoleta y Amenábar 2032 Belgrano.",
                             url: "https://teamcelular.com/contacto",
                         }),
                     }}
@@ -484,5 +490,4 @@ export default function ContactoPage() {
         </section>
     );
 }
-
 

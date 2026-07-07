@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   FaMapMarkerAlt,
@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import StickyLocalCta from "@/components/cro/StickyLocalCta";
+import { getBranch, whatsappUrl as buildWhatsappUrl } from "@/lib/businessProfile";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
@@ -95,33 +96,32 @@ export const metadata: Metadata = {
 };
 
 export default function SucursalRecoletaPage() {
-  const whatsappUrl = `https://wa.me/5491151034595?text=${encodeURIComponent(
-    "Hola! Quiero pedir un presupuesto para la sucursal Recoleta. Marca y modelo:"
-  )}`;
+  const branch = getBranch("recoleta");
+  const whatsappUrl = buildWhatsappUrl(branch.whatsappText, branch.whatsapp);
 
   const localBusinessJsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "@id": `${PAGE_URL}#localbusiness`,
-    name: "Team Celular - Sucursal Recoleta",
+    name: branch.name,
     url: PAGE_URL,
-    telephone: "+54 11 5103-4595",
+    telephone: branch.phone,
     email: "teamcelular.arg@gmail.com",
     image: `${SITE_URL}/opengraph-image.png`,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Paraguay 2451",
-      addressLocality: "Recoleta",
-      addressRegion: "CABA",
-      postalCode: "C1121",
-      addressCountry: "AR",
+      streetAddress: branch.street,
+      addressLocality: branch.neighborhood,
+      addressRegion: branch.region,
+      postalCode: branch.postalCode,
+      addressCountry: branch.country,
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: -34.597528,
-      longitude: -58.403048,
+      latitude: branch.latitude,
+      longitude: branch.longitude,
     },
-    hasMap: "https://maps.app.goo.gl/krFJfjDA4CuR83BK9",
+    hasMap: branch.mapUrl,
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -327,4 +327,3 @@ export default function SucursalRecoletaPage() {
     </section>
   );
 }
-

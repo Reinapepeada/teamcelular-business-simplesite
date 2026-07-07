@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
@@ -437,7 +437,7 @@ export default function GuidesPage() {
                 Guías técnicas de Team Celular en CABA.
               </h1>
               <p className="max-w-3xl text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-                Team Celular, en Paraguay 2451 Recoleta y Amenábar 2030 Belgrano (CABA), publica guías sobre fallas frecuentes, diagnóstico técnico y criterios de repuesto para iPhone, Samsung, Xiaomi, Motorola, microelectrónica y soporte para empresas.
+                Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), publica guías sobre fallas frecuentes, diagnóstico técnico y criterios de repuesto para iPhone, Samsung, Xiaomi, Motorola, microelectrónica y soporte para empresas.
               </p>
             </div>
 
@@ -726,7 +726,7 @@ export default function GuidesPage() {
               "@type": "CollectionPage",
               name: "Guias tecnicas de reparacion de celulares",
               description:
-                "Centro de guías técnicas de Team Celular — Paraguay 2451 Recoleta y Amenábar 2030 Belgrano, CABA. Reparación por marca, microelectrónica y soporte corporativo.",
+                "Centro de guías técnicas de Team Celular — Paraguay 2451 Recoleta y Amenábar 2032 Belgrano, CABA. Reparación por marca, microelectrónica y soporte corporativo.",
               image: `${SITE_URL}/images/banner_guias.webp`,
               provider: { "@id": `${SITE_URL}#localbusiness` },
               hasPart: ARTICLES.map((article) => ({

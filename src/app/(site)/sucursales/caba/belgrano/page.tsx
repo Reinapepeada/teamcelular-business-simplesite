@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import StickyLocalCta from "@/components/cro/StickyLocalCta";
+import { getBranch, whatsappUrl as buildWhatsappUrl } from "@/lib/businessProfile";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
@@ -16,36 +17,36 @@ const PAGE_URL = `${SITE_URL}/sucursales/caba/belgrano`;
 
 const faqs = [
   {
-    q: "¿Dónde está la sucursal Belgrano de Team Celular?",
-    a: "Estamos en Amenábar 2030, Belgrano, Ciudad Autónoma de Buenos Aires.",
+    q: "Â¿DÃ³nde estÃ¡ la sucursal Belgrano de Team Celular?",
+    a: "Estamos en Amenábar 2032, Belgrano, Ciudad AutÃ³noma de Buenos Aires.",
   },
   {
-    q: "¿Qué horario tiene la sucursal Belgrano?",
+    q: "Â¿QuÃ© horario tiene la sucursal Belgrano?",
     a: "Atendemos de lunes a viernes de 10:30 a 18:00 hs.",
   },
   {
-    q: "¿Puedo pedir presupuesto antes de ir a Belgrano?",
-    a: "Sí. Escribinos por WhatsApp con marca, modelo y falla para agilizar el diagnóstico y evitar esperas.",
+    q: "Â¿Puedo pedir presupuesto antes de ir a Belgrano?",
+    a: "SÃ­. Escribinos por WhatsApp con marca, modelo y falla para agilizar el diagnÃ³stico y evitar esperas.",
   },
   {
-    q: "¿Qué reparaciones hacen en la sucursal Belgrano?",
-    a: "Pantalla, batería, pin de carga, cámara, microelectrónica y recuperación por agua. El diagnóstico se hace el mismo día.",
+    q: "Â¿QuÃ© reparaciones hacen en la sucursal Belgrano?",
+    a: "Pantalla, baterÃ­a, pin de carga, cÃ¡mara, microelectrÃ³nica y recuperaciÃ³n por agua. El diagnÃ³stico se hace el mismo dÃ­a.",
   },
   {
-    q: "¿Dan garantía escrita en Belgrano?",
-    a: "Sí. Cada reparación sale con garantía escrita de 90 días sobre trabajo y repuesto instalado.",
+    q: "Â¿Dan garantÃ­a escrita en Belgrano?",
+    a: "SÃ­. Cada reparaciÃ³n sale con garantÃ­a escrita de 90 dÃ­as sobre trabajo y repuesto instalado.",
   },
 ];
 
 const trustSignals = [
   {
-    title: "Laboratorio físico en Belgrano",
-    desc: "Atención real en sucursal con equipamiento técnico para reparaciones simples y complejas.",
+    title: "Laboratorio fÃ­sico en Belgrano",
+    desc: "AtenciÃ³n real en sucursal con equipamiento tÃ©cnico para reparaciones simples y complejas.",
     Icon: FaTools,
   },
   {
-    title: "Garantía escrita por cada servicio",
-    desc: "Cada trabajo sale con garantía escrita de 90 días sobre trabajo y repuesto instalado.",
+    title: "GarantÃ­a escrita por cada servicio",
+    desc: "Cada trabajo sale con garantÃ­a escrita de 90 dÃ­as sobre trabajo y repuesto instalado.",
     Icon: FaShieldAlt,
   },
   {
@@ -56,9 +57,9 @@ const trustSignals = [
 ];
 
 export const metadata: Metadata = {
-  title: "Reparación de Celulares en Belgrano CABA | Team Celular",
+  title: "ReparaciÃ³n de Celulares en Belgrano CABA | Team Celular",
   description:
-    "Reparación de celulares en Belgrano CABA — Team Celular, Amenábar 2030. Pantalla, batería y carga el mismo día con diagnóstico técnico y garantía escrita 90 días.",
+    "ReparaciÃ³n de celulares en Belgrano CABA â€” Team Celular, Amenábar 2032. Pantalla, baterÃ­a y carga el mismo dÃ­a con diagnÃ³stico tÃ©cnico y garantÃ­a escrita 90 dÃ­as.",
   alternates: {
     canonical: PAGE_URL,
     languages: {
@@ -70,9 +71,9 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    title: "Reparación de Celulares en Belgrano CABA | Team Celular",
+    title: "ReparaciÃ³n de Celulares en Belgrano CABA | Team Celular",
     description:
-      "Team Celular, Amenábar 2030 Belgrano CABA. Pantalla, batería y carga el mismo día, diagnóstico técnico y garantía escrita 90 días. Lun–Vie 10:30–18:00.",
+      "Team Celular, Amenábar 2032 Belgrano CABA. Pantalla, baterÃ­a y carga el mismo dÃ­a, diagnÃ³stico tÃ©cnico y garantÃ­a escrita 90 dÃ­as. Lunâ€“Vie 10:30â€“18:00.",
     url: PAGE_URL,
     type: "website",
     locale: "es_AR",
@@ -87,30 +88,29 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Reparación de Celulares en Belgrano CABA | Team Celular",
+    title: "ReparaciÃ³n de Celulares en Belgrano CABA | Team Celular",
     description:
-      "Team Celular, Amenábar 2030 Belgrano CABA. Pantalla y batería el mismo día, garantía escrita 90 días. Lun–Vie 10:30–18:00.",
+      "Team Celular, Amenábar 2032 Belgrano CABA. Pantalla y baterÃ­a el mismo dÃ­a, garantÃ­a escrita 90 dÃ­as. Lunâ€“Vie 10:30â€“18:00.",
     images: [`${SITE_URL}/opengraph-image.png`],
   },
 };
 
 export default function SucursalBelgranoPage() {
-  const whatsappUrl = `https://wa.me/5491151034595?text=${encodeURIComponent(
-    "Hola! Quiero pedir un presupuesto para la sucursal Belgrano. Marca y modelo:"
-  )}`;
+  const branch = getBranch("belgrano");
+  const whatsappUrl = buildWhatsappUrl(branch.whatsappText, branch.whatsapp);
 
   const localBusinessJsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "@id": `${PAGE_URL}#localbusiness`,
-    name: "Team Celular - Sucursal Belgrano",
+    name: branch.name,
     url: PAGE_URL,
-    telephone: "+54 11 5103-4595",
+    telephone: branch.phone,
     email: "teamcelular.arg@gmail.com",
     image: `${SITE_URL}/opengraph-image.png`,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Amenábar 2030",
+      streetAddress: "Amenábar 2032",
       addressLocality: "Belgrano",
       addressRegion: "CABA",
       postalCode: "C1428",
@@ -118,9 +118,10 @@ export default function SucursalBelgranoPage() {
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: -34.5638065,
-      longitude: -58.4579996,
+      latitude: branch.latitude,
+      longitude: branch.longitude,
     },
+    hasMap: branch.mapUrl,
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -170,15 +171,15 @@ export default function SucursalBelgranoPage() {
         <div className="relative z-10 grid gap-8 md:grid-cols-5">
           <div className="space-y-5 md:col-span-3">
             <p className="inline-flex rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-white/90">
-              Sucursal oficial Team Celular · Belgrano
+              Sucursal oficial Team Celular Â· Belgrano
             </p>
             <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
-              Reparación de celulares en Belgrano CABA
+              ReparaciÃ³n de celulares en Belgrano CABA
             </h1>
             <p className="text-lg leading-relaxed text-slate-100/90">
-              Team Celular, en Amenábar 2030 Belgrano CABA, repara celulares con
-              diagnóstico el mismo día, pantalla y batería en 2–4 h, y garantía
-              escrita de 90 días sobre trabajo y repuesto. Lunes a viernes 10:30–18:00.
+              Team Celular, en Amenábar 2032 Belgrano CABA, repara celulares con
+              diagnÃ³stico el mismo dÃ­a, pantalla y baterÃ­a en 2â€“4 h, y garantÃ­a
+              escrita de 90 dÃ­as sobre trabajo y repuesto. Lunes a viernes 10:30â€“18:00.
             </p>
             <div className="flex flex-wrap gap-3">
               <a
@@ -212,7 +213,7 @@ export default function SucursalBelgranoPage() {
               <ul className="mt-4 space-y-3 text-sm text-white/90">
                 <li className="flex items-start gap-2">
                   <FaMapMarkerAlt className="mt-0.5 text-primary" />
-                  Amenábar 2030, Belgrano, CABA
+                  Amenábar 2032, Belgrano, CABA
                 </li>
                 <li className="flex items-start gap-2">
                   <FaRegClock className="mt-0.5 text-primary" />
@@ -220,7 +221,7 @@ export default function SucursalBelgranoPage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <FaTools className="mt-0.5 text-primary" />
-                  Pantalla, batería, carga, placa y notebook
+                  Pantalla, baterÃ­a, carga, placa y notebook
                 </li>
               </ul>
             </div>
@@ -250,19 +251,19 @@ export default function SucursalBelgranoPage() {
 
       <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          ¿Qué reparaciones hacemos en la sucursal Belgrano?
+          Â¿QuÃ© reparaciones hacemos en la sucursal Belgrano?
         </h2>
         <p className="mt-2 text-slate-600 dark:text-slate-300">
-          Team Celular Belgrano, en Amenábar 2030, cubre las mismas reparaciones que el laboratorio central: desde pantallas rotas hasta fallas de placa con microscopio.
+          Team Celular Belgrano, en Amenábar 2032, cubre las mismas reparaciones que el laboratorio central: desde pantallas rotas hasta fallas de placa con microscopio.
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {[
-            "Cambio de pantalla y módulo display",
-            "Cambio de batería con test de autonomía",
-            "Reparación de pin de carga",
-            "Microelectrónica y reparación de placa",
-            "Recuperación por agua o humedad",
-            "Revisión técnica arancelada y presupuesto detallado",
+            "Cambio de pantalla y mÃ³dulo display",
+            "Cambio de baterÃ­a con test de autonomÃ­a",
+            "ReparaciÃ³n de pin de carga",
+            "MicroelectrÃ³nica y reparaciÃ³n de placa",
+            "RecuperaciÃ³n por agua o humedad",
+            "RevisiÃ³n tÃ©cnica arancelada y presupuesto detallado",
           ].map((service) => (
             <div
               key={service}
@@ -296,13 +297,13 @@ export default function SucursalBelgranoPage() {
 
       <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          ¿Cómo llegar a la sucursal Belgrano?
+          Â¿CÃ³mo llegar a la sucursal Belgrano?
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">
-          Amenábar 2030 está en el corazón de Belgrano, con fácil acceso en transporte público. Podés llegar por Subte D (estación Juramento) a pocas cuadras, o en múltiples líneas de colectivo que pasan por la zona. Si venís en auto, la calle tiene estacionamiento disponible en la cuadra.
+          Amenábar 2032 estÃ¡ en el corazÃ³n de Belgrano, con fÃ¡cil acceso en transporte pÃºblico. PodÃ©s llegar por Subte D (estaciÃ³n Juramento) a pocas cuadras, o en mÃºltiples lÃ­neas de colectivo que pasan por la zona. Si venÃ­s en auto, la calle tiene estacionamiento disponible en la cuadra.
         </p>
         <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">
-          Si tenés dudas sobre cómo llegar, escribinos por WhatsApp y te mandamos el punto exacto.
+          Si tenÃ©s dudas sobre cÃ³mo llegar, escribinos por WhatsApp y te mandamos el punto exacto.
         </p>
       </section>
 

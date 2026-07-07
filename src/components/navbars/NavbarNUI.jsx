@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -9,6 +9,7 @@ import Link from "next/link";
 import ThemeSwitcher, {
     ThemeSwitcherInline,
 } from "@/components/switch/ThemeSwitcher";
+import { whatsappUrl } from "@/lib/businessProfile";
 
 const MAIN_LINKS = [
     { href: "/arreglo-de-celulares", label: "Arreglo" },
@@ -24,8 +25,7 @@ const SECONDARY_LINKS = [
     { href: "/sobrenosotros", label: "Sobre nosotros" },
 ];
 
-const WHATSAPP_URL =
-    "https://wa.me/5491151034595?text=Hola%21%20Quiero%20pedir%20un%20presupuesto%20de%20reparaci%C3%B3n.";
+const WHATSAPP_URL = whatsappUrl();
 const BUDGET_URL = "/presupuesto-reparacion#solicitar-presupuesto";
 
 function isActivePath(pathname, href) {

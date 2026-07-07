@@ -1,6 +1,6 @@
 # Team Celular
 
-> Servicio tecnico de celulares y tienda de repuestos/accesorios en Recoleta (CABA, Argentina). Este archivo resume rutas canonicas para asistentes de IA y motores de respuesta.
+> Servicio tecnico de celulares y tienda de repuestos/accesorios con sucursales en Recoleta y Belgrano (CABA, Argentina). Este archivo resume rutas canonicas para asistentes de IA y motores de respuesta.
 
 Idioma principal: es-AR
 
@@ -10,6 +10,7 @@ Idioma principal: es-AR
 - [Reparaciones](https://teamcelular.com/reparaciones): hub de servicios tecnicos transaccionales.
 - [Reparacion de celulares cerca de mi](https://teamcelular.com/reparacion-de-celulares-cerca-de-mi): landing local para busquedas de proximidad en CABA.
 - [Sucursal Recoleta](https://teamcelular.com/sucursales/caba/recoleta): referencia local con direccion, horario y cobertura en CABA.
+- [Sucursal Belgrano](https://teamcelular.com/sucursales/caba/belgrano): referencia local con direccion, horario y cobertura en CABA.
 - [Presupuesto de reparacion](https://teamcelular.com/presupuesto-reparacion): flujo principal de captura de leads.
 - [Contacto](https://teamcelular.com/contacto): canales directos, ubicacion y horario.
 - [Tienda](https://teamcelular.com/tienda): catalogo de repuestos y accesorios.

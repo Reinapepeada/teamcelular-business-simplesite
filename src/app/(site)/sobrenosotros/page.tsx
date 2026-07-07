@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -91,7 +91,7 @@ const timeline = [
         location: "Recoleta · Belgrano",
         title: "Expansión en CABA",
         description:
-            "Con miles de equipos reparados, abrimos segunda sucursal en Belgrano (Amenábar 2030) para cubrir más de CABA con el mismo nivel técnico.",
+            "Con miles de equipos reparados, abrimos segunda sucursal en Belgrano (Amenábar 2032) para cubrir más de CABA con el mismo nivel técnico.",
     },
 ];
 
@@ -187,7 +187,7 @@ export default function SobreNosotrosPage() {
                         </h1>
                         <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-400">
                             Team Celular es un laboratorio familiar con más de 15 años reparando
-                            celulares y microelectrónica, con sucursales en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030), CABA. La propuesta sigue siendo
+                            celulares y microelectrónica, con sucursales en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032), CABA. La propuesta sigue siendo
                             la misma: diagnóstico honesto, repuestos de calidad y
                             garantía escrita de 90 días sobre cada trabajo.
                         </p>
@@ -381,7 +381,7 @@ export default function SobreNosotrosPage() {
                         Queres conocer nuestro laboratorio?
                     </h2>
                     <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
-                        Dos laboratorios en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030). Vení cuando quieras y te mostramos cómo trabajamos.
+                        Dos laboratorios en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032). Vení cuando quieras y te mostramos cómo trabajamos.
                     </p>
                     <div className="mt-6 flex flex-wrap justify-center gap-4">
                         <Link
@@ -438,7 +438,7 @@ export default function SobreNosotrosPage() {
                                         name: "Team Celular Belgrano",
                                         address: {
                                             "@type": "PostalAddress",
-                                            streetAddress: "Amenábar 2030",
+                                            streetAddress: "Amenábar 2032",
                                             addressLocality: "Belgrano",
                                             addressRegion: "CABA",
                                             addressCountry: "AR",

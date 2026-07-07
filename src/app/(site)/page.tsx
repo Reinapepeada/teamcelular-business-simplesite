@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { BsCheckCircleFill } from "react-icons/bs";
 import BannerHome from "@/components/banners/BannerHome";
 import BannerCards from "@/components/cards/BannerCards";
@@ -12,9 +12,9 @@ const SITE_URL = getSiteUrl();
 
 export const metadata = buildWebsiteMetadata({
     path: "/",
-    title: "Reparación de Celulares en Recoleta CABA | Team Celular",
+    title: "Reparación de Celulares en CABA | Recoleta y Belgrano | Team Celular",
     description:
-        "Reparación de celulares en Paraguay 2451, Recoleta CABA. Cambio de pantalla y batería en el día, diagnóstico mismo día y garantía escrita 90 días.",
+        "Reparación de celulares en CABA. Team Celular atiende en Recoleta (Paraguay 2451) y Belgrano (Amenabar 2032), con diagnóstico el mismo día y garantía escrita 90 días.",
     keywords: [
         "reparacion de celulares Buenos Aires",
         "reparacion de celulares cerca de mi",
@@ -28,13 +28,13 @@ export const metadata = buildWebsiteMetadata({
     languages: {
         "es-AR": "/",
     },
-    openGraphTitle: "Reparación de Celulares en Recoleta CABA | Team Celular",
+    openGraphTitle: "Reparación de Celulares en CABA | Team Celular",
     openGraphDescription:
-        "Team Celular, Paraguay 2451 Recoleta CABA. Cambio de pantalla y batería en el día, diagnóstico mismo día y garantía escrita 90 días.",
+        "Team Celular tiene sucursales en Recoleta y Belgrano, CABA. Cambio de pantalla y batería en el día, diagnóstico mismo día y garantía escrita 90 días.",
     openGraphImageAlt: "Team Celular — Reparación de celulares en Recoleta, Buenos Aires",
-    twitterTitle: "Reparación de Celulares en Recoleta CABA | Team Celular",
+    twitterTitle: "Reparación de Celulares en CABA | Team Celular",
     twitterDescription:
-        "Paraguay 2451, Recoleta. Pantalla y batería en el día, diagnóstico mismo día y garantía escrita 90 días. Lun–Vie 10:30–18:00.",
+        "Recoleta y Belgrano, CABA. Pantalla y batería en el día, diagnóstico mismo día y garantía escrita 90 días. Lun–Vie 10:30–18:00.",
 });
 
 const services = [
@@ -260,7 +260,7 @@ export default function Home() {
                         <div className="space-y-4">
                             <p className="text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
                                 Team Celular tiene dos sucursales en CABA:
-                                Paraguay 2451 en Recoleta y Amenábar 2030 en
+                                Paraguay 2451 en Recoleta y Amenábar 2032 en
                                 Belgrano. Ambas atienden de lunes a viernes de
                                 10:30 a 18:00.
                             </p>
@@ -301,7 +301,7 @@ export default function Home() {
                                     </TrackedCtaLink>
                                 </li>
                                 <li>Sucursal Recoleta: Paraguay 2451, CABA.</li>
-                                <li>Sucursal Belgrano: Amenábar 2030, CABA.</li>
+                                <li>Sucursal Belgrano: Amenábar 2032, CABA.</li>
                                 <li>Horario: Lunes a Viernes de 10:30 a 18:00.</li>
                             </ul>
                         </div>

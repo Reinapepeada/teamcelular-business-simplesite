@@ -4,9 +4,9 @@ import { usePathname } from "next/navigation";
 import { BsWhatsapp } from "react-icons/bs";
 import { FaClipboardList } from "react-icons/fa";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
+import { whatsappUrl } from "@/lib/businessProfile";
 
-const WHATSAPP_URL =
-  "https://wa.me/5491151034595?text=Hola%21%20Quiero%20pedir%20un%20presupuesto%20de%20reparaci%C3%B3n.";
+const WHATSAPP_URL = whatsappUrl();
 
 export default function StickyRepairCta() {
   const pathname = usePathname();

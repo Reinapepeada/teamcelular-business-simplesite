@@ -1,7 +1,7 @@
 site: Team Celular
 url: https://teamcelular.com
 language: es-AR
-description: Laboratorio tecnico de reparacion de celulares y tienda de repuestos/accesorios en Recoleta, CABA.
+description: Laboratorio tecnico de reparacion de celulares y tienda de repuestos/accesorios con sucursales en Recoleta y Belgrano, CABA.
 
 primary-intent:
 - presupuesto y reparacion de celulares en CABA
@@ -12,7 +12,9 @@ priority-urls:
 - https://teamcelular.com/
 - https://teamcelular.com/reparacion-de-celulares-cerca-de-mi
 - https://teamcelular.com/reparaciones
+- https://teamcelular.com/sucursales
 - https://teamcelular.com/sucursales/caba/recoleta
+- https://teamcelular.com/sucursales/caba/belgrano
 - https://teamcelular.com/presupuesto-reparacion
 - https://teamcelular.com/contacto
 - https://teamcelular.com/tienda
@@ -50,6 +52,7 @@ brand-guides-emerging:
 
 trust-signals:
 - ubicacion-fisica: Paraguay 2451, Recoleta, CABA
+- ubicacion-fisica: Amenabar 2032, Belgrano, CABA
 - horario: lunes a viernes de 10:30 a 18:00
 - contacto-whatsapp: https://wa.me/5491151034595
 

@@ -361,7 +361,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     {
       question: `Reparan ${seed.brand} aunque no sea una marca tan comun?`,
       answer:
-        `Si. Reparamos ${seed.brand} en nuestros talleres en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030), CABA. Confirmamos viabilidad según modelo y repuesto disponible antes de intervenir.`,
+        `Si. Reparamos ${seed.brand} en nuestros talleres en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032), CABA. Confirmamos viabilidad segÃºn modelo y repuesto disponible antes de intervenir.`,
     },
     {
       question: "Cuanto tarda el diagnostico?",
@@ -395,7 +395,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     pagePath,
     pageLabel,
     title,
-    heroDescription: `Team Celular, en Paraguay 2451 Recoleta y Amenábar 2030 Belgrano (CABA), repara ${seed.brand} con diagnóstico el mismo día y garantía escrita de 90 días sobre trabajo y repuesto. Esta guía explica las fallas más comunes, cómo las diagnosticamos y el paso recomendado según el estado del equipo.`,
+    heroDescription: `Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), repara ${seed.brand} con diagnÃ³stico el mismo dÃ­a y garantÃ­a escrita de 90 dÃ­as sobre trabajo y repuesto. Esta guÃ­a explica las fallas mÃ¡s comunes, cÃ³mo las diagnosticamos y el paso recomendado segÃºn el estado del equipo.`,
     badge: seed.badge,
     readingTime: "5 min",
     publishedTime: "2026-04-20T00:00:00Z",
@@ -406,15 +406,15 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
       `Enfoque tecnico en ${seed.specialtyFocus}.`,
       `Punto critico frecuente: ${seed.knownWeakPoints[0]}.`,
     ],
-    symptomsTitle: `¿Cuáles son las fallas más frecuentes en ${seed.brand}?`,
+    symptomsTitle: `Â¿CuÃ¡les son las fallas mÃ¡s frecuentes en ${seed.brand}?`,
     symptomsDescription:
       `Estas senales son las mas reportadas en ${seed.brand} y conviene abordarlas antes de que escalen a placa.`,
     symptoms,
-    diagnosisTitle: `¿Cómo diagnosticamos un ${seed.brand}?`,
+    diagnosisTitle: `Â¿CÃ³mo diagnosticamos un ${seed.brand}?`,
     diagnosisDescription:
       `Aplicamos una secuencia tecnica para ${seed.brand}, separando sintoma visible de causa real sin cambiar piezas de mas.`,
     diagnostics,
-    planTitle: `¿Qué plan seguimos para reparar ${seed.brand}?`,
+    planTitle: `Â¿QuÃ© plan seguimos para reparar ${seed.brand}?`,
     planDescription:
       `El objetivo es estabilizar ${seed.brand} en uso diario, priorizando la falla que mas afecta rendimiento y autonomia.`,
     planSteps,
@@ -423,9 +423,9 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     whatsappText: `Hola Team Celular, necesito presupuesto para reparar mi ${seed.brand}`,
     metadata: buildWebsiteMetadata({
       path: pagePath,
-      title: `Reparación de ${seed.brand} en CABA | Team Celular — Recoleta y Belgrano`,
+      title: `ReparaciÃ³n de ${seed.brand} en CABA | Team Celular â€” Recoleta y Belgrano`,
       description:
-        `Reparación de ${seed.brand} en CABA. Team Celular, Recoleta y Belgrano. Pantalla, batería y carga con diagnóstico el mismo día. Garantía escrita 90 días.`,
+        `ReparaciÃ³n de ${seed.brand} en CABA. Team Celular, Recoleta y Belgrano. Pantalla, baterÃ­a y carga con diagnÃ³stico el mismo dÃ­a. GarantÃ­a escrita 90 dÃ­as.`,
       keywords: [
         ...seed.keywords,
         `reparacion ${seed.brand.toLowerCase()} buenos aires`,

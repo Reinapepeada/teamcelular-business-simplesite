@@ -24,9 +24,9 @@ const PAGE_PATH = "/guias/reparacion-samsung-buenos-aires";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 
 export const metadata: Metadata = {
-  title: "Reparación de Samsung Galaxy en Buenos Aires, CABA | Team Celular",
+  title: "ReparaciÃ³n de Samsung Galaxy en Buenos Aires, CABA | Team Celular",
   description:
-    "Reparación de Samsung Galaxy en Recoleta, CABA — Team Celular, Paraguay 2451. Pantalla AMOLED, batería y USB-C en el día con garantía escrita 90 días.",
+    "ReparaciÃ³n de Samsung Galaxy en Recoleta, CABA â€” Team Celular, Paraguay 2451. Pantalla AMOLED, baterÃ­a y USB-C en el dÃ­a con garantÃ­a escrita 90 dÃ­as.",
   keywords: [
     "reparacion samsung buenos aires",
     "service samsung caba",
@@ -57,9 +57,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Reparación de Samsung Galaxy en Buenos Aires, CABA | Team Celular",
+    title: "ReparaciÃ³n de Samsung Galaxy en Buenos Aires, CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla AMOLED, batería y USB-C en el día, diagnóstico mismo día y garantía escrita 90 días. Galaxy S, A y Z.",
+      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla AMOLED, baterÃ­a y USB-C en el dÃ­a, diagnÃ³stico mismo dÃ­a y garantÃ­a escrita 90 dÃ­as. Galaxy S, A y Z.",
     type: "article",
     url: PAGE_URL,
     locale: "es_AR",
@@ -77,9 +77,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Reparación de Samsung Galaxy en CABA | Team Celular",
+    title: "ReparaciÃ³n de Samsung Galaxy en CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta. Pantalla AMOLED y batería en el día, garantía escrita 90 días. Galaxy S, A, Note y Z Fold.",
+      "Team Celular, Paraguay 2451 Recoleta. Pantalla AMOLED y baterÃ­a en el dÃ­a, garantÃ­a escrita 90 dÃ­as. Galaxy S, A, Note y Z Fold.",
     images: ["https://teamcelular.com/images/guia_samsung.webp"],
   },
 };
@@ -142,7 +142,7 @@ const repairServices = [
     detail:
       "Para Galaxy S y Note priorizamos paneles con buen contraste, tasa de refresco estable y respuesta tactil precisa.",
     eta: "2-4 h",
-    warranty: "Garantía 90 días",
+    warranty: "GarantÃ­a 90 dÃ­as",
     Icon: FaMobileAlt,
   },
   {
@@ -150,7 +150,7 @@ const repairServices = [
     detail:
       "Reemplazo de bateria para equipos que se apagan en frio, bajan de 30% a 0% o pierden carga en reposo.",
     eta: "1-2 h",
-    warranty: "Garantía 90 días",
+    warranty: "GarantÃ­a 90 dÃ­as",
     Icon: FaBolt,
   },
   {
@@ -158,7 +158,7 @@ const repairServices = [
     detail:
       "Solucion para carga intermitente, cable flojo o equipo que no negocia carga rapida. Incluye limpieza tecnica y test final.",
     eta: "2-3 h",
-    warranty: "Garantía 90 días",
+    warranty: "GarantÃ­a 90 dÃ­as",
     Icon: FaShieldAlt,
   },
   {
@@ -166,7 +166,7 @@ const repairServices = [
     detail:
       "Reparamos modulos de camara en Galaxy S y A para recuperar nitidez, enfoque y estabilizacion segun cada equipo.",
     eta: "2-4 h",
-    warranty: "Garantía 90 días",
+    warranty: "GarantÃ­a 90 dÃ­as",
     Icon: FaCamera,
   },
   {
@@ -174,7 +174,7 @@ const repairServices = [
     detail:
       "Microelectronica para equipos que no encienden, quedan en logo o presentan reinicios constantes despues de golpes o humedad.",
     eta: "24-48 h",
-    warranty: "Garantía 90 días",
+    warranty: "GarantÃ­a 90 dÃ­as",
     Icon: FaMicrochip,
   },
   {
@@ -182,7 +182,7 @@ const repairServices = [
     detail:
       "Evaluamos pliegue, bisagra, cableados flex y panel interno para definir si conviene reparacion parcial o reemplazo completo.",
     eta: "24-72 h",
-    warranty: "Garantía 90 días",
+    warranty: "GarantÃ­a 90 dÃ­as",
     Icon: FaWrench,
   },
 ];
@@ -318,18 +318,18 @@ export default function SamsungRepairGuidePage() {
               Especialistas por marca
             </span>
             <span className="rounded-full border border-emerald-700/80 bg-emerald-700 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white">
-              Recoleta y Belgrano · CABA
+              Recoleta y Belgrano Â· CABA
             </span>
           </div>
 
           <div className="space-y-4">
             <h1 className="text-4xl font-black tracking-tight text-slate-900 dark:text-white md:text-5xl">
-              Reparación de Samsung Galaxy en Buenos Aires
+              ReparaciÃ³n de Samsung Galaxy en Buenos Aires
             </h1>
             <p className="max-w-4xl text-lg leading-relaxed text-slate-700 dark:text-slate-300">
               Team Celular, en Paraguay 2451 Recoleta CABA, repara Samsung
-              Galaxy con diagnóstico el mismo día, pantalla AMOLED y batería en
-              2–4 h, y garantía escrita de 90 días sobre trabajo y repuesto.
+              Galaxy con diagnÃ³stico el mismo dÃ­a, pantalla AMOLED y baterÃ­a en
+              2â€“4 h, y garantÃ­a escrita de 90 dÃ­as sobre trabajo y repuesto.
               Galaxy S, A, Note, Z Fold y Z Flip.
             </p>
           </div>
@@ -348,9 +348,9 @@ export default function SamsungRepairGuidePage() {
               <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
                 Garantia
               </p>
-              <p className="mt-2 text-3xl font-black text-secondary">90 días</p>
+              <p className="mt-2 text-3xl font-black text-secondary">90 dÃ­as</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-                Garantía escrita sobre trabajo y repuesto
+                GarantÃ­a escrita sobre trabajo y repuesto
               </p>
             </div>
             <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
@@ -400,10 +400,10 @@ export default function SamsungRepairGuidePage() {
         <section className="space-y-7">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              ¿Cómo es el proceso de reparación de Samsung en Team Celular?
+              Â¿CÃ³mo es el proceso de reparaciÃ³n de Samsung en Team Celular?
             </h2>
             <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
-              Cuatro etapas para detectar la falla de origen, no solo el síntoma visible
+              Cuatro etapas para detectar la falla de origen, no solo el sÃ­ntoma visible
             </p>
           </div>
           <div className="grid gap-5 md:grid-cols-2">
@@ -437,10 +437,10 @@ export default function SamsungRepairGuidePage() {
         <section className="space-y-7">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              ¿Cuáles son las reparaciones de Samsung más comunes en Buenos Aires?
+              Â¿CuÃ¡les son las reparaciones de Samsung mÃ¡s comunes en Buenos Aires?
             </h2>
             <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
-              Galaxy S, A, Note y Z Fold: los seis trabajos que más se piden cada semana
+              Galaxy S, A, Note y Z Fold: los seis trabajos que mÃ¡s se piden cada semana
             </p>
           </div>
           <div className="grid gap-5 md:grid-cols-3">
@@ -473,7 +473,7 @@ export default function SamsungRepairGuidePage() {
                       href={repairLinks[service.title]}
                       className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-primary transition hover:underline"
                     >
-                      Ver precio y detalles →
+                      Ver precio y detalles â†’
                     </Link>
                   )}
                 </article>
@@ -485,7 +485,7 @@ export default function SamsungRepairGuidePage() {
         <section id="costos-reparacion-samsung" className="rounded-2xl border border-slate-200/80 bg-white dark:border-slate-700/60 dark:bg-slate-900">
           <div className="border-b border-slate-100 px-8 py-5 dark:border-slate-800">
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-              ¿Cuánto cuesta reparar un Samsung Galaxy en Buenos Aires?
+              Â¿CuÃ¡nto cuesta reparar un Samsung Galaxy en Buenos Aires?
             </h2>
             <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-slate-400">
               Rangos orientativos para 2026. El precio exacto depende del modelo, la familia (S, A o Z) y el repuesto disponible.
@@ -493,12 +493,12 @@ export default function SamsungRepairGuidePage() {
           </div>
           <div className="divide-y divide-slate-100 dark:divide-slate-800">
             {[
-              { servicio: "Diagnóstico técnico", modelos: "Todos los modelos", tiempo: "30–45 min", precio: "ARS 15.000–25.000" },
-              { servicio: "Pantalla AMOLED", modelos: "Galaxy S22, S23, S24, S25", tiempo: "2–4 h", precio: "ARS 120.000–280.000" },
-              { servicio: "Pantalla", modelos: "Galaxy A35, A54, A55", tiempo: "2–4 h", precio: "ARS 60.000–140.000" },
-              { servicio: "Cambio de batería", modelos: "Galaxy S y A", tiempo: "1–2 h", precio: "ARS 40.000–80.000" },
-              { servicio: "Puerto USB-C", modelos: "Todos", tiempo: "2–3 h", precio: "ARS 35.000–65.000" },
-              { servicio: "Bisagra / flex Z Fold y Z Flip", modelos: "Z Fold, Z Flip", tiempo: "24–72 h", precio: "Consultar" },
+              { servicio: "DiagnÃ³stico tÃ©cnico", modelos: "Todos los modelos", tiempo: "30â€“45 min", precio: "ARS 15.000â€“25.000" },
+              { servicio: "Pantalla AMOLED", modelos: "Galaxy S22, S23, S24, S25", tiempo: "2â€“4 h", precio: "ARS 120.000â€“280.000" },
+              { servicio: "Pantalla", modelos: "Galaxy A35, A54, A55", tiempo: "2â€“4 h", precio: "ARS 60.000â€“140.000" },
+              { servicio: "Cambio de baterÃ­a", modelos: "Galaxy S y A", tiempo: "1â€“2 h", precio: "ARS 40.000â€“80.000" },
+              { servicio: "Puerto USB-C", modelos: "Todos", tiempo: "2â€“3 h", precio: "ARS 35.000â€“65.000" },
+              { servicio: "Bisagra / flex Z Fold y Z Flip", modelos: "Z Fold, Z Flip", tiempo: "24â€“72 h", precio: "Consultar" },
             ].map((row) => (
               <div key={`${row.servicio}-${row.modelos}`} className="grid grid-cols-2 gap-x-4 gap-y-1 px-6 py-4 text-sm md:grid-cols-4">
                 <span className="font-semibold text-slate-900 dark:text-slate-100">{row.servicio}</span>
@@ -510,7 +510,7 @@ export default function SamsungRepairGuidePage() {
           </div>
           <div className="space-y-4 px-8 py-6">
             <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">
-              Team Celular, con sucursales en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2030) CABA, informa el costo de diagnóstico antes de abrir el equipo. Si avanzás con la reparación, ese monto se descuenta del trabajo final.
+              Team Celular, con sucursales en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032) CABA, informa el costo de diagnÃ³stico antes de abrir el equipo. Si avanzÃ¡s con la reparaciÃ³n, ese monto se descuenta del trabajo final.
             </p>
             <Link
               href="/presupuesto-reparacion#solicitar-presupuesto"
@@ -523,7 +523,7 @@ export default function SamsungRepairGuidePage() {
 
         <section className="space-y-6 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
           <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-white">
-            Diagnóstico, repuestos y garantía: qué esperás al traer tu Samsung
+            DiagnÃ³stico, repuestos y garantÃ­a: quÃ© esperÃ¡s al traer tu Samsung
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
             {trustReasons.map((reason) => {
@@ -554,7 +554,7 @@ export default function SamsungRepairGuidePage() {
           <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-slate-900/40">
             <Image
               src="/images/samsung_portada.webp"
-              alt="Laboratorio de reparación Samsung Galaxy en Team Celular, Recoleta CABA"
+              alt="Laboratorio de reparaciÃ³n Samsung Galaxy en Team Celular, Recoleta CABA"
               width={1200}
               height={900}
               sizes="(max-width: 768px) 100vw, 60vw"
@@ -563,12 +563,12 @@ export default function SamsungRepairGuidePage() {
           </div>
           <article className="space-y-4">
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-              Diagnóstico real antes de tocar el equipo
+              DiagnÃ³stico real antes de tocar el equipo
             </h2>
             <p className="text-slate-600 dark:text-slate-300">
-              Evaluamos síntomas, consumo eléctrico y estado de placa antes de confirmar presupuesto.
-              Si el Galaxy no conviene reparar, te lo decimos con datos claros — sin cobrar de más
-              por un diagnóstico que ya tiene respuesta.
+              Evaluamos sÃ­ntomas, consumo elÃ©ctrico y estado de placa antes de confirmar presupuesto.
+              Si el Galaxy no conviene reparar, te lo decimos con datos claros â€” sin cobrar de mÃ¡s
+              por un diagnÃ³stico que ya tiene respuesta.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
@@ -589,7 +589,7 @@ export default function SamsungRepairGuidePage() {
 
         <section className="space-y-5 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
           <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-white">
-            ¿Qué modelos Samsung reparan en Team Celular?
+            Â¿QuÃ© modelos Samsung reparan en Team Celular?
           </h2>
           <p className="text-center text-slate-600 dark:text-slate-300">
             Cobertura para familias Galaxy S, A, Note y plegables Z.

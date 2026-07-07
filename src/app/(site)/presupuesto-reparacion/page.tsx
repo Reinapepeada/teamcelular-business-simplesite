@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import RepairsForm from "@/components/forms/RepairsForm";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
@@ -27,7 +27,7 @@ export const metadata = buildWebsiteMetadata({
     path: "/presupuesto-reparacion",
     title: "Presupuesto Reparación Celulares CABA | Team Celular — Recoleta y Belgrano",
     description:
-        "Presupuesto de reparación de celular en CABA, sin compromiso. Team Celular en Paraguay 2451 Recoleta y Amenábar 2030 Belgrano. Respuesta en 2 h. Garantía escrita 90 días.",
+        "Presupuesto de reparación de celular en CABA, sin compromiso. Team Celular en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano. Respuesta en 2 h. Garantía escrita 90 días.",
     keywords: [
         "presupuesto reparación celulares",
         "servicio técnico celulares buenos aires",
@@ -42,7 +42,7 @@ export const metadata = buildWebsiteMetadata({
     openGraphTitle:
         "Presupuesto Reparación Celulares en CABA | Team Celular",
     openGraphDescription:
-        "Team Celular, dos sucursales en CABA: Paraguay 2451 Recoleta y Amenábar 2030 Belgrano. Respuesta en 2 h por WhatsApp y garantía escrita 90 días.",
+        "Team Celular, dos sucursales en CABA: Paraguay 2451 Recoleta y Amenábar 2032 Belgrano. Respuesta en 2 h por WhatsApp y garantía escrita 90 días.",
     openGraphImageAlt: "Laboratorio de Team Celular en CABA",
     twitterTitle: "Presupuesto Reparación Celulares CABA | Team Celular",
     twitterDescription:
@@ -67,7 +67,7 @@ const processSteps = [
         icon: FaTools,
         title: "Traelo o coordinamos retiro",
         description:
-            "Podés acercarte a cualquiera de nuestras sucursales en CABA — Recoleta (Paraguay 2451) o Belgrano (Amenábar 2030) — o coordinar retiro según disponibilidad.",
+            "Podés acercarte a cualquiera de nuestras sucursales en CABA — Recoleta (Paraguay 2451) o Belgrano (Amenábar 2032) — o coordinar retiro según disponibilidad.",
         timing: "Mismo día",
     },
     {
@@ -156,7 +156,7 @@ const supportChannels = [
     {
         icon: FaMapMarkerAlt,
         title: "Visitanos",
-        description: "Recoleta (Paraguay 2451) · Belgrano (Amenábar 2030)",
+        description: "Recoleta (Paraguay 2451) · Belgrano (Amenábar 2032)",
         href: "/sucursales",
         external: false,
     },
@@ -212,7 +212,7 @@ export default function PresupuestoReparacionPage() {
                             Presupuesto de reparación de celulares en CABA
                         </h1>
                         <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
-                            Team Celular tiene dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2030, Belgrano</strong>. Respondemos presupuestos en hasta 2 h por WhatsApp. Pantalla, batería, carga y microelectrónica con garantía escrita de 90 días sobre trabajo y repuesto.
+                            Team Celular tiene dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2032, Belgrano</strong>. Respondemos presupuestos en hasta 2 h por WhatsApp. Pantalla, batería, carga y microelectrónica con garantía escrita de 90 días sobre trabajo y repuesto.
                         </p>
 
                         <ul className="mt-6 space-y-3 text-slate-700 dark:text-slate-300">
