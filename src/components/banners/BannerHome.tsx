@@ -11,7 +11,7 @@ const intakeProofs = [
 
 export default function BannerHome() {
     return (
-        <section className="relative w-full overflow-hidden bg-[#171820] text-white">
+        <section className="relative mx-4 mt-4 overflow-hidden rounded-[16px_16px_16px_6px] border border-[#2d2e83]/35 bg-[#171820] text-white sm:mx-6 lg:mx-8">
             <div className="grid min-h-[37rem] lg:grid-cols-[minmax(0,0.92fr)_minmax(30rem,1.08fr)]">
                 <div className="relative z-10 flex flex-col justify-between px-6 py-9 sm:px-9 lg:px-12 lg:py-12">
                     <div className="flex items-center gap-3 text-sm text-white/75">
@@ -71,17 +71,17 @@ export default function BannerHome() {
                         priority
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#171820]/75 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#171820]/35 lg:via-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 flex flex-wrap items-end justify-between gap-4 border-t border-white/20 bg-[#171820]/85 px-6 py-5 backdrop-blur-md sm:px-8">
+                    <div className="liquid-glass liquid-glass-light absolute bottom-4 left-4 right-4 flex flex-wrap items-end justify-between gap-4 rounded-2xl px-5 py-4 text-[#171820] sm:bottom-6 sm:left-6 sm:right-6 sm:px-6">
                         <div>
                             <p className="text-sm font-bold">Dos sucursales en CABA</p>
-                            <p className="mt-1 text-sm text-white/70">Paraguay 2451 · Amenábar 2032</p>
+                            <p className="mt-1 text-sm font-medium text-[#30313c]">Paraguay 2451 · Amenábar 2032</p>
                         </div>
                         <TrackedCtaLink
                             href="/sucursales"
                             ctaName="home_hero_branches"
                             ctaLocation="home_hero"
                             ctaVariant="secondary"
-                            className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-white/30 px-4 py-2 text-sm font-semibold transition hover:bg-white hover:text-[#171820] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                            className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-[#20216b]/20 bg-white/70 px-4 py-2 text-sm font-bold text-[#20216b] transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#20216b]"
                         >
                             Elegir sucursal
                             <BsArrowRight aria-hidden />

@@ -1,0 +1,45 @@
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\Laboratorio\Documents\GitHub\teamcelular\package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * C:\Users\Laboratorio\Documents\GitHub\teamcelular\teamcelular-business-simplesite\package-lock.json
+
+[Error: ENOENT: no such file or directory, stat 'C:\Users\Laboratorio\Documents\GitHub\teamcelular\teamcelular-business-simplesite\.next\cache\webpack\server-development\1.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\Laboratorio\\Documents\\GitHub\\teamcelular\\teamcelular-business-simplesite\\.next\\cache\\webpack\\server-development\\1.pack.gz'
+}
+ ⨯ unhandledRejection: [Error: ENOENT: no such file or directory, stat 'C:\Users\Laboratorio\Documents\GitHub\teamcelular\teamcelular-business-simplesite\.next\cache\webpack\server-development\1.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\Laboratorio\\Documents\\GitHub\\teamcelular\\teamcelular-business-simplesite\\.next\\cache\\webpack\\server-development\\1.pack.gz'
+}
+ ⨯ unhandledRejection:  [Error: ENOENT: no such file or directory, stat 'C:\Users\Laboratorio\Documents\GitHub\teamcelular\teamcelular-business-simplesite\.next\cache\webpack\server-development\1.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\Laboratorio\\Documents\\GitHub\\teamcelular\\teamcelular-business-simplesite\\.next\\cache\\webpack\\server-development\\1.pack.gz'
+}
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, stat 'C:\Users\Laboratorio\Documents\GitHub\teamcelular\teamcelular-business-simplesite\.next\cache\webpack\server-development\1.pack.gz'
+[Error: ENOENT: no such file or directory, stat 'C:\Users\Laboratorio\Documents\GitHub\teamcelular\teamcelular-business-simplesite\.next\cache\webpack\client-development\2.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\Laboratorio\\Documents\\GitHub\\teamcelular\\teamcelular-business-simplesite\\.next\\cache\\webpack\\client-development\\2.pack.gz'
+}
+ ⨯ unhandledRejection: [Error: ENOENT: no such file or directory, stat 'C:\Users\Laboratorio\Documents\GitHub\teamcelular\teamcelular-business-simplesite\.next\cache\webpack\client-development\2.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\Laboratorio\\Documents\\GitHub\\teamcelular\\teamcelular-business-simplesite\\.next\\cache\\webpack\\client-development\\2.pack.gz'
+}
+ ⨯ unhandledRejection:  [Error: ENOENT: no such file or directory, stat 'C:\Users\Laboratorio\Documents\GitHub\teamcelular\teamcelular-business-simplesite\.next\cache\webpack\client-development\2.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\Laboratorio\\Documents\\GitHub\\teamcelular\\teamcelular-business-simplesite\\.next\\cache\\webpack\\client-development\\2.pack.gz'
+}
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, stat 'C:\Users\Laboratorio\Documents\GitHub\teamcelular\teamcelular-business-simplesite\.next\cache\webpack\client-development\2.pack.gz'

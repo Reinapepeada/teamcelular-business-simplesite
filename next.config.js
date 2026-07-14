@@ -26,6 +26,7 @@ const securityHeaders = [
 module.exports = {
   reactStrictMode: true,
   poweredByHeader: false,
+  outputFileTracingRoot: __dirname,
   experimental: {
     optimizePackageImports: [
       "react-icons",

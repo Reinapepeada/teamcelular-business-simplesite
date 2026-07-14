@@ -21,6 +21,43 @@
 @layer utilities {
 	.focus-ring {
 		outline: none;
-		box-shadow: 0 0 0 3px rgba(59,130,246,0.25); /* Tailwind ring-2 blue-500/25 */
+		box-shadow: 0 0 0 3px color-mix(in srgb, #2d2e83 25%, transparent);
+	}
+
+	.liquid-glass {
+		isolation: isolate;
+		background: linear-gradient(135deg, rgba(23,24,32,0.78), rgba(32,33,55,0.64));
+		border: 1px solid rgba(255,255,255,0.46);
+		box-shadow: inset 0 1px 0 rgba(255,255,255,0.28), 0 4px 8px rgba(23,24,32,0.24);
+		-webkit-backdrop-filter: blur(22px) saturate(150%);
+		backdrop-filter: blur(22px) saturate(150%);
+	}
+
+	.liquid-glass::before {
+		content: "";
+		position: absolute;
+		inset: 1px;
+		z-index: -1;
+		border-radius: inherit;
+		background: linear-gradient(115deg, rgba(255,255,255,0.16), transparent 38%, rgba(139,167,255,0.1));
+		pointer-events: none;
+	}
+
+	.liquid-glass-light {
+		background: linear-gradient(135deg, rgba(255,255,255,0.78), rgba(244,246,255,0.62));
+		border-color: rgba(255,255,255,0.86);
+		box-shadow: inset 0 1px 0 rgba(255,255,255,0.78), 0 4px 8px rgba(23,24,32,0.18);
+	}
+}
+
+@media (prefers-reduced-transparency: reduce) {
+	.liquid-glass {
+		background: rgba(23,24,32,0.94);
+		-webkit-backdrop-filter: none;
+		backdrop-filter: none;
+	}
+
+	.liquid-glass-light {
+		background: rgba(255,255,255,0.96);
 	}
 }

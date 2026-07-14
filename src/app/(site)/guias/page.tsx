@@ -326,9 +326,9 @@ const articleLinkTargets: Record<
 export const metadata: Metadata = {
   ...buildWebsiteMetadata({
     path: "/guias",
-    title: "Guias de Reparacion de Celulares en CABA | Team Celular",
+    title: "Guías de Reparación de Celulares en CABA | Team Celular",
     description:
-      "Compara fallas, costos y tiempos en 8 guias practicas: iPhone, Samsung, Xiaomi, bateria, pantalla, microelectronica y soporte empresas.",
+      "Guias practicas de Team Celular para entender fallas de pantalla, bateria, carga y placa antes de pedir una reparacion en CABA.",
     keywords: [
       "guias reparacion celulares",
       "reparacion iPhone buenos aires",
@@ -353,12 +353,12 @@ export const metadata: Metadata = {
     languages: {
       "es-AR": "/guias",
     },
-    openGraphTitle: "Guias de Reparacion de Celulares en CABA | Team Celular",
+    openGraphTitle: "Guías de Reparación de Celulares en CABA | Team Celular",
     openGraphDescription:
       "Aprende y decide mejor antes de reparar: guias tecnicas reales por marca, falla y nivel de complejidad.",
-    openGraphImagePath: "/images/banner_guias.webp",
-    openGraphImageAlt: "Centro de guias tecnicas Team Celular",
-    twitterTitle: "Guias de Reparacion de Celulares en CABA | Team Celular",
+    openGraphImagePath: "/images/guia_microelectronica.webp",
+    openGraphImageAlt: "Diagnóstico de celulares en el laboratorio de Team Celular",
+    twitterTitle: "Guías de Reparación de Celulares en CABA | Team Celular",
     twitterDescription:
       "Guias claras para iPhone, Samsung y Xiaomi: fallas comunes, criterios tecnicos y siguiente paso recomendado.",
   }),
@@ -369,8 +369,8 @@ export const metadata: Metadata = {
 
 export default function GuidesPage() {
   return (
-    <div className="flex w-full justify-center px-4 py-16">
-      <div className="w-full max-w-6xl space-y-12">
+    <div className="flex w-full justify-center bg-[#f7f8fc] px-4 py-8 text-slate-950 dark:bg-slate-950 dark:text-white sm:px-6 lg:px-8">
+      <div className="w-full max-w-[100rem] space-y-16">
         <BreadcrumbJsonLd
           items={[
             { name: "Inicio", url: `${SITE_URL}/` },
@@ -388,133 +388,49 @@ export default function GuidesPage() {
           </span>
         </nav>
 
-        <header className="relative overflow-hidden rounded-3xl border border-slate-200/80 bg-white/90 shadow-xl dark:border-white/10 dark:bg-slate-900/90">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.08),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.08),transparent_30%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.12),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.1),transparent_30%)]"
-          />
-          <div className="relative space-y-8 p-8 text-left md:p-12">
-            <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
-              <div className="space-y-4">
-                <div className="flex flex-wrap items-center gap-3">
-                  <span className="inline-flex items-center gap-2 rounded-full border border-primary/35 bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-white">
-                    <FaBookOpen className="text-sm" />
-                    Guias Team Celular
-                  </span>
-                  <span className="rounded-full border border-slate-300/80 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700 dark:border-white/15 dark:bg-slate-950/70 dark:text-slate-200">
-                    Recoleta y Belgrano · CABA
-                  </span>
-                </div>
-                <div className="w-fit rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-600 dark:border-white/10 dark:bg-slate-950/60 dark:text-slate-300">
-                  Contenido tecnico con criterio comercial real
-                </div>
-              </div>
-
-              <div className="w-full max-w-[260px] rounded-3xl border border-slate-200/80 bg-white p-5 shadow-lg dark:border-white/10 dark:bg-slate-950/70">
-                <Image
-                  src="/images/brand/imagotipo-light.png"
-                  alt="Team Celular"
-                  width={1725}
-                  height={591}
-                  priority
-                  sizes="(max-width: 768px) 220px, 260px"
-                  className="h-auto w-full dark:hidden"
-                />
-                <Image
-                  src="/images/brand/imagotipo-dark.png"
-                  alt="Team Celular"
-                  width={1725}
-                  height={591}
-                  priority
-                  sizes="(max-width: 768px) 220px, 260px"
-                  className="hidden h-auto w-full dark:block"
-                />
-              </div>
+        <header className="grid overflow-hidden bg-[#171820] text-white lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-14">
+            <div className="flex items-center gap-3 text-sm text-white/70">
+              <FaBookOpen aria-hidden />
+              <span>Guías del laboratorio · Recoleta y Belgrano</span>
             </div>
-
-            <div className="space-y-4">
-              <h1 className="max-w-3xl text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
-                Guías técnicas de Team Celular en CABA.
-              </h1>
-              <p className="max-w-3xl text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-                Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), publica guías sobre fallas frecuentes, diagnóstico técnico y criterios de repuesto para iPhone, Samsung, Xiaomi, Motorola, microelectrónica y soporte para empresas.
-              </p>
-            </div>
-
-            <div className="grid gap-4 sm:grid-cols-3">
-              <div className="rounded-2xl border border-slate-200/80 bg-slate-50 p-5 dark:border-white/10 dark:bg-slate-950/55">
-                <div className="mb-3 flex items-center gap-3">
-                  <FaChartLine className="text-2xl text-primary" />
-                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-                    Trayectoria
-                  </span>
-                </div>
-                <div className="text-3xl font-black text-slate-900 dark:text-slate-100">
-                  10+
-                </div>
-                <div className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-                  Anos reparando equipos reales
-                </div>
-              </div>
-              <div className="rounded-2xl border border-slate-200/80 bg-slate-50 p-5 dark:border-white/10 dark:bg-slate-950/55">
-                <div className="mb-3 flex items-center gap-3">
-                  <FaTools className="text-2xl text-secondary" />
-                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-                    Cobertura
-                  </span>
-                </div>
-                <div className="text-3xl font-black text-slate-900 dark:text-slate-100">
-                  {ARTICLES.length}
-                </div>
-                <div className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-                  Guias activas por marca y falla
-                </div>
-              </div>
-              <div className="rounded-2xl border border-slate-200/80 bg-slate-50 p-5 dark:border-white/10 dark:bg-slate-950/55">
-                <div className="mb-3 flex items-center gap-3">
-                  <FaClock className="text-2xl text-primary" />
-                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-                    Respuesta
-                  </span>
-                </div>
-                <div className="text-3xl font-black text-slate-900 dark:text-slate-100">
-                  24 h
-                </div>
-                <div className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-                  Diagnostico y criterio tecnico
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="/presupuesto-reparacion"
-                className="rounded-full bg-primary px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
-              >
-                Solicitar asesoria inmediata
+            <h1 className="mt-8 max-w-3xl text-balance text-[clamp(2.75rem,6vw,5rem)] font-extrabold leading-[0.98] tracking-[-0.035em]">
+              Entendé la falla antes de decidir la reparación.
+            </h1>
+            <p className="mt-6 max-w-2xl text-pretty text-lg leading-8 text-slate-300">
+              Explicamos síntomas, diagnóstico y opciones de reparación con el mismo criterio que usamos en el laboratorio. Sin alarmismo y sin cambiar piezas por descarte.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="#guias-destacadas" className="inline-flex min-h-12 items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#20216b] transition hover:bg-slate-100">
+                Elegir una guía <FaArrowRight aria-hidden />
               </Link>
-              <Link
-                href="/contacto"
-                className="rounded-full border-2 border-primary px-8 py-4 text-base font-semibold text-primary transition hover:bg-primary/10"
-              >
-                Hablar con un tecnico
-              </Link>
+              <TrackedCtaLink href="/presupuesto-reparacion#solicitar-presupuesto" ctaName="guides_hero_budget" ctaLocation="guides_hero" ctaVariant="secondary" className="inline-flex min-h-12 items-center rounded-lg border border-white/35 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10">
+                Consultar una falla
+              </TrackedCtaLink>
+            </div>
+          </div>
+          <div className="relative min-h-[24rem] lg:min-h-[38rem]">
+            <Image src="/images/guia_microelectronica.webp" alt="Diagnóstico de un celular en el laboratorio de Team Celular" fill priority sizes="(max-width: 1024px) 100vw, 55vw" className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#171820]/70 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#171820]/30 lg:via-transparent" />
+            <div className="liquid-glass absolute bottom-5 left-5 right-5 rounded-2xl px-5 py-4 sm:bottom-7 sm:left-7 sm:right-7">
+              <p className="font-bold">Contenido revisado por el equipo técnico</p>
+              <p className="mt-1 text-sm text-white/75">Marca, falla y siguiente paso en una lectura clara.</p>
             </div>
           </div>
         </header>
 
-        <section className="space-y-8">
-          <div className="text-center">
-            <h2 className="mb-3 text-3xl font-bold text-slate-900 dark:text-slate-100">
-              Explora nuestras guias especializadas
+        <section id="guias-destacadas" className="space-y-8 scroll-mt-28">
+          <div className="max-w-3xl">
+            <h2 className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">
+              Buscá por marca o por síntoma
             </h2>
-            <p className="text-lg text-slate-600 dark:text-slate-300">
-              Contenido tecnico y util para usuarios y empresas.
+            <p className="mt-4 text-pretty text-lg leading-8 text-slate-600 dark:text-slate-300">
+              Cada guía separa lo que podés comprobar en casa de lo que requiere diagnóstico técnico.
             </p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2">
-            {ARTICLES.map((article) => {
+          <div className="grid grid-cols-12 gap-6">
+            {ARTICLES.map((article, index) => {
               const Icon = article.Icon;
               const visual = articleVisuals[article.href] ?? {
                 cover: "/images/fondofooter.webp",
@@ -530,9 +446,9 @@ export default function GuidesPage() {
               return (
                 <article
                   key={article.href}
-                  className="group overflow-hidden rounded-2xl border border-slate-200/80 bg-white/85 p-4 shadow-lg transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/85 md:p-5"
+                  className={`group col-span-12 overflow-hidden bg-white transition hover:-translate-y-1 dark:bg-slate-900 ${index % 5 === 3 ? "md:col-span-7" : index % 5 === 4 ? "md:col-span-5" : "md:col-span-6"}`}
                 >
-                  <div className="relative mb-5 h-48 overflow-hidden rounded-xl border border-slate-200/80 bg-slate-100 dark:border-white/10 dark:bg-slate-950/40">
+                  <div className="relative h-56 overflow-hidden sm:h-64">
                     <Image
                       src={visual.cover}
                       alt={article.title}
@@ -540,86 +456,44 @@ export default function GuidesPage() {
                       sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover transition duration-500 group-hover:scale-[1.02]"
                     />
-                    <div className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-full bg-white/92 px-3 py-1 text-xs font-semibold text-slate-900 shadow-sm dark:bg-slate-950/85 dark:text-slate-100">
+                    <div className="liquid-glass absolute left-3 top-3 inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-semibold text-white">
                       <FaClock className="text-[11px]" />
                       {article.readingTime}
                     </div>
                   </div>
 
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-900 text-2xl text-white dark:bg-white dark:text-slate-900">
-                        <Icon />
+                  <div className="p-6 sm:p-7">
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3 text-sm font-bold text-[#2d2e83] dark:text-[#aebaff]">
+                        <Icon aria-hidden />
+                        <span>{article.category}</span>
                       </div>
                       <time
                         dateTime={article.datePublished}
-                        className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700 dark:border-white/10 dark:bg-slate-950/60 dark:text-slate-300"
+                        className="text-xs font-medium text-slate-500 dark:text-slate-400"
                       >
                         {updatedDate}
                       </time>
                     </div>
 
-                    <span className="inline-block rounded-full border border-primary/25 bg-primary/15 px-3 py-1 text-xs font-semibold text-slate-900 dark:border-primary/30 dark:bg-primary/30 dark:text-slate-100">
-                      {article.category}
-                    </span>
-
-                    <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+                    <h3 className="mt-5 text-2xl font-extrabold tracking-[-0.02em] text-slate-950 dark:text-white">
                       {article.title}
                     </h3>
 
-                    <p className="leading-relaxed text-slate-700 dark:text-slate-300">
+                    <p className="mt-3 max-w-2xl leading-7 text-slate-600 dark:text-slate-300">
                       {article.description}
                     </p>
 
-                    <div className="flex flex-wrap gap-2 pt-2">
-                      {article.keywords.slice(0, 3).map((keyword) => (
-                        <span
-                          key={keyword}
-                          className="rounded-full border border-primary/25 bg-primary/15 px-3 py-1 text-xs font-medium text-slate-800 dark:border-primary/35 dark:bg-primary/30 dark:text-slate-100"
-                        >
-                          {keyword}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="rounded-xl border border-slate-200/80 bg-slate-50/90 p-4 dark:border-white/10 dark:bg-slate-950/40">
-                      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-600 dark:text-slate-300">
-                        Siguiente paso recomendado
-                      </p>
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        <Link
-                          href={links.serviceHref}
-                          className="inline-flex min-h-9 items-center rounded-full border border-primary/30 bg-white px-3 text-xs font-semibold text-slate-800 transition hover:border-primary/45 hover:bg-primary/10 dark:border-primary/35 dark:bg-slate-900/70 dark:text-slate-100"
-                        >
-                          {links.serviceLabel}
-                        </Link>
-                        <Link
-                          href={links.siblingHref}
-                          className="inline-flex min-h-9 items-center rounded-full border border-slate-300/80 bg-white px-3 text-xs font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200"
-                        >
-                          {links.siblingLabel}
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 flex flex-wrap gap-3">
+                    <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-slate-200 pt-5 dark:border-slate-700">
                     <Link
                       href={article.href}
-                      className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg transition group-hover:gap-3 group-hover:bg-primary dark:bg-primary dark:group-hover:bg-secondary"
+                      className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#2d2e83] px-5 py-2 text-sm font-bold text-white transition group-hover:gap-3 group-hover:bg-[#20216b]"
                     >
-                      Leer guia completa
+                      Leer guía
                       <FaArrowRight />
                     </Link>
-                    <TrackedCtaLink
-                      href="/presupuesto-reparacion#solicitar-presupuesto"
-                      ctaName="guides_card_budget"
-                      ctaLocation="guides_hub_card"
-                      ctaVariant="secondary"
-                      className="inline-flex items-center rounded-full border border-primary/30 bg-white px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10 dark:border-primary/40 dark:bg-slate-950/70"
-                    >
-                      Pedir presupuesto
-                    </TrackedCtaLink>
+                      <Link href={links.serviceHref} className="inline-flex min-h-11 items-center text-sm font-bold text-slate-600 hover:text-[#2d2e83] dark:text-slate-300 dark:hover:text-white">{links.serviceLabel}</Link>
+                    </div>
                   </div>
                 </article>
               );
@@ -727,7 +601,7 @@ export default function GuidesPage() {
               name: "Guias tecnicas de reparacion de celulares",
               description:
                 "Centro de guías técnicas de Team Celular — Paraguay 2451 Recoleta y Amenábar 2032 Belgrano, CABA. Reparación por marca, microelectrónica y soporte corporativo.",
-              image: `${SITE_URL}/images/banner_guias.webp`,
+               image: `${SITE_URL}/images/guia_microelectronica.webp`,
               provider: { "@id": `${SITE_URL}#localbusiness` },
               hasPart: ARTICLES.map((article) => ({
                 "@type": "Article",

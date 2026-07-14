@@ -108,6 +108,8 @@ La paleta parte del índigo real del imagotipo y lo contrasta con grafito, blanc
 
 El sistema es plano por defecto. La profundidad nace de fotografía, superposición tonal y divisores. Las cards fotográficas pueden elevarse hasta 4px en hover porque ya pertenecen al lenguaje existente; botones y bloques informativos no combinan borde con sombra amplia.
 
+Liquid Glass es una excepción funcional: se usa únicamente para información o controles que flotan sobre fotografía. Combina transparencia blanca, blur de 22px, saturación moderada y borde luminoso; nunca reemplaza una superficie de lectura extensa y debe tener fallback sólido con reducción de transparencia.
+
 **The Flat Workbench Rule.** Las superficies descansan sobre el banco; solo los elementos interactivos responden al usuario.
 
 ## 5. Components
@@ -146,6 +148,10 @@ Navegación clara y compacta. La acción de presupuesto es primaria; WhatsApp co
 
 Fotografía completa, overlay oscuro y título en la imagen. La grilla 4/4/4 seguida de 5/7 es una firma de la home; conservar su asimetría y evitar convertirla en cards idénticas.
 
+### Liquid Glass Overlay
+
+Panel contextual sobre fotografía, radio de 16px y texto blanco de alto contraste. Reservado para ubicación, estado o siguiente acción. No usarlo como fondo de secciones, formularios ni artículos.
+
 ## 6. Do's and Don'ts
 
 ### Do:
@@ -153,6 +159,7 @@ Fotografía completa, overlay oscuro y título en la imagen. La grilla 4/4/4 seg
 - **Do** usar #2D2E83 como color de marca y #171820 como superficie técnica.
 - **Do** mostrar procesos, sucursales, garantía y trabajo real antes que adjetivos.
 - **Do** conservar las proporciones asimétricas y fotografías de las cards existentes.
+- **Do** limitar Liquid Glass a una o dos capas funcionales por hero o superficie fotográfica.
 - **Do** verificar contraste WCAG 2.2 AA, teclado, responsive y movimiento reducido.
 
 ### Don't:
@@ -160,6 +167,7 @@ Fotografía completa, overlay oscuro y título en la imagen. La grilla 4/4/4 seg
 - **Don't** construir una landing SaaS intercambiable con gradientes, métricas flotantes y tarjetas idénticas.
 - **Don't** parecer un e-commerce genérico que prioriza promociones sobre confianza técnica.
 - **Don't** usar estética futurista azul neón, glassmorphism o fondos de cuadrícula decorativa.
+- **Don't** convertir Liquid Glass en glassmorphism decorativo repetido; el contenido principal debe seguir sobre superficies sólidas.
 - **Don't** comunicar como un taller improvisado ni hacer promesas absolutas sin condiciones.
 - **Don't** usar un diseño editorial de moda que dificulte encontrar servicios, sucursales o contacto.
 - **Don't** combinar borde de 1px y sombra suave amplia, usar gradient text ni radios de 32px en cards.

@@ -1,0 +1,38 @@
+
+> teamcelular-simplesite@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.5.10
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.178:3000
+   - Environments: .env.local
+   - Experiments (use with caution):
+     · optimizePackageImports
+
+ ✓ Starting...
+ ✓ Ready in 2.7s
+ ○ Compiling / ...
+ ✓ Compiled / in 12.8s (2163 modules)
+ ✓ Compiled in 1766ms (932 modules)
+ GET / 200 in 14899ms
+ ✓ Compiled in 1808ms (2154 modules)
+ GET / 200 in 548ms
+ GET / 200 in 551ms
+ ✓ Compiled /icon.ico in 300ms (1239 modules)
+ GET /icon.ico 200 in 424ms
+ GET / 200 in 1041ms
+ ○ Compiling /guias ...
+ ✓ Compiled /guias in 1125ms (2171 modules)
+ GET / 200 in 1332ms
+ GET /guias 200 in 2737ms
+ ✓ Compiled /icon.ico in 429ms (1254 modules)
+ ✓ Compiled (1256 modules)
+ GET /icon.ico 200 in 1008ms
+ GET /favicon.ico 200 in 1047ms
+ GET /icon.ico 200 in 49ms
+ GET /favicon.ico 200 in 59ms
+ GET /guias 200 in 1522ms
+ ○ Compiling /guias/celular-mojado-que-hacer ...
+ ✓ Compiled /guias/celular-mojado-que-hacer in 1664ms (2181 modules)
+ GET /guias/celular-mojado-que-hacer 200 in 2483ms
+[?25h
