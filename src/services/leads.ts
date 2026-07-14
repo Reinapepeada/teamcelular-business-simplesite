@@ -23,6 +23,8 @@ export interface RepairLead {
     description: string;
     contactChannel: string;
     contact: string;
+    preferredBranch: string;
+    branchSelectionMethod: string;
     leadAttemptId: string;
     wizardSource: string;
     duplicateOf: string;
@@ -342,6 +344,14 @@ function normalizeLead(raw: unknown): RepairLead {
             "whatsapp"
         ),
         contact,
+        preferredBranch: asString(
+            pickFirst(record, ["preferred_branch", "preferredBranch"]),
+            ""
+        ),
+        branchSelectionMethod: asString(
+            pickFirst(record, ["branch_selection_method", "branchSelectionMethod"]),
+            ""
+        ),
         leadAttemptId,
         wizardSource,
         duplicateOf,

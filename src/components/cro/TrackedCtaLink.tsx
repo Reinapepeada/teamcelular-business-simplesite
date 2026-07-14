@@ -7,6 +7,7 @@ import {
   recordLeadInteraction,
   type LeadInteractionCtaVariant,
 } from "@/lib/analytics/leadInteractions";
+import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 
 type CtaVariant = LeadInteractionCtaVariant;
 
@@ -23,6 +24,7 @@ interface TrackedCtaLinkProps {
   rel?: string;
   prefetch?: boolean;
   ariaLabel?: string;
+  directBranch?: boolean;
 }
 
 function trackCta(
@@ -61,12 +63,33 @@ export default function TrackedCtaLink({
   rel,
   prefetch,
   ariaLabel,
+  directBranch = false,
 }: TrackedCtaLinkProps) {
   const handleClick: MouseEventHandler<HTMLAnchorElement> = () => {
     trackCta(eventName, ctaName, ctaLocation, ctaVariant, href);
   };
 
   const safeRel = target === "_blank" ? rel || "noopener noreferrer" : rel;
+
+  if (ctaVariant === "whatsapp" && external && !directBranch) {
+    let message: string | undefined;
+    try {
+      message = new URL(href).searchParams.get("text") || undefined;
+    } catch {
+      message = undefined;
+    }
+    return (
+      <BranchWhatsAppButton
+        ctaName={ctaName}
+        ctaLocation={ctaLocation}
+        className={className}
+        message={message}
+        ariaLabel={ariaLabel}
+      >
+        {children}
+      </BranchWhatsAppButton>
+    );
+  }
 
   if (external) {
     return (

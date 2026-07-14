@@ -9,6 +9,13 @@ import {
     buildBudgetFunnelPayload,
 } from "@/lib/analytics/budgetFunnel";
 import { recordLeadInteraction } from "@/lib/analytics/leadInteractions";
+import { BranchPreferencePicker } from "@/components/cro/BranchSelector";
+import {
+    readBranchPreference,
+    saveBranchPreference,
+    type BranchSelectionMethod,
+    type BranchSlug,
+} from "@/lib/branchPreference";
 import {
     FaArrowLeft,
     FaArrowRight,
@@ -95,6 +102,8 @@ export default function RepairsForm() {
     const [description, setDescription] = useState("");
     const [contactChannel, setContactChannel] = useState<(typeof contactChannelOptions)[number]["value"]>("whatsapp");
     const [contact, setContact] = useState("");
+    const [preferredBranch, setPreferredBranch] = useState<BranchSlug | "">("");
+    const [branchSelectionMethod, setBranchSelectionMethod] = useState<BranchSelectionMethod>("manual");
     const [errorMessage, setErrorMessage] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [leadAttemptId, setLeadAttemptId] = useState("");
@@ -107,6 +116,12 @@ export default function RepairsForm() {
     const submittedRef = useRef(false);
 
     useEffect(() => {
+        const preference = readBranchPreference();
+        if (preference) {
+            setPreferredBranch(preference.slug);
+            setBranchSelectionMethod("remembered");
+        }
+
         if (typeof window !== "undefined" && typeof window.crypto?.randomUUID === "function") {
             setLeadAttemptId(window.crypto.randomUUID());
             return;
@@ -165,6 +180,9 @@ export default function RepairsForm() {
         }
 
         if (index === LAST_STEP_INDEX) {
+            if (!preferredBranch) {
+                return "Elegí la sucursal con la que preferís hablar.";
+            }
             const normalizedContact = contact.trim();
             if (normalizedContact) {
                 if (
@@ -181,6 +199,13 @@ export default function RepairsForm() {
         }
 
         return null;
+    }
+
+    function selectBranch(slug: BranchSlug, method: BranchSelectionMethod) {
+        setPreferredBranch(slug);
+        setBranchSelectionMethod(method);
+        saveBranchPreference(slug, method);
+        setErrorMessage("");
     }
 
     function toggleRepairType(option: string) {
@@ -261,6 +286,8 @@ export default function RepairsForm() {
             formData.set("description", description);
             formData.set("contactChannel", contactChannel);
             formData.set("contact", contact);
+            formData.set("preferredBranch", preferredBranch);
+            formData.set("branchSelectionMethod", branchSelectionMethod);
             formData.set("wizardSource", `budget_wizard_${BUDGET_WIZARD_VERSION}`);
             formData.set("leadAttemptId", leadAttemptId);
 
@@ -291,6 +318,8 @@ export default function RepairsForm() {
                     repair_type: repairTypeLabel || "sin_definir",
                     urgency,
                     contact_channel: contactChannel,
+                    preferred_branch: preferredBranch,
+                    branch_selection_method: branchSelectionMethod,
                 },
             });
 
@@ -519,6 +548,8 @@ export default function RepairsForm() {
                     </span>
                 </label>
 
+                <BranchPreferencePicker value={preferredBranch} onChange={selectBranch} />
+
                 <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 text-sm leading-6 text-slate-700 dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-300">
                     <p className="font-semibold text-slate-900 dark:text-slate-100">
                         Resumen rapido antes de enviar
@@ -535,6 +566,10 @@ export default function RepairsForm() {
                         </li>
                         <li>
                             <strong>Canal:</strong> {selectedContactChannel?.label || "-"}
+                        </li>
+                        <li>
+                            <strong>Sucursal preferida:</strong>{" "}
+                            {preferredBranch ? preferredBranch[0].toUpperCase() + preferredBranch.slice(1) : "-"}
                         </li>
                     </ul>
                 </div>
@@ -608,6 +643,8 @@ export default function RepairsForm() {
             <input type="hidden" name="description" value={description} />
             <input type="hidden" name="contactChannel" value={contactChannel} />
             <input type="hidden" name="contact" value={contact} />
+            <input type="hidden" name="preferredBranch" value={preferredBranch} />
+            <input type="hidden" name="branchSelectionMethod" value={branchSelectionMethod} />
             <input
                 type="hidden"
                 name="wizardSource"
@@ -644,7 +681,11 @@ export default function RepairsForm() {
                         className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/20 transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:opacity-70"
                     >
                         <FaWhatsapp aria-hidden />
-                        {isSubmitting ? "Guardando datos..." : "Enviar datos y abrir WhatsApp"}
+                        {isSubmitting
+                            ? "Guardando datos..."
+                            : preferredBranch
+                                ? `Enviar a WhatsApp de ${preferredBranch[0].toUpperCase() + preferredBranch.slice(1)}`
+                                : "Elegí una sucursal"}
                     </button>
                 )}
 

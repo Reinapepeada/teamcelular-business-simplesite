@@ -1,20 +1,20 @@
 import Link from "next/link";
-import { BsCheckCircleFill } from "react-icons/bs";
+import { BsArrowRight, BsGeoAlt } from "react-icons/bs";
 import BannerHome from "@/components/banners/BannerHome";
 import BannerCards from "@/components/cards/BannerCards";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import KnowledgeGrid from "@/components/cards/KnowledgeGrid";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
+import BranchWhatsAppButton from "@/components/cro/BranchSelector";
+import { BRANCHES, BUSINESS_PROFILE } from "@/lib/businessProfile";
 import { BUDGET_RESPONSE_MESSAGE } from "@/lib/copyStandards";
-import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
-
-const SITE_URL = getSiteUrl();
+import { buildWebsiteMetadata } from "@/lib/seoMetadata";
 
 export const metadata = buildWebsiteMetadata({
     path: "/",
     title: "Reparación de Celulares en CABA | Recoleta y Belgrano | Team Celular",
     description:
-        "Reparación de celulares en CABA. Team Celular atiende en Recoleta (Paraguay 2451) y Belgrano (Amenabar 2032), con diagnóstico el mismo día y garantía escrita 90 días.",
+        "Reparación de celulares en CABA. Team Celular atiende en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032), con diagnóstico el mismo día y garantía escrita de 90 días.",
     keywords: [
         "reparacion de celulares Buenos Aires",
         "reparacion de celulares cerca de mi",
@@ -25,376 +25,201 @@ export const metadata = buildWebsiteMetadata({
         "servicio tecnico para empresas",
         "control y diagnostico de equipos",
     ],
-    languages: {
-        "es-AR": "/",
-    },
+    languages: { "es-AR": "/" },
     openGraphTitle: "Reparación de Celulares en CABA | Team Celular",
     openGraphDescription:
-        "Team Celular tiene sucursales en Recoleta y Belgrano, CABA. Cambio de pantalla y batería en el día, diagnóstico mismo día y garantía escrita 90 días.",
-    openGraphImageAlt: "Team Celular — Reparación de celulares en Recoleta, Buenos Aires",
+        "Team Celular tiene sucursales en Recoleta y Belgrano, CABA. Diagnóstico previo y garantía escrita de 90 días.",
+    openGraphImageAlt: "Team Celular — Reparación de celulares en CABA",
     twitterTitle: "Reparación de Celulares en CABA | Team Celular",
     twitterDescription:
-        "Recoleta y Belgrano, CABA. Pantalla y batería en el día, diagnóstico mismo día y garantía escrita 90 días. Lun–Vie 10:30–18:00.",
+        "Recoleta y Belgrano, CABA. Diagnóstico previo y garantía escrita de 90 días. Lun–Vie 10:30–18:00.",
 });
-
-const services = [
-    {
-        title: "Reparacion el mismo dia",
-        description:
-            "Pantalla rota, bateria que no dura y puerto de carga dañado. La mayoria de las reparaciones se resuelven en el dia.",
-    },
-    {
-        title: "Problemas complejos de placa",
-        description:
-            "Celulares mojados, que no encienden o con fallas intermitentes. Tenemos microscopio y equipamiento para microelectronica real.",
-    },
-    {
-        title: "Soporte para empresas",
-        description:
-            "Armamos planes a medida con prioridad operativa, descuentos por volumen y facturacion A para equipos de trabajo.",
-    },
-];
-
-const differentiators = [
-    {
-        title: "Garantía documentada",
-        description:
-            "Cada reparación sale con orden técnica y garantía escrita. Sin letra chica ni promesas que se evaporan.",
-    },
-    {
-        title: "Diagnóstico antes de cobrar",
-        description:
-            "Te explicamos qué falla, qué se reemplaza y cuánto tarda antes de tocar el equipo. Sin sorpresas.",
-    },
-    {
-        title: "Respuesta en el día",
-        description:
-            "WhatsApp, llamada o visita directa al laboratorio en Paraguay 2451. Respondemos en menos de 2 horas en horario hábil.",
-    },
-];
 
 const priorityRepairs = [
     {
-        title: "Cambio de pantalla",
-        description:
-            "Vidrio roto, líneas en pantalla o touch que no responde. Primero confirmamos modelo y calidad de módulo.",
+        title: "Pantalla",
+        description: "Vidrio roto, líneas o touch sin respuesta. Confirmamos modelo y calidad de módulo antes de cotizar.",
         href: "/reparaciones/cambio-pantalla-caba",
-        cta: "Ver pantalla",
     },
     {
-        title: "Cambio de batería",
-        description:
-            "Apagados, baja autonomía o temperatura anormal. Revisamos consumo antes de reemplazar.",
+        title: "Batería",
+        description: "Poca autonomía, apagados o temperatura anormal. Primero revisamos el consumo del equipo.",
         href: "/reparaciones/cambio-bateria-caba",
-        cta: "Ver batería",
     },
     {
-        title: "Pin de carga",
-        description:
-            "Falso contacto, carga lenta o equipo que no reconoce cable. No conviene forzarlo.",
+        title: "Puerto de carga",
+        description: "Falso contacto, carga lenta o cable que no reconoce. Evitá forzarlo: puede agravar la falla.",
         href: "/reparaciones/cambio-pin-carga-caba",
-        cta: "Ver carga",
     },
+];
+
+const process = [
+    { title: "Contanos la falla", description: "Con marca y modelo podemos orientarte y derivarte a la sucursal correcta." },
+    { title: "Revisamos el equipo", description: "El diagnóstico define qué conviene reparar, qué se reemplaza y cuánto demora." },
+    { title: "Decidís con el presupuesto", description: "Avanzamos después de explicarte el trabajo. La reparación queda documentada." },
 ];
 
 const faqs = [
     {
-        question: "Arreglan todo tipo de celulares?",
-        answer:
-            "Trabajamos con iPhone, Samsung, Motorola, Xiaomi y la mayoria de las marcas actuales. Si tu modelo es poco comun, te confirmamos disponibilidad antes de avanzar.",
+        question: "¿Qué marcas reparan?",
+        answer: "Trabajamos con iPhone, Samsung, Motorola, Xiaomi y la mayoría de las marcas actuales. Si tu modelo es poco común, consultanos disponibilidad antes de acercarte.",
     },
     {
-        question: "Hacen retiro dentro de CABA?",
-        answer:
-            "Podemos coordinar retiro y entrega en CABA segun disponibilidad operativa del dia.",
+        question: "¿Hacen retiro dentro de CABA?",
+        answer: "Podemos coordinar retiro y entrega en CABA según la zona y la disponibilidad operativa del día.",
     },
-    {
-        question: "Cuanto tarda un presupuesto?",
-        answer: BUDGET_RESPONSE_MESSAGE,
-    },
+    { question: "¿Cuánto tarda un presupuesto?", answer: BUDGET_RESPONSE_MESSAGE },
 ];
 
-const primaryCtaClass =
-    "rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary";
-
-const neutralCtaClass =
-    "rounded-full border border-slate-300 dark:border-slate-600 bg-white/85 dark:bg-slate-900/85 px-6 py-3 text-sm font-semibold text-slate-700 dark:text-slate-300 transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary";
+const primaryCta =
+    "inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#2d2e83] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#22236b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2d2e83]";
+const secondaryCta =
+    "inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-slate-900 transition hover:border-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2d2e83] dark:border-slate-600 dark:bg-slate-900 dark:text-white";
 
 export default function Home() {
     return (
-        <section className="flex w-full max-w-[100rem] flex-col items-center gap-16 px-6 py-14 md:px-8 2xl:px-10">
-            <BannerHome />
+        <div className="w-full bg-[#f7f8fc] text-slate-950 dark:bg-slate-950 dark:text-white">
+            <div className="mx-auto flex w-full max-w-[100rem] flex-col gap-20 px-4 py-5 sm:px-6 md:py-8 lg:px-8 lg:pb-20">
+                <BannerHome />
 
-            <section className="w-full max-w-[100rem] space-y-6">
-                <div className="flex flex-col gap-3 text-center md:text-left">
-                    <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-900 dark:text-sky-300">
-                        Reparaciones que más se piden
-                    </p>
-                    <h2 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 md:text-[2.35rem]">
-                        Lo más buscado, bien explicado y listo para cotizar
-                    </h2>
-                    <p className="max-w-3xl text-[1.03rem] leading-7 text-slate-600 dark:text-slate-400">
-                        Si ya sabés qué le pasa al equipo, entrá directo a la reparación que corresponde. Si no, te ayudamos a elegir sin vueltas.
-                    </p>
-                </div>
-
-                <div className="overflow-hidden rounded-xl border border-slate-900 bg-slate-950 text-white dark:border-slate-700">
-                    {priorityRepairs.map((item) => (
-                        <article
-                            key={item.title}
-                            className="grid gap-4 border-b border-white/10 px-5 py-5 last:border-b-0 md:grid-cols-[12rem_1fr_auto] md:items-center md:px-7"
-                        >
-                            <h3 className="text-xl font-semibold">
-                                {item.title}
-                            </h3>
-                            <p className="max-w-3xl text-sm leading-6 text-slate-300">
-                                {item.description}
-                            </p>
-                            <Link
-                                href={item.href}
-                                className="inline-flex min-h-11 items-center justify-center rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-slate-200"
-                            >
-                                {item.cta}
-                            </Link>
-                        </article>
-                    ))}
-                </div>
-            </section>
-
-            <BannerCards />
-
-            <section className="w-full max-w-[100rem] space-y-12 text-center md:text-left lg:space-y-14">
-                <article className="grid gap-10 border-y border-slate-200 bg-white py-10 dark:border-slate-800 dark:bg-slate-950 md:grid-cols-[0.9fr_1.1fr] md:items-start">
-                    <div className="space-y-6">
-                        <h2 className="text-3xl font-semibold tracking-tight text-primary md:text-[2.35rem]">
-                            Cómo trabajamos en Team Celular
+                <section aria-labelledby="repairs-title" className="grid gap-7 lg:grid-cols-[0.6fr_1.4fr] lg:gap-12">
+                    <div>
+                        <h2 id="repairs-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">
+                            Empezá por lo que le pasa al equipo
                         </h2>
-                        <p className="text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
-                            Somos un laboratorio técnico en Recoleta. Nos
-                            tomamos el trabajo en serio: diagnosticamos con
-                            criterio, reparamos sin vueltas y explicamos cada
-                            paso con palabras claras.
+                        <p className="mt-4 max-w-md text-pretty leading-7 text-slate-600 dark:text-slate-300">
+                            Estas son las consultas más frecuentes. Si la falla no encaja, no adivines: escribinos y la revisamos.
                         </p>
-                        <p className="text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
-                            Atendemos celulares de uso personal y también equipos
-                            de empresas. Cada trabajo sale con garantía escrita y
-                            seguimiento real, no con promesas vacías.
-                        </p>
-                        <div className="flex flex-wrap gap-4">
-                            <TrackedCtaLink
-                                href="/presupuesto-reparacion#solicitar-presupuesto"
-                                ctaName="home_value_budget"
-                                ctaLocation="home_value_section"
-                                ctaVariant="primary"
-                                className={primaryCtaClass}
-                            >
-                                Pedir presupuesto
-                            </TrackedCtaLink>
-                            <TrackedCtaLink
-                                href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20necesito%20una%20reparacion"
-                                ctaName="home_value_whatsapp"
-                                ctaLocation="home_value_section"
-                                ctaVariant="whatsapp"
-                                external
-                                target="_blank"
-                                className={neutralCtaClass}
-                            >
-                                Escribinos por WhatsApp
-                            </TrackedCtaLink>
-                        </div>
                     </div>
-
-                    <div className="space-y-5 bg-slate-50 p-6 dark:bg-slate-900 md:p-8">
-                        <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
-                            Que hacemos
-                        </h3>
-                        <ul className="divide-y divide-slate-200 text-left dark:divide-slate-800">
-                            {services.map((service) => (
-                                <li
-                                    key={service.title}
-                                    className="flex gap-3 py-4"
-                                >
-                                    <BsCheckCircleFill className="mt-1 shrink-0 text-lg text-emerald-500" aria-hidden />
-                                    <div>
-                                        <h4 className="font-semibold text-slate-900 dark:text-slate-100">
-                                            {service.title}
-                                        </h4>
-                                        <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">
-                                            {service.description}
-                                        </p>
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </article>
-
-                <section className="bg-slate-950 px-6 py-7 text-white dark:bg-slate-900 md:px-8">
-                    <div className="grid gap-7 md:grid-cols-3">
-                        {differentiators.map((item) => (
-                            <div
-                                key={item.title}
-                                className="max-w-sm"
-                            >
-                                <div>
-                                    <h3 className="text-[1.07rem] font-semibold">
-                                        {item.title}
-                                    </h3>
-                                    <p className="mt-2 text-[0.95rem] leading-6 text-slate-300">
-                                        {item.description}
-                                    </p>
-                                </div>
-                            </div>
+                    <div className="divide-y divide-slate-300 border-y border-slate-300 dark:divide-slate-700 dark:border-slate-700">
+                        {priorityRepairs.map((repair) => (
+                            <Link key={repair.href} href={repair.href} className="group grid gap-2 py-5 transition hover:bg-white/70 sm:grid-cols-[10rem_1fr_auto] sm:items-center sm:gap-5 sm:px-4 dark:hover:bg-slate-900">
+                                <h3 className="text-xl font-bold">{repair.title}</h3>
+                                <p className="max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-300">{repair.description}</p>
+                                <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#2d2e83] text-white transition group-hover:translate-x-1" aria-hidden>
+                                    <BsArrowRight />
+                                </span>
+                            </Link>
                         ))}
                     </div>
+                </section>
+
+                <section aria-labelledby="evidence-title" className="space-y-7">
+                    <div className="max-w-3xl">
+                        <h2 id="evidence-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">
+                            Un laboratorio se reconoce por cómo trabaja
+                        </h2>
+                        <p className="mt-4 text-pretty text-lg leading-8 text-slate-600 dark:text-slate-300">
+                            Herramientas, repuestos y atención forman parte del mismo servicio. Estas imágenes muestran el tipo de trabajo que hacemos todos los días.
+                        </p>
+                    </div>
+                    <BannerCards />
+                </section>
+
+                <section aria-labelledby="process-title" className="overflow-hidden bg-white dark:bg-slate-900 lg:grid lg:grid-cols-[0.82fr_1.18fr]">
+                    <div className="bg-[#2d2e83] p-7 text-white sm:p-9 lg:p-12">
+                        <h2 id="process-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">
+                            Diagnóstico primero. Reparación después.
+                        </h2>
+                        <p className="mt-5 max-w-lg text-pretty leading-7 text-[#dedfff]">
+                            No hace falta que conozcas el nombre técnico de la falla. Necesitamos saber qué equipo tenés, qué ocurrió y cómo se comporta.
+                        </p>
+                        <div className="mt-8 flex flex-wrap gap-3">
+                            <TrackedCtaLink href="/presupuesto-reparacion#solicitar-presupuesto" ctaName="home_process_budget" ctaLocation="home_process" ctaVariant="primary" className="inline-flex min-h-12 items-center rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#2d2e83] transition hover:bg-[#f0f1ff]">
+                                Contar la falla
+                            </TrackedCtaLink>
+                            <BranchWhatsAppButton ctaName="home_process_whatsapp" ctaLocation="home_process" message="Hola Team Celular, quiero consultar por una falla." className="inline-flex min-h-12 items-center rounded-lg border border-white/40 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10">
+                                Consultar por WhatsApp
+                            </BranchWhatsAppButton>
+                        </div>
+                    </div>
+                    <ol className="divide-y divide-slate-200 p-7 sm:p-9 lg:p-12 dark:divide-slate-700">
+                        {process.map((step, index) => (
+                            <li key={step.title} className="grid gap-3 py-6 first:pt-0 last:pb-0 sm:grid-cols-[3rem_1fr]">
+                                <span className="text-2xl font-extrabold text-[#2d2e83] dark:text-[#aebaff]">0{index + 1}</span>
+                                <div>
+                                    <h3 className="text-xl font-bold">{step.title}</h3>
+                                    <p className="mt-2 max-w-xl leading-7 text-slate-600 dark:text-slate-300">{step.description}</p>
+                                </div>
+                            </li>
+                        ))}
+                    </ol>
+                </section>
+
+                <section aria-label="Compromisos del servicio" className="grid border-y border-slate-300 py-8 md:grid-cols-3 md:divide-x md:divide-slate-300 dark:border-slate-700 dark:divide-slate-700">
+                    {[
+                        ["Garantía escrita", `${BUSINESS_PROFILE.warrantyDays} días sobre el trabajo realizado.`],
+                        ["Respuesta concreta", BUSINESS_PROFILE.responseWindow.replace(/^hasta/, "Hasta") + "."],
+                        ["Dos sucursales", "Recoleta y Belgrano, con contacto directo."],
+                    ].map(([title, copy]) => (
+                        <div key={title} className="px-0 py-4 first:pt-0 last:pb-0 md:px-7 md:py-0 md:first:pl-0 md:last:pr-0">
+                            <h3 className="text-lg font-bold">{title}</h3>
+                            <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">{copy}</p>
+                        </div>
+                    ))}
                 </section>
 
                 {/* @ts-expect-error Async Server Component */}
                 <GoogleReviewsAPI />
 
-                <article className="rounded-2xl border border-slate-200/70 bg-white/70 dark:bg-slate-900/70 p-8 shadow-md lg:p-10">
-                    <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-[2rem]">
-                        Dónde estamos y cómo contactarnos
-                    </h2>
-                    <div className="mt-6 grid gap-8 md:grid-cols-2">
-                        <div className="space-y-4">
-                            <p className="text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
-                                Team Celular tiene dos sucursales en CABA:
-                                Paraguay 2451 en Recoleta y Amenábar 2032 en
-                                Belgrano. Ambas atienden de lunes a viernes de
-                                10:30 a 18:00.
-                            </p>
-                            <p className="text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
-                                Podés acercarte a la sucursal más cercana o
-                                coordinamos retiro según disponibilidad.
-                            </p>
-                        </div>
-                        <div className="space-y-4">
-                            <p className="font-semibold text-slate-900 dark:text-slate-100">
-                                Vias de contacto
-                            </p>
-                            <ul className="space-y-2 text-left text-slate-600 dark:text-slate-400">
-                                <li>
-                                    Tel:{" "}
-                                    <TrackedCtaLink
-                                        href="tel:+541151034595"
-                                        ctaName="home_contact_phone"
-                                        ctaLocation="home_contact"
-                                        ctaVariant="phone"
-                                        external
-                                        className="font-semibold text-primary transition hover:text-secondary"
-                                    >
-                                        +54 11 5103-4595
-                                    </TrackedCtaLink>
-                                </li>
-                                <li>
-                                    Email:{" "}
-                                    <TrackedCtaLink
-                                        href="mailto:teamcelular.arg@gmail.com"
-                                        ctaName="home_contact_email"
-                                        ctaLocation="home_contact"
-                                        ctaVariant="email"
-                                        external
-                                        className="font-semibold text-primary transition hover:text-secondary"
-                                    >
-                                        teamcelular.arg@gmail.com
-                                    </TrackedCtaLink>
-                                </li>
-                                <li>Sucursal Recoleta: Paraguay 2451, CABA.</li>
-                                <li>Sucursal Belgrano: Amenábar 2032, CABA.</li>
-                                <li>Horario: Lunes a Viernes de 10:30 a 18:00.</li>
-                            </ul>
-                        </div>
+                <section aria-labelledby="branches-title" className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+                    <div>
+                        <h2 id="branches-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">Elegí la sucursal que te quede mejor</h2>
+                        <p className="mt-4 max-w-md leading-7 text-slate-600 dark:text-slate-300">Las dos atienden de {BUSINESS_PROFILE.hours.text.toLowerCase()}. Escribí antes de venir para confirmar repuesto y disponibilidad.</p>
+                        <TrackedCtaLink href="/sucursales" ctaName="home_all_branches" ctaLocation="home_branches" ctaVariant="secondary" className={`${secondaryCta} mt-6`}>
+                            Ver sucursales y mapas <BsArrowRight aria-hidden />
+                        </TrackedCtaLink>
                     </div>
-                </article>
-
-                <section className="space-y-6">
-                    <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-[2rem]">
-                        Preguntas frecuentes sobre reparación de celulares
-                    </h2>
-                    <div className="divide-y divide-slate-200 border-y border-slate-200 dark:divide-slate-800 dark:border-slate-800">
-                        {faqs.map((faq) => (
-                            <article
-                                key={faq.question}
-                                className="grid gap-3 py-5 text-left md:grid-cols-[18rem_1fr]"
-                            >
-                                <h3 className="text-[1.05rem] font-semibold leading-snug text-slate-900 dark:text-slate-100">
-                                    {faq.question}
-                                </h3>
-                                <p className="mt-3 text-sm text-slate-700 dark:text-slate-300">
-                                    {faq.answer}
-                                </p>
+                    <div className="divide-y divide-slate-300 border-y border-slate-300 dark:divide-slate-700 dark:border-slate-700">
+                        {BRANCHES.map((branch) => (
+                            <article key={branch.slug} className="grid gap-4 py-6 sm:grid-cols-[1fr_auto] sm:items-center">
+                                <div className="flex gap-4">
+                                    <BsGeoAlt className="mt-1 shrink-0 text-xl text-[#2d2e83] dark:text-[#aebaff]" aria-hidden />
+                                    <div>
+                                        <h3 className="text-xl font-bold">{branch.shortName}</h3>
+                                        <p className="mt-1 text-slate-600 dark:text-slate-300">{branch.street}, CABA</p>
+                                    </div>
+                                </div>
+                                <Link href={branch.url} className="inline-flex min-h-11 items-center gap-2 font-bold text-[#2d2e83] hover:underline dark:text-[#aebaff]">Ver detalles <BsArrowRight aria-hidden /></Link>
                             </article>
                         ))}
                     </div>
                 </section>
 
-                <section className="rounded-xl bg-primary/10 p-6 dark:bg-primary/15">
-                    <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-[2rem]">
-                        ¿Buscas reparación de celulares cerca de tu zona?
-                    </h2>
-                    <p className="mt-3 max-w-3xl text-[1.03rem] leading-7 text-slate-700 dark:text-slate-300">
-                        Si venis desde Palermo, Belgrano, Almagro, Caballito o Microcentro,
-                        armamos presupuesto rapido y te orientamos segun la falla para evitar demoras.
-                    </p>
-                    <div className="mt-5 flex flex-wrap gap-4">
-                        <TrackedCtaLink
-                            href="/reparacion-de-celulares-cerca-de-mi"
-                            ctaName="home_near_me_landing"
-                            ctaLocation="home_near_me_section"
-                            ctaVariant="secondary"
-                            className={neutralCtaClass}
-                        >
-                            Ver cobertura cerca de mi
-                        </TrackedCtaLink>
-                        <TrackedCtaLink
-                            href="/zonas"
-                            ctaName="home_zones_index"
-                            ctaLocation="home_near_me_section"
-                            ctaVariant="secondary"
-                            className={neutralCtaClass}
-                        >
-                            Ver todas las zonas
-                        </TrackedCtaLink>
+                <section aria-labelledby="faq-title" className="grid gap-8 lg:grid-cols-[0.65fr_1.35fr]">
+                    <h2 id="faq-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">Antes de traer el equipo</h2>
+                    <div className="divide-y divide-slate-300 border-y border-slate-300 dark:divide-slate-700 dark:border-slate-700">
+                        {faqs.map((faq) => (
+                            <article key={faq.question} className="grid gap-3 py-6 sm:grid-cols-[13rem_1fr] sm:gap-8">
+                                <h3 className="font-bold">{faq.question}</h3>
+                                <p className="leading-7 text-slate-600 dark:text-slate-300">{faq.answer}</p>
+                            </article>
+                        ))}
                     </div>
+                </section>
+
+                <section aria-labelledby="zones-title" className="grid gap-6 bg-[#171820] p-7 text-white sm:p-9 lg:grid-cols-[1fr_auto] lg:items-end lg:p-12">
+                    <div>
+                        <h2 id="zones-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">¿Buscás reparación cerca de tu zona?</h2>
+                        <p className="mt-4 max-w-3xl text-pretty leading-7 text-slate-300">Atendemos consultas de Recoleta, Belgrano, Palermo, Almagro, Caballito, Balvanera y Microcentro. La mejor sucursal depende de tu recorrido y de la falla.</p>
+                    </div>
+                    <TrackedCtaLink href="/reparacion-de-celulares-cerca-de-mi" ctaName="home_near_me" ctaLocation="home_zones" ctaVariant="secondary" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#171820] transition hover:bg-slate-100">
+                        Ver cobertura <BsArrowRight aria-hidden />
+                    </TrackedCtaLink>
                 </section>
 
                 <KnowledgeGrid />
 
-                <article className="relative overflow-hidden bg-slate-950 p-8 text-center text-white md:text-left lg:p-10">
-                    <h2 className="text-2xl font-bold tracking-tight text-primary md:text-[2rem]">
-                        ¿Listo para recuperar tu teléfono?
-                    </h2>
-                    <p className="mt-4 text-[1.03rem] leading-7 text-slate-300">
-                        Dejanos la falla y un dato de contacto. Te respondemos
-                        por WhatsApp en hasta 2 horas habiles para avanzar
-                        sin perder tiempo.
-                    </p>
-                    <div className="mt-6 flex flex-wrap justify-center gap-4 md:justify-start">
-                        <TrackedCtaLink
-                            href="/presupuesto-reparacion#solicitar-presupuesto"
-                            ctaName="home_bottom_budget"
-                            ctaLocation="home_bottom_section"
-                            ctaVariant="primary"
-                            className={primaryCtaClass}
-                        >
-                            Pedir presupuesto ahora
-                        </TrackedCtaLink>
-                        <TrackedCtaLink
-                            href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20necesito%20una%20reparacion"
-                            ctaName="home_bottom_whatsapp"
-                            ctaLocation="home_bottom_section"
-                            ctaVariant="whatsapp"
-                            external
-                            target="_blank"
-                            className={neutralCtaClass}
-                        >
-                            Hablar por WhatsApp
-                        </TrackedCtaLink>
+                <section aria-labelledby="final-cta-title" className="flex flex-col gap-7 border-t-4 border-[#2d2e83] bg-white p-7 sm:p-9 lg:flex-row lg:items-end lg:justify-between lg:p-12 dark:bg-slate-900">
+                    <div>
+                        <h2 id="final-cta-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">Contanos qué le pasa. Te decimos cómo seguir.</h2>
+                        <p className="mt-4 max-w-2xl leading-7 text-slate-600 dark:text-slate-300">Incluí marca, modelo y falla. Si podés, sumá una foto. Respondemos {BUSINESS_PROFILE.responseWindow}.</p>
                     </div>
-                </article>
-            </section>
-
-        </section>
+                    <TrackedCtaLink href="/presupuesto-reparacion#solicitar-presupuesto" ctaName="home_bottom_budget" ctaLocation="home_bottom" ctaVariant="primary" className={primaryCta}>
+                        Pedir presupuesto <BsArrowRight aria-hidden />
+                    </TrackedCtaLink>
+                </section>
+            </div>
+        </div>
     );
 }

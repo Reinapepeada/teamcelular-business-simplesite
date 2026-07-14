@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-14T18:00:00-03:00",
+  "title": "Design System: Team Celular",
+  "extensions": {
+    "colorMeta": {
+      "brand-indigo": { "role": "primary", "displayName": "Índigo Team", "canonical": "#2D2E83", "tonalRamp": ["#EEEEFF", "#8BA7FF", "#2D2E83", "#20216B"] },
+      "workbench-ink": { "role": "neutral", "displayName": "Grafito de banco", "canonical": "#171820", "tonalRamp": ["#F7F8FC", "#475569", "#171820"] },
+      "signal-green": { "role": "secondary", "displayName": "Verde señal", "canonical": "#34D399", "tonalRamp": ["#D1FAE5", "#34D399", "#047857"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Una idea dominante en el hero." },
+      "body": { "displayName": "Body", "purpose": "Orientación clara en español rioplatense." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "state", "value": "200ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Hover y focus de controles." },
+      { "name": "media", "value": "500ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Escala mínima de fotografía en cards." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Acción principal sobre fondo claro.",
+      "html": "<button class=\"ds-btn-primary\">Pedir presupuesto</button>",
+      "css": ".ds-btn-primary{background:#2D2E83;color:#fff;border:0;border-radius:8px;padding:12px 24px;font:700 14px Inter,Arial,sans-serif;transition:background 200ms cubic-bezier(.16,1,.3,1)}.ds-btn-primary:hover{background:#20216B}.ds-btn-primary:focus-visible{outline:2px solid #2D2E83;outline-offset:2px}"
+    },
+    {
+      "name": "Dark Surface Link",
+      "kind": "button",
+      "refersTo": "button-light",
+      "description": "Acción clara sobre grafito o índigo.",
+      "html": "<a class=\"ds-btn-light\" href=\"#\">Elegir sucursal →</a>",
+      "css": ".ds-btn-light{display:inline-flex;background:#fff;color:#20216B;border-radius:8px;padding:12px 24px;font:700 14px Inter,Arial,sans-serif;text-decoration:none}.ds-btn-light:hover{background:#F7F8FC}.ds-btn-light:focus-visible{outline:2px solid #fff;outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Banco de trabajo urbano",
+    "overview": "Precisión de laboratorio, ritmo directo de CABA y evidencia visual del trabajo real.",
+    "keyCharacteristics": ["Índigo original de marca", "Fotografía técnica", "Composición asimétrica", "Profundidad tonal"],
+    "rules": [
+      { "name": "The Signal Rule", "body": "El verde comunica estado y no compite con el índigo.", "section": "colors" },
+      { "name": "The Flat Workbench Rule", "body": "La profundidad se reserva para interacción y fotografía.", "section": "elevation" }
+    ],
+    "dos": ["Usar datos y trabajo real", "Conservar las cards fotográficas existentes", "Mantener WCAG 2.2 AA"],
+    "donts": ["No usar landing SaaS genérica", "No usar glassmorphism ni grid decorativo", "No repetir cards idénticas"]
+  }
+}

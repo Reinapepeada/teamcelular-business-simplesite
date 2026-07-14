@@ -4,9 +4,7 @@ import { usePathname } from "next/navigation";
 import { BsWhatsapp } from "react-icons/bs";
 import { FaClipboardList } from "react-icons/fa";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
-import { whatsappUrl } from "@/lib/businessProfile";
-
-const WHATSAPP_URL = whatsappUrl();
+import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 
 export default function StickyRepairCta() {
   const pathname = usePathname();
@@ -30,18 +28,14 @@ export default function StickyRepairCta() {
           <FaClipboardList className="text-lg" />
           Presupuesto
         </TrackedCtaLink>
-        <TrackedCtaLink
-          href={WHATSAPP_URL}
+        <BranchWhatsAppButton
           ctaName="sticky_whatsapp"
           ctaLocation="sticky_repair_cta"
-          ctaVariant="whatsapp"
-          external
-          target="_blank"
           className="flex flex-1 items-center justify-center gap-2 rounded-full border-2 border-primary/40 bg-white/70 px-4 py-3 text-sm font-semibold text-primary backdrop-blur transition hover:bg-white dark:bg-slate-950/40 dark:hover:bg-slate-950/60"
         >
           <BsWhatsapp className="text-lg" />
           WhatsApp
-        </TrackedCtaLink>
+        </BranchWhatsAppButton>
       </div>
     </div>
   );

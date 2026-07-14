@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
+import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import { getBranch, whatsappUrl } from "@/lib/businessProfile";
 import {
@@ -190,18 +191,14 @@ export default function ContactoPage() {
                             Team Celular tiene dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2032, Belgrano</strong>. Atendemos lunes a viernes de 10:30 a 18:00 sin turno previo. Podés venir al taller más cercano, escribir por WhatsApp o pedir presupuesto por formulario.
                         </p>
                         <div className="mt-8 flex flex-wrap justify-center gap-4">
-                            <TrackedCtaLink
-                                href={whatsappUrl()}
+                            <BranchWhatsAppButton
                                 ctaName="contact_hero_whatsapp"
                                 ctaLocation="contact_hero"
-                                ctaVariant="whatsapp"
-                                external
-                                target="_blank"
                                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-emerald-700"
                             >
                                 <FaWhatsapp aria-hidden />
                                 Escribinos por WhatsApp
-                            </TrackedCtaLink>
+                            </BranchWhatsAppButton>
                             <Link
                                 href="/presupuesto-reparacion"
                                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-primary px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10"

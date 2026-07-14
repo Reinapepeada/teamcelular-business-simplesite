@@ -26,7 +26,25 @@ const config: Config = {
     },
   },
   darkMode: "class",
-  plugins: [nextui(),addVariablesForColors],
+  plugins: [
+    nextui({
+      themes: {
+        light: {
+          colors: {
+            primary: "#2d2e83",
+            secondary: "#0e7490",
+          },
+        },
+        dark: {
+          colors: {
+            primary: "#5152b7",
+            secondary: "#22d3ee",
+          },
+        },
+      },
+    }),
+    addVariablesForColors,
+  ],
 };
 function addVariablesForColors({ addBase, theme }: any) {
   let allColors = flattenColorPalette(theme("colors"));

@@ -2,6 +2,7 @@ import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import RepairsForm from "@/components/forms/RepairsForm";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
+import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 import { BUDGET_RESPONSE_MESSAGE, REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import {
@@ -249,18 +250,15 @@ export default function PresupuestoReparacionPage() {
                             >
                                 Pedir presupuesto ahora
                             </TrackedCtaLink>
-                            <TrackedCtaLink
-                                href="https://wa.me/5491151034595?text=Hola!%20Quiero%20pedir%20presupuesto%20para%20mi%20equipo"
+                            <BranchWhatsAppButton
                                 ctaName="budget_hero_whatsapp"
                                 ctaLocation="presupuesto_hero"
-                                ctaVariant="whatsapp"
-                                external
-                                target="_blank"
+                                message="Hola! Quiero pedir presupuesto para mi equipo."
                                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-primary px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10"
                             >
                                 <FaWhatsapp aria-hidden />
                                 Hablar por WhatsApp
-                            </TrackedCtaLink>
+                            </BranchWhatsAppButton>
                         </div>
 
                         <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">
@@ -548,18 +546,15 @@ export default function PresupuestoReparacionPage() {
                         >
                             Empezar ahora
                         </TrackedCtaLink>
-                        <TrackedCtaLink
-                            href="https://wa.me/5491151034595?text=Hola!%20Necesito%20un%20presupuesto"
+                        <BranchWhatsAppButton
                             ctaName="budget_bottom_whatsapp"
                             ctaLocation="presupuesto_bottom"
-                            ctaVariant="whatsapp"
-                            external
-                            target="_blank"
+                            message="Hola! Necesito un presupuesto."
                             className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-secondary px-6 py-3 text-sm font-semibold text-secondary transition hover:bg-secondary/10"
                         >
                             <FaWhatsapp aria-hidden />
                             WhatsApp directo
-                        </TrackedCtaLink>
+                        </BranchWhatsAppButton>
                     </div>
                 </section>
 

@@ -6,6 +6,10 @@ const API_BASE_URL =
   (process.env.NEXT_PUBLIC_API_URL?.trim() || process.env.API_URL?.trim() || DEFAULT_API_BASE_URL).replace(/\/+$/, "");
 const FALLBACK_WHATSAPP_NUMBER =
   process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.replace(/\D+/g, "") || "5491151034595";
+const BRANCH_WHATSAPP_NUMBERS = {
+  recoleta: "5491151034595",
+  belgrano: "5491131739099",
+} as const;
 
 type LeadCreatePayload = {
   brand: string;
@@ -15,6 +19,8 @@ type LeadCreatePayload = {
   description?: string;
   contactChannel: string;
   contact?: string;
+  preferredBranch?: "recoleta" | "belgrano";
+  branchSelectionMethod?: "manual" | "nearest" | "remembered" | "contextual";
   leadAttemptId?: string;
   wizardSource?: string;
   metadata?: {
@@ -68,8 +74,12 @@ function getMissingRequiredFields(payload: LeadCreatePayload): string[] {
   return requiredFields.filter((field) => !String(payload[field] || "").trim());
 }
 
-function buildFallbackWhatsappUrl(message: string): string {
-  return `https://wa.me/${FALLBACK_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+function buildFallbackWhatsappUrl(message: string, preferredBranch?: string): string {
+  const number =
+    preferredBranch === "recoleta" || preferredBranch === "belgrano"
+      ? BRANCH_WHATSAPP_NUMBERS[preferredBranch]
+      : FALLBACK_WHATSAPP_NUMBER;
+  return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
 
 function buildIdempotencyKey(
@@ -90,6 +100,8 @@ function buildIdempotencyKey(
     urgency: payload.urgency,
     contactChannel: payload.contactChannel,
     contact: payload.contact ? payload.contact.toLowerCase() : "",
+    preferredBranch: payload.preferredBranch || null,
+    branchSelectionMethod: payload.branchSelectionMethod || null,
     description: payload.description || null,
     wizardSource: payload.wizardSource || null,
     clientIp: clientIp || null,
@@ -177,6 +189,19 @@ export async function POST(request: Request) {
   const contact = getValue(formData, "contact");
   const wizardSource = getValue(formData, "wizardSource");
   const leadAttemptId = getValue(formData, "leadAttemptId");
+  const preferredBranchValue = getValue(formData, "preferredBranch");
+  const branchSelectionMethodValue = getValue(formData, "branchSelectionMethod");
+  const preferredBranch =
+    preferredBranchValue === "recoleta" || preferredBranchValue === "belgrano"
+      ? preferredBranchValue
+      : undefined;
+  const branchSelectionMethod =
+    branchSelectionMethodValue === "manual" ||
+    branchSelectionMethodValue === "nearest" ||
+    branchSelectionMethodValue === "remembered" ||
+    branchSelectionMethodValue === "contextual"
+      ? branchSelectionMethodValue
+      : undefined;
   const repairTypes = formData
     .getAll("repairType")
     .map((value) => String(value).trim())
@@ -196,6 +221,8 @@ export async function POST(request: Request) {
     description: description || undefined,
     contactChannel,
     contact: contact || undefined,
+    preferredBranch,
+    branchSelectionMethod,
     leadAttemptId: leadAttemptId || undefined,
     wizardSource: wizardSource || undefined,
     metadata: {
@@ -216,13 +243,15 @@ export async function POST(request: Request) {
     description ? `Descripcion: ${description}` : null,
     contactChannel ? `Canal preferido: ${contactChannel}` : null,
     contact ? `Contacto preferido: ${contact}` : null,
+    preferredBranch ? `Sucursal preferida: ${preferredBranch === "recoleta" ? "Recoleta" : "Belgrano"}` : null,
+    preferredBranch ? "La sucursal es una preferencia y puede ajustarse si conviene otra sede." : null,
   ]
     .filter(Boolean)
     .join("\n");
 
   let fallbackReason = "missing_required_fields";
   const missingRequiredFields = getMissingRequiredFields(payload);
-  let whatsappUrl = buildFallbackWhatsappUrl(message);
+  let whatsappUrl = buildFallbackWhatsappUrl(message, preferredBranch);
 
   if (hasRequiredFields(payload)) {
     const leadResult = await createLeadAndGetWhatsappUrl(payload, idempotencyKey);

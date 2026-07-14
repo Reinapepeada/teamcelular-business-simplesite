@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { BsFillLightningChargeFill, BsWhatsapp } from "react-icons/bs";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
+import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 
 const cardBase =
     "group relative col-span-12 overflow-hidden rounded-2xl border border-white/15 bg-white/5 shadow-lg backdrop-blur-2xl transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-2xl dark:border-white/10 dark:bg-slate-900/30";
@@ -107,18 +108,15 @@ export default function BannerCards() {
                         <p className="text-[0.92rem] font-medium leading-snug text-white/90">
                             Comunicate con nuestro equipo
                         </p>
-                        <TrackedCtaLink
-                            href="https://wa.me/5491151034595?text=Hola%21%20Quiero%20pedir%20un%20presupuesto%20de%20reparaci%C3%B3n."
+                        <BranchWhatsAppButton
                             ctaName="home_cards_whatsapp"
                             ctaLocation="home_cards"
-                            ctaVariant="whatsapp"
-                            external
-                            target="_blank"
+                            message="Hola! Quiero pedir un presupuesto de reparación."
                             className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-white dark:bg-slate-900 px-4 py-3 font-semibold text-slate-900 dark:text-slate-100 shadow-md transition hover:bg-slate-100 dark:hover:bg-slate-800 sm:w-fit"
                         >
                             <BsWhatsapp className="text-lg" aria-hidden />
                             Pedir presupuesto por WhatsApp
-                        </TrackedCtaLink>
+                        </BranchWhatsAppButton>
                     </div>
                 </div>
             </article>
@@ -163,4 +161,3 @@ export default function BannerCards() {
         </section>
     );
 }
-

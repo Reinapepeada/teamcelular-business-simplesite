@@ -9,7 +9,7 @@ import Link from "next/link";
 import ThemeSwitcher, {
     ThemeSwitcherInline,
 } from "@/components/switch/ThemeSwitcher";
-import { whatsappUrl } from "@/lib/businessProfile";
+import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 
 const MAIN_LINKS = [
     { href: "/arreglo-de-celulares", label: "Arreglo" },
@@ -25,7 +25,6 @@ const SECONDARY_LINKS = [
     { href: "/sobrenosotros", label: "Sobre nosotros" },
 ];
 
-const WHATSAPP_URL = whatsappUrl();
 const BUDGET_URL = "/presupuesto-reparacion#solicitar-presupuesto";
 
 function isActivePath(pathname, href) {
@@ -86,23 +85,14 @@ export default function NavbarNUI() {
                     >
                         Presupuesto
                     </Link>
-                    <Link
-                        href={WHATSAPP_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() =>
-                            trackNavbarCta(
-                                "navbar_whatsapp",
-                                "navbar_mobile_top",
-                                "whatsapp",
-                                WHATSAPP_URL,
-                            )
-                        }
+                    <BranchWhatsAppButton
+                        ctaName="navbar_whatsapp"
+                        ctaLocation="navbar_mobile_top"
                         className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-emerald-500/35 bg-emerald-50 px-4 py-2 text-xs font-semibold text-emerald-700 dark:border-emerald-400/35 dark:bg-emerald-500/15 dark:text-emerald-200"
                     >
                         <BsWhatsapp className="text-sm" aria-hidden />
                         WhatsApp
-                    </Link>
+                    </BranchWhatsAppButton>
                 </div>
             </div>
             <div className="mx-auto flex min-h-[76px] w-full max-w-[100rem] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
@@ -232,23 +222,14 @@ export default function NavbarNUI() {
                     >
                         Presupuesto
                     </Link>
-                    <Link
-                        href={WHATSAPP_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() =>
-                            trackNavbarCta(
-                                "navbar_whatsapp",
-                                "navbar_desktop",
-                                "whatsapp",
-                                WHATSAPP_URL,
-                            )
-                        }
+                    <BranchWhatsAppButton
+                        ctaName="navbar_whatsapp"
+                        ctaLocation="navbar_desktop"
                         className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-emerald-500/35 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100 dark:border-emerald-400/35 dark:bg-emerald-500/15 dark:text-emerald-200 dark:hover:bg-emerald-500/25"
                     >
                         <BsWhatsapp className="text-lg" aria-hidden />
                         WhatsApp
-                    </Link>
+                    </BranchWhatsAppButton>
                 </div>
 
                 <button
@@ -313,23 +294,14 @@ export default function NavbarNUI() {
                             >
                                 Pedir presupuesto
                             </Link>
-                            <Link
-                                href={WHATSAPP_URL}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                onClick={() =>
-                                    trackNavbarCta(
-                                        "navbar_whatsapp",
-                                        "navbar_mobile_drawer",
-                                        "whatsapp",
-                                        WHATSAPP_URL,
-                                    )
-                                }
+                            <BranchWhatsAppButton
+                                ctaName="navbar_whatsapp"
+                                ctaLocation="navbar_mobile_drawer"
                                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-emerald-500/35 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100 dark:border-emerald-400/35 dark:bg-emerald-500/15 dark:text-emerald-200 dark:hover:bg-emerald-500/25"
                             >
                                 <BsWhatsapp className="text-lg" aria-hidden />
                                 Abrir WhatsApp
-                            </Link>
+                            </BranchWhatsAppButton>
                         </div>
                     </div>
                 </div>

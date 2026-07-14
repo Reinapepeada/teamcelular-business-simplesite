@@ -1,4 +1,4 @@
-export const BUDGET_WIZARD_VERSION = "v1";
+export const BUDGET_WIZARD_VERSION = "v2";
 
 export const BUDGET_WIZARD_STEPS = [
   { id: "device", label: "Equipo" },

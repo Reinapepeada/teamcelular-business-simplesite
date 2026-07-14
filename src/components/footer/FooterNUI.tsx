@@ -19,7 +19,8 @@ import { SiMotorola, SiSamsung, SiXiaomi } from "react-icons/si";
 import Link from "next/link";
 import Image from "next/image";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
-import { BRANCHES, whatsappUrl } from "@/lib/businessProfile";
+import BranchWhatsAppButton from "@/components/cro/BranchSelector";
+import { BRANCHES } from "@/lib/businessProfile";
 
 const footerSections = {
   servicios: [
@@ -94,15 +95,7 @@ export default function FooterNUI() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative mt-16 w-full overflow-hidden border-t border-slate-200 bg-slate-950 text-white">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(14,165,233,0.18),transparent_34%),radial-gradient(circle_at_86%_84%,rgba(16,185,129,0.16),transparent_36%)]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(148,163,184,0.14)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.14)_1px,transparent_1px)] [background-size:34px_34px]"
-      />
+    <footer className="relative mt-16 w-full overflow-hidden border-t border-white/10 bg-[#171820] text-white">
       <div className="relative z-10 mx-auto w-full max-w-[100rem] px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col space-y-4">
@@ -121,18 +114,14 @@ export default function FooterNUI() {
             </div>
 
             <div className="flex space-x-3 pt-4">
-              <TrackedCtaLink
-                href={whatsappUrl()}
+              <BranchWhatsAppButton
                 ctaName="footer_whatsapp"
                 ctaLocation="footer_socials"
-                ctaVariant="whatsapp"
-                external
-                target="_blank"
-                ariaLabel="WhatsApp"
+                ariaLabel="Elegir sucursal y abrir WhatsApp"
                 className="inline-flex h-11 w-11 items-center justify-center rounded-full transition-colors hover:bg-white/10 hover:text-green-400"
               >
                 <BsWhatsapp size={22} />
-              </TrackedCtaLink>
+              </BranchWhatsAppButton>
               <TrackedCtaLink
                 href="https://www.instagram.com/teamcelular.arg/"
                 ctaName="footer_instagram"

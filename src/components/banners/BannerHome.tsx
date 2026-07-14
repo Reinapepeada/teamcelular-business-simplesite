@@ -1,133 +1,91 @@
-import React from "react";
 import Image from "next/image";
-import { BsWhatsapp, BsCheckCircleFill } from "react-icons/bs";
+import { BsArrowRight, BsWhatsapp } from "react-icons/bs";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
-
-const stats = [
-    { value: "10+", label: "años reparando" },
-    { value: "< 2h", label: "respuesta WA" },
-    { value: "90 días", label: "garantía escrita" },
-];
-
-const serviceHints = [
-    "Cambio de pantalla",
-    "Cambio de batería",
-    "Reparación de placa",
-    "Recuperación por agua",
-];
+import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 
 const intakeProofs = [
-    "Orden tecnica y garantia escrita",
-    "Respuesta por WhatsApp en horario habil",
-    "Diagnostico antes de abrir el equipo",
+    "Diagnóstico antes de intervenir",
+    "Orden técnica al ingresar",
+    "Garantía escrita de 90 días",
 ];
 
 export default function BannerHome() {
     return (
-        <section className="relative w-full max-w-[100rem] overflow-hidden border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
-            {/* Brand accent top bar */}
-            <div className="absolute inset-x-0 top-0 z-10 h-0.5 bg-gradient-to-r from-primary/80 via-secondary/60 to-primary/30" />
-
-            <div className="relative z-10 grid lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
-                {/* Left: content */}
-                <div className="order-2 flex flex-col justify-center space-y-6 px-6 py-10 md:px-10 md:py-14 lg:order-1">
-                    <div className="flex items-center gap-2">
-                        <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" aria-hidden />
-                        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">
-                            Servicio técnico en Recoleta · Abierto Lun–Vie
-                        </p>
+        <section className="relative w-full overflow-hidden bg-[#171820] text-white">
+            <div className="grid min-h-[37rem] lg:grid-cols-[minmax(0,0.92fr)_minmax(30rem,1.08fr)]">
+                <div className="relative z-10 flex flex-col justify-between px-6 py-9 sm:px-9 lg:px-12 lg:py-12">
+                    <div className="flex items-center gap-3 text-sm text-white/75">
+                        <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" aria-hidden />
+                        <span>Recoleta y Belgrano · Lun–Vie, 10:30–18:00</span>
                     </div>
 
-                    <h1 className="max-w-xl text-4xl font-extrabold leading-[1.05] tracking-tight text-slate-900 dark:text-slate-100 sm:text-5xl lg:text-[3.1rem]">
-                        Arreglamos tu celular el mismo día en CABA
-                    </h1>
-
-                    <div className="max-w-xl space-y-2.5">
-                        <p className="text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-[1.03rem]">
-                            Team Celular tiene dos sucursales en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032). Diagnóstico el mismo día, repuestos de calidad y garantía escrita de 90 días sobre trabajo y repuesto.
+                    <div className="my-12 max-w-[42rem] lg:my-16">
+                        <h1 className="text-balance text-[clamp(2.65rem,6vw,5.2rem)] font-extrabold leading-[0.98] tracking-[-0.035em]">
+                            Tu celular vuelve a funcionar. Vos sabés qué le hicimos.
+                        </h1>
+                        <p className="mt-7 max-w-[38rem] text-pretty text-lg leading-8 text-slate-200">
+                            Reparamos celulares en CABA con diagnóstico previo, orden técnica y garantía escrita. Contanos la falla y te orientamos antes de que vengas.
                         </p>
-                        <p className="text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-[1.03rem]">
-                            Contanos la falla y te orientamos por WhatsApp en menos de 2 horas.
-                        </p>
-                    </div>
 
-                    {/* Service hint tags */}
-                    <div className="flex flex-wrap gap-2">
-                        {serviceHints.map((s) => (
-                            <span
-                                key={s}
-                                className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-600 dark:border-slate-700 dark:bg-slate-800/70 dark:text-slate-300"
+                        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                            <TrackedCtaLink
+                                href="/presupuesto-reparacion#solicitar-presupuesto"
+                                ctaName="home_hero_budget"
+                                ctaLocation="home_hero"
+                                ctaVariant="primary"
+                                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#20216b] transition duration-200 hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                             >
-                                <BsCheckCircleFill className="text-emerald-500" aria-hidden />
-                                {s}
-                            </span>
+                                Pedir presupuesto
+                                <BsArrowRight aria-hidden />
+                            </TrackedCtaLink>
+                            <BranchWhatsAppButton
+                                ctaName="home_hero_whatsapp"
+                                ctaLocation="home_hero"
+                                message="Hola Team Celular, necesito una reparación."
+                                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/35 px-6 py-3 text-sm font-bold text-white transition duration-200 hover:border-white hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                            >
+                                <BsWhatsapp className="text-lg" aria-hidden />
+                                Consultar por WhatsApp
+                            </BranchWhatsAppButton>
+                        </div>
+                    </div>
+
+                    <ul className="grid gap-3 border-t border-white/15 pt-6 text-sm text-white/80 sm:grid-cols-3">
+                        {intakeProofs.map((item) => (
+                            <li key={item} className="flex items-start gap-2.5">
+                                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#8ba7ff]" aria-hidden />
+                                <span>{item}</span>
+                            </li>
                         ))}
-                    </div>
-
-                    {/* CTAs */}
-                    <div className="flex flex-col gap-3 sm:flex-row">
-                        <TrackedCtaLink
-                            href="/presupuesto-reparacion#solicitar-presupuesto"
-                            ctaName="home_hero_budget"
-                            ctaLocation="home_hero"
-                            ctaVariant="primary"
-                            className="inline-flex items-center justify-center rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-primary/25 transition hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
-                        >
-                            Solicitar presupuesto
-                        </TrackedCtaLink>
-                        <TrackedCtaLink
-                            href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20necesito%20una%20reparacion"
-                            ctaName="home_hero_whatsapp"
-                            ctaLocation="home_hero"
-                            ctaVariant="whatsapp"
-                            external
-                            target="_blank"
-                            className="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-50 px-7 py-3.5 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 dark:border-emerald-400/35 dark:bg-emerald-500/15 dark:text-emerald-200 dark:hover:bg-emerald-500/25"
-                        >
-                            <BsWhatsapp className="text-lg" aria-hidden />
-                            WhatsApp directo
-                        </TrackedCtaLink>
-                    </div>
-
-                    <div className="border-t border-slate-200/80 pt-5 dark:border-slate-700/60">
-                        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">
-                            Al ingresar tu equipo queda registrado con:
-                        </p>
-                        <ul className="grid gap-2 text-sm text-slate-700 dark:text-slate-300 sm:grid-cols-3">
-                            {intakeProofs.map((item) => (
-                                <li key={item} className="flex gap-2">
-                                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" aria-hidden />
-                                    <span>{item}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                    </ul>
                 </div>
 
-                {/* Right: image */}
-                <div className="order-1 lg:order-2">
-                    <div className="relative h-[15rem] sm:h-[22rem] lg:h-full lg:min-h-[28rem]">
-                        <Image
-                            src="/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp"
-                            alt="Técnico reparando un smartphone en el laboratorio de Team Celular, Recoleta"
-                            fill
-                            quality={82}
-                            sizes="(max-width: 1024px) 100vw, 46vw"
-                            className="object-cover"
-                            priority
-                        />
-                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/25 via-transparent to-transparent lg:bg-gradient-to-l lg:from-slate-950/10 lg:via-transparent" />
-
-                        {/* Floating badge */}
-                        <div className="absolute inset-x-0 bottom-0 bg-slate-950/72 px-5 py-4 text-sm font-medium text-white backdrop-blur-sm">
-                            <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
-                                Sucursales y horario
-                            </p>
-                            <p className="text-sm font-bold text-slate-900 dark:text-slate-100">
-                                <span className="text-primary">{"< 2 horas"}</span>{" "}
-                                <span className="font-normal text-slate-500 dark:text-slate-400">· Lun–Vie</span>
-                            </p>
+                <div className="relative min-h-[24rem] overflow-hidden lg:min-h-full">
+                    <Image
+                        src="/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp"
+                        alt="Técnico de Team Celular trabajando sobre un smartphone"
+                        fill
+                        quality={82}
+                        sizes="(max-width: 1024px) 100vw, 55vw"
+                        className="object-cover object-center"
+                        priority
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#171820]/75 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#171820]/35 lg:via-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 flex flex-wrap items-end justify-between gap-4 border-t border-white/20 bg-[#171820]/85 px-6 py-5 backdrop-blur-md sm:px-8">
+                        <div>
+                            <p className="text-sm font-bold">Dos sucursales en CABA</p>
+                            <p className="mt-1 text-sm text-white/70">Paraguay 2451 · Amenábar 2032</p>
                         </div>
+                        <TrackedCtaLink
+                            href="/sucursales"
+                            ctaName="home_hero_branches"
+                            ctaLocation="home_hero"
+                            ctaVariant="secondary"
+                            className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-white/30 px-4 py-2 text-sm font-semibold transition hover:bg-white hover:text-[#171820] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                        >
+                            Elegir sucursal
+                            <BsArrowRight aria-hidden />
+                        </TrackedCtaLink>
                     </div>
                 </div>
             </div>

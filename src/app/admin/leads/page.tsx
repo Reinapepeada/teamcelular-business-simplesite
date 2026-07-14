@@ -1656,6 +1656,14 @@ export default function AdminLeadsPage() {
                                                 <DetailRow label="Origen operativo" value={selectedLeadDetail.lead.source} />
                                                 <DetailRow label="Contacto" value={selectedLeadDetail.lead.contact} />
                                                 <DetailRow
+                                                    label="Sucursal preferida"
+                                                    value={humanizeToken(selectedLeadDetail.lead.preferredBranch)}
+                                                />
+                                                <DetailRow
+                                                    label="Método de selección"
+                                                    value={humanizeToken(selectedLeadDetail.lead.branchSelectionMethod)}
+                                                />
+                                                <DetailRow
                                                     label="Canal"
                                                     value={humanizeToken(selectedLeadDetail.lead.contactChannel)}
                                                 />
