@@ -3,6 +3,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import {
@@ -72,7 +73,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2026-03-12T00:00:00Z",
-    modifiedTime: "2026-06-08T00:00:00Z",
+    modifiedTime: "2026-07-14T00:00:00Z",
     section: "Guias Tecnicas",
   },
   twitter: {
@@ -187,6 +188,39 @@ const repairServices = [
   },
 ];
 
+const samsungSymptomRows = [
+  {
+    symptom: "Pantalla con líneas, manchas o táctil que falla",
+    urgency: "Alta si aparecen zonas negras o el táctil deja de responder",
+    typicalTime: "2-4 h si hay módulo compatible en stock",
+    nextStep: "Enviar modelo exacto y una foto para confirmar disponibilidad",
+  },
+  {
+    symptom: "Batería dura poco, se apaga o se hincha",
+    urgency: "Alta si levanta la tapa, calienta o baja de golpe",
+    typicalTime: "1-2 h según modelo Galaxy",
+    nextStep: "Apagarlo si está hinchado y pedir diagnóstico de consumo",
+  },
+  {
+    symptom: "No carga, carga lento o el USB-C hace falso contacto",
+    urgency: "Alta si solo carga en una posición o dejó de encender",
+    typicalTime: "2-3 h para módulo de carga; más si la falla está en placa",
+    nextStep: "No forzar el conector y consultar con el modelo exacto",
+  },
+  {
+    symptom: "Queda en el logo, reinicia o se mojó",
+    urgency: "Crítica si tuvo contacto con líquido: no cargar ni aplicar calor",
+    typicalTime: "24-48 h para limpieza y diagnóstico de placa",
+    nextStep: "Traerlo apagado al laboratorio lo antes posible",
+  },
+  {
+    symptom: "Z Fold o Z Flip no abre, no da imagen o falla en el pliegue",
+    urgency: "Alta para evitar que el flex o la pantalla interna se dañen más",
+    typicalTime: "24-72 h según bisagra, flex y repuesto",
+    nextStep: "No forzar la bisagra y solicitar evaluación específica",
+  },
+];
+
 const repairLinks: Record<string, string> = {
   "Cambio de pantalla AMOLED Samsung": "/reparaciones/cambio-pantalla-caba",
   "Bateria y autonomia degradada": "/reparaciones/cambio-bateria-caba",
@@ -273,6 +307,31 @@ const faq = [
     question: "Incluyen garantia luego de la reparacion?",
     answer: `Si. ${WARRANTY_SCOPE_MESSAGE}`,
   },
+  {
+    question: "Que diferencia hay entre pantalla Service Pack, OLED compatible y alternativa economica?",
+    answer:
+      "La pantalla Service Pack prioriza las especificaciones originales del equipo. Una OLED compatible puede ofrecer una buena relación entre costo y resultado, mientras que una alternativa económica puede cambiar brillo, color, consumo o respuesta táctil. Antes de instalar te informamos qué opción hay para tu modelo y qué funciones conserva.",
+  },
+  {
+    question: "Reparan Samsung Galaxy A15, A35, A54 y A55?",
+    answer:
+      "Sí. Trabajamos las líneas Galaxy A y confirmamos stock de pantalla, batería o módulo de carga según el código exacto del equipo antes de desarmar.",
+  },
+  {
+    question: "Reparan Samsung Galaxy S23, S24 y S25 Ultra?",
+    answer:
+      "Sí. En la línea Galaxy S revisamos pantalla AMOLED, cámaras, carga, batería y placa. En modelos Ultra verificamos además respuesta táctil, tasa de refresco y funciones asociadas al repuesto elegido.",
+  },
+  {
+    question: "Es un servicio oficial Samsung?",
+    answer:
+      "No somos un centro oficial Samsung. Somos un laboratorio técnico independiente en CABA y explicamos por escrito el diagnóstico, el repuesto ofrecido, el tiempo estimado y la garantía antes de avanzar.",
+  },
+  {
+    question: "Cuanto cuesta el diagnostico si no hago la reparacion?",
+    answer:
+      "El diagnóstico tiene costo y se informa antes de abrir el equipo. Si aprobás la reparación, ese monto se descuenta del trabajo final. Confirmamos el valor exacto al recibir el Samsung.",
+  },
 ];
 
 export default function SamsungRepairGuidePage() {
@@ -282,8 +341,15 @@ export default function SamsungRepairGuidePage() {
         title="Reparacion de Samsung en Buenos Aires | Servicio Tecnico Team Celular"
         description="Guia detallada de reparacion Samsung Galaxy con diagnostico profesional, repuestos premium y garantia escrita."
         publishedTime="2026-03-12T00:00:00Z"
-        modifiedTime="2026-05-08T00:00:00Z"
+        modifiedTime="2026-07-14T00:00:00Z"
         authorName="Team Celular"
+        about={[
+          "reparacion de Samsung en Buenos Aires",
+          "service tecnico Samsung Galaxy en CABA",
+          "cambio de pantalla AMOLED Samsung",
+          "cambio de bateria Samsung Galaxy",
+          "reparacion de Galaxy S, A, Z Fold y Z Flip",
+        ]}
         image="https://teamcelular.com/images/guia_samsung.webp"
         url={PAGE_URL}
       />
@@ -396,6 +462,69 @@ export default function SamsungRepairGuidePage() {
             </Link>
           </div>
         </header>
+
+        <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
+          <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-primary">
+              Respuesta directa
+            </p>
+            <h2 className="mt-3 text-2xl font-black text-slate-900 dark:text-white">
+              Dónde reparar un Samsung Galaxy en Buenos Aires
+            </h2>
+            <p className="mt-4 text-base leading-7 text-slate-700 dark:text-slate-200">
+              Para reparar un Samsung Galaxy en Buenos Aires, Team Celular atiende en
+              Paraguay 2451, Recoleta, y Amenábar 2032, Belgrano. Hacemos diagnóstico
+              el mismo día y resolvemos pantalla, batería o carga en 2-4 h según modelo
+              y stock, con garantía escrita sobre el trabajo y el repuesto instalado.
+            </p>
+          </div>
+
+          <div className="overflow-hidden rounded-3xl border border-slate-200/80 bg-white/80 dark:border-slate-700/60 dark:bg-slate-900/60">
+            <div className="border-b border-slate-200 px-6 py-5 dark:border-slate-700">
+              <h2 className="text-2xl font-black text-slate-900 dark:text-white">
+                Qué hacer según la falla del Samsung
+              </h2>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+                Una referencia rápida para no agravar el daño antes del diagnóstico.
+              </p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="min-w-[760px] w-full text-left text-sm">
+                <thead className="bg-slate-100/80 text-slate-700 dark:bg-slate-800/80 dark:text-slate-200">
+                  <tr>
+                    <th scope="col" className="px-5 py-4 font-semibold">Síntoma</th>
+                    <th scope="col" className="px-5 py-4 font-semibold">Urgencia</th>
+                    <th scope="col" className="px-5 py-4 font-semibold">Tiempo típico</th>
+                    <th scope="col" className="px-5 py-4 font-semibold">Siguiente paso</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
+                  {samsungSymptomRows.map((row) => (
+                    <tr key={row.symptom} className="bg-white/70 dark:bg-slate-900/40">
+                      <td className="px-5 py-4 font-semibold text-slate-900 dark:text-white">{row.symptom}</td>
+                      <td className="px-5 py-4 text-slate-700 dark:text-slate-300">{row.urgency}</td>
+                      <td className="px-5 py-4 text-slate-700 dark:text-slate-300">{row.typicalTime}</td>
+                      <td className="px-5 py-4 text-slate-700 dark:text-slate-300">{row.nextStep}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-6 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+              Reseñas reales antes de reparar tu Samsung
+            </h2>
+            <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
+              Opiniones verificables de Google sobre diagnósticos y reparaciones realizadas en el laboratorio.
+            </p>
+          </div>
+          {/* @ts-expect-error Async Server Component */}
+          <GoogleReviewsAPI />
+        </section>
 
         <section className="space-y-7">
           <div className="text-center">

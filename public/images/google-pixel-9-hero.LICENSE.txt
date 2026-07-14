@@ -1,0 +1,5 @@
+Source: https://commons.wikimedia.org/wiki/File:Pixel_9.jpg
+Author: Miyako Fujimiya
+License: CC0 1.0 Universal Public Domain Dedication
+License URL: https://creativecommons.org/publicdomain/zero/1.0/
+Changes: resized and cropped to 1200x900, converted from JPEG to WebP.

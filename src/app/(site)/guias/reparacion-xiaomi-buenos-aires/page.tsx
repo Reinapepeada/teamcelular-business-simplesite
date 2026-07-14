@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import {
@@ -72,7 +73,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2026-03-12T00:00:00Z",
-    modifiedTime: "2026-06-08T00:00:00Z",
+    modifiedTime: "2026-07-14T00:00:00Z",
     section: "Guias Tecnicas",
   },
   twitter: {
@@ -187,6 +188,39 @@ const repairServices = [
   },
 ];
 
+const xiaomiSymptomRows = [
+  {
+    symptom: "Pantalla con líneas, manchas o táctil que falla",
+    urgency: "Alta si aparecen zonas negras o el táctil deja de responder",
+    typicalTime: "2-4 h si hay módulo compatible en stock",
+    nextStep: "Enviar modelo exacto y foto para confirmar AMOLED o IPS",
+  },
+  {
+    symptom: "Batería dura poco, se apaga o calienta",
+    urgency: "Alta si se hincha, levanta la tapa o descarga de golpe",
+    typicalTime: "1-2 h según Xiaomi, Redmi o POCO",
+    nextStep: "Apagarlo si está hinchado y pedir diagnóstico de consumo",
+  },
+  {
+    symptom: "No carga rápido o el USB-C hace falso contacto",
+    urgency: "Alta si dejó de encender o solo carga en una posición",
+    typicalTime: "2-3 h para módulo; más si la falla está en placa",
+    nextStep: "No forzar el conector y traer también cargador y cable",
+  },
+  {
+    symptom: "Queda en el logo, reinicia o no enciende",
+    urgency: "Alta: puede ser software, memoria, batería o PMIC",
+    typicalTime: "24-48 h para diagnóstico de placa y sistema",
+    nextStep: "Evitar reinicios repetidos y solicitar diagnóstico técnico",
+  },
+  {
+    symptom: "Se mojó o empezó a fallar después de humedad",
+    urgency: "Crítica: no cargar, encender ni aplicar calor",
+    typicalTime: "24-48 h para apertura, limpieza y medición",
+    nextStep: "Traerlo apagado al laboratorio lo antes posible",
+  },
+];
+
 const repairLinks: Record<string, string> = {
   "Pantalla AMOLED o IPS para Xiaomi": "/reparaciones/cambio-pantalla-caba",
   "Bateria degradada y autonomia baja": "/reparaciones/cambio-bateria-caba",
@@ -269,6 +303,31 @@ const faq = [
     question: "Que incluye la garantia?",
     answer: WARRANTY_SCOPE_MESSAGE,
   },
+  {
+    question: "Reparan Redmi Note 12, Note 13 y Note 14?",
+    answer:
+      "Sí. Trabajamos la línea Redmi Note y confirmamos el código exacto del equipo antes de cotizar pantalla, batería o módulo USB-C, porque un mismo nombre comercial puede tener variantes de hardware.",
+  },
+  {
+    question: "Reparan POCO X6, F6 y otros modelos POCO?",
+    answer:
+      "Sí. Diagnosticamos POCO X, F, M y C según disponibilidad de repuesto. Revisamos especialmente carga, temperatura, batería, pantalla y placa en equipos de uso intensivo.",
+  },
+  {
+    question: "Que diferencia hay entre pantalla AMOLED, IPS original y compatible?",
+    answer:
+      "El tipo correcto depende del modelo. Una pantalla distinta puede cambiar brillo, color, consumo, tasa de refresco o respuesta táctil. Antes de instalar te informamos qué opción hay, su calidad y qué funciones conserva.",
+  },
+  {
+    question: "Es un servicio oficial Xiaomi?",
+    answer:
+      "No somos un centro oficial Xiaomi. Somos un laboratorio técnico independiente en CABA y detallamos por escrito diagnóstico, repuesto, tiempo estimado y garantía antes de avanzar.",
+  },
+  {
+    question: "Cuanto cuesta el diagnostico si no hago la reparacion?",
+    answer:
+      "El diagnóstico tiene costo y se informa antes de abrir el equipo. Si aprobás la reparación, ese monto se descuenta del trabajo final. Confirmamos el valor exacto al recibir el dispositivo.",
+  },
 ];
 
 export default function XiaomiRepairGuidePage() {
@@ -278,8 +337,15 @@ export default function XiaomiRepairGuidePage() {
         title="Reparacion de Xiaomi en Buenos Aires | Servicio Tecnico Team Celular"
         description="Guia completa de reparacion Xiaomi, Redmi y POCO con diagnostico en 24 horas, repuestos premium y garantia escrita."
         publishedTime="2026-03-12T00:00:00Z"
-        modifiedTime="2026-05-08T00:00:00Z"
+        modifiedTime="2026-07-14T00:00:00Z"
         authorName="Team Celular"
+        about={[
+          "reparacion de Xiaomi en Buenos Aires",
+          "service tecnico Xiaomi en CABA",
+          "reparacion de Redmi Note",
+          "reparacion de celulares POCO",
+          "cambio de pantalla, bateria y USB-C Xiaomi",
+        ]}
         image="https://teamcelular.com/images/guia_xiaomi.webp"
         url={PAGE_URL}
       />
@@ -392,6 +458,69 @@ export default function XiaomiRepairGuidePage() {
             </Link>
           </div>
         </header>
+
+        <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
+          <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-primary">
+              Respuesta directa
+            </p>
+            <h2 className="mt-3 text-2xl font-black text-slate-900 dark:text-white">
+              Dónde reparar un Xiaomi, Redmi o POCO en Buenos Aires
+            </h2>
+            <p className="mt-4 text-base leading-7 text-slate-700 dark:text-slate-200">
+              Para reparar un Xiaomi, Redmi o POCO en Buenos Aires, Team Celular atiende
+              en Paraguay 2451, Recoleta, y Amenábar 2032, Belgrano. Hacemos diagnóstico
+              el mismo día y resolvemos pantalla, batería o carga USB-C en 2-4 h según
+              modelo y stock, con garantía escrita sobre trabajo y repuesto instalado.
+            </p>
+          </div>
+
+          <div className="overflow-hidden rounded-3xl border border-slate-200/80 bg-white/80 dark:border-slate-700/60 dark:bg-slate-900/60">
+            <div className="border-b border-slate-200 px-6 py-5 dark:border-slate-700">
+              <h2 className="text-2xl font-black text-slate-900 dark:text-white">
+                Qué hacer según la falla del Xiaomi
+              </h2>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+                Una referencia rápida para proteger el equipo antes del diagnóstico.
+              </p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="min-w-[760px] w-full text-left text-sm">
+                <thead className="bg-slate-100/80 text-slate-700 dark:bg-slate-800/80 dark:text-slate-200">
+                  <tr>
+                    <th scope="col" className="px-5 py-4 font-semibold">Síntoma</th>
+                    <th scope="col" className="px-5 py-4 font-semibold">Urgencia</th>
+                    <th scope="col" className="px-5 py-4 font-semibold">Tiempo típico</th>
+                    <th scope="col" className="px-5 py-4 font-semibold">Siguiente paso</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
+                  {xiaomiSymptomRows.map((row) => (
+                    <tr key={row.symptom} className="bg-white/70 dark:bg-slate-900/40">
+                      <td className="px-5 py-4 font-semibold text-slate-900 dark:text-white">{row.symptom}</td>
+                      <td className="px-5 py-4 text-slate-700 dark:text-slate-300">{row.urgency}</td>
+                      <td className="px-5 py-4 text-slate-700 dark:text-slate-300">{row.typicalTime}</td>
+                      <td className="px-5 py-4 text-slate-700 dark:text-slate-300">{row.nextStep}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-6 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+              Reseñas reales antes de reparar tu Xiaomi
+            </h2>
+            <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
+              Opiniones verificables de Google sobre diagnósticos y reparaciones realizadas en el laboratorio.
+            </p>
+          </div>
+          {/* @ts-expect-error Async Server Component */}
+          <GoogleReviewsAPI />
+        </section>
 
         <section className="space-y-7">
           <div className="text-center">

@@ -15,6 +15,7 @@ import {
   FaBuilding,
   FaShieldAlt,
 } from "react-icons/fa";
+import { SiMotorola, SiSamsung, SiXiaomi } from "react-icons/si";
 import Link from "next/link";
 import Image from "next/image";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
@@ -26,6 +27,21 @@ const footerSections = {
       name: "Reparacion de iPhone",
       href: "/guias/reparacion-iphone-buenos-aires",
       icon: FaApple,
+    },
+    {
+      name: "Reparacion de Samsung",
+      href: "/guias/reparacion-samsung-buenos-aires",
+      icon: SiSamsung,
+    },
+    {
+      name: "Reparacion de Xiaomi",
+      href: "/guias/reparacion-xiaomi-buenos-aires",
+      icon: SiXiaomi,
+    },
+    {
+      name: "Reparacion de Motorola",
+      href: "/guias/reparacion-motorola-buenos-aires",
+      icon: SiMotorola,
     },
     {
       name: "Reparacion de celulares",
@@ -51,6 +67,9 @@ const footerSections = {
   guias: [
     { name: "Todas las guias", href: "/guias" },
     { name: "Reparacion iPhone", href: "/guias/reparacion-iphone-buenos-aires" },
+    { name: "Reparacion Samsung", href: "/guias/reparacion-samsung-buenos-aires" },
+    { name: "Reparacion Xiaomi", href: "/guias/reparacion-xiaomi-buenos-aires" },
+    { name: "Reparacion Motorola", href: "/guias/reparacion-motorola-buenos-aires" },
     { name: "Microelectronica", href: "/guias/microelectronica-reballing-caba" },
     {
       name: "Mantenimiento preventivo",
@@ -281,7 +300,26 @@ export default function FooterNUI() {
             </div>
           </div>
 
-          <p className="text-xs text-slate-200">Hecho en Buenos Aires, Argentina</p>
+          <div className="flex items-center gap-4">
+            <p className="text-xs text-slate-200">Hecho en Buenos Aires, Argentina</p>
+            <a
+              href="https://qr.afip.gob.ar/?qr=JdurW7uYf0XPjAi2k6j3MA,,"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Ver información fiscal de Team Celular en AFIP"
+              className="shrink-0 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element -- imagen oficial alojada por AFIP */}
+              <img
+                src="https://www.afip.gob.ar/images/f960/DATAWEB.jpg"
+                alt="Formulario 960 Data Fiscal AFIP"
+                width="55"
+                height="74"
+                loading="lazy"
+                className="h-auto w-[55px]"
+              />
+            </a>
+          </div>
         </div>
       </div>
     </footer>

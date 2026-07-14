@@ -28,6 +28,7 @@ type BrandGuideSeed = {
   badge: string;
   imagePath: string;
   models: string[];
+  modifiedTime?: string;
   specialtyFocus: string;
   knownWeakPoints: [string, string, string];
   serviceHref: string;
@@ -47,6 +48,7 @@ export type BrandGuideConfig = {
   publishedTime: string;
   modifiedTime: string;
   imagePath: string;
+  articleAbout: string[];
   heroPoints: string[];
   symptomsTitle: string;
   symptomsDescription: string;
@@ -68,8 +70,9 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     slug: "reparacion-google-pixel-buenos-aires",
     brand: "Google Pixel",
     badge: "Android premium",
-    imagePath: "/images/landings/landing-cambio-camara-caba-hero.webp",
-    models: ["Pixel 9", "Pixel 8", "Pixel 7", "Pixel 6 Pro"],
+    imagePath: "/images/google-pixel-9-hero.webp",
+    models: ["Pixel 10", "Pixel 9", "Pixel 8", "Pixel 7", "Pixel 6 Pro"],
+    modifiedTime: "2026-07-14T00:00:00Z",
     specialtyFocus:
       "enfoque de camara computacional, pantalla OLED y estabilidad de carga USB-C",
     knownWeakPoints: [
@@ -297,12 +300,12 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     {
       title: seed.knownWeakPoints[1],
       description:
-        `Si notas ${seed.knownWeakPoints[1]}, evaluamos desgaste de bateria y consumo en placa para evitar un cambio innecesario.`,
+        `Si notas ${seed.knownWeakPoints[1]}, aislamos el modulo afectado, revisamos sus conectores y hacemos pruebas funcionales antes de proponer un reemplazo.`,
     },
     {
       title: seed.knownWeakPoints[2],
       description:
-        `Ante ${seed.knownWeakPoints[2]}, validamos pin, flex de carga y lineas de datos para resolver la causa real.`,
+        `Ante ${seed.knownWeakPoints[2]}, reproducimos el sintoma y revisamos el circuito, flex o conector relacionado para resolver la causa real.`,
     },
     {
       title: `Sistemas secundarios en ${seed.brand}`,
@@ -399,8 +402,13 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     badge: seed.badge,
     readingTime: "5 min",
     publishedTime: "2026-04-20T00:00:00Z",
-    modifiedTime: "2026-06-09T00:00:00Z",
+    modifiedTime: seed.modifiedTime ?? "2026-06-09T00:00:00Z",
     imagePath: seed.imagePath,
+    articleAbout: [
+      `Reparacion de ${seed.brand}`,
+      `Servicio tecnico ${seed.brand} en CABA`,
+      ...seed.models,
+    ],
     heroPoints: [
       `Diagnostico orientado a equipos ${seed.brand}.`,
       `Enfoque tecnico en ${seed.specialtyFocus}.`,

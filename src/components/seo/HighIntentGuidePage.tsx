@@ -37,6 +37,7 @@ interface HighIntentGuidePageProps {
   publishedTime: string;
   modifiedTime: string;
   imagePath: string;
+  articleAbout?: string[];
   heroPoints: string[];
   symptomsTitle: string;
   symptomsDescription: string;
@@ -71,6 +72,7 @@ export default function HighIntentGuidePage({
   publishedTime,
   modifiedTime,
   imagePath,
+  articleAbout,
   heroPoints,
   symptomsTitle,
   symptomsDescription,
@@ -99,6 +101,7 @@ export default function HighIntentGuidePage({
           authorName="Team Celular"
           image={imageUrl}
           url={pageUrl}
+          about={articleAbout}
         />
         <BreadcrumbJsonLd
           items={[

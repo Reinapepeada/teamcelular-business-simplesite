@@ -20,6 +20,7 @@ export default function BrandGuidePage({ slug }: { slug: BrandGuideSlug }) {
       publishedTime={config.publishedTime}
       modifiedTime={config.modifiedTime}
       imagePath={config.imagePath}
+      articleAbout={config.articleAbout}
       heroPoints={config.heroPoints}
       symptomsTitle={config.symptomsTitle}
       symptomsDescription={config.symptomsDescription}

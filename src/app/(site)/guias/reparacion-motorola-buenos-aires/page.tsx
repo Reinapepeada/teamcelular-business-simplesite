@@ -3,6 +3,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import {
@@ -17,6 +18,7 @@ import {
   FaTools,
   FaWrench,
 } from "react-icons/fa";
+import { SiMotorola } from "react-icons/si";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
@@ -72,7 +74,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2026-05-08T00:00:00Z",
-    modifiedTime: "2026-06-09T00:00:00Z",
+    modifiedTime: "2026-07-14T00:00:00Z",
     section: "Guías Técnicas",
   },
   twitter: {
@@ -199,6 +201,39 @@ const frequentRepairs = [
   },
 ];
 
+const motorolaSymptomRows = [
+  {
+    symptom: "Pantalla con líneas, manchas o táctil que falla",
+    urgency: "Alta si aparecen zonas negras o el táctil deja de responder",
+    typicalTime: "2-4 h si hay módulo compatible en stock",
+    nextStep: "Enviar modelo exacto y foto para confirmar LCD o AMOLED",
+  },
+  {
+    symptom: "Batería dura poco, se apaga o se hincha",
+    urgency: "Alta si levanta la tapa, calienta o descarga de golpe",
+    typicalTime: "1-2 h según modelo Moto G, Edge o E",
+    nextStep: "Apagarlo si está hinchado y pedir diagnóstico de consumo",
+  },
+  {
+    symptom: "No carga o el USB-C hace falso contacto",
+    urgency: "Alta si solo carga en una posición o dejó de encender",
+    typicalTime: "1-3 h para pin o flex; más si la falla está en placa",
+    nextStep: "No forzar el conector y consultar con el modelo exacto",
+  },
+  {
+    symptom: "Queda en el logo, reinicia o no enciende",
+    urgency: "Alta: puede ser batería, software o placa",
+    typicalTime: "24-48 h para diagnóstico de placa y energía",
+    nextStep: "Evitar reinicios repetidos y solicitar diagnóstico técnico",
+  },
+  {
+    symptom: "Se mojó o falla después de humedad",
+    urgency: "Crítica: no cargar, encender ni aplicar calor",
+    typicalTime: "24-48 h para apertura, limpieza y medición",
+    nextStep: "Traerlo apagado al laboratorio lo antes posible",
+  },
+];
+
 const trustBlocks = [
   {
     title: "Diagnóstico claro antes de reparar",
@@ -290,6 +325,16 @@ const faq = [
     answer:
       "No en la línea Moto G. El reemplazo de batería no afecta funciones de software. Después del cambio hacemos test de autonomía y ciclo de carga para confirmar rendimiento.",
   },
+  {
+    question: "¿Qué diferencia hay entre pantalla original, AMOLED compatible y LCD?",
+    answer:
+      "La opción correcta depende del modelo. En equipos Edge o Moto G con AMOLED, cambiar de tecnología puede afectar brillo, color, consumo o respuesta táctil. Antes de instalar informamos qué repuesto hay disponible y qué resultado podés esperar.",
+  },
+  {
+    question: "¿Es un servicio oficial Motorola?",
+    answer:
+      "No somos un centro oficial Motorola. Somos un laboratorio técnico independiente en CABA y detallamos por escrito diagnóstico, repuesto, tiempo estimado y garantía antes de avanzar.",
+  },
 ];
 
 export default function MotorolaRepairGuidePage() {
@@ -299,8 +344,15 @@ export default function MotorolaRepairGuidePage() {
         title="Reparación de Motorola en Buenos Aires | Servicio Técnico Team Celular"
         description="Guía completa para reparar Motorola en CABA con diagnóstico profesional, repuestos de calidad y garantía escrita 90 días."
         publishedTime="2026-05-08T00:00:00Z"
-        modifiedTime="2026-06-09T00:00:00Z"
+        modifiedTime="2026-07-14T00:00:00Z"
         authorName="Team Celular"
+        about={[
+          "reparacion de Motorola en Buenos Aires",
+          "service tecnico Motorola en CABA",
+          "reparacion de Moto G",
+          "reparacion de Motorola Edge",
+          "cambio de pantalla, bateria y USB-C Motorola",
+        ]}
         image="https://teamcelular.com/images/portada_moto.webp"
         url={PAGE_URL}
       />
@@ -331,6 +383,7 @@ export default function MotorolaRepairGuidePage() {
         <header className="space-y-8 rounded-3xl border border-white/20 bg-white/5 p-8 backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-14">
           <div className="flex flex-wrap items-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/70 bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
+              <SiMotorola />
               Especialistas por marca
             </span>
             <span className="rounded-full border border-emerald-700/80 bg-emerald-700 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white">
@@ -412,6 +465,69 @@ export default function MotorolaRepairGuidePage() {
             </Link>
           </div>
         </header>
+
+        <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
+          <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-primary">
+              Respuesta directa
+            </p>
+            <h2 className="mt-3 text-2xl font-black text-slate-900 dark:text-white">
+              Dónde reparar un Motorola en Buenos Aires
+            </h2>
+            <p className="mt-4 text-base leading-7 text-slate-700 dark:text-slate-200">
+              Para reparar un Motorola en Buenos Aires, Team Celular atiende en Paraguay
+              2451, Recoleta, y Amenábar 2032, Belgrano. Hacemos diagnóstico el mismo día
+              y resolvemos pantalla, batería o carga USB-C en 1-4 h según modelo y stock,
+              con garantía escrita sobre trabajo y repuesto instalado.
+            </p>
+          </div>
+
+          <div className="overflow-hidden rounded-3xl border border-slate-200/80 bg-white/80 dark:border-slate-700/60 dark:bg-slate-900/60">
+            <div className="border-b border-slate-200 px-6 py-5 dark:border-slate-700">
+              <h2 className="text-2xl font-black text-slate-900 dark:text-white">
+                Qué hacer según la falla del Motorola
+              </h2>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+                Una referencia rápida para proteger el equipo antes del diagnóstico.
+              </p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="min-w-[760px] w-full text-left text-sm">
+                <thead className="bg-slate-100/80 text-slate-700 dark:bg-slate-800/80 dark:text-slate-200">
+                  <tr>
+                    <th scope="col" className="px-5 py-4 font-semibold">Síntoma</th>
+                    <th scope="col" className="px-5 py-4 font-semibold">Urgencia</th>
+                    <th scope="col" className="px-5 py-4 font-semibold">Tiempo típico</th>
+                    <th scope="col" className="px-5 py-4 font-semibold">Siguiente paso</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
+                  {motorolaSymptomRows.map((row) => (
+                    <tr key={row.symptom} className="bg-white/70 dark:bg-slate-900/40">
+                      <td className="px-5 py-4 font-semibold text-slate-900 dark:text-white">{row.symptom}</td>
+                      <td className="px-5 py-4 text-slate-700 dark:text-slate-300">{row.urgency}</td>
+                      <td className="px-5 py-4 text-slate-700 dark:text-slate-300">{row.typicalTime}</td>
+                      <td className="px-5 py-4 text-slate-700 dark:text-slate-300">{row.nextStep}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-6 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+              Reseñas reales antes de reparar tu Motorola
+            </h2>
+            <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
+              Opiniones verificables de Google sobre diagnósticos y reparaciones realizadas en el laboratorio.
+            </p>
+          </div>
+          {/* @ts-expect-error Async Server Component */}
+          <GoogleReviewsAPI />
+        </section>
 
         <section className="space-y-7">
           <div className="text-center">

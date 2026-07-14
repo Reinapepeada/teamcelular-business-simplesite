@@ -17,6 +17,27 @@ const ARTICLES: KnowledgeItem[] = [
     readingTime: "5 min de lectura",
   },
   {
+    title: "Reparación de Samsung Galaxy en Buenos Aires",
+    summary:
+      "Diagnóstico por falla, tiempos y opciones de pantalla, batería, carga y placa para las líneas Galaxy S, A, Note, Z Fold y Z Flip.",
+    href: "/guias/reparacion-samsung-buenos-aires",
+    readingTime: "6 min de lectura",
+  },
+  {
+    title: "Reparación de Xiaomi, Redmi y POCO",
+    summary:
+      "Fallas frecuentes, tiempos y opciones de pantalla, batería, carga rápida y placa para equipos Xiaomi, Redmi Note y POCO.",
+    href: "/guias/reparacion-xiaomi-buenos-aires",
+    readingTime: "6 min de lectura",
+  },
+  {
+    title: "Reparación de Motorola en Buenos Aires",
+    summary:
+      "Diagnóstico, tiempos y opciones de pantalla, batería, carga y placa para las líneas Moto G, Edge, E y ThinkPhone.",
+    href: "/guias/reparacion-motorola-buenos-aires",
+    readingTime: "6 min de lectura",
+  },
+  {
     title: "Microelectrónica y reballing profesional",
     summary:
       "Cuándo conviene optar por microelectrónica, qué herramientas usamos y cómo cuidamos los chips BGA en reparaciones críticas.",
