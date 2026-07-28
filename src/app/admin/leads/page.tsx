@@ -285,6 +285,7 @@ function buildTrendDataFromMetrics(
 
 function TrendChart({ points }: { points: TrendPoint[] }) {
     const gradientId = `leads-trend-${useId().replaceAll(":", "")}`;
+    const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
     if (points.length === 0) {
         return (
@@ -295,27 +296,37 @@ function TrendChart({ points }: { points: TrendPoint[] }) {
     }
 
     const width = 640;
-    const height = 180;
-    const padding = 26;
+    const height = 220;
+    const plot = { top: 22, right: 14, bottom: 26, left: 38 };
+    const plotWidth = width - plot.left - plot.right;
+    const plotHeight = height - plot.top - plot.bottom;
     const maxCount = Math.max(...points.map((point) => point.count), 1);
-
-    const step = points.length > 1 ? (width - padding * 2) / (points.length - 1) : 0;
+    const xFor = (index: number) =>
+        points.length === 1
+            ? plot.left + plotWidth / 2
+            : plot.left + (plotWidth / (points.length - 1)) * index;
+    const yFor = (count: number) =>
+        plot.top + plotHeight - (count / maxCount) * plotHeight;
 
     const polyline = points
-        .map((point, index) => {
-            const x = padding + step * index;
-            const y =
-                height -
-                padding -
-                (point.count / maxCount) * (height - padding * 2);
-            return `${x},${y}`;
-        })
+        .map((point, index) => `${xFor(index)},${yFor(point.count)}`)
         .join(" ");
+    const activePoint = activeIndex === null ? null : points[activeIndex];
+    const activeX = activeIndex === null ? 0 : xFor(activeIndex);
+    const activeY = activePoint ? yFor(activePoint.count) : 0;
+    const tooltipX = Math.min(Math.max(activeX, 72), width - 72);
+    const yTicks = [...new Set([maxCount, Math.round(maxCount / 2), 0])];
 
     return (
-        <div className="space-y-4">
-            <div className="h-48 w-full rounded-lg border bg-muted/20 p-2">
-                <svg viewBox={`0 0 ${width} ${height}`} className="h-full w-full" role="img" aria-label="Tendencia diaria para el período seleccionado">
+        <div className="space-y-2">
+            <div className="h-60 w-full rounded-lg bg-muted/20 p-2">
+                <svg
+                    viewBox={`0 0 ${width} ${height}`}
+                    className="h-full w-full"
+                    role="img"
+                    aria-label="Tendencia diaria para el período seleccionado"
+                    onPointerLeave={() => setActiveIndex(null)}
+                >
                     <defs>
                         <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
                             <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.28" />
@@ -325,54 +336,117 @@ function TrendChart({ points }: { points: TrendPoint[] }) {
 
                     <rect x="0" y="0" width={width} height={height} fill="transparent" />
 
-                    <path
-                        d={`M ${polyline} L ${width - padding},${height - padding} L ${padding},${height - padding} Z`}
-                        fill={`url(#${gradientId})`}
-                    />
+                    {yTicks.map((tick) => {
+                        const y = yFor(tick);
+                        return (
+                            <g key={tick}>
+                                <line
+                                    x1={plot.left}
+                                    x2={width - plot.right}
+                                    y1={y}
+                                    y2={y}
+                                    stroke="hsl(var(--border))"
+                                    strokeDasharray={tick === 0 ? undefined : "4 5"}
+                                />
+                                <text
+                                    x={plot.left - 8}
+                                    y={y + 4}
+                                    textAnchor="end"
+                                    className="fill-muted-foreground text-[10px]"
+                                >
+                                    {tick}
+                                </text>
+                            </g>
+                        );
+                    })}
 
-                    <polyline
-                        fill="none"
-                        stroke="hsl(var(--primary))"
-                        strokeWidth="3"
-                        strokeLinejoin="round"
-                        strokeLinecap="round"
-                        points={polyline}
-                    />
+                    {points.length > 1 && (
+                        <>
+                            <path
+                                d={`M ${polyline} L ${xFor(points.length - 1)},${yFor(0)} L ${xFor(0)},${yFor(0)} Z`}
+                                fill={`url(#${gradientId})`}
+                            />
+                            <polyline
+                                fill="none"
+                                stroke="hsl(var(--primary))"
+                                strokeWidth="3"
+                                strokeLinejoin="round"
+                                strokeLinecap="round"
+                                points={polyline}
+                            />
+                        </>
+                    )}
 
                     {points.map((point, index) => {
-                        const x = padding + step * index;
-                        const y =
-                            height -
-                            padding -
-                            (point.count / maxCount) * (height - padding * 2);
-
-                        const showValue =
-                            points.length <= 31 ||
-                            index % Math.ceil(points.length / 15) === 0;
-
+                        const x = xFor(index);
+                        const y = yFor(point.count);
                         return (
-                            <g key={point.key}>
-                                <title>{`${point.label}: ${point.count}`}</title>
-                                <circle cx={x} cy={y} r="4" fill="hsl(var(--primary))" />
-                                {showValue && (
-                                    <text
-                                        x={x}
-                                        y={Math.max(y - 8, 10)}
-                                        textAnchor="middle"
-                                        className="fill-foreground text-[10px] font-semibold"
-                                    >
-                                        {point.count}
-                                    </text>
+                            <g
+                                key={point.key}
+                                tabIndex={0}
+                                role="button"
+                                aria-label={`${point.label}: ${point.count}`}
+                                onFocus={() => setActiveIndex(index)}
+                                onBlur={() => setActiveIndex(null)}
+                                onPointerEnter={() => setActiveIndex(index)}
+                                onPointerDown={() => setActiveIndex(index)}
+                            >
+                                <circle cx={x} cy={y} r="10" fill="transparent" />
+                                {(points.length <= 45 || activeIndex === index) && (
+                                    <circle
+                                        cx={x}
+                                        cy={y}
+                                        r={activeIndex === index ? 5 : 2.5}
+                                        fill="hsl(var(--primary))"
+                                    />
                                 )}
                             </g>
                         );
                     })}
+
+                    {activePoint && (
+                        <g pointerEvents="none">
+                            <line
+                                x1={activeX}
+                                x2={activeX}
+                                y1={activeY}
+                                y2={yFor(0)}
+                                stroke="hsl(var(--primary))"
+                                strokeOpacity="0.35"
+                                strokeDasharray="3 3"
+                            />
+                            <rect
+                                x={tooltipX - 62}
+                                y={Math.max(activeY - 48, 2)}
+                                width="124"
+                                height="38"
+                                rx="7"
+                                fill="hsl(var(--foreground))"
+                            />
+                            <text
+                                x={tooltipX}
+                                y={Math.max(activeY - 32, 18)}
+                                textAnchor="middle"
+                                className="fill-background text-[10px]"
+                            >
+                                {activePoint.label}
+                            </text>
+                            <text
+                                x={tooltipX}
+                                y={Math.max(activeY - 18, 32)}
+                                textAnchor="middle"
+                                className="fill-background text-xs font-semibold"
+                            >
+                                {activePoint.count} {activePoint.count === 1 ? "registro" : "registros"}
+                            </text>
+                        </g>
+                    )}
                 </svg>
             </div>
 
-            <div className="flex items-center justify-between text-xs text-muted-foreground">
+            <div className="flex items-center justify-between gap-3 text-xs text-muted-foreground">
                 <span>{points[0]?.label ?? "-"}</span>
-                <span>{points[Math.floor(points.length / 2)]?.label ?? "-"}</span>
+                <span className="hidden text-center sm:block">Pasá el cursor o tocá un punto para ver el valor</span>
                 <span>{points[points.length - 1]?.label ?? "-"}</span>
             </div>
         </div>
@@ -386,6 +460,7 @@ export default function AdminLeadsPage() {
     const [repairTypeFilter, setRepairTypeFilter] = useState("");
     const [dateFrom, setDateFrom] = useState("");
     const [dateTo, setDateTo] = useState("");
+    const [activeDatePreset, setActiveDatePreset] = useState<DatePreset | null>(null);
     const [ctaLocationFilter, setCtaLocationFilter] = useState("all");
     const [pageSize, setPageSize] = useState(20);
     const [currentPage, setCurrentPage] = useState(1);
@@ -424,6 +499,7 @@ export default function AdminLeadsPage() {
 
         setDateFrom(toInputDate(from));
         setDateTo(toInputDate(to));
+        setActiveDatePreset(preset);
         setCurrentPage(1);
     };
 
@@ -782,6 +858,7 @@ export default function AdminLeadsPage() {
         setRepairTypeFilter("");
         setDateFrom("");
         setDateTo("");
+        setActiveDatePreset(null);
         setCtaLocationFilter("all");
         setCurrentPage(1);
     };
@@ -830,7 +907,7 @@ export default function AdminLeadsPage() {
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                    <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-7">
+                    <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
                         <Select
                             value={statusFilter}
                             onValueChange={(value) => {
@@ -901,23 +978,25 @@ export default function AdminLeadsPage() {
                                 placeholder="Tipo de reparación"
                             />
                         </div>
+                    </div>
 
-                        <div className="space-y-2 md:col-span-4 xl:col-span-4">
+                    <div className="grid gap-4 border-t pt-4 lg:grid-cols-[minmax(0,1fr)_180px_180px] lg:items-end">
+                        <div className="space-y-2">
                             <div className="flex items-center gap-2 text-sm font-medium">
                                 <CalendarDays className="h-4 w-4 text-primary" />
-                                Período de los gráficos
+                                Período de análisis
                             </div>
                             <div className="flex flex-wrap gap-2">
-                                <Button type="button" variant="outline" size="sm" onClick={() => applyDatePreset("this-month")}>
+                                <Button type="button" variant={activeDatePreset === "this-month" ? "default" : "outline"} size="sm" onClick={() => applyDatePreset("this-month")}>
                                     Este mes
                                 </Button>
-                                <Button type="button" variant="outline" size="sm" onClick={() => applyDatePreset("last-month")}>
+                                <Button type="button" variant={activeDatePreset === "last-month" ? "default" : "outline"} size="sm" onClick={() => applyDatePreset("last-month")}>
                                     Mes anterior
                                 </Button>
-                                <Button type="button" variant="outline" size="sm" onClick={() => applyDatePreset("30-days")}>
+                                <Button type="button" variant={activeDatePreset === "30-days" ? "default" : "outline"} size="sm" onClick={() => applyDatePreset("30-days")}>
                                     Últimos 30 días
                                 </Button>
-                                <Button type="button" variant="outline" size="sm" onClick={() => applyDatePreset("90-days")}>
+                                <Button type="button" variant={activeDatePreset === "90-days" ? "default" : "outline"} size="sm" onClick={() => applyDatePreset("90-days")}>
                                     Últimos 90 días
                                 </Button>
                             </div>
@@ -931,6 +1010,7 @@ export default function AdminLeadsPage() {
                                 value={dateFrom}
                                 onChange={(event) => {
                                     setDateFrom(event.target.value);
+                                    setActiveDatePreset(null);
                                     setCurrentPage(1);
                                 }}
                             />
@@ -944,6 +1024,7 @@ export default function AdminLeadsPage() {
                                 value={dateTo}
                                 onChange={(event) => {
                                     setDateTo(event.target.value);
+                                    setActiveDatePreset(null);
                                     setCurrentPage(1);
                                 }}
                             />
