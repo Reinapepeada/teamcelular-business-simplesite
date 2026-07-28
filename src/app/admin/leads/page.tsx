@@ -293,7 +293,7 @@ function buildTrendDataFromMetrics(
     return points;
 }
 
-function TrendTooltip({ active, payload }: TooltipContentProps<number, string>) {
+function TrendTooltip({ active, payload }: Partial<TooltipContentProps>) {
     if (!active || !payload?.length) return null;
 
     const point = payload[0].payload as TrendPoint;
@@ -339,7 +339,7 @@ function TrendChart({ points }: { points: TrendPoint[] }) {
                         tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 11 }}
                     />
                     <Tooltip
-                        content={(props) => <TrendTooltip {...props} />}
+                        content={<TrendTooltip />}
                         cursor={{ stroke: "hsl(var(--primary))", strokeOpacity: 0.3 }}
                     />
                     <Area
