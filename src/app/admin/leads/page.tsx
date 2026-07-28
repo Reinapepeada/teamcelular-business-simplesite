@@ -339,7 +339,7 @@ function TrendChart({ points }: { points: TrendPoint[] }) {
                         tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 11 }}
                     />
                     <Tooltip
-                        content={<TrendTooltip />}
+                        content={(props) => <TrendTooltip {...props} />}
                         cursor={{ stroke: "hsl(var(--primary))", strokeOpacity: 0.3 }}
                     />
                     <Area
