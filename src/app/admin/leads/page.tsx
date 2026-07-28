@@ -321,7 +321,11 @@ function TrendChart({ points }: { points: TrendPoint[] }) {
     return (
         <div className="h-64 w-full" role="img" aria-label="Tendencia diaria para el período seleccionado">
             <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={points} margin={{ top: 12, right: 8, bottom: 0, left: -16 }}>
+                <AreaChart
+                    data={points}
+                    accessibilityLayer
+                    margin={{ top: 12, right: 8, bottom: 0, left: -16 }}
+                >
                     <CartesianGrid vertical={false} stroke="hsl(var(--border))" strokeDasharray="4 5" />
                     <XAxis
                         dataKey="label"
@@ -352,7 +356,7 @@ function TrendChart({ points }: { points: TrendPoint[] }) {
                         fillOpacity={0.14}
                         activeDot={{ r: 5, strokeWidth: 0 }}
                         dot={points.length <= 31 ? { r: 2.5, strokeWidth: 0 } : false}
-                        animationDuration={350}
+                        isAnimationActive={false}
                     />
                 </AreaChart>
             </ResponsiveContainer>
