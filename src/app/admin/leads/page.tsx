@@ -1,7 +1,17 @@
 "use client";
 
-import { useCallback, useEffect, useId, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
+import {
+    Area,
+    AreaChart,
+    CartesianGrid,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis,
+    type TooltipContentProps,
+} from "recharts";
 import {
     Card,
     CardContent,
@@ -283,10 +293,21 @@ function buildTrendDataFromMetrics(
     return points;
 }
 
-function TrendChart({ points }: { points: TrendPoint[] }) {
-    const gradientId = `leads-trend-${useId().replaceAll(":", "")}`;
-    const [activeIndex, setActiveIndex] = useState<number | null>(null);
+function TrendTooltip({ active, payload }: TooltipContentProps<number, string>) {
+    if (!active || !payload?.length) return null;
 
+    const point = payload[0].payload as TrendPoint;
+    return (
+        <div className="rounded-lg bg-foreground px-3 py-2 text-background shadow-md">
+            <p className="text-xs opacity-75">{point.label}</p>
+            <p className="text-sm font-semibold">
+                {point.count} {point.count === 1 ? "registro" : "registros"}
+            </p>
+        </div>
+    );
+}
+
+function TrendChart({ points }: { points: TrendPoint[] }) {
     if (points.length === 0) {
         return (
             <div className="rounded-lg border border-dashed py-10 text-center text-sm text-muted-foreground">
@@ -295,160 +316,46 @@ function TrendChart({ points }: { points: TrendPoint[] }) {
         );
     }
 
-    const width = 640;
-    const height = 220;
-    const plot = { top: 22, right: 14, bottom: 26, left: 38 };
-    const plotWidth = width - plot.left - plot.right;
-    const plotHeight = height - plot.top - plot.bottom;
-    const maxCount = Math.max(...points.map((point) => point.count), 1);
-    const xFor = (index: number) =>
-        points.length === 1
-            ? plot.left + plotWidth / 2
-            : plot.left + (plotWidth / (points.length - 1)) * index;
-    const yFor = (count: number) =>
-        plot.top + plotHeight - (count / maxCount) * plotHeight;
-
-    const polyline = points
-        .map((point, index) => `${xFor(index)},${yFor(point.count)}`)
-        .join(" ");
-    const activePoint = activeIndex === null ? null : points[activeIndex];
-    const activeX = activeIndex === null ? 0 : xFor(activeIndex);
-    const activeY = activePoint ? yFor(activePoint.count) : 0;
-    const tooltipX = Math.min(Math.max(activeX, 72), width - 72);
-    const yTicks = [...new Set([maxCount, Math.round(maxCount / 2), 0])];
+    const tickEvery = Math.max(1, Math.ceil(points.length / 7));
 
     return (
-        <div className="space-y-2">
-            <div className="h-60 w-full rounded-lg bg-muted/20 p-2">
-                <svg
-                    viewBox={`0 0 ${width} ${height}`}
-                    className="h-full w-full"
-                    role="img"
-                    aria-label="Tendencia diaria para el período seleccionado"
-                    onPointerLeave={() => setActiveIndex(null)}
-                >
-                    <defs>
-                        <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.28" />
-                            <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
-                        </linearGradient>
-                    </defs>
-
-                    <rect x="0" y="0" width={width} height={height} fill="transparent" />
-
-                    {yTicks.map((tick) => {
-                        const y = yFor(tick);
-                        return (
-                            <g key={tick}>
-                                <line
-                                    x1={plot.left}
-                                    x2={width - plot.right}
-                                    y1={y}
-                                    y2={y}
-                                    stroke="hsl(var(--border))"
-                                    strokeDasharray={tick === 0 ? undefined : "4 5"}
-                                />
-                                <text
-                                    x={plot.left - 8}
-                                    y={y + 4}
-                                    textAnchor="end"
-                                    className="fill-muted-foreground text-[10px]"
-                                >
-                                    {tick}
-                                </text>
-                            </g>
-                        );
-                    })}
-
-                    {points.length > 1 && (
-                        <>
-                            <path
-                                d={`M ${polyline} L ${xFor(points.length - 1)},${yFor(0)} L ${xFor(0)},${yFor(0)} Z`}
-                                fill={`url(#${gradientId})`}
-                            />
-                            <polyline
-                                fill="none"
-                                stroke="hsl(var(--primary))"
-                                strokeWidth="3"
-                                strokeLinejoin="round"
-                                strokeLinecap="round"
-                                points={polyline}
-                            />
-                        </>
-                    )}
-
-                    {points.map((point, index) => {
-                        const x = xFor(index);
-                        const y = yFor(point.count);
-                        return (
-                            <g
-                                key={point.key}
-                                tabIndex={0}
-                                role="button"
-                                aria-label={`${point.label}: ${point.count}`}
-                                onFocus={() => setActiveIndex(index)}
-                                onBlur={() => setActiveIndex(null)}
-                                onPointerEnter={() => setActiveIndex(index)}
-                                onPointerDown={() => setActiveIndex(index)}
-                            >
-                                <circle cx={x} cy={y} r="10" fill="transparent" />
-                                {(points.length <= 45 || activeIndex === index) && (
-                                    <circle
-                                        cx={x}
-                                        cy={y}
-                                        r={activeIndex === index ? 5 : 2.5}
-                                        fill="hsl(var(--primary))"
-                                    />
-                                )}
-                            </g>
-                        );
-                    })}
-
-                    {activePoint && (
-                        <g pointerEvents="none">
-                            <line
-                                x1={activeX}
-                                x2={activeX}
-                                y1={activeY}
-                                y2={yFor(0)}
-                                stroke="hsl(var(--primary))"
-                                strokeOpacity="0.35"
-                                strokeDasharray="3 3"
-                            />
-                            <rect
-                                x={tooltipX - 62}
-                                y={Math.max(activeY - 48, 2)}
-                                width="124"
-                                height="38"
-                                rx="7"
-                                fill="hsl(var(--foreground))"
-                            />
-                            <text
-                                x={tooltipX}
-                                y={Math.max(activeY - 32, 18)}
-                                textAnchor="middle"
-                                className="fill-background text-[10px]"
-                            >
-                                {activePoint.label}
-                            </text>
-                            <text
-                                x={tooltipX}
-                                y={Math.max(activeY - 18, 32)}
-                                textAnchor="middle"
-                                className="fill-background text-xs font-semibold"
-                            >
-                                {activePoint.count} {activePoint.count === 1 ? "registro" : "registros"}
-                            </text>
-                        </g>
-                    )}
-                </svg>
-            </div>
-
-            <div className="flex items-center justify-between gap-3 text-xs text-muted-foreground">
-                <span>{points[0]?.label ?? "-"}</span>
-                <span className="hidden text-center sm:block">Pasá el cursor o tocá un punto para ver el valor</span>
-                <span>{points[points.length - 1]?.label ?? "-"}</span>
-            </div>
+        <div className="h-64 w-full" role="img" aria-label="Tendencia diaria para el período seleccionado">
+            <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={points} margin={{ top: 12, right: 8, bottom: 0, left: -16 }}>
+                    <CartesianGrid vertical={false} stroke="hsl(var(--border))" strokeDasharray="4 5" />
+                    <XAxis
+                        dataKey="label"
+                        axisLine={false}
+                        tickLine={false}
+                        interval={tickEvery - 1}
+                        minTickGap={24}
+                        tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 11 }}
+                    />
+                    <YAxis
+                        allowDecimals={false}
+                        axisLine={false}
+                        tickLine={false}
+                        width={36}
+                        tick={{ fill: "hsl(var(--muted-foreground))", fontSize: 11 }}
+                    />
+                    <Tooltip
+                        content={<TrendTooltip />}
+                        cursor={{ stroke: "hsl(var(--primary))", strokeOpacity: 0.3 }}
+                    />
+                    <Area
+                        type="monotone"
+                        dataKey="count"
+                        name="Registros"
+                        stroke="hsl(var(--primary))"
+                        strokeWidth={3}
+                        fill="hsl(var(--primary))"
+                        fillOpacity={0.14}
+                        activeDot={{ r: 5, strokeWidth: 0 }}
+                        dot={points.length <= 31 ? { r: 2.5, strokeWidth: 0 } : false}
+                        animationDuration={350}
+                    />
+                </AreaChart>
+            </ResponsiveContainer>
         </div>
     );
 }
