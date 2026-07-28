@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useId, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
     Card,
@@ -50,6 +50,7 @@ import {
 import {
     Activity,
     AlertTriangle,
+    CalendarDays,
     CheckCircle2,
     ChevronLeft,
     ChevronRight,
@@ -136,6 +137,8 @@ interface TrendPoint {
     label: string;
     count: number;
 }
+
+type DatePreset = "this-month" | "last-month" | "30-days" | "90-days";
 
 interface ParetoAction {
     id: string;
@@ -247,35 +250,42 @@ function getUrgencyClassName(urgency: string): string {
 
 function buildTrendDataFromMetrics(
     byDate: RepairLeadsMetricsResponse["byDate"],
-    days: number
+    dateFrom?: string,
+    dateTo?: string
 ): TrendPoint[] {
-    return [...byDate]
-        .sort((a, b) => {
-            const timeA = new Date(a.date).getTime();
-            const timeB = new Date(b.date).getTime();
+    const counts = new Map(byDate.map((entry) => [entry.date.slice(0, 10), entry.value]));
+    const sortedDates = [...counts.keys()].sort();
+    const firstDate = dateFrom || sortedDates[0];
+    const lastDate = dateTo || sortedDates[sortedDates.length - 1];
 
-            if (Number.isNaN(timeA) || Number.isNaN(timeB)) {
-                return a.date.localeCompare(b.date);
-            }
+    if (!firstDate || !lastDate) return [];
 
-            return timeA - timeB;
-        })
-        .slice(-days)
-        .map((entry, index) => {
-            const date = new Date(entry.date);
-            const label = Number.isNaN(date.getTime())
-                ? humanizeToken(entry.date)
-                : formatArgentinaDateShort(entry.date);
+    const cursor = new Date(`${firstDate}T12:00:00`);
+    const end = new Date(`${lastDate}T12:00:00`);
+    if (Number.isNaN(cursor.getTime()) || Number.isNaN(end.getTime()) || cursor > end) return [];
 
-            return {
-                key: `${entry.date}-${index}`,
-                label,
-                count: entry.value,
-            };
+    const points: TrendPoint[] = [];
+    while (cursor <= end) {
+        const key = [
+            cursor.getFullYear(),
+            String(cursor.getMonth() + 1).padStart(2, "0"),
+            String(cursor.getDate()).padStart(2, "0"),
+        ].join("-");
+
+        points.push({
+            key,
+            label: formatArgentinaDateShort(key),
+            count: counts.get(key) ?? 0,
         });
+        cursor.setDate(cursor.getDate() + 1);
+    }
+
+    return points;
 }
 
 function TrendChart({ points }: { points: TrendPoint[] }) {
+    const gradientId = `leads-trend-${useId().replaceAll(":", "")}`;
+
     if (points.length === 0) {
         return (
             <div className="rounded-lg border border-dashed py-10 text-center text-sm text-muted-foreground">
@@ -286,7 +296,7 @@ function TrendChart({ points }: { points: TrendPoint[] }) {
 
     const width = 640;
     const height = 180;
-    const padding = 18;
+    const padding = 26;
     const maxCount = Math.max(...points.map((point) => point.count), 1);
 
     const step = points.length > 1 ? (width - padding * 2) / (points.length - 1) : 0;
@@ -302,12 +312,10 @@ function TrendChart({ points }: { points: TrendPoint[] }) {
         })
         .join(" ");
 
-    const gradientId = "leads-trend-gradient";
-
     return (
         <div className="space-y-4">
             <div className="h-48 w-full rounded-lg border bg-muted/20 p-2">
-                <svg viewBox={`0 0 ${width} ${height}`} className="h-full w-full" role="img" aria-label="Tendencia de leads últimos 14 días">
+                <svg viewBox={`0 0 ${width} ${height}`} className="h-full w-full" role="img" aria-label="Tendencia diaria para el período seleccionado">
                     <defs>
                         <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
                             <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.28" />
@@ -338,14 +346,25 @@ function TrendChart({ points }: { points: TrendPoint[] }) {
                             padding -
                             (point.count / maxCount) * (height - padding * 2);
 
+                        const showValue =
+                            points.length <= 31 ||
+                            index % Math.ceil(points.length / 15) === 0;
+
                         return (
-                            <circle
-                                key={point.key}
-                                cx={x}
-                                cy={y}
-                                r="3"
-                                fill="hsl(var(--primary))"
-                            />
+                            <g key={point.key}>
+                                <title>{`${point.label}: ${point.count}`}</title>
+                                <circle cx={x} cy={y} r="4" fill="hsl(var(--primary))" />
+                                {showValue && (
+                                    <text
+                                        x={x}
+                                        y={Math.max(y - 8, 10)}
+                                        textAnchor="middle"
+                                        className="fill-foreground text-[10px] font-semibold"
+                                    >
+                                        {point.count}
+                                    </text>
+                                )}
+                            </g>
                         );
                     })}
                 </svg>
@@ -386,6 +405,27 @@ export default function AdminLeadsPage() {
     const [isLoadingDetail, setIsLoadingDetail] = useState(false);
     const [noteDraft, setNoteDraft] = useState("");
     const [isSubmittingNote, setIsSubmittingNote] = useState(false);
+
+    const applyDatePreset = (preset: DatePreset) => {
+        const today = new Date();
+        let from = new Date(today.getFullYear(), today.getMonth(), 1);
+        let to = today;
+
+        if (preset === "last-month") {
+            from = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+            to = new Date(today.getFullYear(), today.getMonth(), 0);
+        } else if (preset === "30-days" || preset === "90-days") {
+            from = new Date(today);
+            from.setDate(today.getDate() - (preset === "30-days" ? 29 : 89));
+        }
+
+        const toInputDate = (date: Date) =>
+            `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+
+        setDateFrom(toInputDate(from));
+        setDateTo(toInputDate(to));
+        setCurrentPage(1);
+    };
 
     const fetchLeads = useCallback(async (showRefresh = false) => {
         if (showRefresh) {
@@ -555,10 +595,13 @@ export default function AdminLeadsPage() {
             .sort((a, b) => b.value - a.value);
     }, [metrics.byContactChannel]);
 
-    const trendData = useMemo(() => buildTrendDataFromMetrics(metrics.byDate, 14), [metrics.byDate]);
+    const trendData = useMemo(
+        () => buildTrendDataFromMetrics(metrics.byDate, dateFrom, dateTo),
+        [dateFrom, dateTo, metrics.byDate]
+    );
     const interactionTrendData = useMemo(
-        () => buildTrendDataFromMetrics(interactionMetrics.byDate, 14),
-        [interactionMetrics.byDate]
+        () => buildTrendDataFromMetrics(interactionMetrics.byDate, dateFrom, dateTo),
+        [dateFrom, dateTo, interactionMetrics.byDate]
     );
     const interactionTotal = interactionMetrics.totalInteractions || interactionData.total;
 
@@ -859,23 +902,52 @@ export default function AdminLeadsPage() {
                             />
                         </div>
 
-                        <Input
-                            type="date"
-                            value={dateFrom}
-                            onChange={(event) => {
-                                setDateFrom(event.target.value);
-                                setCurrentPage(1);
-                            }}
-                        />
+                        <div className="space-y-2 md:col-span-4 xl:col-span-4">
+                            <div className="flex items-center gap-2 text-sm font-medium">
+                                <CalendarDays className="h-4 w-4 text-primary" />
+                                Período de los gráficos
+                            </div>
+                            <div className="flex flex-wrap gap-2">
+                                <Button type="button" variant="outline" size="sm" onClick={() => applyDatePreset("this-month")}>
+                                    Este mes
+                                </Button>
+                                <Button type="button" variant="outline" size="sm" onClick={() => applyDatePreset("last-month")}>
+                                    Mes anterior
+                                </Button>
+                                <Button type="button" variant="outline" size="sm" onClick={() => applyDatePreset("30-days")}>
+                                    Últimos 30 días
+                                </Button>
+                                <Button type="button" variant="outline" size="sm" onClick={() => applyDatePreset("90-days")}>
+                                    Últimos 90 días
+                                </Button>
+                            </div>
+                        </div>
 
-                        <Input
-                            type="date"
-                            value={dateTo}
-                            onChange={(event) => {
-                                setDateTo(event.target.value);
-                                setCurrentPage(1);
-                            }}
-                        />
+                        <label className="space-y-2 text-sm font-medium">
+                            Desde
+                            <Input
+                                type="date"
+                                max={dateTo || undefined}
+                                value={dateFrom}
+                                onChange={(event) => {
+                                    setDateFrom(event.target.value);
+                                    setCurrentPage(1);
+                                }}
+                            />
+                        </label>
+
+                        <label className="space-y-2 text-sm font-medium">
+                            Hasta
+                            <Input
+                                type="date"
+                                min={dateFrom || undefined}
+                                value={dateTo}
+                                onChange={(event) => {
+                                    setDateTo(event.target.value);
+                                    setCurrentPage(1);
+                                }}
+                            />
+                        </label>
                     </div>
 
                     <div className="flex flex-col items-start justify-between gap-3 border-t pt-4 md:flex-row md:items-center">
@@ -1122,8 +1194,10 @@ export default function AdminLeadsPage() {
 
             <Card>
                 <CardHeader>
-                    <CardTitle>Tendencia de Leads (14 días)</CardTitle>
-                    <CardDescription>Evolución diaria de entradas según filtros aplicados.</CardDescription>
+                    <CardTitle>Tendencia de leads</CardTitle>
+                    <CardDescription>
+                        Datos reales por día para el período seleccionado; los días sin entradas se muestran en cero.
+                    </CardDescription>
                 </CardHeader>
                 <CardContent>
                     <TrendChart points={trendData} />
