@@ -38,6 +38,9 @@ module.exports = {
   },
   images: {
     qualities: [75, 82],
+    // AVIF first, WebP as fallback: same quality at meaningfully fewer bytes
+    // on the hero, which is the LCP element.
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
         protocol: "https",
