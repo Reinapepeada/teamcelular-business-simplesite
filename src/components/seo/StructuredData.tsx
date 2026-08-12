@@ -1,4 +1,4 @@
-import { BRANCHES, BUSINESS_PROFILE, SITE_URL, absoluteUrl, businessId } from "@/lib/businessProfile";
+import { BRANCHES, BUSINESS_PROFILE, SITE_URL, TECHNICAL_AUTHOR, absoluteUrl, businessId } from "@/lib/businessProfile";
 
 interface StructuredDataProps {
   city?: string;
@@ -101,6 +101,14 @@ function createOrganizationJson() {
     telephone: BUSINESS_PROFILE.phone,
     sameAs: BUSINESS_PROFILE.sameAs,
     knowsAbout: BUSINESS_PROFILE.knowsAbout,
+    founder: {
+      "@type": "Person",
+      "@id": businessId("technical-author"),
+      name: TECHNICAL_AUTHOR.name,
+      jobTitle: TECHNICAL_AUTHOR.jobTitle,
+      url: TECHNICAL_AUTHOR.url,
+      sameAs: TECHNICAL_AUTHOR.sameAs,
+    },
     contactPoint: [
       {
         "@type": "ContactPoint",

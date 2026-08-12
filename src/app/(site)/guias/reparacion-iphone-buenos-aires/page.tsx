@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
+import AuthorByline from "@/components/seo/AuthorByline";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
@@ -485,6 +486,8 @@ export default function IphoneRepairGuidePage() {
             </span>
           </div>
         </header>
+
+        <AuthorByline updatedLabel="agosto de 2026" className="mt-6" />
 
         <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
           <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">

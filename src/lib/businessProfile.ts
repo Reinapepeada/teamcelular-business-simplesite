@@ -72,6 +72,28 @@ export const BUSINESS_PROFILE = {
   },
 } as const;
 
+/**
+ * Named technical author. Anonymous authorship is a weak authority signal for
+ * both Google and AI search engines; a real person with verifiable credentials
+ * and a linked profile is the strong one.
+ */
+export const TECHNICAL_AUTHOR = {
+  name: "Alejandro Biarrieta",
+  jobTitle: "Técnico en microelectrónica y socio fundador",
+  url: "https://www.linkedin.com/in/alejandro-biarrieta/",
+  sameAs: ["https://www.linkedin.com/in/alejandro-biarrieta/"],
+  description:
+    "Repara celulares desde los 12 años y es socio fundador de Team Celular junto a su familia. Se especializa en microelectrónica, reballing BGA y recuperación de equipos por daño de líquido.",
+  training: ["Quinceno", "YoReparo", "Ferzamble"],
+  knowsAbout: [
+    "Reparación de celulares",
+    "Microelectrónica",
+    "Reballing BGA",
+    "Soldadura SMD",
+    "Recuperación por daño de líquido",
+  ],
+} as const;
+
 export const BRANCHES = [
   {
     slug: "recoleta",

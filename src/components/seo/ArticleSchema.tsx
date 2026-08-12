@@ -1,5 +1,5 @@
 import React from "react";
-import { BUSINESS_PROFILE, businessId } from "@/lib/businessProfile";
+import { BUSINESS_PROFILE, TECHNICAL_AUTHOR, businessId } from "@/lib/businessProfile";
 
 interface ArticleSchemaProps {
   title: string;
@@ -33,11 +33,18 @@ export default function ArticleSchema({
     image: image,
     datePublished: publishedTime,
     dateModified: modifiedTime,
+    // Persona real con perfil verificable: la autoria anonima es señal debil
+    // tanto para Google como para los motores de IA.
     author: {
-      "@type": "Organization",
-      "@id": businessId("organization"),
-      name: authorName,
-      sameAs: BUSINESS_PROFILE.sameAs,
+      "@type": "Person",
+      "@id": businessId("technical-author"),
+      name: TECHNICAL_AUTHOR.name,
+      jobTitle: TECHNICAL_AUTHOR.jobTitle,
+      description: TECHNICAL_AUTHOR.description,
+      url: TECHNICAL_AUTHOR.url,
+      sameAs: TECHNICAL_AUTHOR.sameAs,
+      knowsAbout: TECHNICAL_AUTHOR.knowsAbout,
+      worksFor: { "@id": businessId("organization") },
     },
     reviewedBy: {
       "@type": "Organization",
