@@ -72,9 +72,9 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     zoneName: "Palermo",
     metaTitle: "Arreglo de Celulares en Palermo (CABA) | Team Celular",
     metaDescription:
-      "Arreglo de celulares en Palermo, CABA — Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga el mismo día con garantía escrita 90 días.",
+      "Arreglo de celulares en Palermo, CABA. Team Celular atiende desde Recoleta y Belgrano, a 10-15 min: pantalla, batería y carga con garantía 90 días.",
     socialDescription:
-      "Team Celular, Recoleta CABA, atiende Palermo. Pantalla, batería y carga con garantía escrita 90 días.",
+      "Team Celular atiende Palermo desde Recoleta y Belgrano. Pantalla, batería y carga con garantía escrita 90 días.",
     heroBadge: "Cobertura Palermo",
     heroIntro:
       "Team Celular tiene dos sucursales en CABA — Paraguay 2451 Recoleta y Amenábar 2032 Belgrano — y atiende clientes de Palermo con diagnóstico el mismo día y garantía escrita de 90 días. Pantalla, batería, carga y fallas de placa sin vueltas.",

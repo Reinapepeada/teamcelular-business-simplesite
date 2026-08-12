@@ -269,11 +269,15 @@ const samsungModels = [
   "Galaxy S22 Ultra",
   "Galaxy S22",
   "Galaxy S21 FE",
+  "Galaxy A56",
   "Galaxy A55",
   "Galaxy A54",
+  "Galaxy A36",
   "Galaxy A35",
   "Galaxy A34",
+  "Galaxy A26",
   "Galaxy A24",
+  "Galaxy A16",
   "Galaxy A15",
   "Galaxy Z Fold6",
   "Galaxy Z Fold5",
@@ -313,7 +317,7 @@ const faq = [
       "La pantalla Service Pack prioriza las especificaciones originales del equipo. Una OLED compatible puede ofrecer una buena relación entre costo y resultado, mientras que una alternativa económica puede cambiar brillo, color, consumo o respuesta táctil. Antes de instalar te informamos qué opción hay para tu modelo y qué funciones conserva.",
   },
   {
-    question: "Reparan Samsung Galaxy A15, A35, A54 y A55?",
+    question: "Reparan Samsung Galaxy A16, A15, A35, A54 y A55?",
     answer:
       "Sí. Trabajamos las líneas Galaxy A y confirmamos stock de pantalla, batería o módulo de carga según el código exacto del equipo antes de desarmar.",
   },
@@ -624,7 +628,7 @@ export default function SamsungRepairGuidePage() {
             {[
               { servicio: "Diagnóstico técnico", modelos: "Todos los modelos", tiempo: "30–45 min", precio: "ARS 15.000–25.000" },
               { servicio: "Pantalla AMOLED", modelos: "Línea S (S22 a S25)", tiempo: "2–4 h", precio: "ARS 450.000–950.000" },
-              { servicio: "Pantalla", modelos: "Línea A (A35, A54, A55)", tiempo: "2–4 h", precio: "ARS 79.000–289.000" },
+              { servicio: "Pantalla", modelos: "Línea A (A16, A26, A35, A36, A54, A55, A56)", tiempo: "2–4 h", precio: "ARS 79.000–289.000" },
               { servicio: "Cambio de batería", modelos: "Línea S", tiempo: "1–2 h", precio: "ARS 120.000–199.000" },
               { servicio: "Cambio de batería", modelos: "Línea A", tiempo: "1–2 h", precio: "ARS 59.000–99.000" },
               { servicio: "Cambio de pin de carga", modelos: "Línea S y A", tiempo: "2–3 h", precio: "ARS 49.000–180.000" },
@@ -849,11 +853,15 @@ export default function SamsungRepairGuidePage() {
                 "@type": "City",
                 name: "Buenos Aires",
               },
+              // Sin priceRange las Offer no son elegibles para rich results,
+              // justo en una pagina cuyas queries son de precio.
+              priceRange: "ARS 15.000-950.000",
               hasOfferCatalog: {
                 "@type": "OfferCatalog",
                 name: "Servicios de reparacion Samsung",
                 itemListElement: repairServices.map((service) => ({
                   "@type": "Offer",
+                  priceCurrency: "ARS",
                   itemOffered: {
                     "@type": "Service",
                     name: service.title,
