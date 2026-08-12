@@ -64,16 +64,18 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
   },
   "cambio-pantalla-caba": {
     slug: "cambio-pantalla-caba",
-    h1: "Cambio de pantalla en CABA",
+    h1: "Cambio de pantalla y módulo en CABA",
     metaTitle:
-      "Cambio de Pantalla en CABA | iPhone y Samsung | Team Celular",
+      "Cambio de Pantalla y Módulo en CABA | Team Celular",
     metaDescription:
-      "Cambio de pantalla en CABA — Team Celular, Paraguay 2451 Recoleta. Módulo display, touch y vidrio con repuestos premium y garantía escrita 90 días.",
+      "Cambio de módulo y pantalla en CABA — Team Celular, Recoleta y Belgrano. Samsung A04, A15, A16 e iPhone, con test completo y garantía escrita 90 días.",
     socialTitle: "Cambio de Pantalla en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Cambio de pantalla en CABA con test completo y garantía escrita 90 días.",
     keywords: [
       "cambio de pantalla CABA",
+      "cambio de modulo samsung",
+      "cambio de modulo samsung a04",
       "modulo display CABA",
       "pantalla iPhone rota CABA",
       "pantalla Samsung rota CABA",

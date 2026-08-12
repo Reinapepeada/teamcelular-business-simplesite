@@ -102,6 +102,7 @@ const guidePages = [
   { path: "guias/reparacion-huawei-buenos-aires", priority: 0.8, changeFreq: "monthly" as const },
   { path: "guias/reparacion-tcl-buenos-aires", priority: 0.77, changeFreq: "monthly" as const },
   { path: "guias/microelectronica-reballing-caba", priority: 0.8, changeFreq: "monthly" as const },
+  { path: "guias/presupuesto-service-oficial-segunda-opinion", priority: 0.82, changeFreq: "monthly" as const },
   { path: "guias/soporte-empresas-servicio-tecnico", priority: 0.75, changeFreq: "monthly" as const },
   { path: "guias/mantenimiento-preventivo-celulares", priority: 0.75, changeFreq: "monthly" as const },
   { path: "guias/cambio-bateria-celular", priority: 0.75, changeFreq: "monthly" as const },
