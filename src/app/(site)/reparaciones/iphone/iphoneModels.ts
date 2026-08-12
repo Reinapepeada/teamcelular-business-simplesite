@@ -53,8 +53,24 @@ export const IPHONE_MODELS: IphoneModelPrice[] = [
 /**
  * Modelos con página propia. Se limita a los que tienen demanda medida en
  * Search Console: una página por modelo solo se justifica si alguien la busca.
+ *
+ * Umbral actual: 5+ impresiones en 28 días. Los 12 modelos restantes quedan
+ * cubiertos por la guía general hasta que muestren demanda propia; publicar
+ * los 26 seria repetir el problema de contenido delgado de /tienda.
+ *
+ * Impresiones al 2026-08-09: 14 Pro Max 24, 13 17, 11 16, 12 14, 14 9,
+ * 13 Mini 7, 13 Pro 7, 14 Pro 5.
  */
-export const IPHONE_MODELS_WITH_PAGE = ["11", "12", "13", "14-pro-max"] as const;
+export const IPHONE_MODELS_WITH_PAGE = [
+  "11",
+  "12",
+  "13",
+  "13-mini",
+  "13-pro",
+  "14",
+  "14-pro",
+  "14-pro-max",
+] as const;
 
 export function getIphoneModel(slug: string): IphoneModelPrice | undefined {
   return IPHONE_MODELS.find((model) => model.slug === slug);

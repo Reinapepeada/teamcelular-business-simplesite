@@ -19,6 +19,17 @@ export function generateStaticParams() {
   return IPHONE_MODELS_WITH_PAGE.map((model) => ({ model }));
 }
 
+/**
+ * Sin esto, la ruta dinamica renderiza cualquier modelo del catalogo de
+ * precios y quedan publicadas las 26 URLs, incluidas las que no tienen una
+ * sola busqueda registrada. Solo existen las de generateStaticParams.
+ */
+export const dynamicParams = false;
+
+function hasOwnPage(slug: string): boolean {
+  return (IPHONE_MODELS_WITH_PAGE as readonly string[]).includes(slug);
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -27,7 +38,7 @@ export async function generateMetadata({
   const { model: slug } = await params;
   const model = getIphoneModel(slug);
 
-  if (!model) {
+  if (!model || !hasOwnPage(slug)) {
     return buildWebsiteMetadata({
       path: "/guias/reparacion-iphone-buenos-aires",
       title: "Modelo no encontrado | Team Celular",
@@ -67,7 +78,7 @@ export default async function IphoneModelPage({
   const { model: slug } = await params;
   const model = getIphoneModel(slug);
 
-  if (!model) {
+  if (!model || !hasOwnPage(slug)) {
     notFound();
   }
 
