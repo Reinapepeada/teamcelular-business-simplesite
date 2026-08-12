@@ -27,7 +27,7 @@ const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 export const metadata: Metadata = {
   title: "Reparación de Samsung Galaxy en Buenos Aires, CABA | Team Celular",
   description:
-    "Reparación de Samsung Galaxy en Recoleta, CABA — Team Celular, Paraguay 2451. Pantalla AMOLED, batería y USB-C en el día con garantía escrita 90 días.",
+    "Reparación de Samsung Galaxy en CABA: pantalla línea A desde $79.000 y línea S desde $450.000. Diagnóstico el mismo día, garantía escrita 90 días.",
   keywords: [
     "reparacion samsung buenos aires",
     "service samsung caba",
@@ -617,16 +617,17 @@ export default function SamsungRepairGuidePage() {
               ¿Cuánto cuesta reparar un Samsung Galaxy en Buenos Aires?
             </h2>
             <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-slate-400">
-              Rangos orientativos para 2026. El precio exacto depende del modelo, la familia (S, A o Z) y el repuesto disponible.
+              Precios actualizados a agosto de 2026. El rango depende del modelo dentro de cada línea y del repuesto disponible: te confirmamos el número exacto tras el diagnóstico, antes de intervenir el equipo.
             </p>
           </div>
           <div className="divide-y divide-slate-100 dark:divide-slate-800">
             {[
               { servicio: "Diagnóstico técnico", modelos: "Todos los modelos", tiempo: "30–45 min", precio: "ARS 15.000–25.000" },
-              { servicio: "Pantalla AMOLED", modelos: "Galaxy S22, S23, S24, S25", tiempo: "2–4 h", precio: "ARS 120.000–280.000" },
-              { servicio: "Pantalla", modelos: "Galaxy A35, A54, A55", tiempo: "2–4 h", precio: "ARS 60.000–140.000" },
-              { servicio: "Cambio de batería", modelos: "Galaxy S y A", tiempo: "1–2 h", precio: "ARS 40.000–80.000" },
-              { servicio: "Puerto USB-C", modelos: "Todos", tiempo: "2–3 h", precio: "ARS 35.000–65.000" },
+              { servicio: "Pantalla AMOLED", modelos: "Línea S (S22 a S25)", tiempo: "2–4 h", precio: "ARS 450.000–950.000" },
+              { servicio: "Pantalla", modelos: "Línea A (A35, A54, A55)", tiempo: "2–4 h", precio: "ARS 79.000–289.000" },
+              { servicio: "Cambio de batería", modelos: "Línea S", tiempo: "1–2 h", precio: "ARS 120.000–199.000" },
+              { servicio: "Cambio de batería", modelos: "Línea A", tiempo: "1–2 h", precio: "ARS 59.000–99.000" },
+              { servicio: "Cambio de pin de carga", modelos: "Línea S y A", tiempo: "2–3 h", precio: "ARS 49.000–180.000" },
               { servicio: "Bisagra / flex Z Fold y Z Flip", modelos: "Z Fold, Z Flip", tiempo: "24–72 h", precio: "Consultar" },
             ].map((row) => (
               <div key={`${row.servicio}-${row.modelos}`} className="grid grid-cols-2 gap-x-4 gap-y-1 px-6 py-4 text-sm md:grid-cols-4">
