@@ -477,9 +477,17 @@ export default function SamsungRepairGuidePage() {
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-700 dark:text-slate-200">
               Para reparar un Samsung Galaxy en Buenos Aires, Team Celular atiende en
-              Paraguay 2451, Recoleta, y Amenábar 2032, Belgrano. Hacemos diagnóstico
-              el mismo día y resolvemos pantalla, batería o carga en 2-4 h según modelo
-              y stock, con garantía escrita sobre el trabajo y el repuesto instalado.
+              Paraguay 2451, Recoleta, y Amenábar 2032, Belgrano, de lunes a viernes
+              de 10:30 a 18:00. El cambio de pantalla cuesta entre ARS 79.000 y 289.000
+              en la línea A (A16, A26, A35, A36, A54, A55, A56) y entre ARS 450.000 y
+              950.000 en la línea S (S22 a S25). La batería va de ARS 59.000 a 99.000
+              en línea A y de ARS 120.000 a 199.000 en línea S, y el cambio de pin de
+              carga entre ARS 49.000 y 180.000. Pantalla, batería y carga se resuelven
+              en 2 a 4 horas según modelo y stock; el diagnóstico se hace el mismo día
+              y todo sale con garantía escrita de 90 días sobre el trabajo y el repuesto
+              instalado. Los equipos que no se resuelven por reemplazo pasan al
+              laboratorio de microelectrónica, con reballing BGA y reparación de placa.
+              Precios actualizados a agosto de 2026.
             </p>
           </div>
 
