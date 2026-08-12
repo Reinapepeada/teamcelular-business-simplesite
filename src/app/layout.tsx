@@ -108,6 +108,7 @@ export const metadata: Metadata = {
         google: process.env.GOOGLE_SITE_VERIFICATION || "",
     },
     other: {
+        "msvalidate.01": "BB500831F8107860C73938B904721ED7",
         "geo.region": "AR-C",
         "geo.placename": "Buenos Aires, Argentina",
         "geo.position": "-34.597528;-58.403048",
