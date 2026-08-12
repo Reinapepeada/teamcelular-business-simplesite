@@ -82,16 +82,19 @@ const faqs = [
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: "/arreglo-de-celulares",
-  title: "Arreglo de Celulares en Recoleta | Fallas Frecuentes | Team Celular",
+  // Esta pagina competia con la home por los head terms genericos. Su
+  // contenido real es triage por sintoma, asi que apunta a como la gente
+  // describe la falla, no a "arreglo de celulares" a secas.
+  title: "Fallas Frecuentes de Celulares | Team Celular",
   description:
-    "Arreglo de celulares en Recoleta, Paraguay 2451 CABA — Team Celular. Pantalla, batería y carga en el día, garantía escrita 90 días. Consultá sin turno.",
+    "No carga, no enciende, pantalla en negro o touch que no responde: qué significa cada falla, cuánto tarda repararla y cuándo hay que revisar la placa.",
   keywords: [
-    "arreglo de celulares recoleta",
-    "arreglo de celular rapido caba",
-    "reparación de celulares recoleta",
-    "arreglo celular caba",
-    "cambio pantalla celular recoleta",
-    "cambio batería celular recoleta",
+    "mi celular no carga",
+    "celular no enciende",
+    "pantalla en negro celular",
+    "touch no responde",
+    "celular se apaga solo",
+    "batería dura poco",
     "servicio técnico celulares recoleta",
     "microelectrónica celulares caba",
   ],
@@ -162,7 +165,7 @@ export default function ArregloDeCelularesPage() {
           Servicio general por falla cotidiana
         </span>
         <h1 className="mt-6 text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-          Arreglo de celulares en CABA para resolver fallas cotidianas
+          ¿Qué le pasa a tu celular? Fallas frecuentes y cómo se reparan
         </h1>
         <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
           Team Celular tiene dos sucursales en CABA: <strong>Recoleta (Paraguay 2451)</strong> y <strong>Belgrano (Amenábar 2032)</strong>. Diagnóstico el mismo día, presupuesto claro antes de
