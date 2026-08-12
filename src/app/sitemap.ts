@@ -1,8 +1,5 @@
 import { MetadataRoute } from "next";
-import { getAllProductImages } from '@/services/products';
 import type { Product } from '@/app/tienda/product';
-import { buildProductSlug } from '@/lib/productSlug';
-import { variantGroupKey } from '@/lib/productCanonical';
 
 // Revalidate sitemap every 24 hours
 export const revalidate = 86400;
@@ -22,13 +19,6 @@ function slugify(text = "") {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
-}
-
-function toAbsoluteUrl(url: string) {
-  if (!url) return "";
-  if (url.startsWith("http://") || url.startsWith("https://")) return url;
-  const normalized = url.startsWith("/") ? url : `/${url}`;
-  return `${SITE_URL}${normalized}`;
 }
 
 // Fetch products with cache for sitemap generation
@@ -153,25 +143,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   }));
 
-  // Supplier variants canonicalize to one owner page (see productCanonical.ts),
-  // so only that owner belongs in the sitemap.
-  const canonicalIdByGroup = new Map<string, number>();
-  for (const product of products) {
-    const key = variantGroupKey(product.name);
-    if (!key) continue;
-    const current = canonicalIdByGroup.get(key);
-    if (current === undefined || product.id < current) {
-      canonicalIdByGroup.set(key, product.id);
-    }
-  }
-
-  const canonicalProducts = products.filter((product) => {
-    const key = variantGroupKey(product.name);
-    return !key || canonicalIdByGroup.get(key) === product.id;
-  });
-
-  // Category discovery stays over every product: a category must not disappear
-  // just because its only entry is a non-canonical variant.
+  // Product pages are noindex (thin programmatic tail, see tienda/[slug]),
+  // so they are deliberately absent from the sitemap: listing a noindexed URL
+  // sends Google contradictory signals. Categories carry the store's organic
+  // weight instead.
   for (const product of products) {
     if (!product?.category?.name) continue;
     const slug = slugify(product.category.name);
@@ -185,20 +160,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  const productEntries = canonicalProducts.map((product) => {
-    const images = getAllProductImages(product)
-      .filter((image) => image && !image.includes("placeholder"))
-      .map((image) => toAbsoluteUrl(image));
-
-    return {
-      url: `${SITE_URL}/tienda/${buildProductSlug(product)}`,
-      lastModified: product.updated_at ? new Date(product.updated_at) : lastMod,
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-      images: images.length ? images : undefined,
-    };
-  });
-
   const categoryEntries = Array.from(categoryMap.keys()).map((slug) => ({
     url: `${SITE_URL}/tienda/categoria/${slug}`,
     lastModified: categoryLastMod.get(slug) || lastMod,
@@ -211,5 +172,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   }));
 
-  return [...mainSitemap, ...guidesSitemap, ...categoryEntries, ...productEntries];
+  return [...mainSitemap, ...guidesSitemap, ...categoryEntries];
 }
