@@ -53,10 +53,41 @@ function buildPayload(payload: LeadInteractionPayload) {
   };
 }
 
+declare global {
+  interface Window {
+    gtag?: (command: string, eventName: string, params?: Record<string, unknown>) => void;
+  }
+}
+
+/**
+ * Mirrors the interaction into GA4. Every lead path (CTA links, branch
+ * WhatsApp buttons, budget form steps) funnels through recordLeadInteraction,
+ * so this is the one place that has to know about gtag. Without it GA4 only
+ * sees page views and there is nothing to mark as a key event.
+ */
+function sendToGa4(payload: LeadInteractionPayload) {
+  if (typeof window.gtag !== "function") return;
+
+  window.gtag("event", payload.eventName, {
+    cta_name: payload.ctaName,
+    cta_location: payload.ctaLocation,
+    cta_variant: payload.ctaVariant,
+    destination: payload.destination,
+    form_name: payload.formName,
+    step_id: payload.stepId,
+    brand: payload.brand,
+    model: payload.model,
+    repair_type: payload.repairType,
+    contact_channel: payload.contactChannel,
+  });
+}
+
 export function recordLeadInteraction(payload: LeadInteractionPayload): boolean {
   if (typeof window === "undefined") {
     return false;
   }
+
+  sendToGa4(payload);
 
   const body = JSON.stringify(buildPayload(payload));
 
