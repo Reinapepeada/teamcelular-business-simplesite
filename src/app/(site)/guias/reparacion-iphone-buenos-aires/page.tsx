@@ -501,9 +501,11 @@ export default function IphoneRepairGuidePage() {
               Para reparar un iPhone en Buenos Aires, Team Celular atiende en Paraguay 2451,
               Recoleta, y Amenábar 2032, Belgrano, de lunes a viernes de 10:30 a 18:00, sin
               turno previo. Cubrimos desde iPhone 8 hasta 17 Pro Max: cambio de pantalla,
-              batería, puerto de carga, cámaras y fallas de placa. El diagnóstico se hace
+              batería, puerto de carga, cámaras y fallas de placa. El cambio de pantalla
+              va de ARS 129.900 en iPhone 11 a ARS 299.900 en iPhone 14 Pro Max, y la
+              batería de ARS 99.900 a ARS 229.900 según modelo. El diagnóstico se hace
               el mismo día y el presupuesto se entrega antes de intervenir el equipo;
-              pantalla y batería suelen resolverse en 2 a 4 horas según modelo y stock.
+              pantalla y batería suelen resolverse en 2 a 4 horas según stock.
               Todo el trabajo sale con garantía escrita de 90 días sobre la mano de obra y
               el repuesto instalado. A diferencia del canal oficial, que reemplaza módulos
               o placas completas, acá se repara a nivel componente: reballing BGA,
@@ -652,16 +654,18 @@ export default function IphoneRepairGuidePage() {
               ¿Cuánto cuesta reparar un iPhone en Buenos Aires?
             </h2>
             <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-slate-400">
-              Rangos orientativos para 2026. El precio exacto depende del modelo, el estado del equipo y el repuesto disponible.
+              Precios actualizados a agosto de 2026. El valor exacto depende del modelo y del estado del equipo; te lo confirmamos tras el diagnóstico, antes de intervenir.
             </p>
           </div>
           <div className="divide-y divide-slate-100 dark:divide-slate-800">
             {[
               { servicio: "Diagnóstico técnico", modelos: "Todos los modelos", tiempo: "30–45 min", precio: "ARS 15.000–25.000" },
-              { servicio: "Cambio de pantalla OLED", modelos: "iPhone 11, 12, 13", tiempo: "2–4 h", precio: "ARS 80.000–180.000" },
-              { servicio: "Cambio de pantalla OLED", modelos: "iPhone 14, 15, 16, 17", tiempo: "2–4 h", precio: "ARS 160.000–350.000" },
-              { servicio: "Cambio de batería", modelos: "iPhone 11–17", tiempo: "1–2 h", precio: "ARS 45.000–90.000" },
-              { servicio: "Puerto de carga", modelos: "Lightning / USB-C", tiempo: "2–3 h", precio: "ARS 40.000–70.000" },
+              { servicio: "Cambio de pantalla", modelos: "iPhone 11, 11 Pro, 12 Mini, 13 Mini", tiempo: "2–4 h", precio: "ARS 129.900–199.900" },
+              { servicio: "Cambio de pantalla", modelos: "iPhone 12, 12 Pro, 12 Pro Max, 13", tiempo: "2–4 h", precio: "ARS 209.900–249.900" },
+              { servicio: "Cambio de pantalla", modelos: "iPhone 13 Pro, 14, 14 Pro, 14 Pro Max", tiempo: "2–4 h", precio: "ARS 249.900–299.900" },
+              { servicio: "Cambio de pantalla", modelos: "iPhone 15, 16, 17 y variantes Pro", tiempo: "2–4 h", precio: "ARS 319.900–649.900" },
+              { servicio: "Cambio de batería", modelos: "iPhone 11 a 14", tiempo: "1–2 h", precio: "ARS 99.900–229.900" },
+              { servicio: "Cambio de batería", modelos: "iPhone 15 y 16", tiempo: "1–2 h", precio: "ARS 189.900–269.900" },
               { servicio: "Placa lógica / microelectrónica", modelos: "Todos", tiempo: "24–48 h", precio: "Consultar" },
             ].map((row) => (
               <div key={`${row.servicio}-${row.modelos}`} className="grid grid-cols-2 gap-x-4 gap-y-1 px-6 py-4 text-sm md:grid-cols-4">
