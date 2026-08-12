@@ -66,8 +66,16 @@ export async function generateMetadata({
   const hasProducts = (categoryPage.products || []).length > 0;
   const shouldIndex = hasProducts && isCategoryPageIndexable(filters);
 
-  const snippetTitle = `${category.name} para Celulares en CABA | Team Celular`;
-  const rawCatDesc = `${category.name} para celulares — Team Celular, Paraguay 2451 Recoleta CABA. Retiro en el día, envio en CABA y compatibilidad validada por WhatsApp.`;
+  // Category names arrive from the API with stray whitespace ("Modulos "),
+  // which shipped a double space into every title.
+  const categoryName = category.name.trim();
+  const productCount = (categoryPage.products || []).length;
+
+  const snippetTitle = `${categoryName} para Celulares en CABA | Team Celular`;
+  // The count keeps each category's snippet distinct instead of shipping one
+  // identical description across every category page.
+  const stockText = productCount > 0 ? `${productCount} modelos en stock. ` : '';
+  const rawCatDesc = `${categoryName} para celulares — Team Celular, Recoleta y Belgrano CABA. ${stockText}Retiro en el día y compatibilidad validada por WhatsApp.`;
   const snippetDescription = rawCatDesc.length > 155 ? rawCatDesc.slice(0, 152) + '...' : rawCatDesc;
 
   return buildWebsiteMetadata({

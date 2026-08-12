@@ -49,6 +49,12 @@ export interface ZoneLandingConfig {
   slug: string;
   zoneName: string;
   zoneAlias?: string;
+  /**
+   * Branch that physically serves this zone. When set, the Service schema
+   * points at that branch's LocalBusiness entity instead of the site-level
+   * one, which carries the Recoleta address.
+   */
+  branchSlug?: "recoleta" | "belgrano";
   metaTitle: string;
   metaDescription: string;
   socialDescription: string;
@@ -209,7 +215,11 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
       { "@type": "City", name: "CABA" },
       { "@type": "City", name: "Buenos Aires" },
     ],
-    provider: { "@id": `${SITE_URL}#localbusiness` },
+    provider: {
+      "@id": config.branchSlug
+        ? `${SITE_URL}/sucursales/caba/${config.branchSlug}#localbusiness`
+        : `${SITE_URL}#localbusiness`,
+    },
     offers: {
       "@type": "Offer",
       url: `${SITE_URL}/presupuesto-reparacion`,

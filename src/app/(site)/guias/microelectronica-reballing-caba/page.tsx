@@ -19,7 +19,7 @@ import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards
 export const metadata: Metadata = {
   title: "Microelectrónica y Reballing BGA en Buenos Aires | Team Celular",
   description:
-    "Reballing BGA, reparación de placas y soldadura SMD en CABA. Team Celular, Paraguay 2451 Recoleta y Amenábar 2032 Belgrano: microscopio, protocolos ESD y garantía escrita de 90 días.",
+    "Reballing BGA y reparación de placas en CABA — Team Celular, Recoleta y Belgrano: microscopio, protocolos ESD y garantía escrita 90 días.",
   keywords: [
     "microelectrónica Buenos Aires",
     "reballing BGA CABA",

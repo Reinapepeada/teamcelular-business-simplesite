@@ -10,6 +10,8 @@ import {
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import StickyLocalCta from "@/components/cro/StickyLocalCta";
 import { getBranch, whatsappUrl as buildWhatsappUrl } from "@/lib/businessProfile";
+import BranchMap from "@/components/cards/BranchMap";
+import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
@@ -307,6 +309,16 @@ export default function SucursalBelgranoPage() {
         <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">
           Si tenés dudas sobre cómo llegar, escribinos por WhatsApp y te mandamos el punto exacto.
         </p>
+        <BranchMap
+          address={`${branch.street}, ${branch.neighborhood}, CABA`}
+          name={branch.shortName}
+          className="mt-6"
+        />
+      </section>
+
+      <section className="mt-10">
+        {/* @ts-expect-error Async Server Component */}
+        <GoogleReviewsAPI />
       </section>
 
       <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">

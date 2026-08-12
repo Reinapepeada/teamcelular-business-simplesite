@@ -4,6 +4,8 @@ import { FaMapMarkedAlt, FaPhoneAlt, FaRegClock } from "react-icons/fa";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import StickyLocalCta from "@/components/cro/StickyLocalCta";
 import { getBranch, whatsappUrl as buildWhatsappUrl } from "@/lib/businessProfile";
+import BranchMap from "@/components/cards/BranchMap";
+import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
@@ -225,6 +227,22 @@ export default function SucursalesPage() {
             </Link>
           </div>
         </article>
+      </section>
+
+      <section className="mt-10 grid gap-6 md:grid-cols-2">
+        <BranchMap
+          address={`${recoleta.street}, ${recoleta.neighborhood}, CABA`}
+          name={recoleta.shortName}
+        />
+        <BranchMap
+          address={`${belgrano.street}, ${belgrano.neighborhood}, CABA`}
+          name={belgrano.shortName}
+        />
+      </section>
+
+      <section className="mt-10">
+        {/* @ts-expect-error Async Server Component */}
+        <GoogleReviewsAPI />
       </section>
 
       <StickyLocalCta

@@ -3,6 +3,7 @@ import type { ZoneLandingConfig } from "./zoneLanding";
 export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
   recoleta: {
     slug: "recoleta",
+    branchSlug: "recoleta",
     zoneName: "Recoleta",
     metaTitle: "Arreglo de Celulares en Recoleta (CABA) | Team Celular",
     metaDescription:
@@ -133,6 +134,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
   },
   belgrano: {
     slug: "belgrano",
+    branchSlug: "belgrano",
     zoneName: "Belgrano",
     metaTitle: "Arreglo de Celulares en Belgrano CABA | Team Celular — Amenábar 2032",
     metaDescription:

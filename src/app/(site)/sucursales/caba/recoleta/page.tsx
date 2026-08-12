@@ -10,6 +10,8 @@ import {
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import StickyLocalCta from "@/components/cro/StickyLocalCta";
 import { getBranch, whatsappUrl as buildWhatsappUrl } from "@/lib/businessProfile";
+import BranchMap from "@/components/cards/BranchMap";
+import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
@@ -307,6 +309,18 @@ export default function SucursalRecoletaPage() {
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="mt-10">
+        <BranchMap
+          address={`${branch.street}, ${branch.neighborhood}, CABA`}
+          name={branch.shortName}
+        />
+      </section>
+
+      <section className="mt-10">
+        {/* @ts-expect-error Async Server Component */}
+        <GoogleReviewsAPI />
       </section>
 
       <StickyLocalCta
