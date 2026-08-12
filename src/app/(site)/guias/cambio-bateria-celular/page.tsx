@@ -172,7 +172,7 @@ const replacementProcess = [
 const faqBattery = [
   {
     question: "¿Cuánto dura una batería nueva de celular?",
-    answer: `Una bateria original o certificada AAA+ dura entre 2-3 anos con uso normal (300-500 ciclos de carga completos). La duracion depende de los habitos de carga: evitar descargas completas, no dejar cargando toda la noche y mantener el equipo entre 20-80% extiende significativamente la vida util. ${WARRANTY_SCOPE_MESSAGE}`,
+    answer: `Una batería original o certificada AAA+ dura entre 2 y 3 años con uso normal (entre 300 y 500 ciclos de carga completos). La duración depende de los hábitos de carga. Evitar descargas completas, no dejar el equipo cargando toda la noche y mantener la batería entre el 20 % y el 80 % puede extender su vida útil. ${WARRANTY_SCOPE_MESSAGE}`,
   },
   {
     question: "¿Pierdo datos al cambiar la batería?",

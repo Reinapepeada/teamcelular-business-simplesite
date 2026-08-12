@@ -25,32 +25,32 @@ import { BRANCHES } from "@/lib/businessProfile";
 const footerSections = {
   servicios: [
     {
-      name: "Reparacion de iPhone",
+      name: "Reparación de iPhone",
       href: "/guias/reparacion-iphone-buenos-aires",
       icon: FaApple,
     },
     {
-      name: "Reparacion de Samsung",
+      name: "Reparación de Samsung",
       href: "/guias/reparacion-samsung-buenos-aires",
       icon: SiSamsung,
     },
     {
-      name: "Reparacion de Xiaomi",
+      name: "Reparación de Xiaomi",
       href: "/guias/reparacion-xiaomi-buenos-aires",
       icon: SiXiaomi,
     },
     {
-      name: "Reparacion de Motorola",
+      name: "Reparación de Motorola",
       href: "/guias/reparacion-motorola-buenos-aires",
       icon: SiMotorola,
     },
     {
-      name: "Reparacion de celulares",
+      name: "Reparación de celulares",
       href: "/reparaciones",
       icon: FaMobileAlt,
     },
     {
-      name: "Microelectronica y reballing",
+      name: "Microelectrónica y reballing",
       href: "/guias/microelectronica-reballing-caba",
       icon: FaTools,
     },
@@ -66,12 +66,12 @@ const footerSections = {
     },
   ],
   guias: [
-    { name: "Todas las guias", href: "/guias" },
-    { name: "Reparacion iPhone", href: "/guias/reparacion-iphone-buenos-aires" },
-    { name: "Reparacion Samsung", href: "/guias/reparacion-samsung-buenos-aires" },
-    { name: "Reparacion Xiaomi", href: "/guias/reparacion-xiaomi-buenos-aires" },
-    { name: "Reparacion Motorola", href: "/guias/reparacion-motorola-buenos-aires" },
-    { name: "Microelectronica", href: "/guias/microelectronica-reballing-caba" },
+    { name: "Todas las guías", href: "/guias" },
+    { name: "Reparación de iPhone", href: "/guias/reparacion-iphone-buenos-aires" },
+    { name: "Reparación de Samsung", href: "/guias/reparacion-samsung-buenos-aires" },
+    { name: "Reparación de Xiaomi", href: "/guias/reparacion-xiaomi-buenos-aires" },
+    { name: "Reparación de Motorola", href: "/guias/reparacion-motorola-buenos-aires" },
+    { name: "Microelectrónica", href: "/guias/microelectronica-reballing-caba" },
     {
       name: "Mantenimiento preventivo",
       href: "/guias/mantenimiento-preventivo-celulares",
@@ -108,7 +108,7 @@ export default function FooterNUI() {
                 className="mb-2 h-auto w-48"
               />
               <p className="text-sm text-slate-200">
-                Mas de 15 anos de experiencia en reparacion profesional de
+                Más de 15 años de experiencia en reparación profesional de
                 celulares en Buenos Aires.
               </p>
             </div>
@@ -148,9 +148,9 @@ export default function FooterNUI() {
             <div className="flex items-start space-x-2 pt-2 text-sm">
               <BsClock className="mt-1 flex-shrink-0 text-primary" />
               <div>
-                <p className="font-semibold">Horario de atencion</p>
+                <p className="font-semibold">Horario de atención</p>
                 <p className="text-slate-200">Lunes a viernes</p>
-                <p className="text-slate-200">10:30 - 18:00 hs</p>
+                <p className="text-slate-200">10:30 a 18:00</p>
               </div>
             </div>
           </div>
@@ -174,7 +174,7 @@ export default function FooterNUI() {
           </div>
 
           <div className="flex flex-col space-y-3">
-            <h2 className="mb-2 text-lg font-bold text-secondary">Guias tecnicas</h2>
+            <h2 className="mb-2 text-lg font-bold text-secondary">Guías técnicas</h2>
             {footerSections.guias.map((guia) => (
               <Link
                 key={guia.href}
@@ -219,7 +219,7 @@ export default function FooterNUI() {
             <div className="flex items-start space-x-3 text-sm">
               <BsTelephone className="mt-1 flex-shrink-0 text-primary" />
               <div>
-                <p className="font-semibold">Telefono</p>
+                <p className="font-semibold">Teléfono</p>
                 <TrackedCtaLink
                   href="tel:+5491151034595"
                   ctaName="footer_phone"
@@ -254,7 +254,7 @@ export default function FooterNUI() {
               href="/contacto"
               className="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-primary px-4 py-2 font-semibold text-white transition-colors duration-200 hover:bg-primary/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-              Ver ubicacion
+              Ver ubicación
             </Link>
           </div>
         </div>
@@ -270,7 +270,7 @@ export default function FooterNUI() {
                 prefetch={false}
                 className="inline-flex min-h-8 items-center transition-colors hover:text-white"
               >
-                Terminos
+                Términos
               </Link>
               <Link
                 href="/devoluciones"

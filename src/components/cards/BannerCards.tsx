@@ -29,7 +29,7 @@ export default function BannerCards() {
 
             <article className={`${cardBase} h-[300px] md:col-span-4 lg:h-[320px]`}>
                 <Image
-                    alt="Tecnico realizando cambio de repuestos"
+                    alt="Técnico realizando un cambio de repuestos"
                     className={mediaBase}
                     src="/images/celuPorDentro.webp"
                     width={900}
@@ -42,13 +42,13 @@ export default function BannerCards() {
                 <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(circle_at_10%_14%,rgba(14,165,233,0.18),transparent_38%)]" />
                 <div className={headerBase}>
                     <p className={eyebrow}>Repuestos de calidad</p>
-                    <h3 className={heading}>Cambio de partes originales</h3>
+                    <h3 className={heading}>Cambio de módulos y componentes</h3>
                 </div>
             </article>
 
             <article className={`${cardBase} h-[300px] md:col-span-4 lg:h-[320px]`}>
                 <Image
-                    alt="Diferentes dispositivos listos para reparacion"
+                    alt="Diferentes dispositivos listos para reparación"
                     className={mediaBase}
                     src="/images/dispositivoshdpro.webp"
                     width={900}
@@ -60,14 +60,14 @@ export default function BannerCards() {
                 <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-32 bg-gradient-to-b from-black/45 to-transparent" />
                 <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(circle_at_88%_20%,rgba(99,68,245,0.24),transparent_42%)]" />
                 <div className={headerBase}>
-                    <p className={eyebrow}>Celulares - Tablets - Notebooks</p>
-                    <h3 className={heading}>Arreglo para todos tus dispositivos</h3>
+                    <p className={eyebrow}>Celulares · tablets · notebooks</p>
+                    <h3 className={heading}>Reparación para distintos dispositivos</h3>
                 </div>
             </article>
 
             <article className={`${cardBase} h-[300px] md:col-span-4 lg:h-[320px]`}>
                 <Image
-                    alt="Laboratorio de microelectronica con equipamiento profesional"
+                    alt="Laboratorio de microelectrónica con equipamiento profesional"
                     className={mediaBase}
                     src="/images/micro_diagnos_fino.webp"
                     width={900}
@@ -81,7 +81,7 @@ export default function BannerCards() {
                 <div className={headerBase}>
                     <p className={eyebrow}>Herramientas profesionales</p>
                     <h3 className={heading}>
-                        Microscopio y diagnostico fino sin inflar la primera carga
+                        Diagnóstico fino con microscopio
                     </h3>
                 </div>
             </article>
@@ -100,8 +100,8 @@ export default function BannerCards() {
                 <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-32 bg-gradient-to-b from-black/45 to-transparent" />
                 <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(circle_at_14%_14%,rgba(16,185,129,0.18),transparent_38%)]" />
                 <div className={headerBase}>
-                    <p className={eyebrow}>Atencion al cliente</p>
-                    <h3 className={heading}>Tenemos la mejor atencion para vos</h3>
+                    <p className={eyebrow}>Atención al cliente</p>
+                    <h3 className={heading}>Te explicamos el diagnóstico y las opciones</h3>
                 </div>
                 <div className="absolute inset-x-0 bottom-0 z-20 border-t border-white/20 bg-black/45 p-4 backdrop-blur-md sm:p-5">
                     <div className="flex w-full flex-col gap-3 text-left sm:flex-row sm:items-center sm:justify-between">
@@ -123,7 +123,7 @@ export default function BannerCards() {
 
             <article className={`${cardBase} h-[320px] md:col-span-7 lg:h-[340px]`}>
                 <Image
-                    alt="Tecnico trabajando en microelectronica"
+                    alt="Técnico trabajando en microelectrónica"
                     className={mediaBase}
                     src="/images/reparacion_placa.webp"
                     width={900}
@@ -135,7 +135,7 @@ export default function BannerCards() {
                 <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-32 bg-gradient-to-b from-black/45 to-transparent" />
                 <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(circle_at_82%_16%,rgba(99,68,245,0.22),transparent_40%)]" />
                 <div className={headerBase}>
-                    <p className={eyebrow}>Microelectronica</p>
+                    <p className={eyebrow}>Microelectrónica</p>
                     <h3 className={heading}>
                         Reparaciones de placa a nivel componente
                     </h3>
@@ -153,7 +153,7 @@ export default function BannerCards() {
                             className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-primary px-4 py-3 font-semibold text-white shadow-md transition hover:bg-primary/90 sm:w-fit"
                         >
                             <BsFillLightningChargeFill className="text-base" aria-hidden />
-                            Cotiza tu reparacion
+                            Cotizá tu reparación
                         </TrackedCtaLink>
                     </div>
                 </div>

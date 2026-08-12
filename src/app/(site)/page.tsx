@@ -62,7 +62,7 @@ const process = [
 const faqs = [
     {
         question: "¿Tienen servicio técnico de celulares cerca?",
-        answer: "Team Celular tiene dos talleres en CABA: Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano). Desde Palermo, Almagro, Balvanera, Caballito o Microcentro estás a 10-15 minutos de alguno de los dos.",
+        answer: "Team Celular tiene dos talleres en CABA: Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano). Desde Palermo, Almagro, Balvanera, Caballito o Microcentro estás a entre 10 y 15 minutos de alguno de los dos.",
     },
     {
         question: "¿Dónde arreglar el celular en CABA?",
@@ -130,7 +130,7 @@ export default function Home() {
                             Diagnóstico primero. Reparación después.
                         </h2>
                         <p className="mt-5 max-w-lg text-pretty leading-7 text-[#dedfff]">
-                            No hace falta que conozcas el nombre técnico de la falla. Necesitamos saber qué equipo tenés, qué ocurrió y cómo se comporta.
+                            No hace falta que conozcas el nombre técnico de la falla. Necesitamos saber qué equipo tenés, qué pasó y cómo se comporta.
                         </p>
                         <div className="mt-8 flex flex-wrap gap-3">
                             <TrackedCtaLink href="/presupuesto-reparacion#solicitar-presupuesto" ctaName="home_process_budget" ctaLocation="home_process" ctaVariant="primary" className="inline-flex min-h-12 items-center rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#2d2e83] transition hover:bg-[#f0f1ff]">

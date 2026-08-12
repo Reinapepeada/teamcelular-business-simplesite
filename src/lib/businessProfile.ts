@@ -9,7 +9,7 @@ export const BUSINESS_PROFILE = {
   email: "teamcelular.arg@gmail.com",
   primaryAddress: {
     street: "Paraguay 2451",
-    locality: "Ciudad Autonoma de Buenos Aires",
+    locality: "Ciudad Autónoma de Buenos Aires",
     region: "CABA",
     postalCode: "C1121",
     country: "AR",
@@ -19,8 +19,8 @@ export const BUSINESS_PROFILE = {
     mapUrl: "https://maps.app.goo.gl/krFJfjDA4CuR83BK9",
   },
   secondaryAddress: {
-    street: "Amenabar 2032",
-    locality: "Ciudad Autonoma de Buenos Aires",
+    street: "Amenábar 2032",
+    locality: "Ciudad Autónoma de Buenos Aires",
     region: "CABA",
     country: "AR",
     neighborhood: "Belgrano",
@@ -32,7 +32,7 @@ export const BUSINESS_PROFILE = {
     closes: "18:00",
   },
   warrantyDays: 90,
-  responseWindow: "hasta 2 horas habiles por WhatsApp",
+  responseWindow: "hasta 2 horas hábiles por WhatsApp",
   reviewCostRange: "ARS 15.000 a ARS 25.000",
   sameAs: [
     "https://www.instagram.com/teamcelular.arg/",
@@ -42,16 +42,16 @@ export const BUSINESS_PROFILE = {
     "https://wa.me/5491151034595",
   ],
   knowsAbout: [
-    "Reparacion de celulares",
-    "Servicio tecnico iPhone",
-    "Servicio tecnico Samsung",
+    "Reparación de celulares",
+    "Servicio técnico iPhone",
+    "Servicio técnico Samsung",
     "Cambio de pantalla",
-    "Cambio de bateria",
+    "Cambio de batería",
     "Cambio de pin de carga",
-    "Microelectronica de celulares",
+    "Microelectrónica de celulares",
     "Reballing BGA",
-    "Recuperacion de celulares mojados",
-    "Diagnostico de placa logica",
+    "Recuperación de celulares mojados",
+    "Diagnóstico de placa lógica",
     "Venta de repuestos y accesorios para celulares",
   ],
   serviceAreas: [
@@ -66,9 +66,9 @@ export const BUSINESS_PROFILE = {
     "Buenos Aires",
   ],
   technicalReviewer: {
-    name: "Equipo tecnico de Team Celular",
+    name: "Equipo técnico de Team Celular",
     description:
-      "Tecnicos de laboratorio especializados en diagnostico de celulares, microelectronica, cambio de modulos y recuperacion por liquido.",
+      "Técnicos de laboratorio especializados en diagnóstico de celulares, microelectrónica, cambio de módulos y recuperación por líquido.",
   },
 } as const;
 
@@ -79,7 +79,7 @@ export const BRANCHES = [
     shortName: "Recoleta",
     url: "/sucursales/caba/recoleta",
     street: "Paraguay 2451",
-    locality: "Ciudad Autonoma de Buenos Aires",
+    locality: "Ciudad Autónoma de Buenos Aires",
     region: "CABA",
     postalCode: "C1121",
     country: "AR",
@@ -96,8 +96,8 @@ export const BRANCHES = [
     name: "Team Celular - Sucursal Belgrano",
     shortName: "Belgrano",
     url: "/sucursales/caba/belgrano",
-    street: "Amenabar 2032",
-    locality: "Ciudad Autonoma de Buenos Aires",
+    street: "Amenábar 2032",
+    locality: "Ciudad Autónoma de Buenos Aires",
     region: "CABA",
     postalCode: "C1428",
     country: "AR",
@@ -112,7 +112,7 @@ export const BRANCHES = [
 ] as const;
 
 export const DEFAULT_WHATSAPP_TEXT =
-  "Hola Team Celular, quiero reparar mi equipo. Marca y modelo: Falla: Me pasan presupuesto y proximos pasos?";
+  "Hola, Team Celular. Quiero reparar mi equipo. Marca y modelo: Falla: ¿Me pasan un presupuesto y los próximos pasos?";
 
 export function whatsappUrl(text = DEFAULT_WHATSAPP_TEXT, baseUrl: string = BUSINESS_PROFILE.whatsapp) {
   return `${baseUrl}?text=${encodeURIComponent(text)}`;

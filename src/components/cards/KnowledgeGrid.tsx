@@ -12,7 +12,7 @@ const ARTICLES: KnowledgeItem[] = [
   {
     title: "Reparación de iPhone en Buenos Aires",
     summary:
-      "Descubre nuestro flujo de diagnóstico avanzado para iPhone, tiempos de entrega y costos orientativos para pantalla, batería y placa lógica.",
+      "Conocé nuestro proceso de diagnóstico para iPhone, los tiempos de entrega y los costos orientativos de pantalla, batería y placa lógica.",
     href: "/guias/reparacion-iphone-buenos-aires",
     readingTime: "5 min de lectura",
   },

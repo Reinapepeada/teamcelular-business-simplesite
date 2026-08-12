@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     keywords: [
         "sobre team celular",
         "empresa familiar reparacion celulares",
-        "15 anos experiencia tecnica",
+        "15 años experiencia técnica",
         "laboratorio microelectronica caba",
         "servicio tecnico certificado",
         "historia team celular",
@@ -151,12 +151,12 @@ const differentiators = [
     {
         icon: FaStar,
         title: "Experiencia internacional",
-        description: "Mas de 15 anos reparando en Venezuela, Panama y Argentina.",
+        description: "Más de 15 años reparando en Venezuela, Panamá y Argentina.",
     },
 ];
 
 const stats = [
-    { icon: FaClock, value: "15+", label: "Anos de experiencia" },
+    { icon: FaClock, value: "15+", label: "Años de experiencia" },
     { icon: FaUsers, value: "10.000+", label: "Equipos reparados" },
     { icon: FaGlobe, value: "3", label: "Paises" },
     { icon: FaStar, value: "4.8", label: "Calificacion promedio" },
@@ -413,7 +413,7 @@ export default function SobreNosotrosPage() {
                             "@type": "AboutPage",
                             name: "Sobre Nosotros - Team Celular",
                             description:
-                                "Historia y valores de Team Celular, empresa familiar con mas de 15 anos de experiencia en reparacion de dispositivos moviles",
+                                "Historia y valores de Team Celular, empresa familiar con más de 15 años de experiencia en reparación de dispositivos móviles",
                             url: "https://teamcelular.com/sobrenosotros",
                             mainEntity: {
                                 "@type": "Organization",
