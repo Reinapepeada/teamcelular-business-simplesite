@@ -15,6 +15,7 @@ import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import StickyLocalCta from "@/components/cro/StickyLocalCta";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
+import { getBranch } from "@/lib/businessProfile";
 
 const SITE_URL = getSiteUrl();
 
@@ -203,6 +204,13 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
     config.whatsappText
   )}`;
 
+  // Zones with their own branch name it; the rest state both, instead of
+  // anchoring every zone to Recoleta regardless of distance.
+  const localBranch = config.branchSlug ? getBranch(config.branchSlug) : null;
+  const localBranchLine = localBranch
+    ? `Taller físico en ${localBranch.neighborhood}, ${localBranch.street}, a minutos de tu casa.`
+    : "Dos talleres en CABA, Recoleta y Belgrano, para atención de toda la ciudad.";
+
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -301,7 +309,7 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
               <ul className="mt-4 space-y-3 text-sm text-white/90">
                 <li className="flex items-start gap-3">
                   <FaMapMarkedAlt className="mt-0.5 text-primary" />
-                  Taller físico en Recoleta para atención de toda CABA.
+                  {localBranchLine}
                 </li>
                 <li className="flex items-start gap-3">
                   <FaShieldAlt className="mt-0.5 text-primary" />

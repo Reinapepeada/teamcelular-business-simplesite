@@ -21,10 +21,10 @@ export default function BannerHome() {
 
                     <div className="my-12 max-w-[42rem] lg:my-16">
                         <h1 className="text-balance text-[clamp(2.65rem,6vw,5.2rem)] font-extrabold leading-[0.98] tracking-[-0.035em]">
-                            Tu celular vuelve a funcionar. Vos sabés qué le hicimos.
+                            Reparación de celulares en CABA. Vos sabés qué le hicimos.
                         </h1>
                         <p className="mt-7 max-w-[38rem] text-pretty text-lg leading-8 text-slate-200">
-                            Reparamos celulares en CABA con diagnóstico previo, orden técnica y garantía escrita. Contanos la falla y te orientamos antes de que vengas.
+                            Team Celular repara en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032), con diagnóstico previo, orden técnica y garantía escrita de 90 días. Contanos la falla y te orientamos antes de que vengas.
                         </p>
 
                         <div className="mt-8 flex flex-col gap-3 sm:flex-row">

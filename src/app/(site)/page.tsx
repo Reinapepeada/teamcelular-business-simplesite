@@ -61,6 +61,14 @@ const process = [
 
 const faqs = [
     {
+        question: "¿Tienen servicio técnico de celulares cerca?",
+        answer: "Team Celular tiene dos talleres en CABA: Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano). Desde Palermo, Almagro, Balvanera, Caballito o Microcentro estás a 10-15 minutos de alguno de los dos.",
+    },
+    {
+        question: "¿Dónde arreglar el celular en CABA?",
+        answer: "Podés acercarte a cualquiera de las dos sucursales de lunes a viernes de 10:30 a 18:00, sin turno. El diagnóstico se hace el mismo día y te pasamos el presupuesto antes de intervenir el equipo.",
+    },
+    {
         question: "¿Qué marcas reparan?",
         answer: "Trabajamos con iPhone, Samsung, Motorola, Xiaomi y la mayoría de las marcas actuales. Si tu modelo es poco común, consultanos disponibilidad antes de acercarte.",
     },
