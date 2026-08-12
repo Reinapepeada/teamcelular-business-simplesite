@@ -7,6 +7,7 @@ import Plugins from "@/components/vercel/Plugins";
 import StructuredData from "@/components/seo/StructuredData";
 import { ThemeProvider } from "@/app/providers";
 import { getSiteUrl } from "@/lib/seoMetadata";
+import Script from "next/script";
 
 const SITE_URL = getSiteUrl();
 
@@ -121,6 +122,19 @@ export default function RootLayout({
 }) {
     return (
         <html lang="es" suppressHydrationWarning>
+            <head>
+                {/* ponytail: GA4 en root layout = todas las páginas. next/script, sin dep nueva. */}
+                <Script
+                    src="https://www.googletagmanager.com/gtag/js?id=G-1S64KMRF99"
+                    strategy="afterInteractive"
+                />
+                <Script id="ga4" strategy="afterInteractive">
+                    {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-1S64KMRF99');`}
+                </Script>
+            </head>
             <body className={`${inter.className} bg-white text-slate-950 dark:bg-slate-950 dark:text-slate-50`}>
                 <ThemeProvider
                     attribute="class"
