@@ -6,7 +6,7 @@ import AuthorByline from "@/components/seo/AuthorByline";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
-import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
+import { INSTALLMENTS_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import {
   FaBolt,
   FaCamera,
@@ -632,7 +632,7 @@ export default function SamsungRepairGuidePage() {
               ¿Cuánto cuesta reparar un Samsung Galaxy en Buenos Aires?
             </h2>
             <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-slate-400">
-              Precios actualizados a agosto de 2026. El rango depende del modelo dentro de cada línea y del repuesto disponible: te confirmamos el número exacto tras el diagnóstico, antes de intervenir el equipo.
+              Precios actualizados a agosto de 2026. El rango depende del modelo dentro de cada línea y del repuesto disponible: te confirmamos el número exacto tras el diagnóstico, antes de intervenir el equipo. {INSTALLMENTS_MESSAGE}
             </p>
           </div>
           <div className="divide-y divide-slate-100 dark:divide-slate-800">

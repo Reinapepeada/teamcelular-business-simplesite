@@ -4,5 +4,12 @@ export const REVIEW_COST_MESSAGE =
 export const WARRANTY_SCOPE_MESSAGE =
   "La garantía escrita cubre 90 días sobre trabajo y repuesto instalado; el alcance exacto se informa por escrito antes de avanzar.";
 
+/**
+ * Financiación. Los competidores que aparecen citados por motores de IA la
+ * publican y Team Celular no la mencionaba en ninguna página, pese a ofrecerla.
+ */
+export const INSTALLMENTS_MESSAGE =
+  "Se puede abonar en 3 cuotas sin interés.";
+
 export const BUDGET_RESPONSE_MESSAGE =
   "Respondemos por WhatsApp en hasta 2 horas hábiles. Si el caso requiere revisión técnica, confirmamos diagnóstico inicial dentro de 24 horas hábiles.";

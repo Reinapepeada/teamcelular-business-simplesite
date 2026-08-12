@@ -6,6 +6,7 @@ import AuthorByline from "@/components/seo/AuthorByline";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import { BUSINESS_PROFILE, businessId } from "@/lib/businessProfile";
+import { INSTALLMENTS_MESSAGE } from "@/lib/copyStandards";
 import {
   IPHONE_MODELS_WITH_PAGE,
   IPHONE_PRICES_UPDATED,
@@ -208,7 +209,7 @@ export default async function IphoneModelPage({
         </div>
         <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">
           {BUSINESS_PROFILE.name} confirma el número exacto después del diagnóstico. Si el
-          equipo tiene más de una falla, te lo decimos antes de avanzar.
+          equipo tiene más de una falla, te lo decimos antes de avanzar. {INSTALLMENTS_MESSAGE}
         </p>
       </section>
 
