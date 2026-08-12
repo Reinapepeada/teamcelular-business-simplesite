@@ -87,7 +87,7 @@ const secondaryCta =
 export default function Home() {
     return (
         <div className="w-full bg-[#f7f8fc] text-slate-950 dark:bg-slate-950 dark:text-white">
-            <div className="mx-auto flex w-full max-w-[100rem] flex-col gap-20 px-4 py-5 sm:px-6 md:py-8 lg:px-8 lg:pb-20">
+            <div className="mx-auto flex w-full max-w-[100rem] flex-col gap-14 px-4 py-5 sm:gap-16 sm:px-6 md:py-8 lg:gap-20 lg:px-8 lg:pb-20">
                 <BannerHome />
 
                 <section aria-labelledby="repairs-title" className="grid gap-7 lg:grid-cols-[0.6fr_1.4fr] lg:gap-12">

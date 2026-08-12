@@ -11,29 +11,29 @@ const intakeProofs = [
 
 export default function BannerHome() {
     return (
-        <section className="relative mx-4 mt-4 overflow-hidden rounded-[16px_16px_16px_6px] border border-[#2d2e83]/35 bg-[#171820] text-white sm:mx-6 lg:mx-8">
-            <div className="grid min-h-[37rem] lg:grid-cols-[minmax(0,0.92fr)_minmax(30rem,1.08fr)]">
-                <div className="relative z-10 flex flex-col justify-between px-6 py-9 sm:px-9 lg:px-12 lg:py-12">
+        <section className="relative overflow-hidden rounded-[16px_16px_16px_6px] border border-[#2d2e83]/35 bg-[#171820] text-white">
+            <div className="grid lg:min-h-[37rem] lg:grid-cols-[minmax(0,1.08fr)_minmax(26rem,0.92fr)]">
+                <div className="relative z-10 flex flex-col px-6 py-8 sm:px-9 lg:px-10 lg:py-10">
                     <div className="flex items-center gap-3 text-sm text-white/75">
                         <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" aria-hidden />
                         <span>Recoleta y Belgrano · Lun–Vie, 10:30–18:00</span>
                     </div>
 
-                    <div className="my-12 max-w-[42rem] lg:my-16">
-                        <h1 className="text-balance text-[clamp(2.65rem,6vw,5.2rem)] font-extrabold leading-[0.98] tracking-[-0.035em]">
+                    <div className="my-9 max-w-[42rem] lg:my-10">
+                        <h1 className="text-balance text-[clamp(2.65rem,4vw,4rem)] font-extrabold leading-none tracking-[-0.03em]">
                             Reparación de celulares en CABA. Vos sabés qué le hicimos.
                         </h1>
-                        <p className="mt-7 max-w-[38rem] text-pretty text-lg leading-8 text-slate-200">
+                        <p className="mt-5 max-w-[38rem] text-pretty text-base leading-7 text-slate-200">
                             Team Celular repara en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032), con diagnóstico previo, orden técnica y garantía escrita de 90 días. Contanos la falla y te orientamos antes de que vengas.
                         </p>
 
-                        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                             <TrackedCtaLink
                                 href="/presupuesto-reparacion#solicitar-presupuesto"
                                 ctaName="home_hero_budget"
                                 ctaLocation="home_hero"
                                 ctaVariant="primary"
-                                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#20216b] transition duration-200 hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                                className="inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#20216b] transition duration-200 hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white lg:px-4 xl:px-6"
                             >
                                 Pedir presupuesto
                                 <BsArrowRight aria-hidden />
@@ -42,7 +42,7 @@ export default function BannerHome() {
                                 ctaName="home_hero_whatsapp"
                                 ctaLocation="home_hero"
                                 message="Hola Team Celular, necesito una reparación."
-                                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/35 px-6 py-3 text-sm font-bold text-white transition duration-200 hover:border-white hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                                className="inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-white/35 px-6 py-3 text-sm font-bold text-white transition duration-200 hover:border-white hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white lg:px-4 xl:px-6"
                             >
                                 <BsWhatsapp className="text-lg" aria-hidden />
                                 Consultar por WhatsApp
@@ -50,7 +50,7 @@ export default function BannerHome() {
                         </div>
                     </div>
 
-                    <ul className="grid gap-3 border-t border-white/15 pt-6 text-sm text-white/80 sm:grid-cols-3">
+                    <ul className="mt-auto grid gap-3 border-t border-white/15 pt-5 text-sm text-white/80 sm:grid-cols-3">
                         {intakeProofs.map((item) => (
                             <li key={item} className="flex items-start gap-2.5">
                                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#8ba7ff]" aria-hidden />
