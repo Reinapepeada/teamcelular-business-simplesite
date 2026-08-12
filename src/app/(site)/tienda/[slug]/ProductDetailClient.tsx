@@ -38,7 +38,7 @@ import {
     calculateTotalStock
 } from '@/services/products';
 import { parseProductIdFromSlug } from '@/lib/productSlug';
-import type { Product, ProductVariant } from '@/app/tienda/product';
+import { formatWarranty, type Product, type ProductVariant } from '@/app/tienda/product';
 import useCartStore from '@/store/cartStore';
 
 function slugify(text = '') {
@@ -51,19 +51,6 @@ function slugify(text = '') {
         .replace(/^-+|-+$/g, '');
 }
 
-function formatWarranty(product: Product) {
-    if (product.warranty_time && product.warranty_unit) {
-        const unitLabels: Record<string, string> = {
-            DAYS: 'dias',
-            MONTHS: 'meses',
-            YEARS: 'anos',
-        };
-
-        return `${product.warranty_time} ${unitLabels[product.warranty_unit] || product.warranty_unit.toLowerCase()}`;
-    }
-
-    return 'consultar antes de comprar';
-}
 
 // Color mapping for display
 const colorMap: Record<string, string> = {
@@ -253,8 +240,8 @@ export default function ProductDetailClient({ productIdProp, productProp }: Prop
             value: categoryName ? `${categoryName}${brandName ? ` para ${brandName}` : ''}` : 'Repuesto o accesorio para celular.',
         },
         {
-            label: 'Garantia',
-            value: `Garantia de ${warrantyLabel} con comprobante de compra.`,
+            label: 'Garantía',
+            value: `Garantía de ${warrantyLabel} con comprobante de compra.`,
         },
         {
             label: 'Retiro y consulta',
@@ -551,10 +538,7 @@ export default function ProductDetailClient({ productIdProp, productProp }: Prop
                             <div>
                                 <p className="text-sm font-medium">Garantía</p>
                                 <p className="text-xs text-muted-foreground">
-                                    {product.warranty_time && product.warranty_unit 
-                                        ? `${product.warranty_time} ${product.warranty_unit.toLowerCase()}`
-                                        : 'Consultar'
-                                    }
+                                    {formatWarranty(product, 'Consultar')}
                                 </p>
                             </div>
                         </div>

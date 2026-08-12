@@ -1,6 +1,7 @@
 import React from 'react';
 import { buildProductSlug } from '@/lib/productSlug';
 import { BUSINESS_PROFILE, businessId } from '@/lib/businessProfile';
+import { formatWarranty } from '@/app/tienda/product';
 
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || 'https://teamcelular.com';
 
@@ -22,9 +23,10 @@ export default function ProductStructuredData({ product, images = [] }: ProductS
   const imageUrls = (images || []).map(toAbsolute).filter(Boolean) as string[];
   const productUrl = `${SITE_URL}/tienda/${buildProductSlug(product)}`;
   const categoryName = product.category?.name;
-  const warranty = product.warranty_time && product.warranty_unit
-    ? `${product.warranty_time} ${String(product.warranty_unit).toLowerCase()}`
-    : `${BUSINESS_PROFILE.warrantyDays} dias sobre trabajo y repuesto instalado cuando aplica`;
+  const warranty = formatWarranty(
+    product,
+    `${BUSINESS_PROFILE.warrantyDays} días sobre trabajo y repuesto instalado cuando aplica`
+  );
   const imageObjects = imageUrls.map((u) => ({
     '@type': 'ImageObject',
     url: u,

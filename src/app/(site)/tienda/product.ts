@@ -5,6 +5,29 @@ export type SizeUnit = 'CLOTHING' | 'DIMENSIONS' | 'WEIGHT' | 'OTHER';
 export type Unit = 'KG' | 'G' | 'LB' | 'CM' | 'M' | 'INCH' | 'XS' | 'S' | 'L' | 'XL' | 'XXL';
 export type WarrantyUnit = 'DAYS' | 'MONTHS' | 'YEARS';
 
+const WARRANTY_UNIT_LABELS: Record<WarrantyUnit, [singular: string, plural: string]> = {
+  DAYS: ['día', 'días'],
+  MONTHS: ['mes', 'meses'],
+  YEARS: ['año', 'años'],
+};
+
+/**
+ * Formats a warranty as es-AR text, e.g. "3 meses" / "1 día".
+ * The API returns the unit as an English enum; never render it raw.
+ */
+export function formatWarranty(
+  product: Pick<Product, 'warranty_time' | 'warranty_unit'>,
+  fallback = 'consultar antes de comprar'
+): string {
+  const { warranty_time: time, warranty_unit: unit } = product;
+  if (!time || !unit) return fallback;
+
+  const labels = WARRANTY_UNIT_LABELS[unit];
+  if (!labels) return fallback;
+
+  return `${time} ${time === 1 ? labels[0] : labels[1]}`;
+}
+
 export interface ProductImage {
   id: number;
   variant_id: number;

@@ -12,9 +12,9 @@ import { buildWebsiteMetadata } from "@/lib/seoMetadata";
 
 export const metadata = buildWebsiteMetadata({
     path: "/",
-    title: "Reparación de Celulares en CABA | Recoleta y Belgrano | Team Celular",
+    title: "Reparación de Celulares en CABA | Team Celular",
     description:
-        "Reparación de celulares en CABA. Team Celular atiende en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032), con diagnóstico el mismo día y garantía escrita de 90 días.",
+        "Reparación de celulares en CABA. Team Celular, en Recoleta y Belgrano, repara con diagnóstico el mismo día y garantía escrita de 90 días.",
     keywords: [
         "reparacion de celulares Buenos Aires",
         "reparacion de celulares cerca de mi",

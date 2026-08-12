@@ -98,6 +98,8 @@ export const metadata: Metadata = {
 export default function SucursalBelgranoPage() {
   const branch = getBranch("belgrano");
   const whatsappUrl = buildWhatsappUrl(branch.whatsappText, branch.whatsapp);
+  // Belgrano has its own line; the schema already declares it, so it must be visible too.
+  const branchPhoneHref = `tel:${branch.phone.replace(/[^+\d]/g, "")}`;
 
   const localBusinessJsonLd = {
     "@context": "https://schema.org",
@@ -191,10 +193,10 @@ export default function SucursalBelgranoPage() {
                 WhatsApp directo
               </a>
               <a
-                href="tel:+541151034595"
+                href={branchPhoneHref}
                 className="inline-flex min-h-11 items-center rounded-full border border-white/35 px-6 text-sm font-semibold text-white transition hover:bg-white/10"
               >
-                Llamar ahora
+                Llamar al {branch.phone}
               </a>
               <Link
                 href="/presupuesto-reparacion#solicitar-presupuesto"
@@ -327,7 +329,7 @@ export default function SucursalBelgranoPage() {
       <StickyLocalCta
         whatsappUrl={whatsappUrl}
         budgetHref="/presupuesto-reparacion#solicitar-presupuesto"
-        phoneHref="tel:+541151034595"
+        phoneHref={branchPhoneHref}
         primaryLabel="Turno"
       />
 

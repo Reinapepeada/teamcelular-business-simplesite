@@ -7,7 +7,7 @@ import { buildProductSlug, parseProductIdFromSlug } from '@/lib/productSlug';
 import { permanentRedirect, notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { buildWebsiteMetadata, getSiteUrl } from '@/lib/seoMetadata';
-import type { Product } from '@/app/tienda/product';
+import { formatWarranty, type Product } from '@/app/tienda/product';
 
 const SITE_URL = getSiteUrl();
 const DEFAULT_LAT = process.env.NEXT_PUBLIC_BUSINESS_LAT || '-34.6037';
@@ -42,13 +42,16 @@ function buildProductSeoDescription(product: Product) {
     const name = product.name?.trim() || 'Repuesto para celular';
     const brand = product.brand?.name?.trim();
     const category = product.category?.name?.trim();
-    const warranty =
-        product.warranty_time && product.warranty_unit
-            ? `Garantia ${product.warranty_time} ${product.warranty_unit.toLowerCase()}.`
-            : 'Garantia segun producto.';
+    const warrantyText = formatWarranty(product, '');
+    const warranty = warrantyText ? `Garantía ${warrantyText}.` : 'Garantía según producto.';
+
+    // Product names usually already carry the brand ("... CK"); appending it again
+    // shipped duplicates like "CK CK" to the meta description.
+    const nameIncludesBrand =
+        !!brand && name.toLowerCase().includes(brand.toLowerCase());
 
     return truncateMetaDescription(
-        `${name}${brand ? ` ${brand}` : ''}${category ? `, ${category}` : ''}. Stock en Team Celular CABA, retiro en Recoleta o Belgrano. ${warranty}`
+        `${name}${brand && !nameIncludesBrand ? ` ${brand}` : ''}${category ? `, ${category}` : ''}. Stock en Team Celular CABA, retiro en Recoleta o Belgrano. ${warranty}`
     );
 }
 
