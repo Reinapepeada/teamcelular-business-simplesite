@@ -8,6 +8,7 @@ import { permanentRedirect, notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { buildWebsiteMetadata, getSiteUrl } from '@/lib/seoMetadata';
 import { formatWarranty, type Product } from '@/app/tienda/product';
+import { resolveCanonicalProduct } from '@/lib/productCanonical';
 
 const SITE_URL = getSiteUrl();
 const DEFAULT_LAT = process.env.NEXT_PUBLIC_BUSINESS_LAT || '-34.6037';
@@ -79,7 +80,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         const title = `${product.name || 'Producto'} | Team Celular`;
         const description = buildProductSeoDescription(product);
         const productSlug = buildProductSlug(product);
-        const canonicalPath = `/tienda/${productSlug}`;
+
+        // Supplier variants (CK / JC / Ampsentrix) are the same repair on
+        // different parts, so they point their canonical at one owner page
+        // instead of competing as near-duplicates.
+        const canonicalProduct = await resolveCanonicalProduct(product);
+        const canonicalPath = `/tienda/${
+            canonicalProduct.id === product.id ? productSlug : buildProductSlug(canonicalProduct)
+        }`;
 
         // geo coordinates
         const lat = process.env.NEXT_PUBLIC_BUSINESS_LAT || DEFAULT_LAT;

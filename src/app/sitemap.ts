@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 import { getAllProductImages } from '@/services/products';
 import type { Product } from '@/app/tienda/product';
 import { buildProductSlug } from '@/lib/productSlug';
+import { variantGroupKey } from '@/lib/productCanonical';
 
 // Revalidate sitemap every 24 hours
 export const revalidate = 86400;
@@ -152,19 +153,39 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   }));
 
-  const productEntries = products.map((product) => {
-    if (product?.category?.name) {
-      const slug = slugify(product.category.name);
-      if (slug) {
-        categoryMap.set(slug, product.category.name);
-        const updatedAt = product.updated_at ? new Date(product.updated_at) : lastMod;
-        const existing = categoryLastMod.get(slug);
-        if (!existing || updatedAt > existing) {
-          categoryLastMod.set(slug, updatedAt);
-        }
-      }
+  // Supplier variants canonicalize to one owner page (see productCanonical.ts),
+  // so only that owner belongs in the sitemap.
+  const canonicalIdByGroup = new Map<string, number>();
+  for (const product of products) {
+    const key = variantGroupKey(product.name);
+    if (!key) continue;
+    const current = canonicalIdByGroup.get(key);
+    if (current === undefined || product.id < current) {
+      canonicalIdByGroup.set(key, product.id);
     }
+  }
 
+  const canonicalProducts = products.filter((product) => {
+    const key = variantGroupKey(product.name);
+    return !key || canonicalIdByGroup.get(key) === product.id;
+  });
+
+  // Category discovery stays over every product: a category must not disappear
+  // just because its only entry is a non-canonical variant.
+  for (const product of products) {
+    if (!product?.category?.name) continue;
+    const slug = slugify(product.category.name);
+    if (!slug) continue;
+
+    categoryMap.set(slug, product.category.name);
+    const updatedAt = product.updated_at ? new Date(product.updated_at) : lastMod;
+    const existing = categoryLastMod.get(slug);
+    if (!existing || updatedAt > existing) {
+      categoryLastMod.set(slug, updatedAt);
+    }
+  }
+
+  const productEntries = canonicalProducts.map((product) => {
     const images = getAllProductImages(product)
       .filter((image) => image && !image.includes("placeholder"))
       .map((image) => toAbsoluteUrl(image));
