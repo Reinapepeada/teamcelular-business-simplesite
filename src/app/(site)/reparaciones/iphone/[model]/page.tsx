@@ -235,12 +235,17 @@ export default async function IphoneModelPage({
           el canal oficial, que ante una falla de placa cotiza el reemplazo completo. Si el
           equipo no tiene reparación posible, te lo decimos sin cobrarte el intento.
         </p>
-        <Link
-          href="/guias/presupuesto-service-oficial-segunda-opinion"
-          className="mt-4 inline-block font-semibold text-primary hover:underline"
-        >
-          Segunda opinión al presupuesto del service oficial →
-        </Link>
+        <div className="mt-4 flex flex-wrap gap-4">
+          <Link
+            href="/guias/presupuesto-service-oficial-segunda-opinion"
+            className="font-semibold text-primary hover:underline"
+          >
+            Segunda opinión al presupuesto del service oficial →
+          </Link>
+          <Link href="/lab" className="font-semibold text-primary hover:underline">
+            Conocé el laboratorio →
+          </Link>
+        </div>
       </section>
 
       <section className="mt-12">

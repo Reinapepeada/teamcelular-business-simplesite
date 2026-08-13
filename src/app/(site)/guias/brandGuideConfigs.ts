@@ -462,6 +462,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
   const relatedLinks: GuideRelatedLink[] = [
     { href: seed.serviceHref, label: "Servicio recomendado" },
     { href: seed.siblingHref, label: seed.siblingLabel },
+    { href: "/lab", label: "Laboratorio de microelectronica" },
     { href: "/reparaciones", label: "Ver todos los servicios" },
     { href: "/presupuesto-reparacion#solicitar-presupuesto", label: "Pedir presupuesto" },
   ];
