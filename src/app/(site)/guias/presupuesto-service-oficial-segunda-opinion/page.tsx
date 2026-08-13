@@ -105,9 +105,9 @@ const planSteps: GuideItem[] = [
 
 const faq: GuideFaqItem[] = [
   {
-    question: "¿Son servicio técnico oficial de Samsung o Apple?",
+    question: "¿Qué diferencia hay con el servicio oficial de la marca?",
     answer:
-      "No. Team Celular es un laboratorio independiente con más de 10 años de trabajo en microelectrónica. Justamente por eso reparamos a nivel componente, algo que el canal oficial no hace porque trabaja por reemplazo de módulo.",
+      "Team Celular es un laboratorio independiente con más de 10 años en microelectrónica. El canal oficial trabaja por reemplazo: ante una falla de placa, cotiza la placa completa. Acá se repara el componente que falló, que es una fracción de ese costo.",
   },
   {
     question: "¿Pierdo la garantía del fabricante si reparo con ustedes?",
