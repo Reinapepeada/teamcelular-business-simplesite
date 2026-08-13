@@ -35,6 +35,13 @@ type BrandGuideSeed = {
   siblingHref: string;
   siblingLabel: string;
   keywords: string[];
+  /**
+   * Overrides opcionales. Solo las marcas con oportunidad real segun GSC y
+   * analisis de SERP llevan texto propio; el resto usa el template generado.
+   */
+  titleOverride?: string;
+  heroDescriptionOverride?: string;
+  extraFaq?: GuideFaqItem[];
 };
 
 export type BrandGuideConfig = {
@@ -68,6 +75,22 @@ export type BrandGuideConfig = {
 const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   {
     slug: "reparacion-google-pixel-buenos-aires",
+    titleOverride:
+      "Reparacion de Google Pixel en Buenos Aires: sin soporte presencial de Google",
+    heroDescriptionOverride:
+      "Google no atiende reparaciones de Pixel en persona en Argentina: deriva a socios autorizados y no opera un local propio donde dejar el equipo. Team Celular no es servicio autorizado de Google: es un taller independiente en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), CABA, con diagnostico el mismo dia y garantia escrita de 90 dias sobre trabajo y repuesto. Reparamos pantalla, bateria y puerto de carga de Pixel, y trabajamos las fallas de placa que aparecen seguido en equipos ingresados por importacion, donde el reemplazo completo no es una opcion realista por costo. Reballing BGA y soldadura SMD bajo microscopio. Recibimos tanto equipos comprados en el pais como importados, porque el origen no cambia el trabajo tecnico, solo la disponibilidad del repuesto. Atendemos de lunes a viernes de 10:30 a 18:00, sin turno, con pago en 3 cuotas sin interes.",
+    extraFaq: [
+      {
+        question: "Google tiene servicio tecnico de Pixel en Argentina?",
+        answer:
+          "Google no opera un centro de reparacion propio en Argentina: su soporte deriva a socios autorizados. Como ademas la mayoria de los Pixel entran al pais por importacion, la garantia de fabrica suele no aplicar localmente.",
+      },
+      {
+        question: "Reparan un Pixel comprado en el exterior?",
+        answer:
+          "Si. El origen del equipo no cambia el trabajo tecnico. Lo que si cambia es la disponibilidad del repuesto segun el modelo, y eso lo confirmamos antes de que lo dejes.",
+      },
+    ],
     brand: "Google Pixel",
     badge: "Android premium",
     imagePath: "/images/google-pixel-9-hero.webp",
@@ -87,6 +110,22 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-honor-buenos-aires",
+    titleOverride:
+      "Reparacion de Honor en Buenos Aires: alternativa presencial al canal oficial",
+    heroDescriptionOverride:
+      "Honor si tiene canal de soporte oficial en Argentina: atiende por hotline y resuelve reparaciones por envio postal. Team Celular no es servicio autorizado Honor: es un taller independiente en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), CABA, donde dejas el equipo en persona y el diagnostico se hace el mismo dia, sin esperar los tiempos de ida y vuelta del correo. Reparamos pantalla, bateria y modulo de carga de las lineas Magic y X, y tambien fallas de placa que el canal oficial resuelve reemplazando el conjunto completo: reballing BGA y soldadura SMD bajo microscopio. Todo sale con garantia escrita de 90 dias sobre trabajo y repuesto, y se puede abonar en 3 cuotas sin interes. Si el equipo todavia tiene garantia vigente de fabrica, conviene usar primero el canal oficial: repararlo por fuera la anula.",
+    extraFaq: [
+      {
+        question: "Team Celular es servicio tecnico oficial de Honor?",
+        answer:
+          "No. Team Celular no es servicio autorizado de Honor ni de ninguna otra marca. Honor tiene su propio canal de soporte en Argentina, con hotline y reparacion por envio. Nosotros somos un taller independiente: la diferencia es que atendemos en persona en Recoleta y Belgrano, con diagnostico el mismo dia.",
+      },
+      {
+        question: "Conviene el canal oficial de Honor o un taller independiente?",
+        answer:
+          "Si el equipo esta en garantia de fabrica, el canal oficial: cualquier intervencion externa la anula. Si la garantia ya vencio, pesa el tiempo y el tipo de falla. El canal oficial trabaja por envio y por reemplazo de modulo; nosotros entregamos el equipo en mano y reparamos a nivel componente cuando la falla esta en la placa.",
+      },
+    ],
     brand: "Honor",
     badge: "Android",
     imagePath: "/images/dispositivoshdpro.webp",
@@ -141,6 +180,22 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-infinix-buenos-aires",
+    titleOverride:
+      "Reparacion de Infinix en Buenos Aires: donde arreglarlo sin red oficial",
+    heroDescriptionOverride:
+      "Infinix no tiene una red de service centers fisicos verificable en Argentina: la marca atiende por canales de contacto a distancia, sin local propio donde dejar el equipo. Team Celular no es servicio autorizado Infinix: es un taller independiente en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), CABA, con diagnostico el mismo dia y garantia escrita de 90 dias sobre trabajo y repuesto. Reparamos pantalla, bateria y pin de carga de las lineas Note, Hot y Zero, y tambien equipos que no encienden o se mojaron, que es donde la reparacion a nivel componente cambia el resultado: reballing BGA y soldadura SMD bajo microscopio en vez de reemplazar la placa entera. El presupuesto se confirma antes de intervenir el equipo, y si no tiene reparacion posible te lo decimos sin cobrarte el intento. Atendemos de lunes a viernes de 10:30 a 18:00, sin turno, con pago en 3 cuotas sin interes.",
+    extraFaq: [
+      {
+        question: "Infinix tiene servicio tecnico oficial en Argentina?",
+        answer:
+          "Infinix atiende consultas por canales a distancia, pero no publica una red de centros de servicio fisicos en el pais donde dejar el equipo en persona. Por eso la mayoria de las reparaciones terminan en talleres independientes.",
+      },
+      {
+        question: "Consiguen repuestos para Infinix en Argentina?",
+        answer:
+          "Depende del modelo. Las lineas Note y Hot son las mas frecuentes y tienen mejor disponibilidad; en modelos menos difundidos el tiempo de espera es mayor. Confirmamos disponibilidad y plazo antes de que dejes el equipo.",
+      },
+    ],
     brand: "Infinix",
     badge: "Android",
     imagePath: "/images/guia_cambio_bateria.webp",
@@ -267,6 +322,22 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-tcl-buenos-aires",
+    titleOverride:
+      "Reparacion de celulares TCL en Buenos Aires: quien los arregla en CABA",
+    heroDescriptionOverride:
+      "Buscar servicio tecnico TCL en Argentina lleva casi siempre a la linea de electrodomesticos, no a celulares: para telefonos TCL no hay una red oficial visible en el pais. Team Celular no es servicio autorizado TCL: es un taller independiente en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), CABA, que si recibe celulares TCL. Diagnosticamos el mismo dia y entregamos garantia escrita de 90 dias sobre trabajo y repuesto. Resolvemos pantalla, bateria y pin de carga, y en equipos que no encienden trabajamos a nivel componente con microscopio, que es lo que permite recuperar placas en marcas donde conseguir un repuesto completo es dificil. El presupuesto se confirma antes de tocar el equipo y la orden tecnica queda por escrito al ingresar. Atendemos de lunes a viernes de 10:30 a 18:00, sin turno, con pago en 3 cuotas sin interes.",
+    extraFaq: [
+      {
+        question: "TCL tiene servicio tecnico oficial de celulares en Argentina?",
+        answer:
+          "Las busquedas de servicio tecnico TCL en Argentina devuelven mayormente la linea de electrodomesticos. Para celulares no hay una red oficial visible en el pais, asi que las reparaciones se resuelven en talleres independientes.",
+      },
+      {
+        question: "Vale la pena reparar un celular TCL o conviene cambiarlo?",
+        answer:
+          "Depende del costo del repuesto contra el valor del equipo. En TCL los modulos completos suelen ser dificiles de conseguir, y ahi la reparacion a nivel componente puede ser la unica via razonable. Te damos el numero y la recomendacion antes de intervenir, sin cobrarte por decirte que no conviene.",
+      },
+    ],
     brand: "TCL",
     badge: "Android",
     imagePath: "/images/guia_cambio_modulo.webp",
@@ -287,7 +358,9 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
 
 function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
   const pagePath = `/guias/${seed.slug}`;
-  const title = `Reparacion de ${seed.brand} en Buenos Aires: fallas comunes, diagnostico y solucion`;
+  const title =
+    seed.titleOverride ??
+    `Reparacion de ${seed.brand} en Buenos Aires: fallas comunes, diagnostico y solucion`;
   const pageLabel = `Reparacion ${seed.brand}`;
   const modelList = seed.models.join(", ");
 
@@ -398,7 +471,9 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     pagePath,
     pageLabel,
     title,
-    heroDescription: `Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), repara ${seed.brand} con diagnóstico el mismo día y garantía escrita de 90 días sobre trabajo y repuesto. Esta guía explica las fallas más comunes, cómo las diagnosticamos y el paso recomendado según el estado del equipo.`,
+    heroDescription:
+      seed.heroDescriptionOverride ??
+      `Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), repara ${seed.brand} con diagnóstico el mismo día y garantía escrita de 90 días sobre trabajo y repuesto. Esta guía explica las fallas más comunes, cómo las diagnosticamos y el paso recomendado según el estado del equipo.`,
     badge: seed.badge,
     readingTime: "5 min",
     publishedTime: "2026-04-20T00:00:00Z",
@@ -426,7 +501,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     planDescription:
       `El objetivo es estabilizar ${seed.brand} en uso diario, priorizando la falla que mas afecta rendimiento y autonomia.`,
     planSteps,
-    faq,
+    faq: [...(seed.extraFaq ?? []), ...faq],
     relatedLinks,
     whatsappText: `Hola Team Celular, necesito presupuesto para reparar mi ${seed.brand}`,
     metadata: buildWebsiteMetadata({
