@@ -84,6 +84,7 @@ const mainPages = [
   { path: "tecnico-de-celulares", priority: 0.9, changeFreq: "weekly" as const },
   { path: "tienda", priority: 0.9, changeFreq: "daily" as const },
   { path: "lab", priority: 0.82, changeFreq: "monthly" as const },
+  { path: "en/phone-repair-buenos-aires", priority: 0.85, changeFreq: "monthly" as const },
   { path: "sobrenosotros", priority: 0.7, changeFreq: "monthly" as const },
   { path: "devoluciones", priority: 0.3, changeFreq: "yearly" as const },
   { path: "terminos", priority: 0.3, changeFreq: "yearly" as const },
