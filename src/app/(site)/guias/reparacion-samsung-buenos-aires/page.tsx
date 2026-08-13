@@ -105,6 +105,12 @@ const brandLinks = [
     helper: "Xiaomi, Redmi y POCO",
     active: false,
   },
+  {
+    href: "/guias/reparacion-motorola-buenos-aires",
+    label: "Motorola",
+    helper: "Moto G, Edge y Razr",
+    active: false,
+  },
 ];
 
 const processSteps = [
