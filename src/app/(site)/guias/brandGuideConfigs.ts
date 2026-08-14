@@ -5,6 +5,7 @@ import type {
   GuideRelatedLink,
 } from "@/components/seo/HighIntentGuidePage";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
+import { businessId } from "@/lib/businessProfile";
 
 const SITE_URL = getSiteUrl();
 
@@ -42,11 +43,19 @@ type BrandGuideSeed = {
   titleOverride?: string;
   heroDescriptionOverride?: string;
   metaDescriptionOverride?: string;
+  /**
+   * Rangos de precio por reparacion. Solo se cargan cuando el negocio los
+   * confirmo: sin datos reales no se emite Service schema, porque un precio
+   * inventado en structured data es peor que no tenerlo.
+   */
+  repairPrices?: { name: string; from: number; to: number }[];
   extraFaq?: GuideFaqItem[];
 };
 
 export type BrandGuideConfig = {
   slug: BrandGuideSlug;
+  /** JSON-LD de Service con rangos de precio. null cuando no hay precios cargados. */
+  serviceJsonLd: Record<string, unknown> | null;
   pagePath: string;
   pageLabel: string;
   title: string;
@@ -79,6 +88,10 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     titleOverride: "Reparacion de Google Pixel en Buenos Aires",
     metaDescriptionOverride:
       "Reparación de Google Pixel en CABA: pantalla desde $360.000 y batería desde $150.000. Pixel 6 a 10 Pro, mismo día, garantía escrita 90 días.",
+    repairPrices: [
+      { name: "Cambio de pantalla", from: 360000, to: 590000 },
+      { name: "Cambio de bateria", from: 150000, to: 200000 },
+    ],
     heroDescriptionOverride:
       "Team Celular repara Google Pixel en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. El cambio de pantalla va de ARS 360.000 a 590.000 y el de bateria de ARS 150.000 a 200.000, segun el modelo: cubrimos desde Pixel 6 y 6a hasta Pixel 10 Pro, incluidas las variantes Pro y Pro XL. Pantalla y bateria salen en 2 a 4 horas. Tambien trabajamos las fallas de placa que aparecen seguido en equipos ingresados por importacion, con reballing BGA y soldadura SMD bajo microscopio. Garantia escrita de 90 dias sobre trabajo y repuesto, y pago en 3 cuotas sin interes. Google no tiene local propio de atencion en el pais, asi que estas reparaciones terminan en talleres independientes: la diferencia esta en si el taller puede trabajar la placa o solo reemplazar modulos completos.",
     extraFaq: [
@@ -382,6 +395,53 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
 ];
 
+function buildServiceJsonLd(seed: BrandGuideSeed, pagePath: string) {
+  if (!seed.repairPrices?.length) return null;
+
+  const url = `${SITE_URL}${pagePath}`;
+  const all = seed.repairPrices.flatMap((price) => [price.from, price.to]);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${url}#service`,
+    name: `Reparacion de ${seed.brand} en CABA`,
+    serviceType: "Reparacion de celulares",
+    url,
+    areaServed: [
+      { "@type": "City", name: "CABA" },
+      { "@type": "City", name: "Buenos Aires" },
+    ],
+    provider: { "@id": businessId("localbusiness") },
+    // AggregateOffer es el tipo correcto para un rango: un Offer con "price"
+    // exigiria un valor unico que aca no existe.
+    offers: {
+      "@type": "AggregateOffer",
+      priceCurrency: "ARS",
+      lowPrice: Math.min(...all),
+      highPrice: Math.max(...all),
+      offerCount: seed.repairPrices.length,
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `Reparaciones para ${seed.brand}`,
+      itemListElement: seed.repairPrices.map((price) => ({
+        "@type": "Offer",
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          priceCurrency: "ARS",
+          minPrice: price.from,
+          maxPrice: price.to,
+        },
+        itemOffered: {
+          "@type": "Service",
+          name: `${price.name} ${seed.brand}`,
+        },
+      })),
+    },
+  };
+}
+
 function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
   const pagePath = `/guias/${seed.slug}`;
   const title =
@@ -525,6 +585,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     planSteps,
     faq: [...(seed.extraFaq ?? []), ...faq],
     relatedLinks,
+    serviceJsonLd: buildServiceJsonLd(seed, pagePath),
     whatsappText: `Hola Team Celular, necesito presupuesto para reparar mi ${seed.brand}`,
     metadata: buildWebsiteMetadata({
       path: pagePath,

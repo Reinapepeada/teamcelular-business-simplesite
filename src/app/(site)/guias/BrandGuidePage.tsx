@@ -9,6 +9,13 @@ export default function BrandGuidePage({ slug }: { slug: BrandGuideSlug }) {
   const config = getBrandGuideConfig(slug);
 
   return (
+    <>
+      {config.serviceJsonLd ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(config.serviceJsonLd) }}
+        />
+      ) : null}
     <HighIntentGuidePage
       siteUrl={SITE_URL}
       pagePath={config.pagePath}
@@ -35,5 +42,6 @@ export default function BrandGuidePage({ slug }: { slug: BrandGuideSlug }) {
       relatedLinks={config.relatedLinks}
       whatsappText={config.whatsappText}
     />
+    </>
   );
 }
