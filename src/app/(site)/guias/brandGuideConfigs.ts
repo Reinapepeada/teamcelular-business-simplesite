@@ -41,6 +41,7 @@ type BrandGuideSeed = {
    */
   titleOverride?: string;
   heroDescriptionOverride?: string;
+  metaDescriptionOverride?: string;
   extraFaq?: GuideFaqItem[];
 };
 
@@ -76,8 +77,10 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   {
     slug: "reparacion-google-pixel-buenos-aires",
     titleOverride: "Reparacion de Google Pixel en Buenos Aires",
+    metaDescriptionOverride:
+      "Reparación de Google Pixel en CABA: pantalla desde $360.000 y batería desde $150.000. Pixel 6 a 10 Pro, mismo día, garantía escrita 90 días.",
     heroDescriptionOverride:
-      "Team Celular repara Google Pixel en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Cambiamos pantalla, bateria y puerto de carga, y trabajamos las fallas de placa que aparecen seguido en equipos ingresados por importacion: reballing BGA y soldadura SMD bajo microscopio. Todo con garantia escrita de 90 dias sobre trabajo y repuesto, y pago en 3 cuotas sin interes. Recibimos tanto equipos comprados en el pais como traidos del exterior, porque el origen no cambia el trabajo tecnico, solo la disponibilidad del repuesto, que confirmamos antes de que lo dejes. Google no tiene local propio de atencion en el pais, asi que estas reparaciones terminan en talleres independientes: la diferencia esta en si el taller puede trabajar la placa o solo reemplazar modulos completos.",
+      "Team Celular repara Google Pixel en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. El cambio de pantalla va de ARS 360.000 a 590.000 y el de bateria de ARS 150.000 a 200.000, segun el modelo: cubrimos desde Pixel 6 y 6a hasta Pixel 10 Pro, incluidas las variantes Pro y Pro XL. Pantalla y bateria salen en 2 a 4 horas. Tambien trabajamos las fallas de placa que aparecen seguido en equipos ingresados por importacion, con reballing BGA y soldadura SMD bajo microscopio. Garantia escrita de 90 dias sobre trabajo y repuesto, y pago en 3 cuotas sin interes. Google no tiene local propio de atencion en el pais, asi que estas reparaciones terminan en talleres independientes: la diferencia esta en si el taller puede trabajar la placa o solo reemplazar modulos completos.",
     extraFaq: [
       {
         question: "Google tiene servicio tecnico de Pixel en Argentina?",
@@ -93,7 +96,22 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     brand: "Google Pixel",
     badge: "Android premium",
     imagePath: "/images/google-pixel-9-hero.webp",
-    models: ["Pixel 10", "Pixel 9", "Pixel 8", "Pixel 7", "Pixel 6 Pro"],
+    models: [
+      "Pixel 10 Pro",
+      "Pixel 10",
+      "Pixel 9 Pro XL",
+      "Pixel 9 Pro",
+      "Pixel 9",
+      "Pixel 8 Pro",
+      "Pixel 8",
+      "Pixel 8a",
+      "Pixel 7 Pro",
+      "Pixel 7",
+      "Pixel 7a",
+      "Pixel 6 Pro",
+      "Pixel 6",
+      "Pixel 6a",
+    ],
     modifiedTime: "2026-07-14T00:00:00Z",
     specialtyFocus:
       "enfoque de camara computacional, pantalla OLED y estabilidad de carga USB-C",
@@ -105,7 +123,16 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     serviceHref: "/reparaciones/cambio-pantalla-caba",
     siblingHref: "/guias/reparacion-samsung-buenos-aires",
     siblingLabel: "Guia hermana: Samsung",
-    keywords: ["reparacion google pixel", "service pixel caba", "tecnico pixel buenos aires"],
+    keywords: [
+      "reparacion google pixel",
+      "donde reparar google pixel",
+      "pixel servicio tecnico",
+      "cambio de pantalla pixel precio",
+      "reparacion pixel 8 pro",
+      "reparacion pixel 9 pro",
+      "service pixel caba",
+      "tecnico pixel buenos aires",
+    ],
   },
   {
     slug: "reparacion-honor-buenos-aires",
@@ -506,6 +533,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
       // la meta description.
       title: `Reparación de ${seed.brand} en CABA | Team Celular`,
       description:
+        seed.metaDescriptionOverride ??
         `Reparación de ${seed.brand} en CABA. Team Celular, Recoleta y Belgrano. Pantalla, batería y carga con diagnóstico el mismo día. Garantía escrita 90 días.`,
       keywords: [
         ...seed.keywords,
