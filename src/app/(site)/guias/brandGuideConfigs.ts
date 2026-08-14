@@ -75,10 +75,9 @@ export type BrandGuideConfig = {
 const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   {
     slug: "reparacion-google-pixel-buenos-aires",
-    titleOverride:
-      "Reparacion de Google Pixel en Buenos Aires: sin soporte presencial de Google",
+    titleOverride: "Reparacion de Google Pixel en Buenos Aires",
     heroDescriptionOverride:
-      "Google no atiende reparaciones de Pixel en persona en Argentina: deriva a socios autorizados y no opera un local propio donde dejar el equipo. Team Celular es un taller independiente de microelectronica en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), CABA, con diagnostico el mismo dia y garantia escrita de 90 dias sobre trabajo y repuesto. Reparamos pantalla, bateria y puerto de carga de Pixel, y trabajamos las fallas de placa que aparecen seguido en equipos ingresados por importacion, donde el reemplazo completo no es una opcion realista por costo. Reballing BGA y soldadura SMD bajo microscopio. Recibimos tanto equipos comprados en el pais como importados, porque el origen no cambia el trabajo tecnico, solo la disponibilidad del repuesto. Atendemos de lunes a viernes de 10:30 a 18:00, sin turno, con pago en 3 cuotas sin interes.",
+      "Team Celular repara Google Pixel en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Cambiamos pantalla, bateria y puerto de carga, y trabajamos las fallas de placa que aparecen seguido en equipos ingresados por importacion: reballing BGA y soldadura SMD bajo microscopio. Todo con garantia escrita de 90 dias sobre trabajo y repuesto, y pago en 3 cuotas sin interes. Recibimos tanto equipos comprados en el pais como traidos del exterior, porque el origen no cambia el trabajo tecnico, solo la disponibilidad del repuesto, que confirmamos antes de que lo dejes. Google no tiene local propio de atencion en el pais, asi que estas reparaciones terminan en talleres independientes: la diferencia esta en si el taller puede trabajar la placa o solo reemplazar modulos completos.",
     extraFaq: [
       {
         question: "Google tiene servicio tecnico de Pixel en Argentina?",
@@ -368,68 +367,63 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     {
       title: seed.knownWeakPoints[0],
       description:
-        `Cuando aparece ${seed.knownWeakPoints[0]}, conviene revisar modulo y conectores antes de seguir usando el equipo en condiciones inestables.`,
+        "Revisamos modulo, flex y conectores antes de cotizar un reemplazo: es frecuente que el panel este sano y falle la conexion.",
     },
     {
       title: seed.knownWeakPoints[1],
       description:
-        `Si notas ${seed.knownWeakPoints[1]}, aislamos el modulo afectado, revisamos sus conectores y hacemos pruebas funcionales antes de proponer un reemplazo.`,
+        "Aislamos el modulo y lo probamos por separado, para no cobrar una pieza que no era la causa.",
     },
     {
       title: seed.knownWeakPoints[2],
       description:
-        `Ante ${seed.knownWeakPoints[2]}, reproducimos el sintoma y revisamos el circuito, flex o conector relacionado para resolver la causa real.`,
+        "Reproducimos la falla en el banco. Si es intermitente, medimos el circuito: cambiar la pieza sin eso deja el problema adentro.",
     },
     {
-      title: `Sistemas secundarios en ${seed.brand}`,
+      title: `Fallas encadenadas en ${seed.brand}`,
       description:
-        "Audio, camara, sensores y conectividad pueden afectarse en cadena cuando una falla principal avanza sin diagnostico.",
+        "Una falla sin resolver suele arrastrar audio, camara o sensores. Por eso el ingreso incluye un control completo, no solo del sintoma que traes.",
     },
   ];
 
   const diagnostics: GuideItem[] = [
     {
-      title: "Checklist funcional al ingreso",
+      title: "Control de ingreso",
       description:
-        `Probamos funciones clave de ${seed.brand} (pantalla, camara, audio, conectividad y carga) para registrar el estado inicial real.`,
+        `Queda por escrito como entro el ${seed.brand}: pantalla, camara, audio, conectividad y carga.`,
     },
     {
-      title: "Medicion de energia y consumo",
+      title: "Medicion de consumo",
       description:
-        "Analizamos comportamiento de carga, estabilidad de bateria y consumo en reposo para detectar la causa principal.",
+        "Consumo en reposo y curva de carga. Es lo que distingue una bateria gastada de una fuga en placa.",
     },
     {
-      title: "Inspeccion de modulos y conectores",
+      title: "Inspeccion bajo microscopio",
       description:
-        "Revisamos fisicamente conectores, flex y piezas asociadas para evitar cambios innecesarios de componentes.",
+        "Corrosion, pistas cortadas y soldaduras frias. Aca aparece lo que el reemplazo de modulo no resuelve.",
     },
     {
-      title: "Validacion final con pruebas de uso",
+      title: "Prueba en uso real",
       description:
-        "Antes de entregar, verificamos estabilidad general y dejamos documentado alcance de la reparacion.",
+        "El equipo se prueba encendido y en uso antes de entregarlo, no solo al terminar la soldadura.",
     },
   ];
 
   const planSteps: GuideItem[] = [
     {
-      title: "Diagnostico inicial y presupuesto",
+      title: "Presupuesto cerrado antes de tocar el equipo",
       description:
-        "Te explicamos falla, alternativas de reparacion y tiempos estimados segun modelo, disponibilidad y complejidad.",
+        "Numero y plazo confirmados. Si no avanzas, te lo devolvemos como entro.",
     },
     {
-      title: "Reparacion sobre falla principal",
+      title: "Primero la falla que te trajo",
       description:
-        "Intervenimos primero lo critico para recuperar funcionalidad de forma segura y sin sobrecostos.",
+        "Si aparece algo mas durante la reparacion, te lo consultamos antes de sumarlo al presupuesto.",
     },
     {
-      title: "Control tecnico de calidad",
+      title: "Entrega con garantia escrita",
       description:
-        "Ejecutamos pruebas de funcionamiento real para confirmar que la solucion sea estable y consistente.",
-    },
-    {
-      title: "Entrega con recomendaciones",
-      description:
-        "Te damos recomendaciones de cuidado y seguimiento para extender vida util del equipo.",
+        "90 dias sobre el trabajo y el repuesto instalado, con el alcance detallado por escrito.",
     },
   ];
 
