@@ -61,3 +61,12 @@
 		background: rgba(255,255,255,0.96);
 	}
 }
+
+/* ponytail: Chromium paints backdrop-filter elements over top-layer <dialog>,
+   tapando el modal de WhatsApp. Matar el blur mientras haya un modal abierto
+   garantiza que el lead siempre vea el selector de sucursal. */
+body:has(dialog[open]) [class*="backdrop-blur"],
+body:has(dialog[open]) .liquid-glass {
+	-webkit-backdrop-filter: none !important;
+	backdrop-filter: none !important;
+}

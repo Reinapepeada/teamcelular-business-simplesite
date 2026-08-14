@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+// GA4 lo recibe via recordLeadInteraction; usar el wrapper duplicaria el evento.
 import { track } from "@vercel/analytics";
 import type { MouseEventHandler, ReactNode } from "react";
 import {

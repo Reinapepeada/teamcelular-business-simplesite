@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { track } from "@vercel/analytics";
+import { track } from "@/lib/analytics/track";
 import {
     BUDGET_FUNNEL_EVENTS,
     BUDGET_WIZARD_STEPS,
