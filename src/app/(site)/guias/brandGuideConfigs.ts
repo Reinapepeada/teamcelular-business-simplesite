@@ -507,7 +507,10 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     whatsappText: `Hola Team Celular, necesito presupuesto para reparar mi ${seed.brand}`,
     metadata: buildWebsiteMetadata({
       path: pagePath,
-      title: `Reparación de ${seed.brand} en CABA | Team Celular — Recoleta y Belgrano`,
+      // Sin el sufijo de sucursales: con marcas de nombre largo el title
+      // superaba los 60 caracteres y se truncaba. Las sucursales ya estan en
+      // la meta description.
+      title: `Reparación de ${seed.brand} en CABA | Team Celular`,
       description:
         `Reparación de ${seed.brand} en CABA. Team Celular, Recoleta y Belgrano. Pantalla, batería y carga con diagnóstico el mismo día. Garantía escrita 90 días.`,
       keywords: [

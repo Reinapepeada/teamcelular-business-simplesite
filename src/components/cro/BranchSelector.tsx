@@ -189,7 +189,10 @@ export default function BranchWhatsAppButton({
         <div className="p-5 sm:p-6">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h2 id={`${ctaName}-branch-title`} className="text-xl font-bold">¿Con qué sucursal querés hablar?</h2>
+              {/* No es <h2>: el selector se renderiza varias veces por pagina y metia
+                  encabezados duplicados en el esquema del documento. El dialogo
+                  conserva su nombre accesible via aria-labelledby. */}
+              <p id={`${ctaName}-branch-title`} className="text-xl font-bold">¿Con qué sucursal querés hablar?</p>
               <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
                 Ambas realizan todo tipo de reparaciones. La elección es una preferencia y podés cambiarla.
               </p>
