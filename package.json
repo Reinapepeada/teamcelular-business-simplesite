@@ -8,7 +8,8 @@
     "build": "npm run clean && next build",
     "start": "next start",
     "lint": "next lint",
-    "seo:audit": "lighthouse http://localhost:3000 --chrome-flags=\"--headless\" --output html --output json --output-path ./reports/lighthouse-report"
+    "seo:audit": "lighthouse http://localhost:3000 --chrome-flags=\"--headless\" --output html --output json --output-path ./reports/lighthouse-report",
+    "seo:indexnow": "node scripts/indexnow-submit.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

@@ -27,7 +27,7 @@ export const metadata = buildWebsiteMetadata({
     ],
     // hreflang reciproco con la version en ingles: sin el par, Google no
     // relaciona las dos paginas y ninguna se muestra al publico correcto.
-    languages: { "es-AR": "/", en: "/en/phone-repair-buenos-aires" },
+    languages: { "es-AR": "/", en: "/en/phone-repair-buenos-aires", "x-default": "/" },
     openGraphTitle: "Reparación de Celulares en CABA | Team Celular",
     openGraphDescription:
         "Team Celular tiene sucursales en Recoleta y Belgrano, CABA. Diagnóstico previo y garantía escrita de 90 días.",

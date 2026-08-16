@@ -92,7 +92,7 @@ const ROUTE_SELECTOR = [
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: "/reparaciones",
-  title: "Catalogo de Reparaciones por Tipo de Falla en CABA | Team Celular",
+  title: "Catálogo de Reparaciones por Tipo de Falla en CABA",
   description:
     "Explora servicios por tipo de falla en CABA: pantalla, bateria, carga, camara, audio, mojado y placa. Hub pensado para comparar opciones y elegir ruta.",
   robots: {
@@ -102,11 +102,11 @@ export const metadata: Metadata = buildWebsiteMetadata({
   languages: {
     "es-AR": "/reparaciones",
   },
-  openGraphTitle: "Catalogo de Reparaciones en CABA | Team Celular",
+  openGraphTitle: "Catálogo de Reparaciones en CABA | Team Celular",
   openGraphDescription:
     "Hub de servicios para elegir reparacion por falla y derivar a presupuesto o diagnostico avanzado.",
   openGraphImageAlt: "Team Celular - Reparaciones en CABA",
-  twitterTitle: "Catalogo de Reparaciones en CABA | Team Celular",
+  twitterTitle: "Catálogo de Reparaciones en CABA | Team Celular",
   twitterDescription:
     "Navega servicios por tipo de falla y elige la ruta correcta para cotizar en CABA.",
 });

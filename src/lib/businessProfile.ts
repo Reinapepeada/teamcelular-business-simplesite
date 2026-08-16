@@ -2,6 +2,14 @@ import { getSiteUrl } from "@/lib/seoMetadata";
 
 export const SITE_URL = getSiteUrl();
 
+// Google ignora .ico como logo de Organization/LocalBusiness: requiere raster
+// PNG/JPG de 112x112 como minimo.
+export const LOGO = {
+  url: `${SITE_URL}/images/IMAGOTIPO/PNG/IMAGOTIPO_6.png`,
+  width: 1752,
+  height: 650,
+};
+
 export const BUSINESS_PROFILE = {
   name: "Team Celular",
   phone: "+54 11 5103-4595",

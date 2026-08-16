@@ -1,5 +1,5 @@
 import React from "react";
-import { BUSINESS_PROFILE, TECHNICAL_AUTHOR, businessId } from "@/lib/businessProfile";
+import { BUSINESS_PROFILE, LOGO, TECHNICAL_AUTHOR, businessId } from "@/lib/businessProfile";
 
 interface ArticleSchemaProps {
   title: string;
@@ -65,7 +65,9 @@ export default function ArticleSchema({
       name: "Team Celular",
       logo: {
         "@type": "ImageObject",
-        url: "https://teamcelular.com/icon.ico",
+        url: LOGO.url,
+        width: LOGO.width,
+        height: LOGO.height,
       },
     },
     mainEntityOfPage: {

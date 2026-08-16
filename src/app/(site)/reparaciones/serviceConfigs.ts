@@ -5,7 +5,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     slug: "cambio-bateria-caba",
     h1: "Cambio de batería en CABA",
     metaTitle:
-      "Cambio de Batería en CABA | Repuestos Certificados | Team Celular",
+      "Cambio de Batería en CABA | Repuestos Certificados",
     metaDescription:
       "Cambio de batería en CABA — Team Celular, Paraguay 2451 Recoleta. Repuestos certificados, garantía escrita 90 días. iPhone, Samsung, Motorola y Xiaomi.",
     socialTitle: "Cambio de Batería en CABA | Team Celular",
@@ -129,7 +129,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     slug: "cambio-pin-carga-caba",
     h1: "Cambio de pin de carga en CABA",
     metaTitle:
-      "Cambio de Pin de Carga en CABA | Celular no Carga | Team Celular",
+      "Cambio de Pin de Carga en CABA | Celular no Carga",
     metaDescription:
       "Cambio de pin de carga en CABA — Team Celular, Paraguay 2451 Recoleta. Falso contacto, carga intermitente y puerto dañado. Garantía escrita 90 días.",
     socialTitle: "Cambio de Pin de Carga en CABA | Team Celular",
@@ -312,7 +312,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     slug: "cambio-tapa-caba",
     h1: "Cambio de tapa trasera en CABA",
     metaTitle:
-      "Cambio de Tapa Trasera en CABA | Terminación Prolija | Team Celular",
+      "Cambio de Tapa Trasera en CABA | Terminación Prolija",
     metaDescription:
       "Cambio de tapa trasera en CABA — Team Celular, Paraguay 2451 Recoleta. Vidrio roto o tapa dañada con terminación prolija y garantía escrita 90 días.",
     socialTitle: "Cambio de Tapa Trasera en CABA | Team Celular",
@@ -373,7 +373,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     slug: "cambio-camara-caba",
     h1: "Cambio de cámara en CABA",
     metaTitle:
-      "Cambio de Cámara en CABA | Cámara Frontal y Trasera | Team Celular",
+      "Cambio de Cámara en CABA | Frontal y Trasera | Team Celular",
     metaDescription:
       "Cambio de cámara en CABA — Team Celular, Paraguay 2451 Recoleta. Cámara borrosa, sin enfoque o sin imagen. Frontal y trasera con garantía escrita 90 días.",
     socialTitle: "Cambio de Cámara en CABA | Team Celular",
@@ -434,7 +434,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     slug: "reparacion-audio-celular-caba",
     h1: "Reparación de audio en CABA",
     metaTitle:
-      "Reparación de Audio de Celular en CABA | Micrófono y Parlante | Team Celular",
+      "Reparación de Audio en CABA | Micrófono y Parlante",
     metaDescription:
       "Reparación de audio en CABA — Team Celular, Paraguay 2451. Micrófono, parlante y auricular. Diagnóstico preciso y garantía escrita 90 días.",
     socialTitle: "Reparación de Audio de Celular en CABA | Team Celular",
@@ -495,7 +495,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     slug: "recuperacion-celular-mojado-caba",
     h1: "Recuperación de celular mojado en CABA",
     metaTitle:
-      "Recuperación de Celular Mojado en CABA | Daño por Líquidos | Team Celular",
+      "Recuperación de Celular Mojado en CABA | Daño por Líquidos",
     metaDescription:
       "Recuperación de celular mojado en CABA — Team Celular, Paraguay 2451. Limpieza técnica, secado controlado y diagnóstico de placa. Actuá rápido.",
     socialTitle: "Recuperación de Celular Mojado en CABA | Team Celular",

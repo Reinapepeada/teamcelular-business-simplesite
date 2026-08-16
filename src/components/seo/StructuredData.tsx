@@ -1,4 +1,4 @@
-import { BRANCHES, BUSINESS_PROFILE, SITE_URL, TECHNICAL_AUTHOR, absoluteUrl, businessId } from "@/lib/businessProfile";
+import { BRANCHES, BUSINESS_PROFILE, LOGO, SITE_URL, TECHNICAL_AUTHOR, absoluteUrl, businessId } from "@/lib/businessProfile";
 
 interface StructuredDataProps {
   city?: string;
@@ -6,9 +6,6 @@ interface StructuredDataProps {
 }
 
 function createLocalBusinessJson(city?: string, country?: string) {
-  const ratingValue = process.env.NEXT_PUBLIC_GOOGLE_RATING ? Number(process.env.NEXT_PUBLIC_GOOGLE_RATING) : null;
-  const ratingCount = process.env.NEXT_PUBLIC_GOOGLE_RATING_COUNT ? Number(process.env.NEXT_PUBLIC_GOOGLE_RATING_COUNT) : null;
-
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -20,7 +17,12 @@ function createLocalBusinessJson(city?: string, country?: string) {
     name: BUSINESS_PROFILE.name,
     url: SITE_URL,
     image: `${SITE_URL}/opengraph-image.png`,
-    logo: `${SITE_URL}/icon.ico`,
+    logo: {
+      "@type": "ImageObject",
+      url: LOGO.url,
+      width: LOGO.width,
+      height: LOGO.height,
+    },
     description:
       "Laboratorio tecnico especializado en reparacion de celulares, microelectronica, reballing BGA, recuperacion por liquido y venta de repuestos en Recoleta y Belgrano, CABA.",
     telephone: BUSINESS_PROFILE.phone,
@@ -75,17 +77,6 @@ function createLocalBusinessJson(city?: string, country?: string) {
       },
       hasMap: branch.mapUrl,
     })),
-    ...(ratingValue && ratingCount
-      ? {
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue,
-            reviewCount: ratingCount,
-            bestRating: 5,
-            worstRating: 1,
-          },
-        }
-      : {}),
   };
 }
 
@@ -96,7 +87,12 @@ function createOrganizationJson() {
     "@id": businessId("organization"),
     name: BUSINESS_PROFILE.name,
     url: SITE_URL,
-    logo: `${SITE_URL}/icon.ico`,
+    logo: {
+      "@type": "ImageObject",
+      url: LOGO.url,
+      width: LOGO.width,
+      height: LOGO.height,
+    },
     email: BUSINESS_PROFILE.email,
     telephone: BUSINESS_PROFILE.phone,
     sameAs: BUSINESS_PROFILE.sameAs,

@@ -88,6 +88,9 @@ const footerSections = {
     { name: "Solicitar presupuesto", href: "/presupuesto-reparacion" },
     { name: "Sobre nosotros", href: "/sobrenosotros" },
     { name: "Contacto", href: "/contacto" },
+    // Unico enlace interno a la version en ingles: sin el, la pagina solo es
+    // alcanzable por hreflang y sitemap, sin PageRank interno que la sostenga.
+    { name: "Phone repair in English", href: "/en/phone-repair-buenos-aires", lang: "en" },
   ],
 };
 
@@ -194,6 +197,7 @@ export default function FooterNUI() {
                 key={recurso.href}
                 href={recurso.href}
                 prefetch={false}
+                {...("lang" in recurso ? { lang: recurso.lang, hrefLang: recurso.lang } : {})}
                 className="inline-flex min-h-9 items-center text-sm text-slate-200 transition-all duration-200 hover:translate-x-1 hover:text-white"
               >
                 {recurso.name}

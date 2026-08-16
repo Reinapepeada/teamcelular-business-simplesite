@@ -35,6 +35,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   languages: {
     en: PAGE_PATH,
     "es-AR": "/",
+    "x-default": "/",
   },
   openGraphTitle: "Phone Repair in Buenos Aires | Team Celular",
   openGraphDescription:
@@ -64,7 +65,11 @@ export default function PhoneRepairEnglishPage() {
   };
 
   return (
-    <section className="w-full max-w-5xl px-6 py-14 pb-24 md:px-8">
+    // El <html> lo renderiza el root layout con lang="es" y no puede variar por
+    // ruta. Sin este lang="en" en el subarbol, la pagina se declara en español
+    // mientras su hreflang dice ingles: señales contradictorias justo en el eje
+    // que esta pagina existe para servir, y lectores de pantalla en voz errada.
+    <section lang="en" className="w-full max-w-5xl px-6 py-14 pb-24 md:px-8">
       <BreadcrumbJsonLd
         items={[
           { name: "Home", url: `${SITE_URL}/` },

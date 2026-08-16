@@ -19,7 +19,7 @@ const LAB_URL = "https://lab.teamcelular.com";
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: "/lab",
-  title: "TC Lab · Ensamble SMD/THT y Testing de Placas en Argentina | Team Celular",
+  title: "TC Lab · Ensamble SMD/THT y Testing de Placas | Team Celular",
   description:
     "TC Lab, división de Team Celular en Recoleta. Ensamble SMD/THT y testing de placas para prototipos y series cortas en Argentina. Startups y pymes.",
   keywords: [
