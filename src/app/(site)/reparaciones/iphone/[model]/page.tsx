@@ -12,6 +12,7 @@ import {
   IPHONE_PRICES_UPDATED,
   formatArs,
   getIphoneModel,
+  getIphoneModelNotes,
   priceLabel,
 } from "../iphoneModels";
 
@@ -84,13 +85,16 @@ export default async function IphoneModelPage({
 
   const SITE_URL = getSiteUrl();
   const pageUrl = `${SITE_URL}/reparaciones/iphone/${model.slug}`;
+  const modelNotes = getIphoneModelNotes(model.slug);
 
   const repairs = [
     {
       name: "Cambio de pantalla",
       price: model.screen,
       time: "2 a 4 horas",
-      detail: `Módulo OLED o Incell según el ${model.name}, con prueba de brillo, color y respuesta táctil antes de entregar.`,
+      detail: modelNotes
+        ? `Módulo ${modelNotes.panel}, con prueba de brillo, color y respuesta táctil antes de entregar.`
+        : `Módulo original del ${model.name}, con prueba de brillo, color y respuesta táctil antes de entregar.`,
     },
     {
       name: "Cambio de batería",
@@ -102,7 +106,9 @@ export default async function IphoneModelPage({
       name: "Puerto de carga",
       price: null,
       time: "2 a 3 horas",
-      detail: "Se presupuesta tras el diagnóstico: puede ser limpieza técnica, cambio de módulo o trabajo en placa.",
+      detail: modelNotes
+        ? `Conector ${modelNotes.port}. Se presupuesta tras el diagnóstico: puede ser limpieza técnica, cambio de módulo o trabajo en placa.`
+        : "Se presupuesta tras el diagnóstico: puede ser limpieza técnica, cambio de módulo o trabajo en placa.",
     },
     {
       name: "Reparación de placa",
@@ -247,6 +253,28 @@ export default async function IphoneModelPage({
           </Link>
         </div>
       </section>
+
+      {modelNotes ? (
+        <section className="mt-12">
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+            Qué tiene de particular reparar un {model.name}
+          </h2>
+          <p className="mt-4 max-w-3xl leading-relaxed text-slate-600 dark:text-slate-300">
+            Cada modelo trae su propia trampa. Esto es lo que cambia el trabajo, el
+            repuesto o el presupuesto en este equipo concreto.
+          </p>
+          <ul className="mt-6 space-y-4">
+            {modelNotes.notes.map((note) => (
+              <li
+                key={note}
+                className="rounded-2xl border border-slate-200 bg-white p-6 leading-relaxed text-slate-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
+              >
+                {note}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       <section className="mt-12">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Otros modelos</h2>

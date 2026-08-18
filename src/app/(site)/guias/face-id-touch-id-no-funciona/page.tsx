@@ -11,7 +11,7 @@ const PAGE_PATH = "/guias/face-id-touch-id-no-funciona";
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
-  title: "Face ID o Touch ID no Funciona: Causas y Solucion | Team Celular",
+  title: "Face ID o Touch ID no Funciona: Causas y Solución",
   description:
     "¿Face ID o Touch ID dejó de funcionar? Team Celular, Recoleta y Belgrano (CABA), diagnostica sensores biométricos el mismo día: flex, módulo o placa con criterio técnico.",
   keywords: [
@@ -21,7 +21,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
     "sensor biometrico celular",
     "microelectronica iphone caba",
   ],
-  openGraphTitle: "Face ID o Touch ID no Funciona: Causas y Solucion | Team Celular",
+  openGraphTitle: "Face ID o Touch ID no Funciona: Causas y Solución | Team Celular",
   openGraphDescription:
     "Guia para diagnosticar fallas biometricas en iPhone y decidir reparacion segura con criterio tecnico.",
   openGraphImagePath: "/images/guia_iphone.webp",

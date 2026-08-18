@@ -23,7 +23,7 @@ import {
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 
 export const metadata: Metadata = {
-  title: "Cambio de Pantalla Celular Buenos Aires | Display Original CABA",
+  title: "Cambio de Pantalla de Celular en CABA | Display Original",
   description:
     "Cambio de pantalla celular en CABA. Team Celular, Recoleta y Belgrano. Displays OLED originales, True Tone preservado, 2-4 h y garantía escrita sobre trabajo y repuesto.",
   keywords: [

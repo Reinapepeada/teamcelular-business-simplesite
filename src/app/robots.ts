@@ -17,7 +17,6 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "Applebot",
         allow: "/",
         disallow: sharedDisallow,
-        crawlDelay: 10,
       },
       {
         userAgent: "Applebot-Extended",

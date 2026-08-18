@@ -29,7 +29,7 @@ const faqs = [
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: "/tecnico-de-celulares",
-  title: "Técnico de Celulares en Recoleta | Diagnóstico Avanzado | Team Celular",
+  title: "Técnico de Celulares en Recoleta, CABA | Team Celular",
   description:
     "Técnico de celulares en Recoleta, Paraguay 2451 CABA — Team Celular. Diagnóstico avanzado, placa y segunda opinión con garantía escrita 90 días.",
   keywords: [

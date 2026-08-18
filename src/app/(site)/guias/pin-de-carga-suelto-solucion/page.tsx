@@ -11,7 +11,7 @@ const PAGE_PATH = "/guias/pin-de-carga-suelto-solucion";
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
-  title: "Pin de Carga Suelto: Causas y Solucion en CABA | Team Celular",
+  title: "Pin de Carga Suelto: Causas y Solución en CABA",
   description:
     "¿Tu celular carga intermitente? Team Celular, Recoleta y Belgrano (CABA), revisa pin de carga, flex y placa el mismo día. Garantía escrita 90 días.",
   keywords: [
@@ -21,12 +21,12 @@ export const metadata: Metadata = buildWebsiteMetadata({
     "reparacion puerto usb celular",
     "service tecnico celulares recoleta",
   ],
-  openGraphTitle: "Pin de Carga Suelto: Causas y Solucion en CABA | Team Celular",
+  openGraphTitle: "Pin de Carga Suelto: Causas y Solución en CABA | Team Celular",
   openGraphDescription:
     "Guia practica para diferenciar suciedad, desgaste de conector o falla de placa antes de gastar de mas.",
   openGraphImagePath: "/images/guia_cambio_modulo.webp",
   openGraphImageAlt: "Diagnostico de pin de carga en Team Celular",
-  twitterTitle: "Pin de Carga Suelto: Causas y Solucion | Team Celular",
+  twitterTitle: "Pin de Carga Suelto: Causas y Solución | Team Celular",
   twitterDescription:
     "Checklist rapido para decidir si necesitas limpieza tecnica, cambio de pin o microelectronica.",
   languages: {

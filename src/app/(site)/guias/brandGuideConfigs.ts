@@ -183,6 +183,23 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-poco-buenos-aires",
+    titleOverride: "Reparacion de POCO en Buenos Aires: temperatura, bateria y carga",
+    metaDescriptionOverride:
+      "Reparación de POCO en CABA: F6 Pro, F6, X6 Pro y M6 Pro. Sobrecalentamiento, batería exigida y carga rápida con pin desgastado. Garantía escrita de 90 días.",
+    heroDescriptionOverride:
+      "Team Celular repara POCO en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. POCO vende potencia a precio contenido, y esa ecuacion se paga en calor: son los equipos que mas entran por sobrecalentamiento en sesiones largas. El calor sostenido no es solo una molestia, es lo que despues acelera la degradacion de la bateria y castiga la placa, asi que las tres fallas tipicas de la linea suelen ser la misma historia contada en orden. La carga rapida agrega su parte: el pin se desgasta antes que en un equipo de carga convencional. Si tu POCO calienta y ademas perdio autonomia, conviene diagnosticar las dos cosas juntas en vez de cambiar la bateria y volver en tres meses. Garantia escrita de 90 dias y 3 cuotas sin interes.",
+    extraFaq: [
+      {
+        question: "Es normal que mi POCO caliente tanto?",
+        answer:
+          "Algo de calor en uso exigente es esperable por el tipo de procesador. Lo que no es normal es que caliente en uso liviano o que se apague: ahi hay algo que medir, y suele estar en la gestion de energia.",
+      },
+      {
+        question: "El sobrecalentamiento arruina la bateria?",
+        answer:
+          "La acelera. Por eso cuando entra un POCO que calienta, medimos tambien el estado de la bateria: cambiar una sin revisar lo otro suele terminar en una segunda visita.",
+      },
+    ],
     brand: "POCO",
     badge: "Gaming y rendimiento",
     imagePath: "/images/componentes-pc-gaming.webp",
@@ -201,6 +218,23 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-oppo-buenos-aires",
+    titleOverride: "Reparacion de OPPO en Buenos Aires: Reno y serie A",
+    metaDescriptionOverride:
+      "Reparación de OPPO en CABA: Reno12, Reno11, A79 y A58. Touch inestable, batería con poca autonomía y desgaste del puerto de carga. Garantía escrita de 90 días.",
+    heroDescriptionOverride:
+      "Team Celular repara OPPO en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. En las lineas Reno y A la consulta que mas se repite es el touch que responde mal sin que la pantalla este rota: se toca y no reacciona, o reacciona donde no es. Eso no siempre es el modulo. Muchas veces es el conector del flex, que se afloja despues de una caida sin marca visible, y revisarlo primero evita cambiar una pantalla que estaba sana. Las otras dos habituales son la autonomia que no llega al final del dia y el puerto de carga desgastado, que en equipos con carga rapida propietaria aparece antes de lo que uno espera. Pantalla y bateria salen en 2 a 4 horas segun stock. Garantia escrita de 90 dias sobre trabajo y repuesto, y 3 cuotas sin interes.",
+    extraFaq: [
+      {
+        question: "El touch de mi OPPO falla pero la pantalla no esta rota",
+        answer:
+          "Es una consulta frecuente. Antes de cotizar un modulo revisamos el conector del flex: si se aflojo por un golpe, se reasienta y el touch vuelve, sin cambiar la pantalla. Recien si el panel esta dañado se reemplaza.",
+      },
+      {
+        question: "Cuanto tarda un cambio de pantalla en un OPPO Reno?",
+        answer:
+          "Entre 2 y 4 horas cuando tenemos el modulo en stock. Si hay que pedirlo, te confirmamos el plazo antes de que dejes el equipo.",
+      },
+    ],
     brand: "OPPO",
     badge: "Android",
     imagePath: "/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp",
@@ -253,6 +287,23 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-zte-buenos-aires",
+    titleOverride: "Reparacion de ZTE en Buenos Aires: audio, carga y reinicios",
+    metaDescriptionOverride:
+      "Reparación de ZTE en CABA: Blade, Nubia y Axon. Audio distorsionado, carga floja y reinicios intermitentes, con diagnóstico el mismo día y garantía de 90 días.",
+    heroDescriptionOverride:
+      "Team Celular repara ZTE en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Las tres fallas que mas entran en las familias Blade y Nubia son de tipo distinto entre si: el audio bajo o distorsionado suele ser el parlante o su filtro, la carga que corta cuando se mueve el cable casi siempre es el pin y no el cargador, y los reinicios intermitentes en equipos de varios años apuntan a la placa. Esa ultima es la que separa un taller de otro: en vez de cotizar el reemplazo del conjunto, se trabaja el componente que fallo con reballing BGA y soldadura SMD bajo microscopio. Todo sale con garantia escrita de 90 dias sobre trabajo y repuesto, y se puede pagar en 3 cuotas sin interes.",
+    extraFaq: [
+      {
+        question: "Por que mi ZTE se reinicia solo?",
+        answer:
+          "Un reinicio intermitente rara vez es de software cuando el equipo ya tiene varios años: lo tipico es una falla de alimentacion en la placa, que aparece cuando el equipo exige corriente. Se diagnostica midiendo consumo, no reinstalando el sistema.",
+      },
+      {
+        question: "El audio bajo de un ZTE se arregla o hay que cambiar el equipo?",
+        answer:
+          "En la mayoria de los casos se arregla. Primero descartamos que sea el filtro tapado por suciedad, que es limpieza tecnica; si el parlante esta dañado se reemplaza. Te lo decimos despues del diagnostico y antes de tocar nada.",
+      },
+    ],
     brand: "ZTE",
     badge: "Android",
     imagePath: "/images/aurisBlue.webp",
@@ -271,6 +322,23 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-tecno-buenos-aires",
+    titleOverride: "Reparacion de Tecno en Buenos Aires: Camon, Pova y Spark",
+    metaDescriptionOverride:
+      "Reparación de Tecno en CABA: Camon, Pova, Spark y Phantom. Pantalla con rayas, cámara sin nitidez y batería que cae, con garantía escrita de 90 días.",
+    heroDescriptionOverride:
+      "Team Celular repara Tecno en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Tecno es una marca de llegada reciente al pais, asi que la pregunta real no suele ser si la falla tiene arreglo sino si el repuesto esta: por eso confirmamos disponibilidad para tu modelo antes de que dejes el equipo, y no despues. En las lineas Camon y Pova lo que mas vemos es pantalla con rayas o toque fantasma, camara que perdio nitidez y bateria que cae rapido en uso mixto. La pantalla y la bateria se resuelven en 2 a 4 horas cuando hay repuesto; la camara conviene diagnosticarla antes de cotizar, porque a veces es el vidrio del lente y no el modulo completo. Garantia escrita de 90 dias y 3 cuotas sin interes.",
+    extraFaq: [
+      {
+        question: "Consiguen repuestos para Tecno en Argentina?",
+        answer:
+          "Depende del modelo. Es lo primero que verificamos: te confirmamos disponibilidad para tu equipo concreto antes de que lo dejes, para que no quede parado en el taller esperando una pieza.",
+      },
+      {
+        question: "La camara de mi Tecno perdio nitidez, es el sensor?",
+        answer:
+          "No siempre. Muchas veces es el vidrio protector del lente, rayado o partido, y eso se cambia solo, mucho mas barato que el modulo. El diagnostico define cual de las dos es.",
+      },
+    ],
     brand: "Tecno",
     badge: "Android",
     imagePath: "/images/landings/landing-audio-celular-caba-hero.webp",
@@ -289,6 +357,23 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-alcatel-buenos-aires",
+    titleOverride: "Reparacion de Alcatel en Buenos Aires: conviene arreglarlo?",
+    metaDescriptionOverride:
+      "Reparación de Alcatel en CABA: series 1, 3, 5 y T. Te decimos si conviene reparar antes de cobrarte, con diagnóstico el mismo día y garantía de 90 días.",
+    heroDescriptionOverride:
+      "Team Celular repara Alcatel en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Con Alcatel la conversacion honesta es otra: son equipos de gama accesible, y en varios casos el costo de la reparacion se acerca demasiado al valor del telefono. Por eso el diagnostico incluye decirte si conviene o no repararlo, aunque la respuesta nos deje sin el trabajo. Lo que si vale casi siempre la pena es la bateria degradada por antiguedad y el conector de carga desgastado: son reparaciones de bajo costo que devuelven un par de años de uso. La pantalla partida es la que hay que pensar, porque el modulo es la pieza mas cara del equipo. Garantia escrita de 90 dias sobre trabajo y repuesto, y 3 cuotas sin interes.",
+    extraFaq: [
+      {
+        question: "Conviene reparar un Alcatel o comprar otro?",
+        answer:
+          "Depende de que se rompio. Bateria o pin de carga casi siempre conviene: son reparaciones baratas que estiran la vida del equipo. Pantalla en un modelo de entrada es la que hay que evaluar con numeros, y te los damos antes de que decidas.",
+      },
+      {
+        question: "Cobran el diagnostico si al final no lo reparo?",
+        answer:
+          "El diagnostico se hace primero y el presupuesto se confirma antes de intervenir el equipo. Si decidis no avanzar, te lo devolvemos como vino.",
+      },
+    ],
     brand: "Alcatel",
     badge: "Android",
     imagePath: "/images/guia_mantenimiento.webp",
@@ -307,6 +392,23 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-asus-buenos-aires",
+    titleOverride: "Reparacion de Asus ROG y Zenfone en Buenos Aires",
+    metaDescriptionOverride:
+      "Reparación de Asus ROG Phone y Zenfone en CABA: sobretemperatura, batería exigida y fallas de placa por estrés térmico. Microelectrónica y garantía de 90 días.",
+    heroDescriptionOverride:
+      "Team Celular repara Asus ROG Phone y Zenfone en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Un ROG Phone no falla como un telefono comun: esta pensado para sostener carga de trabajo alta durante horas, y eso deja marca. La sobretemperatura en uso gaming, la bateria degradada por ciclos de carga exigentes y las fallas de placa por estres termico son el mismo problema en tres etapas distintas. La ultima es donde termina la mayoria de los talleres, porque implica trabajar el componente y no cambiar el modulo: aca se hace con reballing BGA y soldadura SMD bajo microscopio. Si un ROG se apaga bajo carga pero anda bien en escritorio, ese sintoma se mide, no se adivina. Garantia escrita de 90 dias y 3 cuotas sin interes.",
+    extraFaq: [
+      {
+        question: "Mi ROG Phone se apaga cuando juego, es la bateria?",
+        answer:
+          "Puede ser bateria, pero tambien puede ser gestion de energia en la placa: el equipo se apaga justo cuando mas corriente pide. La diferencia se ve midiendo consumo bajo carga, y cambiar la bateria sin medir es tirar una moneda.",
+      },
+      {
+        question: "Reparan placas de Asus o solo cambian modulos?",
+        answer:
+          "Trabajamos a nivel componente con microscopio. En equipos de alto rendimiento es la diferencia entre una reparacion posible y un presupuesto de reemplazo completo.",
+      },
+    ],
     brand: "ASUS",
     badge: "Zenfone y ROG",
     imagePath: "/images/reparacion_placa.webp",
@@ -325,6 +427,23 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-oneplus-buenos-aires",
+    titleOverride: "Reparacion de OnePlus en Buenos Aires: pantalla, bateria y carga",
+    metaDescriptionOverride:
+      "Reparación de OnePlus en CABA: series 12, 11, 10 Pro y Nord. Pantalla, batería y fallas de carga rápida por el puerto USB-C, con garantía escrita de 90 días.",
+    heroDescriptionOverride:
+      "Team Celular repara OnePlus en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. La falla mas caracteristica de la linea no es la pantalla sino la carga: son equipos construidos alrededor de la carga ultra rapida, y el puerto USB-C es la pieza que absorbe todo ese trabajo. Cuando un OnePlus empieza a cargar lento o solo en cierta posicion del cable, el problema esta en el conector mucho antes que en la bateria, y cambiar la bateria no lo resuelve. La pantalla por impacto y la perdida de capacidad de bateria son las otras dos que mas entran, y ambas salen en el dia. Tambien trabajamos las fallas de placa que en otros lados se cotizan como cambio de conjunto. Garantia escrita de 90 dias sobre trabajo y repuesto, y 3 cuotas sin interes.",
+    extraFaq: [
+      {
+        question: "Mi OnePlus carga lento, es la bateria o el cargador?",
+        answer:
+          "Antes de esas dos, revisamos el puerto. En equipos de carga ultra rapida el conector es lo que mas se desgasta, y una carga lenta o intermitente casi siempre empieza ahi. Es ademas la reparacion mas barata de las tres.",
+      },
+      {
+        question: "Cambiar la pantalla de un OnePlus afecta la carga rapida?",
+        answer:
+          "No, son sistemas separados. Si despues de un cambio de pantalla aparecio un problema de carga, lo que hay que revisar es el armado, y eso lo vemos sin cargarte el diagnostico.",
+      },
+    ],
     brand: "OnePlus",
     badge: "Android premium",
     imagePath: "/images/landings/landing-cambio-camara-caba-apoyo.webp",
@@ -343,6 +462,23 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-huawei-buenos-aires",
+    titleOverride: "Reparacion de Huawei en Buenos Aires: camara, sensores y placa",
+    metaDescriptionOverride:
+      "Reparación de Huawei en CABA: P60, P50, Mate y Nova. Cámara con enfoque irregular, sensores tras humedad o golpes y fallas de placa. Garantía de 90 días.",
+    heroDescriptionOverride:
+      "Team Celular repara Huawei en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. La linea P y Mate se compro en buena medida por la camara, asi que cuando el enfoque empieza a fallar el equipo pierde justo aquello por lo que se eligio. Ese es el trabajo mas frecuente que nos llega de la marca, junto con los sensores que dejan de responder despues de un golpe o de humedad: proximidad, giroscopio, huella. Los sensores son el caso donde mas se nota la diferencia entre cambiar un modulo y trabajar la placa, porque muchas veces lo que fallo es la linea que los alimenta y no el sensor. Eso se resuelve con microscopio, reballing BGA y soldadura SMD. Confirmamos disponibilidad de repuesto para tu modelo antes de que dejes el equipo. Garantia escrita de 90 dias y 3 cuotas sin interes.",
+    extraFaq: [
+      {
+        question: "La camara de mi Huawei enfoca mal, tiene arreglo?",
+        answer:
+          "Casi siempre si. Puede ser el modulo de camara, el vidrio del lente o el estabilizador. Son tres reparaciones de costo muy distinto, y por eso se diagnostica antes de cotizar.",
+      },
+      {
+        question: "Mi Huawei se mojo y dejaron de andar algunos sensores",
+        answer:
+          "Es el cuadro tipico de daño por liquido: el equipo enciende pero pierde funciones sueltas. Va al laboratorio de microelectronica para limpieza de placa y revision de las lineas afectadas. Si no tiene reparacion posible, te lo decimos sin cobrarte el intento.",
+      },
+    ],
     brand: "Huawei",
     badge: "Android y EMUI",
     imagePath: "/images/micro_diagnos_fino.webp",

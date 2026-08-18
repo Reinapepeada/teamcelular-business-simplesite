@@ -11,7 +11,7 @@ const PAGE_PATH = "/guias/presupuesto-service-oficial-segunda-opinion";
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
-  title: "Segunda Opinión al Presupuesto del Service Oficial | Team Celular",
+  title: "Segunda Opinión al Presupuesto del Service Oficial",
   description:
     "¿Te dijeron que no tiene arreglo o te cotizaron la placa entera? Team Celular, Recoleta y Belgrano, repara a nivel componente. Diagnóstico el mismo día.",
   keywords: [

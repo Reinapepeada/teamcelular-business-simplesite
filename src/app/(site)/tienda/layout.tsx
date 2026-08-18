@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import StoreCartSheet from "@/components/store/StoreCartSheet";
 
 export const metadata: Metadata = {
-  title: "Tienda Online | Accesorios y Repuestos para Celulares | Team Celular",
+  title: "Repuestos y Accesorios para Celulares | Team Celular",
   description:
     "Compra accesorios, fundas, cargadores, cables y repuestos para celulares con envio a todo CABA. Productos de calidad con garantia en Team Celular Buenos Aires.",
   keywords: [

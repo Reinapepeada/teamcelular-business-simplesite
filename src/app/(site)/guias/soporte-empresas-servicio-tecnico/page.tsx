@@ -24,7 +24,7 @@ import {
 } from "react-icons/fa";
 
 export const metadata: Metadata = {
-  title: "Servicio Técnico de Celulares para Empresas en CABA | Team Celular",
+  title: "Servicio Técnico de Celulares para Empresas en CABA",
   description:
     "Soporte técnico de celulares para empresas en CABA — Team Celular. SLA, logística puerta a puerta y planes desde 5 dispositivos. Garantía escrita 90 días. Recoleta y Belgrano.",
   keywords: [

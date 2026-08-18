@@ -25,7 +25,7 @@ const PAGE_PATH = "/guias/reparacion-xiaomi-buenos-aires";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 
 export const metadata: Metadata = {
-  title: "Reparación de Xiaomi, Redmi y POCO en Buenos Aires, CABA | Team Celular",
+  title: "Reparación de Xiaomi, Redmi y POCO en CABA | Team Celular",
   description:
     "Reparación de Xiaomi, Redmi y POCO en Recoleta, CABA — Team Celular, Paraguay 2451. Pantalla, batería y USB-C en el día con garantía escrita 90 días.",
   keywords: [

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import { getSiteUrl } from "@/lib/seoMetadata";
 import {
     FaAward,
     FaCertificate,
@@ -19,7 +21,7 @@ import {
 } from "react-icons/fa";
 
 export const metadata: Metadata = {
-    title: "Sobre Team Celular | Laboratorio de Celulares en Recoleta, CABA",
+    title: "Sobre Team Celular | Laboratorio en Recoleta, CABA",
     description:
         "Team Celular, Paraguay 2451 Recoleta. Laboratorio familiar, 15+ años en reparación de celulares y microelectrónica con garantía escrita en cada trabajo.",
     keywords: [
@@ -163,8 +165,16 @@ const stats = [
 ];
 
 export default function SobreNosotrosPage() {
+    const SITE_URL = getSiteUrl();
+
     return (
         <section className="w-full">
+            <BreadcrumbJsonLd
+                items={[
+                    { name: "Inicio", url: `${SITE_URL}/` },
+                    { name: "Sobre nosotros", url: `${SITE_URL}/sobrenosotros` },
+                ]}
+            />
             <div className="mx-auto flex w-full max-w-[100rem] flex-col gap-12 px-4 py-12 sm:px-6 lg:px-8">
                 <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
                     <Link href="/" className="transition hover:text-primary">

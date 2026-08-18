@@ -23,7 +23,7 @@ import {
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 
 export const metadata: Metadata = {
-  title: "Cambio de Batería Celular Buenos Aires | Service Certificado CABA",
+  title: "Cambio de Batería de Celular en CABA | Team Celular",
   description:
     "Cambio de batería celular en CABA. Team Celular, Recoleta y Belgrano. Baterías originales, service 1-2 h y garantía escrita sobre trabajo y repuesto.",
   keywords: [

@@ -11,7 +11,7 @@ const PAGE_PATH = "/guias/pantalla-con-lineas-causas-reparacion";
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
-  title: "Pantalla con Lineas en Celular: Causas y Reparacion | Team Celular",
+  title: "Pantalla con Líneas en Celular: Causas y Reparación",
   description:
     "Pantalla con líneas, parpadeo o manchas. Team Celular, Recoleta y Belgrano (CABA), diagnostica display, flex o placa. Cambio de módulo en el día y garantía escrita 90 días.",
   keywords: [
@@ -21,12 +21,12 @@ export const metadata: Metadata = buildWebsiteMetadata({
     "cambio modulo celular",
     "service tecnico recoleta",
   ],
-  openGraphTitle: "Pantalla con Lineas en Celular: Causas y Reparacion | Team Celular",
+  openGraphTitle: "Pantalla con Líneas en Celular: Causas y Reparación | Team Celular",
   openGraphDescription:
     "Guia para diagnosticar lineas en pantalla y saber cuando conviene cambio de modulo o revision de placa.",
   openGraphImagePath: "/images/guia_cambio_modulo.webp",
   openGraphImageAlt: "Pantalla con lineas en celular y diagnostico tecnico",
-  twitterTitle: "Pantalla con Lineas: Causas y Reparacion | Team Celular",
+  twitterTitle: "Pantalla con Líneas: Causas y Reparación | Team Celular",
   twitterDescription:
     "Checklist tecnico para decidir entre reemplazo de display, flex o reparacion de placa.",
   languages: {

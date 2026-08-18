@@ -5,9 +5,9 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     slug: "recoleta",
     branchSlug: "recoleta",
     zoneName: "Recoleta",
-    metaTitle: "Arreglo de Celulares en Recoleta (CABA) | Team Celular",
+    metaTitle: "Arreglo de Celulares en Recoleta: Cobertura y Cómo Llegar",
     metaDescription:
-      "Arreglo de celulares en Recoleta, CABA. Taller en Paraguay 2451 con diagnóstico el mismo día y garantía escrita de 90 días sobre trabajo y repuesto.",
+      "Cubrimos Recoleta y alrededores (Palermo, Belgrano, Microcentro) desde Paraguay 2451. Cómo llegar, cuánto demora cada reparación y garantía de 90 días.",
     socialDescription:
       "Pantalla, batería, carga y placa en Recoleta. Presupuesto rápido y garantía por escrito.",
     heroBadge: "Atencion local en Recoleta",
@@ -136,9 +136,9 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     slug: "belgrano",
     branchSlug: "belgrano",
     zoneName: "Belgrano",
-    metaTitle: "Arreglo de Celulares en Belgrano CABA | Team Celular — Amenábar 2032",
+    metaTitle: "Arreglo de Celulares en Belgrano: Cobertura y Cómo Llegar",
     metaDescription:
-      "Reparación de celulares en Belgrano CABA — Team Celular, Amenábar 2032. Pantalla, batería y carga el mismo día con diagnóstico técnico y garantía escrita 90 días.",
+      "Cubrimos Belgrano y alrededores (Palermo, Recoleta, Microcentro) desde Amenábar 2032. Cómo llegar, cuánto demora cada reparación y garantía de 90 días.",
     socialDescription:
       "Team Celular Belgrano, Amenábar 2032 CABA. Pantalla, batería y placa con diagnóstico el mismo día y garantía escrita 90 días.",
     heroBadge: "Sucursal en Belgrano · Amenábar 2032",

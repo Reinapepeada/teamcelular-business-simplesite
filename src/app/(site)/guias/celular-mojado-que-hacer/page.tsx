@@ -11,7 +11,7 @@ const PAGE_PATH = "/guias/celular-mojado-que-hacer";
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
-  title: "Celular Mojado: Que Hacer en las Primeras 2 Horas | Team Celular",
+  title: "Celular Mojado: Qué Hacer en las Primeras 2 Horas",
   description:
     "¿Se mojó tu celular? Team Celular, Recoleta y Belgrano (CABA), diagnostica daño por líquidos el mismo día. Actuá en las primeras 2 horas para reducir riesgo de corto y corrosión.",
   keywords: [
@@ -21,12 +21,12 @@ export const metadata: Metadata = buildWebsiteMetadata({
     "celular con agua no enciende",
     "servicio tecnico recoleta",
   ],
-  openGraphTitle: "Celular Mojado: Que Hacer en las Primeras 2 Horas | Team Celular",
+  openGraphTitle: "Celular Mojado: Qué Hacer en las Primeras 2 Horas | Team Celular",
   openGraphDescription:
     "Pasos urgentes para minimizar daño por liquidos y decidir cuando necesitas laboratorio de microelectronica.",
   openGraphImagePath: "/images/guia_microelectronica.webp",
   openGraphImageAlt: "Reparacion de celular mojado en laboratorio",
-  twitterTitle: "Celular Mojado: Que Hacer en las Primeras 2 Horas",
+  twitterTitle: "Celular Mojado: Qué Hacer en las Primeras 2 Horas",
   twitterDescription:
     "Evita errores comunes y actua rapido para aumentar chances de recuperacion del equipo.",
   languages: {

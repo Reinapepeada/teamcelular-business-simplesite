@@ -17,7 +17,7 @@ import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 
 export const metadata: Metadata = {
-  title: "Microelectrónica y Reballing BGA en Buenos Aires | Team Celular",
+  title: "Microelectrónica y Reballing BGA en CABA | Team Celular",
   description:
     "Reballing BGA y reparación de placas en CABA — Team Celular, Recoleta y Belgrano: microscopio, protocolos ESD y garantía escrita 90 días.",
   keywords: [
