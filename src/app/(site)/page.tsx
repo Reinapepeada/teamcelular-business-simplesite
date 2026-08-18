@@ -89,7 +89,7 @@ const secondaryCta =
 export default function Home() {
     return (
         <div className="w-full bg-[#f7f8fc] text-slate-950 dark:bg-slate-950 dark:text-white">
-            <div className="mx-auto flex w-full max-w-[100rem] flex-col gap-14 px-4 py-5 sm:gap-16 sm:px-6 md:py-8 lg:gap-20 lg:px-8 lg:pb-20">
+            <div className="mx-auto flex w-full max-w-[100rem] flex-col gap-10 px-4 py-5 sm:gap-16 sm:px-6 md:py-8 lg:gap-20 lg:px-8 lg:pb-20">
                 <BannerHome />
 
                 <section aria-labelledby="repairs-title" className="grid gap-7 lg:grid-cols-[0.6fr_1.4fr] lg:gap-12">
@@ -127,7 +127,7 @@ export default function Home() {
                 </section>
 
                 <section aria-labelledby="process-title" className="overflow-hidden bg-white dark:bg-slate-900 lg:grid lg:grid-cols-[0.82fr_1.18fr]">
-                    <div className="bg-[#2d2e83] p-7 text-white sm:p-9 lg:p-12">
+                    <div className="bg-[#2d2e83] p-5 text-white sm:p-9 lg:p-12">
                         <h2 id="process-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">
                             Diagnóstico primero. Reparación después.
                         </h2>
@@ -143,7 +143,7 @@ export default function Home() {
                             </BranchWhatsAppButton>
                         </div>
                     </div>
-                    <ol className="divide-y divide-slate-200 p-7 sm:p-9 lg:p-12 dark:divide-slate-700">
+                    <ol className="divide-y divide-slate-200 p-5 sm:p-9 lg:p-12 dark:divide-slate-700">
                         {process.map((step, index) => (
                             <li key={step.title} className="grid gap-3 py-6 first:pt-0 last:pb-0 sm:grid-cols-[3rem_1fr]">
                                 <span className="text-2xl font-extrabold text-[#2d2e83] dark:text-[#aebaff]">0{index + 1}</span>
@@ -208,7 +208,7 @@ export default function Home() {
                     </div>
                 </section>
 
-                <section aria-labelledby="zones-title" className="grid gap-6 bg-[#171820] p-7 text-white sm:p-9 lg:grid-cols-[1fr_auto] lg:items-end lg:p-12">
+                <section aria-labelledby="zones-title" className="grid gap-6 bg-[#171820] p-5 text-white sm:p-9 lg:grid-cols-[1fr_auto] lg:items-end lg:p-12">
                     <div>
                         <h2 id="zones-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">¿Buscás reparación cerca de tu zona?</h2>
                         <p className="mt-4 max-w-3xl text-pretty leading-7 text-slate-300">Atendemos consultas de Recoleta, Belgrano, Palermo, Almagro, Caballito, Balvanera y Microcentro. La mejor sucursal depende de tu recorrido y de la falla.</p>
@@ -220,7 +220,7 @@ export default function Home() {
 
                 <KnowledgeGrid />
 
-                <section aria-labelledby="final-cta-title" className="flex flex-col gap-7 border-t-4 border-[#2d2e83] bg-white p-7 sm:p-9 lg:flex-row lg:items-end lg:justify-between lg:p-12 dark:bg-slate-900">
+                <section aria-labelledby="final-cta-title" className="flex flex-col gap-7 border-t-4 border-[#2d2e83] bg-white p-5 sm:p-9 lg:flex-row lg:items-end lg:justify-between lg:p-12 dark:bg-slate-900">
                     <div>
                         <h2 id="final-cta-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">Contanos qué le pasa. Te decimos cómo seguir.</h2>
                         <p className="mt-4 max-w-2xl leading-7 text-slate-600 dark:text-slate-300">Incluí marca, modelo y falla. Si podés, sumá una foto. Respondemos {BUSINESS_PROFILE.responseWindow}.</p>

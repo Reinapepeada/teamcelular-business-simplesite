@@ -112,6 +112,7 @@ export default function RepairsForm() {
     const repairTypeLabel = repairTypes.join(", ");
 
     const stepRef = useRef(stepIndex);
+    const wizardRef = useRef<HTMLDivElement>(null);
     const startedRef = useRef(false);
     const submittedRef = useRef(false);
 
@@ -143,6 +144,11 @@ export default function RepairsForm() {
     }, []);
 
     useEffect(() => {
+        // stepRef sigue el paso anterior: si cambio, el usuario apreto Continuar/Atras
+        // y hay que devolverlo al inicio del formulario.
+        if (stepRef.current !== stepIndex) {
+            wizardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
         stepRef.current = stepIndex;
         track(
             BUDGET_FUNNEL_EVENTS.stepViewed,
@@ -578,13 +584,13 @@ export default function RepairsForm() {
     }
 
     return (
-        <div className="space-y-6">
+        <div ref={wizardRef} className="scroll-mt-24 space-y-5 sm:space-y-6">
             <p className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-700 dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-300">
                 Te toma menos de 1 minuto. Te respondemos por WhatsApp en hasta 2 horas habiles.
                 Si hace falta revision tecnica, confirmamos diagnostico inicial dentro de 24 horas habiles.
             </p>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900/70">
+            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5 dark:border-slate-700 dark:bg-slate-900/70">
                 <div className="mb-3 flex items-center justify-between text-xs font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
                     <span>
                         Paso {stepIndex + 1} de {BUDGET_WIZARD_STEPS.length}
@@ -597,7 +603,10 @@ export default function RepairsForm() {
                         style={{ width: `${progressPercentage}%` }}
                     />
                 </div>
-                <ol className="mt-4 grid gap-2 sm:grid-cols-4">
+                <p className="mt-3 text-base font-bold text-slate-900 sm:hidden dark:text-slate-100">
+                    {BUDGET_WIZARD_STEPS[stepIndex]?.label}
+                </p>
+                <ol className="mt-4 hidden gap-2 sm:grid sm:grid-cols-4">
                     {BUDGET_WIZARD_STEPS.map((step, index) => {
                         const active = index === stepIndex;
                         const done = index < stepIndex;
@@ -620,7 +629,7 @@ export default function RepairsForm() {
                 </ol>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900/70">
+            <div className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 dark:border-slate-700 dark:bg-slate-900/70">
                 {renderStepContent()}
             </div>
 
@@ -657,7 +666,7 @@ export default function RepairsForm() {
                     <button
                         type="button"
                         onClick={handleBack}
-                        className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-slate-600 dark:text-slate-200"
+                        className="order-2 inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-slate-300 px-5 py-3 sm:order-none text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-slate-600 dark:text-slate-200"
                     >
                         <FaArrowLeft aria-hidden />
                         Paso anterior
@@ -668,7 +677,7 @@ export default function RepairsForm() {
                     <button
                         type="button"
                         onClick={handleNext}
-                        className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition hover:bg-primary/90"
+                        className="order-1 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/20 sm:order-none transition hover:bg-primary/90"
                     >
                         Continuar
                         <FaArrowRight aria-hidden />
@@ -678,7 +687,7 @@ export default function RepairsForm() {
                         type="button"
                         onClick={() => void handleFinalSend()}
                         disabled={isSubmitting}
-                        className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/20 transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:opacity-70"
+                        className="order-1 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 py-3 sm:order-none text-sm font-semibold text-white shadow-lg shadow-emerald-900/20 transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:opacity-70"
                     >
                         <FaWhatsapp aria-hidden />
                         {isSubmitting
@@ -689,7 +698,7 @@ export default function RepairsForm() {
                     </button>
                 )}
 
-                <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">
+                <p className="order-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
                     Enviamos todo una sola vez y luego abrimos WhatsApp automáticamente.
                 </p>
             </div>

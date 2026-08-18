@@ -186,7 +186,7 @@ const faqs = [
 export default function PresupuestoReparacionPage() {
     return (
         <section className="w-full">
-            <div className="mx-auto flex w-full max-w-[100rem] flex-col gap-12 px-4 py-12 sm:px-6 lg:px-8">
+            <div className="mx-auto flex w-full max-w-[100rem] flex-col gap-8 px-4 sm:gap-12 py-8 sm:px-6 sm:py-12 lg:px-8">
                 <BreadcrumbJsonLd
                     items={[
                         { name: "Inicio", url: `${SITE_URL}/` },
@@ -204,7 +204,7 @@ export default function PresupuestoReparacionPage() {
                     </span>
                 </nav>
 
-                <header className="grid gap-10 rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-lg lg:grid-cols-[1.05fr_0.95fr] lg:p-12">
+                <header className="grid gap-10 rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-5 shadow-lg sm:p-8 lg:grid-cols-[1.05fr_0.95fr] lg:p-12">
                     <div>
                         <span className="inline-flex rounded-full bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
                             Presupuesto claro y sin vueltas
@@ -266,7 +266,7 @@ export default function PresupuestoReparacionPage() {
                         </p>
                     </div>
 
-                    <aside className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-8">
+                    <aside className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-5 sm:p-8">
                         <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                             Por qué te conviene pedirlo online
                         </h2>
@@ -316,12 +316,12 @@ export default function PresupuestoReparacionPage() {
                     </aside>
                 </header>
 
-                <div className="flex flex-col gap-12">
+                <div className="flex flex-col gap-8 sm:gap-12">
                 <section
                     id="solicitar-presupuesto"
                     className="order-1 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]"
                 >
-                    <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-xl">
+                    <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-5 shadow-xl sm:p-8">
                         <div className="mb-6">
                             <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
                                 Contanos la falla de tu equipo
@@ -340,7 +340,7 @@ export default function PresupuestoReparacionPage() {
                     </article>
 
                     <aside className="space-y-6">
-                        <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-md">
+                        <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-5 shadow-md sm:p-6">
                             <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">
                                 ¿Necesitás ayuda urgente?
                             </h2>
@@ -387,7 +387,7 @@ export default function PresupuestoReparacionPage() {
                             </div>
                         </article>
 
-                        <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-md">
+                        <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-5 shadow-md sm:p-6">
                             <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">
                                 Lo que te prometemos
                             </h2>
@@ -431,7 +431,7 @@ export default function PresupuestoReparacionPage() {
                             return (
                                 <article
                                     key={step.title}
-                                    className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-md"
+                                    className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-5 shadow-md sm:p-6"
                                 >
                                     <div className="flex items-center justify-between">
                                         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -453,7 +453,7 @@ export default function PresupuestoReparacionPage() {
                     </div>
                 </section>
 
-                <section className="order-3 rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md">
+                <section className="order-3 rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-5 shadow-md sm:p-8">
                     <h2 className="text-center text-2xl font-bold text-slate-900 dark:text-slate-100">
                         Respuestas rápidas
                     </h2>
@@ -491,7 +491,7 @@ export default function PresupuestoReparacionPage() {
                             return (
                                 <article
                                     key={repair.title}
-                                    className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-md"
+                                    className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-5 shadow-md sm:p-6"
                                 >
                                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
                                         <Icon className="text-xl" />
@@ -508,7 +508,7 @@ export default function PresupuestoReparacionPage() {
                     </div>
                 </section>
 
-                <section className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md">
+                <section className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-5 shadow-md sm:p-8">
                     <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-slate-100">
                         Preguntas frecuentes
                     </h2>

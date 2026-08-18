@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import Image from "next/image";
 import { BsFillLightningChargeFill, BsWhatsapp } from "react-icons/bs";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
@@ -14,7 +14,13 @@ const eyebrow =
     "inline-flex rounded-full border border-white/25 bg-black/35 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/80 backdrop-blur-sm";
 
 const heading =
-    "max-w-[92%] text-xl font-semibold leading-snug text-white [text-shadow:0_6px_20px_rgba(0,0,0,0.7)] sm:text-2xl";
+    "max-w-[92%] text-lg font-semibold sm:text-xl leading-snug text-white [text-shadow:0_6px_20px_rgba(0,0,0,0.7)] sm:text-2xl";
+
+const cardLink =
+    "absolute inset-0 z-20 flex items-end p-5 text-sm font-semibold text-white/95 sm:p-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white/70";
+
+const cardLinkLabel =
+    "inline-flex items-center gap-1.5 underline-offset-4 group-hover:underline";
 
 const mediaBase =
     "absolute inset-0 z-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]";
@@ -24,10 +30,10 @@ const overlayBase =
 
 export default function BannerCards() {
     return (
-        <section className="mx-auto grid w-full max-w-[100rem] grid-cols-12 gap-6">
+        <section className="mx-auto grid w-full max-w-[100rem] grid-cols-12 gap-4 sm:gap-6">
             <h2 className="sr-only">Servicios y diferenciales de Team Celular</h2>
 
-            <article className={`${cardBase} h-[300px] md:col-span-4 lg:h-[320px]`}>
+            <article className={`${cardBase} h-[210px] sm:h-[300px] md:col-span-4 lg:h-[320px]`}>
                 <Image
                     alt="Técnico realizando un cambio de repuestos"
                     className={mediaBase}
@@ -44,9 +50,18 @@ export default function BannerCards() {
                     <p className={eyebrow}>Repuestos de calidad</p>
                     <h3 className={heading}>Cambio de módulos y componentes</h3>
                 </div>
+                <TrackedCtaLink
+                    href="/guias/reparacion-pantalla-celular"
+                    ctaName="home_cards_guia_modulos"
+                    ctaLocation="home_cards"
+                    ctaVariant="other"
+                    className={cardLink}
+                >
+                    <span className={cardLinkLabel}>Cómo elegimos el módulo <span aria-hidden>→</span></span>
+                </TrackedCtaLink>
             </article>
 
-            <article className={`${cardBase} h-[300px] md:col-span-4 lg:h-[320px]`}>
+            <article className={`${cardBase} h-[210px] sm:h-[300px] md:col-span-4 lg:h-[320px]`}>
                 <Image
                     alt="Diferentes dispositivos listos para reparación"
                     className={mediaBase}
@@ -63,9 +78,18 @@ export default function BannerCards() {
                     <p className={eyebrow}>Celulares · tablets · notebooks</p>
                     <h3 className={heading}>Reparación para distintos dispositivos</h3>
                 </div>
+                <TrackedCtaLink
+                    href="/reparaciones"
+                    ctaName="home_cards_reparaciones"
+                    ctaLocation="home_cards"
+                    ctaVariant="other"
+                    className={cardLink}
+                >
+                    <span className={cardLinkLabel}>Ver todas las reparaciones <span aria-hidden>→</span></span>
+                </TrackedCtaLink>
             </article>
 
-            <article className={`${cardBase} h-[300px] md:col-span-4 lg:h-[320px]`}>
+            <article className={`${cardBase} h-[210px] sm:h-[300px] md:col-span-4 lg:h-[320px]`}>
                 <Image
                     alt="Laboratorio de microelectrónica con equipamiento profesional"
                     className={mediaBase}
@@ -84,9 +108,18 @@ export default function BannerCards() {
                         Diagnóstico fino con microscopio
                     </h3>
                 </div>
+                <TrackedCtaLink
+                    href="/guias/microelectronica-reballing-caba"
+                    ctaName="home_cards_guia_microelectronica"
+                    ctaLocation="home_cards"
+                    ctaVariant="other"
+                    className={cardLink}
+                >
+                    <span className={cardLinkLabel}>Cuándo conviene microelectrónica <span aria-hidden>→</span></span>
+                </TrackedCtaLink>
             </article>
 
-            <article className={`${cardBase} h-[320px] md:col-span-5 lg:h-[340px]`}>
+            <article className={`${cardBase} h-[280px] sm:h-[320px] md:col-span-5 lg:h-[340px]`}>
                 <Image
                     alt="Asesoramiento personalizado del equipo"
                     className={mediaBase}
@@ -121,7 +154,7 @@ export default function BannerCards() {
                 </div>
             </article>
 
-            <article className={`${cardBase} h-[320px] md:col-span-7 lg:h-[340px]`}>
+            <article className={`${cardBase} h-[280px] sm:h-[320px] md:col-span-7 lg:h-[340px]`}>
                 <Image
                     alt="Técnico trabajando en microelectrónica"
                     className={mediaBase}

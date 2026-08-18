@@ -13,13 +13,13 @@ export default function BannerHome() {
     return (
         <section className="relative overflow-hidden rounded-[16px_16px_16px_6px] border border-[#2d2e83]/35 bg-[#171820] text-white">
             <div className="grid lg:min-h-[37rem] lg:grid-cols-[minmax(0,1.08fr)_minmax(26rem,0.92fr)]">
-                <div className="relative z-10 flex flex-col px-6 py-8 sm:px-9 lg:px-10 lg:py-10">
+                <div className="relative z-10 flex flex-col px-5 py-7 sm:px-9 sm:py-8 lg:px-10 lg:py-10">
                     <div className="flex items-center gap-3 text-sm text-white/75">
                         <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" aria-hidden />
                         <span>Recoleta y Belgrano · Lun–Vie, 10:30–18:00</span>
                     </div>
 
-                    <div className="my-9 max-w-[42rem] lg:my-10">
+                    <div className="my-7 max-w-[42rem] sm:my-9 lg:my-10">
                         <h1 className="text-balance text-[clamp(2.65rem,4vw,4rem)] font-extrabold leading-none tracking-[-0.03em]">
                             Reparación de celulares en CABA. Vos sabés qué le hicimos.
                         </h1>
@@ -60,7 +60,7 @@ export default function BannerHome() {
                     </ul>
                 </div>
 
-                <div className="relative min-h-[24rem] overflow-hidden lg:min-h-full">
+                <div className="relative min-h-[15rem] overflow-hidden sm:min-h-[20rem] lg:min-h-full">
                     <Image
                         src="/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp"
                         alt="Técnico de Team Celular trabajando sobre un smartphone"
