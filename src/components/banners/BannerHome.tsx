@@ -13,17 +13,17 @@ export default function BannerHome() {
     return (
         <section className="relative overflow-hidden rounded-[16px_16px_16px_6px] border border-[#2d2e83]/35 bg-[#171820] text-white">
             <div className="grid lg:min-h-[37rem] lg:grid-cols-[minmax(0,1.08fr)_minmax(26rem,0.92fr)]">
-                <div className="relative z-10 flex flex-col px-5 py-7 sm:px-9 sm:py-8 lg:px-10 lg:py-10">
+                <div className="relative z-10 flex flex-col px-5 py-6 sm:px-9 sm:py-8 lg:px-10 lg:py-10">
                     <div className="flex items-center gap-3 text-sm text-white/75">
                         <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" aria-hidden />
                         <span>Recoleta y Belgrano · Lun–Vie, 10:30–18:00</span>
                     </div>
 
-                    <div className="my-7 max-w-[42rem] sm:my-9 lg:my-10">
-                        <h1 className="text-balance text-[clamp(2.65rem,4vw,4rem)] font-extrabold leading-none tracking-[-0.03em]">
+                    <div className="my-5 max-w-[42rem] sm:my-9 lg:my-10">
+                        <h1 className="text-balance text-[clamp(1.85rem,7vw,4rem)] font-extrabold leading-none tracking-[-0.03em]">
                             Reparación de celulares en CABA. Vos sabés qué le hicimos.
                         </h1>
-                        <p className="mt-5 max-w-[38rem] text-pretty text-base leading-7 text-slate-200">
+                        <p className="mt-4 max-w-[38rem] text-pretty text-[15px] leading-6 text-slate-200 sm:mt-5 sm:text-base sm:leading-7">
                             Team Celular repara en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032), con diagnóstico previo, orden técnica y garantía escrita de 90 días. Contanos la falla y te orientamos antes de que vengas.
                         </p>
 
@@ -50,7 +50,7 @@ export default function BannerHome() {
                         </div>
                     </div>
 
-                    <ul className="mt-auto grid gap-3 border-t border-white/15 pt-5 text-sm text-white/80 sm:grid-cols-3">
+                    <ul className="mt-auto grid gap-2 border-t border-white/15 pt-4 text-sm text-white/80 sm:grid-cols-3 sm:gap-3 sm:pt-5">
                         {intakeProofs.map((item) => (
                             <li key={item} className="flex items-start gap-2.5">
                                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#8ba7ff]" aria-hidden />
@@ -60,7 +60,7 @@ export default function BannerHome() {
                     </ul>
                 </div>
 
-                <div className="relative min-h-[15rem] overflow-hidden sm:min-h-[20rem] lg:min-h-full">
+                <div className="relative min-h-[11rem] overflow-hidden sm:min-h-[20rem] lg:min-h-full">
                     <Image
                         src="/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp"
                         alt="Técnico de Team Celular trabajando sobre un smartphone"

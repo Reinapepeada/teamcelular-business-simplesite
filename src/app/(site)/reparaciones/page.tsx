@@ -3,7 +3,6 @@ import Link from "next/link";
 import { FaShieldAlt, FaStopwatch, FaTools } from "react-icons/fa";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
-import StickyLocalCta from "@/components/cro/StickyLocalCta";
 import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 
@@ -235,7 +234,7 @@ export default function ReparacionesPage() {
               </p>
               <Link
                 href={item.href}
-                className="mt-4 inline-flex text-sm font-semibold text-primary underline-offset-4 hover:underline"
+                className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-primary underline-offset-4 hover:underline"
               >
                 {item.cta}
               </Link>
@@ -288,13 +287,6 @@ export default function ReparacionesPage() {
           </TrackedCtaLink>
         </div>
       </section>
-
-      <StickyLocalCta
-        whatsappUrl={whatsappUrl}
-        budgetHref="/presupuesto-reparacion#solicitar-presupuesto"
-        phoneHref="tel:+541151034595"
-        primaryLabel="Cotizar"
-      />
 
       <script
         type="application/ld+json"

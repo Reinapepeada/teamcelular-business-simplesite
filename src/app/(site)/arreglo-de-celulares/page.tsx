@@ -255,7 +255,7 @@ export default function ArregloDeCelularesPage() {
             ctaName="arreglo_route_reparaciones"
             ctaLocation="arreglo_complex_case"
             ctaVariant="secondary"
-            className="rounded-full border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
+            className="rounded-full border border-slate-300 min-h-11 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
           >
             Ver servicios por falla
           </TrackedCtaLink>
@@ -264,7 +264,7 @@ export default function ArregloDeCelularesPage() {
             ctaName="arreglo_complex_case_tecnico"
             ctaLocation="arreglo_complex_case"
             ctaVariant="secondary"
-            className="rounded-full border border-primary/40 px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary/10"
+            className="rounded-full border border-primary/40 min-h-11 px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary/10"
           >
             Ver técnico especialista
           </TrackedCtaLink>
@@ -273,7 +273,7 @@ export default function ArregloDeCelularesPage() {
             ctaName="arreglo_complex_case_board"
             ctaLocation="arreglo_complex_case"
             ctaVariant="secondary"
-            className="rounded-full border border-primary/40 px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary/10"
+            className="rounded-full border border-primary/40 min-h-11 px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary/10"
           >
             Reparación de placa en CABA
           </TrackedCtaLink>

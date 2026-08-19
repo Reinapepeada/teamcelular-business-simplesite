@@ -62,7 +62,7 @@ const ARTICLES: KnowledgeItem[] = [
 
 export default function KnowledgeGrid() {
   return (
-    <section className="grid w-full gap-8 border-y border-slate-300 py-10 lg:grid-cols-[0.65fr_1.35fr] lg:gap-12 dark:border-slate-700">
+    <section className="grid w-full gap-5 border-y border-slate-300 py-7 sm:gap-8 sm:py-10 lg:grid-cols-[0.65fr_1.35fr] lg:gap-12 dark:border-slate-700">
       <header>
         <h2 className="text-balance text-3xl font-extrabold tracking-[-0.025em] text-slate-950 md:text-4xl dark:text-white">
           Guías escritas desde el laboratorio
@@ -82,20 +82,20 @@ export default function KnowledgeGrid() {
         {ARTICLES.map((article) => (
           <article
             key={article.href}
-            className="group grid gap-3 py-5 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-6"
+            className="group grid grid-cols-[1fr_auto] items-center gap-3 py-4 sm:gap-6 sm:py-5"
           >
             <div>
               <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                 <h3 className="text-lg font-bold leading-snug text-slate-950 dark:text-white">{article.title}</h3>
                 <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">{article.readingTime}</span>
               </div>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-300">{article.summary}</p>
+              <p className="mt-2 hidden max-w-2xl text-sm leading-6 text-slate-600 sm:block dark:text-slate-300">{article.summary}</p>
             </div>
             <Link
               href={article.href}
               prefetch={false}
               aria-label={`Leer ${article.title}`}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#2d2e83] text-white transition group-hover:translate-x-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2d2e83]"
+              className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#2d2e83] text-white transition group-hover:translate-x-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2d2e83]"
             >
               <span aria-hidden>→</span>
             </Link>

@@ -1,4 +1,8 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { BsWhatsapp } from "react-icons/bs";
 import {
@@ -64,6 +68,15 @@ export default function GuidesLayout({
 }: {
   readonly children: ReactNode;
 }) {
+  const pathname = usePathname();
+  const activeChipRef = useRef<HTMLAnchorElement | null>(null);
+
+  // ponytail: la tira de chips scrollea en mobile; sin esto el chip activo
+  // puede quedar fuera de vista y el usuario no ve donde esta parado.
+  useEffect(() => {
+    activeChipRef.current?.scrollIntoView({ block: "nearest", inline: "center" });
+  }, [pathname]);
+
   return (
     <div className="relative isolate w-full overflow-hidden">
       <div
@@ -80,28 +93,39 @@ export default function GuidesLayout({
       />
 
       <section className="relative z-10 border-b border-slate-200/80 bg-white/75 backdrop-blur-md dark:border-slate-800/70 dark:bg-slate-950/45">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-4 md:flex-row md:items-center md:justify-between">
-          <div className="space-y-1">
-            <p className="inline-flex items-center gap-2 rounded-full border border-primary/70 bg-primary px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm">
-              <FaBookOpen className="text-[10px]" />
-              Guias Team Celular
-            </p>
-            <p className="text-sm text-slate-700 dark:text-slate-300">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-4 py-3 md:flex-row md:items-center md:justify-between md:gap-4 md:py-4">
+          <div className="space-y-1 min-w-0">
+            <Link
+              href="/guias"
+              className="inline-flex min-h-11 max-w-full items-center gap-2 rounded-full border border-primary/70 bg-primary px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-white shadow-sm transition hover:bg-primary/90 sm:text-[11px] sm:tracking-[0.18em]"
+            >
+              <FaBookOpen className="shrink-0 text-[10px]" />
+              <span className="truncate">Guias Team Celular</span>
+            </Link>
+            <p className="hidden text-xs text-slate-700 md:block md:text-sm dark:text-slate-300">
               Guias por marca y por falla con procesos reales, tiempos y garantia.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="-mx-4 flex items-center gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:flex-wrap md:overflow-visible md:px-0 md:pb-0">
             {quickGuideLinks.map((item) => {
               const Icon = item.Icon;
+              const isActive = pathname === item.href;
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="inline-flex min-h-10 items-center gap-2 rounded-full border border-slate-300/80 bg-white/80 px-4 text-sm font-medium text-slate-700 transition hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200 dark:hover:border-primary/50 dark:hover:text-primary"
+                  ref={isActive ? activeChipRef : undefined}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full border px-3.5 text-[13px] font-medium transition md:px-4 md:text-sm ${
+                    isActive
+                      ? "cursor-default border-primary bg-primary text-white shadow-sm"
+                      : "border-slate-300/80 bg-white/80 text-slate-700 hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200 dark:hover:border-primary/50 dark:hover:text-primary"
+                  }`}
                 >
                   <Icon className="text-[13px]" />
                   {item.label}
+                  {isActive ? <span className="sr-only"> (estas aca)</span> : null}
                 </Link>
               );
             })}
@@ -109,7 +133,7 @@ export default function GuidesLayout({
               href="https://wa.me/5491151034595?text=Hola%20Team%20Celular%2C%20quiero%20ayuda%20con%20una%20reparacion"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-10 items-center gap-2 rounded-full bg-emerald-700 px-4 text-sm font-semibold text-white shadow-lg shadow-emerald-900/30 transition hover:bg-emerald-800"
+              className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full bg-emerald-700 px-3.5 text-[13px] md:px-4 md:text-sm font-semibold text-white shadow-lg shadow-emerald-900/30 transition hover:bg-emerald-800"
             >
               <BsWhatsapp className="text-base" />
               Hablar por WhatsApp

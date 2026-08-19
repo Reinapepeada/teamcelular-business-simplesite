@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { FaMapMarkedAlt, FaPhoneAlt, FaRegClock } from "react-icons/fa";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
-import StickyLocalCta from "@/components/cro/StickyLocalCta";
 import { getBranch, whatsappUrl as buildWhatsappUrl } from "@/lib/businessProfile";
 import BranchMap from "@/components/cards/BranchMap";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
@@ -244,13 +243,6 @@ export default function SucursalesPage() {
         {/* @ts-expect-error Async Server Component */}
         <GoogleReviewsAPI />
       </section>
-
-      <StickyLocalCta
-        whatsappUrl={whatsappUrl}
-        budgetHref="/presupuesto-reparacion#solicitar-presupuesto"
-        phoneHref="tel:+541151034595"
-        primaryLabel="Reservar"
-      />
 
       <script
         type="application/ld+json"

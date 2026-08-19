@@ -92,7 +92,7 @@ export default function HighIntentGuidePage({
   const guideKey = pagePath.replace("/guias/", "").replaceAll("-", "_");
   return (
     <div className="flex w-full justify-center bg-[#f7f8fc] px-4 py-8 dark:bg-slate-950 sm:px-6 lg:px-8">
-      <div className="w-full max-w-[100rem] space-y-16">
+      <div className="w-full max-w-[100rem] space-y-10 md:space-y-16">
         <ArticleSchema
           title={title}
           description={heroDescription}
@@ -111,7 +111,7 @@ export default function HighIntentGuidePage({
           ]}
         />
 
-        <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+        <nav className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-600 md:text-sm dark:text-slate-400">
           <Link href="/" className="transition hover:text-primary">
             Inicio
           </Link>
@@ -125,33 +125,33 @@ export default function HighIntentGuidePage({
           </span>
         </nav>
 
-        <header className="overflow-hidden bg-[#171820] p-7 text-white sm:p-10 lg:p-12">
-          <div className="grid items-center gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+        <header className="overflow-hidden bg-[#171820] p-5 text-white sm:p-10 lg:p-12">
+          <div className="grid items-center gap-6 md:gap-8 lg:grid-cols-[1.15fr_0.85fr]">
             <div>
               <div className="flex flex-wrap items-center gap-3">
-                <span className="liquid-glass relative rounded-xl px-4 py-2 text-xs font-semibold text-white">
+                <span className="liquid-glass relative rounded-xl px-3 py-1.5 text-[11px] font-semibold text-white md:px-4 md:py-2 md:text-xs">
                   {badge}
                 </span>
-                <span className="rounded-xl border border-white/25 px-4 py-2 text-xs font-semibold text-white/75">
+                <span className="rounded-xl border border-white/25 px-3 py-1.5 text-[11px] font-semibold text-white/75 md:px-4 md:py-2 md:text-xs">
                   Lectura {readingTime}
                 </span>
               </div>
 
-              <h1 className="mt-7 max-w-4xl text-balance text-4xl font-extrabold tracking-[-0.03em] text-white md:text-5xl lg:text-6xl">
+              <h1 className="mt-5 max-w-4xl text-balance text-[28px] font-extrabold leading-tight tracking-[-0.03em] text-white sm:text-4xl md:mt-7 md:text-5xl lg:text-6xl">
                 {title}
               </h1>
 
-              <p className="mt-5 max-w-3xl text-pretty text-lg leading-8 text-slate-300">
+              <p className="mt-4 max-w-3xl text-pretty text-[15px] leading-7 text-slate-300 md:mt-5 md:text-lg md:leading-8">
                 {heroDescription}
               </p>
 
-              <div className="mt-6 flex flex-wrap gap-3">
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <TrackedCtaLink
                   href="/presupuesto-reparacion#solicitar-presupuesto"
                   ctaName={`guide_high_intent_budget_${guideKey}`}
                   ctaLocation="guide_high_intent_hero"
                   ctaVariant="primary"
-                  className="inline-flex min-h-12 items-center justify-center rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#20216b] transition hover:bg-slate-100"
+                  className="inline-flex min-h-12 w-full sm:w-auto items-center justify-center rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#20216b] transition hover:bg-slate-100"
                 >
                   Pedir diagnostico y presupuesto
                 </TrackedCtaLink>
@@ -162,7 +162,7 @@ export default function HighIntentGuidePage({
                   ctaVariant="whatsapp"
                   external
                   target="_blank"
-                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/35 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10"
+                  className="inline-flex min-h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-lg border border-white/35 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10"
                 >
                   <FaWhatsapp aria-hidden />
                   Hablar por WhatsApp
@@ -190,7 +190,7 @@ export default function HighIntentGuidePage({
             </aside>
           </div>
 
-          <ul className="mt-8 grid border-t border-white/15 pt-6 md:grid-cols-3 md:divide-x md:divide-white/15">
+          <ul className="mt-6 grid border-t border-white/15 pt-5 md:mt-8 md:pt-6 md:grid-cols-3 md:divide-x md:divide-white/15">
             {heroPoints.map((point) => (
               <li
                 key={point}
@@ -307,7 +307,7 @@ export default function HighIntentGuidePage({
                 key={item.question}
                 className="group rounded-2xl border border-slate-200/80 bg-white p-5 dark:border-white/10 dark:bg-slate-900/85"
               >
-                <summary className="cursor-pointer list-none text-base font-semibold text-slate-900 transition group-open:text-primary dark:text-slate-100">
+                <summary className="flex min-h-11 items-center cursor-pointer list-none text-base font-semibold text-slate-900 transition group-open:text-primary dark:text-slate-100">
                   {item.question}
                 </summary>
                 <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
@@ -330,7 +330,7 @@ export default function HighIntentGuidePage({
                 ctaName={`guide_high_intent_related_${guideKey}_${index + 1}`}
                 ctaLocation="guide_high_intent_related"
                 ctaVariant="secondary"
-                className="inline-flex min-h-10 items-center rounded-full border border-slate-300/80 bg-white px-4 text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900 dark:text-slate-200"
+                className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900 dark:text-slate-200"
               >
                 {link.label}
               </TrackedCtaLink>

@@ -167,7 +167,7 @@ export default function FooterNUI() {
                   key={service.href}
                   href={service.href}
                   prefetch={false}
-                  className="flex min-h-9 items-center space-x-2 text-sm text-slate-200 transition-all duration-200 hover:translate-x-1 hover:text-white"
+                  className="flex min-h-11 items-center space-x-2 text-sm text-slate-200 transition-all duration-200 hover:translate-x-1 hover:text-white"
                 >
                   <Icon className="text-primary" />
                   <span>{service.name}</span>
@@ -183,7 +183,7 @@ export default function FooterNUI() {
                 key={guia.href}
                 href={guia.href}
                 prefetch={false}
-                className="inline-flex min-h-9 items-center text-sm text-slate-200 transition-all duration-200 hover:translate-x-1 hover:text-white"
+                className="inline-flex min-h-11 items-center text-sm text-slate-200 transition-all duration-200 hover:translate-x-1 hover:text-white"
               >
                 {guia.name}
               </Link>
@@ -198,7 +198,7 @@ export default function FooterNUI() {
                 href={recurso.href}
                 prefetch={false}
                 {...("lang" in recurso ? { lang: recurso.lang, hrefLang: recurso.lang } : {})}
-                className="inline-flex min-h-9 items-center text-sm text-slate-200 transition-all duration-200 hover:translate-x-1 hover:text-white"
+                className="inline-flex min-h-11 items-center text-sm text-slate-200 transition-all duration-200 hover:translate-x-1 hover:text-white"
               >
                 {recurso.name}
               </Link>
@@ -230,7 +230,7 @@ export default function FooterNUI() {
                   ctaLocation="footer_contact"
                   ctaVariant="phone"
                   external
-                  className="text-slate-200 transition-colors hover:text-white"
+                  className="inline-flex min-h-11 items-center text-slate-200 transition-colors hover:text-white"
                 >
                   +54 11 5103-4595
                 </TrackedCtaLink>
@@ -247,7 +247,7 @@ export default function FooterNUI() {
                   ctaLocation="footer_contact"
                   ctaVariant="email"
                   external
-                  className="break-all text-slate-200 transition-colors hover:text-white"
+                  className="inline-flex min-h-11 items-center break-all text-slate-200 transition-colors hover:text-white"
                 >
                   teamcelular.arg@gmail.com
                 </TrackedCtaLink>
@@ -272,21 +272,21 @@ export default function FooterNUI() {
               <Link
                 href="/terminos"
                 prefetch={false}
-                className="inline-flex min-h-8 items-center transition-colors hover:text-white"
+                className="inline-flex min-h-11 items-center transition-colors hover:text-white"
               >
                 Términos
               </Link>
               <Link
                 href="/devoluciones"
                 prefetch={false}
-                className="inline-flex min-h-8 items-center transition-colors hover:text-white"
+                className="inline-flex min-h-11 items-center transition-colors hover:text-white"
               >
                 Devoluciones
               </Link>
               <Link
                 href="/privacidad"
                 prefetch={false}
-                className="inline-flex min-h-8 items-center transition-colors hover:text-white"
+                className="inline-flex min-h-11 items-center transition-colors hover:text-white"
               >
                 Privacidad
               </Link>

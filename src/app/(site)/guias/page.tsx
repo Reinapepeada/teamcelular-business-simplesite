@@ -369,8 +369,8 @@ export const metadata: Metadata = {
 
 export default function GuidesPage() {
   return (
-    <div className="flex w-full justify-center bg-[#f7f8fc] px-4 py-8 text-slate-950 dark:bg-slate-950 dark:text-white sm:px-6 lg:px-8">
-      <div className="w-full max-w-[100rem] space-y-16">
+    <div className="flex w-full justify-center bg-[#f7f8fc] px-4 py-4 text-slate-950 sm:px-6 sm:py-8 lg:px-8 dark:bg-slate-950 dark:text-white">
+      <div className="w-full max-w-[100rem] space-y-6 sm:space-y-16">
         <BreadcrumbJsonLd
           items={[
             { name: "Inicio", url: `${SITE_URL}/` },
@@ -389,27 +389,27 @@ export default function GuidesPage() {
         </nav>
 
         <header className="grid overflow-hidden bg-[#171820] text-white lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-14">
+          <div className="flex flex-col justify-center p-5 sm:p-10 lg:p-14">
             <div className="flex items-center gap-3 text-sm text-white/70">
               <FaBookOpen aria-hidden />
               <span>Guías del laboratorio · Recoleta y Belgrano</span>
             </div>
-            <h1 className="mt-8 max-w-3xl text-balance text-[clamp(2.75rem,6vw,5rem)] font-extrabold leading-[0.98] tracking-[-0.035em]">
+            <h1 className="mt-4 max-w-3xl text-balance text-[clamp(1.9rem,6vw,5rem)] sm:mt-8 font-extrabold leading-[0.98] tracking-[-0.035em]">
               Entendé la falla antes de decidir la reparación.
             </h1>
-            <p className="mt-6 max-w-2xl text-pretty text-lg leading-8 text-slate-300">
+            <p className="mt-3 max-w-2xl text-pretty text-[15px] leading-6 text-slate-300 sm:mt-6 sm:text-lg sm:leading-8">
               Explicamos síntomas, diagnóstico y opciones de reparación con el mismo criterio que usamos en el laboratorio. Sin alarmismo y sin cambiar piezas por descarte.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="#guias-destacadas" className="inline-flex min-h-12 items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#20216b] transition hover:bg-slate-100">
+            <div className="mt-5 hidden flex-wrap gap-3 sm:mt-8 sm:flex">
+              <Link href="#guias-destacadas" className="hidden min-h-12 items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#20216b] transition hover:bg-slate-100 sm:inline-flex">
                 Elegir una guía <FaArrowRight aria-hidden />
               </Link>
-              <TrackedCtaLink href="/presupuesto-reparacion#solicitar-presupuesto" ctaName="guides_hero_budget" ctaLocation="guides_hero" ctaVariant="secondary" className="inline-flex min-h-12 items-center rounded-lg border border-white/35 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10">
+              <TrackedCtaLink href="/presupuesto-reparacion#solicitar-presupuesto" ctaName="guides_hero_budget" ctaLocation="guides_hero" ctaVariant="secondary" className="hidden min-h-12 items-center rounded-lg border border-white/35 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10 sm:inline-flex">
                 Consultar una falla
               </TrackedCtaLink>
             </div>
           </div>
-          <div className="relative min-h-[24rem] lg:min-h-[38rem]">
+          <div className="relative hidden min-h-[24rem] sm:block lg:min-h-[38rem]">
             <Image src="/images/guia_microelectronica.webp" alt="Diagnóstico de un celular en el laboratorio de Team Celular" fill priority sizes="(max-width: 1024px) 100vw, 55vw" className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#171820]/70 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#171820]/30 lg:via-transparent" />
             <div className="liquid-glass absolute bottom-5 left-5 right-5 rounded-2xl px-5 py-4 sm:bottom-7 sm:left-7 sm:right-7">
@@ -419,17 +419,17 @@ export default function GuidesPage() {
           </div>
         </header>
 
-        <section id="guias-destacadas" className="space-y-8 scroll-mt-28">
+        <section id="guias-destacadas" className="space-y-4 scroll-mt-28 sm:space-y-8">
           <div className="max-w-3xl">
-            <h2 className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">
+            <h2 className="text-balance text-xl font-extrabold tracking-[-0.025em] sm:text-3xl md:text-4xl">
               Buscá por marca o por síntoma
             </h2>
-            <p className="mt-4 text-pretty text-lg leading-8 text-slate-600 dark:text-slate-300">
+            <p className="mt-2 hidden text-pretty text-[15px] leading-6 text-slate-600 sm:mt-4 sm:block sm:text-lg sm:leading-8 dark:text-slate-300">
               Cada guía separa lo que podés comprobar en casa de lo que requiere diagnóstico técnico.
             </p>
           </div>
 
-          <div className="grid grid-cols-12 gap-6">
+          <div className="grid grid-cols-12 gap-0 divide-y divide-slate-200 sm:gap-6 sm:divide-y-0 dark:divide-slate-800">
             {ARTICLES.map((article, index) => {
               const Icon = article.Icon;
               const visual = articleVisuals[article.href] ?? {
@@ -446,9 +446,9 @@ export default function GuidesPage() {
               return (
                 <article
                   key={article.href}
-                  className={`group col-span-12 overflow-hidden bg-white transition hover:-translate-y-1 dark:bg-slate-900 ${index % 5 === 3 ? "md:col-span-7" : index % 5 === 4 ? "md:col-span-5" : "md:col-span-6"}`}
+                  className={`group relative col-span-12 overflow-hidden bg-white transition sm:hover:-translate-y-1 dark:bg-slate-900 ${index % 5 === 3 ? "md:col-span-7" : index % 5 === 4 ? "md:col-span-5" : "md:col-span-6"}`}
                 >
-                  <div className="relative h-56 overflow-hidden sm:h-64">
+                  <div className="relative hidden h-40 overflow-hidden sm:block sm:h-64">
                     <Image
                       src={visual.cover}
                       alt={article.title}
@@ -462,7 +462,7 @@ export default function GuidesPage() {
                     </div>
                   </div>
 
-                  <div className="p-6 sm:p-7">
+                  <div className="py-3 sm:p-7">
                     <div className="flex items-center justify-between gap-4">
                       <div className="flex items-center gap-3 text-sm font-bold text-[#2d2e83] dark:text-[#aebaff]">
                         <Icon aria-hidden />
@@ -476,15 +476,20 @@ export default function GuidesPage() {
                       </time>
                     </div>
 
-                    <h3 className="mt-5 text-2xl font-extrabold tracking-[-0.02em] text-slate-950 dark:text-white">
+  <h3 className="mt-2 text-base font-bold leading-snug tracking-[-0.02em] text-slate-950 sm:mt-5 sm:text-2xl sm:font-extrabold dark:text-white">
                       {article.title}
                     </h3>
+                    <Link
+                      href={article.href}
+                      aria-label={`Leer ${article.title}`}
+                      className="absolute inset-0 sm:hidden"
+                    />
 
-                    <p className="mt-3 max-w-2xl leading-7 text-slate-600 dark:text-slate-300">
+                    <p className="mt-2 hidden max-w-2xl text-sm leading-6 text-slate-600 sm:mt-3 sm:block sm:text-base sm:leading-7 dark:text-slate-300">
                       {article.description}
                     </p>
 
-                    <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-slate-200 pt-5 dark:border-slate-700">
+                    <div className="mt-4 hidden flex-wrap items-center gap-3 border-t border-slate-200 pt-4 sm:mt-6 sm:flex sm:pt-5 dark:border-slate-700">
                     <Link
                       href={article.href}
                       className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#2d2e83] px-5 py-2 text-sm font-bold text-white transition group-hover:gap-3 group-hover:bg-[#20216b]"
@@ -492,7 +497,7 @@ export default function GuidesPage() {
                       Leer guía
                       <FaArrowRight />
                     </Link>
-                      <Link href={links.serviceHref} className="inline-flex min-h-11 items-center text-sm font-bold text-slate-600 hover:text-[#2d2e83] dark:text-slate-300 dark:hover:text-white">{links.serviceLabel}</Link>
+                      <Link href={links.serviceHref} className="hidden min-h-11 items-center text-sm font-bold text-slate-600 hover:text-[#2d2e83] sm:inline-flex dark:text-slate-300 dark:hover:text-white">{links.serviceLabel}</Link>
                     </div>
                   </div>
                 </article>
@@ -507,13 +512,13 @@ export default function GuidesPage() {
               Si ya sabes la falla
             </h2>
             <div className="flex flex-wrap gap-2">
-              <Link href="/reparaciones/cambio-pantalla-caba" className="rounded-full border border-primary/25 bg-white px-3 py-2 text-xs font-semibold text-slate-800 transition hover:bg-primary/10 dark:bg-slate-900/70 dark:text-slate-100">
+              <Link href="/reparaciones/cambio-pantalla-caba" className="inline-flex min-h-11 items-center rounded-full border border-primary/25 bg-white px-4 py-2 text-[13px] font-semibold text-slate-800 transition hover:bg-primary/10 dark:bg-slate-900/70 dark:text-slate-100">
                 Cambio de pantalla
               </Link>
-              <Link href="/reparaciones/cambio-bateria-caba" className="rounded-full border border-primary/25 bg-white px-3 py-2 text-xs font-semibold text-slate-800 transition hover:bg-primary/10 dark:bg-slate-900/70 dark:text-slate-100">
+              <Link href="/reparaciones/cambio-bateria-caba" className="inline-flex min-h-11 items-center rounded-full border border-primary/25 bg-white px-4 py-2 text-[13px] font-semibold text-slate-800 transition hover:bg-primary/10 dark:bg-slate-900/70 dark:text-slate-100">
                 Cambio de bateria
               </Link>
-              <Link href="/reparaciones/cambio-pin-carga-caba" className="rounded-full border border-primary/25 bg-white px-3 py-2 text-xs font-semibold text-slate-800 transition hover:bg-primary/10 dark:bg-slate-900/70 dark:text-slate-100">
+              <Link href="/reparaciones/cambio-pin-carga-caba" className="inline-flex min-h-11 items-center rounded-full border border-primary/25 bg-white px-4 py-2 text-[13px] font-semibold text-slate-800 transition hover:bg-primary/10 dark:bg-slate-900/70 dark:text-slate-100">
                 Pin de carga
               </Link>
             </div>
@@ -529,7 +534,7 @@ export default function GuidesPage() {
                 ctaName="guides_cluster_budget"
                 ctaLocation="guides_cluster_links"
                 ctaVariant="primary"
-                className="rounded-full bg-primary px-3 py-2 text-xs font-semibold text-white transition hover:bg-primary/90"
+                className="inline-flex min-h-11 items-center rounded-full bg-primary px-4 py-2 text-[13px] font-semibold text-white transition hover:bg-primary/90"
               >
                 Diagnostico y presupuesto
               </TrackedCtaLink>
@@ -540,7 +545,7 @@ export default function GuidesPage() {
                 ctaVariant="whatsapp"
                 external
                 target="_blank"
-                className="rounded-full border border-emerald-700 px-3 py-2 text-xs font-semibold text-white bg-emerald-700 transition hover:bg-emerald-800"
+                className="inline-flex min-h-11 items-center rounded-full border border-emerald-700 px-4 py-2 text-[13px] font-semibold text-white bg-emerald-700 transition hover:bg-emerald-800"
               >
                 WhatsApp tecnico
               </TrackedCtaLink>
@@ -552,16 +557,16 @@ export default function GuidesPage() {
               Si buscas comparar marcas
             </h2>
             <div className="flex flex-wrap gap-2">
-              <Link href="/guias/reparacion-iphone-buenos-aires" className="rounded-full border border-slate-300/80 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
+              <Link href="/guias/reparacion-iphone-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
                 iPhone
               </Link>
-              <Link href="/guias/reparacion-samsung-buenos-aires" className="rounded-full border border-slate-300/80 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
+              <Link href="/guias/reparacion-samsung-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
                 Samsung
               </Link>
-              <Link href="/guias/reparacion-motorola-buenos-aires" className="rounded-full border border-slate-300/80 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
+              <Link href="/guias/reparacion-motorola-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
                 Motorola
               </Link>
-              <Link href="/guias/reparacion-xiaomi-buenos-aires" className="rounded-full border border-slate-300/80 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
+              <Link href="/guias/reparacion-xiaomi-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
                 Xiaomi
               </Link>
             </div>
@@ -619,7 +624,7 @@ export default function GuidesPage() {
           }}
         />
       </div>
-    </div>
-  );
+      </div>
+        );
 }
 

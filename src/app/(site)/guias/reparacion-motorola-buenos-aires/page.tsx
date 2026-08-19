@@ -732,7 +732,7 @@ export default function MotorolaRepairGuidePage() {
             {motorolaModels.map((model) => (
               <span
                 key={model}
-                className="rounded-full border border-primary/40 bg-primary/15 px-3 py-2 text-xs font-semibold text-slate-800 dark:border-primary/40 dark:bg-primary/20 dark:text-slate-100"
+                className="inline-flex min-h-11 items-center rounded-full border border-primary/40 bg-primary/15 px-4 py-2 text-[13px] font-semibold text-slate-800 dark:border-primary/40 dark:bg-primary/20 dark:text-slate-100"
               >
                 {model}
               </span>
@@ -755,7 +755,7 @@ export default function MotorolaRepairGuidePage() {
                 key={item.question}
                 className="rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-xl transition hover:shadow-lg dark:border-white/10 dark:bg-slate-900/30"
               >
-                <summary className="cursor-pointer text-lg font-bold text-slate-900 dark:text-white">
+                <summary className="flex min-h-11 items-center cursor-pointer text-lg font-bold text-slate-900 dark:text-white">
                   {item.question}
                 </summary>
                 <p className="mt-4 leading-relaxed text-slate-700 dark:text-slate-300">

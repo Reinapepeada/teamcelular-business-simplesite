@@ -372,7 +372,7 @@ export default function MicroelectronicsGuide() {
                 key={index}
                 className="group rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-xl transition hover:shadow-lg dark:border-white/10 dark:bg-slate-900/30"
               >
-                <summary className="cursor-pointer text-lg font-bold text-secondary group-hover:text-primary dark:text-secondary/90">
+                <summary className="flex min-h-11 items-center cursor-pointer text-lg font-bold text-secondary group-hover:text-primary dark:text-secondary/90">
                   {faq.question}
                 </summary>
                 <p className="mt-4 leading-relaxed text-slate-700 dark:text-slate-300">

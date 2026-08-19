@@ -79,10 +79,10 @@ export default function StoreCartSheet() {
                 onClick={() => setOpen((current) => !current)}
                 aria-expanded={open}
                 aria-controls="store-cart-sheet"
-                className="fixed bottom-5 right-5 z-40 inline-flex min-h-14 items-center gap-3 rounded-full bg-slate-950 px-5 text-sm font-semibold text-white shadow-xl transition hover:bg-slate-800"
+                className="fixed bottom-[5.5rem] right-5 z-40 inline-flex min-h-14 items-center gap-3 rounded-full bg-slate-950 px-5 text-sm font-semibold text-white shadow-xl transition hover:bg-slate-800"
             >
                 <span>Carrito</span>
-                <span className="inline-flex min-h-8 min-w-8 items-center justify-center rounded-full bg-primary px-2 text-xs font-bold">
+                <span className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full bg-primary px-2 text-xs font-bold">
                     {totalItems}
                 </span>
             </button>

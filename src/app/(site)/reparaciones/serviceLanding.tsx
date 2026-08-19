@@ -10,7 +10,6 @@ import {
   FaTools,
 } from "react-icons/fa";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
-import StickyLocalCta from "@/components/cro/StickyLocalCta";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 
@@ -606,7 +605,7 @@ export default function ServiceLandingPage({
             ctaName="service_related_guides_hub"
             ctaLocation={`service_related_guides_${config.slug}`}
             ctaVariant="secondary"
-            className="rounded-full border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
+            className="rounded-full border border-slate-300 min-h-11 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
           >
             Ver todas las guías
           </TrackedCtaLink>
@@ -615,7 +614,7 @@ export default function ServiceLandingPage({
             ctaName="service_related_guides_budget"
             ctaLocation={`service_related_guides_${config.slug}`}
             ctaVariant="primary"
-            className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
+            className="rounded-full bg-primary min-h-11 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
           >
             Pedir diagnóstico
           </TrackedCtaLink>
@@ -632,7 +631,7 @@ export default function ServiceLandingPage({
               key={faq.q}
               className="group rounded-xl border border-white/15 bg-white/70 p-4 dark:border-white/10 dark:bg-slate-900/45"
             >
-              <summary className="cursor-pointer list-none text-sm font-semibold text-slate-900 dark:text-white">
+              <summary className="flex min-h-11 items-center cursor-pointer list-none text-sm font-semibold text-slate-900 dark:text-white">
                 {faq.q}
               </summary>
               <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
@@ -672,13 +671,6 @@ export default function ServiceLandingPage({
           </TrackedCtaLink>
         </div>
       </section>
-
-      <StickyLocalCta
-        whatsappUrl={whatsappUrl}
-        budgetHref="/presupuesto-reparacion#solicitar-presupuesto"
-        phoneHref="tel:+541151034595"
-        primaryLabel="Presupuesto"
-      />
 
       <script
         type="application/ld+json"

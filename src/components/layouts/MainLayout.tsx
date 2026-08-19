@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import NavbarNUI from "@/components/navbars/NavbarNUI";
 import FooterNUI from "@/components/footer/FooterNUI";
+import StickyLocalCta from "@/components/cro/StickyLocalCta";
 
 export const metadata: Metadata = {
     title: {
@@ -49,6 +50,7 @@ export default function MainLayout({
                 {children}
             </main>
             <FooterNUI />
+            <StickyLocalCta whatsappUrl="https://wa.me/5491151034595?text=Hola%21%20Quiero%20pedir%20un%20presupuesto%20de%20reparacion%20en%20CABA." primaryLabel="Presupuesto" />
         </>
     );
 }

@@ -400,7 +400,7 @@ export default function LabPage() {
               key={f.q}
               className="group rounded-xl border border-white/15 bg-white/70 p-4 dark:border-white/10 dark:bg-slate-900/45"
             >
-              <summary className="cursor-pointer list-none text-sm font-semibold text-slate-900 dark:text-white">
+              <summary className="flex min-h-11 items-center cursor-pointer list-none text-sm font-semibold text-slate-900 dark:text-white">
                 {f.q}
               </summary>
               <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">

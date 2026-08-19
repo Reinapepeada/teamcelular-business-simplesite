@@ -172,13 +172,13 @@ function ProductCard({ product }: { product: Product }) {
                         <Link
                             href={`/tienda/categoria/${slugify(product.category.name)}`}
                             prefetch={false}
-                            className="inline-flex min-h-8 items-center rounded-full border border-slate-200 dark:border-slate-700/70 px-3 text-xs font-medium text-slate-600 dark:text-slate-400 transition hover:border-primary hover:text-primary"
+                            className="inline-flex min-h-11 items-center rounded-full border border-slate-200 dark:border-slate-700/70 px-3 text-xs font-medium text-slate-600 dark:text-slate-400 transition hover:border-primary hover:text-primary"
                         >
                             {product.category.name}
                         </Link>
                     ) : null}
                     {product.brand?.name ? (
-                        <span className="inline-flex min-h-8 items-center rounded-full border border-amber-200 bg-amber-50 px-3 text-xs font-medium text-amber-700">
+                        <span className="inline-flex min-h-11 items-center rounded-full border border-amber-200 bg-amber-50 px-3 text-xs font-medium text-amber-700">
                             {product.brand.name}
                         </span>
                     ) : null}
@@ -222,7 +222,7 @@ function ProductCard({ product }: { product: Product }) {
 
 export function CatalogResultsFallback() {
     return (
-        <section className="rounded-[2rem] border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-sm">
+        <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6 dark:border-slate-700/70 dark:bg-slate-900">
             <div className="flex items-center justify-between gap-3">
                 <div className="space-y-2">
                     <div className="h-4 w-24 animate-pulse rounded-full bg-slate-200" />
@@ -267,21 +267,21 @@ export default async function CatalogResults({
     const total = data.total || products.length;
 
     return (
-        <section className="rounded-[2rem] border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-sm">
-            <div className="flex flex-col gap-3 border-b border-slate-100 dark:border-slate-800 pb-5 sm:flex-row sm:items-end sm:justify-between">
+        <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6 dark:border-slate-700/70 dark:bg-slate-900">
+            <div className="flex flex-col gap-2 border-b border-slate-100 pb-3 sm:flex-row sm:items-end sm:justify-between sm:gap-3 sm:pb-5 dark:border-slate-800">
                 <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+                    <p className="hidden text-sm font-semibold uppercase tracking-[0.18em] text-primary sm:block">
                         Catalogo
                     </p>
-                    <h2 className="mt-2 text-2xl font-semibold text-slate-950 dark:text-slate-50">
+                    <h2 className="text-xl font-semibold text-slate-950 sm:mt-2 sm:text-2xl dark:text-slate-50">
                         {title}
                     </h2>
-                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                    <p className="mt-1 text-sm text-slate-600 sm:mt-2 dark:text-slate-400">
                         {total} resultado{total === 1 ? "" : "s"}
                         {currentPage > 1 ? ` en la pagina ${currentPage}` : ""}.
                     </p>
                 </div>
-                <p className="text-sm text-slate-500 dark:text-slate-400">
+                <p className="hidden text-sm text-slate-500 sm:block dark:text-slate-400">
                     {forcedCategoryName
                         ? `Categoria: ${forcedCategoryName}`
                         : "Entrega y retiro en CABA."}

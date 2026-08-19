@@ -230,6 +230,6 @@ export default function Home() {
                     </TrackedCtaLink>
                 </section>
             </div>
-        </div>
+            </div>
     );
 }

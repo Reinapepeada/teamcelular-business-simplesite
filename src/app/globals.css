@@ -70,3 +70,60 @@ body:has(dialog[open]) .liquid-glass {
 	-webkit-backdrop-filter: none !important;
 	backdrop-filter: none !important;
 }
+
+/* ponytail: tope global de tipografia en mobile. Muchas paginas usan
+   text-4xl/5xl/6xl sin variante responsive y el H1 se comia la pantalla en
+   375px. Un cap por media query evita tocar ~30 archivos; si una pagina
+   necesita algo mas grande en mobile, que declare su propio tamano con !. */
+@media (max-width: 639.98px) {
+	.text-4xl { font-size: 1.75rem; line-height: 1.2; }
+	.text-5xl { font-size: 2rem; line-height: 1.15; }
+	.text-6xl { font-size: 2.25rem; line-height: 1.1; }
+	.text-7xl { font-size: 2.5rem; line-height: 1.1; }
+	.text-8xl { font-size: 2.75rem; line-height: 1.05; }
+	.text-9xl { font-size: 3rem; line-height: 1.05; }
+}
+
+/* ponytail: la barra CTA mobile es fixed y el footer vive en el layout, fuera
+   del componente, asi que un spacer local no alcanza. :has le reserva el alto
+   solo en las paginas que realmente montan la barra. */
+@media (max-width: 767.98px) {
+	body:has(.tc-sticky-cta) footer {
+		padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+	}
+}
+
+/* ponytail: los filtros de tienda son un <details> para no empujar los
+   productos fuera de pantalla en mobile. En desktop hay lugar de sobra:
+   se muestran siempre, este abierto o no. */
+@media (min-width: 1024px) {
+	.tc-filters > summary { display: none; }
+	.tc-filters > *:not(summary) { display: revert; }
+}
+
+/* ponytail: cap de densidad en mobile. El sitio fue maquetado con ritmo de
+   escritorio (space-y-16, py-14, p-8) y en 375px eso obliga a scrollear de mas.
+   Se comprime solo el eje vertical, que en mobile es todo apilado; los valores
+   de tablet/desktop quedan intactos. */
+@media (max-width: 639.98px) {
+	.py-14 { padding-top: 2rem; padding-bottom: 2rem; }
+	.py-16 { padding-top: 2.25rem; padding-bottom: 2.25rem; }
+	.py-20 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+	.py-24 { padding-top: 2.75rem; padding-bottom: 2.75rem; }
+	.pt-14 { padding-top: 2rem; }
+	.pb-14 { padding-bottom: 2rem; }
+	.p-8 { padding: 1.25rem; }
+	.p-10 { padding: 1.25rem; }
+	.p-12 { padding: 1.5rem; }
+	.gap-10 { gap: 1.5rem; }
+	.gap-12 { gap: 1.75rem; }
+	.gap-16 { gap: 2rem; }
+	.space-y-10 > :not([hidden]) ~ :not([hidden]) { margin-top: 1.75rem; }
+	.space-y-12 > :not([hidden]) ~ :not([hidden]) { margin-top: 2rem; }
+	.space-y-14 > :not([hidden]) ~ :not([hidden]) { margin-top: 2.25rem; }
+	.space-y-16 > :not([hidden]) ~ :not([hidden]) { margin-top: 2.5rem; }
+	.space-y-20 > :not([hidden]) ~ :not([hidden]) { margin-top: 2.75rem; }
+	.mt-14 { margin-top: 2rem; }
+	.mt-16 { margin-top: 2.25rem; }
+	.mt-20 { margin-top: 2.5rem; }
+}

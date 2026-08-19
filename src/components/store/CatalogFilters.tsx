@@ -17,7 +17,7 @@ function ActiveFilter({
     readonly children: React.ReactNode;
 }) {
     return (
-        <span className="inline-flex min-h-9 items-center rounded-full border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 px-3 py-1 text-xs font-medium text-slate-700 dark:text-slate-300">
+        <span className="inline-flex min-h-11 items-center rounded-full border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 px-3 py-1 text-xs font-medium text-slate-700 dark:text-slate-300">
             {children}
         </span>
     );
@@ -41,18 +41,19 @@ export default function CatalogFilters({
     const maxPrice = filters.maxPrice || String(options.priceRange.max || 0);
 
     return (
-        <aside className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-5 shadow-sm">
-            <div className="space-y-2">
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
-                    Filtros
-                </p>
-                <h2 className="text-xl font-semibold text-slate-950 dark:text-slate-50">
-                    Ajusta la busqueda
-                </h2>
-                <p className="text-sm text-slate-600 dark:text-slate-400">
-                    Filtra por marca, categoria, precio o una palabra clave.
-                </p>
-            </div>
+        <details
+            open={hasActiveFilters}
+            className="tc-filters rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-4 shadow-sm lg:p-5"
+        >
+            <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-2 text-slate-950 dark:text-slate-50">
+                <span className="text-base font-semibold">Filtros</span>
+                <span className="text-sm font-medium text-primary lg:hidden">
+                    Ver opciones
+                </span>
+            </summary>
+            <p className="mt-1 hidden text-sm text-slate-600 lg:block dark:text-slate-400">
+                Filtra por marca, categoria, precio o una palabra clave.
+            </p>
 
             {hasActiveFilters ? (
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -76,7 +77,7 @@ export default function CatalogFilters({
                 </div>
             ) : null}
 
-            <form action={basePath} method="get" className="mt-6 space-y-6">
+            <form action={basePath} method="get" className="mt-4 space-y-5 lg:mt-6 lg:space-y-6">
                 <div className="space-y-2">
                     <label
                         htmlFor="catalog-search"
@@ -133,7 +134,7 @@ export default function CatalogFilters({
                                         defaultChecked={filters.categories.includes(
                                             category.name,
                                         )}
-                                        className="h-4 w-4 rounded border-slate-300 dark:border-slate-600 text-primary focus:ring-primary"
+                                        className="h-5 w-5 shrink-0 rounded border-slate-300 dark:border-slate-600 text-primary focus:ring-primary"
                                     />
                                     <span>{category.name}</span>
                                 </label>
@@ -166,7 +167,7 @@ export default function CatalogFilters({
                                     name="brands"
                                     value={brand.name}
                                     defaultChecked={filters.brands.includes(brand.name)}
-                                    className="h-4 w-4 rounded border-slate-300 dark:border-slate-600 text-primary focus:ring-primary"
+                                    className="h-5 w-5 shrink-0 rounded border-slate-300 dark:border-slate-600 text-primary focus:ring-primary"
                                 />
                                 <span>{brand.name}</span>
                             </label>
@@ -233,7 +234,7 @@ export default function CatalogFilters({
                     </Link>
                 </div>
             </form>
-        </aside>
+        </details>
     );
 }
 

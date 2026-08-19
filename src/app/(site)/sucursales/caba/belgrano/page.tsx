@@ -8,7 +8,6 @@ import {
   FaUserCheck,
 } from "react-icons/fa";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
-import StickyLocalCta from "@/components/cro/StickyLocalCta";
 import { getBranch, whatsappUrl as buildWhatsappUrl } from "@/lib/businessProfile";
 import BranchMap from "@/components/cards/BranchMap";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
@@ -337,13 +336,6 @@ export default function SucursalBelgranoPage() {
           ))}
         </div>
       </section>
-
-      <StickyLocalCta
-        whatsappUrl={whatsappUrl}
-        budgetHref="/presupuesto-reparacion#solicitar-presupuesto"
-        phoneHref={branchPhoneHref}
-        primaryLabel="Turno"
-      />
 
       <script
         type="application/ld+json"

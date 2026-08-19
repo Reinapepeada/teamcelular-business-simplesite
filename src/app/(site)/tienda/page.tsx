@@ -100,24 +100,23 @@ export default async function TiendaPage({
         ]}
       />
 
-      <section className="mx-auto max-w-screen-2xl px-4 pb-8 sm:px-6 lg:px-8">
-        <div className="rounded-[2rem] border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 px-6 py-8 shadow-sm sm:px-8">
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
-            <div className="space-y-4">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+      <section className="mx-auto max-w-screen-2xl px-4 pb-4 sm:px-6 sm:pb-8 lg:px-8">
+        <div className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 px-4 py-5 shadow-sm sm:px-8 sm:py-8">
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end lg:gap-6">
+            <div className="space-y-3">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary sm:text-sm">
                 Tienda Team Celular
               </p>
               <h1 className="max-w-3xl text-3xl font-semibold tracking-tight text-slate-950 dark:text-slate-50 sm:text-4xl">
-                Accesorios y repuestos para celulares con retiro en Recoleta y envio en CABA
+Repuestos y accesorios para celulares en CABA
               </h1>
-              <p className="max-w-3xl text-base leading-7 text-slate-600 dark:text-slate-400">
-                Team Celular, en Paraguay 2451 Recoleta, ofrece cables, cargadores,
-                fundas, templados y repuestos con asesoramiento real. Validamos
-                compatibilidad por WhatsApp antes de comprar para evitar cambios
-                innecesarios.
+              <p className="max-w-3xl text-sm leading-6 text-slate-600 sm:text-base sm:leading-7 dark:text-slate-400">
+                Team Celular, en Paraguay 2451 Recoleta, vende cables, cargadores,
+                fundas, templados y repuestos con retiro en el local y envio en CABA.
+                Validamos compatibilidad por WhatsApp antes de que pagues.
               </p>
             </div>
-            <div className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-5">
+            <div className="hidden rounded-3xl border border-slate-200 bg-slate-50 p-5 lg:block dark:border-slate-700/70 dark:bg-slate-800/70">
               <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
                 Atencion comercial
               </p>
@@ -162,7 +161,25 @@ export default async function TiendaPage({
         </div>
       </section>
 
-      <section className="mx-auto max-w-screen-2xl px-4 pb-8 sm:px-6 lg:px-8">
+      <section className="mx-auto grid max-w-screen-2xl gap-6 px-4 sm:px-6 lg:grid-cols-[320px_minmax(0,1fr)] lg:px-8">
+        <CatalogFilters
+          basePath="/tienda"
+          filters={filters}
+          options={filterOptions}
+        />
+        <Suspense key={suspenseKey} fallback={<CatalogResultsFallback />}>
+          {/* @ts-expect-error Async Server Component */}
+          <CatalogResults
+            basePath="/tienda"
+            filters={filters}
+            siteUrl={SITE_URL}
+            title="Productos para compra inmediata"
+            emptyMessage="No encontramos productos con esos filtros. Prueba otra marca, categoria o rango de precio."
+          />
+        </Suspense>
+      </section>
+
+      <section className="mx-auto max-w-screen-2xl px-4 pt-8 sm:px-6 lg:px-8">
         <div className="rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm dark:border-slate-700/70 dark:bg-slate-900/85 md:p-8">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
             <div className="space-y-3">
@@ -173,13 +190,13 @@ export default async function TiendaPage({
                 Te ayudamos a validar compatibilidad por marca y modelo antes de pagar. Si el cambio no conviene, te derivamos al servicio de reparacion para evitar compras innecesarias.
               </p>
               <div className="flex flex-wrap gap-2">
-                <Link href="/guias/reparacion-iphone-buenos-aires" className="rounded-full border border-slate-300/80 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
+                <Link href="/guias/reparacion-iphone-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
                   Guia iPhone
                 </Link>
-                <Link href="/guias/reparacion-samsung-buenos-aires" className="rounded-full border border-slate-300/80 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
+                <Link href="/guias/reparacion-samsung-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
                   Guia Samsung
                 </Link>
-                <Link href="/guias/reparacion-xiaomi-buenos-aires" className="rounded-full border border-slate-300/80 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
+                <Link href="/guias/reparacion-xiaomi-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
                   Guia Xiaomi
                 </Link>
               </div>
@@ -208,24 +225,6 @@ export default async function TiendaPage({
             </div>
           </div>
         </div>
-      </section>
-
-      <section className="mx-auto grid max-w-screen-2xl gap-6 px-4 sm:px-6 lg:grid-cols-[320px_minmax(0,1fr)] lg:px-8">
-        <CatalogFilters
-          basePath="/tienda"
-          filters={filters}
-          options={filterOptions}
-        />
-        <Suspense key={suspenseKey} fallback={<CatalogResultsFallback />}>
-          {/* @ts-expect-error Async Server Component */}
-          <CatalogResults
-            basePath="/tienda"
-            filters={filters}
-            siteUrl={SITE_URL}
-            title="Productos para compra inmediata"
-            emptyMessage="No encontramos productos con esos filtros. Prueba otra marca, categoria o rango de precio."
-          />
-        </Suspense>
       </section>
 
       <section className="mx-auto max-w-screen-2xl px-4 pt-8 sm:px-6 lg:px-8">

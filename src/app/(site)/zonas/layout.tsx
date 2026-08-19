@@ -48,7 +48,7 @@ export default function ZonasLayout({
               <Link
                 key={zone.href}
                 href={zone.href}
-                className="inline-flex min-h-10 items-center rounded-full border border-slate-300/80 bg-white/80 px-4 text-sm font-medium text-slate-700 transition hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200 dark:hover:border-primary/50 dark:hover:text-primary"
+                className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white/80 px-4 text-sm font-medium text-slate-700 transition hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200 dark:hover:border-primary/50 dark:hover:text-primary"
               >
                 {zone.label}
               </Link>
@@ -57,7 +57,7 @@ export default function ZonasLayout({
               href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20quiero%20presupuesto%20para%20mi%20zona"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-10 items-center gap-2 rounded-full bg-emerald-700 px-4 text-sm font-semibold text-white shadow-lg shadow-emerald-700/25 transition hover:bg-emerald-800"
+              className="inline-flex min-h-11 items-center gap-2 rounded-full bg-emerald-700 px-4 text-sm font-semibold text-white shadow-lg shadow-emerald-700/25 transition hover:bg-emerald-800"
             >
               <BsWhatsapp className="text-base" />
               WhatsApp

@@ -448,7 +448,7 @@ export default function RepairsForm() {
                                         key={repairType}
                                         type="button"
                                         onClick={() => toggleRepairType(repairType)}
-                                        className="inline-flex min-h-8 items-center gap-2 rounded-full border border-primary/35 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary transition hover:border-primary hover:bg-primary/15"
+                                        className="inline-flex min-h-11 items-center gap-2 rounded-full border border-primary/35 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary transition hover:border-primary hover:bg-primary/15"
                                         aria-label={`Quitar ${repairType}`}
                                     >
                                         {repairType}
