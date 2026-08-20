@@ -78,11 +78,15 @@ Propuesta de nombre canónico, un solo criterio para todo:
 
 | Dónde | Nombre |
 |---|---|
-| Ficha Recoleta | `Team Celular` |
+| Ficha Recoleta | `Team Celular Recoleta` |
 | Ficha Belgrano | `Team Celular Belgrano` |
 | Schema del sitio | los mismos dos, exactos |
+| Organización | `Team Celular` |
 
-Belgrano lleva el barrio porque en fichas de multi-sucursal el descriptor de ubicación es de uso aceptado; lo que no se acepta es la lista de servicios que tiene hoy Recoleta.
+Las dos fichas llevan el barrio: con dos locales, que uno se quede el nombre de
+la marca a secas lo hace competir con la entidad global y deja al otro como
+sucursal de segunda. El descriptor de ubicación es de uso aceptado en fichas
+multi-sucursal; lo que no se acepta es la lista de servicios que tiene hoy Recoleta.
 
 **Nota:** Belgrano tampoco aparece en la data de Search Console — ni una query de marca entre 1.297, ni la página `/sucursales/caba/belgrano` entre las 127 con impresiones. Con la ficha existiendo, la explicación más probable es que la ficha todavía no acumuló señal, o que el nombre en una palabra no se asocia a la marca.
 
@@ -103,8 +107,8 @@ Requiere DataForSEO o acceso a Business Profile:
 
 | # | Acción | Severidad | Esfuerzo |
 |---|---|---|---|
-| 1 | Cambiar el nombre de la ficha a `Team Celular`, sin descriptores | **Crítica** — riesgo de suspensión | 5 min |
-| 2 | Unificar el nombre en ambas fichas y en el schema: `Team Celular` / `Team Celular Belgrano` | **Alta** | 20 min |
+| 1 | Sacar la lista de servicios del nombre de la ficha de Recoleta | **Crítica** — riesgo de suspensión | 5 min |
+| 2 | Unificar el nombre en ambas fichas: `Team Celular Recoleta` / `Team Celular Belgrano` (el schema del sitio ya está alineado) | **Alta** | 20 min |
 | 3 | Cargar Belgrano en OpenStreetMap | Media | 10 min |
 | 4 | Fotos y reseñas nuevas con cadencia sostenida en ambas fichas | **Alta** — es lo que mueve el pack | continuo |
 | 5 | Contratar DataForSEO para medir geo-grid y cerrar el diagnóstico | Media | — |

@@ -108,7 +108,7 @@ export const TECHNICAL_AUTHOR = {
 export const BRANCHES = [
   {
     slug: "recoleta",
-    name: "Team Celular",
+    name: "Team Celular Recoleta",
     shortName: "Recoleta",
     url: "/sucursales/caba/recoleta",
     street: "Paraguay 2451",
