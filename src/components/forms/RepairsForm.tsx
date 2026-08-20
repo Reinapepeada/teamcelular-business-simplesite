@@ -759,7 +759,7 @@ function QuoteEstimate({
             <p className="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">
                 {quote.precision === "exact"
                     ? "Precio de lista para ese modelo. Sale en 2 a 4 horas, con garantia escrita de 90 dias."
-                    : "Rango segun la gama del equipo. Te confirmamos el numero exacto tras el diagnostico, antes de intervenir."}{" "}
+                    : "Precio aproximado: es un rango por gama, no un valor cerrado. Te confirmamos el numero exacto tras el diagnostico, antes de intervenir."}{" "}
                 Segui con el formulario y te lo cerramos por WhatsApp.
             </p>
         </div>

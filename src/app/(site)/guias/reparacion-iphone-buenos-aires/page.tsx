@@ -663,7 +663,7 @@ export default function IphoneRepairGuidePage() {
               ¿Cuánto cuesta reparar un iPhone en Buenos Aires?
             </h2>
             <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-slate-400">
-              Precios actualizados a agosto de 2026. El valor exacto depende del modelo y del estado del equipo; te lo confirmamos tras el diagnóstico, antes de intervenir. {INSTALLMENTS_MESSAGE}
+              Precios aproximados, actualizados a agosto de 2026. Los rangos agrupan varios modelos: el valor exacto depende del modelo y del estado del equipo; te lo confirmamos tras el diagnóstico, antes de intervenir. {INSTALLMENTS_MESSAGE}
             </p>
           </div>
           <div className="divide-y divide-slate-100 dark:divide-slate-800">

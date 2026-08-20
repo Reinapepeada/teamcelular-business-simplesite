@@ -654,7 +654,7 @@ export default function MotorolaRepairGuidePage() {
             ¿Cuánto cuesta reparar un Motorola en CABA?
           </h2>
           <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
-            Precios orientativos en ARS — el valor exacto depende del modelo y el estado del equipo. Team Celular informa el costo de diagnóstico antes de abrir el equipo; si avanzás con la reparación, ese monto se descuenta del trabajo final.
+            Precios aproximados en ARS: son rangos por línea, no valores cerrados. El valor exacto depende del modelo y el estado del equipo. Team Celular informa el costo de diagnóstico antes de abrir el equipo; si avanzás con la reparación, ese monto se descuenta del trabajo final.
           </p>
           <div className="mt-5 overflow-x-auto">
             <table className="w-full text-sm">
@@ -684,7 +684,7 @@ export default function MotorolaRepairGuidePage() {
             </table>
           </div>
           <p className="mt-4 text-xs text-slate-500 dark:text-slate-400">
-            âš ï¸ Precios orientativos sujetos a actualización. Consultá por WhatsApp o presupuesto online para valores exactos según modelo.
+            Precios orientativos sujetos a actualización. Consultá por WhatsApp o presupuesto online para valores exactos según modelo.
           </p>
         </section>
 
