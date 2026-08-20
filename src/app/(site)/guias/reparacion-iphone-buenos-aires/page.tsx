@@ -7,6 +7,7 @@ import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { INSTALLMENTS_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
+import GuideByline from "@/components/seo/GuideByline";
 import {
   FaApple,
   FaBatteryFull,
@@ -361,7 +362,6 @@ export default function IphoneRepairGuidePage() {
         description="Guia completa para reparar iPhone en CABA con diagnostico profesional, repuestos certificados y garantia escrita."
         publishedTime="2024-01-15T00:00:00Z"
         modifiedTime="2026-07-06T00:00:00Z"
-        authorName="Team Celular"
         about={[
           "reparacion de iPhone en Buenos Aires",
           "service tecnico Apple en CABA",
@@ -416,6 +416,9 @@ export default function IphoneRepairGuidePage() {
               diagnóstico el mismo día, pantalla y batería en 2–4 h, y garantía
               escrita de 90 días sobre trabajo y repuesto. iPhone 8 a 17 Pro Max.
             </p>
+            <div className="mt-4">
+              <GuideByline modifiedTime="2026-07-06T00:00:00Z" tone="light" />
+            </div>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-3">

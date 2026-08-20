@@ -6,7 +6,6 @@ interface ArticleSchemaProps {
   description: string;
   publishedTime: string;
   modifiedTime: string;
-  authorName: string;
   image: string;
   url: string;
   reviewedByName?: string;
@@ -18,7 +17,6 @@ export default function ArticleSchema({
   description,
   publishedTime,
   modifiedTime,
-  authorName,
   image,
   url,
   reviewedByName = BUSINESS_PROFILE.technicalReviewer.name,

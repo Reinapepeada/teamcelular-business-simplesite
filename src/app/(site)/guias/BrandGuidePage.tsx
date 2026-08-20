@@ -1,4 +1,5 @@
 import HighIntentGuidePage from "@/components/seo/HighIntentGuidePage";
+import RepairPriceTable from "@/components/seo/RepairPriceTable";
 import {
   type BrandGuideSlug,
   getBrandGuideConfig,
@@ -41,6 +42,15 @@ export default function BrandGuidePage({ slug }: { slug: BrandGuideSlug }) {
       faq={config.faq}
       relatedLinks={config.relatedLinks}
       whatsappText={config.whatsappText}
+      priceTable={
+        config.repairPrices?.length ? (
+          <RepairPriceTable
+            brand={config.pageLabel}
+            prices={config.repairPrices}
+            updatedLabel="20 de agosto de 2026"
+          />
+        ) : null
+      }
     />
     </>
   );

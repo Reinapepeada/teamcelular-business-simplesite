@@ -19,6 +19,8 @@ import {
   FaWrench,
 } from "react-icons/fa";
 import { SiMotorola } from "react-icons/si";
+import GuideByline from "@/components/seo/GuideByline";
+import { BRAND_REPAIR_PRICES, buildPriceOffers, priceRangeOf } from "@/lib/repairPrices";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
@@ -74,7 +76,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2026-05-08T00:00:00Z",
-    modifiedTime: "2026-07-14T00:00:00Z",
+    modifiedTime: "2026-08-20T00:00:00Z",
     section: "Guías Técnicas",
   },
   twitter: {
@@ -344,8 +346,7 @@ export default function MotorolaRepairGuidePage() {
         title="Reparación de Motorola en Buenos Aires | Servicio Técnico Team Celular"
         description="Guía completa para reparar Motorola en CABA con diagnóstico profesional, repuestos de calidad y garantía escrita 90 días."
         publishedTime="2026-05-08T00:00:00Z"
-        modifiedTime="2026-07-14T00:00:00Z"
-        authorName="Team Celular"
+        modifiedTime="2026-08-20T00:00:00Z"
         about={[
           "reparacion de Motorola en Buenos Aires",
           "service tecnico Motorola en CABA",
@@ -399,6 +400,9 @@ export default function MotorolaRepairGuidePage() {
               Team Celular repara Motorola en dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2032, Belgrano</strong>. Diagnóstico el mismo día, pantalla y batería en 2–4 h, y garantía
               escrita de 90 días sobre trabajo y repuesto. Moto G, Edge y E.
             </p>
+            <div className="mt-4">
+              <GuideByline modifiedTime="2026-08-20T00:00:00Z" tone="light" />
+            </div>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-3">
@@ -663,9 +667,11 @@ export default function MotorolaRepairGuidePage() {
               <tbody className="divide-y divide-white/10 dark:divide-white/5">
                 {[
                   ["Diagnóstico técnico", "15.000 – 25.000"],
-                  ["Pantalla Moto G (LCD)", "50.000 – 100.000"],
-                  ["Pantalla Edge (AMOLED)", "90.000 – 200.000"],
-                  ["Batería", "35.000 – 65.000"],
+                  ["Pantalla Moto E / G", "99.900 – 199.900"],
+                  ["Pantalla Edge (pOLED)", "299.900 – 599.900"],
+                  ["Pantalla Razr (plegable)", "999.900 – 1.399.900"],
+                  ["Batería Moto E / G", "89.900 – 169.900"],
+                  ["Batería Edge / Razr", "119.900 – 229.900"],
                   ["Pin de carga USB-C", "35.000 – 60.000"],
                   ["Reparación de placa", "Consultar"],
                 ].map(([service, price]) => (
@@ -854,6 +860,10 @@ export default function MotorolaRepairGuidePage() {
               description:
                 "Servicio técnico especializado en Motorola con diagnóstico profesional, repuestos de calidad y garantía escrita 90 días en CABA.",
               provider: { "@id": "https://teamcelular.com#localbusiness" },
+              // Rango y catalogo salen de repairPrices: un unico lugar donde el precio
+              // visible y el structured data no pueden divergir.
+              priceRange: `ARS ${priceRangeOf(BRAND_REPAIR_PRICES.motorola).low.toLocaleString("es-AR")}-${priceRangeOf(BRAND_REPAIR_PRICES.motorola).high.toLocaleString("es-AR")}`,
+              ...buildPriceOffers(BRAND_REPAIR_PRICES.motorola, "Motorola"),
               areaServed: {
                 "@type": "City",
                 name: "Buenos Aires",

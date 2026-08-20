@@ -6,6 +6,8 @@ import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
+import GuideByline from "@/components/seo/GuideByline";
+import VideoSchema from "@/components/seo/VideoSchema";
 import { 
   FaShieldAlt, 
   FaTruck, 
@@ -70,7 +72,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2024-03-10T00:00:00Z",
-    modifiedTime: "2026-06-09T00:00:00Z",
+    modifiedTime: "2026-08-20T00:00:00Z",
     section: "Guías Técnicas",
   },
   twitter: {
@@ -197,12 +199,19 @@ const faqBusiness = [
 export default function BusinessSupportGuide() {
   return (
     <div className="flex w-full justify-center px-4 py-16">
+      <VideoSchema
+        name="Diagnóstico de placa bajo microscopio en Team Celular"
+        description="Inspección de una placa de celular bajo microscopio en el laboratorio de Team Celular, Paraguay 2451 Recoleta CABA, para ubicar el componente dañado antes de intervenir."
+        contentPath="/videos/microscopio.mp4"
+        thumbnailPath="/images/poster-microscopio.jpg"
+        uploadDate="2026-08-20"
+        duration="PT22S"
+      />
       <ArticleSchema
         title="Servicio Técnico de Celulares para Empresas y Organizaciones | Team Celular"
         description="Soporte técnico corporativo especializado en reparación de dispositivos móviles con SLA garantizado, logística incluida y planes preventivos en CABA."
         publishedTime="2024-03-10T00:00:00Z"
-        modifiedTime="2025-12-11T00:00:00Z"
-        authorName="Team Celular"
+        modifiedTime="2026-08-20T00:00:00Z"
         image="https://teamcelular.com/images/guia_corporativo.webp"
         url={PAGE_URL}
       />
@@ -233,6 +242,9 @@ export default function BusinessSupportGuide() {
           <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
             Team Celular, en <strong>Paraguay 2451 Recoleta</strong> y <strong>Amenábar 2032 Belgrano</strong> (CABA), presta soporte técnico de celulares para empresas con flota desde 5 dispositivos. Diagnóstico en menos de 24 horas, SLA configurable (4 h crítico · 24 h estándar), logística puerta a puerta en CABA y garantía escrita de <strong>90 días</strong> sobre trabajo y repuesto. 10 años de experiencia en reparación avanzada.
           </p>
+          <div className="mt-4 flex justify-center">
+            <GuideByline modifiedTime="2026-08-20T00:00:00Z" tone="light" />
+          </div>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/contacto"

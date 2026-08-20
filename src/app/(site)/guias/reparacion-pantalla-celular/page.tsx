@@ -5,6 +5,7 @@ import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
+import GuideByline from "@/components/seo/GuideByline";
 import {
   FaMobileAlt,
   FaTools,
@@ -23,9 +24,9 @@ import {
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 
 export const metadata: Metadata = {
-  title: "Cambio de Pantalla de Celular en CABA | Display Original",
+  title: "¿Cuándo Cambiar la Pantalla del Celular? Guía Técnica",
   description:
-    "Cambio de pantalla celular en CABA. Team Celular, Recoleta y Belgrano. Displays OLED originales, True Tone preservado, 2-4 h y garantía escrita sobre trabajo y repuesto.",
+    "Líneas, manchas o touch que falla: cómo saber si el módulo se cambia o se repara, qué diferencia hay entre OLED original y genérico, y qué revisar antes de pagar.",
   keywords: [
     "cambio pantalla celular Buenos Aires",
     "pantalla iPhone original",
@@ -242,7 +243,6 @@ export default function ScreenReplacementGuide() {
         description="Cambio de pantalla con displays OLED originales, True Tone preservado y garantia escrita segun repuesto y trabajo. Service express 2-4 horas en CABA."
         publishedTime="2024-11-30T00:00:00Z"
         modifiedTime="2026-06-09T00:00:00Z"
-        authorName="Team Celular"
         image="https://teamcelular.com/images/guia_cambio_modulo.webp"
         url="https://teamcelular.com/guias/reparacion-pantalla-celular"
       />
@@ -275,13 +275,16 @@ export default function ScreenReplacementGuide() {
             <FaMobileAlt className="text-5xl text-white" />
           </div>
           <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-            Cambio de Pantalla de Celular en Buenos Aires
+            ¿Cuándo hay que cambiar la pantalla del celular?
           </h1>
           <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
             Reemplazo de pantalla con <strong className="text-primary">displays OLED originales</strong>, 
             <strong> True Tone preservado</strong>, garantia escrita segun repuesto y trabajo, y servicio 
             express en <strong>2-4 horas</strong>. Reparamos iPhone, Samsung, Motorola y todas las marcas en dos talleres en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).
           </p>
+          <div className="mt-4 flex justify-center">
+            <GuideByline modifiedTime="2026-06-09T00:00:00Z" tone="light" />
+          </div>
 
           {/* Quick Stats */}
           <div className="grid gap-6 md:grid-cols-3 mt-8">

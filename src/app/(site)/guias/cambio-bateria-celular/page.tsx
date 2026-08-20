@@ -5,6 +5,7 @@ import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
+import GuideByline from "@/components/seo/GuideByline";
 import {
   FaBatteryFull,
   FaBatteryHalf,
@@ -23,9 +24,9 @@ import {
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 
 export const metadata: Metadata = {
-  title: "Cambio de Batería de Celular en CABA | Team Celular",
+  title: "¿Cuándo Cambiar la Batería del Celular? Señales Reales",
   description:
-    "Cambio de batería celular en CABA. Team Celular, Recoleta y Belgrano. Baterías originales, service 1-2 h y garantía escrita sobre trabajo y repuesto.",
+    "Se descarga rápido o se apaga solo: cuándo la culpa es la batería y cuándo es el consumo o el pin de carga. Qué mirar antes de reemplazar la pieza.",
   keywords: [
     "cambio batería celular Buenos Aires",
     "batería iPhone original",
@@ -200,7 +201,6 @@ export default function BatteryReplacementGuide() {
         description="Cambio de batería con repuestos originales y certificados. Garantía escrita y service express en 1-2 horas. Atención iPhone, Samsung y Motorola en CABA."
         publishedTime="2024-11-30T00:00:00Z"
         modifiedTime="2026-06-09T00:00:00Z"
-        authorName="Team Celular"
         image="https://teamcelular.com/images/guia_cambio_bateria.webp"
         url="https://teamcelular.com/guias/cambio-bateria-celular"
       />
@@ -233,13 +233,16 @@ export default function BatteryReplacementGuide() {
             <FaBatteryFull className="text-5xl text-white" />
           </div>
           <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-            Cambio de Batería de Celular en Buenos Aires
+            ¿Cuándo hay que cambiar la batería del celular?
           </h1>
           <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
             Reemplazo de batería con <strong className="text-primary">repuestos originales y certificados</strong>, 
             garantia escrita segun repuesto y trabajo, y servicio express en <strong>1-2 horas</strong>. 
             Atendemos iPhone, Samsung, Motorola y todas las marcas en dos talleres en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).
           </p>
+          <div className="mt-4 flex justify-center">
+            <GuideByline modifiedTime="2026-06-09T00:00:00Z" tone="light" />
+          </div>
 
           {/* Quick Stats */}
           <div className="grid gap-6 md:grid-cols-3 mt-8">

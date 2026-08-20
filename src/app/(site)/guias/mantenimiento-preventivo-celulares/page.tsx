@@ -20,6 +20,7 @@ import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
+import GuideByline from "@/components/seo/GuideByline";
 
 export const metadata: Metadata = {
   title: "Mantenimiento Preventivo de Celulares en CABA | Team Celular",
@@ -195,7 +196,6 @@ export default function PreventiveMaintenanceGuide() {
         description="Guía completa de mantenimiento preventivo para smartphones: checklist profesional, cuidado de batería, actualización de software y limpieza especializada."
         publishedTime="2024-04-05T00:00:00Z"
         modifiedTime="2026-05-08T00:00:00Z"
-        authorName="Team Celular"
         image="https://teamcelular.com/images/guia_mantenimiento.webp"
         url={PAGE_URL}
       />
@@ -236,6 +236,9 @@ export default function PreventiveMaintenanceGuide() {
             diagnóstico técnico y revisión de batería cada 6 meses. Cada servicio
             dura entre 2 y 4 horas y sale con garantía escrita de 90 días.
           </p>
+          <div className="mt-4 flex justify-center">
+            <GuideByline modifiedTime="2026-05-08T00:00:00Z" tone="light" />
+          </div>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/contacto"

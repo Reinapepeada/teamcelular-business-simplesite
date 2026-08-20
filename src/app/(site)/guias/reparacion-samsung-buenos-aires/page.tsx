@@ -19,6 +19,8 @@ import {
   FaWrench,
 } from "react-icons/fa";
 import { SiSamsung } from "react-icons/si";
+import GuideByline from "@/components/seo/GuideByline";
+import { BRAND_REPAIR_PRICES, buildPriceOffers, priceRangeOf } from "@/lib/repairPrices";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
@@ -74,7 +76,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2026-03-12T00:00:00Z",
-    modifiedTime: "2026-07-14T00:00:00Z",
+    modifiedTime: "2026-08-20T00:00:00Z",
     section: "Guias Tecnicas",
   },
   twitter: {
@@ -352,8 +354,7 @@ export default function SamsungRepairGuidePage() {
         title="Reparacion de Samsung en Buenos Aires | Servicio Tecnico Team Celular"
         description="Guia detallada de reparacion Samsung Galaxy con diagnostico profesional, repuestos premium y garantia escrita."
         publishedTime="2026-03-12T00:00:00Z"
-        modifiedTime="2026-07-14T00:00:00Z"
-        authorName="Team Celular"
+        modifiedTime="2026-08-20T00:00:00Z"
         about={[
           "reparacion de Samsung en Buenos Aires",
           "service tecnico Samsung Galaxy en CABA",
@@ -409,6 +410,9 @@ export default function SamsungRepairGuidePage() {
               2–4 h, y garantía escrita de 90 días sobre trabajo y repuesto.
               Galaxy S, A, Note, Z Fold y Z Flip.
             </p>
+            <div className="mt-4">
+              <GuideByline modifiedTime="2026-08-20T00:00:00Z" tone="light" />
+            </div>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-3">
@@ -641,23 +645,38 @@ export default function SamsungRepairGuidePage() {
               Precios actualizados a agosto de 2026. El rango depende del modelo dentro de cada línea y del repuesto disponible: te confirmamos el número exacto tras el diagnóstico, antes de intervenir el equipo. {INSTALLMENTS_MESSAGE}
             </p>
           </div>
-          <div className="divide-y divide-slate-100 dark:divide-slate-800">
-            {[
-              { servicio: "Diagnóstico técnico", modelos: "Todos los modelos", tiempo: "30–45 min", precio: "ARS 15.000–25.000" },
-              { servicio: "Pantalla AMOLED", modelos: "Línea S (S22 a S25)", tiempo: "2–4 h", precio: "ARS 450.000–950.000" },
-              { servicio: "Pantalla", modelos: "Línea A (A16, A26, A35, A36, A54, A55, A56)", tiempo: "2–4 h", precio: "ARS 79.000–289.000" },
-              { servicio: "Cambio de batería", modelos: "Línea S", tiempo: "1–2 h", precio: "ARS 120.000–199.000" },
-              { servicio: "Cambio de batería", modelos: "Línea A", tiempo: "1–2 h", precio: "ARS 59.000–99.000" },
-              { servicio: "Cambio de pin de carga", modelos: "Línea S y A", tiempo: "2–3 h", precio: "ARS 49.000–180.000" },
-              { servicio: "Bisagra / flex Z Fold y Z Flip", modelos: "Z Fold, Z Flip", tiempo: "24–72 h", precio: "Consultar" },
-            ].map((row) => (
-              <div key={`${row.servicio}-${row.modelos}`} className="grid grid-cols-2 gap-x-4 gap-y-1 px-6 py-4 text-sm md:grid-cols-4">
-                <span className="font-semibold text-slate-900 dark:text-slate-100">{row.servicio}</span>
-                <span className="text-slate-500 dark:text-slate-400">{row.modelos}</span>
-                <span className="text-slate-500 dark:text-slate-400">{row.tiempo}</span>
-                <span className="font-semibold text-primary">{row.precio}</span>
-              </div>
-            ))}
+          <div className="overflow-x-auto px-6 py-2">
+            <table className="w-full min-w-[38rem] border-collapse text-left text-sm">
+              <caption className="sr-only">
+                Precios de reparación de Samsung Galaxy en CABA, actualizados en agosto de 2026
+              </caption>
+              <thead>
+                <tr className="border-b border-slate-200 dark:border-slate-800">
+                  <th scope="col" className="py-3 pr-4 font-semibold text-slate-900 dark:text-slate-100">Servicio</th>
+                  <th scope="col" className="py-3 pr-4 font-semibold text-slate-900 dark:text-slate-100">Modelos</th>
+                  <th scope="col" className="py-3 pr-4 font-semibold text-slate-900 dark:text-slate-100">Tiempo</th>
+                  <th scope="col" className="py-3 font-semibold text-slate-900 dark:text-slate-100">Precio ARS</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                {[
+                  { servicio: "Diagnóstico técnico", modelos: "Todos los modelos", tiempo: "30–45 min", precio: "15.000 – 25.000" },
+                  { servicio: "Cambio de pantalla", modelos: "Galaxy S / Ultra (S22 a S25)", tiempo: "2–4 h", precio: "299.900 – 1.199.900" },
+                  { servicio: "Cambio de pantalla", modelos: "Galaxy A / M (A16, A26, A35, A36, A54, A55, A56)", tiempo: "2–4 h", precio: "99.900 – 399.900" },
+                  { servicio: "Cambio de batería", modelos: "Galaxy S / Ultra", tiempo: "1–2 h", precio: "119.900 – 219.900" },
+                  { servicio: "Cambio de batería", modelos: "Galaxy A / M", tiempo: "1–2 h", precio: "89.900 – 179.900" },
+                  { servicio: "Cambio de pin de carga", modelos: "Línea S y A", tiempo: "2–3 h", precio: "49.000 – 180.000" },
+                  { servicio: "Bisagra / flex", modelos: "Z Fold, Z Flip", tiempo: "24–72 h", precio: "Consultar" },
+                ].map((row) => (
+                  <tr key={`${row.servicio}-${row.modelos}`}>
+                    <td className="py-3 pr-4 font-semibold text-slate-900 dark:text-slate-100">{row.servicio}</td>
+                    <td className="py-3 pr-4 text-slate-500 dark:text-slate-400">{row.modelos}</td>
+                    <td className="py-3 pr-4 text-slate-500 dark:text-slate-400">{row.tiempo}</td>
+                    <td className="py-3 font-semibold tabular-nums text-primary">{row.precio}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
           <div className="space-y-4 px-8 py-6">
             <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">
@@ -866,25 +885,13 @@ export default function SamsungRepairGuidePage() {
               description:
                 "Servicio tecnico Samsung Galaxy en CABA con diagnostico profesional, repuestos premium y garantia escrita.",
               provider: { "@id": "https://teamcelular.com#localbusiness" },
+              // Rango y catalogo salen de repairPrices: un unico lugar donde el precio
+              // visible y el structured data no pueden divergir.
+              priceRange: `ARS ${priceRangeOf(BRAND_REPAIR_PRICES.samsung).low.toLocaleString("es-AR")}-${priceRangeOf(BRAND_REPAIR_PRICES.samsung).high.toLocaleString("es-AR")}`,
+              ...buildPriceOffers(BRAND_REPAIR_PRICES.samsung, "Samsung Galaxy"),
               areaServed: {
                 "@type": "City",
                 name: "Buenos Aires",
-              },
-              // Sin priceRange las Offer no son elegibles para rich results,
-              // justo en una pagina cuyas queries son de precio.
-              priceRange: "ARS 15.000-950.000",
-              hasOfferCatalog: {
-                "@type": "OfferCatalog",
-                name: "Servicios de reparacion Samsung",
-                itemListElement: repairServices.map((service) => ({
-                  "@type": "Offer",
-                  priceCurrency: "ARS",
-                  itemOffered: {
-                    "@type": "Service",
-                    name: service.title,
-                    description: service.detail,
-                  },
-                })),
               },
             }),
           }}

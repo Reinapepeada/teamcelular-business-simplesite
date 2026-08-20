@@ -15,6 +15,8 @@ import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
+import GuideByline from "@/components/seo/GuideByline";
+import VideoSchema from "@/components/seo/VideoSchema";
 
 export const metadata: Metadata = {
   title: "Microelectrónica y Reballing BGA en CABA | Team Celular",
@@ -63,7 +65,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2024-02-20T00:00:00Z",
-    modifiedTime: "2026-06-09T00:00:00Z",
+    modifiedTime: "2026-08-20T00:00:00Z",
     section: "Guías Técnicas",
   },
   twitter: {
@@ -178,12 +180,27 @@ const faqMicro = [
 export default function MicroelectronicsGuide() {
   return (
     <div className="flex w-full justify-center px-4 py-16">
+      <VideoSchema
+        name="Diagnóstico de placa bajo microscopio en Team Celular"
+        description="Inspección de una placa de celular bajo microscopio en el laboratorio de Team Celular, Paraguay 2451 Recoleta CABA, para ubicar el componente dañado antes de intervenir."
+        contentPath="/videos/microscopio.mp4"
+        thumbnailPath="/images/poster-microscopio.jpg"
+        uploadDate="2026-08-20"
+        duration="PT22S"
+      />
+      <VideoSchema
+        name="Reballing BGA con interposer en Team Celular"
+        description="Proceso de reballing BGA con interposer sobre una placa de celular en el laboratorio de Team Celular, en Recoleta CABA."
+        contentPath="/videos/interposerReballing.mp4"
+        thumbnailPath="/images/poster-interposerReballing.jpg"
+        uploadDate="2026-08-20"
+        duration="PT35S"
+      />
       <ArticleSchema
         title="Microelectrónica y Reballing BGA en Buenos Aires | Team Celular"
         description="Team Celular, Paraguay 2451 Recoleta y Amenábar 2032 Belgrano, CABA. Reballing BGA, soldadura SMD y reparación de placas lógicas con microscopio profesional y garantía escrita de 90 días."
         publishedTime="2024-02-20T00:00:00Z"
-        modifiedTime="2026-06-09T00:00:00Z"
-        authorName="Team Celular"
+        modifiedTime="2026-08-20T00:00:00Z"
         image="https://teamcelular.com/images/guia_microelectronica.webp"
         url={PAGE_URL}
       />
@@ -207,6 +224,9 @@ export default function MicroelectronicsGuide() {
             Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), repara placas lógicas y hace reballing BGA con{" "}
             <strong className="text-primary">microscopio trinocular y protocolos ESD</strong>. Garantía escrita de 90 días sobre cada intervención — incluso en equipos que otros talleres ya descartaron.
           </p>
+          <div className="mt-4 flex justify-center">
+            <GuideByline modifiedTime="2026-08-20T00:00:00Z" tone="light" />
+          </div>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/presupuesto-reparacion"

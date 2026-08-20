@@ -1,7 +1,9 @@
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import GuideByline from "@/components/seo/GuideByline";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import {
   FaCheckCircle,
@@ -49,6 +51,7 @@ interface HighIntentGuidePageProps {
   planDescription: string;
   planSteps: GuideItem[];
   faq: GuideFaqItem[];
+  priceTable?: React.ReactNode;
   relatedLinks: GuideRelatedLink[];
   whatsappText: string;
 }
@@ -84,6 +87,7 @@ export default function HighIntentGuidePage({
   planDescription,
   planSteps,
   faq,
+  priceTable,
   relatedLinks,
   whatsappText,
 }: HighIntentGuidePageProps) {
@@ -98,7 +102,6 @@ export default function HighIntentGuidePage({
           description={heroDescription}
           publishedTime={publishedTime}
           modifiedTime={modifiedTime}
-          authorName="Team Celular"
           image={imageUrl}
           url={pageUrl}
           about={articleAbout}
@@ -144,6 +147,10 @@ export default function HighIntentGuidePage({
               <p className="mt-4 max-w-3xl text-pretty text-[15px] leading-7 text-slate-300 md:mt-5 md:text-lg md:leading-8">
                 {heroDescription}
               </p>
+
+              <div className="mt-4">
+                <GuideByline modifiedTime={modifiedTime} />
+              </div>
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <TrackedCtaLink
@@ -292,6 +299,8 @@ export default function HighIntentGuidePage({
             ))}
           </ol>
         </section>
+
+        {priceTable}
 
         <section className="space-y-5">
           <div className="flex items-center gap-3">

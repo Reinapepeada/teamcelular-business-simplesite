@@ -79,6 +79,7 @@ export type BrandGuideConfig = {
   faq: GuideFaqItem[];
   relatedLinks: GuideRelatedLink[];
   whatsappText: string;
+  repairPrices: BrandGuideSeed["repairPrices"];
   metadata: Metadata;
 };
 
@@ -125,7 +126,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
       "Pixel 6",
       "Pixel 6a",
     ],
-    modifiedTime: "2026-07-14T00:00:00Z",
+    modifiedTime: "2026-08-20T00:00:00Z",
     specialtyFocus:
       "enfoque de camara computacional, pantalla OLED y estabilidad de carga USB-C",
     knownWeakPoints: [
@@ -722,6 +723,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     faq: [...(seed.extraFaq ?? []), ...faq],
     relatedLinks,
     serviceJsonLd: buildServiceJsonLd(seed, pagePath),
+    repairPrices: seed.repairPrices,
     whatsappText: `Hola Team Celular, necesito presupuesto para reparar mi ${seed.brand}`,
     metadata: buildWebsiteMetadata({
       path: pagePath,
