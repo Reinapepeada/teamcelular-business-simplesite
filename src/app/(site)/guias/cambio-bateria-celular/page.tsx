@@ -200,7 +200,7 @@ export default function BatteryReplacementGuide() {
         title="Cambio de batería celular en Buenos Aires | Service Certificado Team Celular"
         description="Cambio de batería con repuestos originales y certificados. Garantía escrita y service express en 1-2 horas. Atención iPhone, Samsung y Motorola en CABA."
         publishedTime="2024-11-30T00:00:00Z"
-        modifiedTime="2026-06-09T00:00:00Z"
+        modifiedTime="2026-08-20T00:00:00Z"
         image="https://teamcelular.com/images/guia_cambio_bateria.webp"
         url="https://teamcelular.com/guias/cambio-bateria-celular"
       />
@@ -236,12 +236,16 @@ export default function BatteryReplacementGuide() {
             ¿Cuándo hay que cambiar la batería del celular?
           </h1>
           <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
-            Reemplazo de batería con <strong className="text-primary">repuestos originales y certificados</strong>, 
-            garantia escrita segun repuesto y trabajo, y servicio express en <strong>1-2 horas</strong>. 
-            Atendemos iPhone, Samsung, Motorola y todas las marcas en dos talleres en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).
+            La batería se cambia cuando perdió capacidad real: dura menos de media jornada de uso normal,
+            se apaga con carga por encima del 20% o el equipo se calienta en reposo. Si en cambio se descarga
+            solo con una app abierta, o carga lento pero aguanta bien, el problema suele ser
+            <strong> consumo de software o el pin de carga</strong>, y reemplazar la batería no cambia nada.
+            Team Celular revisa ciclos, consumo y puerto antes de tocar la pieza, en Paraguay 2451 (Recoleta)
+            y Amenábar 2032 (Belgrano), CABA. El cambio sale en <strong>1 a 2 horas</strong> con garantía
+            escrita de 90 días.
           </p>
           <div className="mt-4 flex justify-center">
-            <GuideByline modifiedTime="2026-06-09T00:00:00Z" tone="light" />
+            <GuideByline modifiedTime="2026-08-20T00:00:00Z" tone="light" />
           </div>
 
           {/* Quick Stats */}

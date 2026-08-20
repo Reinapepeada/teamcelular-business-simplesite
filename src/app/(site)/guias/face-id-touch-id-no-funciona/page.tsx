@@ -13,7 +13,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
   title: "Face ID o Touch ID no Funciona: Causas y Solución",
   description:
-    "¿Face ID o Touch ID dejó de funcionar? Team Celular, Recoleta y Belgrano (CABA), diagnostica sensores biométricos el mismo día: flex, módulo o placa con criterio técnico.",
+    "Face ID o Touch ID que dejó de andar: cuándo es flex, cuándo módulo y cuándo placa. Team Celular, Recoleta y Belgrano CABA, diagnostica el mismo día.",
   keywords: [
     "face id no funciona",
     "touch id no funciona",
@@ -144,7 +144,7 @@ export default function FaceIdTouchIdGuidePage() {
       badge="Diagnostico avanzado"
       readingTime="6 min"
       publishedTime="2026-04-16T00:00:00Z"
-      modifiedTime="2026-06-09T00:00:00Z"
+      modifiedTime="2026-08-20T00:00:00Z"
       imagePath="/images/guia_iphone.webp"
       heroPoints={[
         "Detecta la causa mas probable segun sintomas.",

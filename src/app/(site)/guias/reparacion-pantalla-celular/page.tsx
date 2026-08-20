@@ -26,7 +26,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelula
 export const metadata: Metadata = {
   title: "¿Cuándo Cambiar la Pantalla del Celular? Guía Técnica",
   description:
-    "Líneas, manchas o touch que falla: cómo saber si el módulo se cambia o se repara, qué diferencia hay entre OLED original y genérico, y qué revisar antes de pagar.",
+    "Líneas, manchas o touch que falla: cuándo el módulo se cambia y cuándo el problema es flex o placa. Qué revisar antes de aprobar el reemplazo.",
   keywords: [
     "cambio pantalla celular Buenos Aires",
     "pantalla iPhone original",
@@ -242,7 +242,7 @@ export default function ScreenReplacementGuide() {
         title="Cambio de pantalla celular en Buenos Aires | Display original Team Celular"
         description="Cambio de pantalla con displays OLED originales, True Tone preservado y garantia escrita segun repuesto y trabajo. Service express 2-4 horas en CABA."
         publishedTime="2024-11-30T00:00:00Z"
-        modifiedTime="2026-06-09T00:00:00Z"
+        modifiedTime="2026-08-20T00:00:00Z"
         image="https://teamcelular.com/images/guia_cambio_modulo.webp"
         url="https://teamcelular.com/guias/reparacion-pantalla-celular"
       />
@@ -278,12 +278,15 @@ export default function ScreenReplacementGuide() {
             ¿Cuándo hay que cambiar la pantalla del celular?
           </h1>
           <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
-            Reemplazo de pantalla con <strong className="text-primary">displays OLED originales</strong>, 
-            <strong> True Tone preservado</strong>, garantia escrita segun repuesto y trabajo, y servicio 
-            express en <strong>2-4 horas</strong>. Reparamos iPhone, Samsung, Motorola y todas las marcas en dos talleres en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).
+            La pantalla se cambia cuando el daño está en el módulo: vidrio partido, líneas fijas, manchas
+            que crecen o touch que no responde en una zona. Si la imagen se ve bien pero el táctil falla
+            entero, o el equipo parpadea al moverlo, suele ser <strong>flex o placa</strong> y el reemplazo
+            de módulo no lo resuelve. Por eso conviene el diagnóstico antes de aprobar el cambio.
+            Team Celular lo hace el mismo día en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA:
+            el cambio de módulo sale en <strong>2 a 4 horas</strong> con garantía escrita de 90 días.
           </p>
           <div className="mt-4 flex justify-center">
-            <GuideByline modifiedTime="2026-06-09T00:00:00Z" tone="light" />
+            <GuideByline modifiedTime="2026-08-20T00:00:00Z" tone="light" />
           </div>
 
           {/* Quick Stats */}

@@ -13,7 +13,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
   title: "Celular Mojado: Qué Hacer en las Primeras 2 Horas",
   description:
-    "¿Se mojó tu celular? Team Celular, Recoleta y Belgrano (CABA), diagnostica daño por líquidos el mismo día. Actuá en las primeras 2 horas para reducir riesgo de corto y corrosión.",
+    "¿Se mojó tu celular? Qué hacer en las primeras 2 horas para frenar la corrosión. Team Celular, Recoleta y Belgrano CABA, diagnostica el mismo día.",
   keywords: [
     "celular mojado que hacer",
     "telefono mojado solucion",
@@ -144,7 +144,7 @@ export default function WetPhoneGuidePage() {
       badge="Emergencia tecnica"
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
-      modifiedTime="2026-06-09T00:00:00Z"
+      modifiedTime="2026-08-20T00:00:00Z"
       imagePath="/images/guia_microelectronica.webp"
       heroPoints={[
         "Pasos concretos para minimizar corto y corrosion.",

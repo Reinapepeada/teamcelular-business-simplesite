@@ -25,7 +25,7 @@ import GuideByline from "@/components/seo/GuideByline";
 export const metadata: Metadata = {
   title: "Mantenimiento Preventivo de Celulares en CABA | Team Celular",
   description:
-    "Mantenimiento preventivo de celulares en Team Celular, Recoleta CABA. Limpieza con ultrasonido, revisión de batería y garantía escrita 90 días.",
+    "Mantenimiento preventivo de celulares en Team Celular, Recoleta y Belgrano CABA. Limpieza con ultrasonido, revisión de batería y garantía escrita 90 días.",
   keywords: [
     "mantenimiento preventivo celulares",
     "cuidado smartphone Buenos Aires",
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2024-04-05T00:00:00Z",
-    modifiedTime: "2026-06-08T00:00:00Z",
+    modifiedTime: "2026-08-20T00:00:00Z",
     section: "Guías Técnicas",
   },
   twitter: {
@@ -195,7 +195,7 @@ export default function PreventiveMaintenanceGuide() {
         title="Mantenimiento Preventivo de Celulares | Team Celular"
         description="Guía completa de mantenimiento preventivo para smartphones: checklist profesional, cuidado de batería, actualización de software y limpieza especializada."
         publishedTime="2024-04-05T00:00:00Z"
-        modifiedTime="2026-05-08T00:00:00Z"
+        modifiedTime="2026-08-20T00:00:00Z"
         image="https://teamcelular.com/images/guia_mantenimiento.webp"
         url={PAGE_URL}
       />
@@ -237,7 +237,7 @@ export default function PreventiveMaintenanceGuide() {
             dura entre 2 y 4 horas y sale con garantía escrita de 90 días.
           </p>
           <div className="mt-4 flex justify-center">
-            <GuideByline modifiedTime="2026-05-08T00:00:00Z" tone="light" />
+            <GuideByline modifiedTime="2026-08-20T00:00:00Z" tone="light" />
           </div>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
