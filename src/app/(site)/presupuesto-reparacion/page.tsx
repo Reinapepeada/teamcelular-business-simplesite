@@ -5,6 +5,8 @@ import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 import { BUDGET_RESPONSE_MESSAGE, REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
+import GuideByline from "@/components/seo/GuideByline";
+import { PRICES_UPDATED } from "@/lib/repairPrices";
 import {
     FaBatteryHalf,
     FaCamera,
@@ -215,6 +217,9 @@ export default function PresupuestoReparacionPage() {
                         <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
                             Team Celular tiene dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2032, Belgrano</strong>. Respondemos presupuestos en hasta 2 h por WhatsApp. Pantalla, batería, carga y microelectrónica con garantía escrita de 90 días sobre trabajo y repuesto.
                         </p>
+                        <div className="mt-4">
+                          <GuideByline modifiedTime={PRICES_UPDATED} tone="light" />
+                        </div>
 
                         <ul className="mt-6 space-y-3 text-slate-700 dark:text-slate-300">
                             <li className="flex items-start gap-3">

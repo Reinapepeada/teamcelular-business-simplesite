@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { track } from "@/lib/analytics/track";
+import { lookupQuote, quotableModels } from "@/lib/quoteLookup";
+import { formatArsPrice } from "@/lib/repairPrices";
 import {
     BUDGET_FUNNEL_EVENTS,
     BUDGET_WIZARD_STEPS,
@@ -393,6 +395,7 @@ export default function RepairsForm() {
                             type="text"
                             value={model}
                             onChange={(event) => setModel(event.target.value)}
+                            list="modelos-con-precio"
                             placeholder="Ej: iPhone 13, Galaxy A54, Redmi Note 11"
                             className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
                         />
@@ -437,6 +440,8 @@ export default function RepairsForm() {
                             );
                         })}
                     </div>
+                    <QuoteEstimate brand={brand} model={model} repairTypes={repairTypes} />
+
                     {repairTypes.length > 0 ? (
                         <div className="space-y-2">
                             <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -643,6 +648,12 @@ export default function RepairsForm() {
                 </p>
             ) : null}
 
+            <datalist id="modelos-con-precio">
+                {quotableModels().map((name) => (
+                    <option key={name} value={name} />
+                ))}
+            </datalist>
+
             <input type="hidden" name="brand" value={brand} />
             <input type="hidden" name="model" value={model} />
             {repairTypes.map((repairType) => (
@@ -705,6 +716,51 @@ export default function RepairsForm() {
 
             <p className="text-xs leading-5 text-slate-500 dark:text-slate-400">
                 Solo usamos esta informacion para responder tu consulta tecnica.
+            </p>
+        </div>
+    );
+}
+
+/**
+ * Precio de referencia antes de pedir los datos de contacto. El SERP de
+ * "presupuesto" lo ganan cotizadores que devuelven un numero en el momento;
+ * el formulario solo prometia una respuesta por WhatsApp.
+ *
+ * Nunca reemplaza al envio del lead: aparece arriba del boton.
+ */
+function QuoteEstimate({
+    brand,
+    model,
+    repairTypes,
+}: {
+    brand: string;
+    model: string;
+    repairTypes: string[];
+}) {
+    const quote = lookupQuote(brand, model, repairTypes);
+    if (!quote) return null;
+
+    const price =
+        quote.precision === "exact"
+            ? formatArsPrice(quote.from)
+            : `${formatArsPrice(quote.from)} a ${formatArsPrice(quote.to)}`;
+
+    return (
+        <div className="rounded-2xl border border-primary/30 bg-primary/5 p-4">
+            <p className="text-xs font-semibold uppercase tracking-wide text-primary">
+                Precio de referencia
+            </p>
+            <p className="mt-1 text-sm text-slate-700 dark:text-slate-200">
+                {quote.label}
+            </p>
+            <p className="mt-1 text-2xl font-bold tabular-nums text-slate-900 dark:text-white">
+                {price}
+            </p>
+            <p className="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">
+                {quote.precision === "exact"
+                    ? "Precio de lista para ese modelo. Sale en 2 a 4 horas, con garantia escrita de 90 dias."
+                    : "Rango segun la gama del equipo. Te confirmamos el numero exacto tras el diagnostico, antes de intervenir."}{" "}
+                Segui con el formulario y te lo cerramos por WhatsApp.
             </p>
         </div>
     );
