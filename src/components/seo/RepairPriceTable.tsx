@@ -26,8 +26,8 @@ export default function RepairPriceTable({
       <div className="mt-6 overflow-x-auto">
         <table className="w-full min-w-[34rem] border-collapse text-left text-sm">
           <caption className="sr-only">
-            Precios aproximados de reparación de {brand} en CABA, en rangos por
-            gama, actualizados el {updatedLabel}
+            Precios de reparación de {brand} en CABA, actualizados el{" "}
+            {updatedLabel}
           </caption>
           <thead>
             <tr className="border-b border-slate-300 dark:border-slate-700">
@@ -61,9 +61,7 @@ export default function RepairPriceTable({
       </div>
 
       <p className="mt-3 text-[13px] text-slate-500 dark:text-slate-400">
-        Precios aproximados: son rangos por gama, no valores cerrados. El número
-        exacto sale del diagnóstico y te lo confirmamos antes de intervenir el
-        equipo. Actualizados el {updatedLabel}. Pantalla y batería salen en 2 a
+        Precios actualizados el {updatedLabel}. Pantalla y batería salen en 2 a
         4 horas.
       </p>
     </section>

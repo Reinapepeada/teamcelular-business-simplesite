@@ -623,13 +623,13 @@ export default function XiaomiRepairGuidePage() {
               ¿Cuánto cuesta reparar un Xiaomi, Redmi o POCO en Buenos Aires?
             </h2>
             <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-slate-400">
-              Precios aproximados: son rangos por gama, no valores cerrados. El precio exacto depende del modelo y del repuesto disponible, y te lo confirmamos tras el diagnóstico.
+              Rangos orientativos para 2026. El precio exacto depende del modelo y el repuesto disponible.
             </p>
           </div>
           <div className="overflow-x-auto px-6 py-2">
             <table className="w-full min-w-[38rem] border-collapse text-left text-sm">
               <caption className="sr-only">
-                Precios aproximados de reparación de Xiaomi, Redmi y POCO en CABA, en rangos por gama, actualizados en agosto de 2026
+                Precios de reparación de Xiaomi, Redmi y POCO en CABA, actualizados en agosto de 2026
               </caption>
               <thead>
                 <tr className="border-b border-slate-200 dark:border-slate-800">
