@@ -8,7 +8,11 @@ Fecha: 2026-08-20 · Sucursales: Paraguay 2451 (Recoleta) y Amenábar 2032 (Belg
 - La API key de Google del proyecto tiene **Places API bloqueada** (`API_KEY_SERVICE_BLOCKED`), así que tampoco hay datos de ficha vía Places.
 - Lo que sigue sale de OpenStreetMap (Nominatim + Overpass), del HTML en vivo y de Search Console.
 
-**Maps Health Score: no calculable en Tier 0.** Faltan los datos de ficha y reseñas que pesan la mayor parte del score. Lo que sí se puede afirmar está abajo.
+**Maps Health Score: no calculable en Tier 0.** De los 25 campos del checklist de
+ficha, solo 6 son observables sin acceso a la API: nombre, dirección, teléfono, sitio,
+horario y categoría. Sobre esos seis, **dos están mal en Bing** (nombre y horario) y
+el nombre además está mal en Google. Publicar un número sobre esa muestra sería
+inventar precisión que no tengo.
 
 ---
 
@@ -90,6 +94,40 @@ multi-sucursal; lo que no se acepta es la lista de servicios que tiene hoy Recol
 
 **Nota:** Belgrano tampoco aparece en la data de Search Console — ni una query de marca entre 1.297, ni la página `/sucursales/caba/belgrano` entre las 127 con impresiones. Con la ficha existiendo, la explicación más probable es que la ficha todavía no acumuló señal, o que el nombre en una palabra no se asocia a la marca.
 
+### 4. Bing Places: una sola ficha, con los horarios equivocados
+
+Consultado en vivo desde Bing Maps (ficha `YN43380EEBC2E3B15A`):
+
+| Campo | Bing | Sitio | Estado |
+|---|---|---|---|
+| Nombre | `Team celular \| Reparacion de celulares \| Reparacion de computadoras` | `Team Celular - Recoleta` | ❌ conflicto |
+| Dirección | Calle Paraguay 2451, C1121ABM | Paraguay 2451, C1121 | ✅ coincide |
+| Teléfono | 011 5103-4595 | +54 11 5103-4595 | ✅ coincide |
+| **Horario** | **11:00 – 18:00** lun a vie | **10:30 – 18:00** lun a vie | ❌ **media hora de diferencia** |
+| Sitio web | `http://teamcelular.com` | HTTPS | ⚠️ apunta a HTTP |
+| Reseñas | ninguna | — | ⚠️ |
+| Foto | tomada de Facebook | — | ⚠️ sin foto propia |
+
+**El horario es el hallazgo que cuesta plata.** Media hora de diferencia significa que
+entre las 10:30 y las 11:00 Bing te da por cerrado. Quien filtra por "abierto ahora"
+en ese rango no te ve, y el estado de apertura al momento de la búsqueda es uno de los
+factores de ranking local más citados.
+
+**Belgrano no existe en Bing.** Buscando por Amenábar 2032 devuelve la misma ficha de
+Paraguay 2451. Bing Places alimenta Copilot, así que la sucursal es invisible para ese
+canal completo.
+
+### 5. Presencia cruzada por plataforma
+
+| Plataforma | Recoleta | Belgrano |
+|---|---|---|
+| Google Business Profile | ✅ con nombre saturado | ✅ como `TeamCelular Belgrano` |
+| Bing Places | ✅ con horario incorrecto | ❌ inexistente |
+| OpenStreetMap | ✅ `shop/mobile_phone` | ❌ inexistente |
+| Apple Maps | sin API pública, verificar a mano | sin API pública, verificar a mano |
+
+Belgrano existe en una sola de las cuatro plataformas comprobables.
+
 ---
 
 ## Lo que no pude evaluar
@@ -99,7 +137,8 @@ Requiere DataForSEO o acceso a Business Profile:
 - **Geo-grid / SoLV**: en qué puntos del mapa aparecés en el top 3 y en cuáles desaparecés. Es la medición que convertiría la hipótesis del pack de mapas en un número.
 - **Auditoría de ficha**: categorías primaria y secundarias, atributos, fotos, productos, publicaciones, horarios especiales.
 - **Inteligencia de reseñas**: velocidad, regla de los 18 días, distribución, tasa de respuesta del dueño.
-- **NAP en Bing Places y Apple Maps**.
+- **NAP en Apple Maps** (sin API pública).
+- **Estado de reclamo de la ficha de Bing**: aparece el enlace para administrarla, lo que no confirma si está reclamada.
 
 ---
 
@@ -109,11 +148,13 @@ Requiere DataForSEO o acceso a Business Profile:
 |---|---|---|---|
 | 1 | Sacar la lista de servicios del nombre de la ficha de Recoleta | **Crítica** — riesgo de suspensión | 5 min |
 | 2 | Unificar el nombre en ambas fichas: `Team Celular - Recoleta` / `Team Celular - Belgrano` (el schema del sitio ya está alineado) | **Alta** | 20 min |
-| 3 | Cargar Belgrano en OpenStreetMap | Media | 10 min |
-| 4 | Fotos y reseñas nuevas con cadencia sostenida en ambas fichas | **Alta** — es lo que mueve el pack | continuo |
-| 5 | Contratar DataForSEO para medir geo-grid y cerrar el diagnóstico | Media | — |
+| 3 | Corregir el horario en Bing: 10:30, no 11:00 | **Alta** — te da por cerrado media hora por día | 5 min |
+| 4 | Crear la ficha de Belgrano en Bing Places | Media — alimenta Copilot | 20 min |
+| 5 | Cargar Belgrano en OpenStreetMap | Media | 10 min |
+| 6 | Fotos y reseñas nuevas con cadencia sostenida en ambas fichas | **Alta** — es lo que mueve el pack | continuo |
+| 7 | Contratar DataForSEO para medir geo-grid y cerrar el diagnóstico | Media | — |
 
-Las tres primeras son gratis y se hacen en media hora.
+Las cinco primeras son gratis y se hacen en una hora.
 
 ---
 
