@@ -6,6 +6,7 @@ import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import KnowledgeGrid from "@/components/cards/KnowledgeGrid";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
+import BranchMap from "@/components/cards/BranchMap";
 import { BRANCHES, BUSINESS_PROFILE } from "@/lib/businessProfile";
 import { BUDGET_RESPONSE_MESSAGE } from "@/lib/copyStandards";
 import { buildWebsiteMetadata } from "@/lib/seoMetadata";
@@ -89,6 +90,20 @@ const secondaryCta =
 export default function Home() {
     return (
         <div className="w-full bg-[#f7f8fc] text-slate-950 dark:bg-slate-950 dark:text-white">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "FAQPage",
+                        mainEntity: faqs.map((faq) => ({
+                            "@type": "Question",
+                            name: faq.question,
+                            acceptedAnswer: { "@type": "Answer", text: faq.answer },
+                        })),
+                    }),
+                }}
+            />
             <div className="mx-auto flex w-full max-w-[100rem] flex-col gap-10 px-4 py-5 sm:gap-16 sm:px-6 md:py-8 lg:gap-20 lg:px-8 lg:pb-20">
                 <BannerHome />
 
@@ -204,6 +219,30 @@ export default function Home() {
                                 <h3 className="font-bold">{faq.question}</h3>
                                 <p className="leading-7 text-slate-600 dark:text-slate-300">{faq.answer}</p>
                             </article>
+                        ))}
+                    </div>
+                </section>
+
+                <section aria-labelledby="branches-title" className="grid gap-6">
+                    <div>
+                        <h2 id="branches-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">Dónde estamos</h2>
+                        <p className="mt-4 max-w-3xl text-pretty leading-7 text-slate-600 dark:text-slate-300">Dos talleres en CABA, de lunes a viernes de 10:30 a 18:00, sin turno previo.</p>
+                    </div>
+                    <div className="grid gap-6 md:grid-cols-2">
+                        {BRANCHES.map((branch) => (
+                            <div key={branch.slug} className="flex flex-col gap-3">
+                                <BranchMap
+                                    address={`${branch.street}, ${branch.neighborhood}, CABA`}
+                                    name={branch.shortName}
+                                />
+                                <p className="text-sm leading-6 text-slate-600 dark:text-slate-300">
+                                    <span className="font-bold text-slate-900 dark:text-white">{branch.shortName}</span>
+                                    {" — "}{branch.street}, {branch.neighborhood}.{" "}
+                                    <Link href={branch.url} className="font-semibold text-primary hover:underline">
+                                        Cómo llegar
+                                    </Link>
+                                </p>
+                            </div>
                         ))}
                     </div>
                 </section>

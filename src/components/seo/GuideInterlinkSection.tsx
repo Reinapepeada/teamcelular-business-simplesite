@@ -11,8 +11,11 @@ type GuidePath =
   | "/guias/reparacion-xiaomi-buenos-aires"
   | "/guias/soporte-empresas-servicio-tecnico";
 
+/** Destino: incluye guias que no tienen bloque propio de interlinks. */
+type GuideTarget = GuidePath | "/guias/presupuesto-service-oficial-segunda-opinion";
+
 interface RelatedGuide {
-  href: GuidePath;
+  href: GuideTarget;
   title: string;
   description: string;
 }
@@ -184,10 +187,10 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
           "Guía para Moto G, Edge y E con foco en pantalla, batería y pin de carga.",
       },
       {
-        href: "/guias/reparacion-pantalla-celular",
-        title: "Guia de pantalla",
+        href: "/guias/presupuesto-service-oficial-segunda-opinion",
+        title: "Segunda opinión al service oficial",
         description:
-          "Criterios para elegir modulo y evitar reemplazos de baja duracion.",
+          "Qué hacer cuando el oficial presupuesta cambio de placa completa o declara el equipo sin reparación.",
       },
     ],
   },
@@ -241,7 +244,7 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
   },
 };
 
-function toGuideKey(path: GuidePath) {
+function toGuideKey(path: GuideTarget) {
   return path.replace("/guias/", "").replaceAll("-", "_");
 }
 
