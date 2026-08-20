@@ -102,10 +102,13 @@ export const TECHNICAL_AUTHOR = {
   ],
 } as const;
 
+// El `name` de cada sucursal debe coincidir palabra por palabra con el nombre
+// de su ficha de Google Business Profile: la consistencia de nombre es una de
+// las señales base del pack local.
 export const BRANCHES = [
   {
     slug: "recoleta",
-    name: "Team Celular - Sucursal Recoleta",
+    name: "Team Celular",
     shortName: "Recoleta",
     url: "/sucursales/caba/recoleta",
     street: "Paraguay 2451",
@@ -123,7 +126,7 @@ export const BRANCHES = [
   },
   {
     slug: "belgrano",
-    name: "Team Celular - Sucursal Belgrano",
+    name: "Team Celular Belgrano",
     shortName: "Belgrano",
     url: "/sucursales/caba/belgrano",
     street: "Amenábar 2032",
