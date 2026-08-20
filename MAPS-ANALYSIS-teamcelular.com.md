@@ -78,8 +78,8 @@ Propuesta de nombre canónico, un solo criterio para todo:
 
 | Dónde | Nombre |
 |---|---|
-| Ficha Recoleta | `Team Celular Recoleta` |
-| Ficha Belgrano | `Team Celular Belgrano` |
+| Ficha Recoleta | `Team Celular - Recoleta` |
+| Ficha Belgrano | `Team Celular - Belgrano` |
 | Schema del sitio | los mismos dos, exactos |
 | Organización | `Team Celular` |
 
@@ -108,7 +108,7 @@ Requiere DataForSEO o acceso a Business Profile:
 | # | Acción | Severidad | Esfuerzo |
 |---|---|---|---|
 | 1 | Sacar la lista de servicios del nombre de la ficha de Recoleta | **Crítica** — riesgo de suspensión | 5 min |
-| 2 | Unificar el nombre en ambas fichas: `Team Celular Recoleta` / `Team Celular Belgrano` (el schema del sitio ya está alineado) | **Alta** | 20 min |
+| 2 | Unificar el nombre en ambas fichas: `Team Celular - Recoleta` / `Team Celular - Belgrano` (el schema del sitio ya está alineado) | **Alta** | 20 min |
 | 3 | Cargar Belgrano en OpenStreetMap | Media | 10 min |
 | 4 | Fotos y reseñas nuevas con cadencia sostenida en ambas fichas | **Alta** — es lo que mueve el pack | continuo |
 | 5 | Contratar DataForSEO para medir geo-grid y cerrar el diagnóstico | Media | — |

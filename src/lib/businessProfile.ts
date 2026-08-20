@@ -108,7 +108,7 @@ export const TECHNICAL_AUTHOR = {
 export const BRANCHES = [
   {
     slug: "recoleta",
-    name: "Team Celular Recoleta",
+    name: "Team Celular - Recoleta",
     shortName: "Recoleta",
     url: "/sucursales/caba/recoleta",
     street: "Paraguay 2451",
@@ -126,7 +126,7 @@ export const BRANCHES = [
   },
   {
     slug: "belgrano",
-    name: "Team Celular Belgrano",
+    name: "Team Celular - Belgrano",
     shortName: "Belgrano",
     url: "/sucursales/caba/belgrano",
     street: "Amenábar 2032",
