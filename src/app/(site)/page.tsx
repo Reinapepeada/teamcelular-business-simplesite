@@ -15,7 +15,7 @@ export const metadata = buildWebsiteMetadata({
     path: "/",
     title: "Reparación de Celulares en CABA | Team Celular",
     description:
-        "Reparación de celulares en CABA. Team Celular, en Recoleta y Belgrano, repara con diagnóstico el mismo día y garantía escrita de 90 días.",
+        "Reparación de celulares en CABA con diagnóstico el mismo día y garantía escrita de 90 días. Team Celular, Recoleta y Belgrano.",
     keywords: [
         "reparacion de celulares Buenos Aires",
         "reparacion de celulares cerca de mi",

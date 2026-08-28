@@ -72,7 +72,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     zoneName: "Palermo",
     metaTitle: "Arreglo de Celulares en Palermo (CABA) | Team Celular",
     metaDescription:
-      "Arreglo de celulares en Palermo, CABA. Team Celular atiende desde Recoleta y Belgrano, a 10-15 min: pantalla, batería y carga con garantía 90 días.",
+      "Arreglo de celulares en Palermo: garantía escrita de 90 días y taller a 10-15 min. Team Celular, Recoleta y Belgrano, CABA.",
     socialDescription:
       "Team Celular atiende Palermo desde Recoleta y Belgrano. Pantalla, batería y carga con garantía escrita 90 días.",
     heroBadge: "Cobertura Palermo",

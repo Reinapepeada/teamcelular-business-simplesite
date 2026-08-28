@@ -30,7 +30,7 @@ export const metadata = buildWebsiteMetadata({
     path: "/presupuesto-reparacion",
     title: "Presupuesto de Reparación de Celulares | Team Celular",
     description:
-        "Presupuesto de reparación de celular en CABA, sin compromiso. Team Celular en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano. Respuesta en 2 h. Garantía escrita 90 días.",
+        "Presupuesto sin compromiso y garantía escrita de 90 días. Respondemos en 2 h. Team Celular, Recoleta y Belgrano, CABA.",
     keywords: [
         "presupuesto reparación celulares",
         "servicio técnico celulares buenos aires",
