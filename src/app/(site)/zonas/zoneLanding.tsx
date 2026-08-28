@@ -370,6 +370,19 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
           Como venir desde {displayZone}
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">{config.transportTip}</p>
+        {/* Las paginas de zona absorben impresiones de "phone repair" en ingles
+            (1229 en 13 dias solo Palermo). Este enlace le pasa esa relevancia a
+            la pagina en ingles, que es la que deberia atender esa consulta. */}
+        <p className="mt-3 text-sm text-slate-500 dark:text-slate-400" lang="en">
+          Looking for phone repair in English?{" "}
+          <Link
+            href="/en/phone-repair-buenos-aires"
+            className="font-semibold text-primary hover:underline"
+          >
+            We speak English
+          </Link>
+          .
+        </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
             href="/contacto"
