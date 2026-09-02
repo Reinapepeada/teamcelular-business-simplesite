@@ -431,3 +431,51 @@ en la excepcion 2 textualmente.
 Nada de esto afecta al organico. La reparacion sigue trayendo el grueso del trafico
 por Search Console, la home convierte al 24,2% y el trabajo de contenido y precios
 publicados no depende de Ads.
+
+
+---
+
+# Investigacion: por que los competidores si anuncian (2026-09-02)
+
+Revisados tres que aparecen con anuncios en las mismas busquedas:
+
+| Competidor | Como se presenta | Tiene carrito y precios |
+|---|---|---|
+| GoFix | "Compra productos de Electronica/IT/Computacion por internet" | si |
+| Koyology | Clasificada como "Tienda de accesorios para telefonos celulares" | si |
+| iseephone | "Tu tienda de confianza en accesorios para celulares y servicio tecnico" | si, envio gratis desde $80.000 |
+
+Los tres venden productos online. Eso los pone dentro de la excepcion 1 de la
+politica: *anuncios que venden tecnologia de consumo, incluso si la pagina de destino
+tiene secciones de asistencia tecnica*. iseephone incluso dice "servicio tecnico" en
+su titulo y publica igual, porque el negocio es tambien una tienda.
+
+## Por que teamcelular.com no entra en esa excepcion
+
+`/tienda` tiene 65 URLs con schema `Product` y `Offer`, pero:
+
+| | Competidores | teamcelular.com |
+|---|---|---|
+| Precio visible en la ficha | si | **no** |
+| Carrito | si | **no existe** (`/cart` devuelve 404) |
+| Checkout | si | **no existe** |
+| Boton principal | "Agregar al carrito" | **"Consultar por WhatsApp"** |
+| Indexacion | indexadas | **noindex** |
+
+Para el clasificador eso no es venta de producto: es una consulta de servicio, que es
+exactamente lo que la politica restringe. La tienda existe como catalogo de captacion,
+no como comercio.
+
+## Las dos rutas reales
+
+**A. Convertir la tienda en tienda.** Mostrar precio, habilitar carrito y checkout,
+sacar el noindex. Es trabajo de producto y una decision de negocio: implica querer
+vender repuestos y accesorios online de verdad. Recien ahi los anuncios de producto
+entran en la excepcion 1.
+
+**B. Campana solo para empresas.** Excepcion 2, textual, y no necesita ecommerce.
+La landing ya existe: `/guias/soporte-empresas-servicio-tecnico`, planes desde 5
+dispositivos con SLA y logistica.
+
+Ninguna de las dos garantiza aprobacion: la deteccion es automatica. Pero son las
+unicas dos que la politica describe como permitidas.
