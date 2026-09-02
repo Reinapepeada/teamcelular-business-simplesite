@@ -1,0 +1,109 @@
+# Lista de palabras clave negativas — Team Celular
+#
+# Como usarla: Google Ads → Herramientas → Administrador de recursos →
+# Listas de palabras clave negativas → Crear lista → pegar todo lo de abajo
+# (sin las lineas que empiezan con #) → aplicar la lista a la campana.
+#
+# Una lista compartida y no negativas sueltas por campana: se edita en un solo
+# lugar y aplica a todo.
+#
+# Cada bloque indica las impresiones reales que ese termino junto en Search
+# Console entre el 1 de junio y el 30 de agosto de 2026, con cero o casi cero
+# clicks. En organico no molestan; en pago cada una de esas impresiones puede
+# convertirse en un click cobrado.
+
+# --- Trafico extranjero (2.679 impresiones, 1 click) ---
+phone repair
+cell phone
+near me
+repair shop
+"iphone repair"
+
+# --- Portugues: Brasil (47 impresiones, 0 clicks) ---
+conserto
+aparelho
+assistencia
+perto de mim
+celular perto
+
+# --- Buscan aprender, no contratar (65 impresiones, 0 clicks) ---
+curso
+cursos
+capacitacion
+aprender
+tutorial
+como reparar
+como arreglar
+como cambiar
+paso a paso
+manual
+diy
+hazlo tu mismo
+
+# --- Buscan trabajo ---
+empleo
+trabajo
+vacante
+busco trabajo
+tecnico se ofrece
+sueldo
+
+# --- Quieren la pieza, no el servicio (70 impresiones, 0 clicks) ---
+repuestos
+repuesto
+mayorista
+al por mayor
+distribuidor
+comprar pantalla
+comprar bateria
+venta de repuestos
+
+# --- Quieren comprar un equipo, no repararlo (74 impresiones, 2 clicks) ---
+comprar
+venta
+vendo
+usado
+usados
+segunda mano
+precio de celulares
+cuanto sale un iphone
+plan canje
+
+# --- Servicios que no prestamos ---
+liberar
+liberacion
+desbloquear
+desbloqueo
+imei
+icloud
+cuenta google
+formatear
+recuperar contrasena
+espiar
+hackear
+rastrear
+
+# --- Buscan gratis ---
+gratis
+sin cargo
+regalado
+barato
+mas barato
+economico
+
+# --- Otras marcas de servicio tecnico y cadenas ---
+movistar
+personal
+claro
+samsung oficial
+apple store
+garantia oficial
+
+# --- Notas ---
+# 'tienda' junto 60 impresiones y 2 clicks: NO la agregues como negativa si
+# queres trafico al catalogo de repuestos. Si la campana es solo de servicio
+# tecnico, agregala.
+#
+# Revisa el informe de terminos de busqueda cada semana durante el primer mes.
+# La mitad de las negativas buenas aparecen ahi, no en una lista armada de
+# antemano.
