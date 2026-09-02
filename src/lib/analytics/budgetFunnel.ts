@@ -20,7 +20,6 @@ export const BUDGET_FUNNEL_EVENTS = {
   stepBack: "budget_wizard_step_back",
   abandoned: "budget_wizard_abandon",
   submit: "lead_form_submit",
-  redirect: "lead_whatsapp_redirect",
 } as const;
 
 export const BUDGET_FUNNEL_EVENT_MAP = {
@@ -46,10 +45,6 @@ export const BUDGET_FUNNEL_EVENT_MAP = {
   },
   lead_form_submit: {
     goal: "Envio del formulario",
-    requiredFields: ["lead_channel", "repair_type", "urgency", "contact_channel"],
-  },
-  lead_whatsapp_redirect: {
-    goal: "Salida a WhatsApp",
     requiredFields: ["lead_channel", "repair_type", "urgency", "contact_channel"],
   },
 } as const;
