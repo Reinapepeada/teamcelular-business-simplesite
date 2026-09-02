@@ -524,7 +524,7 @@ export default function PreventiveMaintenanceGuide() {
               href="/guias/soporte-empresas-servicio-tecnico"
               className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
             >
-              <h3 className="mb-2 font-bold text-primary">Soporte Corporativo</h3>
+              <h3 className="mb-2 font-bold text-primary">Empresas y flotas</h3>
               <p className="text-sm text-slate-700 dark:text-slate-300">
                 Planes de mantenimiento para empresas con SLA
               </p>
