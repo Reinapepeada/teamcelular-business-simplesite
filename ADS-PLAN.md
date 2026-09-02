@@ -370,9 +370,15 @@ Con ese presupuesto no alcanza para cinco grupos. Dos:
 | Grupo | Destino | Por que |
 |---|---|---|
 | Genericas locales | `/` | El hueco que el organico no cubre (0,55% de CTR en posicion 7) + la pagina que mejor convierte |
-| Placa y agua | `/reparaciones/reparacion-placa-caba` | Mejor margen, mejor CTR organico, 23,5% de conversion |
+| Pantalla | `/reparaciones/cambio-pantalla-caba` | El trabajo mas rutinario, 2 a 4 horas, y la pagina transaccional con mejor senal (41,7%, aunque sobre 12 sesiones) |
 
-Los otros tres pausados. Cuando haya datos propios de la campana, se abren.
+**Placa y agua queda afuera por decision del negocio**, no por los datos: convertia al
+23,5% y es el de mayor margen, pero no se quiere ese tipo de trabajo. Se suman
+negativas de campana (placa, reballing, microelectronica, mojado, corrosion, no
+enciende) para que las genericas tampoco lo traigan. El trabajo de placa sigue
+llegando por organico, que no cuesta nada.
+
+Los otros grupos pausados. Cuando haya datos propios de la campana, se abren.
 
 ## Advertencia sobre estos numeros
 
