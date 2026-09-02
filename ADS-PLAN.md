@@ -374,8 +374,11 @@ Con ese presupuesto no alcanza para cinco grupos. Dos:
 
 **Placa y agua queda afuera por decision del negocio**, no por los datos: convertia al
 23,5% y es el de mayor margen, pero no se quiere ese tipo de trabajo. Se suman
-negativas de campana (placa, reballing, microelectronica, mojado, corrosion, no
-enciende) para que las genericas tampoco lo traigan. El trabajo de placa sigue
+negativas de campana para que las genericas tampoco lo traigan: `placa`, `reballing`,
+`microelectronica` y `corrosion`, que son terminos de quien ya sabe que el dano es a
+nivel componente. `mojado`, `sumergido` y `no enciende` quedan permitidas: son
+sintomas de entrada que muchas veces terminan siendo bateria o pin de carga, y ese
+trabajo si se quiere. El trabajo de placa sigue
 llegando por organico, que no cuesta nada.
 
 Los otros grupos pausados. Cuando haya datos propios de la campana, se abren.
