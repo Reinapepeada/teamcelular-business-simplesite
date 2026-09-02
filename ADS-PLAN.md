@@ -331,3 +331,51 @@ Nada de "presupuesto sin cargo" ni "diagnóstico gratis". La revisión técnica 
 arancelada, entre 15.000 y 25.000 pesos según el caso. Prometer gratis en el anuncio y
 cobrar en el mostrador genera reclamos, malas reseñas y riesgo de desaprobación por
 política de Google. El presupuesto por WhatsApp sí es sin cargo, y así está redactado.
+
+
+---
+
+# Triangulacion con GA4 — que conviene pujar de verdad
+
+Las landings de la primera version se eligieron por logica de intencion. Cruzadas
+con las conversiones reales de GA4 (90 dias, tasa sobre sesiones que entraron por
+esa pagina), una eleccion estaba mal y otras quedaron confirmadas.
+
+| Pagina de entrada | Sesiones | Convierten | Tasa |
+|---|---|---|---|
+| `/` (home) | 223 | 54 | **24,2%** |
+| `/reparaciones/reparacion-placa-caba` | 17 | 4 | 23,5% |
+| `/guias/reparacion-samsung-buenos-aires` | 61 | 12 | 19,7% |
+| `/guias/reparacion-iphone-buenos-aires` | 50 | 8 | 16,0% |
+| `/zonas/palermo` | 38 | 4 | 10,5% |
+| `/presupuesto-reparacion` | 52 | 3 | **5,8%** |
+| `/guias/pin-de-carga-suelto-solucion` | 26 | 0 | **0%** |
+
+**Correccion 1: el grupo principal ya no va al formulario.** `/presupuesto-reparacion`
+convierte al 5,8% como pagina de entrada, la peor de las que tienen volumen. Quien cae
+en frio sobre un formulario sin contexto se va, y el trafico de anuncios es frio por
+definicion. El grupo "Genericas locales" apunta ahora a la home, que convierte al
+24,2% con el mayor volumen medido.
+
+**Correccion 2: no pujar por pin de carga.** `/guias/pin-de-carga-suelto-solucion`
+tiene 2.623 impresiones en Search Console y **cero conversiones** en 26 sesiones. Es
+trafico que lee y se va. El grupo "Bateria y carga" queda pausado.
+
+**Confirmado: placa y agua.** 23,5% de conversion valida el grupo de mayor margen.
+
+## Que correr con 50.000 pesos
+
+Con ese presupuesto no alcanza para cinco grupos. Dos:
+
+| Grupo | Destino | Por que |
+|---|---|---|
+| Genericas locales | `/` | El hueco que el organico no cubre (0,55% de CTR en posicion 7) + la pagina que mejor convierte |
+| Placa y agua | `/reparaciones/reparacion-placa-caba` | Mejor margen, mejor CTR organico, 23,5% de conversion |
+
+Los otros tres pausados. Cuando haya datos propios de la campana, se abren.
+
+## Advertencia sobre estos numeros
+
+Son visitantes organicos, que llegan mas decididos que los de un anuncio. La tasa
+pagada va a ser menor. Sirven para ordenar prioridades entre paginas, no para
+proyectar cuantos leads vas a tener.
