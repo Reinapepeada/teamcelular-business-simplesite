@@ -388,3 +388,46 @@ Los otros grupos pausados. Cuando haya datos propios de la campana, se abren.
 Son visitantes organicos, que llegan mas decididos que los de un anuncio. La tasa
 pagada va a ser menor. Sirven para ordenar prioridades entre paginas, no para
 proyectar cuantos leads vas a tener.
+
+
+---
+
+# Por que la campana de reparacion no puede correr (2026-09-02)
+
+Los anuncios de reparacion quedaron rechazados o limitados bajo la politica
+**"Asistencia tecnica de terceros para consumidores"**, por deteccion automatica.
+Reescribir el texto no sirvio: una version sin "service", "tecnico", "soporte" ni
+"diagnostico" cayo igual. El clasificador mira el rubro, no las palabras.
+
+La politica tiene **dos excepciones**, y ahi esta la explicacion de por que los
+competidores si anuncian:
+
+1. Anuncios que **venden tecnologia de consumo**, incluso si la pagina de destino
+   tiene secciones de asistencia tecnica.
+2. Anunciantes que dan asistencia tecnica **exclusivamente a empresas**.
+
+| Competidor | Como se presenta | Excepcion |
+|---|---|---|
+| GoFix | Tienda online: carrito, precios, categorias de producto. "Compra productos de Electronica/IT/Computacion por internet" | 1 |
+| Koyology | Clasificada como "Tienda de accesorios para telefonos celulares" | 1 |
+| Team Celular | Anuncios de reparacion hacia paginas de reparacion | ninguna |
+
+**No existe certificacion para este caso.** La politica no menciona ningun programa
+de verificacion que habilite anunciar asistencia tecnica de consumo, ni ninguna via
+para un taller fisico. Las apelaciones en curso probablemente no prosperen.
+
+## Las dos vias viables
+
+**Vender productos.** 65 URLs en `/tienda` y Merchant Center ya vinculado. Anuncios de
+modulos, baterias, fundas y cargadores, con destino a fichas de producto. Tiene que ser
+venta real, no un anuncio de reparacion disfrazado.
+
+**Solo empresas.** `/guias/soporte-empresas-servicio-tecnico`, planes desde 5
+dispositivos con SLA y logistica. Una campana dirigida exclusivamente a empresas entra
+en la excepcion 2 textualmente.
+
+## Que sigue valiendo
+
+Nada de esto afecta al organico. La reparacion sigue trayendo el grueso del trafico
+por Search Console, la home convierte al 24,2% y el trabajo de contenido y precios
+publicados no depende de Ads.
