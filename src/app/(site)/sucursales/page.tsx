@@ -181,12 +181,6 @@ export default function SucursalesPage() {
             >
               Cotizar en Recoleta
             </a>
-            <Link
-              href="/zonas/recoleta"
-              className="rounded-full border border-primary/40 px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10"
-            >
-              Ver zona Recoleta
-            </Link>
           </div>
         </article>
 
@@ -218,12 +212,6 @@ export default function SucursalesPage() {
             >
               Cotizar en Belgrano
             </a>
-            <Link
-              href="/zonas/belgrano"
-              className="rounded-full border border-secondary/50 px-6 py-3 text-sm font-semibold text-secondary transition hover:bg-secondary/10"
-            >
-              Ver zona Belgrano
-            </Link>
           </div>
         </article>
       </section>

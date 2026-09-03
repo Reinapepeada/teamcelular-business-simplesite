@@ -46,6 +46,7 @@ export interface NearbyZone {
 }
 
 export interface ZoneLandingConfig {
+  noIndex?: boolean;
   slug: string;
   zoneName: string;
   zoneAlias?: string;
@@ -183,7 +184,7 @@ export function buildZoneMetadata(config: ZoneLandingConfig): Metadata {
     title: config.metaTitle,
     description: config.metaDescription,
     robots: {
-      index: true,
+      index: !config.noIndex,
       follow: true,
     },
     languages: {
@@ -268,10 +269,25 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
               {config.heroBadge}
             </p>
             <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
-              Arreglo de celulares para {displayZone} (CABA)
+              {displayZone}: arreglo de celulares en CABA
             </h1>
             <p className="max-w-3xl text-lg leading-relaxed text-slate-100/90">
               {config.heroIntro}
+            </p>
+            {/* Salida explicita para la intencion generica: estas paginas de
+                barrio venian ranqueando head terms ("reparacion de celulares",
+                496 impresiones y 0 clicks en 26 dias) y el visitante no
+                encontraba donde seguir. */}
+            <p className="max-w-3xl text-sm text-slate-200/80">
+              ¿No buscabas {displayZone} en particular? Entrá por{" "}
+              <Link href="/" className="font-semibold text-white underline underline-offset-4">
+                reparación de celulares en CABA
+              </Link>{" "}
+              para ver el servicio completo, o por{" "}
+              <Link href="/sucursales" className="font-semibold text-white underline underline-offset-4">
+                las dos sucursales
+              </Link>
+              .
             </p>
             <div className="flex flex-wrap gap-3">
               <TrackedCtaLink

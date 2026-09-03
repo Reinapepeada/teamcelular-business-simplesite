@@ -1,72 +1,6 @@
 import type { ZoneLandingConfig } from "./zoneLanding";
 
 export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
-  recoleta: {
-    slug: "recoleta",
-    branchSlug: "recoleta",
-    zoneName: "Recoleta",
-    metaTitle: "Arreglo de Celulares en Recoleta: Cobertura y Cómo Llegar",
-    metaDescription:
-      "Cubrimos Recoleta y alrededores (Palermo, Belgrano, Microcentro) desde Paraguay 2451. Cómo llegar, cuánto demora cada reparación y garantía de 90 días.",
-    socialDescription:
-      "Pantalla, batería, carga y placa en Recoleta. Presupuesto rápido y garantía por escrito.",
-    heroBadge: "Atencion local en Recoleta",
-    heroIntro:
-      "Team Celular, en Paraguay 2451 Recoleta CABA, repara celulares con diagnóstico el mismo día, repuestos de calidad y garantía escrita de 90 días sobre trabajo y repuesto. Pantalla, batería, carga y placa sin vueltas.",
-    heroImage: "/images/teamcelular.webp",
-    heroGlowClass:
-      "bg-[radial-gradient(circle_at_84%_18%,rgba(56,189,248,0.3),transparent_44%)]",
-    whatsappText:
-      "Hola! Quiero un presupuesto para arreglo de celular en Recoleta. Marca y modelo:",
-    highlights: [
-      {
-        title: "Taller en la zona",
-        desc: "Podes venir directo a Paraguay 2451 o coordinar por WhatsApp para reducir espera.",
-        icon: "business",
-      },
-      {
-        title: "Reparaciones en el dia",
-        desc: "Pantalla, bateria y carga suelen resolverse en el dia segun modelo y stock.",
-        icon: "speed",
-      },
-      {
-        title: "Microelectronica real",
-        desc: "No enciende, reinicios o mojado: trabajamos placa con equipamiento de laboratorio.",
-        icon: "chip",
-      },
-    ],
-    localScenarios: [
-      "Si tu equipo se mojó, apagalo y no intentes cargarlo antes de traerlo; eso suele empeorar el daño.",
-      "Si ves líneas, manchas o el touch responde a medias, normalmente ya estamos hablando de cambio de módulo.",
-      "Cuando la carga entra y sale, revisamos pin, flex y batería antes de pasarte un número.",
-    ],
-    transportTip:
-      "Nuestro laboratorio está en Paraguay 2451 (Recoleta). Si estás cerca, podés venir caminando; si venís en transporte público, te pasamos la ruta por WhatsApp.",
-    nearbyZones: [
-      { name: "Palermo", slug: "palermo" },
-      { name: "Belgrano", slug: "belgrano" },
-      { name: "Microcentro", slug: "microcentro" },
-    ],
-    focusServices: ["pantalla", "bateria", "carga", "placa"],
-    faqs: [
-      {
-        q: "Donde queda el taller en Recoleta?",
-        a: "Estamos en Paraguay 2451, Recoleta, CABA. Horario: lunes a viernes de 10:30 a 18:00.",
-      },
-      {
-        q: "Hacen arreglos en el dia?",
-        a: "En muchos casos si. Si tu equipo requiere placa o repuesto especial, te informamos el plazo antes de avanzar.",
-      },
-      {
-        q: "Dan garantia por escrito?",
-        a: "Sí. Entregamos garantía escrita de 90 días sobre trabajo y repuesto instalado.",
-      },
-      {
-        q: "Como pido presupuesto rapido?",
-        a: "Escribinos por WhatsApp con marca, modelo y falla. Si podes, agrega fotos para mejorar la estimacion.",
-      },
-    ],
-  },
   palermo: {
     slug: "palermo",
     zoneName: "Palermo",
@@ -132,74 +66,10 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
     ],
   },
-  belgrano: {
-    slug: "belgrano",
-    branchSlug: "belgrano",
-    zoneName: "Belgrano",
-    metaTitle: "Arreglo de Celulares en Belgrano: Cobertura y Cómo Llegar",
-    metaDescription:
-      "Cubrimos Belgrano y alrededores (Palermo, Recoleta, Microcentro) desde Amenábar 2032. Cómo llegar, cuánto demora cada reparación y garantía de 90 días.",
-    socialDescription:
-      "Team Celular Belgrano, Amenábar 2032 CABA. Pantalla, batería y placa con diagnóstico el mismo día y garantía escrita 90 días.",
-    heroBadge: "Sucursal en Belgrano · Amenábar 2032",
-    heroIntro:
-      "Team Celular tiene sucursal en Amenábar 2032, Belgrano CABA. Reparamos celulares con diagnóstico el mismo día, pantalla y batería en 2–4 h, y garantía escrita de 90 días sobre trabajo y repuesto. Lunes a viernes 10:30–18:00.",
-    heroImage: "/images/celuPorDentro.webp",
-    heroGlowClass:
-      "bg-[radial-gradient(circle_at_84%_18%,rgba(14,165,233,0.32),transparent_44%)]",
-    whatsappText:
-      "Hola! Quiero un presupuesto para arreglo de celular en Belgrano (Amenábar 2032). Marca y modelo:",
-    highlights: [
-      {
-        title: "Sucursal física en Belgrano",
-        desc: "Amenábar 2032, a pocas cuadras del Subte D Juramento. Sin viaje hasta Recoleta.",
-        icon: "business",
-      },
-      {
-        title: "Carga y conectores",
-        desc: "Cuando el pin está flojo o la carga entra y sale, buscamos la causa real para que no vuelvas por lo mismo.",
-        icon: "repair",
-      },
-      {
-        title: "Diagnóstico de placa",
-        desc: "Si se reinicia, se apaga o da fallas raras, vamos a hardware con instrumental de laboratorio para no adivinar.",
-        icon: "chip",
-      },
-    ],
-    localScenarios: [
-      "En Belgrano vemos mucho equipo de uso diario con pantalla rota y batería ya muy gastada.",
-      "También aparecen pines de carga flojos por uso fuerte y por cargarlos todos los días al límite.",
-      "Si hubo golpe o humedad, revisamos la placa para decirte si conviene reparar o no.",
-    ],
-    transportTip:
-      "La sucursal Belgrano está en Amenábar 2032, a pocas cuadras del Subte D (estación Juramento). También podés llegar en colectivo o en auto — hay estacionamiento disponible en la cuadra.",
-    nearbyZones: [
-      { name: "Palermo", slug: "palermo" },
-      { name: "Recoleta", slug: "recoleta" },
-      { name: "Microcentro", slug: "microcentro" },
-    ],
-    focusServices: ["pantalla", "bateria", "carga", "diagnostico placa"],
-    faqs: [
-      {
-        q: "¿Dónde queda la sucursal de Belgrano?",
-        a: "En Amenábar 2032, Belgrano, CABA. Horario: lunes a viernes de 10:30 a 18:00.",
-      },
-      {
-        q: "¿Qué pasa si el equipo no enciende?",
-        a: "Hacemos diagnóstico técnico para ver si el problema está en placa, energía o en un componente puntual. El diagnóstico se informa antes de intervenir.",
-      },
-      {
-        q: "¿Puedo cotizar por WhatsApp antes de ir a Belgrano?",
-        a: "Sí. Escribinos con marca, modelo y falla para agilizar el diagnóstico y evitar esperas en sucursal.",
-      },
-      {
-        q: "¿Entregan garantía por escrito en Belgrano?",
-        a: "Sí. Cada reparación sale con garantía escrita de 90 días sobre trabajo y repuesto instalado.",
-      },
-    ],
-  },
   caballito: {
     slug: "caballito",
+    // 1 impresion en 26 dias: fuera del indice hasta que haya demanda real.
+    noIndex: true,
     zoneName: "Caballito",
     metaTitle: "Arreglo de Celulares en Caballito (CABA) | Team Celular",
     metaDescription:
@@ -397,6 +267,8 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
   },
   microcentro: {
     slug: "microcentro",
+    // 1 impresion en 26 dias: fuera del indice hasta que haya demanda real.
+    noIndex: true,
     zoneName: "Microcentro",
     metaTitle: "Arreglo de Celulares en Microcentro (CABA) | Team Celular",
     metaDescription:

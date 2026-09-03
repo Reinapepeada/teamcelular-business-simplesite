@@ -69,16 +69,16 @@ const ROUTE_SELECTOR = [
   {
     title: "No se bien que falla tiene",
     description:
-      "Si todavia no sabes la falla exacta, entra por la ruta general para cotizar rapido con sintomas.",
-    href: "/arreglo-de-celulares",
-    cta: "Ir a arreglo general",
+      "Si todavia no sabes la falla exacta, contanos el sintoma y te orientamos antes de que vengas.",
+    href: "/presupuesto-reparacion#solicitar-presupuesto",
+    cta: "Describir el sintoma",
   },
   {
     title: "Es un caso complejo o de placa",
     description:
       "Para humedad, reinicios, no enciende o segunda opinion, conviene diagnostico avanzado.",
-    href: "/tecnico-de-celulares",
-    cta: "Ir a tecnico especialista",
+    href: "/reparaciones/reparacion-placa-caba",
+    cta: "Ir a reparacion de placa",
   },
   {
     title: "Quiero precio rapido",
@@ -138,13 +138,13 @@ export default function ReparacionesPage() {
             escrita de 90 días sobre trabajo y repuesto.
           </p>
           <p className="mt-3 text-sm text-slate-200/90">
-            Si buscas una solucion por falla frecuente, puedes ir a{" "}
-            <Link href="/arreglo-de-celulares" className="font-semibold underline underline-offset-4">
-              Arreglo de celulares
+            Si buscás el servicio general, entrá por{" "}
+            <Link href="/" className="font-semibold underline underline-offset-4">
+              reparación de celulares en CABA
             </Link>
-            . Si necesitas segunda opinion o placa compleja, te conviene{" "}
-            <Link href="/tecnico-de-celulares" className="font-semibold underline underline-offset-4">
-              Tecnico de celulares
+            . Si necesitás segunda opinión o placa compleja, te conviene{" "}
+            <Link href="/reparaciones/reparacion-placa-caba" className="font-semibold underline underline-offset-4">
+              reparación de placa
             </Link>
             .
           </p>

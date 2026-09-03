@@ -9,9 +9,9 @@ const SITE_URL = getSiteUrl();
 const PAGE_URL = `${SITE_URL}/reparacion-de-celulares-cerca-de-mi`;
 
 const nearbyZones = [
-  { name: "Recoleta", href: "/zonas/recoleta" },
+  { name: "Recoleta", href: "/sucursales/caba/recoleta" },
   { name: "Palermo", href: "/zonas/palermo" },
-  { name: "Belgrano", href: "/zonas/belgrano" },
+  { name: "Belgrano", href: "/sucursales/caba/belgrano" },
   { name: "Caballito", href: "/zonas/caballito" },
   { name: "Almagro", href: "/zonas/almagro" },
   { name: "Balvanera", href: "/zonas/balvanera" },
