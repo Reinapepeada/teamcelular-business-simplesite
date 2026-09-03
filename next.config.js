@@ -21,6 +21,32 @@ const securityHeaders = [
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=()",
   },
+  {
+    // Dos años ya estaban puestos, pero sin cubrir subdominios ni entrar a
+    // la preload list de los navegadores.
+    key: "Strict-Transport-Security",
+    value: "max-age=63072000; includeSubDomains; preload",
+  },
+  {
+    // Report-only primero: el sitio carga Google Maps, Analytics y la API en
+    // Railway, y una CSP bloqueante mal calibrada rompe el checkout antes de
+    // que nadie lo note. Revisar los reportes del navegador y recien despues
+    // pasar a Content-Security-Policy a secas.
+    key: "Content-Security-Policy-Report-Only",
+    value: [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://*.google-analytics.com https://va.vercel-scripts.com https://*.clarity.ms",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "font-src 'self' data: https://fonts.gstatic.com",
+      "img-src 'self' data: blob: https:",
+      "connect-src 'self' https://*.google-analytics.com https://*.googletagmanager.com https://fastapi-teamcelular-dev.up.railway.app https://*.up.railway.app https://*.clarity.ms https://analytics.google.com https://stats.g.doubleclick.net",
+      "frame-src 'self' https://www.google.com https://maps.google.com",
+      "frame-ancestors 'self'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "object-src 'none'",
+    ].join("; "),
+  },
 ];
 
 module.exports = {
