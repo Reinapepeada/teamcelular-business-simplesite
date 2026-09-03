@@ -106,6 +106,23 @@ export default function HighIntentGuidePage({
           url={pageUrl}
           about={articleAbout}
         />
+        {/* Schema.org — FAQPage. Vive aca y no en cada guia: las 6 paginas que
+            usan este componente tienen FAQ visible y ninguna lo emitia. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "@id": `${pageUrl}#faq`,
+              mainEntity: faq.map((item) => ({
+                "@type": "Question",
+                name: item.question,
+                acceptedAnswer: { "@type": "Answer", text: item.answer },
+              })),
+            }),
+          }}
+        />
         <BreadcrumbJsonLd
           items={[
             { name: "Inicio", url: `${siteUrl}/` },
