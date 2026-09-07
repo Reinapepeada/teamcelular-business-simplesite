@@ -479,3 +479,52 @@ dispositivos con SLA y logistica.
 
 Ninguna de las dos garantiza aprobacion: la deteccion es automatica. Pero son las
 unicas dos que la politica describe como permitidas.
+
+
+---
+
+# Relevamiento de anunciantes del rubro (2026-09-02)
+
+Fuente: Centro de Transparencia Publicitaria de Google, region Argentina. Es el unico
+registro publico de quien anuncia. **No expone presupuesto ni rendimiento**: eso no es
+publico para nadie.
+
+| Dominio | Anuncios activos | Anunciante | Verificado |
+|---|---|---|---|
+| gofix.com.ar | **25** | The Chilling Company S.R.L. + MANUEL DOMIAN | si |
+| koyology.com | **14** | YULIANA ALEXANDRA GUERRA PEREZ | si |
+| iseephone.com.ar | **7** | OLIVER VASQUEZ | si |
+| fixnow.com.ar | **4** | Jhonander Viloria matos | si |
+| ipoint.com.ar | **4** | GLOUP BY DIGITAL TIE SRL | si |
+| tecbox.com.ar | **2** | Bullmetrix SRL | si |
+| **teamcelular.com** | **0** | — | — |
+| quickfix.com.ar | 0 | — | — |
+| solvery.com.ar | 0 | — | — |
+| stmobile.com.ar | 0 | — | — |
+| tecnoland.com.ar | 0 | — | — |
+| applepoint.com.ar | 0 | — | — |
+| centermac.com.ar | 0 | — | — |
+| grupogb.com.ar | 0 | — | — |
+| mobidoc.com.ar | 0 | — | — |
+
+## Lo que muestra
+
+**Seis de quince anuncian. Los seis estan verificados**, sin excepcion, y aparecen con
+nombre legal: dos S.R.L. y cuatro personas fisicas. Ninguno anuncia de forma anonima.
+
+**Nueve no anuncian**, incluidos nombres grandes del rubro como Solvery, QuickFix,
+ST Mobile y ApplePoint. No es que "todos menos vos" pueden: es que la mayoria tampoco.
+La politica los afecta igual.
+
+**Dos anunciantes concentran el volumen**: GoFix con 25 anuncios y Koyology con 14
+suman 39 de los 56 activos del relevamiento. Los demas corren campanas chicas de 2 a 7
+anuncios.
+
+Un detalle util: en gofix.com.ar aparecen **dos cuentas de anunciante distintas**
+apuntando al mismo dominio, una empresa y una persona. Es una estructura habitual
+cuando una agencia opera parte de las campanas.
+
+## Lo que no se puede saber
+
+Presupuesto, CPC, impresiones, clicks y conversiones de terceros no son publicos. Quien
+ofrezca ese dato lo esta estimando con modelos propios, no midiendolo.
