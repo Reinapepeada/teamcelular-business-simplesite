@@ -114,6 +114,7 @@ const guidePages = [
   { path: "guias/celular-mojado-que-hacer", priority: 0.76, changeFreq: "monthly" as const },
   { path: "guias/face-id-touch-id-no-funciona", priority: 0.76, changeFreq: "monthly" as const },
   { path: "guias/pantalla-con-lineas-causas-reparacion", priority: 0.76, changeFreq: "monthly" as const },
+  { path: "guias/celular-con-virus-que-hacer", priority: 0.76, changeFreq: "monthly" as const },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
