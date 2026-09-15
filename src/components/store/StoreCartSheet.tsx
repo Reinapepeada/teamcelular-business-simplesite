@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { buildProductSlug } from "@/lib/productSlug";
 import useCartStore, { type CartItem } from "@/store/cartStore";
+import CheckoutDialog from "./CheckoutDialog";
 
 const WHATSAPP_NUMBER =
     process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.trim() || "5491151034595";
@@ -26,6 +27,7 @@ function getProductImage(item: CartItem) {
 
 export default function StoreCartSheet() {
     const [open, setOpen] = useState(false);
+    const [comprando, setComprando] = useState(false);
     const { cart, removeFromCart, updateQuantity, clearCart } = useCartStore();
 
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -214,12 +216,27 @@ export default function StoreCartSheet() {
 
                 <div className="border-t border-slate-200 px-5 py-4 dark:border-slate-700">
                     <div className="flex items-center justify-between text-sm text-slate-600 dark:text-slate-400">
-                        <span>Total estimado</span>
+                        {/* Estimado de verdad: el envio lo cotiza el servidor
+                            al confirmar, y el total final sale de ahi. */}
+                        <span>Productos</span>
                         <span className="text-lg font-semibold text-slate-950 dark:text-slate-50">
                             ${formatPrice(totalPrice)}
                         </span>
                     </div>
                     <div className="mt-4 flex flex-col gap-3">
+                        {/* **Comprar es la salida principal, no el chat.** El
+                            carrito termina en el checkout: datos, envio o
+                            retiro, y a pagar. WhatsApp queda abajo como
+                            consulta, que es para lo que siempre sirvio:
+                            preguntar algo antes de comprar. */}
+                        <button
+                            type="button"
+                            onClick={() => setComprando(true)}
+                            disabled={cart.length === 0}
+                            className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-white transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-500 dark:disabled:bg-slate-800"
+                        >
+                            Comprar
+                        </button>
                         <Link
                             href={
                                 cart.length > 0
@@ -228,15 +245,11 @@ export default function StoreCartSheet() {
                             }
                             target={cart.length > 0 ? "_blank" : undefined}
                             rel={cart.length > 0 ? "noopener noreferrer" : undefined}
-                            className={`inline-flex min-h-12 items-center justify-center rounded-full px-5 text-sm font-semibold transition ${
-                                cart.length > 0
-                                    ? "bg-primary text-white hover:bg-primary/90"
-                                    : "bg-slate-200 text-slate-500 dark:bg-slate-800 dark:text-slate-500"
-                            }`}
+                            className="inline-flex min-h-12 items-center justify-center rounded-full border border-slate-300 px-5 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:border-slate-500 dark:hover:bg-slate-800"
                             onClick={() => setOpen(false)}
                             aria-disabled={cart.length === 0}
                         >
-                            Pedir por WhatsApp
+                            Consultar por WhatsApp
                         </Link>
                         <button
                             type="button"
@@ -249,6 +262,8 @@ export default function StoreCartSheet() {
                     </div>
                 </div>
             </aside>
+
+            <CheckoutDialog abierto={comprando} onCerrar={() => setComprando(false)} />
         </>
     );
 }
