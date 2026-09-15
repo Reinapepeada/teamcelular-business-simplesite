@@ -6,6 +6,11 @@ import Link from "next/link";
 import { buildProductSlug } from "@/lib/productSlug";
 import useCartStore, { type CartItem } from "@/store/cartStore";
 import CheckoutDialog from "./CheckoutDialog";
+import {
+    nombreDeVariante,
+    totalDeLinea,
+    totalesDelCarrito,
+} from "@/lib/totalesDelCarrito";
 
 const WHATSAPP_NUMBER =
     process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.trim() || "5491151034595";
@@ -30,11 +35,9 @@ export default function StoreCartSheet() {
     const [comprando, setComprando] = useState(false);
     const { cart, removeFromCart, updateQuantity, clearCart } = useCartStore();
 
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    const totalPrice = cart.reduce(
-        (sum, item) => sum + item.product.retail_price * item.quantity,
-        0,
-    );
+    // Las sumas viven en src/lib/totalesDelCarrito.ts, que explica por que
+    // esto es un estimado: los precios salen de lo que el navegador guardo.
+    const { unidades: totalItems, productos: totalPrice } = totalesDelCarrito(cart);
 
     useEffect(() => {
         if (!open) {
@@ -56,18 +59,11 @@ export default function StoreCartSheet() {
             "Hola Team Celular, quiero consultar por estos productos:",
             "",
             ...cart.map((item, index) => {
-                const variantParts = [
-                    item.variant?.color || "",
-                    item.variant?.size || "",
-                ]
-                    .filter(Boolean)
-                    .join(" / ");
+                const variantParts = nombreDeVariante(item);
 
                 return `${index + 1}. ${item.product.name}${
                     variantParts ? ` (${variantParts})` : ""
-                } x${item.quantity} - $${formatPrice(
-                    item.product.retail_price * item.quantity,
-                )}`;
+                } x${item.quantity} - $${formatPrice(totalDeLinea(item))}`;
             }),
             "",
             `Total estimado: $${formatPrice(totalPrice)}`,
