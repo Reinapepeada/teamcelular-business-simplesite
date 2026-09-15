@@ -10,8 +10,9 @@ import {
     recordarPedido,
 } from "@/lib/vueltaDelPago";
 import {
+    abrirElPago,
     armarPedido,
-    comprar,
+    reservar,
     ErrorDeCompra,
     hayErrores,
     validarDatos,
@@ -21,6 +22,8 @@ import {
 import { aLineasDeCheckout } from "@/lib/cartLines";
 import { huellaDelCarrito } from "@/lib/checkoutKey";
 import { queHacerConElPendiente } from "@/lib/pedidoPendiente";
+import { resumenParaConfirmar } from "@/lib/resumenDelPedido";
+import { totalesDelCarrito } from "@/lib/totalesDelCarrito";
 import {
     createOrder,
     fetchOrderStatus,
@@ -57,6 +60,90 @@ interface CheckoutDialogProps {
     onCerrar: () => void;
 }
 
+/**
+ * El resumen que se confirma antes de pagar.
+ *
+ * Tonto a propósito: qué mostrar lo decide `resumenParaConfirmar`, que sí está
+ * probado. Acá solo se dibuja.
+ */
+function ResumenAConfirmar({
+    pedido,
+    estimadoDeProductos,
+    enviando,
+    fallo,
+    onPagar,
+    onVolver,
+}: {
+    pedido: StoreOrder;
+    estimadoDeProductos: number;
+    enviando: boolean;
+    fallo: string | null;
+    onPagar: () => void;
+    onVolver: () => void;
+}) {
+    const r = resumenParaConfirmar(pedido, estimadoDeProductos);
+
+    return (
+        <div className="mt-4 flex flex-col gap-3">
+            {r.precioCambio && (
+                <p className="rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-800 dark:bg-amber-500/10 dark:text-amber-300">
+                    {r.diferencia > 0
+                        ? "El precio de algún producto subió desde que lo agregaste al carrito."
+                        : "El precio de algún producto bajó desde que lo agregaste al carrito."}{" "}
+                    Este es el importe que se va a cobrar.
+                </p>
+            )}
+
+            <dl className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm dark:border-slate-700/70 dark:bg-slate-800/70">
+                <div className="flex justify-between gap-4">
+                    <dt className="text-slate-600 dark:text-slate-400">Productos</dt>
+                    <dd className="font-medium">{pesos(r.subtotal, r.moneda)}</dd>
+                </div>
+                {r.hayEnvio && (
+                    <div className="mt-2 flex justify-between gap-4">
+                        <dt className="text-slate-600 dark:text-slate-400">Envío</dt>
+                        <dd className="font-medium">{pesos(r.envio, r.moneda)}</dd>
+                    </div>
+                )}
+                <div className="mt-3 flex justify-between gap-4 border-t border-slate-200 pt-3 dark:border-slate-700/70">
+                    <dt className="font-semibold text-slate-900 dark:text-slate-100">Total</dt>
+                    <dd className="text-lg font-bold text-slate-950 dark:text-slate-50">
+                        {pesos(r.total, r.moneda)}
+                    </dd>
+                </div>
+            </dl>
+
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+                Tu pedido {pedido.commerce_key} ya quedó reservado. Si salís de acá,
+                lo podés retomar desde el carrito.
+            </p>
+
+            {fallo && (
+                <p className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-800 dark:bg-rose-500/10 dark:text-rose-300">
+                    {fallo}
+                </p>
+            )}
+
+            <button
+                type="button"
+                onClick={onPagar}
+                disabled={enviando}
+                className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-white transition hover:bg-primary/90 disabled:opacity-50"
+            >
+                {enviando ? "Abriendo el pago…" : "Ir a pagar"}
+            </button>
+            <button
+                type="button"
+                onClick={onVolver}
+                disabled={enviando}
+                className="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-300 px-5 text-sm font-medium text-slate-700 transition hover:border-slate-400 disabled:opacity-50 dark:border-slate-600 dark:text-slate-300"
+            >
+                Volver
+            </button>
+        </div>
+    );
+}
+
 export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProps) {
     const { cart } = useCartStore();
 
@@ -73,6 +160,10 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
     // Un pedido que quedó creado y sin link. Guardarlo es lo que permite
     // reintentar SOLO el link: volver a comprar crearía un segundo pedido con
     // su propia reserva sobre el mismo stock.
+    // El pedido creado y esperando que el comprador confirme el total.
+    // **Tiene stock reservado**: irse de esta pantalla no lo cancela, lo deja
+    // recuperable por el mismo camino que un fallo del link.
+    const [aConfirmar, setAConfirmar] = useState<StoreOrder | null>(null);
     const [pedidoPendiente, setPedidoPendiente] = useState<StoreOrder | null>(null);
     // Con qué carrito se armó el pedido pendiente. Comparar la huella una sola
     // vez, al recuperarlo, no alcanza: el comprador puede cambiar el carrito
@@ -88,6 +179,11 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
             })),
         [cart]
     );
+
+    // Lo que el carrito venía mostrando por los productos. **Solo sirve para
+    // avisar si el precio cambió**: ningún importe de la confirmación sale de
+    // acá, todos salen del pedido que creó el servidor.
+    const estimadoDeProductos = useMemo(() => totalesDelCarrito(cart).productos, [cart]);
 
     const huellaActual = useMemo(
         () => huellaDelCarrito(aLineasDeCheckout(items).lineas),
@@ -146,7 +242,7 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
         setEnviando(true);
         try {
             const clave = claveDeCheckout(window.localStorage, aLineasDeCheckout(items).lineas);
-            const { checkoutUrl } = await comprar(
+            const pedido = await reservar(
                 {
                     crearPedido: createOrder,
                     pedirLink: requestPaymentLink,
@@ -168,10 +264,12 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                 },
                 armarPedido(datos, items, clave)
             );
-            // La clave NO se olvida acá: entre esto y el pago hay una pantalla
-            // de Mercado Pago de la que se puede volver, y ahí todavía tiene que
-            // servir para recuperar el mismo pedido.
-            irAPagar(checkoutUrl);
+            // **Acá NO se manda a pagar.** El total que se cobra —con el precio
+            // de hoy y el envío cotizado— recién existe ahora, y el comprador
+            // tiene que verlo antes de que le cobren.
+            setAConfirmar(pedido);
+            setHuellaPendiente(huellaActual);
+            setEnviando(false);
         } catch (error) {
             if (error instanceof ErrorDeCompra) {
                 setFallo(error.message);
@@ -181,6 +279,33 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
             } else {
                 setFallo("No pudimos completar la compra. Probá de nuevo.");
             }
+            setEnviando(false);
+        }
+    };
+
+    const confirmarYPagar = async () => {
+        if (!aConfirmar) return;
+        setEnviando(true);
+        setFallo(null);
+        try {
+            const url = await abrirElPago(
+                { crearPedido: createOrder, pedirLink: requestPaymentLink },
+                aConfirmar
+            );
+            // La clave NO se olvida acá: entre esto y el pago hay una pantalla
+            // de Mercado Pago de la que se puede volver, y ahí todavía tiene que
+            // servir para recuperar el mismo pedido.
+            irAPagar(url);
+        } catch (error) {
+            setFallo(
+                error instanceof ErrorDeCompra
+                    ? error.message
+                    : "No pudimos abrir el pago. Probá de nuevo."
+            );
+            // El pedido sigue vivo y con su token: se ofrece reintentar solo el
+            // link en vez de crear otro.
+            setPedidoPendiente(aConfirmar);
+            setAConfirmar(null);
             setEnviando(false);
         }
     };
@@ -253,7 +378,7 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
             >
                 <div className="flex items-center justify-between">
                     <h2 className="text-lg font-semibold text-slate-950 dark:text-slate-50">
-                        Finalizar compra
+                        {aConfirmar ? "Confirmá tu compra" : "Finalizar compra"}
                     </h2>
                     <button type="button" onClick={onCerrar} aria-label="Cerrar" className="text-slate-500">
                         ✕
@@ -266,6 +391,24 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                     </p>
                 )}
 
+                {aConfirmar ? (
+                    <ResumenAConfirmar
+                        pedido={aConfirmar}
+                        estimadoDeProductos={estimadoDeProductos}
+                        enviando={enviando}
+                        fallo={fallo}
+                        onPagar={confirmarYPagar}
+                        onVolver={() => {
+                            // **No se cancela el pedido.** Ya tiene stock
+                            // reservado; queda recuperable por el mismo camino
+                            // que un fallo del link, y vence solo si nadie lo
+                            // paga.
+                            setPedidoPendiente(aConfirmar);
+                            setAConfirmar(null);
+                            setFallo("Tenés un pedido reservado esperando el pago.");
+                        }}
+                    />
+                ) : (
                 <form className="mt-4 flex flex-col gap-3" onSubmit={onSubmit}>
                     <div>
                         <label className="text-sm font-medium" htmlFor="ck-nombre">Nombre y apellido</label>
@@ -431,6 +574,7 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                         {enviando ? "Un momento…" : "Ir a pagar"}
                     </button>
                 </form>
+                )}
             </div>
         </div>
     );

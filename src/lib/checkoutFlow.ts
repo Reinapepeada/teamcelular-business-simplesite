@@ -144,18 +144,24 @@ export class ErrorDeCompra extends Error {
 }
 
 /**
- * Crea el pedido y devuelve a dónde se paga.
+ * Primer paso: crea el pedido y reserva el stock.
  *
- * **El pedido se crea una sola vez.** Si falla el link de pago, el pedido ya
+ * **La compra se parte en dos a propósito.** El total que se cobra —con el
+ * precio de hoy y el envío cotizado— recién existe cuando el servidor crea el
+ * pedido, y el comprador tiene que verlo ANTES de que le cobren. Hasta que esto
+ * se partió, el importe real aparecía por primera vez en Mercado Pago, con el
+ * pedido ya creado.
+ *
+ * **El pedido se crea una sola vez.** Si algo falla después, el pedido ya
  * existe y tiene el stock reservado: el error lo lleva adentro para que la
- * pantalla ofrezca reintentar SOLO el link. Reintentar la compra entera con una
+ * pantalla ofrezca seguir con ESE pedido. Reintentar la compra entera con una
  * clave nueva dejaría dos pedidos vivos por el mismo carrito, cada uno con su
  * reserva, y el stock disponible caería a la mitad sin que nadie haya comprado.
  */
-export const comprar = async (
+export const reservar = async (
     puertos: PuertosDeCompra,
     payload: CheckoutPayload
-): Promise<ResultadoDeCompra> => {
+): Promise<StoreOrder> => {
     let pedido: StoreOrder;
     try {
         pedido = await puertos.crearPedido(payload);
@@ -165,7 +171,9 @@ export const comprar = async (
 
     // **Apenas existe el pedido, se anota.** Desde acá hasta que se abre el
     // pago hay stock reservado y nada que le permita al comprador volver:
-    // guardarlo recién con el link en la mano deja ese hueco sin red.
+    // guardarlo recién con el link en la mano deja ese hueco sin red. Y ahora
+    // ese hueco es más largo, porque en el medio hay una pantalla donde el
+    // comprador puede irse.
     puertos.recordar?.(pedido);
 
     if (!pedido.access_token) {
@@ -180,9 +188,30 @@ export const comprar = async (
         );
     }
 
+    return pedido;
+};
+
+/**
+ * Segundo paso: abre el pago del pedido que el comprador ya confirmó.
+ *
+ * Separado del primero porque se puede reintentar solo: el pedido sigue vivo y
+ * pedirle otro link no crea otra reserva.
+ */
+export const abrirElPago = async (
+    puertos: PuertosDeCompra,
+    pedido: StoreOrder
+): Promise<string> => {
+    if (!pedido.access_token) {
+        throw new ErrorDeCompra(
+            "Tu pedido ya estaba creado. Buscá el mail con el link de pago o escribinos.",
+            pedido,
+            null
+        );
+    }
+
     try {
         const { checkout_url } = await puertos.pedirLink(pedido.access_token);
-        return { checkoutUrl: checkout_url, pedido };
+        return checkout_url;
     } catch (causa) {
         throw new ErrorDeCompra(
             "El pedido quedó reservado pero no pudimos abrir el pago.",
@@ -190,4 +219,19 @@ export const comprar = async (
             causa
         );
     }
+};
+
+/**
+ * Los dos pasos juntos, sin pantalla en el medio.
+ *
+ * Queda para lo que no necesita confirmación y para los tests: el checkout del
+ * comprador usa `reservar` y `abrirElPago` por separado.
+ */
+export const comprar = async (
+    puertos: PuertosDeCompra,
+    payload: CheckoutPayload
+): Promise<ResultadoDeCompra> => {
+    const pedido = await reservar(puertos, payload);
+    const checkoutUrl = await abrirElPago(puertos, pedido);
+    return { checkoutUrl, pedido };
 };
