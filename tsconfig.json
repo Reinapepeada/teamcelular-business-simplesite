@@ -39,6 +39,10 @@
     "src/components/cart/resume_cart_nav.jsx"
 , "src/app/admin/test/page.jsx", "src/app/admin/page.jsx", "src/app/admin/create-products/page.jsx"  ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    // Los tests corren con `node --test`, que exige la extension .ts en los
+    // imports; tsc la rechaza salvo con allowImportingTsExtensions. Quedan
+    // afuera de la compilacion porque no son parte del bundle.
+    "**/*.test.ts"
   ]
 }
