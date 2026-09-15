@@ -138,6 +138,22 @@ export const fetchStoreProducts = (params: Record<string, string | number> = {})
 export const fetchStoreProduct = (slug: string) =>
     pedir<StoreProduct>(`/store/products/${encodeURIComponent(slug)}`);
 
+/**
+ * Lo que necesitan los filtros, en una sola llamada.
+ *
+ * **Sale de lo publicado, no del inventario.** Una marca que solo existe en
+ * productos sin publicar es un filtro que no devuelve nada, y de paso cuenta
+ * que la empresa la tiene.
+ */
+export interface StoreFacets {
+    categories: string[];
+    brands: string[];
+    min_price: number;
+    max_price: number;
+}
+
+export const fetchStoreFacets = () => pedir<StoreFacets>("/store/facets");
+
 export const quoteShipping = (province: string, postalCode: string, items: StoreLine[]) =>
     pedir<ShippingQuote>("/store/shipping/quote", {
         method: "POST",

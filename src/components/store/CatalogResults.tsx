@@ -1,6 +1,7 @@
 ﻿import Image from "next/image";
 import Link from "next/link";
-import type { Product, ProductsPaginatedResponse } from "@/app/tienda/product";
+import type { ProductsPaginatedResponse } from "@/app/tienda/product";
+import type { VidrieraProduct } from "@/lib/fixbeeCatalog";
 import AddToCartButton from "@/components/store/AddToCartButton";
 import {
     buildItemListJsonLd,
@@ -23,14 +24,14 @@ function formatPrice(price: number) {
     return new Intl.NumberFormat("es-AR").format(price);
 }
 
-function getProductImage(product: Product) {
+function getProductImage(product: VidrieraProduct) {
     return (
         product.variants?.find((variant) => variant.images?.length)?.images?.[0]
             ?.image_url || "/placeholder.jpg"
     );
 }
 
-function getProductStock(product: Product) {
+function getProductStock(product: VidrieraProduct) {
     return product.variants?.reduce(
         (total, variant) => total + (variant.stock || 0),
         0,
@@ -142,7 +143,7 @@ function CatalogPagination({
     );
 }
 
-function ProductCard({ product }: { product: Product }) {
+function ProductCard({ product }: { product: VidrieraProduct }) {
     const productImage = getProductImage(product);
     const stock = getProductStock(product);
     const productHref = `/tienda/${buildProductSlug(product)}`;
@@ -213,7 +214,7 @@ function ProductCard({ product }: { product: Product }) {
                 ) : null}
 
                 <div className="mt-5">
-                    <AddToCartButton product={product} />
+                    <AddToCartButton product={product} storeSlug={product.storeSlug} />
                 </div>
             </div>
         </article>
@@ -261,7 +262,7 @@ export default async function CatalogResults({
         filters,
         forcedCategoryName,
     );
-    const products = data.products || [];
+    const products = (data.products || []) as VidrieraProduct[];
     const totalPages = Math.max(1, data.pages || 1);
     const currentPage = Math.max(1, data.page || filters.page || 1);
     const total = data.total || products.length;
@@ -298,7 +299,7 @@ export default async function CatalogResults({
                     />
                     <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
                         {products.map((product) => (
-                            <ProductCard key={product.id} product={product} />
+                            <ProductCard key={product.storeSlug} product={product} />
                         ))}
                     </div>
                     <CatalogPagination

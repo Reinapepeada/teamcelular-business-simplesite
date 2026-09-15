@@ -8,7 +8,29 @@ export function slugify(value: string): string {
         .replace(/^-+|-+$/g, "");
 }
 
-export function buildProductSlug(product: { id?: number | string | null; name?: string | null }): string {
+/**
+ * La URL pública de un producto.
+ *
+ * **Si el producto viene de Fixbee, manda su slug y no se arma nada.** El
+ * backend deriva el slug del nombre y lo guarda; el sitio lo venía armando en
+ * el navegador como `nombre-{id}` con el id del backend viejo. Los dos se
+ * llaman "el slug del producto" y no coinciden nunca, así que un link armado
+ * acá cae en un 404 del catálogo nuevo, y el mismo desajuste hacía que el
+ * checkout rechazara productos publicados y con stock.
+ *
+ * El armado viejo sobrevive para lo que todavía no pasó por Fixbee —el admin
+ * lista productos del backend anterior— y muere solo cuando no queda ninguno.
+ */
+export function buildProductSlug(product: {
+    id?: number | string | null;
+    name?: string | null;
+    storeSlug?: string | null;
+}): string {
+    const delBackend = product?.storeSlug;
+    if (typeof delBackend === "string" && delBackend.trim() !== "") {
+        return delBackend;
+    }
+
     const id = product?.id ?? "";
     const name = product?.name ?? "";
     const nameSlug = slugify(name ? String(name) : "");

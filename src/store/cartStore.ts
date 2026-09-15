@@ -2,6 +2,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { Product, ProductVariant } from "@/app/tienda/product";
+import { claveDeCarrito } from "@/lib/cartKey";
 
 // Item del carrito con variante seleccionada opcional
 export interface CartItem {
@@ -45,10 +46,9 @@ interface CartState {
     isInCart: (productId: number, variantId?: number) => boolean;
 }
 
-// Generar key única para el carrito
-function generateCartKey(productId: number, variantId?: number): string {
-    return variantId ? `${productId}-${variantId}` : `${productId}`;
-}
+// Generar key única para el carrito. La regla vive en src/lib/cartKey.ts, que
+// explica por qué con Fixbee manda el slug y no el id.
+const generateCartKey = claveDeCarrito;
 
 // Calcular totales
 function calculateTotals(cart: CartItem[]) {
@@ -67,7 +67,7 @@ const useCartStore = create<CartState>()(
 
             addToCart: (product, variant = null, quantity = 1, storeSlug = null) => {
                 const { cart } = get();
-                const cartKey = generateCartKey(product.id, variant?.id);
+                const cartKey = generateCartKey(product.id, variant?.id, storeSlug);
                 const existingItem = cart.find((item) => item.cartKey === cartKey);
 
                 let updatedCart: CartItem[];

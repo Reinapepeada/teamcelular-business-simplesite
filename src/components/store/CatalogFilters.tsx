@@ -112,7 +112,6 @@ export default function CatalogFilters({
                         <option value="price-asc">Menor precio</option>
                         <option value="price-desc">Mayor precio</option>
                         <option value="name-asc">Nombre A-Z</option>
-                        <option value="name-desc">Nombre Z-A</option>
                     </select>
                 </div>
 
@@ -124,19 +123,19 @@ export default function CatalogFilters({
                         <div className="max-h-64 space-y-2 overflow-y-auto pr-1">
                             {options.categories.map((category) => (
                                 <label
-                                    key={category.id}
+                                    key={category}
                                     className="flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl border border-slate-200 dark:border-slate-700/70 px-3 py-2 text-sm text-slate-700 dark:text-slate-300 transition hover:border-primary/40 hover:bg-slate-50 dark:hover:bg-slate-800"
                                 >
                                     <input
                                         type="checkbox"
                                         name="categories"
-                                        value={category.name}
+                                        value={category}
                                         defaultChecked={filters.categories.includes(
-                                            category.name,
+                                            category,
                                         )}
                                         className="h-5 w-5 shrink-0 rounded border-slate-300 dark:border-slate-600 text-primary focus:ring-primary"
                                     />
-                                    <span>{category.name}</span>
+                                    <span>{category}</span>
                                 </label>
                             ))}
                         </div>
@@ -159,17 +158,17 @@ export default function CatalogFilters({
                     <div className="max-h-64 space-y-2 overflow-y-auto pr-1">
                         {options.brands.map((brand) => (
                             <label
-                                key={brand.id}
+                                key={brand}
                                 className="flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl border border-slate-200 dark:border-slate-700/70 px-3 py-2 text-sm text-slate-700 dark:text-slate-300 transition hover:border-primary/40 hover:bg-slate-50 dark:hover:bg-slate-800"
                             >
                                 <input
                                     type="checkbox"
                                     name="brands"
-                                    value={brand.name}
-                                    defaultChecked={filters.brands.includes(brand.name)}
+                                    value={brand}
+                                    defaultChecked={filters.brands.includes(brand)}
                                     className="h-5 w-5 shrink-0 rounded border-slate-300 dark:border-slate-600 text-primary focus:ring-primary"
                                 />
-                                <span>{brand.name}</span>
+                                <span>{brand}</span>
                             </label>
                         ))}
                     </div>

@@ -1,13 +1,11 @@
 import { buildProductSlug, slugify } from "@/lib/productSlug";
+import { listarCatalogo } from "@/lib/storeCatalog";
+import { fetchStoreFacets } from "@/lib/storeApi";
+import { productoDeVidriera } from "@/lib/fixbeeCatalog";
 import type {
-    Brand,
-    Category,
-    PriceRangeResponse,
     Product,
     ProductsPaginatedResponse,
 } from "@/app/tienda/product";
-
-const apiUrl = process.env.NEXT_PUBLIC_API_URL?.trim();
 
 export const ITEMS_PER_PAGE = 12;
 
@@ -26,8 +24,9 @@ export interface CatalogFiltersState {
 }
 
 export interface CatalogFilterOptions {
-    categories: Category[];
-    brands: Brand[];
+    /** Nombres, no entidades: el catálogo público no expone ids de nada. */
+    categories: string[];
+    brands: string[];
     priceRange: {
         min: number;
         max: number;
@@ -56,23 +55,6 @@ function parseListParam(value: string | string[] | undefined) {
 function parsePage(value: string | string[] | undefined) {
     const pageValue = Number(ensureArray(value)[0] || 1);
     return Number.isFinite(pageValue) && pageValue > 0 ? pageValue : 1;
-}
-
-async function fetchJson<T>(url: string, revalidate: number): Promise<T | null> {
-    try {
-        const response = await fetch(url, {
-            next: { revalidate },
-        });
-
-        if (!response.ok) {
-            return null;
-        }
-
-        return response.json();
-    } catch (error) {
-        console.error("Catalog fetch failed", error);
-        return null;
-    }
 }
 
 export function normalizeCatalogFilters(
@@ -153,70 +135,92 @@ export function buildPageHref(
     return query ? `${basePath}?${query}` : basePath;
 }
 
-export async function getCatalogFilters(): Promise<CatalogFilterOptions> {
-    if (!apiUrl) {
-        return {
-            categories: [],
-            brands: [],
-            priceRange: { min: 0, max: 1000000 },
-        };
+/**
+ * Lo que se le pide a Fixbee para armar una pagina del catalogo.
+ *
+ * **Los filtros del sitio son de a muchos y los del backend de a uno.** La
+ * vidriera acepta una categoria y una marca por consulta porque filtra y
+ * pagina en la base: mandar varias y quedarse con la interseccion en el
+ * navegador reacomodaria los 12 que ya vinieron, y el total y la paginacion
+ * dejarian de decir la verdad. Se manda la primera de cada una, que es lo que
+ * el comprador eligio primero.
+ */
+export function parametrosDeCatalogo(
+    filters: CatalogFiltersState,
+    forcedCategory?: string,
+): Record<string, string | number> {
+    const params: Record<string, string | number> = {
+        page: filters.page,
+        size: ITEMS_PER_PAGE,
+    };
+
+    if (filters.search) {
+        params.search = filters.search;
     }
 
-    const [categories, brands, priceRange] = await Promise.all([
-        fetchJson<Category[]>(`${apiUrl}/categories/get/all`, 86400),
-        fetchJson<Brand[]>(`${apiUrl}/brands/get/all`, 86400),
-        fetchJson<PriceRangeResponse>(`${apiUrl}/products/min-max-price`, 86400),
-    ]);
+    const categoria = forcedCategory ?? filters.categories[0];
+    if (categoria) {
+        params.category = categoria;
+    }
 
-    return {
-        categories: categories || [],
-        brands: brands || [],
-        priceRange: {
-            min: Number(priceRange?.min || 0),
-            max: Number(priceRange?.max || 1000000),
-        },
+    if (filters.brands[0]) {
+        params.brand = filters.brands[0];
+    }
+
+    // Un rango vacio o ilegible no se manda: el backend rechaza lo que no es
+    // numero, y "" no es "sin minimo", es un 422 sobre toda la pagina.
+    const minimo = Number(filters.minPrice);
+    if (filters.minPrice && Number.isFinite(minimo) && minimo >= 0) {
+        params.min_price = minimo;
+    }
+    const maximo = Number(filters.maxPrice);
+    if (filters.maxPrice && Number.isFinite(maximo) && maximo >= 0) {
+        params.max_price = maximo;
+    }
+
+    const orden: Record<string, string> = {
+        "price-asc": "price_asc",
+        "price-desc": "price_desc",
+        "name-asc": "name",
     };
+    if (orden[filters.sort]) {
+        params.sort = orden[filters.sort];
+    }
+
+    return params;
 }
 
+export async function getCatalogFilters(): Promise<CatalogFilterOptions> {
+    try {
+        const facetas = await fetchStoreFacets();
+        return {
+            categories: facetas.categories ?? [],
+            brands: facetas.brands ?? [],
+            priceRange: {
+                min: Number(facetas.min_price || 0),
+                max: Number(facetas.max_price || 0),
+            },
+        };
+    } catch (error) {
+        // Sin facetas la tienda sigue vendiendo: los filtros aparecen vacios,
+        // que es peor que tenerlos y mejor que una pagina rota.
+        console.error("Catalog facets fetch failed", error);
+        return { categories: [], brands: [], priceRange: { min: 0, max: 0 } };
+    }
+}
+
+/**
+ * Una pagina del catalogo, ya en la forma que el sitio sabe mostrar.
+ *
+ * El orden lo aplica el backend sobre el catalogo entero, no sobre la pagina:
+ * ordenar aca solo reacomodaria los 12 que vinieron, y "de menor precio"
+ * mostraria el mas barato de una pagina cualquiera.
+ */
 export async function getCatalogPage(
     filters: CatalogFiltersState,
     forcedCategory?: string,
 ): Promise<ProductsPaginatedResponse> {
-    if (!apiUrl) {
-        return { products: [], total: 0, page: 1, size: ITEMS_PER_PAGE, pages: 1 };
-    }
-
-    const queryParams = new URLSearchParams();
-    queryParams.set("page", String(filters.page));
-    queryParams.set("size", String(ITEMS_PER_PAGE));
-
-    if (filters.search) {
-        queryParams.set("search", filters.search);
-    }
-
-    const categories = forcedCategory ? [forcedCategory] : filters.categories;
-    if (categories.length > 0) {
-        queryParams.set("categories", categories.join(","));
-    }
-
-    if (filters.brands.length > 0) {
-        queryParams.set("brands", filters.brands.join(","));
-    }
-
-    if (filters.minPrice) {
-        queryParams.set("minPrice", filters.minPrice);
-    }
-
-    if (filters.maxPrice) {
-        queryParams.set("maxPrice", filters.maxPrice);
-    }
-
-    const data = await fetchJson<ProductsPaginatedResponse>(
-        `${apiUrl}/products/?${queryParams.toString()}`,
-        300,
-    );
-
-    const fallback = {
+    const vacia = {
         products: [],
         total: 0,
         page: filters.page,
@@ -224,35 +228,37 @@ export async function getCatalogPage(
         pages: 1,
     };
 
-    const response = data || fallback;
-    const products = [...(response.products || [])];
-
-    if (filters.sort === "price-asc") {
-        products.sort((left, right) => left.retail_price - right.retail_price);
-    } else if (filters.sort === "price-desc") {
-        products.sort((left, right) => right.retail_price - left.retail_price);
-    } else if (filters.sort === "name-asc") {
-        products.sort((left, right) => left.name.localeCompare(right.name));
-    } else if (filters.sort === "name-desc") {
-        products.sort((left, right) => right.name.localeCompare(left.name));
+    try {
+        const pagina = await listarCatalogo(
+            parametrosDeCatalogo(filters, forcedCategory),
+        );
+        const size = pagina.size || ITEMS_PER_PAGE;
+        return {
+            products: pagina.items.map(productoDeVidriera),
+            total: pagina.total,
+            page: pagina.page || filters.page,
+            size,
+            pages: Math.max(1, Math.ceil(pagina.total / size)),
+        };
+    } catch (error) {
+        console.error("Catalog fetch failed", error);
+        return vacia;
     }
-
-    return {
-        ...response,
-        products,
-    };
 }
 
+/**
+ * La categoria detras de `/tienda/categoria/{slug}`.
+ *
+ * El slug de categoria lo arma el sitio con `slugify`, asi que la vuelta es
+ * buscar entre las categorias publicadas la que slugifica igual. No hay ids
+ * que pedir: el catalogo publico expone nombres.
+ */
 export async function getCatalogCategoryBySlug(slug: string) {
-    if (!apiUrl) {
-        return null;
-    }
-
-    const categories = await fetchJson<Category[]>(`${apiUrl}/categories/get/all`, 86400);
-    return (
-        categories?.find((category) => slugify(category.name) === slug) || null
-    );
+    const { categories } = await getCatalogFilters();
+    const nombre = categories.find((c) => slugify(c) === slug);
+    return nombre ? { name: nombre } : null;
 }
+
 
 export function buildItemListJsonLd(products: Product[], siteUrl: string) {
     return {
