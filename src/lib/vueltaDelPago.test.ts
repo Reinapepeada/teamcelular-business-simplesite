@@ -99,24 +99,40 @@ describe("el pedido recordado", () => {
 });
 
 describe("claveDeLaVuelta", () => {
-    test("prefiere lo que guardo el navegador sobre lo que dice la URL", () => {
+    test("manda la referencia de la URL: es el pedido que MP acaba de procesar", () => {
         const almacen = almacenFalso();
-        recordarPedido(almacen, "CK-DEL-NAVEGADOR");
-        assert.equal(
-            claveDeLaVuelta(almacen, query({ external_reference: "CK-DE-LA-URL" })),
-            "CK-DEL-NAVEGADOR",
-        );
+        recordarPedido(almacen, "CK-VIEJO");
+        const pedido = claveDeLaVuelta(almacen, query({ external_reference: "CK-NUEVO" }));
+        assert.equal(pedido?.clave, "CK-NUEVO");
     });
 
-    test("sin nada guardado usa external_reference", () => {
-        assert.equal(
-            claveDeLaVuelta(almacenFalso(), query({ external_reference: "CK-7" })),
-            "CK-7",
-        );
+    test("una referencia ajena se mira pero no cuenta como propia", () => {
+        const almacen = almacenFalso();
+        recordarPedido(almacen, "CK-MIO");
+        const pedido = claveDeLaVuelta(almacen, query({ external_reference: "CK-DE-OTRO" }));
+        assert.equal(pedido?.esNuestro, false);
+    });
+
+    test("la misma clave que guardo este navegador si es propia", () => {
+        const almacen = almacenFalso();
+        recordarPedido(almacen, "CK-MIO");
+        const pedido = claveDeLaVuelta(almacen, query({ external_reference: "CK-MIO" }));
+        assert.equal(pedido?.esNuestro, true);
+    });
+
+    test("sin referencia en la URL usa la guardada, que es propia", () => {
+        const almacen = almacenFalso();
+        recordarPedido(almacen, "CK-MIO");
+        assert.deepEqual(claveDeLaVuelta(almacen, query({})), {
+            clave: "CK-MIO",
+            esNuestro: true,
+        });
     });
 
     test("sirve aunque no haya almacenamiento: pagar en otro dispositivo", () => {
-        assert.equal(claveDeLaVuelta(null, query({ external_reference: "CK-7" })), "CK-7");
+        const pedido = claveDeLaVuelta(null, query({ external_reference: "CK-7" }));
+        assert.equal(pedido?.clave, "CK-7");
+        assert.equal(pedido?.esNuestro, false);
     });
 
     test("sin pedido por ningun lado no hay nada que preguntar", () => {
@@ -174,5 +190,44 @@ describe("esperaAntesDeReintentar", () => {
 
     test("un intento negativo no da una espera negativa", () => {
         assert.ok(esperaAntesDeReintentar(-3) > 0);
+    });
+});
+
+describe("vueltaMostrable segun la puerta por la que volvio", () => {
+    test("lo pagado manda sobre la puerta: aprobado que vuelve por /error sigue pagado", () => {
+        // Si la puerta ganara, la pantalla le diria "no se hizo ningun cargo"
+        // a alguien que ya pago.
+        const v = vueltaMostrable(estado({ paid: true }), "error");
+        assert.equal(v.desenlace, "pagado");
+    });
+
+    test("un rechazo no se queda preguntando", () => {
+        const v = vueltaMostrable(estado({ paid: false }), "error");
+        assert.equal(v.desenlace, "rechazado");
+        assert.equal(v.seguirPreguntando, false);
+    });
+
+    test("un rechazo dice que no se cobro nada", () => {
+        assert.match(vueltaMostrable(estado({ paid: false }), "error").detalle, /ningún cargo/i);
+    });
+
+    test("un pago demorado tampoco se espera con la pestana abierta", () => {
+        // Efectivo o Rapipago pueden tardar dias: reintentar es dejar una
+        // pestana olvidada golpeando el backend.
+        const v = vueltaMostrable(estado({ paid: false }), "pendiente");
+        assert.equal(v.seguirPreguntando, false);
+        assert.notEqual(v.desenlace, "rechazado");
+    });
+
+    test("por la puerta de exito si espera, que es donde el aviso llega en segundos", () => {
+        assert.equal(vueltaMostrable(estado({ paid: false }), "exito").seguirPreguntando, true);
+    });
+
+    test("sin estado todavia, la puerta de error ya puede decir que no entro", () => {
+        assert.equal(vueltaMostrable(null, "error").desenlace, "rechazado");
+    });
+
+    test("sin estado todavia, la puerta de exito espera", () => {
+        assert.equal(vueltaMostrable(null, "exito").seguirPreguntando, true);
     });
 });

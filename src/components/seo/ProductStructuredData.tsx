@@ -2,6 +2,7 @@ import React from 'react';
 import { buildProductSlug } from '@/lib/productSlug';
 import { BUSINESS_PROFILE, businessId } from '@/lib/businessProfile';
 import { formatWarranty } from '@/app/tienda/product';
+import { condicionSchema } from '@/lib/fixbeeCatalog';
 
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || 'https://teamcelular.com';
 
@@ -41,7 +42,7 @@ export default function ProductStructuredData({ product, images = [] }: ProductS
       : "https://schema.org/OutOfStock",
     url: productUrl,
     seller: { "@id": businessId("localbusiness") },
-    itemCondition: "https://schema.org/NewCondition",
+    itemCondition: condicionSchema(product.storeCondition),
     availableAtOrFrom: {
       "@type": "Place",
       name: "Team Celular Recoleta",

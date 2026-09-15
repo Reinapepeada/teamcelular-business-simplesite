@@ -15,6 +15,15 @@ import type { Product } from "@/app/tienda/product";
 export type VidrieraProduct = Product & {
     /** El slug del backend. **Nunca se construye acá.** */
     storeSlug: string;
+    /**
+     * Nuevo, usado o reacondicionado, tal como lo publicó la empresa.
+     *
+     * `Product` no tiene dónde ponerlo —el backend viejo vendía solo nuevo— y
+     * sin esto el JSON-LD de la ficha declara `NewCondition` sobre cualquier
+     * cosa: un usado publicado como nuevo para Google y para quien compra
+     * leyendo el resultado de búsqueda.
+     */
+    storeCondition: string;
 };
 
 const AHORA = "1970-01-01T00:00:00.000Z";
@@ -49,6 +58,7 @@ const garantia = (meses: number | null) =>
 export const productoDeVidriera = (p: CatalogProduct): VidrieraProduct => ({
     id: 0,
     storeSlug: p.slug,
+    storeCondition: p.condition,
     serial_number: "",
     name: p.name,
     description: p.description,
@@ -83,3 +93,23 @@ export const productoDeVidriera = (p: CatalogProduct): VidrieraProduct => ({
         },
     ],
 });
+
+/**
+ * La condición del producto, en el vocabulario de schema.org.
+ *
+ * **Lo desconocido cae en usado, no en nuevo.** Declarar `NewCondition` sobre
+ * algo que no sabemos es prometerle al comprador —y al buscador que muestra el
+ * resultado— una cosa que nadie afirmó; al revés solo se queda corto.
+ */
+export const condicionSchema = (condicion?: string | null): string => {
+    switch ((condicion ?? "").trim().toLowerCase()) {
+        case "new":
+        case "nuevo":
+            return "https://schema.org/NewCondition";
+        case "refurbished":
+        case "reacondicionado":
+            return "https://schema.org/RefurbishedCondition";
+        default:
+            return "https://schema.org/UsedCondition";
+    }
+};

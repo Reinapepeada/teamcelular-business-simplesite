@@ -2,7 +2,7 @@ import ProductDetailClient from './ProductDetailClient';
 import { getAllProductImages, getPrimaryImage } from '@/services/products';
 import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd';
 import ProductStructuredData from '@/components/seo/ProductStructuredData';
-import { permanentRedirect, notFound } from 'next/navigation';
+import { redirect, notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { buildWebsiteMetadata, getSiteUrl } from '@/lib/seoMetadata';
 import { formatWarranty, type Product } from '@/app/tienda/product';
@@ -42,10 +42,14 @@ const buscarProducto = async (
             if (crudo) {
                 return { product: productoDeVidriera(crudo), slug: crudo.slug };
             }
-        } catch {
-            // Un 404 del catalogo es "probemos el que sigue", no un error de
-            // la pagina. Cualquier otra falla tambien: la ficha termina en
-            // notFound(), que es lo que corresponde mostrar.
+        } catch (error) {
+            // **Solo un 404 habilita probar el que sigue.** Un 502 o un corte
+            // de red no dicen que el producto no exista; con el recorte del
+            // sufijo como segundo intento, seguir de largo ante cualquier
+            // falla puede mandar a `pantalla-iphone` a alguien que pidio
+            // `pantalla-iphone-13` porque justo fallo esa consulta.
+            const status = (error as { status?: number } | null)?.status;
+            if (status !== 404) throw error;
         }
     }
     return null;
@@ -177,11 +181,16 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
     const product = encontrado.product;
 
-    // Un link viejo `/tienda/{nombre}-{id}` resuelve al producto por el nombre:
-    // 301 a la URL nueva, para que el link compartido siga valiendo y Google
-    // mueva la senal en vez de ver dos paginas iguales.
+    // Un link viejo `/tienda/{nombre}-{id}` resuelve al producto por el nombre,
+    // y se manda a la URL nueva para que el link compartido siga valiendo.
+    //
+    // **Temporal y no permanente, a proposito.** Esto llega aca por una
+    // heuristica: se recorto un sufijo numerico suponiendo que era el id viejo.
+    // Cuando acierta esta bien, pero un 301 lo deja grabado en el navegador y
+    // en los buscadores, y una suposicion equivocada se vuelve irreversible
+    // sobre una URL que despues puede existir de verdad.
     if (String(slug ?? '') !== encontrado.slug) {
-        permanentRedirect(`/tienda/${encontrado.slug}`);
+        redirect(`/tienda/${encontrado.slug}`);
     }
 
     const images = getAllProductImages(product);

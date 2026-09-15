@@ -17,7 +17,7 @@ import {
     parametrosDeCatalogo,
     type CatalogFiltersState,
 } from "./catalog.ts";
-import { productoDeVidriera } from "./fixbeeCatalog.ts";
+import { condicionSchema, productoDeVidriera } from "./fixbeeCatalog.ts";
 import type { CatalogProduct } from "./storeCatalog.ts";
 
 const filtros = (over: Partial<CatalogFiltersState> = {}): CatalogFiltersState => ({
@@ -161,5 +161,39 @@ describe("productoDeVidriera", () => {
         const p = productoDeVidriera(deFixbee({ category: null, brand: null }));
         assert.equal(p.category, null);
         assert.equal(p.brand, null);
+    });
+});
+
+describe("condicionSchema", () => {
+    test("nuevo es nuevo", () => {
+        assert.equal(condicionSchema("new"), "https://schema.org/NewCondition");
+        assert.equal(condicionSchema("Nuevo"), "https://schema.org/NewCondition");
+    });
+
+    test("reacondicionado tiene su propia condicion", () => {
+        assert.equal(condicionSchema("refurbished"), "https://schema.org/RefurbishedCondition");
+    });
+
+    test("usado es usado", () => {
+        assert.equal(condicionSchema("used"), "https://schema.org/UsedCondition");
+    });
+
+    test("lo desconocido cae en usado, nunca en nuevo", () => {
+        // Prometer "nuevo" sobre algo que nadie afirmo es la unica de las dos
+        // equivocaciones que le miente al comprador.
+        assert.equal(condicionSchema(null), "https://schema.org/UsedCondition");
+        assert.equal(condicionSchema(""), "https://schema.org/UsedCondition");
+        assert.equal(condicionSchema("lo que sea"), "https://schema.org/UsedCondition");
+    });
+});
+
+describe("la condicion viaja hasta el JSON-LD", () => {
+    test("productoDeVidriera la lleva", () => {
+        assert.equal(productoDeVidriera(deFixbee({ condition: "used" })).storeCondition, "used");
+    });
+
+    test("un usado no se publica como nuevo", () => {
+        const p = productoDeVidriera(deFixbee({ condition: "used" }));
+        assert.equal(condicionSchema(p.storeCondition), "https://schema.org/UsedCondition");
     });
 });
