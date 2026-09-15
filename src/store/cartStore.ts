@@ -10,6 +10,18 @@ export interface CartItem {
     quantity: number;
     // Key única para identificar el item (product_id + variant_id)
     cartKey: string;
+    /**
+     * El slug del producto EN EL BACKEND, que es lo único que entiende el
+     * checkout: el catálogo público no expone ids.
+     *
+     * Opcional porque el carrito se persiste en localStorage y sobrevive al
+     * deploy: los ítems agregados antes de esta versión vuelven sin él. De esos
+     * no se puede deducir —el slug que armaba el sitio, `nombre-{id}`, usaba el
+     * id del backend viejo y nunca matcheó con el del servidor— así que se
+     * avisa que hay que volver a agregarlos, en vez de mandarlos y recibir un
+     * error incomprensible sobre un producto que está publicado y con stock.
+     */
+    storeSlug?: string | null;
 }
 
 interface CartState {
@@ -18,7 +30,12 @@ interface CartState {
     totalPrice: number;
     
     // Acciones
-    addToCart: (product: Product, variant?: ProductVariant | null, quantity?: number) => void;
+    addToCart: (
+        product: Product,
+        variant?: ProductVariant | null,
+        quantity?: number,
+        storeSlug?: string | null
+    ) => void;
     removeFromCart: (cartKey: string) => void;
     updateQuantity: (cartKey: string, newQuantity: number) => void;
     clearCart: () => void;
@@ -48,7 +65,7 @@ const useCartStore = create<CartState>()(
             totalItems: 0,
             totalPrice: 0,
 
-            addToCart: (product, variant = null, quantity = 1) => {
+            addToCart: (product, variant = null, quantity = 1, storeSlug = null) => {
                 const { cart } = get();
                 const cartKey = generateCartKey(product.id, variant?.id);
                 const existingItem = cart.find((item) => item.cartKey === cartKey);
@@ -59,18 +76,25 @@ const useCartStore = create<CartState>()(
                     // Incrementar cantidad si ya existe
                     updatedCart = cart.map((item) =>
                         item.cartKey === cartKey
-                            ? { ...item, quantity: item.quantity + quantity }
+                            ? {
+                                  ...item,
+                                  quantity: item.quantity + quantity,
+                                  // Volver a agregar un producto que venia del
+                                  // carrito viejo lo deja comprable.
+                                  storeSlug: storeSlug ?? item.storeSlug ?? null,
+                              }
                             : item
                     );
                 } else {
                     // Agregar nuevo item
                     updatedCart = [
                         ...cart, 
-                        { 
-                            product, 
-                            variant, 
+                        {
+                            product,
+                            variant,
                             quantity,
-                            cartKey 
+                            cartKey,
+                            storeSlug,
                         }
                     ];
                 }
