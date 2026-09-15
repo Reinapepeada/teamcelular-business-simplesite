@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import useCartStore from "@/store/cartStore";
 import { claveDeCheckout, olvidarClave } from "@/lib/checkoutKey";
+import { recordarPedido } from "@/lib/vueltaDelPago";
 import {
     armarPedido,
     comprar,
@@ -86,10 +87,14 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
         setEnviando(true);
         try {
             const clave = claveDeCheckout(window.localStorage, aLineasDeCheckout(items).lineas);
-            const { checkoutUrl } = await comprar(
+            const { checkoutUrl, pedido } = await comprar(
                 { crearPedido: createOrder, pedirLink: requestPaymentLink },
                 armarPedido(datos, items, clave)
             );
+            // Se recuerda el pedido ANTES de irse a pagar: es lo que la
+            // pantalla de vuelta usa para preguntar el estado sin depender de
+            // los parametros de la URL, que cualquiera puede escribir.
+            recordarPedido(window.localStorage, pedido.commerce_key);
             // La clave NO se olvida acá: entre esto y el pago hay una pantalla
             // de Mercado Pago de la que se puede volver, y ahí todavía tiene que
             // servir para recuperar el mismo pedido.
