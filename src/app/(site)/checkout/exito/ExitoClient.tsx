@@ -74,8 +74,17 @@ export default function ExitoClient({ intencion = "exito" }: { intencion?: Inten
                     if (pedido.esNuestro) {
                         clearCart();
                         if (guardado) {
-                            olvidarPedido(guardado, pedido.clave);
-                            olvidarClave(guardado);
+                            // **La clave de checkout se borra solo si el
+                            // pedido guardado era este.** Si el comprador ya
+                            // arrancó otra compra, esa clave es la que impide
+                            // que un reintento cree un segundo pedido con su
+                            // propia reserva sobre el mismo stock: llevársela
+                            // por la confirmación de un pedido anterior es
+                            // fabricar exactamente el cobro duplicado que la
+                            // clave existe para evitar.
+                            if (olvidarPedido(guardado, pedido.clave)) {
+                                olvidarClave(guardado);
+                            }
                         }
                     }
                     return;

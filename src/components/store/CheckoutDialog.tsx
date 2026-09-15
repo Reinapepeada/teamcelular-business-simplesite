@@ -124,11 +124,16 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
         setFallo("Tenés un pedido reservado esperando el pago.");
     }, [pedidoPendiente, huellaActual]);
 
-    // Si el carrito deja de ser el del pedido reservado, el botón de reintentar
-    // se va: ofrecer pagar un pedido con otros productos a la vista es peor que
-    // no ofrecer nada.
+    // Si el carrito pasa a ser OTRO, el botón de reintentar se va: ofrecer
+    // pagar un pedido con productos distintos a la vista es peor que no
+    // ofrecer nada.
+    //
+    // **Vaciar el carrito no cuenta.** Ahí no hay con qué confundirse, y el
+    // pedido sigue reservado y pagable: esconderlo dejaría al comprador sin
+    // forma de pagar algo que ya tiene el stock tomado, hasta que venza.
     useEffect(() => {
         if (!huellaPendiente) return;
+        if (!huellaActual) return;
         if (huellaPendiente === huellaActual) return;
         setPedidoPendiente(null);
         setHuellaPendiente(null);

@@ -135,15 +135,17 @@ export const pedidoRecordado = (almacen: AlmacenClave): string | null =>
  * almacenamiento guarda la nueva. Borrar a ciegas se lleva la credencial del
  * pedido EN CURSO por la buena noticia de uno anterior.
  */
-export const olvidarPedido = (almacen: AlmacenClave, claveEsperada?: string): void => {
+export const olvidarPedido = (almacen: AlmacenClave, claveEsperada?: string): boolean => {
     try {
         if (claveEsperada) {
             const guardado = pedidoGuardado(almacen);
-            if (!guardado || guardado.clave !== claveEsperada) return;
+            if (!guardado || guardado.clave !== claveEsperada) return false;
         }
         almacen.removeItem(ESPACIO);
+        return true;
     } catch {
         // La próxima compra lo reemplaza.
+        return false;
     }
 };
 

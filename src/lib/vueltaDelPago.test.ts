@@ -420,3 +420,34 @@ describe("cuando un pedido ya no se puede pagar", () => {
         assert.equal(pedidoYaNoSePuedePagar(null), false);
     });
 });
+
+describe("olvidarPedido avisa si borro", () => {
+    test("devuelve true cuando borro de verdad", () => {
+        const almacen = almacenFalso();
+        recordarPedido(almacen, { clave: "CK-A", token: "tok" });
+        assert.equal(olvidarPedido(almacen, "CK-A"), true);
+    });
+
+    test("devuelve false cuando el guardado es otro", () => {
+        // De esto depende que NO se borre la clave de checkout de la compra en
+        // curso: esa clave es lo que impide que un reintento cree un segundo
+        // pedido con su propia reserva sobre el mismo stock.
+        const almacen = almacenFalso();
+        recordarPedido(almacen, { clave: "CK-NUEVO", token: "tok" });
+        assert.equal(olvidarPedido(almacen, "CK-VIEJO"), false);
+        assert.equal(pedidoGuardado(almacen)?.clave, "CK-NUEVO");
+    });
+
+    test("devuelve false cuando no hay nada guardado", () => {
+        assert.equal(olvidarPedido(almacenFalso(), "CK-A"), false);
+    });
+
+    test("un almacenamiento bloqueado devuelve false y no rompe", () => {
+        // Con clave esperada corta antes, al no poder leer. Sin clave llega
+        // hasta el borrado, que es la otra forma de fallar: las dos tienen que
+        // decir que NO borraron, o la clave de checkout se va detras de un
+        // borrado que nunca ocurrio.
+        assert.equal(olvidarPedido(almacenRoto(), "CK-A"), false);
+        assert.equal(olvidarPedido(almacenRoto()), false);
+    });
+});
