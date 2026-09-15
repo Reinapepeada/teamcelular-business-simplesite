@@ -3,7 +3,12 @@
 import { useEffect, useMemo, useState } from "react";
 import useCartStore from "@/store/cartStore";
 import { claveDeCheckout, olvidarClave } from "@/lib/checkoutKey";
-import { olvidarPedido, pedidoGuardado, recordarPedido } from "@/lib/vueltaDelPago";
+import {
+    olvidarPedido,
+    pedidoGuardado,
+    pedidoYaNoSePuedePagar,
+    recordarPedido,
+} from "@/lib/vueltaDelPago";
 import {
     armarPedido,
     comprar,
@@ -15,7 +20,12 @@ import {
 } from "@/lib/checkoutFlow";
 import { aLineasDeCheckout } from "@/lib/cartLines";
 import { huellaDelCarrito } from "@/lib/checkoutKey";
-import { createOrder, requestPaymentLink, type StoreOrder } from "@/lib/storeApi";
+import {
+    createOrder,
+    fetchOrderStatus,
+    requestPaymentLink,
+    type StoreOrder,
+} from "@/lib/storeApi";
 
 /**
  * El checkout del comprador.
@@ -63,6 +73,10 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
     // reintentar SOLO el link: volver a comprar crearía un segundo pedido con
     // su propia reserva sobre el mismo stock.
     const [pedidoPendiente, setPedidoPendiente] = useState<StoreOrder | null>(null);
+    // Con qué carrito se armó el pedido pendiente. Comparar la huella una sola
+    // vez, al recuperarlo, no alcanza: el comprador puede cambiar el carrito
+    // DESPUÉS y quedarse con un botón que ofrece pagar otra cosa.
+    const [huellaPendiente, setHuellaPendiente] = useState<string | null>(null);
 
     const items = useMemo(
         () =>
@@ -106,8 +120,20 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
             total_amount: guardado.total ?? 0,
             currency: guardado.moneda ?? "ARS",
         } as StoreOrder);
+        setHuellaPendiente(guardado.huella);
         setFallo("Tenés un pedido reservado esperando el pago.");
     }, [pedidoPendiente, huellaActual]);
+
+    // Si el carrito deja de ser el del pedido reservado, el botón de reintentar
+    // se va: ofrecer pagar un pedido con otros productos a la vista es peor que
+    // no ofrecer nada.
+    useEffect(() => {
+        if (!huellaPendiente) return;
+        if (huellaPendiente === huellaActual) return;
+        setPedidoPendiente(null);
+        setHuellaPendiente(null);
+        setFallo(null);
+    }, [huellaActual, huellaPendiente]);
 
     const irAPagar = (url: string) => {
         window.location.href = url;
@@ -152,7 +178,9 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
         } catch (error) {
             if (error instanceof ErrorDeCompra) {
                 setFallo(error.message);
-                setPedidoPendiente(error.pedido?.access_token ? error.pedido : null);
+                const recuperable = error.pedido?.access_token ? error.pedido : null;
+                setPedidoPendiente(recuperable);
+                setHuellaPendiente(recuperable ? huellaActual : null);
             } else {
                 setFallo("No pudimos completar la compra. Probá de nuevo.");
             }
@@ -168,21 +196,43 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
             const { checkout_url } = await requestPaymentLink(pedidoPendiente.access_token);
             irAPagar(checkout_url);
         } catch (error) {
-            // **Un 409 no es "probemos de nuevo".** El backend contesta eso
-            // cuando el pedido ya no acepta un link: pagado, vencido o
-            // cancelado. Dejar el token guardado ahi deja el checkout trabado
-            // ofreciendo reintentar algo que nunca va a andar.
             const status = (error as { status?: number } | null)?.status;
+
+            // **El 409 no dice qué pasó.** El backend contesta lo mismo para
+            // "el pedido ya no acepta un link" y para "la tienda no puede
+            // cobrar ahora" —credenciales vencidas o ilegibles—, y lo hace a
+            // propósito, para no delatar qué empresas cobran online. Tomarlo
+            // como "este pedido murió" tira el token de un pedido perfectamente
+            // pagable cada vez que la tienda tiene un problema de credenciales.
+            //
+            // Quién sabe de verdad es el estado del pedido, que es lo que se
+            // pregunta acá antes de soltar nada.
             if (status === 409) {
+                let terminado = false;
                 try {
-                    olvidarPedido(window.localStorage, pedidoPendiente.commerce_key);
+                    const estado = await fetchOrderStatus(pedidoPendiente.commerce_key);
+                    terminado = pedidoYaNoSePuedePagar(estado);
                 } catch {
-                    // Si no se puede limpiar, al menos el dialogo se destraba.
+                    // Sin poder confirmarlo, el pedido se conserva: perderlo es
+                    // irreversible y volver a intentar no cuesta nada.
                 }
-                setPedidoPendiente(null);
-                setFallo(
-                    "Ese pedido ya no se puede pagar: puede que ya esté pagado o que haya vencido. Revisá tu mail o escribinos."
-                );
+
+                if (terminado) {
+                    try {
+                        olvidarPedido(window.localStorage, pedidoPendiente.commerce_key);
+                    } catch {
+                        // Si no se puede limpiar, al menos el diálogo se destraba.
+                    }
+                    setPedidoPendiente(null);
+                    setHuellaPendiente(null);
+                    setFallo(
+                        "Ese pedido ya no se puede pagar: puede que ya esté pagado o que haya vencido. Revisá tu mail o escribinos."
+                    );
+                } else {
+                    setFallo(
+                        "No pudimos abrir el pago ahora. Tu pedido sigue reservado: probá de nuevo en un rato o escribinos."
+                    );
+                }
             } else {
                 setFallo("Seguimos sin poder abrir el pago. Escribinos y lo resolvemos.");
             }

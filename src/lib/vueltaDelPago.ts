@@ -298,3 +298,23 @@ export const vueltaMostrable = (
  */
 export const esperaAntesDeReintentar = (intento: number): number =>
     Math.min(1000 * 2 ** Math.max(0, intento), 15000);
+
+/**
+ * Si un pedido ya no puede recibir un link de pago.
+ *
+ * **Existe porque el 409 del backend no distingue.** `order_not_payable` sale
+ * igual para "el pedido está pagado, vencido o cancelado" que para "esta tienda
+ * no puede cobrar ahora" —credenciales vencidas o ilegibles—, y eso es
+ * deliberado: distinguirlos delataría qué empresas cobran online. Del lado del
+ * comprador, tratarlos igual significa tirar la credencial de un pedido
+ * perfectamente pagable cada vez que la tienda tiene un problema de
+ * configuración.
+ *
+ * Quien sí sabe es el estado del pedido, que sale de la base.
+ */
+export const pedidoYaNoSePuedePagar = (estado: StoreOrderStatus | null): boolean => {
+    // Sin poder confirmarlo se conserva: soltar el pedido es irreversible
+    // —el token se entrega una sola vez— y volver a intentar no cuesta nada.
+    if (!estado) return false;
+    return estado.paid || estado.status !== "pending_payment";
+};

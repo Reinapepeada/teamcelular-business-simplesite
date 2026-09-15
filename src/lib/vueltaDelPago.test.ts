@@ -17,6 +17,7 @@ import {
     esperaAntesDeReintentar,
     olvidarPedido,
     pedidoGuardado,
+    pedidoYaNoSePuedePagar,
     pedidoRecordado,
     recordarPedido,
     vueltaMostrable,
@@ -381,5 +382,41 @@ describe("sin respuesta del backend no se afirma nada sobre el cobro", () => {
 
     test("un pago demorado, con respuesta, deja de preguntar", () => {
         assert.equal(vueltaMostrable(estado({ paid: false }), "pendiente").seguirPreguntando, false);
+    });
+});
+
+describe("cuando un pedido ya no se puede pagar", () => {
+    test("pagado: se suelta", () => {
+        assert.equal(pedidoYaNoSePuedePagar(estado({ paid: true, status: "paid" })), true);
+    });
+
+    test("paid manda, aunque el estado en texto diga otra cosa", () => {
+        // Toda esta pantalla se apoya en `paid` y no en el texto del estado.
+        // Si la decision saliera solo del texto, un pedido cobrado con el
+        // estado todavia sin mover quedaria ofreciendo pagarlo de nuevo.
+        assert.equal(
+            pedidoYaNoSePuedePagar(estado({ paid: true, status: "pending_payment" })),
+            true,
+        );
+    });
+
+    test("vencido o cancelado: se suelta", () => {
+        assert.equal(pedidoYaNoSePuedePagar(estado({ paid: false, status: "expired" })), true);
+        assert.equal(pedidoYaNoSePuedePagar(estado({ paid: false, status: "cancelled" })), true);
+    });
+
+    test("esperando pago: NO se suelta, aunque el backend haya dicho 409", () => {
+        // El 409 sale igual cuando la tienda no puede cobrar por credenciales.
+        // Soltar ahi tira la credencial de un pedido que se puede pagar apenas
+        // el negocio arregle sus credenciales.
+        assert.equal(
+            pedidoYaNoSePuedePagar(estado({ paid: false, status: "pending_payment" })),
+            false,
+        );
+    });
+
+    test("sin poder confirmar el estado, se conserva", () => {
+        // Soltarlo es irreversible: el token se entrega una sola vez.
+        assert.equal(pedidoYaNoSePuedePagar(null), false);
     });
 });
