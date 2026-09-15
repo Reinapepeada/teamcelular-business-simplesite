@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -29,7 +29,6 @@ import {
 } from "lucide-react";
 
 import { 
-    getProductById, 
     formatPrice, 
     getPrimaryImage, 
     getAllProductImages,
@@ -37,7 +36,6 @@ import {
     getAvailableSizes,
     calculateTotalStock
 } from '@/services/products';
-import { parseProductIdFromSlug } from '@/lib/productSlug';
 import { formatWarranty, type Product, type ProductVariant } from '@/app/tienda/product';
 import useCartStore from '@/store/cartStore';
 
@@ -85,18 +83,23 @@ const colorNames: Record<string, string> = {
 };
 
 interface Props {
-    productIdProp?: number;
     productProp?: Product | null;
+    /**
+     * El slug del producto EN FIXBEE, que es lo unico que entiende el checkout:
+     * el catalogo publico no expone ids. Lo resuelve el server component, que
+     * es quien pregunto por el.
+     */
+    storeSlugProp?: string | null;
 }
 
-export default function ProductDetailClient({ productIdProp, productProp }: Props) {
-    const params = useParams();
+export default function ProductDetailClient({ productProp, storeSlugProp }: Props) {
     const router = useRouter();
-    const productIdFromSlug = parseProductIdFromSlug(params?.slug);
-    const productId = productIdProp ?? productIdFromSlug ?? NaN;
-    
+
     const [product, setProduct] = useState<Product | null>(productProp || null);
-    const [isLoading, setIsLoading] = useState(true);
+    // **El producto siempre llega del server.** La ficha lo resuelve por slug
+    // contra Fixbee y hace notFound() si no existe, asi que no queda ningun
+    // caso en el que el navegador tenga que ir a buscarlo de nuevo.
+    const [isLoading, setIsLoading] = useState(!productProp);
     const [error, setError] = useState<string | null>(null);
     
     // UI States
@@ -108,44 +111,19 @@ export default function ProductDetailClient({ productIdProp, productProp }: Prop
     
     const { addToCart } = useCartStore();
     
-    // Fetch product data only if not provided by server
+    // Las selecciones por defecto salen del producto que trajo el server.
     useEffect(() => {
-        if (productProp) {
-            // already set by server
-            setIsLoading(false);
-            return;
-        }
+        if (!product) return;
 
-        async function fetchProduct() {
-            if (isNaN(productId)) {
-                setError('ID de producto inválido');
-                setIsLoading(false);
-                return;
-            }
-            
-            try {
-                setIsLoading(true);
-                const data = await getProductById(productId);
-                setProduct(data);
-                
-                // Set default selections
-                const colors = getAvailableColors(data.variants);
-                const sizes = getAvailableSizes(data.variants);
-                
-                if (colors.length > 0) setSelectedColor(colors[0]);
-                if (sizes.length > 0) setSelectedSize(sizes[0]);
-                
-            } catch (err) {
-                console.error('Error fetching product:', err);
-                setError('No se pudo cargar el producto');
-            } finally {
-                setIsLoading(false);
-            }
-        }
-        
-        fetchProduct();
-    }, [productId, productProp]);
-    
+        const colors = getAvailableColors(product.variants);
+        const sizes = getAvailableSizes(product.variants);
+
+        if (colors.length > 0) setSelectedColor((previo) => previo ?? colors[0]);
+        if (sizes.length > 0) setSelectedSize((previo) => previo ?? sizes[0]);
+        setIsLoading(false);
+    }, [product]);
+
+
     // Update selected variant when color/size changes
     useEffect(() => {
         if (!product) return;
@@ -187,7 +165,7 @@ export default function ProductDetailClient({ productIdProp, productProp }: Prop
     // Handle add to cart
     const handleAddToCart = () => {
         if (product) {
-            addToCart(product, selectedVariant, quantity);
+            addToCart(product, selectedVariant, quantity, storeSlugProp ?? null);
         }
     };
     

@@ -1,14 +1,14 @@
 import ProductDetailClient from './ProductDetailClient';
-import { getAllProductImages, getProductById, getPrimaryImage } from '@/services/products';
+import { getAllProductImages, getPrimaryImage } from '@/services/products';
 import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd';
 import ProductStructuredData from '@/components/seo/ProductStructuredData';
-import { fetchWithCache } from '@/lib/serverCache';
-import { buildProductSlug, parseProductIdFromSlug } from '@/lib/productSlug';
 import { permanentRedirect, notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { buildWebsiteMetadata, getSiteUrl } from '@/lib/seoMetadata';
 import { formatWarranty, type Product } from '@/app/tienda/product';
-import { resolveCanonicalProduct } from '@/lib/productCanonical';
+import { verProducto } from '@/lib/storeCatalog';
+import { productoDeVidriera, type VidrieraProduct } from '@/lib/fixbeeCatalog';
+import { slugsAProbar } from '@/lib/legacySlug';
 
 const SITE_URL = getSiteUrl();
 const DEFAULT_LAT = process.env.NEXT_PUBLIC_BUSINESS_LAT || '-34.6037';
@@ -25,12 +25,30 @@ function slugify(text = '') {
         .replace(/^-+|-+$/g, '');
 }
 
-const getProductData = async (productId: number) => {
-    return fetchWithCache(
-        `product:${productId}`,
-        () => getProductById(productId),
-        1000 * 60 * 5
-    );
+/**
+ * El producto detras de la URL, y el slug con el que quedo resuelto.
+ *
+ * Devuelve el slug encontrado ademas del producto porque puede no ser el que
+ * se pidio: un link viejo `/tienda/{nombre}-{id}` se resuelve recortando el
+ * sufijo, y entonces la ficha tiene que redirigir a la URL nueva en vez de
+ * servir dos URLs con el mismo contenido.
+ */
+const buscarProducto = async (
+    slug: string
+): Promise<{ product: VidrieraProduct; slug: string } | null> => {
+    for (const candidato of slugsAProbar(slug)) {
+        try {
+            const crudo = await verProducto(candidato);
+            if (crudo) {
+                return { product: productoDeVidriera(crudo), slug: crudo.slug };
+            }
+        } catch {
+            // Un 404 del catalogo es "probemos el que sigue", no un error de
+            // la pagina. Cualquier otra falla tambien: la ficha termina en
+            // notFound(), que es lo que corresponde mostrar.
+        }
+    }
+    return null;
 };
 
 function truncateMetaDescription(text: string) {
@@ -62,32 +80,27 @@ function buildProductSeoDescription(product: Product) {
  */
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
-    const productId = parseProductIdFromSlug(slug);
-    if (!productId) {
-        return buildWebsiteMetadata({
-            path: '/tienda',
-            title: 'Producto no encontrado | Team Celular',
-            description: 'Producto no disponible en Team Celular.',
-            robots: { index: false, follow: false },
-        });
-    }
 
     try {
-        const product = await getProductData(productId);
+        const encontrado = await buscarProducto(slug);
+        if (!encontrado) {
+            return buildWebsiteMetadata({
+                path: '/tienda',
+                title: 'Producto no encontrado | Team Celular',
+                description: 'Producto no disponible en Team Celular.',
+                robots: { index: false, follow: false },
+            });
+        }
+        const product = encontrado.product;
         const image = getPrimaryImage(product) || '/placeholder.jpg';
         const absoluteImage = image.startsWith('http') ? image : `${SITE_URL}${image.startsWith('/') ? '' : '/'}${image}`;
 
         const title = `${product.name || 'Producto'} | Team Celular`;
         const description = buildProductSeoDescription(product);
-        const productSlug = buildProductSlug(product);
-
-        // Supplier variants (CK / JC / Ampsentrix) are the same repair on
-        // different parts, so they point their canonical at one owner page
-        // instead of competing as near-duplicates.
-        const canonicalProduct = await resolveCanonicalProduct(product);
-        const canonicalPath = `/tienda/${
-            canonicalProduct.id === product.id ? productSlug : buildProductSlug(canonicalProduct)
-        }`;
+        // El canonico es el slug que devolvio el catalogo, no el que vino en
+        // la URL: asi un link viejo apunta a la ficha nueva en vez de
+        // declararse canonico de si mismo.
+        const canonicalPath = `/tienda/${encontrado.slug}`;
 
         // geo coordinates
         const lat = process.env.NEXT_PUBLIC_BUSINESS_LAT || DEFAULT_LAT;
@@ -156,30 +169,23 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
-    const productId = parseProductIdFromSlug(slug);
-    let product = null;
-    try {
-        if (productId) {
-            product = await getProductData(productId);
-        }
-    } catch (err) {
-        console.error('Server fetch product error:', err);
-    }
+    const encontrado = await buscarProducto(slug);
 
-    if (!product) {
+    if (!encontrado) {
         notFound();
     }
 
-    if (product) {
-        const requestedSlug = String(slug ?? '');
-        const canonicalSlug = buildProductSlug(product);
-        if (canonicalSlug && requestedSlug !== canonicalSlug) {
-            permanentRedirect(`/tienda/${canonicalSlug}`);
-        }
+    const product = encontrado.product;
+
+    // Un link viejo `/tienda/{nombre}-{id}` resuelve al producto por el nombre:
+    // 301 a la URL nueva, para que el link compartido siga valiendo y Google
+    // mueva la senal en vez de ver dos paginas iguales.
+    if (String(slug ?? '') !== encontrado.slug) {
+        permanentRedirect(`/tienda/${encontrado.slug}`);
     }
 
-    const images = product ? getAllProductImages(product) : [];
-    const productSlug = product ? buildProductSlug(product) : '';
+    const images = getAllProductImages(product);
+    const productSlug = encontrado.slug;
     const breadcrumbItems = product
         ? [
               { name: 'Inicio', url: `${SITE_URL}/` },
@@ -205,8 +211,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         </>
     )}
     <ProductDetailClient
-        productIdProp={productId ?? undefined}
         productProp={product}
+        storeSlugProp={encontrado.slug}
     />
         </>
     );
