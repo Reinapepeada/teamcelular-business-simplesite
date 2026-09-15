@@ -38,6 +38,12 @@ import {
 } from '@/services/products';
 import { formatWarranty, type Product, type ProductVariant } from '@/app/tienda/product';
 import useCartStore from '@/store/cartStore';
+import {
+    hayParaComprar,
+    sePuedeRestar,
+    sePuedeSumar,
+    stockQueManda,
+} from '@/lib/stockDeLaFicha';
 
 function slugify(text = '') {
     return text
@@ -95,12 +101,10 @@ interface Props {
 export default function ProductDetailClient({ productProp, storeSlugProp }: Props) {
     const router = useRouter();
 
-    const [product, setProduct] = useState<Product | null>(productProp || null);
-    // **El producto siempre llega del server.** La ficha lo resuelve por slug
-    // contra Fixbee y hace notFound() si no existe, asi que no queda ningun
-    // caso en el que el navegador tenga que ir a buscarlo de nuevo.
-    const [isLoading, setIsLoading] = useState(!productProp);
-    const [error, setError] = useState<string | null>(null);
+    // El producto llega resuelto del server, que hace `notFound()` si no
+    // existe: no hay estado que actualizar ni error que mostrar acá.
+    const product: Product | null = productProp ?? null;
+
     
     // UI States
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -120,7 +124,6 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
 
         if (colors.length > 0) setSelectedColor((previo) => previo ?? colors[0]);
         if (sizes.length > 0) setSelectedSize((previo) => previo ?? sizes[0]);
-        setIsLoading(false);
     }, [product]);
 
 
@@ -154,12 +157,11 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
     
     // Handle quantity
     const incrementQuantity = () => {
-        const maxStock = selectedVariant?.stock || totalStock;
-        if (quantity < maxStock) setQuantity(q => q + 1);
+        if (sePuedeSumar(quantity, selectedVariant, totalStock)) setQuantity(q => q + 1);
     };
     
     const decrementQuantity = () => {
-        if (quantity > 1) setQuantity(q => q - 1);
+        if (sePuedeRestar(quantity)) setQuantity(q => q - 1);
     };
     
     // Handle add to cart
@@ -169,38 +171,12 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
         }
     };
     
-    // Loading state
-    if (isLoading) {
-        return (
-            <div className="max-w-screen-xl mx-auto px-4 py-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <Skeleton className="w-full aspect-square rounded-xl" />
-                    <div className="space-y-4">
-                        <Skeleton className="h-10 w-3/4" />
-                        <Skeleton className="h-6 w-1/2" />
-                        <Skeleton className="h-24 w-full" />
-                        <Skeleton className="h-12 w-1/3" />
-                        <Skeleton className="h-12 w-full" />
-                    </div>
-                </div>
-            </div>
-        );
-    }
-    
-    // Error state
-    if (error || !product) {
-        return (
-            <div className="max-w-screen-xl mx-auto px-4 py-16 text-center">
-                <h1 className="text-2xl font-bold mb-4">Producto no encontrado</h1>
-                <p className="text-muted-foreground mb-8">{error || 'El producto que buscas no existe.'}</p>
-                <Button onClick={() => router.push('/tienda')} variant="solid" color="primary">
-                    <ArrowLeft className="w-4 h-4 mr-2" />
-                    Volver a la tienda
-                </Button>
-            </div>
-        );
-    }
-    
+    // **No hay pantalla de carga ni de error.** El producto lo resuelve el
+    // server component, que hace `notFound()` cuando el slug no existe: acá no
+    // queda ningún camino en el que falte. El `if` es para el tipo, no para el
+    // comprador.
+    if (!product) return null;
+
     // Calculate discount (example: 0% off)
     const discount = 0;
     const originalPrice = product.retail_price;
@@ -440,11 +416,11 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                     
                     {/* Stock Info */}
                     <div className="flex items-center gap-2">
-                        {(selectedVariant?.stock || totalStock) > 0 ? (
+                        {hayParaComprar(selectedVariant, totalStock) ? (
                             <>
                                 <Check className="w-5 h-5 text-green-500" />
                                 <span className="text-green-600 font-medium">
-                                    {selectedVariant ? selectedVariant.stock : totalStock} unidades disponibles
+                                    {stockQueManda(selectedVariant, totalStock)} unidades disponibles
                                 </span>
                             </>
                         ) : (
@@ -468,7 +444,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                             </span>
                             <button
                                 onClick={incrementQuantity}
-                                disabled={quantity >= (selectedVariant?.stock || totalStock)}
+                                disabled={!sePuedeSumar(quantity, selectedVariant, totalStock)}
                                 className="p-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors disabled:opacity-50"
                             >
                                 <Plus className="w-4 h-4" />
@@ -478,7 +454,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                         {/* Add to Cart Button */}
                         <Button
                             onClick={handleAddToCart}
-                            disabled={(selectedVariant?.stock || totalStock) === 0}
+                            disabled={!hayParaComprar(selectedVariant, totalStock)}
                             color="primary"
                             size="lg"
                             className="flex-1"
