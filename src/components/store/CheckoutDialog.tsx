@@ -20,6 +20,7 @@ import {
 } from "@/lib/checkoutFlow";
 import { aLineasDeCheckout } from "@/lib/cartLines";
 import { huellaDelCarrito } from "@/lib/checkoutKey";
+import { queHacerConElPendiente } from "@/lib/pedidoPendiente";
 import {
     createOrder,
     fetchOrderStatus,
@@ -93,51 +94,42 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
         [items]
     );
 
-    // **Un pedido creado y sin pagar sobrevive a la recarga.** El backend
-    // entrega el `access_token` una sola vez, al crear el pedido: si el link
-    // falla y el comprador recarga, sin esto la reserva queda viva y sin forma
-    // de pagarla desde la tienda.
-    //
-    // **Solo si es el pedido de ESTE carrito.** Un pedido abandonado deja su
-    // token guardado; sin comparar la huella, la tienda le ofreceria a alguien
-    // que ya armo otro carrito pagar el pedido viejo —otros productos, otro
-    // importe— con el carrito nuevo a la vista.
+    // **Un pedido creado y sin pagar sobrevive a la recarga**, y se suelta si
+    // el carrito pasa a ser otro. La regla completa, con sus bordes, vive en
+    // `src/lib/pedidoPendiente.ts`, que es lo que se puede probar.
     useEffect(() => {
-        if (pedidoPendiente) return;
         let almacen: Storage | null = null;
         try {
             almacen = window.localStorage;
         } catch {
+            // Modo privado: no hay pedido que recuperar ni que soltar.
             return;
         }
-        const guardado = almacen ? pedidoGuardado(almacen) : null;
-        if (!guardado?.token) return;
-        if (!guardado.huella || guardado.huella !== huellaActual) return;
 
-        setPedidoPendiente({
-            commerce_key: guardado.clave,
-            access_token: guardado.token,
-            total_amount: guardado.total ?? 0,
-            currency: guardado.moneda ?? "ARS",
-        } as StoreOrder);
-        setHuellaPendiente(guardado.huella);
-        setFallo("Tenés un pedido reservado esperando el pago.");
-    }, [pedidoPendiente, huellaActual]);
+        const decision = queHacerConElPendiente({
+            guardado: almacen ? pedidoGuardado(almacen) : null,
+            huellaActual,
+            huellaEnPantalla: huellaPendiente,
+        });
 
-    // Si el carrito pasa a ser OTRO, el botón de reintentar se va: ofrecer
-    // pagar un pedido con productos distintos a la vista es peor que no
-    // ofrecer nada.
-    //
-    // **Vaciar el carrito no cuenta.** Ahí no hay con qué confundirse, y el
-    // pedido sigue reservado y pagable: esconderlo dejaría al comprador sin
-    // forma de pagar algo que ya tiene el stock tomado, hasta que venza.
-    useEffect(() => {
-        if (!huellaPendiente) return;
-        if (!huellaActual) return;
-        if (huellaPendiente === huellaActual) return;
-        setPedidoPendiente(null);
-        setHuellaPendiente(null);
-        setFallo(null);
+        if (decision.accion === "recuperar") {
+            const g = decision.pedido;
+            setPedidoPendiente({
+                commerce_key: g.clave,
+                access_token: g.token,
+                total_amount: g.total ?? 0,
+                currency: g.moneda ?? "ARS",
+            } as StoreOrder);
+            setHuellaPendiente(g.huella);
+            setFallo("Tenés un pedido reservado esperando el pago.");
+            return;
+        }
+
+        if (decision.accion === "soltar") {
+            setPedidoPendiente(null);
+            setHuellaPendiente(null);
+            setFallo(null);
+        }
     }, [huellaActual, huellaPendiente]);
 
     const irAPagar = (url: string) => {
