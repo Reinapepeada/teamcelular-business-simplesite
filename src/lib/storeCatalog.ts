@@ -1,9 +1,5 @@
-// **Solo el tipo arriba, y el runtime adentro de cada funcion.** `node --test`
-// ejecuta TypeScript nativo pero exige la extension .ts en los imports, y tsc
-// la rechaza (TS5097) salvo con allowImportingTsExtensions, que cambiaria la
-// compilacion de todo el sitio. Un import de tipos se borra al ejecutar, asi
-// que las funciones puras de este modulo se pueden probar sin runner.
 import type { StoreProduct } from "./storeApi";
+import { fetchStoreProduct, fetchStoreProducts } from "./storeApi";
 
 /**
  * El catálogo, leído del backend de Fixbee.
@@ -95,7 +91,6 @@ export const adaptarProducto = (crudo: StoreProduct): CatalogProduct | null => {
 export const listarCatalogo = async (
     params: Record<string, string | number> = {}
 ): Promise<CatalogPage> => {
-    const { fetchStoreProducts } = await import("./storeApi");
     const pagina = await fetchStoreProducts(params);
     const items = (pagina.items ?? [])
         .map(adaptarProducto)
@@ -104,7 +99,6 @@ export const listarCatalogo = async (
 };
 
 export const verProducto = async (slug: string): Promise<CatalogProduct | null> => {
-    const { fetchStoreProduct } = await import("./storeApi");
     const crudo = await fetchStoreProduct(slug);
     return adaptarProducto(crudo);
 };

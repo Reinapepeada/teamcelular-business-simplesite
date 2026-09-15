@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "seo:audit": "lighthouse http://localhost:3000 --chrome-flags=\"--headless\" --output html --output json --output-path ./reports/lighthouse-report",
-    "seo:indexnow": "node scripts/indexnow-submit.mjs"
+    "seo:indexnow": "node scripts/indexnow-submit.mjs",
+    "test": "node --import ./tools/node-test-resolver.mjs --test src/lib/*.test.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
