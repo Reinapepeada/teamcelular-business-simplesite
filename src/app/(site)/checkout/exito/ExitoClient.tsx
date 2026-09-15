@@ -67,15 +67,25 @@ export default function ExitoClient({ intencion = "exito" }: { intencion?: Inten
                     // mano, compartida por WhatsApp— esto le borraría al que
                     // mira el carrito que está armando ahora, y la clave que le
                     // permite recuperar su propio pedido.
+                    //
+                    // Y se olvida NOMBRANDO el pedido: esta confirmación puede
+                    // llegar tarde, con el comprador ya en otra compra, y
+                    // borrar a ciegas se llevaría la credencial de esa otra.
                     if (pedido.esNuestro) {
                         clearCart();
                         if (guardado) {
-                            olvidarPedido(guardado);
+                            olvidarPedido(guardado, pedido.clave);
                             olvidarClave(guardado);
                         }
                     }
                     return;
                 }
+
+                // **La decisión de seguir sale de lo que contestó el backend**,
+                // no de un estado inventado: un pago pendiente de verdad dice
+                // que no hay nada que esperar en esta pestaña, y preguntarle a
+                // un `null` lo trataba como una demora anormal.
+                if (!vueltaMostrable(respuesta, intencion).seguirPreguntando) return;
             } catch (error) {
                 if (!vivo) return;
                 // Un pedido que no existe no se va a acreditar nunca: seguir
@@ -89,7 +99,6 @@ export default function ExitoClient({ intencion = "exito" }: { intencion?: Inten
             }
 
             if (!vivo) return;
-            if (!vueltaMostrable(null, intencion).seguirPreguntando) return;
             intento += 1;
             if (intento >= INTENTOS) {
                 setSeGastaronLosIntentos(true);

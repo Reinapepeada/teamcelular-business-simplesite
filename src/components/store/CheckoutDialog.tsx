@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import useCartStore from "@/store/cartStore";
 import { claveDeCheckout, olvidarClave } from "@/lib/checkoutKey";
-import { pedidoGuardado, recordarPedido } from "@/lib/vueltaDelPago";
+import { olvidarPedido, pedidoGuardado, recordarPedido } from "@/lib/vueltaDelPago";
 import {
     armarPedido,
     comprar,
@@ -14,6 +14,7 @@ import {
     type ErroresDeCompra,
 } from "@/lib/checkoutFlow";
 import { aLineasDeCheckout } from "@/lib/cartLines";
+import { huellaDelCarrito } from "@/lib/checkoutKey";
 import { createOrder, requestPaymentLink, type StoreOrder } from "@/lib/storeApi";
 
 /**
@@ -63,10 +64,30 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
     // su propia reserva sobre el mismo stock.
     const [pedidoPendiente, setPedidoPendiente] = useState<StoreOrder | null>(null);
 
+    const items = useMemo(
+        () =>
+            cart.map(item => ({
+                slug: item.storeSlug,
+                quantity: item.quantity,
+                nombre: item.product?.name,
+            })),
+        [cart]
+    );
+
+    const huellaActual = useMemo(
+        () => huellaDelCarrito(aLineasDeCheckout(items).lineas),
+        [items]
+    );
+
     // **Un pedido creado y sin pagar sobrevive a la recarga.** El backend
     // entrega el `access_token` una sola vez, al crear el pedido: si el link
     // falla y el comprador recarga, sin esto la reserva queda viva y sin forma
     // de pagarla desde la tienda.
+    //
+    // **Solo si es el pedido de ESTE carrito.** Un pedido abandonado deja su
+    // token guardado; sin comparar la huella, la tienda le ofreceria a alguien
+    // que ya armo otro carrito pagar el pedido viejo —otros productos, otro
+    // importe— con el carrito nuevo a la vista.
     useEffect(() => {
         if (pedidoPendiente) return;
         let almacen: Storage | null = null;
@@ -77,22 +98,16 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
         }
         const guardado = almacen ? pedidoGuardado(almacen) : null;
         if (!guardado?.token) return;
+        if (!guardado.huella || guardado.huella !== huellaActual) return;
+
         setPedidoPendiente({
             commerce_key: guardado.clave,
             access_token: guardado.token,
+            total_amount: guardado.total ?? 0,
+            currency: guardado.moneda ?? "ARS",
         } as StoreOrder);
         setFallo("Tenés un pedido reservado esperando el pago.");
-    }, [pedidoPendiente]);
-
-    const items = useMemo(
-        () =>
-            cart.map(item => ({
-                slug: item.storeSlug,
-                quantity: item.quantity,
-                nombre: item.product?.name,
-            })),
-        [cart]
-    );
+    }, [pedidoPendiente, huellaActual]);
 
     const irAPagar = (url: string) => {
         window.location.href = url;
@@ -117,11 +132,16 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                     // lo que la pantalla de vuelta usa para preguntar el estado
                     // sin depender de los parametros de la URL.
                     recordar: (pedido) =>
-                        recordarPedido(
-                            window.localStorage,
-                            pedido.commerce_key,
-                            pedido.access_token ?? null
-                        ),
+                        recordarPedido(window.localStorage, {
+                            clave: pedido.commerce_key,
+                            token: pedido.access_token ?? null,
+                            total: pedido.total_amount,
+                            moneda: pedido.currency,
+                            // Con que carrito se creo: es lo que despues
+                            // decide si este pedido todavia es el de la compra
+                            // que el comprador tiene a la vista.
+                            huella: huellaActual,
+                        }),
                 },
                 armarPedido(datos, items, clave)
             );
@@ -147,8 +167,25 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
         try {
             const { checkout_url } = await requestPaymentLink(pedidoPendiente.access_token);
             irAPagar(checkout_url);
-        } catch {
-            setFallo("Seguimos sin poder abrir el pago. Escribinos y lo resolvemos.");
+        } catch (error) {
+            // **Un 409 no es "probemos de nuevo".** El backend contesta eso
+            // cuando el pedido ya no acepta un link: pagado, vencido o
+            // cancelado. Dejar el token guardado ahi deja el checkout trabado
+            // ofreciendo reintentar algo que nunca va a andar.
+            const status = (error as { status?: number } | null)?.status;
+            if (status === 409) {
+                try {
+                    olvidarPedido(window.localStorage, pedidoPendiente.commerce_key);
+                } catch {
+                    // Si no se puede limpiar, al menos el dialogo se destraba.
+                }
+                setPedidoPendiente(null);
+                setFallo(
+                    "Ese pedido ya no se puede pagar: puede que ya esté pagado o que haya vencido. Revisá tu mail o escribinos."
+                );
+            } else {
+                setFallo("Seguimos sin poder abrir el pago. Escribinos y lo resolvemos.");
+            }
             setEnviando(false);
         }
     };

@@ -65,27 +65,27 @@ const estado = (over: Partial<StoreOrderStatus> = {}): StoreOrderStatus => ({
 describe("el pedido recordado", () => {
     test("se guarda y se recupera", () => {
         const almacen = almacenFalso();
-        recordarPedido(almacen, "CK-42");
+        recordarPedido(almacen, { clave: "CK-42" });
         assert.equal(pedidoRecordado(almacen), "CK-42");
     });
 
     test("se olvida cuando se pide", () => {
         const almacen = almacenFalso();
-        recordarPedido(almacen, "CK-42");
+        recordarPedido(almacen, { clave: "CK-42" });
         olvidarPedido(almacen);
         assert.equal(pedidoRecordado(almacen), null);
     });
 
     test("un almacenamiento bloqueado no rompe la compra", () => {
         const almacen = almacenRoto();
-        assert.doesNotThrow(() => recordarPedido(almacen, "CK-42"));
+        assert.doesNotThrow(() => recordarPedido(almacen, { clave: "CK-42" }));
         assert.doesNotThrow(() => olvidarPedido(almacen));
         assert.equal(pedidoRecordado(almacen), null);
     });
 
     test("una clave vacia no se guarda", () => {
         const almacen = almacenFalso();
-        recordarPedido(almacen, "");
+        recordarPedido(almacen, { clave: "" });
         assert.equal(pedidoRecordado(almacen), null);
     });
 
@@ -93,8 +93,8 @@ describe("el pedido recordado", () => {
         // Si la pisara, el comprador vuelve de Mercado Pago y la pantalla
         // queda sin saber de que pedido preguntar.
         const almacen = almacenFalso();
-        recordarPedido(almacen, "CK-42");
-        recordarPedido(almacen, "");
+        recordarPedido(almacen, { clave: "CK-42" });
+        recordarPedido(almacen, { clave: "" });
         assert.equal(pedidoRecordado(almacen), "CK-42");
     });
 });
@@ -102,28 +102,28 @@ describe("el pedido recordado", () => {
 describe("claveDeLaVuelta", () => {
     test("manda la referencia de la URL: es el pedido que MP acaba de procesar", () => {
         const almacen = almacenFalso();
-        recordarPedido(almacen, "CK-VIEJO");
+        recordarPedido(almacen, { clave: "CK-VIEJO" });
         const pedido = claveDeLaVuelta(almacen, query({ external_reference: "CK-NUEVO" }));
         assert.equal(pedido?.clave, "CK-NUEVO");
     });
 
     test("una referencia ajena se mira pero no cuenta como propia", () => {
         const almacen = almacenFalso();
-        recordarPedido(almacen, "CK-MIO");
+        recordarPedido(almacen, { clave: "CK-MIO" });
         const pedido = claveDeLaVuelta(almacen, query({ external_reference: "CK-DE-OTRO" }));
         assert.equal(pedido?.esNuestro, false);
     });
 
     test("la misma clave que guardo este navegador si es propia", () => {
         const almacen = almacenFalso();
-        recordarPedido(almacen, "CK-MIO");
+        recordarPedido(almacen, { clave: "CK-MIO" });
         const pedido = claveDeLaVuelta(almacen, query({ external_reference: "CK-MIO" }));
         assert.equal(pedido?.esNuestro, true);
     });
 
     test("sin referencia en la URL usa la guardada, que es propia", () => {
         const almacen = almacenFalso();
-        recordarPedido(almacen, "CK-MIO");
+        recordarPedido(almacen, { clave: "CK-MIO" });
         assert.deepEqual(claveDeLaVuelta(almacen, query({})), {
             clave: "CK-MIO",
             esNuestro: true,
@@ -224,10 +224,6 @@ describe("vueltaMostrable segun la puerta por la que volvio", () => {
         assert.equal(vueltaMostrable(estado({ paid: false }), "exito").seguirPreguntando, true);
     });
 
-    test("sin estado todavia, la puerta de error ya puede decir que no entro", () => {
-        assert.equal(vueltaMostrable(null, "error").desenlace, "rechazado");
-    });
-
     test("sin estado todavia, la puerta de exito espera", () => {
         assert.equal(vueltaMostrable(null, "exito").seguirPreguntando, true);
     });
@@ -236,21 +232,33 @@ describe("vueltaMostrable segun la puerta por la que volvio", () => {
 describe("el token del pedido a medio pagar", () => {
     test("se guarda junto con la clave", () => {
         const almacen = almacenFalso();
-        recordarPedido(almacen, "CK-42", "tok-secreto");
-        assert.deepEqual(pedidoGuardado(almacen), { clave: "CK-42", token: "tok-secreto" });
+        recordarPedido(almacen, { clave: "CK-42", token: "tok-secreto" });
+        assert.deepEqual(pedidoGuardado(almacen), {
+            clave: "CK-42",
+            token: "tok-secreto",
+            total: null,
+            moneda: null,
+            huella: null,
+        });
     });
 
     test("sin token se guarda igual: la vuelta solo necesita la clave", () => {
         const almacen = almacenFalso();
-        recordarPedido(almacen, "CK-42");
-        assert.deepEqual(pedidoGuardado(almacen), { clave: "CK-42", token: null });
+        recordarPedido(almacen, { clave: "CK-42" });
+        assert.deepEqual(pedidoGuardado(almacen), {
+            clave: "CK-42",
+            token: null,
+            total: null,
+            moneda: null,
+            huella: null,
+        });
     });
 
     test("un pedido guardado por la version vieja se sigue leyendo", () => {
         // Antes se guardaba la clave pelada. El almacenamiento sobrevive al
         // deploy: tirar ese formato perderia el pedido en curso.
         const almacen = almacenFalso({ "tc.pedido": "CK-VIEJO" });
-        assert.deepEqual(pedidoGuardado(almacen), { clave: "CK-VIEJO", token: null });
+        assert.equal(pedidoGuardado(almacen)?.clave, "CK-VIEJO");
         assert.equal(pedidoRecordado(almacen), "CK-VIEJO");
     });
 
@@ -267,7 +275,7 @@ describe("el token del pedido a medio pagar", () => {
 
     test("olvidar el pedido se lleva el token", () => {
         const almacen = almacenFalso();
-        recordarPedido(almacen, "CK-42", "tok-secreto");
+        recordarPedido(almacen, { clave: "CK-42", token: "tok-secreto" });
         olvidarPedido(almacen);
         assert.equal(pedidoGuardado(almacen), null);
     });
@@ -280,7 +288,98 @@ describe("el token del pedido a medio pagar", () => {
 
     test("la clave sigue saliendo de pedidoRecordado, que es lo que usa la vuelta", () => {
         const almacen = almacenFalso();
-        recordarPedido(almacen, "CK-42", "tok-secreto");
+        recordarPedido(almacen, { clave: "CK-42", token: "tok-secreto" });
         assert.equal(pedidoRecordado(almacen), "CK-42");
+    });
+});
+
+describe("olvidar el pedido sin llevarse el que sigue", () => {
+    test("con la clave esperada, borra solo si sigue siendo ese", () => {
+        const almacen = almacenFalso();
+        recordarPedido(almacen, { clave: "CK-A", token: "tok-a" });
+        olvidarPedido(almacen, "CK-A");
+        assert.equal(pedidoGuardado(almacen), null);
+    });
+
+    test("una confirmacion que llega tarde no borra el pedido nuevo", () => {
+        // El comprador ya arranco otra compra: borrar a ciegas se lleva la
+        // credencial del pedido EN CURSO por la buena noticia de uno anterior.
+        const almacen = almacenFalso();
+        recordarPedido(almacen, { clave: "CK-NUEVO", token: "tok-nuevo" });
+        olvidarPedido(almacen, "CK-VIEJO");
+        assert.equal(pedidoGuardado(almacen)?.clave, "CK-NUEVO");
+        assert.equal(pedidoGuardado(almacen)?.token, "tok-nuevo");
+    });
+
+    test("sin clave esperada borra lo que haya", () => {
+        const almacen = almacenFalso();
+        recordarPedido(almacen, { clave: "CK-A" });
+        olvidarPedido(almacen);
+        assert.equal(pedidoGuardado(almacen), null);
+    });
+});
+
+describe("el monto y la huella del pedido guardado", () => {
+    test("se guardan para no tener que inventarlos al recuperar", () => {
+        const almacen = almacenFalso();
+        recordarPedido(almacen, {
+            clave: "CK-1",
+            token: "tok",
+            total: 15000,
+            moneda: "ARS",
+            huella: "pantalla:1",
+        });
+        const g = pedidoGuardado(almacen);
+        assert.equal(g?.total, 15000);
+        assert.equal(g?.moneda, "ARS");
+        assert.equal(g?.huella, "pantalla:1");
+    });
+
+    test("un total que no es numero vuelve como null y no como NaN", () => {
+        // Mostrarlo daria "quedo reservado por $ NaN" justo cuando el
+        // comprador necesita saber que importe va a reintentar.
+        const almacen = almacenFalso({
+            "tc.pedido": JSON.stringify({ clave: "CK-1", total: "mil" }),
+        });
+        assert.equal(pedidoGuardado(almacen)?.total, null);
+
+        const nan = almacenFalso({
+            "tc.pedido": '{"clave":"CK-1","total":null}',
+        });
+        assert.equal(pedidoGuardado(nan)?.total, null);
+    });
+
+    test("una huella en blanco vuelve como null, no como cadena vacia", () => {
+        // La huella de un carrito vacio TAMBIEN es la cadena vacia: si una
+        // guardada en blanco se devolviera tal cual, un pedido viejo
+        // "coincidiria" con el carrito vacio y la tienda ofreceria pagarlo.
+        const almacen = almacenFalso({
+            "tc.pedido": JSON.stringify({ clave: "CK-1", token: "tok", huella: "" }),
+        });
+        assert.equal(pedidoGuardado(almacen)?.huella, null);
+    });
+
+    test("el formato viejo no trae huella, asi que no se recupera como propio", () => {
+        const almacen = almacenFalso({ "tc.pedido": "CK-VIEJO" });
+        assert.equal(pedidoGuardado(almacen)?.huella, null);
+    });
+});
+
+describe("sin respuesta del backend no se afirma nada sobre el cobro", () => {
+    test("la puerta de error, sin estado todavia, espera en vez de decir que no se cobro", () => {
+        // Volver por /checkout/error dice por donde redirigio Mercado Pago, no
+        // que no se haya cobrado. Si la consulta fallo o todavia no contesto,
+        // afirmar el rechazo es dejar que la URL diga lo que no puede decir.
+        const v = vueltaMostrable(null, "error");
+        assert.notEqual(v.desenlace, "rechazado");
+        assert.equal(v.seguirPreguntando, true);
+    });
+
+    test("recien con el backend diciendo que no esta pagado se muestra el rechazo", () => {
+        assert.equal(vueltaMostrable(estado({ paid: false }), "error").desenlace, "rechazado");
+    });
+
+    test("un pago demorado, con respuesta, deja de preguntar", () => {
+        assert.equal(vueltaMostrable(estado({ paid: false }), "pendiente").seguirPreguntando, false);
     });
 });

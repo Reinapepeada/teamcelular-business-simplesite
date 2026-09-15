@@ -37,6 +37,23 @@ export interface PedidoGuardado {
      * el pago entra.
      */
     token: string | null;
+    /**
+     * Lo que se va a cobrar, para no tener que inventarlo al recuperar.
+     *
+     * Reconstruir el pedido sin esto mostraba "quedó reservado por $ NaN"
+     * justo cuando el comprador necesita saber qué importe está por reintentar.
+     */
+    total: number | null;
+    moneda: string | null;
+    /**
+     * La huella del carrito con el que se creó ESTE pedido.
+     *
+     * **Es lo que impide pagar la compra equivocada.** Un pedido abandonado
+     * deja su token guardado; si después el comprador arma otro carrito, sin
+     * comparar la huella la tienda le ofrecería pagar el pedido viejo —otros
+     * productos, otro importe— con el carrito nuevo a la vista.
+     */
+    huella: string | null;
 }
 
 /**
@@ -51,12 +68,26 @@ export interface PedidoGuardado {
  */
 export const recordarPedido = (
     almacen: AlmacenClave,
-    commerceKey: string,
-    token: string | null = null
+    pedido: {
+        clave: string;
+        token?: string | null;
+        total?: number | null;
+        moneda?: string | null;
+        huella?: string | null;
+    }
 ): void => {
     try {
-        if (commerceKey) {
-            almacen.setItem(ESPACIO, JSON.stringify({ clave: commerceKey, token }));
+        if (pedido?.clave) {
+            almacen.setItem(
+                ESPACIO,
+                JSON.stringify({
+                    clave: pedido.clave,
+                    token: pedido.token ?? null,
+                    total: pedido.total ?? null,
+                    moneda: pedido.moneda ?? null,
+                    huella: pedido.huella ?? null,
+                })
+            );
         }
     } catch {
         // Sin poder guardar la compra sigue: la vuelta usa el parámetro.
@@ -77,11 +108,16 @@ export const pedidoGuardado = (almacen: AlmacenClave): PedidoGuardado | null => 
                 return {
                     clave: dato.clave.trim(),
                     token: typeof dato.token === "string" && dato.token ? dato.token : null,
+                    total: typeof dato.total === "number" && Number.isFinite(dato.total)
+                        ? dato.total
+                        : null,
+                    moneda: typeof dato.moneda === "string" && dato.moneda ? dato.moneda : null,
+                    huella: typeof dato.huella === "string" && dato.huella ? dato.huella : null,
                 };
             }
             return null;
         } catch {
-            return { clave: crudo.trim(), token: null };
+            return { clave: crudo.trim(), token: null, total: null, moneda: null, huella: null };
         }
     } catch {
         return null;
@@ -91,8 +127,20 @@ export const pedidoGuardado = (almacen: AlmacenClave): PedidoGuardado | null => 
 export const pedidoRecordado = (almacen: AlmacenClave): string | null =>
     pedidoGuardado(almacen)?.clave ?? null;
 
-export const olvidarPedido = (almacen: AlmacenClave): void => {
+/**
+ * Se olvida el pedido guardado.
+ *
+ * **Con `claveEsperada`, solo si sigue siendo ese.** La confirmación de un
+ * pedido puede llegar tarde: el comprador ya arrancó otra compra y el
+ * almacenamiento guarda la nueva. Borrar a ciegas se lleva la credencial del
+ * pedido EN CURSO por la buena noticia de uno anterior.
+ */
+export const olvidarPedido = (almacen: AlmacenClave, claveEsperada?: string): void => {
     try {
+        if (claveEsperada) {
+            const guardado = pedidoGuardado(almacen);
+            if (!guardado || guardado.clave !== claveEsperada) return;
+        }
         almacen.removeItem(ESPACIO);
     } catch {
         // La próxima compra lo reemplaza.
@@ -229,7 +277,12 @@ export const vueltaMostrable = (
         };
     }
 
-    if (!estado) return intencion === "error" ? RECHAZADO : ESPERANDO;
+    // **Sin respuesta del backend no se afirma nada sobre el cobro.** Volver
+    // por la puerta de error dice por dónde redirigió Mercado Pago, no que no
+    // se haya cobrado: si la consulta de estado todavía no contestó —o falló la
+    // red— decir "no se hizo ningún cargo" es dejar que la URL afirme
+    // exactamente lo que no puede afirmar.
+    if (!estado) return ESPERANDO;
 
     if (intencion === "error") return RECHAZADO;
     if (intencion === "pendiente") return DEMORADO;
