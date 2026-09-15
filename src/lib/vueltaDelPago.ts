@@ -19,30 +19,77 @@ import type { StoreOrderStatus } from "./storeApi";
 
 const ESPACIO = "tc.pedido";
 
+/** El pedido que este navegador dejó empezado. */
+export interface PedidoGuardado {
+    clave: string;
+    /**
+     * La credencial para pedir el link de pago de ESE pedido.
+     *
+     * **El backend la entrega una sola vez, al crear el pedido.** Si se
+     * quedaba solo en memoria, un fallo del proveedor justo después de crear el
+     * pedido más una recarga dejaban una compra con el stock reservado que el
+     * comprador ya no podía pagar desde la tienda: hacía falta que alguien del
+     * negocio la destrabara a mano.
+     *
+     * Guardarla tiene su costo —es una credencial en el navegador— y es el
+     * menor de los dos: alcanza para pagarle a la tienda el pedido de uno
+     * mismo, no para leer datos de nadie ni para cobrar nada. Se borra apenas
+     * el pago entra.
+     */
+    token: string | null;
+}
+
 /**
- * Se recuerda el pedido antes de mandar a pagar.
+ * Se recuerda el pedido apenas se crea, ANTES de pedir el link de pago.
  *
- * Es la fuente preferida para la vuelta: sale del navegador del comprador y no
- * de una URL que se puede editar. Los parámetros quedan como respaldo para
- * cuando el pago se termina en otro dispositivo, o cuando el almacenamiento
- * está bloqueado.
+ * Antes y no después **porque el momento peligroso es justo el del medio**: el
+ * pedido ya existe y tiene stock reservado, y todavía no hay a dónde mandar a
+ * pagar. Recordarlo recién con el link en la mano deja ese hueco sin red.
+ *
+ * Es además la fuente preferida para la vuelta del pago: sale del navegador y
+ * no de una URL que se puede editar.
  */
-export const recordarPedido = (almacen: AlmacenClave, commerceKey: string): void => {
+export const recordarPedido = (
+    almacen: AlmacenClave,
+    commerceKey: string,
+    token: string | null = null
+): void => {
     try {
-        if (commerceKey) almacen.setItem(ESPACIO, commerceKey);
+        if (commerceKey) {
+            almacen.setItem(ESPACIO, JSON.stringify({ clave: commerceKey, token }));
+        }
     } catch {
         // Sin poder guardar la compra sigue: la vuelta usa el parámetro.
     }
 };
 
-export const pedidoRecordado = (almacen: AlmacenClave): string | null => {
+export const pedidoGuardado = (almacen: AlmacenClave): PedidoGuardado | null => {
     try {
-        const valor = almacen.getItem(ESPACIO);
-        return valor && valor.trim() !== "" ? valor.trim() : null;
+        const crudo = almacen.getItem(ESPACIO);
+        if (!crudo || crudo.trim() === "") return null;
+
+        // Las versiones anteriores guardaban la clave pelada. El carrito
+        // sobrevive al deploy, así que ese formato sigue llegando: se lee en
+        // vez de tirarlo, aunque venga sin token.
+        try {
+            const dato = JSON.parse(crudo);
+            if (dato && typeof dato.clave === "string" && dato.clave.trim() !== "") {
+                return {
+                    clave: dato.clave.trim(),
+                    token: typeof dato.token === "string" && dato.token ? dato.token : null,
+                };
+            }
+            return null;
+        } catch {
+            return { clave: crudo.trim(), token: null };
+        }
     } catch {
         return null;
     }
 };
+
+export const pedidoRecordado = (almacen: AlmacenClave): string | null =>
+    pedidoGuardado(almacen)?.clave ?? null;
 
 export const olvidarPedido = (almacen: AlmacenClave): void => {
     try {

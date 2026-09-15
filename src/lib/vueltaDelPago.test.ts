@@ -16,6 +16,7 @@ import {
     claveDeLaVuelta,
     esperaAntesDeReintentar,
     olvidarPedido,
+    pedidoGuardado,
     pedidoRecordado,
     recordarPedido,
     vueltaMostrable,
@@ -229,5 +230,57 @@ describe("vueltaMostrable segun la puerta por la que volvio", () => {
 
     test("sin estado todavia, la puerta de exito espera", () => {
         assert.equal(vueltaMostrable(null, "exito").seguirPreguntando, true);
+    });
+});
+
+describe("el token del pedido a medio pagar", () => {
+    test("se guarda junto con la clave", () => {
+        const almacen = almacenFalso();
+        recordarPedido(almacen, "CK-42", "tok-secreto");
+        assert.deepEqual(pedidoGuardado(almacen), { clave: "CK-42", token: "tok-secreto" });
+    });
+
+    test("sin token se guarda igual: la vuelta solo necesita la clave", () => {
+        const almacen = almacenFalso();
+        recordarPedido(almacen, "CK-42");
+        assert.deepEqual(pedidoGuardado(almacen), { clave: "CK-42", token: null });
+    });
+
+    test("un pedido guardado por la version vieja se sigue leyendo", () => {
+        // Antes se guardaba la clave pelada. El almacenamiento sobrevive al
+        // deploy: tirar ese formato perderia el pedido en curso.
+        const almacen = almacenFalso({ "tc.pedido": "CK-VIEJO" });
+        assert.deepEqual(pedidoGuardado(almacen), { clave: "CK-VIEJO", token: null });
+        assert.equal(pedidoRecordado(almacen), "CK-VIEJO");
+    });
+
+    test("un token en blanco o de otro tipo vuelve como null", () => {
+        // Devolverlo tal cual lo dejaria pasar el chequeo de "hay token" en
+        // algunos lugares y no en otros, y la tienda terminaria pidiendo el
+        // link de pago con una credencial vacia.
+        const vacio = almacenFalso({ "tc.pedido": JSON.stringify({ clave: "CK-1", token: "" }) });
+        assert.equal(pedidoGuardado(vacio)?.token, null);
+
+        const raro = almacenFalso({ "tc.pedido": JSON.stringify({ clave: "CK-1", token: 7 }) });
+        assert.equal(pedidoGuardado(raro)?.token, null);
+    });
+
+    test("olvidar el pedido se lleva el token", () => {
+        const almacen = almacenFalso();
+        recordarPedido(almacen, "CK-42", "tok-secreto");
+        olvidarPedido(almacen);
+        assert.equal(pedidoGuardado(almacen), null);
+    });
+
+    test("un almacenamiento con basura no rompe la vuelta", () => {
+        assert.equal(pedidoGuardado(almacenFalso({ "tc.pedido": "{roto" }))?.clave, "{roto");
+        assert.equal(pedidoGuardado(almacenFalso({ "tc.pedido": "{}" })), null);
+        assert.equal(pedidoGuardado(almacenRoto()), null);
+    });
+
+    test("la clave sigue saliendo de pedidoRecordado, que es lo que usa la vuelta", () => {
+        const almacen = almacenFalso();
+        recordarPedido(almacen, "CK-42", "tok-secreto");
+        assert.equal(pedidoRecordado(almacen), "CK-42");
     });
 });

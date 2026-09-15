@@ -14,6 +14,7 @@ import assert from "node:assert/strict";
 
 import {
     ITEMS_PER_PAGE,
+    normalizeCatalogFilters,
     parametrosDeCatalogo,
     type CatalogFiltersState,
 } from "./catalog.ts";
@@ -195,5 +196,31 @@ describe("la condicion viaja hasta el JSON-LD", () => {
     test("un usado no se publica como nuevo", () => {
         const p = productoDeVidriera(deFixbee({ condition: "used" }));
         assert.equal(condicionSchema(p.storeCondition), "https://schema.org/UsedCondition");
+    });
+});
+
+describe("normalizeCatalogFilters con los filtros de a una", () => {
+    test("una URL con varias categorias deja una sola", () => {
+        // Si guardara las tres, los chips de filtros activos mostrarian tres
+        // mientras la consulta lleva una: la mentira que los filtros de a una
+        // vienen a sacar.
+        const f = normalizeCatalogFilters({ categories: ["Pantallas", "Fundas"] });
+        assert.deepEqual(f.categories, ["Pantallas"]);
+    });
+
+    test("una URL con varias marcas deja una sola", () => {
+        const f = normalizeCatalogFilters({ brands: "Apple,Samsung" });
+        assert.deepEqual(f.brands, ["Apple"]);
+    });
+
+    test("sin filtros no inventa ninguno", () => {
+        const f = normalizeCatalogFilters({});
+        assert.deepEqual(f.categories, []);
+        assert.deepEqual(f.brands, []);
+    });
+
+    test("la que queda es la primera, que es la que se le manda al backend", () => {
+        const f = normalizeCatalogFilters({ brands: ["Samsung", "Apple"] });
+        assert.equal(parametrosDeCatalogo(f).brand, "Samsung");
     });
 });

@@ -114,6 +114,14 @@ export interface ResultadoDeCompra {
 export interface PuertosDeCompra {
     crearPedido: (payload: CheckoutPayload) => Promise<StoreOrder>;
     pedirLink: (accessToken: string) => Promise<{ checkout_url: string }>;
+    /**
+     * Se llama apenas el pedido existe, antes de pedir el link.
+     *
+     * Opcional porque no cambia el resultado de la compra: es lo que le permite
+     * al comprador volver si el link falla. Que no pueda guardar no puede
+     * impedir pagar.
+     */
+    recordar?: (pedido: StoreOrder) => void;
 }
 
 /**
@@ -154,6 +162,11 @@ export const comprar = async (
     } catch (causa) {
         throw new ErrorDeCompra("No se pudo crear el pedido.", null, causa);
     }
+
+    // **Apenas existe el pedido, se anota.** Desde acá hasta que se abre el
+    // pago hay stock reservado y nada que le permita al comprador volver:
+    // guardarlo recién con el link en la mano deja ese hueco sin red.
+    puertos.recordar?.(pedido);
 
     if (!pedido.access_token) {
         // Pasa cuando la misma `checkout_key` ya había creado el pedido: el

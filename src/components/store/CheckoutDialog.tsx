@@ -1,9 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import useCartStore from "@/store/cartStore";
 import { claveDeCheckout, olvidarClave } from "@/lib/checkoutKey";
-import { recordarPedido } from "@/lib/vueltaDelPago";
+import { pedidoGuardado, recordarPedido } from "@/lib/vueltaDelPago";
 import {
     armarPedido,
     comprar,
@@ -63,6 +63,27 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
     // su propia reserva sobre el mismo stock.
     const [pedidoPendiente, setPedidoPendiente] = useState<StoreOrder | null>(null);
 
+    // **Un pedido creado y sin pagar sobrevive a la recarga.** El backend
+    // entrega el `access_token` una sola vez, al crear el pedido: si el link
+    // falla y el comprador recarga, sin esto la reserva queda viva y sin forma
+    // de pagarla desde la tienda.
+    useEffect(() => {
+        if (pedidoPendiente) return;
+        let almacen: Storage | null = null;
+        try {
+            almacen = window.localStorage;
+        } catch {
+            return;
+        }
+        const guardado = almacen ? pedidoGuardado(almacen) : null;
+        if (!guardado?.token) return;
+        setPedidoPendiente({
+            commerce_key: guardado.clave,
+            access_token: guardado.token,
+        } as StoreOrder);
+        setFallo("Tenés un pedido reservado esperando el pago.");
+    }, [pedidoPendiente]);
+
     const items = useMemo(
         () =>
             cart.map(item => ({
@@ -87,14 +108,23 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
         setEnviando(true);
         try {
             const clave = claveDeCheckout(window.localStorage, aLineasDeCheckout(items).lineas);
-            const { checkoutUrl, pedido } = await comprar(
-                { crearPedido: createOrder, pedirLink: requestPaymentLink },
+            const { checkoutUrl } = await comprar(
+                {
+                    crearPedido: createOrder,
+                    pedirLink: requestPaymentLink,
+                    // Se anota apenas el pedido existe, antes de pedir el link:
+                    // es lo que permite volver si el pago no llega a abrirse, y
+                    // lo que la pantalla de vuelta usa para preguntar el estado
+                    // sin depender de los parametros de la URL.
+                    recordar: (pedido) =>
+                        recordarPedido(
+                            window.localStorage,
+                            pedido.commerce_key,
+                            pedido.access_token ?? null
+                        ),
+                },
                 armarPedido(datos, items, clave)
             );
-            // Se recuerda el pedido ANTES de irse a pagar: es lo que la
-            // pantalla de vuelta usa para preguntar el estado sin depender de
-            // los parametros de la URL, que cualquiera puede escribir.
-            recordarPedido(window.localStorage, pedido.commerce_key);
             // La clave NO se olvida acá: entre esto y el pago hay una pantalla
             // de Mercado Pago de la que se puede volver, y ahí todavía tiene que
             // servir para recuperar el mismo pedido.

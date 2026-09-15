@@ -121,19 +121,38 @@ export default function CatalogFilters({
                             Categorias
                         </legend>
                         <div className="max-h-64 space-y-2 overflow-y-auto pr-1">
+                            {/* **De a una, y no de a muchas.** La vidriera
+                                filtra y pagina en la base, que acepta una
+                                categoria por consulta. Con casillas, el
+                                comprador marcaba tres, veia las tres marcadas y
+                                la consulta llevaba una sola: los resultados y
+                                el total eran de otra seleccion que la que la
+                                pantalla mostraba. */}
+                            <label
+                                className="flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl border border-slate-200 dark:border-slate-700/70 px-3 py-2 text-sm text-slate-700 dark:text-slate-300 transition hover:border-primary/40 hover:bg-slate-50 dark:hover:bg-slate-800"
+                            >
+                                <input
+                                    type="radio"
+                                    name="categories"
+                                    value=""
+                                    defaultChecked={filters.categories.length === 0}
+                                    className="h-5 w-5 shrink-0 border-slate-300 dark:border-slate-600 text-primary focus:ring-primary"
+                                />
+                                <span>Todas</span>
+                            </label>
                             {options.categories.map((category) => (
                                 <label
                                     key={category}
                                     className="flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl border border-slate-200 dark:border-slate-700/70 px-3 py-2 text-sm text-slate-700 dark:text-slate-300 transition hover:border-primary/40 hover:bg-slate-50 dark:hover:bg-slate-800"
                                 >
                                     <input
-                                        type="checkbox"
+                                        type="radio"
                                         name="categories"
                                         value={category}
                                         defaultChecked={filters.categories.includes(
                                             category,
                                         )}
-                                        className="h-5 w-5 shrink-0 rounded border-slate-300 dark:border-slate-600 text-primary focus:ring-primary"
+                                        className="h-5 w-5 shrink-0 border-slate-300 dark:border-slate-600 text-primary focus:ring-primary"
                                     />
                                     <span>{category}</span>
                                 </label>
@@ -156,17 +175,31 @@ export default function CatalogFilters({
                         Marcas
                     </legend>
                     <div className="max-h-64 space-y-2 overflow-y-auto pr-1">
+                        {/* Una marca por consulta, por lo mismo que las
+                            categorias. */}
+                        <label
+                            className="flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl border border-slate-200 dark:border-slate-700/70 px-3 py-2 text-sm text-slate-700 dark:text-slate-300 transition hover:border-primary/40 hover:bg-slate-50 dark:hover:bg-slate-800"
+                        >
+                            <input
+                                type="radio"
+                                name="brands"
+                                value=""
+                                defaultChecked={filters.brands.length === 0}
+                                className="h-5 w-5 shrink-0 border-slate-300 dark:border-slate-600 text-primary focus:ring-primary"
+                            />
+                            <span>Todas</span>
+                        </label>
                         {options.brands.map((brand) => (
                             <label
                                 key={brand}
                                 className="flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl border border-slate-200 dark:border-slate-700/70 px-3 py-2 text-sm text-slate-700 dark:text-slate-300 transition hover:border-primary/40 hover:bg-slate-50 dark:hover:bg-slate-800"
                             >
                                 <input
-                                    type="checkbox"
+                                    type="radio"
                                     name="brands"
                                     value={brand}
                                     defaultChecked={filters.brands.includes(brand)}
-                                    className="h-5 w-5 shrink-0 rounded border-slate-300 dark:border-slate-600 text-primary focus:ring-primary"
+                                    className="h-5 w-5 shrink-0 border-slate-300 dark:border-slate-600 text-primary focus:ring-primary"
                                 />
                                 <span>{brand}</span>
                             </label>

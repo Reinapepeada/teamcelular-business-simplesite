@@ -63,8 +63,13 @@ export function normalizeCatalogFilters(
     return {
         page: parsePage(searchParams.page),
         search: String(ensureArray(searchParams.search)[0] || "").trim(),
-        categories: parseListParam(searchParams.categories),
-        brands: parseListParam(searchParams.brands),
+        // **Una sola, aunque la URL traiga varias.** La vidriera filtra de a
+        // una porque filtra y pagina en la base; si el estado guardara las
+        // tres que vinieron en la query, los chips de filtros activos las
+        // mostrarían todas mientras la consulta lleva una, que es justo la
+        // mentira que los filtros de a una vienen a sacar.
+        categories: parseListParam(searchParams.categories).slice(0, 1),
+        brands: parseListParam(searchParams.brands).slice(0, 1),
         minPrice: String(ensureArray(searchParams.minPrice)[0] || "").trim(),
         maxPrice: String(ensureArray(searchParams.maxPrice)[0] || "").trim(),
         sort: String(ensureArray(searchParams.sort)[0] || "").trim(),

@@ -245,3 +245,74 @@ describe("crear el pedido y abrir el pago", () => {
         assert.equal(pidioLink, false);
     });
 });
+
+describe("el pedido se anota apenas existe", () => {
+    const payload = {
+        checkout_key: "ck-1",
+        customer_name: "Ana",
+        customer_email: "ana@example.com",
+        items: [{ slug: "pantalla", quantity: 1 }],
+    };
+
+    const pedido = {
+        commerce_key: "CK-9",
+        status: "pending_payment",
+        subtotal_amount: 1000,
+        shipping_amount: 0,
+        total_amount: 1000,
+        currency: "ARS",
+        access_token: "tok-secreto",
+    };
+
+    test("se anota antes de pedir el link, no despues", async () => {
+        const pasos: string[] = [];
+        await comprar(
+            {
+                crearPedido: async () => {
+                    pasos.push("crear");
+                    return pedido;
+                },
+                pedirLink: async () => {
+                    pasos.push("link");
+                    return { checkout_url: "https://mp/pagar" };
+                },
+                recordar: () => pasos.push("recordar"),
+            },
+            payload,
+        );
+        assert.deepEqual(pasos, ["crear", "recordar", "link"]);
+    });
+
+    test("se anota aunque el link falle: es justo cuando hace falta", async () => {
+        // El pedido quedo creado y con stock reservado. Sin esto, una recarga
+        // pierde el token y la reserva no se puede pagar nunca mas.
+        let anotado: { commerce_key: string; access_token?: string | null } | null = null;
+        await assert.rejects(
+            comprar(
+                {
+                    crearPedido: async () => pedido,
+                    pedirLink: async () => {
+                        throw new Error("proveedor caido");
+                    },
+                    recordar: (p) => {
+                        anotado = p;
+                    },
+                },
+                payload,
+            ),
+        );
+        assert.equal(anotado!.commerce_key, "CK-9");
+        assert.equal(anotado!.access_token, "tok-secreto");
+    });
+
+    test("sin puerto para anotar la compra sigue: no puede impedir pagar", async () => {
+        const r = await comprar(
+            {
+                crearPedido: async () => pedido,
+                pedirLink: async () => ({ checkout_url: "https://mp/pagar" }),
+            },
+            payload,
+        );
+        assert.equal(r.checkoutUrl, "https://mp/pagar");
+    });
+});
