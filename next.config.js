@@ -74,6 +74,14 @@ module.exports = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: "/store/:path*",
+        destination: "https://api.beescend.com/store/:path*",
+      },
+    ];
+  },
   async headers() {
     return [
       {

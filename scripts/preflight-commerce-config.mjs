@@ -27,9 +27,8 @@ export const validateCommerceConfig = (env) => {
     : (errors.push('NEXT_PUBLIC_BASE_URL es obligatoria'), null);
 
   if (!apiValue) {
-    if (env.STORE_SAME_ORIGIN_PROXY_CONFIRMED !== 'true') {
-      errors.push('Definir NEXT_PUBLIC_STORE_API_URL o confirmar STORE_SAME_ORIGIN_PROXY_CONFIRMED=true');
-    }
+    // El proxy /store -> api.beescend.com esta versionado en next.config.js.
+    // Sin override, el navegador usa el mismo origen de la tienda.
   } else {
     const api = parseHttpUrl('NEXT_PUBLIC_STORE_API_URL', apiValue, errors, allowLoopback);
     if (site && api && site.hostname !== api.hostname) {
