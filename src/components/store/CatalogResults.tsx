@@ -10,6 +10,7 @@ import {
     type CatalogFiltersState,
 } from "@/lib/catalog";
 import { buildProductSlug, slugify } from "@/lib/productSlug";
+import { cargaDirectaImagen } from "@/lib/storeCatalog";
 
 interface CatalogResultsProps {
     basePath: string;
@@ -161,6 +162,7 @@ function ProductCard({ product }: { product: VidrieraProduct }) {
                         src={productImage}
                         alt={product.name}
                         fill
+                        unoptimized={cargaDirectaImagen(productImage)}
                         className="object-contain p-4 transition duration-300 group-hover:scale-[1.03]"
                         sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
                     />
@@ -326,4 +328,3 @@ export default async function CatalogResults({
         </section>
     );
 }
-

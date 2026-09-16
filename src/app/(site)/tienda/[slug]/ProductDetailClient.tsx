@@ -38,6 +38,7 @@ import {
 } from '@/services/products';
 import { formatWarranty, type Product, type ProductVariant } from '@/app/tienda/product';
 import useCartStore from '@/store/cartStore';
+import { cargaDirectaImagen } from '@/lib/storeCatalog';
 import {
     hayParaComprar,
     sePuedeRestar,
@@ -242,6 +243,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                                     src={images[selectedImageIndex]}
                                     alt={product.name}
                                     fill
+                                    unoptimized={cargaDirectaImagen(images[selectedImageIndex])}
                                     className="object-contain p-4"
                                     priority
                                     sizes="(max-width: 1024px) 100vw, 50vw"
@@ -294,6 +296,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                                         src={img}
                                         alt={`${product.name} - ${index + 1}`}
                                         fill
+                                        unoptimized={cargaDirectaImagen(img)}
                                         className="object-cover"
                                         sizes="80px"
                                     />
@@ -546,6 +549,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                                             alt={`${product.name} - ${variant.color || ''} ${variant.size || ''}`}
                                             width={60}
                                             height={60}
+                                            unoptimized={cargaDirectaImagen(variant.images[0].image_url)}
                                             className="rounded-lg object-cover"
                                             sizes="60px"
                                         />

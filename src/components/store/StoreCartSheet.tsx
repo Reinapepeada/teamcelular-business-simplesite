@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { buildProductSlug } from "@/lib/productSlug";
+import { cargaDirectaImagen } from "@/lib/storeCatalog";
 import useCartStore, { type CartItem } from "@/store/cartStore";
 import CheckoutDialog from "./CheckoutDialog";
 import {
@@ -139,6 +140,7 @@ export default function StoreCartSheet() {
                                             src={getProductImage(item)}
                                             alt={item.product.name}
                                             fill
+                                            unoptimized={cargaDirectaImagen(getProductImage(item))}
                                             className="object-contain p-2"
                                             sizes="80px"
                                         />
