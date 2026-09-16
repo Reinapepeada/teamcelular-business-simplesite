@@ -101,49 +101,18 @@ export default async function TiendaPage({
       />
 
       <section className="mx-auto max-w-screen-2xl px-4 pb-4 sm:px-6 sm:pb-8 lg:px-8">
-        <div className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 px-4 py-5 shadow-sm sm:px-8 sm:py-8">
-          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end lg:gap-6">
+        <div className="flex flex-col justify-between gap-4 rounded-3xl border border-slate-200 bg-white px-5 py-5 shadow-sm dark:border-slate-700/70 dark:bg-slate-900 sm:flex-row sm:items-center sm:px-6">
             <div className="space-y-3">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary sm:text-sm">
                 Tienda Team Celular
               </p>
-              <h1 className="max-w-3xl text-3xl font-semibold tracking-tight text-slate-950 dark:text-slate-50 sm:text-4xl">
-Repuestos y accesorios para celulares en CABA
+              <h1 className="text-2xl font-semibold tracking-tight text-slate-950 dark:text-slate-50 sm:text-3xl">
+                Repuestos y accesorios para tu celular
               </h1>
-              <p className="max-w-3xl text-sm leading-6 text-slate-600 sm:text-base sm:leading-7 dark:text-slate-400">
-                Team Celular, en Paraguay 2451 Recoleta, vende cables, cargadores,
-                fundas, templados y repuestos con retiro en el local y envio en CABA.
-                Validamos compatibilidad por WhatsApp antes de que pagues.
+              <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">
+                Comprá online con Mercado Pago. Retirá en Recoleta o elegí envío a domicilio.
               </p>
             </div>
-            <div className="hidden rounded-3xl border border-slate-200 bg-slate-50 p-5 lg:block dark:border-slate-700/70 dark:bg-slate-800/70">
-              <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
-                Atencion comercial
-              </p>
-              <ul className="mt-3 space-y-2 text-sm text-slate-600 dark:text-slate-400">
-                <li>Retiro por Paraguay 2451, Recoleta.</li>
-                <li>Enviamos en CABA y coordinamos por WhatsApp.</li>
-                <li>Consulta compatibilidad antes de cerrar la compra.</li>
-              </ul>
-              <div className="mt-4 flex flex-wrap gap-3">
-                <TrackedCtaLink
-                  href="/contacto"
-                  ctaName="store_hero_contact"
-                  ctaLocation="store_hero_panel"
-                  ctaVariant="secondary"
-                  className="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-300 dark:border-slate-600 px-4 text-sm font-semibold text-slate-700 dark:text-slate-300 transition hover:border-primary hover:text-primary"
-                >
-                  Ver ubicacion
-                </TrackedCtaLink>
-                <TrackedCtaLink
-                  href="/presupuesto-reparacion#solicitar-presupuesto"
-                  ctaName="store_hero_budget"
-                  ctaLocation="store_hero_panel"
-                  ctaVariant="primary"
-                  className="inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-4 text-sm font-semibold text-white transition hover:bg-primary/90"
-                >
-                  Pedir asesoramiento
-                </TrackedCtaLink>
                 <TrackedCtaLink
                   href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20necesito%20ayuda%20para%20elegir%20un%20repuesto"
                   ctaName="store_hero_whatsapp"
@@ -151,17 +120,14 @@ Repuestos y accesorios para celulares en CABA
                   ctaVariant="whatsapp"
                   external
                   target="_blank"
-                  className="inline-flex min-h-11 items-center justify-center rounded-full border border-emerald-500/35 bg-emerald-50 px-4 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100 dark:bg-emerald-500/10 dark:text-emerald-300"
+                  className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-full border border-slate-300 px-4 text-sm font-medium text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-300"
                 >
-                  Validar por WhatsApp
+                  ¿Necesitás ayuda para elegir?
                 </TrackedCtaLink>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-screen-2xl gap-6 px-4 sm:px-6 lg:grid-cols-[320px_minmax(0,1fr)] lg:px-8">
+      <section className="mx-auto grid max-w-screen-2xl items-start gap-6 px-4 sm:px-6 lg:grid-cols-[260px_minmax(0,1fr)] lg:px-8">
         <CatalogFilters
           basePath="/tienda"
           filters={filters}
@@ -229,48 +195,6 @@ Repuestos y accesorios para celulares en CABA
       <section className="mx-auto max-w-screen-2xl px-4 pt-8 sm:px-6 lg:px-8">
         <div className="rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm dark:border-slate-700/70 dark:bg-slate-900/85 md:p-8">
           <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
-            No encontraste el producto exacto?
-          </h2>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-400">
-            Podemos conseguirlo o sugerirte una reparacion mas rentable segun el estado del equipo. Tambien coordinamos retiro en Recoleta y seguimiento por WhatsApp.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-3">
-            <TrackedCtaLink
-              href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20no%20encuentro%20el%20producto%20en%20tienda"
-              ctaName="store_bottom_whatsapp"
-              ctaLocation="store_bottom_conversion"
-              ctaVariant="whatsapp"
-              external
-              target="_blank"
-              className="inline-flex min-h-11 items-center justify-center rounded-full bg-emerald-700 px-5 text-sm font-semibold text-white transition hover:bg-emerald-800"
-            >
-              Resolver por WhatsApp
-            </TrackedCtaLink>
-            <TrackedCtaLink
-              href="/reparaciones"
-              ctaName="store_bottom_repairs"
-              ctaLocation="store_bottom_conversion"
-              ctaVariant="secondary"
-              className="inline-flex min-h-11 items-center justify-center rounded-full border border-primary/40 px-5 text-sm font-semibold text-primary transition hover:bg-primary/10"
-            >
-              Ver reparaciones
-            </TrackedCtaLink>
-            <TrackedCtaLink
-              href="/contacto"
-              ctaName="store_bottom_contact"
-              ctaLocation="store_bottom_conversion"
-              ctaVariant="secondary"
-              className="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-300 dark:border-slate-600 px-5 text-sm font-semibold text-slate-700 dark:text-slate-300 transition hover:border-primary hover:text-primary"
-            >
-              Visitar sucursal
-            </TrackedCtaLink>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-screen-2xl px-4 pt-8 sm:px-6 lg:px-8">
-        <div className="rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm dark:border-slate-700/70 dark:bg-slate-900/85 md:p-8">
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
             Preguntas frecuentes de compra
           </h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-400">
@@ -278,17 +202,17 @@ Repuestos y accesorios para celulares en CABA
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {storeFaqs.map((faq) => (
-              <article
+              <details
                 key={faq.question}
                 className="rounded-2xl border border-slate-200/80 bg-slate-50/90 p-5 dark:border-slate-700/70 dark:bg-slate-800/70"
               >
-                <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">
+                <summary className="cursor-pointer text-base font-semibold text-slate-900 dark:text-slate-100">
                   {faq.question}
-                </h3>
+                </summary>
                 <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
                   {faq.answer}
                 </p>
-              </article>
+              </details>
             ))}
           </div>
         </div>

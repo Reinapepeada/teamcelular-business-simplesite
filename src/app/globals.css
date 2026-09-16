@@ -93,12 +93,10 @@ body:has(dialog[open]) .liquid-glass {
 	}
 }
 
-/* ponytail: los filtros de tienda son un <details> para no empujar los
-   productos fuera de pantalla en mobile. En desktop hay lugar de sobra:
-   se muestran siempre, este abierto o no. */
+/* En escritorio CatalogFilters abre el details. Sin JavaScript, la cabecera
+   queda disponible para abrirlo manualmente. */
 @media (min-width: 1024px) {
-	.tc-filters > summary { display: none; }
-	.tc-filters > *:not(summary) { display: revert; }
+	.tc-filters[open] > summary { display: none; }
 }
 
 /* ponytail: cap de densidad en mobile. El sitio fue maquetado con ritmo de

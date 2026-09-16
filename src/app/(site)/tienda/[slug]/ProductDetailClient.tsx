@@ -10,12 +10,10 @@ import {
     Chip, 
     Skeleton, 
     Card,
-    Divider,
-    Badge
+    Divider
 } from "@nextui-org/react";
 import { 
     ShoppingCart, 
-    Heart, 
     Share2, 
     ChevronLeft, 
     ChevronRight,
@@ -30,7 +28,6 @@ import {
 
 import { 
     formatPrice, 
-    getPrimaryImage, 
     getAllProductImages,
     getAvailableColors,
     getAvailableSizes,
@@ -113,6 +110,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
     const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null);
     const [quantity, setQuantity] = useState(1);
+    const [feedback, setFeedback] = useState('');
     
     const { addToCart } = useCartStore();
     
@@ -169,6 +167,23 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
     const handleAddToCart = () => {
         if (product) {
             addToCart(product, selectedVariant, quantity, storeSlugProp ?? null);
+            setFeedback('Carrito actualizado. Podés continuar desde el botón Carrito.');
+        }
+    };
+
+    const handleShare = async () => {
+        if (!product) return;
+        try {
+            if (navigator.share) {
+                await navigator.share({ title: product.name, url: window.location.href });
+            } else {
+                await navigator.clipboard.writeText(window.location.href);
+                setFeedback('Enlace copiado.');
+            }
+        } catch (error) {
+            if (!(error instanceof DOMException && error.name === 'AbortError')) {
+                setFeedback('No pudimos compartir el enlace. Podés copiarlo desde la barra de direcciones.');
+            }
         }
     };
     
@@ -196,7 +211,9 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
         },
         {
             label: 'Garantía',
-            value: `Garantía de ${warrantyLabel} con comprobante de compra.`,
+            value: product.warranty_time
+                ? `Garantía de ${warrantyLabel} con comprobante de compra.`
+                : 'Consultanos las condiciones de garantía antes de comprar.',
         },
         {
             label: 'Retiro y consulta',
@@ -256,12 +273,14 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                             <>
                                 <button
                                     onClick={prevImage}
+                                    aria-label="Foto anterior"
                                     className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 shadow-lg hover:bg-white dark:hover:bg-gray-800 transition-colors"
                                 >
                                     <ChevronLeft className="w-5 h-5" />
                                 </button>
                                 <button
                                     onClick={nextImage}
+                                    aria-label="Foto siguiente"
                                     className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 shadow-lg hover:bg-white dark:hover:bg-gray-800 transition-colors"
                                 >
                                     <ChevronRight className="w-5 h-5" />
@@ -286,6 +305,8 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                                 <button
                                     key={index}
                                     onClick={() => setSelectedImageIndex(index)}
+                                    aria-label={`Ver foto ${index + 1}`}
+                                    aria-pressed={selectedImageIndex === index}
                                     className={`relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 border-2 transition-colors ${
                                         selectedImageIndex === index 
                                             ? 'border-primary' 
@@ -320,20 +341,18 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                                 {product.category.name}
                             </Chip>
                         )}
-                        {product.status === 'ACTIVE' && (
-                            <Chip variant="flat" color="success" size="sm">
-                                Disponible
-                            </Chip>
-                        )}
+                        <Chip variant="flat" color={totalStock > 0 ? 'success' : 'default'} size="sm">
+                            {totalStock > 0 ? 'Disponible' : 'Agotado'}
+                        </Chip>
                     </div>
                     
                     {/* Title */}
                     <h1 className="text-3xl font-bold">{product.name}</h1>
 
                     {/* SKU */}
-                    <p className="text-sm text-muted-foreground">
+                    {product.serial_number && <p className="text-sm text-muted-foreground">
                         SKU: {product.serial_number}
-                    </p>
+                    </p>}
 
                     {/* Price */}
                     <div className="space-y-1">
@@ -437,6 +456,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                         <div className="flex items-center border rounded-lg">
                             <button
                                 onClick={decrementQuantity}
+                                aria-label="Reducir cantidad"
                                 disabled={quantity <= 1}
                                 className="p-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors disabled:opacity-50"
                             >
@@ -447,6 +467,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                             </span>
                             <button
                                 onClick={incrementQuantity}
+                                aria-label="Aumentar cantidad"
                                 disabled={!sePuedeSumar(quantity, selectedVariant, totalStock)}
                                 className="p-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors disabled:opacity-50"
                             >
@@ -460,7 +481,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                             disabled={!hayParaComprar(selectedVariant, totalStock)}
                             color="primary"
                             size="lg"
-                            className="flex-1"
+                            className="flex-1 text-white"
                         >
                             <ShoppingCart className="w-5 h-5 mr-2" />
                             Agregar al carrito
@@ -469,15 +490,14 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                     
                     {/* Quick Actions */}
                     <div className="flex gap-4">
-                        <Button variant="ghost" size="sm">
-                            <Heart className="w-4 h-4 mr-2" />
-                            Favoritos
-                        </Button>
-                        <Button variant="ghost" size="sm">
+                        <Button variant="ghost" size="sm" onClick={handleShare}>
                             <Share2 className="w-4 h-4 mr-2" />
                             Compartir
                         </Button>
                     </div>
+                    <p role="status" aria-live="polite" className="text-sm text-emerald-700 dark:text-emerald-300">
+                        {feedback}
+                    </p>
                     
                     <Divider />
                     
@@ -487,7 +507,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                             <Truck className="w-6 h-6 text-primary" />
                                 <div>
                                     <p className="text-sm font-medium">Envío</p>
-                                    <p className="text-xs text-muted-foreground">En compras +$50.000</p>
+                                    <p className="text-xs text-muted-foreground">Costo al confirmar la compra</p>
                                 </div>
                         </div>
                         <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
@@ -503,7 +523,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                             <RotateCcw className="w-6 h-6 text-primary" />
                             <div>
                                 <p className="text-sm font-medium">Devoluciones</p>
-                                <p className="text-xs text-muted-foreground">30 días</p>
+                                <Link href="/devoluciones" className="text-xs text-muted-foreground underline">Ver condiciones</Link>
                             </div>
                         </div>
                     </div>
@@ -536,7 +556,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
             </section>
             
             {/* Product Details Section */}
-            {product.variants.length > 0 && (
+            {product.variants.some(variant => variant.color || variant.size) && (
                 <div className="mt-12">
                     <h2 className="text-2xl font-bold mb-6">Variantes disponibles</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

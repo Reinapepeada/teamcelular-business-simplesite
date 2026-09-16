@@ -16,7 +16,15 @@ import {
     sePuedeRestar,
     sePuedeSumar,
     stockQueManda,
+    limitarCantidadAlStock,
 } from "./stockDeLaFicha.ts";
+
+test("agregar repetidamente no supera el stock mostrado", () => {
+    assert.equal(limitarCantidadAlStock(6, 3), 3);
+    assert.equal(limitarCantidadAlStock(2, 3), 2);
+    assert.equal(limitarCantidadAlStock(1, 0), 0);
+    assert.equal(limitarCantidadAlStock(NaN, 3), 0);
+});
 
 describe("stockQueManda", () => {
     test("manda la variante elegida", () => {

@@ -1,3 +1,6 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { BsWhatsapp } from "react-icons/bs";
 import { FaRegCalendarCheck } from "react-icons/fa";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
@@ -13,6 +16,9 @@ export default function StickyLocalCta({
   budgetHref = "/presupuesto-reparacion#solicitar-presupuesto",
   primaryLabel = "Pedir presupuesto",
 }: StickyLocalCtaProps) {
+  const pathname = usePathname();
+  if (pathname?.startsWith("/tienda") || pathname?.startsWith("/checkout")) return null;
+
   return (
     <>
       {/* ponytail: unica variante. El panel flotante de escritorio se elimino:

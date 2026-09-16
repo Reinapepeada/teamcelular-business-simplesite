@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import useCartStore from "@/store/cartStore";
 import { prepararCheckout } from "@/lib/checkoutKey";
 import {
@@ -147,6 +147,7 @@ function ResumenAConfirmar({
 
 export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProps) {
     const { cart } = useCartStore();
+    const dialogRef = useRef<HTMLDialogElement>(null);
 
     const [datos, setDatos] = useState<DatosDeCompra>({
         nombre: "",
@@ -170,6 +171,18 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
     // vez, al recuperarlo, no alcanza: el comprador puede cambiar el carrito
     // DESPUÉS y quedarse con un botón que ofrece pagar otra cosa.
     const [huellaPendiente, setHuellaPendiente] = useState<string | null>(null);
+
+    useEffect(() => {
+        const dialog = dialogRef.current;
+        if (!abierto || !dialog) return;
+        dialog.showModal();
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.body.style.overflow = previousOverflow;
+            dialog.close();
+        };
+    }, [abierto]);
 
     const items = useMemo(
         () =>
@@ -386,19 +399,21 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
     const error = "mt-1 text-xs text-red-600 dark:text-red-400";
 
     return (
-        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/50 sm:items-center">
-            <div
-                role="dialog"
-                aria-modal="true"
+            <dialog
+                ref={dialogRef}
                 aria-label="Finalizar compra"
-                className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-t-2xl bg-white p-5 dark:bg-slate-950 sm:rounded-2xl"
+                onCancel={event => {
+                    event.preventDefault();
+                    if (!enviando) onCerrar();
+                }}
+                className="fixed inset-x-0 bottom-0 top-auto m-0 hidden max-h-[90dvh] w-full max-w-lg overflow-y-auto rounded-t-2xl border-0 bg-white p-5 text-slate-950 backdrop:bg-black/50 open:block dark:bg-slate-950 dark:text-slate-50 sm:inset-0 sm:m-auto sm:rounded-2xl"
             >
                 <div className="flex items-center justify-between">
                     <h2 className="text-lg font-semibold text-slate-950 dark:text-slate-50">
-                        {aConfirmar ? "Confirmá tu compra" : "Finalizar compra"}
+                        {aConfirmar ? "Revisá y confirmá tu compra" : "Tus datos y entrega"}
                     </h2>
-                    <button type="button" onClick={onCerrar} aria-label="Cerrar" className="text-slate-500">
-                        ✕
+                    <button type="button" onClick={onCerrar} disabled={enviando} aria-label="Volver al carrito" className="inline-flex min-h-11 items-center justify-center px-3 text-sm text-slate-500 disabled:opacity-40">
+                        Volver
                     </button>
                 </div>
 
@@ -427,10 +442,12 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                     />
                 ) : (
                 <form className="mt-4 flex flex-col gap-3" onSubmit={onSubmit}>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">Comprás como invitado. No necesitás crear una cuenta.</p>
                     <div>
                         <label className="text-sm font-medium" htmlFor="ck-nombre">Nombre y apellido</label>
                         <input
                             id="ck-nombre"
+                            autoComplete="name"
                             className={campo}
                             value={datos.nombre}
                             onChange={e => setDatos({ ...datos, nombre: e.target.value })}
@@ -443,6 +460,8 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                         <input
                             id="ck-email"
                             type="email"
+                            autoComplete="email"
+                            inputMode="email"
                             className={campo}
                             value={datos.email}
                             onChange={e => setDatos({ ...datos, email: e.target.value })}
@@ -455,6 +474,8 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                         <label className="text-sm font-medium" htmlFor="ck-tel">Teléfono (opcional)</label>
                         <input
                             id="ck-tel"
+                            type="tel"
+                            autoComplete="tel"
                             className={campo}
                             value={datos.telefono ?? ""}
                             onChange={e => setDatos({ ...datos, telefono: e.target.value })}
@@ -493,6 +514,7 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                                 <label className="text-sm font-medium" htmlFor="ck-calle">Calle y número</label>
                                 <input
                                     id="ck-calle"
+                                    autoComplete="street-address"
                                     className={campo}
                                     value={datos.direccion?.street ?? ""}
                                     onChange={e =>
@@ -506,6 +528,7 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                                     <label className="text-sm font-medium" htmlFor="ck-ciudad">Localidad</label>
                                     <input
                                         id="ck-ciudad"
+                                        autoComplete="address-level2"
                                         className={campo}
                                         value={datos.direccion?.city ?? ""}
                                         onChange={e =>
@@ -518,6 +541,7 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                                     <label className="text-sm font-medium" htmlFor="ck-cp">Código postal</label>
                                     <input
                                         id="ck-cp"
+                                        autoComplete="postal-code"
                                         className={campo}
                                         value={datos.direccion?.postal_code ?? ""}
                                         onChange={e =>
@@ -534,6 +558,7 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                                 <label className="text-sm font-medium" htmlFor="ck-prov">Provincia</label>
                                 <select
                                     id="ck-prov"
+                                    autoComplete="address-level1"
                                     className={campo}
                                     value={datos.direccion?.province ?? ""}
                                     onChange={e =>
@@ -588,11 +613,10 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                         disabled={enviando || cart.length === 0 || pedidoPendiente !== null}
                         className="mt-1 inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-white transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
                     >
-                        {enviando ? "Un momento…" : "Ir a pagar"}
+                        {enviando ? "Un momento…" : "Revisar pedido"}
                     </button>
                 </form>
                 )}
-            </div>
-        </div>
+            </dialog>
     );
 }

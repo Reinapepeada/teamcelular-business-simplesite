@@ -40,3 +40,9 @@ export const hayParaComprar = (
     variante: VarianteConStock | null | undefined,
     stockTotal: number
 ): boolean => stockQueManda(variante, stockTotal) > 0;
+
+/** Tope visual; el checkout vuelve a validar el stock actual en el servidor. */
+export const limitarCantidadAlStock = (cantidad: number, stock: number): number =>
+    Number.isFinite(cantidad) && Number.isFinite(stock)
+        ? Math.max(0, Math.min(Math.floor(cantidad), Math.floor(stock)))
+        : 0;

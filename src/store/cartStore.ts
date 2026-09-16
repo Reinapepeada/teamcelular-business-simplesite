@@ -3,6 +3,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { Product, ProductVariant } from "@/app/tienda/product";
 import { claveDeCarrito } from "@/lib/cartKey";
+import { limitarCantidadAlStock } from "@/lib/stockDeLaFicha";
 
 // Item del carrito con variante seleccionada opcional
 export interface CartItem {
@@ -69,6 +70,9 @@ const useCartStore = create<CartState>()(
                 const { cart } = get();
                 const cartKey = generateCartKey(product.id, variant?.id, storeSlug);
                 const existingItem = cart.find((item) => item.cartKey === cartKey);
+                const stock = variant?.stock ?? product.variants.reduce((sum, item) => sum + item.stock, 0);
+                const nextQuantity = limitarCantidadAlStock((existingItem?.quantity ?? 0) + quantity, stock);
+                if (nextQuantity === 0) return;
 
                 let updatedCart: CartItem[];
 
@@ -78,7 +82,9 @@ const useCartStore = create<CartState>()(
                         item.cartKey === cartKey
                             ? {
                                   ...item,
-                                  quantity: item.quantity + quantity,
+                                  product,
+                                  variant,
+                                  quantity: nextQuantity,
                                   // Volver a agregar un producto que venia del
                                   // carrito viejo lo deja comprable.
                                   storeSlug: storeSlug ?? item.storeSlug ?? null,
@@ -92,7 +98,7 @@ const useCartStore = create<CartState>()(
                         {
                             product,
                             variant,
-                            quantity,
+                            quantity: nextQuantity,
                             cartKey,
                             storeSlug,
                         }
@@ -120,7 +126,13 @@ const useCartStore = create<CartState>()(
 
                 const updatedCart = cart.map((item) =>
                     item.cartKey === cartKey 
-                        ? { ...item, quantity: newQuantity } 
+                        ? {
+                            ...item,
+                            quantity: limitarCantidadAlStock(
+                                newQuantity,
+                                item.variant?.stock ?? item.product.variants.reduce((sum, variant) => sum + variant.stock, 0),
+                            ) || item.quantity,
+                        }
                         : item
                 );
                 

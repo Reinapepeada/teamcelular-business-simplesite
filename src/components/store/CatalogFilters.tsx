@@ -1,4 +1,7 @@
-﻿import Link from "next/link";
+"use client";
+
+import { useEffect, useRef } from "react";
+import Link from "next/link";
 import type {
     CatalogFilterOptions,
     CatalogFiltersState,
@@ -29,6 +32,7 @@ export default function CatalogFilters({
     options,
     forcedCategoryName,
 }: CatalogFiltersProps) {
+    const detailsRef = useRef<HTMLDetailsElement>(null);
     const hasActiveFilters =
         Boolean(filters.search) ||
         filters.categories.length > 0 ||
@@ -40,8 +44,19 @@ export default function CatalogFilters({
     const minPrice = filters.minPrice || String(options.priceRange.min || 0);
     const maxPrice = filters.maxPrice || String(options.priceRange.max || 0);
 
+    useEffect(() => {
+        const desktop = window.matchMedia("(min-width: 1024px)");
+        const update = () => {
+            if (detailsRef.current) detailsRef.current.open = desktop.matches || hasActiveFilters;
+        };
+        update();
+        desktop.addEventListener("change", update);
+        return () => desktop.removeEventListener("change", update);
+    }, [hasActiveFilters]);
+
     return (
         <details
+            ref={detailsRef}
             open={hasActiveFilters}
             className="tc-filters rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-4 shadow-sm lg:p-5"
         >
@@ -269,4 +284,3 @@ export default function CatalogFilters({
         </details>
     );
 }
-

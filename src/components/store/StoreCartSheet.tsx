@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { buildProductSlug } from "@/lib/productSlug";
@@ -31,9 +31,15 @@ function getProductImage(item: CartItem) {
     );
 }
 
+function getProductStock(item: CartItem) {
+    return item.variant?.stock ?? item.product.variants.reduce((sum, variant) => sum + variant.stock, 0);
+}
+
 export default function StoreCartSheet() {
     const [open, setOpen] = useState(false);
     const [comprando, setComprando] = useState(false);
+    const dialogRef = useRef<HTMLDialogElement>(null);
+    const triggerRef = useRef<HTMLButtonElement>(null);
     const { cart, removeFromCart, updateQuantity, clearCart } = useCartStore();
 
     // Las sumas viven en src/lib/totalesDelCarrito.ts, que explica por que
@@ -41,18 +47,19 @@ export default function StoreCartSheet() {
     const { unidades: totalItems, productos: totalPrice } = totalesDelCarrito(cart);
 
     useEffect(() => {
+        const dialog = dialogRef.current;
+        if (!dialog) return;
         if (!open) {
-            return undefined;
+            if (dialog.open) dialog.close();
+            return;
         }
-
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "Escape") {
-                setOpen(false);
-            }
+        if (!dialog.open) dialog.showModal();
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.body.style.overflow = previousOverflow;
+            if (dialog.open) dialog.close();
         };
-
-        window.addEventListener("keydown", handleKeyDown);
-        return () => window.removeEventListener("keydown", handleKeyDown);
     }, [open]);
 
     const whatsappMessage = encodeURIComponent(
@@ -74,11 +81,12 @@ export default function StoreCartSheet() {
     return (
         <>
             <button
+                ref={triggerRef}
                 type="button"
                 onClick={() => setOpen((current) => !current)}
                 aria-expanded={open}
                 aria-controls="store-cart-sheet"
-                className="fixed bottom-[5.5rem] right-5 z-40 inline-flex min-h-14 items-center gap-3 rounded-full bg-slate-950 px-5 text-sm font-semibold text-white shadow-xl transition hover:bg-slate-800"
+                className="fixed bottom-5 right-5 z-40 inline-flex min-h-14 items-center gap-3 rounded-full bg-slate-950 px-5 text-sm font-semibold text-white shadow-xl transition hover:bg-slate-800"
             >
                 <span>Carrito</span>
                 <span className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full bg-primary px-2 text-xs font-bold">
@@ -86,21 +94,16 @@ export default function StoreCartSheet() {
                 </span>
             </button>
 
-            {open ? (
-                <button
-                    type="button"
-                    aria-label="Cerrar carrito"
-                    onClick={() => setOpen(false)}
-                    className="fixed inset-0 z-40 bg-slate-950/40"
-                />
-            ) : null}
-
-            <aside
+            <dialog
+                ref={dialogRef}
                 id="store-cart-sheet"
                 aria-label="Resumen del carrito"
-                className={`fixed bottom-0 right-0 z-50 flex h-[85vh] w-full max-w-md flex-col rounded-t-[2rem] border border-slate-200 bg-white shadow-2xl transition-transform duration-300 dark:border-slate-700 dark:bg-slate-950 sm:top-0 sm:h-full sm:rounded-l-[2rem] sm:rounded-tr-none ${
-                    open ? "translate-y-0 sm:translate-x-0" : "translate-y-full sm:translate-x-full"
-                }`}
+                onClose={() => {
+                    setOpen(false);
+                    if (!comprando) triggerRef.current?.focus();
+                }}
+                onCancel={() => setOpen(false)}
+                className="fixed inset-auto bottom-0 right-0 m-0 hidden h-[85dvh] max-h-none w-full max-w-md flex-col rounded-t-[2rem] border border-slate-200 bg-white p-0 shadow-2xl backdrop:bg-slate-950/40 open:flex dark:border-slate-700 dark:bg-slate-950 sm:top-0 sm:h-dvh sm:rounded-l-[2rem] sm:rounded-tr-none"
             >
                 <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4 dark:border-slate-700">
                     <div>
@@ -125,7 +128,7 @@ export default function StoreCartSheet() {
                                 Todavia no agregaste productos
                             </p>
                             <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
-                                Usa el carrito para pedir accesorios o repuestos por WhatsApp.
+                                Elegí un producto y agregalo para comenzar tu compra.
                             </p>
                         </div>
                     ) : (
@@ -171,13 +174,14 @@ export default function StoreCartSheet() {
                                     <div className="flex items-center rounded-full border border-slate-300 dark:border-slate-600">
                                         <button
                                             type="button"
+                                            disabled={item.quantity <= 1}
                                             onClick={() =>
                                                 updateQuantity(
                                                     item.cartKey,
                                                     item.quantity - 1,
                                                 )
                                             }
-                                            className="inline-flex min-h-11 min-w-11 items-center justify-center text-slate-700 transition hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800"
+                                            className="inline-flex min-h-11 min-w-11 items-center justify-center text-slate-700 transition hover:bg-slate-50 disabled:opacity-40 dark:text-slate-300 dark:hover:bg-slate-800"
                                             aria-label={`Reducir cantidad de ${item.product.name}`}
                                         >
                                             -
@@ -187,13 +191,14 @@ export default function StoreCartSheet() {
                                         </span>
                                         <button
                                             type="button"
+                                            disabled={item.quantity >= getProductStock(item)}
                                             onClick={() =>
                                                 updateQuantity(
                                                     item.cartKey,
                                                     item.quantity + 1,
                                                 )
                                             }
-                                            className="inline-flex min-h-11 min-w-11 items-center justify-center text-slate-700 transition hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800"
+                                            className="inline-flex min-h-11 min-w-11 items-center justify-center text-slate-700 transition hover:bg-slate-50 disabled:opacity-40 dark:text-slate-300 dark:hover:bg-slate-800"
                                             aria-label={`Aumentar cantidad de ${item.product.name}`}
                                         >
                                             +
@@ -221,6 +226,9 @@ export default function StoreCartSheet() {
                             ${formatPrice(totalPrice)}
                         </span>
                     </div>
+                    <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
+                        El envío y el total final se confirman en el siguiente paso.
+                    </p>
                     <div className="mt-4 flex flex-col gap-3">
                         {/* **Comprar es la salida principal, no el chat.** El
                             carrito termina en el checkout: datos, envio o
@@ -229,11 +237,14 @@ export default function StoreCartSheet() {
                             preguntar algo antes de comprar. */}
                         <button
                             type="button"
-                            onClick={() => setComprando(true)}
+                            onClick={() => {
+                                setOpen(false);
+                                setComprando(true);
+                            }}
                             disabled={cart.length === 0}
                             className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-white transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-500 dark:disabled:bg-slate-800"
                         >
-                            Comprar
+                            Continuar con la compra
                         </button>
                         <Link
                             href={
@@ -253,15 +264,18 @@ export default function StoreCartSheet() {
                             type="button"
                             onClick={clearCart}
                             disabled={cart.length === 0}
-                            className="inline-flex min-h-12 items-center justify-center rounded-full border border-slate-300 px-5 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-600 dark:text-slate-300 dark:hover:border-slate-500 dark:hover:bg-slate-800"
+                            className="inline-flex min-h-11 items-center justify-center text-sm text-slate-500 underline underline-offset-4 disabled:cursor-not-allowed disabled:opacity-50 dark:text-slate-400"
                         >
                             Vaciar carrito
                         </button>
                     </div>
                 </div>
-            </aside>
+            </dialog>
 
-            <CheckoutDialog abierto={comprando} onCerrar={() => setComprando(false)} />
+            <CheckoutDialog abierto={comprando} onCerrar={() => {
+                setComprando(false);
+                setOpen(true);
+            }} />
         </>
     );
 }
