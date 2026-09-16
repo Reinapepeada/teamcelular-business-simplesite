@@ -1,8 +1,8 @@
 ﻿
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
-const inter = Inter({ subsets: ["latin"], display: "swap" });
+import localFont from "next/font/local";
+const inter = localFont({ src: "../../public/fonts/inter/inter-latin.woff2", weight: "100 900", style: "normal", display: "swap" });
 import Plugins from "@/components/vercel/Plugins";
 import StructuredData from "@/components/seo/StructuredData";
 import { ThemeProvider } from "@/app/providers";

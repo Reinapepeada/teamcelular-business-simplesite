@@ -168,7 +168,6 @@ Repuestos y accesorios para celulares en CABA
           options={filterOptions}
         />
         <Suspense key={suspenseKey} fallback={<CatalogResultsFallback />}>
-          {/* @ts-expect-error Async Server Component */}
           <CatalogResults
             basePath="/tienda"
             filters={filters}

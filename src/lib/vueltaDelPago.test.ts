@@ -22,7 +22,7 @@ import {
     recordarPedido,
     vueltaMostrable,
 } from "./vueltaDelPago.ts";
-import type { AlmacenClave } from "./checkoutKey.ts";
+import { claveDeCheckout, type AlmacenClave } from "./checkoutKey.ts";
 import type { StoreOrderStatus } from "./storeApi.ts";
 
 const almacenFalso = (inicial: Record<string, string> = {}): AlmacenClave => {
@@ -64,6 +64,16 @@ const estado = (over: Partial<StoreOrderStatus> = {}): StoreOrderStatus => ({
 });
 
 describe("el pedido recordado", () => {
+    test("reintento sin token no borra credencial previa del mismo pedido ni la transfiere a otro", () => {
+        const almacen = almacenFalso();
+        recordarPedido(almacen, { clave: "CK-42", token: "original", checkoutKey: "ck-original" });
+        recordarPedido(almacen, { clave: "CK-42", token: null });
+        assert.equal(pedidoGuardado(almacen)?.token, "original");
+        assert.equal(pedidoGuardado(almacen)?.checkoutKey, "ck-original");
+        recordarPedido(almacen, { clave: "CK-43", token: null });
+        assert.equal(pedidoGuardado(almacen)?.token, null);
+        assert.equal(pedidoGuardado(almacen)?.checkoutKey, undefined);
+    });
     test("se guarda y se recupera", () => {
         const almacen = almacenFalso();
         recordarPedido(almacen, { clave: "CK-42" });
@@ -450,4 +460,24 @@ describe("olvidarPedido avisa si borro", () => {
         assert.equal(olvidarPedido(almacenRoto(), "CK-A"), false);
         assert.equal(olvidarPedido(almacenRoto()), false);
     });
+});
+
+test("pedido terminal libera su checkout y permite repetir el carrito", () => {
+    const almacen = almacenFalso();
+    const items = [{ slug: "pantalla", quantity: 1 }];
+    const key = claveDeCheckout(almacen, items);
+    recordarPedido(almacen, { clave: "CO-1", checkoutKey: key, token: "token" });
+    assert.equal(pedidoGuardado(almacen)?.checkoutKey, key);
+    assert.equal(olvidarPedido(almacen, "CO-1"), true);
+    assert.notEqual(claveDeCheckout(almacen, items), key);
+});
+
+test("confirmacion tardia no borra checkout nuevo aun sin pedido nuevo", () => {
+    const almacen = almacenFalso();
+    const oldKey = claveDeCheckout(almacen, [{ slug: "viejo", quantity: 1 }]);
+    recordarPedido(almacen, { clave: "CO-1", checkoutKey: oldKey });
+    const items = [{ slug: "nuevo", quantity: 1 }];
+    const newKey = claveDeCheckout(almacen, items);
+    olvidarPedido(almacen, "CO-1");
+    assert.equal(claveDeCheckout(almacen, items), newKey);
 });

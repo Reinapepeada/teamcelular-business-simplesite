@@ -12,7 +12,6 @@ import {
     vueltaMostrable,
     type Intencion,
 } from "@/lib/vueltaDelPago";
-import { olvidarClave } from "@/lib/checkoutKey";
 import useCartStore from "@/store/cartStore";
 
 const almacen = () => {
@@ -82,9 +81,7 @@ export default function ExitoClient({ intencion = "exito" }: { intencion?: Inten
                             // por la confirmación de un pedido anterior es
                             // fabricar exactamente el cobro duplicado que la
                             // clave existe para evitar.
-                            if (olvidarPedido(guardado, pedido.clave)) {
-                                olvidarClave(guardado);
-                            }
+                            olvidarPedido(guardado, pedido.clave);
                         }
                     }
                     return;

@@ -162,6 +162,7 @@ export const quoteShipping = (province: string, postalCode: string, items: Store
 
 export interface CheckoutPayload {
     checkout_key: string;
+    recovery_token?: string;
     customer_name: string;
     customer_email: string;
     customer_phone?: string | null;

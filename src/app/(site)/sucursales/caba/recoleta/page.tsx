@@ -318,7 +318,6 @@ export default function SucursalRecoletaPage() {
       </section>
 
       <section className="mt-10">
-        {/* @ts-expect-error Async Server Component */}
         <GoogleReviewsAPI />
       </section>
 

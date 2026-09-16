@@ -174,7 +174,6 @@ export default async function CategoryPage({
           forcedCategoryName={category.name}
         />
         <Suspense key={suspenseKey} fallback={<CatalogResultsFallback />}>
-          {/* @ts-expect-error Async Server Component */}
           <CatalogResults
             basePath={`/tienda/categoria/${canonicalSlug}`}
             filters={{

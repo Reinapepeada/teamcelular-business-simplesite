@@ -240,7 +240,6 @@ export default function SucursalesPage() {
       </section>
 
       <section className="mt-10">
-        {/* @ts-expect-error Async Server Component */}
         <GoogleReviewsAPI />
       </section>
 

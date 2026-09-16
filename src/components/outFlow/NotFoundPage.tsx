@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import { Button } from "@nextui-org/react";
 import { FaExclamationCircle } from "react-icons/fa";
 
 export default function NotFound() {
@@ -17,8 +16,8 @@ export default function NotFound() {
                 </h3>
             </div>
             <div className="mb-4">
-                <Link href="/">
-                    <Button color="primary">Volver a Inicio</Button>
+                <Link href="/" className="inline-flex rounded-xl bg-primary px-4 py-2 text-primary-foreground">
+                    Volver a Inicio
                 </Link>
             </div>
         </div>

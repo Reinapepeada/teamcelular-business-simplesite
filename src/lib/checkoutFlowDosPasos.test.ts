@@ -13,6 +13,7 @@ import assert from "node:assert/strict";
 
 import { abrirElPago, comprar, ErrorDeCompra, reservar } from "./checkoutFlow.ts";
 import type { CheckoutPayload, StoreOrder } from "./storeApi.ts";
+import { parseStoreError } from "./storeApi.ts";
 
 const payload: CheckoutPayload = {
     checkout_key: "ck-1",
@@ -32,6 +33,50 @@ const pedido = {
 } as StoreOrder;
 
 describe("reservar", () => {
+    test("informa pausa y permite reintentar con la misma recuperación sin abrir pago", async () => {
+        const attempt = { ...payload, recovery_token: "synthetic-recovery-token" };
+        const original = JSON.stringify(attempt);
+        let paused = true;
+        let links = 0;
+        let remembered = 0;
+        const ports = {
+            crearPedido: async (sent: CheckoutPayload) => {
+                assert.equal(JSON.stringify(sent), original);
+                if (paused) throw parseStoreError(409, { error: { code: "STOREFRONT_PAUSED" } });
+                return pedido;
+            },
+            pedirLink: async () => { links++; return { checkout_url: "https://mp.test" }; },
+            recordar: () => { remembered++; },
+        };
+        await assert.rejects(reservar(ports, attempt), (error: unknown) => {
+            assert.ok(error instanceof ErrorDeCompra);
+            assert.match(error.message, /pausadas/);
+            assert.equal(error.pedido, null);
+            return true;
+        });
+        assert.equal(remembered, 0);
+        paused = false;
+        assert.equal(await reservar(ports, attempt), pedido);
+        assert.equal(remembered, 1);
+        assert.equal(links, 0);
+    });
+
+    for (const status of ["paid", "paid_pending_stock_commit", "expired", "cancelled"]) {
+        test(`no ofrece confirmar ni pagar pedido recuperado ${status}`, async () => {
+            let remembered = false;
+            let links = 0;
+            const closed = { ...pedido, status };
+            const ports = {
+                crearPedido: async () => closed,
+                recordar: () => { remembered = true; },
+                pedirLink: async () => { links++; return { checkout_url: "x" }; },
+            };
+            await assert.rejects(reservar(ports, payload), ErrorDeCompra);
+            assert.equal(remembered, true, "conserva evidencia del pedido recuperado");
+            await assert.rejects(abrirElPago(ports, closed), ErrorDeCompra);
+            assert.equal(links, 0);
+        });
+    }
     test("crea el pedido y NO pide el link", async () => {
         // El total que se cobra recién existe cuando el servidor crea el
         // pedido: mandar a pagar antes es cobrarle sin que lo haya visto.

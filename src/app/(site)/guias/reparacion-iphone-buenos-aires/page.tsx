@@ -568,7 +568,6 @@ export default function IphoneRepairGuidePage() {
               Mostramos opiniones verificables de Google para que evalúes la confianza del servicio con evidencia pública.
             </p>
           </div>
-          {/* @ts-expect-error Async Server Component */}
           <GoogleReviewsAPI />
         </section>
 

@@ -7,6 +7,7 @@
  */
 
 import type { CheckoutPayload, ShippingAddress, StoreOrder } from "./storeApi";
+import { StoreApiError } from "./storeApi";
 import type { ItemComprable } from "./cartLines";
 import { aLineasDeCheckout, carritoComprable } from "./cartLines";
 
@@ -76,7 +77,8 @@ export const hayErrores = (errores: ErroresDeCompra): boolean =>
 export const armarPedido = (
     datos: DatosDeCompra,
     items: ItemComprable[],
-    checkoutKey: string
+    checkoutKey: string,
+    recoveryToken?: string
 ): CheckoutPayload => {
     const { lineas } = aLineasDeCheckout(items);
     const payload: CheckoutPayload = {
@@ -86,6 +88,7 @@ export const armarPedido = (
         items: lineas,
     };
     const telefono = datos.telefono?.trim();
+    if (recoveryToken) payload.recovery_token = recoveryToken;
     if (telefono) payload.customer_phone = telefono;
 
     if (datos.entrega === "envio") {
@@ -143,6 +146,21 @@ export class ErrorDeCompra extends Error {
     }
 }
 
+export const mensajePedidoTerminado = (pedido: StoreOrder): string | null => {
+    if (pedido.status === "paid" || pedido.status === "paid_pending_stock_commit") {
+        return `El pedido ${pedido.commerce_key} ya recibió el pago. No vuelvas a pagarlo.`;
+    }
+    if (pedido.status === "expired" || pedido.status === "cancelled") {
+        return `El pedido ${pedido.commerce_key} está ${pedido.status === "expired" ? "vencido" : "cancelado"}. Podés iniciar una nueva compra.`;
+    }
+    return null;
+};
+
+const exigirPedidoPendiente = (pedido: StoreOrder): void => {
+    const mensaje = mensajePedidoTerminado(pedido);
+    if (mensaje) throw new ErrorDeCompra(mensaje, pedido, null);
+};
+
 /**
  * Primer paso: crea el pedido y reserva el stock.
  *
@@ -166,6 +184,13 @@ export const reservar = async (
     try {
         pedido = await puertos.crearPedido(payload);
     } catch (causa) {
+        if (causa instanceof StoreApiError && causa.code === "STOREFRONT_PAUSED") {
+            throw new ErrorDeCompra(
+                "Las nuevas compras están pausadas temporalmente. Podés reintentar más tarde. Si ya tenés un pedido, podés retomarlo desde el carrito.",
+                null,
+                causa
+            );
+        }
         throw new ErrorDeCompra("No se pudo crear el pedido.", null, causa);
     }
 
@@ -175,6 +200,7 @@ export const reservar = async (
     // ese hueco es más largo, porque en el medio hay una pantalla donde el
     // comprador puede irse.
     puertos.recordar?.(pedido);
+    exigirPedidoPendiente(pedido);
 
     if (!pedido.access_token) {
         // Pasa cuando la misma `checkout_key` ya había creado el pedido: el
@@ -182,7 +208,7 @@ export const reservar = async (
         // sola vez. No se puede pedir el link, y crear otro pedido sería
         // cobrar dos veces lo mismo.
         throw new ErrorDeCompra(
-            "Tu pedido ya estaba creado. Buscá el mail con el link de pago o escribinos.",
+            `El pedido ${pedido.commerce_key} ya existe, pero este navegador no tiene su acceso. Escribinos con ese número antes de volver a comprar.`,
             pedido,
             null
         );
@@ -201,9 +227,10 @@ export const abrirElPago = async (
     puertos: PuertosDeCompra,
     pedido: StoreOrder
 ): Promise<string> => {
+    exigirPedidoPendiente(pedido);
     if (!pedido.access_token) {
         throw new ErrorDeCompra(
-            "Tu pedido ya estaba creado. Buscá el mail con el link de pago o escribinos.",
+            `El pedido ${pedido.commerce_key} ya existe, pero este navegador no tiene su acceso. Escribinos con ese número antes de volver a comprar.`,
             pedido,
             null
         );

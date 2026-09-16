@@ -14,7 +14,7 @@
  * existe, el backend no cuenta nada.
  */
 
-import type { AlmacenClave } from "./checkoutKey";
+import { olvidarClave, type AlmacenClave } from "./checkoutKey";
 import type { StoreOrderStatus } from "./storeApi";
 
 const ESPACIO = "tc.pedido";
@@ -22,6 +22,8 @@ const ESPACIO = "tc.pedido";
 /** El pedido que este navegador dejó empezado. */
 export interface PedidoGuardado {
     clave: string;
+    /** Clave idempotente exacta de este pedido, para limpieza condicional. */
+    checkoutKey?: string;
     /**
      * La credencial para pedir el link de pago de ESE pedido.
      *
@@ -70,6 +72,7 @@ export const recordarPedido = (
     almacen: AlmacenClave,
     pedido: {
         clave: string;
+        checkoutKey?: string;
         token?: string | null;
         total?: number | null;
         moneda?: string | null;
@@ -78,11 +81,15 @@ export const recordarPedido = (
 ): void => {
     try {
         if (pedido?.clave) {
+            const anterior = pedidoGuardado(almacen);
+            const mismo = anterior?.clave === pedido.clave ? anterior : null;
+            const checkoutKey = pedido.checkoutKey ?? mismo?.checkoutKey;
             almacen.setItem(
                 ESPACIO,
                 JSON.stringify({
                     clave: pedido.clave,
-                    token: pedido.token ?? null,
+                    ...(checkoutKey ? { checkoutKey } : {}),
+                    token: pedido.token || mismo?.token || null,
                     total: pedido.total ?? null,
                     moneda: pedido.moneda ?? null,
                     huella: pedido.huella ?? null,
@@ -107,6 +114,8 @@ export const pedidoGuardado = (almacen: AlmacenClave): PedidoGuardado | null => 
             if (dato && typeof dato.clave === "string" && dato.clave.trim() !== "") {
                 return {
                     clave: dato.clave.trim(),
+                    ...(typeof dato.checkoutKey === "string" && dato.checkoutKey
+                        ? { checkoutKey: dato.checkoutKey } : {}),
                     token: typeof dato.token === "string" && dato.token ? dato.token : null,
                     total: typeof dato.total === "number" && Number.isFinite(dato.total)
                         ? dato.total
@@ -137,11 +146,12 @@ export const pedidoRecordado = (almacen: AlmacenClave): string | null =>
  */
 export const olvidarPedido = (almacen: AlmacenClave, claveEsperada?: string): boolean => {
     try {
+        const guardado = pedidoGuardado(almacen);
         if (claveEsperada) {
-            const guardado = pedidoGuardado(almacen);
             if (!guardado || guardado.clave !== claveEsperada) return false;
         }
         almacen.removeItem(ESPACIO);
+        if (guardado?.checkoutKey) olvidarClave(almacen, guardado.checkoutKey);
         return true;
     } catch {
         // La próxima compra lo reemplaza.

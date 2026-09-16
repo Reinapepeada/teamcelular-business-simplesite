@@ -48,6 +48,7 @@ const nuevaClave = (): string => {
 interface Guardada {
     key: string;
     huella: string;
+    recoveryToken?: string;
 }
 
 const leer = (almacen: AlmacenClave): Guardada | null => {
@@ -97,10 +98,38 @@ export const claveDeCheckout = (
  * todavía tiene que servir para recuperar el mismo pedido en vez de abrir uno
  * nuevo con el stock reservado dos veces.
  */
-export const olvidarClave = (almacen: AlmacenClave): void => {
+export const olvidarClave = (almacen: AlmacenClave, claveEsperada?: string): void => {
     try {
+        if (claveEsperada && leer(almacen)?.key !== claveEsperada) return;
         almacen.removeItem(ESPACIO);
     } catch {
         // Nada que hacer: la proxima compra con otro carrito la reemplaza.
     }
+};
+
+/** Guarda el secreto antes de crear la reserva; nunca usa azar no criptográfico. */
+export const secretoDeCheckout = (almacen: AlmacenClave, key: string): string => {
+    const guardada = leer(almacen);
+    if (!guardada || guardada.key !== key) throw new Error("Checkout no persistido");
+    if (guardada.recoveryToken && /^[a-f0-9]{64}$/.test(guardada.recoveryToken)) {
+        return guardada.recoveryToken;
+    }
+    const bytes = globalThis.crypto.getRandomValues(new Uint8Array(32));
+    const recoveryToken = Array.from(bytes, byte => byte.toString(16).padStart(2, "0")).join("");
+    almacen.setItem(ESPACIO, JSON.stringify({ ...guardada, recoveryToken }));
+    if (leer(almacen)?.recoveryToken !== recoveryToken) throw new Error("Checkout no persistido");
+    return recoveryToken;
+};
+
+/** localStorage no ofrece transacciones entre pestañas; Web Locks protege el par. */
+export const prepararCheckout = async (
+    almacen: AlmacenClave,
+    items: { slug: string; quantity: number }[],
+    locks: LockManager | undefined = globalThis.navigator?.locks,
+): Promise<{ clave: string; secreto: string }> => {
+    if (!locks) throw new Error("Este navegador no permite proteger la compra entre pestañas.");
+    return locks.request("tc.checkout", () => {
+        const clave = claveDeCheckout(almacen, items);
+        return { clave, secreto: secretoDeCheckout(almacen, clave) };
+    });
 };

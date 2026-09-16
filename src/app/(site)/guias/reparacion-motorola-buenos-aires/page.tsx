@@ -529,7 +529,6 @@ export default function MotorolaRepairGuidePage() {
               Opiniones verificables de Google sobre diagnósticos y reparaciones realizadas en el laboratorio.
             </p>
           </div>
-          {/* @ts-expect-error Async Server Component */}
           <GoogleReviewsAPI />
         </section>
 

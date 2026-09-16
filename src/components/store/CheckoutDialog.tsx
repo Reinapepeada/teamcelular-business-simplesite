@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import useCartStore from "@/store/cartStore";
-import { claveDeCheckout, olvidarClave } from "@/lib/checkoutKey";
+import { prepararCheckout } from "@/lib/checkoutKey";
 import {
     olvidarPedido,
     pedidoGuardado,
@@ -14,6 +14,7 @@ import {
     armarPedido,
     reservar,
     ErrorDeCompra,
+    mensajePedidoTerminado,
     hayErrores,
     validarDatos,
     type DatosDeCompra,
@@ -238,10 +239,14 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
         setErrores(encontrados);
         setFallo(null);
         if (hayErrores(encontrados)) return;
+        if (!window.navigator.locks) {
+            setFallo("Para comprar, abrí la tienda con HTTPS en un navegador actualizado.");
+            return;
+        }
 
         setEnviando(true);
         try {
-            const clave = claveDeCheckout(window.localStorage, aLineasDeCheckout(items).lineas);
+            const { clave, secreto } = await prepararCheckout(window.localStorage, aLineasDeCheckout(items).lineas);
             const pedido = await reservar(
                 {
                     crearPedido: createOrder,
@@ -253,6 +258,7 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                     recordar: (pedido) =>
                         recordarPedido(window.localStorage, {
                             clave: pedido.commerce_key,
+                            checkoutKey: clave,
                             token: pedido.access_token ?? null,
                             total: pedido.total_amount,
                             moneda: pedido.currency,
@@ -262,7 +268,7 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                             huella: huellaActual,
                         }),
                 },
-                armarPedido(datos, items, clave)
+                armarPedido(datos, items, clave, secreto)
             );
             // **Acá NO se manda a pagar.** El total que se cobra —con el precio
             // de hoy y el envío cotizado— recién existe ahora, y el comprador
@@ -273,6 +279,17 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
         } catch (error) {
             if (error instanceof ErrorDeCompra) {
                 setFallo(error.message);
+                if (error.pedido && mensajePedidoTerminado(error.pedido)) {
+                    if (error.pedido.status === "paid" || error.pedido.status === "paid_pending_stock_commit") {
+                        window.location.assign("/checkout/exito");
+                    } else {
+                        olvidarPedido(window.localStorage, error.pedido.commerce_key);
+                    }
+                    setPedidoPendiente(null);
+                    setHuellaPendiente(null);
+                    setEnviando(false);
+                    return;
+                }
                 const recuperable = error.pedido?.access_token ? error.pedido : null;
                 setPedidoPendiente(recuperable);
                 setHuellaPendiente(recuperable ? huellaActual : null);

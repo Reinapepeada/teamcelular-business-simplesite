@@ -14,7 +14,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
       {
@@ -36,8 +36,12 @@
     "src/components/icons/MoonIcon.jsx",
     "src/app/not-found.tsx",
     "src/store/cartStore.ts",
-    "src/components/cart/resume_cart_nav.jsx"
-, "src/app/admin/test/page.jsx", "src/app/admin/page.jsx", "src/app/admin/create-products/page.jsx"  ],
+    "src/components/cart/resume_cart_nav.jsx",
+    "src/app/admin/test/page.jsx",
+    "src/app/admin/page.jsx",
+    "src/app/admin/create-products/page.jsx",
+    ".next/dev/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules",
     // Los tests corren con `node --test`, que exige la extension .ts en los

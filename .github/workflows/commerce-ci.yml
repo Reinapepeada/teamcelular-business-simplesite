@@ -1,0 +1,34 @@
+name: Storefront Commerce CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: storefront-commerce-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm audit --audit-level=high --omit=dev
+      - run: npm run lint
+      - run: npm test
+      - name: Build with isolated same-origin topology
+        run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_URL: https://store.example.test
+          STORE_SAME_ORIGIN_PROXY_CONFIRMED: "true"

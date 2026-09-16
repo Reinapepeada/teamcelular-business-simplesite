@@ -184,7 +184,6 @@ export default function Home() {
                     ))}
                 </section>
 
-                {/* @ts-expect-error Async Server Component */}
                 <GoogleReviewsAPI />
 
                 <section aria-labelledby="branches-title" className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
