@@ -24,6 +24,7 @@ export interface StoreProduct {
     condition: string;
     category: string | null;
     image_key: string | null;
+    image_urls?: string[];
     warranty_months: number | null;
     /** Lo que se puede comprar ahora, ya descontadas las reservas vivas. */
     available: number;
@@ -111,9 +112,19 @@ export const parseStoreError = (status: number, body: unknown): StoreApiError =>
     return new StoreApiError(message, status, code, slug);
 };
 
+export const storeRequestUrl = (path: string, server = typeof window === "undefined") => {
+    if (!server) return `${STORE_API_BASE}${path}`;
+    const base =
+        STORE_API_BASE ||
+        process.env.NEXT_PUBLIC_BASE_URL?.trim() ||
+        "https://teamcelular.com";
+    return new URL(path, `${base.replace(/\/+$/, "")}/`).toString();
+};
+
 async function pedir<T>(path: string, init?: RequestInit): Promise<T> {
-    const res = await fetch(`${STORE_API_BASE}${path}`, {
+    const res = await fetch(storeRequestUrl(path), {
         ...init,
+        cache: "no-store",
         headers: { "Content-Type": "application/json", ...(init?.headers ?? {}) },
     });
     if (!res.ok) {

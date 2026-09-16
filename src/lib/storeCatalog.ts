@@ -28,6 +28,7 @@ export interface CatalogProduct {
     condition: string;
     category: string | null;
     imageUrl: string | null;
+    imageUrls: string[];
     warrantyMonths: number | null;
     /** Lo que se puede comprar ahora, ya descontadas las reservas vivas. */
     available: number;
@@ -53,6 +54,7 @@ const BASE_IMAGENES = (process.env.NEXT_PUBLIC_STORE_IMAGES_URL ?? "").replace(/
 
 export const imagenDe = (imageKey: string | null): string | null => {
     if (!imageKey) return null;
+    if (imageKey.startsWith("/")) return imageKey;
     if (/^https?:\/\//i.test(imageKey)) return imageKey;
     if (!BASE_IMAGENES) return null;
     return `${BASE_IMAGENES}/${imageKey.replace(/^\/+/, "")}`;
@@ -68,6 +70,10 @@ export const imagenDe = (imageKey: string | null): string | null => {
 export const adaptarProducto = (crudo: StoreProduct): CatalogProduct | null => {
     if (!crudo.slug) return null;
     const disponible = Number.isFinite(crudo.available) ? crudo.available : 0;
+    const imageUrls = (crudo.image_urls ?? [])
+        .map(imagenDe)
+        .filter((url): url is string => Boolean(url));
+    const imageUrl = imageUrls[0] ?? imagenDe(crudo.image_key);
     return {
         slug: crudo.slug,
         name: crudo.name,
@@ -78,7 +84,8 @@ export const adaptarProducto = (crudo: StoreProduct): CatalogProduct | null => {
         model: crudo.model,
         condition: crudo.condition,
         category: crudo.category,
-        imageUrl: imagenDe(crudo.image_key),
+        imageUrl,
+        imageUrls: imageUrls.length ? imageUrls : (imageUrl ? [imageUrl] : []),
         warrantyMonths: crudo.warranty_months,
         available: disponible,
         // **Agotado se muestra igual, sin poder comprarse.** Sacarlo del

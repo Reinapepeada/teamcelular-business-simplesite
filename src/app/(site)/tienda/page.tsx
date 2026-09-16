@@ -18,7 +18,7 @@ import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 const SITE_URL = getSiteUrl();
 const PAGE_URL = `${SITE_URL}/tienda`;
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 const storeFaqs = [
   {

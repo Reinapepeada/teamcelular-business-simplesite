@@ -25,6 +25,7 @@ const crudo = (over: Partial<StoreProduct> = {}): StoreProduct => ({
     condition: "new",
     category: "Pantallas",
     image_key: null,
+    image_urls: [],
     warranty_months: 6,
     available: 3,
     ...over,
@@ -85,6 +86,16 @@ describe("la foto", () => {
 
     test("sin foto, null", () => {
         assert.equal(imagenDe(null), null);
+    });
+
+    test("la galería pública conserva todas las fotos", () => {
+        const producto = adaptarProducto(crudo({
+            image_urls: ["/store/products/a/images/0", "/store/products/a/images/1"],
+        }))!;
+        assert.deepEqual(producto.imageUrls, [
+            "/store/products/a/images/0",
+            "/store/products/a/images/1",
+        ]);
     });
 });
 

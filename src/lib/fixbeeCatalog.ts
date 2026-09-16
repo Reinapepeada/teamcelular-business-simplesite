@@ -28,6 +28,11 @@ export type VidrieraProduct = Product & {
 
 const AHORA = "1970-01-01T00:00:00.000Z";
 
+const imagenes = (product: CatalogProduct) =>
+    product.imageUrls?.length
+        ? product.imageUrls
+        : (product.imageUrl ? [product.imageUrl] : []);
+
 /**
  * Meses a la forma que el sitio ya formatea.
  *
@@ -87,9 +92,12 @@ export const productoDeVidriera = (p: CatalogProduct): VidrieraProduct => ({
             stock: p.available,
             created_at: AHORA,
             updated_at: AHORA,
-            images: p.imageUrl
-                ? [{ id: 0, variant_id: 0, image_url: p.imageUrl, created_at: AHORA }]
-                : [],
+            images: imagenes(p).map((image_url, index) => ({
+                id: index,
+                variant_id: 0,
+                image_url,
+                created_at: AHORA,
+            })),
         },
     ],
 });

@@ -19,8 +19,14 @@ import {
     fetchOrderStatus,
     requestPaymentLink,
     quoteShipping,
+    storeRequestUrl,
 } from "./storeApi.ts";
 import { claveDeCheckout, huellaDelCarrito, olvidarClave, type AlmacenClave } from "./checkoutKey.ts";
+
+test("el servidor consulta el proxy público con URL absoluta", () => {
+    assert.equal(storeRequestUrl("/store/products", false), "/store/products");
+    assert.match(storeRequestUrl("/store/products", true), /^https?:\/\/[^/]+\/store\/products$/);
+});
 
 // --- un almacenamiento de juguete ---------------------------------------
 
