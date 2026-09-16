@@ -15,7 +15,21 @@ type Props = Record<string, string | number | boolean | null>;
 export function track(eventName: string, props?: Props) {
   vercelTrack(eventName, props ?? {});
 
-  if (typeof window !== "undefined" && typeof window.gtag === "function") {
+  if (typeof window === "undefined") return;
+
+  if (typeof window.gtag === "function") {
     window.gtag("event", eventName, props ?? {});
+  }
+
+  // Clarity grababa sesiones sin forma de segmentarlas: no se podia pedir "las
+  // grabaciones de quien abandono el presupuesto en el paso 2". Con el evento y
+  // el paso como tags, cada uno pasa a ser un filtro sobre las grabaciones.
+  if (typeof window.clarity === "function") {
+    window.clarity("event", eventName);
+
+    const step = props?.step_id;
+    if (typeof step === "string") {
+      window.clarity("set", `${eventName}_step`, step);
+    }
   }
 }

@@ -21,7 +21,7 @@ import VideoSchema from "@/components/seo/VideoSchema";
 export const metadata: Metadata = {
   title: "Microelectrónica y Reballing BGA en CABA | Team Celular",
   description:
-    "Reballing BGA y reparación de placas en CABA — Team Celular, Recoleta y Belgrano: microscopio, protocolos ESD y garantía escrita 90 días.",
+    "Reballing BGA y reparación de placas con garantía escrita de 90 días. Microscopio y protocolos ESD. Recoleta y Belgrano, CABA.",
   keywords: [
     "microelectrónica Buenos Aires",
     "reballing BGA CABA",
@@ -242,6 +242,66 @@ export default function MicroelectronicsGuide() {
             </Link>
           </div>
         </header>
+
+        {/* Puente informativo -> consulta. GA4 marca 54,3% de rebote en esta
+            pagina: llega gente buscando "que es el reballing", lee la
+            definicion y se va. Este bloque traduce el concepto a sintomas
+            concretos para que reconozca su propio caso antes de abandonar. */}
+        <section className="rounded-2xl border border-primary/25 bg-primary/5 p-8 dark:border-primary/30 dark:bg-primary/10">
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+            ¿Cómo sé si mi celular necesita reballing?
+          </h2>
+          <p className="mt-3 max-w-3xl text-slate-700 dark:text-slate-200">
+            El reballing no se pide: se detecta. Estas son las tres señales que en el
+            laboratorio terminan casi siempre en trabajo de placa, y no en cambio de módulo.
+          </p>
+          <div className="mt-6 divide-y divide-primary/15 border-y border-primary/15">
+            {[
+              {
+                señal: "No enciende, pero da señales de vida",
+                detalle:
+                  "Calienta al conectarlo, vibra o el cargador reacciona, pero la pantalla nunca prende. Suele ser el chip de gestión de energía o una línea cortada.",
+              },
+              {
+                señal: "Se reinicia solo o queda en el logo",
+                detalle:
+                  "El equipo arranca y vuelve a empezar en loop. Cuando el reinicio aparece después de un golpe o de un mojado, el origen está en la placa.",
+              },
+              {
+                señal: "Se mojó y ya fue “secado”",
+                detalle:
+                  "La corrosión avanza durante semanas después del contacto con líquido. Un equipo que funcionó unos días y después falló es el caso más común que entra acá.",
+              },
+            ].map((item) => (
+              <div key={item.señal} className="py-4">
+                <p className="font-semibold text-slate-900 dark:text-slate-100">{item.señal}</p>
+                <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                  {item.detalle}
+                </p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-5 text-sm text-slate-600 dark:text-slate-300">
+            Si tu equipo entra en alguno de los tres, traelo apagado. La revisión técnica
+            va de ARS 15.000 a 25.000 según el caso, se hace bajo microscopio y te decimos si
+            tiene arreglo antes de cobrarte la reparación. Si no se puede recuperar, te lo
+            decimos y no cobramos el intento.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link
+              href="/presupuesto-reparacion#solicitar-presupuesto"
+              className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-primary/90"
+            >
+              Contar la falla
+            </Link>
+            <Link
+              href="/reparaciones/reparacion-placa-caba"
+              className="rounded-full border border-primary px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10"
+            >
+              Ver servicio de placa
+            </Link>
+          </div>
+        </section>
 
         {/* Introducción con video */}
         <section className="grid gap-8 overflow-hidden rounded-2xl border border-white/15 bg-white/5 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:grid-cols-2">

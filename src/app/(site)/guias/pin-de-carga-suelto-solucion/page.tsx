@@ -13,7 +13,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
   title: "Pin de Carga Suelto: Causas y Solución en CABA",
   description:
-    "¿Tu celular carga intermitente? Team Celular, Recoleta y Belgrano (CABA), revisa pin de carga, flex y placa el mismo día. Garantía escrita 90 días.",
+    "¿Carga intermitente? Revisamos pin, flex y placa el mismo día, con garantía escrita de 90 días. Team Celular, Recoleta y Belgrano.",
   keywords: [
     "pin de carga suelto",
     "celular no carga bien",

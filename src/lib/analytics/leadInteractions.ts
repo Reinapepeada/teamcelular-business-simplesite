@@ -56,6 +56,8 @@ function buildPayload(payload: LeadInteractionPayload) {
 declare global {
   interface Window {
     gtag?: (command: string, eventName: string, params?: Record<string, unknown>) => void;
+    /** Tag de Microsoft Clarity; se carga en el layout raiz. */
+    clarity?: (command: string, ...args: unknown[]) => void;
   }
 }
 

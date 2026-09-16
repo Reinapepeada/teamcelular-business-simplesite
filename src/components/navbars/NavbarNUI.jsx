@@ -12,7 +12,6 @@ import ThemeSwitcher, {
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 
 const MAIN_LINKS = [
-    { href: "/arreglo-de-celulares", label: "Arreglo" },
     { href: "/reparaciones", label: "Reparaciones" },
     { href: "/tienda", label: "Tienda" },
     { href: "/guias", label: "Guías" },

@@ -74,13 +74,13 @@ export const metadata: Metadata = {
     description: "Displays OLED originales con True Tone y garantia escrita segun repuesto y trabajo. Service 2-4hs.",
     images: ["https://teamcelular.com/images/guia_cambio_modulo.webp"],
   },
-  // Google ya rechazo indexar esta guia ("Crawled - currently not indexed"):
-  // compite por "cambio de pantalla" con /reparaciones/cambio-pantalla-caba,
-  // que si ranquea (88 impresiones contra 0). El canonical formaliza esa
-  // decision y consolida la señal en la pagina que gana, sin romper los 26
-  // enlaces internos ni perder el contenido para quien llega.
+  // Se canonicalizo hacia /reparaciones/cambio-pantalla-caba y se revirtio:
+  // GSC muestra 14% de solapamiento de queries entre ambas (12 de 86). Esta
+  // guia atiende intencion informativa ("cuanto demora un cambio de pantalla",
+  // "cuantas veces se puede cambiar") y la pagina de servicio, transaccional.
+  // Ademas rinde mas: 1524 impresiones y 7 clicks en 13 dias contra 233 y 10.
   alternates: {
-    canonical: `${SITE_URL}/reparaciones/cambio-pantalla-caba`,
+    canonical: `${SITE_URL}/guias/reparacion-pantalla-celular`,
   },
 };
 

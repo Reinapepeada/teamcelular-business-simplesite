@@ -28,13 +28,11 @@ Idioma principal: es-AR
 
 ## Zonas de Servicio
 
-- [Recoleta](https://teamcelular.com/zonas/recoleta)
+- [Sucursal Recoleta](https://teamcelular.com/sucursales/caba/recoleta): Paraguay 2451, Lun-Vie 10:30-18:00.
+- [Sucursal Belgrano](https://teamcelular.com/sucursales/caba/belgrano): Amenabar 2032, Lun-Vie 10:30-18:00.
 - [Palermo](https://teamcelular.com/zonas/palermo)
-- [Belgrano](https://teamcelular.com/zonas/belgrano)
-- [Caballito](https://teamcelular.com/zonas/caballito)
 - [Almagro](https://teamcelular.com/zonas/almagro)
 - [Balvanera](https://teamcelular.com/zonas/balvanera)
-- [Microcentro](https://teamcelular.com/zonas/microcentro)
 
 ## Guias de Alta Intencion
 

@@ -184,9 +184,10 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-poco-buenos-aires",
+    modifiedTime: "2026-09-02T00:00:00Z",
     titleOverride: "Reparacion de POCO en Buenos Aires: temperatura, bateria y carga",
     metaDescriptionOverride:
-      "Reparación de POCO en CABA: F6 Pro, F6, X6 Pro y M6 Pro. Sobrecalentamiento, batería exigida y carga rápida con pin desgastado. Garantía escrita de 90 días.",
+      "Reparación de POCO en CABA: F6 Pro, F6, X6 Pro y M6 Pro. Sobrecalentamiento, batería exigida y pin de carga gastado. Garantía escrita 90 días.",
     heroDescriptionOverride:
       "Team Celular repara POCO en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. POCO vende potencia a precio contenido, y esa ecuacion se paga en calor: son los equipos que mas entran por sobrecalentamiento en sesiones largas. El calor sostenido no es solo una molestia, es lo que despues acelera la degradacion de la bateria y castiga la placa, asi que las tres fallas tipicas de la linea suelen ser la misma historia contada en orden. La carga rapida agrega su parte: el pin se desgasta antes que en un equipo de carga convencional. Si tu POCO calienta y ademas perdio autonomia, conviene diagnosticar las dos cosas juntas en vez de cambiar la bateria y volver en tres meses. Garantia escrita de 90 dias y 3 cuotas sin interes.",
     extraFaq: [
@@ -219,9 +220,10 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-oppo-buenos-aires",
+    modifiedTime: "2026-09-02T00:00:00Z",
     titleOverride: "Reparacion de OPPO en Buenos Aires: Reno y serie A",
     metaDescriptionOverride:
-      "Reparación de OPPO en CABA: Reno12, Reno11, A79 y A58. Touch inestable, batería con poca autonomía y desgaste del puerto de carga. Garantía escrita de 90 días.",
+      "Reparación de OPPO en CABA: Reno12, Reno11, A79 y A58. Touch inestable, poca autonomía y puerto de carga gastado. Garantía escrita 90 días.",
     heroDescriptionOverride:
       "Team Celular repara OPPO en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. En las lineas Reno y A la consulta que mas se repite es el touch que responde mal sin que la pantalla este rota: se toca y no reacciona, o reacciona donde no es. Eso no siempre es el modulo. Muchas veces es el conector del flex, que se afloja despues de una caida sin marca visible, y revisarlo primero evita cambiar una pantalla que estaba sana. Las otras dos habituales son la autonomia que no llega al final del dia y el puerto de carga desgastado, que en equipos con carga rapida propietaria aparece antes de lo que uno espera. Pantalla y bateria salen en 2 a 4 horas segun stock. Garantia escrita de 90 dias sobre trabajo y repuesto, y 3 cuotas sin interes.",
     extraFaq: [
@@ -288,9 +290,10 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-zte-buenos-aires",
+    modifiedTime: "2026-09-02T00:00:00Z",
     titleOverride: "Reparacion de ZTE en Buenos Aires: audio, carga y reinicios",
     metaDescriptionOverride:
-      "Reparación de ZTE en CABA: Blade, Nubia y Axon. Audio distorsionado, carga floja y reinicios intermitentes, con diagnóstico el mismo día y garantía de 90 días.",
+      "Reparación de ZTE en CABA: Blade, Nubia y Axon. Audio distorsionado, carga floja y reinicios. Mismo día, garantía escrita 90 días.",
     heroDescriptionOverride:
       "Team Celular repara ZTE en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Las tres fallas que mas entran en las familias Blade y Nubia son de tipo distinto entre si: el audio bajo o distorsionado suele ser el parlante o su filtro, la carga que corta cuando se mueve el cable casi siempre es el pin y no el cargador, y los reinicios intermitentes en equipos de varios años apuntan a la placa. Esa ultima es la que separa un taller de otro: en vez de cotizar el reemplazo del conjunto, se trabaja el componente que fallo con reballing BGA y soldadura SMD bajo microscopio. Todo sale con garantia escrita de 90 dias sobre trabajo y repuesto, y se puede pagar en 3 cuotas sin interes.",
     extraFaq: [
@@ -393,9 +396,10 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-asus-buenos-aires",
+    modifiedTime: "2026-09-02T00:00:00Z",
     titleOverride: "Reparacion de Asus ROG y Zenfone en Buenos Aires",
     metaDescriptionOverride:
-      "Reparación de Asus ROG Phone y Zenfone en CABA: sobretemperatura, batería exigida y fallas de placa por estrés térmico. Microelectrónica y garantía de 90 días.",
+      "Reparación de Asus ROG Phone y Zenfone en CABA: sobretemperatura, batería exigida y fallas por estrés térmico. Garantía escrita 90 días.",
     heroDescriptionOverride:
       "Team Celular repara Asus ROG Phone y Zenfone en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Un ROG Phone no falla como un telefono comun: esta pensado para sostener carga de trabajo alta durante horas, y eso deja marca. La sobretemperatura en uso gaming, la bateria degradada por ciclos de carga exigentes y las fallas de placa por estres termico son el mismo problema en tres etapas distintas. La ultima es donde termina la mayoria de los talleres, porque implica trabajar el componente y no cambiar el modulo: aca se hace con reballing BGA y soldadura SMD bajo microscopio. Si un ROG se apaga bajo carga pero anda bien en escritorio, ese sintoma se mide, no se adivina. Garantia escrita de 90 dias y 3 cuotas sin interes.",
     extraFaq: [
@@ -428,9 +432,10 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-oneplus-buenos-aires",
+    modifiedTime: "2026-09-02T00:00:00Z",
     titleOverride: "Reparacion de OnePlus en Buenos Aires: pantalla, bateria y carga",
     metaDescriptionOverride:
-      "Reparación de OnePlus en CABA: series 12, 11, 10 Pro y Nord. Pantalla, batería y fallas de carga rápida por el puerto USB-C, con garantía escrita de 90 días.",
+      "Reparación de OnePlus en CABA: series 12, 11, 10 Pro y Nord. Pantalla, batería y fallas del puerto USB-C. Garantía escrita 90 días.",
     heroDescriptionOverride:
       "Team Celular repara OnePlus en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. La falla mas caracteristica de la linea no es la pantalla sino la carga: son equipos construidos alrededor de la carga ultra rapida, y el puerto USB-C es la pieza que absorbe todo ese trabajo. Cuando un OnePlus empieza a cargar lento o solo en cierta posicion del cable, el problema esta en el conector mucho antes que en la bateria, y cambiar la bateria no lo resuelve. La pantalla por impacto y la perdida de capacidad de bateria son las otras dos que mas entran, y ambas salen en el dia. Tambien trabajamos las fallas de placa que en otros lados se cotizan como cambio de conjunto. Garantia escrita de 90 dias sobre trabajo y repuesto, y 3 cuotas sin interes.",
     extraFaq: [

@@ -68,7 +68,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Cambio de Pantalla y Módulo en CABA | Team Celular",
     metaDescription:
-      "Cambio de módulo y pantalla en CABA — Team Celular, Recoleta y Belgrano. Samsung A04, A15, A16 e iPhone, con test completo y garantía escrita 90 días.",
+      "Cambio de módulo y pantalla con garantía escrita de 90 días y test completo. Samsung A04, A15, A16 e iPhone. Recoleta y Belgrano.",
     socialTitle: "Cambio de Pantalla en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Cambio de pantalla en CABA con test completo y garantía escrita 90 días.",

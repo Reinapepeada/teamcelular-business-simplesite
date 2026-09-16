@@ -8,22 +8,10 @@ const PAGE_URL = `${SITE_URL}/zonas`;
 
 const ZONES = [
   {
-    slug: "recoleta",
-    name: "Recoleta",
-    description:
-      "Arreglo de celulares en Recoleta (taller en Paraguay 2451): pantalla, batería, carga y microelectrónica con garantía escrita.",
-  },
-  {
     slug: "palermo",
     name: "Palermo",
     description:
       "Arreglo de celulares para Palermo: pantalla, batería, carga y placa. Taller en Recoleta y presupuesto rápido.",
-  },
-  {
-    slug: "belgrano",
-    name: "Belgrano",
-    description:
-      "Reparación de celulares para Belgrano: iPhone y Android. Garantía por escrito y tiempos estimados claros.",
   },
   {
     slug: "caballito",
@@ -101,23 +89,28 @@ export default function ZonasPage() {
           Zonas donde arreglamos celulares en CABA
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          Estamos en <strong>Recoleta</strong> y trabajamos con consultas y
-          reparaciones para toda <strong>CABA</strong>. Si estás cerca de una de
-          estas zonas, te mostramos la página más útil para avanzar rápido.
+          Los talleres están en <strong>Recoleta</strong> (Paraguay 2451) y{" "}
+          <strong>Belgrano</strong> (Amenábar 2032), y atendemos consultas de
+          toda <strong>CABA</strong>. Si buscás el servicio general, entrá por{" "}
+          <Link href="/" className="font-semibold underline underline-offset-4">
+            reparación de celulares en CABA
+          </Link>
+          ; si estás cerca de una de estas zonas, la página del barrio te da los
+          tiempos y la sucursal más cercana.
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Link
-            href="/arreglo-de-celulares"
+            href="/reparaciones"
             className="rounded-full bg-primary px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
           >
-            Ver arreglo de celulares
+            Ver todas las reparaciones
           </Link>
           <Link
-            href="/tecnico-de-celulares"
+            href="/reparaciones/reparacion-placa-caba"
             className="rounded-full border border-secondary/50 px-8 py-4 text-base font-semibold text-secondary transition hover:bg-secondary/10"
           >
-            Técnico de celulares
+            Reparación de placa
           </Link>
           <Link
             href="/presupuesto-reparacion#solicitar-presupuesto"

@@ -13,7 +13,7 @@ const PAGE_URL = `${SITE_URL}/sucursales`;
 export const metadata: Metadata = {
   title: "Sucursales Team Celular en CABA | Recoleta y Belgrano",
   description:
-    "Sucursales de Team Celular en CABA: Paraguay 2451 Recoleta y Amenábar 2032 Belgrano. Reparación de celulares con diagnóstico el mismo día y garantía escrita 90 días.",
+    "Dos talleres en CABA con diagnóstico el mismo día y garantía escrita de 90 días: Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano).",
   alternates: {
     canonical: PAGE_URL,
     languages: {
@@ -181,12 +181,6 @@ export default function SucursalesPage() {
             >
               Cotizar en Recoleta
             </a>
-            <Link
-              href="/zonas/recoleta"
-              className="rounded-full border border-primary/40 px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10"
-            >
-              Ver zona Recoleta
-            </Link>
           </div>
         </article>
 
@@ -218,12 +212,6 @@ export default function SucursalesPage() {
             >
               Cotizar en Belgrano
             </a>
-            <Link
-              href="/zonas/belgrano"
-              className="rounded-full border border-secondary/50 px-6 py-3 text-sm font-semibold text-secondary transition hover:bg-secondary/10"
-            >
-              Ver zona Belgrano
-            </Link>
           </div>
         </article>
       </section>

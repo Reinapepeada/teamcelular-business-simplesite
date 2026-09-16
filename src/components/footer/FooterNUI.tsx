@@ -55,7 +55,7 @@ const footerSections = {
       icon: FaTools,
     },
     {
-      name: "Soporte para empresas",
+      name: "Reparación para empresas",
       href: "/guias/soporte-empresas-servicio-tecnico",
       icon: FaBuilding,
     },
@@ -77,7 +77,7 @@ const footerSections = {
       href: "/guias/mantenimiento-preventivo-celulares",
     },
     {
-      name: "Soporte empresas",
+      name: "Empresas",
       href: "/guias/soporte-empresas-servicio-tecnico",
     },
   ],

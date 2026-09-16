@@ -167,6 +167,17 @@ const ARTICLES = [
     datePublished: "2026-04-16",
     keywords: ["pantalla con lineas", "display con rayas", "reparacion pantalla"],
   },
+  {
+    title: "Celular con virus: como saberlo y que hacer",
+    description:
+      "Que sintomas son malware, cuales son bateria o placa, y los pasos para limpiar el equipo sin perder datos.",
+    href: "/guias/celular-con-virus-que-hacer",
+    category: "Fallas frecuentes",
+    readingTime: "6 min",
+    Icon: FaMobileAlt,
+    datePublished: "2026-09-14",
+    keywords: ["celular con virus", "publicidad invasiva", "celular hackeado"],
+  },
   ...BRAND_GUIDE_LIST.map((item) => ({
     title: `Reparacion de ${item.brand} en Buenos Aires`,
     description:
@@ -223,6 +234,9 @@ const articleVisuals: Record<string, { cover: string }> = {
   },
   "/guias/pantalla-con-lineas-causas-reparacion": {
     cover: "/images/guia_cambio_modulo.webp",
+  },
+  "/guias/celular-con-virus-que-hacer": {
+    cover: "/images/guia_mantenimiento.webp",
   },
   ...Object.fromEntries(
     BRAND_GUIDE_LIST.map((item) => [
@@ -320,6 +334,12 @@ const articleLinkTargets: Record<
     serviceLabel: "Servicio: cambio de pantalla",
     siblingHref: "/guias/reparacion-pantalla-celular",
     siblingLabel: "Guia hermana: guia de pantalla",
+  },
+  "/guias/celular-con-virus-que-hacer": {
+    serviceHref: "/reparaciones/cambio-bateria-caba",
+    serviceLabel: "Servicio: cambio de bateria",
+    siblingHref: "/guias/mantenimiento-preventivo-celulares",
+    siblingLabel: "Guia hermana: mantenimiento preventivo",
   },
 };
 

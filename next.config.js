@@ -54,6 +54,18 @@ module.exports = {
   },
   async redirects() {
     return [
+      // Consolidacion de head terms (GSC 2026-07-15/08-09): estas URLs no
+      // ranqueaban (8, 6, 8 y 0 impresiones en 26 dias) y aparecian en pos
+      // 60-99 para "reparacion de celulares caba", diluyendo la eleccion de
+      // canonica de Google. Cada una cae en su equivalente mas cercano.
+      { source: "/arreglo-de-celulares", destination: "/reparaciones", permanent: true },
+      {
+        source: "/tecnico-de-celulares",
+        destination: "/reparaciones/reparacion-placa-caba",
+        permanent: true,
+      },
+      { source: "/zonas/recoleta", destination: "/sucursales/caba/recoleta", permanent: true },
+      { source: "/zonas/belgrano", destination: "/sucursales/caba/belgrano", permanent: true },
       {
         source: "/:path*",
         has: [{ type: "header", key: "x-forwarded-proto", value: "http" }],

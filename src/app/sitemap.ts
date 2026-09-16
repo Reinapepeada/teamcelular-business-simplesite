@@ -46,11 +46,6 @@ async function getCategoriesForSitemap(): Promise<string[]> {
 const mainPages = [
   { path: "", priority: 1.0, changeFreq: "weekly" as const },
   {
-    path: "arreglo-de-celulares",
-    priority: 0.95,
-    changeFreq: "weekly" as const,
-  },
-  {
     path: "reparacion-de-celulares-cerca-de-mi",
     priority: 0.93,
     changeFreq: "weekly" as const,
@@ -152,25 +147,16 @@ const mainPages = [
     priority: 0.88,
     changeFreq: "monthly" as const,
   },
-  { path: "zonas", priority: 0.8, changeFreq: "monthly" as const },
-  { path: "zonas/recoleta", priority: 0.8, changeFreq: "monthly" as const },
-  { path: "zonas/palermo", priority: 0.75, changeFreq: "monthly" as const },
-  { path: "zonas/belgrano", priority: 0.75, changeFreq: "monthly" as const },
-  { path: "zonas/caballito", priority: 0.75, changeFreq: "monthly" as const },
-  { path: "zonas/almagro", priority: 0.75, changeFreq: "monthly" as const },
-  { path: "zonas/balvanera", priority: 0.75, changeFreq: "monthly" as const },
-  { path: "zonas/microcentro", priority: 0.75, changeFreq: "monthly" as const },
+  { path: "zonas", priority: 0.55, changeFreq: "monthly" as const },
+  { path: "zonas/palermo", priority: 0.55, changeFreq: "monthly" as const },
+  { path: "zonas/almagro", priority: 0.55, changeFreq: "monthly" as const },
+  { path: "zonas/balvanera", priority: 0.55, changeFreq: "monthly" as const },
   {
     path: "presupuesto-reparacion",
     priority: 0.95,
     changeFreq: "weekly" as const,
   },
   { path: "contacto", priority: 0.9, changeFreq: "monthly" as const },
-  {
-    path: "tecnico-de-celulares",
-    priority: 0.9,
-    changeFreq: "weekly" as const,
-  },
   { path: "tienda", priority: 0.9, changeFreq: "daily" as const },
   { path: "lab", priority: 0.82, changeFreq: "monthly" as const },
   {
@@ -293,6 +279,11 @@ const guidePages = [
     changeFreq: "monthly" as const,
   },
   {
+    path: "guias/reparacion-pantalla-celular",
+    priority: 0.78,
+    changeFreq: "monthly" as const,
+  },
+  {
     path: "guias/pin-de-carga-suelto-solucion",
     priority: 0.76,
     changeFreq: "monthly" as const,
@@ -309,6 +300,11 @@ const guidePages = [
   },
   {
     path: "guias/pantalla-con-lineas-causas-reparacion",
+    priority: 0.76,
+    changeFreq: "monthly" as const,
+  },
+  {
+    path: "guias/celular-con-virus-que-hacer",
     priority: 0.76,
     changeFreq: "monthly" as const,
   },

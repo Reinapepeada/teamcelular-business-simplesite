@@ -4,9 +4,7 @@ import { BsWhatsapp } from "react-icons/bs";
 import { FaMapMarkedAlt } from "react-icons/fa";
 
 const quickZones = [
-  { href: "/zonas/recoleta", label: "Recoleta" },
   { href: "/zonas/palermo", label: "Palermo" },
-  { href: "/zonas/belgrano", label: "Belgrano" },
   { href: "/zonas/caballito", label: "Caballito" },
   { href: "/zonas/almagro", label: "Almagro" },
   { href: "/zonas/microcentro", label: "Microcentro" },
