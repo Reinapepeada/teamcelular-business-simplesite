@@ -130,8 +130,8 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     specialtyFocus:
       "enfoque de camara computacional, pantalla OLED y estabilidad de carga USB-C",
     knownWeakPoints: [
-      "pantalla OLED con lineas o toque fantasma",
-      "modulo de camara con enfoque irregular",
+      "pantalla OLED con líneas o toque fantasma",
+      "módulo de cámara con enfoque irregular",
       "desgaste en conector USB-C por uso diario",
     ],
     serviceHref: "/reparaciones/cambio-pantalla-caba",
@@ -175,8 +175,8 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     specialtyFocus:
       "paneles AMOLED, baterias de alta densidad y modulos de carga rapida",
     knownWeakPoints: [
-      "pantalla golpeada con perdida de brillo",
-      "autonomia irregular en uso intenso",
+      "pantalla golpeada con pérdida de brillo",
+      "autonomía irregular en uso intenso",
       "carga inestable por desgaste del puerto",
     ],
     serviceHref: "/reparaciones/cambio-bateria-caba",
@@ -212,8 +212,8 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
       "equipos de alto rendimiento con foco en temperatura, bateria y carga",
     knownWeakPoints: [
       "sobrecalentamiento en sesiones largas",
-      "degradacion de bateria por uso exigente",
-      "falla de carga rapida por desgaste de pin",
+      "degradación de batería por uso exigente",
+      "falla de carga rápida por desgaste de pin",
     ],
     serviceHref: "/reparaciones/cambio-pin-carga-caba",
     siblingHref: "/guias/reparacion-xiaomi-buenos-aires",
@@ -247,9 +247,9 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     specialtyFocus:
       "linea Reno y A con foco en pantalla, bateria y tecnologia de carga rapida",
     knownWeakPoints: [
-      "modulo de pantalla con touch inestable",
-      "bateria con baja autonomia al final del dia",
-      "degradacion del puerto de carga",
+      "módulo de pantalla con touch inestable",
+      "batería con baja autonomía al final del día",
+      "degradación del puerto de carga",
     ],
     serviceHref: "/reparaciones/cambio-pantalla-caba",
     siblingHref: "/guias/reparacion-pantalla-celular",
@@ -284,7 +284,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
       "equipos de gama media con foco en bateria, pantalla y conectores",
     knownWeakPoints: [
       "pantalla quebrada por golpes laterales",
-      "caida de autonomia en menos de un dia",
+      "caida de autonomía en menos de un día",
       "microcortes de carga en USB-C",
     ],
     serviceHref: "/reparaciones/cambio-bateria-caba",
@@ -355,8 +355,8 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
       "modelos Camon y Pova con foco en pantalla, camara y consumo de energia",
     knownWeakPoints: [
       "pantalla con rayas o toque fantasma",
-      "camara con perdida de nitidez",
-      "bateria que cae rapido en uso mixto",
+      "cámara con pérdida de nitidez",
+      "batería que cae rápido en uso mixto",
     ],
     serviceHref: "/reparaciones/cambio-camara-caba",
     siblingHref: "/guias/reparacion-pantalla-celular",
@@ -390,7 +390,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
       "equipos con uso cotidiano donde importa costo-beneficio de la reparacion",
     knownWeakPoints: [
       "pantalla y touch sensibles a caidas",
-      "bateria degradada por antiguedad",
+      "batería degradada por antigüedad",
       "carga lenta por desgaste del conector",
     ],
     serviceHref: "/reparaciones/cambio-bateria-caba",
@@ -426,8 +426,8 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
       "equipos ROG y Zenfone con foco en temperatura, energia y placa",
     knownWeakPoints: [
       "sobretemperatura en uso gaming",
-      "degradacion de bateria por carga exigente",
-      "fallas de placa por estres termico",
+      "degradación de batería por carga exigente",
+      "fallas de placa por estrés térmico",
     ],
     serviceHref: "/reparaciones/reparacion-placa-caba",
     siblingHref: "/guias/microelectronica-reballing-caba",
@@ -461,9 +461,9 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     specialtyFocus:
       "linea premium con foco en pantalla, bateria y carga ultra rapida",
     knownWeakPoints: [
-      "pantalla con dano por impacto",
-      "bateria con perdida de capacidad",
-      "fallas de carga rapida por puerto USB-C",
+      "pantalla con daño por impacto",
+      "batería con pérdida de capacidad",
+      "fallas de carga rápida por puerto USB-C",
     ],
     serviceHref: "/reparaciones/cambio-pin-carga-caba",
     siblingHref: "/guias/reparacion-xiaomi-buenos-aires",
@@ -496,8 +496,8 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     specialtyFocus:
       "camara, sensores y placa en linea P, Mate y Nova",
     knownWeakPoints: [
-      "modulo de camara con enfoque irregular",
-      "bateria con descarga acelerada",
+      "módulo de cámara con enfoque irregular",
+      "batería con descarga acelerada",
       "fallas de sensores luego de golpes o humedad",
     ],
     serviceHref: "/reparaciones/cambio-camara-caba",
@@ -532,8 +532,8 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     specialtyFocus:
       "equipos de uso diario con foco en pantalla, bateria y conectividad",
     knownWeakPoints: [
-      "pantalla quebrada con perdida de touch",
-      "autonomia baja en uso continuo",
+      "pantalla quebrada con pérdida de touch",
+      "autonomía baja en uso continuo",
       "intermitencia de carga por desgaste del puerto",
     ],
     serviceHref: "/reparaciones/cambio-pantalla-caba",
@@ -590,6 +590,28 @@ function buildServiceJsonLd(seed: BrandGuideSeed, pagePath: string) {
   };
 }
 
+// Cada falla tipica recibe la explicacion de su tipo (antes eran 3 textos fijos
+// iguales para todas las marcas, y contradecian la falla: "audio bajo" terminaba
+// explicado como "el panel esta sano").
+const WEAK_POINT_DESCRIPTIONS: Array<[RegExp, string]> = [
+  [/pantalla|touch|oled|brillo/i, "Revisamos módulo, flex y conector antes de cotizar: a veces el panel está sano y falla la conexión. Si hay que cambiarlo, siempre es el módulo completo."],
+  [/bater|autonom|descarga/i, "Medimos la salud de la batería y el consumo en reposo. Así sabemos si alcanza con cambiar la batería o si hay una fuga en la placa que la vacía."],
+  [/carga|puerto|pin|usb/i, "Probamos con cable y cargador de banco y revisamos el conector con microscopio. Distinguimos suciedad, pin gastado o falla del circuito de carga."],
+  [/c[aá]mara/i, "Probamos la cámara aislada del equipo para saber si falla el módulo, el flex o la placa, y no cambiar una pieza que no era la causa."],
+  [/audio|parlante|micr[oó]fono/i, "Probamos parlante, auricular y micrófono por separado. Si el componente está bien, revisamos el circuito de audio en la placa."],
+  [/placa|temperatura|sobrecalent|reinicio|t[eé]rmico/i, "Reproducimos la falla en el banco y medimos la placa. Si hay componentes dañados por calor, se reparan con microsoldadura bajo microscopio."],
+  [/sensor|humedad/i, "Revisamos sensores, flex y rastros de humedad bajo microscopio: después de un golpe o de agua, la falla suele estar en un conector o una pista."],
+];
+
+function describeWeakPoint(point: string): string {
+  const match = WEAK_POINT_DESCRIPTIONS.find(([pattern]) => pattern.test(point));
+  return match ? match[1] : "Reproducimos la falla en el banco antes de cotizar, para no cambiar piezas que no eran la causa.";
+}
+
+function capitalize(text: string): string {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
 function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
   const pagePath = `/guias/${seed.slug}`;
   const title =
@@ -599,25 +621,14 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
   const modelList = seed.models.join(", ");
 
   const symptoms: GuideItem[] = [
-    {
-      title: seed.knownWeakPoints[0],
-      description:
-        "Revisamos modulo, flex y conectores antes de cotizar un reemplazo: es frecuente que el panel este sano y falle la conexion.",
-    },
-    {
-      title: seed.knownWeakPoints[1],
-      description:
-        "Aislamos el modulo y lo probamos por separado, para no cobrar una pieza que no era la causa.",
-    },
-    {
-      title: seed.knownWeakPoints[2],
-      description:
-        "Reproducimos la falla en el banco. Si es intermitente, medimos el circuito: cambiar la pieza sin eso deja el problema adentro.",
-    },
+    ...seed.knownWeakPoints.map((point) => ({
+      title: capitalize(point),
+      description: describeWeakPoint(point),
+    })),
     {
       title: `Fallas encadenadas en ${seed.brand}`,
       description:
-        "Una falla sin resolver suele arrastrar audio, camara o sensores. Por eso el ingreso incluye un control completo, no solo del sintoma que traes.",
+        "Una falla sin resolver suele arrastrar audio, cámara o sensores. Por eso el ingreso incluye un control completo, no solo del síntoma que traés.",
     },
   ];
 
@@ -625,17 +636,17 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     {
       title: "Control de ingreso",
       description:
-        `Queda por escrito como entro el ${seed.brand}: pantalla, camara, audio, conectividad y carga.`,
+        `Queda por escrito cómo entró el ${seed.brand}: pantalla, cámara, audio, conectividad y carga.`,
     },
     {
-      title: "Medicion de consumo",
+      title: "Medición de consumo",
       description:
-        "Consumo en reposo y curva de carga. Es lo que distingue una bateria gastada de una fuga en placa.",
+        "Consumo en reposo y curva de carga. Es lo que distingue una batería gastada de una fuga en placa.",
     },
     {
-      title: "Inspeccion bajo microscopio",
+      title: "Inspección bajo microscopio",
       description:
-        "Corrosion, pistas cortadas y soldaduras frias. Aca aparece lo que el reemplazo de modulo no resuelve.",
+        "Corrosión, pistas cortadas y soldaduras frías. Acá aparece lo que el reemplazo de módulo no resuelve.",
     },
     {
       title: "Prueba en uso real",
@@ -648,50 +659,46 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     {
       title: "Presupuesto cerrado antes de tocar el equipo",
       description:
-        "Numero y plazo confirmados. Si no avanzas, te lo devolvemos como entro.",
+        "Número y plazo confirmados. Si no avanzás, te lo devolvemos como entró.",
     },
     {
       title: "Primero la falla que te trajo",
       description:
-        "Si aparece algo mas durante la reparacion, te lo consultamos antes de sumarlo al presupuesto.",
+        "Si aparece algo más durante la reparación, te lo consultamos antes de sumarlo al presupuesto.",
     },
     {
-      title: "Entrega con garantia escrita",
+      title: "Entrega con garantía escrita",
       description:
-        "90 dias sobre el trabajo y el repuesto instalado, con el alcance detallado por escrito.",
+        "90 días sobre el trabajo y el repuesto instalado, con el alcance detallado por escrito.",
     },
   ];
 
   const faq: GuideFaqItem[] = [
     {
-      question: `Reparan ${seed.brand} aunque no sea una marca tan comun?`,
+      question: `¿Reparan ${seed.brand} aunque no sea una marca tan común?`,
       answer:
-        `Si. Reparamos ${seed.brand} en nuestros talleres en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032), CABA. Confirmamos viabilidad según modelo y repuesto disponible antes de intervenir.`,
+        `Sí. Reparamos ${seed.brand} en nuestros talleres en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032), CABA. Confirmamos viabilidad según modelo y repuesto disponible antes de intervenir.`,
     },
     {
-      question: "Cuanto tarda el diagnostico?",
+      question: "¿Cuánto tarda el diagnóstico?",
       answer:
-        "El diagnostico inicial se responde dentro del mismo dia habil y te permite decidir con informacion clara.",
+        "El diagnóstico sale el mismo día hábil, y con eso decidís si conviene reparar antes de que toquemos el equipo.",
     },
     {
-      question: `Que modelos ${seed.brand} reciben?`,
+      question: `¿Qué modelos de ${seed.brand} reciben?`,
       answer: `Trabajamos, entre otros, estos modelos frecuentes: ${modelList}.`,
     },
     {
-      question: `Cual es el foco tecnico mas comun en ${seed.brand}?`,
-      answer: `En esta marca solemos priorizar ${seed.specialtyFocus}.`,
-    },
-    {
-      question: "Conviene reparar o cambiar de equipo?",
+      question: "¿Conviene reparar o cambiar de equipo?",
       answer:
-        "Depende del dano, estado general y costo total. Te mostramos escenarios para elegir la opcion mas rentable.",
+        "Depende del daño, del estado general y del costo total. Te pasamos el precio de la reparación para que lo compares con un equipo nuevo antes de decidir.",
     },
   ];
 
   const relatedLinks: GuideRelatedLink[] = [
     { href: seed.serviceHref, label: "Servicio recomendado" },
     { href: seed.siblingHref, label: seed.siblingLabel },
-    { href: "/lab", label: "Laboratorio de microelectronica" },
+    { href: "/lab", label: "Laboratorio de microelectrónica" },
     { href: "/reparaciones", label: "Ver todos los servicios" },
     { href: "/presupuesto-reparacion#solicitar-presupuesto", label: "Pedir presupuesto" },
   ];
