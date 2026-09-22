@@ -54,8 +54,11 @@ export default function RepairsForm() {
 
     const startedRef = useRef(false);
     const submittedRef = useRef(false);
+    // Lo lee el cleanup de abandono al desmontar, sin re-ejecutar ese effect.
     const repairTypeRef = useRef("sin_definir");
-    repairTypeRef.current = repairTypeLabel || "sin_definir";
+    useEffect(() => {
+        repairTypeRef.current = repairTypeLabel || "sin_definir";
+    }, [repairTypeLabel]);
 
     useEffect(() => {
         const preference = readBranchPreference();
