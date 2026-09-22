@@ -221,7 +221,7 @@ const quickAnswers = [
   {
     question: "¿Cambio de pantalla y cambio de módulo es lo mismo?",
     answer:
-      "En la mayoría de los celulares actuales, sí. El vidrio, el táctil y el display vienen pegados de fábrica en una sola pieza llamada módulo, así que cambiar la pantalla es cambiar el módulo completo.",
+      "En la mayoría de los celulares actuales, sí. El vidrio, el táctil y el display vienen pegados de fábrica en una sola pieza llamada módulo, así que cambiar la pantalla es cambiar el módulo completo. En Team Celular siempre cambiamos el módulo entero: separar solo el vidrio tiene riesgo de dañar el display y muchas veces cuesta casi lo mismo.",
   },
   {
     question: "¿Cuando se cambia la pantalla se borra todo?",

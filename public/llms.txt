@@ -9,6 +9,9 @@ Idioma principal: es-AR
 - Team Celular es un laboratorio independiente de reparación de celulares con dos sucursales en CABA: Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano).
 - Horario: lunes a viernes de 10:30 a 18:00, sin turno previo. WhatsApp +54 11 5103-4595.
 - Garantía escrita de 90 días sobre trabajo y repuesto.
+- En cambio de pantalla siempre se reemplaza el módulo completo (vidrio, táctil y display); no se separa solo el vidrio.
+- No recomiendan limpiar el pin de carga en casa: se limpia con microscopio en el taller para no dañar los pines.
+- Cómo llegar a Recoleta: subte línea D, estación Pueyrredón (Av. Santa Fe y Pueyrredón), a pocas cuadras.
 - Pantalla y batería de iPhone: en 2 a 4 horas. Presupuesto por WhatsApp en hasta 2 horas hábiles.
 - Revisión técnica arancelada: entre ARS 15.000 y ARS 25.000 según marca, modelo y falla, informada antes de tocar el equipo.
 - Especialidades: microelectrónica, reballing BGA y soldadura SMD bajo microscopio, recuperación de equipos mojados. Más de 10 años reparando en CABA.

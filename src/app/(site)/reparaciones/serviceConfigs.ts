@@ -109,7 +109,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     faqs: [
       {
         q: "¿Cambian solo el vidrio o el módulo completo?",
-        a: "Depende del modelo y del daño. En muchos casos conviene el módulo completo para evitar fallas de touch o brillo. Te indicamos la mejor opción antes de avanzar.",
+        a: "Siempre cambiamos el módulo completo. Separar solo el vidrio tiene riesgo de dañar el display o el táctil, y muchas veces cuesta casi lo mismo que el módulo entero, así que no lo hacemos.",
       },
       {
         q: "¿Se pierde Face ID o huella al cambiar pantalla?",
@@ -171,6 +171,10 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       {
         q: "¿Siempre hay que cambiar el pin cuando no carga?",
         a: "No. A veces el problema es suciedad en el puerto, un cable defectuoso o la batería. Primero hacemos diagnóstico para no hacer un gasto innecesario.",
+      },
+      {
+        q: "¿Puedo limpiar el pin de carga en casa?",
+        a: "No lo recomendamos. Con agujas, clips o cepillos es fácil doblar o romper los pines del conector, y una limpieza que se resolvía en minutos termina en un cambio de pin. Traelo y lo limpiamos con microscopio, sin forzar el puerto.",
       },
       {
         q: "¿Cuánto tarda reparar la carga?",

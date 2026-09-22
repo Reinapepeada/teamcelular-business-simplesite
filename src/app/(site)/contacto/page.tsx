@@ -120,7 +120,7 @@ const transportInfo = [
     {
         icon: FaSubway,
         title: "Subte",
-        description: "Línea D - Estación Callao, a unos 5 minutos caminando.",
+        description: "Recoleta: línea D, estación Pueyrredón (Av. Santa Fe y Pueyrredón), a pocas cuadras.",
     },
     {
         icon: FaBus,

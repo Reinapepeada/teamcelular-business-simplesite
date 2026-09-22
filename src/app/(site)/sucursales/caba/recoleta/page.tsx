@@ -313,10 +313,21 @@ export default function SucursalRecoletaPage() {
         </div>
       </section>
 
-      <section className="mt-10">
+      <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+          ¿Cómo llegar a la sucursal Recoleta?
+        </h2>
+        <p className="mt-3 text-slate-600 dark:text-slate-300">
+          Paraguay 2451 queda a pocas cuadras de la estación Pueyrredón de la línea D (Av. Santa Fe y Pueyrredón). Bajás en
+          Santa Fe y Pueyrredón y caminás por Pueyrredón hasta Paraguay.
+        </p>
+        <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+          Si tenés dudas sobre cómo llegar, escribinos por WhatsApp y te mandamos el punto exacto.
+        </p>
         <BranchMap
           address={`${branch.street}, ${branch.neighborhood}, CABA`}
           name={branch.shortName}
+          className="mt-6"
         />
       </section>
 

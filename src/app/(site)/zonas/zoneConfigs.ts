@@ -40,7 +40,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       "En Android suele entrar modulo display y problemas de energia por uso intensivo.",
     ],
     transportTip:
-      "Desde Palermo podés llegar a Recoleta (Paraguay 2451) por Subte D hasta Callao, o a Belgrano (Amenábar 2032) por Subte D hasta Juramento. Ambas opciones están a pocas cuadras de la estación.",
+      "Desde Palermo podés llegar a Recoleta (Paraguay 2451) por Subte D hasta Pueyrredón (Av. Santa Fe y Pueyrredón), o a Belgrano (Amenábar 2032) por Subte D hasta Juramento. Ambas opciones están a pocas cuadras de la estación.",
     nearbyZones: [
       { name: "Recoleta", slug: "recoleta" },
       { name: "Belgrano", slug: "belgrano" },
@@ -306,7 +306,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       "También vemos fallas de placa en equipos que no encienden o se reinician sin explicación clara.",
     ],
     transportTip:
-      "Desde Microcentro podés llegar a Recoleta (Paraguay 2451) por Subte D hasta Callao, o a Belgrano (Amenábar 2032) por Subte D hasta Juramento. Ambas opciones están a pocas cuadras de la estación.",
+      "Desde Microcentro podés llegar a Recoleta (Paraguay 2451) por Subte D hasta Pueyrredón (Av. Santa Fe y Pueyrredón), o a Belgrano (Amenábar 2032) por Subte D hasta Juramento. Ambas opciones están a pocas cuadras de la estación.",
     nearbyZones: [
       { name: "Balvanera / Once", slug: "balvanera" },
       { name: "Recoleta", slug: "recoleta" },

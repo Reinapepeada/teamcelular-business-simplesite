@@ -84,7 +84,7 @@ const planSteps: GuideItem[] = [
   {
     title: "Limpieza técnica",
     description:
-      "Si el conector está sano y hay residuos, lo limpiamos sin forzar ni doblar los pines.",
+      "Si el conector está sano y hay residuos, lo limpiamos con microscopio sin forzar ni doblar los pines. No conviene hacerlo en casa: es fácil dañar el conector.",
   },
   {
     title: "Cambio de pin o flex",
@@ -118,6 +118,11 @@ const faq: GuideFaqItem[] = [
     question: "¿Conviene limpiar o cambiar el pin de carga?",
     answer:
       "Si hay suciedad compactada y el conector está sano, la limpieza técnica suele resolverlo. Si hay juego mecánico, cortes o un pin doblado, conviene cambiarlo.",
+  },
+  {
+    question: "¿Puedo limpiar el pin de carga en casa?",
+    answer:
+      "No lo recomendamos. Con agujas, clips o cepillos es fácil doblar o romper los pines del conector, y una limpieza que se resolvía en minutos termina en un cambio de pin. Traelo y lo limpiamos con microscopio, sin forzar el puerto.",
   },
   {
     question: "¿Usar el celular así puede empeorar la falla?",
@@ -154,7 +159,7 @@ export default function ChargingPortGuidePage() {
       heroPoints={[
         "Cuatro señales para reconocer un pin dañado.",
         "Cómo descartar el cable y la batería.",
-        "Cuándo alcanza con limpiar y cuándo hay que cambiarlo.",
+        "Por qué no conviene limpiarlo en casa.",
       ]}
       symptomsTitle="¿Cuáles son las señales de un pin de carga dañado?"
       symptomsDescription="Suelen aparecer antes de que el equipo deje de cargar por completo."
