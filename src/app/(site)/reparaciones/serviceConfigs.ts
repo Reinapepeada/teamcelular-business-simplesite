@@ -7,7 +7,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Cambio de Batería en CABA | Repuestos Certificados",
     metaDescription:
-      "Cambio de batería en CABA — Team Celular, Paraguay 2451 Recoleta. Repuestos certificados, garantía escrita 90 días. iPhone, Samsung, Motorola y Xiaomi.",
+      "¿La batería no dura? Cambio de batería en Paraguay 2451, Recoleta (CABA): repuestos certificados y garantía escrita 90 días. iPhone, Samsung y Motorola.",
     socialTitle: "Cambio de Batería en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Cambio de batería en CABA con diagnóstico previo y garantía escrita 90 días.",
@@ -131,7 +131,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Cambio de Pin de Carga en CABA | Celular no Carga",
     metaDescription:
-      "Cambio de pin de carga en CABA — Team Celular, Paraguay 2451 Recoleta. Falso contacto, carga intermitente y puerto dañado. Garantía escrita 90 días.",
+      "¿El celular no carga o hace falso contacto? Cambiamos el pin de carga en Paraguay 2451, Recoleta (CABA), con garantía escrita 90 días.",
     socialTitle: "Cambio de Pin de Carga en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Reparación de puerto de carga en CABA con diagnóstico y garantía escrita 90 días.",
@@ -192,7 +192,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Reparación de Placa en CABA | Microsoldadura | Team Celular",
     metaDescription:
-      "Reparación de placa en CABA — Team Celular, Paraguay 2451. No enciende, mojado o en corto. Diagnóstico avanzado y garantía escrita 90 días.",
+      "¿No enciende, se mojó o está en corto? Reparamos la placa con microsoldadura bajo microscopio en Paraguay 2451, Recoleta. Garantía 90 días.",
     socialTitle: "Reparación de Placa en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Microelectrónica y reparación de placa en CABA con diagnóstico de laboratorio.",
@@ -314,7 +314,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Cambio de Tapa Trasera en CABA | Terminación Prolija",
     metaDescription:
-      "Cambio de tapa trasera en CABA — Team Celular, Paraguay 2451 Recoleta. Vidrio roto o tapa dañada con terminación prolija y garantía escrita 90 días.",
+      "Vidrio trasero roto o tapa dañada: cambio de tapa trasera en Paraguay 2451, Recoleta (CABA), con terminación prolija y garantía escrita 90 días.",
     socialTitle: "Cambio de Tapa Trasera en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Reemplazo de tapa trasera en CABA con terminación prolija y garantía escrita 90 días.",
@@ -436,7 +436,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Reparación de Audio en CABA | Micrófono y Parlante",
     metaDescription:
-      "Reparación de audio en CABA — Team Celular, Paraguay 2451. Micrófono, parlante y auricular. Diagnóstico preciso y garantía escrita 90 días.",
+      "Micrófono, parlante o auricular sin sonido: reparación de audio de celulares en Paraguay 2451, Recoleta (CABA). Garantía escrita 90 días.",
     socialTitle: "Reparación de Audio de Celular en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Solución para fallas de micrófono, parlante y auricular con diagnóstico técnico y garantía 90 días.",
@@ -497,7 +497,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Recuperación de Celular Mojado en CABA | Daño por Líquidos",
     metaDescription:
-      "Recuperación de celular mojado en CABA — Team Celular, Paraguay 2451. Limpieza técnica, secado controlado y diagnóstico de placa. Actuá rápido.",
+      "¿Se mojó el celular? No lo cargues. En Paraguay 2451, Recoleta (CABA), hacemos limpieza técnica, secado controlado y diagnóstico de placa.",
     socialTitle: "Recuperación de Celular Mojado en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Servicio urgente para daño por líquidos con limpieza técnica y diagnóstico de laboratorio.",

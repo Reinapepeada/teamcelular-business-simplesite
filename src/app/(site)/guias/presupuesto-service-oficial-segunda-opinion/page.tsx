@@ -13,7 +13,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
   title: "Service Oficial vs Taller Independiente en CABA",
   description:
-    "Service oficial vs taller independiente en CABA: costo, plazo, garantía y datos. Team Celular repara a nivel componente, diagnóstico el mismo día.",
+    "Costo, plazo, garantía y datos: qué cambia entre el service oficial y un taller independiente en CABA. Team Celular repara a nivel componente.",
   keywords: [
     "service oficial vs taller independiente",
     "conviene el service oficial celular",

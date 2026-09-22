@@ -60,7 +60,7 @@ const trustSignals = [
 export const metadata: Metadata = {
   title: "Reparación de Celulares en Belgrano CABA | Team Celular",
   description:
-    "Reparación de celulares en Belgrano CABA — Team Celular, Amenábar 2032. Pantalla, batería y carga el mismo día con diagnóstico técnico y garantía escrita 90 días.",
+    "Team Celular en Amenábar 2032, Belgrano (CABA): pantalla, batería y carga el mismo día, sin turno, con garantía escrita de 90 días.",
   alternates: {
     canonical: PAGE_URL,
     languages: {

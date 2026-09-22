@@ -60,7 +60,7 @@ const trustSignals = [
 export const metadata: Metadata = {
   title: "Reparación de Celulares en Recoleta CABA | Team Celular",
   description:
-    "Reparación de celulares en Recoleta CABA — Team Celular, Paraguay 2451. Pantalla, batería y carga el mismo día con garantía escrita 90 días.",
+    "Team Celular en Paraguay 2451, Recoleta: pantalla, batería y carga el mismo día, sin turno. Lunes a viernes 10:30–18:00, garantía escrita 90 días.",
   alternates: {
     canonical: PAGE_URL,
     languages: {

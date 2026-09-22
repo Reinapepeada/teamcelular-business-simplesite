@@ -28,7 +28,7 @@ import {
 export const metadata: Metadata = {
   title: "Servicio Técnico de Celulares para Empresas en CABA",
   description:
-    "Soporte técnico de celulares para empresas en CABA — Team Celular. SLA, logística puerta a puerta y planes desde 5 dispositivos. Garantía escrita 90 días. Recoleta y Belgrano.",
+    "Celulares corporativos reparados en CABA con SLA, logística puerta a puerta y planes desde 5 equipos. Recoleta y Belgrano, garantía escrita 90 días.",
   keywords: [
     "servicio técnico empresas Buenos Aires",
     "reparación celulares corporativos",

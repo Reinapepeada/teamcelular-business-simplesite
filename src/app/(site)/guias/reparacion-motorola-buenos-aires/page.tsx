@@ -30,7 +30,7 @@ const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 export const metadata: Metadata = {
   title: "Reparación de Motorola en Buenos Aires, CABA | Team Celular",
   description:
-    "Reparación de Motorola en Recoleta, CABA — Team Celular, Paraguay 2451. Pantalla, batería y pin de carga en el día. Moto G y Edge con garantía escrita 90 días.",
+    "Pantalla, batería y pin de carga de Motorola en el día: Moto G y Edge en Paraguay 2451, Recoleta (CABA). Garantía escrita 90 días.",
   keywords: [
     "reparacion motorola buenos aires",
     "service motorola caba",

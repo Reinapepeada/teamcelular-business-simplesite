@@ -30,7 +30,7 @@ const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 export const metadata: Metadata = {
   title: "Reparación de Samsung Galaxy en CABA | Team Celular",
   description:
-    "Reparación de Samsung Galaxy en CABA: pantalla línea A desde $79.000 y línea S desde $450.000. Diagnóstico el mismo día, garantía escrita 90 días.",
+    "Pantalla Samsung línea A desde $79.000 y línea S desde $450.000. Reparamos Galaxy en CABA con diagnóstico el mismo día y garantía escrita 90 días.",
   keywords: [
     "reparacion samsung buenos aires",
     "service samsung caba",

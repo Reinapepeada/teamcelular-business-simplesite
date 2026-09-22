@@ -24,7 +24,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
   title: "Phone Repair in Buenos Aires | English-Speaking Technician",
   description:
-    "Phone repair in Buenos Aires: screens and batteries same day, no appointment. English-speaking technician in Recoleta and Belgrano. 90-day warranty.",
+    "Same-day screen and battery repair in Buenos Aires, no appointment. English-speaking technician in Recoleta and Belgrano, 90-day written warranty.",
   keywords: [
     "phone repair buenos aires",
     "iphone repair buenos aires",

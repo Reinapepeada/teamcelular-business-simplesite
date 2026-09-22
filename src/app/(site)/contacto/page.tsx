@@ -20,7 +20,7 @@ import {
 export const metadata: Metadata = {
     title: "Contacto | Reparación de Celulares en CABA | Team Celular",
     description:
-        "Team Celular tiene dos sucursales en CABA: Paraguay 2451 Recoleta y Amenábar 2032 Belgrano. WhatsApp +54 11 5103-4595. Lun–Vie 10:30–18:00. Garantía escrita 90 días.",
+        "Dos sucursales en CABA: Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano). WhatsApp +54 11 5103-4595, lun–vie 10:30–18:00. Garantía 90 días.",
     keywords: [
         "contacto team celular",
         "reparación celulares recoleta",

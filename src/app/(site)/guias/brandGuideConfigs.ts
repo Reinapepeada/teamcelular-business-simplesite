@@ -88,7 +88,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     slug: "reparacion-google-pixel-buenos-aires",
     titleOverride: "Reparacion de Google Pixel en Buenos Aires",
     metaDescriptionOverride:
-      "Reparación de Google Pixel en CABA: pantalla desde $360.000 y batería desde $150.000. Pixel 6 a 10 Pro, mismo día, garantía escrita 90 días.",
+      "Pantalla de Google Pixel desde $360.000 y batería desde $150.000. Pixel 6 a 10 Pro reparados en CABA el mismo día, con garantía escrita 90 días.",
     repairPrices: [
       { name: "Cambio de pantalla", from: 360000, to: 590000 },
       { name: "Cambio de bateria", from: 150000, to: 200000 },
@@ -150,6 +150,8 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-honor-buenos-aires",
+    metaDescriptionOverride:
+      "Honor Magic y X reparados en CABA sin mandar el equipo por correo: diagnóstico el mismo día en Recoleta y Belgrano, garantía escrita 90 días.",
     titleOverride:
       "Reparacion de Honor en Buenos Aires: alternativa presencial al canal oficial",
     heroDescriptionOverride:
@@ -187,7 +189,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     modifiedTime: "2026-09-02T00:00:00Z",
     titleOverride: "Reparacion de POCO en Buenos Aires: temperatura, bateria y carga",
     metaDescriptionOverride:
-      "Reparación de POCO en CABA: F6 Pro, F6, X6 Pro y M6 Pro. Sobrecalentamiento, batería exigida y pin de carga gastado. Garantía escrita 90 días.",
+      "POCO F6 Pro, F6, X6 Pro y M6 Pro: sobrecalentamiento, batería exigida y pin de carga gastado. Reparación en CABA con garantía escrita 90 días.",
     heroDescriptionOverride:
       "Team Celular repara POCO en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. POCO vende potencia a precio contenido, y esa ecuacion se paga en calor: son los equipos que mas entran por sobrecalentamiento en sesiones largas. El calor sostenido no es solo una molestia, es lo que despues acelera la degradacion de la bateria y castiga la placa, asi que las tres fallas tipicas de la linea suelen ser la misma historia contada en orden. La carga rapida agrega su parte: el pin se desgasta antes que en un equipo de carga convencional. Si tu POCO calienta y ademas perdio autonomia, conviene diagnosticar las dos cosas juntas en vez de cambiar la bateria y volver en tres meses. Garantia escrita de 90 dias y 3 cuotas sin interes.",
     extraFaq: [
@@ -223,7 +225,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     modifiedTime: "2026-09-02T00:00:00Z",
     titleOverride: "Reparacion de OPPO en Buenos Aires: Reno y serie A",
     metaDescriptionOverride:
-      "Reparación de OPPO en CABA: Reno12, Reno11, A79 y A58. Touch inestable, poca autonomía y puerto de carga gastado. Garantía escrita 90 días.",
+      "OPPO Reno12, Reno11, A79 y A58: touch inestable, poca autonomía y puerto de carga gastado. Reparación en CABA con garantía escrita 90 días.",
     heroDescriptionOverride:
       "Team Celular repara OPPO en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. En las lineas Reno y A la consulta que mas se repite es el touch que responde mal sin que la pantalla este rota: se toca y no reacciona, o reacciona donde no es. Eso no siempre es el modulo. Muchas veces es el conector del flex, que se afloja despues de una caida sin marca visible, y revisarlo primero evita cambiar una pantalla que estaba sana. Las otras dos habituales son la autonomia que no llega al final del dia y el puerto de carga desgastado, que en equipos con carga rapida propietaria aparece antes de lo que uno espera. Pantalla y bateria salen en 2 a 4 horas segun stock. Garantia escrita de 90 dias sobre trabajo y repuesto, y 3 cuotas sin interes.",
     extraFaq: [
@@ -256,6 +258,8 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-infinix-buenos-aires",
+    metaDescriptionOverride:
+      "Infinix Note, Hot y Zero: sin service oficial físico en el país, los reparamos en Recoleta y Belgrano con diagnóstico en el día y garantía 90 días.",
     titleOverride:
       "Reparacion de Infinix en Buenos Aires: donde arreglarlo sin red oficial",
     heroDescriptionOverride:
@@ -293,7 +297,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     modifiedTime: "2026-09-02T00:00:00Z",
     titleOverride: "Reparacion de ZTE en Buenos Aires: audio, carga y reinicios",
     metaDescriptionOverride:
-      "Reparación de ZTE en CABA: Blade, Nubia y Axon. Audio distorsionado, carga floja y reinicios. Mismo día, garantía escrita 90 días.",
+      "ZTE Blade, Nubia y Axon con audio distorsionado, carga floja o reinicios: reparación en CABA el mismo día, con garantía escrita 90 días.",
     heroDescriptionOverride:
       "Team Celular repara ZTE en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Las tres fallas que mas entran en las familias Blade y Nubia son de tipo distinto entre si: el audio bajo o distorsionado suele ser el parlante o su filtro, la carga que corta cuando se mueve el cable casi siempre es el pin y no el cargador, y los reinicios intermitentes en equipos de varios años apuntan a la placa. Esa ultima es la que separa un taller de otro: en vez de cotizar el reemplazo del conjunto, se trabaja el componente que fallo con reballing BGA y soldadura SMD bajo microscopio. Todo sale con garantia escrita de 90 dias sobre trabajo y repuesto, y se puede pagar en 3 cuotas sin interes.",
     extraFaq: [
@@ -328,7 +332,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     slug: "reparacion-tecno-buenos-aires",
     titleOverride: "Reparacion de Tecno en Buenos Aires: Camon, Pova y Spark",
     metaDescriptionOverride:
-      "Reparación de Tecno en CABA: Camon, Pova, Spark y Phantom. Pantalla con rayas, cámara sin nitidez y batería que cae, con garantía escrita de 90 días.",
+      "Tecno Camon, Pova, Spark y Phantom: pantalla con rayas, cámara sin nitidez y batería que cae. Reparación en CABA con garantía escrita de 90 días.",
     heroDescriptionOverride:
       "Team Celular repara Tecno en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Tecno es una marca de llegada reciente al pais, asi que la pregunta real no suele ser si la falla tiene arreglo sino si el repuesto esta: por eso confirmamos disponibilidad para tu modelo antes de que dejes el equipo, y no despues. En las lineas Camon y Pova lo que mas vemos es pantalla con rayas o toque fantasma, camara que perdio nitidez y bateria que cae rapido en uso mixto. La pantalla y la bateria se resuelven en 2 a 4 horas cuando hay repuesto; la camara conviene diagnosticarla antes de cotizar, porque a veces es el vidrio del lente y no el modulo completo. Garantia escrita de 90 dias y 3 cuotas sin interes.",
     extraFaq: [
@@ -363,7 +367,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     slug: "reparacion-alcatel-buenos-aires",
     titleOverride: "Reparacion de Alcatel en Buenos Aires: conviene arreglarlo?",
     metaDescriptionOverride:
-      "Reparación de Alcatel en CABA: series 1, 3, 5 y T. Te decimos si conviene reparar antes de cobrarte, con diagnóstico el mismo día y garantía de 90 días.",
+      "Alcatel series 1, 3, 5 y T: te decimos si conviene reparar antes de cobrarte. Diagnóstico el mismo día en CABA y garantía de 90 días.",
     heroDescriptionOverride:
       "Team Celular repara Alcatel en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Con Alcatel la conversacion honesta es otra: son equipos de gama accesible, y en varios casos el costo de la reparacion se acerca demasiado al valor del telefono. Por eso el diagnostico incluye decirte si conviene o no repararlo, aunque la respuesta nos deje sin el trabajo. Lo que si vale casi siempre la pena es la bateria degradada por antiguedad y el conector de carga desgastado: son reparaciones de bajo costo que devuelven un par de años de uso. La pantalla partida es la que hay que pensar, porque el modulo es la pieza mas cara del equipo. Garantia escrita de 90 dias sobre trabajo y repuesto, y 3 cuotas sin interes.",
     extraFaq: [
@@ -435,7 +439,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     modifiedTime: "2026-09-02T00:00:00Z",
     titleOverride: "Reparacion de OnePlus en Buenos Aires: pantalla, bateria y carga",
     metaDescriptionOverride:
-      "Reparación de OnePlus en CABA: series 12, 11, 10 Pro y Nord. Pantalla, batería y fallas del puerto USB-C. Garantía escrita 90 días.",
+      "OnePlus 12, 11, 10 Pro y Nord: pantalla, batería y fallas del puerto USB-C. Reparación en CABA con garantía escrita 90 días.",
     heroDescriptionOverride:
       "Team Celular repara OnePlus en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. La falla mas caracteristica de la linea no es la pantalla sino la carga: son equipos construidos alrededor de la carga ultra rapida, y el puerto USB-C es la pieza que absorbe todo ese trabajo. Cuando un OnePlus empieza a cargar lento o solo en cierta posicion del cable, el problema esta en el conector mucho antes que en la bateria, y cambiar la bateria no lo resuelve. La pantalla por impacto y la perdida de capacidad de bateria son las otras dos que mas entran, y ambas salen en el dia. Tambien trabajamos las fallas de placa que en otros lados se cotizan como cambio de conjunto. Garantia escrita de 90 dias sobre trabajo y repuesto, y 3 cuotas sin interes.",
     extraFaq: [
@@ -470,7 +474,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     slug: "reparacion-huawei-buenos-aires",
     titleOverride: "Reparacion de Huawei en Buenos Aires: camara, sensores y placa",
     metaDescriptionOverride:
-      "Reparación de Huawei en CABA: P60, P50, Mate y Nova. Cámara con enfoque irregular, sensores tras humedad o golpes y fallas de placa. Garantía de 90 días.",
+      "Huawei P60, P50, Mate y Nova: cámara que no enfoca, sensores tras humedad o golpes y fallas de placa. Reparación en CABA, garantía 90 días.",
     heroDescriptionOverride:
       "Team Celular repara Huawei en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. La linea P y Mate se compro en buena medida por la camara, asi que cuando el enfoque empieza a fallar el equipo pierde justo aquello por lo que se eligio. Ese es el trabajo mas frecuente que nos llega de la marca, junto con los sensores que dejan de responder despues de un golpe o de humedad: proximidad, giroscopio, huella. Los sensores son el caso donde mas se nota la diferencia entre cambiar un modulo y trabajar la placa, porque muchas veces lo que fallo es la linea que los alimenta y no el sensor. Eso se resuelve con microscopio, reballing BGA y soldadura SMD. Confirmamos disponibilidad de repuesto para tu modelo antes de que dejes el equipo. Garantia escrita de 90 dias y 3 cuotas sin interes.",
     extraFaq: [
@@ -503,6 +507,8 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-tcl-buenos-aires",
+    metaDescriptionOverride:
+      "Celulares TCL sin red oficial en el país: pantalla, batería y pin de carga en Recoleta y Belgrano (CABA), diagnóstico en el día, garantía 90 días.",
     titleOverride:
       "Reparacion de celulares TCL en Buenos Aires: quien los arregla en CABA",
     heroDescriptionOverride:
@@ -738,7 +744,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
       title: `Reparación de ${seed.brand} en CABA | Team Celular`,
       description:
         seed.metaDescriptionOverride ??
-        `Reparación de ${seed.brand} en CABA. Team Celular, Recoleta y Belgrano. Pantalla, batería y carga con diagnóstico el mismo día. Garantía escrita 90 días.`,
+        `Taller en Recoleta y Belgrano que repara ${seed.brand}: pantalla, batería y carga con diagnóstico el mismo día en CABA. Garantía escrita 90 días.`,
       keywords: [
         ...seed.keywords,
         `reparacion ${seed.brand.toLowerCase()} buenos aires`,

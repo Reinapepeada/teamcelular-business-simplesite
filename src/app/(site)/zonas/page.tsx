@@ -43,7 +43,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: "/zonas",
   title: "Zonas de Servicio en CABA | Team Celular",
   description:
-    "Zonas de servicio de Team Celular en CABA: Palermo, Belgrano, Caballito, Almagro, Balvanera y Microcentro. Taller en Recoleta con garantía escrita y presupuesto rápido.",
+    "Atendemos Palermo, Belgrano, Caballito, Almagro, Balvanera y Microcentro desde Recoleta y Belgrano. Presupuesto en el día y garantía escrita.",
   robots: {
     index: true,
     follow: true,
