@@ -8,6 +8,14 @@ import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { INSTALLMENTS_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import GuideByline from "@/components/seo/GuideByline";
+import { formatArsPrice } from "@/lib/repairPrices";
+import {
+  IPHONE_MODELS,
+  IPHONE_MODELS_WITH_PAGE,
+} from "@/app/(site)/reparaciones/iphone/iphoneModels";
+
+// Precio citable en el primer parrafo: sale de la misma fuente que la tabla.
+const IPHONE_13 = IPHONE_MODELS.find((m) => m.slug === "13");
 import {
   FaApple,
   FaBatteryFull,
@@ -420,6 +428,13 @@ export default function IphoneRepairGuidePage() {
               Team Celular, en Paraguay 2451 Recoleta CABA, repara iPhone con
               diagnóstico el mismo día, pantalla y batería en 2–4 h, y garantía
               escrita de 90 días sobre trabajo y repuesto. iPhone 8 a 17 Pro Max.
+              {IPHONE_13?.screen && IPHONE_13.battery ? (
+                <>
+                  {" "}Por ejemplo, en un iPhone 13 el cambio de pantalla cuesta{" "}
+                  {formatArsPrice(IPHONE_13.screen)} y el de batería{" "}
+                  {formatArsPrice(IPHONE_13.battery)}.
+                </>
+              ) : null}
             </p>
             <div className="mt-4">
               <GuideByline modifiedTime="2026-09-22T00:00:00Z" tone="light" />
@@ -688,6 +703,46 @@ export default function IphoneRepairGuidePage() {
                 <span className="font-semibold text-primary">{row.precio}</span>
               </div>
             ))}
+          </div>
+          <div className="border-t border-slate-100 px-6 py-6 dark:border-slate-800 md:px-8">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+              Precio de pantalla y batería por modelo de iPhone
+            </h3>
+            <div className="mt-4 overflow-x-auto">
+              <table className="w-full min-w-[22rem] text-left text-sm">
+                <caption className="sr-only">
+                  Precios de cambio de pantalla y batería de iPhone en Team Celular, CABA, agosto de 2026
+                </caption>
+                <thead>
+                  <tr className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                    <th scope="col" className="py-2 pr-4 font-semibold">Modelo</th>
+                    <th scope="col" className="py-2 pr-4 font-semibold">Pantalla</th>
+                    <th scope="col" className="py-2 font-semibold">Batería</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                  {IPHONE_MODELS.map((model) => (
+                    <tr key={model.slug}>
+                      <th scope="row" className="py-2.5 pr-4 font-semibold text-slate-900 dark:text-slate-100">
+                        {(IPHONE_MODELS_WITH_PAGE as readonly string[]).includes(model.slug) ? (
+                          <Link href={`/reparaciones/iphone/${model.slug}`} className="hover:text-primary hover:underline">
+                            {model.name}
+                          </Link>
+                        ) : (
+                          model.name
+                        )}
+                      </th>
+                      <td className="py-2.5 pr-4 tabular-nums text-slate-700 dark:text-slate-300">
+                        {model.screen ? formatArsPrice(model.screen) : "Consultar"}
+                      </td>
+                      <td className="py-2.5 tabular-nums text-slate-700 dark:text-slate-300">
+                        {model.battery ? formatArsPrice(model.battery) : "Consultar"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
           <div className="space-y-4 px-8 py-6">
             <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">

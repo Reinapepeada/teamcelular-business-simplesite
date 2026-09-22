@@ -1,8 +1,6 @@
 ﻿import Image from "next/image";
 import { FaGoogle, FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
-import { getGoogleReviews } from "@/lib/googleReviews";
-
-const FALLBACK_RATING = { rating: 4.9, total: 362 };
+import { GOOGLE_RATING_FALLBACK as FALLBACK_RATING, getGoogleReviews } from "@/lib/googleReviews";
 
 function StarRating({ rating }: { rating: number }) {
     const stars = [];

@@ -13,6 +13,12 @@ export interface PlaceDetails {
     reviews: GoogleReview[];
 }
 
+/**
+ * Calificacion del perfil de Google de la sucursal Recoleta, cargada a mano.
+ * Se muestra mientras falten GOOGLE_PLACES_API_KEY/GOOGLE_PLACE_ID en Vercel.
+ */
+export const GOOGLE_RATING_FALLBACK = { rating: 4.9, total: 362, branch: "Recoleta" };
+
 export async function getGoogleReviews(): Promise<PlaceDetails | null> {
     const apiKey = process.env.GOOGLE_PLACES_API_KEY;
     const placeId = process.env.GOOGLE_PLACE_ID;

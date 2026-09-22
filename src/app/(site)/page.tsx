@@ -10,6 +10,14 @@ import BranchMap from "@/components/cards/BranchMap";
 import { BRANCHES, BUSINESS_PROFILE } from "@/lib/businessProfile";
 import { BUDGET_RESPONSE_MESSAGE } from "@/lib/copyStandards";
 import { buildWebsiteMetadata } from "@/lib/seoMetadata";
+import { GOOGLE_RATING_FALLBACK } from "@/lib/googleReviews";
+import { BRAND_REPAIR_PRICES, formatArsPrice } from "@/lib/repairPrices";
+import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
+
+// Precios citables de la home: salen de las mismas fuentes que las tablas.
+const iphone13 = IPHONE_MODELS.find((m) => m.slug === "13");
+const samsungA = BRAND_REPAIR_PRICES.samsung[0];
+const motoG = BRAND_REPAIR_PRICES.motorola[0];
 
 export const metadata = buildWebsiteMetadata({
     path: "/",
@@ -129,6 +137,28 @@ export default function Home() {
                     </div>
                 </section>
 
+                <section aria-labelledby="prices-title" className="grid gap-7 lg:grid-cols-[0.6fr_1.4fr] lg:gap-12">
+                    <h2 id="prices-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">
+                        ¿Cuánto sale reparar un celular en CABA?
+                    </h2>
+                    <div>
+                        <p className="text-pretty text-lg leading-8 text-slate-700 dark:text-slate-300">
+                            Team Celular es un laboratorio de reparación de celulares en CABA con más de 10 años de trabajo y{" "}
+                            {GOOGLE_RATING_FALLBACK.rating.toFixed(1).replace(".", ",")} estrellas en Google sobre{" "}
+                            {GOOGLE_RATING_FALLBACK.total} reseñas. En un iPhone 13 el cambio de pantalla cuesta{" "}
+                            {iphone13?.screen ? formatArsPrice(iphone13.screen) : "a consultar"} y el de batería{" "}
+                            {iphone13?.battery ? formatArsPrice(iphone13.battery) : "a consultar"}; en Samsung Galaxy A la pantalla va desde{" "}
+                            {formatArsPrice(samsungA.from)} y en Motorola Moto G desde {formatArsPrice(motoG.from)}. Pantalla y batería salen en
+                            2 a 4 horas, con garantía escrita de {BUSINESS_PROFILE.warrantyDays} días.
+                        </p>
+                        <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm font-bold text-[#2d2e83] dark:text-[#aebaff]">
+                            <Link href="/guias/reparacion-iphone-buenos-aires#costos-reparacion-iphone" className="hover:underline">Precios de iPhone por modelo</Link>
+                            <Link href="/guias/reparacion-samsung-buenos-aires" className="hover:underline">Precios de Samsung</Link>
+                            <Link href="/guias/reparacion-motorola-buenos-aires" className="hover:underline">Precios de Motorola</Link>
+                        </div>
+                    </div>
+                </section>
+
                 <section aria-labelledby="evidence-title" className="space-y-7">
                     <div className="max-w-3xl">
                         <h2 id="evidence-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">
@@ -222,9 +252,9 @@ export default function Home() {
                     </div>
                 </section>
 
-                <section aria-labelledby="branches-title" className="grid gap-6">
+                <section aria-labelledby="locations-title" className="grid gap-6">
                     <div>
-                        <h2 id="branches-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">Dónde estamos</h2>
+                        <h2 id="locations-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">Dónde estamos</h2>
                         <p className="mt-4 max-w-3xl text-pretty leading-7 text-slate-600 dark:text-slate-300">Dos talleres en CABA, de lunes a viernes de 10:30 a 18:00, sin turno previo.</p>
                     </div>
                     <div className="grid gap-6 md:grid-cols-2">
