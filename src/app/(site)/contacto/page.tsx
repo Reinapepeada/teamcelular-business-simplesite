@@ -18,7 +18,7 @@ import {
 } from "react-icons/fa";
 
 export const metadata: Metadata = {
-    title: "Contacto | Reparación de Celulares en CABA | Team Celular",
+    title: "Contacto, horarios y WhatsApp | Team Celular",
     description:
         "Dos sucursales en CABA: Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano). WhatsApp +54 11 5103-4595, lun–vie 10:30–18:00. Garantía 90 días.",
     keywords: [
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
         canonical: "https://teamcelular.com/contacto",
     },
     openGraph: {
-        title: "Contacto | Reparación de Celulares en CABA | Team Celular",
+        title: "Contacto, horarios y WhatsApp | Team Celular",
         description:
             "Team Celular, dos sucursales en CABA: Paraguay 2451 Recoleta y Amenábar 2032 Belgrano. Diagnóstico el mismo día y garantía escrita 90 días. WhatsApp +54 11 5103-4595.",
         type: "website",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Contacto | Reparación de Celulares en CABA | Team Celular",
+        title: "Contacto, horarios y WhatsApp | Team Celular",
         description: "Team Celular, Paraguay 2451 Recoleta y Amenábar 2032 Belgrano. Reparación de celulares en CABA, diagnóstico el mismo día y garantía escrita 90 días.",
         images: ["https://teamcelular.com/opengraph-image.png"],
     },

@@ -269,7 +269,7 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
               {config.heroBadge}
             </p>
             <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
-              {displayZone}: arreglo de celulares en CABA
+              Arreglo de celulares en {displayZone}
             </h1>
             <p className="max-w-3xl text-lg leading-relaxed text-slate-100/90">
               {config.heroIntro}
