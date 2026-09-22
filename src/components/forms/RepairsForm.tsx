@@ -13,18 +13,13 @@ import {
 import { recordLeadInteraction } from "@/lib/analytics/leadInteractions";
 import { BranchPreferencePicker } from "@/components/cro/BranchSelector";
 import {
+    branchWhatsappUrl,
     readBranchPreference,
     saveBranchPreference,
     type BranchSelectionMethod,
     type BranchSlug,
 } from "@/lib/branchPreference";
-import {
-    FaArrowLeft,
-    FaArrowRight,
-    FaCheckCircle,
-    FaExclamationCircle,
-    FaWhatsapp,
-} from "react-icons/fa";
+import { FaCheckCircle, FaExclamationCircle, FaWhatsapp } from "react-icons/fa";
 
 const repairOptions = [
     "Pantalla",
@@ -39,84 +34,28 @@ const repairOptions = [
     "Otro",
 ];
 
-const urgencyOptions = [
-    {
-        value: "hoy",
-        label: "Lo necesito hoy",
-        description: "Priorizamos un primer diagnostico y ventana de atencion rapida.",
-    },
-    {
-        value: "esta_semana",
-        label: "Esta semana",
-        description: "Coordinamos dentro de una franja de horario flexible.",
-    },
-    {
-        value: "sin_urgencia",
-        label: "Sin urgencia",
-        description: "Te respondemos con calma y alternativas por costo/beneficio.",
-    },
-] as const;
-
-const contactChannelOptions = [
-    { value: "whatsapp", label: "WhatsApp" },
-    { value: "llamada", label: "Llamada" },
-    { value: "email", label: "Email" },
-] as const;
-
-const PHONE_CONTACT_REGEX = /^[+\d][\d\s()-]{7,19}$/;
-const EMAIL_CONTACT_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-
-const LAST_STEP_INDEX = BUDGET_WIZARD_STEPS.length - 1;
-
-const contactFieldMeta = {
-    whatsapp: {
-        label: "WhatsApp de contacto",
-        placeholder: "Ej: +54 9 11 1234-5678",
-        helper: "Dejanos un medio para responderte mas rapido.",
-        type: "tel" as const,
-        inputMode: "tel" as const,
-        autoComplete: "tel",
-    },
-    llamada: {
-        label: "Telefono para llamada",
-        placeholder: "Ej: 11 1234-5678",
-        helper: "Dejanos un telefono para coordinar la llamada.",
-        type: "tel" as const,
-        inputMode: "tel" as const,
-        autoComplete: "tel",
-    },
-    email: {
-        label: "Email de contacto",
-        placeholder: "Ej: nombre@correo.com",
-        helper: "Aca te enviamos el diagnostico inicial.",
-        type: "email" as const,
-        inputMode: "email" as const,
-        autoComplete: "email",
-    },
-} as const;
+// Valores fijos para los eventos de analytics: ya no se preguntan, el
+// detalle se completa en la conversacion de WhatsApp.
+const DEFAULT_URGENCY = "esta_semana";
+const DEFAULT_CONTACT_CHANNEL = "whatsapp";
+const UNKNOWN = "sin especificar";
 
 export default function RepairsForm() {
-    const [stepIndex, setStepIndex] = useState(0);
-    const [brand, setBrand] = useState("");
     const [model, setModel] = useState("");
     const [repairTypes, setRepairTypes] = useState<string[]>([]);
-    const [urgency, setUrgency] = useState<(typeof urgencyOptions)[number]["value"]>("esta_semana");
-    const [description, setDescription] = useState("");
-    const [contactChannel, setContactChannel] = useState<(typeof contactChannelOptions)[number]["value"]>("whatsapp");
-    const [contact, setContact] = useState("");
     const [preferredBranch, setPreferredBranch] = useState<BranchSlug | "">("");
     const [branchSelectionMethod, setBranchSelectionMethod] = useState<BranchSelectionMethod>("manual");
     const [errorMessage, setErrorMessage] = useState("");
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const [leadAttemptId, setLeadAttemptId] = useState("");
 
-    const selectedContactMeta = contactFieldMeta[contactChannel];
     const repairTypeLabel = repairTypes.join(", ");
+    const modelValue = model.trim() || UNKNOWN;
+    const brandValue = model.trim().split(/\s+/)[0] || UNKNOWN;
 
-    const stepRef = useRef(stepIndex);
-    const wizardRef = useRef<HTMLDivElement>(null);
     const startedRef = useRef(false);
     const submittedRef = useRef(false);
+    const repairTypeRef = useRef("sin_definir");
+    repairTypeRef.current = repairTypeLabel || "sin_definir";
 
     useEffect(() => {
         const preference = readBranchPreference();
@@ -125,523 +64,164 @@ export default function RepairsForm() {
             setBranchSelectionMethod("remembered");
         }
 
-        if (typeof window !== "undefined" && typeof window.crypto?.randomUUID === "function") {
-            setLeadAttemptId(window.crypto.randomUUID());
-            return;
-        }
+        setLeadAttemptId(
+            typeof window.crypto?.randomUUID === "function"
+                ? window.crypto.randomUUID()
+                : `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`,
+        );
 
-        setLeadAttemptId(`${Date.now()}-${Math.random().toString(36).slice(2, 10)}`);
-    }, []);
-
-    useEffect(() => {
         track(
             BUDGET_FUNNEL_EVENTS.wizardViewed,
-            buildBudgetFunnelPayload({
-                stepIndex: 0,
-                extra: {
-                    wizard_source: `budget_wizard_${BUDGET_WIZARD_VERSION}`,
-                },
-            }),
+            buildBudgetFunnelPayload({ extra: { wizard_source: `budget_wizard_${BUDGET_WIZARD_VERSION}` } }),
         );
-    }, []);
 
-    useEffect(() => {
-        // stepRef sigue el paso anterior: si cambio, el usuario apreto Continuar/Atras
-        // y hay que devolverlo al inicio del formulario.
-        if (stepRef.current !== stepIndex) {
-            wizardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-        stepRef.current = stepIndex;
-        track(
-            BUDGET_FUNNEL_EVENTS.stepViewed,
-            buildBudgetFunnelPayload({
-                stepIndex,
-            }),
-        );
-    }, [stepIndex]);
-
-    // Ref con los ultimos valores: si el effect dependiera de ellos, su cleanup
-    // dispararia un abandono falso cada vez que el usuario cambia una opcion.
-    const abandonExtraRef = useRef({ repair_type: "sin_definir", urgency, contact_channel: contactChannel });
-    abandonExtraRef.current = {
-        repair_type: repairTypeLabel || "sin_definir",
-        urgency,
-        contact_channel: contactChannel,
-    };
-
-    useEffect(() => {
         return () => {
             if (startedRef.current && !submittedRef.current) {
                 track(
                     BUDGET_FUNNEL_EVENTS.abandoned,
-                    buildBudgetFunnelPayload({
-                        stepIndex: stepRef.current,
-                        extra: abandonExtraRef.current,
-                    }),
+                    buildBudgetFunnelPayload({ extra: { repair_type: repairTypeRef.current } }),
                 );
             }
         };
     }, []);
 
-    function validateStep(index: number): string | null {
-        if (index === 0 && (!brand.trim() || !model.trim())) {
-            return "Completa marca y modelo para seguir.";
-        }
+    function markStarted() {
+        if (startedRef.current) return;
+        startedRef.current = true;
+        track(BUDGET_FUNNEL_EVENTS.stepViewed, buildBudgetFunnelPayload({}));
+    }
 
-        if (index === 1 && repairTypes.length === 0) {
-            return "Selecciona al menos una falla para continuar.";
-        }
-
-        if (index === LAST_STEP_INDEX) {
-            if (!preferredBranch) {
-                return "Elegí la sucursal con la que preferís hablar.";
-            }
-            const normalizedContact = contact.trim();
-            if (normalizedContact) {
-                if (
-                    (contactChannel === "whatsapp" || contactChannel === "llamada") &&
-                    !PHONE_CONTACT_REGEX.test(normalizedContact)
-                ) {
-                    return "Ingresa un telefono valido con codigo de area o deja el campo vacio.";
-                }
-
-                if (contactChannel === "email" && !EMAIL_CONTACT_REGEX.test(normalizedContact)) {
-                    return "Ingresa un email valido o deja el campo vacio.";
-                }
-            }
-        }
-
-        return null;
+    function toggleRepairType(option: string) {
+        markStarted();
+        setRepairTypes((current) =>
+            current.includes(option) ? current.filter((item) => item !== option) : [...current, option],
+        );
+        setErrorMessage("");
     }
 
     function selectBranch(slug: BranchSlug, method: BranchSelectionMethod) {
+        markStarted();
         setPreferredBranch(slug);
         setBranchSelectionMethod(method);
         saveBranchPreference(slug, method);
         setErrorMessage("");
     }
 
-    function toggleRepairType(option: string) {
-        setRepairTypes((current) => {
-            if (current.includes(option)) {
-                return current.filter((item) => item !== option);
-            }
-
-            return [...current, option];
-        });
-        setErrorMessage("");
-    }
-
-    function handleBack() {
-        if (stepIndex === 0) {
+    function handleSend() {
+        if (repairTypes.length === 0) {
+            setErrorMessage("Tocá qué le pasa al celular.");
+            return;
+        }
+        if (!preferredBranch) {
+            setErrorMessage("Elegí la sucursal que te queda más cerca.");
             return;
         }
 
-        const nextStepIndex = Math.max(stepIndex - 1, 0);
-        setErrorMessage("");
-        track(
-            BUDGET_FUNNEL_EVENTS.stepBack,
-            buildBudgetFunnelPayload({
-                stepIndex,
-                extra: {
-                    to_step_index: nextStepIndex + 1,
-                },
-            }),
-        );
-        setStepIndex(nextStepIndex);
-    }
-
-    function handleNext() {
-        const validationError = validateStep(stepIndex);
-        if (validationError) {
-            setErrorMessage(validationError);
-            return;
-        }
-
-        startedRef.current = true;
-        setErrorMessage("");
+        // ponytail: el backend de leads no esta operativo; el mensaje va armado
+        // directo a WhatsApp. Si vuelve, recuperar el POST a /api/repair-lead.
+        const message = [
+            "Hola Team Celular, quiero un presupuesto.",
+            `Falla: ${repairTypeLabel}`,
+            `Modelo: ${modelValue}`,
+        ].join("\n");
+        const destination = branchWhatsappUrl(preferredBranch, message);
+        const step = BUDGET_WIZARD_STEPS[0];
+        submittedRef.current = true;
 
         track(
-            BUDGET_FUNNEL_EVENTS.stepCompleted,
+            BUDGET_FUNNEL_EVENTS.submit,
             buildBudgetFunnelPayload({
-                stepIndex,
                 extra: {
-                    repair_type: repairTypeLabel || "sin_definir",
-                    urgency,
-                    contact_channel: contactChannel,
-                },
-            }),
-        );
-
-        setStepIndex((current) => Math.min(current + 1, LAST_STEP_INDEX));
-    }
-
-    async function handleFinalSend() {
-        if (isSubmitting) {
-            return;
-        }
-
-        const validationError = validateStep(LAST_STEP_INDEX);
-        if (validationError) {
-            setErrorMessage(validationError);
-            return;
-        }
-
-        setIsSubmitting(true);
-        setErrorMessage("");
-
-        try {
-            const formData = new FormData();
-            formData.set("brand", brand);
-            formData.set("model", model);
-            repairTypes.forEach((repairType) => formData.append("repairType", repairType));
-            formData.set("urgency", urgency);
-            formData.set("description", description);
-            formData.set("contactChannel", contactChannel);
-            formData.set("contact", contact);
-            formData.set("preferredBranch", preferredBranch);
-            formData.set("branchSelectionMethod", branchSelectionMethod);
-            formData.set("wizardSource", `budget_wizard_${BUDGET_WIZARD_VERSION}`);
-            formData.set("leadAttemptId", leadAttemptId);
-
-            const response = await fetch("/api/repair-lead", {
-                method: "POST",
-                body: formData,
-                headers: {
-                    Accept: "application/json",
-                },
-                cache: "no-store",
-            });
-
-            const body = (await response.json().catch(() => null)) as
-                | { success?: boolean; data?: { whatsappUrl?: string; leadId?: string; status?: string; replayed?: boolean } }
-                | null;
-
-            if (!response.ok || !body?.data?.whatsappUrl) {
-                throw new Error("No pudimos preparar el enlace de WhatsApp.");
-            }
-
-            submittedRef.current = true;
-
-            const currentStep = BUDGET_WIZARD_STEPS[stepIndex] || BUDGET_WIZARD_STEPS[LAST_STEP_INDEX];
-            const submitPayload = buildBudgetFunnelPayload({
-                stepIndex,
-                extra: {
-                    lead_channel: "whatsapp_ready",
-                    repair_type: repairTypeLabel || "sin_definir",
-                    urgency,
-                    contact_channel: contactChannel,
+                    lead_channel: "whatsapp_direct",
+                    repair_type: repairTypeLabel,
+                    urgency: DEFAULT_URGENCY,
+                    contact_channel: DEFAULT_CONTACT_CHANNEL,
                     preferred_branch: preferredBranch,
                     branch_selection_method: branchSelectionMethod,
                 },
-            });
-
-            track(BUDGET_FUNNEL_EVENTS.submit, submitPayload);
-
-            recordLeadInteraction({
-                eventName: "lead_form_submit",
-                ctaName: "budget_wizard_submit",
-                ctaLocation: "presupuesto_reparacion_wizard",
-                ctaVariant: "whatsapp",
-                destination: body.data.whatsappUrl,
-                leadAttemptId,
-                formName: "repair_budget_wizard",
-                formLocation: "presupuesto_reparacion",
-                formVersion: BUDGET_WIZARD_VERSION,
-                stepIndex: stepIndex + 1,
-                stepId: currentStep.id,
-                stepLabel: currentStep.label,
-                totalSteps: BUDGET_WIZARD_STEPS.length,
-                brand,
-                model,
-                repairType: repairTypeLabel || "sin_definir",
-                urgency,
-                contactChannel,
-                contact,
-                description,
-            });
-
-            window.location.assign(body.data.whatsappUrl);
-        } catch {
-            setErrorMessage("No pudimos preparar el enlace de WhatsApp. Intentalo otra vez.");
-        } finally {
-            setIsSubmitting(false);
-        }
-    }
-
-    const progressPercentage = ((stepIndex + 1) / BUDGET_WIZARD_STEPS.length) * 100;
-
-    const selectedUrgency = urgencyOptions.find((option) => option.value === urgency);
-
-    const selectedContactChannel = contactChannelOptions.find(
-        (option) => option.value === contactChannel,
-    );
-
-    function renderStepContent() {
-        if (stepIndex === 0) {
-            return (
-                <div className="grid gap-4 md:grid-cols-2">
-                    <label className="space-y-2 text-sm font-medium text-slate-900 dark:text-slate-100">
-                        <span>Marca</span>
-                        <input
-                            type="text"
-                            value={brand}
-                            onChange={(event) => setBrand(event.target.value)}
-                            placeholder="Ej: iPhone, Samsung, Xiaomi"
-                            className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
-                        />
-                        <span className="text-xs font-normal leading-5 text-slate-500 dark:text-slate-400">
-                            Si no la recuerdas exacta, escribe una aproximada.
-                        </span>
-                    </label>
-                    <label className="space-y-2 text-sm font-medium text-slate-900 dark:text-slate-100">
-                        <span>Modelo</span>
-                        <input
-                            type="text"
-                            value={model}
-                            onChange={(event) => setModel(event.target.value)}
-                            list="modelos-con-precio"
-                            placeholder="Ej: iPhone 13, Galaxy A54, Redmi Note 11"
-                            className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
-                        />
-                        <span className="text-xs font-normal leading-5 text-slate-500 dark:text-slate-400">
-                            Con esto te damos un estimado mucho mas preciso.
-                        </span>
-                    </label>
-                </div>
-            );
-        }
-
-        if (stepIndex === 1) {
-            return (
-                <fieldset className="space-y-3">
-                    <legend className="text-sm font-semibold text-slate-900 dark:text-slate-100">
-                        Selecciona una o varias fallas
-                    </legend>
-                    <p className="text-xs leading-5 text-slate-500 dark:text-slate-400">
-                        Marca los sintomas principales. Luego afinamos detalles por WhatsApp.
-                    </p>
-                    <p className="text-xs font-medium text-slate-600 dark:text-slate-300">
-                        Seleccionadas: {repairTypes.length}
-                    </p>
-                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                        {repairOptions.map((option) => {
-                            const selected = repairTypes.includes(option);
-
-                            return (
-                                <button
-                                    key={option}
-                                    type="button"
-                                    onClick={() => toggleRepairType(option)}
-                                    className={`flex min-h-11 items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-sm font-medium transition ${
-                                        selected
-                                            ? "border-primary bg-primary/10 text-primary"
-                                            : "border-slate-200 bg-white text-slate-700 hover:border-primary/40 hover:bg-primary/5 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
-                                    }`}
-                                >
-                                    <span>{option}</span>
-                                    {selected ? <FaCheckCircle aria-hidden /> : null}
-                                </button>
-                            );
-                        })}
-                    </div>
-                    <QuoteEstimate brand={brand} model={model} repairTypes={repairTypes} />
-
-                    {repairTypes.length > 0 ? (
-                        <div className="space-y-2">
-                            <p className="text-xs text-slate-500 dark:text-slate-400">
-                                Tocala para quitarla:
-                            </p>
-                            <div className="flex flex-wrap gap-2">
-                                {repairTypes.map((repairType) => (
-                                    <button
-                                        key={repairType}
-                                        type="button"
-                                        onClick={() => toggleRepairType(repairType)}
-                                        className="inline-flex min-h-11 items-center gap-2 rounded-full border border-primary/35 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary transition hover:border-primary hover:bg-primary/15"
-                                        aria-label={`Quitar ${repairType}`}
-                                    >
-                                        {repairType}
-                                        <span aria-hidden>x</span>
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                    ) : null}
-                </fieldset>
-            );
-        }
-
-        if (stepIndex === 2) {
-            return (
-                <div className="space-y-6">
-                    <fieldset className="space-y-3">
-                        <legend className="text-sm font-semibold text-slate-900 dark:text-slate-100">
-                            Nivel de urgencia
-                        </legend>
-                        <div className="grid gap-3 md:grid-cols-3">
-                            {urgencyOptions.map((option) => {
-                                const selected = urgency === option.value;
-
-                                return (
-                                    <button
-                                        key={option.value}
-                                        type="button"
-                                        onClick={() => setUrgency(option.value)}
-                                        className={`rounded-2xl border px-4 py-4 text-left transition ${
-                                            selected
-                                                ? "border-primary bg-primary/10"
-                                                : "border-slate-200 bg-white hover:border-primary/35 dark:border-slate-700 dark:bg-slate-900"
-                                        }`}
-                                    >
-                                        <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
-                                            {option.label}
-                                        </p>
-                                        <p className="mt-1 text-xs leading-5 text-slate-600 dark:text-slate-400">
-                                            {option.description}
-                                        </p>
-                                    </button>
-                                );
-                            })}
-                        </div>
-                    </fieldset>
-
-                    <label className="block space-y-2 text-sm font-medium text-slate-900 dark:text-slate-100">
-                        <span>Descripcion de la falla (opcional)</span>
-                        <textarea
-                            value={description}
-                            onChange={(event) => setDescription(event.target.value)}
-                            rows={5}
-                            className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
-                            placeholder="Ej: Se cayo ayer, el touch responde mal y se descarga rapido."
-                        />
-                    </label>
-                </div>
-            );
-        }
-
-        return (
-            <div className="space-y-6">
-                <fieldset className="space-y-3">
-                    <legend className="text-sm font-semibold text-slate-900 dark:text-slate-100">
-                        Canal de respuesta preferido
-                    </legend>
-                    <div className="grid gap-3 sm:grid-cols-3">
-                        {contactChannelOptions.map((option) => {
-                            const selected = contactChannel === option.value;
-
-                            return (
-                                <button
-                                    key={option.value}
-                                    type="button"
-                                    onClick={() => setContactChannel(option.value)}
-                                    className={`rounded-2xl border px-4 py-3 text-sm font-semibold transition ${
-                                        selected
-                                            ? "border-primary bg-primary/10 text-primary"
-                                            : "border-slate-200 bg-white text-slate-700 hover:border-primary/35 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
-                                    }`}
-                                >
-                                    {option.label}
-                                </button>
-                            );
-                        })}
-                    </div>
-                </fieldset>
-
-                <label className="block space-y-2 text-sm font-medium text-slate-900 dark:text-slate-100">
-                    <span>{selectedContactMeta.label}</span>
-                    <input
-                        type={selectedContactMeta.type}
-                        inputMode={selectedContactMeta.inputMode}
-                        autoComplete={selectedContactMeta.autoComplete}
-                        value={contact}
-                        onChange={(event) => setContact(event.target.value)}
-                        placeholder={selectedContactMeta.placeholder}
-                        className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
-                    />
-                    <span className="text-xs font-normal leading-5 text-slate-500 dark:text-slate-400">
-                        {selectedContactMeta.helper}
-                    </span>
-                </label>
-
-                <BranchPreferencePicker value={preferredBranch} onChange={selectBranch} />
-
-                <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 text-sm leading-6 text-slate-700 dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-300">
-                    <p className="font-semibold text-slate-900 dark:text-slate-100">
-                        Resumen rapido antes de enviar
-                    </p>
-                    <ul className="mt-2 space-y-1">
-                        <li>
-                            <strong>Equipo:</strong> {brand || "-"} {model || ""}
-                        </li>
-                        <li>
-                            <strong>Fallas:</strong> {repairTypeLabel || "-"}
-                        </li>
-                        <li>
-                            <strong>Urgencia:</strong> {selectedUrgency?.label || "-"}
-                        </li>
-                        <li>
-                            <strong>Canal:</strong> {selectedContactChannel?.label || "-"}
-                        </li>
-                        <li>
-                            <strong>Sucursal preferida:</strong>{" "}
-                            {preferredBranch ? preferredBranch[0].toUpperCase() + preferredBranch.slice(1) : "-"}
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            }),
         );
+
+        recordLeadInteraction({
+            eventName: "lead_form_submit",
+            ctaName: "budget_wizard_submit",
+            ctaLocation: "presupuesto_reparacion_wizard",
+            ctaVariant: "whatsapp",
+            destination,
+            leadAttemptId,
+            formName: "repair_budget_wizard",
+            formLocation: "presupuesto_reparacion",
+            formVersion: BUDGET_WIZARD_VERSION,
+            stepIndex: 1,
+            stepId: step.id,
+            stepLabel: step.label,
+            totalSteps: BUDGET_WIZARD_STEPS.length,
+            brand: brandValue,
+            model: modelValue,
+            repairType: repairTypeLabel,
+            urgency: DEFAULT_URGENCY,
+            contactChannel: DEFAULT_CONTACT_CHANNEL,
+            contact: "",
+            description: "",
+        });
+
+        window.location.assign(destination);
     }
 
     return (
-        <div ref={wizardRef} className="scroll-mt-24 space-y-5 sm:space-y-6">
-            <p className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-700 dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-300">
-                Te toma menos de 1 minuto. Te respondemos por WhatsApp en hasta 2 horas habiles.
-                Si hace falta revision tecnica, confirmamos diagnostico inicial dentro de 24 horas habiles.
-            </p>
-
-            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5 dark:border-slate-700 dark:bg-slate-900/70">
-                <div className="mb-3 flex items-center justify-between text-xs font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
-                    <span>
-                        Paso {stepIndex + 1} de {BUDGET_WIZARD_STEPS.length}
-                    </span>
-                    <span>{Math.round(progressPercentage)}% completado</span>
-                </div>
-                <div className="h-2 w-full rounded-full bg-slate-200 dark:bg-slate-700">
-                    <div
-                        className="h-2 rounded-full bg-primary transition-all duration-300"
-                        style={{ width: `${progressPercentage}%` }}
-                    />
-                </div>
-                <p className="mt-3 text-base font-bold text-slate-900 sm:hidden dark:text-slate-100">
-                    {BUDGET_WIZARD_STEPS[stepIndex]?.label}
-                </p>
-                <ol className="mt-4 hidden gap-2 sm:grid sm:grid-cols-4">
-                    {BUDGET_WIZARD_STEPS.map((step, index) => {
-                        const active = index === stepIndex;
-                        const done = index < stepIndex;
+        <div className="space-y-6">
+            <fieldset className="space-y-3">
+                <legend className="text-base font-semibold text-slate-900 dark:text-slate-100">
+                    ¿Qué le pasa a tu celular?
+                </legend>
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
+                    {repairOptions.map((option) => {
+                        const selected = repairTypes.includes(option);
 
                         return (
-                            <li
-                                key={step.id}
-                                className={`rounded-xl border px-3 py-2 text-center text-xs font-semibold transition ${
-                                    active
+                            <button
+                                key={option}
+                                type="button"
+                                aria-pressed={selected}
+                                onClick={() => toggleRepairType(option)}
+                                className={`flex min-h-11 items-center justify-between gap-2 rounded-2xl border px-4 py-3 text-sm font-medium transition ${
+                                    selected
                                         ? "border-primary bg-primary/10 text-primary"
-                                        : done
-                                            ? "border-emerald-700 bg-emerald-700/10 text-emerald-800 dark:text-emerald-300"
-                                            : "border-slate-200 bg-slate-50 text-slate-600 dark:border-slate-700 dark:bg-slate-800/40 dark:text-slate-300"
+                                        : "border-slate-200 bg-white text-slate-700 hover:border-primary/40 hover:bg-primary/5 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
                                 }`}
                             >
-                                {step.label}
-                            </li>
+                                <span>{option}</span>
+                                {selected ? <FaCheckCircle aria-hidden /> : null}
+                            </button>
                         );
                     })}
-                </ol>
-            </div>
+                </div>
+            </fieldset>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 dark:border-slate-700 dark:bg-slate-900/70">
-                {renderStepContent()}
-            </div>
+            <label className="block space-y-2 text-base font-semibold text-slate-900 dark:text-slate-100">
+                <span>
+                    ¿Qué modelo es?{" "}
+                    <span className="text-sm font-normal text-slate-500 dark:text-slate-400">(si no sabés, dejalo vacío)</span>
+                </span>
+                <input
+                    type="text"
+                    value={model}
+                    onFocus={markStarted}
+                    onChange={(event) => setModel(event.target.value)}
+                    list="modelos-con-precio"
+                    placeholder="Ej: iPhone 13, Galaxy A54, Moto G54"
+                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base font-normal text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
+                />
+            </label>
+            <datalist id="modelos-con-precio">
+                {quotableModels().map((name) => (
+                    <option key={name} value={name} />
+                ))}
+            </datalist>
+
+            <QuoteEstimate model={model} repairTypes={repairTypes} />
+
+            <BranchPreferencePicker value={preferredBranch} onChange={selectBranch} />
 
             {errorMessage ? (
                 <p
@@ -653,96 +233,28 @@ export default function RepairsForm() {
                 </p>
             ) : null}
 
-            <datalist id="modelos-con-precio">
-                {quotableModels().map((name) => (
-                    <option key={name} value={name} />
-                ))}
-            </datalist>
+            <button
+                type="button"
+                onClick={handleSend}
+                className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-emerald-900/20 transition hover:bg-emerald-800 sm:w-auto"
+            >
+                <FaWhatsapp aria-hidden />
+                Pedir presupuesto por WhatsApp
+            </button>
 
-            <input type="hidden" name="brand" value={brand} />
-            <input type="hidden" name="model" value={model} />
-            {repairTypes.map((repairType) => (
-                <input key={repairType} type="hidden" name="repairType" value={repairType} />
-            ))}
-            <input type="hidden" name="urgency" value={urgency} />
-            <input type="hidden" name="description" value={description} />
-            <input type="hidden" name="contactChannel" value={contactChannel} />
-            <input type="hidden" name="contact" value={contact} />
-            <input type="hidden" name="preferredBranch" value={preferredBranch} />
-            <input type="hidden" name="branchSelectionMethod" value={branchSelectionMethod} />
-            <input
-                type="hidden"
-                name="wizardSource"
-                value={`budget_wizard_${BUDGET_WIZARD_VERSION}`}
-            />
-            <input type="hidden" name="leadAttemptId" value={leadAttemptId} />
-
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                {stepIndex > 0 ? (
-                    <button
-                        type="button"
-                        onClick={handleBack}
-                        className="order-2 inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-slate-300 px-5 py-3 sm:order-none text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-slate-600 dark:text-slate-200"
-                    >
-                        <FaArrowLeft aria-hidden />
-                        Paso anterior
-                    </button>
-                ) : null}
-
-                {stepIndex < LAST_STEP_INDEX ? (
-                    <button
-                        type="button"
-                        onClick={handleNext}
-                        className="order-1 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/20 sm:order-none transition hover:bg-primary/90"
-                    >
-                        Continuar
-                        <FaArrowRight aria-hidden />
-                    </button>
-                ) : (
-                    <button
-                        type="button"
-                        onClick={() => void handleFinalSend()}
-                        disabled={isSubmitting}
-                        className="order-1 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 py-3 sm:order-none text-sm font-semibold text-white shadow-lg shadow-emerald-900/20 transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:opacity-70"
-                    >
-                        <FaWhatsapp aria-hidden />
-                        {isSubmitting
-                            ? "Guardando datos..."
-                            : preferredBranch
-                                ? `Enviar a WhatsApp de ${preferredBranch[0].toUpperCase() + preferredBranch.slice(1)}`
-                                : "Elegí una sucursal"}
-                    </button>
-                )}
-
-                <p className="order-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
-                    Enviamos todo una sola vez y luego abrimos WhatsApp automáticamente.
-                </p>
-            </div>
-
-            <p className="text-xs leading-5 text-slate-500 dark:text-slate-400">
-                Solo usamos esta informacion para responder tu consulta tecnica.
+            <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">
+                Te respondemos en hasta 2 horas hábiles. El precio final se confirma antes de tocar el equipo.
             </p>
         </div>
     );
 }
 
 /**
- * Precio de referencia antes de pedir los datos de contacto. El SERP de
- * "presupuesto" lo ganan cotizadores que devuelven un numero en el momento;
- * el formulario solo prometia una respuesta por WhatsApp.
- *
- * Nunca reemplaza al envio del lead: aparece arriba del boton.
+ * Precio de referencia antes de ir a WhatsApp. El SERP de "presupuesto" lo
+ * ganan cotizadores que devuelven un numero en el momento.
  */
-function QuoteEstimate({
-    brand,
-    model,
-    repairTypes,
-}: {
-    brand: string;
-    model: string;
-    repairTypes: string[];
-}) {
-    const quote = lookupQuote(brand, model, repairTypes);
+function QuoteEstimate({ model, repairTypes }: { model: string; repairTypes: string[] }) {
+    const quote = lookupQuote("", model, repairTypes);
     if (!quote) return null;
 
     const price =
@@ -752,21 +264,13 @@ function QuoteEstimate({
 
     return (
         <div className="rounded-2xl border border-primary/30 bg-primary/5 p-4">
-            <p className="text-xs font-semibold uppercase tracking-wide text-primary">
-                Precio de referencia
-            </p>
-            <p className="mt-1 text-sm text-slate-700 dark:text-slate-200">
-                {quote.label}
-            </p>
-            <p className="mt-1 text-2xl font-bold tabular-nums text-slate-900 dark:text-white">
-                {price}
-            </p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-primary">Precio de referencia</p>
+            <p className="mt-1 text-sm text-slate-700 dark:text-slate-200">{quote.label}</p>
+            <p className="mt-1 text-2xl font-bold tabular-nums text-slate-900 dark:text-white">{price}</p>
             <p className="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">
                 {quote.precision === "exact"
-                    ? "Precio aproximado de lista para ese modelo: puede variar segun el estado del equipo y el repuesto disponible. Sale en 2 a 4 horas, con garantia escrita de 90 dias."
-                    : "Precio aproximado: es un rango por gama, no un valor cerrado."}{" "}
-                Te confirmamos el numero exacto tras el diagnostico, antes de
-                intervenir. Segui con el formulario y te lo cerramos por WhatsApp.
+                    ? "Sale en 2 a 4 horas, con garantía escrita de 90 días. Puede variar según el estado del equipo."
+                    : "Es un rango por gama, no un valor cerrado."}
             </p>
         </div>
     );

@@ -1,11 +1,7 @@
-export const BUDGET_WIZARD_VERSION = "v2";
+// v3: una sola pantalla. En v2 (4 pasos) la mitad abandonaba en el primero.
+export const BUDGET_WIZARD_VERSION = "v3";
 
-export const BUDGET_WIZARD_STEPS = [
-  { id: "device", label: "Equipo" },
-  { id: "issue", label: "Falla" },
-  { id: "urgency", label: "Urgencia" },
-  { id: "contact", label: "Contacto" },
-] as const;
+export const BUDGET_WIZARD_STEPS = [{ id: "quick", label: "Presupuesto" }] as const;
 
 export type BudgetWizardStepId = (typeof BUDGET_WIZARD_STEPS)[number]["id"];
 

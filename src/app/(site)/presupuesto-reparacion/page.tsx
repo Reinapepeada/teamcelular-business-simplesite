@@ -1,27 +1,13 @@
 import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import RepairsForm from "@/components/forms/RepairsForm";
-import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 import { BUDGET_RESPONSE_MESSAGE, REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import GuideByline from "@/components/seo/GuideByline";
 import { PRICES_UPDATED } from "@/lib/repairPrices";
-import {
-    FaBatteryHalf,
-    FaCamera,
-    FaCheckCircle,
-    FaClock,
-    FaClipboardList,
-    FaMapMarkerAlt,
-    FaMobileAlt,
-    FaPhoneAlt,
-    FaShieldAlt,
-    FaSmile,
-    FaTools,
-    FaTruck,
-    FaWhatsapp,
-} from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
+import { BsCheckCircleFill } from "react-icons/bs";
 
 const SITE_URL = getSiteUrl();
 const PAGE_URL = `${SITE_URL}/presupuesto-reparacion`;
@@ -54,115 +40,31 @@ export const metadata = buildWebsiteMetadata({
 
 const processSteps = [
     {
-        icon: FaClipboardList,
-        title: "Completa el formulario",
-        description:
-            "Contanos la marca, modelo y problema del equipo. Cuanto más contexto nos des, mejor.",
-        timing: "2 minutos",
+        title: "Nos contás qué le pasa",
+        description: "Tocás la falla y, si lo sabés, el modelo. Se abre WhatsApp con el mensaje listo.",
     },
     {
-        icon: FaClock,
-        title: "Recibí tu diagnóstico inicial",
+        title: "Te pasamos el precio",
         description: BUDGET_RESPONSE_MESSAGE,
-        timing: "2h / 24h",
     },
     {
-        icon: FaTools,
-        title: "Traelo o coordinamos retiro",
+        title: "Lo traés y te lo llevás reparado",
         description:
-            "Podés acercarte a cualquiera de nuestras sucursales en CABA — Recoleta (Paraguay 2451) o Belgrano (Amenábar 2032) — o coordinar retiro según disponibilidad.",
-        timing: "Mismo día",
+            "Recoleta (Paraguay 2451) o Belgrano (Amenábar 2032), sin turno. Pantalla y batería salen en 2 a 4 horas, con garantía escrita de 90 días.",
     },
-    {
-        icon: FaSmile,
-        title: "Retirá con garantía",
-        description:
-            "Entregamos el equipo probado y con garantía escrita de 90 días sobre trabajo y repuesto instalado.",
-        timing: "24-72 hs",
-    },
+];
+
+const stats = [
+    { value: "2 h", label: "para responderte" },
+    { value: "2-4 h", label: "pantalla o batería" },
+    { value: "90 días", label: "garantía escrita" },
+    { value: "10+ años", label: "reparando en CABA" },
 ];
 
 const promises = [
-    {
-        icon: FaShieldAlt,
-        title: "Garantía escrita",
-        description: "Todos los trabajos incluyen respaldo y documentación.",
-    },
-    {
-        icon: FaCheckCircle,
-        title: "Repuestos premium",
-        description:
-            "Trabajamos con originales y alternativas de primera línea según el caso.",
-    },
-    {
-        icon: FaTruck,
-        title: "Opciones de retiro",
-        description: "Retiro y entrega express en zonas cercanas a coordinar.",
-    },
-];
-
-const quickResponseFaqs = [
-    {
-        question: "¿En cuánto tiempo confirman el presupuesto?",
-        answer: BUDGET_RESPONSE_MESSAGE,
-    },
-    {
-        question: "¿El retiro en CABA tiene costo?",
-        answer:
-            "Se coordina según zona y disponibilidad. Para reparaciones confirmadas puede quedar bonificado.",
-    },
-    {
-        question: "¿Cómo se paga la seña?",
-        answer:
-            "Podés transferir o pedir link de pago. El saldo se abona al retirar o contra entrega.",
-    },
-];
-
-const popularRepairs = [
-    {
-        icon: FaMobileAlt,
-        title: "Pantalla dañada",
-        details: "Display, touch, vidrio y marcos originales u OLED premium.",
-    },
-    {
-        icon: FaBatteryHalf,
-        title: "Batería y carga",
-        details: "Cambio de batería, pin de carga, limpieza de puertos y humedad.",
-    },
-    {
-        icon: FaCamera,
-        title: "Cámaras y sensores",
-        details: "Reemplazo de cámaras, flex, sensores y calibraciones.",
-    },
-    {
-        icon: FaTools,
-        title: "Microelectrónica",
-        details: "Reballing BGA, fallas de placa y recuperación avanzada.",
-    },
-];
-
-const supportChannels = [
-    {
-        icon: FaWhatsapp,
-        title: "Atención inmediata",
-        description: "+54 11 5103-4595",
-        href: "https://wa.me/5491151034595?text=Hola!%20Necesito%20un%20presupuesto",
-        external: true,
-    },
-    {
-        icon: FaPhoneAlt,
-        title: "Consultas técnicas",
-        description: "Lunes a viernes de 10:30 a 18:00",
-        href: "tel:+5491151034595",
-        external: true,
-    },
-    {
-        icon: FaMapMarkerAlt,
-        title: "Visitanos",
-        description: "Recoleta (Paraguay 2451) · Belgrano (Amenábar 2032)",
-        href: "/sucursales",
-        external: false,
-    },
+    ["Sin compromiso", "Si no te conviene el precio, no pagás nada por preguntar."],
+    ["Sin turno", "Lunes a viernes de 10:30 a 18:00 en las dos sucursales."],
+    ["Precio antes de tocarlo", "Nunca intervenimos el equipo sin tu confirmación."],
 ];
 
 const faqs = [
@@ -172,23 +74,22 @@ const faqs = [
     },
     {
         question: "¿La revisión técnica tiene costo?",
-        answer: `Si. ${REVIEW_COST_MESSAGE} Te lo informamos antes de ingresar el equipo.`,
+        answer: `Sí. ${REVIEW_COST_MESSAGE} Te lo informamos antes de ingresar el equipo.`,
     },
     {
         question: "¿Qué garantía ofrecen?",
         answer: WARRANTY_SCOPE_MESSAGE,
     },
     {
-        question: "¿Puedo enviar fotos o videos?",
-        answer:
-            "Sí. Después de completar el formulario seguimos por WhatsApp si hace falta más contexto.",
+        question: "¿Puedo mandar fotos o videos de la falla?",
+        answer: "Sí. Una vez que se abre WhatsApp podés mandar fotos, videos o audios con lo que le pasa al equipo.",
     },
 ];
 
 export default function PresupuestoReparacionPage() {
     return (
         <section className="w-full">
-            <div className="mx-auto flex w-full max-w-[100rem] flex-col gap-8 px-4 sm:gap-12 py-8 sm:px-6 sm:py-12 lg:px-8">
+            <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-6 sm:gap-14 sm:px-6 sm:py-10 lg:px-8">
                 <BreadcrumbJsonLd
                     items={[
                         { name: "Inicio", url: `${SITE_URL}/` },
@@ -201,366 +102,116 @@ export default function PresupuestoReparacionPage() {
                         Inicio
                     </Link>
                     <span>/</span>
-                    <span className="font-semibold text-slate-900 dark:text-slate-100">
-                        Presupuesto de reparación
-                    </span>
+                    <span className="font-semibold text-slate-900 dark:text-slate-100">Presupuesto</span>
                 </nav>
 
-                <header className="grid gap-10 rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-5 shadow-lg sm:p-8 lg:grid-cols-[1.05fr_0.95fr] lg:p-12">
-                    <div>
-                        <span className="inline-flex rounded-full bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
-                            Presupuesto claro y sin vueltas
-                        </span>
-                        <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
+                <header
+                    id="solicitar-presupuesto"
+                    className="grid scroll-mt-24 items-start gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-x-12 lg:gap-y-6"
+                >
+                    <div className="lg:col-start-1">
+                        <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-slate-100 sm:text-4xl md:text-5xl">
                             Presupuesto de reparación de celulares en CABA
                         </h1>
-                        <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
-                            Team Celular tiene dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2032, Belgrano</strong>. Respondemos presupuestos en hasta 2 h por WhatsApp. Pantalla, batería, carga y microelectrónica con garantía escrita de 90 días sobre trabajo y repuesto.
-                        </p>
-                        <div className="mt-4">
-                          <GuideByline modifiedTime={PRICES_UPDATED} tone="light" />
-                        </div>
-
-                        <ul className="mt-6 space-y-3 text-slate-700 dark:text-slate-300">
-                            <li className="flex items-start gap-3">
-                                <FaCheckCircle className="mt-1 text-primary" />
-                                <span>
-                                    Revisión técnica con costo informado antes de
-                                    tocar el equipo. El valor suele variar entre
-                                    ARS 15.000 y ARS 25.000.
-                                </span>
-                            </li>
-                            <li className="flex items-start gap-3">
-                                <FaCheckCircle className="mt-1 text-primary" />
-                                <span>
-                                    Repuestos originales o premium según tu caso
-                                    y objetivo.
-                                </span>
-                            </li>
-                            <li className="flex items-start gap-3">
-                                <FaCheckCircle className="mt-1 text-primary" />
-                                <span>
-                                    Seguimiento comercial y técnico por WhatsApp.
-                                </span>
-                            </li>
-                        </ul>
-
-                        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                            <TrackedCtaLink
-                                href="#solicitar-presupuesto"
-                                ctaName="budget_hero_form"
-                                ctaLocation="presupuesto_hero"
-                                ctaVariant="primary"
-                                className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-primary/90"
-                            >
-                                Pedir presupuesto ahora
-                            </TrackedCtaLink>
-                            <BranchWhatsAppButton
-                                ctaName="budget_hero_whatsapp"
-                                ctaLocation="presupuesto_hero"
-                                message="Hola! Quiero pedir presupuesto para mi equipo."
-                                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-primary px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10"
-                            >
-                                <FaWhatsapp aria-hidden />
-                                Hablar por WhatsApp
-                            </BranchWhatsAppButton>
-                        </div>
-
-                        <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">
-                            Respuesta comercial de lunes a viernes de 10:30 a 18:00.
+                        <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-400">
+                            Decinos qué le pasa a tu celular y te pasamos el precio por WhatsApp en hasta 2 horas.
+                            Team Celular repara en{" "}
+                            <strong className="text-slate-900 dark:text-slate-100">Paraguay 2451, Recoleta</strong> y{" "}
+                            <strong className="text-slate-900 dark:text-slate-100">Amenábar 2032, Belgrano</strong>, con
+                            garantía escrita de 90 días.
                         </p>
                     </div>
 
-                    <aside className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-5 sm:p-8">
-                        <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-                            Por qué te conviene pedirlo online
-                        </h2>
-                        <div className="mt-6 space-y-6">
-                            {[
-                                {
-                                    icon: FaClock,
-                                    title: "Tiempo de respuesta",
-                                    value: "Hasta 2 horas habiles",
-                                    description: BUDGET_RESPONSE_MESSAGE,
-                                },
-                                {
-                                    icon: FaShieldAlt,
-                                    title: "Garantía",
-                                    value: "90 días escrita",
-                                    description: WARRANTY_SCOPE_MESSAGE,
-                                },
-                                {
-                                    icon: FaSmile,
-                                    title: "Confianza",
-                                    value: "Reseñas verificables",
-                                    description:
-                                        "Te mostramos experiencia real de laboratorio y clientes que ya pasaron por acá.",
-                                },
-                            ].map((item) => {
-                                const Icon = item.icon;
-                                return (
-                                    <div key={item.title} className="flex gap-4">
-                                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-                                            <Icon className="text-xl" />
-                                        </div>
-                                        <div>
-                                            <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">
-                                                {item.title}
-                                            </p>
-                                            <p className="text-xl font-bold text-slate-900 dark:text-slate-100">
-                                                {item.value}
-                                            </p>
-                                            <p className="text-sm text-slate-600 dark:text-slate-400">
-                                                {item.description}
-                                            </p>
-                                        </div>
-                                    </div>
-                                );
-                            })}
+                    <div className="order-last lg:order-none lg:col-start-1">
+                        <ul className="space-y-3">
+                            {promises.map(([title, text]) => (
+                                <li key={title} className="flex items-start gap-3">
+                                    <BsCheckCircleFill
+                                        className="mt-1 shrink-0 text-emerald-600 dark:text-emerald-400"
+                                        aria-hidden
+                                    />
+                                    <span className="text-slate-700 dark:text-slate-300">
+                                        <strong className="text-slate-900 dark:text-slate-100">{title}.</strong> {text}
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+                        <div className="mt-6">
+                            <GuideByline modifiedTime={PRICES_UPDATED} tone="light" />
                         </div>
-                    </aside>
+                    </div>
+
+                    <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-xl lg:col-start-2 lg:row-span-2 lg:row-start-1 dark:border-slate-700/70 dark:bg-slate-900 sm:p-8">
+                        <p className="mb-5 text-sm font-semibold uppercase tracking-[0.14em] text-primary">
+                            Te toma 20 segundos
+                        </p>
+                        <RepairsForm />
+                    </article>
                 </header>
 
-                <div className="flex flex-col gap-8 sm:gap-12">
-                <section
-                    id="solicitar-presupuesto"
-                    className="order-1 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]"
-                >
-                    <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-5 shadow-xl sm:p-8">
-                        <div className="mb-6">
-                            <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
-                                Contanos la falla de tu equipo
-                            </h2>
-                            <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
-                                Cuanto más contexto envíes, más preciso será el
-                                presupuesto inicial.
-                            </p>
+                <dl className="grid grid-cols-2 gap-y-6 border-y border-slate-200 py-6 dark:border-slate-700/70 md:grid-cols-4">
+                    {stats.map((stat) => (
+                        <div key={stat.label} className="flex flex-col-reverse text-center">
+                            <dt className="text-sm text-slate-600 dark:text-slate-400">{stat.label}</dt>
+                            <dd className="text-3xl font-black text-slate-900 dark:text-slate-100">{stat.value}</dd>
                         </div>
-                        <RepairsForm />
-                        <p className="mt-6 text-xs leading-5 text-slate-500 dark:text-slate-400">
-                            Al enviar tus datos aceptás que te contactemos por
-                            los medios proporcionados. No compartimos información
-                            con terceros.
-                        </p>
-                    </article>
+                    ))}
+                </dl>
 
-                    <aside className="space-y-6">
-                        <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-5 shadow-md sm:p-6">
-                            <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">
-                                ¿Necesitás ayuda urgente?
-                            </h2>
-                            <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
-                                Elegí el canal que prefieras y un especialista te
-                                ayuda a coordinar retiro o visita al laboratorio.
-                            </p>
-                            <div className="mt-5 space-y-3">
-                                {supportChannels.map((channel) => {
-                                    const Icon = channel.icon;
-                                    return (
-                                        <TrackedCtaLink
-                                            key={channel.title}
-                                            href={channel.href}
-                                            ctaName={`budget_support_${channel.title.toLowerCase().replace(/\s+/g, "_")}`}
-                                            ctaLocation="presupuesto_support"
-                                            ctaVariant={
-                                                channel.title.includes("WhatsApp")
-                                                    ? "whatsapp"
-                                                    : channel.href.startsWith("tel:")
-                                                        ? "phone"
-                                                        : "secondary"
-                                            }
-                                            external={channel.external}
-                                            target={
-                                                channel.external ? "_blank" : undefined
-                                            }
-                                            className="flex min-h-14 items-center gap-3 rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 px-4 py-3 transition hover:border-primary/40 hover:bg-primary/5"
-                                        >
-                                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
-                                                <Icon className="text-lg" />
-                                            </div>
-                                            <div>
-                                                <p className="font-semibold text-slate-900 dark:text-slate-100">
-                                                    {channel.title}
-                                                </p>
-                                                <p className="text-xs text-slate-600 dark:text-slate-400">
-                                                    {channel.description}
-                                                </p>
-                                            </div>
-                                        </TrackedCtaLink>
-                                    );
-                                })}
-                            </div>
-                        </article>
-
-                        <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-5 shadow-md sm:p-6">
-                            <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">
-                                Lo que te prometemos
-                            </h2>
-                            <div className="mt-5 space-y-4">
-                                {promises.map((promise) => {
-                                    const Icon = promise.icon;
-                                    return (
-                                        <div key={promise.title} className="flex gap-3">
-                                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
-                                                <Icon className="text-lg" />
-                                            </div>
-                                            <div>
-                                                <p className="font-semibold text-slate-900 dark:text-slate-100">
-                                                    {promise.title}
-                                                </p>
-                                                <p className="text-sm text-slate-600 dark:text-slate-400">
-                                                    {promise.description}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </article>
-                    </aside>
-                </section>
-
-                <section className="order-2 space-y-6">
-                    <div className="text-center">
-                        <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
-                            ¿Cómo funciona el servicio de presupuesto?
-                        </h2>
-                        <p className="mt-2 text-lg text-slate-600 dark:text-slate-400">
-                            Un proceso simple para pedir presupuesto y avanzar
-                            sin perder tiempo.
-                        </p>
-                    </div>
-                    <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-                        {processSteps.map((step) => {
-                            const Icon = step.icon;
-                            return (
-                                <article
-                                    key={step.title}
-                                    className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-5 shadow-md sm:p-6"
-                                >
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-                                            <Icon className="text-xl" />
-                                        </div>
-                                        <span className="rounded-full bg-primary px-3 py-1 text-xs font-semibold text-white">
-                                            {step.timing}
-                                        </span>
-                                    </div>
-                                    <h3 className="mt-4 text-lg font-bold text-slate-900 dark:text-slate-100">
-                                        {step.title}
-                                    </h3>
-                                    <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
+                    <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 sm:text-3xl">
+                        ¿Qué pasa después de pedir el presupuesto?
+                    </h2>
+                    <ol className="divide-y divide-slate-200 dark:divide-slate-700/70">
+                        {processSteps.map((step, index) => (
+                            <li key={step.title} className="flex gap-5 py-5 first:pt-0">
+                                <span className="text-2xl font-black tabular-nums text-primary">
+                                    {String(index + 1).padStart(2, "0")}
+                                </span>
+                                <div>
+                                    <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">{step.title}</h3>
+                                    <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">
                                         {step.description}
                                     </p>
-                                </article>
-                            );
-                        })}
-                    </div>
-                </section>
-
-                <section className="order-3 rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-5 shadow-md sm:p-8">
-                    <h2 className="text-center text-2xl font-bold text-slate-900 dark:text-slate-100">
-                        Respuestas rápidas
-                    </h2>
-                    <div className="mt-6 grid gap-6 md:grid-cols-3">
-                        {quickResponseFaqs.map((item) => (
-                            <article
-                                key={item.question}
-                                className="rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-5"
-                            >
-                                <h3 className="font-semibold text-slate-900 dark:text-slate-100">
-                                    {item.question}
-                                </h3>
-                                <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
-                                    {item.answer}
-                                </p>
-                            </article>
+                                </div>
+                            </li>
                         ))}
-                    </div>
-                </section>
-                </div>
-
-                <section className="space-y-6">
-                    <div className="text-center">
-                        <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
-                            ¿Qué reparaciones hacemos más?
-                        </h2>
-                        <p className="mt-2 text-lg text-slate-600 dark:text-slate-400">
-                            Algunas de las consultas que recibimos todos los días
-                            en el laboratorio.
-                        </p>
-                    </div>
-                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-                        {popularRepairs.map((repair) => {
-                            const Icon = repair.icon;
-                            return (
-                                <article
-                                    key={repair.title}
-                                    className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-5 shadow-md sm:p-6"
-                                >
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-                                        <Icon className="text-xl" />
-                                    </div>
-                                    <h3 className="mt-4 text-lg font-bold text-slate-900 dark:text-slate-100">
-                                        {repair.title}
-                                    </h3>
-                                    <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
-                                        {repair.details}
-                                    </p>
-                                </article>
-                            );
-                        })}
-                    </div>
+                    </ol>
                 </section>
 
-                <section className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-5 shadow-md sm:p-8">
-                    <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-slate-100">
+                <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
+                    <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 sm:text-3xl">
                         Preguntas frecuentes
                     </h2>
-                    <div className="mt-6 grid gap-6 md:grid-cols-2">
+                    <div className="divide-y divide-slate-200 dark:divide-slate-700/70">
                         {faqs.map((faq) => (
-                            <article
-                                key={faq.question}
-                                className="rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-5"
-                            >
-                                <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+                            <details key={faq.question} className="group py-4 first:pt-0">
+                                <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold text-slate-900 dark:text-slate-100">
                                     {faq.question}
-                                </h3>
-                                <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
-                                    {faq.answer}
-                                </p>
-                            </article>
+                                    <span aria-hidden className="text-xl text-primary transition group-open:rotate-45">
+                                        +
+                                    </span>
+                                </summary>
+                                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">{faq.answer}</p>
+                            </details>
                         ))}
                     </div>
                 </section>
 
-                <section className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-10 text-center shadow-lg">
-                    <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
-                        ¿Listo para devolverle la vida a tu celular?
-                    </h2>
-                    <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400">
-                        Completa el formulario y te respondemos por WhatsApp en hasta 2 horas habiles.
-                    </p>
-                    <div className="mt-6 flex flex-wrap justify-center gap-4">
-                        <TrackedCtaLink
-                            href="#solicitar-presupuesto"
-                            ctaName="budget_bottom_form"
-                            ctaLocation="presupuesto_bottom"
-                            ctaVariant="primary"
-                            className="inline-flex min-h-12 items-center justify-center rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-secondary/90"
-                        >
-                            Empezar ahora
-                        </TrackedCtaLink>
-                        <BranchWhatsAppButton
-                            ctaName="budget_bottom_whatsapp"
-                            ctaLocation="presupuesto_bottom"
-                            message="Hola! Necesito un presupuesto."
-                            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-secondary px-6 py-3 text-sm font-semibold text-secondary transition hover:bg-secondary/10"
-                        >
-                            <FaWhatsapp aria-hidden />
-                            WhatsApp directo
-                        </BranchWhatsAppButton>
+                <section className="flex flex-col items-start gap-5 rounded-3xl bg-slate-900 p-6 text-white dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between sm:p-10">
+                    <div>
+                        <h2 className="text-2xl font-bold sm:text-3xl">¿Preferís escribirnos directo?</h2>
+                        <p className="mt-2 text-slate-300">Mandanos una foto del equipo y te decimos cuánto sale.</p>
                     </div>
+                    <BranchWhatsAppButton
+                        ctaName="budget_bottom_whatsapp"
+                        ctaLocation="presupuesto_bottom"
+                        message="Hola! Necesito un presupuesto."
+                        className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-emerald-500"
+                    >
+                        <FaWhatsapp aria-hidden />
+                        Escribir por WhatsApp
+                    </BranchWhatsAppButton>
                 </section>
 
                 <script
@@ -637,7 +288,3 @@ export default function PresupuestoReparacionPage() {
         </section>
     );
 }
-
-
-
-
