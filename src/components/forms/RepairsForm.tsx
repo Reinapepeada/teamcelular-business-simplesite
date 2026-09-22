@@ -160,6 +160,15 @@ export default function RepairsForm() {
         );
     }, [stepIndex]);
 
+    // Ref con los ultimos valores: si el effect dependiera de ellos, su cleanup
+    // dispararia un abandono falso cada vez que el usuario cambia una opcion.
+    const abandonExtraRef = useRef({ repair_type: "sin_definir", urgency, contact_channel: contactChannel });
+    abandonExtraRef.current = {
+        repair_type: repairTypeLabel || "sin_definir",
+        urgency,
+        contact_channel: contactChannel,
+    };
+
     useEffect(() => {
         return () => {
             if (startedRef.current && !submittedRef.current) {
@@ -167,16 +176,12 @@ export default function RepairsForm() {
                     BUDGET_FUNNEL_EVENTS.abandoned,
                     buildBudgetFunnelPayload({
                         stepIndex: stepRef.current,
-                        extra: {
-                            repair_type: repairTypeLabel || "sin_definir",
-                            urgency,
-                            contact_channel: contactChannel,
-                        },
+                        extra: abandonExtraRef.current,
                     }),
                 );
             }
         };
-    }, [contactChannel, repairTypeLabel, urgency]);
+    }, []);
 
     function validateStep(index: number): string | null {
         if (index === 0 && (!brand.trim() || !model.trim())) {
