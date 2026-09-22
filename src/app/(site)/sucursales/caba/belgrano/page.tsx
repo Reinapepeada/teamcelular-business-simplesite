@@ -140,7 +140,7 @@ export default function SucursalBelgranoPage() {
       { "@type": "AdministrativeArea", name: "Ciudad Autonoma de Buenos Aires" },
     ],
     sameAs: [
-      "https://www.instagram.com/teamcelular.arg/",
+      "https://www.instagram.com/teamcelular.ar/",
       "https://www.facebook.com/TeamCelular/",
     ],
   };

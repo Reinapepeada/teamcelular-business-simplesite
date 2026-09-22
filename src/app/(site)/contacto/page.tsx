@@ -88,7 +88,7 @@ const socialMedia = [
         icon: FaInstagram,
         name: "Instagram",
         handle: "@teamcelular.arg",
-        href: "https://www.instagram.com/teamcelular.arg/",
+        href: "https://www.instagram.com/teamcelular.ar/",
     },
     {
         icon: FaFacebook,

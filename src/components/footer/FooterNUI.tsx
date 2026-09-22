@@ -126,7 +126,7 @@ export default function FooterNUI() {
                 <BsWhatsapp size={22} />
               </BranchWhatsAppButton>
               <TrackedCtaLink
-                href="https://www.instagram.com/teamcelular.arg/"
+                href="https://www.instagram.com/teamcelular.ar/"
                 ctaName="footer_instagram"
                 ctaLocation="footer_socials"
                 ctaVariant="instagram"

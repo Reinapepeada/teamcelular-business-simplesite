@@ -43,7 +43,7 @@ export const BUSINESS_PROFILE = {
   responseWindow: "hasta 2 horas hábiles por WhatsApp",
   reviewCostRange: "ARS 15.000 a ARS 25.000",
   sameAs: [
-    "https://www.instagram.com/teamcelular.arg/",
+    "https://www.instagram.com/teamcelular.ar/",
     "https://www.facebook.com/TeamCelular/",
     "https://www.linkedin.com/company/teamcelular/",
     "https://maps.app.goo.gl/krFJfjDA4CuR83BK9",

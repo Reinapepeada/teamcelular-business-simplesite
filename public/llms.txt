@@ -92,8 +92,8 @@ Idioma principal: es-AR
 
 ## Entity Profiles
 
-- [Instagram](https://www.instagram.com/teamcelular)
-- [Facebook](https://www.facebook.com/teamcelular.ok)
+- [Instagram](https://www.instagram.com/teamcelular.ar/)
+- [Facebook](https://www.facebook.com/TeamCelular/)
 - [LinkedIn](https://www.linkedin.com/company/teamcelular)
 - [Google Maps - Recoleta](https://maps.app.goo.gl/SB33yrhZQvM4RMr29)
 - [WhatsApp](https://wa.me/5491151034595)
