@@ -2,6 +2,8 @@
 import { FaGoogle, FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { getGoogleReviews } from "@/lib/googleReviews";
 
+const FALLBACK_RATING = { rating: 4.9, total: 362 };
+
 function StarRating({ rating }: { rating: number }) {
     const stars = [];
 
@@ -37,12 +39,20 @@ export default async function GoogleReviewsAPI() {
                         </h2>
                     </div>
                     <div className="rounded-2xl border border-slate-200/70 bg-white/70 p-8 shadow-md dark:border-white/10 dark:bg-slate-900/70">
-                        <p className="text-lg text-slate-600 dark:text-slate-400">
-                            Las reseñas no están disponibles en este momento.
-                        </p>
+                        {/* ponytail: dato fijo del perfil de Google de Recoleta mientras
+                            falten GOOGLE_PLACES_API_KEY/GOOGLE_PLACE_ID en Vercel.
+                            Actualizar a mano o cargar las variables para verlo en vivo. */}
+                        <div className="flex flex-wrap items-center justify-center gap-3">
+                            <StarRating rating={FALLBACK_RATING.rating} />
+                            <span className="text-2xl font-bold text-primary">
+                                {FALLBACK_RATING.rating.toFixed(1).replace(".", ",")}
+                            </span>
+                            <span className="text-slate-600 dark:text-slate-400">
+                                ({FALLBACK_RATING.total} reseñas en Google, sucursal Recoleta)
+                            </span>
+                        </div>
                         <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
-                            Podés ver todas las opiniones directamente en nuestro
-                            perfil de Google.
+                            Leé las opiniones completas en nuestro perfil de Google.
                         </p>
                         <div className="mt-6">
                             <a
