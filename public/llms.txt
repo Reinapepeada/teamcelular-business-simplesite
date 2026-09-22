@@ -60,6 +60,7 @@ Idioma principal: es-AR
 ## Precios de iPhone por modelo
 
 - [iPhone 11](https://teamcelular.com/reparaciones/iphone/11), [iPhone 12](https://teamcelular.com/reparaciones/iphone/12), [iPhone 13](https://teamcelular.com/reparaciones/iphone/13), [iPhone 13 mini](https://teamcelular.com/reparaciones/iphone/13-mini), [iPhone 13 Pro](https://teamcelular.com/reparaciones/iphone/13-pro), [iPhone 14](https://teamcelular.com/reparaciones/iphone/14), [iPhone 14 Pro](https://teamcelular.com/reparaciones/iphone/14-pro), [iPhone 14 Pro Max](https://teamcelular.com/reparaciones/iphone/14-pro-max): precio de pantalla y batería, tiempo y garantía.
+- [Tabla completa iPhone 11 a 17 Pro Max](https://teamcelular.com/guias/reparacion-iphone-buenos-aires#costos-reparacion-iphone): precio de pantalla y batería de los 26 modelos, incluidos iPhone 15, 16 y 17.
 - [Laboratorio](https://teamcelular.com/lab): equipamiento y trabajos de microelectrónica.
 
 ## Guias por Marcas No Masivas

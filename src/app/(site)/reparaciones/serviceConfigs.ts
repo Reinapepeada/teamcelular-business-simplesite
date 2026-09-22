@@ -1,4 +1,9 @@
 import type { ServiceLandingConfig } from "./serviceLanding";
+import { BRAND_REPAIR_PRICES, formatArsPrice } from "@/lib/repairPrices";
+import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
+
+// Precios del primer parrafo de cambio de pantalla: misma fuente que las tablas.
+const IPHONE_13_SCREEN = IPHONE_MODELS.find((m) => m.slug === "13")?.screen ?? 249900;
 
 export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
   "cambio-bateria-caba": {
@@ -82,7 +87,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "touch no responde celular",
     ],
     intro:
-      "Team Celular, en Paraguay 2451 Recoleta CABA, cambia pantallas con prueba funcional completa y garantía escrita de 90 días. Si el equipo tiene vidrio roto, líneas, manchas o touch sin respuesta, verificamos módulo, sensores y cámaras antes de darte el número.",
+      `Team Celular, en Paraguay 2451 Recoleta CABA, cambia pantallas en 2 a 4 horas con garantía escrita de 90 días. En un iPhone 13 el cambio cuesta ${formatArsPrice(IPHONE_13_SCREEN)}; en Samsung Galaxy A va desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[0].from)} y en Motorola Moto G desde ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[0].from)}. Si hay vidrio roto, líneas, manchas o touch sin respuesta, verificamos módulo, sensores y cámaras antes de darte el número.`,
     whatsappText:
       "Hola! Quiero un presupuesto para cambio de pantalla en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de pantalla (CABA)",
@@ -96,8 +101,8 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
         desc: "Probamos brillo, touch, cámaras, sensores y carga antes de entregarte el equipo. Si algo no cierra, lo resolvemos antes de que te vayas.",
       },
       {
-        title: "Repuestos premium",
-        desc: "Te explicamos la diferencia entre opciones de módulo y elegís con información real, no con promesas genéricas.",
+        title: "Siempre módulo completo",
+        desc: "Cambiamos el módulo entero (vidrio, táctil y display). Separar solo el vidrio tiene riesgo y cuesta casi lo mismo. Te explicamos las calidades de módulo disponibles antes de elegir.",
       },
       {
         title: "Costo claro antes de abrir",

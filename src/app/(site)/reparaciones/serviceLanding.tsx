@@ -440,7 +440,7 @@ export default function ServiceLandingPage({
           <aside className="md:col-span-2">
             <div className="rounded-2xl border border-white/20 bg-black/25 p-5 backdrop-blur-md">
               <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-white/75">
-                Confianza local
+                ¿Dónde reparamos?
               </h2>
               <ul className="mt-4 space-y-3 text-sm text-white/90">
                 <li className="flex items-start gap-3">
