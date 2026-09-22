@@ -83,47 +83,47 @@ const GUIDE_SIGNAL_MAP: Array<{ token: string; guide: ZoneRelatedGuide }> = [
     token: "pantalla",
     guide: {
       href: "/guias/reparacion-pantalla-celular",
-      title: "Guia de pantalla",
-      description: "Como validar dano de modulo y evitar reemplazos de baja duracion.",
+      title: "Guía de pantalla",
+      description: "Cómo validar el daño del módulo y evitar reemplazos que duran poco.",
     },
   },
   {
     token: "bateria",
     guide: {
       href: "/guias/cambio-bateria-celular",
-      title: "Guia de bateria",
-      description: "Senales reales de desgaste y recomendaciones por tipo de uso.",
+      title: "Guía de batería",
+      description: "Señales reales de desgaste y recomendaciones por tipo de uso.",
     },
   },
   {
     token: "carga",
     guide: {
       href: "/guias/reparacion-samsung-buenos-aires",
-      title: "Guia Samsung",
-      description: "Casos frecuentes de USB-C, carga intermitente y diagnostico tecnico.",
+      title: "Guía Samsung",
+      description: "Casos frecuentes de USB-C, carga intermitente y diagnóstico técnico.",
     },
   },
   {
     token: "pin",
     guide: {
       href: "/guias/reparacion-xiaomi-buenos-aires",
-      title: "Guia Xiaomi",
-      description: "Referencia util para fallas de carga en equipos de uso intensivo.",
+      title: "Guía Xiaomi",
+      description: "Referencia útil para fallas de carga en equipos de uso intensivo.",
     },
   },
   {
     token: "placa",
     guide: {
       href: "/guias/microelectronica-reballing-caba",
-      title: "Guia de microelectronica",
-      description: "Cuando conviene revision de placa y como se evalua viabilidad.",
+      title: "Guía de microelectrónica",
+      description: "Cuándo conviene revisar la placa y cómo se evalúa si tiene arreglo.",
     },
   },
   {
     token: "microelectronica",
     guide: {
       href: "/guias/microelectronica-reballing-caba",
-      title: "Guia de microelectronica",
+      title: "Guía de microelectrónica",
       description: "Proceso de laboratorio para equipos que no encienden o reinician.",
     },
   },
@@ -131,8 +131,8 @@ const GUIDE_SIGNAL_MAP: Array<{ token: string; guide: ZoneRelatedGuide }> = [
     token: "diagnostico",
     guide: {
       href: "/guias/mantenimiento-preventivo-celulares",
-      title: "Guia de mantenimiento",
-      description: "Checklist para reducir fallas repetidas y extender vida util.",
+      title: "Guía de mantenimiento",
+      description: "Checklist para reducir fallas repetidas y extender la vida útil.",
     },
   },
 ];
@@ -140,18 +140,18 @@ const GUIDE_SIGNAL_MAP: Array<{ token: string; guide: ZoneRelatedGuide }> = [
 const GUIDE_FALLBACK: ZoneRelatedGuide[] = [
   {
     href: "/guias/reparacion-iphone-buenos-aires",
-    title: "Guia iPhone",
-    description: "Escenarios reales de reparacion en equipos Apple en CABA.",
+    title: "Guía iPhone",
+    description: "Casos reales de reparación de equipos Apple en CABA.",
   },
   {
     href: "/guias/reparacion-samsung-buenos-aires",
-    title: "Guia Samsung",
-    description: "Fallas comunes en Galaxy y criterios de reparacion por prioridad.",
+    title: "Guía Samsung",
+    description: "Fallas comunes en Galaxy y qué reparar primero.",
   },
   {
     href: "/guias/reparacion-xiaomi-buenos-aires",
-    title: "Guia Xiaomi",
-    description: "Diagnostico practico para Redmi, POCO y Xiaomi con carga rapida.",
+    title: "Guía Xiaomi",
+    description: "Diagnóstico práctico para Redmi, POCO y Xiaomi con carga rápida.",
   },
 ];
 
@@ -471,7 +471,12 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
           {config.nearbyZones.map((zone) => (
             <Link
               key={zone.slug}
-              href={`/zonas/${zone.slug}`}
+              href={
+                // /zonas/recoleta y /zonas/belgrano redirigen (301) a las sucursales.
+                zone.slug === "recoleta" || zone.slug === "belgrano"
+                  ? `/sucursales/caba/${zone.slug}`
+                  : `/zonas/${zone.slug}`
+              }
               className="rounded-xl border border-white/10 bg-white/10 p-4 text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-white/10 dark:bg-slate-900/40 dark:text-slate-200"
             >
               {zone.name}

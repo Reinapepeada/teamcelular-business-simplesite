@@ -24,9 +24,9 @@ import {
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 
 export const metadata: Metadata = {
-  title: "¿Cuándo Cambiar la Pantalla del Celular? Guía Técnica",
+  title: "Cambio de Pantalla de Celular: ¿Es lo Mismo que el Módulo?",
   description:
-    "Líneas, manchas o touch que falla: cuándo el módulo se cambia y cuándo el problema es flex o placa. Qué revisar antes de aprobar el reemplazo.",
+    "Sí se puede cambiar la pantalla y no se borran tus datos. Qué es el módulo, cuánto tarda (2 a 4 h) y cuándo el problema es flex o placa.",
   keywords: [
     "cambio pantalla celular Buenos Aires",
     "pantalla iPhone original",
@@ -137,7 +137,7 @@ const screenTypes = [
       "100% compatible con el equipo",
       "True Tone / Always On Display preservado",
       "Colores y brillo idénticos al original",
-      "Garantía 6-12 meses",
+      "Garantía escrita de 90 días",
       "Certificación de autenticidad"
     ],
     cons: ["Precio más alto"],
@@ -172,7 +172,7 @@ const screenTypes = [
     ],
     cons: [
       "Menor contraste que OLED",
-      "?ngulos de visión limitados"
+      "Ángulos de visión limitados"
     ],
     price: "$$",
     recommended: "iPhone 8, XR, 11, Samsung A10-A30",
@@ -212,7 +212,31 @@ const replacementProcess = [
   },
 ];
 
+const quickAnswers = [
+  {
+    question: "¿Se puede cambiar la pantalla de un celular?",
+    answer:
+      "Sí. En casi todos los modelos actuales la pantalla se cambia sin tocar la placa, siempre que el golpe no haya dañado el conector ni el flex. En Team Celular (Paraguay 2451, Recoleta) lo confirmamos en el diagnóstico y el cambio sale en 2 a 4 horas si hay repuesto en stock.",
+  },
+  {
+    question: "¿Cambio de pantalla y cambio de módulo es lo mismo?",
+    answer:
+      "En la mayoría de los celulares actuales, sí. El vidrio, el táctil y el display vienen pegados de fábrica en una sola pieza llamada módulo, así que cambiar la pantalla es cambiar el módulo completo.",
+  },
+  {
+    question: "¿Cuando se cambia la pantalla se borra todo?",
+    answer:
+      "No. Fotos, chats y apps están guardados en la memoria de la placa, no en la pantalla, y el cambio de módulo no toca la placa. Igual recomendamos hacer backup antes de traerlo, porque un equipo golpeado puede tener otra falla escondida.",
+  },
+  {
+    question: "¿Cuántas veces se puede cambiar la pantalla de un celular?",
+    answer:
+      "No hay un límite fijo. Lo que se desgasta es el conector de la placa y el marco, y los revisamos bajo microscopio en cada cambio.",
+  },
+];
+
 const faqScreen = [
+  ...quickAnswers,
   {
     question: "¿Se pierde Face ID o Touch ID al cambiar la pantalla?",
     answer: "NO, si el cambio se hace correctamente. Face ID y Touch ID están vinculados a módulos específicos que se transfieren de la pantalla original a la nueva. En Team Celular transferimos TODOS los componentes originales: módulo Face ID completo (dot projector, flood illuminator, cámara infrarroja), botón Home con Touch ID, cámara frontal y sensores. La única excepción es si el módulo biométrico original está físicamente dañado, en ese caso Face ID/Touch ID no funcionará con ninguna pantalla.",
@@ -242,7 +266,7 @@ export default function ScreenReplacementGuide() {
         title="Cambio de pantalla celular en Buenos Aires | Display original Team Celular"
         description="Cambio de pantalla con displays OLED originales, True Tone preservado y garantia escrita segun repuesto y trabajo. Service express 2-4 horas en CABA."
         publishedTime="2024-11-30T00:00:00Z"
-        modifiedTime="2026-08-20T00:00:00Z"
+        modifiedTime="2026-09-22T00:00:00Z"
         image="https://teamcelular.com/images/guia_cambio_modulo.webp"
         url="https://teamcelular.com/guias/reparacion-pantalla-celular"
       />
@@ -275,7 +299,7 @@ export default function ScreenReplacementGuide() {
             <FaMobileAlt className="text-5xl text-white" />
           </div>
           <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-            ¿Cuándo hay que cambiar la pantalla del celular?
+            Cambio de pantalla de celular: qué es el módulo y cuándo cambiarlo
           </h1>
           <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
             La pantalla se cambia cuando el daño está en el módulo: vidrio partido, líneas fijas, manchas
@@ -286,7 +310,7 @@ export default function ScreenReplacementGuide() {
             el cambio de módulo sale en <strong>2 a 4 horas</strong> con garantía escrita de 90 días.
           </p>
           <div className="mt-4 flex justify-center">
-            <GuideByline modifiedTime="2026-08-20T00:00:00Z" tone="light" />
+            <GuideByline modifiedTime="2026-09-22T00:00:00Z" tone="light" />
           </div>
 
           {/* Quick Stats */}
@@ -298,8 +322,8 @@ export default function ScreenReplacementGuide() {
             </div>
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
               <FaShieldAlt className="mx-auto text-3xl text-secondary mb-2" />
-              <div className="text-2xl font-bold text-secondary">Variable</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">Garantia segun trabajo y repuesto</div>
+              <div className="text-2xl font-bold text-secondary">90 días</div>
+              <div className="text-sm text-slate-600 dark:text-slate-400">Garantía escrita sobre trabajo y repuesto</div>
             </div>
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
               <FaCertificate className="mx-auto text-3xl text-blue-500 mb-2" />
@@ -323,6 +347,32 @@ export default function ScreenReplacementGuide() {
             </Link>
           </div>
         </header>
+
+        <section className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
+          <div>
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+              Lo que más nos preguntan antes de cambiar la pantalla
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-slate-700 dark:text-slate-300">
+              Team Celular, en Paraguay 2451 Recoleta, cambia pantallas de celular en 2 a 4 horas sin
+              borrar los datos, con garantía escrita de 90 días sobre repuesto y trabajo.
+            </p>
+            <Link
+              href="/reparaciones/cambio-pantalla-caba"
+              className="mt-6 inline-flex min-h-12 items-center rounded-full bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
+            >
+              Ver precio para tu modelo
+            </Link>
+          </div>
+          <div className="divide-y divide-slate-200 dark:divide-slate-700">
+            {quickAnswers.map((item) => (
+              <div key={item.question} className="py-5 first:pt-0">
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white">{item.question}</h3>
+                <p className="mt-2 leading-7 text-slate-700 dark:text-slate-300">{item.answer}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
         {/* Tipos de daños */}
         <section className="space-y-8">

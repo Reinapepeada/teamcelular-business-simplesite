@@ -249,23 +249,6 @@ export default function PresupuestoReparacionPage() {
                     }}
                 />
 
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{
-                        __html: JSON.stringify({
-                            "@context": "https://schema.org",
-                            "@type": "HowTo",
-                            name: "Cómo solicitar un presupuesto de reparación",
-                            totalTime: "PT2H",
-                            step: processSteps.map((step, index) => ({
-                                "@type": "HowToStep",
-                                position: index + 1,
-                                name: step.title,
-                                text: step.description,
-                            })),
-                        }),
-                    }}
-                />
 
                 <script
                     type="application/ld+json"

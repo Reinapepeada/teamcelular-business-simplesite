@@ -6,12 +6,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     zoneName: "Palermo",
     metaTitle: "Arreglo de Celulares en Palermo (CABA) | Team Celular",
     metaDescription:
-      "Arreglo de celulares en Palermo: garantía escrita de 90 días y taller a 10-15 min. Team Celular, Recoleta y Belgrano, CABA.",
+      "Desde Palermo tenés dos sucursales cerca: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032). Diagnóstico en el día y garantía escrita de 90 días.",
     socialDescription:
       "Team Celular atiende Palermo desde Recoleta y Belgrano. Pantalla, batería y carga con garantía escrita 90 días.",
     heroBadge: "Cobertura Palermo",
     heroIntro:
-      "Team Celular tiene dos sucursales en CABA — Paraguay 2451 Recoleta y Amenábar 2032 Belgrano — y atiende clientes de Palermo con diagnóstico el mismo día y garantía escrita de 90 días. Pantalla, batería, carga y fallas de placa sin vueltas.",
+      "Si estás en Palermo, la sucursal más cerca depende del lado: desde Palermo Chico, Botánico y Plaza Italia te conviene Recoleta (Paraguay 2451); desde Palermo Hollywood, Las Cañitas y Colegiales, Belgrano (Amenábar 2032). En las dos hay diagnóstico el mismo día, pantalla y batería en 2 a 4 horas y garantía escrita de 90 días.",
     heroImage: "/images/dispositivoshdpro.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(59,130,246,0.32),transparent_44%)]",
@@ -49,8 +49,8 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     focusServices: ["pantalla", "bateria", "pin de carga", "microelectronica"],
     faqs: [
       {
-        q: "¿Atienden clientes de Palermo?",
-        a: "Sí. Tenemos sucursales en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032). Palermo entra cómodo a cualquiera de las dos — coordinamos por WhatsApp para que no tengas que dar vueltas de más.",
+        q: "¿Cuál es la sucursal más cerca de Palermo?",
+        a: "Depende de la zona de Palermo. Plaza Italia y Palermo Chico quedan más cerca de Recoleta (Paraguay 2451); Hollywood, Las Cañitas y Colegiales, de Belgrano (Amenábar 2032). Si no sabés cuál te conviene, escribinos por WhatsApp con tu esquina.",
       },
       {
         q: "¿Qué demora tiene una reparación común?",

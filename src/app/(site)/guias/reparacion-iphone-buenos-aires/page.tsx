@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     "service tecnico apple argentina",
     "reparar iphone mojado caba",
     "repuestos iphone certificados",
-    "diagnostico iphone 24 horas",
+    "diagnostico iphone en el dia",
   ],
   alternates: {
     canonical: PAGE_URL,
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2024-01-15T00:00:00Z",
-    modifiedTime: "2026-07-06T00:00:00Z",
+    modifiedTime: "2026-09-22T00:00:00Z",
     section: "Guias Tecnicas",
   },
   twitter: {
@@ -343,6 +343,11 @@ const faq = [
       "Entre 1 y 2 horas en la mayoría de modelos. Incluye prueba de autonomía y verificación de consumo real. Si el equipo requiere adhesivo especial o tiene batería pegada (como en iPhone 14/15), puede tomar hasta 2,5 horas.",
   },
   {
+    question: "¿Team Celular es servicio oficial de Apple?",
+    answer:
+      "No. Somos un laboratorio independiente, y por eso podemos reparar placa y hacer reballing, cosas que el servicio oficial resuelve cambiando el equipo. En cada presupuesto aclaramos si el repuesto es original o compatible, y qué funciones pueden verse afectadas, como True Tone o el aviso de pieza desconocida.",
+  },
+  {
     question: "¿Trabajan iPhone X, XR, XS y generaciones anteriores?",
     answer:
       "Sí. Atendemos iPhone 8 en adelante, incluyendo XR, X, XS, XS Max con repuestos de calidad. Para modelos anteriores, consultá disponibilidad de repuesto antes de venir.",
@@ -361,7 +366,7 @@ export default function IphoneRepairGuidePage() {
         title="Reparacion de iPhone en Buenos Aires | Servicio Tecnico Premium Team Celular"
         description="Guia completa para reparar iPhone en CABA con diagnostico profesional, repuestos certificados y garantia escrita."
         publishedTime="2024-01-15T00:00:00Z"
-        modifiedTime="2026-07-06T00:00:00Z"
+        modifiedTime="2026-09-22T00:00:00Z"
         about={[
           "reparacion de iPhone en Buenos Aires",
           "service tecnico Apple en CABA",
@@ -417,7 +422,7 @@ export default function IphoneRepairGuidePage() {
               escrita de 90 días sobre trabajo y repuesto. iPhone 8 a 17 Pro Max.
             </p>
             <div className="mt-4">
-              <GuideByline modifiedTime="2026-07-06T00:00:00Z" tone="light" />
+              <GuideByline modifiedTime="2026-09-22T00:00:00Z" tone="light" />
             </div>
           </div>
 
@@ -426,7 +431,7 @@ export default function IphoneRepairGuidePage() {
               <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
                 Diagnóstico
               </p>
-              <p className="mt-2 text-3xl font-black text-primary">24 h</p>
+              <p className="mt-2 text-3xl font-black text-primary">Mismo día</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
                 Informe claro con pasos y presupuesto
               </p>
@@ -504,7 +509,7 @@ export default function IphoneRepairGuidePage() {
               Respuesta directa
             </p>
             <h2 className="mt-3 text-2xl font-black text-slate-900 dark:text-white">
-              Donde reparar un iPhone en Buenos Aires
+              ¿Dónde reparar un iPhone en Buenos Aires?
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-700 dark:text-slate-200">
               Para reparar un iPhone en Buenos Aires, Team Celular atiende en Paraguay 2451,
@@ -527,7 +532,7 @@ export default function IphoneRepairGuidePage() {
           <div className="overflow-hidden rounded-3xl border border-white/15 bg-white/5 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
             <div className="border-b border-white/10 p-6">
               <h2 className="text-2xl font-black text-slate-900 dark:text-white">
-                Que hacer segun la falla del iPhone
+                ¿Qué hacer según la falla del iPhone?
               </h2>
               <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
                 Usa esta tabla para decidir si conviene consultar por WhatsApp, traer el equipo
@@ -562,7 +567,7 @@ export default function IphoneRepairGuidePage() {
         <section className="space-y-6 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Prueba social real antes de cotizar
+              ¿Qué dicen quienes ya repararon su iPhone?
             </h2>
             <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
               Mostramos opiniones verificables de Google para que evalúes la confianza del servicio con evidencia pública.
@@ -741,7 +746,7 @@ export default function IphoneRepairGuidePage() {
           </div>
           <article className="space-y-4">
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-              Diagnóstico real, sin reemplazos innecesarios
+              ¿Por qué diagnosticamos antes de cambiar piezas?
             </h2>
             <p className="text-slate-600 dark:text-slate-300">
               Antes de abrir el iPhone medimos consumo, estado de placa y funciones críticas.

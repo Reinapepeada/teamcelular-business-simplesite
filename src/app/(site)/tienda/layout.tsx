@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import StoreCartSheet from "@/components/store/StoreCartSheet";
+import NextUIScope from "./NextUIScope";
 
 export const metadata: Metadata = {
   title: "Repuestos y Accesorios para Celulares | Team Celular",
@@ -48,9 +49,9 @@ export default function TiendaLayout({
   readonly children: React.ReactNode;
 }) {
   return (
-    <>
+    <NextUIScope>
       {children}
       <StoreCartSheet />
-    </>
+    </NextUIScope>
   );
 }

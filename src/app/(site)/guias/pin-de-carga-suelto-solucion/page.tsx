@@ -11,24 +11,24 @@ const PAGE_PATH = "/guias/pin-de-carga-suelto-solucion";
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
-  title: "Pin de Carga Suelto: Causas y Solución en CABA",
+  title: "Pin de Carga Suelto: Cómo Saber si Está Dañado",
   description:
-    "¿Carga intermitente? Revisamos pin, flex y placa el mismo día, con garantía escrita de 90 días. Team Celular, Recoleta y Belgrano.",
+    "Probá otro cable, mirá el puerto con linterna y fijate si carga solo en un ángulo. Si es el pin, lo cambiamos en el día con garantía de 90 días.",
   keywords: [
     "pin de carga suelto",
+    "como saber si se daño el pin de carga",
     "celular no carga bien",
     "cambio pin de carga caba",
     "reparacion puerto usb celular",
-    "service tecnico celulares recoleta",
   ],
-  openGraphTitle: "Pin de Carga Suelto: Causas y Solución en CABA | Team Celular",
+  openGraphTitle: "Pin de Carga Suelto: Cómo Saber si Está Dañado | Team Celular",
   openGraphDescription:
-    "Guia practica para diferenciar suciedad, desgaste de conector o falla de placa antes de gastar de mas.",
+    "Cómo distinguir si el problema es el cable, la batería o el pin de carga antes de gastar de más.",
   openGraphImagePath: "/images/guia_cambio_modulo.webp",
-  openGraphImageAlt: "Diagnostico de pin de carga en Team Celular",
-  twitterTitle: "Pin de Carga Suelto: Causas y Solución | Team Celular",
+  openGraphImageAlt: "Diagnóstico de pin de carga en Team Celular",
+  twitterTitle: "Pin de Carga Suelto: Cómo Saber si Está Dañado | Team Celular",
   twitterDescription:
-    "Checklist rapido para decidir si necesitas limpieza tecnica, cambio de pin o microelectronica.",
+    "Señales claras de pin de carga dañado y qué hacer en cada caso.",
   languages: {
     "es-AR": PAGE_PATH,
   },
@@ -36,32 +36,32 @@ export const metadata: Metadata = buildWebsiteMetadata({
 
 const symptoms: GuideItem[] = [
   {
-    title: "Carga solo si sostienes el cable",
+    title: "Carga solo si sostenés el cable",
     description:
-      "Si el cable debe quedar en una posicion exacta, suele haber desgaste mecanico en el conector o juego en el pin.",
+      "Si el cable tiene que quedar en una posición exacta, suele haber desgaste en el conector o juego en el pin.",
   },
   {
     title: "Conector flojo o inestable",
     description:
-      "El enchufe entra facil pero se mueve mucho. Esto suele indicar deformacion del puerto o residuos compactados.",
+      "El enchufe entra fácil pero se mueve para los costados. Indica un puerto deformado o pelusa compactada al fondo.",
   },
   {
-    title: "No activa carga rapida",
+    title: "No activa la carga rápida",
     description:
-      "Cuando solo carga lento o desconecta al usar el equipo, puede haber daño en lineas de datos del flex de carga.",
+      "Si solo carga lento o se desconecta mientras usás el equipo, puede haber daño en las líneas de datos del flex de carga.",
   },
   {
-    title: "Calienta al conectar",
+    title: "Aviso de humedad o accesorio no compatible",
     description:
-      "El sobrecalentamiento durante la carga puede marcar falso contacto o fuga en circuito de entrada.",
+      "Si Samsung muestra \"humedad detectada\" o iPhone \"accesorio no compatible\" con el puerto seco, apunta al pin o al flex.",
   },
 ];
 
 const diagnostics: GuideItem[] = [
   {
-    title: "Inspeccion microscopica",
+    title: "Inspección con microscopio",
     description:
-      "Revisamos estado fisico de pines, pistas y soldaduras para separar suciedad de daño real.",
+      "Revisamos pines, pistas y soldaduras para separar suciedad de daño real.",
   },
   {
     title: "Prueba cruzada de cable y cargador",
@@ -69,67 +69,72 @@ const diagnostics: GuideItem[] = [
       "Descartamos accesorios defectuosos antes de abrir el equipo o cambiar piezas.",
   },
   {
-    title: "Test electrico de continuidad",
+    title: "Test eléctrico de continuidad",
     description:
-      "Validamos si el puerto transmite energia y datos de forma estable o si hay corte interno.",
+      "Medimos si el puerto transmite energía y datos de forma estable o si hay un corte interno.",
   },
   {
     title: "Control de consumo en placa",
     description:
-      "Si el puerto esta bien, medimos consumo para identificar si la falla ya avanzo a la placa.",
+      "Si el puerto está bien, medimos el consumo para ver si la falla ya llegó a la placa.",
   },
 ];
 
 const planSteps: GuideItem[] = [
   {
-    title: "Limpieza tecnica segura",
+    title: "Limpieza técnica",
     description:
-      "Si el daño es superficial, limpiamos residuos sin dañar pines ni forzar el conector.",
+      "Si el conector está sano y hay residuos, lo limpiamos sin forzar ni doblar los pines.",
   },
   {
-    title: "Reemplazo de pin o flex",
+    title: "Cambio de pin o flex",
     description:
-      "Cuando hay juego mecanico o cortes internos, cambiamos el modulo afectado con repuesto compatible.",
+      "Cuando hay juego mecánico o cortes internos, cambiamos el pin o el flex de carga.",
   },
   {
-    title: "Micro soldadura en placa",
+    title: "Microsoldadura en placa",
     description:
-      "Si el daño llego a pistas o circuito de carga, se corrige en laboratorio de microelectronica.",
+      "Si el daño llegó a las pistas o al circuito de carga, se corrige en el laboratorio de microelectrónica.",
   },
   {
-    title: "Pruebas finales de estabilidad",
+    title: "Pruebas finales",
     description:
-      "Verificamos carga continua, carga rapida y funcionamiento en uso real antes de entregar.",
+      "Verificamos carga continua, carga rápida y uso real antes de entregar el equipo.",
   },
 ];
 
 const faq: GuideFaqItem[] = [
   {
-    question: "Conviene limpiar o cambiar el pin de carga?",
+    question: "¿Cómo saber si se dañó el pin de carga del celular?",
     answer:
-      "Si hay suciedad compactada y el conector esta sano, la limpieza tecnica suele resolver. Si hay juego mecanico, cortes o pin doblado, conviene reemplazo.",
+      "Hay cuatro señales claras: carga solo si sostenés el cable en una posición, el enchufe tiene juego hacia los costados, dejó de cargar rápido, o la computadora no reconoce el equipo por cable. Si además aparece un aviso de humedad o de accesorio no compatible con el puerto seco, también apunta al pin o al flex.",
   },
   {
-    question: "Usar el celular asi puede empeorar la falla?",
+    question: "¿Es el pin de carga, el cable o la batería?",
     answer:
-      "Si. Forzar el cable en mala posicion puede dañar pistas internas y pasar de una reparacion simple a una intervencion de placa.",
+      "Si con otro cable y otro cargador carga normal, era el accesorio. Si carga pero el porcentaje baja muy rápido, suele ser la batería. Si el cable se desconecta o solo carga en cierto ángulo, es el pin.",
   },
   {
-    question: "El problema puede ser bateria y no el pin?",
+    question: "¿Conviene limpiar o cambiar el pin de carga?",
     answer:
-      "Puede pasar. Por eso primero se valida entrada de carga, estado de bateria y consumo para no cambiar piezas innecesarias.",
+      "Si hay suciedad compactada y el conector está sano, la limpieza técnica suele resolverlo. Si hay juego mecánico, cortes o un pin doblado, conviene cambiarlo.",
   },
   {
-    question: "Cuanto tarda este tipo de diagnostico?",
+    question: "¿Usar el celular así puede empeorar la falla?",
     answer:
-      "El diagnostico inicial suele quedar dentro del mismo dia habil. Con eso puedes decidir si conviene reparar o pasar a otra alternativa.",
+      "Sí. Forzar el cable en mala posición puede dañar pistas internas y pasar de una reparación simple a una intervención de placa.",
+  },
+  {
+    question: "¿Cuánto tarda el diagnóstico?",
+    answer:
+      "El diagnóstico sale el mismo día hábil. Con eso decidís si conviene reparar antes de que toquemos el equipo.",
   },
 ];
 
 const relatedLinks: GuideRelatedLink[] = [
-  { href: "/reparaciones/cambio-pin-carga-caba", label: "Servicio de pin de carga" },
+  { href: "/reparaciones/cambio-pin-carga-caba", label: "Precio del cambio de pin de carga" },
   { href: "/guias/celular-mojado-que-hacer", label: "Celular mojado: primeros pasos" },
-  { href: "/guias/cambio-bateria-celular", label: "Guia de bateria" },
+  { href: "/guias/cambio-bateria-celular", label: "Guía de batería" },
   { href: "/presupuesto-reparacion#solicitar-presupuesto", label: "Pedir presupuesto" },
 ];
 
@@ -139,30 +144,30 @@ export default function ChargingPortGuidePage() {
       siteUrl={SITE_URL}
       pagePath={PAGE_PATH}
       pageLabel="Pin de carga suelto"
-      title="Pin de carga suelto: causas, diagnostico y solucion"
-      heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), diagnostica pin de carga suelto con inspección microscópica el mismo día. Si es suciedad, desgaste de conector o falla de placa, lo confirmamos antes de cambiar piezas."
+      title="Pin de carga suelto: cómo saber si está dañado"
+      heroDescription="Para saber si se dañó el pin de carga, probá con otro cable y otro cargador. Si el problema sigue, mirá el puerto con una linterna: si el cable queda flojo, carga solo en cierto ángulo o hay pelusa compactada al fondo, el problema está en el pin. Team Celular, en Paraguay 2451 Recoleta, lo confirma con microscopio el mismo día."
       badge="Falla frecuente"
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
-      modifiedTime="2026-06-09T00:00:00Z"
+      modifiedTime="2026-09-22T00:00:00Z"
       imagePath="/images/guia_cambio_modulo.webp"
       heroPoints={[
-        "Checklist rapido para detectar la causa principal.",
-        "Evita forzar el conector y agravar el daño.",
-        "Define si conviene limpieza, cambio o microelectronica.",
+        "Cuatro señales para reconocer un pin dañado.",
+        "Cómo descartar el cable y la batería.",
+        "Cuándo alcanza con limpiar y cuándo hay que cambiarlo.",
       ]}
-      symptomsTitle="¿Cuáles son las señales de pin de carga comprometido?"
-      symptomsDescription="Estas pistas suelen aparecer antes de que el equipo deje de cargar por completo."
+      symptomsTitle="¿Cuáles son las señales de un pin de carga dañado?"
+      symptomsDescription="Suelen aparecer antes de que el equipo deje de cargar por completo."
       symptoms={symptoms}
-      diagnosisTitle="¿Cómo diagnosticamos la falla de carga?"
-      diagnosisDescription="Separar el origen real evita gastos innecesarios y acelera la solución correcta."
+      diagnosisTitle="¿Cómo lo diagnosticamos en el laboratorio?"
+      diagnosisDescription="Separar el origen real evita cambiar piezas que no hacían falta."
       diagnostics={diagnostics}
-      planTitle="¿Cuál es el plan de reparación recomendado?"
-      planDescription="El flujo cambia según nivel de daño, pero siempre avanzamos de lo simple a lo complejo."
+      planTitle="¿Qué reparación corresponde en cada caso?"
+      planDescription="Siempre vamos de lo simple a lo complejo, según el daño."
       planSteps={planSteps}
       faq={faq}
       relatedLinks={relatedLinks}
-      whatsappText="Hola Team Celular, vi la guia de pin de carga suelto y quiero diagnostico para mi equipo"
+      whatsappText="Hola Team Celular, vi la guía de pin de carga y quiero un diagnóstico para mi equipo"
     />
   );
 }

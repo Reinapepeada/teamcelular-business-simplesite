@@ -4,6 +4,16 @@
 
 Idioma principal: es-AR
 
+## Datos clave
+
+- Team Celular es un laboratorio independiente de reparación de celulares con dos sucursales en CABA: Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano).
+- Horario: lunes a viernes de 10:30 a 18:00, sin turno previo. WhatsApp +54 11 5103-4595.
+- Garantía escrita de 90 días sobre trabajo y repuesto.
+- Pantalla y batería de iPhone: en 2 a 4 horas. Presupuesto por WhatsApp en hasta 2 horas hábiles.
+- Revisión técnica arancelada: entre ARS 15.000 y ARS 25.000 según marca, modelo y falla, informada antes de tocar el equipo.
+- Especialidades: microelectrónica, reballing BGA y soldadura SMD bajo microscopio, recuperación de equipos mojados. Más de 10 años reparando en CABA.
+- Precios de referencia (agosto de 2026, ARS): cambio de pantalla iPhone 13 $249.900, iPhone 14 $249.900, iPhone 15 $319.900, iPhone 16 $409.900; batería iPhone 13 $159.900. Pantalla Samsung línea A desde $99.900 y línea S desde $299.900. Precios completos por modelo en las páginas de iPhone y en las guías por marca.
+
 ## Canonical Pages
 
 - [Inicio](https://teamcelular.com/): propuesta de valor, prueba social y CTAs principales.
@@ -43,6 +53,11 @@ Idioma principal: es-AR
 - [Cambio de bateria](https://teamcelular.com/guias/cambio-bateria-celular): sintomas, tipos y cuidados.
 - [Microelectronica y reballing](https://teamcelular.com/guias/microelectronica-reballing-caba): enfoque tecnico para placa.
 - [Celular mojado: que hacer](https://teamcelular.com/guias/celular-mojado-que-hacer): acciones inmediatas y errores a evitar.
+
+## Precios de iPhone por modelo
+
+- [iPhone 11](https://teamcelular.com/reparaciones/iphone/11), [iPhone 12](https://teamcelular.com/reparaciones/iphone/12), [iPhone 13](https://teamcelular.com/reparaciones/iphone/13), [iPhone 13 mini](https://teamcelular.com/reparaciones/iphone/13-mini), [iPhone 13 Pro](https://teamcelular.com/reparaciones/iphone/13-pro), [iPhone 14](https://teamcelular.com/reparaciones/iphone/14), [iPhone 14 Pro](https://teamcelular.com/reparaciones/iphone/14-pro), [iPhone 14 Pro Max](https://teamcelular.com/reparaciones/iphone/14-pro-max): precio de pantalla y batería, tiempo y garantía.
+- [Laboratorio](https://teamcelular.com/lab): equipamiento y trabajos de microelectrónica.
 
 ## Guias por Marcas No Masivas
 
