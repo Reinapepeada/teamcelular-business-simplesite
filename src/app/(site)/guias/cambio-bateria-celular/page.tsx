@@ -6,6 +6,19 @@ import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import GuideByline from "@/components/seo/GuideByline";
+import { BRAND_REPAIR_PRICES, formatArsPrice } from "@/lib/repairPrices";
+import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
+
+// Precios citables: minimos reales de las mismas fuentes que las tablas.
+const ANDROID_BATTERY_FROM = Math.min(
+  ...Object.values(BRAND_REPAIR_PRICES)
+    .flat()
+    .filter((p) => /bater/i.test(p.name))
+    .map((p) => p.from),
+);
+const IPHONE_BATTERY_FROM = Math.min(
+  ...IPHONE_MODELS.map((m) => m.battery).filter((v): v is number => v !== null),
+);
 import {
   FaBatteryFull,
   FaBatteryHalf,
@@ -24,9 +37,9 @@ import {
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 
 export const metadata: Metadata = {
-  title: "¿Cuándo Cambiar la Batería del Celular? Señales Reales",
+  title: "Cambio de batería de celular en CABA: en 1 a 2 horas",
   description:
-    "Se descarga rápido o se apaga solo: cuándo la culpa es la batería y cuándo es el consumo o el pin de carga. Qué mirar antes de reemplazar la pieza.",
+    "Cambio de batería de celular en Recoleta y Belgrano, CABA. Sale en 1 a 2 horas, no borra tus datos y tiene garantía escrita de 90 días. Desde $89.900.",
   keywords: [
     "cambio batería celular Buenos Aires",
     "batería iPhone original",
@@ -54,7 +67,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Cambio de Batería Celular Buenos Aires | Service Certificado",
     description:
-      "Cambio de bateria con repuestos originales y certificados. Service express en 1-2 horas y garantia segun repuesto y trabajo.",
+      "Cambio de batería con repuestos originales y certificados. Sale en 1 a 2 horas con garantía escrita de 90 días.",
     type: "article",
     locale: "es_AR",
     url: "https://teamcelular.com/guias/cambio-bateria-celular",
@@ -71,7 +84,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Cambio de Batería Celular Buenos Aires",
-    description: "Baterias originales o certificadas con garantia escrita segun repuesto y trabajo. Service express 1-2hs.",
+    description: "Baterías originales o certificadas con garantía escrita de 90 días. Cambio en 1 a 2 horas.",
     images: ["https://teamcelular.com/images/guia_cambio_bateria.webp"],
   },
   alternates: {
@@ -122,14 +135,14 @@ const batteryTypes = [
   {
     type: "Batería Original",
     description: "Fabricada por el mismo proveedor del fabricante (Apple, Samsung). Incluye chip de autenticación y certificación de calidad.",
-    pros: ["100% compatible", "Chip de autenticación", "Garantia escrita segun repuesto y trabajo", "Salud al 100%"],
+    pros: ["100% compatible", "Chip de autenticación", "Garantía escrita de 90 días", "Salud al 100%"],
     price: "$$$$",
     recommended: true,
   },
   {
     type: "Batería Certificada AAA+",
     description: "Aftermarket de alta calidad con certificación CE, FCC y RoHS. Capacidad igual o superior a la original.",
-    pros: ["Excelente calidad", "Certificaciones internacionales", "Garantia escrita segun repuesto y trabajo", "Precio competitivo"],
+    pros: ["Excelente calidad", "Certificaciones internacionales", "Garantía escrita de 90 días", "Precio competitivo"],
     price: "$$$",
     recommended: true,
   },
@@ -164,13 +177,18 @@ const replacementProcess = [
   },
   {
     step: "4. Calibración y pruebas",
-    detail: "Calibramos la batería al 100%, ejecutamos test de carga/descarga, verificamos temperatura y entregamos con informe de salud.",
+    detail: "Hacemos un test de carga y descarga, verificamos temperatura y entregamos el equipo con informe de salud de la batería.",
     duration: "30 min",
     Icon: FaCheckCircle,
   },
 ];
 
 const faqBattery = [
+  {
+    question: "¿Vale la pena cambiar la batería o conviene comprar otro celular?",
+    answer:
+      "Si lo único que falla es la autonomía, casi siempre conviene cambiar la batería: cuesta una fracción de un equipo nuevo y le devuelve el día completo de uso. Si además tiene la pantalla rota o fallas de placa, sumá los presupuestos antes de decidir y te decimos con números cuál opción conviene.",
+  },
   {
     question: "¿Cuánto dura una batería nueva de celular?",
     answer: `Una batería original o certificada AAA+ dura entre 2 y 3 años con uso normal (entre 300 y 500 ciclos de carga completos). La duración depende de los hábitos de carga. Evitar descargas completas, no dejar el equipo cargando toda la noche y mantener la batería entre el 20 % y el 80 % puede extender su vida útil. ${WARRANTY_SCOPE_MESSAGE}`,
@@ -200,7 +218,7 @@ export default function BatteryReplacementGuide() {
         title="Cambio de batería celular en Buenos Aires | Service Certificado Team Celular"
         description="Cambio de batería con repuestos originales y certificados. Garantía escrita y service express en 1-2 horas. Atención iPhone, Samsung y Motorola en CABA."
         publishedTime="2024-11-30T00:00:00Z"
-        modifiedTime="2026-08-20T00:00:00Z"
+        modifiedTime="2026-09-22T00:00:00Z"
         image="https://teamcelular.com/images/guia_cambio_bateria.webp"
         url="https://teamcelular.com/guias/cambio-bateria-celular"
       />
@@ -233,7 +251,7 @@ export default function BatteryReplacementGuide() {
             <FaBatteryFull className="text-5xl text-white" />
           </div>
           <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-            ¿Cuándo hay que cambiar la batería del celular?
+            Cambio de batería de celular: cuándo conviene y cuánto sale en CABA
           </h1>
           <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
             La batería se cambia cuando perdió capacidad real: dura menos de media jornada de uso normal,
@@ -244,8 +262,13 @@ export default function BatteryReplacementGuide() {
             y Amenábar 2032 (Belgrano), CABA. El cambio sale en <strong>1 a 2 horas</strong> con garantía
             escrita de 90 días.
           </p>
+          <p className="mx-auto mt-3 max-w-3xl text-lg font-semibold text-slate-800 dark:text-slate-100">
+            Team Celular, en Paraguay 2451 Recoleta, cambia la batería de Samsung, Motorola y Xiaomi desde{" "}
+            {formatArsPrice(ANDROID_BATTERY_FROM)} y de iPhone desde {formatArsPrice(IPHONE_BATTERY_FROM)}, en 1 a 2
+            horas y sin borrar datos.
+          </p>
           <div className="mt-4 flex justify-center">
-            <GuideByline modifiedTime="2026-08-20T00:00:00Z" tone="light" />
+            <GuideByline modifiedTime="2026-09-22T00:00:00Z" tone="light" />
           </div>
 
           {/* Quick Stats */}
@@ -257,8 +280,8 @@ export default function BatteryReplacementGuide() {
             </div>
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
               <FaShieldAlt className="mx-auto text-3xl text-secondary mb-2" />
-              <div className="text-2xl font-bold text-secondary">Variable</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">Garantia segun trabajo y repuesto</div>
+              <div className="text-2xl font-bold text-secondary">90 días</div>
+              <div className="text-sm text-slate-600 dark:text-slate-400">Garantía escrita</div>
             </div>
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
               <FaCertificate className="mx-auto mb-2 text-3xl text-green-700 dark:text-green-300" />
@@ -457,7 +480,7 @@ export default function BatteryReplacementGuide() {
             ¿Tu celular necesita batería nueva?
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
-            {REVIEW_COST_MESSAGE} Service express en 1-2 horas con garantia escrita segun repuesto y trabajo.
+            {REVIEW_COST_MESSAGE} Cambio en 1 a 2 horas con garantía escrita de 90 días.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link

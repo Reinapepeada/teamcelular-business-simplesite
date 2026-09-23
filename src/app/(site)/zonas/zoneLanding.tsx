@@ -15,6 +15,7 @@ import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import { getBranch } from "@/lib/businessProfile";
+import { ZONE_CONFIGS } from "./zoneConfigs";
 
 const SITE_URL = getSiteUrl();
 
@@ -312,7 +313,7 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
               </TrackedCtaLink>
             </div>
             <p className="text-sm text-slate-200/90">
-              Atención presencial en Recoleta y derivación rápida para toda CABA.
+              Atención presencial en Recoleta y Belgrano, sin turno.
             </p>
           </div>
 
@@ -383,7 +384,7 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
 
       <section className="mt-10 rounded-2xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:from-slate-900/40 dark:via-slate-900/30 dark:to-slate-900/40">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Como venir desde {displayZone}
+          ¿Cómo llego desde {displayZone}?
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">{config.transportTip}</p>
         {/* Las paginas de zona absorben impresiones de "phone repair" en ingles
@@ -404,23 +405,23 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
             href="/contacto"
             className="rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-secondary/90"
           >
-            Ver mapa y como llegar
+            Ver mapa y cómo llegar
           </Link>
           <Link
-            href="/sucursales/caba/recoleta"
+            href="/sucursales"
             className="rounded-full border border-secondary/50 px-6 py-3 text-sm font-semibold text-secondary transition hover:bg-secondary/10"
           >
-            Ver sucursal Recoleta
+            Ver las dos sucursales
           </Link>
         </div>
       </section>
 
       <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Guias tecnicas recomendadas para {displayZone}
+          Guías técnicas recomendadas para {displayZone}
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">
-          Si queres comparar opciones antes de traer el equipo, estas lecturas te ayudan a decidir mejor.
+          Si querés comparar opciones antes de traer el equipo, estas lecturas te ayudan a decidir mejor.
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           {relatedGuides.map((guide) => (
@@ -449,7 +450,7 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
             ctaVariant="secondary"
             className="rounded-full border border-slate-300 min-h-11 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
           >
-            Ver todas las guias
+            Ver todas las guías
           </TrackedCtaLink>
           <TrackedCtaLink
             href="/presupuesto-reparacion#solicitar-presupuesto"
@@ -458,17 +459,17 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
             ctaVariant="primary"
             className="rounded-full bg-primary min-h-11 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
           >
-            Pedir diagnostico
+            Pedir diagnóstico
           </TrackedCtaLink>
         </div>
       </section>
 
       <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Zonas cercanas que tambien atendemos
+          ¿Atienden otros barrios cerca?
         </h2>
         <div className="mt-5 grid gap-3 md:grid-cols-3">
-          {config.nearbyZones.map((zone) => (
+          {config.nearbyZones.filter((zone) => !ZONE_CONFIGS[zone.slug]?.noIndex).map((zone) => (
             <Link
               key={zone.slug}
               href={
@@ -487,7 +488,7 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
 
       <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Preguntas frecuentes
+          Preguntas frecuentes desde {displayZone}
         </h2>
         <div className="mt-6 space-y-3">
           {config.faqs.map((faq) => (
@@ -509,6 +510,20 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: config.faqs.map((faq) => ({
+              "@type": "Question",
+              name: faq.q,
+              acceptedAnswer: { "@type": "Answer", text: faq.a },
+            })),
+          }),
+        }}
       />
     </section>
   );

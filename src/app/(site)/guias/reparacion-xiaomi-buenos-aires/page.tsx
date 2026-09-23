@@ -27,9 +27,9 @@ const PAGE_PATH = "/guias/reparacion-xiaomi-buenos-aires";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 
 export const metadata: Metadata = {
-  title: "Reparación de Xiaomi, Redmi y POCO en CABA | Team Celular",
+  title: "Servicio técnico Xiaomi, Redmi y POCO en CABA | Team Celular",
   description:
-    "Reparación de Xiaomi, Redmi y POCO en Recoleta, CABA — Team Celular, Paraguay 2451. Pantalla, batería y USB-C en el día con garantía escrita 90 días.",
+    "Servicio técnico Xiaomi, Redmi y POCO en Recoleta y Belgrano. Pantalla desde $99.900 y batería desde $89.900, en 2-4 h. Garantía escrita 90 días.",
   keywords: [
     "reparacion xiaomi buenos aires",
     "service xiaomi caba",
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Reparación de Xiaomi, Redmi y POCO en CABA | Team Celular",
+    title: "Servicio técnico Xiaomi, Redmi y POCO en CABA | Team Celular",
     description:
       "Team Celular, Paraguay 2451 Recoleta. Pantalla AMOLED y batería en el día, garantía escrita 90 días. Xiaomi, Redmi y POCO.",
     images: ["https://teamcelular.com/images/guia_xiaomi.webp"],

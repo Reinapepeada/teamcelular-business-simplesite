@@ -5,9 +5,8 @@ import { FaMapMarkedAlt } from "react-icons/fa";
 
 const quickZones = [
   { href: "/zonas/palermo", label: "Palermo" },
-  { href: "/zonas/caballito", label: "Caballito" },
   { href: "/zonas/almagro", label: "Almagro" },
-  { href: "/zonas/microcentro", label: "Microcentro" },
+  { href: "/zonas/balvanera", label: "Balvanera / Once" },
 ];
 
 export default function ZonasLayout({
@@ -38,7 +37,7 @@ export default function ZonasLayout({
               Cobertura CABA
             </p>
             <p className="text-sm text-slate-700 dark:text-slate-300">
-              Elegi tu zona y te orientamos con la mejor opcion de reparacion.
+              Elegí tu barrio y te decimos qué sucursal te queda más cerca.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">

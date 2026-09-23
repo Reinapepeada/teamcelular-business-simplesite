@@ -105,22 +105,22 @@ const planSteps: GuideItem[] = [
 
 const faq: GuideFaqItem[] = [
   {
-    question: "Sirve poner el celular mojado en arroz?",
+    question: "¿Sirve poner el celular mojado en arroz?",
     answer:
       "No es confiable. El arroz no elimina corrosion en placa y puede dejar residuos en puertos o rejillas.",
   },
   {
-    question: "Si vuelve a prender, igual conviene revisarlo?",
+    question: "Si vuelve a prender, ¿igual conviene revisarlo?",
     answer:
       "Si. Muchos equipos funcionan unas horas y fallan despues por corrosion progresiva en conectores o pistas.",
   },
   {
-    question: "El agua dulce y salada afectan igual?",
+    question: "¿El agua dulce y la salada afectan igual?",
     answer:
       "No. El agua salada acelera corrosion y suele ser mas agresiva para circuitos y soldaduras.",
   },
   {
-    question: "En cuanto tiempo hay que actuar?",
+    question: "¿En cuánto tiempo hay que actuar?",
     answer:
       "Lo ideal es dentro de las primeras 2 horas. Ese margen mejora mucho la posibilidad de recuperacion.",
   },
@@ -140,11 +140,11 @@ export default function WetPhoneGuidePage() {
       pagePath={PAGE_PATH}
       pageLabel="Celular mojado"
       title="Celular mojado: que hacer en las primeras 2 horas"
-      heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), recupera celulares con daño por líquidos con diagnóstico el mismo día. Actuá dentro de las primeras 2 horas para reducir riesgo de corto y corrosión en placa."
+      heroDescription="Si se te mojó el celular: apagalo ya, no lo cargues, sacale la funda y la SIM, y no lo metas en arroz ni le pases secador. Lo que daña la placa es la corrosión, que avanza durante horas aunque el equipo prenda. Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), lo revisa bajo microscopio el mismo día."
       badge="Emergencia tecnica"
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
-      modifiedTime="2026-08-20T00:00:00Z"
+      modifiedTime="2026-09-22T00:00:00Z"
       imagePath="/images/guia_microelectronica.webp"
       heroPoints={[
         "Pasos concretos para minimizar corto y corrosion.",

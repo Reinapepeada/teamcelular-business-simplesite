@@ -12,6 +12,8 @@ import {
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
+import { GOOGLE_RATING_FALLBACK } from "@/lib/googleReviews";
+import { PRICES_UPDATED } from "@/lib/repairPrices";
 
 const SITE_URL = getSiteUrl();
 
@@ -358,6 +360,7 @@ export default function ServiceLandingPage({
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${serviceUrl}#service`,
+    dateModified: PRICES_UPDATED,
     name: config.serviceName,
     serviceType: config.serviceType,
     description: config.serviceDescription,
@@ -433,7 +436,7 @@ export default function ServiceLandingPage({
               </TrackedCtaLink>
             </div>
             <p className="text-sm text-slate-200/90">
-              Dos sucursales en CABA (Recoleta y Belgrano) con reseñas públicas en Google para validar experiencia real.
+              Dos sucursales en CABA (Recoleta y Belgrano). {GOOGLE_RATING_FALLBACK.rating.toFixed(1).replace(".", ",")} en Google con {GOOGLE_RATING_FALLBACK.total} reseñas (Recoleta).
             </p>
           </div>
 
@@ -453,7 +456,7 @@ export default function ServiceLandingPage({
                 </li>
                 <li className="flex items-start gap-3">
                   <FaStopwatch className="mt-0.5 text-primary" />
-                  Tiempos estimados segun modelo, stock y complejidad tecnica.
+                  Tiempos estimados según modelo, stock y complejidad técnica.
                 </li>
               </ul>
             </div>
@@ -477,7 +480,7 @@ export default function ServiceLandingPage({
 
       <section className="mt-10 rounded-3xl border border-white/15 bg-white/5 p-8 shadow-xl backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Cómo trabajamos este servicio
+          ¿Qué pasa con tu equipo desde que lo dejás?
         </h2>
         <p className="mt-2 text-slate-600 dark:text-slate-300">
           Proceso pensado para que sepas qué pasa con tu equipo en cada etapa.
@@ -507,14 +510,14 @@ export default function ServiceLandingPage({
 
       <section className="mt-10 rounded-3xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-8 shadow-xl backdrop-blur-2xl dark:border-white/10 dark:from-slate-900/40 dark:via-slate-900/30 dark:to-slate-900/40">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Marcas y modelos que atendemos
+          ¿Qué marcas reparan?
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">{config.brandsText}</p>
         <div className="mt-6 flex flex-wrap gap-3">
           {[
-            "Diagnostico profesional",
+            "Diagnóstico profesional",
             "Recoleta y Belgrano",
-            "Garantia escrita",
+            "Garantía escrita",
             "Seguimiento por WhatsApp",
           ].map((signal) => (
             <span
@@ -532,7 +535,7 @@ export default function ServiceLandingPage({
           <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-slate-900/40">
             <Image
               src={visual.support}
-              alt={`${config.serviceName} en laboratorio tecnico`}
+              alt={`${config.serviceName} en laboratorio técnico`}
               width={1200}
               height={900}
               sizes="(max-width: 768px) 100vw, 60vw"
@@ -541,10 +544,10 @@ export default function ServiceLandingPage({
           </div>
           <article className="space-y-4">
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-              Diagnostico real, sin respuestas genericas
+              ¿Conviene reparar o no?
             </h2>
             <p className="text-slate-600 dark:text-slate-300">
-              Evaluamos sintomas, pruebas y contexto del equipo para darte una recomendacion
+              Evaluamos síntomas, pruebas y contexto del equipo para darte una recomendación
               concreta. Si no conviene reparar, te lo decimos claro antes de avanzar.
             </p>
             <div className="flex flex-wrap gap-3">
@@ -675,6 +678,20 @@ export default function ServiceLandingPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: config.faqs.map((faq) => ({
+              "@type": "Question",
+              name: faq.q,
+              acceptedAnswer: { "@type": "Answer", text: faq.a },
+            })),
+          }),
+        }}
       />
     </section>
   );

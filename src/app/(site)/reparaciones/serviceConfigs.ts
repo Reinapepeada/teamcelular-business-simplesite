@@ -4,15 +4,19 @@ import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 // Precios del primer parrafo de cambio de pantalla: misma fuente que las tablas.
 const IPHONE_13_SCREEN = IPHONE_MODELS.find((m) => m.slug === "13")?.screen ?? 249900;
+const IPHONE_13_BATTERY = IPHONE_MODELS.find((m) => m.slug === "13")?.battery ?? 159900;
+const IPHONE_BATTERY_FROM = Math.min(
+  ...IPHONE_MODELS.map((m) => m.battery).filter((v): v is number => v !== null),
+);
 
 export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
   "cambio-bateria-caba": {
     slug: "cambio-bateria-caba",
     h1: "Cambio de batería en CABA",
     metaTitle:
-      "Cambio de Batería en CABA | Repuestos Certificados",
+      "Cambio de Batería de Celular en CABA desde $89.900",
     metaDescription:
-      "¿La batería no dura? Cambio de batería en Paraguay 2451, Recoleta (CABA): repuestos certificados y garantía escrita 90 días. iPhone, Samsung y Motorola.",
+      "Cambio de batería en CABA desde $89.900 (Samsung A y Moto G) y $99.900 en iPhone 11. En 1 a 2 horas en Paraguay 2451, Recoleta. Garantía escrita 90 días.",
     socialTitle: "Cambio de Batería en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Cambio de batería en CABA con diagnóstico previo y garantía escrita 90 días.",
@@ -24,7 +28,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "bateria celular se descarga rapido",
     ],
     intro:
-      "Team Celular, en Paraguay 2451 Recoleta CABA, diagnostica y reemplaza baterías con garantía escrita de 90 días sobre trabajo y repuesto. Si el equipo dura poco, se apaga solo o se calienta, primero confirmamos que la causa sea la batería antes de cambiar nada.",
+      `Team Celular, en Paraguay 2451 Recoleta CABA, cambia baterías de celular en 1 a 2 horas con garantía escrita de 90 días. En Samsung Galaxy A sale desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[2].from)} y en Motorola Moto G desde ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[3].from)}; en iPhone 13 cuesta ${formatArsPrice(IPHONE_13_BATTERY)}. Si el equipo dura poco o se apaga solo, primero medimos el consumo para confirmar que la culpa es de la batería.`,
     whatsappText:
       "Hola! Quiero un presupuesto para cambio de bateria en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de batería (CABA)",
@@ -51,7 +55,11 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     faqs: [
       {
         q: "¿Cuánto tarda el cambio de batería?",
-        a: "Depende del modelo y stock disponible. En la mayoría de los casos se resuelve en el día. Te confirmamos el plazo antes de abrir el equipo.",
+        a: "En la mayoría de los modelos, 1 a 2 horas con el repuesto en stock. Te confirmamos el plazo antes de abrir el equipo.",
+      },
+      {
+        q: "¿Cuánto sale cambiar la batería del celular?",
+        a: `En Samsung Galaxy A va de ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[2].from)} a ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[2].to)}, en Motorola Moto G de ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[3].from)} a ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[3].to)} y en iPhone desde ${formatArsPrice(IPHONE_BATTERY_FROM)}. El precio exacto por modelo de iPhone está en la guía de reparación de iPhone.`,
       },
       {
         q: "¿Trabajan con todas las marcas?",
@@ -441,14 +449,14 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
   },
   "reparacion-audio-celular-caba": {
     slug: "reparacion-audio-celular-caba",
-    h1: "Reparación de audio en CABA",
+    h1: "Reparación de audio de celular en CABA",
     metaTitle:
-      "Reparación de Audio en CABA | Micrófono y Parlante",
+      "Audio de Celular en CABA: Micrófono, Parlante y Auricular",
     metaDescription:
       "Micrófono, parlante o auricular sin sonido: reparación de audio de celulares en Paraguay 2451, Recoleta (CABA). Garantía escrita 90 días.",
     socialTitle: "Reparación de Audio de Celular en CABA | Team Celular",
     socialDescription:
-      "Team Celular, Paraguay 2451 Recoleta. Solución para fallas de micrófono, parlante y auricular con diagnóstico técnico y garantía 90 días.",
+      "Team Celular, Paraguay 2451 Recoleta. Micrófono, parlante y auricular de celular revisados bajo microscopio, con garantía escrita de 90 días.",
     keywords: [
       "reparacion audio celular CABA",
       "microfono celular no funciona",

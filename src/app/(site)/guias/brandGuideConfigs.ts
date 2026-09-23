@@ -1,3 +1,4 @@
+import { GOOGLE_RATING_FALLBACK } from "@/lib/googleReviews";
 import type { Metadata } from "next";
 import type {
   GuideFaqItem,
@@ -32,6 +33,8 @@ type BrandGuideSeed = {
   modifiedTime?: string;
   specialtyFocus: string;
   knownWeakPoints: [string, string, string];
+  /** <title> propio: el H1 sale de titleOverride. */
+  seoTitleOverride?: string;
   serviceHref: string;
   siblingHref: string;
   siblingLabel: string;
@@ -206,7 +209,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "POCO",
     badge: "Gaming y rendimiento",
-    imagePath: "/images/componentes-pc-gaming.webp",
+    imagePath: "/images/micro_diagnos_fino.webp",
     models: ["POCO F6 Pro", "POCO F6", "POCO X6 Pro", "POCO M6 Pro"],
     specialtyFocus:
       "equipos de alto rendimiento con foco en temperatura, bateria y carga",
@@ -222,6 +225,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-oppo-buenos-aires",
+    seoTitleOverride: "Servicio técnico OPPO en CABA: Reno y A | Team Celular",
     modifiedTime: "2026-09-02T00:00:00Z",
     titleOverride: "Reparacion de OPPO en Buenos Aires: Reno y serie A",
     metaDescriptionOverride:
@@ -242,7 +246,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "OPPO",
     badge: "Android",
-    imagePath: "/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp",
+    imagePath: "/images/micro_diagnos_fino.webp",
     models: ["OPPO Reno12", "OPPO Reno11", "OPPO A79", "OPPO A58"],
     specialtyFocus:
       "linea Reno y A con foco en pantalla, bateria y tecnologia de carga rapida",
@@ -258,6 +262,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-infinix-buenos-aires",
+    seoTitleOverride: "Servicio técnico Infinix en CABA | Team Celular",
     metaDescriptionOverride:
       "Infinix Note, Hot y Zero: sin service oficial físico en el país, los reparamos en Recoleta y Belgrano con diagnóstico en el día y garantía 90 días.",
     titleOverride:
@@ -294,6 +299,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-zte-buenos-aires",
+    seoTitleOverride: "Servicio técnico ZTE y Nubia en CABA | Team Celular",
     modifiedTime: "2026-09-02T00:00:00Z",
     titleOverride: "Reparacion de ZTE en Buenos Aires: audio, carga y reinicios",
     metaDescriptionOverride:
@@ -314,7 +320,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "ZTE",
     badge: "Android",
-    imagePath: "/images/aurisBlue.webp",
+    imagePath: "/images/micro_diagnos_fino.webp",
     models: ["ZTE Blade V50", "ZTE Blade A73", "ZTE Nubia", "ZTE Axon"],
     specialtyFocus:
       "familias Blade y Nubia con foco en audio, carga y estabilidad de placa",
@@ -330,6 +336,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-tecno-buenos-aires",
+    seoTitleOverride: "Tecno: reparación y servicio técnico en CABA | Team Celular",
     titleOverride: "Reparacion de Tecno en Buenos Aires: Camon, Pova y Spark",
     metaDescriptionOverride:
       "Tecno Camon, Pova, Spark y Phantom: pantalla con rayas, cámara sin nitidez y batería que cae. Reparación en CABA con garantía escrita de 90 días.",
@@ -365,6 +372,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-alcatel-buenos-aires",
+    seoTitleOverride: "Servicio técnico Alcatel en CABA | Team Celular",
     titleOverride: "Reparacion de Alcatel en Buenos Aires: conviene arreglarlo?",
     metaDescriptionOverride:
       "Alcatel series 1, 3, 5 y T: te decimos si conviene reparar antes de cobrarte. Diagnóstico el mismo día en CABA y garantía de 90 días.",
@@ -472,6 +480,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-huawei-buenos-aires",
+    seoTitleOverride: "Servicio técnico Huawei en CABA | Team Celular",
     titleOverride: "Reparacion de Huawei en Buenos Aires: camara, sensores y placa",
     metaDescriptionOverride:
       "Huawei P60, P50, Mate y Nova: cámara que no enfoca, sensores tras humedad o golpes y fallas de placa. Reparación en CABA, garantía 90 días.",
@@ -507,6 +516,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-tcl-buenos-aires",
+    seoTitleOverride: "Servicio técnico TCL celulares en CABA | Team Celular",
     metaDescriptionOverride:
       "Celulares TCL sin red oficial en el país: pantalla, batería y pin de carga en Recoleta y Belgrano (CABA), diagnóstico en el día, garantía 90 días.",
     titleOverride:
@@ -675,7 +685,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
 
   const faq: GuideFaqItem[] = [
     {
-      question: `¿Reparan ${seed.brand} aunque no sea una marca tan común?`,
+      question: `¿Dónde reparar un ${seed.brand} en CABA si no es service oficial?`,
       answer:
         `Sí. Reparamos ${seed.brand} en nuestros talleres en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032), CABA. Confirmamos viabilidad según modelo y repuesto disponible antes de intervenir.`,
     },
@@ -714,7 +724,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     badge: seed.badge,
     readingTime: "5 min",
     publishedTime: "2026-04-20T00:00:00Z",
-    modifiedTime: seed.modifiedTime ?? "2026-06-09T00:00:00Z",
+    modifiedTime: seed.modifiedTime ?? "2026-09-22T00:00:00Z",
     imagePath: seed.imagePath,
     articleAbout: [
       `Reparacion de ${seed.brand}`,
@@ -722,21 +732,21 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
       ...seed.models,
     ],
     heroPoints: [
-      `Diagnostico orientado a equipos ${seed.brand}.`,
-      `Enfoque tecnico en ${seed.specialtyFocus}.`,
-      `Punto critico frecuente: ${seed.knownWeakPoints[0]}.`,
+      "Diagnóstico el mismo día, sin turno.",
+      "Garantía escrita de 90 días sobre trabajo y repuesto.",
+      `Google ${GOOGLE_RATING_FALLBACK.rating.toFixed(1).replace(".", ",")} con ${GOOGLE_RATING_FALLBACK.total} reseñas en Recoleta.`,
     ],
     symptomsTitle: `¿Cuáles son las fallas más frecuentes en ${seed.brand}?`,
     symptomsDescription:
-      `Estas senales son las mas reportadas en ${seed.brand} y conviene abordarlas antes de que escalen a placa.`,
+      `Estas son las señales que más vemos en ${seed.brand}. Conviene resolverlas antes de que lleguen a la placa.`,
     symptoms,
     diagnosisTitle: `¿Cómo diagnosticamos un ${seed.brand}?`,
     diagnosisDescription:
-      `Aplicamos una secuencia tecnica para ${seed.brand}, separando sintoma visible de causa real sin cambiar piezas de mas.`,
+      `Separamos el síntoma visible de la causa real antes de cambiar una pieza.`,
     diagnostics,
     planTitle: `¿Qué plan seguimos para reparar ${seed.brand}?`,
     planDescription:
-      `El objetivo es estabilizar ${seed.brand} en uso diario, priorizando la falla que mas afecta rendimiento y autonomia.`,
+      `Primero se resuelve la falla que más te complica el uso diario; lo demás se consulta antes de sumarlo.`,
     planSteps,
     faq: [...(seed.extraFaq ?? []), ...faq],
     relatedLinks,
@@ -748,7 +758,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
       // Sin el sufijo de sucursales: con marcas de nombre largo el title
       // superaba los 60 caracteres y se truncaba. Las sucursales ya estan en
       // la meta description.
-      title: `Reparación de ${seed.brand} en CABA | Team Celular`,
+      title: seed.seoTitleOverride ?? `Reparación de ${seed.brand} en CABA | Team Celular`,
       description:
         seed.metaDescriptionOverride ??
         `Taller en Recoleta y Belgrano que repara ${seed.brand}: pantalla, batería y carga con diagnóstico el mismo día en CABA. Garantía escrita 90 días.`,

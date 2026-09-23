@@ -126,7 +126,7 @@ export default function HighIntentGuidePage({
         <BreadcrumbJsonLd
           items={[
             { name: "Inicio", url: `${siteUrl}/` },
-            { name: "Guias", url: `${siteUrl}/guias` },
+            { name: "Guías", url: `${siteUrl}/guias` },
             { name: pageLabel, url: pageUrl },
           ]}
         />
@@ -137,7 +137,7 @@ export default function HighIntentGuidePage({
           </Link>
           <span>/</span>
           <Link href="/guias" className="transition hover:text-primary">
-            Guias
+            Guías
           </Link>
           <span>/</span>
           <span className="font-semibold text-slate-900 dark:text-slate-100">
@@ -177,7 +177,7 @@ export default function HighIntentGuidePage({
                   ctaVariant="primary"
                   className="inline-flex min-h-12 w-full sm:w-auto items-center justify-center rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#20216b] transition hover:bg-slate-100"
                 >
-                  Pedir diagnostico y presupuesto
+                  Pedir diagnóstico y presupuesto
                 </TrackedCtaLink>
                 <TrackedCtaLink
                   href={`https://wa.me/5491151034595?text=${encodeURIComponent(whatsappText)}`}
@@ -346,7 +346,7 @@ export default function HighIntentGuidePage({
 
         <section className="rounded-3xl border border-slate-200/80 bg-white p-8 shadow-sm dark:border-white/10 dark:bg-slate-900/85">
           <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">
-            Guias relacionadas para seguir evaluando
+            Guías relacionadas para seguir evaluando
           </h2>
           <div className="mt-4 flex flex-wrap gap-3">
             {relatedLinks.map((link, index) => (

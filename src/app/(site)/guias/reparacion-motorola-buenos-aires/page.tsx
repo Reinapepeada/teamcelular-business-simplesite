@@ -28,9 +28,9 @@ const PAGE_PATH = "/guias/reparacion-motorola-buenos-aires";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 
 export const metadata: Metadata = {
-  title: "Reparación de Motorola en Buenos Aires, CABA | Team Celular",
+  title: "Service Motorola en CABA: Recoleta y Belgrano | Team Celular",
   description:
-    "Pantalla, batería y pin de carga de Motorola en el día: Moto G y Edge en Paraguay 2451, Recoleta (CABA). Garantía escrita 90 días.",
+    "Servicio técnico Motorola en CABA, sin ser service oficial: Moto G y Edge en Recoleta y Belgrano. Pantalla desde $99.900, en 2-4 h. Garantía 90 días.",
   keywords: [
     "reparacion motorola buenos aires",
     "service motorola caba",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Reparación de Motorola en Buenos Aires, CABA | Team Celular",
+    title: "Service Motorola en CABA: Recoleta y Belgrano | Team Celular",
     description:
       "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla, batería y pin de carga de Motorola en el día, garantía escrita 90 días. Moto G, Edge y E.",
     type: "article",

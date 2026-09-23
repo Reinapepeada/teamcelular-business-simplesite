@@ -160,8 +160,8 @@ const differentiators = [
 const stats = [
     { icon: FaClock, value: "15+", label: "Años de experiencia" },
     { icon: FaUsers, value: "10.000+", label: "Equipos reparados" },
-    { icon: FaGlobe, value: "3", label: "Paises" },
-    { icon: FaStar, value: "4.8", label: "Calificacion promedio" },
+    { icon: FaGlobe, value: "3", label: "Países" },
+    { icon: FaStar, value: "4,9", label: "en Google (362 reseñas)" },
 ];
 
 export default function SobreNosotrosPage() {

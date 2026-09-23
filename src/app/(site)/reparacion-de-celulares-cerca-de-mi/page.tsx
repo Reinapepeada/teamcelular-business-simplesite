@@ -12,10 +12,8 @@ const nearbyZones = [
   { name: "Recoleta", href: "/sucursales/caba/recoleta" },
   { name: "Palermo", href: "/zonas/palermo" },
   { name: "Belgrano", href: "/sucursales/caba/belgrano" },
-  { name: "Caballito", href: "/zonas/caballito" },
   { name: "Almagro", href: "/zonas/almagro" },
   { name: "Balvanera", href: "/zonas/balvanera" },
-  { name: "Microcentro", href: "/zonas/microcentro" },
 ];
 
 const frequentRepairs = [
@@ -89,15 +87,14 @@ const localSignals = [
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: "/reparacion-de-celulares-cerca-de-mi",
-  title: "Reparación de Celulares Cerca de Mi en CABA | Team Celular",
+  title: "Servicio Técnico de Celulares Cerca de Mí en CABA",
   description:
-    "Reparación de celulares cerca de vos en CABA. Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga en el día. Garantía escrita 90 días.",
+    "Servicio técnico de celulares en Recoleta (subte D, Pueyrredón) y Belgrano. Sin turno, lun a vie 10:30-18. Pantalla y batería en el día, garantía 90 días.",
   keywords: [
     "reparacion de celulares cerca de mi",
     "arreglo de celulares cerca de mi",
     "servicio tecnico celulares cerca de mi",
     "reparacion celulares recoleta",
-    "reparacion de celulares caba",
     "cambio pantalla celular cerca",
     "cambio bateria celular recoleta",
   ],
@@ -146,40 +143,6 @@ export default function ReparacionCelularesCercaPage() {
     })),
   };
 
-  const localBusinessJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": `${SITE_URL}#localbusiness`,
-    name: "Team Celular",
-    image: `${SITE_URL}/images/brand/imagotipo-dark.png`,
-    url: `${SITE_URL}/sucursales/caba/recoleta`,
-    telephone: "+54 11 5103-4595",
-    priceRange: "$$",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Paraguay 2451",
-      addressLocality: "Recoleta",
-      addressRegion: "CABA",
-      postalCode: "C1121",
-      addressCountry: "AR",
-    },
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-        ],
-        opens: "10:30",
-        closes: "18:00",
-      },
-    ],
-    areaServed: ["Recoleta", "Palermo", "Belgrano", "Caballito", "CABA"],
-    sameAs: ["https://wa.me/5491151034595"],
-  };
 
   return (
     <section className="w-full max-w-6xl px-6 py-14 md:px-8">
@@ -198,7 +161,7 @@ export default function ReparacionCelularesCercaPage() {
           Reparación de celulares cerca de vos, con talleres en Recoleta y Belgrano, CABA
         </h1>
         <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          Team Celular tiene dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2032, Belgrano</strong>. Diagnóstico el mismo día, presupuesto claro sin compromiso
+          Team Celular tiene dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2032, Belgrano</strong>. Diagnóstico el mismo día, presupuesto antes de abrir el equipo
           y garantía escrita de <strong>90 días</strong> sobre trabajo y repuesto.
           Pantalla, batería y carga suelen salir en el día.
         </p>
@@ -270,7 +233,7 @@ export default function ReparacionCelularesCercaPage() {
 
       <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Señales locales para validar cercania real
+          ¿Cómo llego al taller?
         </h2>
         <ul className="mt-4 space-y-3 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
           {localSignals.map((signal) => (
@@ -336,10 +299,6 @@ export default function ReparacionCelularesCercaPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
       />
     </section>
   );

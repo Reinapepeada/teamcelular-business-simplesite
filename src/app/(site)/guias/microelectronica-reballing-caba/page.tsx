@@ -19,9 +19,9 @@ import GuideByline from "@/components/seo/GuideByline";
 import VideoSchema from "@/components/seo/VideoSchema";
 
 export const metadata: Metadata = {
-  title: "Microelectrónica y Reballing BGA en CABA | Team Celular",
+  title: "Reballing en celulares: qué es y cuándo se hace | CABA",
   description:
-    "Reballing BGA y reparación de placas con garantía escrita de 90 días. Microscopio y protocolos ESD. Recoleta y Belgrano, CABA.",
+    "Qué es el reballing en celulares y cuándo se necesita. Team Celular, Paraguay 2451 Recoleta: revisión bajo microscopio y garantía escrita de 90 días.",
   keywords: [
     "microelectrónica Buenos Aires",
     "reballing BGA CABA",
@@ -65,12 +65,12 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2024-02-20T00:00:00Z",
-    modifiedTime: "2026-08-20T00:00:00Z",
+    modifiedTime: "2026-09-22T00:00:00Z",
     section: "Guías Técnicas",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Microelectrónica y Reballing BGA en CABA | Team Celular",
+    title: "Reballing en celulares: qué es y cuándo se hace | CABA",
     description:
       "Reballing BGA y reparación de placas en CABA — Team Celular, Recoleta y Belgrano. Microscopio profesional y garantía escrita de 90 días.",
     images: ["https://teamcelular.com/images/guia_microelectronica.webp"],
@@ -160,12 +160,16 @@ const faqMicro = [
     answer: "El reballing BGA es el proceso de remover un chip (CPU, NAND, baseband, etc.) de la placa, limpiar los contactos y aplicar nuevas bolas de soldadura. Es necesario cuando el chip pierde contacto con la placa por golpes, sobrecalentamiento o desgaste térmico, causando fallas como 'no enciende', pérdida de señal WiFi o loops de boot.",
   },
   {
+    question: "¿El reballing es lo mismo que cambiar el chip?",
+    answer: "No. En el reballing se reutiliza el mismo chip y solo se renuevan las bolas de soldadura que lo unen a la placa. Cambiar el chip implica un repuesto nuevo, y en la memoria o el procesador de un iPhone muchas veces no se puede, porque están emparejados con la placa.",
+  },
+  {
     question: "¿Cuánto tarda una reparación de microelectrónica?",
-    answer: "Depende de la complejidad. Un reballing simple puede tomar 4-6 horas. Reparaciones complejas con reconstrucción de pistas o múltiples chips pueden requerir 2-3 días. Siempre hacemos revisión técnica previa arancelada. El valor suele variar entre ARS 15.000 y ARS 25.000 para darte un tiempo estimado preciso.",
+    answer: `Un reballing de un solo chip lleva entre 4 y 6 horas de banco. Si hay que reconstruir pistas o intervenir varios chips, puede llevar 2 a 3 días. ${REVIEW_COST_MESSAGE}`,
   },
   {
     question: "¿Tienen garantía las reparaciones de placa?",
-    answer: `Si. ${WARRANTY_SCOPE_MESSAGE} La cobertura no incluye danos nuevos por liquidos, golpes o uso inadecuado posterior.`,
+    answer: `Sí. ${WARRANTY_SCOPE_MESSAGE} La cobertura no incluye daños nuevos por líquidos, golpes o uso inadecuado posterior.`,
   },
   {
     question: "¿Qué equipos pueden reparar a nivel microelectrónica?",
@@ -200,7 +204,7 @@ export default function MicroelectronicsGuide() {
         title="Microelectrónica y Reballing BGA en Buenos Aires | Team Celular"
         description="Team Celular, Paraguay 2451 Recoleta y Amenábar 2032 Belgrano, CABA. Reballing BGA, soldadura SMD y reparación de placas lógicas con microscopio profesional y garantía escrita de 90 días."
         publishedTime="2024-02-20T00:00:00Z"
-        modifiedTime="2026-08-20T00:00:00Z"
+        modifiedTime="2026-09-22T00:00:00Z"
         image="https://teamcelular.com/images/guia_microelectronica.webp"
         url={PAGE_URL}
       />
@@ -214,18 +218,21 @@ export default function MicroelectronicsGuide() {
         />
         {/* Hero Section */}
         <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-16">
-          <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-primary via-secondary to-primary shadow-2xl">
+          <div className="mx-auto mb-6 hidden h-24 w-24 items-center justify-center rounded-2xl md:flex bg-gradient-to-br from-primary via-secondary to-primary shadow-2xl">
             <FaMicroscope className="text-5xl text-white" />
           </div>
           <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-            Microelectrónica y Reballing BGA en Buenos Aires
+            Reballing en celulares: qué es y cuándo se hace en CABA
           </h1>
           <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
-            Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), repara placas lógicas y hace reballing BGA con{" "}
-            <strong className="text-primary">microscopio trinocular y protocolos ESD</strong>. Garantía escrita de 90 días sobre cada intervención — incluso en equipos que otros talleres ya descartaron.
+            El reballing es volver a soldar un chip BGA a la placa: se levanta el chip (procesador, memoria, energía o
+            módem), se limpian los contactos y se le ponen bolas de estaño nuevas con plantilla. Se hace cuando el
+            celular no enciende, se reinicia en loop o pierde señal después de un golpe, calor o un mojado. Team
+            Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), lo hace bajo{" "}
+            <strong className="text-primary">microscopio trinocular y con protocolo ESD</strong>, con garantía escrita de 90 días.
           </p>
           <div className="mt-4 flex justify-center">
-            <GuideByline modifiedTime="2026-08-20T00:00:00Z" tone="light" />
+            <GuideByline modifiedTime="2026-09-22T00:00:00Z" tone="light" />
           </div>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
