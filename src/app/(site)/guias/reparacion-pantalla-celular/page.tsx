@@ -239,15 +239,15 @@ const faqScreen = [
   ...quickAnswers,
   {
     question: "¿Se pierde Face ID o Touch ID al cambiar la pantalla?",
-    answer: "No, si el cambio se hace bien. Desde el iPhone 13 la pantalla viene emparejada con el equipo: si no se transfiere el IC original por microsoldadura, se pierden el Face ID y el True Tone. Nosotros hacemos esa transferencia en cada cambio. Face ID y Touch ID están vinculados a módulos específicos que se transfieren de la pantalla original a la nueva. En Team Celular transferimos TODOS los componentes originales: módulo Face ID completo (dot projector, flood illuminator, cámara infrarroja), botón Home con Touch ID, cámara frontal y sensores. La única excepción es si el módulo biométrico original está físicamente dañado, en ese caso Face ID/Touch ID no funcionará con ninguna pantalla.",
+    answer: "No, si se hace bien. Desde el iPhone 13 la pantalla viene emparejada con el equipo: si no se transfiere el IC original por microsoldadura, se pierden Face ID y True Tone. Nosotros hacemos esa transferencia en cada cambio.",
   },
   {
     question: "¿Qué es True Tone y se puede mantener?",
-    answer: "True Tone es una tecnología de Apple que ajusta automáticamente la temperatura de color de la pantalla según la luz ambiente. Cada pantalla original tiene datos de calibración únicos. Para preservar True Tone, usamos programadores especializados (JC V1S, Qianli iCopy) que transfieren estos datos del módulo original a la pantalla nueva. Esto solo es posible si: 1) La pantalla original está funcional (aunque rota), 2) Usamos pantalla original o AAA+ compatible, 3) El módulo de calibración no está dañado. En iPhone 13+ Apple ha restringido aún más esta función.",
+    answer: "Es la función de iPhone que ajusta el color de la pantalla según la luz. Se mantiene si transferimos los datos de la pantalla original a la nueva, y para eso la original tiene que funcionar, aunque esté rota.",
   },
   {
     question: "¿Cuánto tiempo tarda el cambio de pantalla?",
-    answer: "El servicio express toma 2-4 horas si tenemos el repuesto en stock. El proceso incluye: diagnóstico inicial (15 min), desmontaje (20 min), transferencia de componentes (20 min), instalación (25 min), calibración True Tone si aplica (15 min) y test completo (15 min). Para modelos menos comunes que requieren pedido de pantalla, el tiempo es de 24-48 horas. Ofrecemos servicio de espera en nuestros locales de Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032) con WiFi.",
+    answer: "De 2 a 4 horas si el repuesto está en stock. Si hay que pedirlo, de 24 a 48 horas. Podés esperar en Recoleta o Belgrano.",
   },
   {
     question: "¿La pantalla nueva viene con garantía?",
@@ -255,7 +255,7 @@ const faqScreen = [
   },
   {
     question: "¿Puedo usar el celular normalmente después del cambio?",
-    answer: "Sí, pero recomendamos esperar 2-3 horas antes de uso intensivo para que el adhesivo cure completamente. Durante las primeras 24 horas: evitar presión excesiva en los bordes, no sumergir en agua (aunque tenga IP68), no aplicar protector de pantalla inmediatamente. Después de 24 horas el equipo está 100% funcional. Si instalamos pantalla original en iPhone, todas las funciones quedan idénticas a fábrica: True Tone, brillo automático, Night Shift, etc. Recomendamos usar funda y protector de pantalla de calidad.",
+    answer: "Sí. Conviene esperar 2 o 3 horas antes de exigirlo para que cure el adhesivo, y no mojarlo durante las primeras 24 horas.",
   },
 ];
 
@@ -518,7 +518,7 @@ export default function ScreenReplacementGuide() {
             </p>
           </div>
           <div className="space-y-4">
-            {faqScreen.map((faq, index) => (
+            {faqScreen.slice(quickAnswers.length).map((faq, index) => (
               <details
                 key={index}
                 className="group rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-xl transition hover:shadow-lg dark:border-white/10 dark:bg-slate-900/30"

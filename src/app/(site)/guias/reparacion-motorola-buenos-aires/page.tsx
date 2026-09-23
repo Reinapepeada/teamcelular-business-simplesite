@@ -158,7 +158,6 @@ const frequentRepairs = [
     description:
       "Módulo LCD o AMOLED con prueba de brillo, touch y sensores antes de entregar. Trabajamos Moto G series, Edge y variantes con pantalla curva.",
     eta: "2-4 h",
-    warranty: "Garantía 90 días",
     Icon: FaMobileAlt,
   },
   {
@@ -166,7 +165,6 @@ const frequentRepairs = [
     description:
       "Batería de calidad con test de autonomía real. Ideal para Moto G que dura menos de medio día o se apaga en forma repentina.",
     eta: "1-2 h",
-    warranty: "Garantía 90 días",
     Icon: FaBatteryFull,
   },
   {
@@ -174,7 +172,6 @@ const frequentRepairs = [
     description:
       "Reparamos pin, flex de carga y micrófonos inferiores. Frecuente en Moto G14, G24, G54 y Edge por uso intensivo con carga rápida.",
     eta: "1-3 h",
-    warranty: "Garantía 90 días",
     Icon: FaBolt,
   },
   {
@@ -182,7 +179,6 @@ const frequentRepairs = [
     description:
       "Cambio o reparación de módulo trasero y frontal con ajuste de foco. Cubrimos Edge 40/50 y Moto G84/G85 con cámara de alta resolución.",
     eta: "2-3 h",
-    warranty: "Garantía 90 días",
     Icon: FaCamera,
   },
   {
@@ -190,7 +186,6 @@ const frequentRepairs = [
     description:
       "Reparamos botón de encendido, volumen, flex de huellas dactilares, micrófono y parlante en toda la línea Moto G y Edge.",
     eta: "1-3 h",
-    warranty: "Garantía 90 días",
     Icon: FaShieldAlt,
   },
   {
@@ -198,7 +193,6 @@ const frequentRepairs = [
     description:
       "Diagnóstico y reparación de placa para Motorola que no enciende, reinicia o no toma carga luego de un golpe o daño por líquidos.",
     eta: "24-48 h",
-    warranty: "Garantía 90 días",
     Icon: FaMicrochip,
   },
 ];
@@ -520,17 +514,7 @@ export default function MotorolaRepairGuidePage() {
           </div>
         </section>
 
-        <section className="space-y-6 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Reseñas reales antes de reparar tu Motorola
-            </h2>
-            <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
-              Opiniones verificables de Google sobre diagnósticos y reparaciones realizadas en el laboratorio.
-            </p>
-          </div>
-          <GoogleReviewsAPI />
-        </section>
+        <GoogleReviewsAPI />
 
         <section className="space-y-7">
           <div className="text-center">
@@ -598,9 +582,6 @@ export default function MotorolaRepairGuidePage() {
                   <div className="mt-4 flex items-center justify-between text-xs font-semibold">
                     <span className="rounded-full bg-primary px-3 py-1 text-white">
                       {repair.eta}
-                    </span>
-                    <span className="rounded-full bg-secondary/10 px-3 py-1 text-secondary">
-                      {repair.warranty}
                     </span>
                   </div>
                   {repairLinks[repair.title] && (
@@ -687,44 +668,6 @@ export default function MotorolaRepairGuidePage() {
           </p>
         </section>
 
-        <section className="grid gap-6 rounded-3xl border border-white/15 bg-white/5 p-6 shadow-xl backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:grid-cols-[1.15fr_0.85fr] md:items-center md:p-8">
-          <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-slate-900/40">
-            <Image
-              src="/images/guia_motorola.webp"
-              alt="Laboratorio de reparación Motorola Team Celular Recoleta CABA"
-              width={1200}
-              height={900}
-              sizes="(max-width: 768px) 100vw, 60vw"
-              className="h-auto w-full object-cover"
-            />
-          </div>
-          <article className="space-y-4">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-              Diagnóstico real, sin respuestas genéricas
-            </h2>
-            <p className="text-slate-600 dark:text-slate-300">
-              Evaluamos síntomas, pruebas y contexto del equipo para darte una recomendación
-              concreta. Si no conviene reparar el Motorola, te lo decimos claro antes de avanzar
-              — el informe técnico va incluido en el diagnóstico (ARS 15.000 a 25.000).
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href={`https://wa.me/5491151034595?text=${encodeURIComponent(
-                  "Hola Team Celular, quiero cotizar una reparación de Motorola. Modelo y falla:"
-                )}`}
-                className="inline-flex min-h-11 items-center rounded-full bg-emerald-700 px-5 text-sm font-semibold text-white transition hover:bg-emerald-800"
-              >
-                Consultar por WhatsApp
-              </Link>
-              <Link
-                href="/presupuesto-reparacion#solicitar-presupuesto"
-                className="inline-flex min-h-11 items-center rounded-full border border-slate-300 px-5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
-              >
-                Ver presupuesto
-              </Link>
-            </div>
-          </article>
-        </section>
 
         <section className="space-y-5 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
           <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-white">
@@ -771,81 +714,7 @@ export default function MotorolaRepairGuidePage() {
           </div>
         </section>
 
-        <section className="rounded-3xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-8 text-center backdrop-blur-2xl dark:border-white/10 dark:from-slate-900/45 dark:via-slate-900/30 dark:to-slate-900/45 md:p-12">
-          <h2 className="text-3xl font-black text-slate-900 dark:text-white">
-            Servicio por marca: Motorola, Samsung, iPhone y Xiaomi
-          </h2>
-          <p className="mx-auto mt-4 max-w-3xl text-lg text-slate-700 dark:text-slate-300">
-            Cada guía tiene procesos, fallas típicas y criterios de repuesto adaptados a esa marca. Si tenés otro modelo, revisá la guía que corresponde.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Link
-              href="/guias/reparacion-samsung-buenos-aires"
-              className="rounded-full border border-slate-300/80 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200"
-            >
-              Ver guía Samsung
-            </Link>
-            <Link
-              href="/guias/reparacion-iphone-buenos-aires"
-              className="rounded-full border border-slate-300/80 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200"
-            >
-              Ver guía iPhone
-            </Link>
-            <Link
-              href="/guias/reparacion-xiaomi-buenos-aires"
-              className="rounded-full border border-slate-300/80 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200"
-            >
-              Ver guía Xiaomi
-            </Link>
-            <Link
-              href="/presupuesto-reparacion"
-              className="rounded-full bg-secondary px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-secondary/90"
-            >
-              Pedir diagnóstico ahora
-            </Link>
-          </div>
-        </section>
 
-        <section className="space-y-5 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-            Lecturas relacionadas para seguir evaluando
-          </h2>
-          <div className="grid gap-4 md:grid-cols-3">
-            <Link
-              href="/reparaciones/cambio-pantalla-caba"
-              className="rounded-2xl border border-white/20 bg-white/10 p-5 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
-            >
-              <h3 className="font-bold text-primary">
-                Cambio de pantalla en CABA
-              </h3>
-              <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                Proceso y tiempos para módulo LCD y AMOLED con prueba funcional.
-              </p>
-            </Link>
-            <Link
-              href="/reparaciones/cambio-bateria-caba"
-              className="rounded-2xl border border-white/20 bg-white/10 p-5 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
-            >
-              <h3 className="font-bold text-primary">
-                Cambio de batería en CABA
-              </h3>
-              <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                Diagnóstico de desgaste y reemplazo con test de autonomía real.
-              </p>
-            </Link>
-            <Link
-              href="/reparaciones/cambio-pin-carga-caba"
-              className="rounded-2xl border border-white/20 bg-white/10 p-5 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
-            >
-              <h3 className="font-bold text-primary">
-                Pin de carga USB-C en CABA
-              </h3>
-              <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                Reparación de carga intermitente y falso contacto en Moto G.
-              </p>
-            </Link>
-          </div>
-        </section>
 
         <GuideInterlinkSection currentGuide="/guias/reparacion-motorola-buenos-aires" />
 

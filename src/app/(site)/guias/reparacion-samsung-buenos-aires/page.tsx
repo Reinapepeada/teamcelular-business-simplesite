@@ -11,7 +11,6 @@ import {
   FaBolt,
   FaCamera,
   FaCheckCircle,
-  FaClock,
   FaMobileAlt,
   FaMicrochip,
   FaShieldAlt,
@@ -152,7 +151,6 @@ const repairServices = [
     detail:
       "Para Galaxy S y Note priorizamos paneles con buen contraste, tasa de refresco estable y respuesta tactil precisa.",
     eta: "2-4 h",
-    warranty: "Garantía 90 días",
     Icon: FaMobileAlt,
   },
   {
@@ -160,7 +158,6 @@ const repairServices = [
     detail:
       "Reemplazo de bateria para equipos que se apagan en frio, bajan de 30% a 0% o pierden carga en reposo.",
     eta: "1-2 h",
-    warranty: "Garantía 90 días",
     Icon: FaBolt,
   },
   {
@@ -168,7 +165,6 @@ const repairServices = [
     detail:
       "Solucion para carga intermitente, cable flojo o equipo que no negocia carga rapida. Incluye limpieza tecnica y test final.",
     eta: "2-3 h",
-    warranty: "Garantía 90 días",
     Icon: FaShieldAlt,
   },
   {
@@ -176,7 +172,6 @@ const repairServices = [
     detail:
       "Reparamos modulos de camara en Galaxy S y A para recuperar nitidez, enfoque y estabilizacion segun cada equipo.",
     eta: "2-4 h",
-    warranty: "Garantía 90 días",
     Icon: FaCamera,
   },
   {
@@ -184,7 +179,6 @@ const repairServices = [
     detail:
       "Microelectronica para equipos que no encienden, quedan en logo o presentan reinicios constantes despues de golpes o humedad.",
     eta: "24-48 h",
-    warranty: "Garantía 90 días",
     Icon: FaMicrochip,
   },
   {
@@ -192,7 +186,6 @@ const repairServices = [
     detail:
       "Evaluamos pliegue, bisagra, cableados flex y panel interno para definir si conviene reparacion parcial o reemplazo completo.",
     eta: "24-72 h",
-    warranty: "Garantía 90 días",
     Icon: FaWrench,
   },
 ];
@@ -238,31 +231,6 @@ const repairLinks: Record<string, string> = {
   "Placa logica Samsung": "/reparaciones/reparacion-placa-caba",
 };
 
-const trustReasons = [
-  {
-    title: "Especializacion real en Samsung Galaxy",
-    description:
-      "No tratamos todos los equipos igual. Ajustamos repuesto y procedimiento segun familia S, A o Z.",
-    Icon: FaCheckCircle,
-  },
-  {
-    title: "Diagnostico util para decidir",
-    description:
-      "Recibis opciones con costo, tiempo y riesgo tecnico, para elegir la alternativa mas rentable para tu equipo.",
-    Icon: FaTools,
-  },
-  {
-    title: "Garantia escrita segun servicio",
-    description: WARRANTY_SCOPE_MESSAGE,
-    Icon: FaShieldAlt,
-  },
-  {
-    title: "Flujo express para fallas comunes",
-    description:
-      "Pantalla, bateria y carga suelen resolverse el mismo dia si hay stock disponible.",
-    Icon: FaClock,
-  },
-];
 
 const samsungModels = [
   "Galaxy S25 Ultra",
@@ -538,17 +506,7 @@ export default function SamsungRepairGuidePage() {
           </div>
         </section>
 
-        <section className="space-y-6 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Reseñas reales antes de reparar tu Samsung
-            </h2>
-            <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
-              Opiniones verificables de Google sobre diagnósticos y reparaciones realizadas en el laboratorio.
-            </p>
-          </div>
-          <GoogleReviewsAPI />
-        </section>
+        <GoogleReviewsAPI />
 
         <section className="space-y-7">
           <div className="text-center">
@@ -616,9 +574,6 @@ export default function SamsungRepairGuidePage() {
                   <div className="mt-4 flex items-center justify-between text-xs font-semibold">
                     <span className="rounded-full bg-primary px-3 py-1 text-white">
                       {service.eta}
-                    </span>
-                    <span className="rounded-full bg-secondary/10 px-3 py-1 text-secondary">
-                      {service.warranty}
                     </span>
                   </div>
                   {repairLinks[service.title] && (
@@ -690,71 +645,7 @@ export default function SamsungRepairGuidePage() {
           </div>
         </section>
 
-        <section className="space-y-6 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
-          <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-white">
-            Diagnóstico, repuestos y garantía: qué esperás al traer tu Samsung
-          </h2>
-          <div className="grid gap-4 md:grid-cols-2">
-            {trustReasons.map((reason) => {
-              const Icon = reason.Icon;
-              return (
-                <article
-                  key={reason.title}
-                  className="flex gap-4 rounded-2xl border border-white/20 bg-white/10 p-5 dark:border-white/15 dark:bg-slate-900/40"
-                >
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
-                    <Icon />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-slate-900 dark:text-white">
-                      {reason.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                      {reason.description}
-                    </p>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </section>
 
-        <section className="grid gap-6 rounded-3xl border border-white/15 bg-white/5 p-6 shadow-xl backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:grid-cols-[1.15fr_0.85fr] md:items-center md:p-8">
-          <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-slate-900/40">
-            <Image
-              src="/images/samsung_portada.webp"
-              alt="Laboratorio de reparación Samsung Galaxy en Team Celular, Recoleta CABA"
-              width={1200}
-              height={900}
-              sizes="(max-width: 768px) 100vw, 60vw"
-              className="h-auto w-full object-cover"
-            />
-          </div>
-          <article className="space-y-4">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-              Diagnóstico real antes de tocar el equipo
-            </h2>
-            <p className="text-slate-600 dark:text-slate-300">
-              Evaluamos síntomas, consumo eléctrico y estado de placa antes de confirmar presupuesto.
-              Si el Galaxy no conviene reparar, te lo decimos con datos claros — sin cobrar de más
-              por un diagnóstico que ya tiene respuesta.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="https://wa.me/5491151034595?text=Hola%20Team%20Celular%2C%20quiero%20cotizar%20una%20reparacion%20de%20Samsung"
-                className="inline-flex min-h-11 items-center rounded-full bg-emerald-700 px-5 text-sm font-semibold text-white transition hover:bg-emerald-800"
-              >
-                Consultar por WhatsApp
-              </Link>
-              <Link
-                href="/presupuesto-reparacion#solicitar-presupuesto"
-                className="inline-flex min-h-11 items-center rounded-full border border-slate-300 px-5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
-              >
-                Ver presupuesto
-              </Link>
-            </div>
-          </article>
-        </section>
 
         <section className="space-y-5 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
           <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-white">
@@ -801,76 +692,7 @@ export default function SamsungRepairGuidePage() {
           </div>
         </section>
 
-        <section className="rounded-3xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-8 text-center backdrop-blur-2xl dark:border-white/10 dark:from-slate-900/45 dark:via-slate-900/30 dark:to-slate-900/45 md:p-12">
-          <h2 className="text-3xl font-black text-slate-900 dark:text-white">
-            Compara servicios por marca antes de decidir
-          </h2>
-          <p className="mx-auto mt-4 max-w-3xl text-lg text-slate-700 dark:text-slate-300">
-            Si tambien evaluas iPhone o Xiaomi, entra a las otras landings para comparar
-            sintomas tipicos, tiempos de reparacion y criterios de repuestos.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Link
-              href="/guias/reparacion-iphone-buenos-aires"
-              className="rounded-full border border-slate-300/80 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200"
-            >
-              Ver landing iPhone
-            </Link>
-            <Link
-              href="/guias/reparacion-xiaomi-buenos-aires"
-              className="rounded-full border border-slate-300/80 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200"
-            >
-              Ver landing Xiaomi
-            </Link>
-            <Link
-              href="/presupuesto-reparacion"
-              className="rounded-full bg-secondary px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-secondary/90"
-            >
-              Pedir presupuesto Samsung
-            </Link>
-          </div>
-        </section>
 
-        <section className="space-y-5 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-            Guias relacionadas
-          </h2>
-          <div className="grid gap-4 md:grid-cols-3">
-            <Link
-              href="/guias/reparacion-iphone-buenos-aires"
-              className="rounded-2xl border border-white/20 bg-white/10 p-5 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
-            >
-              <h3 className="font-bold text-primary">
-                Reparacion de iPhone en Buenos Aires
-              </h3>
-              <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                Flujo premium para Apple con foco en True Tone y Face ID.
-              </p>
-            </Link>
-            <Link
-              href="/guias/reparacion-xiaomi-buenos-aires"
-              className="rounded-2xl border border-white/20 bg-white/10 p-5 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
-            >
-              <h3 className="font-bold text-primary">
-                Reparacion de Xiaomi, Redmi y POCO
-              </h3>
-              <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                Diagnostico para carga rapida, bateria y placa en Xiaomi.
-              </p>
-            </Link>
-            <Link
-              href="/guias/reparacion-pantalla-celular"
-              className="rounded-2xl border border-white/20 bg-white/10 p-5 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
-            >
-              <h3 className="font-bold text-primary">
-                Guia de reparacion de pantallas
-              </h3>
-              <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                Como elegir repuestos y que validar antes de cerrar una reparacion.
-              </p>
-            </Link>
-          </div>
-        </section>
 
         <GuideInterlinkSection currentGuide="/guias/reparacion-samsung-buenos-aires" />
 

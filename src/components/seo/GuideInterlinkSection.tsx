@@ -28,11 +28,11 @@ interface GuideInterlinkConfig {
 const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
   "/guias/cambio-bateria-celular": {
     guidance:
-      "Si tu equipo calienta o ya no rinde, conviene validar pantalla, carga y mantenimiento antes de cambiar piezas sin diagnostico.",
+      "Si tu equipo calienta o ya no rinde, conviene validar pantalla, carga y mantenimiento antes de cambiar piezas sin diagnóstico.",
     links: [
       {
         href: "/guias/reparacion-pantalla-celular",
-        title: "Guia de cambio de pantalla",
+        title: "Guía de cambio de pantalla",
         description:
           "Aprende cuando conviene reemplazar modulo y que revisar para evitar fallas repetidas.",
       },
@@ -116,7 +116,7 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
       },
       {
         href: "/guias/reparacion-pantalla-celular",
-        title: "Guia de cambio de pantalla",
+        title: "Guía de cambio de pantalla",
         description:
           "Referencia transversal para decidir modulo y control de calidad final.",
       },
@@ -124,7 +124,7 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
   },
   "/guias/reparacion-pantalla-celular": {
     guidance:
-      "Una pantalla rota suele venir con otros sintomas. Estas guias te ayudan a validar bateria, mantenimiento y diagnostico por marca.",
+      "Una pantalla rota suele venir con otros sintomas. Estas guias te ayudan a validar bateria, mantenimiento y diagnóstico por marca.",
     links: [
       {
         href: "/guias/cambio-bateria-celular",
@@ -178,7 +178,7 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
         href: "/guias/reparacion-iphone-buenos-aires",
         title: "Reparacion de iPhone",
         description:
-          "Enfoque premium en Apple para diagnostico, repuestos y calibracion.",
+          "Enfoque premium en Apple para diagnóstico, repuestos y calibracion.",
       },
       {
         href: "/guias/reparacion-motorola-buenos-aires",
@@ -202,7 +202,7 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
         href: "/guias/reparacion-iphone-buenos-aires",
         title: "Reparacion de iPhone",
         description:
-          "Guia enfocada en trazabilidad y diagnostico de hardware critico.",
+          "Guía enfocada en trazabilidad y diagnóstico de hardware crítico.",
       },
       {
         href: "/guias/reparacion-samsung-buenos-aires",
@@ -226,7 +226,7 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
         href: "/guias/microelectronica-reballing-caba",
         title: "Microelectronica y reballing",
         description:
-          "Cobertura para casos complejos de placa en equipos criticos.",
+          "Cobertura para casos complejos de placa en equipos críticos.",
       },
       {
         href: "/guias/mantenimiento-preventivo-celulares",
@@ -238,7 +238,7 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
         href: "/guias/reparacion-pantalla-celular",
         title: "Reparacion de pantallas",
         description:
-          "Guia para estandarizar criterios de recambio en equipos de uso diario.",
+          "Guía para estandarizar criterios de recambio en equipos de uso diario.",
       },
     ],
   },
@@ -261,13 +261,9 @@ export default function GuideInterlinkSection({
   return (
     <section className="space-y-5 rounded-3xl border border-slate-200/80 bg-slate-50/90 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/45">
       <div className="space-y-2">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-700 dark:text-slate-200">
-          Siguiente paso recomendado
-        </p>
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Profundiza tu decision con guias relacionadas
+          Otras guías que te pueden servir
         </h2>
-        <p className="text-sm text-slate-700 dark:text-slate-300">{config.guidance}</p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
@@ -296,7 +292,7 @@ export default function GuideInterlinkSection({
           ctaVariant="primary"
           className="inline-flex min-h-11 items-center justify-center rounded-full bg-secondary px-5 text-sm font-semibold text-white transition hover:bg-secondary/90"
         >
-          Pedir diagnostico y presupuesto
+          Pedir diagnóstico y presupuesto
         </TrackedCtaLink>
         <TrackedCtaLink
           href="/tienda"

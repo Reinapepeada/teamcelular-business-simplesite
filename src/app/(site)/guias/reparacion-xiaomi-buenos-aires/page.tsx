@@ -10,7 +10,6 @@ import {
   FaBolt,
   FaCamera,
   FaCheckCircle,
-  FaClock,
   FaMobileAlt,
   FaMicrochip,
   FaShieldAlt,
@@ -151,7 +150,6 @@ const repairServices = [
     detail:
       "Reemplazo de display con control de brillo, tactil y uniformidad de color en equipos Xiaomi 13/14, Redmi Note y POCO.",
     eta: "2-4 h",
-    warranty: "Garantía 90 días",
     Icon: FaMobileAlt,
   },
   {
@@ -159,7 +157,6 @@ const repairServices = [
     detail:
       "Cambio de bateria para equipos con descarga acelerada, apagados inesperados o perdida de rendimiento en uso intenso.",
     eta: "1-2 h",
-    warranty: "Garantía 90 días",
     Icon: FaBatteryFull,
   },
   {
@@ -167,7 +164,6 @@ const repairServices = [
     detail:
       "Solucion de carga intermitente, falso contacto y perdida de carga rapida en Xiaomi, Redmi y POCO.",
     eta: "2-3 h",
-    warranty: "Garantía 90 días",
     Icon: FaBolt,
   },
   {
@@ -175,7 +171,6 @@ const repairServices = [
     detail:
       "Reparacion o cambio de modulo para recuperar enfoque, nitidez y estabilizacion en fotos y video.",
     eta: "2-4 h",
-    warranty: "Garantía 90 días",
     Icon: FaCamera,
   },
   {
@@ -183,7 +178,6 @@ const repairServices = [
     detail:
       "Microelectronica para equipos que reinician en logo, no encienden o quedan sin red luego de caidas o humedad.",
     eta: "24-48 h",
-    warranty: "Garantía 90 días",
     Icon: FaMicrochip,
   },
   {
@@ -191,7 +185,6 @@ const repairServices = [
     detail:
       "Reparacion de audio bajo, distorsionado o sin microfono en llamadas con test final de grabacion y reproduccion.",
     eta: "2-3 h",
-    warranty: "Garantía 90 días",
     Icon: FaShieldAlt,
   },
 ];
@@ -237,31 +230,6 @@ const repairLinks: Record<string, string> = {
   "Placa logica, PMIC y bootloop": "/reparaciones/reparacion-placa-caba",
 };
 
-const trustReasons = [
-  {
-    title: "Servicio tecnico dedicado a Xiaomi",
-    description:
-      "Conocemos diferencias de hardware entre Xiaomi, Redmi y POCO para evitar diagnosticos genericos.",
-    Icon: FaTools,
-  },
-  {
-    title: "Informacion concreta para decidir",
-    description:
-      "Te explicamos si conviene reparar, que costo tiene y que resultado esperar en cada opcion.",
-    Icon: FaCheckCircle,
-  },
-  {
-    title: "Garantia escrita segun servicio",
-    description: WARRANTY_SCOPE_MESSAGE,
-    Icon: FaShieldAlt,
-  },
-  {
-    title: "Velocidad para equipos de trabajo",
-    description:
-      "Sabemos que muchos Xiaomi son herramientas laborales, por eso priorizamos tiempos cortos con control de calidad.",
-    Icon: FaClock,
-  },
-];
 
 const xiaomiModels = [
   "Xiaomi 15 Ultra",
@@ -519,17 +487,7 @@ export default function XiaomiRepairGuidePage() {
           </div>
         </section>
 
-        <section className="space-y-6 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Reseñas reales antes de reparar tu Xiaomi
-            </h2>
-            <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
-              Opiniones verificables de Google sobre diagnósticos y reparaciones realizadas en el laboratorio.
-            </p>
-          </div>
-          <GoogleReviewsAPI />
-        </section>
+        <GoogleReviewsAPI />
 
         <section className="space-y-7">
           <div className="text-center">
@@ -597,9 +555,6 @@ export default function XiaomiRepairGuidePage() {
                   <div className="mt-4 flex items-center justify-between text-xs font-semibold">
                     <span className="rounded-full bg-primary px-3 py-1 text-white">
                       {service.eta}
-                    </span>
-                    <span className="rounded-full bg-secondary/10 px-3 py-1 text-secondary">
-                      {service.warranty}
                     </span>
                   </div>
                   {repairLinks[service.title] && (
@@ -671,34 +626,6 @@ export default function XiaomiRepairGuidePage() {
           </div>
         </section>
 
-        <section className="space-y-6 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
-          <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-white">
-            Diagnóstico, repuestos y garantía: qué esperás al traer tu Xiaomi
-          </h2>
-          <div className="grid gap-4 md:grid-cols-2">
-            {trustReasons.map((reason) => {
-              const Icon = reason.Icon;
-              return (
-                <article
-                  key={reason.title}
-                  className="flex gap-4 rounded-2xl border border-white/20 bg-white/10 p-5 dark:border-white/15 dark:bg-slate-900/40"
-                >
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
-                    <Icon />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-slate-900 dark:text-white">
-                      {reason.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                      {reason.description}
-                    </p>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </section>
 
         <section className="space-y-5 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
           <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-white">
@@ -745,76 +672,7 @@ export default function XiaomiRepairGuidePage() {
           </div>
         </section>
 
-        <section className="rounded-3xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-8 text-center backdrop-blur-2xl dark:border-white/10 dark:from-slate-900/45 dark:via-slate-900/30 dark:to-slate-900/45 md:p-12">
-          <h2 className="text-3xl font-black text-slate-900 dark:text-white">
-            Compara servicios por marca antes de decidir
-          </h2>
-          <p className="mx-auto mt-4 max-w-3xl text-lg text-slate-700 dark:text-slate-300">
-            Si estas comparando marcas, usa nuestras tres landings: iPhone, Samsung y Xiaomi.
-            Cada una esta escrita para consultas reales y problemas tecnicos concretos.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Link
-              href="/guias/reparacion-iphone-buenos-aires"
-              className="rounded-full border border-slate-300/80 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200"
-            >
-              Ver landing iPhone
-            </Link>
-            <Link
-              href="/guias/reparacion-samsung-buenos-aires"
-              className="rounded-full border border-slate-300/80 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200"
-            >
-              Ver landing Samsung
-            </Link>
-            <Link
-              href="/presupuesto-reparacion"
-              className="rounded-full bg-secondary px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-secondary/90"
-            >
-              Pedir presupuesto Xiaomi
-            </Link>
-          </div>
-        </section>
 
-        <section className="space-y-5 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-            Guias relacionadas
-          </h2>
-          <div className="grid gap-4 md:grid-cols-3">
-            <Link
-              href="/guias/reparacion-iphone-buenos-aires"
-              className="rounded-2xl border border-white/20 bg-white/10 p-5 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
-            >
-              <h3 className="font-bold text-primary">
-                Reparacion de iPhone en Buenos Aires
-              </h3>
-              <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                Enfoque premium para Apple con garantia escrita y proceso trazable.
-              </p>
-            </Link>
-            <Link
-              href="/guias/reparacion-samsung-buenos-aires"
-              className="rounded-2xl border border-white/20 bg-white/10 p-5 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
-            >
-              <h3 className="font-bold text-primary">
-                Reparacion de Samsung Galaxy
-              </h3>
-              <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                Fallas de pantalla AMOLED, carga y placa en equipos Galaxy.
-              </p>
-            </Link>
-            <Link
-              href="/guias/cambio-bateria-celular"
-              className="rounded-2xl border border-white/20 bg-white/10 p-5 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
-            >
-              <h3 className="font-bold text-primary">
-                Guia de cambio de bateria
-              </h3>
-              <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                Senales de bateria degradada y criterios para reemplazo seguro.
-              </p>
-            </Link>
-          </div>
-        </section>
 
         <GuideInterlinkSection currentGuide="/guias/reparacion-xiaomi-buenos-aires" />
 

@@ -22,7 +22,6 @@ import {
   FaBolt,
   FaCamera,
   FaCheckCircle,
-  FaClock,
   FaMicrochip,
   FaMobileAlt,
   FaShieldAlt,
@@ -163,7 +162,6 @@ const frequentRepairs = [
     description:
       "Display con brillo, color y respuesta táctil consistentes. Preservamos funciones compatibles con True Tone cuando el módulo original lo permite.",
     eta: "2-4 h",
-    warranty: "Garantía 90 días",
     Icon: FaMobileAlt,
   },
   {
@@ -171,7 +169,6 @@ const frequentRepairs = [
     description:
       "Batería premium con medición de consumo y test de autonomía real para evitar apagados repentinos o calentamiento anormal.",
     eta: "1-2 h",
-    warranty: "Garantía 90 días",
     Icon: FaBatteryFull,
   },
   {
@@ -179,7 +176,6 @@ const frequentRepairs = [
     description:
       "Reparamos módulo de carga Lightning o USB-C, micrófono y flex inferior. Ideal para iPhone que cargan intermitente o no detectan cable.",
     eta: "2-3 h",
-    warranty: "Garantía 90 días",
     Icon: FaBolt,
   },
   {
@@ -187,7 +183,6 @@ const frequentRepairs = [
     description:
       "Diagnóstico por microelectrónica para fallas de Face ID, cámara selfie y sensor de proximidad en golpes o humedad.",
     eta: "3-6 h",
-    warranty: "Garantía 90 días",
     Icon: FaShieldAlt,
   },
   {
@@ -195,7 +190,6 @@ const frequentRepairs = [
     description:
       "Cambio o reparación de módulo de cámaras con ajuste de foco, estabilización y limpieza interna para fotos nítidas.",
     eta: "2-4 h",
-    warranty: "Garantía 90 días",
     Icon: FaCamera,
   },
   {
@@ -203,7 +197,6 @@ const frequentRepairs = [
     description:
       "Trabajo de microelectrónica para equipos que no encienden, reinician o no toman carga luego de un golpe eléctrico o líquido.",
     eta: "24-48 h",
-    warranty: "Garantía 90 días",
     Icon: FaMicrochip,
   },
 ];
@@ -249,32 +242,6 @@ const repairLinks: Record<string, string> = {
   "Placa lógica y recuperación avanzada": "/reparaciones/reparacion-placa-caba",
 };
 
-const trustBlocks = [
-  {
-    title: "Diagnóstico claro antes de reparar",
-    description:
-      "Recibís un informe simple: qué falla, qué se reemplaza, cuánto tarda y cuánto cuesta. Sin letras chicas ni sorpresas al retirar.",
-    Icon: FaCheckCircle,
-  },
-  {
-    title: "Laboratorio en Recoleta con trazabilidad",
-    description:
-      "Cada equipo se registra con orden técnica y checklist. Sabés en qué etapa está tu iPhone en todo momento.",
-    Icon: FaClock,
-  },
-  {
-    title: "Piezas premium y procedimiento controlado",
-    description:
-      "Evitamos repuestos de baja duración. Priorizamos estabilidad, autonomía y seguridad eléctrica en cada servicio.",
-    Icon: FaShieldAlt,
-  },
-  {
-    title: "Respuesta rápida para urgencias reales",
-    description:
-      "Pantalla, batería y carga podemos resolverlos en el día según stock y cola de trabajo. Confirmamos tiempo antes de abrir el equipo.",
-    Icon: FaApple,
-  },
-];
 
 const iphoneModels = [
   "iPhone 17 Pro Max",
@@ -579,17 +546,7 @@ export default function IphoneRepairGuidePage() {
           </div>
         </section>
 
-        <section className="space-y-6 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              ¿Qué dicen quienes ya repararon su iPhone?
-            </h2>
-            <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
-              Mostramos opiniones verificables de Google para que evalúes la confianza del servicio con evidencia pública.
-            </p>
-          </div>
-          <GoogleReviewsAPI />
-        </section>
+        <GoogleReviewsAPI />
 
         <section className="space-y-7">
           <div className="text-center">
@@ -657,9 +614,6 @@ export default function IphoneRepairGuidePage() {
                   <div className="mt-4 flex items-center justify-between text-xs font-semibold">
                     <span className="rounded-full bg-primary px-3 py-1 text-white">
                       {repair.eta}
-                    </span>
-                    <span className="rounded-full bg-secondary/10 px-3 py-1 text-secondary">
-                      {repair.warranty}
                     </span>
                   </div>
                   {repairLinks[repair.title] && (
@@ -757,73 +711,7 @@ export default function IphoneRepairGuidePage() {
           </div>
         </section>
 
-        <section className="rounded-2xl border border-slate-200/80 bg-white dark:border-slate-700/60 dark:bg-slate-900">
-          <div className="border-b border-slate-100 px-8 py-5 dark:border-slate-800">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-              Diagnóstico, garantía y repuestos: qué esperás al traer tu iPhone
-            </h2>
-            <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-slate-400">
-              Cuatro datos concretos sobre cómo trabajamos cada equipo en Recoleta.
-            </p>
-          </div>
-          <div className="divide-y divide-slate-100 dark:divide-slate-800">
-            {trustBlocks.map((block) => {
-              const Icon = block.Icon;
-              return (
-                <div key={block.title} className="flex gap-4 px-8 py-5">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-lg text-primary">
-                    <Icon aria-hidden />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-slate-900 dark:text-slate-100">
-                      {block.title}
-                    </h3>
-                    <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">
-                      {block.description}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
 
-        <section className="grid gap-6 rounded-3xl border border-white/15 bg-white/5 p-6 shadow-xl backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:grid-cols-[1.15fr_0.85fr] md:items-center md:p-8">
-          <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-slate-900/40">
-            <Image
-              src="/images/guia_iphone.webp"
-              alt="Laboratorio de reparación iPhone en Team Celular, Recoleta CABA"
-              width={1200}
-              height={900}
-              sizes="(max-width: 768px) 100vw, 60vw"
-              className="h-auto w-full object-cover"
-            />
-          </div>
-          <article className="space-y-4">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-              ¿Por qué diagnosticamos antes de cambiar piezas?
-            </h2>
-            <p className="text-slate-600 dark:text-slate-300">
-              Antes de abrir el iPhone medimos consumo, estado de placa y funciones críticas.
-              Si no conviene reparar, te lo decimos con informe técnico — sin cobrar de más
-              por un diagnóstico que ya tiene respuesta clara.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="https://wa.me/5491151034595?text=Hola%20Team%20Celular%2C%20quiero%20cotizar%20una%20reparacion%20de%20iPhone"
-                className="inline-flex min-h-11 items-center rounded-full bg-emerald-700 px-5 text-sm font-semibold text-white transition hover:bg-emerald-800"
-              >
-                Consultar por WhatsApp
-              </Link>
-              <Link
-                href="/presupuesto-reparacion#solicitar-presupuesto"
-                className="inline-flex min-h-11 items-center rounded-full border border-slate-300 px-5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
-              >
-                Ver presupuesto
-              </Link>
-            </div>
-          </article>
-        </section>
 
         <section className="space-y-5 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
           <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-white">
@@ -870,75 +758,7 @@ export default function IphoneRepairGuidePage() {
           </div>
         </section>
 
-        <section className="rounded-3xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-8 text-center backdrop-blur-2xl dark:border-white/10 dark:from-slate-900/45 dark:via-slate-900/30 dark:to-slate-900/45 md:p-12">
-          <h2 className="text-3xl font-black text-slate-900 dark:text-white">
-            Servicio por marca: iPhone, Samsung y Xiaomi
-          </h2>
-          <p className="mx-auto mt-4 max-w-3xl text-lg text-slate-700 dark:text-slate-300">
-            Si comparás opciones, revisá también nuestras guías de Samsung y Xiaomi. Cada una tiene procesos, fallas típicas y criterios de repuesto adaptados a esa marca.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Link
-              href="/guias/reparacion-samsung-buenos-aires"
-              className="rounded-full border border-slate-300/80 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200"
-            >
-              Ver guía Samsung
-            </Link>
-            <Link
-              href="/guias/reparacion-xiaomi-buenos-aires"
-              className="rounded-full border border-slate-300/80 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200"
-            >
-              Ver guía Xiaomi
-            </Link>
-            <Link
-              href="/presupuesto-reparacion"
-              className="rounded-full bg-secondary px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-secondary/90"
-            >
-              Pedir diagnóstico ahora
-            </Link>
-          </div>
-        </section>
 
-        <section className="space-y-5 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-            Lecturas relacionadas para seguir evaluando
-          </h2>
-          <div className="grid gap-4 md:grid-cols-3">
-            <Link
-              href="/guias/reparacion-samsung-buenos-aires"
-              className="rounded-2xl border border-white/20 bg-white/10 p-5 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
-            >
-              <h3 className="font-bold text-primary">
-                Reparación de Samsung en Buenos Aires
-              </h3>
-              <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                Fallas comunes de Galaxy S, A y Z Fold con tiempos reales.
-              </p>
-            </Link>
-            <Link
-              href="/guias/reparacion-xiaomi-buenos-aires"
-              className="rounded-2xl border border-white/20 bg-white/10 p-5 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
-            >
-              <h3 className="font-bold text-primary">
-                Reparación de Xiaomi, Redmi y POCO
-              </h3>
-              <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                Diagnóstico de carga rápida, pantalla y placa en equipos Xiaomi.
-              </p>
-            </Link>
-            <Link
-              href="/guias/microelectronica-reballing-caba"
-              className="rounded-2xl border border-white/20 bg-white/10 p-5 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
-            >
-              <h3 className="font-bold text-primary">
-                Microelectrónica y reballing en CABA
-              </h3>
-              <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">
-                Casos complejos para equipos que no encienden o reinician.
-              </p>
-            </Link>
-          </div>
-        </section>
 
         <GuideInterlinkSection currentGuide="/guias/reparacion-iphone-buenos-aires" />
 
