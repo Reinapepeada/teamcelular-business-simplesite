@@ -109,7 +109,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "Google Pixel",
     badge: "Android premium",
-    imagePath: "/images/google-pixel-9-hero.webp",
+    imagePath: "/images/guia-google-pixel.webp",
     models: [
       "Pixel 10 Pro",
       "Pixel 10",
@@ -170,7 +170,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "Honor",
     badge: "Android",
-    imagePath: "/images/dispositivoshdpro.webp",
+    imagePath: "/images/guia-honor.webp",
     models: ["Honor Magic6 Pro", "Honor 200", "Honor X8", "Honor X7"],
     specialtyFocus:
       "paneles AMOLED, baterias de alta densidad y modulos de carga rapida",
@@ -206,7 +206,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "POCO",
     badge: "Gaming y rendimiento",
-    imagePath: "/images/componentes-pc-gaming.webp",
+    imagePath: "/images/guia-poco.webp",
     models: ["POCO F6 Pro", "POCO F6", "POCO X6 Pro", "POCO M6 Pro"],
     specialtyFocus:
       "equipos de alto rendimiento con foco en temperatura, bateria y carga",
@@ -242,7 +242,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "OPPO",
     badge: "Android",
-    imagePath: "/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp",
+    imagePath: "/images/guia-oppo.webp",
     models: ["OPPO Reno12", "OPPO Reno11", "OPPO A79", "OPPO A58"],
     specialtyFocus:
       "linea Reno y A con foco en pantalla, bateria y tecnologia de carga rapida",
@@ -278,7 +278,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "Infinix",
     badge: "Android",
-    imagePath: "/images/guia_cambio_bateria.webp",
+    imagePath: "/images/guia-infinix.webp",
     models: ["Infinix Note 40", "Infinix GT 20 Pro", "Infinix Hot 40", "Infinix Smart 8"],
     specialtyFocus:
       "equipos de gama media con foco en bateria, pantalla y conectores",
@@ -314,7 +314,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "ZTE",
     badge: "Android",
-    imagePath: "/images/aurisBlue.webp",
+    imagePath: "/images/guia-zte.webp",
     models: ["ZTE Blade V50", "ZTE Blade A73", "ZTE Nubia", "ZTE Axon"],
     specialtyFocus:
       "familias Blade y Nubia con foco en audio, carga y estabilidad de placa",
@@ -349,7 +349,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "Tecno",
     badge: "Android",
-    imagePath: "/images/landings/landing-audio-celular-caba-hero.webp",
+    imagePath: "/images/guia-tecno.webp",
     models: ["Tecno Camon 30", "Tecno Pova", "Tecno Spark 20", "Tecno Phantom"],
     specialtyFocus:
       "modelos Camon y Pova con foco en pantalla, camara y consumo de energia",
@@ -384,7 +384,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "Alcatel",
     badge: "Android",
-    imagePath: "/images/guia_mantenimiento.webp",
+    imagePath: "/images/guia-alcatel.webp",
     models: ["Alcatel 1", "Alcatel 3", "Alcatel 5", "Alcatel serie T"],
     specialtyFocus:
       "equipos con uso cotidiano donde importa costo-beneficio de la reparacion",
@@ -420,7 +420,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "ASUS",
     badge: "Zenfone y ROG",
-    imagePath: "/images/reparacion_placa.webp",
+    imagePath: "/images/guia-asus.webp",
     models: ["ROG Phone 8", "ROG Phone 7", "Zenfone 11", "Zenfone 10"],
     specialtyFocus:
       "equipos ROG y Zenfone con foco en temperatura, energia y placa",
@@ -456,7 +456,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "OnePlus",
     badge: "Android premium",
-    imagePath: "/images/landings/landing-cambio-camara-caba-apoyo.webp",
+    imagePath: "/images/guia-oneplus.webp",
     models: ["OnePlus 12", "OnePlus 11", "OnePlus Nord", "OnePlus 10 Pro"],
     specialtyFocus:
       "linea premium con foco en pantalla, bateria y carga ultra rapida",
@@ -491,7 +491,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "Huawei",
     badge: "Android y EMUI",
-    imagePath: "/images/micro_diagnos_fino.webp",
+    imagePath: "/images/guia-huawei.webp",
     models: ["Huawei P60", "Huawei P50", "Huawei Nova", "Huawei Mate"],
     specialtyFocus:
       "camara, sensores y placa en linea P, Mate y Nova",
@@ -527,7 +527,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "TCL",
     badge: "Android",
-    imagePath: "/images/guia_cambio_modulo.webp",
+    imagePath: "/images/guia-tcl.webp",
     models: ["TCL 50", "TCL 40", "TCL 30", "TCL serie 20"],
     specialtyFocus:
       "equipos de uso diario con foco en pantalla, bateria y conectividad",

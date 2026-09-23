@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/guia_corporativo.webp",
+        url: "https://teamcelular.com/images/guia-soporte-empresas.webp",
         width: 1200,
         height: 630,
         alt: "Servicio Técnico Corporativo - Team Celular",
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Servicio Técnico de Celulares para Empresas en CABA | Team Celular",
     description: "Team Celular, Recoleta y Belgrano CABA. Soporte de celulares para empresas: SLA, logística puerta a puerta y garantía escrita 90 días.",
-    images: ["https://teamcelular.com/images/guia_corporativo.webp"],
+    images: ["https://teamcelular.com/images/guia-soporte-empresas.webp"],
   },
 };
 
@@ -212,7 +212,7 @@ export default function BusinessSupportGuide() {
         description="Soporte técnico corporativo especializado en reparación de dispositivos móviles con SLA garantizado, logística incluida y planes preventivos en CABA."
         publishedTime="2024-03-10T00:00:00Z"
         modifiedTime="2026-08-20T00:00:00Z"
-        image="https://teamcelular.com/images/guia_corporativo.webp"
+        image="https://teamcelular.com/images/guia-soporte-empresas.webp"
         url={PAGE_URL}
       />
       <article className="w-full max-w-6xl space-y-16">

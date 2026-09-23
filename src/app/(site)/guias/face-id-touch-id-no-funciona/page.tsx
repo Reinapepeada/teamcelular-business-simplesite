@@ -24,7 +24,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   openGraphTitle: "Face ID o Touch ID no Funciona: Causas y Solución | Team Celular",
   openGraphDescription:
     "Guia para diagnosticar fallas biometricas en iPhone y decidir reparacion segura con criterio tecnico.",
-  openGraphImagePath: "/images/guia_iphone.webp",
+  openGraphImagePath: "/images/guia-face-id-touch-id.webp",
   openGraphImageAlt: "Diagnostico de Face ID y Touch ID",
   twitterTitle: "Face ID o Touch ID no Funciona | Team Celular",
   twitterDescription:
@@ -145,7 +145,7 @@ export default function FaceIdTouchIdGuidePage() {
       readingTime="6 min"
       publishedTime="2026-04-16T00:00:00Z"
       modifiedTime="2026-08-20T00:00:00Z"
-      imagePath="/images/guia_iphone.webp"
+      imagePath="/images/guia-face-id-touch-id.webp"
       heroPoints={[
         "Detecta la causa mas probable segun sintomas.",
         "Evita cambios de modulo sin diagnostico previo.",

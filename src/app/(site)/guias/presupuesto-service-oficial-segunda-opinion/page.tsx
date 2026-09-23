@@ -27,7 +27,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   openGraphTitle: "Service oficial vs taller independiente en CABA | Team Celular",
   openGraphDescription:
     "Costo, plazo, garantía y qué pasa con tus datos: la comparación antes de aceptar el presupuesto.",
-  openGraphImagePath: "/images/guia_cambio_modulo.webp",
+  openGraphImagePath: "/images/guia-segunda-opinion.webp",
   openGraphImageAlt: "Reparación a nivel placa con microscopio en Team Celular",
   twitterTitle: "Service oficial vs taller independiente | Team Celular",
   twitterDescription:
@@ -261,7 +261,7 @@ export default function SecondOpinionGuidePage() {
       readingTime="6 min"
       publishedTime="2026-08-12T00:00:00Z"
       modifiedTime="2026-09-03T00:00:00Z"
-      imagePath="/images/guia_cambio_modulo.webp"
+      imagePath="/images/guia-segunda-opinion.webp"
       heroPoints={[
         "Con garantía de fábrica vigente, el canal oficial primero.",
         "Vencida o con la falla rechazada, se repara el componente.",

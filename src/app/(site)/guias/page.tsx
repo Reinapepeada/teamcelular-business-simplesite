@@ -196,58 +196,22 @@ const ARTICLES = [
 ];
 
 const articleVisuals: Record<string, { cover: string }> = {
-  "/guias/reparacion-iphone-buenos-aires": {
-    cover: "/images/portada_iphone.webp",
-  },
-  "/guias/reparacion-samsung-buenos-aires": {
-    cover: "/images/guia_samsung.webp",
-  },
-  "/guias/reparacion-xiaomi-buenos-aires": {
-    cover: "/images/guia_xiaomi.webp",
-  },
-  "/guias/reparacion-motorola-buenos-aires": {
-    cover: "/images/portada_moto.webp",
-  },
-  "/guias/microelectronica-reballing-caba": {
-    cover: "/images/guia_microelectronica.webp",
-  },
-  "/guias/soporte-empresas-servicio-tecnico": {
-    cover: "/images/guia_corporativo.webp",
-  },
-  "/guias/mantenimiento-preventivo-celulares": {
-    cover: "/images/guia_mantenimiento.webp",
-  },
-  "/guias/cambio-bateria-celular": {
-    cover: "/images/guia_cambio_bateria.webp",
-  },
-  "/guias/reparacion-pantalla-celular": {
-    cover: "/images/guia_cambio_modulo.webp",
-  },
-  "/guias/pin-de-carga-suelto-solucion": {
-    cover: "/images/guia_cambio_modulo.webp",
-  },
-  "/guias/celular-mojado-que-hacer": {
-    cover: "/images/guia_microelectronica.webp",
-  },
-  "/guias/face-id-touch-id-no-funciona": {
-    cover: "/images/guia_iphone.webp",
-  },
-  "/guias/pantalla-con-lineas-causas-reparacion": {
-    cover: "/images/guia_cambio_modulo.webp",
-  },
-  "/guias/celular-con-virus-que-hacer": {
-    cover: "/images/guia_mantenimiento.webp",
-  },
-  ...Object.fromEntries(
-    BRAND_GUIDE_LIST.map((item) => [
-      item.path,
-      {
-        cover: item.imagePath,
-      },
-    ])
-  ),
+  "/guias/reparacion-iphone-buenos-aires": { cover: "/images/guia-iphone.webp" },
+  "/guias/reparacion-samsung-buenos-aires": { cover: "/images/guia-samsung.webp" },
+  "/guias/reparacion-xiaomi-buenos-aires": { cover: "/images/guia-xiaomi.webp" },
+  "/guias/reparacion-motorola-buenos-aires": { cover: "/images/guia-motorola.webp" },
+  "/guias/microelectronica-reballing-caba": { cover: "/images/guia-microelectronica-reballing.webp" },
+  "/guias/soporte-empresas-servicio-tecnico": { cover: "/images/guia-soporte-empresas.webp" },
+  "/guias/mantenimiento-preventivo-celulares": { cover: "/images/guia-mantenimiento-preventivo.webp" },
+  "/guias/cambio-bateria-celular": { cover: "/images/guia-cambio-bateria.webp" },
+  "/guias/reparacion-pantalla-celular": { cover: "/images/guia-cambio-pantalla.webp" },
+  "/guias/pin-de-carga-suelto-solucion": { cover: "/images/guia-pin-carga.webp" },
+  "/guias/celular-mojado-que-hacer": { cover: "/images/guia-celular-mojado.webp" },
+  "/guias/face-id-touch-id-no-funciona": { cover: "/images/guia-face-id-touch-id.webp" },
+  "/guias/pantalla-con-lineas-causas-reparacion": { cover: "/images/guia-pantalla-lineas.webp" },
+  "/guias/celular-con-virus-que-hacer": { cover: "/images/guia-celular-virus.webp" },
+  ...Object.fromEntries(BRAND_GUIDE_LIST.map((item) => [item.path, { cover: item.imagePath }])),
 };
-
 const articleLinkTargets: Record<
   string,
   {
@@ -376,7 +340,7 @@ export const metadata: Metadata = {
     openGraphTitle: "Guías de Reparación de Celulares en CABA | Team Celular",
     openGraphDescription:
       "Aprende y decide mejor antes de reparar: guias tecnicas reales por marca, falla y nivel de complejidad.",
-    openGraphImagePath: "/images/guia_microelectronica.webp",
+    openGraphImagePath: "/images/guia-indice.webp",
     openGraphImageAlt: "Diagnóstico de celulares en el laboratorio de Team Celular",
     twitterTitle: "Guías de Reparación de Celulares en CABA | Team Celular",
     twitterDescription:
@@ -430,7 +394,7 @@ export default function GuidesPage() {
             </div>
           </div>
           <div className="relative hidden min-h-[24rem] sm:block lg:min-h-[38rem]">
-            <Image src="/images/guia_microelectronica.webp" alt="Diagnóstico de un celular en el laboratorio de Team Celular" fill priority sizes="(max-width: 1024px) 100vw, 55vw" className="object-cover" />
+            <Image src="/images/guia-indice.webp" alt="Diagnóstico de un celular en el laboratorio de Team Celular" fill priority sizes="(max-width: 1024px) 100vw, 55vw" className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#171820]/70 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#171820]/30 lg:via-transparent" />
             <div className="liquid-glass absolute bottom-5 left-5 right-5 rounded-2xl px-5 py-4 sm:bottom-7 sm:left-7 sm:right-7">
               <p className="font-bold">Contenido revisado por el equipo técnico</p>
@@ -452,9 +416,7 @@ export default function GuidesPage() {
           <div className="grid grid-cols-12 gap-0 divide-y divide-slate-200 sm:gap-6 sm:divide-y-0 dark:divide-slate-800">
             {ARTICLES.map((article, index) => {
               const Icon = article.Icon;
-              const visual = articleVisuals[article.href] ?? {
-                cover: "/images/fondofooter.webp",
-              };
+              const visual = articleVisuals[article.href];
               const links = articleLinkTargets[article.href] ?? {
                 serviceHref: "/reparaciones",
                 serviceLabel: "Servicio: reparaciones en CABA",
@@ -626,7 +588,7 @@ export default function GuidesPage() {
               name: "Guias tecnicas de reparacion de celulares",
               description:
                 "Centro de guías técnicas de Team Celular — Paraguay 2451 Recoleta y Amenábar 2032 Belgrano, CABA. Reparación por marca, microelectrónica y soporte corporativo.",
-               image: `${SITE_URL}/images/guia_microelectronica.webp`,
+               image: `${SITE_URL}/images/guia-indice.webp`,
               provider: { "@id": `${SITE_URL}#localbusiness` },
               hasPart: ARTICLES.map((article) => ({
                 "@type": "Article",

@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     siteName: "Team Celular",
     images: [
       {
-        url: "https://teamcelular.com/images/guia_cambio_bateria.webp",
+        url: "https://teamcelular.com/images/guia-cambio-bateria.webp",
         width: 1200,
         height: 630,
         alt: "Cambio de bateria de celular en Team Celular",
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Cambio de Batería Celular Buenos Aires",
     description: "Baterias originales o certificadas con garantia escrita segun repuesto y trabajo. Service express 1-2hs.",
-    images: ["https://teamcelular.com/images/guia_cambio_bateria.webp"],
+    images: ["https://teamcelular.com/images/guia-cambio-bateria.webp"],
   },
   alternates: {
     canonical: "https://teamcelular.com/guias/cambio-bateria-celular",
@@ -201,7 +201,7 @@ export default function BatteryReplacementGuide() {
         description="Cambio de batería con repuestos originales y certificados. Garantía escrita y service express en 1-2 horas. Atención iPhone, Samsung y Motorola en CABA."
         publishedTime="2024-11-30T00:00:00Z"
         modifiedTime="2026-08-20T00:00:00Z"
-        image="https://teamcelular.com/images/guia_cambio_bateria.webp"
+        image="https://teamcelular.com/images/guia-cambio-bateria.webp"
         url="https://teamcelular.com/guias/cambio-bateria-celular"
       />
       <BreadcrumbJsonLd

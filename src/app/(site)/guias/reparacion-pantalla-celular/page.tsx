@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     siteName: "Team Celular",
     images: [
       {
-        url: "https://teamcelular.com/images/guia_cambio_modulo.webp",
+        url: "https://teamcelular.com/images/guia-cambio-pantalla.webp",
         width: 1200,
         height: 630,
         alt: "Cambio de pantalla de celular en Team Celular",
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Cambio de Pantalla Celular Buenos Aires",
     description: "Displays OLED originales con True Tone y garantia escrita segun repuesto y trabajo. Service 2-4hs.",
-    images: ["https://teamcelular.com/images/guia_cambio_modulo.webp"],
+    images: ["https://teamcelular.com/images/guia-cambio-pantalla.webp"],
   },
   // Se canonicalizo hacia /reparaciones/cambio-pantalla-caba y se revirtio:
   // GSC muestra 14% de solapamiento de queries entre ambas (12 de 86). Esta
@@ -267,7 +267,7 @@ export default function ScreenReplacementGuide() {
         description="Cambio de pantalla con displays OLED originales, True Tone preservado y garantia escrita segun repuesto y trabajo. Service express 2-4 horas en CABA."
         publishedTime="2024-11-30T00:00:00Z"
         modifiedTime="2026-09-22T00:00:00Z"
-        image="https://teamcelular.com/images/guia_cambio_modulo.webp"
+        image="https://teamcelular.com/images/guia-cambio-pantalla.webp"
         url="https://teamcelular.com/guias/reparacion-pantalla-celular"
       />
       <BreadcrumbJsonLd

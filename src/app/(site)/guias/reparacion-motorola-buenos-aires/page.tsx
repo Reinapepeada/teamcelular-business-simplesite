@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/portada_moto.webp",
+        url: "https://teamcelular.com/images/guia-motorola.webp",
         width: 1200,
         height: 630,
         alt: "Reparación técnica de Motorola en Team Celular, Recoleta CABA",
@@ -84,7 +84,7 @@ export const metadata: Metadata = {
     title: "Reparación de Motorola en CABA | Team Celular",
     description:
       "Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga de Motorola en el día. Garantía escrita 90 días.",
-    images: ["https://teamcelular.com/images/portada_moto.webp"],
+    images: ["https://teamcelular.com/images/guia-motorola.webp"],
   },
 };
 
@@ -354,7 +354,7 @@ export default function MotorolaRepairGuidePage() {
           "reparacion de Motorola Edge",
           "cambio de pantalla, bateria y USB-C Motorola",
         ]}
-        image="https://teamcelular.com/images/portada_moto.webp"
+        image="https://teamcelular.com/images/guia-motorola.webp"
         url={PAGE_URL}
       />
 
@@ -690,7 +690,7 @@ export default function MotorolaRepairGuidePage() {
         <section className="grid gap-6 rounded-3xl border border-white/15 bg-white/5 p-6 shadow-xl backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:grid-cols-[1.15fr_0.85fr] md:items-center md:p-8">
           <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-slate-900/40">
             <Image
-              src="/images/guia_motorola.webp"
+              src="/images/guia-motorola.webp"
               alt="Laboratorio de reparación Motorola Team Celular Recoleta CABA"
               width={1200}
               height={900}

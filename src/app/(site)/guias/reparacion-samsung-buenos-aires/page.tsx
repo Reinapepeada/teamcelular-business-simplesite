@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/guia_samsung.webp",
+        url: "https://teamcelular.com/images/guia-samsung.webp",
         width: 1200,
         height: 630,
         alt: "Reparacion tecnica de Samsung Galaxy en Team Celular",
@@ -84,7 +84,7 @@ export const metadata: Metadata = {
     title: "Reparación de Samsung Galaxy en CABA | Team Celular",
     description:
       "Team Celular, Paraguay 2451 Recoleta. Pantalla AMOLED y batería en el día, garantía escrita 90 días. Galaxy S, A, Note y Z Fold.",
-    images: ["https://teamcelular.com/images/guia_samsung.webp"],
+    images: ["https://teamcelular.com/images/guia-samsung.webp"],
   },
 };
 
@@ -362,7 +362,7 @@ export default function SamsungRepairGuidePage() {
           "cambio de bateria Samsung Galaxy",
           "reparacion de Galaxy S, A, Z Fold y Z Flip",
         ]}
-        image="https://teamcelular.com/images/guia_samsung.webp"
+        image="https://teamcelular.com/images/guia-samsung.webp"
         url={PAGE_URL}
       />
 
@@ -722,7 +722,7 @@ export default function SamsungRepairGuidePage() {
         <section className="grid gap-6 rounded-3xl border border-white/15 bg-white/5 p-6 shadow-xl backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:grid-cols-[1.15fr_0.85fr] md:items-center md:p-8">
           <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-slate-900/40">
             <Image
-              src="/images/samsung_portada.webp"
+              src="/images/guia-samsung.webp"
               alt="Laboratorio de reparación Samsung Galaxy en Team Celular, Recoleta CABA"
               width={1200}
               height={900}

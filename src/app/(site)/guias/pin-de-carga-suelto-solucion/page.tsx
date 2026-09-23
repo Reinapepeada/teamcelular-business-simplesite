@@ -24,7 +24,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   openGraphTitle: "Pin de Carga Suelto: Cómo Saber si Está Dañado | Team Celular",
   openGraphDescription:
     "Cómo distinguir si el problema es el cable, la batería o el pin de carga antes de gastar de más.",
-  openGraphImagePath: "/images/guia_cambio_modulo.webp",
+  openGraphImagePath: "/images/guia-pin-carga.webp",
   openGraphImageAlt: "Diagnóstico de pin de carga en Team Celular",
   twitterTitle: "Pin de Carga Suelto: Cómo Saber si Está Dañado | Team Celular",
   twitterDescription:
@@ -155,7 +155,7 @@ export default function ChargingPortGuidePage() {
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
       modifiedTime="2026-09-22T00:00:00Z"
-      imagePath="/images/guia_cambio_modulo.webp"
+      imagePath="/images/guia-pin-carga.webp"
       heroPoints={[
         "Cuatro señales para reconocer un pin dañado.",
         "Cómo descartar el cable y la batería.",

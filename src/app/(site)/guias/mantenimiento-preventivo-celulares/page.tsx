@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/guia_mantenimiento.webp",
+        url: "https://teamcelular.com/images/guia-mantenimiento-preventivo.webp",
         width: 1200,
         height: 630,
         alt: "Mantenimiento Preventivo de Celulares - Team Celular",
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     title: "Mantenimiento Preventivo de Celulares en CABA | Team Celular",
     description:
       "Team Celular, Paraguay 2451 Recoleta CABA. Limpieza interna, revisión de batería y diagnóstico preventivo con garantía escrita 90 días.",
-    images: ["https://teamcelular.com/images/guia_mantenimiento.webp"],
+    images: ["https://teamcelular.com/images/guia-mantenimiento-preventivo.webp"],
   },
 };
 
@@ -196,7 +196,7 @@ export default function PreventiveMaintenanceGuide() {
         description="Guía completa de mantenimiento preventivo para smartphones: checklist profesional, cuidado de batería, actualización de software y limpieza especializada."
         publishedTime="2024-04-05T00:00:00Z"
         modifiedTime="2026-08-20T00:00:00Z"
-        image="https://teamcelular.com/images/guia_mantenimiento.webp"
+        image="https://teamcelular.com/images/guia-mantenimiento-preventivo.webp"
         url={PAGE_URL}
       />
       <article className="w-full max-w-6xl space-y-16">
@@ -543,7 +543,7 @@ export default function PreventiveMaintenanceGuide() {
               "@type": "HowTo",
               "name": "Mantenimiento Preventivo de Celulares",
               "description": "Guía completa de mantenimiento preventivo para smartphones con checklist profesional y consejos de expertos.",
-              "image": "https://teamcelular.com/images/guia_mantenimiento.webp",
+              "image": "https://teamcelular.com/images/guia-mantenimiento-preventivo.webp",
               "totalTime": "PT120M",
               "supply": ["Smartphone", "Paño de microfibra", "Software de diagnóstico"],
               "tool": ["Aire comprimido", "IPA 99%", "Microscopio (para servicio profesional)"],

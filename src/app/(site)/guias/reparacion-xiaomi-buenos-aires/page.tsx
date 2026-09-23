@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/guia_xiaomi.webp",
+        url: "https://teamcelular.com/images/guia-xiaomi.webp",
         width: 1200,
         height: 630,
         alt: "Servicio tecnico para Xiaomi Redmi y POCO en Team Celular",
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     title: "Reparación de Xiaomi, Redmi y POCO en CABA | Team Celular",
     description:
       "Team Celular, Paraguay 2451 Recoleta. Pantalla AMOLED y batería en el día, garantía escrita 90 días. Xiaomi, Redmi y POCO.",
-    images: ["https://teamcelular.com/images/guia_xiaomi.webp"],
+    images: ["https://teamcelular.com/images/guia-xiaomi.webp"],
   },
 };
 
@@ -353,7 +353,7 @@ export default function XiaomiRepairGuidePage() {
           "reparacion de celulares POCO",
           "cambio de pantalla, bateria y USB-C Xiaomi",
         ]}
-        image="https://teamcelular.com/images/guia_xiaomi.webp"
+        image="https://teamcelular.com/images/guia-xiaomi.webp"
         url={PAGE_URL}
       />
 

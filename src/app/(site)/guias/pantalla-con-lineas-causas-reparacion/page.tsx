@@ -24,7 +24,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   openGraphTitle: "Pantalla con Líneas en Celular: Causas y Reparación | Team Celular",
   openGraphDescription:
     "Guia para diagnosticar lineas en pantalla y saber cuando conviene cambio de modulo o revision de placa.",
-  openGraphImagePath: "/images/guia_cambio_modulo.webp",
+  openGraphImagePath: "/images/guia-pantalla-lineas.webp",
   openGraphImageAlt: "Pantalla con lineas en celular y diagnostico tecnico",
   twitterTitle: "Pantalla con Líneas: Causas y Reparación | Team Celular",
   twitterDescription:
@@ -145,7 +145,7 @@ export default function ScreenLinesGuidePage() {
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
       modifiedTime="2026-08-20T00:00:00Z"
-      imagePath="/images/guia_cambio_modulo.webp"
+      imagePath="/images/guia-pantalla-lineas.webp"
       heroPoints={[
         "Diferencia causa visual vs causa electrica.",
         "Evita reemplazar modulo sin validar placa.",

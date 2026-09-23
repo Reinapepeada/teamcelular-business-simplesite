@@ -24,7 +24,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   openGraphTitle: "Celular Mojado: Qué Hacer en las Primeras 2 Horas | Team Celular",
   openGraphDescription:
     "Pasos urgentes para minimizar daño por liquidos y decidir cuando necesitas laboratorio de microelectronica.",
-  openGraphImagePath: "/images/guia_microelectronica.webp",
+  openGraphImagePath: "/images/guia-celular-mojado.webp",
   openGraphImageAlt: "Reparacion de celular mojado en laboratorio",
   twitterTitle: "Celular Mojado: Qué Hacer en las Primeras 2 Horas",
   twitterDescription:
@@ -145,7 +145,7 @@ export default function WetPhoneGuidePage() {
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
       modifiedTime="2026-08-20T00:00:00Z"
-      imagePath="/images/guia_microelectronica.webp"
+      imagePath="/images/guia-celular-mojado.webp"
       heroPoints={[
         "Pasos concretos para minimizar corto y corrosion.",
         "Errores frecuentes que debes evitar desde el minuto uno.",

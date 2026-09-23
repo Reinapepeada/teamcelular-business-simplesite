@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/portada_iphone.webp",
+        url: "https://teamcelular.com/images/guia-iphone.webp",
         width: 1200,
         height: 630,
         alt: "Laboratorio de reparacion de iPhone en Team Celular",
@@ -95,7 +95,7 @@ export const metadata: Metadata = {
     title: "Reparación de iPhone en CABA | Team Celular",
     description:
       "Team Celular, Paraguay 2451 Recoleta. Pantalla y batería en 2–4 h, garantía escrita 90 días. iPhone 8 a 17 Pro Max.",
-    images: ["https://teamcelular.com/images/portada_iphone.webp"],
+    images: ["https://teamcelular.com/images/guia-iphone.webp"],
   },
 };
 
@@ -382,7 +382,7 @@ export default function IphoneRepairGuidePage() {
           "cambio de bateria iPhone",
           "microelectronica para iPhone",
         ]}
-        image="https://teamcelular.com/images/portada_iphone.webp"
+        image="https://teamcelular.com/images/guia-iphone.webp"
         url={PAGE_URL}
       />
 
@@ -791,7 +791,7 @@ export default function IphoneRepairGuidePage() {
         <section className="grid gap-6 rounded-3xl border border-white/15 bg-white/5 p-6 shadow-xl backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:grid-cols-[1.15fr_0.85fr] md:items-center md:p-8">
           <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-slate-900/40">
             <Image
-              src="/images/guia_iphone.webp"
+              src="/images/guia-iphone.webp"
               alt="Laboratorio de reparación iPhone en Team Celular, Recoleta CABA"
               width={1200}
               height={900}

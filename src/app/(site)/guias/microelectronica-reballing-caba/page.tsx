@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/guia_microelectronica.webp",
+        url: "https://teamcelular.com/images/guia-microelectronica-reballing.webp",
         width: 1200,
         height: 630,
         alt: "Laboratorio de microelectrónica y reballing BGA - Team Celular Recoleta",
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     title: "Microelectrónica y Reballing BGA en CABA | Team Celular",
     description:
       "Reballing BGA y reparación de placas en CABA — Team Celular, Recoleta y Belgrano. Microscopio profesional y garantía escrita de 90 días.",
-    images: ["https://teamcelular.com/images/guia_microelectronica.webp"],
+    images: ["https://teamcelular.com/images/guia-microelectronica-reballing.webp"],
   },
 };
 
@@ -201,7 +201,7 @@ export default function MicroelectronicsGuide() {
         description="Team Celular, Paraguay 2451 Recoleta y Amenábar 2032 Belgrano, CABA. Reballing BGA, soldadura SMD y reparación de placas lógicas con microscopio profesional y garantía escrita de 90 días."
         publishedTime="2024-02-20T00:00:00Z"
         modifiedTime="2026-08-20T00:00:00Z"
-        image="https://teamcelular.com/images/guia_microelectronica.webp"
+        image="https://teamcelular.com/images/guia-microelectronica-reballing.webp"
         url={PAGE_URL}
       />
       <article className="w-full max-w-6xl space-y-16">
