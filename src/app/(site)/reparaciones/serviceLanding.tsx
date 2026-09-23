@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { BsCheckCircleFill } from "react-icons/bs";
 import {
   FaCheckCircle,
   FaClipboardCheck,
@@ -320,6 +321,8 @@ export interface ServiceLandingConfig {
   serviceDescription: string;
   highlights: ServiceHighlight[];
   brandsText: string;
+  /** Precios cortos para el hero (una fila por caso). Mejor que meterlos en el parrafo. */
+  prices?: { label: string; value: string }[];
   faqs: ServiceFaq[];
 }
 
@@ -413,6 +416,16 @@ export default function ServiceLandingPage({
             <p className="max-w-3xl text-lg leading-relaxed text-slate-100/90">
               {config.intro}
             </p>
+            {config.prices?.length ? (
+              <dl className="max-w-md divide-y divide-white/15 rounded-2xl border border-white/20 bg-black/25 text-sm">
+                {config.prices.map((row) => (
+                  <div key={row.label} className="flex items-center justify-between gap-4 px-4 py-2.5">
+                    <dt className="text-white/80">{row.label}</dt>
+                    <dd className="font-semibold tabular-nums text-white">{row.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            ) : null}
             <div className="flex flex-wrap gap-3">
               <TrackedCtaLink
                 href="/presupuesto-reparacion#solicitar-presupuesto"
@@ -440,7 +453,7 @@ export default function ServiceLandingPage({
             </p>
           </div>
 
-          <aside className="md:col-span-2">
+          <aside className="hidden md:col-span-2 md:block">
             <div className="rounded-2xl border border-white/20 bg-black/25 p-5 backdrop-blur-md">
               <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-white/75">
                 ¿Dónde reparamos?
@@ -464,48 +477,33 @@ export default function ServiceLandingPage({
         </div>
       </header>
 
-      <section className="mt-10 grid gap-6 md:grid-cols-3">
+      <ul className="mt-10 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white dark:divide-slate-700 dark:border-slate-700 dark:bg-slate-900">
         {config.highlights.map((item) => (
-          <article
-            key={item.title}
-            className="rounded-2xl border border-white/15 bg-white/5 p-6 shadow-lg backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
-          >
-            <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
-              {item.title}
-            </h2>
-            <p className="mt-2 text-slate-600 dark:text-slate-300">{item.desc}</p>
-          </article>
+          <li key={item.title} className="flex gap-3 p-5">
+            <BsCheckCircleFill className="mt-1 shrink-0 text-emerald-600 dark:text-emerald-400" aria-hidden />
+            <div>
+              <h2 className="font-semibold text-slate-900 dark:text-white">{item.title}</h2>
+              <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300">{item.desc}</p>
+            </div>
+          </li>
         ))}
-      </section>
+      </ul>
 
-      <section className="mt-10 rounded-3xl border border-white/15 bg-white/5 p-8 shadow-xl backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
+      <section className="mt-10">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
           ¿Qué pasa con tu equipo desde que lo dejás?
         </h2>
-        <p className="mt-2 text-slate-600 dark:text-slate-300">
-          Proceso pensado para que sepas qué pasa con tu equipo en cada etapa.
-        </p>
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          {WORKFLOW.map((step) => {
-            const Icon = step.Icon;
-            return (
-              <article
-                key={step.title}
-                className="rounded-2xl border border-white/10 bg-white/70 p-5 dark:border-white/10 dark:bg-slate-900/45"
-              >
-                <h3 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-white">
-                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-primary">
-                    <Icon className="text-sm" />
-                  </span>
-                  {step.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                  {step.desc}
-                </p>
-              </article>
-            );
-          })}
-        </div>
+        <ol className="mt-4 divide-y divide-slate-200 dark:divide-slate-700">
+          {WORKFLOW.map((step, index) => (
+            <li key={step.title} className="flex gap-4 py-4">
+              <span className="text-lg font-black tabular-nums text-primary">{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <h3 className="font-semibold text-slate-900 dark:text-white">{step.title.replace(/^\d+\.\s*/, "")}</h3>
+                <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300">{step.desc}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </section>
 
       <section className="mt-10 rounded-3xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-8 shadow-xl backdrop-blur-2xl dark:border-white/10 dark:from-slate-900/40 dark:via-slate-900/30 dark:to-slate-900/40">
@@ -513,76 +511,13 @@ export default function ServiceLandingPage({
           ¿Qué marcas reparan?
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">{config.brandsText}</p>
-        <div className="mt-6 flex flex-wrap gap-3">
-          {[
-            "Diagnóstico profesional",
-            "Recoleta y Belgrano",
-            "Garantía escrita",
-            "Seguimiento por WhatsApp",
-          ].map((signal) => (
-            <span
-              key={signal}
-              className="rounded-full border border-primary/30 bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-primary dark:border-primary/40 dark:bg-slate-900/45"
-            >
-              {signal}
-            </span>
-          ))}
-        </div>
       </section>
 
-      {visual.support ? (
-        <section className="mt-10 grid gap-6 rounded-3xl border border-white/15 bg-white/5 p-6 shadow-xl backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:grid-cols-[1.15fr_0.85fr] md:items-center md:p-8">
-          <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-slate-900/40">
-            <Image
-              src={visual.support}
-              alt={`${config.serviceName} en laboratorio técnico`}
-              width={1200}
-              height={900}
-              sizes="(max-width: 768px) 100vw, 60vw"
-              className="h-auto w-full object-cover"
-            />
-          </div>
-          <article className="space-y-4">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-              ¿Conviene reparar o no?
-            </h2>
-            <p className="text-slate-600 dark:text-slate-300">
-              Evaluamos síntomas, pruebas y contexto del equipo para darte una recomendación
-              concreta. Si no conviene reparar, te lo decimos claro antes de avanzar.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <TrackedCtaLink
-                href={whatsappUrl}
-                ctaName="service_support_visual_whatsapp"
-                ctaLocation={`service_support_visual_${config.slug}`}
-                ctaVariant="whatsapp"
-                external
-                target="_blank"
-                className="inline-flex min-h-11 items-center rounded-full bg-emerald-700 px-5 text-sm font-semibold text-white transition hover:bg-emerald-800"
-              >
-                Consultar por WhatsApp
-              </TrackedCtaLink>
-              <TrackedCtaLink
-                href="/presupuesto-reparacion#solicitar-presupuesto"
-                ctaName="service_support_visual_budget"
-                ctaLocation={`service_support_visual_${config.slug}`}
-                ctaVariant="secondary"
-                className="inline-flex min-h-11 items-center rounded-full border border-slate-300 px-5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
-              >
-                Ver presupuesto
-              </TrackedCtaLink>
-            </div>
-          </article>
-        </section>
-      ) : null}
 
       <section className="mt-10 rounded-3xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
           Guías recomendadas para este servicio
         </h2>
-        <p className="mt-2 text-slate-600 dark:text-slate-300">
-          Si querés comparar opciones antes de decidir, estas lecturas te dan contexto técnico y comercial real.
-        </p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           {relatedGuides.map((guide) => (
             <TrackedCtaLink
@@ -601,26 +536,6 @@ export default function ServiceLandingPage({
               </span>
             </TrackedCtaLink>
           ))}
-        </div>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <TrackedCtaLink
-            href="/guias"
-            ctaName="service_related_guides_hub"
-            ctaLocation={`service_related_guides_${config.slug}`}
-            ctaVariant="secondary"
-            className="rounded-full border border-slate-300 min-h-11 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
-          >
-            Ver todas las guías
-          </TrackedCtaLink>
-          <TrackedCtaLink
-            href="/presupuesto-reparacion#solicitar-presupuesto"
-            ctaName="service_related_guides_budget"
-            ctaLocation={`service_related_guides_${config.slug}`}
-            ctaVariant="primary"
-            className="rounded-full bg-primary min-h-11 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
-          >
-            Pedir diagnóstico
-          </TrackedCtaLink>
         </div>
       </section>
 
@@ -648,8 +563,7 @@ export default function ServiceLandingPage({
       <section className="mt-10 rounded-2xl border border-white/15 bg-slate-900 p-8 text-center text-white shadow-lg">
         <h2 className="text-2xl font-bold">¿Querés que lo revisemos hoy?</h2>
         <p className="mx-auto mt-3 max-w-2xl text-slate-200">
-          Escribinos con marca, modelo y falla. Te respondemos con orientación clara
-          para que sepas si conviene reparar, en qué plazo y con qué garantía.
+          Mandanos marca, modelo y falla por WhatsApp y te pasamos precio y plazo.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           <TrackedCtaLink

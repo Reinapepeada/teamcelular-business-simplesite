@@ -28,7 +28,12 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "bateria celular se descarga rapido",
     ],
     intro:
-      `Team Celular, en Paraguay 2451 Recoleta CABA, cambia baterías de celular en 1 a 2 horas con garantía escrita de 90 días. En Samsung Galaxy A sale desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[2].from)} y en Motorola Moto G desde ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[3].from)}; en iPhone 13 cuesta ${formatArsPrice(IPHONE_13_BATTERY)}. Si el equipo dura poco o se apaga solo, primero medimos el consumo para confirmar que la culpa es de la batería.`,
+      "Cambiamos la batería de tu celular en 1 a 2 horas, con garantía escrita de 90 días. Antes medimos el consumo para confirmar que la culpa es de la batería.",
+    prices: [
+      { label: "iPhone 13", value: formatArsPrice(IPHONE_13_BATTERY) },
+      { label: "Samsung Galaxy A", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[2].from)}` },
+      { label: "Motorola Moto G", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[3].from)}` },
+    ],
     whatsappText:
       "Hola! Quiero un presupuesto para cambio de bateria en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de batería (CABA)",
@@ -81,7 +86,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Cambio de Pantalla y Módulo en CABA | Team Celular",
     metaDescription:
-      "Cambio de módulo y pantalla con garantía escrita de 90 días y test completo. Samsung A04, A15, A16 e iPhone. Recoleta y Belgrano.",
+      "Cambio de pantalla en CABA en 2 a 4 horas, siempre módulo completo. iPhone 13 $249.900, Samsung Galaxy A desde $99.900. Garantía escrita de 90 días.",
     socialTitle: "Cambio de Pantalla en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Cambio de pantalla en CABA con test completo y garantía escrita 90 días.",
@@ -95,7 +100,12 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "touch no responde celular",
     ],
     intro:
-      `Team Celular, en Paraguay 2451 Recoleta CABA, cambia pantallas en 2 a 4 horas con garantía escrita de 90 días. En un iPhone 13 el cambio cuesta ${formatArsPrice(IPHONE_13_SCREEN)}; en Samsung Galaxy A va desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[0].from)} y en Motorola Moto G desde ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[0].from)}. Si hay vidrio roto, líneas, manchas o touch sin respuesta, verificamos módulo, sensores y cámaras antes de darte el número.`,
+      "Cambiamos la pantalla de tu celular en 2 a 4 horas, siempre con módulo completo y garantía escrita de 90 días. Team Celular, Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano).",
+    prices: [
+      { label: "iPhone 13", value: formatArsPrice(IPHONE_13_SCREEN) },
+      { label: "Samsung Galaxy A", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[0].from)}` },
+      { label: "Motorola Moto G", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[0].from)}` },
+    ],
     whatsappText:
       "Hola! Quiero un presupuesto para cambio de pantalla en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de pantalla (CABA)",
@@ -156,7 +166,11 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "ficha de carga celular",
     ],
     intro:
-      `Team Celular, en Paraguay 2451 Recoleta CABA, cambia el pin de carga con garantía escrita de 90 días. Según el equipo, cuesta entre ${formatArsPrice(CHARGING_PORT_PRICE.from)} y ${formatArsPrice(CHARGING_PORT_PRICE.to)}. Si el celular carga solo en cierta posición o no carga, primero revisamos pin, flex y conectores bajo microscopio para no cambiar una pieza que no era la causa.`,
+      "Cambiamos el pin de carga con garantía escrita de 90 días. Antes lo revisamos con microscopio: a veces alcanza con una limpieza técnica.",
+    prices: [
+      { label: "Cambio de pin de carga", value: `${formatArsPrice(CHARGING_PORT_PRICE.from)} a ${formatArsPrice(CHARGING_PORT_PRICE.to)}` },
+      { label: "Diagnóstico", value: "$ 15.000 a $ 25.000" },
+    ],
     whatsappText:
       "Hola! Quiero un presupuesto para cambio de pin de carga en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de pin de carga (CABA)",
