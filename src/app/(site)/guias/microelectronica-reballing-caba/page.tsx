@@ -66,7 +66,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2024-02-20T00:00:00Z",
-    modifiedTime: "2026-09-22T00:00:00Z",
+    modifiedTime: "2026-09-23T00:00:00Z",
     section: "Guías Técnicas",
   },
   twitter: {
@@ -85,7 +85,7 @@ const PAGE_URL = `${SITE_URL}/guias/microelectronica-reballing-caba`;
 const useCases = [
   {
     title: "Equipos mojados y daño por líquidos",
-    description: "Cortocircuitos en placa lógica, oxidación de componentes, recuperación de datos de chips NAND con corrosión avanzada.",
+    description: "Cortos en la placa, componentes oxidados y recuperación de datos de memorias NAND con corrosión.",
     Icon: FaMicrochip,
   },
   {
@@ -100,7 +100,7 @@ const useCases = [
   },
   {
     title: "Reconstrucción de pistas",
-    description: "Bypass de circuitos dañados, microbridge en placas multilayer, reparación de pads levantados y restauración de conexiones críticas.",
+    description: "Puentes sobre pistas cortadas, pads levantados y líneas rotas en placas de varias capas.",
     Icon: FaCertificate,
   },
 ];
@@ -182,7 +182,7 @@ const faqMicro = [
   },
   {
     question: "¿Ofrecen capacitaciones en microelectrónica?",
-    answer: "Sí, ofrecemos cursos personalizados para técnicos que quieran especializarse en soldadura SMD, reballing BGA y diagnóstico avanzado de placas. Consultanos por el programa de capacitación y disponibilidad de cupos.",
+    answer: "Sí, damos cursos para técnicos que quieren aprender soldadura SMD, reballing BGA y diagnóstico de placas. Escribinos para saber fechas y cupos.",
   },
 ];
 
@@ -209,7 +209,7 @@ export default function MicroelectronicsGuide() {
         title="Microelectrónica y Reballing BGA en Buenos Aires | Team Celular"
         description="Team Celular, Paraguay 2451 Recoleta y Amenábar 2032 Belgrano, CABA. Reballing BGA, soldadura SMD y reparación de placas lógicas con microscopio profesional y garantía escrita de 90 días."
         publishedTime="2024-02-20T00:00:00Z"
-        modifiedTime="2026-09-22T00:00:00Z"
+        modifiedTime="2026-09-23T00:00:00Z"
         image="https://teamcelular.com/images/guia_microelectronica.webp"
         url={PAGE_URL}
       />
@@ -241,7 +241,7 @@ export default function MicroelectronicsGuide() {
             del equipo y lleva cerca de un mes y medio, que es el tiempo que manejamos para que el trabajo salga bien.
           </p>
           <div className="mt-4 flex justify-center">
-            <GuideByline modifiedTime="2026-09-22T00:00:00Z" tone="light" />
+            <GuideByline modifiedTime="2026-09-23T00:00:00Z" tone="light" />
           </div>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
@@ -300,8 +300,8 @@ export default function MicroelectronicsGuide() {
           <p className="mt-5 text-sm text-slate-600 dark:text-slate-300">
             Si tu equipo entra en alguno de los tres, traelo apagado. La revisión técnica
             va de ARS 15.000 a 25.000 según el caso, se hace bajo microscopio y te decimos si
-            tiene arreglo antes de cobrarte la reparación. Si no se puede recuperar, te lo
-            decimos y no cobramos el intento.
+            tiene arreglo antes de cobrarte la reparación. Si no tiene arreglo, pagás
+            solo la revisión y te llevás el equipo.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
@@ -356,10 +356,10 @@ export default function MicroelectronicsGuide() {
         <section className="space-y-8">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Casos en los que recomendamos microelectrónica
+              ¿Qué fallas se arreglan con microelectrónica?
             </h2>
             <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
-              Reparaciones complejas que otros talleres no pueden resolver
+              Los casos que en otros talleres terminan en “no tiene arreglo”
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2">
@@ -389,10 +389,10 @@ export default function MicroelectronicsGuide() {
         <section className="space-y-8 rounded-2xl border border-white/15 bg-white/5 p-10 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
           <div>
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Equipamiento profesional y protocolos certificados
+              ¿Con qué equipos se hace un reballing?
             </h2>
             <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
-              Trabajamos con instrumental de nivel laboratorio bajo normas ESD
+              Esto es lo que hay en la mesa de trabajo de Recoleta
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2">
@@ -459,7 +459,7 @@ export default function MicroelectronicsGuide() {
               Preguntas frecuentes sobre microelectrónica
             </h2>
             <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
-              Respondemos las dudas más comunes sobre reballing y reparación de placas
+              Lo que más nos preguntan antes de dejar un equipo en laboratorio
             </p>
           </div>
           <div className="space-y-4">
@@ -502,7 +502,7 @@ export default function MicroelectronicsGuide() {
             </Link>
           </div>
           <p className="mt-8 text-sm text-slate-600 dark:text-slate-400">
-            También ofrecemos{" "}
+            También damos{" "}
             <Link href="/guias/soporte-empresas-servicio-tecnico" className="font-semibold text-primary underline">
               soporte para empresas y gremios
             </Link>{" "}

@@ -71,12 +71,12 @@ export const metadata: Metadata = {
         url: "https://teamcelular.com/images/guia_samsung.webp",
         width: 1200,
         height: 630,
-        alt: "Reparacion tecnica de Samsung Galaxy en Team Celular",
+        alt: "Reparación de Samsung Galaxy en Team Celular",
       },
     ],
     publishedTime: "2026-03-12T00:00:00Z",
-    modifiedTime: "2026-08-20T00:00:00Z",
-    section: "Guias Tecnicas",
+    modifiedTime: "2026-09-23T00:00:00Z",
+    section: "Guías técnicas",
   },
   twitter: {
     card: "summary_large_image",
@@ -116,30 +116,30 @@ const brandLinks = [
 
 const processSteps = [
   {
-    title: "Ingreso tecnico y control inicial",
+    title: "Lo probamos antes de abrirlo",
     description:
-      "Verificamos numero de serie, estado del equipo y funcionamiento de pantalla, camaras, sensores, WiFi, Bluetooth y carga rapida antes de desarmar.",
+      "Anotamos el número de serie y probamos pantalla, cámaras, sensores, WiFi, Bluetooth y carga rápida con vos adelante. Así queda claro qué andaba y qué no.",
     duration: "15 min",
     Icon: FaMobileAlt,
   },
   {
-    title: "Diagnostico Galaxy por sintoma real",
+    title: "Buscamos la falla de origen",
     description:
-      "Medimos consumo de energia, lineas de carga USB-C y estabilidad de placa logica para detectar fallas intermitentes que no aparecen en una revision superficial.",
+      "Medimos consumo, líneas de carga del USB-C y estabilidad de la placa. Un Galaxy que se apaga no siempre necesita batería: a veces es el pin o un corto en placa.",
     duration: "30-45 min",
     Icon: FaTools,
   },
   {
-    title: "Reparacion con repuesto premium",
+    title: "Cambio de la pieza",
     description:
-      "Instalamos modulo compatible de alta calidad segun modelo y uso: linea S, A o Z. Ajustamos armado para preservar tactil, brillo y respuesta de sensores.",
+      "Antes de instalar te decimos si el repuesto es Service Pack (original de Samsung) u OLED compatible, y qué cambia entre uno y otro en tu modelo.",
     duration: "2-4 h",
     Icon: FaWrench,
   },
   {
-    title: "QA final + entrega con garantia",
+    title: "Prueba final y garantía",
     description:
-      `Testeamos llamadas, camaras, datos moviles, carga rapida y rendimiento termico. Entregamos recomendaciones de cuidado post reparacion. ${WARRANTY_SCOPE_MESSAGE}`,
+      `Probamos llamadas, cámaras, datos, carga rápida y temperatura antes de devolvértelo. ${WARRANTY_SCOPE_MESSAGE}`,
     duration: "20 min",
     Icon: FaCheckCircle,
   },
@@ -149,42 +149,42 @@ const repairServices = [
   {
     title: "Cambio de pantalla AMOLED Samsung",
     detail:
-      "Para Galaxy S y Note priorizamos paneles con buen contraste, tasa de refresco estable y respuesta tactil precisa.",
+      "Líneas verdes, manchas negras o touch que no responde. Cambiamos el módulo completo y te avisamos si el repuesto mantiene los 120 Hz.",
     eta: "2-4 h",
     Icon: FaMobileAlt,
   },
   {
-    title: "Bateria y autonomia degradada",
+    title: "Batería que no dura",
     detail:
-      "Reemplazo de bateria para equipos que se apagan en frio, bajan de 30% a 0% o pierden carga en reposo.",
+      "Se apaga con el frío, pasa de 30% a 0% de golpe o pierde carga sin usarlo. Si la tapa se levantó, apagalo: la batería está hinchada.",
     eta: "1-2 h",
     Icon: FaBolt,
   },
   {
-    title: "Puerto USB-C y carga rapida",
+    title: "Puerto USB-C y carga rápida",
     detail:
-      "Solucion para carga intermitente, cable flojo o equipo que no negocia carga rapida. Incluye limpieza tecnica y test final.",
+      "Carga solo en una posición, el cable queda flojo o dejó de aparecer la carga rápida. No lo limpies con una aguja: se doblan los pines.",
     eta: "2-3 h",
     Icon: FaShieldAlt,
   },
   {
-    title: "Camaras con foco inestable u OIS fallando",
+    title: "Cámara que no enfoca o vibra",
     detail:
-      "Reparamos modulos de camara en Galaxy S y A para recuperar nitidez, enfoque y estabilizacion segun cada equipo.",
+      "Fotos borrosas, zumbido al abrir la cámara o lente trasero partido. En Galaxy S suele ser el estabilizador (OIS) del módulo.",
     eta: "2-4 h",
     Icon: FaCamera,
   },
   {
-    title: "Placa logica Samsung",
+    title: "Placa de Samsung",
     detail:
-      "Microelectronica para equipos que no encienden, quedan en logo o presentan reinicios constantes despues de golpes o humedad.",
+      "Queda en el logo, se reinicia solo o no prende después de un golpe o de mojarse. Va a laboratorio con microscopio.",
     eta: "24-48 h",
     Icon: FaMicrochip,
   },
   {
     title: "Bisagra, flex y display en Z Fold / Z Flip",
     detail:
-      "Evaluamos pliegue, bisagra, cableados flex y panel interno para definir si conviene reparacion parcial o reemplazo completo.",
+      "Revisamos pliegue, bisagra, flex y pantalla interna para ver si conviene cambiar una pieza o el conjunto. Te pasamos las dos opciones.",
     eta: "24-72 h",
     Icon: FaWrench,
   },
@@ -225,10 +225,10 @@ const samsungSymptomRows = [
 
 const repairLinks: Record<string, string> = {
   "Cambio de pantalla AMOLED Samsung": "/reparaciones/cambio-pantalla-caba",
-  "Bateria y autonomia degradada": "/reparaciones/cambio-bateria-caba",
-  "Puerto USB-C y carga rapida": "/reparaciones/cambio-pin-carga-caba",
-  "Camaras con foco inestable u OIS fallando": "/reparaciones/cambio-camara-caba",
-  "Placa logica Samsung": "/reparaciones/reparacion-placa-caba",
+  "Batería que no dura": "/reparaciones/cambio-bateria-caba",
+  "Puerto USB-C y carga rápida": "/reparaciones/cambio-pin-carga-caba",
+  "Cámara que no enfoca o vibra": "/reparaciones/cambio-camara-caba",
+  "Placa de Samsung": "/reparaciones/reparacion-placa-caba",
 };
 
 
@@ -265,51 +265,51 @@ const samsungModels = [
 
 const faq = [
   {
-    question: "Cuanto tarda un cambio de pantalla Samsung?",
+    question: "¿Cuánto tarda un cambio de pantalla Samsung?",
     answer:
-      "Depende del modelo y stock de modulo. En lineas S y A suele resolverse en el dia, entre 2 y 4 horas para casos standard.",
+      "Si el módulo está en stock, entre 2 y 4 horas en las líneas S y A. Si hay que pedirlo, te avisamos el plazo antes de que lo dejes.",
   },
   {
-    question: "Se mantiene la tasa de refresco de 120 Hz?",
+    question: "¿Se mantiene la tasa de refresco de 120 Hz?",
     answer:
-      "Si el repuesto elegido y el modelo lo permiten, la tasa alta se mantiene. Te informamos antes de instalar para que no haya sorpresas.",
+      "Depende del repuesto: hay pantallas compatibles que no llegan a 120 Hz. Te lo decimos antes de instalar para que elijas.",
   },
   {
-    question: "Reparan Samsung mojados o con humedad?",
+    question: "¿Reparan Samsung mojados?",
     answer:
-      "Si. Hacemos apertura tecnica, limpieza y medicion de corrosion. Es clave no cargar el equipo mojado y traerlo cuanto antes.",
+      "Sí. Lo abrimos, limpiamos la placa y medimos la corrosión. Lo más importante: no lo cargues ni lo metas en arroz, traelo apagado cuanto antes.",
   },
   {
-    question: "Atienden linea Z Fold y Z Flip?",
+    question: "¿Arreglan Z Fold y Z Flip?",
     answer:
-      "Si, con diagnostico especifico de bisagra, flex y pantalla interna. Son equipos mas delicados y requieren evaluacion detallada.",
+      "Sí. Son los más delicados: revisamos bisagra, flex y pantalla interna, y el trabajo lleva de 24 a 72 horas según el repuesto.",
   },
   {
-    question: "Incluyen garantia luego de la reparacion?",
-    answer: `Si. ${WARRANTY_SCOPE_MESSAGE}`,
+    question: "¿La reparación tiene garantía?",
+    answer: `Sí. ${WARRANTY_SCOPE_MESSAGE}`,
   },
   {
-    question: "Que diferencia hay entre pantalla Service Pack, OLED compatible y alternativa economica?",
+    question: "¿Qué diferencia hay entre pantalla Service Pack, OLED compatible y alternativa económica?",
     answer:
       "La pantalla Service Pack prioriza las especificaciones originales del equipo. Una OLED compatible puede ofrecer una buena relación entre costo y resultado, mientras que una alternativa económica puede cambiar brillo, color, consumo o respuesta táctil. Antes de instalar te informamos qué opción hay para tu modelo y qué funciones conserva.",
   },
   {
-    question: "Reparan Samsung Galaxy A16, A15, A35, A54 y A55?",
+    question: "¿Reparan Samsung Galaxy A16, A15, A35, A54 y A55?",
     answer:
       "Sí. Trabajamos las líneas Galaxy A y confirmamos stock de pantalla, batería o módulo de carga según el código exacto del equipo antes de desarmar.",
   },
   {
-    question: "Reparan Samsung Galaxy S23, S24 y S25 Ultra?",
+    question: "¿Reparan Samsung Galaxy S23, S24 y S25 Ultra?",
     answer:
       "Sí. En la línea Galaxy S revisamos pantalla AMOLED, cámaras, carga, batería y placa. En modelos Ultra verificamos además respuesta táctil, tasa de refresco y funciones asociadas al repuesto elegido.",
   },
   {
-    question: "Es un servicio oficial Samsung?",
+    question: "¿Es un servicio oficial de Samsung?",
     answer:
       "No somos un centro oficial Samsung. Somos un laboratorio técnico independiente en CABA y explicamos por escrito el diagnóstico, el repuesto ofrecido, el tiempo estimado y la garantía antes de avanzar.",
   },
   {
-    question: "Cuanto cuesta el diagnostico si no hago la reparacion?",
+    question: "¿Cuánto cuesta el diagnóstico si no hago la reparación?",
     answer:
       "El diagnóstico tiene costo y se informa antes de abrir el equipo. Si aprobás la reparación, ese monto se descuenta del trabajo final. Confirmamos el valor exacto al recibir el Samsung.",
   },
@@ -319,10 +319,10 @@ export default function SamsungRepairGuidePage() {
   return (
     <div className="flex w-full justify-center px-4 py-16">
       <ArticleSchema
-        title="Reparacion de Samsung en Buenos Aires | Servicio Tecnico Team Celular"
-        description="Guia detallada de reparacion Samsung Galaxy con diagnostico profesional, repuestos premium y garantia escrita."
+        title="Reparación de Samsung Galaxy en Buenos Aires | Team Celular"
+        description="Precios, tiempos y fallas comunes de Samsung Galaxy, con diagnóstico el mismo día y garantía escrita de 90 días en CABA."
         publishedTime="2026-03-12T00:00:00Z"
-        modifiedTime="2026-08-20T00:00:00Z"
+        modifiedTime="2026-09-23T00:00:00Z"
         about={[
           "reparacion de Samsung en Buenos Aires",
           "service tecnico Samsung Galaxy en CABA",
@@ -338,8 +338,8 @@ export default function SamsungRepairGuidePage() {
         <BreadcrumbJsonLd
           items={[
             { name: "Inicio", url: `${SITE_URL}/` },
-            { name: "Guias", url: `${SITE_URL}/guias` },
-            { name: "Reparacion de Samsung", url: PAGE_URL },
+            { name: "Guías", url: `${SITE_URL}/guias` },
+            { name: "Reparación de Samsung", url: PAGE_URL },
           ]}
         />
 
@@ -349,11 +349,11 @@ export default function SamsungRepairGuidePage() {
           </Link>
           <span>/</span>
           <Link href="/guias" className="transition hover:text-primary">
-            Guias
+            Guías
           </Link>
           <span>/</span>
           <span className="font-semibold text-slate-900 dark:text-white">
-            Reparacion Samsung
+            Reparación Samsung
           </span>
         </nav>
 
@@ -379,23 +379,23 @@ export default function SamsungRepairGuidePage() {
               Galaxy S, A, Note, Z Fold y Z Flip.
             </p>
             <div className="mt-4">
-              <GuideByline modifiedTime="2026-08-20T00:00:00Z" tone="light" />
+              <GuideByline modifiedTime="2026-09-23T00:00:00Z" tone="light" />
             </div>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-3">
             <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
               <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
-                Diagnostico
+                Diagnóstico
               </p>
               <p className="mt-2 text-3xl font-black text-primary">24 h</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-                Informe tecnico con opciones concretas
+                Te decimos qué tiene y cuánto sale
               </p>
             </div>
             <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
               <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
-                Garantia
+                Garantía
               </p>
               <p className="mt-2 text-3xl font-black text-secondary">90 días</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
@@ -408,7 +408,7 @@ export default function SamsungRepairGuidePage() {
               </p>
               <p className="mt-2 text-3xl font-black text-primary">2-4 h</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-                Pantalla, bateria y carga en el dia
+                Pantalla, batería y carga en el día
               </p>
             </div>
           </div>
@@ -435,13 +435,13 @@ export default function SamsungRepairGuidePage() {
               href="/presupuesto-reparacion"
               className="rounded-full bg-primary px-8 py-4 text-base font-bold text-white shadow-lg transition hover:bg-primary/90"
             >
-              Cotizar reparacion Samsung
+              Cotizar reparación Samsung
             </Link>
             <Link
               href="https://wa.me/5491151034595?text=Hola%20Team%20Celular%2C%20quiero%20cotizar%20una%20reparacion%20de%20Samsung"
               className="rounded-full border-2 border-primary px-8 py-4 text-base font-bold text-primary transition hover:bg-primary/10"
             >
-              WhatsApp tecnico directo
+              Hablar con un técnico
             </Link>
           </div>
         </header>
@@ -514,7 +514,7 @@ export default function SamsungRepairGuidePage() {
               ¿Cómo es el proceso de reparación de Samsung en Team Celular?
             </h2>
             <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
-              Cuatro etapas para detectar la falla de origen, no solo el síntoma visible
+              Así trabajamos cada Galaxy que entra al taller
             </p>
           </div>
           <div className="grid gap-5 md:grid-cols-2">
@@ -669,10 +669,10 @@ export default function SamsungRepairGuidePage() {
         <section className="space-y-7">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Preguntas frecuentes de reparacion Samsung
+              Preguntas frecuentes sobre reparación de Samsung
             </h2>
             <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
-              Informacion concreta para evitar dudas antes de avanzar
+              Lo que más nos preguntan antes de dejar el equipo
             </p>
           </div>
           <div className="space-y-4">
@@ -702,9 +702,9 @@ export default function SamsungRepairGuidePage() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Service",
-              name: "Reparacion de Samsung en Buenos Aires",
+              name: "Reparación de Samsung en Buenos Aires",
               description:
-                "Servicio tecnico Samsung Galaxy en CABA con diagnostico profesional, repuestos premium y garantia escrita.",
+                "Reparación de Samsung Galaxy en CABA: pantalla, batería, carga y placa, con garantía escrita de 90 días.",
               provider: { "@id": "https://teamcelular.com#localbusiness" },
               // Rango y catalogo salen de repairPrices: un unico lugar donde el precio
               // visible y el structured data no pueden divergir.

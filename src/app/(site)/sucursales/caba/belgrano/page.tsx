@@ -27,7 +27,7 @@ const faqs = [
   },
   {
     q: "¿Puedo pedir presupuesto antes de ir a Belgrano?",
-    a: "Sí. Escribinos por WhatsApp con marca, modelo y falla para agilizar el diagnóstico y evitar esperas.",
+    a: "Sí. Mandanos por WhatsApp marca, modelo y qué le pasa, y te confirmamos precio y si hay repuesto antes de que vayas.",
   },
   {
     q: "¿Qué reparaciones hacen en la sucursal Belgrano?",
@@ -42,7 +42,7 @@ const faqs = [
 const trustSignals = [
   {
     title: "Laboratorio físico en Belgrano",
-    desc: "Atención real en sucursal con equipamiento técnico para reparaciones simples y complejas.",
+    desc: "Pantalla, batería y carga se hacen acá mismo. Si el equipo necesita trabajo de placa, te lo decimos antes y te damos el plazo.",
     Icon: FaTools,
   },
   {
@@ -52,7 +52,7 @@ const trustSignals = [
   },
   {
     title: "Seguimiento por WhatsApp",
-    desc: "Canal directo para consultar estado, coordinar entrega y resolver dudas sin filas.",
+    desc: "Te avisamos por WhatsApp cuando está listo o si aparece algo que no estaba en el presupuesto.",
     Icon: FaUserCheck,
   },
 ];
@@ -265,7 +265,7 @@ export default function SucursalBelgranoPage() {
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {[
             "Cambio de pantalla y módulo display",
-            "Cambio de batería con test de autonomía",
+            "Cambio de batería",
             "Reparación de pin de carga",
             "Microelectrónica y reparación de placa",
             "Recuperación por agua o humedad",
@@ -306,7 +306,7 @@ export default function SucursalBelgranoPage() {
           ¿Cómo llegar a la sucursal Belgrano?
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">
-          Amenábar 2032 está en el corazón de Belgrano, con fácil acceso en transporte público. Podés llegar por Subte D (estación Juramento) a pocas cuadras, o en múltiples líneas de colectivo que pasan por la zona. Si venís en auto, la calle tiene estacionamiento disponible en la cuadra.
+          La estación de subte más cercana es Juramento, de la línea D, sobre Av. Cabildo. Desde ahí caminás hasta Amenábar 2032; también te dejan cerca los colectivos que van por Cabildo.
         </p>
         <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">
           Si tenés dudas sobre cómo llegar, escribinos por WhatsApp y te mandamos el punto exacto.

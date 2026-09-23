@@ -10,80 +10,80 @@ const SITE_URL = getSiteUrl();
 
 const REPAIR_SERVICES = [
   {
-    title: "Cambio de bateria",
+    title: "Cambio de batería",
     description:
-      "Baterias originales o certificadas. Diagnostico y presupuesto rapido. Atencion en CABA.",
+      "Se descarga al mediodía, se apaga con 20% o está hinchada. En la mayoría de los modelos sale en el día.",
     href: "/reparaciones/cambio-bateria-caba",
   },
   {
-    title: "Cambio de pantalla / modulo display",
+    title: "Cambio de pantalla",
     description:
-      "Cambio de modulo completo (display + touch) con repuestos premium. CABA.",
+      "Vidrio astillado, líneas, manchas o touch que no responde. Cambiamos el módulo completo, nunca solo el vidrio.",
     href: "/reparaciones/cambio-pantalla-caba",
   },
   {
-    title: "Cambio de pin / ficha de carga",
+    title: "Pin de carga",
     description:
-      "Problemas de carga, falso contacto o no reconoce cargador. Atencion en CABA.",
+      "Carga solo si movés el cable, carga lento o no reconoce el cargador. Primero vemos si es el pin o la placa.",
     href: "/reparaciones/cambio-pin-carga-caba",
   },
   {
-    title: "Cambio de camara (frontal / trasera)",
+    title: "Cámara frontal o trasera",
     description:
-      "Camara borrosa, sin enfoque o en negro. Diagnostico y reemplazo en CABA.",
+      "Fotos borrosas, no enfoca, vibra o queda en negro. Cambiamos el módulo o el vidrio del lente.",
     href: "/reparaciones/cambio-camara-caba",
   },
   {
-    title: "Reparacion de audio (microfono / parlante)",
+    title: "Micrófono y parlante",
     description:
-      "No te escuchan en llamadas, audio bajo o distorsionado. Reparacion en CABA.",
+      "No te escuchan en las llamadas, el audio sale bajo o con ruido. Suele ser flex, módulo o suciedad en la rejilla.",
     href: "/reparaciones/reparacion-audio-celular-caba",
   },
   {
-    title: "Recuperacion de celular mojado",
+    title: "Celular mojado",
     description:
-      "Dano por liquidos, corrosion y fallas intermitentes. Servicio urgente con laboratorio.",
+      "Se cayó al agua o le entró humedad. No lo cargues: traelo apagado y lo abrimos para frenar la corrosión.",
     href: "/reparaciones/recuperacion-celular-mojado-caba",
   },
   {
-    title: "Reparacion de placa (microelectronica)",
+    title: "Placa y microelectrónica",
     description:
-      "Fallas complejas: no enciende, se reinicia, mojado o corto. Diagnostico de laboratorio.",
+      "No prende, se reinicia solo o quedó en loop. Trabajo bajo microscopio, incluido reballing de chips.",
     href: "/reparaciones/reparacion-placa-caba",
   },
   {
-    title: "Cambio de flex (carga / boton encendido)",
+    title: "Flex y botones",
     description:
-      "Flex de carga, boton power, volumen u otros flex. Diagnostico y reemplazo en CABA.",
+      "Botón de encendido o volumen que no responde, flex de carga cortado. Diagnóstico y cambio del flex.",
     href: "/reparaciones/cambio-flex-caba",
   },
   {
-    title: "Cambio de tapa trasera",
+    title: "Tapa trasera",
     description:
-      "Tapa rota, levantada o marcada. Reemplazo con terminacion prolija en CABA.",
+      "Tapa de vidrio rota o levantada. Si se levantó sola, revisamos la batería antes de cerrar.",
     href: "/reparaciones/cambio-tapa-caba",
   },
 ];
 
 const ROUTE_SELECTOR = [
   {
-    title: "No se bien que falla tiene",
+    title: "No sé bien qué tiene",
     description:
-      "Si todavia no sabes la falla exacta, contanos el sintoma y te orientamos antes de que vengas.",
+      "Contanos qué hace el equipo (o qué dejó de hacer) y te decimos si hace falta revisarlo antes de pasarte un precio.",
     href: "/presupuesto-reparacion#solicitar-presupuesto",
-    cta: "Describir el sintoma",
+    cta: "Contar qué le pasa",
   },
   {
-    title: "Es un caso complejo o de placa",
+    title: "No prende o se mojó",
     description:
-      "Para humedad, reinicios, no enciende o segunda opinion, conviene diagnostico avanzado.",
+      "Humedad, reinicios o equipos que no encienden van directo a laboratorio. También hacemos segunda opinión si ya te dijeron que no tiene arreglo.",
     href: "/reparaciones/reparacion-placa-caba",
-    cta: "Ir a reparacion de placa",
+    cta: "Ver reparación de placa",
   },
   {
-    title: "Quiero precio rapido",
+    title: "Ya sé qué necesito",
     description:
-      "Si ya tenes marca, modelo y falla, pedi presupuesto directo por formulario o WhatsApp.",
+      "Si tenés marca, modelo y falla, pedí el precio por formulario o WhatsApp y te respondemos en hasta 2 horas hábiles.",
     href: "/presupuesto-reparacion#solicitar-presupuesto",
     cta: "Pedir presupuesto",
   },
@@ -91,9 +91,9 @@ const ROUTE_SELECTOR = [
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: "/reparaciones",
-  title: "Catálogo de Reparaciones por Tipo de Falla en CABA",
+  title: "Reparaciones de Celular por Tipo de Falla en CABA",
   description:
-    "Explora servicios por tipo de falla en CABA: pantalla, bateria, carga, camara, audio, mojado y placa. Hub pensado para comparar opciones y elegir ruta.",
+    "Pantalla, batería, pin de carga, cámara, audio, mojado y placa. Qué incluye cada reparación, cuánto tarda y garantía escrita de 90 días en CABA.",
   robots: {
     index: true,
     follow: true,
@@ -101,18 +101,18 @@ export const metadata: Metadata = buildWebsiteMetadata({
   languages: {
     "es-AR": "/reparaciones",
   },
-  openGraphTitle: "Catálogo de Reparaciones en CABA | Team Celular",
+  openGraphTitle: "Reparaciones por Tipo de Falla en CABA | Team Celular",
   openGraphDescription:
-    "Hub de servicios para elegir reparacion por falla y derivar a presupuesto o diagnostico avanzado.",
+    "Buscá la falla de tu celular y mirá qué incluye la reparación, cuánto tarda y cómo pedir precio.",
   openGraphImageAlt: "Team Celular - Reparaciones en CABA",
-  twitterTitle: "Catálogo de Reparaciones en CABA | Team Celular",
+  twitterTitle: "Reparaciones por Tipo de Falla en CABA | Team Celular",
   twitterDescription:
-    "Navega servicios por tipo de falla y elige la ruta correcta para cotizar en CABA.",
+    "Pantalla, batería, carga, cámara, audio, mojado y placa. Garantía escrita de 90 días.",
 });
 
 export default function ReparacionesPage() {
   const whatsappUrl =
-    "https://wa.me/5491151034595?text=Hola%21%20Quiero%20pedir%20un%20presupuesto%20de%20reparacion%20en%20CABA.";
+    "https://wa.me/5491151034595?text=Hola%21%20Quiero%20pedir%20un%20presupuesto%20de%20reparaci%C3%B3n.";
 
   return (
     <section className="w-full max-w-6xl px-6 py-14 pb-28 md:px-8 md:pb-20">
@@ -130,7 +130,7 @@ export default function ReparacionesPage() {
         />
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
-            Servicios de reparacion de celulares en CABA
+            Reparaciones por tipo de falla en CABA
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-slate-100/90">
             Team Celular tiene dos talleres en CABA: <strong>Recoleta (Paraguay 2451)</strong> y <strong>Belgrano (Amenábar 2032)</strong>. iPhone,
@@ -176,54 +176,43 @@ export default function ReparacionesPage() {
         </div>
       </header>
 
-      <section className="mt-10 grid gap-4 md:grid-cols-3">
-        <article className="rounded-2xl border border-white/15 bg-white/5 p-5 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
-          <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-white">
-            <FaTools className="text-primary" />
-            Diagnostico real
-          </h2>
-          <p className="mt-2 text-slate-600 dark:text-slate-300">
-            Confirmamos la falla antes de presupuestar para evitar cambios innecesarios.
+      <section className="mt-10 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white dark:divide-slate-700/60 dark:border-slate-700/60 dark:bg-slate-900">
+        <div className="flex items-start gap-3 p-5">
+          <FaTools className="mt-1 shrink-0 text-primary" />
+          <p className="text-slate-700 dark:text-slate-300">
+            <strong className="text-slate-900 dark:text-white">Primero confirmamos la falla.</strong>{" "}
+            Un celular que no carga puede ser el pin, el flex o la placa; no te
+            cobramos un repuesto que no hacía falta.
           </p>
-        </article>
-        <article className="rounded-2xl border border-white/15 bg-white/5 p-5 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
-          <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-white">
-            <FaStopwatch className="text-primary" />
-            Tiempos claros
-          </h2>
-          <p className="mt-2 text-slate-600 dark:text-slate-300">
-            Te informamos plazos estimados segun modelo, stock y complejidad tecnica.
+        </div>
+        <div className="flex items-start gap-3 p-5">
+          <FaStopwatch className="mt-1 shrink-0 text-primary" />
+          <p className="text-slate-700 dark:text-slate-300">
+            <strong className="text-slate-900 dark:text-white">¿Cuánto sale revisarlo?</strong>{" "}
+            {REVIEW_COST_MESSAGE}
           </p>
-        </article>
-        <article className="rounded-2xl border border-white/15 bg-white/5 p-5 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
-          <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-white">
-            <FaShieldAlt className="text-primary" />
-            Garantia por escrito
-          </h2>
-          <p className="mt-2 text-slate-600 dark:text-slate-300">
+        </div>
+        <div className="flex items-start gap-3 p-5">
+          <FaShieldAlt className="mt-1 shrink-0 text-primary" />
+          <p className="text-slate-700 dark:text-slate-300">
+            <strong className="text-slate-900 dark:text-white">Garantía por escrito.</strong>{" "}
             {WARRANTY_SCOPE_MESSAGE}
           </p>
-        </article>
-      </section>
-
-      <section className="mt-8 rounded-2xl border border-white/15 bg-white/5 p-6 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
-        <p className="text-sm text-slate-700 dark:text-slate-300">
-          {REVIEW_COST_MESSAGE}
-        </p>
+        </div>
       </section>
 
       <section className="mt-8 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Elegi la ruta correcta segun tu caso
+          ¿No encontrás tu falla en la lista?
         </h2>
         <p className="mt-2 text-slate-600 dark:text-slate-300">
-          Este hub es para navegar servicios por tipo de falla. Si tu caso necesita
-          otra entrada, te derivamos aca.
+          Pasa seguido: el celular hace algo raro y no sabés a qué servicio
+          corresponde. Empezá por acá.
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           {ROUTE_SELECTOR.map((item) => (
             <article
-              key={item.href}
+              key={item.title}
               className="rounded-xl border border-white/10 bg-white/10 p-5 dark:border-white/5 dark:bg-slate-900/40"
             >
               <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">
@@ -261,11 +250,11 @@ export default function ReparacionesPage() {
 
       <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 text-center shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Queres resolverlo hoy?
+          ¿Lo querés tener arreglado hoy?
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">
-          Contanos marca, modelo y falla. Te respondemos rapido con opciones y
-          tiempos estimados.
+          Mandanos marca, modelo y qué le pasa. Pantalla y batería suelen salir
+          en 2 a 4 horas si el repuesto está en stock.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-4">
           <Link
@@ -297,7 +286,7 @@ export default function ReparacionesPage() {
             "@id": `${SITE_URL}/reparaciones#collection`,
             name: "Reparaciones de celulares en CABA",
             url: `${SITE_URL}/reparaciones`,
-            about: "Reparacion de celulares en Ciudad Autonoma de Buenos Aires",
+            about: "Reparación de celulares en Ciudad Autónoma de Buenos Aires",
             hasPart: REPAIR_SERVICES.map((s) => ({
               "@type": "WebPage",
               name: s.title,

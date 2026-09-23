@@ -94,23 +94,23 @@ const DEFAULT_VISUAL: ServiceVisual = {
 
 const WORKFLOW = [
   {
-    title: "1. Diagnóstico inicial",
-    desc: "Revisamos síntomas, equipo y prioridad para confirmar la falla real antes de cotizar.",
+    title: "1. Lo revisamos",
+    desc: "Lo probamos con vos adelante y buscamos la falla de origen, no solo el síntoma que se ve.",
     Icon: FaTools,
   },
   {
-    title: "2. Presupuesto claro",
-    desc: "Te explicamos opciones de repuesto, tiempos estimados y garantía de 90 días por escrito.",
+    title: "2. Te pasamos el precio",
+    desc: "Precio, plazo y tipo de repuesto antes de tocar nada. Si no te cierra, te lo llevás y pagás solo la revisión.",
     Icon: FaClipboardCheck,
   },
   {
-    title: "3. Reparación profesional",
-    desc: "Trabajamos con herramientas de laboratorio y control de calidad técnico antes de entregar.",
+    title: "3. Lo reparamos",
+    desc: "Pantalla y batería suelen salir en el día. Si aparece otro daño al abrirlo, te avisamos antes de seguir.",
     Icon: FaCheckCircle,
   },
   {
-    title: "4. Entrega y seguimiento",
-    desc: "Probamos funciones clave con vos y te dejamos canales directos para soporte post-servicio.",
+    title: "4. Lo probás y te lo llevás",
+    desc: "Lo revisás con nosotros antes de irte y te llevás la garantía de 90 días por escrito. Cualquier cosa, nos escribís al mismo WhatsApp.",
     Icon: FaShieldAlt,
   },
 ];
@@ -469,7 +469,7 @@ export default function ServiceLandingPage({
                 </li>
                 <li className="flex items-start gap-3">
                   <FaStopwatch className="mt-0.5 text-primary" />
-                  Tiempos estimados según modelo, stock y complejidad técnica.
+                  Pantalla y batería en 2 a 4 horas si el repuesto está en stock.
                 </li>
               </ul>
             </div>

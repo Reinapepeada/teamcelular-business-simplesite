@@ -84,7 +84,7 @@ const faqs = [
     },
     {
         question: "¿Hacen retiro dentro de CABA?",
-        answer: "Podemos coordinar retiro y entrega en CABA según la zona y la disponibilidad operativa del día.",
+        answer: "Sí, con moto, de lunes a viernes. Cuesta ARS 15.000 y el horario depende del barrio: escribinos y lo coordinamos.",
     },
     { question: "¿Cuánto tarda un presupuesto?", answer: BUDGET_RESPONSE_MESSAGE },
 ];

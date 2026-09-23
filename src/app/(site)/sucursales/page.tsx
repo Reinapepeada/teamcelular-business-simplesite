@@ -164,7 +164,7 @@ export default function SucursalesPage() {
             Paraguay 2451 · Lun–Vie 10:30–18:00
           </p>
           <p className="mt-3 text-slate-600 dark:text-slate-300">
-            Laboratorio principal con atención integral para pantalla, batería, carga y microelectrónica. También trabajamos tablets y notebooks.
+            Laboratorio principal: acá se hacen pantalla, batería y carga en el día, y los trabajos de placa bajo microscopio. También tablets y notebooks.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link

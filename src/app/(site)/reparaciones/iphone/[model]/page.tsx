@@ -93,14 +93,14 @@ export default async function IphoneModelPage({
       price: model.screen,
       time: "2 a 4 horas",
       detail: modelNotes
-        ? `Módulo ${modelNotes.panel}, con prueba de brillo, color y respuesta táctil antes de entregar.`
-        : `Módulo original del ${model.name}, con prueba de brillo, color y respuesta táctil antes de entregar.`,
+        ? `Módulo ${modelNotes.panel}. Pasamos el chip IC de tu pantalla a la nueva para que no pierdas True Tone ni Face ID.`
+        : `Módulo completo del ${model.name}. Pasamos el chip IC de tu pantalla a la nueva para que no pierdas True Tone ni Face ID.`,
     },
     {
       name: "Cambio de batería",
       price: model.battery,
       time: "1 a 2 horas",
-      detail: "Incluye medición de consumo real y test de autonomía, no solo el reemplazo.",
+      detail: "Antes medimos el consumo: si la batería está bien y el problema es otro, te lo decimos.",
     },
     {
       name: "Puerto de carga",

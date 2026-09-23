@@ -82,12 +82,12 @@ export const metadata: Metadata = {
         url: "https://teamcelular.com/images/portada_iphone.webp",
         width: 1200,
         height: 630,
-        alt: "Laboratorio de reparacion de iPhone en Team Celular",
+        alt: "Laboratorio de reparación de iPhone en Team Celular",
       },
     ],
     publishedTime: "2024-01-15T00:00:00Z",
-    modifiedTime: "2026-09-22T00:00:00Z",
-    section: "Guias Tecnicas",
+    modifiedTime: "2026-09-23T00:00:00Z",
+    section: "Guías técnicas",
   },
   twitter: {
     card: "summary_large_image",
@@ -127,30 +127,30 @@ const brandLinks = [
 
 const quickSteps = [
   {
-    step: "Ingreso y checklist técnico",
+    step: "Lo probamos con vos adelante",
     detail:
-      "Validamos IMEI, estado estético y todas las funciones clave antes de abrir el equipo: cámaras, micrófono, carga, parlantes, WiFi, Bluetooth, Face ID o Touch ID.",
+      "Antes de abrirlo anotamos el IMEI, las marcas que ya tiene y probamos cámaras, micrófono, carga, parlantes, WiFi, Bluetooth y Face ID o Touch ID. Así queda claro qué andaba y qué no.",
     duration: "15 min",
     Icon: FaMobileAlt,
   },
   {
-    step: "Diagnóstico de laboratorio",
+    step: "Buscamos la falla de origen",
     detail:
-      "Analizamos placa lógica, líneas de carga y consumo con instrumental de laboratorio. Si hay daño por líquido o golpe, documentamos fotos macro para un informe transparente.",
+      "Medimos consumo, líneas de carga y placa con instrumental de laboratorio. Si hay líquido o golpe adentro, le sacamos fotos con el microscopio y te las mandamos.",
     duration: "30-45 min",
     Icon: FaTools,
   },
   {
-    step: "Reparación y calibración",
+    step: "Cambio de la pieza",
     detail:
-      "Instalamos repuestos certificados y calibramos funciones delicadas de iPhone: True Tone, sensores de proximidad y rendimiento de batería para sostener la experiencia original.",
+      "Pasamos el chip IC de tu pantalla original a la nueva para que no pierdas Face ID ni True Tone. Es el paso que muchos talleres se saltean.",
     duration: "2-4 h",
     Icon: FaWrench,
   },
   {
-    step: "Control de calidad + garantía",
+    step: "Prueba final y garantía",
     detail:
-      `Hacemos pruebas funcionales, estabilidad térmica y carga real. Entregamos informe final con recomendaciones. ${WARRANTY_SCOPE_MESSAGE}`,
+      `Lo cargamos, lo calentamos un rato y probamos todo de nuevo antes de devolvértelo. ${WARRANTY_SCOPE_MESSAGE}`,
     duration: "20 min",
     Icon: FaCheckCircle,
   },
@@ -160,42 +160,42 @@ const frequentRepairs = [
   {
     title: "Cambio de pantalla OLED para iPhone",
     description:
-      "Display con brillo, color y respuesta táctil consistentes. Preservamos funciones compatibles con True Tone cuando el módulo original lo permite.",
+      "Módulo completo, nunca solo el vidrio. Transferimos el IC de la pantalla original para conservar True Tone y evitar el aviso de pieza desconocida.",
     eta: "2-4 h",
     Icon: FaMobileAlt,
   },
   {
-    title: "Reemplazo de batería certificada",
+    title: "Cambio de batería",
     description:
-      "Batería premium con medición de consumo y test de autonomía real para evitar apagados repentinos o calentamiento anormal.",
+      "Para iPhone que se apagan con 20%, calientan o marcan salud por debajo del 80%. Medimos el consumo antes, por si el problema no es la batería.",
     eta: "1-2 h",
     Icon: FaBatteryFull,
   },
   {
     title: "Puerto de carga y audio inferior",
     description:
-      "Reparamos módulo de carga Lightning o USB-C, micrófono y flex inferior. Ideal para iPhone que cargan intermitente o no detectan cable.",
+      "Carga solo si movés el cable, no lo detecta o no te escuchan en las llamadas. Cambiamos el flex inferior Lightning o USB-C.",
     eta: "2-3 h",
     Icon: FaBolt,
   },
   {
     title: "Face ID, cámara frontal y sensores",
     description:
-      "Diagnóstico por microelectrónica para fallas de Face ID, cámara selfie y sensor de proximidad en golpes o humedad.",
+      "Face ID que dejó de andar después de un golpe o de mojarse, cámara selfie en negro o pantalla que no se apaga en las llamadas.",
     eta: "3-6 h",
     Icon: FaShieldAlt,
   },
   {
     title: "Cámaras traseras y estabilización",
     description:
-      "Cambio o reparación de módulo de cámaras con ajuste de foco, estabilización y limpieza interna para fotos nítidas.",
+      "Fotos borrosas, la cámara vibra o hace ruido, o se partió el vidrio del lente. Te decimos si alcanza con el lente o hay que cambiar el módulo.",
     eta: "2-4 h",
     Icon: FaCamera,
   },
   {
-    title: "Placa lógica y recuperación avanzada",
+    title: "Placa lógica",
     description:
-      "Trabajo de microelectrónica para equipos que no encienden, reinician o no toman carga luego de un golpe eléctrico o líquido.",
+      "No prende, se reinicia en la manzanita o no toma carga después de un cargador trucho o de mojarse. Va a laboratorio con microscopio.",
     eta: "24-48 h",
     Icon: FaMicrochip,
   },
@@ -203,43 +203,43 @@ const frequentRepairs = [
 
 const iphoneSymptomRows = [
   {
-    symptom: "Pantalla con lineas, manchas o touch que falla",
-    urgency: "Alta si el tactil no responde o aparecen zonas negras",
-    typicalTime: "2-4 h si hay modulo compatible en stock",
-    nextStep: "Pedir cotizacion con modelo exacto y foto del dano",
+    symptom: "Pantalla con líneas, manchas o touch que falla",
+    urgency: "Alta si el touch no responde o aparecen zonas negras",
+    typicalTime: "2-4 h si hay módulo en stock",
+    nextStep: "Mandanos el modelo exacto y una foto del daño",
   },
   {
-    symptom: "Bateria dura poco, se apaga o calienta",
+    symptom: "La batería dura poco, se apaga o calienta",
     urgency: "Media-alta si baja de golpe o se hincha",
-    typicalTime: "1-2 h segun modelo",
-    nextStep: "Solicitar diagnostico de consumo y salud de bateria",
+    typicalTime: "1-2 h según modelo",
+    nextStep: "Fijate la salud en Ajustes > Batería y pasanos el número",
   },
   {
     symptom: "No carga, carga lento o hace falso contacto",
-    urgency: "Alta si no enciende o solo carga en una posicion",
-    typicalTime: "2-3 h para modulo de carga; mas si es placa",
-    nextStep: "Probar cable/fuente y consultar antes de seguir forzando",
+    urgency: "Alta si no enciende o solo carga en una posición",
+    typicalTime: "2-3 h si es el flex de carga; más si es placa",
+    nextStep: "Probá con otro cable y no lo limpies con aguja",
   },
   {
-    symptom: "Se mojo, no prende o reinicia",
-    urgency: "Critica: no cargar ni aplicar calor",
-    typicalTime: "24-48 h para limpieza y diagnostico de placa",
-    nextStep: "Traerlo apagado lo antes posible para laboratorio",
+    symptom: "Se mojó, no prende o se reinicia",
+    urgency: "Urgente: no lo cargues ni le des calor",
+    typicalTime: "24-48 h para limpieza y diagnóstico de placa",
+    nextStep: "Traelo apagado lo antes posible (el arroz no sirve)",
   },
   {
-    symptom: "Face ID, camara o sensores fallan",
-    urgency: "Media; alta si afecta uso diario o seguridad",
-    typicalTime: "3-6 h si no requiere microelectronica avanzada",
-    nextStep: "Solicitar revision para diferenciar flex, modulo o placa",
+    symptom: "Falla Face ID, la cámara o los sensores",
+    urgency: "Media; alta si no podés desbloquearlo",
+    typicalTime: "3-6 h si no hace falta trabajar la placa",
+    nextStep: "Traelo para ver si es flex, módulo o placa",
   },
 ];
 
 const repairLinks: Record<string, string> = {
   "Cambio de pantalla OLED para iPhone": "/reparaciones/cambio-pantalla-caba",
-  "Reemplazo de batería certificada": "/reparaciones/cambio-bateria-caba",
+  "Cambio de batería": "/reparaciones/cambio-bateria-caba",
   "Puerto de carga y audio inferior": "/reparaciones/cambio-pin-carga-caba",
   "Cámaras traseras y estabilización": "/reparaciones/cambio-camara-caba",
-  "Placa lógica y recuperación avanzada": "/reparaciones/reparacion-placa-caba",
+  "Placa lógica": "/reparaciones/reparacion-placa-caba",
 };
 
 
@@ -281,17 +281,17 @@ const faq = [
   {
     question: "¿Cuánto tarda la reparación de pantalla de iPhone?",
     answer:
-      "En la mayoría de los casos entre 2 y 4 horas. Si hay daños adicionales en marco, sensores o cámaras, el tiempo puede extenderse porque priorizamos control de calidad y pruebas finales.",
+      "Entre 2 y 4 horas si el módulo está en stock. Si el marco está doblado o hay otro daño, tarda más y te avisamos antes.",
   },
   {
     question: "¿Pueden mantener True Tone después de cambiar pantalla?",
     answer:
-      "Sí, cuando el módulo original permite lectura de datos de calibración. Si la pantalla llega totalmente destruida, te lo avisamos antes para que decidas con toda la información.",
+      "Sí: pasamos el chip IC de tu pantalla original a la nueva y True Tone sigue andando. Si la original llega tan destruida que no se puede leer el chip, te lo decimos antes de cambiarla.",
   },
   {
     question: "¿Reparan iPhone con daño por agua o humedad?",
     answer:
-      "Sí. Hacemos apertura técnica, limpieza y diagnóstico de corrosión en laboratorio. La clave es no enchufarlo ni intentar cargarlo antes de traerlo.",
+      "Sí. Lo abrimos, limpiamos la placa y medimos la corrosión en laboratorio. Lo importante es no enchufarlo ni meterlo en arroz: traelo apagado.",
   },
   {
     question: "¿La garantía cubre mano de obra y repuesto?",
@@ -300,7 +300,7 @@ const faq = [
   {
     question: "¿Qué pasa si no quiero reparar luego del diagnóstico?",
     answer:
-      "Te llevás el informe técnico y el presupuesto detallado sin compromiso. El objetivo es que tomes una decisión informada.",
+      "Pagás solo la revisión y te llevás el equipo con el presupuesto por escrito. Si querés, lo comparás con otro taller.",
   },
   {
     question: "¿El cambio de pantalla del iPhone 14 o 15 afecta al Face ID?",
@@ -315,7 +315,7 @@ const faq = [
   {
     question: "¿Cuánto tarda un cambio de batería de iPhone?",
     answer:
-      "Entre 1 y 2 horas en la mayoría de modelos. Incluye prueba de autonomía y verificación de consumo real. Si el equipo requiere adhesivo especial o tiene batería pegada (como en iPhone 14/15), puede tomar hasta 2,5 horas.",
+      "Entre 1 y 2 horas en la mayoría de los modelos. En iPhone 14 y 15, que llevan la batería más pegada, puede llegar a 2,5 horas.",
   },
   {
     question: "¿Team Celular es servicio oficial de Apple?",
@@ -325,7 +325,7 @@ const faq = [
   {
     question: "¿Trabajan iPhone X, XR, XS y generaciones anteriores?",
     answer:
-      "Sí. Atendemos iPhone 8 en adelante, incluyendo XR, X, XS, XS Max con repuestos de calidad. Para modelos anteriores, consultá disponibilidad de repuesto antes de venir.",
+      "Sí. Trabajamos desde iPhone 8 en adelante, incluidos X, XR, XS y XS Max. Para modelos más viejos, preguntanos si hay repuesto antes de venir.",
   },
   {
     question: "¿Cuánto cuesta el diagnóstico si no hago la reparación?",
@@ -338,10 +338,10 @@ export default function IphoneRepairGuidePage() {
   return (
     <div className="flex w-full justify-center px-4 py-16">
       <ArticleSchema
-        title="Reparacion de iPhone en Buenos Aires | Servicio Tecnico Premium Team Celular"
-        description="Guia completa para reparar iPhone en CABA con diagnostico profesional, repuestos certificados y garantia escrita."
+        title="Reparación de iPhone en Buenos Aires | Team Celular"
+        description="Precios por modelo, tiempos y fallas comunes de iPhone, con transferencia de IC en pantallas y garantía escrita de 90 días en CABA."
         publishedTime="2024-01-15T00:00:00Z"
-        modifiedTime="2026-09-22T00:00:00Z"
+        modifiedTime="2026-09-23T00:00:00Z"
         about={[
           "reparacion de iPhone en Buenos Aires",
           "service tecnico Apple en CABA",
@@ -357,8 +357,8 @@ export default function IphoneRepairGuidePage() {
         <BreadcrumbJsonLd
           items={[
             { name: "Inicio", url: `${SITE_URL}/` },
-            { name: "Guias", url: `${SITE_URL}/guias` },
-            { name: "Reparacion de iPhone", url: PAGE_URL },
+            { name: "Guías", url: `${SITE_URL}/guias` },
+            { name: "Reparación de iPhone", url: PAGE_URL },
           ]}
         />
 
@@ -368,7 +368,7 @@ export default function IphoneRepairGuidePage() {
           </Link>
           <span>/</span>
           <Link href="/guias" className="transition hover:text-primary">
-            Guias
+            Guías
           </Link>
           <span>/</span>
           <span className="font-semibold text-slate-900 dark:text-white">
@@ -404,7 +404,7 @@ export default function IphoneRepairGuidePage() {
               ) : null}
             </p>
             <div className="mt-4">
-              <GuideByline modifiedTime="2026-09-22T00:00:00Z" tone="light" />
+              <GuideByline modifiedTime="2026-09-23T00:00:00Z" tone="light" />
             </div>
           </div>
 
@@ -420,7 +420,7 @@ export default function IphoneRepairGuidePage() {
             </div>
             <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
               <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
-                Garantia
+                Garantía
               </p>
               <p className="mt-2 text-3xl font-black text-secondary">90 días</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
@@ -429,7 +429,7 @@ export default function IphoneRepairGuidePage() {
             </div>
             <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
               <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
-                Tiempo express
+                Rapidez
               </p>
               <p className="mt-2 text-3xl font-black text-primary">2-4 h</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
@@ -475,10 +475,10 @@ export default function IphoneRepairGuidePage() {
               Reseñas reales de Google
             </span>
             <span className="rounded-full border border-secondary/25 bg-secondary/10 px-3 py-1 text-secondary">
-              Sin testimonios inventados
+              4,9 sobre 362 reseñas
             </span>
             <span className="rounded-full border border-emerald-700/70 bg-emerald-700 px-3 py-1 text-white">
-              Actualizacion via API
+              Más de 15 años reparando
             </span>
           </div>
         </header>
@@ -517,7 +517,7 @@ export default function IphoneRepairGuidePage() {
                 ¿Qué hacer según la falla del iPhone?
               </h2>
               <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
-                Usa esta tabla para decidir si conviene consultar por WhatsApp, traer el equipo
+                Usá esta tabla para ver si conviene escribirnos por WhatsApp, traer el equipo
                 al laboratorio o evitar acciones que puedan empeorar la falla.
               </p>
             </div>
@@ -718,7 +718,7 @@ export default function IphoneRepairGuidePage() {
             Modelos de iPhone que trabajamos
           </h2>
           <p className="text-center text-slate-600 dark:text-slate-300">
-            Cobertura para líneas actuales y generaciones anteriores con repuestos compatibles de calidad.
+            Desde iPhone 8 hasta la línea 17. Si el tuyo no está, preguntanos igual.
           </p>
           <div className="flex flex-wrap justify-center gap-2">
             {iphoneModels.map((model) => (
@@ -738,7 +738,7 @@ export default function IphoneRepairGuidePage() {
               Preguntas frecuentes sobre reparación de iPhone
             </h2>
             <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
-              Respuestas concretas por modelo y falla para decidir rápido
+              Lo que más nos preguntan en el mostrador
             </p>
           </div>
           <div className="space-y-4">
@@ -768,9 +768,9 @@ export default function IphoneRepairGuidePage() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Service",
-              name: "Reparacion de iPhone en Buenos Aires",
+              name: "Reparación de iPhone en Buenos Aires",
               description:
-                "Servicio tecnico especializado en iPhone con diagnostico profesional, repuestos certificados y garantia escrita en CABA.",
+                "Reparación de iPhone en CABA: pantalla con transferencia de IC, batería, carga y placa, con garantía escrita de 90 días.",
               provider: { "@id": "https://teamcelular.com#localbusiness" },
               areaServed: {
                 "@type": "City",
@@ -778,7 +778,7 @@ export default function IphoneRepairGuidePage() {
               },
               hasOfferCatalog: {
                 "@type": "OfferCatalog",
-                name: "Servicios de reparacion iPhone",
+                name: "Servicios de reparación de iPhone",
                 itemListElement: frequentRepairs.map((repair) => ({
                   "@type": "Offer",
                   itemOffered: {

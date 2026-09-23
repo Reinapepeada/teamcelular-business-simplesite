@@ -21,10 +21,10 @@ export default function BannerHome() {
 
                     <div className="my-5 max-w-[42rem] sm:my-9 lg:my-10">
                         <h1 className="text-balance text-[clamp(1.85rem,7vw,4rem)] font-extrabold leading-none tracking-[-0.03em]">
-                            Reparación de celulares en CABA. Vos sabés qué le hicimos.
+                            Reparación de celulares en CABA: pantalla y batería en el día
                         </h1>
                         <p className="mt-4 max-w-[38rem] text-pretty text-[15px] leading-6 text-slate-200 sm:mt-5 sm:text-base sm:leading-7">
-                            Pantalla y batería en 2 a 4 horas, sin turno. Contanos la falla por WhatsApp y te pasamos precio y plazo antes de que vengas.
+                            Sin turno, en Recoleta y Belgrano. Si el repuesto está en stock, te lo llevás en 2 a 4 horas. Contanos la falla por WhatsApp y te pasamos precio y plazo antes de que vengas.
                         </p>
 
                         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -60,18 +60,21 @@ export default function BannerHome() {
                     </ul>
                 </div>
 
-                <div className="relative min-h-[11rem] overflow-hidden sm:min-h-[20rem] lg:min-h-full">
-                    <Image
-                        src="/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp"
-                        alt="Técnico de Team Celular trabajando sobre un smartphone"
-                        fill
-                        quality={82}
-                        sizes="(max-width: 1024px) 100vw, 55vw"
-                        className="object-cover object-center"
-                        priority
-                    />
+                <div className="relative flex flex-col overflow-hidden sm:block sm:min-h-[20rem] lg:min-h-full">
+                    {/* Mobile: la tarjeta va debajo de la foto; encima tapaba al tecnico. */}
+                    <div className="relative h-[15rem] sm:absolute sm:inset-0 sm:h-auto">
+                        <Image
+                            src="/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp"
+                            alt="Técnico de Team Celular trabajando sobre un smartphone"
+                            fill
+                            quality={82}
+                            sizes="(max-width: 1024px) 100vw, 55vw"
+                            className="object-cover object-[center_30%]"
+                            priority
+                        />
+                    </div>
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#171820]/75 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#171820]/35 lg:via-transparent" />
-                    <div className="liquid-glass liquid-glass-light absolute bottom-4 left-4 right-4 flex flex-wrap items-end justify-between gap-4 rounded-2xl px-5 py-4 text-[#171820] sm:bottom-6 sm:left-6 sm:right-6 sm:px-6">
+                    <div className="liquid-glass liquid-glass-light relative m-4 sm:absolute sm:m-0 sm:bottom-6 sm:left-6 sm:right-6 flex flex-wrap items-end justify-between gap-4 rounded-2xl px-5 py-4 text-[#171820] sm:px-6">
                         <div>
                             <p className="text-sm font-bold">Dos sucursales en CABA</p>
                             <p className="mt-1 text-sm font-medium text-[#30313c]">Paraguay 2451 · Amenábar 2032</p>

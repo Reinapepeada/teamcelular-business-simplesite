@@ -28,7 +28,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "bateria celular se descarga rapido",
     ],
     intro:
-      "Cambiamos la batería de tu celular en 1 a 2 horas, con garantía escrita de 90 días. Antes medimos el consumo para confirmar que la culpa es de la batería.",
+      "Cambiamos la batería de tu celular en 1 a 2 horas si el repuesto está en stock, con garantía escrita de 90 días. Antes medimos el consumo: a veces el que se come la carga es una app o la placa, no la batería.",
     prices: [
       { label: "iPhone 13", value: formatArsPrice(IPHONE_13_BATTERY) },
       { label: "Samsung Galaxy A", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[2].from)}` },
@@ -44,15 +44,15 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     highlights: [
       {
         title: "Diagnóstico primero",
-        desc: "Antes de cambiar nada, confirmamos si el problema es batería, software o consumo anormal. No cambiamos piezas por descarte.",
+        desc: "Si el celular se descarga rápido, primero medimos qué consume. No te vendemos una batería para probar a ver si era eso.",
       },
       {
-        title: "Repuestos certificados",
-        desc: "Te ofrecemos la opción que más convenga según modelo, uso y presupuesto, con trazabilidad del repuesto instalado.",
+        title: "Te decimos qué batería lleva",
+        desc: "Según el modelo puede haber original o compatible. Te explicamos la diferencia de precio y de duración antes de elegir.",
       },
       {
         title: "Garantía escrita 90 días",
-        desc: "La reparación sale documentada con alcance, plazo y condiciones claras desde el inicio.",
+        desc: "Si la batería nueva falla dentro de los 90 días, la cambiamos. Está por escrito en la orden que te llevás.",
       },
     ],
     brandsText:
@@ -112,11 +112,11 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     serviceName: "Cambio de pantalla en CABA",
     serviceType: "Cambio de pantalla / módulo display",
     serviceDescription:
-      "Servicio de reemplazo de pantalla para celulares en CABA con repuestos premium y garantía escrita de 90 días.",
+      "Servicio de reemplazo de pantalla para celulares en CABA siempre con módulo completo y garantía escrita de 90 días.",
     highlights: [
       {
         title: "Test funcional completo",
-        desc: "Probamos brillo, touch, cámaras, sensores y carga antes de entregarte el equipo. Si algo no cierra, lo resolvemos antes de que te vayas.",
+        desc: "Antes de devolvértelo probamos brillo, touch en toda la pantalla, cámara frontal, sensor de proximidad y carga. Lo revisás vos también antes de irte.",
       },
       {
         title: "Siempre módulo completo",
@@ -124,7 +124,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       },
       {
         title: "Costo claro antes de abrir",
-        desc: "Antes de intervenir el equipo te dejamos claro el tiempo estimado, el costo y el alcance de la garantía.",
+        desc: "Te pasamos precio y tiempo antes de abrirlo. Si al abrir aparece otro daño, te avisamos y decidís vos.",
       },
     ],
     brandsText:
@@ -180,16 +180,16 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "Diagnóstico y reparación de puerto de carga para celulares en CABA con garantía escrita de 90 días.",
     highlights: [
       {
-        title: "Diagnóstico preciso",
-        desc: "Validamos si la falla es suciedad, pin gastado, flex, batería o placa. No cotizamos a ciegas.",
+        title: "Primero lo miramos con microscopio",
+        desc: "Muchas veces es pelusa compactada al fondo del puerto y se resuelve con una limpieza. Si el pin está gastado o doblado, ahí sí se cambia.",
       },
       {
-        title: "Trabajo prolijo sin atajos",
-        desc: "Reparamos con equipamiento técnico para evitar falsos contactos futuros y daños en la placa.",
+        title: "Pin o flex, según el modelo",
+        desc: "En algunos equipos el pin va soldado a la placa y en otros viene en un flex. Te decimos cuál es el tuyo y cuánto cambia el precio.",
       },
       {
         title: "Garantía escrita 90 días",
-        desc: "Dejamos cobertura detallada de mano de obra y repuesto instalado, con plazo claro desde el inicio.",
+        desc: "Cubre el pin y la soldadura por 90 días. No cubre un pin que se vuelva a romper por un golpe con el cable puesto.",
       },
     ],
     brandsText:
@@ -239,26 +239,26 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "service microelectronica",
     ],
     intro:
-      "Team Celular, en Paraguay 2451 Recoleta CABA, diagnostica fallas de placa con instrumental de laboratorio y garantía escrita según caso técnico. Si el equipo no enciende, se reinicia, tuvo líquido o está en corto, evaluamos viabilidad real antes de cotizar.",
+      "Si tu celular no prende, se reinicia solo o quedó en corto después de mojarse, el problema casi siempre está en la placa. En Team Celular la revisamos bajo microscopio y te decimos si tiene arreglo antes de cotizar; si ya te dijeron que no tenía, traelo igual para una segunda opinión.",
     whatsappText:
       "Hola! Quiero un presupuesto para reparacion de placa en CABA. Marca y modelo:",
     breadcrumbLabel: "Reparación de placa (CABA)",
     serviceName: "Reparación de placa en CABA",
     serviceType: "Microelectrónica / reparación de placa",
     serviceDescription:
-      "Servicio de microelectrónica para reparación de placa de celulares en CABA con diagnóstico avanzado y garantía escrita.",
+      "Servicio de microelectrónica para reparación de placa de celulares en CABA con diagnóstico bajo microscopio y garantía escrita.",
     highlights: [
       {
         title: "Diagnóstico de laboratorio",
-        desc: "Análisis con instrumental técnico — microscopio, mediciones de líneas y consumo — para ubicar la causa real antes de tocar nada.",
+        desc: "Medimos consumo y líneas de alimentación y miramos la placa con microscopio para encontrar el componente que falla.",
       },
       {
-        title: "Casos complejos sin adivinar",
-        desc: "No enciende, celular mojado, reinicios constantes, consumo anormal o corto. Evaluamos con criterio técnico real.",
+        title: "Los casos que otros descartan",
+        desc: "No enciende, mojado, reinicios en loop o corto. Son el trabajo diario del laboratorio, incluido el reballing de chips.",
       },
       {
-        title: "Transparencia antes de avanzar",
-        desc: "Informamos viabilidad, tiempo estimado y costo antes de intervenir. Si no conviene reparar, te lo decimos de frente.",
+        title: "Si no conviene, te lo decimos",
+        desc: "Hay placas que se arreglan y otras que no valen la pena. Te pasamos costo y plazo antes de tocar nada, y si no conviene reparar, te lo decimos de frente.",
       },
     ],
     brandsText:
@@ -300,7 +300,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "reparacion flex CABA",
     ],
     intro:
-      "Team Celular, en Paraguay 2451 Recoleta CABA, reemplaza el flex específico con garantía escrita de 90 días. Si fallan botones, carga, cámara o audio, determinamos primero si el problema está en el flex, el conector, la placa o en software.",
+      "Si el botón de encendido no responde, el volumen se traba o la carga anda a medias, lo más probable es un flex cortado. Lo cambiamos con garantía escrita de 90 días, pero antes probamos que no sea el conector, la placa o un tema de software.",
     whatsappText:
       "Hola! Quiero un presupuesto para cambio de flex en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de flex (CABA)",
@@ -311,15 +311,15 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     highlights: [
       {
         title: "Revisión por síntoma",
-        desc: "Detectamos si la falla es flex, conector, placa o software antes de cotizar cualquier repuesto.",
+        desc: "Un botón que no anda puede ser el flex, el conector o la placa. Lo medimos antes de pasarte un precio.",
       },
       {
         title: "Repuesto correcto",
-        desc: "Cambiamos el flex específico según modelo y componente afectado. Sin generalizaciones.",
+        desc: "Cada modelo tiene su flex de encendido, volumen o carga. Pedimos el que corresponde al código exacto de tu equipo.",
       },
       {
         title: "Entrega probada",
-        desc: "Testeamos botones, carga y funciones relacionadas antes de entregarte el equipo.",
+        desc: "Probamos todos los botones, la carga y la vibración con vos adelante antes de devolvértelo.",
       },
     ],
     brandsText:
@@ -361,7 +361,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "cambio glass trasero",
     ],
     intro:
-      "Team Celular, en Paraguay 2451 Recoleta CABA, reemplaza tapas traseras con instalación prolija, adhesivos correctos y garantía escrita de 90 días. Si el vidrio trasero está roto o la tapa levantada, verificamos la pieza exacta según modelo antes de avanzar.",
+      "Cambiamos la tapa trasera rota o levantada con adhesivo nuevo y garantía escrita de 90 días. Si la tapa se levantó sola, primero revisamos la batería: suele ser una batería hinchada empujando desde adentro.",
     whatsappText:
       "Hola! Quiero un presupuesto para cambio de tapa trasera en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de tapa trasera (CABA)",
@@ -371,16 +371,16 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "Servicio de reemplazo de tapa trasera para celulares en CABA con terminación prolija y garantía escrita 90 días.",
     highlights: [
       {
-        title: "Acabado prolijo",
-        desc: "Instalación cuidada con adhesivos correctos para mantener la estética y el sellado original del equipo.",
+        title: "Adhesivo nuevo",
+        desc: "Sacamos todo el pegamento viejo y ponemos adhesivo nuevo para que la tapa quede firme y sin luz en los bordes.",
       },
       {
         title: "Compatibilidad exacta",
-        desc: "Verificamos la pieza según modelo exacto antes de instalar para evitar problemas de ajuste.",
+        desc: "Pedimos la tapa por el código exacto del modelo, con el recorte de cámara y el color que corresponden.",
       },
       {
         title: "Presupuesto claro",
-        desc: "Informamos costo y plazo antes de iniciar. Sin sorpresas al retirar el equipo.",
+        desc: "Te pasamos precio y plazo antes de empezar, y lo que te dijimos es lo que pagás al retirarlo.",
       },
     ],
     brandsText:
@@ -422,7 +422,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "reparacion camara Samsung CABA",
     ],
     intro:
-      "Team Celular, en Paraguay 2451 Recoleta CABA, diagnostica y reemplaza cámaras con garantía escrita de 90 días. Si la cámara enfoca mal, no abre o sale en negro, revisamos módulo, flex y conectores para resolver la falla real sin cambiar piezas de más.",
+      "Si la cámara saca fotos borrosas, no enfoca, vibra o queda en negro, la cambiamos con garantía escrita de 90 días. Antes revisamos si es el módulo, el flex o solo el vidrio del lente, para no cambiar piezas de más.",
     whatsappText:
       "Hola! Quiero un presupuesto para cambio de camara en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de cámara (CABA)",
@@ -433,15 +433,15 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     highlights: [
       {
         title: "Diagnóstico por síntoma",
-        desc: "Verificamos si la falla está en el módulo de cámara, el flex, el conector o la placa antes de cotizar.",
+        desc: "Una cámara en negro puede ser el módulo, el conector o la placa. Lo confirmamos antes de pasarte un precio.",
       },
       {
-        title: "Repuestos compatibles",
-        desc: "Instalamos el módulo según modelo exacto para conservar calidad de imagen, estabilización y flash.",
+        title: "El módulo de tu modelo",
+        desc: "Pedimos la cámara por el código exacto del equipo para que el enfoque y la estabilización funcionen como antes.",
       },
       {
         title: "Pruebas completas",
-        desc: "Testeamos enfoque, video, flash y cámara frontal y trasera antes de entregarte el equipo.",
+        desc: "Sacamos fotos y video con todas las cámaras, de cerca y de lejos, antes de devolvértelo.",
       },
     ],
     brandsText:
@@ -483,7 +483,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "service audio celular recoleta",
     ],
     intro:
-      "Team Celular, en Paraguay 2451 Recoleta CABA, diagnostica y repara fallas de audio con garantía escrita de 90 días. Si no te escuchan en llamadas, el parlante suena bajo o el audio sale distorsionado, separamos si la falla viene del módulo, flex, suciedad o circuito en placa.",
+      "Si no te escuchan en las llamadas, el parlante suena bajo o el audio sale con ruido, lo reparamos con garantía escrita de 90 días. Muchas veces es suciedad en la rejilla y se resuelve con una limpieza; otras, el flex o el módulo.",
     whatsappText:
       "Hola! Quiero un presupuesto para reparacion de audio de celular en CABA. Marca y modelo:",
     breadcrumbLabel: "Reparación de audio (CABA)",
@@ -493,16 +493,16 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "Servicio técnico para resolver fallas de audio en celulares en CABA con diagnóstico preciso y garantía escrita 90 días.",
     highlights: [
       {
-        title: "Diagnóstico sin adivinar",
-        desc: "Separamos si la falla viene del módulo de audio, flex, suciedad o de un circuito en placa antes de cotizar.",
+        title: "Primero descartamos lo simple",
+        desc: "Revisamos la rejilla, el flex y el módulo antes de hablar de placa. Lo más barato se prueba primero.",
       },
       {
-        title: "Prueba real de llamadas y multimedia",
-        desc: "Verificamos micrófono, auricular, altavoz y grabación para confirmar funcionamiento antes de entregarte el equipo.",
+        title: "Lo probamos con una llamada",
+        desc: "Hacemos una llamada real, grabamos un audio de WhatsApp y probamos el altavoz antes de devolvértelo.",
       },
       {
-        title: "Intervención precisa",
-        desc: "Reparamos o reemplazamos solo el componente necesario para cuidar costo y tiempo de servicio.",
+        title: "Solo lo que falla",
+        desc: "Si es el micrófono, cambiamos el micrófono. No te cobramos el módulo entero si no hace falta.",
       },
     ],
     brandsText:
@@ -544,7 +544,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "microelectronica celular mojado",
     ],
     intro:
-      "Team Celular, en Paraguay 2451 Recoleta CABA, atiende celulares mojados como urgencia técnica: cada hora sin intervención aumenta la corrosión interna. Hacemos limpieza controlada, diagnóstico de placa y te decimos con claridad si la recuperación es viable.",
+      "Si se te mojó el celular, apagalo, no lo cargues y traelo cuanto antes: la corrosión avanza aunque el equipo parezca andar. Lo abrimos, limpiamos la placa en laboratorio y te decimos si se puede recuperar el equipo o al menos los datos.",
     whatsappText:
       "Hola! Quiero un presupuesto para recuperacion de celular mojado en CABA. Marca y modelo:",
     breadcrumbLabel: "Celular mojado (CABA)",
@@ -554,16 +554,16 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "Servicio técnico urgente para recuperación de celulares con daño por líquidos en CABA con diagnóstico de laboratorio.",
     highlights: [
       {
-        title: "Acción urgente",
-        desc: "Atendemos prioridad por daño por líquidos. Cada hora que pasa sin intervención técnica aumenta el avance de la corrosión.",
+        title: "Pasa adelante en la fila",
+        desc: "Un celular mojado no espera turno. Cuanto antes se abre, menos corrosión hay que limpiar.",
       },
       {
-        title: "Limpieza de laboratorio",
-        desc: "Aplicamos limpieza técnica controlada y secado profesional para proteger conectores, circuitos y módulos críticos.",
+        title: "Limpieza de la placa",
+        desc: "Desarmamos el equipo y limpiamos la placa y los conectores. El arroz no saca el agua de adentro: solo hace perder tiempo.",
       },
       {
-        title: "Evaluación real de viabilidad",
-        desc: "Te decimos si conviene reparar, qué riesgo tiene cada alternativa y qué podés esperar antes de avanzar.",
+        title: "Te decimos qué se puede salvar",
+        desc: "Después de la limpieza sabemos si vuelve a andar, si hay que reparar placa o si conviene rescatar fotos y contactos.",
       },
     ],
     brandsText:

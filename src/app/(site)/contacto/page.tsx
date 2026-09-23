@@ -61,7 +61,7 @@ const contactMethods = [
         icon: FaWhatsapp,
         title: "WhatsApp",
         value: "+54 11 5103-4595",
-        description: "Respuesta comercial rápida",
+        description: "Precio y stock en hasta 2 h hábiles",
         href: whatsappUrl(),
         tone: "bg-emerald-50 text-emerald-700 border-emerald-200",
     },
@@ -77,7 +77,7 @@ const contactMethods = [
         icon: FaEnvelope,
         title: "Email",
         value: "teamcelular.arg@gmail.com",
-        description: "Ideal para consultas técnicas largas",
+        description: "Para empresas o consultas con fotos y detalle",
         href: "mailto:teamcelular.arg@gmail.com",
         tone: "bg-violet-50 text-violet-700 border-violet-200",
     },
@@ -102,12 +102,12 @@ const quickFaqs = [
     {
         question: "¿Necesito turno para acercarme?",
         answer:
-            "No. Atendemos por orden de llegada, aunque si escribís antes te confirmamos disponibilidad de banco de trabajo.",
+            "No. Atendemos por orden de llegada. Si nos escribís antes, te confirmamos que tenemos el repuesto y no hacés el viaje de balde.",
     },
     {
         question: "¿Coordinan retiros en CABA?",
         answer:
-            "Sí. Programamos motos de lunes a viernes según carga operativa y zona.",
+            "Sí, con moto, de lunes a viernes. Cuesta ARS 15.000 y el horario depende del barrio: escribinos y lo coordinamos.",
     },
     {
         question: "¿Cuándo conviene escribir por mail?",
@@ -138,7 +138,7 @@ const faqs = [
     {
         question: "¿Necesito turno previo?",
         answer:
-            "No es obligatorio, pero escribir antes acelera la recepción del equipo y evita esperas.",
+            "No. Pero si escribís antes con el modelo, te confirmamos que hay repuesto y te ahorrás la espera.",
     },
     {
         question: "¿La revisión técnica tiene costo?",

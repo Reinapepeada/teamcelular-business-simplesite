@@ -18,20 +18,20 @@ const PAGE_URL = `${SITE_URL}/sucursales/caba/recoleta`;
 
 const faqs = [
   {
-    q: "Donde esta la sucursal Recoleta?",
-    a: "Estamos en Paraguay 2451, Recoleta, Ciudad Autonoma de Buenos Aires.",
+    q: "¿Dónde está la sucursal Recoleta?",
+    a: "En Paraguay 2451, Recoleta, a unas cuadras de Santa Fe y Pueyrredón.",
   },
   {
-    q: "Que horario tiene la sucursal?",
-    a: "Atendemos de lunes a viernes de 10:30 a 18:00 hs.",
+    q: "¿Qué horario tiene la sucursal?",
+    a: "De lunes a viernes de 10:30 a 18:00, sin turno.",
   },
   {
-    q: "Puedo pedir presupuesto por WhatsApp antes de ir?",
-    a: "Si. Escribinos con marca, modelo y falla para agilizar el diagnostico.",
+    q: "¿Puedo pedir presupuesto por WhatsApp antes de ir?",
+    a: "Sí. Mandanos marca, modelo y qué le pasa, y te respondemos en hasta 2 horas hábiles con precio y si hay repuesto.",
   },
   {
-    q: "Atienden clientes de otros barrios?",
-    a: "Si. Esta sucursal atiende Recoleta y toda CABA.",
+    q: "¿Atienden gente de otros barrios?",
+    a: "Sí. Viene gente de toda CABA; si te queda más cerca Belgrano, tenemos sucursal en Amenábar 2032.",
   },
   {
     q: "¿Dan garantía escrita?",
@@ -41,18 +41,18 @@ const faqs = [
 
 const trustSignals = [
   {
-    title: "Taller fisico y equipo tecnico",
-    desc: "Atencion real en sucursal, con laboratorio para reparaciones simples y complejas.",
+    title: "El laboratorio está acá",
+    desc: "Es el laboratorio principal: acá se hacen los trabajos de placa y reballing bajo microscopio.",
     Icon: FaTools,
   },
   {
-    title: "Garantia escrita por servicio",
+    title: "Garantía escrita",
     desc: "Cada trabajo sale con garantía escrita de 90 días sobre trabajo y repuesto instalado.",
     Icon: FaShieldAlt,
   },
   {
     title: "Seguimiento directo",
-    desc: "Canal rapido por WhatsApp para estado, dudas y coordinacion de entrega.",
+    desc: "Te avisamos por WhatsApp cuando está listo o si aparece algo que no estaba en el presupuesto.",
     Icon: FaUserCheck,
   },
 ];
@@ -225,7 +225,7 @@ export default function SucursalRecoletaPage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <FaTools className="mt-0.5 text-primary" />
-                  Pantalla, bateria, carga, placa y notebook
+                  Pantalla, batería, carga, placa y notebook
                 </li>
               </ul>
             </div>
@@ -259,11 +259,11 @@ export default function SucursalRecoletaPage() {
         </h2>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {[
-            "Cambio de pantalla y modulo display",
-            "Cambio de bateria",
-            "Reparacion de pin de carga",
-            "Microelectronica y reparacion de placa",
-            "Reparacion de tablets y notebooks",
+            "Cambio de pantalla (módulo completo)",
+            "Cambio de batería",
+            "Reparación de pin de carga",
+            "Microelectrónica y reparación de placa",
+            "Reparación de tablets y notebooks",
             "Revisión técnica arancelada y presupuesto detallado",
           ].map((service) => (
             <div
