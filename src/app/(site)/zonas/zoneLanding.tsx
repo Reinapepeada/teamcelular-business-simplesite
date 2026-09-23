@@ -242,7 +242,7 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
       <BreadcrumbJsonLd
         items={[
           { name: "Inicio", url: `${SITE_URL}/` },
-          { name: "Zonas", url: `${SITE_URL}/zonas` },
+          { name: "Sucursales", url: `${SITE_URL}/sucursales` },
           { name: displayZone, url },
         ]}
       />

@@ -265,7 +265,7 @@ export default function PreventiveMaintenanceGuide() {
               El mantenimiento preventivo es la estrategia más efectiva para{" "}
               <strong className="text-primary">evitar reparaciones costosas</strong> y asegurar que tu smartphone
               rinda al máximo durante toda su vida útil. En <strong>Team Celular</strong> desarrollamos rutinas
-              personalizadas basadas en más de 10 años de experiencia atendiendo usuarios particulares y empresas con
+              personalizadas basadas en más de 15 años de experiencia atendiendo usuarios particulares y empresas con
               flotas de dispositivos.
             </p>
             <p>
@@ -478,7 +478,7 @@ export default function PreventiveMaintenanceGuide() {
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
             Agendá tu servicio de mantenimiento preventivo y extendé la vida útil de tu smartphone.
-            Atención en CABA con más de 10 años de experiencia.
+            Atención en CABA con más de 15 años de experiencia.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link

@@ -645,7 +645,7 @@ export default function XiaomiRepairGuidePage() {
                   { servicio: "Cambio de pantalla", modelos: "Redmi, Redmi Note, POCO", tiempo: "2–4 h", precio: "99.900 – 349.900" },
                   { servicio: "Cambio de batería", modelos: "Alta gama", tiempo: "1–2 h", precio: "119.900 – 229.900" },
                   { servicio: "Cambio de batería", modelos: "Redmi, Redmi Note, POCO", tiempo: "1–2 h", precio: "89.900 – 179.900" },
-                  { servicio: "Pin USB-C / turbo charge", modelos: "Todos", tiempo: "2–3 h", precio: "35.000 – 60.000" },
+                  { servicio: "Pin USB-C / turbo charge", modelos: "Todos", tiempo: "2–3 h", precio: "35.000 – 150.000" },
                   { servicio: "Placa / bootloop / PMIC", modelos: "Todos", tiempo: "24–48 h", precio: "Consultar" },
                 ].map((row) => (
                   <tr key={`${row.servicio}-${row.modelos}`}>

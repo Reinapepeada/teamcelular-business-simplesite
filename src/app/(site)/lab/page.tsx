@@ -417,7 +417,7 @@ export default function LabPage() {
           Por qué confiar en TC Lab
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">
-          TC Lab nació de 10 años haciendo microelectrónica de precisión en el
+          TC Lab nació de más de 15 años haciendo microelectrónica de precisión en el
           laboratorio de Team Celular: reballing BGA, reparación de placa lógica,
           recuperación de equipos con daño por líquidos y diagnóstico avanzado.
           El mismo instrumental, el mismo criterio técnico, aplicado a proyectos

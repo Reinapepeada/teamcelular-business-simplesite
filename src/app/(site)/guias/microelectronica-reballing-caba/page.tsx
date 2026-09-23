@@ -16,6 +16,7 @@ import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import GuideByline from "@/components/seo/GuideByline";
+import { REBALLING_PRICE, formatArsPrice } from "@/lib/repairPrices";
 import VideoSchema from "@/components/seo/VideoSchema";
 
 export const metadata: Metadata = {
@@ -160,12 +161,16 @@ const faqMicro = [
     answer: "El reballing BGA es el proceso de remover un chip (CPU, NAND, baseband, etc.) de la placa, limpiar los contactos y aplicar nuevas bolas de soldadura. Es necesario cuando el chip pierde contacto con la placa por golpes, sobrecalentamiento o desgaste térmico, causando fallas como 'no enciende', pérdida de señal WiFi o loops de boot.",
   },
   {
+    question: "¿Cuánto sale un reballing?",
+    answer: `Entre ${formatArsPrice(REBALLING_PRICE.from)} y ${formatArsPrice(REBALLING_PRICE.to)}, según la gama del equipo, y el trabajo lleva cerca de un mes y medio. Es un trabajo de laboratorio, no un arreglo rápido: te pasamos el número exacto después del diagnóstico, antes de empezar.`,
+  },
+  {
     question: "¿El reballing es lo mismo que cambiar el chip?",
     answer: "No. En el reballing se reutiliza el mismo chip y solo se renuevan las bolas de soldadura que lo unen a la placa. Cambiar el chip implica un repuesto nuevo, y en la memoria o el procesador de un iPhone muchas veces no se puede, porque están emparejados con la placa.",
   },
   {
     question: "¿Cuánto tarda una reparación de microelectrónica?",
-    answer: `Un reballing de un solo chip lleva entre 4 y 6 horas de banco. Si hay que reconstruir pistas o intervenir varios chips, puede llevar 2 a 3 días. ${REVIEW_COST_MESSAGE}`,
+    answer: `Cerca de un mes y medio. Es el tiempo que manejamos para que el trabajo salga bien: el reballing no es un arreglo de horas. ${REVIEW_COST_MESSAGE}`,
   },
   {
     question: "¿Tienen garantía las reparaciones de placa?",
@@ -230,6 +235,10 @@ export default function MicroelectronicsGuide() {
             celular no enciende, se reinicia en loop o pierde señal después de un golpe, calor o un mojado. Team
             Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), lo hace bajo{" "}
             <strong className="text-primary">microscopio trinocular y con protocolo ESD</strong>, con garantía escrita de 90 días.
+          </p>
+          <p className="mx-auto max-w-3xl rounded-xl border border-amber-300 bg-amber-50 px-5 py-3 text-base font-semibold text-amber-900 dark:border-amber-700/60 dark:bg-amber-950/40 dark:text-amber-100">
+            El reballing cuesta entre {formatArsPrice(REBALLING_PRICE.from)} y {formatArsPrice(REBALLING_PRICE.to)} según la gama
+            del equipo y lleva cerca de un mes y medio, que es el tiempo que manejamos para que el trabajo salga bien.
           </p>
           <div className="mt-4 flex justify-center">
             <GuideByline modifiedTime="2026-09-22T00:00:00Z" tone="light" />

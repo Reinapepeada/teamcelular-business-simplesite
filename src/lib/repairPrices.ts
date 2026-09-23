@@ -11,6 +11,12 @@ export const PRICES_UPDATED = "2026-08-20T00:00:00Z";
 
 export type RepairPrice = { name: string; from: number; to: number };
 
+/** Cambio de pin de carga, todas las marcas: el precio depende del dispositivo. */
+export const CHARGING_PORT_PRICE = { from: 35000, to: 150000 };
+
+/** Reballing: depende de la gama. El trabajo lleva cerca de un mes y medio. */
+export const REBALLING_PRICE = { from: 280000, to: 580000 };
+
 export const BRAND_REPAIR_PRICES: Record<string, RepairPrice[]> = {
   samsung: [
     { name: "Cambio de pantalla Galaxy A / M", from: 99900, to: 399900 },

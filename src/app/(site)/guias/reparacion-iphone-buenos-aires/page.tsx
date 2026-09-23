@@ -540,7 +540,7 @@ export default function IphoneRepairGuidePage() {
               o placas completas, acá se repara a nivel componente: reballing BGA,
               soldadura SMD bajo microscopio y recuperación de equipos mojados, incluidos
               los que otro servicio declaró sin reparación. Team Celular trabaja hace más
-              de 10 años y tiene 4,9 estrellas sobre 362 reseñas de Google.
+              de 15 años y tiene 4,9 estrellas sobre 362 reseñas de Google.
             </p>
           </div>
 

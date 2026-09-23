@@ -64,6 +64,9 @@ module.exports = {
         destination: "/reparaciones/reparacion-placa-caba",
         permanent: true,
       },
+      // Menos URLs compitiendo por "reparacion de celulares" / "cerca de mi" (GSC sep 2026).
+      { source: "/zonas", destination: "/sucursales", permanent: true },
+      { source: "/reparacion-de-celulares-cerca-de-mi", destination: "/sucursales", permanent: true },
       { source: "/zonas/recoleta", destination: "/sucursales/caba/recoleta", permanent: true },
       { source: "/zonas/belgrano", destination: "/sucursales/caba/belgrano", permanent: true },
       {

@@ -289,7 +289,7 @@ export default function BusinessSupportGuide() {
               <strong className="text-primary">Team Celular</strong>, con talleres en Recoleta (Paraguay 2451)
               y Belgrano (Amenábar 2032), resuelve el diagnóstico en menos de 24 horas y trabaja con
               SLA firmado para que los tiempos de reparación sean predecibles, no una promesa verbal.
-              Llevamos 10 años reparando dispositivos móviles con microscopio, instrumental de
+              Llevamos más de 15 años reparando dispositivos móviles con microscopio, instrumental de
               laboratorio y garantía escrita.
             </p>
             <p>

@@ -143,7 +143,7 @@ export default function Home() {
                     </h2>
                     <div>
                         <p className="text-pretty text-lg leading-8 text-slate-700 dark:text-slate-300">
-                            Team Celular es un laboratorio de reparación de celulares en CABA con más de 10 años de trabajo y{" "}
+                            Team Celular es un laboratorio de reparación de celulares en CABA con más de 15 años de trayectoria y{" "}
                             {GOOGLE_RATING_FALLBACK.rating.toFixed(1).replace(".", ",")} estrellas en Google sobre{" "}
                             {GOOGLE_RATING_FALLBACK.total} reseñas. En un iPhone 13 el cambio de pantalla cuesta{" "}
                             {iphone13?.screen ? formatArsPrice(iphone13.screen) : "a consultar"} y el de batería{" "}
@@ -281,7 +281,7 @@ export default function Home() {
                         <h2 id="zones-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">¿Buscás reparación cerca de tu zona?</h2>
                         <p className="mt-4 max-w-3xl text-pretty leading-7 text-slate-300">Atendemos consultas de Recoleta, Belgrano, Palermo, Almagro, Caballito, Balvanera y Microcentro. La mejor sucursal depende de tu recorrido y de la falla.</p>
                     </div>
-                    <TrackedCtaLink href="/reparacion-de-celulares-cerca-de-mi" ctaName="home_near_me" ctaLocation="home_zones" ctaVariant="secondary" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#171820] transition hover:bg-slate-100">
+                    <TrackedCtaLink href="/sucursales" ctaName="home_near_me" ctaLocation="home_zones" ctaVariant="secondary" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#171820] transition hover:bg-slate-100">
                         Ver cobertura <BsArrowRight aria-hidden />
                     </TrackedCtaLink>
                 </section>

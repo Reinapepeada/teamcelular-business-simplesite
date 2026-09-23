@@ -239,7 +239,7 @@ const faqScreen = [
   ...quickAnswers,
   {
     question: "¿Se pierde Face ID o Touch ID al cambiar la pantalla?",
-    answer: "NO, si el cambio se hace correctamente. Face ID y Touch ID están vinculados a módulos específicos que se transfieren de la pantalla original a la nueva. En Team Celular transferimos TODOS los componentes originales: módulo Face ID completo (dot projector, flood illuminator, cámara infrarroja), botón Home con Touch ID, cámara frontal y sensores. La única excepción es si el módulo biométrico original está físicamente dañado, en ese caso Face ID/Touch ID no funcionará con ninguna pantalla.",
+    answer: "No, si el cambio se hace bien. Desde el iPhone 13 la pantalla viene emparejada con el equipo: si no se transfiere el IC original por microsoldadura, se pierden el Face ID y el True Tone. Nosotros hacemos esa transferencia en cada cambio. Face ID y Touch ID están vinculados a módulos específicos que se transfieren de la pantalla original a la nueva. En Team Celular transferimos TODOS los componentes originales: módulo Face ID completo (dot projector, flood illuminator, cámara infrarroja), botón Home con Touch ID, cámara frontal y sensores. La única excepción es si el módulo biométrico original está físicamente dañado, en ese caso Face ID/Touch ID no funcionará con ninguna pantalla.",
   },
   {
     question: "¿Qué es True Tone y se puede mantener?",

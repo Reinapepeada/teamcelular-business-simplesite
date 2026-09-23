@@ -282,10 +282,10 @@ export default function SucursalRecoletaPage() {
             Ver servicios
           </Link>
           <Link
-            href="/zonas"
+            href="/sucursales/caba/belgrano"
             className="rounded-full border border-secondary/50 px-6 py-3 text-sm font-semibold text-secondary transition hover:bg-secondary/10"
           >
-            Ver zonas atendidas
+            Ver sucursal Belgrano
           </Link>
           <Link
             href="/contacto"

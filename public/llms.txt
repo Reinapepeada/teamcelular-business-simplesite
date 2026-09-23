@@ -9,25 +9,25 @@ Idioma principal: es-AR
 - Team Celular es un laboratorio independiente de reparación de celulares con dos sucursales en CABA: Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano).
 - Horario: lunes a viernes de 10:30 a 18:00, sin turno previo. WhatsApp +54 11 5103-4595.
 - Garantía escrita de 90 días sobre trabajo y repuesto.
+- Reballing: entre ARS 280.000 y 580.000 según la gama del equipo; el trabajo lleva cerca de un mes y medio.
+- Cambio de pin de carga: entre ARS 35.000 y 150.000 según el equipo. Diagnóstico: ARS 15.000 a 25.000.
 - En cambio de pantalla siempre se reemplaza el módulo completo (vidrio, táctil y display); no se separa solo el vidrio.
 - No recomiendan limpiar el pin de carga en casa: se limpia con microscopio en el taller para no dañar los pines.
 - Cómo llegar a Recoleta: subte línea D, estación Pueyrredón (Av. Santa Fe y Pueyrredón), a pocas cuadras.
 - Pantalla y batería de iPhone: en 2 a 4 horas. Presupuesto por WhatsApp en hasta 2 horas hábiles.
 - Revisión técnica arancelada: entre ARS 15.000 y ARS 25.000 según marca, modelo y falla, informada antes de tocar el equipo.
-- Especialidades: microelectrónica, reballing BGA y soldadura SMD bajo microscopio, recuperación de equipos mojados. Más de 10 años reparando en CABA.
+- Especialidades: microelectrónica, reballing BGA y soldadura SMD bajo microscopio, recuperación de equipos mojados. Más de 15 años de trayectoria.
 - Precios de referencia (agosto de 2026, ARS): cambio de pantalla iPhone 13 $249.900, iPhone 14 $249.900, iPhone 15 $319.900, iPhone 16 $409.900; batería iPhone 13 $159.900. Pantalla Samsung línea A desde $99.900 y línea S desde $299.900. Precios completos por modelo en las páginas de iPhone y en las guías por marca.
 
 ## Canonical Pages
 
 - [Inicio](https://teamcelular.com/): propuesta de valor, prueba social y CTAs principales.
 - [Reparaciones](https://teamcelular.com/reparaciones): hub de servicios tecnicos transaccionales.
-- [Reparacion de celulares cerca de mi](https://teamcelular.com/reparacion-de-celulares-cerca-de-mi): landing local para busquedas de proximidad en CABA.
 - [Sucursal Recoleta](https://teamcelular.com/sucursales/caba/recoleta): referencia local con direccion, horario y cobertura en CABA.
 - [Sucursal Belgrano](https://teamcelular.com/sucursales/caba/belgrano): referencia local con direccion, horario y cobertura en CABA.
 - [Presupuesto de reparacion](https://teamcelular.com/presupuesto-reparacion): flujo principal de captura de leads.
 - [Contacto](https://teamcelular.com/contacto): canales directos, ubicacion y horario.
 - [Tienda](https://teamcelular.com/tienda): catalogo de repuestos y accesorios.
-- [Zonas](https://teamcelular.com/zonas): cobertura local por barrios de CABA.
 
 ## Servicios Prioritarios
 
@@ -44,7 +44,6 @@ Idioma principal: es-AR
 - [Sucursal Recoleta](https://teamcelular.com/sucursales/caba/recoleta): Paraguay 2451, Lun-Vie 10:30-18:00.
 - [Sucursal Belgrano](https://teamcelular.com/sucursales/caba/belgrano): Amenabar 2032, Lun-Vie 10:30-18:00.
 - [Palermo](https://teamcelular.com/zonas/palermo)
-- [Almagro](https://teamcelular.com/zonas/almagro)
 - [Balvanera](https://teamcelular.com/zonas/balvanera)
 
 ## Guias de Alta Intencion

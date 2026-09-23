@@ -130,6 +130,11 @@ const faq: GuideFaqItem[] = [
       "Sí. Forzar el cable en mala posición puede dañar pistas internas y pasar de una reparación simple a una intervención de placa.",
   },
   {
+    question: "¿Cuánto sale cambiar el pin de carga?",
+    answer:
+      "Entre $35.000 y $150.000, según el dispositivo. El diagnóstico cuesta entre $15.000 y $25.000 y te confirmamos el número exacto antes de abrir el equipo.",
+  },
+  {
     question: "¿Cuánto tarda el diagnóstico?",
     answer:
       "El diagnóstico sale el mismo día hábil. Con eso decidís si conviene reparar antes de que toquemos el equipo.",

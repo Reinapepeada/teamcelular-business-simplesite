@@ -239,7 +239,7 @@ export default async function IphoneModelPage({
           microelectrónica, donde se trabaja a nivel componente con microscopio: reballing
           BGA, soldadura SMD y limpieza de placa por daño de líquido. Es la diferencia con
           el canal oficial, que ante una falla de placa cotiza el reemplazo completo. Si el
-          equipo no tiene reparación posible, te lo decimos sin cobrarte el intento.
+          equipo no tiene reparación posible, te lo decimos antes de intervenir: solo se cobra el diagnóstico (ARS 15.000 a 25.000 según el equipo).
         </p>
         <div className="mt-4 flex flex-wrap gap-4">
           <Link

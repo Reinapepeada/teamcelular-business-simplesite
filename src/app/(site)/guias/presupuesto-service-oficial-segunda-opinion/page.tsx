@@ -110,7 +110,7 @@ const faq: GuideFaqItem[] = [
   {
     question: "¿Qué diferencia hay con el servicio oficial de la marca?",
     answer:
-      "Team Celular es un laboratorio independiente con más de 10 años en microelectrónica. El canal oficial trabaja por reemplazo: ante una falla de placa, cotiza la placa completa. Acá se repara el componente que falló, que es una fracción de ese costo.",
+      "Team Celular es un laboratorio independiente con más de 15 años en microelectrónica. El canal oficial trabaja por reemplazo: ante una falla de placa, cotiza la placa completa. Acá se repara el componente que falló, que es una fracción de ese costo.",
   },
   {
     question: "¿Pierdo la garantía del fabricante si reparo con ustedes?",

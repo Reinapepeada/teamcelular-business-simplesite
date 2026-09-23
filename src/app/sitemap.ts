@@ -45,11 +45,6 @@ async function getCategoriesForSitemap(): Promise<string[]> {
 // Paginas principales con alta prioridad
 const mainPages = [
   { path: "", priority: 1.0, changeFreq: "weekly" as const },
-  {
-    path: "reparacion-de-celulares-cerca-de-mi",
-    priority: 0.93,
-    changeFreq: "weekly" as const,
-  },
   { path: "reparaciones", priority: 0.95, changeFreq: "weekly" as const },
   {
     path: "reparaciones/cambio-bateria-caba",
@@ -147,9 +142,7 @@ const mainPages = [
     priority: 0.88,
     changeFreq: "monthly" as const,
   },
-  { path: "zonas", priority: 0.55, changeFreq: "monthly" as const },
   { path: "zonas/palermo", priority: 0.55, changeFreq: "monthly" as const },
-  { path: "zonas/almagro", priority: 0.55, changeFreq: "monthly" as const },
   { path: "zonas/balvanera", priority: 0.55, changeFreq: "monthly" as const },
   {
     path: "presupuesto-reparacion",

@@ -112,7 +112,7 @@ export const IPHONE_MODEL_NOTES: Record<string, IphoneModelNotes> = {
     panel: 'OLED Super Retina XDR de 6,1"',
     port: "Lightning",
     notes: [
-      "Apple emparejó el Face ID con la pantalla en esta generación: si se cambia el módulo sin transferir el chip original por microsoldadura, el Face ID deja de funcionar. Nosotros hacemos esa transferencia, así que salís con Face ID andando. Es la pregunta número uno que recibimos sobre este modelo.",
+      "Apple emparejó el Face ID con la pantalla en esta generación: si se cambia el módulo sin transferir el chip original por microsoldadura, se pierden el Face ID y el True Tone. Nosotros hacemos esa transferencia, así que salís con Face ID andando. Es la pregunta número uno que recibimos sobre este modelo.",
       "Por el mismo emparejamiento, un cambio de pantalla mal hecho en otro lado suele llegarnos con Face ID muerto y el mensaje de pantalla no genuina. En muchos casos se recupera, pero conviene revisarlo antes de que el equipo acumule intentos.",
       "La batería es de las que mejor aguantan de la serie: si tu iPhone 13 dura poco, vale medir consumo antes de asumir que es la batería.",
     ],
@@ -122,7 +122,7 @@ export const IPHONE_MODEL_NOTES: Record<string, IphoneModelNotes> = {
     port: "Lightning",
     notes: [
       "Es el iPhone con la batería más chica de todo el catálogo que reparamos. Eso hace que la degradación se note mucho antes que en un modelo grande: a los dos años, la diferencia de autonomía es evidente aunque la salud de batería todavía marque un número aceptable.",
-      "Comparte con el iPhone 13 el emparejamiento de Face ID con la pantalla, así que el cambio de módulo también lleva transferencia del chip por microsoldadura.",
+      "Comparte con el iPhone 13 el emparejamiento de Face ID con la pantalla, así que el cambio de módulo también lleva transferencia del chip (IC) por microsoldadura; sin eso se pierden Face ID y True Tone.",
       "Al ser un equipo compacto, todo adentro está más apretado: el desarme lleva más cuidado y por eso el tiempo de pantalla se va al borde alto de las 2 a 4 horas.",
     ],
   },
@@ -141,7 +141,7 @@ export const IPHONE_MODEL_NOTES: Record<string, IphoneModelNotes> = {
     notes: [
       "Es el modelo donde Apple rediseñó el interior: la tapa trasera se saca desde atrás en lugar de tener que abrir todo el equipo desde la pantalla. En la práctica, cambiar el vidrio trasero de un iPhone 14 sale bastante menos que en un iPhone 13, que es la misma reparación con mucho más trabajo.",
       "Ese mismo rediseño hace que el acceso a batería sea más directo, así que la reparación cae en el borde bajo de la ventana de 1 a 2 horas.",
-      "La pantalla sigue emparejada con Face ID, así que el cambio de módulo lleva transferencia del chip original.",
+      "La pantalla sigue emparejada con Face ID, así que el cambio de módulo lleva transferencia del chip (IC) original; sin eso se pierden Face ID y True Tone.",
     ],
   },
   "14-pro": {

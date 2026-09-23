@@ -19,7 +19,6 @@ const MAIN_LINKS = [
 ];
 
 const SECONDARY_LINKS = [
-    { href: "/zonas", label: "Zonas" },
     { href: "/contacto", label: "Contacto" },
     { href: "/sobrenosotros", label: "Sobre nosotros" },
 ];

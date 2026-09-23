@@ -1,5 +1,5 @@
 import type { ServiceLandingConfig } from "./serviceLanding";
-import { BRAND_REPAIR_PRICES, formatArsPrice } from "@/lib/repairPrices";
+import { BRAND_REPAIR_PRICES, CHARGING_PORT_PRICE, formatArsPrice } from "@/lib/repairPrices";
 import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 // Precios del primer parrafo de cambio de pantalla: misma fuente que las tablas.
@@ -55,7 +55,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     faqs: [
       {
         q: "¿Cuánto tarda el cambio de batería?",
-        a: "En la mayoría de los modelos, 1 a 2 horas con el repuesto en stock. Te confirmamos el plazo antes de abrir el equipo.",
+        a: "1 a 2 horas si reservás con una seña y el repuesto está en stock. Si no, unas 4 horas, siempre que lo traigas antes de las 13. Te confirmamos el plazo antes de abrir el equipo.",
       },
       {
         q: "¿Cuánto sale cambiar la batería del celular?",
@@ -142,9 +142,9 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     slug: "cambio-pin-carga-caba",
     h1: "Cambio de pin de carga en CABA",
     metaTitle:
-      "Cambio de Pin de Carga en CABA | Celular no Carga",
+      "Cambio de Pin de Carga en CABA desde $35.000",
     metaDescription:
-      "¿El celular no carga o hace falso contacto? Cambiamos el pin de carga en Paraguay 2451, Recoleta (CABA), con garantía escrita 90 días.",
+      "¿El celular no carga o hace falso contacto? Cambio de pin de carga de $35.000 a $150.000 según el equipo, en Paraguay 2451, Recoleta. Garantía 90 días.",
     socialTitle: "Cambio de Pin de Carga en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Reparación de puerto de carga en CABA con diagnóstico y garantía escrita 90 días.",
@@ -156,7 +156,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "ficha de carga celular",
     ],
     intro:
-      "Team Celular, en Paraguay 2451 Recoleta CABA, revisa pin, flex y conectores para resolver fallas de carga con garantía escrita de 90 días. Si el celular carga solo en cierta posición o no reconoce el cargador, primero confirmamos si es suciedad, pin gastado, batería o placa.",
+      `Team Celular, en Paraguay 2451 Recoleta CABA, cambia el pin de carga con garantía escrita de 90 días. Según el equipo, cuesta entre ${formatArsPrice(CHARGING_PORT_PRICE.from)} y ${formatArsPrice(CHARGING_PORT_PRICE.to)}. Si el celular carga solo en cierta posición o no carga, primero revisamos pin, flex y conectores bajo microscopio para no cambiar una pieza que no era la causa.`,
     whatsappText:
       "Hola! Quiero un presupuesto para cambio de pin de carga en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de pin de carga (CABA)",
@@ -188,6 +188,10 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       {
         q: "¿Puedo limpiar el pin de carga en casa?",
         a: "No lo recomendamos. Con agujas, clips o cepillos es fácil doblar o romper los pines del conector, y una limpieza que se resolvía en minutos termina en un cambio de pin. Traelo y lo limpiamos con microscopio, sin forzar el puerto.",
+      },
+      {
+        q: "¿Cuánto sale cambiar el pin de carga?",
+        a: `Entre ${formatArsPrice(CHARGING_PORT_PRICE.from)} y ${formatArsPrice(CHARGING_PORT_PRICE.to)}, según el dispositivo. El diagnóstico cuesta entre ARS 15.000 y 25.000 y te confirmamos el número exacto antes de abrir el equipo.`,
       },
       {
         q: "¿Cuánto tarda reparar la carga?",

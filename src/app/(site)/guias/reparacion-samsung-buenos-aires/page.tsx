@@ -495,7 +495,7 @@ export default function SamsungRepairGuidePage() {
               en la línea A (A16, A26, A35, A36, A54, A55, A56) y entre ARS 299.900 y
               1.199.900 en la línea S (S22 a S25). La batería va de ARS 89.900 a 179.900
               en línea A y de ARS 119.900 a 219.900 en línea S, y el cambio de pin de
-              carga entre ARS 49.000 y 180.000. Pantalla, batería y carga se resuelven
+              carga entre ARS 35.000 y 150.000. Pantalla, batería y carga se resuelven
               en 2 a 4 horas según modelo y stock; el diagnóstico se hace el mismo día
               y todo sale con garantía escrita de 90 días sobre el trabajo y el repuesto
               instalado. Los equipos que no se resuelven por reemplazo pasan al
@@ -664,7 +664,7 @@ export default function SamsungRepairGuidePage() {
                   { servicio: "Cambio de pantalla", modelos: "Galaxy A / M (A16, A26, A35, A36, A54, A55, A56)", tiempo: "2–4 h", precio: "99.900 – 399.900" },
                   { servicio: "Cambio de batería", modelos: "Galaxy S / Ultra", tiempo: "1–2 h", precio: "119.900 – 219.900" },
                   { servicio: "Cambio de batería", modelos: "Galaxy A / M", tiempo: "1–2 h", precio: "89.900 – 179.900" },
-                  { servicio: "Cambio de pin de carga", modelos: "Línea S y A", tiempo: "2–3 h", precio: "49.000 – 180.000" },
+                  { servicio: "Cambio de pin de carga", modelos: "Línea S y A", tiempo: "2–3 h", precio: "35.000 – 150.000" },
                   { servicio: "Bisagra / flex", modelos: "Z Fold, Z Flip", tiempo: "24–72 h", precio: "Consultar" },
                 ].map((row) => (
                   <tr key={`${row.servicio}-${row.modelos}`}>

@@ -268,7 +268,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     titleOverride:
       "Reparacion de Infinix en Buenos Aires: donde arreglarlo sin red oficial",
     heroDescriptionOverride:
-      "Infinix no tiene una red de service centers fisicos verificable en Argentina: la marca atiende por canales de contacto a distancia, sin local propio donde dejar el equipo. Team Celular es un taller independiente de microelectronica en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), CABA, con diagnostico el mismo dia y garantia escrita de 90 dias sobre trabajo y repuesto. Reparamos pantalla, bateria y pin de carga de las lineas Note, Hot y Zero, y tambien equipos que no encienden o se mojaron, que es donde la reparacion a nivel componente cambia el resultado: reballing BGA y soldadura SMD bajo microscopio en vez de reemplazar la placa entera. El presupuesto se confirma antes de intervenir el equipo, y si no tiene reparacion posible te lo decimos sin cobrarte el intento. Atendemos de lunes a viernes de 10:30 a 18:00, sin turno, con pago en 3 cuotas sin interes.",
+      "Infinix no tiene una red de service centers fisicos verificable en Argentina: la marca atiende por canales de contacto a distancia, sin local propio donde dejar el equipo. Team Celular es un taller independiente de microelectronica en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), CABA, con diagnostico el mismo dia y garantia escrita de 90 dias sobre trabajo y repuesto. Reparamos pantalla, bateria y pin de carga de las lineas Note, Hot y Zero, y tambien equipos que no encienden o se mojaron, que es donde la reparacion a nivel componente cambia el resultado: reballing BGA y soldadura SMD bajo microscopio en vez de reemplazar la placa entera. El presupuesto se confirma antes de intervenir el equipo, y si no tiene reparación posible te lo decimos antes de intervenir: solo se cobra el diagnóstico (ARS 15.000 a 25.000 según el equipo). Atendemos de lunes a viernes de 10:30 a 18:00, sin turno, con pago en 3 cuotas sin interes.",
     extraFaq: [
       {
         question: "Infinix tiene servicio tecnico oficial en Argentina?",
@@ -459,7 +459,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
       {
         question: "Cambiar la pantalla de un OnePlus afecta la carga rapida?",
         answer:
-          "No, son sistemas separados. Si despues de un cambio de pantalla aparecio un problema de carga, lo que hay que revisar es el armado, y eso lo vemos sin cargarte el diagnostico.",
+          "No, son sistemas separados. Si despues de un cambio de pantalla aparecio un problema de carga, lo que hay que revisar es el armado, y eso lo vemos en el diagnóstico (ARS 15.000 a 25.000 según el equipo).",
       },
     ],
     brand: "OnePlus",
@@ -495,7 +495,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
       {
         question: "Mi Huawei se mojo y dejaron de andar algunos sensores",
         answer:
-          "Es el cuadro tipico de daño por liquido: el equipo enciende pero pierde funciones sueltas. Va al laboratorio de microelectronica para limpieza de placa y revision de las lineas afectadas. Si no tiene reparacion posible, te lo decimos sin cobrarte el intento.",
+          "Es el cuadro tipico de daño por liquido: el equipo enciende pero pierde funciones sueltas. Va al laboratorio de microelectronica para limpieza de placa y revision de las lineas afectadas. Si no tiene reparación posible, te lo decimos antes de intervenir: solo se cobra el diagnóstico (ARS 15.000 a 25.000 según el equipo).",
       },
     ],
     brand: "Huawei",
@@ -532,7 +532,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
       {
         question: "Vale la pena reparar un celular TCL o conviene cambiarlo?",
         answer:
-          "Depende del costo del repuesto contra el valor del equipo. En TCL los modulos completos suelen ser dificiles de conseguir, y ahi la reparacion a nivel componente puede ser la unica via razonable. Te damos el numero y la recomendacion antes de intervenir, sin cobrarte por decirte que no conviene.",
+          "Depende del costo del repuesto contra el valor del equipo. En TCL los modulos completos suelen ser dificiles de conseguir, y ahi la reparacion a nivel componente puede ser la unica via razonable. Te damos el numero y la recomendacion antes de intervenir, y si no conviene, solo pagás el diagnóstico (ARS 15.000 a 25.000).",
       },
     ],
     brand: "TCL",

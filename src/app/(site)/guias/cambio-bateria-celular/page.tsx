@@ -203,7 +203,7 @@ const faqBattery = [
   },
   {
     question: "¿Cuánto tiempo tarda el cambio de batería?",
-    answer: "El servicio express toma 1-2 horas si contamos con el repuesto en stock. Incluye: diagnóstico inicial, desmontaje, instalación, calibración y test completo. Para modelos menos comunes que requieren pedido de batería, el tiempo es de 24-48 horas. Ofrecemos servicio de espera en nuestros locales de Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032) con WiFi.",
+    answer: "1 a 2 horas si reservás con una seña y el repuesto está en stock. Si no, unas 4 horas, siempre que lo traigas antes de las 13. El trabajo incluye diagnóstico, desmontaje, instalación y test completo.",
   },
   {
     question: "¿La batería nueva viene con garantía?",

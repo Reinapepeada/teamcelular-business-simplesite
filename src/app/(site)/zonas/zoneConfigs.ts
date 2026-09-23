@@ -135,6 +135,8 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     ],
   },
   almagro: {
+    // Sus busquedas en GSC eran ruido (sep 2026): fuera del indice.
+    noIndex: true,
     slug: "almagro",
     zoneName: "Almagro",
     metaTitle: "Arreglo de Celulares en Almagro (CABA) | Team Celular",

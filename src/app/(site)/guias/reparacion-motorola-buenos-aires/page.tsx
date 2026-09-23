@@ -671,7 +671,7 @@ export default function MotorolaRepairGuidePage() {
                   ["Pantalla Razr (plegable)", "999.900 – 1.399.900"],
                   ["Batería Moto E / G", "89.900 – 169.900"],
                   ["Batería Edge / Razr", "119.900 – 229.900"],
-                  ["Pin de carga USB-C", "35.000 – 60.000"],
+                  ["Pin de carga USB-C", "35.000 – 150.000"],
                   ["Reparación de placa", "Consultar"],
                 ].map(([service, price]) => (
                   <tr key={service}>
@@ -705,7 +705,7 @@ export default function MotorolaRepairGuidePage() {
             <p className="text-slate-600 dark:text-slate-300">
               Evaluamos síntomas, pruebas y contexto del equipo para darte una recomendación
               concreta. Si no conviene reparar el Motorola, te lo decimos claro antes de avanzar
-              — con informe técnico sin costo extra.
+              — el informe técnico va incluido en el diagnóstico (ARS 15.000 a 25.000).
             </p>
             <div className="flex flex-wrap gap-3">
               <Link

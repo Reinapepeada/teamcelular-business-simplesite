@@ -5,7 +5,6 @@ import { FaMapMarkedAlt } from "react-icons/fa";
 
 const quickZones = [
   { href: "/zonas/palermo", label: "Palermo" },
-  { href: "/zonas/almagro", label: "Almagro" },
   { href: "/zonas/balvanera", label: "Balvanera / Once" },
 ];
 

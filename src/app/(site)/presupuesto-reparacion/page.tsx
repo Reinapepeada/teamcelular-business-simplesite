@@ -58,7 +58,7 @@ const stats = [
     { value: "2 h", label: "para responderte" },
     { value: "2-4 h", label: "pantalla o batería" },
     { value: "90 días", label: "garantía escrita" },
-    { value: "10+ años", label: "reparando en CABA" },
+    { value: "15+ años", label: "de trayectoria" },
 ];
 
 const promises = [
