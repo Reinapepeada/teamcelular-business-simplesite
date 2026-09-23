@@ -11,9 +11,9 @@ const PAGE_PATH = "/guias/pin-de-carga-suelto-solucion";
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
-  title: "Pin de Carga Suelto: Cómo Saber si Está Dañado",
+  title: "Pin de Carga: Cómo Saber si Está Dañado y Por Qué Se Daña",
   description:
-    "Probá otro cable, mirá el puerto con linterna y fijate si carga solo en un ángulo. Si es el pin, lo cambiamos en el día con garantía de 90 días.",
+    "3 pruebas para saber si se dañó el pin de carga: otro cable, linterna y ángulo. Por qué se daña y cómo se cambia en el día, con garantía 90 días.",
   keywords: [
     "pin de carga suelto",
     "como saber si se daño el pin de carga",
@@ -24,7 +24,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   openGraphTitle: "Pin de Carga Suelto: Cómo Saber si Está Dañado | Team Celular",
   openGraphDescription:
     "Cómo distinguir si el problema es el cable, la batería o el pin de carga antes de gastar de más.",
-  openGraphImagePath: "/images/guia_cambio_modulo.webp",
+  openGraphImagePath: "/images/reparacion_placa.webp",
   openGraphImageAlt: "Diagnóstico de pin de carga en Team Celular",
   twitterTitle: "Pin de Carga Suelto: Cómo Saber si Está Dañado | Team Celular",
   twitterDescription:
@@ -160,7 +160,7 @@ export default function ChargingPortGuidePage() {
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
       modifiedTime="2026-09-22T00:00:00Z"
-      imagePath="/images/guia_cambio_modulo.webp"
+      imagePath="/images/reparacion_placa.webp"
       heroPoints={[
         "Cuatro señales para reconocer un pin dañado.",
         "Cómo descartar el cable y la batería.",

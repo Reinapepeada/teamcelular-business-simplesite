@@ -12,6 +12,7 @@ import {
   FaTools,
 } from "react-icons/fa";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import { BsWhatsapp } from "react-icons/bs";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import { getBranch } from "@/lib/businessProfile";
@@ -238,7 +239,7 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
   };
 
   return (
-    <section className="w-full max-w-6xl px-6 py-14 pb-28 md:px-8 md:pb-20">
+    <div className="w-full bg-black pb-28 text-[#f5f5f7] md:pb-20">
       <BreadcrumbJsonLd
         items={[
           { name: "Inicio", url: `${SITE_URL}/` },
@@ -247,183 +248,172 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
         ]}
       />
 
-      <header className="relative overflow-hidden rounded-3xl border border-white/15 bg-slate-900 text-white shadow-2xl">
-        <div className="absolute inset-0">
+      <header className="tc-intro mx-auto max-w-[1200px] px-4 pt-12 text-center sm:px-6 sm:pt-16">
+        <p className="tc-eyebrow">{config.heroBadge}</p>
+        <h1 className="tc-display mx-auto mt-3 max-w-4xl">
+          Arreglo de celulares en {displayZone}
+        </h1>
+        <p className="mx-auto mt-5 max-w-2xl text-pretty text-[19px] leading-[1.42] text-[#86868b] sm:text-[21px]">
+          {config.heroIntro}
+        </p>
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5">
+          <TrackedCtaLink
+            href="/presupuesto-reparacion#solicitar-presupuesto"
+            ctaName="zone_hero_budget"
+            ctaLocation={`zone_hero_${config.slug}`}
+            ctaVariant="primary"
+            className="tc-btn tc-btn-primary"
+          >
+            Pedir presupuesto
+          </TrackedCtaLink>
+          <TrackedCtaLink
+            href={whatsappUrl}
+            ctaName="zone_hero_whatsapp"
+            ctaLocation={`zone_hero_${config.slug}`}
+            ctaVariant="whatsapp"
+            external
+            target="_blank"
+            className="tc-link inline-flex min-h-11 items-center gap-2 text-[17px]"
+          >
+            <BsWhatsapp aria-hidden /> WhatsApp directo ›
+          </TrackedCtaLink>
+        </div>
+        <p className="mt-4 text-[14px] text-[#86868b]">
+          Atención presencial en Recoleta y Belgrano, sin turno.
+        </p>
+        {/* Salida explicita para la intencion generica: estas paginas de
+            barrio venian ranqueando head terms ("reparacion de celulares",
+            496 impresiones y 0 clicks en 26 dias) y el visitante no
+            encontraba donde seguir. */}
+        <p className="mx-auto mt-3 max-w-2xl text-[14px] text-[#86868b]">
+          ¿No buscabas {displayZone} en particular? Entrá por{" "}
+          <Link href="/" className="tc-link">
+            reparación de celulares en CABA
+          </Link>{" "}
+          para ver el servicio completo, o por{" "}
+          <Link href="/sucursales" className="tc-link">
+            las dos sucursales
+          </Link>
+          .
+        </p>
+      </header>
+
+      <div className="mx-auto mt-12 max-w-[1200px] px-4 sm:px-6">
+        <div className="tc-zoom relative aspect-[3/4] overflow-hidden rounded-[28px] sm:aspect-[16/9] lg:aspect-[16/7]">
           <Image
             src={config.heroImage}
             alt={`Arreglo de celulares en ${displayZone}`}
             fill
             priority
-            sizes="(max-width: 1024px) 100vw, 1100px"
-            className="object-cover opacity-35"
+            quality={82}
+            sizes="(max-width: 768px) 200vw, 1200px"
+            className="object-cover"
           />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+          {/* Señales locales de confianza sobre la foto, en vidrio. */}
+          <section aria-label="Señales locales de confianza" className="tc-glass absolute bottom-4 left-4 right-4 rounded-[24px] px-5 py-4 sm:bottom-6 sm:left-6 sm:right-6">
+            <h2 className="sr-only">Señales locales de confianza</h2>
+            <ul className="grid gap-2 text-[14px] text-white/90 md:grid-cols-3 md:gap-6">
+              <li className="flex items-start gap-2.5">
+                <FaMapMarkedAlt className="mt-0.5 shrink-0 text-[#6aa6ff]" aria-hidden />
+                {localBranchLine}
+              </li>
+              <li className="flex items-start gap-2.5">
+                <FaShieldAlt className="mt-0.5 shrink-0 text-[#6aa6ff]" aria-hidden />
+                Garantía escrita de 90 días y explicación clara antes de reparar.
+              </li>
+              <li className="flex items-start gap-2.5">
+                <FaSubway className="mt-0.5 shrink-0 text-[#6aa6ff]" aria-hidden />
+                Coordinación por WhatsApp para acortar tiempos de espera.
+              </li>
+            </ul>
+          </section>
         </div>
-        <div aria-hidden className={`absolute inset-0 ${config.heroGlowClass}`} />
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-gradient-to-br from-slate-950/95 via-slate-900/75 to-slate-900/55"
-        />
+      </div>
 
-        <div className="relative z-10 grid gap-8 p-8 md:grid-cols-5 md:p-12">
-          <div className="space-y-6 md:col-span-3">
-            <p className="inline-flex rounded-full border border-white/35 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/90">
-              {config.heroBadge}
-            </p>
-            <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
-              Arreglo de celulares en {displayZone}
-            </h1>
-            <p className="max-w-3xl text-lg leading-relaxed text-slate-100/90">
-              {config.heroIntro}
-            </p>
-            {/* Salida explicita para la intencion generica: estas paginas de
-                barrio venian ranqueando head terms ("reparacion de celulares",
-                496 impresiones y 0 clicks en 26 dias) y el visitante no
-                encontraba donde seguir. */}
-            <p className="max-w-3xl text-sm text-slate-200/80">
-              ¿No buscabas {displayZone} en particular? Entrá por{" "}
-              <Link href="/" className="font-semibold text-white underline underline-offset-4">
-                reparación de celulares en CABA
-              </Link>{" "}
-              para ver el servicio completo, o por{" "}
-              <Link href="/sucursales" className="font-semibold text-white underline underline-offset-4">
-                las dos sucursales
+      <section className="tc-section">
+        <div className="tc-stagger grid gap-5 md:grid-cols-3">
+          {config.highlights.map((item) => {
+            const Icon = iconMap[item.icon];
+            return (
+              <article key={item.title} className="tc-card flex min-h-[15rem] flex-col">
+                <Icon className="text-3xl text-[#f5f5f7]" aria-hidden />
+                <h2 className="tc-subheading mt-auto pt-8">{item.title}</h2>
+                <p className="tc-body mt-3">{item.desc}</p>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="w-full bg-[#f5f5f7] text-[#1d1d1f]">
+        <div className="tc-section grid gap-10 lg:grid-cols-2">
+          <div className="tc-reveal">
+            <h2 className="tc-heading !text-[#1d1d1f]">Casos frecuentes desde {displayZone}</h2>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {config.focusServices.map((service) => (
+                <span key={service} className="rounded-full bg-white px-3 py-1.5 text-[12px] text-[#424245]">
+                  {service}
+                </span>
+              ))}
+            </div>
+          </div>
+          <ul className="tc-reveal divide-y divide-[#d2d2d7] rounded-[28px] bg-white px-7">
+            {config.localScenarios.map((item) => (
+              <li key={item} className="py-5 text-[17px] leading-[1.47] text-[#1d1d1f]">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="tc-section">
+        <div className="tc-card tc-reveal grid gap-8 !p-8 sm:!p-12 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+          <div>
+            <h2 className="tc-heading">¿Cómo llego desde {displayZone}?</h2>
+            <p className="tc-body mt-4 max-w-2xl">{config.transportTip}</p>
+            {/* Las paginas de zona absorben impresiones de "phone repair" en ingles
+                (1229 en 13 dias solo Palermo). Este enlace le pasa esa relevancia a
+                la pagina en ingles, que es la que deberia atender esa consulta. */}
+            <p className="mt-4 text-[14px] text-[#86868b]" lang="en">
+              Looking for phone repair in English?{" "}
+              <Link href="/en/phone-repair-buenos-aires" className="tc-link">
+                We speak English
               </Link>
               .
             </p>
-            <div className="flex flex-wrap gap-3">
-              <TrackedCtaLink
-                href="/presupuesto-reparacion#solicitar-presupuesto"
-                ctaName="zone_hero_budget"
-                ctaLocation={`zone_hero_${config.slug}`}
-                ctaVariant="primary"
-                className="inline-flex min-h-11 items-center rounded-full bg-white px-6 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
-              >
-                Pedir presupuesto
-              </TrackedCtaLink>
-              <TrackedCtaLink
-                href={whatsappUrl}
-                ctaName="zone_hero_whatsapp"
-                ctaLocation={`zone_hero_${config.slug}`}
-                ctaVariant="whatsapp"
-                external
-                target="_blank"
-                className="inline-flex min-h-11 items-center rounded-full border border-white/40 bg-white/10 px-6 text-sm font-semibold text-white transition hover:bg-white/20"
-              >
-                WhatsApp directo
-              </TrackedCtaLink>
-            </div>
-            <p className="text-sm text-slate-200/90">
-              Atención presencial en Recoleta y Belgrano, sin turno.
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+            <Link href="/contacto" className="tc-btn tc-btn-primary">
+              Ver mapa y cómo llegar
+            </Link>
+            <Link href="/sucursales" className="tc-btn tc-btn-ghost">
+              Ver las dos sucursales
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="tc-section !pt-0">
+        <div className="tc-reveal flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="tc-heading">Guías técnicas recomendadas para {displayZone}</h2>
+            <p className="tc-body mt-4 max-w-2xl">
+              Si querés comparar opciones antes de traer el equipo, estas lecturas te ayudan a decidir mejor.
             </p>
           </div>
-
-          <aside className="md:col-span-2">
-            <div className="rounded-2xl border border-white/20 bg-black/25 p-5 backdrop-blur-md">
-              <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-white/75">
-                Señales locales de confianza
-              </h2>
-              <ul className="mt-4 space-y-3 text-sm text-white/90">
-                <li className="flex items-start gap-3">
-                  <FaMapMarkedAlt className="mt-0.5 text-primary" />
-                  {localBranchLine}
-                </li>
-                <li className="flex items-start gap-3">
-                  <FaShieldAlt className="mt-0.5 text-primary" />
-                  Garantía escrita de 90 días y explicación clara antes de reparar.
-                </li>
-                <li className="flex items-start gap-3">
-                  <FaSubway className="mt-0.5 text-primary" />
-                  Coordinación por WhatsApp para acortar tiempos de espera.
-                </li>
-              </ul>
-            </div>
-          </aside>
-        </div>
-      </header>
-
-      <section className="mt-10 grid gap-6 md:grid-cols-3">
-        {config.highlights.map((item) => {
-          const Icon = iconMap[item.icon];
-          return (
-            <article
-              key={item.title}
-              className="rounded-2xl border border-white/15 bg-white/5 p-6 shadow-lg backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
-            >
-              <h2 className="flex items-center gap-2 text-xl font-semibold text-slate-900 dark:text-white">
-                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-primary">
-                  <Icon className="text-sm" />
-                </span>
-                {item.title}
-              </h2>
-              <p className="mt-3 text-slate-600 dark:text-slate-300">{item.desc}</p>
-            </article>
-          );
-        })}
-      </section>
-
-      <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Casos frecuentes desde {displayZone}
-        </h2>
-        <ul className="mt-4 list-disc space-y-2 pl-5 text-slate-600 dark:text-slate-300">
-          {config.localScenarios.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-        <div className="mt-6 flex flex-wrap gap-3">
-          {config.focusServices.map((service) => (
-            <span
-              key={service}
-              className="rounded-full border border-slate-300 bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
-            >
-              {service}
-            </span>
-          ))}
-        </div>
-      </section>
-
-      <section className="mt-10 rounded-2xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:from-slate-900/40 dark:via-slate-900/30 dark:to-slate-900/40">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          ¿Cómo llego desde {displayZone}?
-        </h2>
-        <p className="mt-3 text-slate-600 dark:text-slate-300">{config.transportTip}</p>
-        {/* Las paginas de zona absorben impresiones de "phone repair" en ingles
-            (1229 en 13 dias solo Palermo). Este enlace le pasa esa relevancia a
-            la pagina en ingles, que es la que deberia atender esa consulta. */}
-        <p className="mt-3 text-sm text-slate-500 dark:text-slate-400" lang="en">
-          Looking for phone repair in English?{" "}
-          <Link
-            href="/en/phone-repair-buenos-aires"
-            className="font-semibold text-primary hover:underline"
+          <TrackedCtaLink
+            href="/guias"
+            ctaName="zone_related_guides_hub"
+            ctaLocation={`zone_related_guides_${config.slug}`}
+            ctaVariant="secondary"
+            className="tc-link inline-flex min-h-11 shrink-0 items-center text-[17px]"
           >
-            We speak English
-          </Link>
-          .
-        </p>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Link
-            href="/contacto"
-            className="rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-secondary/90"
-          >
-            Ver mapa y cómo llegar
-          </Link>
-          <Link
-            href="/sucursales"
-            className="rounded-full border border-secondary/50 px-6 py-3 text-sm font-semibold text-secondary transition hover:bg-secondary/10"
-          >
-            Ver las dos sucursales
-          </Link>
+            Ver todas las guías ›
+          </TrackedCtaLink>
         </div>
-      </section>
-
-      <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Guías técnicas recomendadas para {displayZone}
-        </h2>
-        <p className="mt-3 text-slate-600 dark:text-slate-300">
-          Si querés comparar opciones antes de traer el equipo, estas lecturas te ayudan a decidir mejor.
-        </p>
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
+        <div className="tc-stagger mt-10 grid gap-5 md:grid-cols-3">
           {relatedGuides.map((guide) => (
             <TrackedCtaLink
               key={guide.href}
@@ -431,44 +421,30 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
               ctaName={`zone_related_guide_${config.slug}_${guide.href.replace("/guias/", "").replaceAll("-", "_")}`}
               ctaLocation={`zone_related_guides_${config.slug}`}
               ctaVariant="secondary"
-              className="rounded-2xl border border-white/15 bg-white/70 p-5 transition hover:-translate-y-0.5 hover:border-primary/40 dark:border-white/10 dark:bg-slate-900/45"
+              className="tc-card group block transition-colors hover:bg-[#262628]"
             >
-              <span className="block text-base font-semibold text-slate-900 dark:text-white">
-                {guide.title}
-              </span>
-              <span className="mt-2 block text-sm text-slate-600 dark:text-slate-300">
-                {guide.description}
-              </span>
+              <span className="tc-subheading block">{guide.title}</span>
+              <span className="tc-body mt-3 block">{guide.description}</span>
+              <span className="tc-link mt-5 block text-[17px]">Leer guía ›</span>
             </TrackedCtaLink>
           ))}
         </div>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <TrackedCtaLink
-            href="/guias"
-            ctaName="zone_related_guides_hub"
-            ctaLocation={`zone_related_guides_${config.slug}`}
-            ctaVariant="secondary"
-            className="rounded-full border border-slate-300 min-h-11 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-200"
-          >
-            Ver todas las guías
-          </TrackedCtaLink>
+        <div className="mt-10 text-center">
           <TrackedCtaLink
             href="/presupuesto-reparacion#solicitar-presupuesto"
             ctaName="zone_related_guides_budget"
             ctaLocation={`zone_related_guides_${config.slug}`}
             ctaVariant="primary"
-            className="rounded-full bg-primary min-h-11 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
+            className="tc-btn tc-btn-primary"
           >
             Pedir diagnóstico
           </TrackedCtaLink>
         </div>
       </section>
 
-      <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          ¿Atienden otros barrios cerca?
-        </h2>
-        <div className="mt-5 grid gap-3 md:grid-cols-3">
+      <section className="tc-section !pt-0">
+        <h2 className="tc-heading tc-reveal">¿Atienden otros barrios cerca?</h2>
+        <div className="mt-8 flex flex-wrap gap-3">
           {config.nearbyZones.filter((zone) => !ZONE_CONFIGS[zone.slug]?.noIndex).map((zone) => (
             <Link
               key={zone.slug}
@@ -478,7 +454,7 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
                   ? `/sucursales/caba/${zone.slug}`
                   : `/zonas/${zone.slug}`
               }
-              className="rounded-xl border border-white/10 bg-white/10 p-4 text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-white/10 dark:bg-slate-900/40 dark:text-slate-200"
+              className="inline-flex min-h-11 items-center rounded-full bg-[#1d1d1f] px-5 text-[15px] text-[#cccccc] transition hover:bg-[#333336] hover:text-white"
             >
               {zone.name}
             </Link>
@@ -486,22 +462,16 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
         </div>
       </section>
 
-      <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Preguntas frecuentes desde {displayZone}
-        </h2>
-        <div className="mt-6 space-y-3">
+      <section className="tc-section !pt-0">
+        <h2 className="tc-heading tc-reveal">Preguntas frecuentes desde {displayZone}</h2>
+        <div className="mt-10 divide-y divide-[#333336] border-y border-[#333336]">
           {config.faqs.map((faq) => (
-            <details
-              key={faq.q}
-              className="group rounded-xl border border-white/15 bg-white/70 p-4 dark:border-white/10 dark:bg-slate-900/45"
-            >
-              <summary className="flex min-h-11 items-center cursor-pointer list-none text-sm font-semibold text-slate-900 dark:text-white">
+            <details key={faq.q} className="group py-6">
+              <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-6 text-[19px] font-semibold sm:text-[21px]">
                 {faq.q}
+                <span className="text-2xl font-light text-[#86868b] transition-transform group-open:rotate-45" aria-hidden>+</span>
               </summary>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                {faq.a}
-              </p>
+              <p className="tc-body mt-3 max-w-3xl">{faq.a}</p>
             </details>
           ))}
         </div>
@@ -525,6 +495,6 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
           }),
         }}
       />
-    </section>
+    </div>
   );
 }

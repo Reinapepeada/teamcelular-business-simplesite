@@ -22,9 +22,9 @@ const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
  */
 export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
-  title: "Phone Repair in Buenos Aires | English-Speaking Technician",
+  title: "Phone Repair Buenos Aires | Same-Day, English Spoken",
   description:
-    "Same-day screen and battery repair in Buenos Aires, no appointment. English-speaking technician in Recoleta and Belgrano, 90-day written warranty.",
+    "iPhone and Android repair in Buenos Aires: screen and battery in 2–4 hours, no appointment. Recoleta and Belgrano, English spoken, 90-day warranty.",
   keywords: [
     "phone repair buenos aires",
     "iphone repair buenos aires",

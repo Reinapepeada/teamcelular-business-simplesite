@@ -95,7 +95,7 @@ export default function HighIntentGuidePage({
   const imageUrl = toAbsoluteUrl(imagePath, siteUrl);
   const guideKey = pagePath.replace("/guias/", "").replaceAll("-", "_");
   return (
-    <div className="flex w-full justify-center bg-[#f7f8fc] px-4 py-8 dark:bg-slate-950 sm:px-6 lg:px-8">
+    <div className="flex w-full justify-center bg-[#f7f8fc] px-4 py-8 dark:bg-black sm:px-6 lg:px-8">
       <div className="w-full max-w-[100rem] space-y-10 md:space-y-16">
         <ArticleSchema
           title={title}
@@ -131,7 +131,7 @@ export default function HighIntentGuidePage({
           ]}
         />
 
-        <nav className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-600 md:text-sm dark:text-slate-400">
+        <nav className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-600 md:text-sm dark:text-[#86868b]">
           <Link href="/" className="transition hover:text-primary">
             Inicio
           </Link>
@@ -140,12 +140,12 @@ export default function HighIntentGuidePage({
             Guías
           </Link>
           <span>/</span>
-          <span className="font-semibold text-slate-900 dark:text-slate-100">
+          <span className="font-semibold text-slate-900 dark:text-[#f5f5f7]">
             {pageLabel}
           </span>
         </nav>
 
-        <header className="overflow-hidden bg-[#171820] p-5 text-white sm:p-10 lg:p-12">
+        <header className="overflow-hidden bg-black p-5 text-white sm:p-10 lg:p-12">
           <div className="grid items-center gap-6 md:gap-8 lg:grid-cols-[1.15fr_0.85fr]">
             <div>
               <div className="flex flex-wrap items-center gap-3">
@@ -157,11 +157,11 @@ export default function HighIntentGuidePage({
                 </span>
               </div>
 
-              <h1 className="mt-5 max-w-4xl text-balance text-[28px] font-extrabold leading-tight tracking-[-0.03em] text-white sm:text-4xl md:mt-7 md:text-5xl lg:text-6xl">
+              <h1 className="mt-5 max-w-4xl text-balance text-[28px] font-semibold leading-tight tracking-[-0.03em] text-white sm:text-4xl md:mt-7 md:text-5xl lg:text-6xl">
                 {title}
               </h1>
 
-              <p className="mt-4 max-w-3xl text-pretty text-[15px] leading-7 text-slate-300 md:mt-5 md:text-lg md:leading-8">
+              <p className="mt-4 max-w-3xl text-pretty text-[15px] leading-7 text-[#a1a1a6] md:mt-5 md:text-lg md:leading-8">
                 {heroDescription}
               </p>
 
@@ -175,7 +175,7 @@ export default function HighIntentGuidePage({
                   ctaName={`guide_high_intent_budget_${guideKey}`}
                   ctaLocation="guide_high_intent_hero"
                   ctaVariant="primary"
-                  className="inline-flex min-h-12 w-full sm:w-auto items-center justify-center rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#20216b] transition hover:bg-slate-100"
+                  className="tc-btn tc-btn-primary w-full sm:w-auto"
                 >
                   Pedir diagnóstico y presupuesto
                 </TrackedCtaLink>
@@ -186,7 +186,7 @@ export default function HighIntentGuidePage({
                   ctaVariant="whatsapp"
                   external
                   target="_blank"
-                  className="inline-flex min-h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-lg border border-white/35 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10"
+                  className="tc-btn tc-btn-ghost w-full sm:w-auto"
                 >
                   <FaWhatsapp aria-hidden />
                   Hablar por WhatsApp
@@ -194,7 +194,7 @@ export default function HighIntentGuidePage({
               </div>
             </div>
 
-            <aside className="relative overflow-hidden bg-slate-950">
+            <aside className="relative overflow-hidden bg-black">
               <Image
                 src={imagePath}
                 alt={`${pageLabel} en laboratorio Team Celular`}
@@ -218,7 +218,7 @@ export default function HighIntentGuidePage({
             {heroPoints.map((point) => (
               <li
                 key={point}
-                className="flex items-start gap-3 px-4 py-3 text-sm text-slate-300 first:pl-0 last:pr-0"
+                className="flex items-start gap-3 px-4 py-3 text-sm text-[#a1a1a6] first:pl-0 last:pr-0"
               >
                 <FaCheckCircle className="mt-0.5 text-[#8ba7ff]" aria-hidden />
                 <span>{point}</span>
@@ -229,10 +229,10 @@ export default function HighIntentGuidePage({
 
         <section className="space-y-5">
           <div>
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
               {symptomsTitle}
             </h2>
-            <p className="mt-2 text-slate-600 dark:text-slate-300">
+            <p className="mt-2 text-slate-600 dark:text-[#a1a1a6]">
               {symptomsDescription}
             </p>
           </div>
@@ -240,12 +240,12 @@ export default function HighIntentGuidePage({
             {symptoms.map((item) => (
               <article
                 key={item.title}
-                className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-slate-900/80"
+                className="bg-[#1d1d1f] rounded-[28px] p-5"
               >
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-[#f5f5f7]">
                   {item.title}
                 </h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-[#a1a1a6]">
                   {item.description}
                 </p>
               </article>
@@ -257,10 +257,10 @@ export default function HighIntentGuidePage({
           <div className="flex items-start gap-3">
             <FaTools className="mt-1 text-2xl text-primary" aria-hidden />
             <div>
-              <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
+              <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
                 {diagnosisTitle}
               </h2>
-              <p className="mt-2 text-slate-600 dark:text-slate-300">
+              <p className="mt-2 text-slate-600 dark:text-[#a1a1a6]">
                 {diagnosisDescription}
               </p>
             </div>
@@ -270,12 +270,12 @@ export default function HighIntentGuidePage({
             {diagnostics.map((item) => (
               <article
                 key={item.title}
-                className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-slate-900/80"
+                className="bg-[#1d1d1f] rounded-[28px] p-5"
               >
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-[#f5f5f7]">
                   {item.title}
                 </h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-[#a1a1a6]">
                   {item.description}
                 </p>
               </article>
@@ -283,14 +283,14 @@ export default function HighIntentGuidePage({
           </div>
         </section>
 
-        <section className="space-y-5 rounded-3xl border border-slate-200/80 bg-slate-50/90 p-8 dark:border-white/10 dark:bg-slate-950/45">
+        <section className="bg-[#1d1d1f] space-y-5 rounded-[28px] p-8 dark:bg-black/45">
           <div className="flex items-start gap-3">
             <FaClipboardList className="mt-1 text-2xl text-secondary" aria-hidden />
             <div>
-              <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
+              <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
                 {planTitle}
               </h2>
-              <p className="mt-2 text-slate-600 dark:text-slate-300">
+              <p className="mt-2 text-slate-600 dark:text-[#a1a1a6]">
                 {planDescription}
               </p>
             </div>
@@ -301,15 +301,15 @@ export default function HighIntentGuidePage({
               <li
                 key={item.title}
                 id={`paso-${index + 1}`}
-                className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-slate-900/85"
+                className="bg-[#1d1d1f] rounded-[28px] p-5"
               >
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-[#86868b]">
                   Paso {index + 1}
                 </p>
-                <h3 className="mt-1 text-lg font-semibold text-slate-900 dark:text-slate-100">
+                <h3 className="mt-1 text-lg font-semibold text-slate-900 dark:text-[#f5f5f7]">
                   {item.title}
                 </h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-[#a1a1a6]">
                   {item.description}
                 </p>
               </li>
@@ -322,7 +322,7 @@ export default function HighIntentGuidePage({
         <section className="space-y-5">
           <div className="flex items-center gap-3">
             <FaQuestionCircle className="text-2xl text-primary" aria-hidden />
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
               Preguntas frecuentes
             </h2>
           </div>
@@ -331,12 +331,12 @@ export default function HighIntentGuidePage({
             {faq.map((item) => (
               <details
                 key={item.question}
-                className="group rounded-2xl border border-slate-200/80 bg-white p-5 dark:border-white/10 dark:bg-slate-900/85"
+                className="bg-[#1d1d1f] group rounded-[28px] p-5"
               >
-                <summary className="flex min-h-11 items-center cursor-pointer list-none text-base font-semibold text-slate-900 transition group-open:text-primary dark:text-slate-100">
+                <summary className="flex min-h-11 items-center cursor-pointer list-none text-base font-semibold text-slate-900 transition group-open:text-primary dark:text-[#f5f5f7]">
                   {item.question}
                 </summary>
-                <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-[#a1a1a6]">
                   {item.answer}
                 </p>
               </details>
@@ -344,8 +344,8 @@ export default function HighIntentGuidePage({
           </div>
         </section>
 
-        <section className="rounded-3xl border border-slate-200/80 bg-white p-8 shadow-sm dark:border-white/10 dark:bg-slate-900/85">
-          <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+        <section className="bg-[#1d1d1f] rounded-[28px] p-8">
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
             Guías relacionadas para seguir evaluando
           </h2>
           <div className="mt-4 flex flex-wrap gap-3">
@@ -356,7 +356,7 @@ export default function HighIntentGuidePage({
                 ctaName={`guide_high_intent_related_${guideKey}_${index + 1}`}
                 ctaLocation="guide_high_intent_related"
                 ctaVariant="secondary"
-                className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 text-sm font-semibold text-slate-700 transition hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900 dark:text-slate-200"
+                className="inline-flex min-h-11 items-center rounded-full bg-[#1d1d1f] px-4 text-sm text-[#cccccc] transition hover:bg-[#333336] hover:text-white"
               >
                 {link.label}
               </TrackedCtaLink>

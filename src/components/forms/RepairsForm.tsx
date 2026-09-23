@@ -174,7 +174,7 @@ export default function RepairsForm() {
     return (
         <div className="space-y-6">
             <fieldset className="space-y-3">
-                <legend className="text-base font-semibold text-slate-900 dark:text-slate-100">
+                <legend className="text-base font-semibold text-slate-900 dark:text-[#f5f5f7]">
                     ¿Qué le pasa a tu celular?
                 </legend>
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
@@ -201,10 +201,10 @@ export default function RepairsForm() {
                 </div>
             </fieldset>
 
-            <label className="block space-y-2 text-base font-semibold text-slate-900 dark:text-slate-100">
+            <label className="block space-y-2 text-base font-semibold text-slate-900 dark:text-[#f5f5f7]">
                 <span>
                     ¿Qué modelo es?{" "}
-                    <span className="text-sm font-normal text-slate-500 dark:text-slate-400">(si no sabés, dejalo vacío)</span>
+                    <span className="text-sm font-normal text-slate-500 dark:text-[#86868b]">(si no sabés, dejalo vacío)</span>
                 </span>
                 <input
                     type="text"
@@ -213,7 +213,7 @@ export default function RepairsForm() {
                     onChange={(event) => setModel(event.target.value)}
                     list="modelos-con-precio"
                     placeholder="Ej: iPhone 13, Galaxy A54, Moto G54"
-                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base font-normal text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
+                    className="bg-[#1d1d1f] w-full rounded-[28px] px-4 py-3 text-base font-normal text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-primary focus:ring-4 focus:ring-primary/10 dark:text-[#f5f5f7] dark:placeholder:text-slate-500"
                 />
             </label>
             <datalist id="modelos-con-precio">
@@ -239,13 +239,13 @@ export default function RepairsForm() {
             <button
                 type="button"
                 onClick={handleSend}
-                className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-emerald-700 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-emerald-900/20 transition hover:bg-emerald-800 sm:w-auto"
+                className="tc-btn tc-btn-primary w-full sm:w-auto"
             >
                 <FaWhatsapp aria-hidden />
                 Pedir presupuesto por WhatsApp
             </button>
 
-            <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">
+            <p className="text-sm leading-6 text-slate-600 dark:text-[#86868b]">
                 Te respondemos en hasta 2 horas hábiles. El precio final se confirma antes de tocar el equipo.
             </p>
         </div>
@@ -268,9 +268,9 @@ function QuoteEstimate({ model, repairTypes }: { model: string; repairTypes: str
     return (
         <div className="rounded-2xl border border-primary/30 bg-primary/5 p-4">
             <p className="text-xs font-semibold uppercase tracking-wide text-primary">Precio de referencia</p>
-            <p className="mt-1 text-sm text-slate-700 dark:text-slate-200">{quote.label}</p>
-            <p className="mt-1 text-2xl font-bold tabular-nums text-slate-900 dark:text-white">{price}</p>
-            <p className="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">
+            <p className="mt-1 text-sm text-slate-700 dark:text-[#a1a1a6]">{quote.label}</p>
+            <p className="mt-1 text-2xl font-semibold tabular-nums text-slate-900 dark:text-[#f5f5f7]">{price}</p>
+            <p className="mt-2 text-xs leading-5 text-slate-600 dark:text-[#86868b]">
                 {quote.precision === "exact"
                     ? "Sale en 2 a 4 horas, con garantía escrita de 90 días. Puede variar según el estado del equipo."
                     : "Es un rango por gama, no un valor cerrado."}

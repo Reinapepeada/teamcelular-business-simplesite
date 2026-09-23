@@ -123,21 +123,21 @@ export default function ReparacionesPage() {
         ]}
       />
 
-      <header className="relative overflow-hidden rounded-3xl border border-white/15 bg-slate-900 p-8 text-white shadow-2xl md:p-12">
+      <header className="relative overflow-hidden text-white py-6 md:py-10">
         <div
           aria-hidden
-          className="absolute inset-0 bg-[radial-gradient(circle_at_14%_14%,rgba(14,165,233,0.32),transparent_40%),radial-gradient(circle_at_86%_86%,rgba(99,102,241,0.25),transparent_38%)]"
+          className="hidden"
         />
         <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
+          <h1 className="tc-display mt-4">
             Reparaciones por tipo de falla en CABA
           </h1>
-          <p className="mt-5 text-lg leading-relaxed text-slate-100/90">
+          <p className="mt-5 text-lg leading-relaxed text-[#a1a1a6]">
             Team Celular tiene dos talleres en CABA: <strong>Recoleta (Paraguay 2451)</strong> y <strong>Belgrano (Amenábar 2032)</strong>. iPhone,
             Samsung, Motorola, Xiaomi y más marcas con diagnóstico técnico y garantía
             escrita de 90 días sobre trabajo y repuesto.
           </p>
-          <p className="mt-3 text-sm text-slate-200/90">
+          <p className="mt-3 text-sm text-[#a1a1a6]">
             Si buscás el servicio general, entrá por{" "}
             <Link href="/" className="font-semibold underline underline-offset-4">
               reparación de celulares en CABA
@@ -151,7 +151,7 @@ export default function ReparacionesPage() {
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
               href="/presupuesto-reparacion#solicitar-presupuesto"
-              className="rounded-full bg-white px-8 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
+              className="tc-btn tc-btn-primary"
             >
               Pedir presupuesto
             </Link>
@@ -162,13 +162,13 @@ export default function ReparacionesPage() {
               ctaVariant="whatsapp"
               external
               target="_blank"
-              className="rounded-full border border-white/35 px-8 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+              className="tc-btn tc-btn-ghost"
             >
               WhatsApp directo
             </TrackedCtaLink>
             <Link
               href="/sucursales"
-              className="rounded-full border border-white/35 px-8 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+              className="tc-btn tc-btn-ghost"
             >
               Ver sucursales
             </Link>
@@ -176,36 +176,36 @@ export default function ReparacionesPage() {
         </div>
       </header>
 
-      <section className="mt-10 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white dark:divide-slate-700/60 dark:border-slate-700/60 dark:bg-slate-900">
+      <section className="bg-[#1d1d1f] mt-10 divide-y divide-slate-200 rounded-[28px] dark:divide-slate-700/60">
         <div className="flex items-start gap-3 p-5">
           <FaTools className="mt-1 shrink-0 text-primary" />
-          <p className="text-slate-700 dark:text-slate-300">
-            <strong className="text-slate-900 dark:text-white">Primero confirmamos la falla.</strong>{" "}
+          <p className="text-slate-700 dark:text-[#a1a1a6]">
+            <strong className="text-slate-900 dark:text-[#f5f5f7]">Primero confirmamos la falla.</strong>{" "}
             Un celular que no carga puede ser el pin, el flex o la placa; no te
             cobramos un repuesto que no hacía falta.
           </p>
         </div>
         <div className="flex items-start gap-3 p-5">
           <FaStopwatch className="mt-1 shrink-0 text-primary" />
-          <p className="text-slate-700 dark:text-slate-300">
-            <strong className="text-slate-900 dark:text-white">¿Cuánto sale revisarlo?</strong>{" "}
+          <p className="text-slate-700 dark:text-[#a1a1a6]">
+            <strong className="text-slate-900 dark:text-[#f5f5f7]">¿Cuánto sale revisarlo?</strong>{" "}
             {REVIEW_COST_MESSAGE}
           </p>
         </div>
         <div className="flex items-start gap-3 p-5">
           <FaShieldAlt className="mt-1 shrink-0 text-primary" />
-          <p className="text-slate-700 dark:text-slate-300">
-            <strong className="text-slate-900 dark:text-white">Garantía por escrito.</strong>{" "}
+          <p className="text-slate-700 dark:text-[#a1a1a6]">
+            <strong className="text-slate-900 dark:text-[#f5f5f7]">Garantía por escrito.</strong>{" "}
             {WARRANTY_SCOPE_MESSAGE}
           </p>
         </div>
       </section>
 
-      <section className="mt-8 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+      <section className="bg-[#1d1d1f] mt-8 rounded-[28px] p-8">
+        <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
           ¿No encontrás tu falla en la lista?
         </h2>
-        <p className="mt-2 text-slate-600 dark:text-slate-300">
+        <p className="mt-2 text-slate-600 dark:text-[#a1a1a6]">
           Pasa seguido: el celular hace algo raro y no sabés a qué servicio
           corresponde. Empezá por acá.
         </p>
@@ -213,12 +213,12 @@ export default function ReparacionesPage() {
           {ROUTE_SELECTOR.map((item) => (
             <article
               key={item.title}
-              className="rounded-xl border border-white/10 bg-white/10 p-5 dark:border-white/5 dark:bg-slate-900/40"
+              className="bg-[#1d1d1f] rounded-xl p-5"
             >
-              <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">
+              <h3 className="text-base font-semibold text-slate-900 dark:text-[#f5f5f7]">
                 {item.title}
               </h3>
-              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+              <p className="mt-2 text-sm text-slate-600 dark:text-[#a1a1a6]">
                 {item.description}
               </p>
               <Link
@@ -237,29 +237,29 @@ export default function ReparacionesPage() {
           <Link
             key={service.href}
             href={service.href}
-            className="group rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
+            className="bg-[#1d1d1f] group rounded-[28px] p-8 transition"
           >
-            <h2 className="text-2xl font-semibold text-slate-900 transition group-hover:text-primary dark:text-white">
+            <h2 className="text-2xl font-semibold text-slate-900 transition group-hover:text-primary dark:text-[#f5f5f7]">
               {service.title}
             </h2>
-            <p className="mt-3 text-slate-600 dark:text-slate-300">{service.description}</p>
+            <p className="mt-3 text-slate-600 dark:text-[#a1a1a6]">{service.description}</p>
             <p className="mt-6 text-sm font-semibold text-primary">Ver servicio →</p>
           </Link>
         ))}
       </section>
 
-      <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 text-center shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+      <section className="bg-[#1d1d1f] mt-10 rounded-[28px] p-8 text-center">
+        <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
           ¿Lo querés tener arreglado hoy?
         </h2>
-        <p className="mt-3 text-slate-600 dark:text-slate-300">
+        <p className="mt-3 text-slate-600 dark:text-[#a1a1a6]">
           Mandanos marca, modelo y qué le pasa. Pantalla y batería suelen salir
           en 2 a 4 horas si el repuesto está en stock.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-4">
           <Link
             href="/presupuesto-reparacion#solicitar-presupuesto"
-            className="rounded-full bg-secondary px-8 py-4 font-semibold text-white shadow-lg transition hover:bg-secondary/90"
+            className="tc-btn tc-btn-primary"
           >
             Ir al formulario
           </Link>

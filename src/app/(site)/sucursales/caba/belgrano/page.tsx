@@ -165,24 +165,24 @@ export default function SucursalBelgranoPage() {
         ]}
       />
 
-      <header className="relative overflow-hidden rounded-3xl border border-white/15 bg-slate-900 p-8 text-white shadow-2xl md:p-12">
+      <header className="relative overflow-hidden text-white py-6 md:py-10">
         <div
           aria-hidden
-          className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(14,165,233,0.3),transparent_38%),radial-gradient(circle_at_84%_86%,rgba(16,185,129,0.25),transparent_36%)]"
+          className="hidden"
         />
         <div
           aria-hidden
-          className="absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:36px_36px]"
+          className="hidden"
         />
         <div className="relative z-10 grid gap-8 md:grid-cols-5">
           <div className="space-y-5 md:col-span-3">
             <p className="inline-flex rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-white/90">
               Sucursal oficial Team Celular · Belgrano
             </p>
-            <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
+            <h1 className="tc-display">
               Reparación de celulares en Belgrano CABA
             </h1>
-            <p className="text-lg leading-relaxed text-slate-100/90">
+            <p className="text-lg leading-relaxed text-[#a1a1a6]">
               Team Celular, en Amenábar 2032 Belgrano CABA, repara celulares con
               diagnóstico el mismo día, pantalla y batería en 2–4 h, y garantía
               escrita de 90 días sobre trabajo y repuesto. Lunes a viernes 10:30–18:00.
@@ -192,19 +192,19 @@ export default function SucursalBelgranoPage() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center rounded-full bg-white px-6 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
+                className="tc-btn tc-btn-primary"
               >
                 WhatsApp directo
               </a>
               <a
                 href={branchPhoneHref}
-                className="inline-flex min-h-11 items-center rounded-full border border-white/35 px-6 text-sm font-semibold text-white transition hover:bg-white/10"
+                className="tc-btn tc-btn-ghost"
               >
                 Llamar al {branch.phone}
               </a>
               <Link
                 href="/presupuesto-reparacion#solicitar-presupuesto"
-                className="inline-flex min-h-11 items-center rounded-full border border-white/35 px-6 text-sm font-semibold text-white transition hover:bg-white/10"
+                className="tc-btn tc-btn-ghost"
               >
                 Pedir presupuesto
               </Link>
@@ -212,7 +212,7 @@ export default function SucursalBelgranoPage() {
           </div>
 
           <aside className="md:col-span-2">
-            <div className="rounded-2xl border border-white/20 bg-black/25 p-5 backdrop-blur-md">
+            <div className="rounded-[28px] bg-[#1d1d1f] p-6">
               <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-white/75">
                 Datos de la sucursal
               </h2>
@@ -241,25 +241,25 @@ export default function SucursalBelgranoPage() {
           return (
             <article
               key={signal.title}
-              className="rounded-2xl border border-white/15 bg-white/5 p-6 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30"
+              className="bg-[#1d1d1f] rounded-[28px] p-6"
             >
-              <h2 className="flex items-center gap-2 text-xl font-semibold text-slate-900 dark:text-white">
+              <h2 className="flex items-center gap-2 text-xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
                 <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-primary">
                   <Icon className="text-sm" />
                 </span>
                 {signal.title}
               </h2>
-              <p className="mt-3 text-slate-600 dark:text-slate-300">{signal.desc}</p>
+              <p className="mt-3 text-slate-600 dark:text-[#a1a1a6]">{signal.desc}</p>
             </article>
           );
         })}
       </section>
 
-      <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+      <section className="bg-[#1d1d1f] mt-10 rounded-[28px] p-8">
+        <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
           ¿Qué reparaciones hacemos en la sucursal Belgrano?
         </h2>
-        <p className="mt-2 text-slate-600 dark:text-slate-300">
+        <p className="mt-2 text-slate-600 dark:text-[#a1a1a6]">
           Team Celular Belgrano, en Amenábar 2032, cubre las mismas reparaciones que el laboratorio central: desde pantallas rotas hasta fallas de placa con microscopio.
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
@@ -273,7 +273,7 @@ export default function SucursalBelgranoPage() {
           ].map((service) => (
             <div
               key={service}
-              className="rounded-xl border border-white/10 bg-white/10 p-5 text-sm text-slate-700 dark:border-white/5 dark:bg-slate-900/40 dark:text-slate-300"
+              className="bg-[#1d1d1f] rounded-xl p-5 text-sm text-slate-700 dark:text-[#a1a1a6]"
             >
               {service}
             </div>
@@ -282,7 +282,7 @@ export default function SucursalBelgranoPage() {
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
             href="/reparaciones"
-            className="rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-secondary/90"
+            className="tc-btn tc-btn-primary"
           >
             Ver todos los servicios
           </Link>
@@ -301,14 +301,14 @@ export default function SucursalBelgranoPage() {
         </div>
       </section>
 
-      <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+      <section className="bg-[#1d1d1f] mt-10 rounded-[28px] p-8">
+        <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
           ¿Cómo llegar a la sucursal Belgrano?
         </h2>
-        <p className="mt-3 text-slate-600 dark:text-slate-300">
+        <p className="mt-3 text-slate-600 dark:text-[#a1a1a6]">
           La estación de subte más cercana es Juramento, de la línea D, sobre Av. Cabildo. Desde ahí caminás hasta Amenábar 2032; también te dejan cerca los colectivos que van por Cabildo.
         </p>
-        <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+        <p className="mt-3 text-sm text-slate-500 dark:text-[#86868b]">
           Si tenés dudas sobre cómo llegar, escribinos por WhatsApp y te mandamos el punto exacto.
         </p>
         <BranchMap
@@ -322,15 +322,15 @@ export default function SucursalBelgranoPage() {
         <GoogleReviewsAPI />
       </section>
 
-      <section className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+      <section className="bg-[#1d1d1f] mt-10 rounded-[28px] p-8">
+        <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
           Preguntas frecuentes sobre la sucursal Belgrano
         </h2>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {faqs.map((faq) => (
             <article
               key={faq.q}
-              className="rounded-xl border border-white/10 bg-white/10 p-5 text-sm leading-relaxed text-slate-700 dark:border-white/5 dark:bg-slate-900/40 dark:text-slate-300"
+              className="bg-[#1d1d1f] rounded-xl p-5 text-sm leading-relaxed text-slate-700 dark:text-[#a1a1a6]"
             >
               <h3 className="font-semibold text-primary">{faq.q}</h3>
               <p className="mt-2">{faq.a}</p>

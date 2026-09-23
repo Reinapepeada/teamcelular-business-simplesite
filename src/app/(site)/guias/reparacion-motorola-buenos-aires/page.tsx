@@ -361,7 +361,7 @@ export default function MotorolaRepairGuidePage() {
           ]}
         />
 
-        <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+        <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-[#86868b]">
           <Link href="/" className="transition hover:text-primary">
             Inicio
           </Link>
@@ -370,12 +370,12 @@ export default function MotorolaRepairGuidePage() {
             Guías
           </Link>
           <span>/</span>
-          <span className="font-semibold text-slate-900 dark:text-white">
+          <span className="font-semibold text-slate-900 dark:text-[#f5f5f7]">
             Reparación Motorola
           </span>
         </nav>
 
-        <header className="space-y-8 rounded-3xl border border-white/20 bg-white/5 p-8 backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-14">
+        <header className="bg-[#1d1d1f] space-y-8 rounded-[28px] p-8 md:p-14">
           <div className="flex flex-wrap items-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/70 bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
               <SiMotorola />
@@ -387,10 +387,10 @@ export default function MotorolaRepairGuidePage() {
           </div>
 
           <div className="space-y-4">
-            <h1 className="text-4xl font-black tracking-tight text-slate-900 dark:text-white md:text-5xl">
+            <h1 className="text-4xl font-semibold tracking-[-0.01em] text-slate-900 dark:text-[#f5f5f7] md:text-5xl">
               Reparación de Motorola en Buenos Aires
             </h1>
-            <p className="max-w-4xl text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+            <p className="max-w-4xl text-lg leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
               Team Celular repara Motorola en dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2032, Belgrano</strong>. Diagnóstico el mismo día, pantalla y batería en 2–4 h, y garantía
               escrita de 90 días sobre trabajo y repuesto. Moto G, Edge y E.
             </p>
@@ -400,30 +400,30 @@ export default function MotorolaRepairGuidePage() {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-3">
-            <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
-              <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
+            <div className="bg-[#1d1d1f] rounded-[28px] p-5">
+              <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-[#86868b]">
                 Diagnóstico
               </p>
-              <p className="mt-2 text-3xl font-black text-primary">Mismo día</p>
-              <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-primary">Mismo día</p>
+              <p className="mt-1 text-sm text-slate-600 dark:text-[#a1a1a6]">
                 Informe claro con pasos y presupuesto
               </p>
             </div>
-            <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
-              <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
+            <div className="bg-[#1d1d1f] rounded-[28px] p-5">
+              <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-[#86868b]">
                 Garantía
               </p>
-              <p className="mt-2 text-3xl font-black text-secondary">90 días</p>
-              <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-secondary">90 días</p>
+              <p className="mt-1 text-sm text-slate-600 dark:text-[#a1a1a6]">
                 Garantía escrita sobre trabajo y repuesto
               </p>
             </div>
-            <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
-              <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
+            <div className="bg-[#1d1d1f] rounded-[28px] p-5">
+              <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-[#86868b]">
                 Tiempo express
               </p>
-              <p className="mt-2 text-3xl font-black text-primary">1-4 h</p>
-              <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-primary">1-4 h</p>
+              <p className="mt-1 text-sm text-slate-600 dark:text-[#a1a1a6]">
                 Pantalla, batería y carga en el día
               </p>
             </div>
@@ -449,7 +449,7 @@ export default function MotorolaRepairGuidePage() {
           <div className="flex flex-wrap gap-4">
             <Link
               href="/presupuesto-reparacion"
-              className="rounded-full bg-primary px-8 py-4 text-base font-bold text-white shadow-lg transition hover:bg-primary/90"
+              className="tc-btn tc-btn-primary"
             >
               Quiero presupuesto para mi Motorola
             </Link>
@@ -457,7 +457,7 @@ export default function MotorolaRepairGuidePage() {
               href={`https://wa.me/5491151034595?text=${encodeURIComponent(
                 "Hola Team Celular, quiero cotizar una reparación de Motorola. Modelo y falla:"
               )}`}
-              className="rounded-full border-2 border-primary px-8 py-4 text-base font-bold text-primary transition hover:bg-primary/10"
+              className="tc-btn tc-btn-ghost"
             >
               Hablar por WhatsApp
             </Link>
@@ -466,10 +466,10 @@ export default function MotorolaRepairGuidePage() {
 
         <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
           <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-primary">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
               Respuesta directa
             </p>
-            <h2 className="mt-3 text-2xl font-black text-slate-900 dark:text-white">
+            <h2 className="mt-3 text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
               Dónde reparar un Motorola en Buenos Aires
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-700 dark:text-slate-200">
@@ -480,12 +480,12 @@ export default function MotorolaRepairGuidePage() {
             </p>
           </div>
 
-          <div className="overflow-hidden rounded-3xl border border-slate-200/80 bg-white/80 dark:border-slate-700/60 dark:bg-slate-900/60">
+          <div className="bg-[#1d1d1f] overflow-hidden rounded-[28px]">
             <div className="border-b border-slate-200 px-6 py-5 dark:border-slate-700">
-              <h2 className="text-2xl font-black text-slate-900 dark:text-white">
+              <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
                 Qué hacer según la falla del Motorola
               </h2>
-              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+              <p className="mt-2 text-sm text-slate-600 dark:text-[#a1a1a6]">
                 Una referencia rápida para proteger el equipo antes del diagnóstico.
               </p>
             </div>
@@ -502,10 +502,10 @@ export default function MotorolaRepairGuidePage() {
                 <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                   {motorolaSymptomRows.map((row) => (
                     <tr key={row.symptom} className="bg-white/70 dark:bg-slate-900/40">
-                      <td className="px-5 py-4 font-semibold text-slate-900 dark:text-white">{row.symptom}</td>
-                      <td className="px-5 py-4 text-slate-700 dark:text-slate-300">{row.urgency}</td>
-                      <td className="px-5 py-4 text-slate-700 dark:text-slate-300">{row.typicalTime}</td>
-                      <td className="px-5 py-4 text-slate-700 dark:text-slate-300">{row.nextStep}</td>
+                      <td className="px-5 py-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">{row.symptom}</td>
+                      <td className="px-5 py-4 text-slate-700 dark:text-[#a1a1a6]">{row.urgency}</td>
+                      <td className="px-5 py-4 text-slate-700 dark:text-[#a1a1a6]">{row.typicalTime}</td>
+                      <td className="px-5 py-4 text-slate-700 dark:text-[#a1a1a6]">{row.nextStep}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -518,10 +518,10 @@ export default function MotorolaRepairGuidePage() {
 
         <section className="space-y-7">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
               ¿Cómo trabajamos tu Motorola de punta a punta?
             </h2>
-            <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
+            <p className="mt-2 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Método técnico para confirmar la falla real antes de tocar el equipo
             </p>
           </div>
@@ -531,7 +531,7 @@ export default function MotorolaRepairGuidePage() {
               return (
                 <article
                   key={step.step}
-                  className="rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
+                  className="bg-[#1d1d1f] rounded-[28px] p-6 transition"
                 >
                   <div className="mb-4 flex items-center justify-between">
                     <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-2xl text-white">
@@ -541,10 +541,10 @@ export default function MotorolaRepairGuidePage() {
                       {step.duration}
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                  <h3 className="text-xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
                     {step.step}
                   </h3>
-                  <p className="mt-3 leading-relaxed text-slate-700 dark:text-slate-300">
+                  <p className="mt-3 leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
                     {step.detail}
                   </p>
                 </article>
@@ -555,10 +555,10 @@ export default function MotorolaRepairGuidePage() {
 
         <section className="space-y-7">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
               ¿Cuáles son las reparaciones de Motorola más frecuentes en CABA?
             </h2>
-            <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
+            <p className="mt-2 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Servicios para Moto G, Edge y E con diagnóstico previo y garantía escrita
             </p>
           </div>
@@ -568,15 +568,15 @@ export default function MotorolaRepairGuidePage() {
               return (
                 <article
                   key={repair.title}
-                  className="rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
+                  className="bg-[#1d1d1f] rounded-[28px] p-6 transition"
                 >
                   <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-xl text-primary">
                     <Icon />
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                  <h3 className="text-xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
                     {repair.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+                  <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
                     {repair.description}
                   </p>
                   <div className="mt-4 flex items-center justify-between text-xs font-semibold">
@@ -598,12 +598,12 @@ export default function MotorolaRepairGuidePage() {
           </div>
         </section>
 
-        <section className="rounded-2xl border border-slate-200/80 bg-white dark:border-slate-700/60 dark:bg-slate-900">
+        <section className="bg-[#1d1d1f] rounded-[28px]">
           <div className="border-b border-slate-100 px-8 py-5 dark:border-slate-800">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
               ¿Por qué elegir Team Celular para tu Motorola?
             </h2>
-            <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-slate-400">
+            <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-[#86868b]">
               Cuatro puntos concretos que marcan la diferencia en cada trabajo.
             </p>
           </div>
@@ -616,10 +616,10 @@ export default function MotorolaRepairGuidePage() {
                     <Icon aria-hidden />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-slate-900 dark:text-slate-100">
+                    <h3 className="font-semibold text-slate-900 dark:text-[#f5f5f7]">
                       {block.title}
                     </h3>
-                    <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                    <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-[#86868b]">
                       {block.description}
                     </p>
                   </div>
@@ -629,19 +629,19 @@ export default function MotorolaRepairGuidePage() {
           </div>
         </section>
 
-        <section id="costos-reparacion-motorola" className="rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+        <section id="costos-reparacion-motorola" className="bg-[#1d1d1f] rounded-[28px] p-8">
+          <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
             ¿Cuánto cuesta reparar un Motorola en CABA?
           </h2>
-          <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
+          <p className="mt-3 text-sm text-slate-600 dark:text-[#a1a1a6]">
             Precios orientativos en ARS — el valor exacto depende del modelo y el estado del equipo. Team Celular informa el costo de diagnóstico antes de abrir el equipo; si avanzás con la reparación, ese monto se descuenta del trabajo final.
           </p>
           <div className="mt-5 overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-white/20 dark:border-white/10">
-                  <th className="pb-2 text-left font-semibold text-slate-900 dark:text-white">Servicio</th>
-                  <th className="pb-2 text-right font-semibold text-slate-900 dark:text-white">Precio estimado ARS</th>
+                  <th className="pb-2 text-left font-semibold text-slate-900 dark:text-[#f5f5f7]">Servicio</th>
+                  <th className="pb-2 text-right font-semibold text-slate-900 dark:text-[#f5f5f7]">Precio estimado ARS</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/10 dark:divide-white/5">
@@ -656,31 +656,31 @@ export default function MotorolaRepairGuidePage() {
                   ["Reparación de placa", "Consultar"],
                 ].map(([service, price]) => (
                   <tr key={service}>
-                    <td className="py-2.5 text-slate-700 dark:text-slate-300">{service}</td>
-                    <td className="py-2.5 text-right font-semibold text-slate-900 dark:text-white">{price}</td>
+                    <td className="py-2.5 text-slate-700 dark:text-[#a1a1a6]">{service}</td>
+                    <td className="py-2.5 text-right font-semibold text-slate-900 dark:text-[#f5f5f7]">{price}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <p className="mt-4 text-xs text-slate-500 dark:text-slate-400">
+          <p className="mt-4 text-xs text-slate-500 dark:text-[#86868b]">
             Precios orientativos sujetos a actualización. Consultá por WhatsApp o presupuesto online para valores exactos según modelo.
           </p>
         </section>
 
 
-        <section className="space-y-5 rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:p-10">
-          <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-white">
+        <section className="bg-[#1d1d1f] space-y-5 rounded-[28px] p-8 md:p-10">
+          <h2 className="text-center text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
             ¿Qué modelos de Motorola reparamos?
           </h2>
-          <p className="text-center text-slate-600 dark:text-slate-300">
+          <p className="text-center text-slate-600 dark:text-[#a1a1a6]">
             Cubrimos líneas actuales y generaciones anteriores con repuestos de calidad.
           </p>
           <div className="flex flex-wrap justify-center gap-2">
             {motorolaModels.map((model) => (
               <span
                 key={model}
-                className="inline-flex min-h-11 items-center rounded-full border border-primary/40 bg-primary/15 px-4 py-2 text-[13px] font-semibold text-slate-800 dark:border-primary/40 dark:bg-primary/20 dark:text-slate-100"
+                className="inline-flex min-h-11 items-center rounded-full border border-primary/40 bg-primary/15 px-4 py-2 text-[13px] font-semibold text-slate-800 dark:border-primary/40 dark:bg-primary/20 dark:text-[#f5f5f7]"
               >
                 {model}
               </span>
@@ -690,10 +690,10 @@ export default function MotorolaRepairGuidePage() {
 
         <section className="space-y-7">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
               Preguntas frecuentes sobre reparación de Motorola
             </h2>
-            <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
+            <p className="mt-2 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Respuestas por modelo y falla para decidir rápido y con información real
             </p>
           </div>
@@ -701,12 +701,12 @@ export default function MotorolaRepairGuidePage() {
             {faq.map((item) => (
               <details
                 key={item.question}
-                className="rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-xl transition hover:shadow-lg dark:border-white/10 dark:bg-slate-900/30"
+                className="bg-[#1d1d1f] rounded-[28px] p-6 transition"
               >
-                <summary className="flex min-h-11 items-center cursor-pointer text-lg font-bold text-slate-900 dark:text-white">
+                <summary className="flex min-h-11 items-center cursor-pointer text-lg font-semibold text-slate-900 dark:text-[#f5f5f7]">
                   {item.question}
                 </summary>
-                <p className="mt-4 leading-relaxed text-slate-700 dark:text-slate-300">
+                <p className="mt-4 leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
                   {item.answer}
                 </p>
               </details>

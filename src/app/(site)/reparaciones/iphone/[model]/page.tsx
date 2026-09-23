@@ -160,16 +160,16 @@ export default async function IphoneModelPage({
       />
 
       <header>
-        <span className="inline-flex rounded-full bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
+        <span className="tc-eyebrow">
           Precio publicado
         </span>
-        <h1 className="mt-6 text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
+        <h1 className="tc-display mt-6 text-slate-900 dark:text-[#f5f5f7]">
           Reparación de {model.name} en CABA
         </h1>
 
         {/* Respuesta autocontenida: entidad, precio, plazo, garantía y ubicación
             en el primer bloque de la página, que es de donde salen las citas. */}
-        <p className="mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
+        <p className="mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-[#a1a1a6]">
           El cambio de pantalla de {model.name} cuesta{" "}
           <strong>{priceLabel(model.screen)}</strong> y el de batería{" "}
           <strong>{priceLabel(model.battery)}</strong> en Team Celular, con sucursales en
@@ -189,7 +189,7 @@ export default async function IphoneModelPage({
             ctaName={`iphone_${model.slug}_budget`}
             ctaLocation="iphone_model_hero"
             ctaVariant="primary"
-            className="inline-flex min-h-12 items-center rounded-full bg-primary px-8 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-primary/90"
+            className="tc-btn tc-btn-primary"
           >
             Pedir presupuesto
           </TrackedCtaLink>
@@ -201,7 +201,7 @@ export default async function IphoneModelPage({
             ctaLocation="iphone_model_hero"
             ctaVariant="whatsapp"
             external
-            className="inline-flex min-h-12 items-center rounded-full border-2 border-primary px-8 py-4 text-base font-semibold text-primary transition hover:bg-primary/10"
+            className="tc-btn tc-btn-ghost"
           >
             Consultar por WhatsApp
           </TrackedCtaLink>
@@ -209,32 +209,32 @@ export default async function IphoneModelPage({
       </header>
 
       <section className="mt-12">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+        <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
           ¿Cuánto sale reparar un {model.name}?
         </h2>
-        <div className="mt-6 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white dark:divide-slate-700 dark:border-slate-700 dark:bg-slate-900">
+        <div className="bg-[#1d1d1f] mt-6 divide-y divide-slate-200 rounded-[28px] dark:divide-slate-700">
           {repairs.map((repair) => (
             <div key={repair.name} className="grid gap-2 px-6 py-5 md:grid-cols-[1.1fr_0.6fr_0.6fr]">
               <div>
-                <p className="font-semibold text-slate-900 dark:text-slate-100">{repair.name}</p>
-                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{repair.detail}</p>
+                <p className="font-semibold text-slate-900 dark:text-[#f5f5f7]">{repair.name}</p>
+                <p className="mt-1 text-sm text-slate-500 dark:text-[#86868b]">{repair.detail}</p>
               </div>
-              <p className="text-sm text-slate-500 dark:text-slate-400">{repair.time}</p>
-              <p className="font-bold text-primary">{priceLabel(repair.price)}</p>
+              <p className="text-sm text-slate-500 dark:text-[#86868b]">{repair.time}</p>
+              <p className="font-semibold text-primary">{priceLabel(repair.price)}</p>
             </div>
           ))}
         </div>
-        <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">
+        <p className="mt-4 text-sm text-slate-500 dark:text-[#86868b]">
           {BUSINESS_PROFILE.name} confirma el número exacto después del diagnóstico. Si el
           equipo tiene más de una falla, te lo decimos antes de avanzar. {INSTALLMENTS_MESSAGE}
         </p>
       </section>
 
-      <section className="mt-12 rounded-2xl border border-slate-200 bg-white p-8 dark:border-slate-700 dark:bg-slate-900">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+      <section className="bg-[#1d1d1f] mt-12 rounded-[28px] p-8">
+        <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
           ¿Qué pasa si el {model.name} no enciende o se mojó?
         </h2>
-        <p className="mt-4 leading-relaxed text-slate-600 dark:text-slate-300">
+        <p className="mt-4 leading-relaxed text-slate-600 dark:text-[#a1a1a6]">
           Esos casos no se resuelven cambiando un módulo. Van al laboratorio de
           microelectrónica, donde se trabaja a nivel componente con microscopio: reballing
           BGA, soldadura SMD y limpieza de placa por daño de líquido. Es la diferencia con
@@ -256,10 +256,10 @@ export default async function IphoneModelPage({
 
       {modelNotes ? (
         <section className="mt-12">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+          <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
             Qué tiene de particular reparar un {model.name}
           </h2>
-          <p className="mt-4 max-w-3xl leading-relaxed text-slate-600 dark:text-slate-300">
+          <p className="mt-4 max-w-3xl leading-relaxed text-slate-600 dark:text-[#a1a1a6]">
             Cada modelo trae su propia trampa. Esto es lo que cambia el trabajo, el
             repuesto o el presupuesto en este equipo concreto.
           </p>
@@ -267,7 +267,7 @@ export default async function IphoneModelPage({
             {modelNotes.notes.map((note) => (
               <li
                 key={note}
-                className="rounded-2xl border border-slate-200 bg-white p-6 leading-relaxed text-slate-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
+                className="bg-[#1d1d1f] rounded-[28px] p-6 leading-relaxed text-slate-600 dark:text-[#a1a1a6]"
               >
                 {note}
               </li>
@@ -277,7 +277,7 @@ export default async function IphoneModelPage({
       ) : null}
 
       <section className="mt-12">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Otros modelos</h2>
+        <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">Otros modelos</h2>
         <div className="mt-4 flex flex-wrap gap-3">
           {IPHONE_MODELS_WITH_PAGE.filter((other) => other !== model.slug).map((other) => {
             const target = getIphoneModel(other);
@@ -286,7 +286,7 @@ export default async function IphoneModelPage({
               <Link
                 key={other}
                 href={`/reparaciones/iphone/${other}`}
-                className="rounded-full border border-slate-300 px-5 py-2 text-sm font-medium text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-300"
+                className="rounded-full border border-slate-300 px-5 py-2 text-sm font-medium text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-[#a1a1a6]"
               >
                 {target.name}
               </Link>
@@ -294,7 +294,7 @@ export default async function IphoneModelPage({
           })}
           <Link
             href="/guias/reparacion-iphone-buenos-aires"
-            className="rounded-full border border-slate-300 px-5 py-2 text-sm font-medium text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-300"
+            className="rounded-full border border-slate-300 px-5 py-2 text-sm font-medium text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-[#a1a1a6]"
           >
             Ver todos los iPhone
           </Link>

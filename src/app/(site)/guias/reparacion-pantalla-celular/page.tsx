@@ -24,9 +24,9 @@ import {
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 
 export const metadata: Metadata = {
-  title: "Cambio de Pantalla de Celular: ¿Es lo Mismo que el Módulo?",
+  title: "Cambio de Pantalla de Celular: ¿Se Borra Todo? ¿Cuánto Tarda?",
   description:
-    "Sí se puede cambiar la pantalla y no se borran tus datos. Qué es el módulo, cuánto tarda (2 a 4 h) y cuándo el problema es flex o placa.",
+    "Sí se puede cambiar la pantalla y no se borran tus fotos ni datos. Tarda 2 a 4 horas. Qué es el módulo y cuándo la falla es el flex o la placa.",
   keywords: [
     "cambio pantalla celular Buenos Aires",
     "pantalla iPhone original",
@@ -52,9 +52,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Cambio de Pantalla Celular Buenos Aires | Display Original",
+    title: "Cambio de Pantalla de Celular: ¿Se Borra Todo? ¿Cuánto Tarda?",
     description:
-      "Cambio de pantalla con displays OLED originales y True Tone preservado. Garantia escrita segun repuesto y trabajo. Service express 2-4hs.",
+      "Sí se puede cambiar la pantalla y no se borran tus datos. Tarda 2 a 4 horas. Team Celular, Recoleta y Belgrano, CABA.",
     type: "article",
     locale: "es_AR",
     url: "https://teamcelular.com/guias/reparacion-pantalla-celular",
@@ -279,7 +279,7 @@ export default function ScreenReplacementGuide() {
       />
       <article className="w-full max-w-6xl space-y-16">
         {/* Breadcrumbs */}
-        <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+        <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-[#86868b]">
           <Link href="/" className="hover:text-primary transition">
             Inicio
           </Link>
@@ -288,20 +288,20 @@ export default function ScreenReplacementGuide() {
             Guías
           </Link>
           <span>/</span>
-          <span className="text-slate-900 dark:text-white font-semibold">
+          <span className="text-slate-900 dark:text-[#f5f5f7] font-semibold">
             Cambio de Pantalla
           </span>
         </nav>
 
         {/* Hero Section */}
-        <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-16">
-          <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 shadow-2xl">
+        <header className="bg-[#1d1d1f] space-y-6 rounded-[28px] p-10 text-center md:p-16">
+          <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-[20px] bg-[#333336] text-[#6aa6ff]">
             <FaMobileAlt className="text-5xl text-white" />
           </div>
-          <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
+          <h1 className="text-4xl font-semibold tracking-[-0.01em] text-slate-900 dark:text-[#f5f5f7] md:text-5xl">
             Cambio de pantalla de celular: qué es el módulo y cuándo cambiarlo
           </h1>
-          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
+          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-[#a1a1a6]">
             La pantalla se cambia cuando el daño está en el módulo: vidrio partido, líneas fijas, manchas
             que crecen o touch que no responde en una zona. Si la imagen se ve bien pero el táctil falla
             entero, o el equipo parpadea al moverlo, suele ser <strong>flex o placa</strong> y el reemplazo
@@ -315,27 +315,27 @@ export default function ScreenReplacementGuide() {
 
           {/* Quick Stats */}
           <div className="grid gap-6 md:grid-cols-3 mt-8">
-            <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
+            <div className="bg-[#1d1d1f] rounded-[28px] p-6">
               <FaClock className="mx-auto text-3xl text-blue-500 mb-2" />
-              <div className="text-2xl font-bold text-blue-500">2-4hs</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">Service express</div>
+              <div className="text-2xl font-semibold text-blue-500">2-4hs</div>
+              <div className="text-sm text-slate-600 dark:text-[#86868b]">Service express</div>
             </div>
-            <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
+            <div className="bg-[#1d1d1f] rounded-[28px] p-6">
               <FaShieldAlt className="mx-auto text-3xl text-secondary mb-2" />
-              <div className="text-2xl font-bold text-secondary">90 días</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">Garantía escrita sobre trabajo y repuesto</div>
+              <div className="text-2xl font-semibold text-secondary">90 días</div>
+              <div className="text-sm text-slate-600 dark:text-[#86868b]">Garantía escrita sobre trabajo y repuesto</div>
             </div>
-            <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
+            <div className="bg-[#1d1d1f] rounded-[28px] p-6">
               <FaCertificate className="mx-auto text-3xl text-blue-500 mb-2" />
-              <div className="text-2xl font-bold text-blue-500">OLED</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">Displays originales</div>
+              <div className="text-2xl font-semibold text-blue-500">OLED</div>
+              <div className="text-sm text-slate-600 dark:text-[#86868b]">Displays originales</div>
             </div>
           </div>
 
           <div className="flex flex-wrap justify-center gap-4 mt-8">
             <Link
               href="/presupuesto-reparacion"
-              className="rounded-full bg-blue-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-blue-700 hover:shadow-xl"
+              className="tc-btn tc-btn-primary"
             >
               Solicitar cambio de pantalla
             </Link>
@@ -350,10 +350,10 @@ export default function ScreenReplacementGuide() {
 
         <section className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
           <div>
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
               Lo que más nos preguntan antes de cambiar la pantalla
             </h2>
-            <p className="mt-4 text-lg leading-8 text-slate-700 dark:text-slate-300">
+            <p className="mt-4 text-lg leading-8 text-slate-700 dark:text-[#a1a1a6]">
               Team Celular, en Paraguay 2451 Recoleta, cambia pantallas de celular en 2 a 4 horas sin
               borrar los datos, con garantía escrita de 90 días sobre repuesto y trabajo.
             </p>
@@ -367,8 +367,8 @@ export default function ScreenReplacementGuide() {
           <div className="divide-y divide-slate-200 dark:divide-slate-700">
             {quickAnswers.map((item) => (
               <div key={item.question} className="py-5 first:pt-0">
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white">{item.question}</h3>
-                <p className="mt-2 leading-7 text-slate-700 dark:text-slate-300">{item.answer}</p>
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-[#f5f5f7]">{item.question}</h3>
+                <p className="mt-2 leading-7 text-slate-700 dark:text-[#a1a1a6]">{item.answer}</p>
               </div>
             ))}
           </div>
@@ -377,10 +377,10 @@ export default function ScreenReplacementGuide() {
         {/* Tipos de daños */}
         <section className="space-y-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
               Tipos de daños en pantallas de celular
             </h2>
-            <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
+            <p className="mt-3 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Identificá el problema de tu pantalla
             </p>
           </div>
@@ -390,7 +390,7 @@ export default function ScreenReplacementGuide() {
               return (
                 <div
                   key={damage.title}
-                  className="rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
+                  className="bg-[#1d1d1f] rounded-[28px] p-6 transition"
                 >
                   <div className="mb-4 flex items-center justify-between">
                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-2xl text-blue-800 dark:bg-blue-900/40 dark:text-blue-200">
@@ -400,10 +400,10 @@ export default function ScreenReplacementGuide() {
                       {damage.severity}
                     </span>
                   </div>
-                  <h3 className="mb-2 text-xl font-bold text-slate-900 dark:text-white">
+                  <h3 className="mb-2 text-xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
                     {damage.title}
                   </h3>
-                  <p className="mb-3 text-slate-700 dark:text-slate-300">{damage.description}</p>
+                  <p className="mb-3 text-slate-700 dark:text-[#a1a1a6]">{damage.description}</p>
                   <p className="text-sm font-semibold text-secondary">{damage.urgency}</p>
                 </div>
               );
@@ -414,10 +414,10 @@ export default function ScreenReplacementGuide() {
         {/* Tipos de pantallas */}
         <section className="space-y-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
               Tipos de pantallas que instalamos
             </h2>
-            <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
+            <p className="mt-3 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Comparativa de calidad, tecnología y precio
             </p>
           </div>
@@ -425,22 +425,22 @@ export default function ScreenReplacementGuide() {
             {screenTypes.map((screen) => (
               <div
                 key={screen.type}
-                className="rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
+                className="bg-[#1d1d1f] rounded-[28px] p-6 transition"
               >
-                <h3 className="mb-2 text-xl font-bold text-slate-900 dark:text-white">
+                <h3 className="mb-2 text-xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
                   {screen.type}
                 </h3>
-                <p className="mb-4 text-sm text-slate-700 dark:text-slate-300">{screen.description}</p>
+                <p className="mb-4 text-sm text-slate-700 dark:text-[#a1a1a6]">{screen.description}</p>
                 <div className="mb-4">
-                  <p className="text-2xl font-bold text-blue-500">{screen.price}</p>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
+                  <p className="text-2xl font-semibold text-blue-500">{screen.price}</p>
+                  <p className="text-xs text-slate-600 dark:text-[#86868b] mt-1">
                     Recomendado: {screen.recommended}
                   </p>
                 </div>
                 <div className="space-y-2 mb-4">
-                  <p className="text-sm font-semibold text-slate-900 dark:text-white">Ventajas:</p>
+                  <p className="text-sm font-semibold text-slate-900 dark:text-[#f5f5f7]">Ventajas:</p>
                   {screen.pros.map((pro) => (
-                    <div key={pro} className="flex items-start gap-2 text-sm text-slate-700 dark:text-slate-300">
+                    <div key={pro} className="flex items-start gap-2 text-sm text-slate-700 dark:text-[#a1a1a6]">
                       <FaCheckCircle className="text-green-500 flex-shrink-0 mt-0.5" />
                       <span>{pro}</span>
                     </div>
@@ -448,7 +448,7 @@ export default function ScreenReplacementGuide() {
                 </div>
                 {screen.cons && (
                   <div className="space-y-2">
-                    <p className="text-sm font-semibold text-slate-900 dark:text-white">Desventajas:</p>
+                    <p className="text-sm font-semibold text-slate-900 dark:text-[#f5f5f7]">Desventajas:</p>
                     {screen.cons.map((con) => (
                       <div key={con} className="flex items-start gap-2 text-sm text-orange-700 dark:text-orange-300">
                         <FaExclamationTriangle className="flex-shrink-0 mt-0.5" />
@@ -465,10 +465,10 @@ export default function ScreenReplacementGuide() {
         {/* Proceso de reemplazo */}
         <section className="space-y-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
               Proceso de cambio de pantalla
             </h2>
-            <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
+            <p className="mt-3 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Procedimiento profesional certificado
             </p>
           </div>
@@ -478,17 +478,17 @@ export default function ScreenReplacementGuide() {
               return (
                 <div
                   key={process.step}
-                  className="rounded-2xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
+                  className="bg-[#1d1d1f] rounded-[28px] p-8 transition"
                 >
                   <div className="flex flex-col md:flex-row gap-6">
                     <div className="flex-shrink-0">
-                      <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 text-3xl text-white shadow-lg">
+                      <div className="flex h-16 w-16 items-center justify-center rounded-[20px] bg-[#333336] text-[#6aa6ff]">
                         <Icon />
                       </div>
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-3">
-                        <h3 className="text-xl font-bold text-secondary dark:text-secondary/90">
+                        <h3 className="text-xl font-semibold text-secondary dark:text-secondary/90">
                           {process.step}
                         </h3>
                         <span className="flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-800 dark:bg-blue-900/40 dark:text-blue-200">
@@ -496,7 +496,7 @@ export default function ScreenReplacementGuide() {
                           {process.duration}
                         </span>
                       </div>
-                      <p className="leading-relaxed text-slate-700 dark:text-slate-300">
+                      <p className="leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
                         {process.detail}
                       </p>
                     </div>
@@ -510,10 +510,10 @@ export default function ScreenReplacementGuide() {
         {/* FAQ */}
         <section className="space-y-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
               Preguntas frecuentes sobre cambio de pantalla
             </h2>
-            <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
+            <p className="mt-3 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Respondemos las dudas más comunes
             </p>
           </div>
@@ -521,12 +521,12 @@ export default function ScreenReplacementGuide() {
             {faqScreen.slice(quickAnswers.length).map((faq, index) => (
               <details
                 key={index}
-                className="group rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-xl transition hover:shadow-lg dark:border-white/10 dark:bg-slate-900/30"
+                className="bg-[#1d1d1f] group rounded-[28px] p-6 transition"
               >
-                <summary className="flex min-h-11 items-center cursor-pointer text-lg font-bold text-secondary group-hover:text-primary dark:text-secondary/90">
+                <summary className="flex min-h-11 items-center cursor-pointer text-lg font-semibold text-secondary group-hover:text-primary dark:text-secondary/90">
                   {faq.question}
                 </summary>
-                <p className="mt-4 leading-relaxed text-slate-700 dark:text-slate-300">
+                <p className="mt-4 leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
                   {faq.answer}
                 </p>
               </details>
@@ -535,17 +535,17 @@ export default function ScreenReplacementGuide() {
         </section>
 
         {/* CTA Final */}
-        <section className="rounded-2xl border border-white/15 bg-gradient-to-br from-blue-500/10 via-white/5 to-blue-600/10 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:from-slate-900/40 dark:via-slate-900/30 dark:to-slate-900/40 md:p-16">
-          <h2 className="mb-6 text-3xl font-bold text-slate-900 dark:text-white">
+        <section className="bg-[#1d1d1f] rounded-[28px] p-10 text-center md:p-16">
+          <h2 className="mb-6 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
             ¿Tu pantalla está rota o no funciona?
           </h2>
-          <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
+          <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-[#a1a1a6]">
             {REVIEW_COST_MESSAGE} Service express en 2-4 horas con garantia escrita segun repuesto y trabajo.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/presupuesto-reparacion"
-              className="rounded-full bg-blue-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-blue-700"
+              className="tc-btn tc-btn-primary"
             >
               Solicitar presupuesto
             </Link>

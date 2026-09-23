@@ -348,7 +348,7 @@ export const metadata: Metadata = {
     path: "/guias",
     title: "Guías de Reparación de Celulares en CABA | Team Celular",
     description:
-      "Guias practicas de Team Celular para entender fallas de pantalla, bateria, carga y placa antes de pedir una reparacion en CABA.",
+      "Guías de Team Celular con precios por modelo y fallas de pantalla, batería, carga y placa. iPhone, Samsung, Motorola y Xiaomi, escritas en el taller.",
     keywords: [
       "guias reparacion celulares",
       "reparacion iPhone buenos aires",

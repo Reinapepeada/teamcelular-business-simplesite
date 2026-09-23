@@ -231,7 +231,7 @@ export default function BatteryReplacementGuide() {
       />
       <article className="w-full max-w-6xl space-y-16">
         {/* Breadcrumbs */}
-        <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+        <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-[#86868b]">
           <Link href="/" className="hover:text-primary transition">
             Inicio
           </Link>
@@ -240,20 +240,20 @@ export default function BatteryReplacementGuide() {
             Guías
           </Link>
           <span>/</span>
-          <span className="text-slate-900 dark:text-white font-semibold">
+          <span className="text-slate-900 dark:text-[#f5f5f7] font-semibold">
             Cambio de Batería
           </span>
         </nav>
 
         {/* Hero Section */}
-        <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-16">
-          <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500 via-green-600 to-green-700 shadow-2xl">
+        <header className="bg-[#1d1d1f] space-y-6 rounded-[28px] p-10 text-center md:p-16">
+          <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-[20px] bg-[#333336] text-[#6aa6ff]">
             <FaBatteryFull className="text-5xl text-white" />
           </div>
-          <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
+          <h1 className="text-4xl font-semibold tracking-[-0.01em] text-slate-900 dark:text-[#f5f5f7] md:text-5xl">
             Cambio de batería de celular: cuándo conviene y cuánto sale en CABA
           </h1>
-          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
+          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-[#a1a1a6]">
             La batería se cambia cuando perdió capacidad real: dura menos de media jornada de uso normal,
             se apaga con carga por encima del 20% o el equipo se calienta en reposo. Si en cambio se descarga
             solo con una app abierta, o carga lento pero aguanta bien, el problema suele ser
@@ -262,7 +262,7 @@ export default function BatteryReplacementGuide() {
             y Amenábar 2032 (Belgrano), CABA. El cambio sale en <strong>1 a 2 horas</strong> con garantía
             escrita de 90 días.
           </p>
-          <p className="mx-auto mt-3 max-w-3xl text-lg font-semibold text-slate-800 dark:text-slate-100">
+          <p className="mx-auto mt-3 max-w-3xl text-lg font-semibold text-slate-800 dark:text-[#f5f5f7]">
             Team Celular, en Paraguay 2451 Recoleta, cambia la batería de Samsung, Motorola y Xiaomi desde{" "}
             {formatArsPrice(ANDROID_BATTERY_FROM)} y de iPhone desde {formatArsPrice(IPHONE_BATTERY_FROM)}, en 1 a 2
             horas y sin borrar datos.
@@ -273,27 +273,27 @@ export default function BatteryReplacementGuide() {
 
           {/* Quick Stats */}
           <div className="grid gap-6 md:grid-cols-3 mt-8">
-            <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
+            <div className="bg-[#1d1d1f] rounded-[28px] p-6">
               <FaClock className="mx-auto mb-2 text-3xl text-green-700 dark:text-green-300" />
-              <div className="text-2xl font-bold text-green-700 dark:text-green-300">1-2hs</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">Service express</div>
+              <div className="text-2xl font-semibold text-green-700 dark:text-green-300">1-2hs</div>
+              <div className="text-sm text-slate-600 dark:text-[#86868b]">Service express</div>
             </div>
-            <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
+            <div className="bg-[#1d1d1f] rounded-[28px] p-6">
               <FaShieldAlt className="mx-auto text-3xl text-secondary mb-2" />
-              <div className="text-2xl font-bold text-secondary">90 días</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">Garantía escrita</div>
+              <div className="text-2xl font-semibold text-secondary">90 días</div>
+              <div className="text-sm text-slate-600 dark:text-[#86868b]">Garantía escrita</div>
             </div>
-            <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
+            <div className="bg-[#1d1d1f] rounded-[28px] p-6">
               <FaCertificate className="mx-auto mb-2 text-3xl text-green-700 dark:text-green-300" />
-              <div className="text-2xl font-bold text-green-700 dark:text-green-300">100%</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">Baterías certificadas</div>
+              <div className="text-2xl font-semibold text-green-700 dark:text-green-300">100%</div>
+              <div className="text-sm text-slate-600 dark:text-[#86868b]">Baterías certificadas</div>
             </div>
           </div>
 
           <div className="flex flex-wrap justify-center gap-4 mt-8">
             <Link
               href="/presupuesto-reparacion"
-              className="rounded-full bg-green-700 px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-green-800 hover:shadow-xl"
+              className="tc-btn tc-btn-primary"
             >
               Solicitar cambio de batería
             </Link>
@@ -309,10 +309,10 @@ export default function BatteryReplacementGuide() {
         {/* Señales de que necesitas cambiar la batería */}
         <section className="space-y-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
               ¿Cuándo cambiar la batería de tu celular?
             </h2>
-            <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
+            <p className="mt-3 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Señales claras de que tu batería necesita reemplazo urgente
             </p>
           </div>
@@ -329,7 +329,7 @@ export default function BatteryReplacementGuide() {
               return (
                 <div
                   key={signal.title}
-                  className="rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
+                  className="bg-[#1d1d1f] rounded-[28px] p-6 transition"
                 >
                   <div className="mb-4 flex items-center justify-between">
                     <div className={`flex h-12 w-12 items-center justify-center rounded-full text-2xl ${severityStyles.bg} ${severityStyles.text}`}>
@@ -339,10 +339,10 @@ export default function BatteryReplacementGuide() {
                       {signal.severity}
                     </span>
                   </div>
-                  <h3 className="mb-2 text-xl font-bold text-slate-900 dark:text-white">
+                  <h3 className="mb-2 text-xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
                     {signal.title}
                   </h3>
-                  <p className="text-slate-700 dark:text-slate-300">{signal.description}</p>
+                  <p className="text-slate-700 dark:text-[#a1a1a6]">{signal.description}</p>
                 </div>
               );
             })}
@@ -352,10 +352,10 @@ export default function BatteryReplacementGuide() {
         {/* Tipos de baterías */}
         <section className="space-y-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
               Tipos de baterías que instalamos
             </h2>
-            <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
+            <p className="mt-3 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Comparativa de calidad, garantía y precio
             </p>
           </div>
@@ -363,10 +363,8 @@ export default function BatteryReplacementGuide() {
             {batteryTypes.map((battery) => (
               <div
                 key={battery.type}
-                className={`rounded-2xl border p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl ${
-                  battery.recommended
-                    ? "border-green-500/50 bg-green-500/5 dark:bg-green-500/10"
-                    : "border-white/15 bg-white/5 dark:border-white/10 dark:bg-slate-900/30"
+                className={`rounded-[28px] bg-[#1d1d1f] p-6 transition ${
+                  battery.recommended ? "ring-1 ring-inset ring-emerald-500/60" : ""
                 }`}
               >
                 {battery.recommended && (
@@ -376,17 +374,17 @@ export default function BatteryReplacementGuide() {
                     </span>
                   </div>
                 )}
-                <h3 className="mb-2 text-xl font-bold text-slate-900 dark:text-white">
+                <h3 className="mb-2 text-xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
                   {battery.type}
                 </h3>
-                <p className="mb-4 text-sm text-slate-700 dark:text-slate-300">{battery.description}</p>
+                <p className="mb-4 text-sm text-slate-700 dark:text-[#a1a1a6]">{battery.description}</p>
                 <div className="mb-4">
-                  <p className="text-2xl font-bold text-green-500">{battery.price}</p>
+                  <p className="text-2xl font-semibold text-green-500">{battery.price}</p>
                 </div>
                 {battery.pros && (
                   <ul className="space-y-2 mb-4">
                     {battery.pros.map((pro) => (
-                      <li key={pro} className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
+                      <li key={pro} className="flex items-center gap-2 text-sm text-slate-700 dark:text-[#a1a1a6]">
                         <FaCheckCircle className="text-green-500 flex-shrink-0" />
                         {pro}
                       </li>
@@ -411,10 +409,10 @@ export default function BatteryReplacementGuide() {
         {/* Proceso de reemplazo */}
         <section className="space-y-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
               Proceso de cambio de batería
             </h2>
-            <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
+            <p className="mt-3 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Procedimiento profesional paso a paso
             </p>
           </div>
@@ -424,10 +422,10 @@ export default function BatteryReplacementGuide() {
               return (
                 <div
                   key={process.step}
-                  className="rounded-2xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
+                  className="bg-[#1d1d1f] rounded-[28px] p-8 transition"
                 >
                   <div className="mb-4 flex items-center justify-between">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-green-600 text-3xl text-white shadow-lg">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-[20px] bg-[#333336] text-[#6aa6ff]">
                       <Icon />
                     </div>
                     <span className="flex items-center gap-2 rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-800 dark:bg-green-900/40 dark:text-green-200">
@@ -435,10 +433,10 @@ export default function BatteryReplacementGuide() {
                       {process.duration}
                     </span>
                   </div>
-                  <h3 className="mb-3 text-xl font-bold text-secondary dark:text-secondary/90">
+                  <h3 className="mb-3 text-xl font-semibold text-secondary dark:text-secondary/90">
                     {process.step}
                   </h3>
-                  <p className="leading-relaxed text-slate-700 dark:text-slate-300">
+                  <p className="leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
                     {process.detail}
                   </p>
                 </div>
@@ -450,10 +448,10 @@ export default function BatteryReplacementGuide() {
         {/* FAQ */}
         <section className="space-y-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
               Preguntas frecuentes sobre cambio de batería
             </h2>
-            <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
+            <p className="mt-3 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Respondemos las dudas más comunes
             </p>
           </div>
@@ -461,12 +459,12 @@ export default function BatteryReplacementGuide() {
             {faqBattery.map((faq, index) => (
               <details
                 key={index}
-                className="group rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-xl transition hover:shadow-lg dark:border-white/10 dark:bg-slate-900/30"
+                className="bg-[#1d1d1f] group rounded-[28px] p-6 transition"
               >
-                <summary className="flex min-h-11 items-center cursor-pointer text-lg font-bold text-secondary group-hover:text-primary dark:text-secondary/90">
+                <summary className="flex min-h-11 items-center cursor-pointer text-lg font-semibold text-secondary group-hover:text-primary dark:text-secondary/90">
                   {faq.question}
                 </summary>
-                <p className="mt-4 leading-relaxed text-slate-700 dark:text-slate-300">
+                <p className="mt-4 leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
                   {faq.answer}
                 </p>
               </details>
@@ -475,17 +473,17 @@ export default function BatteryReplacementGuide() {
         </section>
 
         {/* CTA Final */}
-        <section className="rounded-2xl border border-white/15 bg-gradient-to-br from-green-500/10 via-white/5 to-green-600/10 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:from-slate-900/40 dark:via-slate-900/30 dark:to-slate-900/40 md:p-16">
-          <h2 className="mb-6 text-3xl font-bold text-slate-900 dark:text-white">
+        <section className="bg-[#1d1d1f] rounded-[28px] p-10 text-center md:p-16">
+          <h2 className="mb-6 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
             ¿Tu celular necesita batería nueva?
           </h2>
-          <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
+          <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-[#a1a1a6]">
             {REVIEW_COST_MESSAGE} Cambio en 1 a 2 horas con garantía escrita de 90 días.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/presupuesto-reparacion"
-              className="rounded-full bg-green-700 px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-green-800"
+              className="tc-btn tc-btn-primary"
             >
               Solicitar presupuesto
             </Link>

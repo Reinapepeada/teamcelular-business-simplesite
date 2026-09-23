@@ -78,31 +78,18 @@ export default function GuidesLayout({
   }, [pathname]);
 
   return (
-    <div className="relative isolate w-full overflow-hidden">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-20 bg-slate-50 dark:bg-transparent"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-20 bg-[radial-gradient(circle_at_18%_10%,rgba(14,165,233,0.16),transparent_33%),radial-gradient(circle_at_86%_15%,rgba(16,185,129,0.14),transparent_35%)] dark:bg-[radial-gradient(circle_at_12%_10%,rgba(14,165,233,0.14),transparent_30%),radial-gradient(circle_at_88%_14%,rgba(99,102,241,0.16),transparent_34%)]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 opacity-35 [background-image:linear-gradient(rgba(148,163,184,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.1)_1px,transparent_1px)] [background-size:38px_38px] dark:opacity-15"
-      />
-
-      <section className="relative z-10 border-b border-slate-200/80 bg-white/75 backdrop-blur-md dark:border-slate-800/70 dark:bg-slate-950/45">
+    <div className="relative isolate w-full bg-black">
+      <section className="relative z-10 border-b border-[#333336] bg-black">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-4 py-3 md:flex-row md:items-center md:justify-between md:gap-4 md:py-4">
           <div className="space-y-1 min-w-0">
             <Link
               href="/guias"
-              className="inline-flex min-h-11 max-w-full items-center gap-2 rounded-full border border-primary/70 bg-primary px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-white shadow-sm transition hover:bg-primary/90 sm:text-[11px] sm:tracking-[0.18em]"
+              className="inline-flex min-h-11 max-w-full items-center gap-2 text-[21px] font-semibold text-[#f5f5f7]"
             >
-              <FaBookOpen className="shrink-0 text-[10px]" />
-              <span className="truncate">Guias Team Celular</span>
+              <FaBookOpen className="shrink-0 text-base text-[#86868b]" aria-hidden />
+              <span className="truncate">Guías</span>
             </Link>
-            <p className="hidden text-xs text-slate-700 md:block md:text-sm dark:text-slate-300">
+            <p className="hidden text-[12px] text-[#86868b] md:block">
               Guias por marca y por falla con procesos reales, tiempos y garantia.
             </p>
           </div>
@@ -117,10 +104,10 @@ export default function GuidesLayout({
                   href={item.href}
                   ref={isActive ? activeChipRef : undefined}
                   aria-current={isActive ? "page" : undefined}
-                  className={`inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full border px-3.5 text-[13px] font-medium transition md:px-4 md:text-sm ${
+                  className={`relative inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full px-3.5 text-[13px] transition md:px-4 ${
                     isActive
-                      ? "cursor-default border-primary bg-primary text-white shadow-sm"
-                      : "border-slate-300/80 bg-white/80 text-slate-700 hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200 dark:hover:border-primary/50 dark:hover:text-primary"
+                      ? "cursor-default bg-[#f5f5f7] text-black"
+                      : "bg-[#1d1d1f] text-[#cccccc] hover:bg-[#333336] hover:text-white"
                   }`}
                 >
                   <Icon className="text-[13px]" />
@@ -133,7 +120,7 @@ export default function GuidesLayout({
               href="https://wa.me/5491151034595?text=Hola%20Team%20Celular%2C%20quiero%20ayuda%20con%20una%20reparacion"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full bg-emerald-700 px-3.5 text-[13px] md:px-4 md:text-sm font-semibold text-white shadow-lg shadow-emerald-900/30 transition hover:bg-emerald-800"
+              className="tc-link inline-flex min-h-11 shrink-0 items-center gap-2 px-2 text-[13px]"
             >
               <BsWhatsapp className="text-base" />
               Hablar por WhatsApp

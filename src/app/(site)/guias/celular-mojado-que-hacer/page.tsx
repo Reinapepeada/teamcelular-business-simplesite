@@ -11,9 +11,9 @@ const PAGE_PATH = "/guias/celular-mojado-que-hacer";
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
-  title: "Celular Mojado: Qué Hacer en las Primeras 2 Horas",
+  title: "Celular Mojado: Qué Hacer (y Qué No) en las Primeras 2 Horas",
   description:
-    "¿Se mojó tu celular? Qué hacer en las primeras 2 horas para frenar la corrosión. Team Celular, Recoleta y Belgrano CABA, diagnostica el mismo día.",
+    "Apagalo, no lo cargues y no lo metas en arroz. Qué hacer en las primeras 2 horas para frenar la corrosión, y cuándo llevarlo a revisar el mismo día.",
   keywords: [
     "celular mojado que hacer",
     "telefono mojado solucion",

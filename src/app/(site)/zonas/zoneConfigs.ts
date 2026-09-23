@@ -4,9 +4,9 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
   palermo: {
     slug: "palermo",
     zoneName: "Palermo",
-    metaTitle: "Arreglo de Celulares en Palermo (CABA) | Team Celular",
+    metaTitle: "Reparación de Celulares en Palermo, CABA | Sin Turno",
     metaDescription:
-      "Desde Palermo tenés dos sucursales cerca: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032). Diagnóstico en el día y garantía escrita de 90 días.",
+      "Servicio técnico a minutos de Palermo: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032). Pantalla y batería en 2–4 h, garantía 90 días.",
     socialDescription:
       "Team Celular atiende Palermo desde Recoleta y Belgrano. Pantalla, batería y carga con garantía escrita 90 días.",
     heroBadge: "Cobertura Palermo",
@@ -147,7 +147,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     heroBadge: "Cobertura Almagro",
     heroIntro:
       "Team Celular tiene dos sucursales en CABA — Paraguay 2451 Recoleta y Amenábar 2032 Belgrano — y atiende Almagro con diagnóstico el mismo día. Pantalla, batería y carga con garantía escrita de 90 días sobre trabajo y repuesto.",
-    heroImage: "/images/equipoCall.webp",
+    heroImage: "/images/celuPorDentro.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(16,185,129,0.3),transparent_44%)]",
     whatsappText:
@@ -213,7 +213,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     heroBadge: "Cobertura Balvanera / Once",
     heroIntro:
       "Team Celular tiene dos sucursales en CABA — Paraguay 2451 Recoleta y Amenábar 2032 Belgrano — y atiende Balvanera y Once con diagnóstico el mismo día. Pantalla, batería, carga y casos de placa con garantía escrita de 90 días.",
-    heroImage: "/images/cargadores.webp",
+    heroImage: "/images/reparacion_placa.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(245,158,11,0.32),transparent_44%)]",
     whatsappText:

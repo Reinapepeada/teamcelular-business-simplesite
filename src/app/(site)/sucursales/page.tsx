@@ -84,19 +84,19 @@ export default function SucursalesPage() {
         ]}
       />
 
-      <header className="relative overflow-hidden rounded-3xl border border-white/15 bg-slate-900 p-8 text-white shadow-2xl md:p-12">
+      <header className="relative overflow-hidden text-white py-6 md:py-10">
         <div
           aria-hidden
-          className="absolute inset-0 bg-[radial-gradient(circle_at_18%_10%,rgba(14,165,233,0.32),transparent_40%),radial-gradient(circle_at_80%_86%,rgba(16,185,129,0.25),transparent_38%)]"
+          className="hidden"
         />
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <p className="inline-flex rounded-full border border-white/35 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/90">
             Presencia local real
           </p>
-          <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
+          <h1 className="tc-display mt-4">
             Sucursales Team Celular en CABA
           </h1>
-          <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-100/90">
+          <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-[#a1a1a6]">
             Team Celular tiene dos sucursales en CABA: Paraguay 2451 en Recoleta y
             Amenábar 2032 en Belgrano. Diagnóstico el mismo día, garantía escrita de
             90 días y atención de lunes a viernes 10:30–18:00.
@@ -104,19 +104,19 @@ export default function SucursalesPage() {
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
               href="/sucursales/caba/recoleta"
-              className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
+              className="tc-btn tc-btn-primary"
             >
               Ver ficha Recoleta
             </Link>
             <Link
               href="/sucursales/caba/belgrano"
-              className="rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+              className="tc-btn tc-btn-ghost"
             >
               Ver ficha Belgrano
             </Link>
             <Link
               href="/contacto"
-              className="rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+              className="tc-btn tc-btn-ghost"
             >
               Ver mapa y contacto
             </Link>
@@ -125,51 +125,51 @@ export default function SucursalesPage() {
       </header>
 
       <section className="mt-10 grid gap-4 md:grid-cols-3">
-        <article className="rounded-2xl border border-white/15 bg-white/5 p-5 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
-          <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-white">
+        <article className="bg-[#1d1d1f] rounded-[28px] p-5">
+          <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-[#f5f5f7]">
             <FaMapMarkedAlt className="text-primary" />
             Sucursales
           </h2>
-          <p className="mt-2 text-slate-600 dark:text-slate-300">
+          <p className="mt-2 text-slate-600 dark:text-[#a1a1a6]">
             Recoleta: Paraguay 2451. Belgrano: Amenabar 2032.
           </p>
         </article>
-        <article className="rounded-2xl border border-white/15 bg-white/5 p-5 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
-          <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-white">
+        <article className="bg-[#1d1d1f] rounded-[28px] p-5">
+          <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-[#f5f5f7]">
             <FaRegClock className="text-primary" />
             Horario
           </h2>
-          <p className="mt-2 text-slate-600 dark:text-slate-300">
+          <p className="mt-2 text-slate-600 dark:text-[#a1a1a6]">
             Lunes a viernes de 10:30 a 18:00 hs.
           </p>
         </article>
-        <article className="rounded-2xl border border-white/15 bg-white/5 p-5 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
-          <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-white">
+        <article className="bg-[#1d1d1f] rounded-[28px] p-5">
+          <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-[#f5f5f7]">
             <FaPhoneAlt className="text-primary" />
             Contacto
           </h2>
-          <p className="mt-2 text-slate-600 dark:text-slate-300">+54 11 5103-4595</p>
+          <p className="mt-2 text-slate-600 dark:text-[#a1a1a6]">+54 11 5103-4595</p>
         </article>
       </section>
 
       <section className="mt-8 grid gap-6 md:grid-cols-2">
-        <article className="rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
+        <article className="bg-[#1d1d1f] rounded-[28px] p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">
             Sucursal 1
           </p>
-          <h2 className="mt-2 text-2xl font-semibold text-slate-900 dark:text-white">
+          <h2 className="mt-2 text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
             Recoleta (CABA)
           </h2>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+          <p className="mt-1 text-sm text-slate-500 dark:text-[#86868b]">
             Paraguay 2451 · Lun–Vie 10:30–18:00
           </p>
-          <p className="mt-3 text-slate-600 dark:text-slate-300">
+          <p className="mt-3 text-slate-600 dark:text-[#a1a1a6]">
             Laboratorio principal: acá se hacen pantalla, batería y carga en el día, y los trabajos de placa bajo microscopio. También tablets y notebooks.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/sucursales/caba/recoleta"
-              className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-primary/90"
+              className="tc-btn tc-btn-primary"
             >
               Ver ficha de sucursal
             </Link>
@@ -184,23 +184,23 @@ export default function SucursalesPage() {
           </div>
         </article>
 
-        <article className="rounded-2xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
+        <article className="bg-[#1d1d1f] rounded-[28px] p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">
             Sucursal 2
           </p>
-          <h2 className="mt-2 text-2xl font-semibold text-slate-900 dark:text-white">
+          <h2 className="mt-2 text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
             Belgrano (CABA)
           </h2>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+          <p className="mt-1 text-sm text-slate-500 dark:text-[#86868b]">
             Amenábar 2032 · Lun–Vie 10:30–18:00
           </p>
-          <p className="mt-3 text-slate-600 dark:text-slate-300">
+          <p className="mt-3 text-slate-600 dark:text-[#a1a1a6]">
             Segunda sucursal en Belgrano con los mismos servicios: pantalla, batería, carga, placa y recuperación por agua. Diagnóstico el mismo día y garantía escrita 90 días.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/sucursales/caba/belgrano"
-              className="rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-secondary/90"
+              className="tc-btn tc-btn-primary"
             >
               Ver ficha de sucursal
             </Link>

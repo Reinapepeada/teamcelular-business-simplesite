@@ -222,14 +222,14 @@ export default function MicroelectronicsGuide() {
           ]}
         />
         {/* Hero Section */}
-        <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-16">
-          <div className="mx-auto mb-6 hidden h-24 w-24 items-center justify-center rounded-2xl md:flex bg-gradient-to-br from-primary via-secondary to-primary shadow-2xl">
+        <header className="bg-[#1d1d1f] space-y-6 rounded-[28px] p-10 text-center md:p-16">
+          <div className="mx-auto mb-6 hidden h-24 w-24 items-center justify-center rounded-[20px] md:flex bg-[#333336] text-[#6aa6ff]">
             <FaMicroscope className="text-5xl text-white" />
           </div>
-          <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
+          <h1 className="text-4xl font-semibold tracking-[-0.01em] text-slate-900 dark:text-[#f5f5f7] md:text-5xl">
             Reballing en celulares: qué es y cuándo se hace en CABA
           </h1>
-          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
+          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-[#a1a1a6]">
             El reballing es volver a soldar un chip BGA a la placa: se levanta el chip (procesador, memoria, energía o
             módem), se limpian los contactos y se le ponen bolas de estaño nuevas con plantilla. Se hace cuando el
             celular no enciende, se reinicia en loop o pierde señal después de un golpe, calor o un mojado. Team
@@ -246,7 +246,7 @@ export default function MicroelectronicsGuide() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/presupuesto-reparacion"
-              className="rounded-full bg-primary px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
+              className="tc-btn tc-btn-primary"
             >
               Solicitar diagnóstico
             </Link>
@@ -264,7 +264,7 @@ export default function MicroelectronicsGuide() {
             definicion y se va. Este bloque traduce el concepto a sintomas
             concretos para que reconozca su propio caso antes de abandonar. */}
         <section className="rounded-2xl border border-primary/25 bg-primary/5 p-8 dark:border-primary/30 dark:bg-primary/10">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+          <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
             ¿Cómo sé si mi celular necesita reballing?
           </h2>
           <p className="mt-3 max-w-3xl text-slate-700 dark:text-slate-200">
@@ -290,14 +290,14 @@ export default function MicroelectronicsGuide() {
               },
             ].map((item) => (
               <div key={item.señal} className="py-4">
-                <p className="font-semibold text-slate-900 dark:text-slate-100">{item.señal}</p>
-                <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                <p className="font-semibold text-slate-900 dark:text-[#f5f5f7]">{item.señal}</p>
+                <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-[#a1a1a6]">
                   {item.detalle}
                 </p>
               </div>
             ))}
           </div>
-          <p className="mt-5 text-sm text-slate-600 dark:text-slate-300">
+          <p className="mt-5 text-sm text-slate-600 dark:text-[#a1a1a6]">
             Si tu equipo entra en alguno de los tres, traelo apagado. La revisión técnica
             va de ARS 15.000 a 25.000 según el caso, se hace bajo microscopio y te decimos si
             tiene arreglo antes de cobrarte la reparación. Si no tiene arreglo, pagás
@@ -306,7 +306,7 @@ export default function MicroelectronicsGuide() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/presupuesto-reparacion#solicitar-presupuesto"
-              className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-primary/90"
+              className="tc-btn tc-btn-primary"
             >
               Contar la falla
             </Link>
@@ -320,24 +320,24 @@ export default function MicroelectronicsGuide() {
         </section>
 
         {/* Introducción con video */}
-        <section className="grid gap-8 overflow-hidden rounded-2xl border border-white/15 bg-white/5 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:grid-cols-2">
+        <section className="bg-[#1d1d1f] grid gap-8 overflow-hidden rounded-[28px] md:grid-cols-2">
           <div className="order-2 md:order-1">
             <video
               autoPlay
               loop
               muted
               playsInline
-              className="h-full w-full rounded-xl object-cover shadow-lg"
+              className="h-full w-full rounded-[20px] object-cover"
             >
               <source src="/videos/microscopio.mp4" type="video/mp4" />
               Tu navegador no soporta el elemento de video.
             </video>
           </div>
           <div className="order-1 space-y-6 p-10 md:order-2">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
               Cuando la reparación requiere microscopio
             </h2>
-            <div className="space-y-4 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+            <div className="space-y-4 text-lg leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
               <p>
                 Cuando un celular se moja, deja de encender sin razón aparente o tiene fallas intermitentes que no resuelve un cambio de pantalla o batería, el problema está en la{" "}
                 <strong className="text-primary">placa lógica</strong>.
@@ -355,10 +355,10 @@ export default function MicroelectronicsGuide() {
         {/* Casos de uso */}
         <section className="space-y-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
               ¿Qué fallas se arreglan con microelectrónica?
             </h2>
-            <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
+            <p className="mt-3 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Los casos que en otros talleres terminan en “no tiene arreglo”
             </p>
           </div>
@@ -368,15 +368,15 @@ export default function MicroelectronicsGuide() {
               return (
                 <div
                   key={useCase.title}
-                  className="group rounded-2xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
+                  className="bg-[#1d1d1f] group rounded-[28px] p-8 transition"
                 >
-                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-3xl text-white shadow-lg">
+                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-[20px] bg-[#333336] text-[#6aa6ff]">
                     <Icon />
                   </div>
-                  <h3 className="mb-3 text-xl font-bold text-secondary dark:text-secondary/90">
+                  <h3 className="mb-3 text-xl font-semibold text-secondary dark:text-secondary/90">
                     {useCase.title}
                   </h3>
-                  <p className="leading-relaxed text-slate-700 dark:text-slate-300">
+                  <p className="leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
                     {useCase.description}
                   </p>
                 </div>
@@ -386,12 +386,12 @@ export default function MicroelectronicsGuide() {
         </section>
 
         {/* Equipamiento */}
-        <section className="space-y-8 rounded-2xl border border-white/15 bg-white/5 p-10 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
+        <section className="bg-[#1d1d1f] space-y-8 rounded-[28px] p-10">
           <div>
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
               ¿Con qué equipos se hace un reballing?
             </h2>
-            <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
+            <p className="mt-3 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Esto es lo que hay en la mesa de trabajo de Recoleta
             </p>
           </div>
@@ -401,13 +401,13 @@ export default function MicroelectronicsGuide() {
               return (
                 <div
                   key={item.title}
-                  className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40"
+                  className="bg-[#1d1d1f] rounded-[28px] p-6"
                 >
                   <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/20 text-2xl text-primary">
                     <Icon />
                   </div>
-                  <h3 className="mb-3 text-lg font-bold text-primary">{item.title}</h3>
-                  <p className="text-slate-700 dark:text-slate-300">{item.description}</p>
+                  <h3 className="mb-3 text-lg font-semibold text-primary">{item.title}</h3>
+                  <p className="text-slate-700 dark:text-[#a1a1a6]">{item.description}</p>
                 </div>
               );
             })}
@@ -415,7 +415,7 @@ export default function MicroelectronicsGuide() {
         </section>
 
         {/* Proceso de reballing */}
-        <section className="overflow-hidden rounded-2xl border border-white/15 bg-white/5 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
+        <section className="bg-[#1d1d1f] overflow-hidden rounded-[28px]">
           <div className="grid gap-0 md:grid-cols-5">
             <div className="order-2 md:order-1 md:col-span-2">
               <video
@@ -431,20 +431,20 @@ export default function MicroelectronicsGuide() {
             </div>
             <div className="order-1 space-y-6 p-10 md:order-2 md:col-span-3">
               <div className="flex items-center gap-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-3xl text-white shadow-lg">
+                <div className="flex h-16 w-16 items-center justify-center rounded-[20px] bg-[#333336] text-[#6aa6ff]">
                   <FaCamera />
                 </div>
-                <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+                <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
                   Proceso de reballing paso a paso
                 </h2>
               </div>
               <div className="space-y-4">
                 {reballingProcess.map((item, index) => (
-                  <div key={index} className="rounded-xl border border-white/20 bg-white/10 p-4 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40">
-                    <h3 className="mb-2 font-bold text-secondary dark:text-secondary/90">
+                  <div key={index} className="bg-[#1d1d1f] rounded-[28px] p-4">
+                    <h3 className="mb-2 font-semibold text-secondary dark:text-secondary/90">
                       {item.step}
                     </h3>
-                    <p className="text-sm text-slate-700 dark:text-slate-300">{item.detail}</p>
+                    <p className="text-sm text-slate-700 dark:text-[#a1a1a6]">{item.detail}</p>
                   </div>
                 ))}
               </div>
@@ -455,10 +455,10 @@ export default function MicroelectronicsGuide() {
         {/* FAQ */}
         <section className="space-y-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
               Preguntas frecuentes sobre microelectrónica
             </h2>
-            <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
+            <p className="mt-3 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Lo que más nos preguntan antes de dejar un equipo en laboratorio
             </p>
           </div>
@@ -466,12 +466,12 @@ export default function MicroelectronicsGuide() {
             {faqMicro.map((faq, index) => (
               <details
                 key={index}
-                className="group rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-xl transition hover:shadow-lg dark:border-white/10 dark:bg-slate-900/30"
+                className="bg-[#1d1d1f] group rounded-[28px] p-6 transition"
               >
-                <summary className="flex min-h-11 items-center cursor-pointer text-lg font-bold text-secondary group-hover:text-primary dark:text-secondary/90">
+                <summary className="flex min-h-11 items-center cursor-pointer text-lg font-semibold text-secondary group-hover:text-primary dark:text-secondary/90">
                   {faq.question}
                 </summary>
-                <p className="mt-4 leading-relaxed text-slate-700 dark:text-slate-300">
+                <p className="mt-4 leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
                   {faq.answer}
                 </p>
               </details>
@@ -480,17 +480,17 @@ export default function MicroelectronicsGuide() {
         </section>
 
         {/* CTA Final */}
-        <section className="rounded-2xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:from-slate-900/40 dark:via-slate-900/30 dark:to-slate-900/40 md:p-16">
-          <h2 className="mb-6 text-3xl font-bold text-slate-900 dark:text-white">
+        <section className="bg-[#1d1d1f] rounded-[28px] p-10 text-center md:p-16">
+          <h2 className="mb-6 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
             ¿Tu equipo necesita reparación de placa lógica?
           </h2>
-          <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
+          <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-[#a1a1a6]">
             {REVIEW_COST_MESSAGE} Si tiene solucion, te damos presupuesto detallado con tiempos y cobertura por escrito segun repuesto y trabajo. Si no, te lo decimos honestamente.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/presupuesto-reparacion"
-              className="rounded-full bg-secondary px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-secondary/90"
+              className="tc-btn tc-btn-primary"
             >
               Solicitar diagnóstico de placa
             </Link>
@@ -501,7 +501,7 @@ export default function MicroelectronicsGuide() {
               Consultar por WhatsApp
             </Link>
           </div>
-          <p className="mt-8 text-sm text-slate-600 dark:text-slate-400">
+          <p className="mt-8 text-sm text-slate-600 dark:text-[#86868b]">
             También damos{" "}
             <Link href="/guias/soporte-empresas-servicio-tecnico" className="font-semibold text-primary underline">
               soporte para empresas y gremios

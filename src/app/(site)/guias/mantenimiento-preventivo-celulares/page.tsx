@@ -23,9 +23,9 @@ import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import GuideByline from "@/components/seo/GuideByline";
 
 export const metadata: Metadata = {
-  title: "Mantenimiento Preventivo de Celulares en CABA | Team Celular",
+  title: "Mantenimiento de Celular: Qué Incluye y Cada Cuánto Hacerlo",
   description:
-    "Mantenimiento preventivo de celulares en Team Celular, Recoleta y Belgrano CABA. Limpieza con ultrasonido, revisión de batería y garantía escrita 90 días.",
+    "Qué incluye un mantenimiento de celular: limpieza con ultrasonido, revisión de batería y placa. Cada cuánto conviene y cuánto dura.",
   keywords: [
     "mantenimiento preventivo celulares",
     "cuidado smartphone Buenos Aires",
@@ -54,9 +54,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Mantenimiento Preventivo de Celulares en CABA | Team Celular",
+    title: "Mantenimiento de Celular: Qué Incluye y Cada Cuánto Hacerlo",
     description:
-      "Mantenimiento preventivo de celulares en Paraguay 2451, Recoleta CABA. Limpieza con ultrasonido, revisión de batería y garantía escrita 90 días.",
+      "Qué incluye un mantenimiento de celular: limpieza con ultrasonido, revisión de batería y placa. Team Celular, Recoleta y Belgrano, CABA.",
     type: "article",
     url: "https://teamcelular.com/guias/mantenimiento-preventivo-celulares",
     locale: "es_AR",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mantenimiento Preventivo de Celulares en CABA | Team Celular",
+    title: "Mantenimiento de Celular: Qué Incluye y Cada Cuánto Hacerlo",
     description:
       "Team Celular, Paraguay 2451 Recoleta CABA. Limpieza interna, revisión de batería y diagnóstico preventivo con garantía escrita 90 días.",
     images: ["https://teamcelular.com/images/guia_mantenimiento.webp"],

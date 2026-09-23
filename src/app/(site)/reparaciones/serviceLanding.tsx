@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { BsCheckCircleFill } from "react-icons/bs";
+import { BsCheckCircleFill, BsWhatsapp } from "react-icons/bs";
 import {
   FaCheckCircle,
   FaClipboardCheck,
@@ -27,7 +27,7 @@ type ServiceVisual = {
 
 const SERVICE_VISUALS: Record<string, ServiceVisual> = {
   "cambio-bateria-caba": {
-    cover: "/images/cargadores.webp",
+    cover: "/images/celuPorDentro.webp",
     glow:
       "bg-[radial-gradient(circle_at_80%_20%,rgba(34,197,94,0.35),transparent_40%)]",
     badge: "Batería y energía",
@@ -39,13 +39,13 @@ const SERVICE_VISUALS: Record<string, ServiceVisual> = {
     badge: "Pantallas y módulos",
   },
   "cambio-pin-carga-caba": {
-    cover: "/images/dispositivoshdpro.webp",
+    cover: "/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp",
     glow:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(14,165,233,0.32),transparent_42%)]",
     badge: "Carga y conectividad",
   },
   "reparacion-placa-caba": {
-    cover: "/images/teamcelular.webp",
+    cover: "/images/reparacion_placa.webp",
     glow:
       "bg-[radial-gradient(circle_at_82%_16%,rgba(139,92,246,0.35),transparent_42%)]",
     badge: "Microelectrónica",
@@ -57,7 +57,7 @@ const SERVICE_VISUALS: Record<string, ServiceVisual> = {
     badge: "Flex y componentes",
   },
   "cambio-tapa-caba": {
-    cover: "/images/fundaOtter.webp",
+    cover: "/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp",
     glow:
       "bg-[radial-gradient(circle_at_86%_16%,rgba(244,114,182,0.3),transparent_42%)]",
     badge: "Estética y terminación",
@@ -86,7 +86,7 @@ const SERVICE_VISUALS: Record<string, ServiceVisual> = {
 };
 
 const DEFAULT_VISUAL: ServiceVisual = {
-  cover: "/images/teamcelular.webp",
+  cover: "/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp",
   glow:
     "bg-[radial-gradient(circle_at_84%_16%,rgba(56,189,248,0.32),transparent_42%)]",
   badge: "Servicio técnico local",
@@ -381,7 +381,7 @@ export default function ServiceLandingPage({
   };
 
   return (
-    <section className="w-full max-w-6xl px-6 py-14 pb-28 md:px-8 md:pb-20">
+    <div className="w-full bg-black pb-28 text-[#f5f5f7] md:pb-20">
       <BreadcrumbJsonLd
         items={[
           { name: "Inicio", url: `${SITE_URL}/` },
@@ -390,135 +390,123 @@ export default function ServiceLandingPage({
         ]}
       />
 
-      <header className="relative overflow-hidden rounded-3xl border border-white/15 bg-slate-900 text-white shadow-2xl">
-        <div className="absolute inset-0">
+      <header className="tc-intro mx-auto max-w-[1200px] px-4 pt-12 text-center sm:px-6 sm:pt-16">
+        <p className="tc-eyebrow">{visual.badge}</p>
+        <h1 className="tc-display mx-auto mt-3 max-w-4xl">{config.h1}</h1>
+        <p className="mx-auto mt-5 max-w-2xl text-pretty text-[19px] leading-[1.42] text-[#86868b] sm:text-[21px]">
+          {config.intro}
+        </p>
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5">
+          <TrackedCtaLink
+            href="/presupuesto-reparacion#solicitar-presupuesto"
+            ctaName="service_hero_budget"
+            ctaLocation={`service_hero_${config.slug}`}
+            ctaVariant="primary"
+            className="tc-btn tc-btn-primary"
+          >
+            Pedir presupuesto
+          </TrackedCtaLink>
+          <TrackedCtaLink
+            href={whatsappUrl}
+            ctaName="service_hero_whatsapp"
+            ctaLocation={`service_hero_${config.slug}`}
+            ctaVariant="whatsapp"
+            external
+            target="_blank"
+            className="tc-link inline-flex min-h-11 items-center gap-2 text-[17px]"
+          >
+            <BsWhatsapp aria-hidden /> WhatsApp directo ›
+          </TrackedCtaLink>
+        </div>
+        <p className="mt-4 text-[14px] text-[#86868b]">
+          Dos sucursales en CABA (Recoleta y Belgrano). {GOOGLE_RATING_FALLBACK.rating.toFixed(1).replace(".", ",")} en Google con {GOOGLE_RATING_FALLBACK.total} reseñas (Recoleta).
+        </p>
+      </header>
+
+      <div className="mx-auto mt-12 grid max-w-[1200px] gap-5 px-4 sm:px-6 lg:grid-cols-[1.4fr_1fr]">
+        <div className="tc-zoom relative aspect-[4/3] overflow-hidden rounded-[28px] lg:aspect-auto lg:min-h-[26rem]">
           <Image
             src={visual.cover}
             alt={config.serviceName}
             fill
             priority
-            sizes="(max-width: 1024px) 100vw, 1100px"
-            className="object-cover opacity-35"
+            quality={82}
+            sizes="(max-width: 1024px) 150vw, 720px"
+            className="object-cover"
           />
         </div>
-        <div aria-hidden className={`absolute inset-0 ${visual.glow}`} />
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-gradient-to-br from-slate-950/95 via-slate-900/75 to-slate-900/55"
-        />
-
-        <div className="relative z-10 grid gap-8 p-8 md:grid-cols-5 md:p-12">
-          <div className="space-y-6 md:col-span-3">
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/90">
-              {visual.badge}
-            </p>
-            <h1 className="text-4xl font-bold tracking-tight md:text-5xl">{config.h1}</h1>
-            <p className="max-w-3xl text-lg leading-relaxed text-slate-100/90">
-              {config.intro}
-            </p>
-            {config.prices?.length ? (
-              <dl className="max-w-md divide-y divide-white/15 rounded-2xl border border-white/20 bg-black/25 text-sm">
-                {config.prices.map((row) => (
-                  <div key={row.label} className="flex items-center justify-between gap-4 px-4 py-2.5">
-                    <dt className="text-white/80">{row.label}</dt>
-                    <dd className="font-semibold tabular-nums text-white">{row.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            ) : null}
-            <div className="flex flex-wrap gap-3">
-              <TrackedCtaLink
-                href="/presupuesto-reparacion#solicitar-presupuesto"
-                ctaName="service_hero_budget"
-                ctaLocation={`service_hero_${config.slug}`}
-                ctaVariant="primary"
-                className="inline-flex min-h-11 items-center rounded-full bg-white px-6 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
-              >
-                Pedir presupuesto
-              </TrackedCtaLink>
-              <TrackedCtaLink
-                href={whatsappUrl}
-                ctaName="service_hero_whatsapp"
-                ctaLocation={`service_hero_${config.slug}`}
-                ctaVariant="whatsapp"
-                external
-                target="_blank"
-                className="inline-flex min-h-11 items-center rounded-full border border-white/40 bg-white/10 px-6 text-sm font-semibold text-white transition hover:bg-white/20"
-              >
-                WhatsApp directo
-              </TrackedCtaLink>
-            </div>
-            <p className="text-sm text-slate-200/90">
-              Dos sucursales en CABA (Recoleta y Belgrano). {GOOGLE_RATING_FALLBACK.rating.toFixed(1).replace(".", ",")} en Google con {GOOGLE_RATING_FALLBACK.total} reseñas (Recoleta).
-            </p>
-          </div>
-
-          <aside className="hidden md:col-span-2 md:block">
-            <div className="rounded-2xl border border-white/20 bg-black/25 p-5 backdrop-blur-md">
-              <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-white/75">
-                ¿Dónde reparamos?
-              </h2>
-              <ul className="mt-4 space-y-3 text-sm text-white/90">
-                <li className="flex items-start gap-3">
-                  <FaMapMarkerAlt className="mt-0.5 text-primary" />
-                  Dos talleres en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).
-                </li>
-                <li className="flex items-start gap-3">
-                  <FaShieldAlt className="mt-0.5 text-primary" />
-                  Garantía escrita de 90 días sobre trabajo y repuesto instalado.
-                </li>
-                <li className="flex items-start gap-3">
-                  <FaStopwatch className="mt-0.5 text-primary" />
-                  Pantalla y batería en 2 a 4 horas si el repuesto está en stock.
-                </li>
-              </ul>
-            </div>
+        <div className="flex flex-col gap-5">
+          {config.prices?.length ? (
+            <dl className="rounded-[28px] bg-[#f5f5f7] px-7 py-3 text-[#1d1d1f]">
+              {config.prices.map((row) => (
+                <div key={row.label} className="flex items-baseline justify-between gap-4 border-b border-[#d2d2d7] py-4 last:border-0">
+                  <dt className="text-[15px] text-[#424245]">{row.label}</dt>
+                  <dd className="text-[19px] font-semibold tabular-nums">{row.value}</dd>
+                </div>
+              ))}
+            </dl>
+          ) : null}
+          <aside className="tc-card flex-1">
+            <h2 className="text-[12px] uppercase tracking-[0.08em] text-[#86868b]">
+              ¿Dónde reparamos?
+            </h2>
+            <ul className="mt-4 space-y-4 text-[15px] leading-6 text-[#f5f5f7]">
+              <li className="flex items-start gap-3">
+                <FaMapMarkerAlt className="mt-1 shrink-0 text-[#6aa6ff]" aria-hidden />
+                Dos talleres en CABA: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).
+              </li>
+              <li className="flex items-start gap-3">
+                <FaShieldAlt className="mt-1 shrink-0 text-[#6aa6ff]" aria-hidden />
+                Garantía escrita de 90 días sobre trabajo y repuesto instalado.
+              </li>
+              <li className="flex items-start gap-3">
+                <FaStopwatch className="mt-1 shrink-0 text-[#6aa6ff]" aria-hidden />
+                Pantalla y batería en 2 a 4 horas si el repuesto está en stock.
+              </li>
+            </ul>
           </aside>
         </div>
-      </header>
+      </div>
 
-      <ul className="mt-10 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white dark:divide-slate-700 dark:border-slate-700 dark:bg-slate-900">
-        {config.highlights.map((item) => (
-          <li key={item.title} className="flex gap-3 p-5">
-            <BsCheckCircleFill className="mt-1 shrink-0 text-emerald-600 dark:text-emerald-400" aria-hidden />
-            <div>
-              <h2 className="font-semibold text-slate-900 dark:text-white">{item.title}</h2>
-              <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300">{item.desc}</p>
-            </div>
-          </li>
-        ))}
-      </ul>
-
-      <section className="mt-10">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          ¿Qué pasa con tu equipo desde que lo dejás?
-        </h2>
-        <ol className="mt-4 divide-y divide-slate-200 dark:divide-slate-700">
-          {WORKFLOW.map((step, index) => (
-            <li key={step.title} className="flex gap-4 py-4">
-              <span className="text-lg font-black tabular-nums text-primary">{String(index + 1).padStart(2, "0")}</span>
-              <div>
-                <h3 className="font-semibold text-slate-900 dark:text-white">{step.title.replace(/^\d+\.\s*/, "")}</h3>
-                <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300">{step.desc}</p>
-              </div>
+      <section className="tc-section">
+        <ul className="tc-stagger grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {config.highlights.map((item) => (
+            <li key={item.title} className="tc-card">
+              <BsCheckCircleFill className="text-2xl text-[#6aa6ff]" aria-hidden />
+              <h2 className="tc-subheading mt-6">{item.title}</h2>
+              <p className="tc-body mt-3">{item.desc}</p>
             </li>
           ))}
-        </ol>
+        </ul>
       </section>
 
-      <section className="mt-10 rounded-3xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-8 shadow-xl backdrop-blur-2xl dark:border-white/10 dark:from-slate-900/40 dark:via-slate-900/30 dark:to-slate-900/40">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          ¿Qué marcas reparan?
-        </h2>
-        <p className="mt-3 text-slate-600 dark:text-slate-300">{config.brandsText}</p>
+      <section className="w-full bg-[#f5f5f7] text-[#1d1d1f]">
+        <div className="tc-section">
+          <h2 className="tc-heading tc-reveal max-w-3xl !text-[#1d1d1f]">
+            ¿Qué pasa con tu equipo desde que lo dejás?
+          </h2>
+          <ol className="tc-stagger mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {WORKFLOW.map((step, index) => (
+              <li key={step.title} className="rounded-[28px] bg-white p-7">
+                <span className="text-[14px] tabular-nums text-[#86868b]">{String(index + 1).padStart(2, "0")}</span>
+                <h3 className="mt-6 text-[21px] font-semibold leading-tight">{step.title.replace(/^\d+\.\s*/, "")}</h3>
+                <p className="mt-3 text-[15px] leading-6 text-[#424245]">{step.desc}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
       </section>
 
+      <section className="tc-section">
+        <div className="tc-reveal grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-baseline">
+          <h2 className="tc-heading">¿Qué marcas reparan?</h2>
+          <p className="text-[19px] leading-[1.42] text-[#a1a1a6] sm:text-[21px]">{config.brandsText}</p>
+        </div>
+      </section>
 
-      <section className="mt-10 rounded-3xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Guías recomendadas para este servicio
-        </h2>
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
+      <section className="tc-section !pt-0">
+        <h2 className="tc-heading tc-reveal">Guías recomendadas para este servicio</h2>
+        <div className="tc-stagger mt-10 grid gap-5 md:grid-cols-3">
           {relatedGuides.map((guide) => (
             <TrackedCtaLink
               key={guide.href}
@@ -526,46 +514,37 @@ export default function ServiceLandingPage({
               ctaName={`service_related_guide_${config.slug}`}
               ctaLocation={`service_related_guides_${config.slug}`}
               ctaVariant="secondary"
-              className="rounded-2xl border border-white/15 bg-white/70 p-5 transition hover:-translate-y-0.5 hover:border-primary/40 dark:border-white/10 dark:bg-slate-900/45"
+              className="tc-card group block transition-colors hover:bg-[#262628]"
             >
-              <span className="block text-base font-semibold text-slate-900 dark:text-white">
-                {guide.title}
-              </span>
-              <span className="mt-2 block text-sm text-slate-600 dark:text-slate-300">
-                {guide.description}
-              </span>
+              <span className="tc-subheading block">{guide.title}</span>
+              <span className="tc-body mt-3 block">{guide.description}</span>
+              <span className="tc-link mt-5 block text-[17px]">Leer guía ›</span>
             </TrackedCtaLink>
           ))}
         </div>
       </section>
 
-      <section className="mt-10 rounded-3xl border border-white/15 bg-white/5 p-8 shadow-lg backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Preguntas frecuentes
-        </h2>
-        <div className="mt-6 space-y-3">
+      <section className="tc-section !pt-0">
+        <h2 className="tc-heading tc-reveal">Preguntas frecuentes</h2>
+        <div className="mt-10 divide-y divide-[#333336] border-y border-[#333336]">
           {config.faqs.map((faq) => (
-            <details
-              key={faq.q}
-              className="group rounded-xl border border-white/15 bg-white/70 p-4 dark:border-white/10 dark:bg-slate-900/45"
-            >
-              <summary className="flex min-h-11 items-center cursor-pointer list-none text-sm font-semibold text-slate-900 dark:text-white">
+            <details key={faq.q} className="group py-6">
+              <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-6 text-[19px] font-semibold sm:text-[21px]">
                 {faq.q}
+                <span className="text-2xl font-light text-[#86868b] transition-transform group-open:rotate-45" aria-hidden>+</span>
               </summary>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                {faq.a}
-              </p>
+              <p className="tc-body mt-3 max-w-3xl">{faq.a}</p>
             </details>
           ))}
         </div>
       </section>
 
-      <section className="mt-10 rounded-2xl border border-white/15 bg-slate-900 p-8 text-center text-white shadow-lg">
-        <h2 className="text-2xl font-bold">¿Querés que lo revisemos hoy?</h2>
-        <p className="mx-auto mt-3 max-w-2xl text-slate-200">
+      <section className="tc-section tc-reveal text-center">
+        <h2 className="tc-heading mx-auto max-w-3xl">¿Querés que lo revisemos hoy?</h2>
+        <p className="tc-body mx-auto mt-5 max-w-xl">
           Mandanos marca, modelo y falla por WhatsApp y te pasamos precio y plazo.
         </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-3">
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5">
           <TrackedCtaLink
             href={whatsappUrl}
             ctaName="service_bottom_whatsapp"
@@ -573,7 +552,7 @@ export default function ServiceLandingPage({
             ctaVariant="whatsapp"
             external
             target="_blank"
-            className="inline-flex min-h-11 items-center rounded-full bg-emerald-700 px-6 text-sm font-semibold text-white transition hover:bg-emerald-800"
+            className="tc-btn tc-btn-primary"
           >
             Iniciar por WhatsApp
           </TrackedCtaLink>
@@ -582,9 +561,9 @@ export default function ServiceLandingPage({
             ctaName="service_bottom_form"
             ctaLocation={`service_bottom_${config.slug}`}
             ctaVariant="secondary"
-            className="inline-flex min-h-11 items-center rounded-full border border-white/40 px-6 text-sm font-semibold text-white transition hover:bg-white/10"
+            className="tc-link inline-flex min-h-11 items-center text-[17px]"
           >
-            Completar formulario
+            Completar formulario ›
           </TrackedCtaLink>
         </div>
       </section>
@@ -607,6 +586,6 @@ export default function ServiceLandingPage({
           }),
         }}
       />
-    </section>
+    </div>
   );
 }

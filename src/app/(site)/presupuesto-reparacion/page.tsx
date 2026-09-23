@@ -97,12 +97,12 @@ export default function PresupuestoReparacionPage() {
                     ]}
                 />
 
-                <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-[#86868b]">
                     <Link href="/" className="transition hover:text-primary">
                         Inicio
                     </Link>
                     <span>/</span>
-                    <span className="font-semibold text-slate-900 dark:text-slate-100">Presupuesto</span>
+                    <span className="font-semibold text-slate-900 dark:text-[#f5f5f7]">Presupuesto</span>
                 </nav>
 
                 <header
@@ -110,14 +110,14 @@ export default function PresupuestoReparacionPage() {
                     className="grid scroll-mt-24 items-start gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-x-12 lg:gap-y-6"
                 >
                     <div className="lg:col-start-1">
-                        <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-slate-100 sm:text-4xl md:text-5xl">
+                        <h1 className="tc-display text-slate-900 dark:text-[#f5f5f7]">
                             Presupuesto de reparación de celulares en CABA
                         </h1>
-                        <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-400">
+                        <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-[#86868b]">
                             Decinos qué le pasa a tu celular y te pasamos el precio por WhatsApp en hasta 2 horas.
                             Team Celular repara en{" "}
-                            <strong className="text-slate-900 dark:text-slate-100">Paraguay 2451, Recoleta</strong> y{" "}
-                            <strong className="text-slate-900 dark:text-slate-100">Amenábar 2032, Belgrano</strong>, con
+                            <strong className="text-slate-900 dark:text-[#f5f5f7]">Paraguay 2451, Recoleta</strong> y{" "}
+                            <strong className="text-slate-900 dark:text-[#f5f5f7]">Amenábar 2032, Belgrano</strong>, con
                             garantía escrita de 90 días.
                         </p>
                     </div>
@@ -130,8 +130,8 @@ export default function PresupuestoReparacionPage() {
                                         className="mt-1 shrink-0 text-emerald-600 dark:text-emerald-400"
                                         aria-hidden
                                     />
-                                    <span className="text-slate-700 dark:text-slate-300">
-                                        <strong className="text-slate-900 dark:text-slate-100">{title}.</strong> {text}
+                                    <span className="text-slate-700 dark:text-[#a1a1a6]">
+                                        <strong className="text-slate-900 dark:text-[#f5f5f7]">{title}.</strong> {text}
                                     </span>
                                 </li>
                             ))}
@@ -141,7 +141,7 @@ export default function PresupuestoReparacionPage() {
                         </div>
                     </div>
 
-                    <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-xl lg:col-start-2 lg:row-span-2 lg:row-start-1 dark:border-slate-700/70 dark:bg-slate-900 sm:p-8">
+                    <article className="bg-[#1d1d1f] rounded-[28px] p-5 lg:col-start-2 lg:row-span-2 lg:row-start-1 sm:p-8">
                         <p className="mb-5 text-sm font-semibold uppercase tracking-[0.14em] text-primary">
                             Te toma 20 segundos
                         </p>
@@ -152,25 +152,25 @@ export default function PresupuestoReparacionPage() {
                 <dl className="grid grid-cols-2 gap-y-6 border-y border-slate-200 py-6 dark:border-slate-700/70 md:grid-cols-4">
                     {stats.map((stat) => (
                         <div key={stat.label} className="flex flex-col-reverse text-center">
-                            <dt className="text-sm text-slate-600 dark:text-slate-400">{stat.label}</dt>
-                            <dd className="text-3xl font-black text-slate-900 dark:text-slate-100">{stat.value}</dd>
+                            <dt className="text-sm text-slate-600 dark:text-[#86868b]">{stat.label}</dt>
+                            <dd className="text-3xl font-semibold text-slate-900 dark:text-[#f5f5f7]">{stat.value}</dd>
                         </div>
                     ))}
                 </dl>
 
                 <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 sm:text-3xl">
+                    <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7] sm:text-3xl">
                         ¿Qué pasa después de pedir el presupuesto?
                     </h2>
                     <ol className="divide-y divide-slate-200 dark:divide-slate-700/70">
                         {processSteps.map((step, index) => (
                             <li key={step.title} className="flex gap-5 py-5 first:pt-0">
-                                <span className="text-2xl font-black tabular-nums text-primary">
+                                <span className="text-2xl font-semibold tabular-nums text-primary">
                                     {String(index + 1).padStart(2, "0")}
                                 </span>
                                 <div>
-                                    <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">{step.title}</h3>
-                                    <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                                    <h3 className="text-lg font-semibold text-slate-900 dark:text-[#f5f5f7]">{step.title}</h3>
+                                    <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-[#86868b]">
                                         {step.description}
                                     </p>
                                 </div>
@@ -180,34 +180,34 @@ export default function PresupuestoReparacionPage() {
                 </section>
 
                 <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 sm:text-3xl">
+                    <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7] sm:text-3xl">
                         Preguntas frecuentes
                     </h2>
                     <div className="divide-y divide-slate-200 dark:divide-slate-700/70">
                         {faqs.map((faq) => (
                             <details key={faq.question} className="group py-4 first:pt-0">
-                                <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold text-slate-900 dark:text-slate-100">
+                                <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold text-slate-900 dark:text-[#f5f5f7]">
                                     {faq.question}
                                     <span aria-hidden className="text-xl text-primary transition group-open:rotate-45">
                                         +
                                     </span>
                                 </summary>
-                                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">{faq.answer}</p>
+                                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-[#86868b]">{faq.answer}</p>
                             </details>
                         ))}
                     </div>
                 </section>
 
-                <section className="flex flex-col items-start gap-5 rounded-3xl bg-slate-900 p-6 text-white dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between sm:p-10">
+                <section className="flex flex-col items-start gap-5 rounded-[28px] bg-slate-900 p-6 text-white dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between sm:p-10">
                     <div>
-                        <h2 className="text-2xl font-bold sm:text-3xl">¿Preferís escribirnos directo?</h2>
-                        <p className="mt-2 text-slate-300">Mandanos una foto del equipo y te decimos cuánto sale.</p>
+                        <h2 className="text-2xl font-semibold sm:text-3xl">¿Preferís escribirnos directo?</h2>
+                        <p className="mt-2 text-[#a1a1a6]">Mandanos una foto del equipo y te decimos cuánto sale.</p>
                     </div>
                     <BranchWhatsAppButton
                         ctaName="budget_bottom_whatsapp"
                         ctaLocation="presupuesto_bottom"
                         message="Hola! Necesito un presupuesto."
-                        className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-emerald-500"
+                        className="tc-btn tc-btn-primary shrink-0"
                     >
                         <FaWhatsapp aria-hidden />
                         Escribir por WhatsApp
