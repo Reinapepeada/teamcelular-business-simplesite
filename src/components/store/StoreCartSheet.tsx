@@ -87,7 +87,7 @@ export default function StoreCartSheet() {
                 onClick={() => setOpen((current) => !current)}
                 aria-expanded={open}
                 aria-controls="store-cart-sheet"
-                className="tc-glass fixed bottom-24 right-4 z-40 inline-flex min-h-14 items-center gap-3 rounded-full px-5 text-[15px] text-white transition hover:bg-[#424245] sm:right-6"
+                className="tc-glass fixed bottom-24 right-4 z-40 md:bottom-6 inline-flex min-h-14 items-center gap-3 rounded-full px-5 text-[15px] text-white transition hover:bg-[#424245] sm:right-6"
             >
                 <BsBag className="text-lg" aria-hidden />
                 <span>Carrito</span>

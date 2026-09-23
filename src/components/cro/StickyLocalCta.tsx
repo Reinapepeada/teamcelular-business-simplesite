@@ -24,7 +24,7 @@ export default function StickyLocalCta({
       {/* ponytail: unica variante. El panel flotante de escritorio se elimino:
           dos botones al alcance del pulgar cubren el mismo objetivo sin tapar
           contenido, y hay una sola cosa que mantener. */}
-      <div className="tc-sticky-cta fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 px-3 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur-md dark:border-white/10 dark:bg-slate-950/95">
+      <div className="tc-sticky-cta fixed inset-x-0 bottom-0 z-40 md:hidden border-t border-slate-200 bg-white/95 px-3 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur-md dark:border-white/10 dark:bg-slate-950/95">
         <div className="mx-auto flex max-w-lg gap-2">
           <TrackedCtaLink
             href={whatsappUrl}

@@ -56,7 +56,7 @@ export default function BannerHome() {
             {/* Foto fija (sticky) mientras las frases pasan por encima, al estilo
                 de las secciones de producto de Apple. Sin JS: sticky + scroll-driven CSS. */}
             <div className="tc-hero relative mt-12">
-                <div className="sticky top-[52px] h-[calc(100svh-52px)] px-4 pb-24 sm:px-6">
+                <div className="sticky top-[52px] h-[calc(100svh-52px)] px-4 pb-24 sm:px-6 md:pb-6">
                     <div className="tc-zoom relative mx-auto h-full max-w-[1200px] overflow-hidden rounded-[28px]">
                         <Image
                             src="/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp"
