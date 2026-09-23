@@ -1,12 +1,9 @@
 ﻿import type { Metadata } from "next";
-import { Suspense } from "react";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import CatalogFilters from "@/components/store/CatalogFilters";
-import CatalogResults, {
-  CatalogResultsFallback,
-} from "@/components/store/CatalogResults";
+import CatalogResults from "@/components/store/CatalogResults";
 import {
   getCatalogCategoryBySlug,
   getCatalogFilters,
@@ -124,7 +121,6 @@ export default async function CategoryPage({
   }
 
   const categoryUrl = `${SITE_URL}/tienda/categoria/${canonicalSlug}`;
-  const suspenseKey = `${category.name}:${JSON.stringify(filters)}`;
 
   return (
     <div className="w-full bg-slate-50 dark:bg-[#1d1d1f] pb-16">
@@ -173,19 +169,17 @@ export default async function CategoryPage({
           options={filterOptions}
           forcedCategoryName={category.name}
         />
-        <Suspense key={suspenseKey} fallback={<CatalogResultsFallback />}>
-          <CatalogResults
-            basePath={`/tienda/categoria/${canonicalSlug}`}
-            filters={{
-              ...filters,
-              categories: [],
-            }}
-            forcedCategoryName={category.name}
-            siteUrl={SITE_URL}
-            title={`Productos en ${category.name}`}
-            emptyMessage={`No encontramos productos en ${category.name} con esos filtros. Prueba otra marca o rango de precio.`}
-          />
-        </Suspense>
+        <CatalogResults
+          basePath={`/tienda/categoria/${canonicalSlug}`}
+          filters={{
+            ...filters,
+            categories: [],
+          }}
+          forcedCategoryName={category.name}
+          siteUrl={SITE_URL}
+          title={`Productos en ${category.name}`}
+          emptyMessage={`No encontramos productos en ${category.name} con esos filtros. Prueba otra marca o rango de precio.`}
+        />
       </section>
     </div>
   );

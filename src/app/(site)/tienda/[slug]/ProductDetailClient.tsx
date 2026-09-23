@@ -247,7 +247,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                 {/* Image Gallery */}
                 <div className="space-y-4">
                     <div className="relative aspect-square rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800">
-                        <AnimatePresence mode="wait">
+                        <AnimatePresence mode="wait" initial={false}>
                             <motion.div
                                 key={selectedImageIndex}
                                 initial={{ opacity: 0 }}

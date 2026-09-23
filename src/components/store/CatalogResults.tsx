@@ -144,7 +144,7 @@ function CatalogPagination({
     );
 }
 
-function ProductCard({ product }: { product: VidrieraProduct }) {
+function ProductCard({ product, priority }: { product: VidrieraProduct; priority: boolean }) {
     const productImage = getProductImage(product);
     const stock = getProductStock(product);
     const productHref = `/tienda/${buildProductSlug(product)}`;
@@ -163,6 +163,7 @@ function ProductCard({ product }: { product: VidrieraProduct }) {
                         src={productImage}
                         alt={product.name}
                         fill
+                        priority={priority}
                         unoptimized={cargaDirectaImagen(productImage)}
                         className="object-contain p-6 transition duration-500 group-hover:scale-[1.04]"
                         sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
@@ -295,8 +296,8 @@ export default async function CatalogResults({
                         }}
                     />
                     <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
-                        {products.map((product) => (
-                            <ProductCard key={product.storeSlug} product={product} />
+                        {products.map((product, index) => (
+                            <ProductCard key={product.storeSlug} product={product} priority={currentPage === 1 && index < 3} />
                         ))}
                     </div>
                     <CatalogPagination

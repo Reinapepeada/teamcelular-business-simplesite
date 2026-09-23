@@ -1,12 +1,9 @@
 ﻿import type { Metadata } from "next";
-import { Suspense } from "react";
 import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import CatalogFilters from "@/components/store/CatalogFilters";
-import CatalogResults, {
-  CatalogResultsFallback,
-} from "@/components/store/CatalogResults";
+import CatalogResults from "@/components/store/CatalogResults";
 import {
   getCatalogFilters,
   isCatalogIndexable,
@@ -79,7 +76,6 @@ export default async function TiendaPage({
 }) {
   const filters = normalizeCatalogFilters((await searchParams) ?? {});
   const filterOptions = await getCatalogFilters();
-  const suspenseKey = JSON.stringify(filters);
 
   return (
     <div className="w-full bg-black pb-20 text-[#f5f5f7]">
@@ -126,15 +122,13 @@ export default async function TiendaPage({
           filters={filters}
           options={filterOptions}
         />
-        <Suspense key={suspenseKey} fallback={<CatalogResultsFallback />}>
-          <CatalogResults
-            basePath="/tienda"
-            filters={filters}
-            siteUrl={SITE_URL}
-            title="Productos para compra inmediata"
-            emptyMessage="No encontramos productos con esos filtros. Prueba otra marca, categoria o rango de precio."
-          />
-        </Suspense>
+        <CatalogResults
+          basePath="/tienda"
+          filters={filters}
+          siteUrl={SITE_URL}
+          title="Productos para compra inmediata"
+          emptyMessage="No encontramos productos con esos filtros. Prueba otra marca, categoria o rango de precio."
+        />
       </section>
 
       <section className="tc-section tc-reveal">
