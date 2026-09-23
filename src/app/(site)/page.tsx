@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { BsArrowRight, BsGeoAlt } from "react-icons/bs";
+import { BsArrowRight } from "react-icons/bs";
 import BannerHome from "@/components/banners/BannerHome";
-import BannerCards from "@/components/cards/BannerCards";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import KnowledgeGrid from "@/components/cards/KnowledgeGrid";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
@@ -92,8 +91,6 @@ const faqs = [
 
 const primaryCta =
     "inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#2d2e83] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#22236b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2d2e83]";
-const secondaryCta =
-    "inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-slate-900 transition hover:border-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2d2e83] dark:border-slate-600 dark:bg-slate-900 dark:text-white";
 
 export default function Home() {
     return (
@@ -143,32 +140,29 @@ export default function Home() {
                     </h2>
                     <div>
                         <p className="text-pretty text-lg leading-8 text-slate-700 dark:text-slate-300">
-                            Team Celular es un laboratorio de reparación de celulares en CABA con más de 15 años de trayectoria y{" "}
+                            Más de 15 años reparando celulares, con{" "}
                             {GOOGLE_RATING_FALLBACK.rating.toFixed(1).replace(".", ",")} estrellas en Google sobre{" "}
-                            {GOOGLE_RATING_FALLBACK.total} reseñas. En un iPhone 13 el cambio de pantalla cuesta{" "}
-                            {iphone13?.screen ? formatArsPrice(iphone13.screen) : "a consultar"} y el de batería{" "}
-                            {iphone13?.battery ? formatArsPrice(iphone13.battery) : "a consultar"}; en Samsung Galaxy A la pantalla va desde{" "}
-                            {formatArsPrice(samsungA.from)} y en Motorola Moto G desde {formatArsPrice(motoG.from)}. Pantalla y batería salen en
-                            2 a 4 horas, con garantía escrita de {BUSINESS_PROFILE.warrantyDays} días.
+                            {GOOGLE_RATING_FALLBACK.total} reseñas. Pantalla y batería salen en 2 a 4 horas.
                         </p>
+                        <dl className="mt-5 max-w-lg divide-y divide-slate-300 border-y border-slate-300 dark:divide-slate-700 dark:border-slate-700">
+                            {[
+                                ["Pantalla iPhone 13", iphone13?.screen ? formatArsPrice(iphone13.screen) : "Consultar"],
+                                ["Batería iPhone 13", iphone13?.battery ? formatArsPrice(iphone13.battery) : "Consultar"],
+                                ["Pantalla Samsung Galaxy A", `desde ${formatArsPrice(samsungA.from)}`],
+                                ["Pantalla Motorola Moto G", `desde ${formatArsPrice(motoG.from)}`],
+                            ].map(([label, value]) => (
+                                <div key={label} className="flex justify-between gap-4 py-3">
+                                    <dt className="text-slate-600 dark:text-slate-300">{label}</dt>
+                                    <dd className="font-bold tabular-nums">{value}</dd>
+                                </div>
+                            ))}
+                        </dl>
                         <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm font-bold text-[#2d2e83] dark:text-[#aebaff]">
                             <Link href="/guias/reparacion-iphone-buenos-aires#costos-reparacion-iphone" className="hover:underline">Precios de iPhone por modelo</Link>
                             <Link href="/guias/reparacion-samsung-buenos-aires" className="hover:underline">Precios de Samsung</Link>
                             <Link href="/guias/reparacion-motorola-buenos-aires" className="hover:underline">Precios de Motorola</Link>
                         </div>
                     </div>
-                </section>
-
-                <section aria-labelledby="evidence-title" className="space-y-7">
-                    <div className="max-w-3xl">
-                        <h2 id="evidence-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">
-                            Un laboratorio se reconoce por cómo trabaja
-                        </h2>
-                        <p className="mt-4 text-pretty text-lg leading-8 text-slate-600 dark:text-slate-300">
-                            Herramientas, repuestos y atención forman parte del mismo servicio. Estas imágenes muestran el tipo de trabajo que hacemos todos los días.
-                        </p>
-                    </div>
-                    <BannerCards />
                 </section>
 
                 <section aria-labelledby="process-title" className="overflow-hidden bg-white dark:bg-slate-900 lg:grid lg:grid-cols-[0.82fr_1.18fr]">
@@ -201,44 +195,7 @@ export default function Home() {
                     </ol>
                 </section>
 
-                <section aria-label="Compromisos del servicio" className="grid border-y border-slate-300 py-8 md:grid-cols-3 md:divide-x md:divide-slate-300 dark:border-slate-700 dark:divide-slate-700">
-                    {[
-                        ["Garantía escrita", `${BUSINESS_PROFILE.warrantyDays} días sobre el trabajo realizado.`],
-                        ["Respuesta concreta", BUSINESS_PROFILE.responseWindow.replace(/^hasta/, "Hasta") + "."],
-                        ["Dos sucursales", "Recoleta y Belgrano, con contacto directo."],
-                    ].map(([title, copy]) => (
-                        <div key={title} className="px-0 py-4 first:pt-0 last:pb-0 md:px-7 md:py-0 md:first:pl-0 md:last:pr-0">
-                            <h3 className="text-lg font-bold">{title}</h3>
-                            <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">{copy}</p>
-                        </div>
-                    ))}
-                </section>
-
                 <GoogleReviewsAPI />
-
-                <section aria-labelledby="branches-title" className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
-                    <div>
-                        <h2 id="branches-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">Elegí la sucursal que te quede mejor</h2>
-                        <p className="mt-4 max-w-md leading-7 text-slate-600 dark:text-slate-300">Las dos atienden de {BUSINESS_PROFILE.hours.text.toLowerCase()}. Escribí antes de venir para confirmar repuesto y disponibilidad.</p>
-                        <TrackedCtaLink href="/sucursales" ctaName="home_all_branches" ctaLocation="home_branches" ctaVariant="secondary" className={`${secondaryCta} mt-6`}>
-                            Ver sucursales y mapas <BsArrowRight aria-hidden />
-                        </TrackedCtaLink>
-                    </div>
-                    <div className="divide-y divide-slate-300 border-y border-slate-300 dark:divide-slate-700 dark:border-slate-700">
-                        {BRANCHES.map((branch) => (
-                            <article key={branch.slug} className="grid gap-4 py-6 sm:grid-cols-[1fr_auto] sm:items-center">
-                                <div className="flex gap-4">
-                                    <BsGeoAlt className="mt-1 shrink-0 text-xl text-[#2d2e83] dark:text-[#aebaff]" aria-hidden />
-                                    <div>
-                                        <h3 className="text-xl font-bold">{branch.shortName}</h3>
-                                        <p className="mt-1 text-slate-600 dark:text-slate-300">{branch.street}, CABA</p>
-                                    </div>
-                                </div>
-                                <Link href={branch.url} className="inline-flex min-h-11 items-center gap-2 font-bold text-[#2d2e83] hover:underline dark:text-[#aebaff]">Ver detalles <BsArrowRight aria-hidden /></Link>
-                            </article>
-                        ))}
-                    </div>
-                </section>
 
                 <section aria-labelledby="faq-title" className="grid gap-8 lg:grid-cols-[0.65fr_1.35fr]">
                     <h2 id="faq-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">Antes de traer el equipo</h2>
@@ -255,7 +212,7 @@ export default function Home() {
                 <section aria-labelledby="locations-title" className="grid gap-6">
                     <div>
                         <h2 id="locations-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">Dónde estamos</h2>
-                        <p className="mt-4 max-w-3xl text-pretty leading-7 text-slate-600 dark:text-slate-300">Dos talleres en CABA, de lunes a viernes de 10:30 a 18:00, sin turno previo.</p>
+                        <p className="mt-4 max-w-3xl text-pretty leading-7 text-slate-600 dark:text-slate-300">Lunes a viernes de 10:30 a 18:00, sin turno.</p>
                     </div>
                     <div className="grid gap-6 md:grid-cols-2">
                         {BRANCHES.map((branch) => (
@@ -274,16 +231,6 @@ export default function Home() {
                             </div>
                         ))}
                     </div>
-                </section>
-
-                <section aria-labelledby="zones-title" className="grid gap-6 bg-[#171820] p-5 text-white sm:p-9 lg:grid-cols-[1fr_auto] lg:items-end lg:p-12">
-                    <div>
-                        <h2 id="zones-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">¿Buscás reparación cerca de tu zona?</h2>
-                        <p className="mt-4 max-w-3xl text-pretty leading-7 text-slate-300">Atendemos consultas de Recoleta, Belgrano, Palermo, Almagro, Caballito, Balvanera y Microcentro. La mejor sucursal depende de tu recorrido y de la falla.</p>
-                    </div>
-                    <TrackedCtaLink href="/sucursales" ctaName="home_near_me" ctaLocation="home_zones" ctaVariant="secondary" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#171820] transition hover:bg-slate-100">
-                        Ver cobertura <BsArrowRight aria-hidden />
-                    </TrackedCtaLink>
                 </section>
 
                 <KnowledgeGrid />

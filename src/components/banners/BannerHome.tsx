@@ -24,7 +24,7 @@ export default function BannerHome() {
                             Reparación de celulares en CABA. Vos sabés qué le hicimos.
                         </h1>
                         <p className="mt-4 max-w-[38rem] text-pretty text-[15px] leading-6 text-slate-200 sm:mt-5 sm:text-base sm:leading-7">
-                            Team Celular repara en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032), con diagnóstico previo, orden técnica y garantía escrita de 90 días. Contanos la falla y te orientamos antes de que vengas.
+                            Pantalla y batería en 2 a 4 horas, sin turno. Contanos la falla por WhatsApp y te pasamos precio y plazo antes de que vengas.
                         </p>
 
                         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
