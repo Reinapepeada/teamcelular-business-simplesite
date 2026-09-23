@@ -57,6 +57,7 @@ const estado = (over: Partial<StoreOrderStatus> = {}): StoreOrderStatus => ({
     commerce_key: "CK-1",
     status: "pending",
     paid: false,
+    payment_reversed: false,
     total_amount: 15000,
     currency: "ARS",
     fulfillment_status: "pending",
@@ -400,6 +401,12 @@ describe("sin respuesta del backend no se afirma nada sobre el cobro", () => {
 });
 
 describe("seguimiento del pedido", () => {
+    test("un reembolso confirmado reemplaza el mensaje de compra y oculta la entrega", () => {
+        const devuelto = estado({ paid: true, status: "paid", payment_reversed: true });
+        assert.equal(vueltaMostrable(devuelto).desenlace, "devuelto");
+        assert.equal(vueltaMostrable(devuelto).seguirPreguntando, false);
+        assert.equal(estadoDeEntrega(devuelto), null);
+    });
     test("no muestra entrega antes de acreditar el pago", () => {
         assert.equal(estadoDeEntrega(estado({ paid: false, fulfillment_status: "shipped" })), null);
     });

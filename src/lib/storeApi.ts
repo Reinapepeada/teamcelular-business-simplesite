@@ -72,6 +72,7 @@ export interface StoreOrderStatus {
     status: string;
     /** Sale de la base, no de la redirección del proveedor. */
     paid: boolean;
+    payment_reversed?: boolean;
     total_amount: number;
     currency: string;
     fulfillment_status: string;

@@ -129,13 +129,13 @@ export default function ExitoClient({ intencion = "exito" }: { intencion?: Inten
 
     const titulo = sinPedido
         ? "No encontramos tu pedido"
-        : seGastaronLosIntentos && !cobrado
+        : seGastaronLosIntentos && vista.seguirPreguntando
           ? "Todavía no nos llegó la confirmación"
           : vista.titulo;
 
     const detalle = sinPedido
         ? "Si pagaste, conservá el comprobante y escribinos para buscar tu pedido."
-        : seGastaronLosIntentos && !cobrado
+        : seGastaronLosIntentos && vista.seguirPreguntando
           ? "El aviso de Mercado Pago está demorando. Revisá si hubo un cargo y escribinos con el comprobante antes de reintentar."
           : vista.detalle;
 
@@ -195,7 +195,7 @@ export default function ExitoClient({ intencion = "exito" }: { intencion?: Inten
                                 <dd className="text-right font-medium text-slate-900 dark:text-slate-100">{entrega}</dd>
                             </div>
                         ) : null}
-                        {estado.paid && estado.tracking_ref ? (
+                        {estado.paid && !estado.payment_reversed && estado.tracking_ref ? (
                             <div className="flex justify-between gap-4">
                                 <dt className="text-slate-600 dark:text-slate-400">Seguimiento</dt>
                                 <dd className="break-all text-right font-medium text-slate-900 dark:text-slate-100">{estado.tracking_ref}</dd>
@@ -204,7 +204,7 @@ export default function ExitoClient({ intencion = "exito" }: { intencion?: Inten
                     </dl>
                 ) : null}
 
-                {estado?.paid ? (
+                {estado?.paid && !estado.payment_reversed ? (
                     <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
                         Volvé a este enlace para consultar el estado actualizado de tu pedido.
                     </p>

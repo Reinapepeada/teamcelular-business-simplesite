@@ -204,7 +204,7 @@ export const claveDeLaVuelta = (
     return null;
 };
 
-export type Desenlace = "pagado" | "esperando" | "rechazado" | "sin_pedido";
+export type Desenlace = "pagado" | "devuelto" | "esperando" | "rechazado" | "sin_pedido";
 
 /**
  * Por cuál de las tres puertas volvió el comprador.
@@ -276,6 +276,14 @@ export const vueltaMostrable = (
     estado: StoreOrderStatus | null,
     intencion: Intencion = "exito"
 ): VueltaMostrable => {
+    if (estado?.payment_reversed) {
+        return {
+            desenlace: "devuelto",
+            titulo: "El pago de este pedido fue revertido",
+            detalle: "El pedido no sigue en preparación. Si necesitás ayuda, escribinos con el número de pedido.",
+            seguirPreguntando: false,
+        };
+    }
     // **Lo pagado se decide antes que la puerta.** Un pago que entró y volvió
     // por `/checkout/error` está pagado igual: si la puerta ganara, la pantalla
     // le diría que no pudo confirmar un pago que ya entró.
@@ -292,7 +300,7 @@ export const vueltaMostrable = (
             desenlace: "pagado",
             titulo: "¡Listo! Tu pago entró",
             detalle:
-                "Registramos tu pedido. Te avisaremos por mail cuando salga.",
+                "Registramos tu pedido. La confirmación llegará por mail.",
             seguirPreguntando: false,
         };
     }
@@ -319,7 +327,7 @@ export const vueltaMostrable = (
 };
 
 export const estadoDeEntrega = (estado: StoreOrderStatus | null): string | null => {
-    if (!estado?.paid) return null;
+    if (!estado?.paid || estado.payment_reversed) return null;
     if (estado.status === "paid_pending_stock_commit") return "Disponibilidad en revisión";
     switch (estado.fulfillment_status) {
         case "preparing": return "En preparación";
