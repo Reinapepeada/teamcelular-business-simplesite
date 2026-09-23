@@ -6,9 +6,6 @@ import { BsChevronDown, BsList, BsWhatsapp, BsX } from "react-icons/bs";
 import { track } from "@vercel/analytics";
 import Image from "next/image";
 import Link from "next/link";
-import ThemeSwitcher, {
-    ThemeSwitcherInline,
-} from "@/components/switch/ThemeSwitcher";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 
 const MAIN_LINKS = [
@@ -66,13 +63,13 @@ export default function NavbarNUI() {
     }
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/92 shadow-[0_8px_24px_-20px_rgba(15,23,42,0.35)] backdrop-blur-xl dark:border-slate-800/80 dark:bg-gradient-to-b dark:from-slate-950/96 dark:to-slate-900/96 dark:shadow-[0_10px_30px_-18px_rgba(2,6,23,0.9)]">
-            <div className="mx-auto flex min-h-[60px] md:min-h-[76px] w-full max-w-[100rem] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+        <header className="sticky top-0 z-50 w-full bg-black/80 text-[#f5f5f7] backdrop-blur-xl backdrop-saturate-150">
+            <div className="mx-auto flex min-h-[52px] w-full max-w-[1200px] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center gap-3">
                     <Link href="/" className="flex items-center gap-3 text-inherit">
                         <div className="hidden sm:block">
                             <Image
-                                className="h-10 w-auto dark:hidden"
+                                className="h-7 w-auto dark:hidden"
                                 src="/images/brand/imagotipo-light.png"
                                 alt="Team Celular"
                                 width={1725}
@@ -81,7 +78,7 @@ export default function NavbarNUI() {
                                 priority
                             />
                             <Image
-                                className="hidden h-10 w-auto dark:block"
+                                className="hidden h-7 w-auto dark:block"
                                 src="/images/brand/imagotipo-dark.png"
                                 alt="Team Celular"
                                 width={1725}
@@ -92,7 +89,7 @@ export default function NavbarNUI() {
                         </div>
                         <div className="sm:hidden">
                             <Image
-                                className="h-11 w-auto dark:hidden"
+                                className="h-8 w-auto dark:hidden"
                                 src="/images/ISOTIPO/SVG/ISOTIPO_light.svg"
                                 alt="Team Celular"
                                 width={256}
@@ -100,7 +97,7 @@ export default function NavbarNUI() {
                                 sizes="40px"
                             />
                             <Image
-                                className="hidden h-11 w-auto dark:block"
+                                className="hidden h-8 w-auto dark:block"
                                 src="/images/ISOTIPO/SVG/ISOTIPO_black.svg"
                                 alt="Team Celular"
                                 width={256}
@@ -112,7 +109,7 @@ export default function NavbarNUI() {
 
                 </div>
 
-                <nav className="hidden items-center gap-5 lg:flex">
+                <nav className="hidden items-center gap-7 lg:flex">
                     {MAIN_LINKS.map((item) => {
                         const active = isActivePath(pathname, item.href);
 
@@ -120,10 +117,8 @@ export default function NavbarNUI() {
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                className={`flex min-h-11 items-center py-2 text-sm font-medium transition ${
-                                    active
-                                        ? "text-primary dark:text-sky-300"
-                                        : "text-slate-700 hover:text-slate-950 dark:text-slate-200/90 dark:hover:text-white"
+                                className={`flex min-h-11 items-center py-2 text-[12px] transition ${
+                                    active ? "text-white" : "text-[#cccccc]/80 hover:text-white"
                                 }`}
                             >
                                 {item.label}
@@ -135,10 +130,8 @@ export default function NavbarNUI() {
                         <button
                             type="button"
                             onClick={() => setDesktopMenuOpen((current) => !current)}
-                            className={`flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition ${
-                                desktopMenuOpen
-                                    ? "bg-slate-100 text-slate-950 dark:bg-slate-800/80 dark:text-white"
-                                    : "text-slate-700 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-200 dark:hover:bg-slate-800/70 dark:hover:text-white"
+                            className={`flex min-h-11 items-center gap-1.5 py-2 text-[12px] transition ${
+                                desktopMenuOpen ? "text-white" : "text-[#cccccc]/80 hover:text-white"
                             }`}
                             aria-expanded={desktopMenuOpen}
                             aria-haspopup="menu"
@@ -151,7 +144,7 @@ export default function NavbarNUI() {
                         </button>
 
                         {desktopMenuOpen ? (
-                            <div className="absolute right-0 top-[calc(100%+0.5rem)] z-20 w-60 rounded-[1.4rem] border border-slate-200/85 bg-white/96 p-3 shadow-xl dark:border-slate-700/80 dark:bg-slate-900/95 dark:shadow-[0_16px_32px_-18px_rgba(2,6,23,0.95)]">
+                            <div className="absolute right-0 top-[calc(100%+0.5rem)] z-20 w-60 rounded-[18px] bg-[#1d1d1f] p-2">
                                 <ul className="space-y-1">
                                     {SECONDARY_LINKS.map((item) => {
                                         const active = isActivePath(pathname, item.href);
@@ -179,7 +172,6 @@ export default function NavbarNUI() {
                 </nav>
 
                 <div className="hidden items-center gap-2 sm:flex">
-                    <ThemeSwitcher />
                     <Link
                         href={BUDGET_URL}
                         onClick={() =>
@@ -190,16 +182,16 @@ export default function NavbarNUI() {
                                 BUDGET_URL,
                             )
                         }
-                        className="inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition hover:bg-primary/90"
+                        className="tc-btn tc-btn-primary !min-h-8 !px-4 !py-1 !text-[12px]"
                     >
                         Presupuesto
                     </Link>
                     <BranchWhatsAppButton
                         ctaName="navbar_whatsapp"
                         ctaLocation="navbar_desktop"
-                        className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-emerald-500/35 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100 dark:border-emerald-400/35 dark:bg-emerald-500/15 dark:text-emerald-200 dark:hover:bg-emerald-500/25"
+                        className="inline-flex min-h-8 items-center justify-center gap-1.5 rounded-full px-3 text-[12px] text-[#cccccc]/80 transition hover:text-white"
                     >
-                        <BsWhatsapp className="text-lg" aria-hidden />
+                        <BsWhatsapp className="text-sm" aria-hidden />
                         WhatsApp
                     </BranchWhatsAppButton>
                 </div>
@@ -207,7 +199,7 @@ export default function NavbarNUI() {
                 <button
                     type="button"
                     onClick={() => setMobileMenuOpen((current) => !current)}
-                    className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 lg:hidden dark:border-slate-700/80 dark:bg-slate-900/80 dark:text-white dark:hover:border-slate-600 dark:hover:bg-slate-800"
+                    className="inline-flex min-h-11 min-w-11 items-center justify-center text-xl text-[#f5f5f7] lg:hidden"
                     aria-expanded={mobileMenuOpen}
                     aria-controls="mobile-site-menu"
                     aria-label={mobileMenuOpen ? "Cerrar menu" : "Abrir menu"}
@@ -219,16 +211,9 @@ export default function NavbarNUI() {
             {mobileMenuOpen ? (
                 <div
                     id="mobile-site-menu"
-                    className="border-t border-slate-200/80 bg-white/96 px-4 py-4 backdrop-blur-lg lg:hidden dark:border-slate-700/80 dark:bg-slate-950/95"
+                    className="h-[calc(100dvh-52px)] overflow-y-auto bg-black px-6 py-6 lg:hidden"
                 >
                     <div className="mx-auto w-full max-w-[100rem] space-y-3">
-                        <div className="flex items-center justify-between rounded-2xl border border-slate-200 px-4 py-3 dark:border-slate-700/80">
-                            <span className="text-sm font-medium text-slate-700 dark:text-slate-200">
-                                Tema
-                            </span>
-                            <ThemeSwitcherInline />
-                        </div>
-
                         <ul className="space-y-1">
                             {[...MAIN_LINKS, ...SECONDARY_LINKS].map((item) => {
                                 const active = isActivePath(pathname, item.href);
@@ -238,10 +223,8 @@ export default function NavbarNUI() {
                                         <Link
                                             href={item.href}
                                             prefetch={false}
-                                            className={`flex min-h-11 items-center rounded-xl px-3 py-2 text-sm font-medium transition ${
-                                                active
-                                                    ? "bg-slate-900 text-white dark:bg-white dark:text-slate-950"
-                                                    : "text-slate-700 hover:bg-slate-100 hover:text-slate-950 dark:text-slate-200 dark:hover:bg-slate-800/70 dark:hover:text-white"
+                                            className={`flex min-h-12 items-center text-[28px] font-semibold transition ${
+                                                active ? "text-white" : "text-[#d2d2d7] hover:text-white"
                                             }`}
                                         >
                                             {item.label}
@@ -262,14 +245,14 @@ export default function NavbarNUI() {
                                         BUDGET_URL,
                                     )
                                 }
-                                className="inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition hover:bg-primary/90"
+                                className="tc-btn tc-btn-primary"
                             >
                                 Pedir presupuesto
                             </Link>
                             <BranchWhatsAppButton
                                 ctaName="navbar_whatsapp"
                                 ctaLocation="navbar_mobile_drawer"
-                                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-emerald-500/35 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100 dark:border-emerald-400/35 dark:bg-emerald-500/15 dark:text-emerald-200 dark:hover:bg-emerald-500/25"
+                                className="tc-btn tc-btn-ghost"
                             >
                                 <BsWhatsapp className="text-lg" aria-hidden />
                                 Abrir WhatsApp

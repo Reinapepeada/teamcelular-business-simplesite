@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BsArrowRight } from "react-icons/bs";
+import { BsArrowRight, BsBatteryHalf, BsChatDots, BsClipboardCheck, BsLightningCharge, BsPhone, BsSearch } from "react-icons/bs";
 import BannerHome from "@/components/banners/BannerHome";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import KnowledgeGrid from "@/components/cards/KnowledgeGrid";
@@ -50,23 +50,26 @@ const priorityRepairs = [
         title: "Pantalla",
         description: "Vidrio roto, líneas o touch sin respuesta. Confirmamos modelo y calidad de módulo antes de cotizar.",
         href: "/reparaciones/cambio-pantalla-caba",
+        icon: BsPhone,
     },
     {
         title: "Batería",
         description: "Poca autonomía, apagados o temperatura anormal. Primero revisamos el consumo del equipo.",
         href: "/reparaciones/cambio-bateria-caba",
+        icon: BsBatteryHalf,
     },
     {
         title: "Puerto de carga",
         description: "Falso contacto, carga lenta o cable que no reconoce. Evitá forzarlo: puede agravar la falla.",
         href: "/reparaciones/cambio-pin-carga-caba",
+        icon: BsLightningCharge,
     },
 ];
 
 const process = [
-    { title: "Contanos la falla", description: "Con marca y modelo podemos orientarte y derivarte a la sucursal correcta." },
-    { title: "Revisamos el equipo", description: "El diagnóstico define qué conviene reparar, qué se reemplaza y cuánto demora." },
-    { title: "Decidís con el presupuesto", description: "Avanzamos después de explicarte el trabajo. La reparación queda documentada." },
+    { icon: BsChatDots, title: "Contanos la falla", description: "Con marca y modelo podemos orientarte y derivarte a la sucursal correcta." },
+    { icon: BsSearch, title: "Revisamos el equipo", description: "El diagnóstico define qué conviene reparar, qué se reemplaza y cuánto demora." },
+    { icon: BsClipboardCheck, title: "Decidís con el presupuesto", description: "Avanzamos después de explicarte el trabajo. La reparación queda documentada." },
 ];
 
 const faqs = [
@@ -89,12 +92,16 @@ const faqs = [
     { question: "¿Cuánto tarda un presupuesto?", answer: BUDGET_RESPONSE_MESSAGE },
 ];
 
-const primaryCta =
-    "inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#2d2e83] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#22236b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2d2e83]";
-
 export default function Home() {
+    const prices = [
+        ["Pantalla iPhone 13", iphone13?.screen ? formatArsPrice(iphone13.screen) : "Consultar"],
+        ["Batería iPhone 13", iphone13?.battery ? formatArsPrice(iphone13.battery) : "Consultar"],
+        ["Pantalla Samsung Galaxy A", `desde ${formatArsPrice(samsungA.from)}`],
+        ["Pantalla Motorola Moto G", `desde ${formatArsPrice(motoG.from)}`],
+    ];
+
     return (
-        <div className="w-full bg-[#f7f8fc] text-slate-950 dark:bg-slate-950 dark:text-white">
+        <div className="w-full bg-black text-[#f5f5f7]">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
@@ -109,142 +116,138 @@ export default function Home() {
                     }),
                 }}
             />
-            <div className="mx-auto flex w-full max-w-[100rem] flex-col gap-10 px-4 py-5 sm:gap-16 sm:px-6 md:py-8 lg:gap-20 lg:px-8 lg:pb-20">
-                <BannerHome />
 
-                <section aria-labelledby="repairs-title" className="grid gap-7 lg:grid-cols-[0.6fr_1.4fr] lg:gap-12">
-                    <div>
-                        <h2 id="repairs-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">
-                            Empezá por lo que le pasa al equipo
-                        </h2>
-                        <p className="mt-4 max-w-md text-pretty leading-7 text-slate-600 dark:text-slate-300">
-                            Estas son las consultas más frecuentes. Si la falla no encaja, no adivines: escribinos y la revisamos.
-                        </p>
-                    </div>
-                    <div className="divide-y divide-slate-300 border-y border-slate-300 dark:divide-slate-700 dark:border-slate-700">
-                        {priorityRepairs.map((repair) => (
-                            <Link key={repair.href} href={repair.href} className="group grid gap-2 py-5 transition hover:bg-white/70 sm:grid-cols-[10rem_1fr_auto] sm:items-center sm:gap-5 sm:px-4 dark:hover:bg-slate-900">
-                                <h3 className="text-xl font-bold">{repair.title}</h3>
-                                <p className="max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-300">{repair.description}</p>
-                                <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#2d2e83] text-white transition group-hover:translate-x-1" aria-hidden>
-                                    <BsArrowRight />
-                                </span>
-                            </Link>
-                        ))}
-                    </div>
-                </section>
+            <BannerHome />
 
-                <section aria-labelledby="prices-title" className="grid gap-7 lg:grid-cols-[0.6fr_1.4fr] lg:gap-12">
-                    <h2 id="prices-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">
-                        ¿Cuánto sale reparar un celular en CABA?
-                    </h2>
+            <section aria-labelledby="repairs-title" className="tc-section">
+                <div className="tc-reveal flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                    <h2 id="repairs-title" className="tc-heading max-w-2xl">Empezá por lo que le pasa al equipo</h2>
+                    <Link href="/reparaciones" className="tc-link inline-flex items-center gap-1 text-[17px]">
+                        Todas las reparaciones <BsArrowRight aria-hidden className="text-sm" />
+                    </Link>
+                </div>
+                <p className="tc-body mt-4 max-w-xl">
+                    Estas son las consultas más frecuentes. Si la falla no encaja, no adivines: escribinos y la revisamos.
+                </p>
+                <div className="tc-stagger mt-12 grid gap-5 md:grid-cols-3">
+                    {priorityRepairs.map(({ icon: Icon, ...repair }) => (
+                        <Link key={repair.href} href={repair.href} className="tc-card group flex min-h-[18rem] flex-col transition-colors hover:bg-[#262628]">
+                            <Icon className="text-4xl text-[#f5f5f7]" aria-hidden />
+                            <h3 className="tc-subheading mt-auto pt-10">{repair.title}</h3>
+                            <p className="tc-body mt-3">{repair.description}</p>
+                            <span className="tc-link mt-5 inline-flex items-center gap-1 text-[17px]">
+                                Ver reparación <BsArrowRight aria-hidden className="text-sm transition-transform group-hover:translate-x-1" />
+                            </span>
+                        </Link>
+                    ))}
+                </div>
+            </section>
+
+            <section aria-labelledby="prices-title" className="w-full bg-[#f5f5f7] text-[#1d1d1f]">
+                <div className="tc-section grid gap-10 lg:grid-cols-2 lg:items-center">
                     <div>
-                        <p className="text-pretty text-lg leading-8 text-slate-700 dark:text-slate-300">
+                        <h2 id="prices-title" className="tc-heading !text-[#1d1d1f]">¿Cuánto sale reparar un celular en CABA?</h2>
+                        <p className="mt-5 max-w-lg text-pretty text-[19px] leading-[1.42] text-[#424245]">
                             Más de 15 años reparando celulares, con{" "}
                             {GOOGLE_RATING_FALLBACK.rating.toFixed(1).replace(".", ",")} estrellas en Google sobre{" "}
                             {GOOGLE_RATING_FALLBACK.total} reseñas. Pantalla y batería salen en 2 a 4 horas.
                         </p>
-                        <dl className="mt-5 max-w-lg divide-y divide-slate-300 border-y border-slate-300 dark:divide-slate-700 dark:border-slate-700">
-                            {[
-                                ["Pantalla iPhone 13", iphone13?.screen ? formatArsPrice(iphone13.screen) : "Consultar"],
-                                ["Batería iPhone 13", iphone13?.battery ? formatArsPrice(iphone13.battery) : "Consultar"],
-                                ["Pantalla Samsung Galaxy A", `desde ${formatArsPrice(samsungA.from)}`],
-                                ["Pantalla Motorola Moto G", `desde ${formatArsPrice(motoG.from)}`],
-                            ].map(([label, value]) => (
-                                <div key={label} className="flex justify-between gap-4 py-3">
-                                    <dt className="text-slate-600 dark:text-slate-300">{label}</dt>
-                                    <dd className="font-bold tabular-nums">{value}</dd>
-                                </div>
-                            ))}
-                        </dl>
-                        <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm font-bold text-[#2d2e83] dark:text-[#aebaff]">
-                            <Link href="/guias/reparacion-iphone-buenos-aires#costos-reparacion-iphone" className="hover:underline">Precios de iPhone por modelo</Link>
-                            <Link href="/guias/reparacion-samsung-buenos-aires" className="hover:underline">Precios de Samsung</Link>
-                            <Link href="/guias/reparacion-motorola-buenos-aires" className="hover:underline">Precios de Motorola</Link>
+                        <div className="mt-6 flex flex-col gap-2 text-[17px] text-[#0066cc]">
+                            <Link href="/guias/reparacion-iphone-buenos-aires#costos-reparacion-iphone" className="hover:underline">Precios de iPhone por modelo ›</Link>
+                            <Link href="/guias/reparacion-samsung-buenos-aires" className="hover:underline">Precios de Samsung ›</Link>
+                            <Link href="/guias/reparacion-motorola-buenos-aires" className="hover:underline">Precios de Motorola ›</Link>
                         </div>
                     </div>
-                </section>
-
-                <section aria-labelledby="process-title" className="overflow-hidden bg-white dark:bg-slate-900 lg:grid lg:grid-cols-[0.82fr_1.18fr]">
-                    <div className="bg-[#2d2e83] p-5 text-white sm:p-9 lg:p-12">
-                        <h2 id="process-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">
-                            Diagnóstico primero. Reparación después.
-                        </h2>
-                        <p className="mt-5 max-w-lg text-pretty leading-7 text-[#dedfff]">
-                            No hace falta que conozcas el nombre técnico de la falla. Necesitamos saber qué equipo tenés, qué pasó y cómo se comporta.
-                        </p>
-                        <div className="mt-8 flex flex-wrap gap-3">
-                            <TrackedCtaLink href="/presupuesto-reparacion#solicitar-presupuesto" ctaName="home_process_budget" ctaLocation="home_process" ctaVariant="primary" className="inline-flex min-h-12 items-center rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#2d2e83] transition hover:bg-[#f0f1ff]">
-                                Contar la falla
-                            </TrackedCtaLink>
-                            <BranchWhatsAppButton ctaName="home_process_whatsapp" ctaLocation="home_process" message="Hola Team Celular, quiero consultar por una falla." className="inline-flex min-h-12 items-center rounded-lg border border-white/40 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10">
-                                Consultar por WhatsApp
-                            </BranchWhatsAppButton>
-                        </div>
-                    </div>
-                    <ol className="divide-y divide-slate-200 p-5 sm:p-9 lg:p-12 dark:divide-slate-700">
-                        {process.map((step, index) => (
-                            <li key={step.title} className="grid gap-3 py-6 first:pt-0 last:pb-0 sm:grid-cols-[3rem_1fr]">
-                                <span className="text-2xl font-extrabold text-[#2d2e83] dark:text-[#aebaff]">0{index + 1}</span>
-                                <div>
-                                    <h3 className="text-xl font-bold">{step.title}</h3>
-                                    <p className="mt-2 max-w-xl leading-7 text-slate-600 dark:text-slate-300">{step.description}</p>
-                                </div>
-                            </li>
-                        ))}
-                    </ol>
-                </section>
-
-                <GoogleReviewsAPI />
-
-                <section aria-labelledby="faq-title" className="grid gap-8 lg:grid-cols-[0.65fr_1.35fr]">
-                    <h2 id="faq-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">Antes de traer el equipo</h2>
-                    <div className="divide-y divide-slate-300 border-y border-slate-300 dark:divide-slate-700 dark:border-slate-700">
-                        {faqs.map((faq) => (
-                            <article key={faq.question} className="grid gap-3 py-6 sm:grid-cols-[13rem_1fr] sm:gap-8">
-                                <h3 className="font-bold">{faq.question}</h3>
-                                <p className="leading-7 text-slate-600 dark:text-slate-300">{faq.answer}</p>
-                            </article>
-                        ))}
-                    </div>
-                </section>
-
-                <section aria-labelledby="locations-title" className="grid gap-6">
-                    <div>
-                        <h2 id="locations-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">Dónde estamos</h2>
-                        <p className="mt-4 max-w-3xl text-pretty leading-7 text-slate-600 dark:text-slate-300">Lunes a viernes de 10:30 a 18:00, sin turno.</p>
-                    </div>
-                    <div className="grid gap-6 md:grid-cols-2">
-                        {BRANCHES.map((branch) => (
-                            <div key={branch.slug} className="flex flex-col gap-3">
-                                <BranchMap
-                                    address={`${branch.street}, ${branch.neighborhood}, CABA`}
-                                    name={branch.shortName}
-                                />
-                                <p className="text-sm leading-6 text-slate-600 dark:text-slate-300">
-                                    <span className="font-bold text-slate-900 dark:text-white">{branch.shortName}</span>
-                                    {" — "}{branch.street}, {branch.neighborhood}.{" "}
-                                    <Link href={branch.url} className="font-semibold text-primary hover:underline">
-                                        Cómo llegar
-                                    </Link>
-                                </p>
+                    <dl className="tc-reveal rounded-[28px] bg-white p-7 sm:p-9">
+                        {prices.map(([label, value]) => (
+                            <div key={label} className="flex items-baseline justify-between gap-4 border-b border-[#d2d2d7] py-4 first:pt-0 last:border-0 last:pb-0">
+                                <dt className="text-[17px] text-[#424245]">{label}</dt>
+                                <dd className="text-[21px] font-semibold tabular-nums">{value}</dd>
                             </div>
                         ))}
-                    </div>
-                </section>
+                    </dl>
+                </div>
+            </section>
 
-                <KnowledgeGrid />
-
-                <section aria-labelledby="final-cta-title" className="flex flex-col gap-7 border-t-4 border-[#2d2e83] bg-white p-5 sm:p-9 lg:flex-row lg:items-end lg:justify-between lg:p-12 dark:bg-slate-900">
-                    <div>
-                        <h2 id="final-cta-title" className="text-balance text-3xl font-extrabold tracking-[-0.025em] md:text-4xl">Contanos qué le pasa. Te decimos cómo seguir.</h2>
-                        <p className="mt-4 max-w-2xl leading-7 text-slate-600 dark:text-slate-300">Incluí marca, modelo y falla. Si podés, sumá una foto. Respondemos {BUSINESS_PROFILE.responseWindow}.</p>
-                    </div>
-                    <TrackedCtaLink href="/presupuesto-reparacion#solicitar-presupuesto" ctaName="home_bottom_budget" ctaLocation="home_bottom" ctaVariant="primary" className={primaryCta}>
-                        Pedir presupuesto <BsArrowRight aria-hidden />
+            <section aria-labelledby="process-title" className="tc-section">
+                <div className="tc-reveal text-center">
+                    <h2 id="process-title" className="tc-heading mx-auto max-w-3xl">Diagnóstico primero. Reparación después.</h2>
+                    <p className="tc-body mx-auto mt-5 max-w-xl">
+                        No hace falta que conozcas el nombre técnico de la falla. Necesitamos saber qué equipo tenés, qué pasó y cómo se comporta.
+                    </p>
+                </div>
+                <ol className="tc-stagger mt-12 grid gap-5 md:grid-cols-3">
+                    {process.map(({ icon: Icon, ...step }, index) => (
+                        <li key={step.title} className="tc-card">
+                            <div className="flex items-center justify-between">
+                                <Icon className="text-3xl text-[#6aa6ff]" aria-hidden />
+                                <span className="text-[14px] tabular-nums text-[#86868b]">0{index + 1}</span>
+                            </div>
+                            <h3 className="tc-subheading mt-10">{step.title}</h3>
+                            <p className="tc-body mt-3">{step.description}</p>
+                        </li>
+                    ))}
+                </ol>
+                <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5">
+                    <TrackedCtaLink href="/presupuesto-reparacion#solicitar-presupuesto" ctaName="home_process_budget" ctaLocation="home_process" ctaVariant="primary" className="tc-btn tc-btn-primary">
+                        Contar la falla
                     </TrackedCtaLink>
-                </section>
+                    <BranchWhatsAppButton ctaName="home_process_whatsapp" ctaLocation="home_process" message="Hola Team Celular, quiero consultar por una falla." className="tc-link inline-flex min-h-11 items-center gap-1 text-[17px]">
+                        Consultar por WhatsApp <BsArrowRight aria-hidden className="text-sm" />
+                    </BranchWhatsAppButton>
+                </div>
+            </section>
+
+            <div className="tc-section !pt-0">
+                <GoogleReviewsAPI />
             </div>
+
+            <section aria-labelledby="faq-title" className="tc-section">
+                <h2 id="faq-title" className="tc-heading">Antes de traer el equipo</h2>
+                <div className="mt-10 divide-y divide-[#333336] border-y border-[#333336]">
+                    {faqs.map((faq) => (
+                        <article key={faq.question} className="grid gap-3 py-7 md:grid-cols-[1fr_1.4fr] md:gap-10">
+                            <h3 className="text-[19px] font-semibold leading-snug sm:text-[21px]">{faq.question}</h3>
+                            <p className="tc-body">{faq.answer}</p>
+                        </article>
+                    ))}
+                </div>
+            </section>
+
+            <section aria-labelledby="locations-title" className="tc-section">
+                <h2 id="locations-title" className="tc-heading">Dónde estamos</h2>
+                <p className="tc-body mt-4">Lunes a viernes de 10:30 a 18:00, sin turno.</p>
+                <div className="tc-stagger mt-10 grid gap-5 md:grid-cols-2">
+                    {BRANCHES.map((branch) => (
+                        <div key={branch.slug} className="tc-card flex flex-col gap-5 !p-3">
+                            <BranchMap
+                                address={`${branch.street}, ${branch.neighborhood}, CABA`}
+                                name={branch.shortName}
+                                className="!rounded-[20px] !border-0"
+                            />
+                            <div className="flex flex-wrap items-center justify-between gap-2 px-4 pb-4">
+                                <p className="text-[17px]">
+                                    <span className="font-semibold">{branch.shortName}</span>
+                                    <span className="text-[#86868b]"> — {branch.street}, {branch.neighborhood}.</span>
+                                </p>
+                                <Link href={branch.url} className="tc-link text-[17px]">Cómo llegar ›</Link>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            <div className="tc-section !pt-0">
+                <KnowledgeGrid />
             </div>
+
+            <section aria-labelledby="final-cta-title" className="tc-section tc-reveal text-center">
+                <h2 id="final-cta-title" className="tc-heading mx-auto max-w-3xl">Contanos qué le pasa. Te decimos cómo seguir.</h2>
+                <p className="tc-body mx-auto mt-5 max-w-xl">Incluí marca, modelo y falla. Si podés, sumá una foto. Respondemos {BUSINESS_PROFILE.responseWindow}.</p>
+                <TrackedCtaLink href="/presupuesto-reparacion#solicitar-presupuesto" ctaName="home_bottom_budget" ctaLocation="home_bottom" ctaVariant="primary" className="tc-btn tc-btn-primary mt-8">
+                    Pedir presupuesto
+                </TrackedCtaLink>
+            </section>
+        </div>
     );
 }
