@@ -95,7 +95,7 @@ function ResumenAConfirmar({
                 </p>
             )}
 
-            <dl className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm dark:border-slate-700/70 dark:bg-slate-800/70">
+            <dl className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm dark:border-white/10 dark:bg-[#1d1d1f]">
                 <div className="flex justify-between gap-4">
                     <dt className="text-slate-600 dark:text-slate-400">Productos</dt>
                     <dd className="font-medium">{pesos(r.subtotal, r.moneda)}</dd>
@@ -106,9 +106,9 @@ function ResumenAConfirmar({
                         <dd className="font-medium">{pesos(r.envio, r.moneda)}</dd>
                     </div>
                 )}
-                <div className="mt-3 flex justify-between gap-4 border-t border-slate-200 pt-3 dark:border-slate-700/70">
+                <div className="mt-3 flex justify-between gap-4 border-t border-slate-200 pt-3 dark:border-white/10">
                     <dt className="font-semibold text-slate-900 dark:text-slate-100">Total</dt>
-                    <dd className="text-lg font-bold text-slate-950 dark:text-slate-50">
+                    <dd className="text-lg font-semibold text-slate-950 dark:text-slate-50">
                         {pesos(r.total, r.moneda)}
                     </dd>
                 </div>
@@ -406,7 +406,7 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                     event.preventDefault();
                     if (!enviando) onCerrar();
                 }}
-                className="fixed inset-x-0 bottom-0 top-auto m-0 hidden max-h-[90dvh] w-full max-w-lg overflow-y-auto rounded-t-2xl border-0 bg-white p-5 text-slate-950 backdrop:bg-black/50 open:block dark:bg-slate-950 dark:text-slate-50 sm:inset-0 sm:m-auto sm:rounded-2xl"
+                className="fixed inset-x-0 bottom-0 top-auto m-0 hidden max-h-[90dvh] w-full max-w-lg overflow-y-auto rounded-t-[28px] border-0 bg-white p-6 text-slate-950 backdrop:bg-black/60 backdrop:backdrop-blur-sm open:block dark:bg-[#1d1d1f] dark:text-slate-50 sm:inset-0 sm:m-auto sm:rounded-[28px]"
             >
                 <div className="flex items-center justify-between">
                     <h2 className="text-lg font-semibold text-slate-950 dark:text-slate-50">
@@ -509,7 +509,7 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                     {/* La dirección aparece solo para envío: pedirla siempre hace
                         abandonar a quien iba a retirar por el local. */}
                     {esEnvio && (
-                        <div className="flex flex-col gap-3 rounded-lg border border-slate-200 p-3 dark:border-slate-700">
+                        <div className="flex flex-col gap-3 rounded-lg border border-slate-200 p-3 dark:border-white/10">
                             <div>
                                 <label className="text-sm font-medium" htmlFor="ck-calle">Calle y número</label>
                                 <input

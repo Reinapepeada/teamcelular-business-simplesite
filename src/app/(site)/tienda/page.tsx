@@ -82,17 +82,7 @@ export default async function TiendaPage({
   const suspenseKey = JSON.stringify(filters);
 
   return (
-    <div className="w-full bg-slate-50 dark:bg-slate-800/70 pb-16">
-      <div className="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
-        <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-          <Link href="/" className="transition hover:text-primary">
-            Inicio
-          </Link>
-          <span>/</span>
-          <span className="font-semibold text-slate-950 dark:text-slate-50">Tienda</span>
-        </nav>
-      </div>
-
+    <div className="w-full bg-black pb-20 text-[#f5f5f7]">
       <BreadcrumbJsonLd
         items={[
           { name: "Inicio", url: `${SITE_URL}/` },
@@ -100,34 +90,37 @@ export default async function TiendaPage({
         ]}
       />
 
-      <section className="mx-auto max-w-screen-2xl px-4 pb-4 sm:px-6 sm:pb-8 lg:px-8">
-        <div className="flex flex-col justify-between gap-4 rounded-3xl border border-slate-200 bg-white px-5 py-5 shadow-sm dark:border-slate-700/70 dark:bg-slate-900 sm:flex-row sm:items-center sm:px-6">
-            <div className="space-y-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary sm:text-sm">
-                Tienda Team Celular
-              </p>
-              <h1 className="text-2xl font-semibold tracking-tight text-slate-950 dark:text-slate-50 sm:text-3xl">
-                Repuestos y accesorios para tu celular
-              </h1>
-              <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">
-                Comprá online con Mercado Pago. Retirá en Recoleta o elegí envío a domicilio.
-              </p>
-            </div>
-                <TrackedCtaLink
-                  href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20necesito%20ayuda%20para%20elegir%20un%20repuesto"
-                  ctaName="store_hero_whatsapp"
-                  ctaLocation="store_hero_panel"
-                  ctaVariant="whatsapp"
-                  external
-                  target="_blank"
-                  className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-full border border-slate-300 px-4 text-sm font-medium text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-300"
-                >
-                  ¿Necesitás ayuda para elegir?
-                </TrackedCtaLink>
+      <section className="tc-intro mx-auto max-w-[1200px] px-4 pb-12 pt-10 text-center sm:px-6 sm:pt-16">
+        <nav aria-label="Migas de pan" className="flex items-center justify-center gap-2 text-[12px] text-[#86868b]">
+          <Link href="/" className="transition hover:text-white">
+            Inicio
+          </Link>
+          <span aria-hidden>›</span>
+          <span className="text-[#f5f5f7]">Tienda</span>
+        </nav>
+        <p className="tc-eyebrow mt-6">Tienda Team Celular</p>
+        <h1 className="tc-display mx-auto mt-2 max-w-4xl">
+          Repuestos y accesorios para tu celular
+        </h1>
+        <p className="mx-auto mt-5 max-w-xl text-[19px] leading-[1.4] text-[#86868b] sm:text-[21px]">
+          Comprá online con Mercado Pago. Retirá en Recoleta o elegí envío a domicilio.
+        </p>
+        <div>
+          <TrackedCtaLink
+            href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20necesito%20ayuda%20para%20elegir%20un%20repuesto"
+            ctaName="store_hero_whatsapp"
+            ctaLocation="store_hero_panel"
+            ctaVariant="whatsapp"
+            external
+            target="_blank"
+            className="tc-link mt-6 inline-flex min-h-11 items-center gap-1 text-[17px]"
+          >
+            ¿Necesitás ayuda para elegir? ›
+          </TrackedCtaLink>
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-screen-2xl items-start gap-6 px-4 sm:px-6 lg:grid-cols-[260px_minmax(0,1fr)] lg:px-8">
+      <section className="mx-auto grid max-w-[1400px] items-start gap-6 px-4 sm:px-6 lg:grid-cols-[260px_minmax(0,1fr)] lg:px-8">
         <CatalogFilters
           basePath="/tienda"
           filters={filters}
@@ -144,77 +137,59 @@ export default async function TiendaPage({
         </Suspense>
       </section>
 
-      <section className="mx-auto max-w-screen-2xl px-4 pt-8 sm:px-6 lg:px-8">
-        <div className="rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm dark:border-slate-700/70 dark:bg-slate-900/85 md:p-8">
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
-            <div className="space-y-3">
-              <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
-                No sabes que repuesto elegir?
-              </h2>
-              <p className="max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-400">
-                Te ayudamos a validar compatibilidad por marca y modelo antes de pagar. Si el cambio no conviene, te derivamos al servicio de reparacion para evitar compras innecesarias.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <Link href="/guias/reparacion-iphone-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
-                  Guia iPhone
-                </Link>
-                <Link href="/guias/reparacion-samsung-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
-                  Guia Samsung
-                </Link>
-                <Link href="/guias/reparacion-xiaomi-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
-                  Guia Xiaomi
-                </Link>
-              </div>
+      <section className="tc-section tc-reveal">
+        <div className="tc-card grid gap-8 !p-8 sm:!p-12 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+          <div>
+            <h2 className="tc-heading">No sabes que repuesto elegir?</h2>
+            <p className="tc-body mt-4 max-w-2xl">
+              Te ayudamos a validar compatibilidad por marca y modelo antes de pagar. Si el cambio no conviene, te derivamos al servicio de reparacion para evitar compras innecesarias.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-x-6 gap-y-1 text-[17px]">
+              <Link href="/guias/reparacion-iphone-buenos-aires" className="tc-link inline-flex min-h-11 items-center">Guia iPhone ›</Link>
+              <Link href="/guias/reparacion-samsung-buenos-aires" className="tc-link inline-flex min-h-11 items-center">Guia Samsung ›</Link>
+              <Link href="/guias/reparacion-xiaomi-buenos-aires" className="tc-link inline-flex min-h-11 items-center">Guia Xiaomi ›</Link>
             </div>
-            <div className="flex flex-wrap gap-3">
-              <TrackedCtaLink
-                href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20quiero%20validar%20compatibilidad%20de%20un%20repuesto"
-                ctaName="store_strip_whatsapp"
-                ctaLocation="store_conversion_strip"
-                ctaVariant="whatsapp"
-                external
-                target="_blank"
-                className="inline-flex min-h-11 items-center justify-center rounded-full bg-emerald-700 px-5 text-sm font-semibold text-white transition hover:bg-emerald-800"
-              >
-                Validar en WhatsApp
-              </TrackedCtaLink>
-              <TrackedCtaLink
-                href="/presupuesto-reparacion#solicitar-presupuesto"
-                ctaName="store_strip_budget"
-                ctaLocation="store_conversion_strip"
-                ctaVariant="primary"
-                className="inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-white transition hover:bg-primary/90"
-              >
-                Pedir diagnostico
-              </TrackedCtaLink>
-            </div>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+            <TrackedCtaLink
+              href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20quiero%20validar%20compatibilidad%20de%20un%20repuesto"
+              ctaName="store_strip_whatsapp"
+              ctaLocation="store_conversion_strip"
+              ctaVariant="whatsapp"
+              external
+              target="_blank"
+              className="tc-btn tc-btn-ghost"
+            >
+              Validar en WhatsApp
+            </TrackedCtaLink>
+            <TrackedCtaLink
+              href="/presupuesto-reparacion#solicitar-presupuesto"
+              ctaName="store_strip_budget"
+              ctaLocation="store_conversion_strip"
+              ctaVariant="primary"
+              className="tc-btn tc-btn-primary"
+            >
+              Pedir diagnostico
+            </TrackedCtaLink>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-screen-2xl px-4 pt-8 sm:px-6 lg:px-8">
-        <div className="rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm dark:border-slate-700/70 dark:bg-slate-900/85 md:p-8">
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
-            Preguntas frecuentes de compra
-          </h2>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-400">
-            Resolvemos lo mas comun antes de comprar para que elijas bien y cierres rapido.
-          </p>
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            {storeFaqs.map((faq) => (
-              <details
-                key={faq.question}
-                className="rounded-2xl border border-slate-200/80 bg-slate-50/90 p-5 dark:border-slate-700/70 dark:bg-slate-800/70"
-              >
-                <summary className="cursor-pointer text-base font-semibold text-slate-900 dark:text-slate-100">
-                  {faq.question}
-                </summary>
-                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
-                  {faq.answer}
-                </p>
-              </details>
-            ))}
-          </div>
+      <section className="tc-section !pt-0">
+        <h2 className="tc-heading tc-reveal">Preguntas frecuentes de compra</h2>
+        <p className="tc-body mt-4 max-w-2xl">
+          Resolvemos lo mas comun antes de comprar para que elijas bien y cierres rapido.
+        </p>
+        <div className="mt-10 divide-y divide-[#333336] border-y border-[#333336]">
+          {storeFaqs.map((faq) => (
+            <details key={faq.question} className="group py-6">
+              <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-6 text-[19px] font-semibold sm:text-[21px]">
+                {faq.question}
+                <span className="text-2xl font-light text-[#86868b] transition-transform group-open:rotate-45" aria-hidden>+</span>
+              </summary>
+              <p className="tc-body mt-3 max-w-3xl">{faq.answer}</p>
+            </details>
+          ))}
         </div>
       </section>
 
@@ -242,4 +217,3 @@ export default async function TiendaPage({
     </div>
   );
 }
-

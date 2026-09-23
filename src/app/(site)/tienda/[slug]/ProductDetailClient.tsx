@@ -274,14 +274,14 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                                 <button
                                     onClick={prevImage}
                                     aria-label="Foto anterior"
-                                    className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 shadow-lg hover:bg-white dark:hover:bg-gray-800 transition-colors"
+                                    className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 transition-colors"
                                 >
                                     <ChevronLeft className="w-5 h-5" />
                                 </button>
                                 <button
                                     onClick={nextImage}
                                     aria-label="Foto siguiente"
-                                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 shadow-lg hover:bg-white dark:hover:bg-gray-800 transition-colors"
+                                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 transition-colors"
                                 >
                                     <ChevronRight className="w-5 h-5" />
                                 </button>
@@ -347,7 +347,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                     </div>
                     
                     {/* Title */}
-                    <h1 className="text-3xl font-bold">{product.name}</h1>
+                    <h1 className="text-3xl font-semibold">{product.name}</h1>
 
                     {/* SKU */}
                     {product.serial_number && <p className="text-sm text-muted-foreground">
@@ -361,7 +361,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                                 <p className="text-lg line-through text-gray-400">
                                     ${formatPrice(originalPrice)}
                                 </p>
-                                <p className="text-4xl font-bold text-red-600">
+                                <p className="text-4xl font-semibold text-red-600">
                                     ${formatPrice(discountedPrice)}
                                 </p>
                                 <p className="text-sm text-green-600 font-medium">
@@ -369,7 +369,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                                 </p>
                             </>
                         ) : (
-                            <p className="text-4xl font-bold">
+                            <p className="text-4xl font-semibold">
                                 ${formatPrice(originalPrice)}
                             </p>
                         )}
@@ -495,7 +495,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                             Compartir
                         </Button>
                     </div>
-                    <p role="status" aria-live="polite" className="text-sm text-emerald-700 dark:text-emerald-300">
+                    <p role="status" aria-live="polite" className="text-sm text-emerald-400 dark:text-emerald-300">
                         {feedback}
                     </p>
                     
@@ -530,12 +530,12 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                 </div>
             </div>
 
-            <section className="mt-10 rounded-2xl border border-default-200 bg-white/80 p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900/60 sm:p-6">
+            <section className="mt-10 rounded-2xl border border-default-200 bg-white/80 p-5 dark:border-gray-800 dark:bg-gray-900/60 sm:p-6">
                 <div className="mb-5 max-w-3xl">
                     <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
                         Antes de comprar
                     </p>
-                    <h2 className="mt-2 text-2xl font-bold">
+                    <h2 className="mt-2 text-2xl font-semibold">
                         Compatibilidad, garantia y retiro en CABA
                     </h2>
                     <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base">
@@ -558,7 +558,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
             {/* Product Details Section */}
             {product.variants.some(variant => variant.color || variant.size) && (
                 <div className="mt-12">
-                    <h2 className="text-2xl font-bold mb-6">Variantes disponibles</h2>
+                    <h2 className="text-2xl font-semibold mb-6">Variantes disponibles</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         {product.variants.map((variant) => (
                             <Card key={variant.id} className="p-4">

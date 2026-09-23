@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { BsBag, BsX } from "react-icons/bs";
 import { buildProductSlug } from "@/lib/productSlug";
 import { cargaDirectaImagen } from "@/lib/storeCatalog";
 import useCartStore, { type CartItem } from "@/store/cartStore";
@@ -86,10 +87,11 @@ export default function StoreCartSheet() {
                 onClick={() => setOpen((current) => !current)}
                 aria-expanded={open}
                 aria-controls="store-cart-sheet"
-                className="fixed bottom-5 right-5 z-40 inline-flex min-h-14 items-center gap-3 rounded-full bg-slate-950 px-5 text-sm font-semibold text-white shadow-xl transition hover:bg-slate-800"
+                className="tc-glass fixed bottom-24 right-4 z-40 inline-flex min-h-14 items-center gap-3 rounded-full px-5 text-[15px] text-white transition hover:bg-[#424245] sm:right-6"
             >
+                <BsBag className="text-lg" aria-hidden />
                 <span>Carrito</span>
-                <span className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full bg-primary px-2 text-xs font-bold">
+                <span className="inline-flex h-7 min-w-7 items-center justify-center rounded-full bg-primary px-2 text-xs font-semibold">
                     {totalItems}
                 </span>
             </button>
@@ -103,9 +105,9 @@ export default function StoreCartSheet() {
                     if (!comprando) triggerRef.current?.focus();
                 }}
                 onCancel={() => setOpen(false)}
-                className="fixed inset-auto bottom-0 right-0 m-0 hidden h-[85dvh] max-h-none w-full max-w-md flex-col rounded-t-[2rem] border border-slate-200 bg-white p-0 shadow-2xl backdrop:bg-slate-950/40 open:flex dark:border-slate-700 dark:bg-slate-950 sm:top-0 sm:h-dvh sm:rounded-l-[2rem] sm:rounded-tr-none"
+                className="fixed inset-auto bottom-0 right-0 m-0 hidden h-[85dvh] max-h-none w-full max-w-md flex-col rounded-t-[28px] border-0 bg-white p-0 backdrop:bg-black/60 backdrop:backdrop-blur-sm open:flex dark:bg-[#1d1d1f] sm:top-0 sm:h-dvh sm:rounded-l-[28px] sm:rounded-tr-none"
             >
-                <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4 dark:border-slate-700">
+                <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4 dark:border-white/10">
                     <div>
                         <p className="text-lg font-semibold text-slate-950 dark:text-slate-50">Tu carrito</p>
                         <p className="text-sm text-slate-600 dark:text-slate-400">
@@ -115,15 +117,16 @@ export default function StoreCartSheet() {
                     <button
                         type="button"
                         onClick={() => setOpen(false)}
-                        className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-slate-300 text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:border-slate-500 dark:hover:bg-slate-800"
+                        aria-label="Cerrar carrito"
+                        className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#333336] text-xl text-[#cccccc] transition hover:bg-[#424245] hover:text-white"
                     >
-                        Cerrar
+                        <BsX aria-hidden />
                     </button>
                 </div>
 
                 <div className="flex-1 space-y-4 overflow-y-auto px-5 py-5">
                     {cart.length === 0 ? (
-                        <div className="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-6 text-center dark:border-slate-700 dark:bg-slate-900/70">
+                        <div className="rounded-[28px] bg-slate-50 p-8 text-center dark:bg-black/40">
                             <p className="text-lg font-semibold text-slate-900 dark:text-slate-100">
                                 Todavia no agregaste productos
                             </p>
@@ -135,7 +138,7 @@ export default function StoreCartSheet() {
                         cart.map((item) => (
                             <article
                                 key={item.cartKey}
-                                className="rounded-3xl border border-slate-200 p-4 dark:border-slate-700"
+                                className="rounded-[28px] border border-slate-200 p-4 dark:border-white/10"
                             >
                                 <div className="flex gap-4">
                                     <div className="relative h-20 w-20 flex-none overflow-hidden rounded-2xl bg-slate-50 dark:bg-slate-900">
@@ -207,7 +210,7 @@ export default function StoreCartSheet() {
                                         <button
                                             type="button"
                                             onClick={() => removeFromCart(item.cartKey)}
-                                            className="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-300 px-4 text-sm font-medium text-slate-700 transition hover:border-rose-300 hover:bg-rose-50 hover:text-rose-700 dark:border-slate-600 dark:text-slate-300 dark:hover:border-rose-400 dark:hover:bg-rose-900/20 dark:hover:text-rose-300"
+                                            className="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-300 px-4 text-sm font-medium text-slate-700 transition hover:border-rose-300 hover:bg-rose-50 hover:text-rose-400 dark:border-slate-600 dark:text-slate-300 dark:hover:border-rose-400 dark:hover:bg-rose-900/20 dark:hover:text-rose-300"
                                         >
                                             Quitar
                                         </button>
@@ -217,7 +220,7 @@ export default function StoreCartSheet() {
                     )}
                 </div>
 
-                <div className="border-t border-slate-200 px-5 py-4 dark:border-slate-700">
+                <div className="border-t border-slate-200 px-5 py-4 dark:border-white/10">
                     <div className="flex items-center justify-between text-sm text-slate-600 dark:text-slate-400">
                         {/* Estimado de verdad: el envio lo cotiza el servidor
                             al confirmar, y el total final sale de ahi. */}

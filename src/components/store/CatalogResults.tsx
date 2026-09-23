@@ -79,7 +79,7 @@ function CatalogPagination({
                 aria-disabled={currentPage === 1}
                 className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border px-4 text-sm font-medium transition ${
                     currentPage === 1
-                        ? "pointer-events-none border-slate-200 dark:border-slate-700/70 text-slate-400"
+                        ? "pointer-events-none border-slate-200 dark:border-white/10 text-slate-400"
                         : "border-slate-300 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary"
                 }`}
             >
@@ -134,7 +134,7 @@ function CatalogPagination({
                 aria-disabled={currentPage === totalPages}
                 className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border px-4 text-sm font-medium transition ${
                     currentPage === totalPages
-                        ? "pointer-events-none border-slate-200 dark:border-slate-700/70 text-slate-400"
+                        ? "pointer-events-none border-slate-200 dark:border-white/10 text-slate-400"
                         : "border-slate-300 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary"
                 }`}
             >
@@ -150,72 +150,70 @@ function ProductCard({ product }: { product: VidrieraProduct }) {
     const productHref = `/tienda/${buildProductSlug(product)}`;
 
     return (
-        <article className="flex h-full flex-col rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+        <article className="group flex h-full flex-col rounded-[28px] bg-[#1d1d1f] p-3 transition-colors hover:bg-[#262628]">
             <Link
                 href={productHref}
                 prefetch={false}
-                className="group block"
+                className="block"
                 aria-label={`Ver ${product.name}`}
             >
-                <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-2xl bg-slate-50 dark:bg-slate-800/70">
+                {/* Foto sobre recuadro claro: los productos vienen con fondo blanco. */}
+                <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-[20px] bg-[#f5f5f7]">
                     <Image
                         src={productImage}
                         alt={product.name}
                         fill
                         unoptimized={cargaDirectaImagen(productImage)}
-                        className="object-contain p-4 transition duration-300 group-hover:scale-[1.03]"
+                        className="object-contain p-6 transition duration-500 group-hover:scale-[1.04]"
                         sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
                     />
                 </div>
             </Link>
 
-            <div className="mt-4 flex flex-1 flex-col">
-                <div className="flex flex-wrap gap-2">
+            <div className="flex flex-1 flex-col px-3 pb-3 pt-5">
+                <div className="flex flex-wrap items-center gap-x-3 text-[12px] text-[#86868b]">
+                    {product.brand?.name ? <span className="uppercase tracking-wide">{product.brand.name}</span> : null}
                     {product.category?.name ? (
                         <Link
                             href={`/tienda/categoria/${slugify(product.category.name)}`}
                             prefetch={false}
-                            className="inline-flex min-h-11 items-center rounded-full border border-slate-200 dark:border-slate-700/70 px-3 text-xs font-medium text-slate-600 dark:text-slate-400 transition hover:border-primary hover:text-primary"
+                            className="inline-flex min-h-8 items-center transition hover:text-white"
                         >
                             {product.category.name}
                         </Link>
-                    ) : null}
-                    {product.brand?.name ? (
-                        <span className="inline-flex min-h-11 items-center rounded-full border border-amber-200 bg-amber-50 px-3 text-xs font-medium text-amber-700">
-                            {product.brand.name}
-                        </span>
                     ) : null}
                 </div>
 
                 <Link
                     href={productHref}
                     prefetch={false}
-                    className="mt-3 block text-lg font-semibold leading-snug text-slate-950 dark:text-slate-50 transition hover:text-primary"
+                    className="mt-1 block text-[19px] font-semibold leading-snug text-[#f5f5f7] transition hover:text-white"
                 >
                     {product.name}
                 </Link>
 
-                <p className="mt-2 text-2xl font-bold text-slate-950 dark:text-slate-50">
-                    ${formatPrice(product.retail_price)}
-                </p>
-
-                {stock > 0 && stock < 10 ? (
-                    <p className="mt-2 text-sm font-medium text-amber-700">
-                        Ultimas {stock} unidades
-                    </p>
-                ) : stock > 0 ? (
-                    <p className="mt-2 text-sm text-emerald-700">Stock disponible</p>
-                ) : (
-                    <p className="mt-2 text-sm text-rose-700">Sin stock</p>
-                )}
-
                 {product.description ? (
-                    <p className="mt-3 line-clamp-2 text-sm text-slate-600 dark:text-slate-400">
+                    <p className="mt-2 line-clamp-2 text-[14px] leading-5 text-[#86868b]">
                         {product.description}
                     </p>
                 ) : null}
 
-                <div className="mt-5">
+                <div className="mt-auto flex items-end justify-between gap-3 pt-5">
+                    <div>
+                        <p className="text-[21px] font-semibold tabular-nums text-[#f5f5f7]">
+                            ${formatPrice(product.retail_price)}
+                        </p>
+                        {stock > 0 && stock < 10 ? (
+                            <p className="text-[12px] text-amber-400">Ultimas {stock} unidades</p>
+                        ) : stock > 0 ? (
+                            <p className="text-[12px] text-emerald-400">Stock disponible</p>
+                        ) : (
+                            <p className="text-[12px] text-rose-400">Sin stock</p>
+                        )}
+                    </div>
+                </div>
+
+                <div className="mt-4">
                     <AddToCartButton product={product} storeSlug={product.storeSlug} />
                 </div>
             </div>
@@ -225,26 +223,26 @@ function ProductCard({ product }: { product: VidrieraProduct }) {
 
 export function CatalogResultsFallback() {
     return (
-        <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6 dark:border-slate-700/70 dark:bg-slate-900">
+        <section>
             <div className="flex items-center justify-between gap-3">
                 <div className="space-y-2">
-                    <div className="h-4 w-24 animate-pulse rounded-full bg-slate-200" />
-                    <div className="h-8 w-52 animate-pulse rounded-full bg-slate-200" />
+                    <div className="h-4 w-24 animate-pulse rounded-full bg-[#333336]" />
+                    <div className="h-8 w-52 animate-pulse rounded-full bg-[#333336]" />
                 </div>
-                <div className="h-6 w-20 animate-pulse rounded-full bg-slate-200" />
+                <div className="h-6 w-20 animate-pulse rounded-full bg-[#333336]" />
             </div>
 
             <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
                 {Array.from({ length: 6 }).map((_, index) => (
                     <div
                         key={index}
-                        className="rounded-3xl border border-slate-200 dark:border-slate-700/70 p-4"
+                        className="rounded-[28px] border border-slate-200 dark:border-white/10 p-4"
                     >
-                        <div className="aspect-square animate-pulse rounded-2xl bg-slate-200" />
-                        <div className="mt-4 h-4 w-20 animate-pulse rounded-full bg-slate-200" />
-                        <div className="mt-3 h-6 w-4/5 animate-pulse rounded-full bg-slate-200" />
-                        <div className="mt-3 h-8 w-32 animate-pulse rounded-full bg-slate-200" />
-                        <div className="mt-6 h-11 w-full animate-pulse rounded-full bg-slate-200" />
+                        <div className="aspect-square animate-pulse rounded-2xl bg-[#333336]" />
+                        <div className="mt-4 h-4 w-20 animate-pulse rounded-full bg-[#333336]" />
+                        <div className="mt-3 h-6 w-4/5 animate-pulse rounded-full bg-[#333336]" />
+                        <div className="mt-3 h-8 w-32 animate-pulse rounded-full bg-[#333336]" />
+                        <div className="mt-6 h-11 w-full animate-pulse rounded-full bg-[#333336]" />
                     </div>
                 ))}
             </div>
@@ -270,13 +268,10 @@ export default async function CatalogResults({
     const total = data.total || products.length;
 
     return (
-        <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6 dark:border-slate-700/70 dark:bg-slate-900">
-            <div className="flex flex-col gap-2 border-b border-slate-100 pb-3 sm:flex-row sm:items-end sm:justify-between sm:gap-3 sm:pb-5 dark:border-slate-800">
+        <section>
+            <div className="flex flex-col gap-2 border-b border-[#333336] pb-3 sm:flex-row sm:items-end sm:justify-between sm:gap-3 sm:pb-5 ">
                 <div>
-                    <p className="hidden text-sm font-semibold uppercase tracking-[0.18em] text-primary sm:block">
-                        Catalogo
-                    </p>
-                    <h2 className="text-xl font-semibold text-slate-950 sm:mt-2 sm:text-2xl dark:text-slate-50">
+                    <h2 className="tc-subheading">
                         {title}
                     </h2>
                     <p className="mt-1 text-sm text-slate-600 sm:mt-2 dark:text-slate-400">
@@ -312,7 +307,7 @@ export default async function CatalogResults({
                     />
                 </>
             ) : (
-                <div className="mt-6 rounded-3xl border border-dashed border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/70 p-8 text-center">
+                <div className="mt-6 rounded-[28px] border border-dashed border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-[#1d1d1f] p-8 text-center">
                     <p className="text-lg font-semibold text-slate-900 dark:text-slate-100">
                         Sin resultados por ahora
                     </p>

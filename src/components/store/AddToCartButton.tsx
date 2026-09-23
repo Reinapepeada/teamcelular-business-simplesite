@@ -32,11 +32,11 @@ export default function AddToCartButton({ product, storeSlug = null }: AddToCart
             onClick={() => addToCart(product, null, 1, storeSlug)}
             disabled={inCart >= stock}
             aria-label={`Agregar al carrito: ${product.name}`}
-            className="inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white shadow-md transition hover:bg-primary/90 disabled:opacity-50"
+            className="tc-btn tc-btn-primary w-full !text-[15px] disabled:opacity-50"
         >
             {inCart >= stock ? "En tu carrito" : inCart > 0 ? "Agregar otro" : "Agregar al carrito"}
         </button>
-        <span role="status" aria-live="polite" className="mt-2 block text-xs text-emerald-700 dark:text-emerald-300">
+        <span role="status" aria-live="polite" className="mt-2 block text-xs text-emerald-400 dark:text-emerald-300">
             {inCart > 0 ? `${inCart} en tu carrito` : ""}
         </span>
         </>

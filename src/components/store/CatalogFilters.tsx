@@ -20,7 +20,7 @@ function ActiveFilter({
     readonly children: React.ReactNode;
 }) {
     return (
-        <span className="inline-flex min-h-11 items-center rounded-full border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 px-3 py-1 text-xs font-medium text-slate-700 dark:text-slate-300">
+        <span className="inline-flex min-h-11 items-center rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 px-3 py-1 text-xs font-medium text-slate-700 dark:text-slate-300">
             {children}
         </span>
     );
@@ -58,7 +58,7 @@ export default function CatalogFilters({
         <details
             ref={detailsRef}
             open={hasActiveFilters}
-            className="tc-filters rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-4 shadow-sm lg:p-5"
+            className="tc-filters rounded-[28px] bg-[#1d1d1f] p-4 lg:p-5"
         >
             <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-2 text-slate-950 dark:text-slate-50">
                 <span className="text-base font-semibold">Filtros</span>
@@ -144,7 +144,7 @@ export default function CatalogFilters({
                                 el total eran de otra seleccion que la que la
                                 pantalla mostraba. */}
                             <label
-                                className="flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl border border-slate-200 dark:border-slate-700/70 px-3 py-2 text-sm text-slate-700 dark:text-slate-300 transition hover:border-primary/40 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                className="flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl border border-slate-200 dark:border-white/10 px-3 py-2 text-sm text-slate-700 dark:text-slate-300 transition hover:border-primary/40 hover:bg-slate-50 dark:hover:bg-slate-800"
                             >
                                 <input
                                     type="radio"
@@ -158,7 +158,7 @@ export default function CatalogFilters({
                             {options.categories.map((category) => (
                                 <label
                                     key={category}
-                                    className="flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl border border-slate-200 dark:border-slate-700/70 px-3 py-2 text-sm text-slate-700 dark:text-slate-300 transition hover:border-primary/40 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                    className="flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl border border-slate-200 dark:border-white/10 px-3 py-2 text-sm text-slate-700 dark:text-slate-300 transition hover:border-primary/40 hover:bg-slate-50 dark:hover:bg-slate-800"
                                 >
                                     <input
                                         type="radio"
@@ -175,7 +175,7 @@ export default function CatalogFilters({
                         </div>
                     </fieldset>
                 ) : (
-                    <div className="rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-4">
+                    <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#1d1d1f] p-4">
                         <p className="text-sm font-medium text-slate-900 dark:text-slate-100">
                             Categoria actual
                         </p>
@@ -193,7 +193,7 @@ export default function CatalogFilters({
                         {/* Una marca por consulta, por lo mismo que las
                             categorias. */}
                         <label
-                            className="flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl border border-slate-200 dark:border-slate-700/70 px-3 py-2 text-sm text-slate-700 dark:text-slate-300 transition hover:border-primary/40 hover:bg-slate-50 dark:hover:bg-slate-800"
+                            className="flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl border border-slate-200 dark:border-white/10 px-3 py-2 text-sm text-slate-700 dark:text-slate-300 transition hover:border-primary/40 hover:bg-slate-50 dark:hover:bg-slate-800"
                         >
                             <input
                                 type="radio"
@@ -207,7 +207,7 @@ export default function CatalogFilters({
                         {options.brands.map((brand) => (
                             <label
                                 key={brand}
-                                className="flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl border border-slate-200 dark:border-slate-700/70 px-3 py-2 text-sm text-slate-700 dark:text-slate-300 transition hover:border-primary/40 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                className="flex min-h-11 cursor-pointer items-center gap-3 rounded-2xl border border-slate-200 dark:border-white/10 px-3 py-2 text-sm text-slate-700 dark:text-slate-300 transition hover:border-primary/40 hover:bg-slate-50 dark:hover:bg-slate-800"
                             >
                                 <input
                                     type="radio"
@@ -269,7 +269,7 @@ export default function CatalogFilters({
                 <div className="flex flex-col gap-3 sm:flex-row">
                     <button
                         type="submit"
-                        className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-white shadow-md transition hover:bg-primary/90"
+                        className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-white transition hover:bg-primary/90"
                     >
                         Aplicar filtros
                     </button>

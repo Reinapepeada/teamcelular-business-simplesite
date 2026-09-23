@@ -127,7 +127,7 @@ export default async function CategoryPage({
   const suspenseKey = `${category.name}:${JSON.stringify(filters)}`;
 
   return (
-    <div className="w-full bg-slate-50 dark:bg-slate-800/70 pb-16">
+    <div className="w-full bg-slate-50 dark:bg-[#1d1d1f] pb-16">
       <div className="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
         <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
           <Link href="/" className="transition hover:text-primary">
@@ -151,7 +151,7 @@ export default async function CategoryPage({
       />
 
       <section className="mx-auto max-w-screen-2xl px-4 pb-8 sm:px-6 lg:px-8">
-        <div className="rounded-[2rem] border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 px-6 py-8 shadow-sm sm:px-8">
+        <div className="rounded-[2rem] border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 px-6 py-8 sm:px-8">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
             Categoria destacada
           </p>
