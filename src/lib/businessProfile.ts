@@ -47,6 +47,8 @@ export const BUSINESS_PROFILE = {
     "https://www.facebook.com/TeamCelular/",
     "https://www.linkedin.com/company/teamcelular/",
     "https://maps.app.goo.gl/krFJfjDA4CuR83BK9",
+    "https://share.google/QKkG7KaIMWtcfUzia",
+    "https://share.google/ATqxS65okEfOxZJYA",
     "https://wa.me/5491151034595",
   ],
   knowsAbout: [
@@ -137,7 +139,8 @@ export const BRANCHES = [
     neighborhood: "Belgrano",
     latitude: -34.5638065,
     longitude: -58.4579996,
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=Amenabar%202032%20Belgrano%20CABA",
+    // Ficha de Google Business Profile de Belgrano (link de compartir del dueño).
+    mapUrl: "https://share.google/ATqxS65okEfOxZJYA",
     phone: "+54 11 3173-9099",
     whatsapp: "https://wa.me/5491131739099",
     whatsappText: "Hola Team Celular, quiero consultar con la sucursal Belgrano. Marca y modelo:",
