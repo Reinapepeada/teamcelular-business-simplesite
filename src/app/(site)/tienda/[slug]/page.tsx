@@ -126,13 +126,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             title,
             description,
             keywords,
-            // Product pages are a thin programmatic tail: the best performer
-            // drew 29 impressions and 0 clicks in 28 days, and the template's
-            // only unique text is name, price and warranty. They stay
-            // crawlable and linkable so the catalog still flows equity to
-            // category pages, but they no longer compete as index entries.
             robots: {
-                index: false,
+                index: true,
                 follow: true,
             },
             languages: {

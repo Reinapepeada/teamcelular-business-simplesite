@@ -1,4 +1,4 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 
 // Revalidate sitemap every 24 hours
 export const revalidate = 86400;
@@ -40,6 +40,38 @@ async function getCategoriesForSitemap(): Promise<string[]> {
     console.error("Error fetching store facets for sitemap:", error);
     return [];
   }
+}
+
+/** Solo slugs de publicaciones WEB activas; la API pública aplica ese filtro. */
+async function getProductsForSitemap(): Promise<string[]> {
+  const slugs = new Set<string>();
+  try {
+    let page = 1;
+    let total = 0;
+    do {
+      const endpoint = new URL(`/store/products?page=${page}&size=60`, STORE_API_URL);
+      const response = await fetch(endpoint, { cache: "no-store" });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = (await response.json()) as {
+        items?: { slug?: unknown }[];
+        total?: number;
+      };
+      if (!Array.isArray(data.items) || !Number.isSafeInteger(data.total) || data.total! < 0) {
+        throw new Error("Respuesta inválida del catálogo público");
+      }
+      for (const item of data.items) {
+        if (typeof item.slug === "string" && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(item.slug)) {
+          slugs.add(item.slug);
+        }
+      }
+      total = data.total!;
+      if (data.items.length === 0) break;
+      page += 1;
+    } while ((page - 1) * 60 < total);
+  } catch (error) {
+    console.error("Error fetching published products for sitemap:", error);
+  }
+  return [...slugs];
 }
 
 // Paginas principales con alta prioridad
@@ -306,7 +338,9 @@ const guidePages = [
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const currentDate = new Date();
   const lastMod = currentDate;
-  const categories = await getCategoriesForSitemap();
+  const [categories, productSlugs] = await Promise.all([
+    getCategoriesForSitemap(), getProductsForSitemap(),
+  ]);
 
   const mainSitemap = mainPages.map((page) => ({
     url: page.path ? `${SITE_URL}/${page.path}` : SITE_URL,
@@ -332,7 +366,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   }));
 
-  // Product pages remain noindex. Published category facets carry store SEO.
   const categorySlugs = Array.from(
     new Set(categories.map(slugify).filter(Boolean)),
   );
@@ -348,5 +381,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   }));
 
-  return [...mainSitemap, ...guidesSitemap, ...categoryEntries];
+  const productEntries = productSlugs.map((slug) => ({
+    url: `${SITE_URL}/tienda/${slug}`,
+    changeFrequency: "daily" as const,
+    priority: 0.65,
+    alternates: { languages: { "es-AR": `${SITE_URL}/tienda/${slug}` } },
+  }));
+
+  return [...mainSitemap, ...guidesSitemap, ...categoryEntries, ...productEntries];
 }

@@ -8,6 +8,7 @@ import { fetchOrderStatus, type StoreOrderStatus } from "@/lib/storeApi";
 import {
     claveDeLaVuelta,
     esperaAntesDeReintentar,
+    estadoDeEntrega,
     olvidarPedido,
     vueltaMostrable,
     type Intencion,
@@ -122,6 +123,7 @@ export default function ExitoClient({ intencion = "exito" }: { intencion?: Inten
     }, [params, clearCart, intencion]);
 
     const vista = vueltaMostrable(estado, intencion);
+    const entrega = estadoDeEntrega(estado);
     const esperando = !sinPedido && !seGastaronLosIntentos && vista.seguirPreguntando;
     const cobrado = !sinPedido && vista.desenlace === "pagado";
 
@@ -132,9 +134,9 @@ export default function ExitoClient({ intencion = "exito" }: { intencion?: Inten
           : vista.titulo;
 
     const detalle = sinPedido
-        ? "Si pagaste, el comprobante te llega por mail igual. Escribinos y lo buscamos con tu nombre."
+        ? "Si pagaste, conservá el comprobante y escribinos para buscar tu pedido."
         : seGastaronLosIntentos && !cobrado
-          ? "El aviso de Mercado Pago está demorando más de lo normal. Si el pago salió, lo vas a ver en tu mail; escribinos y lo confirmamos."
+          ? "El aviso de Mercado Pago está demorando. Revisá si hubo un cargo y escribinos con el comprobante antes de reintentar."
           : vista.detalle;
 
     return (
@@ -187,7 +189,25 @@ export default function ExitoClient({ intencion = "exito" }: { intencion?: Inten
                                 {plata(estado.total_amount, estado.currency)}
                             </dd>
                         </div>
+                        {entrega ? (
+                            <div className="flex justify-between gap-4">
+                                <dt className="text-slate-600 dark:text-slate-400">Entrega</dt>
+                                <dd className="text-right font-medium text-slate-900 dark:text-slate-100">{entrega}</dd>
+                            </div>
+                        ) : null}
+                        {estado.paid && estado.tracking_ref ? (
+                            <div className="flex justify-between gap-4">
+                                <dt className="text-slate-600 dark:text-slate-400">Seguimiento</dt>
+                                <dd className="break-all text-right font-medium text-slate-900 dark:text-slate-100">{estado.tracking_ref}</dd>
+                            </div>
+                        ) : null}
                     </dl>
+                ) : null}
+
+                {estado?.paid ? (
+                    <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
+                        Volvé a este enlace para consultar el estado actualizado de tu pedido.
+                    </p>
                 ) : null}
 
                 <div className="mt-8 flex flex-wrap gap-3">
