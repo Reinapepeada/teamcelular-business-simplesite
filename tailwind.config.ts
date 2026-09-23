@@ -15,6 +15,39 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // Sistema "teatro negro" (ver DESIGN.md): los neutros oscuros de slate se
+      // remapean a la escala Apple para que todas las paginas con dark: hereden
+      // el canvas negro sin tocar cada archivo.
+      colors: {
+        slate: {
+          ...colors.slate,
+          700: "#424245",
+          800: "#333336",
+          900: "#1d1d1f",
+          950: "#000000",
+        },
+        // Verde calido para WhatsApp/estado (el emerald de Tailwind es frio).
+        emerald: {
+          ...colors.emerald,
+          400: "#4cd964",
+          500: "#34c759",
+          600: "#248a3d",
+          700: "#1f7a35",
+        },
+        tc: {
+          action: "#1a6dff",
+          "action-hover": "#3d84ff",
+          link: "#6aa6ff",
+          silk: "#f5f5f7",
+          ash: "#86868b",
+          charcoal: "#1d1d1f",
+          smoke: "#333336",
+          graphite: "#424245",
+        },
+      },
+      borderRadius: {
+        card: "28px",
+      },
       screens: {
         nav: "1265px",
       },
@@ -37,8 +70,8 @@ const config: Config = {
         },
         dark: {
           colors: {
-            primary: "#5152b7",
-            secondary: "#22d3ee",
+            primary: "#1a6dff",
+            secondary: "#6aa6ff",
           },
         },
       },

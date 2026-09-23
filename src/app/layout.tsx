@@ -122,7 +122,7 @@ export default function RootLayout({
     readonly children: React.ReactNode;
 }) {
     return (
-        <html lang="es" suppressHydrationWarning>
+        <html lang="es" className="dark" style={{ colorScheme: "dark" }} suppressHydrationWarning>
             <head>
                 {/* ponytail: GA4 en root layout = todas las páginas. next/script, sin dep nueva. */}
                 <Script
@@ -143,10 +143,11 @@ gtag('config', 'G-1S64KMRF99');`}
 })(window, document, "clarity", "script", "y1c74jznnm");`}
                 </Script>
             </head>
-            <body className={`${inter.className} bg-white text-slate-950 dark:bg-slate-950 dark:text-slate-50`}>
+            <body className={`${inter.className} bg-black text-[#f5f5f7] antialiased`}>
                 <ThemeProvider
                     attribute="class"
-                    defaultTheme="light"
+                    defaultTheme="dark"
+                    forcedTheme="dark"
                     enableSystem={false}
                     storageKey="teamcelular-theme"
                     disableTransitionOnChange

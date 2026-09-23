@@ -66,7 +66,8 @@
    tapando el modal de WhatsApp. Matar el blur mientras haya un modal abierto
    garantiza que el lead siempre vea el selector de sucursal. */
 body:has(dialog[open]) [class*="backdrop-blur"],
-body:has(dialog[open]) .liquid-glass {
+body:has(dialog[open]) .liquid-glass,
+body:has(dialog[open]) .tc-glass {
 	-webkit-backdrop-filter: none !important;
 	backdrop-filter: none !important;
 }
@@ -124,4 +125,180 @@ body:has(dialog[open]) .liquid-glass {
 	.mt-14 { margin-top: 2rem; }
 	.mt-16 { margin-top: 2.25rem; }
 	.mt-20 { margin-top: 2.5rem; }
+}
+
+/* ============================================================
+   Sistema "teatro negro" — estandar visual para todo el sitio.
+   Canvas negro, texto silk, un solo color de accion (indigo Team)
+   y un solo color de link. Sin sombras: la profundidad sale del
+   contraste tonal y del radio de 28px. Ver DESIGN.md.
+   ============================================================ */
+:root {
+	--tc-canvas: #000000;
+	--tc-charcoal: #1d1d1f;
+	--tc-smoke: #333336;
+	--tc-graphite: #424245;
+	--tc-ash: #86868b;
+	--tc-silk: #f5f5f7;
+	--tc-action: #1a6dff;
+	--tc-action-hover: #3d84ff;
+	--tc-link: #6aa6ff;
+	--tc-radius-card: 28px;
+}
+
+/* Tipografia: tope de peso 600 y tracking negativo en titulares. Se aplica
+   globalmente para que las paginas existentes (font-extrabold) converjan. */
+h1, h2, h3, .font-extrabold, .font-black { font-weight: 600; }
+h1, h2 { letter-spacing: -0.015em; }
+body { letter-spacing: -0.011em; }
+
+@layer components {
+	.tc-eyebrow {
+		font-size: 17px;
+		line-height: 1.47;
+		color: var(--tc-silk);
+	}
+	.tc-display {
+		font-size: clamp(2.5rem, 7vw, 5rem);
+		line-height: 1.05;
+		font-weight: 600;
+		letter-spacing: -0.015em;
+		color: var(--tc-silk);
+		text-wrap: balance;
+	}
+	.tc-heading {
+		font-size: clamp(2rem, 4.5vw, 3.5rem);
+		line-height: 1.07;
+		font-weight: 600;
+		letter-spacing: -0.005em;
+		color: var(--tc-silk);
+		text-wrap: balance;
+	}
+	.tc-subheading {
+		font-size: clamp(1.3rem, 2.4vw, 1.75rem);
+		line-height: 1.14;
+		font-weight: 600;
+		letter-spacing: 0.007em;
+		color: var(--tc-silk);
+	}
+	.tc-body {
+		font-size: 17px;
+		line-height: 1.47;
+		letter-spacing: -0.022em;
+		color: var(--tc-ash);
+	}
+	.tc-section {
+		width: 100%;
+		max-width: 1200px;
+		margin-inline: auto;
+		padding: 5rem 1rem;
+	}
+	@media (min-width: 640px) { .tc-section { padding-inline: 1.5rem; } }
+	.tc-card {
+		border-radius: var(--tc-radius-card);
+		background: var(--tc-charcoal);
+		padding: 28px;
+	}
+	.tc-btn {
+		display: inline-flex;
+		min-height: 44px;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		border-radius: 9999px;
+		padding: 11px 22px;
+		font-size: 17px;
+		font-weight: 400;
+		letter-spacing: -0.022em;
+		transition: background-color .2s, color .2s;
+	}
+	.tc-btn:focus-visible { outline: 2px solid var(--tc-link); outline-offset: 3px; }
+	.tc-btn-primary { background: var(--tc-action); color: #fff; }
+	.tc-btn-primary:hover { background: var(--tc-action-hover); }
+	.tc-btn-ghost { color: rgba(255,255,255,.85); background: var(--tc-smoke); }
+	.tc-btn-ghost:hover { background: var(--tc-graphite); color: #fff; }
+	.tc-link { color: var(--tc-link); }
+	.tc-link:hover { text-decoration: underline; }
+	.tc-glass {
+		background: rgba(66,66,69,0.72);
+		-webkit-backdrop-filter: blur(20px) saturate(1);
+		backdrop-filter: blur(20px) saturate(1);
+	}
+}
+
+/* ---- Movimiento estilo Apple ----
+   ponytail: scroll-driven animations nativas (Chrome/Edge/Safari 26). Donde
+   no hay soporte o el usuario pide menos movimiento, todo queda estatico y
+   visible: nada depende de JS para mostrarse. */
+@keyframes tc-rise { from { opacity: 0; transform: translateY(48px); } }
+@keyframes tc-zoom { from { transform: scale(.86); border-radius: 48px; opacity: .4; } }
+@keyframes tc-light { from { color: #424245; } to { color: #f5f5f7; } }
+
+@media (prefers-reduced-motion: no-preference) {
+	/* Entrada del hero al cargar, escalonada. */
+	.tc-intro > * { animation: tc-rise .9s cubic-bezier(.2,.7,.2,1) both; }
+	.tc-intro > :nth-child(2) { animation-delay: .08s; }
+	.tc-intro > :nth-child(3) { animation-delay: .16s; }
+	.tc-intro > :nth-child(4) { animation-delay: .24s; }
+	.tc-intro > :nth-child(5) { animation-delay: .32s; }
+
+	@supports (animation-timeline: view()) {
+		.tc-reveal, .tc-stagger > * {
+			animation: tc-rise linear both;
+			animation-timeline: view();
+			animation-range: entry 0% cover 28%;
+		}
+		.tc-stagger > :nth-child(2) { animation-range: entry 8% cover 34%; }
+		.tc-stagger > :nth-child(3) { animation-range: entry 16% cover 40%; }
+		.tc-zoom {
+			animation: tc-zoom linear both;
+			animation-timeline: view();
+			animation-range: entry 0% cover 45%;
+		}
+		/* Frase que se "enciende" palabra por palabra al scrollear. */
+		.tc-light > span {
+			color: #424245;
+			animation: tc-light linear both;
+			animation-timeline: view();
+			animation-range: cover 25% cover 50%;
+		}
+	}
+}
+/* El H1 es el LCP: sin fade de opacidad para no retrasarlo. */
+@keyframes tc-rise-soft { from { transform: translateY(32px); } }
+@media (prefers-reduced-motion: no-preference) {
+	.tc-intro > h1 { animation-name: tc-rise-soft; }
+}
+/* Hero sticky: el contenedor alto (.tc-hero) define un view-timeline y la
+   foto, el oscurecido y las frases se animan contra el. Sin soporte o con
+   reduced-motion, el hero no es alto y las 3 frases se ven apiladas. */
+@keyframes tc-dim { from { opacity: 0; } }
+@keyframes tc-phrase {
+	0% { opacity: 0; transform: translateY(38svh); }
+	30%, 70% { opacity: 1; }
+	100% { opacity: 0; transform: translateY(-38svh); }
+}
+@keyframes tc-phrase-last {
+	0% { opacity: 0; transform: translateY(38svh); }
+	60%, 100% { opacity: 1; transform: none; }
+}
+.tc-hero { height: auto; }
+@media (prefers-reduced-motion: no-preference) {
+	@supports (animation-timeline: view()) {
+		.tc-hero { height: 400svh; view-timeline-name: --tc-hero; }
+		/* Recorte + fundido en los bordes: las frases recorren la foto pero nunca
+		   salen de ella ni pisan la barra de sucursales. */
+		.tc-phrases { overflow: hidden; -webkit-mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent); mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent); }
+		.tc-dim { animation: tc-dim linear both; animation-timeline: --tc-hero; animation-range: contain 0% contain 15%; }
+		.tc-phrases > p {
+			position: absolute;
+			inset-inline: 1.5rem;
+			animation: tc-phrase linear both;
+			animation-timeline: --tc-hero;
+		}
+		.tc-phrases > p:nth-child(1) { animation-range: contain 5% contain 38%; }
+		.tc-phrases > p:nth-child(2) { animation-range: contain 33% contain 66%; }
+		/* La ultima frase queda visible hasta que la tarjeta se va. */
+		.tc-phrases > p:nth-child(3) { animation-name: tc-phrase-last; animation-range: contain 61% contain 90%; }
+	}
 }
