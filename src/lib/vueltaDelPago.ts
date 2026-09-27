@@ -244,23 +244,23 @@ const ESPERANDO: VueltaMostrable = {
  */
 const DEMORADO: VueltaMostrable = {
     desenlace: "esperando",
-    titulo: "Tu pago está en camino",
+    titulo: "Tu pago sigue pendiente",
     detalle:
-        "Elegiste un medio que tarda en acreditarse. Cuando entre te avisamos por mail y preparamos el pedido; el stock te queda reservado mientras tanto.",
+        "La reserva de stock tiene un plazo corto. Si elegiste un medio de pago demorado, consultanos antes de completarlo.",
     seguirPreguntando: false,
 };
 
 /**
- * El pago no entró.
+ * El backend todavía no confirmó el pago.
  *
  * **El carrito no se toca.** Quien vuelve de un rechazo suele reintentar con
  * otra tarjeta, y hacerle rearmar el pedido es perderlo.
  */
 const RECHAZADO: VueltaMostrable = {
     desenlace: "rechazado",
-    titulo: "El pago no se completó",
+    titulo: "No pudimos confirmar el pago",
     detalle:
-        "No se hizo ningún cargo. Tu carrito quedó como estaba: podés intentar de nuevo con otro medio de pago.",
+        "Revisá si Mercado Pago registró un cargo antes de reintentar. Tu carrito sigue disponible; si hay un cargo, escribinos con el comprobante.",
     seguirPreguntando: false,
 };
 
@@ -278,13 +278,21 @@ export const vueltaMostrable = (
 ): VueltaMostrable => {
     // **Lo pagado se decide antes que la puerta.** Un pago que entró y volvió
     // por `/checkout/error` está pagado igual: si la puerta ganara, la pantalla
-    // le diría "no se hizo ningún cargo" a alguien que ya pagó.
+    // le diría que no pudo confirmar un pago que ya entró.
     if (estado?.paid) {
+        if (estado.status === "paid_pending_stock_commit") {
+            return {
+                desenlace: "pagado",
+                titulo: "Recibimos tu pago",
+                detalle: "Estamos revisando la disponibilidad de tu pedido. Te avisaremos cómo seguimos.",
+                seguirPreguntando: false,
+            };
+        }
         return {
             desenlace: "pagado",
             titulo: "¡Listo! Tu pago entró",
             detalle:
-                "Te mandamos el detalle por mail. Preparamos el pedido y te avisamos cuando salga.",
+                "Registramos tu pedido. Te avisaremos por mail cuando salga.",
             seguirPreguntando: false,
         };
     }
@@ -292,13 +300,33 @@ export const vueltaMostrable = (
     // **Sin respuesta del backend no se afirma nada sobre el cobro.** Volver
     // por la puerta de error dice por dónde redirigió Mercado Pago, no que no
     // se haya cobrado: si la consulta de estado todavía no contestó —o falló la
-    // red— decir "no se hizo ningún cargo" es dejar que la URL afirme
+    // red— afirmar que no hubo cargo es dejar que la URL afirme
     // exactamente lo que no puede afirmar.
     if (!estado) return ESPERANDO;
+
+    if (estado.status === "expired" || estado.status === "cancelled") {
+        return {
+            desenlace: "rechazado",
+            titulo: "Este pedido ya no se puede pagar",
+            detalle: "La reserva venció o el pedido fue cancelado. Volvé al carrito para iniciar una compra nueva.",
+            seguirPreguntando: false,
+        };
+    }
 
     if (intencion === "error") return RECHAZADO;
     if (intencion === "pendiente") return DEMORADO;
     return ESPERANDO;
+};
+
+export const estadoDeEntrega = (estado: StoreOrderStatus | null): string | null => {
+    if (!estado?.paid) return null;
+    if (estado.status === "paid_pending_stock_commit") return "Disponibilidad en revisión";
+    switch (estado.fulfillment_status) {
+        case "preparing": return "En preparación";
+        case "shipped": return "Despachado";
+        case "delivered": return "Entregado";
+        default: return "Pendiente de preparación";
+    }
 };
 
 /**

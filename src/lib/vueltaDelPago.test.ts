@@ -15,6 +15,7 @@ import assert from "node:assert/strict";
 import {
     claveDeLaVuelta,
     esperaAntesDeReintentar,
+    estadoDeEntrega,
     olvidarPedido,
     pedidoGuardado,
     pedidoYaNoSePuedePagar,
@@ -219,8 +220,10 @@ describe("vueltaMostrable segun la puerta por la que volvio", () => {
         assert.equal(v.seguirPreguntando, false);
     });
 
-    test("un rechazo dice que no se cobro nada", () => {
-        assert.match(vueltaMostrable(estado({ paid: false }), "error").detalle, /ningún cargo/i);
+    test("una vuelta de error no afirma que no hubo cargo", () => {
+        const v = vueltaMostrable(estado({ paid: false }), "error");
+        assert.doesNotMatch(v.detalle, /no se hizo ningún cargo/i);
+        assert.match(v.detalle, /revisá si Mercado Pago registró un cargo/i);
     });
 
     test("un pago demorado tampoco se espera con la pestana abierta", () => {
@@ -229,6 +232,7 @@ describe("vueltaMostrable segun la puerta por la que volvio", () => {
         const v = vueltaMostrable(estado({ paid: false }), "pendiente");
         assert.equal(v.seguirPreguntando, false);
         assert.notEqual(v.desenlace, "rechazado");
+        assert.doesNotMatch(v.detalle, /stock te queda reservado/i);
     });
 
     test("por la puerta de exito si espera, que es donde el aviso llega en segundos", () => {
@@ -393,6 +397,30 @@ describe("sin respuesta del backend no se afirma nada sobre el cobro", () => {
     test("un pago demorado, con respuesta, deja de preguntar", () => {
         assert.equal(vueltaMostrable(estado({ paid: false }), "pendiente").seguirPreguntando, false);
     });
+});
+
+describe("seguimiento del pedido", () => {
+    test("no muestra entrega antes de acreditar el pago", () => {
+        assert.equal(estadoDeEntrega(estado({ paid: false, fulfillment_status: "shipped" })), null);
+    });
+
+    test("distingue deuda de stock de un pedido en preparación", () => {
+        const pendiente = estado({ paid: true, status: "paid_pending_stock_commit", fulfillment_status: "pending" });
+        assert.equal(estadoDeEntrega(pendiente), "Disponibilidad en revisión");
+        assert.equal(vueltaMostrable(pendiente).titulo, "Recibimos tu pago");
+    });
+
+    test("muestra el estado de entrega registrado por el backend", () => {
+        assert.equal(estadoDeEntrega(estado({ paid: true, status: "paid", fulfillment_status: "preparing" })), "En preparación");
+        assert.equal(estadoDeEntrega(estado({ paid: true, status: "paid", fulfillment_status: "shipped" })), "Despachado");
+        assert.equal(estadoDeEntrega(estado({ paid: true, status: "paid", fulfillment_status: "delivered" })), "Entregado");
+    });
+});
+
+test("una reserva vencida deja de esperar confirmación de pago", () => {
+    const vista = vueltaMostrable(estado({ status: "expired", paid: false }), "exito");
+    assert.equal(vista.seguirPreguntando, false);
+    assert.equal(vista.desenlace, "rechazado");
 });
 
 describe("cuando un pedido ya no se puede pagar", () => {

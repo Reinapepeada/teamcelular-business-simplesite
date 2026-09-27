@@ -48,15 +48,14 @@ export default function ProductStructuredData({ product, images = [] }: ProductS
       name: "Team Celular Recoleta",
       address: `${BUSINESS_PROFILE.primaryAddress.street}, ${BUSINESS_PROFILE.primaryAddress.neighborhood}, CABA`,
     },
-    // Google requires a return policy (or shipping details) on Offer for
-    // product rich results. 30 days from delivery, per the store's policy.
+    // La politica publicada en /devoluciones da 10 dias corridos desde la entrega.
     hasMerchantReturnPolicy: {
       "@type": "MerchantReturnPolicy",
       applicableCountry: "AR",
       returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
-      merchantReturnDays: 30,
+      merchantReturnDays: 10,
       returnMethod: "https://schema.org/ReturnInStore",
-      name: "30 dias desde la entrega del producto",
+      name: "10 dias corridos desde la entrega del producto",
     },
   };
 
