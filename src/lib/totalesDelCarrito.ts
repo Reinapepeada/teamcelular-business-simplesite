@@ -7,8 +7,8 @@
  * el viejo. **Lo que se cobra lo pone el servidor** al crear el pedido, y ese
  * es el número que el comprador ve en Mercado Pago.
  *
- * Por eso no hay ninguna función acá que se llame "total": el total con envío
- * no existe de este lado.
+ * La cotización de envío también es estimada: el servidor vuelve a cotizar
+ * al crear el pedido.
  */
 
 /** Lo mínimo de un ítem del carrito para poder sumarlo. */
@@ -56,3 +56,9 @@ export const totalDeLinea = (item: ItemSumable): number =>
 /** Cómo se nombra una variante en el mensaje de WhatsApp: "Rojo / L". */
 export const nombreDeVariante = (item: ItemSumable): string =>
     [item?.variant?.color || "", item?.variant?.size || ""].filter(Boolean).join(" / ");
+
+/** Sin cotización válida no se presenta el envío como gratuito. */
+export const totalEstimadoConEnvio = (productos: number, envio: number | null): number | null =>
+    envio === null || !Number.isFinite(envio) || envio < 0 || !Number.isFinite(productos) || productos < 0
+        ? null
+        : Math.round((productos + envio) * 100) / 100;

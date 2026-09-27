@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { PROVINCIAS } from "@/lib/provincias";
 import useCartStore from "@/store/cartStore";
 import { prepararCheckout } from "@/lib/checkoutKey";
 import {
@@ -47,15 +48,7 @@ import {
  * misma facilidad.
  */
 
-const PROVINCIAS = [
-    ["B", "Buenos Aires"], ["C", "CABA"], ["K", "Catamarca"], ["H", "Chaco"],
-    ["U", "Chubut"], ["X", "Córdoba"], ["W", "Corrientes"], ["E", "Entre Ríos"],
-    ["P", "Formosa"], ["Y", "Jujuy"], ["L", "La Pampa"], ["F", "La Rioja"],
-    ["M", "Mendoza"], ["N", "Misiones"], ["Q", "Neuquén"], ["R", "Río Negro"],
-    ["A", "Salta"], ["J", "San Juan"], ["D", "San Luis"], ["Z", "Santa Cruz"],
-    ["S", "Santa Fe"], ["G", "Santiago del Estero"], ["V", "Tierra del Fuego"],
-    ["T", "Tucumán"],
-] as const;
+
 
 const pesos = (monto: number, moneda = "ARS") =>
     new Intl.NumberFormat("es-AR", { style: "currency", currency: moneda }).format(monto);
@@ -188,7 +181,7 @@ const propsDeCampo = (id: string, error?: string) => ({
 });
 
 export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProps) {
-    const { cart } = useCartStore();
+    const { cart, destinoEnvio } = useCartStore();
     const dialogRef = useRef<HTMLDialogElement>(null);
 
     const [datos, setDatos] = useState<DatosDeCompra>({
@@ -571,7 +564,11 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                                     name="entrega"
                                     className="mt-1"
                                     checked={esEnvio}
-                                    onChange={() => setDatos({ ...datos, entrega: "envio" })}
+                                    onChange={() => setDatos({ ...datos, entrega: "envio", direccion: {
+                                        ...datos.direccion,
+                                        province: datos.direccion?.province || destinoEnvio.province,
+                                        postal_code: datos.direccion?.postal_code || destinoEnvio.postal_code,
+                                    } })}
                                 />
                                 Envío a domicilio
                             </label>

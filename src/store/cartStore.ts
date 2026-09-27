@@ -27,6 +27,8 @@ export interface CartItem {
 }
 
 interface CartState {
+    destinoEnvio: { province: string; postal_code: string };
+    setDestinoEnvio: (destino: { province: string; postal_code: string }) => void;
     open: boolean;
     openCart: () => void;
     closeCart: () => void;
@@ -65,6 +67,8 @@ function calculateTotals(cart: CartItem[]) {
 const useCartStore = create<CartState>()(
     persist(
         (set, get) => ({
+            destinoEnvio: { province: "", postal_code: "" },
+            setDestinoEnvio: (destinoEnvio) => set({ destinoEnvio }),
             open: false,
             openCart: () => set({ open: true }),
             closeCart: () => set({ open: false }),
@@ -163,7 +167,7 @@ const useCartStore = create<CartState>()(
             name: 'cart-storage',
             storage: createJSONStorage(() => localStorage),
             // Abrir el carrito es transitorio; recargar conserva solo la compra.
-            partialize: ({ cart, totalItems, totalPrice }) => ({ cart, totalItems, totalPrice }),
+            partialize: ({ cart, totalItems, totalPrice, destinoEnvio }) => ({ cart, totalItems, totalPrice, destinoEnvio }),
         }
     )
 );

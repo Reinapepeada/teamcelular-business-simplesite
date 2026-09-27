@@ -21,14 +21,18 @@ test("el carrito conserva condición, admite compras viejas y no persiste su ape
     });
     const { default: useCartStore } = await import("@/store/cartStore");
     useCartStore.getState().clearCart();
+    assert.deepEqual(useCartStore.getState().destinoEnvio, { province: "", postal_code: "" });
+    useCartStore.getState().setDestinoEnvio({ province: "B", postal_code: "1900" });
     useCartStore.getState().addToCart(product, null, 1, product.storeSlug);
     useCartStore.getState().openCart();
     assert.equal(useCartStore.getState().open, true);
     const persisted = JSON.parse(saved!);
     assert.equal(persisted.state.open, undefined);
+    assert.deepEqual(persisted.state.destinoEnvio, { province: "B", postal_code: "1900" });
     assert.equal(persisted.state.cart[0].product.storeCondition, "used");
     useCartStore.getState().closeCart();
     await useCartStore.persist.rehydrate();
+    assert.deepEqual(useCartStore.getState().destinoEnvio, { province: "B", postal_code: "1900" });
     assert.equal(useCartStore.getState().open, false);
     assert.equal(etiquetaCondicion(useCartStore.getState().cart[0].product.storeCondition), "Usado");
 

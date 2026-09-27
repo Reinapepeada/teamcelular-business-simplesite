@@ -72,6 +72,10 @@ export interface StoreOrderStatus {
     status: string;
     /** Sale de la base, no de la redirección del proveedor. */
     paid: boolean;
+    payment_result?: "none" | "pending" | "approved" | "rejected" | "reversed";
+    reason_code?: "insufficient_funds" | "invalid_card_data" | "rejected_by_bank" | "expired" | "other" | null;
+    can_retry?: boolean;
+    tracking_url?: string | null;
     total_amount: number;
     currency: string;
     fulfillment_status: string;

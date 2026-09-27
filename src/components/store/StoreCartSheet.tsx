@@ -8,9 +8,13 @@ import { cargaDirectaImagen } from "@/lib/storeCatalog";
 import useCartStore, { type CartItem } from "@/store/cartStore";
 import CheckoutDialog from "./CheckoutDialog";
 import ProductCondition from "./ProductCondition";
+import { PROVINCIAS } from "@/lib/provincias";
+import { aLineasDeCheckout, carritoComprable } from "@/lib/cartLines";
+import { quoteShipping, StoreApiError, type ShippingQuote } from "@/lib/storeApi";
 import {
     nombreDeVariante,
     totalDeLinea,
+    totalEstimadoConEnvio,
     totalesDelCarrito,
 } from "@/lib/totalesDelCarrito";
 
@@ -41,11 +45,51 @@ export default function StoreCartSheet() {
     const [comprando, setComprando] = useState(false);
     const dialogRef = useRef<HTMLDialogElement>(null);
     const triggerRef = useRef<HTMLButtonElement>(null);
-    const { cart, removeFromCart, updateQuantity, clearCart, open, openCart, closeCart } = useCartStore();
+    const { cart, removeFromCart, updateQuantity, clearCart, open, openCart, closeCart, destinoEnvio, setDestinoEnvio } = useCartStore();
 
     // Las sumas viven en src/lib/totalesDelCarrito.ts, que explica por que
     // esto es un estimado: los precios salen de lo que el navegador guardo.
     const { unidades: totalItems, productos: totalPrice } = totalesDelCarrito(cart);
+    const [cotizacion, setCotizacion] = useState<{ clave: string; opcion: ShippingQuote["cheapest"] } | null>(null);
+    const [falloEnvio, setFalloEnvio] = useState<{ clave: string; mensaje: string } | null>(null);
+    const [calculando, setCalculando] = useState(false);
+    const solicitudEnvio = useRef(0);
+    const lineasEnvio = aLineasDeCheckout(cart.map(item => ({ slug: item.storeSlug, quantity: item.quantity, nombre: item.product.name })));
+    const claveEnvio = JSON.stringify([destinoEnvio, lineasEnvio, totalPrice]);
+    const claveActual = useRef(claveEnvio);
+    useEffect(() => {
+        claveActual.current = claveEnvio;
+    }, [claveEnvio]);
+    const envio = cotizacion?.clave === claveEnvio ? cotizacion.opcion : null;
+    const totalEstimado = totalEstimadoConEnvio(totalPrice, envio?.price ?? null);
+
+    const calcularEnvio = async () => {
+        const solicitud = ++solicitudEnvio.current;
+        setCotizacion(null);
+        setFalloEnvio(null);
+        if (!carritoComprable(lineasEnvio)) {
+            setFalloEnvio({ clave: claveEnvio, mensaje: "Volvé a agregar los productos desde la tienda para calcular el envío." });
+            return;
+        }
+        setCalculando(true);
+        try {
+            const resultado = await quoteShipping(destinoEnvio.province, destinoEnvio.postal_code.trim(), lineasEnvio.lineas);
+            if (solicitud !== solicitudEnvio.current || claveActual.current !== claveEnvio) return;
+            if (totalEstimadoConEnvio(totalPrice, resultado.cheapest?.price ?? null) === null) throw new Error("Cotización inválida");
+            setCotizacion({ clave: claveEnvio, opcion: resultado.cheapest });
+        } catch (error) {
+            if (solicitud !== solicitudEnvio.current || claveActual.current !== claveEnvio) return;
+            // El contrato agrupa falta de cobertura, productos sin envío y fallas del proveedor.
+            const mensaje = error instanceof StoreApiError && error.code === "SHIPPING_UNAVAILABLE"
+                ? "No hay envío disponible para estos productos o este código postal. Revisá el destino o continuá con retiro."
+                : error instanceof StoreApiError && error.code === "PRODUCT_NOT_FOUND"
+                  ? "Un producto ya no está disponible. Revisá el carrito."
+                  : "No pudimos calcular el envío. Revisá provincia y código postal, o continuá con retiro.";
+            setFalloEnvio({ clave: claveEnvio, mensaje });
+        } finally {
+            if (solicitud === solicitudEnvio.current) setCalculando(false);
+        }
+    };
 
     useEffect(() => {
         const dialog = dialogRef.current;
@@ -218,9 +262,28 @@ export default function StoreCartSheet() {
                             </article>
                         ))
                     )}
+                    {cart.length > 0 && (
+                        <form className="mb-4 space-y-3" onSubmit={event => { event.preventDefault(); void calcularEnvio(); }}>
+                            <h2 className="font-semibold">Calcular envío</h2>
+                            <label className="block text-sm">Provincia
+                                <select required value={destinoEnvio.province} onChange={event => setDestinoEnvio({ ...destinoEnvio, province: event.target.value })} className="mt-1 w-full rounded-lg border p-2 text-base dark:bg-slate-900">
+                                    <option value="">Elegí una</option>
+                                    {PROVINCIAS.map(([codigo, nombre]) => <option key={codigo} value={codigo}>{nombre}</option>)}
+                                </select>
+                            </label>
+                            <label className="block text-sm">Código postal
+                                <input required autoComplete="postal-code" value={destinoEnvio.postal_code} onChange={event => setDestinoEnvio({ ...destinoEnvio, postal_code: event.target.value })} className="mt-1 w-full rounded-lg border p-2 text-base dark:bg-slate-900" />
+                            </label>
+                            <button disabled={calculando || !destinoEnvio.postal_code.trim()} className="min-h-11 rounded-full border px-4 text-sm disabled:opacity-50">{calculando ? "Calculando…" : "Calcular envío"}</button>
+                            <div aria-live="polite" className="text-sm">
+                                {envio && <p>Envío estimado: ${formatPrice(envio.price)}{envio.hours != null && Number.isFinite(envio.hours) && envio.hours > 0 ? ` · Plazo estimado: ${envio.hours} horas` : ""}</p>}
+                                {falloEnvio?.clave === claveEnvio && <p>{falloEnvio.mensaje}</p>}
+                            </div>
+                        </form>
+                    )}
                 </div>
 
-                <div className="border-t border-slate-200 px-5 py-4 dark:border-slate-700">
+                <div className="shrink-0 border-t border-slate-200 px-5 py-4 dark:border-slate-700">
                     <div className="flex items-center justify-between text-sm text-slate-600 dark:text-slate-400">
                         {/* Estimado de verdad: el envio lo cotiza el servidor
                             al confirmar, y el total final sale de ahi. */}
@@ -229,8 +292,9 @@ export default function StoreCartSheet() {
                             ${formatPrice(totalPrice)}
                         </span>
                     </div>
+                    {totalEstimado !== null && <p className="mt-2 flex justify-between font-semibold"><span>Total estimado</span><span>${formatPrice(totalEstimado)}</span></p>}
                     <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-                        El envío y el total final se confirman en el siguiente paso.
+                        El envío se vuelve a calcular al crear el pedido. Vas a ver el total final antes de pagar.
                     </p>
                     <div className="mt-4 flex flex-col gap-3">
                         {/* **Comprar es la salida principal, no el chat.** El
