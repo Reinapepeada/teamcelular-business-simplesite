@@ -11,8 +11,8 @@ import { resumenParaConfirmar } from "./resumenDelPedido";
 import { totalEstimadoConEnvio } from "./totalesDelCarrito";
 import { StoreApiError } from "./storeApi";
 import type { ItemComprable } from "./cartLines";
-import { aLineasDeCheckout, carritoComprable } from "./cartLines";
-import { intentoDeCheckout, type AlmacenClave } from "./checkoutKey";
+import { aLineasDeCheckout, carritoComprable, productosSoloRetiro } from "./cartLines";
+import { intentoDeCheckout, olvidarClave, type AlmacenClave } from "./checkoutKey";
 
 export type Entrega = "envio" | "retiro";
 
@@ -109,6 +109,11 @@ export const validarDatos = (
         if (!d.postal_code?.trim()) errores.postal_code = "Poné el código postal.";
     }
 
+    const soloRetiro = productosSoloRetiro(items);
+    if (datos.entrega === "envio" && soloRetiro.length) {
+        errores.carrito = `Solo retiro en el local: ${soloRetiro.join(", ")}. Elegí retirar en el local para continuar.`;
+    }
+
     const resumen = aLineasDeCheckout(items);
     if (!carritoComprable(resumen)) {
         errores.carrito = resumen.hayQueReagregar.length
@@ -141,14 +146,17 @@ export const armarPedido = (
 
     if (datos.entrega === "envio") {
         const d = datos.direccion ?? {};
-        // El pedido todavía guarda calle y complemento como dos textos: se
-        // arman acá con las partes que el comprador escribió por separado.
+        // Conservamos los textos combinados para versiones anteriores del backend.
         const piso = d.floor?.trim();
         const depto = d.apartment?.trim();
         const complemento = [piso && `Piso ${piso}`, depto && `Depto ${depto}`]
             .filter(Boolean)
             .join(" ");
         payload.shipping_address = {
+            street_name: d.street?.trim(),
+            street_number: d.number?.trim(),
+            floor: piso || null,
+            apartment: depto || null,
             street: [d.street?.trim(), d.number?.trim()].filter(Boolean).join(" "),
             city: d.city!.trim(),
             province: d.province!.trim(),
@@ -334,6 +342,13 @@ export const problemaDeCheckout = (causa: unknown, items: ItemComprable[] = []):
             const item = items.find(i => i.slug === error.slug);
             return { mensaje: "Ya no hay stock de " + (item?.nombre || "uno de los productos") + ". Quitalo del carrito para continuar.", quitarSlug: item?.slug || undefined };
         }
+        if (code === "PICKUP_ONLY") {
+            const slugs = error.slugs.length ? error.slugs : error.slug ? [error.slug] : [];
+            const nombres = slugs.length
+                ? slugs.map(slug => items.find(item => item.slug === slug)?.nombre || slug)
+                : productosSoloRetiro(items);
+            return { mensaje: `Solo retiro en el local: ${nombres.join(", ") || "uno o más productos del carrito"}. Elegí retirar en el local para continuar.`, ofrecerRetiro: true };
+        }
         if (code === "SHIPPING_UNAVAILABLE") {
             // También incluye fallas del proveedor: no afirma falta de cobertura.
             return { mensaje: "No pudimos cotizar el envío. Probá de nuevo o retirá en el local.", ofrecerRetiro: true };
@@ -342,6 +357,7 @@ export const problemaDeCheckout = (causa: unknown, items: ItemComprable[] = []):
             const campos: ErroresDeCompra = {};
             const mapa: Record<string, (keyof ErroresDeCompra)[]> = {
                 customer_name: ["nombre"], customer_email: ["email"], customer_phone: ["telefono"],
+                street_name: ["street"], street_number: ["number"],
                 street: ["street", "number"], extra: ["floor", "apartment"], city: ["city"],
                 province: ["province"], postal_code: ["postal_code"], floor: ["floor"], apartment: ["apartment"],
             };
@@ -380,4 +396,19 @@ export const reservarYPagarSiCoincide = async (
 export const recuperarIntento = async (almacen: AlmacenClave, puertos: PuertosDeCompra) => {
     const payload = intentoDeCheckout(almacen);
     return payload ? reservar(puertos, payload) : null;
+};
+
+/** Solo un rechazo explícito permite descartar el intento; una respuesta perdida se recupera. */
+export const crearPedidoConRecuperacion = async (
+    crear: PuertosDeCompra["crearPedido"], payload: CheckoutPayload, almacen: AlmacenClave,
+    locks: LockManager | undefined = globalThis.navigator?.locks,
+): Promise<StoreOrder> => {
+    try {
+        return await crear(payload);
+    } catch (error) {
+        if (error instanceof StoreApiError && error.status === 422 && error.code.toUpperCase() === "PICKUP_ONLY" && locks) {
+            await locks.request("tc.checkout", () => olvidarClave(almacen, payload.checkout_key));
+        }
+        throw error;
+    }
 };

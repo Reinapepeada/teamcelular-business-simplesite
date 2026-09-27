@@ -72,6 +72,7 @@ export interface Branch {
 }
 
 export interface Product {
+  shipping_enabled?: boolean;
   /** Opcional para conservar los carritos guardados antes del catálogo Fixbee. */
   storeCondition?: string;
   id: number;

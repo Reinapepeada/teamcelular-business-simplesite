@@ -14,6 +14,7 @@ import {
 import {
     abrirElPago,
     armarPedido,
+    crearPedidoConRecuperacion,
     reservarYPagarSiCoincide,
     recuperarIntento,
     revisarPedido,
@@ -28,7 +29,7 @@ import {
     type DireccionDelFormulario,
     type ErroresDeCompra,
 } from "@/lib/checkoutFlow";
-import { aLineasDeCheckout } from "@/lib/cartLines";
+import { aLineasDeCheckout, productosSoloRetiro } from "@/lib/cartLines";
 import { huellaDelCarrito } from "@/lib/checkoutKey";
 import { queHacerConElPendiente } from "@/lib/pedidoPendiente";
 import { whatsappUrl } from "@/lib/businessProfile";
@@ -42,6 +43,7 @@ import {
     requestPaymentLink,
     type PickupPoint,
     type StoreOrder,
+    StoreApiError,
 } from "@/lib/storeApi";
 
 /**
@@ -62,6 +64,7 @@ const pesos = (monto: number, moneda = "ARS") =>
 
 interface CheckoutDialogProps {
     abierto: boolean;
+    retiroSolicitado?: number;
     onCerrar: () => void;
 }
 
@@ -197,7 +200,7 @@ const propsDeCampo = (id: string, error?: string) => ({
     "aria-describedby": error ? `${id}-error` : undefined,
 });
 
-export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProps) {
+export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0 }: CheckoutDialogProps) {
     const router = useRouter();
     const { cart, destinoEnvio, removeFromCart } = useCartStore();
     const dialogRef = useRef<HTMLDialogElement>(null);
@@ -234,6 +237,18 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
     // El local donde se retira de verdad: lo elige el backend, no esta página.
     // Si no se puede saber, la opción queda sin detalle antes que con uno falso.
     const [retiro, setRetiro] = useState<PickupPoint | null>(null);
+
+    useEffect(() => {
+        if (!retiroSolicitado) return;
+        // Cambia la entrega sin borrar los datos personales ya escritos.
+        const frame = requestAnimationFrame(() => {
+            setDatos(previos => ({ ...previos, entrega: "retiro" }));
+            setRevision(null);
+            setErrores({});
+            setFallo(null);
+        });
+        return () => cancelAnimationFrame(frame);
+    }, [retiroSolicitado]);
 
     useEffect(() => {
         if (!abierto) return;
@@ -286,6 +301,7 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                 slug: item.storeSlug,
                 quantity: item.quantity,
                 nombre: item.product?.name,
+                shipping_enabled: item.shipping_enabled,
             })),
         [cart]
     );
@@ -348,7 +364,7 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
         if (!payload) return false;
         setIntentoPendiente(true);
         const pedido = await recuperarIntento(window.localStorage, {
-            crearPedido: createOrder,
+            crearPedido: payload => crearPedidoConRecuperacion(createOrder, payload, window.localStorage),
             pedirLink: requestPaymentLink,
             recordar: pedido => recordarPedido(window.localStorage, {
                 clave: pedido.commerce_key, checkoutKey: payload.checkout_key,
@@ -375,7 +391,13 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
         try {
             await recuperarCompra();
         } catch (error) {
-            if (error instanceof ErrorDeCompra && error.pedido && mensajePedidoTerminado(error.pedido)) {
+            if (error instanceof ErrorDeCompra && error.causa instanceof StoreApiError && error.causa.code === "PICKUP_ONLY") {
+                const p = problemaDeCheckout(error, items);
+                setProblema(p);
+                setFallo(p.mensaje);
+                setRevision(null);
+                setIntentoPendiente(!!intentoDeCheckout(window.localStorage));
+            } else if (error instanceof ErrorDeCompra && error.pedido && mensajePedidoTerminado(error.pedido)) {
                 if (error.pedido.status === "paid" || error.pedido.status === "paid_pending_stock_commit") {
                     router.push("/checkout/exito");
                 } else {
@@ -442,7 +464,7 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
 
     const confirmarRevision = async () => {
         if (!revision || ocupado.current || pedidoPendiente || aConfirmar) return;
-        if (revision.huella !== huellaActual || revision.productos !== estimadoDeProductos) {
+        if (hayErrores(validarDatos(revision.datos, items)) || revision.huella !== huellaActual || revision.productos !== estimadoDeProductos) {
             setRevision(null);
             setFallo("El carrito cambió. Revisá el pedido otra vez.");
             return;
@@ -461,7 +483,7 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
             setIntentoPendiente(true);
             const { pedido, checkoutUrl } = await reservarYPagarSiCoincide(
                 {
-                    crearPedido: createOrder,
+                    crearPedido: payload => crearPedidoConRecuperacion(createOrder, payload, window.localStorage),
                     pedirLink: requestPaymentLink,
                     // Se anota apenas el pedido existe, antes de pedir el link:
                     // es lo que permite volver si el pago no llega a abrirse, y
@@ -495,7 +517,9 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
             if (error instanceof ErrorDeCompra) {
                 const p = problemaDeCheckout(error, items);
                 setProblema(p);
-                setFallo(error.pedido ? p.mensaje : "No pudimos confirmar tu pedido. Recuperalo antes de cambiar los datos o pagar.");
+                const soloRetiro = error.causa instanceof StoreApiError && error.causa.code === "PICKUP_ONLY";
+                if (soloRetiro) setIntentoPendiente(!!intentoDeCheckout(window.localStorage));
+                setFallo(error.pedido || soloRetiro ? p.mensaje : "No pudimos confirmar tu pedido. Recuperalo antes de cambiar los datos o pagar.");
                 setErrores(p.campos ?? {});
                 setRevision(null);
                 if (error.pedido && mensajePedidoTerminado(error.pedido)) {
@@ -612,6 +636,7 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
     if (!abierto) return null;
 
     const numeroPedido = (aConfirmar ?? pedidoPendiente)?.commerce_key;
+    const soloRetiro = productosSoloRetiro(items);
     const esEnvio = datos.entrega === "envio";
     const cambiarDireccion = (cambio: Partial<DireccionDelFormulario>) =>
         setDatos({ ...datos, direccion: { ...datos.direccion, ...cambio } });
@@ -753,6 +778,8 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                                     name="entrega"
                                     className="mt-1"
                                     checked={esEnvio}
+                                    disabled={soloRetiro.length > 0}
+                                    aria-describedby={soloRetiro.length ? "solo-retiro" : undefined}
                                     onChange={() => setDatos({ ...datos, entrega: "envio", direccion: {
                                         ...datos.direccion,
                                         province: datos.direccion?.province || destinoEnvio.province,
@@ -760,6 +787,7 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                                     } })}
                                 />
                                 Envío a domicilio
+                                {soloRetiro.length > 0 && <span id="solo-retiro" className="block text-sm">Solo retiro en el local: {soloRetiro.join(", ")}. Elegí retirar en el local.</span>}
                             </label>
                         </div>
                     </fieldset>
@@ -853,7 +881,7 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                     {fallo && (
                         <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-500/10 dark:text-red-300">
                             <p role="alert">{fallo}</p>
-                            {!pedidoPendiente && problema?.ofrecerRetiro && <button type="button" className="min-h-11 underline" onClick={() => { setDatos({ ...datos, entrega: "retiro" }); setFallo(null); setProblema(null); }}>Retirar en el local</button>}
+                            {!pedidoPendiente && problema?.ofrecerRetiro && <button type="button" className="min-h-11 underline" onClick={() => { setDatos({ ...datos, entrega: "retiro" }); setErrores({}); setRevision(null); setFallo(null); setProblema(null); }}>Retirar en el local</button>}
                             {!pedidoPendiente && problema?.quitarSlug && <button type="button" className="min-h-11 underline" onClick={() => { cart.filter(i => i.storeSlug === problema.quitarSlug).forEach(i => removeFromCart(i.cartKey)); setFallo(null); setProblema(null); }}>Quitar del carrito</button>}
                             {pedidoPendiente && (
                                 <>

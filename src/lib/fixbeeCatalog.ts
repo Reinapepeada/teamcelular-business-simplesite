@@ -80,6 +80,7 @@ const garantia = (meses: number | null) =>
 export const productoDeVidriera = (p: CatalogProduct): VidrieraProduct => ({
     id: 0,
     storeSlug: p.slug,
+    shipping_enabled: p.shipping_enabled !== false,
     storeCondition: p.condition,
     serial_number: "",
     name: p.name,

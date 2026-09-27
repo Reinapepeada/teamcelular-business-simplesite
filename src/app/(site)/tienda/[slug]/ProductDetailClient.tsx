@@ -509,7 +509,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                     ¿Tenés dudas sobre compatibilidad? <a href={BUSINESS_PROFILE.whatsapp} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">Consultanos por WhatsApp</a> con el modelo de tu equipo.
                 </p>
                 <p className="mt-2 text-sm text-muted-foreground">
-                    Retiro en el local o envío a domicilio. Las opciones disponibles se confirman al comprar.
+                    {product.shipping_enabled === false ? "Solo retiro en el local" : "Retiro en el local o envío a domicilio. Las opciones disponibles se confirman al comprar."}
                 </p>
             </section>
             

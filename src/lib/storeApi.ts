@@ -14,6 +14,7 @@ export const STORE_API_BASE = (process.env.NEXT_PUBLIC_STORE_API_URL ?? "").repl
 
 /** Un producto del catálogo público. No trae `id`: ver el comentario de arriba. */
 export interface StoreProduct {
+    shipping_enabled?: boolean;
     slug: string | null;
     name: string;
     description: string | null;
@@ -43,6 +44,10 @@ export interface StoreLine {
 }
 
 export interface ShippingAddress {
+    street_name?: string;
+    street_number?: string;
+    floor?: string | null;
+    apartment?: string | null;
     street: string;
     city: string;
     province: string;
@@ -98,14 +103,16 @@ export class StoreApiError extends Error {
     readonly slug: string | null;
 
     readonly field: string | null;
+    readonly slugs: string[];
 
-    constructor(message: string, status: number, code: string, slug: string | null = null, field: string | null = null) {
+    constructor(message: string, status: number, code: string, slug: string | null = null, field: string | null = null, slugs: string[] = []) {
         super(message);
         this.name = "StoreApiError";
         this.status = status;
         this.code = code;
         this.slug = slug;
         this.field = field;
+        this.slugs = slugs;
     }
 }
 
@@ -124,7 +131,8 @@ export const parseStoreError = (status: number, body: unknown): StoreApiError =>
     const detalles = error.details ?? {};
     const slug = typeof detalles.slug === "string" ? detalles.slug : null;
     const message = typeof error.message === "string" ? error.message : "No se pudo completar la operación.";
-    return new StoreApiError(message, status, code, slug, typeof detalles.field === "string" ? detalles.field : null);
+    return new StoreApiError(message, status, code, slug, typeof detalles.field === "string" ? detalles.field : null,
+        Array.isArray(detalles.slugs) ? detalles.slugs.filter((slug: unknown): slug is string => typeof slug === "string") : []);
 };
 
 export const storeRequestUrl = (path: string, server = typeof window === "undefined") => {

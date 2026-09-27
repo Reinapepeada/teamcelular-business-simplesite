@@ -143,6 +143,10 @@ describe("el pedido que se manda", () => {
 
         assert.deepEqual(p.shipping_address, {
             street: "Rivadavia 100",
+            street_name: "Rivadavia",
+            street_number: "100",
+            floor: null,
+            apartment: null,
             city: "La Plata",
             province: "B",
             postal_code: "1900",
@@ -158,6 +162,8 @@ describe("el pedido que se manda", () => {
         );
 
         assert.equal(p.shipping_address?.extra, "Piso 5 Depto B");
+        assert.equal(p.shipping_address?.floor, "5");
+        assert.equal(p.shipping_address?.apartment, "B");
     });
 
     test("no manda telefono vacio", () => {

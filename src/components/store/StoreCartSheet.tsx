@@ -6,10 +6,11 @@ import Link from "next/link";
 import { buildProductSlug } from "@/lib/productSlug";
 import { cargaDirectaImagen } from "@/lib/storeCatalog";
 import useCartStore, { type CartItem } from "@/store/cartStore";
+import { problemaDeCheckout } from "@/lib/checkoutFlow";
 import CheckoutDialog from "./CheckoutDialog";
 import ProductCondition from "./ProductCondition";
 import { PROVINCIAS } from "@/lib/provincias";
-import { aLineasDeCheckout, carritoComprable } from "@/lib/cartLines";
+import { aLineasDeCheckout, carritoComprable, productosSoloRetiro } from "@/lib/cartLines";
 import { quoteShipping, StoreApiError, type ShippingQuote } from "@/lib/storeApi";
 import {
     nombreDeVariante,
@@ -43,6 +44,7 @@ function getProductStock(item: CartItem) {
 export default function StoreCartSheet() {
     const [confirmarVaciado, setConfirmarVaciado] = useState(false);
     const [comprando, setComprando] = useState(false);
+    const [retiroSolicitado, setRetiroSolicitado] = useState(0);
     const dialogRef = useRef<HTMLDialogElement>(null);
     const triggerRef = useRef<HTMLButtonElement>(null);
     const { cart, removeFromCart, updateQuantity, clearCart, open, openCart, closeCart, destinoEnvio, setDestinoEnvio } = useCartStore();
@@ -51,19 +53,22 @@ export default function StoreCartSheet() {
     // esto es un estimado: los precios salen de lo que el navegador guardo.
     const { unidades: totalItems, productos: totalPrice } = totalesDelCarrito(cart);
     const [cotizacion, setCotizacion] = useState<{ clave: string; opcion: ShippingQuote["cheapest"] } | null>(null);
-    const [falloEnvio, setFalloEnvio] = useState<{ clave: string; mensaje: string } | null>(null);
+    const [falloEnvio, setFalloEnvio] = useState<{ clave: string; mensaje: string; soloRetiro?: boolean } | null>(null);
     const [calculando, setCalculando] = useState(false);
     const solicitudEnvio = useRef(0);
-    const lineasEnvio = aLineasDeCheckout(cart.map(item => ({ slug: item.storeSlug, quantity: item.quantity, nombre: item.product.name })));
-    const claveEnvio = JSON.stringify([destinoEnvio, lineasEnvio, totalPrice]);
+    const items = cart.map(item => ({ slug: item.storeSlug, quantity: item.quantity, nombre: item.product.name, shipping_enabled: item.shipping_enabled }));
+    const soloRetiro = productosSoloRetiro(items);
+    const lineasEnvio = aLineasDeCheckout(items);
+    const claveEnvio = JSON.stringify([destinoEnvio, lineasEnvio, totalPrice, soloRetiro]);
     const claveActual = useRef(claveEnvio);
     useEffect(() => {
         claveActual.current = claveEnvio;
     }, [claveEnvio]);
-    const envio = cotizacion?.clave === claveEnvio ? cotizacion.opcion : null;
+    const envio = !soloRetiro.length && cotizacion?.clave === claveEnvio ? cotizacion.opcion : null;
     const totalEstimado = totalEstimadoConEnvio(totalPrice, envio?.price ?? null);
 
     const calcularEnvio = async () => {
+        if (soloRetiro.length) return;
         const solicitud = ++solicitudEnvio.current;
         setCotizacion(null);
         setFalloEnvio(null);
@@ -79,7 +84,10 @@ export default function StoreCartSheet() {
             setCotizacion({ clave: claveEnvio, opcion: resultado.cheapest });
         } catch (error) {
             if (solicitud !== solicitudEnvio.current || claveActual.current !== claveEnvio) return;
-            // El contrato agrupa falta de cobertura, productos sin envío y fallas del proveedor.
+            if (error instanceof StoreApiError && error.code === "PICKUP_ONLY") {
+                setFalloEnvio({ clave: claveEnvio, mensaje: problemaDeCheckout(error, items).mensaje, soloRetiro: true });
+                return;
+            }
             const mensaje = error instanceof StoreApiError && error.code === "SHIPPING_UNAVAILABLE"
                 ? "No hay envío disponible para estos productos o este código postal. Revisá el destino o continuá con retiro."
                 : error instanceof StoreApiError && error.code === "PRODUCT_NOT_FOUND"
@@ -262,7 +270,8 @@ export default function StoreCartSheet() {
                             </article>
                         ))
                     )}
-                    {cart.length > 0 && (
+                    {soloRetiro.length > 0 && <p>Solo retiro en el local: {soloRetiro.join(", ")}. Podés retirar tu compra en el local.</p>}
+                    {cart.length > 0 && soloRetiro.length === 0 && (
                         <form className="mb-4 space-y-3" onSubmit={event => { event.preventDefault(); void calcularEnvio(); }}>
                             <h2 className="font-semibold">Calcular envío</h2>
                             <label className="block text-sm">Provincia
@@ -277,7 +286,7 @@ export default function StoreCartSheet() {
                             <button disabled={calculando || !destinoEnvio.postal_code.trim()} className="min-h-11 rounded-full border px-4 text-sm disabled:opacity-50">{calculando ? "Calculando…" : "Calcular envío"}</button>
                             <div aria-live="polite" className="text-sm">
                                 {envio && <p>Envío estimado: ${formatPrice(envio.price)}{envio.hours != null && Number.isFinite(envio.hours) && envio.hours > 0 ? ` · Plazo estimado: ${envio.hours} horas` : ""}</p>}
-                                {falloEnvio?.clave === claveEnvio && <p>{falloEnvio.mensaje}</p>}
+                                {falloEnvio?.clave === claveEnvio && <><p>{falloEnvio.mensaje}</p>{falloEnvio.soloRetiro && <button type="button" className="min-h-11 underline" onClick={() => { setRetiroSolicitado(value => value + 1); closeCart(); setComprando(true); }}>Retirar en el local</button>}</>}
                             </div>
                         </form>
                     )}
@@ -294,7 +303,7 @@ export default function StoreCartSheet() {
                     </div>
                     {totalEstimado !== null && <p className="mt-2 flex justify-between font-semibold"><span>Total estimado</span><span>${formatPrice(totalEstimado)}</span></p>}
                     <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-                        El envío se vuelve a calcular al crear el pedido. Vas a ver el total final antes de pagar.
+                        {soloRetiro.length ? "Tu compra se retira en el local, sin costo de envío." : "El envío se vuelve a calcular al crear el pedido. Vas a ver el total final antes de pagar."}
                     </p>
                     <div className="mt-4 flex flex-col gap-3">
                         {/* **Comprar es la salida principal, no el chat.** El
@@ -351,7 +360,7 @@ export default function StoreCartSheet() {
                 </div>
             </dialog>
 
-            <CheckoutDialog abierto={comprando} onCerrar={() => {
+            <CheckoutDialog retiroSolicitado={retiroSolicitado} abierto={comprando} onCerrar={() => {
                 setComprando(false);
                 openCart();
             }} />

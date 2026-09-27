@@ -7,6 +7,8 @@ import { limitarCantidadAlStock } from "@/lib/stockDeLaFicha";
 
 // Item del carrito con variante seleccionada opcional
 export interface CartItem {
+    /** Ausente en carritos anteriores: permite envío hasta que el servidor indique lo contrario. */
+    shipping_enabled?: boolean;
     product: Product;
     variant?: ProductVariant | null;
     quantity: number;
@@ -95,6 +97,7 @@ const useCartStore = create<CartState>()(
                                   product,
                                   variant,
                                   quantity: nextQuantity,
+                                  shipping_enabled: product.shipping_enabled !== false,
                                   // Volver a agregar un producto que venia del
                                   // carrito viejo lo deja comprable.
                                   storeSlug: storeSlug ?? item.storeSlug ?? null,
@@ -109,6 +112,7 @@ const useCartStore = create<CartState>()(
                             product,
                             variant,
                             quantity: nextQuantity,
+                            shipping_enabled: product.shipping_enabled !== false,
                             cartKey,
                             storeSlug,
                         }

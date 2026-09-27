@@ -30,6 +30,7 @@ test("el carrito conserva condición, admite compras viejas y no persiste su ape
     assert.equal(persisted.state.open, undefined);
     assert.deepEqual(persisted.state.destinoEnvio, { province: "B", postal_code: "1900" });
     assert.equal(persisted.state.cart[0].product.storeCondition, "used");
+    assert.equal(persisted.state.cart[0].shipping_enabled, true);
     useCartStore.getState().closeCart();
     await useCartStore.persist.rehydrate();
     assert.deepEqual(useCartStore.getState().destinoEnvio, { province: "B", postal_code: "1900" });
@@ -38,17 +39,27 @@ test("el carrito conserva condición, admite compras viejas y no persiste su ape
 
     // El mismo formato de localStorage anterior a la condición sigue siendo comprable.
     delete persisted.state.cart[0].product.storeCondition;
+    delete persisted.state.cart[0].shipping_enabled;
+    delete persisted.state.cart[0].product.shipping_enabled;
     saved = JSON.stringify(persisted);
     await useCartStore.persist.rehydrate();
     const oldItem = useCartStore.getState().cart[0];
     assert.equal(etiquetaCondicion(oldItem.product.storeCondition), null);
     assert.equal(oldItem.storeSlug, "equipo-usado");
     assert.equal(oldItem.quantity, 1);
+    assert.equal(oldItem.shipping_enabled, undefined);
     useCartStore.getState().updateQuantity(oldItem.cartKey, 2);
     assert.equal(useCartStore.getState().totalPrice, 200);
     useCartStore.getState().addToCart(product, null, 1, product.storeSlug);
     assert.equal(useCartStore.getState().cart[0].product.storeCondition, "used");
     assert.equal(useCartStore.getState().cart[0].quantity, 3);
+    useCartStore.getState().addToCart({ ...product, shipping_enabled: false }, null, 1, product.storeSlug);
+    assert.equal(useCartStore.getState().cart[0].shipping_enabled, false);
+    await useCartStore.persist.rehydrate();
+    assert.equal(useCartStore.getState().cart[0].shipping_enabled, false);
+    useCartStore.getState().clearCart();
+    useCartStore.getState().addToCart({ ...product, shipping_enabled: false }, null, 1, product.storeSlug);
+    assert.equal(useCartStore.getState().cart[0].shipping_enabled, false);
     useCartStore.getState().clearCart();
 });
 
