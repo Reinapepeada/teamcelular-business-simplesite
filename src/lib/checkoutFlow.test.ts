@@ -31,7 +31,8 @@ const datos = (over: Partial<DatosDeCompra> = {}): DatosDeCompra => ({
 });
 
 const direccion = {
-    street: "Rivadavia 100",
+    street: "Rivadavia",
+    number: "100",
     city: "La Plata",
     province: "B",
     postal_code: "1900",
@@ -82,12 +83,37 @@ describe("lo que le falta al formulario", () => {
 
     test("el envio a domicilio pide la direccion completa", () => {
         // Falta uno solo y el proveedor no puede cotizar ni despachar.
-        const e = validarDatos(datos({ entrega: "envio", direccion: { street: "Rivadavia 100" } }), carrito);
+        const e = validarDatos(datos({ entrega: "envio", direccion: { street: "Rivadavia" } }), carrito);
 
         assert.equal(e.street, undefined);
+        assert.ok(e.number);
         assert.ok(e.city);
         assert.ok(e.province);
         assert.ok(e.postal_code);
+    });
+
+    test("el envio rechaza antes de cobrar lo que Enviopack no acepta", () => {
+        // Si pasa, el error aparece al despachar, con la plata ya cobrada.
+        const e = validarDatos(
+            datos({
+                nombre: "N".repeat(51),
+                entrega: "envio",
+                direccion: { ...direccion, street: "C".repeat(51), number: "123456", floor: "1234567", apartment: "12345" },
+            }),
+            carrito
+        );
+
+        assert.ok(e.nombre);
+        assert.ok(e.street);
+        assert.ok(e.number);
+        assert.ok(e.floor);
+        assert.ok(e.apartment);
+    });
+
+    test("retiro no aplica los largos del envio", () => {
+        const e = validarDatos(datos({ nombre: "N".repeat(80) }), carrito);
+
+        assert.equal(e.nombre, undefined);
     });
 
     test("un carrito vacio no se compra", () => {
@@ -115,7 +141,23 @@ describe("el pedido que se manda", () => {
     test("envio a domicilio manda los cuatro campos", () => {
         const p = armarPedido(datos({ entrega: "envio", direccion }), carrito, "ck-1");
 
-        assert.deepEqual(p.shipping_address, { ...direccion, extra: null });
+        assert.deepEqual(p.shipping_address, {
+            street: "Rivadavia 100",
+            city: "La Plata",
+            province: "B",
+            postal_code: "1900",
+            extra: null,
+        });
+    });
+
+    test("piso y depto viajan como complemento", () => {
+        const p = armarPedido(
+            datos({ entrega: "envio", direccion: { ...direccion, floor: "5", apartment: "B" } }),
+            carrito,
+            "ck-1"
+        );
+
+        assert.equal(p.shipping_address?.extra, "Piso 5 Depto B");
     });
 
     test("no manda telefono vacio", () => {

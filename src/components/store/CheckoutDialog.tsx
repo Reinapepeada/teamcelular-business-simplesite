@@ -16,8 +16,10 @@ import {
     ErrorDeCompra,
     mensajePedidoTerminado,
     hayErrores,
+    LARGOS_DE_ENVIO,
     validarDatos,
     type DatosDeCompra,
+    type DireccionDelFormulario,
     type ErroresDeCompra,
 } from "@/lib/checkoutFlow";
 import { aLineasDeCheckout } from "@/lib/cartLines";
@@ -28,7 +30,9 @@ import { totalesDelCarrito } from "@/lib/totalesDelCarrito";
 import {
     createOrder,
     fetchOrderStatus,
+    fetchPickupPoint,
     requestPaymentLink,
+    type PickupPoint,
     type StoreOrder,
 } from "@/lib/storeApi";
 
@@ -145,6 +149,44 @@ function ResumenAConfirmar({
     );
 }
 
+/**
+ * Un campo con su error enganchado: el lector de pantalla anuncia el error al
+ * entrar al campo, no solo quien lo ve en rojo.
+ */
+function Campo({
+    id,
+    label,
+    error,
+    children,
+}: {
+    id: string;
+    label: string;
+    error?: string;
+    children: React.ReactNode;
+}) {
+    return (
+        <div>
+            <label className="text-sm font-medium" htmlFor={id}>{label}</label>
+            {children}
+            {error && (
+                <p id={`${id}-error`} className="mt-1 text-xs text-red-600 dark:text-red-400">
+                    {error}
+                </p>
+            )}
+        </div>
+    );
+}
+
+// 16 px en el celular: con menos, Safari hace zoom al tocar el campo y el
+// comprador pierde de vista el formulario.
+const propsDeCampo = (id: string, error?: string) => ({
+    id,
+    className:
+        "w-full rounded-lg border border-slate-300 px-3 py-2 text-base sm:text-sm dark:border-slate-600 dark:bg-slate-900",
+    "aria-invalid": error ? true : undefined,
+    "aria-describedby": error ? `${id}-error` : undefined,
+});
+
 export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProps) {
     const { cart } = useCartStore();
     const dialogRef = useRef<HTMLDialogElement>(null);
@@ -171,6 +213,22 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
     // vez, al recuperarlo, no alcanza: el comprador puede cambiar el carrito
     // DESPUÉS y quedarse con un botón que ofrece pagar otra cosa.
     const [huellaPendiente, setHuellaPendiente] = useState<string | null>(null);
+    // El local donde se retira de verdad: lo elige el backend, no esta página.
+    // Si no se puede saber, la opción queda sin detalle antes que con uno falso.
+    const [retiro, setRetiro] = useState<PickupPoint | null>(null);
+
+    useEffect(() => {
+        if (!abierto) return;
+        let vivo = true;
+        fetchPickupPoint()
+            .then(punto => {
+                if (vivo) setRetiro(punto);
+            })
+            .catch(() => undefined);
+        return () => {
+            vivo = false;
+        };
+    }, [abierto]);
 
     useEffect(() => {
         const dialog = dialogRef.current;
@@ -251,7 +309,16 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
         const encontrados = validarDatos(datos, items);
         setErrores(encontrados);
         setFallo(null);
-        if (hayErrores(encontrados)) return;
+        if (hayErrores(encontrados)) {
+            // El foco va al primer campo con error: en el celular el mensaje
+            // puede quedar fuera de la pantalla y el botón no parece hacer nada.
+            requestAnimationFrame(() => {
+                dialogRef.current
+                    ?.querySelector<HTMLElement>('[aria-invalid="true"]')
+                    ?.focus();
+            });
+            return;
+        }
         if (!window.navigator.locks) {
             setFallo("Para comprar, abrí la tienda con HTTPS en un navegador actualizado.");
             return;
@@ -395,8 +462,8 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
     if (!abierto) return null;
 
     const esEnvio = datos.entrega === "envio";
-    const campo = "w-full rounded-lg border border-slate-300 px-3 py-2 text-sm dark:border-slate-600 dark:bg-slate-900";
-    const error = "mt-1 text-xs text-red-600 dark:text-red-400";
+    const cambiarDireccion = (cambio: Partial<DireccionDelFormulario>) =>
+        setDatos({ ...datos, direccion: { ...datos.direccion, ...cambio } });
 
     return (
             <dialog
@@ -443,61 +510,66 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                 ) : (
                 <form className="mt-4 flex flex-col gap-3" onSubmit={onSubmit}>
                     <p className="text-sm text-slate-600 dark:text-slate-400">Comprás como invitado. No necesitás crear una cuenta.</p>
-                    <div>
-                        <label className="text-sm font-medium" htmlFor="ck-nombre">Nombre y apellido</label>
+                    <Campo id="ck-nombre" label="Nombre y apellido" error={errores.nombre}>
                         <input
-                            id="ck-nombre"
+                            {...propsDeCampo("ck-nombre", errores.nombre)}
                             autoComplete="name"
-                            className={campo}
                             value={datos.nombre}
                             onChange={e => setDatos({ ...datos, nombre: e.target.value })}
                         />
-                        {errores.nombre && <p className={error}>{errores.nombre}</p>}
-                    </div>
+                    </Campo>
 
-                    <div>
-                        <label className="text-sm font-medium" htmlFor="ck-email">Mail</label>
+                    {/* Por acá llega el aviso de que el pedido salió. */}
+                    <Campo id="ck-email" label="Mail" error={errores.email}>
                         <input
-                            id="ck-email"
+                            {...propsDeCampo("ck-email", errores.email)}
                             type="email"
                             autoComplete="email"
                             inputMode="email"
-                            className={campo}
                             value={datos.email}
                             onChange={e => setDatos({ ...datos, email: e.target.value })}
                         />
-                        {/* Por acá llega el aviso de que el pedido salió. */}
-                        {errores.email && <p className={error}>{errores.email}</p>}
-                    </div>
+                    </Campo>
 
-                    <div>
-                        <label className="text-sm font-medium" htmlFor="ck-tel">Teléfono (opcional)</label>
+                    <Campo
+                        id="ck-tel"
+                        label={esEnvio ? "Teléfono (para que el correo te ubique)" : "Teléfono (opcional)"}
+                        error={errores.telefono}
+                    >
                         <input
-                            id="ck-tel"
+                            {...propsDeCampo("ck-tel", errores.telefono)}
                             type="tel"
                             autoComplete="tel"
-                            className={campo}
                             value={datos.telefono ?? ""}
                             onChange={e => setDatos({ ...datos, telefono: e.target.value })}
                         />
-                    </div>
+                    </Campo>
 
                     <fieldset className="mt-1">
                         <legend className="text-sm font-medium">¿Cómo lo recibís?</legend>
-                        <div className="mt-2 flex gap-4">
-                            <label className="flex items-center gap-2 text-sm">
+                        <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:gap-4">
+                            <label className="flex items-start gap-2 text-sm">
                                 <input
                                     type="radio"
                                     name="entrega"
+                                    className="mt-1"
                                     checked={!esEnvio}
                                     onChange={() => setDatos({ ...datos, entrega: "retiro" })}
                                 />
-                                Retiro en el local
+                                <span>
+                                    Retiro en el local
+                                    {retiro && (
+                                        <span className="block text-xs text-slate-500 dark:text-slate-400">
+                                            {[retiro.name, retiro.address, retiro.hours].filter(Boolean).join(" · ")}
+                                        </span>
+                                    )}
+                                </span>
                             </label>
-                            <label className="flex items-center gap-2 text-sm">
+                            <label className="flex items-start gap-2 text-sm">
                                 <input
                                     type="radio"
                                     name="entrega"
+                                    className="mt-1"
                                     checked={esEnvio}
                                     onChange={() => setDatos({ ...datos, entrega: "envio" })}
                                 />
@@ -510,68 +582,77 @@ export default function CheckoutDialog({ abierto, onCerrar }: CheckoutDialogProp
                         abandonar a quien iba a retirar por el local. */}
                     {esEnvio && (
                         <div className="flex flex-col gap-3 rounded-lg border border-slate-200 p-3 dark:border-slate-700">
-                            <div>
-                                <label className="text-sm font-medium" htmlFor="ck-calle">Calle y número</label>
-                                <input
-                                    id="ck-calle"
-                                    autoComplete="street-address"
-                                    className={campo}
-                                    value={datos.direccion?.street ?? ""}
-                                    onChange={e =>
-                                        setDatos({ ...datos, direccion: { ...datos.direccion, street: e.target.value } })
-                                    }
-                                />
-                                {errores.street && <p className={error}>{errores.street}</p>}
+                            <div className="grid grid-cols-[1fr_6rem] gap-3">
+                                <Campo id="ck-calle" label="Calle" error={errores.street}>
+                                    <input
+                                        {...propsDeCampo("ck-calle", errores.street)}
+                                        autoComplete="address-line1"
+                                        maxLength={LARGOS_DE_ENVIO.street}
+                                        value={datos.direccion?.street ?? ""}
+                                        onChange={e => cambiarDireccion({ street: e.target.value })}
+                                    />
+                                </Campo>
+                                <Campo id="ck-numero" label="Número" error={errores.number}>
+                                    <input
+                                        {...propsDeCampo("ck-numero", errores.number)}
+                                        inputMode="numeric"
+                                        maxLength={LARGOS_DE_ENVIO.number}
+                                        value={datos.direccion?.number ?? ""}
+                                        onChange={e => cambiarDireccion({ number: e.target.value })}
+                                    />
+                                </Campo>
                             </div>
                             <div className="grid grid-cols-2 gap-3">
-                                <div>
-                                    <label className="text-sm font-medium" htmlFor="ck-ciudad">Localidad</label>
+                                <Campo id="ck-piso" label="Piso (opcional)" error={errores.floor}>
                                     <input
-                                        id="ck-ciudad"
-                                        autoComplete="address-level2"
-                                        className={campo}
-                                        value={datos.direccion?.city ?? ""}
-                                        onChange={e =>
-                                            setDatos({ ...datos, direccion: { ...datos.direccion, city: e.target.value } })
-                                        }
+                                        {...propsDeCampo("ck-piso", errores.floor)}
+                                        autoComplete="address-line2"
+                                        maxLength={LARGOS_DE_ENVIO.floor}
+                                        value={datos.direccion?.floor ?? ""}
+                                        onChange={e => cambiarDireccion({ floor: e.target.value })}
                                     />
-                                    {errores.city && <p className={error}>{errores.city}</p>}
-                                </div>
-                                <div>
-                                    <label className="text-sm font-medium" htmlFor="ck-cp">Código postal</label>
+                                </Campo>
+                                <Campo id="ck-depto" label="Depto (opcional)" error={errores.apartment}>
                                     <input
-                                        id="ck-cp"
-                                        autoComplete="postal-code"
-                                        className={campo}
-                                        value={datos.direccion?.postal_code ?? ""}
-                                        onChange={e =>
-                                            setDatos({
-                                                ...datos,
-                                                direccion: { ...datos.direccion, postal_code: e.target.value },
-                                            })
-                                        }
+                                        {...propsDeCampo("ck-depto", errores.apartment)}
+                                        maxLength={LARGOS_DE_ENVIO.apartment}
+                                        value={datos.direccion?.apartment ?? ""}
+                                        onChange={e => cambiarDireccion({ apartment: e.target.value })}
                                     />
-                                    {errores.postal_code && <p className={error}>{errores.postal_code}</p>}
-                                </div>
+                                </Campo>
                             </div>
-                            <div>
-                                <label className="text-sm font-medium" htmlFor="ck-prov">Provincia</label>
+                            <div className="grid grid-cols-2 gap-3">
+                                <Campo id="ck-ciudad" label="Localidad" error={errores.city}>
+                                    <input
+                                        {...propsDeCampo("ck-ciudad", errores.city)}
+                                        autoComplete="address-level2"
+                                        maxLength={LARGOS_DE_ENVIO.city}
+                                        value={datos.direccion?.city ?? ""}
+                                        onChange={e => cambiarDireccion({ city: e.target.value })}
+                                    />
+                                </Campo>
+                                <Campo id="ck-cp" label="Código postal" error={errores.postal_code}>
+                                    <input
+                                        {...propsDeCampo("ck-cp", errores.postal_code)}
+                                        autoComplete="postal-code"
+                                        value={datos.direccion?.postal_code ?? ""}
+                                        onChange={e => cambiarDireccion({ postal_code: e.target.value })}
+                                    />
+                                </Campo>
+                            </div>
+                            <Campo id="ck-prov" label="Provincia" error={errores.province}>
                                 <select
-                                    id="ck-prov"
+                                    {...propsDeCampo("ck-prov", errores.province)}
                                     autoComplete="address-level1"
-                                    className={campo}
                                     value={datos.direccion?.province ?? ""}
-                                    onChange={e =>
-                                        setDatos({ ...datos, direccion: { ...datos.direccion, province: e.target.value } })
-                                    }
+                                    onChange={e => cambiarDireccion({ province: e.target.value })}
                                 >
                                     <option value="">Elegí una</option>
                                     {PROVINCIAS.map(([codigo, nombre]) => (
                                         <option key={codigo} value={codigo}>{nombre}</option>
                                     ))}
                                 </select>
-                                {errores.province && <p className={error}>{errores.province}</p>}
-                            </div>
+                            </Campo>
                         </div>
                     )}
 

@@ -165,6 +165,27 @@ export interface StoreFacets {
 
 export const fetchStoreFacets = () => pedir<StoreFacets>("/store/facets");
 
+/** El local donde se retira, tal como lo resuelve el backend para esta tienda. */
+export interface PickupPoint {
+    name: string;
+    address: string;
+    hours: string | null;
+}
+
+/**
+ * Dónde se retira, o `null` si la tienda no lo informa.
+ *
+ * Un fallo acá no puede frenar la compra: sin el dato, la opción de retiro se
+ * muestra sin detalle.
+ */
+export const fetchPickupPoint = async (): Promise<PickupPoint | null> => {
+    try {
+        return await pedir<PickupPoint>("/store/pickup-point");
+    } catch {
+        return null;
+    }
+};
+
 export const quoteShipping = (province: string, postalCode: string, items: StoreLine[]) =>
     pedir<ShippingQuote>("/store/shipping/quote", {
         method: "POST",

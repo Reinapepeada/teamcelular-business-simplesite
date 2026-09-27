@@ -13,18 +13,50 @@ import { aLineasDeCheckout, carritoComprable } from "./cartLines";
 
 export type Entrega = "envio" | "retiro";
 
+/**
+ * La dirección como la escribe el comprador: calle y número por separado, y
+ * piso y depto aparte. Es la forma en que Envíopack da de alta el envío; pedirla
+ * junta obligaba a quien despacha a volver a separarla a mano.
+ */
+export interface DireccionDelFormulario extends Partial<ShippingAddress> {
+    number?: string;
+    floor?: string;
+    apartment?: string;
+}
+
 export interface DatosDeCompra {
     nombre: string;
     email: string;
     telefono?: string;
     entrega: Entrega;
-    direccion?: Partial<ShippingAddress>;
+    direccion?: DireccionDelFormulario;
 }
 
 export type ErroresDeCompra = Partial<Record<
-    "nombre" | "email" | "telefono" | "street" | "city" | "province" | "postal_code" | "carrito",
+    | "nombre" | "email" | "telefono" | "street" | "number" | "floor" | "apartment"
+    | "city" | "province" | "postal_code" | "carrito",
     string
 >>;
+
+/**
+ * Los largos que acepta el alta de un envío en Envíopack.
+ *
+ * El checkout no los necesita para cobrar, pero si deja pasar una calle de 60
+ * letras el problema aparece recién al despachar, con la plata ya cobrada. El
+ * backend valida lo mismo; esto es para avisar antes de mandar.
+ */
+export const LARGOS_DE_ENVIO = {
+    nombre: 50,
+    email: 100,
+    street: 50,
+    number: 5,
+    floor: 6,
+    apartment: 4,
+    city: 50,
+} as const;
+
+const excede = (valor: string | undefined, maximo: number) =>
+    (valor?.trim().length ?? 0) > maximo;
 
 // Deliberadamente laxo: alcanza para atajar el dedazo (falta la arroba, falta
 // el punto) sin rechazar direcciones válidas raras. Quien valida de verdad es
@@ -55,8 +87,21 @@ export const validarDatos = (
 
     if (datos.entrega === "envio") {
         const d = datos.direccion ?? {};
-        if (!d.street?.trim()) errores.street = "Poné la calle y el número.";
+        const L = LARGOS_DE_ENVIO;
+        if (!d.street?.trim()) errores.street = "Poné la calle.";
+        else if (excede(d.street, L.street)) errores.street = `La calle puede tener hasta ${L.street} letras.`;
+        if (!d.number?.trim()) errores.number = "Poné el número, o S/N si no tiene.";
+        else if (excede(d.number, L.number)) errores.number = `El número puede tener hasta ${L.number} caracteres.`;
+        if (excede(d.floor, L.floor)) errores.floor = `El piso puede tener hasta ${L.floor} caracteres.`;
+        if (excede(d.apartment, L.apartment)) errores.apartment = `El depto puede tener hasta ${L.apartment} caracteres.`;
         if (!d.city?.trim()) errores.city = "Poné la localidad.";
+        else if (excede(d.city, L.city)) errores.city = `La localidad puede tener hasta ${L.city} letras.`;
+        if (!errores.nombre && excede(datos.nombre, L.nombre)) {
+            errores.nombre = `Para el envío, nombre y apellido pueden tener hasta ${L.nombre} letras.`;
+        }
+        if (!errores.email && excede(datos.email, L.email)) {
+            errores.email = `Para el envío, el mail puede tener hasta ${L.email} caracteres.`;
+        }
         if (!d.province?.trim()) errores.province = "Elegí la provincia.";
         if (!d.postal_code?.trim()) errores.postal_code = "Poné el código postal.";
     }
@@ -93,12 +138,19 @@ export const armarPedido = (
 
     if (datos.entrega === "envio") {
         const d = datos.direccion ?? {};
+        // El pedido todavía guarda calle y complemento como dos textos: se
+        // arman acá con las partes que el comprador escribió por separado.
+        const piso = d.floor?.trim();
+        const depto = d.apartment?.trim();
+        const complemento = [piso && `Piso ${piso}`, depto && `Depto ${depto}`]
+            .filter(Boolean)
+            .join(" ");
         payload.shipping_address = {
-            street: d.street!.trim(),
+            street: [d.street?.trim(), d.number?.trim()].filter(Boolean).join(" "),
             city: d.city!.trim(),
             province: d.province!.trim(),
             postal_code: d.postal_code!.trim(),
-            extra: d.extra?.trim() || null,
+            extra: complemento || d.extra?.trim() || null,
         };
     }
     // Sin `shipping_address` el backend entiende retiro en el local y cobra
