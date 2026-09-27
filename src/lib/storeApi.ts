@@ -56,6 +56,14 @@ export interface ShippingQuote {
 }
 
 export interface StoreOrder {
+    customer_name?: string;
+    customer_email?: string;
+    customer_phone?: string | null;
+    shipping?: Partial<ShippingAddress> | null;
+    items?: { product_id: number; quantity: number; unit_price: number; current_product_name?: string | null }[];
+    expires_at?: string | null;
+    reserved_until?: string | null;
+    created_at?: string | null;
     commerce_key: string;
     status: string;
     subtotal_amount: number;
@@ -89,12 +97,15 @@ export class StoreApiError extends Error {
     /** Qué línea del carrito falló, cuando el backend lo dice. */
     readonly slug: string | null;
 
-    constructor(message: string, status: number, code: string, slug: string | null = null) {
+    readonly field: string | null;
+
+    constructor(message: string, status: number, code: string, slug: string | null = null, field: string | null = null) {
         super(message);
         this.name = "StoreApiError";
         this.status = status;
         this.code = code;
         this.slug = slug;
+        this.field = field;
     }
 }
 
@@ -113,7 +124,7 @@ export const parseStoreError = (status: number, body: unknown): StoreApiError =>
     const detalles = error.details ?? {};
     const slug = typeof detalles.slug === "string" ? detalles.slug : null;
     const message = typeof error.message === "string" ? error.message : "No se pudo completar la operación.";
-    return new StoreApiError(message, status, code, slug);
+    return new StoreApiError(message, status, code, slug, typeof detalles.field === "string" ? detalles.field : null);
 };
 
 export const storeRequestUrl = (path: string, server = typeof window === "undefined") => {

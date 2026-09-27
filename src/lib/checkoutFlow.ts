@@ -7,9 +7,12 @@
  */
 
 import type { CheckoutPayload, ShippingAddress, StoreOrder } from "./storeApi";
+import { resumenParaConfirmar } from "./resumenDelPedido";
+import { totalEstimadoConEnvio } from "./totalesDelCarrito";
 import { StoreApiError } from "./storeApi";
 import type { ItemComprable } from "./cartLines";
 import { aLineasDeCheckout, carritoComprable } from "./cartLines";
+import { intentoDeCheckout, type AlmacenClave } from "./checkoutKey";
 
 export type Entrega = "envio" | "retiro";
 
@@ -251,6 +254,7 @@ export const reservar = async (
     // guardarlo recién con el link en la mano deja ese hueco sin red. Y ahora
     // ese hueco es más largo, porque en el medio hay una pantalla donde el
     // comprador puede irse.
+    pedido.created_at ??= new Date().toISOString();
     puertos.recordar?.(pedido);
     exigirPedidoPendiente(pedido);
 
@@ -313,4 +317,67 @@ export const comprar = async (
     const pedido = await reservar(puertos, payload);
     const checkoutUrl = await abrirElPago(puertos, pedido);
     return { checkoutUrl, pedido };
+};
+
+export interface ProblemaDeCheckout {
+    mensaje: string;
+    quitarSlug?: string;
+    ofrecerRetiro?: boolean;
+    campos?: ErroresDeCompra;
+}
+
+export const problemaDeCheckout = (causa: unknown, items: ItemComprable[] = []): ProblemaDeCheckout => {
+    const error = causa instanceof ErrorDeCompra ? causa.causa : causa;
+    if (error instanceof StoreApiError) {
+        const code = error.code.toUpperCase();
+        if (["PRODUCT_UNAVAILABLE", "PRODUCT_NOT_FOUND", "INSUFFICIENT_STOCK", "OUT_OF_STOCK"].includes(code)) {
+            const item = items.find(i => i.slug === error.slug);
+            return { mensaje: "Ya no hay stock de " + (item?.nombre || "uno de los productos") + ". Quitalo del carrito para continuar.", quitarSlug: item?.slug || undefined };
+        }
+        if (code === "SHIPPING_UNAVAILABLE") {
+            // También incluye fallas del proveedor: no afirma falta de cobertura.
+            return { mensaje: "No pudimos cotizar el envío. Probá de nuevo o retirá en el local.", ofrecerRetiro: true };
+        }
+        if (code === "SHIPPING_FIELD_TOO_LONG" || (error.status === 422 && error.field)) {
+            const campos: ErroresDeCompra = {};
+            const mapa: Record<string, (keyof ErroresDeCompra)[]> = {
+                customer_name: ["nombre"], customer_email: ["email"], customer_phone: ["telefono"],
+                street: ["street", "number"], extra: ["floor", "apartment"], city: ["city"],
+                province: ["province"], postal_code: ["postal_code"], floor: ["floor"], apartment: ["apartment"],
+            };
+            for (const campo of mapa[error.field ?? ""] ?? []) campos[campo] = code === "SHIPPING_FIELD_TOO_LONG" ? "Este dato es demasiado largo. Acortalo para continuar." : "Revisá este dato para continuar.";
+            return { mensaje: "Revisá los datos indicados antes de continuar.", campos };
+        }
+        if (code === "STOREFRONT_PAUSED") return { mensaje: "Las nuevas compras están pausadas temporalmente. Podés reintentar más tarde. Si ya tenés un pedido, podés retomarlo desde el carrito." };
+    }
+    return { mensaje: causa instanceof ErrorDeCompra && causa.pedido ? causa.message : "No pudimos completar la compra. Probá de nuevo o escribinos." };
+};
+
+/** Revisar solo cotiza: no recibe un puerto capaz de crear pedidos. */
+export const revisarPedido = async (
+    datos: DatosDeCompra, items: ItemComprable[], productos: number,
+    cotizar: typeof import("./storeApi").quoteShipping,
+) => {
+    const envio = datos.entrega === "retiro" ? 0 : (await cotizar(
+        datos.direccion!.province!.trim(), datos.direccion!.postal_code!.trim(), aLineasDeCheckout(items).lineas,
+    )).cheapest?.price;
+    const total = totalEstimadoConEnvio(productos, envio ?? null);
+    if (total === null) throw new StoreApiError("Sin cotización", 409, "SHIPPING_UNAVAILABLE");
+    return { productos, envio, total };
+};
+
+export const reservarYPagarSiCoincide = async (
+    puertos: PuertosDeCompra, payload: CheckoutPayload, productos: number, envio: number,
+    recuperado = false,
+) => {
+    const pedido = await reservar(puertos, payload);
+    const cambio = resumenParaConfirmar(pedido, productos, envio).precioCambio;
+    const checkoutUrl = cambio || recuperado ? null : await abrirElPago(puertos, pedido);
+    return { pedido, checkoutUrl };
+};
+
+/** El POST existente recupera antes de cotizar; no hay un endpoint de consulta por clave. */
+export const recuperarIntento = async (almacen: AlmacenClave, puertos: PuertosDeCompra) => {
+    const payload = intentoDeCheckout(almacen);
+    return payload ? reservar(puertos, payload) : null;
 };

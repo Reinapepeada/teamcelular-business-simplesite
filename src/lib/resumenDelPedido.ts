@@ -54,14 +54,17 @@ const TOLERANCIA = 1;
  */
 export const resumenParaConfirmar = (
     pedido: Pick<StoreOrder, "subtotal_amount" | "shipping_amount" | "total_amount" | "currency">,
-    estimadoDeProductos: number
+    estimadoDeProductos: number,
+    estimadoDeEnvio?: number
 ): ResumenParaConfirmar => {
     const subtotal = numeroSano(pedido?.subtotal_amount);
     const envio = numeroSano(pedido?.shipping_amount);
     const total = numeroSano(pedido?.total_amount);
     const estimado = numeroSano(estimadoDeProductos);
 
-    const diferencia = subtotal - estimado;
+    const diferencia = estimadoDeEnvio === undefined
+        ? subtotal - estimado
+        : total - estimado - estimadoDeEnvio;
 
     return {
         subtotal,
@@ -72,7 +75,16 @@ export const resumenParaConfirmar = (
         // Sin estimado no se afirma que cambió: un carrito recuperado de una
         // versión vieja puede no tener con qué comparar, y decir "el precio
         // cambió" sobre eso es inventar.
-        precioCambio: estimado > 0 && Math.abs(diferencia) > TOLERANCIA,
+        precioCambio: (estimadoDeEnvio !== undefined || estimado > 0) && Math.abs(diferencia) > TOLERANCIA,
         diferencia,
     };
+};
+
+/** Renderizar otra vez no extiende la reserva. */
+export const vencimientoReserva = (pedido: Pick<StoreOrder, "expires_at" | "reserved_until" | "created_at">): string | null => {
+    const exacto = [pedido.expires_at, pedido.reserved_until].find(v => v && Number.isFinite(Date.parse(v)));
+    const creado = pedido.created_at ? Date.parse(pedido.created_at) : NaN;
+    if (!exacto && !Number.isFinite(creado)) return null;
+    const fecha = new Date(exacto ? Date.parse(exacto) : creado + 15 * 60_000);
+    return fecha.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit" }) + (exacto ? "" : " (aprox.)");
 };

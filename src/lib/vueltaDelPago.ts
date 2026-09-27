@@ -15,12 +15,13 @@
  */
 
 import { olvidarClave, type AlmacenClave } from "./checkoutKey";
-import type { StoreOrderStatus } from "./storeApi";
+import type { StoreOrder, StoreOrderStatus } from "./storeApi";
 
 const ESPACIO = "tc.pedido";
 
 /** El pedido que este navegador dejó empezado. */
 export interface PedidoGuardado {
+    reserva?: Pick<StoreOrder, "created_at" | "expires_at" | "reserved_until">;
     clave: string;
     /** Clave idempotente exacta de este pedido, para limpieza condicional. */
     checkoutKey?: string;
@@ -71,6 +72,7 @@ export interface PedidoGuardado {
 export const recordarPedido = (
     almacen: AlmacenClave,
     pedido: {
+        reserva?: Pick<StoreOrder, "created_at" | "expires_at" | "reserved_until">;
         clave: string;
         checkoutKey?: string;
         token?: string | null;
@@ -88,6 +90,7 @@ export const recordarPedido = (
                 ESPACIO,
                 JSON.stringify({
                     clave: pedido.clave,
+                    ...(pedido.reserva ? { reserva: pedido.reserva } : mismo?.reserva ? { reserva: mismo.reserva } : {}),
                     ...(checkoutKey ? { checkoutKey } : {}),
                     token: pedido.token || mismo?.token || null,
                     total: pedido.total ?? null,
@@ -114,6 +117,7 @@ export const pedidoGuardado = (almacen: AlmacenClave): PedidoGuardado | null => 
             if (dato && typeof dato.clave === "string" && dato.clave.trim() !== "") {
                 return {
                     clave: dato.clave.trim(),
+                    ...(dato.reserva && typeof dato.reserva === "object" ? { reserva: Object.fromEntries(Object.entries(dato.reserva).filter(([k, v]) => ["created_at", "expires_at", "reserved_until"].includes(k) && typeof v === "string" && Number.isFinite(Date.parse(v)))) } : {}),
                     ...(typeof dato.checkoutKey === "string" && dato.checkoutKey
                         ? { checkoutKey: dato.checkoutKey } : {}),
                     token: typeof dato.token === "string" && dato.token ? dato.token : null,
