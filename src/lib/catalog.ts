@@ -224,7 +224,7 @@ export async function getCatalogFilters(): Promise<CatalogFilterOptions> {
 export async function getCatalogPage(
     filters: CatalogFiltersState,
     forcedCategory?: string,
-): Promise<ProductsPaginatedResponse> {
+): Promise<ProductsPaginatedResponse & { error: boolean }> {
     const vacia = {
         products: [],
         total: 0,
@@ -239,6 +239,7 @@ export async function getCatalogPage(
         );
         const size = pagina.size || ITEMS_PER_PAGE;
         return {
+            error: false,
             products: pagina.items.map(productoDeVidriera),
             total: pagina.total,
             page: pagina.page || filters.page,
@@ -247,7 +248,7 @@ export async function getCatalogPage(
         };
     } catch (error) {
         console.error("Catalog fetch failed", error);
-        return vacia;
+        return { ...vacia, error: true };
     }
 }
 

@@ -1,7 +1,7 @@
 'use client'
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { Product, ProductVariant } from "@/app/tienda/product";
+import type { Product, ProductVariant } from "@/app/tienda/product";
 import { claveDeCarrito } from "@/lib/cartKey";
 import { limitarCantidadAlStock } from "@/lib/stockDeLaFicha";
 
@@ -27,6 +27,9 @@ export interface CartItem {
 }
 
 interface CartState {
+    open: boolean;
+    openCart: () => void;
+    closeCart: () => void;
     cart: CartItem[];
     totalItems: number;
     totalPrice: number;
@@ -62,6 +65,9 @@ function calculateTotals(cart: CartItem[]) {
 const useCartStore = create<CartState>()(
     persist(
         (set, get) => ({
+            open: false,
+            openCart: () => set({ open: true }),
+            closeCart: () => set({ open: false }),
             cart: [],
             totalItems: 0,
             totalPrice: 0,
@@ -156,6 +162,8 @@ const useCartStore = create<CartState>()(
         {
             name: 'cart-storage',
             storage: createJSONStorage(() => localStorage),
+            // Abrir el carrito es transitorio; recargar conserva solo la compra.
+            partialize: ({ cart, totalItems, totalPrice }) => ({ cart, totalItems, totalPrice }),
         }
     )
 );

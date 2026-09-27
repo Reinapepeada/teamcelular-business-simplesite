@@ -14,12 +14,52 @@ import assert from "node:assert/strict";
 
 import {
     ITEMS_PER_PAGE,
+    getCatalogPage,
     normalizeCatalogFilters,
     parametrosDeCatalogo,
     type CatalogFiltersState,
 } from "./catalog.ts";
 import { condicionSchema, productoDeVidriera } from "./fixbeeCatalog.ts";
 import type { CatalogProduct } from "./storeCatalog.ts";
+
+describe("carga del catálogo", () => {
+    test("una respuesta vacía es válida y conserva la página solicitada", async (t) => {
+        t.mock.method(globalThis, "fetch", async () => Response.json({ items: [], total: 0, page: 2, size: 12 }));
+        const result = await getCatalogPage(normalizeCatalogFilters({ page: "2" }));
+        assert.equal(result.error, false);
+        assert.deepEqual(result.products, []);
+        assert.equal(result.page, 2);
+    });
+
+    for (const failure of ["red", "http", "json"]) {
+        test(`una falla de ${failure} no se presenta como catálogo vacío`, async (t) => {
+            t.mock.method(console, "error", () => {});
+            t.mock.method(globalThis, "fetch", async () => {
+                if (failure === "red") throw new TypeError("sin conexión");
+                return new Response("respuesta inválida", { status: failure === "http" ? 503 : 200 });
+            });
+            const result = await getCatalogPage(normalizeCatalogFilters({}));
+            assert.equal(result.error, true);
+            assert.deepEqual(result.products, []);
+        });
+    }
+
+    test("reintentar recupera el catálogo con los mismos filtros", async (t) => {
+        t.mock.method(console, "error", () => {});
+        const urls: string[] = [];
+        t.mock.method(globalThis, "fetch", async (url: string | URL | Request) => {
+            urls.push(String(url));
+            if (urls.length === 1) return new Response("", { status: 503 });
+            return Response.json({ items: [], total: 0, page: 1, size: 12 });
+        });
+        const filters = normalizeCatalogFilters({ search: "pantalla", brands: "Apple" });
+        assert.equal((await getCatalogPage(filters)).error, true);
+        assert.equal((await getCatalogPage(filters)).error, false);
+        assert.equal(urls[0], urls[1]);
+        assert.match(urls[1], /search=pantalla/);
+        assert.match(urls[1], /brand=Apple/);
+    });
+});
 
 const filtros = (over: Partial<CatalogFiltersState> = {}): CatalogFiltersState => ({
     page: 1,

@@ -7,6 +7,7 @@ import { buildProductSlug } from "@/lib/productSlug";
 import { cargaDirectaImagen } from "@/lib/storeCatalog";
 import useCartStore, { type CartItem } from "@/store/cartStore";
 import CheckoutDialog from "./CheckoutDialog";
+import ProductCondition from "./ProductCondition";
 import {
     nombreDeVariante,
     totalDeLinea,
@@ -36,11 +37,11 @@ function getProductStock(item: CartItem) {
 }
 
 export default function StoreCartSheet() {
-    const [open, setOpen] = useState(false);
+    const [confirmarVaciado, setConfirmarVaciado] = useState(false);
     const [comprando, setComprando] = useState(false);
     const dialogRef = useRef<HTMLDialogElement>(null);
     const triggerRef = useRef<HTMLButtonElement>(null);
-    const { cart, removeFromCart, updateQuantity, clearCart } = useCartStore();
+    const { cart, removeFromCart, updateQuantity, clearCart, open, openCart, closeCart } = useCartStore();
 
     // Las sumas viven en src/lib/totalesDelCarrito.ts, que explica por que
     // esto es un estimado: los precios salen de lo que el navegador guardo.
@@ -83,7 +84,7 @@ export default function StoreCartSheet() {
             <button
                 ref={triggerRef}
                 type="button"
-                onClick={() => setOpen((current) => !current)}
+                onClick={() => openCart()}
                 aria-expanded={open}
                 aria-controls="store-cart-sheet"
                 className="fixed bottom-5 right-5 z-40 inline-flex min-h-14 items-center gap-3 rounded-full bg-slate-950 px-5 text-sm font-semibold text-white shadow-xl transition hover:bg-slate-800"
@@ -99,10 +100,11 @@ export default function StoreCartSheet() {
                 id="store-cart-sheet"
                 aria-label="Resumen del carrito"
                 onClose={() => {
-                    setOpen(false);
+                    closeCart();
+                    setConfirmarVaciado(false);
                     if (!comprando) triggerRef.current?.focus();
                 }}
-                onCancel={() => setOpen(false)}
+                onCancel={() => closeCart()}
                 className="fixed inset-auto bottom-0 right-0 m-0 hidden h-[85dvh] max-h-none w-full max-w-md flex-col rounded-t-[2rem] border border-slate-200 bg-white p-0 shadow-2xl backdrop:bg-slate-950/40 open:flex dark:border-slate-700 dark:bg-slate-950 sm:top-0 sm:h-dvh sm:rounded-l-[2rem] sm:rounded-tr-none"
             >
                 <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4 dark:border-slate-700">
@@ -114,7 +116,7 @@ export default function StoreCartSheet() {
                     </div>
                     <button
                         type="button"
-                        onClick={() => setOpen(false)}
+                        onClick={() => closeCart()}
                         className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-slate-300 text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:border-slate-500 dark:hover:bg-slate-800"
                     >
                         Cerrar
@@ -152,7 +154,7 @@ export default function StoreCartSheet() {
                                         <Link
                                             href={`/tienda/${buildProductSlug(item.product)}`}
                                             prefetch={false}
-                                            onClick={() => setOpen(false)}
+                                            onClick={() => closeCart()}
                                             className="line-clamp-2 text-sm font-semibold text-slate-950 transition hover:text-primary dark:text-slate-50"
                                         >
                                             {item.product.name}
@@ -160,6 +162,7 @@ export default function StoreCartSheet() {
                                         <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
                                             ${formatPrice(item.product.retail_price)} c/u
                                         </p>
+                                        <ProductCondition condition={item.product.storeCondition} />
                                         {item.variant?.color || item.variant?.size ? (
                                             <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
                                                 {[item.variant?.color, item.variant?.size]
@@ -238,7 +241,7 @@ export default function StoreCartSheet() {
                         <button
                             type="button"
                             onClick={() => {
-                                setOpen(false);
+                                closeCart();
                                 setComprando(true);
                             }}
                             disabled={cart.length === 0}
@@ -255,26 +258,38 @@ export default function StoreCartSheet() {
                             target={cart.length > 0 ? "_blank" : undefined}
                             rel={cart.length > 0 ? "noopener noreferrer" : undefined}
                             className="inline-flex min-h-12 items-center justify-center rounded-full border border-slate-300 px-5 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:border-slate-500 dark:hover:bg-slate-800"
-                            onClick={() => setOpen(false)}
+                            onClick={() => closeCart()}
                             aria-disabled={cart.length === 0}
                         >
                             Consultar por WhatsApp
                         </Link>
                         <button
                             type="button"
-                            onClick={clearCart}
+                            onClick={() => {
+                                if (!confirmarVaciado) {
+                                    setConfirmarVaciado(true);
+                                    return;
+                                }
+                                clearCart();
+                                setConfirmarVaciado(false);
+                            }}
                             disabled={cart.length === 0}
                             className="inline-flex min-h-11 items-center justify-center text-sm text-slate-500 underline underline-offset-4 disabled:cursor-not-allowed disabled:opacity-50 dark:text-slate-400"
                         >
-                            Vaciar carrito
+                            {confirmarVaciado ? "Confirmar vaciar" : "Vaciar carrito"}
                         </button>
+                        {confirmarVaciado && (
+                            <button type="button" onClick={() => setConfirmarVaciado(false)} className="min-h-11 text-sm text-slate-700 dark:text-slate-300">
+                                Conservar productos
+                            </button>
+                        )}
                     </div>
                 </div>
             </dialog>
 
             <CheckoutDialog abierto={comprando} onCerrar={() => {
                 setComprando(false);
-                setOpen(true);
+                openCart();
             }} />
         </>
     );

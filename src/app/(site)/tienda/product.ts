@@ -72,6 +72,8 @@ export interface Branch {
 }
 
 export interface Product {
+  /** Opcional para conservar los carritos guardados antes del catálogo Fixbee. */
+  storeCondition?: string;
   id: number;
   serial_number: string;
   name: string;

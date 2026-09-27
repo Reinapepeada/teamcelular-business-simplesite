@@ -34,7 +34,6 @@ export default function CatalogFilters({
 }: CatalogFiltersProps) {
     const detailsRef = useRef<HTMLDetailsElement>(null);
     const hasActiveFilters =
-        Boolean(filters.search) ||
         filters.categories.length > 0 ||
         filters.brands.length > 0 ||
         Boolean(filters.minPrice) ||
@@ -55,6 +54,27 @@ export default function CatalogFilters({
     }, [hasActiveFilters]);
 
     return (
+        <form action={basePath} method="get" className="space-y-3">
+                <div className="space-y-2">
+                    <label
+                        htmlFor="catalog-search"
+                        className="text-sm font-medium text-slate-900 dark:text-slate-100"
+                    >
+                        Buscar producto
+                    </label>
+                    <input
+                        id="catalog-search"
+                        name="search"
+                        type="search"
+                        defaultValue={filters.search}
+                        placeholder="Ej: cargador iPhone, modulo Samsung"
+                        className="min-h-12 w-full rounded-2xl border border-slate-300 dark:border-slate-600 px-4 text-base text-slate-900 dark:text-slate-100 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                    />
+                    <button type="submit" className="inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-white hover:bg-primary/90">
+                        Buscar
+                    </button>
+                </div>
+
         <details
             ref={detailsRef}
             open={hasActiveFilters}
@@ -92,24 +112,7 @@ export default function CatalogFilters({
                 </div>
             ) : null}
 
-            <form action={basePath} method="get" className="mt-4 space-y-5 lg:mt-6 lg:space-y-6">
-                <div className="space-y-2">
-                    <label
-                        htmlFor="catalog-search"
-                        className="text-sm font-medium text-slate-900 dark:text-slate-100"
-                    >
-                        Buscar producto
-                    </label>
-                    <input
-                        id="catalog-search"
-                        name="search"
-                        type="search"
-                        defaultValue={filters.search}
-                        placeholder="Ej: cargador iPhone, modulo Samsung"
-                        className="min-h-12 w-full rounded-2xl border border-slate-300 dark:border-slate-600 px-4 text-sm text-slate-900 dark:text-slate-100 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
-                    />
-                </div>
-
+            <div className="mt-4 space-y-5 lg:mt-6 lg:space-y-6">
                 <div className="space-y-2">
                     <label
                         htmlFor="catalog-sort"
@@ -280,7 +283,8 @@ export default function CatalogFilters({
                         Limpiar
                     </Link>
                 </div>
-            </form>
+            </div>
         </details>
+        </form>
     );
 }

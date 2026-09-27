@@ -29,7 +29,7 @@ const storeFaqs = [
   {
     question: "Hacen envios o solo retiro en sucursal?",
     answer:
-      "Ofrecemos retiro en Recoleta y envio en CABA. La modalidad se coordina durante la compra segun zona y disponibilidad.",
+      "Retiro en el local o envío a domicilio. Las opciones disponibles se confirman durante la compra según tu dirección.",
   },
   {
     question: "Que pasa si no encuentro el repuesto exacto?",
@@ -55,7 +55,7 @@ export async function generateMetadata({
     path: "/tienda",
     title: "Repuestos y Accesorios para Celulares en CABA | Team Celular",
     description:
-      "Repuestos, fundas y cargadores para celular con retiro en Paraguay 2451, Recoleta CABA. Validamos compatibilidad por WhatsApp antes de comprar.",
+      "Repuestos, fundas y cargadores para celular. Retiro en el local o envío a domicilio. Consultanos por compatibilidad antes de comprar.",
     robots: {
       index: shouldIndex,
       follow: true,
@@ -65,7 +65,7 @@ export async function generateMetadata({
     },
     openGraphTitle: "Repuestos y Accesorios para Celulares en CABA | Team Celular",
     openGraphDescription:
-      "Team Celular, Paraguay 2451 Recoleta. Repuestos, fundas y cargadores con asesoramiento real y retiro en CABA.",
+      "Repuestos, fundas y cargadores con asesoramiento. Retiro en el local o envío a domicilio.",
     openGraphImageAlt: "Tienda de repuestos para celulares - Team Celular Recoleta",
     twitterTitle: "Repuestos y Accesorios para Celulares en CABA | Team Celular",
     twitterDescription: "Team Celular, Paraguay 2451 Recoleta. Validamos compatibilidad por WhatsApp antes de pagar.",
@@ -83,7 +83,7 @@ export default async function TiendaPage({
 
   return (
     <div className="w-full bg-slate-50 dark:bg-slate-800/70 pb-16">
-      <div className="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-screen-2xl px-4 py-3 sm:py-6 sm:px-6 lg:px-8">
         <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
           <Link href="/" className="transition hover:text-primary">
             Inicio
@@ -101,16 +101,16 @@ export default async function TiendaPage({
       />
 
       <section className="mx-auto max-w-screen-2xl px-4 pb-4 sm:px-6 sm:pb-8 lg:px-8">
-        <div className="flex flex-col justify-between gap-4 rounded-3xl border border-slate-200 bg-white px-5 py-5 shadow-sm dark:border-slate-700/70 dark:bg-slate-900 sm:flex-row sm:items-center sm:px-6">
-            <div className="space-y-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary sm:text-sm">
+        <div className="flex flex-col justify-between gap-4 rounded-3xl border border-slate-200 bg-white px-4 py-3 shadow-sm dark:border-slate-700/70 dark:bg-slate-900 sm:flex-row sm:items-center sm:px-6 sm:py-5">
+            <div className="space-y-2 sm:space-y-3">
+              <p className="hidden text-xs font-semibold uppercase tracking-[0.2em] text-primary sm:block sm:text-sm">
                 Tienda Team Celular
               </p>
-              <h1 className="text-2xl font-semibold tracking-tight text-slate-950 dark:text-slate-50 sm:text-3xl">
-                Repuestos y accesorios para tu celular
+              <h1 className="text-xl font-semibold tracking-tight text-slate-950 dark:text-slate-50 sm:text-3xl">
+                Repuestos y accesorios<span className="hidden sm:inline"> para tu celular</span>
               </h1>
               <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">
-                Comprá online con Mercado Pago. Retirá en Recoleta o elegí envío a domicilio.
+                Retiro en el local o envío a domicilio
               </p>
             </div>
                 <TrackedCtaLink
@@ -120,7 +120,7 @@ export default async function TiendaPage({
                   ctaVariant="whatsapp"
                   external
                   target="_blank"
-                  className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-full border border-slate-300 px-4 text-sm font-medium text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-300"
+                  className="hidden min-h-11 shrink-0 items-center justify-center rounded-full border border-slate-300 px-4 text-sm font-medium text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-300 sm:inline-flex"
                 >
                   ¿Necesitás ayuda para elegir?
                 </TrackedCtaLink>

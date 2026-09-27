@@ -1,6 +1,7 @@
 ﻿import Image from "next/image";
 import Link from "next/link";
-import type { ProductsPaginatedResponse } from "@/app/tienda/product";
+import ProductCondition from "./ProductCondition";
+import CatalogRetryButton from "./CatalogRetryButton";
 import type { VidrieraProduct } from "@/lib/fixbeeCatalog";
 import AddToCartButton from "@/components/store/AddToCartButton";
 import {
@@ -195,9 +196,12 @@ function ProductCard({ product }: { product: VidrieraProduct }) {
                     {product.name}
                 </Link>
 
-                <p className="mt-2 text-2xl font-bold text-slate-950 dark:text-slate-50">
-                    ${formatPrice(product.retail_price)}
-                </p>
+                <div className="mt-2 flex flex-wrap items-center gap-2">
+                    <p className="text-2xl font-bold text-slate-950 dark:text-slate-50">
+                        ${formatPrice(product.retail_price)}
+                    </p>
+                    <ProductCondition condition={product.storeCondition} />
+                </div>
 
                 {stock > 0 && stock < 10 ? (
                     <p className="mt-2 text-sm font-medium text-amber-700">
@@ -260,10 +264,19 @@ export default async function CatalogResults({
     title = "Productos disponibles",
     emptyMessage = "No encontramos productos con esos filtros.",
 }: CatalogResultsProps) {
-    const data: ProductsPaginatedResponse = await getCatalogPage(
+    const data = await getCatalogPage(
         filters,
         forcedCategoryName,
     );
+    if (data.error) {
+        return (
+            <section className="rounded-3xl border border-slate-200 bg-white p-8 text-center dark:border-slate-700 dark:bg-slate-900">
+                <h2 className="text-xl font-semibold text-slate-950 dark:text-slate-50">No pudimos cargar la tienda</h2>
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">Probá de nuevo en unos instantes.</p>
+                <CatalogRetryButton />
+            </section>
+        );
+    }
     const products = (data.products || []) as VidrieraProduct[];
     const totalPages = Math.max(1, data.pages || 1);
     const currentPage = Math.max(1, data.page || filters.page || 1);
@@ -287,7 +300,7 @@ export default async function CatalogResults({
                 <p className="hidden text-sm text-slate-500 sm:block dark:text-slate-400">
                     {forcedCategoryName
                         ? `Categoria: ${forcedCategoryName}`
-                        : "Entrega y retiro en CABA."}
+                        : "Retiro en el local o envío a domicilio"}
                 </p>
             </div>
 

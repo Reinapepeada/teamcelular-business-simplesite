@@ -28,6 +28,23 @@ export type VidrieraProduct = Product & {
 
 const AHORA = "1970-01-01T00:00:00.000Z";
 
+/** Sin condición guardada no se supone que un producto sea nuevo. */
+export function etiquetaCondicion(condition?: string): string | null {
+    switch (condition?.trim().toLowerCase()) {
+        case "new":
+        case "nuevo":
+            return "Nuevo";
+        case "used":
+        case "usado":
+            return "Usado";
+        case "refurbished":
+        case "reacondicionado":
+            return "Reacondicionado";
+        default:
+            return null;
+    }
+}
+
 const imagenes = (product: CatalogProduct) =>
     product.imageUrls?.length
         ? product.imageUrls
