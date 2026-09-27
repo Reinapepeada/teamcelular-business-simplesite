@@ -368,7 +368,7 @@ export const estadoDeEntrega = (estado: StoreOrderStatus | null): string | null 
         case "preparing": return "En preparación";
         case "ready_for_pickup": return "Listo para retirar";
         case "shipped": return "Despachado";
-        case "delivered": return estado.shipping === null ? "Retirado" : "Entregado";
+        case "delivered": return estado.delivery_mode === "pickup" || estado.shipping === null ? "Retirado" : "Entregado";
         default: return "Pendiente de preparación";
     }
 };

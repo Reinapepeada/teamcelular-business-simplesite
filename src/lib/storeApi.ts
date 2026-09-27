@@ -82,6 +82,8 @@ export interface StoreOrder {
 }
 
 export interface StoreOrderStatus {
+    /** Retiro en el local o envio; los backends viejos no lo mandan. */
+    delivery_mode?: "pickup" | "shipping";
     reservation_expires_at?: string | null;
     shipping?: Partial<ShippingAddress> | null;
     commerce_key: string;
