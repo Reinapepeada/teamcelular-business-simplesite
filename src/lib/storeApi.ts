@@ -66,6 +66,7 @@ export interface StoreOrder {
     customer_phone?: string | null;
     shipping?: Partial<ShippingAddress> | null;
     items?: { product_id: number; quantity: number; unit_price: number; current_product_name?: string | null }[];
+    reservation_expires_at?: string | null;
     expires_at?: string | null;
     reserved_until?: string | null;
     created_at?: string | null;
@@ -81,6 +82,8 @@ export interface StoreOrder {
 }
 
 export interface StoreOrderStatus {
+    reservation_expires_at?: string | null;
+    shipping?: Partial<ShippingAddress> | null;
     commerce_key: string;
     status: string;
     /** Sale de la base, no de la redirección del proveedor. */
@@ -104,8 +107,9 @@ export class StoreApiError extends Error {
 
     readonly field: string | null;
     readonly slugs: string[];
+    readonly fields: string[];
 
-    constructor(message: string, status: number, code: string, slug: string | null = null, field: string | null = null, slugs: string[] = []) {
+    constructor(message: string, status: number, code: string, slug: string | null = null, field: string | null = null, slugs: string[] = [], fields: string[] = []) {
         super(message);
         this.name = "StoreApiError";
         this.status = status;
@@ -113,26 +117,37 @@ export class StoreApiError extends Error {
         this.slug = slug;
         this.field = field;
         this.slugs = slugs;
+        this.fields = fields;
     }
 }
 
-/**
- * Saca el código del sobre de errores del backend.
- *
- * El backend envuelve todo en `{error: {code, message, details}}` y **normaliza
- * el código a MAYÚSCULAS**: el handler levanta `product_unavailable` y afuera
- * sale `PRODUCT_UNAVAILABLE`. Comparar contra la forma del código fuente no
- * matchea nunca.
- */
+/** Normaliza F1 y los sobres anteriores sin perder la causa comercial. */
 export const parseStoreError = (status: number, body: unknown): StoreApiError => {
-    const sobre = (body ?? {}) as Record<string, any>;
-    const error = sobre.error ?? {};
-    const code = typeof error.code === "string" ? error.code.toUpperCase() : "UNKNOWN";
-    const detalles = error.details ?? {};
-    const slug = typeof detalles.slug === "string" ? detalles.slug : null;
-    const message = typeof error.message === "string" ? error.message : "No se pudo completar la operación.";
-    return new StoreApiError(message, status, code, slug, typeof detalles.field === "string" ? detalles.field : null,
-        Array.isArray(detalles.slugs) ? detalles.slugs.filter((slug: unknown): slug is string => typeof slug === "string") : []);
+    const objeto = (value: unknown): Record<string, unknown> =>
+        value !== null && typeof value === "object" && !Array.isArray(value) ? value as Record<string, unknown> : {};
+    const sobre = objeto(body);
+    const error = objeto(sobre.error);
+    // El manejador anterior colocaba el detail original dentro de message.
+    const anterior = objeto(error.message);
+    const causa = typeof anterior.code === "string" ? anterior
+        : typeof error.code === "string" ? error : objeto(sobre.detail);
+    const detalles = { ...causa, ...objeto(causa.details) };
+    const strings = (value: unknown): string[] => Array.isArray(value)
+        ? value.filter((v): v is string => typeof v === "string") : [];
+    const validaciones = detalles.validation_errors ?? sobre.validation_errors ?? sobre.detail;
+    const camposAnteriores = Array.isArray(validaciones) ? validaciones.flatMap(v => {
+        const ruta = objeto(v).loc ?? objeto(v).field;
+        const campo = Array.isArray(ruta) ? ruta.at(-1) : typeof ruta === "string" ? ruta.split(" -> ").at(-1) : null;
+        return typeof campo === "string" ? [campo] : [];
+    }) : [];
+    const fields = strings(detalles.fields);
+    if (!fields.length) fields.push(...camposAnteriores);
+    const field = typeof detalles.field === "string" ? detalles.field : fields[0] ?? null;
+    return new StoreApiError(
+        typeof causa.message === "string" ? causa.message : "No se pudo completar la operación.",
+        status, typeof causa.code === "string" ? causa.code.toUpperCase() : "UNKNOWN",
+        typeof detalles.slug === "string" ? detalles.slug : null, field, strings(detalles.slugs), fields,
+    );
 };
 
 export const storeRequestUrl = (path: string, server = typeof window === "undefined") => {

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PROVINCIAS } from "@/lib/provincias";
 import useCartStore from "@/store/cartStore";
+import ProductCondition from "./ProductCondition";
 import { intentoDeCheckout, prepararIntento } from "@/lib/checkoutKey";
 import {
     olvidarPedido,
@@ -15,6 +16,7 @@ import {
     abrirElPago,
     armarPedido,
     crearPedidoConRecuperacion,
+    rechazoDefinitivo,
     reservarYPagarSiCoincide,
     recuperarIntento,
     revisarPedido,
@@ -43,7 +45,6 @@ import {
     requestPaymentLink,
     type PickupPoint,
     type StoreOrder,
-    StoreApiError,
 } from "@/lib/storeApi";
 
 /**
@@ -77,6 +78,7 @@ interface CheckoutDialogProps {
 function ResumenAConfirmar({
     pedido,
     estimadoDeProductos,
+    condiciones,
     estimadoDeEnvio,
     enviando,
     fallo,
@@ -84,6 +86,7 @@ function ResumenAConfirmar({
     onVolver,
 }: {
     pedido: StoreOrder;
+    condiciones: React.ReactNode;
     estimadoDeProductos: number;
     estimadoDeEnvio: number;
     enviando: boolean;
@@ -98,6 +101,7 @@ function ResumenAConfirmar({
             <ul>{pedido.items?.map(item => (
                 <li key={item.product_id}>{item.current_product_name || `Producto ${item.product_id}`} · {item.quantity} × {pesos(item.unit_price, pedido.currency)}</li>
             ))}</ul>
+            {condiciones}
             <p>{pedido.customer_name} · {pedido.customer_email} {pedido.customer_phone}</p>
             <p>{pedido.shipping === null ? "Retiro en el local" : pedido.shipping
                 ? [pedido.shipping.street, pedido.shipping.extra, pedido.shipping.city,
@@ -133,7 +137,7 @@ function ResumenAConfirmar({
 
             <p className="text-xs text-slate-500 dark:text-slate-400">
                 Tu pedido {pedido.commerce_key} ya quedó reservado. Si salís de acá,
-                lo podés retomar desde el carrito. {vencimientoReserva(pedido) && `Reservado hasta las ${vencimientoReserva(pedido)}.`}
+                lo podés retomar desde el carrito. {vencimientoReserva(pedido) && `Reservado hasta ${vencimientoReserva(pedido)}.`}
             </p>
 
             {fallo && (
@@ -355,6 +359,11 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
         }
     }, [huellaActual, huellaPendiente]);
 
+    useEffect(() => {
+        if (!abierto || enviando || revision || aConfirmar || intentoPendiente) return;
+        dialogRef.current?.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+    }, [errores, abierto, enviando, revision, aConfirmar, intentoPendiente]);
+
     const irAPagar = (url: string) => {
         window.location.href = url;
     };
@@ -370,7 +379,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                 clave: pedido.commerce_key, checkoutKey: payload.checkout_key,
                 token: pedido.access_token, total: pedido.total_amount, moneda: pedido.currency,
                 huella: huellaDelCarrito(payload.items),
-                reserva: { created_at: pedido.created_at, expires_at: pedido.expires_at, reserved_until: pedido.reserved_until },
+                reserva: { reservation_expires_at: pedido.reservation_expires_at, created_at: pedido.created_at, expires_at: pedido.expires_at, reserved_until: pedido.reserved_until },
             }),
         });
         if (!pedido) return false;
@@ -391,9 +400,10 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
         try {
             await recuperarCompra();
         } catch (error) {
-            if (error instanceof ErrorDeCompra && error.causa instanceof StoreApiError && error.causa.code === "PICKUP_ONLY") {
+            if (rechazoDefinitivo(error)) {
                 const p = problemaDeCheckout(error, items);
                 setProblema(p);
+                setErrores(p.campos ?? {});
                 setFallo(p.mensaje);
                 setRevision(null);
                 setIntentoPendiente(!!intentoDeCheckout(window.localStorage));
@@ -454,6 +464,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
             setProductosRevisados(r.productos);
         } catch (error) {
             const p = problemaDeCheckout(error, items);
+            setErrores(p.campos ?? {});
             setProblema({ ...p, ofrecerRetiro: datos.entrega === "envio" || p.ofrecerRetiro });
             setFallo(p.mensaje);
         } finally {
@@ -502,7 +513,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                             // decide si este pedido todavia es el de la compra
                             // que el comprador tiene a la vista.
                             huella: huellaDelCarrito(payload.items),
-                            reserva: { created_at: pedido.created_at, expires_at: pedido.expires_at, reserved_until: pedido.reserved_until },
+                            reserva: { reservation_expires_at: pedido.reservation_expires_at, created_at: pedido.created_at, expires_at: pedido.expires_at, reserved_until: pedido.reserved_until },
                         });
                     },
                 },
@@ -517,9 +528,9 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
             if (error instanceof ErrorDeCompra) {
                 const p = problemaDeCheckout(error, items);
                 setProblema(p);
-                const soloRetiro = error.causa instanceof StoreApiError && error.causa.code === "PICKUP_ONLY";
-                if (soloRetiro) setIntentoPendiente(!!intentoDeCheckout(window.localStorage));
-                setFallo(error.pedido || soloRetiro ? p.mensaje : "No pudimos confirmar tu pedido. Recuperalo antes de cambiar los datos o pagar.");
+                const definitivo = rechazoDefinitivo(error);
+                if (definitivo) setIntentoPendiente(!!intentoDeCheckout(window.localStorage));
+                setFallo(error.pedido || definitivo ? p.mensaje : "No pudimos confirmar tu pedido. Recuperalo antes de cambiar los datos o pagar.");
                 setErrores(p.campos ?? {});
                 setRevision(null);
                 if (error.pedido && mensajePedidoTerminado(error.pedido)) {
@@ -677,6 +688,11 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                 ) : aConfirmar ? (
                     <ResumenAConfirmar
                         pedido={aConfirmar}
+                        condiciones={huellaPendiente === huellaActual ? (
+                            <div><p className="text-sm">Condición de los productos del carrito:</p>
+                                <ul>{cart.map(item => <li key={item.cartKey}>{item.product.name} · <ProductCondition condition={item.product.storeCondition} /></li>)}</ul>
+                            </div>
+                        ) : <p className="text-sm">No tenemos la condición de los productos de este pedido. Escribinos para confirmarla.</p>}
                         estimadoDeProductos={productosRevisados}
                         estimadoDeEnvio={estimadoEnvio}
                         enviando={enviando}
@@ -695,8 +711,8 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                 ) : revision ? (
                     <div className="mt-4 flex flex-col gap-3" aria-live="polite">
                         <h3 className="font-semibold">Revisá tu pedido</h3>
-                        {pedidoPendiente && <p>Pedido {pedidoPendiente.commerce_key}. Reservado hasta las {vencimientoReserva(pedidoPendiente)}.</p>}
-                        <ul>{cart.map(item => <li key={item.cartKey}>{item.product.name} · {item.quantity} × {pesos(item.product.retail_price)}</li>)}</ul>
+                        {pedidoPendiente && vencimientoReserva(pedidoPendiente) && <p>Pedido {pedidoPendiente.commerce_key}. Reservado hasta {vencimientoReserva(pedidoPendiente)}.</p>}
+                        <ul>{cart.map(item => <li key={item.cartKey}>{item.product.name} · <ProductCondition condition={item.product.storeCondition} /> · {item.quantity} × {pesos(item.product.retail_price)}</li>)}</ul>
                         <p>{revision.datos.nombre} · {revision.datos.email} {revision.datos.telefono}</p>
                         <p>{revision.datos.entrega === "retiro"
                             ? retiro ? [retiro.name, retiro.address].filter(Boolean).join(" · ") : "Retiro en el local. No pudimos obtener la dirección; escribinos para confirmarla."
@@ -888,7 +904,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                                     <p className="mt-1 text-xs">
                                         Tu pedido {pedidoPendiente.commerce_key} quedó reservado por{" "}
                                         {pesos(pedidoPendiente.total_amount, pedidoPendiente.currency)}. No lo
-                                        pidas de nuevo: reintentá el pago. {vencimientoReserva(pedidoPendiente) && `Reservado hasta las ${vencimientoReserva(pedidoPendiente)}.`}
+                                        pidas de nuevo: reintentá el pago. {vencimientoReserva(pedidoPendiente) && `Reservado hasta ${vencimientoReserva(pedidoPendiente)}.`}
                                     </p>
                                     <button
                                         type="button"

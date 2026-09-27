@@ -353,7 +353,7 @@ export const problemaDeCheckout = (causa: unknown, items: ItemComprable[] = []):
             // También incluye fallas del proveedor: no afirma falta de cobertura.
             return { mensaje: "No pudimos cotizar el envío. Probá de nuevo o retirá en el local.", ofrecerRetiro: true };
         }
-        if (code === "SHIPPING_FIELD_TOO_LONG" || (error.status === 422 && error.field)) {
+        if (code === "SHIPPING_FIELD_TOO_LONG" || (error.status === 422 && (error.field || error.fields.length))) {
             const campos: ErroresDeCompra = {};
             const mapa: Record<string, (keyof ErroresDeCompra)[]> = {
                 customer_name: ["nombre"], customer_email: ["email"], customer_phone: ["telefono"],
@@ -361,7 +361,7 @@ export const problemaDeCheckout = (causa: unknown, items: ItemComprable[] = []):
                 street: ["street", "number"], extra: ["floor", "apartment"], city: ["city"],
                 province: ["province"], postal_code: ["postal_code"], floor: ["floor"], apartment: ["apartment"],
             };
-            for (const campo of mapa[error.field ?? ""] ?? []) campos[campo] = code === "SHIPPING_FIELD_TOO_LONG" ? "Este dato es demasiado largo. Acortalo para continuar." : "Revisá este dato para continuar.";
+            for (const field of new Set([error.field, ...error.fields])) for (const campo of mapa[field ?? ""] ?? []) campos[campo] = code === "SHIPPING_FIELD_TOO_LONG" ? "Este dato es demasiado largo. Acortalo para continuar." : "Revisá este dato para continuar.";
             return { mensaje: "Revisá los datos indicados antes de continuar.", campos };
         }
         if (code === "STOREFRONT_PAUSED") return { mensaje: "Las nuevas compras están pausadas temporalmente. Podés reintentar más tarde. Si ya tenés un pedido, podés retomarlo desde el carrito." };
@@ -398,6 +398,15 @@ export const recuperarIntento = async (almacen: AlmacenClave, puertos: PuertosDe
     return payload ? reservar(puertos, payload) : null;
 };
 
+/** Un timeout o conflicto de recuperación no confirma que la reserva haya fallado. */
+export const rechazoDefinitivo = (causa: unknown): boolean => {
+    if (causa instanceof ErrorDeCompra && causa.pedido) return false;
+    const error = causa instanceof ErrorDeCompra ? causa.causa : causa;
+    return error instanceof StoreApiError && error.status >= 400 && error.status < 500
+        && ![408, 425, 429].includes(error.status)
+        && !["UNKNOWN", "HTTP_ERROR", "CONFLICT", "ORDER_NOT_PAYABLE"].includes(error.code.toUpperCase());
+};
+
 /** Solo un rechazo explícito permite descartar el intento; una respuesta perdida se recupera. */
 export const crearPedidoConRecuperacion = async (
     crear: PuertosDeCompra["crearPedido"], payload: CheckoutPayload, almacen: AlmacenClave,
@@ -406,7 +415,7 @@ export const crearPedidoConRecuperacion = async (
     try {
         return await crear(payload);
     } catch (error) {
-        if (error instanceof StoreApiError && error.status === 422 && error.code.toUpperCase() === "PICKUP_ONLY" && locks) {
+        if (rechazoDefinitivo(error) && locks) {
             await locks.request("tc.checkout", () => olvidarClave(almacen, payload.checkout_key));
         }
         throw error;

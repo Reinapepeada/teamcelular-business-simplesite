@@ -81,8 +81,10 @@ export const resumenParaConfirmar = (
 };
 
 /** Renderizar otra vez no extiende la reserva. */
-export const vencimientoReserva = (pedido: Pick<StoreOrder, "expires_at" | "reserved_until" | "created_at">): string | null => {
-    const exacto = [pedido.expires_at, pedido.reserved_until].find(v => v && Number.isFinite(Date.parse(v)));
+export const vencimientoReserva = (pedido: Pick<StoreOrder, "reservation_expires_at" | "expires_at" | "reserved_until" | "created_at">): string | null => {
+    // null confirma que no quedan reservas activas; no se inventa un vencimiento.
+    if (pedido.reservation_expires_at === null) return null;
+    const exacto = [pedido.reservation_expires_at, pedido.expires_at, pedido.reserved_until].find(v => v && Number.isFinite(Date.parse(v)));
     const creado = pedido.created_at ? Date.parse(pedido.created_at) : NaN;
     if (!exacto && !Number.isFinite(creado)) return null;
     const fecha = new Date(exacto ? Date.parse(exacto) : creado + 15 * 60_000);

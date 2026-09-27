@@ -66,8 +66,8 @@ test("422 pickup_only libera su intento y permite revisar un nuevo retiro", asyn
     assert.equal(nuevo.payload.shipping_address, undefined);
 });
 
-test("respuesta perdida y errores distintos conservan el intento original", async () => {
-    for (const error of [new Error("Sin conexión"), new StoreApiError("Error", 500, "PICKUP_ONLY"), new StoreApiError("Error", 422, "OTHER")]) {
+test("respuesta perdida y errores inciertos conservan el intento original", async () => {
+    for (const error of [new Error("Sin conexión"), new StoreApiError("Error", 500, "PICKUP_ONLY"), new StoreApiError("Error", 408, "TIMEOUT")]) {
         const almacen = almacenamiento();
         const anterior = await prepararIntento(almacen, items, (k, s) => armarPedido(datos, items, k, s));
         await assert.rejects(crearPedidoConRecuperacion(async () => { throw error; }, anterior.payload, almacen));

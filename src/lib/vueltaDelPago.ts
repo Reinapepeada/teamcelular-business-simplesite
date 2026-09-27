@@ -21,7 +21,7 @@ const ESPACIO = "tc.pedido";
 
 /** El pedido que este navegador dejó empezado. */
 export interface PedidoGuardado {
-    reserva?: Pick<StoreOrder, "created_at" | "expires_at" | "reserved_until">;
+    reserva?: Pick<StoreOrder, "reservation_expires_at" | "created_at" | "expires_at" | "reserved_until">;
     clave: string;
     /** Clave idempotente exacta de este pedido, para limpieza condicional. */
     checkoutKey?: string;
@@ -72,7 +72,7 @@ export interface PedidoGuardado {
 export const recordarPedido = (
     almacen: AlmacenClave,
     pedido: {
-        reserva?: Pick<StoreOrder, "created_at" | "expires_at" | "reserved_until">;
+        reserva?: Pick<StoreOrder, "reservation_expires_at" | "created_at" | "expires_at" | "reserved_until">;
         clave: string;
         checkoutKey?: string;
         token?: string | null;
@@ -117,7 +117,7 @@ export const pedidoGuardado = (almacen: AlmacenClave): PedidoGuardado | null => 
             if (dato && typeof dato.clave === "string" && dato.clave.trim() !== "") {
                 return {
                     clave: dato.clave.trim(),
-                    ...(dato.reserva && typeof dato.reserva === "object" ? { reserva: Object.fromEntries(Object.entries(dato.reserva).filter(([k, v]) => ["created_at", "expires_at", "reserved_until"].includes(k) && typeof v === "string" && Number.isFinite(Date.parse(v)))) } : {}),
+                    ...(dato.reserva && typeof dato.reserva === "object" ? { reserva: Object.fromEntries(Object.entries(dato.reserva).filter(([k, v]) => ["reservation_expires_at", "created_at", "expires_at", "reserved_until"].includes(k) && (k === "reservation_expires_at" && v === null || typeof v === "string" && Number.isFinite(Date.parse(v))))) } : {}),
                     ...(typeof dato.checkoutKey === "string" && dato.checkoutKey
                         ? { checkoutKey: dato.checkoutKey } : {}),
                     token: typeof dato.token === "string" && dato.token ? dato.token : null,
@@ -368,7 +368,7 @@ export const estadoDeEntrega = (estado: StoreOrderStatus | null): string | null 
         case "preparing": return "En preparación";
         case "ready_for_pickup": return "Listo para retirar";
         case "shipped": return "Despachado";
-        case "delivered": return "Entregado";
+        case "delivered": return estado.shipping === null ? "Retirado" : "Entregado";
         default: return "Pendiente de preparación";
     }
 };
