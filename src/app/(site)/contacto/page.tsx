@@ -274,7 +274,7 @@ export default function ContactoPage() {
                     </div>
                 </section>
 
-                <section className="space-y-6">
+                <section id="ubicacion" className="scroll-mt-24 space-y-6">
                     <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                         Nuestras sucursales en CABA
                     </h2>

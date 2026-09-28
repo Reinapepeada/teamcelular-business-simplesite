@@ -254,8 +254,9 @@ export default function FooterNUI() {
               </div>
             </div>
 
+            {/* Con ancla: desde /contacto un href igual a la página actual no hacía nada (rage clicks). */}
             <Link
-              href="/contacto"
+              href="/contacto#ubicacion"
               className="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-primary px-4 py-2 font-semibold text-white transition-colors duration-200 hover:bg-primary/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               Ver ubicación
