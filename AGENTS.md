@@ -1,6 +1,6 @@
 # Trabajo de comercio
 
-Leer y actualizar ../../infra-fixbee/mvp-scalarbee/docs/commerce/ESTADO_IMPLEMENTACION.md como fuente única de avance y próximo paso. Coordinar contratos con backend y frontend Fixbee.
+Leer y actualizar ../../mvp-scalarbee/docs/commerce/ESTADO_IMPLEMENTACION.md como fuente única de avance y próximo paso. Coordinar contratos con backend y frontend Fixbee.
 
 Usar caveman ultra y ponytail full instaladas. Mantener claridad, seguridad y pruebas monetarias/concurrencia; documentos en prosa normal. Revalidar hallazgos y corregir la causa con el cambio mínimo.
 
