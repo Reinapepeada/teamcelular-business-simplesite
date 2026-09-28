@@ -12,6 +12,8 @@ export const LOGO = {
 
 export const BUSINESS_PROFILE = {
   name: "Team Celular",
+  // Variantes con las que se busca la marca: ayudan a Google a asociarlas al dominio.
+  alternateName: ["TeamCelular", "teamcelular.com"],
   phone: "+54 11 5103-4595",
   whatsapp: "https://wa.me/5491151034595",
   email: "teamcelular.arg@gmail.com",

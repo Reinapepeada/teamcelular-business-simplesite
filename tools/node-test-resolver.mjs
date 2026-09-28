@@ -52,7 +52,15 @@ export async function resolve(especificador, contexto, siguiente) {
         if (archivo) return { url: pathToFileURL(archivo).href, shortCircuit: true };
     }
 
-    return siguiente(especificador, contexto);
+    try {
+        return await siguiente(especificador, contexto);
+    } catch (error) {
+        // Subpaths de paquetes sin `exports` (`next/server`): Node ESM exige `.js`.
+        if (error?.code === "ERR_MODULE_NOT_FOUND" && /^[@\w][^:]*\/[^.]+$/.test(especificador)) {
+            return siguiente(`${especificador}.js`, contexto);
+        }
+        throw error;
+    }
 }
 
 // Se registra a sí mismo cuando se lo pasa por `--import`.

@@ -69,6 +69,10 @@ module.exports = {
       { source: "/reparacion-de-celulares-cerca-de-mi", destination: "/sucursales", permanent: true },
       { source: "/zonas/recoleta", destination: "/sucursales/caba/recoleta", permanent: true },
       { source: "/zonas/belgrano", destination: "/sucursales/caba/belgrano", permanent: true },
+      // Rutas estándar que los agentes prueban para verificar el negocio.
+      { source: "/about", destination: "/sobrenosotros", permanent: true },
+      { source: "/contact", destination: "/contacto", permanent: true },
+      { source: "/privacy", destination: "/privacidad", permanent: true },
       {
         source: "/:path*",
         has: [{ type: "header", key: "x-forwarded-proto", value: "http" }],

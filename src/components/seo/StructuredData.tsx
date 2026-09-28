@@ -15,6 +15,7 @@ function createLocalBusinessJson(city?: string, country?: string) {
       "https://schema.org/ProfessionalService",
     ],
     name: BUSINESS_PROFILE.name,
+    alternateName: BUSINESS_PROFILE.alternateName,
     url: SITE_URL,
     image: `${SITE_URL}/opengraph-image.png`,
     logo: {
@@ -86,6 +87,7 @@ function createOrganizationJson() {
     "@type": "Organization",
     "@id": businessId("organization"),
     name: BUSINESS_PROFILE.name,
+    alternateName: BUSINESS_PROFILE.alternateName,
     url: SITE_URL,
     logo: {
       "@type": "ImageObject",
@@ -125,6 +127,7 @@ function createWebsiteJson() {
     "@id": businessId("website"),
     url: SITE_URL,
     name: BUSINESS_PROFILE.name,
+    alternateName: BUSINESS_PROFILE.alternateName,
     inLanguage: "es-AR",
     publisher: { "@id": businessId("organization") },
     potentialAction: [
