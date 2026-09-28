@@ -14,6 +14,7 @@
 
 /** Lo mínimo que hace falta de un ítem del carrito para poder comprarlo. */
 export interface ItemComprable {
+    shipping_enabled?: boolean;
     /** El slug del backend. Los ítems guardados antes de esta versión no lo tienen. */
     slug?: string | null;
     quantity: number;
@@ -68,3 +69,7 @@ export const aLineasDeCheckout = (items: ItemComprable[]): LineasDelCarrito => {
  */
 export const carritoComprable = (resumen: LineasDelCarrito): boolean =>
     resumen.lineas.length > 0 && resumen.hayQueReagregar.length === 0;
+
+export const productosSoloRetiro = (items: ItemComprable[]): string[] =>
+    items.filter(item => item.shipping_enabled === false && item.quantity > 0)
+        .map(item => item.nombre || item.slug || "un producto");

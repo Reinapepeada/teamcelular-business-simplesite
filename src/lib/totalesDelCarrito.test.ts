@@ -109,3 +109,16 @@ describe("nombreDeVariante", () => {
         assert.equal(nombreDeVariante(item()), "");
     });
 });
+
+
+test("total estimado suma envío, redondea centavos y no confunde falta de cotización con envío gratis", async () => {
+    const { totalEstimadoConEnvio } = await import("./totalesDelCarrito.ts");
+    assert.equal(totalEstimadoConEnvio(39000, 13803.58), 52803.58);
+    assert.equal(totalEstimadoConEnvio(0.1, 0.2), 0.3);
+    assert.equal(totalEstimadoConEnvio(100, 0), 100);
+    assert.equal(totalEstimadoConEnvio(100, null), null);
+    for (const valor of [NaN, Infinity, -1]) {
+        assert.equal(totalEstimadoConEnvio(100, valor), null);
+        assert.equal(totalEstimadoConEnvio(valor, 100), null);
+    }
+});

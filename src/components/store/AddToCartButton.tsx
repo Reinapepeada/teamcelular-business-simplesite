@@ -21,6 +21,7 @@ interface AddToCartButtonProps {
 
 export default function AddToCartButton({ product, storeSlug = null }: AddToCartButtonProps) {
     const addToCart = useCartStore((state) => state.addToCart);
+    const openCart = useCartStore((state) => state.openCart);
     const key = claveDeCarrito(product.id, null, storeSlug);
     const inCart = useCartStore((state) => state.cart.find(item => item.cartKey === key)?.quantity ?? 0);
     const stock = product.variants.reduce((sum, variant) => sum + variant.stock, 0);
@@ -29,7 +30,10 @@ export default function AddToCartButton({ product, storeSlug = null }: AddToCart
         <>
         <button
             type="button"
-            onClick={() => addToCart(product, null, 1, storeSlug)}
+            onClick={() => {
+                addToCart(product, null, 1, storeSlug);
+                openCart();
+            }}
             disabled={inCart >= stock}
             aria-label={`Agregar al carrito: ${product.name}`}
             className="tc-btn tc-btn-primary w-full !text-[15px] disabled:opacity-50"

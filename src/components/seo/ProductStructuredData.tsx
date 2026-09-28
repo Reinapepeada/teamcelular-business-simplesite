@@ -71,7 +71,7 @@ export default function ProductStructuredData({ product, images = [] }: ProductS
     name: product.name,
     description:
       product.description ||
-      `${product.name} disponible en Team Celular CABA. Consultar compatibilidad, stock, garantia y retiro en Recoleta o Belgrano antes de comprar.`,
+      `${product.name} disponible en Team Celular. Retiro en el local o envío a domicilio. Consultanos por compatibilidad y garantía antes de comprar.`,
     sku: product.serial_number || undefined,
     category: categoryName || undefined,
     image: imageObjects.length ? imageObjects : undefined,

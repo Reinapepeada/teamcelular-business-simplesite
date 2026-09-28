@@ -7,24 +7,59 @@
  */
 
 import type { CheckoutPayload, ShippingAddress, StoreOrder } from "./storeApi";
+import { resumenParaConfirmar } from "./resumenDelPedido";
+import { totalEstimadoConEnvio } from "./totalesDelCarrito";
 import { StoreApiError } from "./storeApi";
 import type { ItemComprable } from "./cartLines";
-import { aLineasDeCheckout, carritoComprable } from "./cartLines";
+import { aLineasDeCheckout, carritoComprable, productosSoloRetiro } from "./cartLines";
+import { intentoDeCheckout, olvidarClave, type AlmacenClave } from "./checkoutKey";
 
 export type Entrega = "envio" | "retiro";
+
+/**
+ * La dirección como la escribe el comprador: calle y número por separado, y
+ * piso y depto aparte. Es la forma en que Envíopack da de alta el envío; pedirla
+ * junta obligaba a quien despacha a volver a separarla a mano.
+ */
+export interface DireccionDelFormulario extends Partial<ShippingAddress> {
+    number?: string;
+    floor?: string;
+    apartment?: string;
+}
 
 export interface DatosDeCompra {
     nombre: string;
     email: string;
     telefono?: string;
     entrega: Entrega;
-    direccion?: Partial<ShippingAddress>;
+    direccion?: DireccionDelFormulario;
 }
 
 export type ErroresDeCompra = Partial<Record<
-    "nombre" | "email" | "telefono" | "street" | "city" | "province" | "postal_code" | "carrito",
+    | "nombre" | "email" | "telefono" | "street" | "number" | "floor" | "apartment"
+    | "city" | "province" | "postal_code" | "carrito",
     string
 >>;
+
+/**
+ * Los largos que acepta el alta de un envío en Envíopack.
+ *
+ * El checkout no los necesita para cobrar, pero si deja pasar una calle de 60
+ * letras el problema aparece recién al despachar, con la plata ya cobrada. El
+ * backend valida lo mismo; esto es para avisar antes de mandar.
+ */
+export const LARGOS_DE_ENVIO = {
+    nombre: 50,
+    email: 100,
+    street: 50,
+    number: 5,
+    floor: 6,
+    apartment: 4,
+    city: 50,
+} as const;
+
+const excede = (valor: string | undefined, maximo: number) =>
+    (valor?.trim().length ?? 0) > maximo;
 
 // Deliberadamente laxo: alcanza para atajar el dedazo (falta la arroba, falta
 // el punto) sin rechazar direcciones válidas raras. Quien valida de verdad es
@@ -55,10 +90,28 @@ export const validarDatos = (
 
     if (datos.entrega === "envio") {
         const d = datos.direccion ?? {};
-        if (!d.street?.trim()) errores.street = "Poné la calle y el número.";
+        const L = LARGOS_DE_ENVIO;
+        if (!d.street?.trim()) errores.street = "Poné la calle.";
+        else if (excede(d.street, L.street)) errores.street = `La calle puede tener hasta ${L.street} letras.`;
+        if (!d.number?.trim()) errores.number = "Poné el número, o S/N si no tiene.";
+        else if (excede(d.number, L.number)) errores.number = `El número puede tener hasta ${L.number} caracteres.`;
+        if (excede(d.floor, L.floor)) errores.floor = `El piso puede tener hasta ${L.floor} caracteres.`;
+        if (excede(d.apartment, L.apartment)) errores.apartment = `El depto puede tener hasta ${L.apartment} caracteres.`;
         if (!d.city?.trim()) errores.city = "Poné la localidad.";
+        else if (excede(d.city, L.city)) errores.city = `La localidad puede tener hasta ${L.city} letras.`;
+        if (!errores.nombre && excede(datos.nombre, L.nombre)) {
+            errores.nombre = `Para el envío, nombre y apellido pueden tener hasta ${L.nombre} letras.`;
+        }
+        if (!errores.email && excede(datos.email, L.email)) {
+            errores.email = `Para el envío, el mail puede tener hasta ${L.email} caracteres.`;
+        }
         if (!d.province?.trim()) errores.province = "Elegí la provincia.";
         if (!d.postal_code?.trim()) errores.postal_code = "Poné el código postal.";
+    }
+
+    const soloRetiro = productosSoloRetiro(items);
+    if (datos.entrega === "envio" && soloRetiro.length) {
+        errores.carrito = `Solo retiro en el local: ${soloRetiro.join(", ")}. Elegí retirar en el local para continuar.`;
     }
 
     const resumen = aLineasDeCheckout(items);
@@ -93,12 +146,22 @@ export const armarPedido = (
 
     if (datos.entrega === "envio") {
         const d = datos.direccion ?? {};
+        // Conservamos los textos combinados para versiones anteriores del backend.
+        const piso = d.floor?.trim();
+        const depto = d.apartment?.trim();
+        const complemento = [piso && `Piso ${piso}`, depto && `Depto ${depto}`]
+            .filter(Boolean)
+            .join(" ");
         payload.shipping_address = {
-            street: d.street!.trim(),
+            street_name: d.street?.trim(),
+            street_number: d.number?.trim(),
+            floor: piso || null,
+            apartment: depto || null,
+            street: [d.street?.trim(), d.number?.trim()].filter(Boolean).join(" "),
             city: d.city!.trim(),
             province: d.province!.trim(),
             postal_code: d.postal_code!.trim(),
-            extra: d.extra?.trim() || null,
+            extra: complemento || d.extra?.trim() || null,
         };
     }
     // Sin `shipping_address` el backend entiende retiro en el local y cobra
@@ -199,6 +262,7 @@ export const reservar = async (
     // guardarlo recién con el link en la mano deja ese hueco sin red. Y ahora
     // ese hueco es más largo, porque en el medio hay una pantalla donde el
     // comprador puede irse.
+    pedido.created_at ??= new Date().toISOString();
     puertos.recordar?.(pedido);
     exigirPedidoPendiente(pedido);
 
@@ -261,4 +325,99 @@ export const comprar = async (
     const pedido = await reservar(puertos, payload);
     const checkoutUrl = await abrirElPago(puertos, pedido);
     return { checkoutUrl, pedido };
+};
+
+export interface ProblemaDeCheckout {
+    mensaje: string;
+    quitarSlug?: string;
+    ofrecerRetiro?: boolean;
+    campos?: ErroresDeCompra;
+}
+
+export const problemaDeCheckout = (causa: unknown, items: ItemComprable[] = []): ProblemaDeCheckout => {
+    const error = causa instanceof ErrorDeCompra ? causa.causa : causa;
+    if (error instanceof StoreApiError) {
+        const code = error.code.toUpperCase();
+        if (["PRODUCT_UNAVAILABLE", "PRODUCT_NOT_FOUND", "INSUFFICIENT_STOCK", "OUT_OF_STOCK"].includes(code)) {
+            const item = items.find(i => i.slug === error.slug);
+            return { mensaje: "Ya no hay stock de " + (item?.nombre || "uno de los productos") + ". Quitalo del carrito para continuar.", quitarSlug: item?.slug || undefined };
+        }
+        if (code === "PICKUP_ONLY") {
+            const slugs = error.slugs.length ? error.slugs : error.slug ? [error.slug] : [];
+            const nombres = slugs.length
+                ? slugs.map(slug => items.find(item => item.slug === slug)?.nombre || slug)
+                : productosSoloRetiro(items);
+            return { mensaje: `Solo retiro en el local: ${nombres.join(", ") || "uno o más productos del carrito"}. Elegí retirar en el local para continuar.`, ofrecerRetiro: true };
+        }
+        if (code === "SHIPPING_UNAVAILABLE") {
+            // También incluye fallas del proveedor: no afirma falta de cobertura.
+            return { mensaje: "No pudimos cotizar el envío. Probá de nuevo o retirá en el local.", ofrecerRetiro: true };
+        }
+        if (code === "SHIPPING_FIELD_TOO_LONG" || (error.status === 422 && (error.field || error.fields.length))) {
+            const campos: ErroresDeCompra = {};
+            const mapa: Record<string, (keyof ErroresDeCompra)[]> = {
+                customer_name: ["nombre"], customer_email: ["email"], customer_phone: ["telefono"],
+                street_name: ["street"], street_number: ["number"],
+                street: ["street", "number"], extra: ["floor", "apartment"], city: ["city"],
+                province: ["province"], postal_code: ["postal_code"], floor: ["floor"], apartment: ["apartment"],
+            };
+            for (const field of new Set([error.field, ...error.fields])) for (const campo of mapa[field ?? ""] ?? []) campos[campo] = code === "SHIPPING_FIELD_TOO_LONG" ? "Este dato es demasiado largo. Acortalo para continuar." : "Revisá este dato para continuar.";
+            return { mensaje: "Revisá los datos indicados antes de continuar.", campos };
+        }
+        if (code === "STOREFRONT_PAUSED") return { mensaje: "Las nuevas compras están pausadas temporalmente. Podés reintentar más tarde. Si ya tenés un pedido, podés retomarlo desde el carrito." };
+    }
+    return { mensaje: causa instanceof ErrorDeCompra && causa.pedido ? causa.message : "No pudimos completar la compra. Probá de nuevo o escribinos." };
+};
+
+/** Revisar solo cotiza: no recibe un puerto capaz de crear pedidos. */
+export const revisarPedido = async (
+    datos: DatosDeCompra, items: ItemComprable[], productos: number,
+    cotizar: typeof import("./storeApi").quoteShipping,
+) => {
+    const envio = datos.entrega === "retiro" ? 0 : (await cotizar(
+        datos.direccion!.province!.trim(), datos.direccion!.postal_code!.trim(), aLineasDeCheckout(items).lineas,
+    )).cheapest?.price;
+    const total = totalEstimadoConEnvio(productos, envio ?? null);
+    if (total === null) throw new StoreApiError("Sin cotización", 409, "SHIPPING_UNAVAILABLE");
+    return { productos, envio, total };
+};
+
+export const reservarYPagarSiCoincide = async (
+    puertos: PuertosDeCompra, payload: CheckoutPayload, productos: number, envio: number,
+    recuperado = false,
+) => {
+    const pedido = await reservar(puertos, payload);
+    const cambio = resumenParaConfirmar(pedido, productos, envio).precioCambio;
+    const checkoutUrl = cambio || recuperado ? null : await abrirElPago(puertos, pedido);
+    return { pedido, checkoutUrl };
+};
+
+/** El POST existente recupera antes de cotizar; no hay un endpoint de consulta por clave. */
+export const recuperarIntento = async (almacen: AlmacenClave, puertos: PuertosDeCompra) => {
+    const payload = intentoDeCheckout(almacen);
+    return payload ? reservar(puertos, payload) : null;
+};
+
+/** Un timeout o conflicto de recuperación no confirma que la reserva haya fallado. */
+export const rechazoDefinitivo = (causa: unknown): boolean => {
+    if (causa instanceof ErrorDeCompra && causa.pedido) return false;
+    const error = causa instanceof ErrorDeCompra ? causa.causa : causa;
+    return error instanceof StoreApiError && error.status >= 400 && error.status < 500
+        && ![408, 425, 429].includes(error.status)
+        && !["UNKNOWN", "HTTP_ERROR", "CONFLICT", "ORDER_NOT_PAYABLE"].includes(error.code.toUpperCase());
+};
+
+/** Solo un rechazo explícito permite descartar el intento; una respuesta perdida se recupera. */
+export const crearPedidoConRecuperacion = async (
+    crear: PuertosDeCompra["crearPedido"], payload: CheckoutPayload, almacen: AlmacenClave,
+    locks: LockManager | undefined = globalThis.navigator?.locks,
+): Promise<StoreOrder> => {
+    try {
+        return await crear(payload);
+    } catch (error) {
+        if (rechazoDefinitivo(error) && locks) {
+            await locks.request("tc.checkout", () => olvidarClave(almacen, payload.checkout_key));
+        }
+        throw error;
+    }
 };

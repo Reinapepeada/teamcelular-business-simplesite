@@ -45,10 +45,13 @@ const nuevaClave = (): string => {
     return `ck-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 12)}`;
 };
 
+import type { CheckoutPayload } from "./storeApi";
+
 interface Guardada {
     key: string;
     huella: string;
     recoveryToken?: string;
+    payload?: CheckoutPayload;
 }
 
 const leer = (almacen: AlmacenClave): Guardada | null => {
@@ -63,6 +66,38 @@ const leer = (almacen: AlmacenClave): Guardada | null => {
         // pueden impedir comprar: se arranca de cero.
         return null;
     }
+};
+
+/** Un intento enviado nunca se reemplaza por datos editados, ni por otro carrito. */
+export const intentoDeCheckout = (almacen: AlmacenClave): CheckoutPayload | null => {
+    const guardada = leer(almacen);
+    if (!guardada?.recoveryToken) return null;
+    if (!guardada.payload || guardada.payload.checkout_key !== guardada.key ||
+        guardada.payload.recovery_token !== guardada.recoveryToken) {
+        throw new Error("No tenemos los datos de tu intento anterior. Escribinos antes de volver a comprar.");
+    }
+    return guardada.payload;
+};
+
+export const prepararIntento = async (
+    almacen: AlmacenClave,
+    items: { slug: string; quantity: number }[],
+    construir: (clave: string, secreto: string) => CheckoutPayload,
+    locks: LockManager | undefined = globalThis.navigator?.locks,
+) => {
+    if (!locks) throw new Error("Para comprar, abrí la tienda con HTTPS en un navegador actualizado.");
+    return locks.request("tc.checkout", async () => {
+        const anterior = intentoDeCheckout(almacen);
+        if (anterior) return { payload: anterior, recuperado: true };
+        const clave = claveDeCheckout(almacen, items);
+        const secreto = secretoDeCheckout(almacen, clave);
+        const payload = construir(clave, secreto);
+        const contenido = JSON.stringify({ ...leer(almacen), payload });
+        // Sin el cuerpo original persistido, una respuesta perdida no es recuperable con seguridad.
+        almacen.setItem(ESPACIO, contenido);
+        if (almacen.getItem(ESPACIO) !== contenido) throw new Error("No pudimos guardar tu compra en este navegador.");
+        return { payload, recuperado: false };
+    });
 };
 
 /**

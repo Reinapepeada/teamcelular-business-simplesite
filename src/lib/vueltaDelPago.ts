@@ -15,12 +15,13 @@
  */
 
 import { olvidarClave, type AlmacenClave } from "./checkoutKey";
-import type { StoreOrderStatus } from "./storeApi";
+import type { StoreOrder, StoreOrderStatus } from "./storeApi";
 
 const ESPACIO = "tc.pedido";
 
 /** El pedido que este navegador dejó empezado. */
 export interface PedidoGuardado {
+    reserva?: Pick<StoreOrder, "reservation_expires_at" | "created_at" | "expires_at" | "reserved_until">;
     clave: string;
     /** Clave idempotente exacta de este pedido, para limpieza condicional. */
     checkoutKey?: string;
@@ -71,6 +72,7 @@ export interface PedidoGuardado {
 export const recordarPedido = (
     almacen: AlmacenClave,
     pedido: {
+        reserva?: Pick<StoreOrder, "reservation_expires_at" | "created_at" | "expires_at" | "reserved_until">;
         clave: string;
         checkoutKey?: string;
         token?: string | null;
@@ -88,6 +90,7 @@ export const recordarPedido = (
                 ESPACIO,
                 JSON.stringify({
                     clave: pedido.clave,
+                    ...(pedido.reserva ? { reserva: pedido.reserva } : mismo?.reserva ? { reserva: mismo.reserva } : {}),
                     ...(checkoutKey ? { checkoutKey } : {}),
                     token: pedido.token || mismo?.token || null,
                     total: pedido.total ?? null,
@@ -114,6 +117,7 @@ export const pedidoGuardado = (almacen: AlmacenClave): PedidoGuardado | null => 
             if (dato && typeof dato.clave === "string" && dato.clave.trim() !== "") {
                 return {
                     clave: dato.clave.trim(),
+                    ...(dato.reserva && typeof dato.reserva === "object" ? { reserva: Object.fromEntries(Object.entries(dato.reserva).filter(([k, v]) => ["reservation_expires_at", "created_at", "expires_at", "reserved_until"].includes(k) && (k === "reservation_expires_at" && v === null || typeof v === "string" && Number.isFinite(Date.parse(v))))) } : {}),
                     ...(typeof dato.checkoutKey === "string" && dato.checkoutKey
                         ? { checkoutKey: dato.checkoutKey } : {}),
                     token: typeof dato.token === "string" && dato.token ? dato.token : null,
@@ -204,7 +208,7 @@ export const claveDeLaVuelta = (
     return null;
 };
 
-export type Desenlace = "pagado" | "devuelto" | "esperando" | "rechazado" | "sin_pedido";
+export type Desenlace = "pagado" | "esperando" | "rechazado" | "sin_pedido";
 
 /**
  * Por cuál de las tres puertas volvió el comprador.
@@ -272,15 +276,15 @@ const RECHAZADO: VueltaMostrable = {
  * a alguien que todavía no pagó —o de asustar a alguien que sí pagó y cuyo
  * aviso está en camino.
  */
-export const vueltaMostrable = (
+const vueltaBase = (
     estado: StoreOrderStatus | null,
     intencion: Intencion = "exito"
 ): VueltaMostrable => {
-    if (estado?.payment_reversed) {
+    if (estado?.payment_result === "reversed" || estado?.status === "payment_reversed") {
         return {
-            desenlace: "devuelto",
-            titulo: "El pago de este pedido fue revertido",
-            detalle: "El pedido no sigue en preparación. Si necesitás ayuda, escribinos con el número de pedido.",
+            desenlace: "rechazado",
+            titulo: "Este pago se devolvió",
+            detalle: "Escribinos con el número de pedido para consultar cómo seguir.",
             seguirPreguntando: false,
         };
     }
@@ -300,7 +304,7 @@ export const vueltaMostrable = (
             desenlace: "pagado",
             titulo: "¡Listo! Tu pago entró",
             detalle:
-                "Registramos tu pedido. La confirmación llegará por mail.",
+                "Registramos tu pedido. Te avisaremos por mail cuando salga.",
             seguirPreguntando: false,
         };
     }
@@ -312,6 +316,23 @@ export const vueltaMostrable = (
     // exactamente lo que no puede afirmar.
     if (!estado) return ESPERANDO;
 
+    if (estado.payment_result === "rejected" || estado.reason_code === "expired") {
+        const motivos = {
+            insufficient_funds: "La tarjeta no tenía saldo suficiente",
+            invalid_card_data: "Algún dato de la tarjeta no coincidió",
+            rejected_by_bank: "El banco rechazó el pago",
+            expired: "La reserva venció",
+            other: "No pudimos confirmar el pago",
+        };
+        return {
+            ...RECHAZADO,
+            titulo: motivos[estado.reason_code ?? "other"] ?? motivos.other,
+            detalle: estado.can_retry === true
+                ? "Podés reintentar el pago de este mismo pedido."
+                : "Escribinos con el número de pedido para consultar cómo seguir.",
+        };
+    }
+
     if (estado.status === "expired" || estado.status === "cancelled") {
         return {
             desenlace: "rechazado",
@@ -321,18 +342,33 @@ export const vueltaMostrable = (
         };
     }
 
+    if (estado.payment_result === "pending") return DEMORADO;
+    if (estado.payment_result === "approved" || estado.payment_result === "none") return ESPERANDO;
     if (intencion === "error") return RECHAZADO;
     if (intencion === "pendiente") return DEMORADO;
     return ESPERANDO;
 };
 
+export const vueltaMostrable = (estado: StoreOrderStatus | null, intencion: Intencion = "exito") => ({
+    ...vueltaBase(estado, intencion),
+    // Un campo ausente nunca habilita un nuevo intento de cobro.
+    canRetry: estado?.can_retry === true && !estado.paid && estado.payment_result !== "approved" && estado.payment_result !== "reversed" && estado.status !== "payment_reversed",
+});
+
+/** El enlace compartido identifica un pedido, pero nunca presta el token de otro. */
+export const tokenParaReintentar = (estado: StoreOrderStatus | null, guardado: PedidoGuardado | null): string | null =>
+    estado && vueltaMostrable(estado).canRetry && guardado?.clave === estado.commerce_key
+        ? guardado.token
+        : null;
+
 export const estadoDeEntrega = (estado: StoreOrderStatus | null): string | null => {
-    if (!estado?.paid || estado.payment_reversed) return null;
+    if (!estado?.paid || estado.payment_result === "reversed" || estado.status === "payment_reversed") return null;
     if (estado.status === "paid_pending_stock_commit") return "Disponibilidad en revisión";
     switch (estado.fulfillment_status) {
         case "preparing": return "En preparación";
+        case "ready_for_pickup": return "Listo para retirar";
         case "shipped": return "Despachado";
-        case "delivered": return "Entregado";
+        case "delivered": return estado.delivery_mode === "pickup" || estado.shipping === null ? "Retirado" : "Entregado";
         default: return "Pendiente de preparación";
     }
 };

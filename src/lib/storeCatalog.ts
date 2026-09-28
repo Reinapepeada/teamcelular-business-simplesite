@@ -17,6 +17,7 @@ import { fetchStoreProduct, fetchStoreProducts } from "./storeApi";
 
 /** Un producto listo para la tienda, con el slug que entiende el checkout. */
 export interface CatalogProduct {
+    shipping_enabled?: boolean;
     /** El del backend. **No se construye acá.** */
     slug: string;
     name: string;
@@ -81,6 +82,7 @@ export const adaptarProducto = (crudo: StoreProduct): CatalogProduct | null => {
     const imageUrl = imageUrls[0] ?? imagenDe(crudo.image_key);
     return {
         slug: crudo.slug,
+        shipping_enabled: crudo.shipping_enabled !== false,
         name: crudo.name,
         description: crudo.description,
         price: crudo.price,

@@ -1,14 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
     Button, 
     Chip, 
-    Skeleton, 
     Card,
     Divider
 } from "@nextui-org/react";
@@ -23,7 +21,6 @@ import {
     Check,
     Minus,
     Plus,
-    ArrowLeft
 } from "lucide-react";
 
 import { 
@@ -35,6 +32,8 @@ import {
 } from '@/services/products';
 import { formatWarranty, type Product, type ProductVariant } from '@/app/tienda/product';
 import useCartStore from '@/store/cartStore';
+import ProductCondition from '@/components/store/ProductCondition';
+import { BUSINESS_PROFILE } from '@/lib/businessProfile';
 import { cargaDirectaImagen } from '@/lib/storeCatalog';
 import {
     hayParaComprar,
@@ -42,17 +41,6 @@ import {
     sePuedeSumar,
     stockQueManda,
 } from '@/lib/stockDeLaFicha';
-
-function slugify(text = '') {
-    return text
-        .toString()
-        .normalize('NFD')
-        .replace(/\p{Diacritic}/gu, '')
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '');
-}
-
 
 // Color mapping for display
 const colorMap: Record<string, string> = {
@@ -97,7 +85,6 @@ interface Props {
 }
 
 export default function ProductDetailClient({ productProp, storeSlugProp }: Props) {
-    const router = useRouter();
 
     // El producto llega resuelto del server, que hace `notFound()` si no
     // existe: no hay estado que actualizar ni error que mostrar acá.
@@ -112,7 +99,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
     const [quantity, setQuantity] = useState(1);
     const [feedback, setFeedback] = useState('');
     
-    const { addToCart } = useCartStore();
+    const { addToCart, openCart } = useCartStore();
     
     // Las selecciones por defecto salen del producto que trajo el server.
     useEffect(() => {
@@ -167,7 +154,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
     const handleAddToCart = () => {
         if (product) {
             addToCart(product, selectedVariant, quantity, storeSlugProp ?? null);
-            setFeedback('Carrito actualizado. Podés continuar desde el botón Carrito.');
+            openCart();
         }
     };
 
@@ -197,32 +184,9 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
     const discount = 0;
     const originalPrice = product.retail_price;
     const discountedPrice = originalPrice * (1 - discount / 100);
-    const brandName = product.brand?.name?.trim();
-    const categoryName = product.category?.name?.trim();
-    const warrantyLabel = formatWarranty(product);
-    const productContextRows = [
-        {
-            label: 'Compatibilidad',
-            value: `Confirmamos el modelo exacto antes de preparar ${product.name}.`,
-        },
-        {
-            label: 'Categoria',
-            value: categoryName ? `${categoryName}${brandName ? ` para ${brandName}` : ''}` : 'Repuesto o accesorio para celular.',
-        },
-        {
-            label: 'Garantía',
-            value: product.warranty_time
-                ? `Garantía de ${warrantyLabel} con comprobante de compra.`
-                : 'Consultanos las condiciones de garantía antes de comprar.',
-        },
-        {
-            label: 'Retiro y consulta',
-            value: 'Retiro en Recoleta o Belgrano. Si tenes dudas, consultanos por WhatsApp antes de comprar.',
-        },
-    ];
     
     return (
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 pt-4 pb-28 sm:py-8">
             {/* Breadcrumb */}
             <nav className="flex items-center space-x-2 text-xs sm:text-sm mb-4 sm:mb-6 overflow-x-auto pb-2">
                 <Link href="/tienda" className="text-muted-foreground hover:text-primary transition-colors">
@@ -247,7 +211,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                 {/* Image Gallery */}
                 <div className="space-y-4">
                     <div className="relative aspect-square rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800">
-                        <AnimatePresence mode="wait" initial={false}>
+                        <AnimatePresence mode="wait">
                             <motion.div
                                 key={selectedImageIndex}
                                 initial={{ opacity: 0 }}
@@ -274,14 +238,14 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                                 <button
                                     onClick={prevImage}
                                     aria-label="Foto anterior"
-                                    className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 transition-colors"
+                                    className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 shadow-lg hover:bg-white dark:hover:bg-gray-800 transition-colors"
                                 >
                                     <ChevronLeft className="w-5 h-5" />
                                 </button>
                                 <button
                                     onClick={nextImage}
                                     aria-label="Foto siguiente"
-                                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 transition-colors"
+                                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 shadow-lg hover:bg-white dark:hover:bg-gray-800 transition-colors"
                                 >
                                     <ChevronRight className="w-5 h-5" />
                                 </button>
@@ -347,7 +311,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                     </div>
                     
                     {/* Title */}
-                    <h1 className="text-3xl font-semibold">{product.name}</h1>
+                    <h1 className="text-3xl font-bold">{product.name}</h1>
 
                     {/* SKU */}
                     {product.serial_number && <p className="text-sm text-muted-foreground">
@@ -355,24 +319,30 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                     </p>}
 
                     {/* Price */}
-                    <div className="space-y-1">
-                        {discount > 0 ? (
-                            <>
-                                <p className="text-lg line-through text-gray-400">
+                    <div className="space-y-2">
+                        <div className="flex flex-wrap items-center gap-3">
+                            {discount > 0 ? (
+                                <>
+                                    <p className="text-lg line-through text-gray-400">
+                                        ${formatPrice(originalPrice)}
+                                    </p>
+                                    <p className="text-4xl font-bold text-red-600">
+                                        ${formatPrice(discountedPrice)}
+                                    </p>
+                                    <p className="text-sm text-green-600 font-medium">
+                                        ¡Ahorrás ${formatPrice(originalPrice - discountedPrice)}!
+                                    </p>
+                                </>
+                            ) : (
+                                <p className="text-4xl font-bold">
                                     ${formatPrice(originalPrice)}
                                 </p>
-                                <p className="text-4xl font-semibold text-red-600">
-                                    ${formatPrice(discountedPrice)}
-                                </p>
-                                <p className="text-sm text-green-600 font-medium">
-                                    ¡Ahorrás ${formatPrice(originalPrice - discountedPrice)}!
-                                </p>
-                            </>
-                        ) : (
-                            <p className="text-4xl font-semibold">
-                                ${formatPrice(originalPrice)}
-                            </p>
-                        )}
+                            )}
+                            <ProductCondition condition={product.storeCondition} />
+                        </div>
+                        <p className="text-sm text-muted-foreground">
+                            Pagás con Mercado Pago: tarjeta, débito o dinero en cuenta. Las cuotas las ves al pagar.
+                        </p>
                     </div>
 
                     {/* Description */}
@@ -495,7 +465,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                             Compartir
                         </Button>
                     </div>
-                    <p role="status" aria-live="polite" className="text-sm text-emerald-400 dark:text-emerald-300">
+                    <p role="status" aria-live="polite" className="text-sm text-emerald-700 dark:text-emerald-300">
                         {feedback}
                     </p>
                     
@@ -513,10 +483,13 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                         <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
                             <Shield className="w-6 h-6 text-primary" />
                             <div>
-                                <p className="text-sm font-medium">Garantía</p>
-                                <p className="text-xs text-muted-foreground">
-                                    {formatWarranty(product, 'Consultar')}
-                                </p>
+                                {product.warranty_time ? (
+                                    <p className="text-sm font-medium">Garantía: {formatWarranty(product)}</p>
+                                ) : (
+                                    <a href={BUSINESS_PROFILE.whatsapp} target="_blank" rel="noopener noreferrer" className="text-sm underline underline-offset-4">
+                                        Garantía: consultanos antes de comprar
+                                    </a>
+                                )}
                             </div>
                         </div>
                         <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
@@ -530,35 +503,20 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                 </div>
             </div>
 
-            <section className="mt-10 rounded-2xl border border-default-200 bg-white/80 p-5 dark:border-gray-800 dark:bg-gray-900/60 sm:p-6">
-                <div className="mb-5 max-w-3xl">
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
-                        Antes de comprar
-                    </p>
-                    <h2 className="mt-2 text-2xl font-semibold">
-                        Compatibilidad, garantia y retiro en CABA
-                    </h2>
-                    <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base">
-                        Esta ficha resume lo que necesitás validar para comprar {product.name}
-                        {brandName ? ` ${brandName}` : ''} sin errores: modelo compatible, stock real,
-                        garantia y punto de retiro. Si el repuesto requiere instalacion, el equipo tecnico
-                        puede confirmar la pieza correcta antes de avanzar.
-                    </p>
-                </div>
-                <div className="grid gap-3 md:grid-cols-2">
-                    {productContextRows.map((row) => (
-                        <div key={row.label} className="rounded-xl bg-gray-50 p-4 dark:bg-gray-800/60">
-                            <h3 className="text-sm font-semibold">{row.label}</h3>
-                            <p className="mt-2 text-sm leading-6 text-muted-foreground">{row.value}</p>
-                        </div>
-                    ))}
-                </div>
+            <section className="mt-10 rounded-2xl border border-default-200 bg-white/80 p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900/60 sm:p-6">
+                <h2 className="text-xl font-bold">Antes de comprar</h2>
+                <p className="mt-3 text-sm text-muted-foreground">
+                    ¿Tenés dudas sobre compatibilidad? <a href={BUSINESS_PROFILE.whatsapp} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">Consultanos por WhatsApp</a> con el modelo de tu equipo.
+                </p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                    {product.shipping_enabled === false ? "Solo retiro en el local" : "Retiro en el local o envío a domicilio. Las opciones disponibles se confirman al comprar."}
+                </p>
             </section>
             
             {/* Product Details Section */}
             {product.variants.some(variant => variant.color || variant.size) && (
                 <div className="mt-12">
-                    <h2 className="text-2xl font-semibold mb-6">Variantes disponibles</h2>
+                    <h2 className="text-2xl font-bold mb-6">Variantes disponibles</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         {product.variants.map((variant) => (
                             <Card key={variant.id} className="p-4">

@@ -74,7 +74,7 @@ function buildProductSeoDescription(product: Product) {
         !!brand && name.toLowerCase().includes(brand.toLowerCase());
 
     return truncateMetaDescription(
-        `${name}${brand && !nameIncludesBrand ? ` ${brand}` : ''}${category ? `, ${category}` : ''}. Stock en Team Celular CABA, retiro en Recoleta o Belgrano. ${warranty}`
+        `${name}${brand && !nameIncludesBrand ? ` ${brand}` : ''}${category ? `, ${category}` : ''}. Retiro en el local o envío a domicilio. ${warranty}`
     );
 }
 

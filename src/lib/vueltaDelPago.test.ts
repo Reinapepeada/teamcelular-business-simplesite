@@ -22,6 +22,7 @@ import {
     pedidoRecordado,
     recordarPedido,
     vueltaMostrable,
+    tokenParaReintentar,
 } from "./vueltaDelPago.ts";
 import { claveDeCheckout, type AlmacenClave } from "./checkoutKey.ts";
 import type { StoreOrderStatus } from "./storeApi.ts";
@@ -57,7 +58,6 @@ const estado = (over: Partial<StoreOrderStatus> = {}): StoreOrderStatus => ({
     commerce_key: "CK-1",
     status: "pending",
     paid: false,
-    payment_reversed: false,
     total_amount: 15000,
     currency: "ARS",
     fulfillment_status: "pending",
@@ -401,12 +401,6 @@ describe("sin respuesta del backend no se afirma nada sobre el cobro", () => {
 });
 
 describe("seguimiento del pedido", () => {
-    test("un reembolso confirmado reemplaza el mensaje de compra y oculta la entrega", () => {
-        const devuelto = estado({ paid: true, status: "paid", payment_reversed: true });
-        assert.equal(vueltaMostrable(devuelto).desenlace, "devuelto");
-        assert.equal(vueltaMostrable(devuelto).seguirPreguntando, false);
-        assert.equal(estadoDeEntrega(devuelto), null);
-    });
     test("no muestra entrega antes de acreditar el pago", () => {
         assert.equal(estadoDeEntrega(estado({ paid: false, fulfillment_status: "shipped" })), null);
     });
@@ -515,4 +509,57 @@ test("confirmacion tardia no borra checkout nuevo aun sin pedido nuevo", () => {
     const newKey = claveDeCheckout(almacen, items);
     olvidarPedido(almacen, "CO-1");
     assert.equal(claveDeCheckout(almacen, items), newKey);
+});
+
+
+describe("contrato público 1A", () => {
+    for (const [reason_code, titulo] of Object.entries({
+        insufficient_funds: "La tarjeta no tenía saldo suficiente",
+        invalid_card_data: "Algún dato de la tarjeta no coincidió",
+        rejected_by_bank: "El banco rechazó el pago",
+        expired: "La reserva venció",
+        other: "No pudimos confirmar el pago",
+    })) {
+        test(reason_code, () => {
+            const vista = vueltaMostrable(estado({ paid: false, payment_result: "rejected", reason_code: reason_code as StoreOrderStatus["reason_code"], can_retry: true }));
+            assert.equal(vista.titulo, titulo);
+            assert.equal(vista.canRetry, true);
+            assert.equal(vista.seguirPreguntando, false);
+        });
+    }
+    test("el reintento necesita permiso explícito, nunca un pago aprobado o revertido", () => {
+        assert.equal(vueltaMostrable(null).canRetry, false);
+        assert.equal(vueltaMostrable(estado({ paid: false })).canRetry, false);
+        assert.equal(vueltaMostrable(estado({ paid: false, can_retry: false })).canRetry, false);
+        assert.equal(vueltaMostrable(estado({ paid: true, can_retry: true })).canRetry, false);
+        for (const cambios of [{ payment_result: "reversed" as const }, { status: "payment_reversed" }]) {
+            const pedido = estado({ ...cambios, paid: true, can_retry: true, fulfillment_status: "ready_for_pickup" });
+            assert.equal(vueltaMostrable(pedido).titulo, "Este pago se devolvió");
+            assert.equal(vueltaMostrable(pedido).canRetry, false);
+            assert.equal(estadoDeEntrega(pedido), null);
+        }
+    });
+    test("respuestas viejas, causas desconocidas y estados nuevos son tolerados", () => {
+        assert.equal(vueltaMostrable(estado({ paid: true })).desenlace, "pagado");
+        assert.equal(vueltaMostrable(estado({ paid: false, payment_result: "rejected" })).titulo, "No pudimos confirmar el pago");
+        assert.equal(vueltaMostrable(estado({ paid: false, payment_result: "rejected", reason_code: "nuevo" as StoreOrderStatus["reason_code"] })).titulo, "No pudimos confirmar el pago");
+        assert.equal(vueltaMostrable(estado({ paid: false, status: "nuevo" })).seguirPreguntando, true);
+        assert.equal(vueltaMostrable(estado({ paid: false, payment_result: "pending" }), "error").titulo, "Tu pago sigue pendiente");
+        assert.equal(vueltaMostrable(estado({ paid: false, payment_result: "approved" }), "error").desenlace, "esperando");
+        assert.equal(estadoDeEntrega(estado({ paid: true, fulfillment_status: "ready_for_pickup" })), "Listo para retirar");
+    });
+});
+
+
+test("el reintento conserva el pedido y usa únicamente su token local", () => {
+    const almacen = almacenFalso();
+    recordarPedido(almacen, { clave: "CK-MIO", token: "secreto" });
+    const guardado = pedidoGuardado(almacen);
+    const actual = estado({ commerce_key: "CK-MIO", paid: false, payment_result: "rejected", can_retry: true });
+    assert.equal(tokenParaReintentar(actual, guardado), "secreto");
+    assert.equal(tokenParaReintentar({ ...actual, commerce_key: "CK-OTRO" }, guardado), null);
+    assert.equal(tokenParaReintentar(actual, null), null);
+    assert.equal(tokenParaReintentar({ ...actual, can_retry: false }, guardado), null);
+    assert.equal(tokenParaReintentar({ ...actual, payment_result: "approved" }, guardado), null);
+    assert.equal(pedidoGuardado(almacen)?.token, "secreto");
 });
