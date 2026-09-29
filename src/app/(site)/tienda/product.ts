@@ -75,6 +75,8 @@ export interface Product {
   shipping_enabled?: boolean;
   /** Opcional para conservar los carritos guardados antes del catálogo Fixbee. */
   storeCondition?: string;
+  /** Modelo del fabricante (Fixbee `model`); va al JSON-LD. */
+  model?: string | null;
   id: number;
   serial_number: string;
   name: string;

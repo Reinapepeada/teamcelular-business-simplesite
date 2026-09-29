@@ -82,6 +82,7 @@ export const productoDeVidriera = (p: CatalogProduct): VidrieraProduct => ({
     storeSlug: p.slug,
     shipping_enabled: p.shipping_enabled !== false,
     storeCondition: p.condition,
+    model: p.model,
     serial_number: "",
     name: p.name,
     description: p.description,

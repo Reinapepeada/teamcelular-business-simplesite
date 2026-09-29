@@ -347,7 +347,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
 
                     {/* Description */}
                     {product.description && (
-                        <p className="text-muted-foreground leading-relaxed">
+                        <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
                             {product.description}
                         </p>
                     )}
@@ -412,7 +412,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                             <>
                                 <Check className="w-5 h-5 text-green-500" />
                                 <span className="text-green-600 font-medium">
-                                    {stockQueManda(selectedVariant, totalStock)} unidades disponibles
+                                    {stockQueManda(selectedVariant, totalStock)} {stockQueManda(selectedVariant, totalStock) === 1 ? 'unidad disponible' : 'unidades disponibles'}
                                 </span>
                             </>
                         ) : (

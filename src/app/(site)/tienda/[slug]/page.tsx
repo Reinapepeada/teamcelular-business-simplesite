@@ -73,6 +73,13 @@ function buildProductSeoDescription(product: Product) {
     const nameIncludesBrand =
         !!brand && name.toLowerCase().includes(brand.toLowerCase());
 
+    // La primera oración de la descripción vende mejor que la categoría interna
+    // en mayúsculas ("AURICULAR BT"); sin descripción queda el armado anterior.
+    const intro = product.description?.split('\n')[0]?.split(/(?<=\.)\s/)[0]?.trim();
+    if (intro) {
+        return truncateMetaDescription(`${intro} Envío o retiro en CABA. ${warranty}`);
+    }
+
     return truncateMetaDescription(
         `${name}${brand && !nameIncludesBrand ? ` ${brand}` : ''}${category ? `, ${category}` : ''}. Retiro en el local o envío a domicilio. ${warranty}`
     );
