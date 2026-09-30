@@ -11,6 +11,8 @@ import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import { getBranch, whatsappUrl as buildWhatsappUrl } from "@/lib/businessProfile";
 import BranchMap from "@/components/cards/BranchMap";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
+import RepairPriceTable from "@/components/seo/RepairPriceTable";
+import { POPULAR_REPAIR_PRICES, PRICES_UPDATED_LABEL } from "@/lib/repairPrices";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
@@ -253,6 +255,10 @@ export default function SucursalBelgranoPage() {
             </article>
           );
         })}
+      </section>
+
+      <section className="mt-10">
+        <RepairPriceTable brand="celular" prices={POPULAR_REPAIR_PRICES} updatedLabel={PRICES_UPDATED_LABEL} />
       </section>
 
       <section className="bg-[#1d1d1f] mt-10 rounded-[28px] p-8">

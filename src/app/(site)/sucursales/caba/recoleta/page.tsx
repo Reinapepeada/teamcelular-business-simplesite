@@ -11,6 +11,8 @@ import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import { getBranch, whatsappUrl as buildWhatsappUrl } from "@/lib/businessProfile";
 import BranchMap from "@/components/cards/BranchMap";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
+import RepairPriceTable from "@/components/seo/RepairPriceTable";
+import { POPULAR_REPAIR_PRICES, PRICES_UPDATED_LABEL } from "@/lib/repairPrices";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
@@ -253,6 +255,13 @@ export default function SucursalRecoletaPage() {
         })}
       </section>
 
+      <section className="mt-10">
+
+        <RepairPriceTable brand="celular" prices={POPULAR_REPAIR_PRICES} updatedLabel={PRICES_UPDATED_LABEL} />
+
+      </section>
+
+
       <section className="bg-[#1d1d1f] mt-10 rounded-[28px] p-8">
         <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
           Servicios destacados en esta sucursal
@@ -320,6 +329,10 @@ export default function SucursalRecoletaPage() {
         <p className="mt-3 text-slate-600 dark:text-[#a1a1a6]">
           Paraguay 2451 queda a pocas cuadras de la estación Pueyrredón de la línea D (Av. Santa Fe y Pueyrredón). Bajás en
           Santa Fe y Pueyrredón y caminás por Pueyrredón hasta Paraguay.
+        </p>
+        <p className="mt-3 text-slate-600 dark:text-[#a1a1a6]">
+          Por la línea H también quedás a una cuadra: las estaciones Santa Fe y Córdoba están sobre
+          Pueyrredón, una a cada lado de Paraguay. Desde Once son dos estaciones hasta Córdoba.
         </p>
         <p className="mt-3 text-sm text-slate-500 dark:text-[#86868b]">
           Si tenés dudas sobre cómo llegar, escribinos por WhatsApp y te mandamos el punto exacto.

@@ -16,6 +16,8 @@ import { BsWhatsapp } from "react-icons/bs";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import { getBranch } from "@/lib/businessProfile";
+import RepairPriceTable from "@/components/seo/RepairPriceTable";
+import { POPULAR_REPAIR_PRICES, PRICES_UPDATED_LABEL } from "@/lib/repairPrices";
 import { ZONE_CONFIGS } from "./zoneConfigs";
 
 const SITE_URL = getSiteUrl();
@@ -344,6 +346,11 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
             );
           })}
         </div>
+      </section>
+
+      {/* SEO local 2026-09: Palermo convierte 23% pero no mostraba precios. */}
+      <section className="tc-section !pt-0">
+        <RepairPriceTable brand="celular" prices={POPULAR_REPAIR_PRICES} updatedLabel={PRICES_UPDATED_LABEL} />
       </section>
 
       <section className="w-full bg-[#f5f5f7] text-[#1d1d1f]">

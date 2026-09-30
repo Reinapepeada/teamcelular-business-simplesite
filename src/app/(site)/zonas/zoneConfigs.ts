@@ -204,66 +204,75 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
   balvanera: {
     slug: "balvanera",
     zoneName: "Balvanera",
-    zoneAlias: "Balvanera / Once",
-    metaTitle: "Arreglo de Celulares en Balvanera (CABA) | Team Celular",
+    zoneAlias: "Once y Balvanera",
+    // SEO local 2026-09: el texto pasaba el "swap test" (cambiabas el barrio y
+    // seguia valiendo). Ahora se apoya en lo que solo vale para Once: la linea H
+    // deja a una cuadra de Recoleta y el Sarmiento combina en Plaza Miserere.
+    branchSlug: "recoleta",
+    metaTitle: "Arreglo de Celulares en Once y Balvanera | A 2 Estaciones por la H",
     metaDescription:
-      "Arreglo de celulares en Balvanera y Once, CABA. Team Celular, Paraguay 2451 Recoleta. Pantalla, carga y batería con garantía escrita 90 días.",
+      "Desde Once, la línea H te deja a una cuadra de Team Celular (Paraguay 2451, Recoleta). Pantalla y batería en 2 a 4 horas, sin turno, garantía escrita 90 días.",
     socialDescription:
-      "Team Celular, Recoleta CABA, atiende Balvanera y Once. Pantalla, batería y carga con garantía escrita 90 días.",
-    heroBadge: "Cobertura Balvanera / Once",
+      "Team Celular queda a dos estaciones de Once por la línea H. Pantalla, batería y carga en el día con garantía escrita 90 días.",
+    heroBadge: "Once, Abasto y Balvanera",
     heroIntro:
-      "Team Celular tiene dos sucursales en CABA — Paraguay 2451 Recoleta y Amenábar 2032 Belgrano — y atiende Balvanera y Once con diagnóstico el mismo día. Pantalla, batería, carga y casos de placa con garantía escrita de 90 días.",
+      "Si estás en Once, el taller más cerca es el de Recoleta: tomás la línea H en Plaza Miserere, bajás dos estaciones después en Córdoba y caminás una cuadra hasta Paraguay 2451. Pantalla y batería salen en 2 a 4 horas, sin turno, con garantía escrita de 90 días.",
     heroImage: "/images/reparacion_placa.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(245,158,11,0.32),transparent_44%)]",
     whatsappText:
-      "Hola! Quiero un presupuesto para arreglo de celular desde Balvanera/Once. Marca y modelo:",
+      "Hola! Estoy en Once/Balvanera y quiero un presupuesto. Marca y modelo:",
     highlights: [
       {
-        title: "Pantalla y modulo",
-        desc: "Display sin imagen o touch fallando: cambio completo con pruebas funcionales.",
-        icon: "screen",
+        title: "Lo dejás a la mañana, lo retirás a la tarde",
+        desc: "Pantalla y batería salen en 2 a 4 horas. Si trabajás en Once, lo traés en el viaje y lo retirás a la vuelta.",
+        icon: "speed",
       },
       {
-        title: "Carga y bateria",
-        desc: "Pin, flex y autonomia de bateria con diagnostico para evitar gasto innecesario.",
+        title: "Carga que entra y sale",
+        desc: "El pin se gasta con el uso de todo el día. Primero probamos limpieza y ajuste; solo cambiamos si hace falta.",
         icon: "battery",
       },
       {
-        title: "Reparación de placa",
-        desc: "Mojado, corto o no enciende: diagnóstico con equipamiento de laboratorio y presupuesto antes de intervenir.",
+        title: "Mojado o no enciende",
+        desc: "Diagnóstico de placa con microscopio y presupuesto antes de intervenir. Mientras antes llegue, más chances de recuperarlo.",
         icon: "chip",
       },
     ],
     localScenarios: [
-      "En Balvanera y Once se repiten equipos con carga gastada por uso continuo y cables que ya no hacen buen contacto.",
-      "Si el teléfono se mojó, apagalo y traelo rápido: mientras más tarde, más se corroe adentro.",
-      "Las fallas intermitentes las miramos con diagnóstico técnico para no mezclar software con hardware.",
+      "Si venís en el Sarmiento, bajás en Once y combinás con la línea H en la estación Once, frente a Plaza Miserere.",
+      "Desde el Abasto, la línea B hasta Pueyrredón combina con la H en Corrientes: una estación más y estás en Córdoba.",
+      "Si el celular es tu herramienta de trabajo en el barrio, pedí presupuesto por WhatsApp antes de venir y te decimos si lo tenemos en el día.",
+      "Desde Congreso, la línea A te lleva a Plaza Miserere en tres estaciones (Pasco, Alberti, Plaza Miserere) y ahí tomás la H hasta Córdoba.",
     ],
     transportTip:
-      "Desde Once o Balvanera llegás rápido en colectivo o combinando subte. Te compartimos el punto exacto para evitar vueltas de más.",
+      "Línea H desde Once (Plaza Miserere): dos estaciones hasta Córdoba, sobre Av. Pueyrredón. Paraguay 2451 queda a una cuadra, entre las estaciones Córdoba y Santa Fe. A pie desde Once son unas 10 cuadras por Pueyrredón.",
     nearbyZones: [
+      { name: "Palermo", slug: "palermo" },
       { name: "Almagro", slug: "almagro" },
       { name: "Caballito", slug: "caballito" },
-      { name: "Microcentro", slug: "microcentro" },
     ],
     focusServices: ["pantalla", "carga", "bateria", "placa"],
     faqs: [
       {
-        q: "Atienden Balvanera y Once?",
-        a: "Si. Cubrimos ambas zonas con atencion en talleres fisicos en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).",
+        q: "¿Cuál es la sucursal más cerca de Once?",
+        a: "Recoleta, en Paraguay 2451. Por la línea H son dos estaciones desde Once hasta Córdoba, y de ahí una cuadra.",
       },
       {
-        q: "Que hago si se mojo el celular?",
-        a: "Apagalo, no lo cargues y traelo cuanto antes para mejorar probabilidad de recuperacion.",
+        q: "¿Cuánto tardo desde el Sarmiento?",
+        a: "Bajás en Once y tomás la línea H en la estación Once, frente a Plaza Miserere: son dos estaciones hasta Córdoba y una cuadra hasta el taller.",
       },
       {
-        q: "Siempre se cambia el pin de carga?",
-        a: "No siempre. A veces se resuelve con limpieza o ajuste. Confirmamos con diagnostico.",
+        q: "¿Necesito turno?",
+        a: "No. Atendemos de lunes a viernes de 10:30 a 18:00. Si querés asegurarte de que haya repuesto, escribinos antes por WhatsApp con marca y modelo.",
       },
       {
-        q: "Como llego al taller desde Once?",
-        a: "Tenemos dos sucursales: Paraguay 2451 Recoleta y Amenábar 2032 Belgrano. En la página de contacto tenés mapa y recorrido recomendado para cada una.",
+        q: "¿Qué hago si se me mojó el celular?",
+        a: "Apagalo, no lo cargues y traelo cuanto antes. Mientras más tarda en llegar, más avanza la corrosión dentro de la placa.",
+      },
+      {
+        q: "¿Siempre hay que cambiar el pin de carga?",
+        a: "No. Muchas veces se resuelve con limpieza o ajuste. Lo confirmamos con diagnóstico antes de cambiar nada.",
       },
     ],
   },

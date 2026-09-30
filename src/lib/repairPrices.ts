@@ -7,6 +7,8 @@
  *
  * Actualizado: agosto de 2026.
  */
+import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
+
 export const PRICES_UPDATED = "2026-08-20T00:00:00Z";
 
 export type RepairPrice = { name: string; from: number; to: number };
@@ -82,3 +84,29 @@ export function buildPriceOffers(prices: RepairPrice[], brand: string) {
     },
   };
 }
+
+function rangeOf(values: (number | null)[]) {
+  const known = values.filter((v): v is number => v !== null);
+  return { from: Math.min(...known), to: Math.max(...known) };
+}
+
+/**
+ * Las reparaciones mas pedidas, para paginas locales (zonas y sucursales).
+ * Sale de las mismas fuentes que las guias: no hay un segundo precio que
+ * mantener.
+ */
+export const POPULAR_REPAIR_PRICES: RepairPrice[] = [
+  { name: "Cambio de pantalla iPhone 11 a 17", ...rangeOf(IPHONE_MODELS.map((m) => m.screen)) },
+  { name: "Cambio de batería iPhone 11 a 17", ...rangeOf(IPHONE_MODELS.map((m) => m.battery)) },
+  { ...BRAND_REPAIR_PRICES.samsung[0], name: "Cambio de pantalla Samsung Galaxy A / M" },
+  { ...BRAND_REPAIR_PRICES.motorola[0], name: "Cambio de pantalla Motorola Moto E / G" },
+  { ...BRAND_REPAIR_PRICES.xiaomi[0], name: "Cambio de pantalla Xiaomi Redmi / Note / Poco" },
+  { name: "Cambio de pin de carga (todas las marcas)", ...CHARGING_PORT_PRICE },
+];
+
+export const PRICES_UPDATED_LABEL = new Date(PRICES_UPDATED).toLocaleDateString("es-AR", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC",
+});
