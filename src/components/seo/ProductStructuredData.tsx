@@ -78,6 +78,7 @@ export default function ProductStructuredData({ product, images = [] }: ProductS
     brand: product.brand ? { "@type": "Brand", name: product.brand.name } : undefined,
     model: product.model || undefined,
     mpn: product.model || undefined,
+    gtin: product.gtin || undefined,
     audience: {
       "@type": "PeopleAudience",
       geographicArea: {

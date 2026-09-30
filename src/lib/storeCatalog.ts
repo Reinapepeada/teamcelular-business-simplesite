@@ -30,6 +30,7 @@ export interface CatalogProduct {
     category: string | null;
     imageUrl: string | null;
     imageUrls: string[];
+    gtin: string | null;
     warrantyMonths: number | null;
     /** Lo que se puede comprar ahora, ya descontadas las reservas vivas. */
     available: number;
@@ -89,6 +90,7 @@ export const adaptarProducto = (crudo: StoreProduct): CatalogProduct | null => {
         currency: crudo.currency ?? "ARS",
         brand: crudo.brand,
         model: crudo.model,
+        gtin: crudo.gtin ?? null,
         condition: crudo.condition,
         category: crudo.category,
         imageUrl,

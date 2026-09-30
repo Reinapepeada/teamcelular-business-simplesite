@@ -22,6 +22,8 @@ export interface StoreProduct {
     currency: string | null;
     brand: string | null;
     model: string | null;
+    /** GTIN verificado del fabricante; va al JSON-LD. */
+    gtin?: string | null;
     condition: string;
     category: string | null;
     image_key: string | null;

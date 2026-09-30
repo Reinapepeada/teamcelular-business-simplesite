@@ -77,6 +77,8 @@ export interface Product {
   storeCondition?: string;
   /** Modelo del fabricante (Fixbee `model`); va al JSON-LD. */
   model?: string | null;
+  /** GTIN del fabricante (Fixbee `gtin`); va al JSON-LD. */
+  gtin?: string | null;
   id: number;
   serial_number: string;
   name: string;

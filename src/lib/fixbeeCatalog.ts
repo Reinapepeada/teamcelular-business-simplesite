@@ -83,6 +83,7 @@ export const productoDeVidriera = (p: CatalogProduct): VidrieraProduct => ({
     shipping_enabled: p.shipping_enabled !== false,
     storeCondition: p.condition,
     model: p.model,
+    gtin: p.gtin,
     serial_number: "",
     name: p.name,
     description: p.description,
