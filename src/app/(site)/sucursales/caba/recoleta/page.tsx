@@ -139,7 +139,9 @@ export default function SucursalRecoletaPage() {
     areaServed: [
       { "@type": "AdministrativeArea", name: "Ciudad Autonoma de Buenos Aires" },
     ],
+    // Ficha de GBP propia: ata esta pagina a su ficha (senal de entidad local).
     sameAs: [
+      branch.mapUrl,
       "https://www.instagram.com/teamcelular.ar/",
       "https://www.facebook.com/TeamCelular/",
     ],

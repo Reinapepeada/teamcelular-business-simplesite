@@ -51,7 +51,6 @@ export const BUSINESS_PROFILE = {
     "https://maps.app.goo.gl/krFJfjDA4CuR83BK9",
     "https://share.google/QKkG7KaIMWtcfUzia",
     "https://share.google/ATqxS65okEfOxZJYA",
-    "https://wa.me/5491151034595",
   ],
   knowsAbout: [
     "Reparación de celulares",
