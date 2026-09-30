@@ -240,7 +240,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
     ],
     localScenarios: [
-      "Si venís en el Sarmiento, bajás en Once y combinás con la línea H en la estación Once, frente a Plaza Miserere.",
+      "Si venís en el Sarmiento, bajás en Once y combinás con la línea H en Plaza Miserere sin salir a la calle.",
       "Desde el Abasto, la línea B hasta Pueyrredón combina con la H en Corrientes: una estación más y estás en Córdoba.",
       "Si el celular es tu herramienta de trabajo en el barrio, pedí presupuesto por WhatsApp antes de venir y te decimos si lo tenemos en el día.",
       "Desde Congreso, la línea A te lleva a Plaza Miserere en tres estaciones (Pasco, Alberti, Plaza Miserere) y ahí tomás la H hasta Córdoba.",
@@ -260,7 +260,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
       {
         q: "¿Cuánto tardo desde el Sarmiento?",
-        a: "Bajás en Once y tomás la línea H en la estación Once, frente a Plaza Miserere: son dos estaciones hasta Córdoba y una cuadra hasta el taller.",
+        a: "Bajás en Once y combinás con la H en Plaza Miserere sin salir a la calle: son dos estaciones hasta Córdoba y una cuadra hasta el taller.",
       },
       {
         q: "¿Necesito turno?",
