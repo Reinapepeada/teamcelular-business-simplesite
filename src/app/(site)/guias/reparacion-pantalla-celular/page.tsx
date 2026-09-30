@@ -6,6 +6,10 @@ import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import GuideByline from "@/components/seo/GuideByline";
+import RepairPriceTable from "@/components/seo/RepairPriceTable";
+import BranchWhatsAppButton from "@/components/cro/BranchSelector";
+import { BRAND_REPAIR_PRICES, PRICES_UPDATED, formatArsPrice } from "@/lib/repairPrices";
+import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 import {
   FaMobileAlt,
   FaTools,
@@ -23,10 +27,29 @@ import {
 
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 
+// SXO 2026-09: la guia recibia busquedas de compra ("cambio de pantalla") sin
+// mostrar un precio y convertia 0%. Solo pantallas de marcas con precio cargado.
+const IPHONE_SCREENS = IPHONE_MODELS.map((m) => m.screen).filter((v): v is number => v !== null);
+const SCREEN_PRICES = [
+  { name: "Cambio de pantalla iPhone 11 a 17", from: Math.min(...IPHONE_SCREENS), to: Math.max(...IPHONE_SCREENS) },
+  ...Object.entries(BRAND_REPAIR_PRICES).flatMap(([brand, prices]) =>
+    prices
+      .filter((p) => p.name.startsWith("Cambio de pantalla"))
+      .map((p) => ({ ...p, name: `${p.name} (${brand[0].toUpperCase()}${brand.slice(1)})` })),
+  ),
+];
+const SCREEN_FROM = formatArsPrice(Math.min(...SCREEN_PRICES.map((p) => p.from)));
+const PRICES_UPDATED_LABEL = new Date(PRICES_UPDATED).toLocaleDateString("es-AR", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
 export const metadata: Metadata = {
-  title: "Cambio de Pantalla de Celular: ¿Se Borra Todo? ¿Cuánto Tarda?",
+  title: "Cambio de Pantalla de Celular en CABA: Precios y Qué Pasa con tus Datos",
   description:
-    "Sí se puede cambiar la pantalla y no se borran tus fotos ni datos. Tarda 2 a 4 horas. Qué es el módulo y cuándo la falla es el flex o la placa.",
+    `Precios reales por marca desde ${SCREEN_FROM}, en el día y con garantía de 90 días. Qué pasa con tus fotos y cuándo la falla no es la pantalla sino el flex o la placa.`,
   keywords: [
     "cambio pantalla celular Buenos Aires",
     "pantalla iPhone original",
@@ -52,9 +75,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Cambio de Pantalla de Celular: ¿Se Borra Todo? ¿Cuánto Tarda?",
+    title: "Cambio de Pantalla de Celular en CABA: Precios y Qué Pasa con tus Datos",
     description:
-      "Sí se puede cambiar la pantalla y no se borran tus datos. Tarda 2 a 4 horas. Team Celular, Recoleta y Belgrano, CABA.",
+      `Precios por marca desde ${SCREEN_FROM}, listo en el día. Team Celular, Recoleta y Belgrano, CABA.`,
     type: "article",
     locale: "es_AR",
     url: "https://teamcelular.com/guias/reparacion-pantalla-celular",
@@ -266,7 +289,7 @@ export default function ScreenReplacementGuide() {
         title="Cambio de pantalla celular en Buenos Aires | Display original Team Celular"
         description="Cambio de pantalla con displays OLED originales, True Tone preservado y garantia escrita segun repuesto y trabajo. Service express 2-4 horas en CABA."
         publishedTime="2024-11-30T00:00:00Z"
-        modifiedTime="2026-09-22T00:00:00Z"
+        modifiedTime="2026-09-30T00:00:00Z"
         image="https://teamcelular.com/images/guia_cambio_modulo.webp"
         url="https://teamcelular.com/guias/reparacion-pantalla-celular"
       />
@@ -310,7 +333,7 @@ export default function ScreenReplacementGuide() {
             el cambio de módulo sale en <strong>2 a 4 horas</strong> con garantía escrita de 90 días.
           </p>
           <div className="mt-4 flex justify-center">
-            <GuideByline modifiedTime="2026-09-22T00:00:00Z" tone="light" />
+            <GuideByline modifiedTime="2026-09-30T00:00:00Z" tone="light" />
           </div>
 
           {/* Quick Stats */}
@@ -327,8 +350,8 @@ export default function ScreenReplacementGuide() {
             </div>
             <div className="bg-[#1d1d1f] rounded-[28px] p-6">
               <FaCertificate className="mx-auto text-3xl text-blue-500 mb-2" />
-              <div className="text-2xl font-semibold text-blue-500">OLED</div>
-              <div className="text-sm text-slate-600 dark:text-[#86868b]">Displays originales</div>
+              <div className="text-2xl font-semibold text-blue-500">desde {SCREEN_FROM}</div>
+              <div className="text-sm text-slate-600 dark:text-[#86868b]">Según modelo y repuesto</div>
             </div>
           </div>
 
@@ -339,12 +362,14 @@ export default function ScreenReplacementGuide() {
             >
               Solicitar cambio de pantalla
             </Link>
-            <Link
-              href="https://wa.me/5491151034595?text=Necesito%20cambiar%20la%20pantalla%20de%20mi%20celular"
+            <BranchWhatsAppButton
+              ctaName="guide_screen_hero_whatsapp"
+              ctaLocation="guide_screen_hero"
+              message="Necesito cambiar la pantalla de mi celular"
               className="rounded-full border-2 border-blue-700 px-8 py-4 text-lg font-semibold text-blue-800 transition hover:bg-blue-100 dark:border-blue-500 dark:text-blue-200"
             >
               WhatsApp directo
-            </Link>
+            </BranchWhatsAppButton>
           </div>
         </header>
 
@@ -373,6 +398,8 @@ export default function ScreenReplacementGuide() {
             ))}
           </div>
         </section>
+
+        <RepairPriceTable brand="celular" prices={SCREEN_PRICES} updatedLabel={PRICES_UPDATED_LABEL} />
 
         {/* Tipos de daños */}
         <section className="space-y-8">

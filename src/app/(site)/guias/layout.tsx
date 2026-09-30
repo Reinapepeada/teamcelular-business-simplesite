@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 import { BsWhatsapp } from "react-icons/bs";
 import {
   FaApple,
@@ -116,15 +117,15 @@ export default function GuidesLayout({
                 </Link>
               );
             })}
-            <Link
-              href="https://wa.me/5491151034595?text=Hola%20Team%20Celular%2C%20quiero%20ayuda%20con%20una%20reparacion"
-              target="_blank"
-              rel="noopener noreferrer"
+            <BranchWhatsAppButton
+              ctaName="guide_nav_whatsapp"
+              ctaLocation="guide_nav"
+              message="Hola Team Celular, quiero ayuda con una reparacion"
               className="tc-link inline-flex min-h-11 shrink-0 items-center gap-2 px-2 text-[13px]"
             >
-              <BsWhatsapp className="text-base" />
+              <BsWhatsapp className="text-base" aria-hidden />
               Hablar por WhatsApp
-            </Link>
+            </BranchWhatsAppButton>
           </div>
         </div>
       </section>

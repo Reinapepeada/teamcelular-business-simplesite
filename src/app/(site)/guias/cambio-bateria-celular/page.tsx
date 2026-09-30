@@ -6,6 +6,7 @@ import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import GuideByline from "@/components/seo/GuideByline";
+import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 import { BRAND_REPAIR_PRICES, formatArsPrice } from "@/lib/repairPrices";
 import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
@@ -218,7 +219,7 @@ export default function BatteryReplacementGuide() {
         title="Cambio de batería celular en Buenos Aires | Service Certificado Team Celular"
         description="Cambio de batería con repuestos originales y certificados. Garantía escrita y service express en 1-2 horas. Atención iPhone, Samsung y Motorola en CABA."
         publishedTime="2024-11-30T00:00:00Z"
-        modifiedTime="2026-09-22T00:00:00Z"
+        modifiedTime="2026-09-30T00:00:00Z"
         image="https://teamcelular.com/images/guia_cambio_bateria.webp"
         url="https://teamcelular.com/guias/cambio-bateria-celular"
       />
@@ -268,7 +269,7 @@ export default function BatteryReplacementGuide() {
             horas y sin borrar datos.
           </p>
           <div className="mt-4 flex justify-center">
-            <GuideByline modifiedTime="2026-09-22T00:00:00Z" tone="light" />
+            <GuideByline modifiedTime="2026-09-30T00:00:00Z" tone="light" />
           </div>
 
           {/* Quick Stats */}
@@ -297,12 +298,14 @@ export default function BatteryReplacementGuide() {
             >
               Solicitar cambio de batería
             </Link>
-            <Link
-              href="https://wa.me/5491151034595?text=Necesito%20cambiar%20la%20bater%C3%ADa%20de%20mi%20celular"
+            <BranchWhatsAppButton
+              ctaName="guide_battery_hero_whatsapp"
+              ctaLocation="guide_battery_hero"
+              message="Necesito cambiar la batería de mi celular"
               className="rounded-full border-2 border-green-700 px-8 py-4 text-lg font-semibold text-green-800 transition hover:bg-green-100 dark:border-green-500 dark:text-green-200 dark:hover:bg-green-900/30"
             >
               WhatsApp directo
-            </Link>
+            </BranchWhatsAppButton>
           </div>
         </header>
 

@@ -101,6 +101,7 @@ export default function TrackedCtaLink({
         target={target}
         rel={safeRel}
         aria-label={ariaLabel}
+        data-cta-location={ctaLocation}
       >
         {children}
       </a>

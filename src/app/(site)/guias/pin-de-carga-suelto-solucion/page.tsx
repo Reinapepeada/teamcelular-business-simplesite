@@ -5,15 +5,20 @@ import HighIntentGuidePage, {
   type GuideRelatedLink,
 } from "@/components/seo/HighIntentGuidePage";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
+import RepairPriceTable from "@/components/seo/RepairPriceTable";
+import { CHARGING_PORT_PRICE, PRICES_UPDATED, formatArsPrice } from "@/lib/repairPrices";
+
+// SXO 2026-09: "cuanto sale cambiar el pin de carga" llegaba aca sin precio visible.
+const PORT_FROM = formatArsPrice(CHARGING_PORT_PRICE.from);
 
 const SITE_URL = getSiteUrl();
 const PAGE_PATH = "/guias/pin-de-carga-suelto-solucion";
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
-  title: "Pin de Carga: Cómo Saber si Está Dañado y Por Qué Se Daña",
+  title: "Pin de Carga Dañado: Cómo Saberlo y Cuánto Sale Cambiarlo en CABA",
   description:
-    "3 pruebas para saber si se dañó el pin de carga: otro cable, linterna y ángulo. Por qué se daña y cómo se cambia en el día, con garantía 90 días.",
+    `3 pruebas para saber si se dañó el pin de carga: otro cable, linterna y ángulo. Cambio en el día desde ${PORT_FROM}, con garantía 90 días.`,
   keywords: [
     "pin de carga suelto",
     "como saber si se daño el pin de carga",
@@ -159,7 +164,7 @@ export default function ChargingPortGuidePage() {
       badge="Falla frecuente"
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
-      modifiedTime="2026-09-22T00:00:00Z"
+      modifiedTime="2026-09-30T00:00:00Z"
       imagePath="/images/reparacion_placa.webp"
       heroPoints={[
         "Cuatro señales para reconocer un pin dañado.",
@@ -176,6 +181,13 @@ export default function ChargingPortGuidePage() {
       planDescription="Siempre vamos de lo simple a lo complejo, según el daño."
       planSteps={planSteps}
       faq={faq}
+      priceTable={
+        <RepairPriceTable
+          brand="celular"
+          prices={[{ name: "Cambio de pin de carga (todas las marcas)", ...CHARGING_PORT_PRICE }]}
+          updatedLabel={new Date(PRICES_UPDATED).toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}
+        />
+      }
       relatedLinks={relatedLinks}
       whatsappText="Hola Team Celular, vi la guía de pin de carga y quiero un diagnóstico para mi equipo"
     />

@@ -133,10 +133,26 @@ export default function RootLayout({
                     {`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-1S64KMRF99');`}
+gtag('config', 'G-1S64KMRF99');
+// ponytail: un listener global en vez de envolver cada link a wa.me (habia 14 paginas
+// sin medir). BranchWhatsAppButton abre con window.open, no con <a>: no cuenta doble.
+document.addEventListener('click', function (e) {
+  var a = e.target && e.target.closest && e.target.closest('a[href*="wa.me/"]');
+  if (!a) return;
+  // cta_location: el explicito si el link lo trae; si no, la zona de la pagina.
+  var tagged = a.closest('[data-cta-location]');
+  var zone = tagged ? tagged.getAttribute('data-cta-location')
+    : a.closest('.tc-sticky-cta') ? 'sticky'
+    : a.closest('nav') ? 'nav'
+    : a.closest('header') ? 'hero'
+    : a.closest('footer') ? 'footer'
+    : 'body';
+  gtag('event', 'whatsapp_click', { link_url: a.href, page_path: location.pathname, cta_location: zone });
+}, true);`}
                 </Script>
+                {/* ponytail: filtro por hostname y no NODE_ENV, `next start` local también es production. */}
                 <Script id="microsoft-clarity" strategy="lazyOnload">
-                    {`(function(c,l,a,r,i,t,y){
+                    {`if (/(^|\\.)teamcelular\\.com$/.test(location.hostname)) (function(c,l,a,r,i,t,y){
     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
     t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
     y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);

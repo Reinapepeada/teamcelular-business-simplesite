@@ -169,7 +169,7 @@ export default function FooterNUI() {
                   prefetch={false}
                   className="flex min-h-11 items-center space-x-2 text-sm text-slate-200 transition-all duration-200 hover:translate-x-1 hover:text-white"
                 >
-                  <Icon className="text-primary" />
+                  <Icon className="text-primary" aria-hidden="true" />
                   <span>{service.name}</span>
                 </Link>
               );
