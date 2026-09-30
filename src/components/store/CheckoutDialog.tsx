@@ -66,8 +66,37 @@ const pesos = (monto: number, moneda = "ARS") =>
 interface CheckoutDialogProps {
     abierto: boolean;
     retiroSolicitado?: number;
+    /** Lo que el comprador ya eligió en el carrito: no se le vuelve a preguntar. */
+    entregaInicial?: "retiro" | "envio";
     onCerrar: () => void;
 }
+
+/** Dónde está el comprador: datos → revisión → pago. */
+function Pasos({ actual }: { actual: 1 | 2 | 3 }) {
+    const pasos = ["Datos y entrega", "Revisión", "Pago"];
+    return (
+        <ol className="mt-3 flex items-center gap-2 text-xs" aria-label="Pasos de la compra">
+            {pasos.map((paso, index) => {
+                const numero = index + 1;
+                const estado = numero < actual ? "hecho" : numero === actual ? "actual" : "pendiente";
+                return (
+                    <li key={paso} className="flex items-center gap-2" aria-current={estado === "actual" ? "step" : undefined}>
+                        <span className={`inline-flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-semibold ${
+                            estado === "pendiente" ? "border border-slate-300 text-slate-500 dark:border-slate-700 dark:text-slate-400" : "bg-primary text-white"
+                        }`}>
+                            {estado === "hecho" ? "✓" : numero}
+                        </span>
+                        <span className={estado === "actual" ? "font-semibold" : "text-slate-500 dark:text-slate-400"}>{paso}</span>
+                        {numero < pasos.length && <span aria-hidden="true" className="h-px w-4 bg-slate-300 dark:bg-slate-700" />}
+                    </li>
+                );
+            })}
+        </ol>
+    );
+}
+
+/** Tarjeta de sección del checkout. */
+const tarjeta = "rounded-2xl border border-slate-200 p-4 dark:border-slate-800";
 
 /**
  * El resumen que se confirma antes de pagar.
@@ -98,17 +127,30 @@ function ResumenAConfirmar({
 
     return (
         <div className="mt-4 flex flex-col gap-3">
-            <ul>{pedido.items?.map(item => (
-                <li key={item.product_id}>{item.current_product_name || `Producto ${item.product_id}`} · {item.quantity} × {pesos(item.unit_price, pedido.currency)}</li>
-            ))}</ul>
-            {condiciones}
-            <p>{pedido.customer_name} · {pedido.customer_email} {pedido.customer_phone}</p>
-            <p>{pedido.shipping === null ? "Retiro en el local" : pedido.shipping
-                ? [pedido.shipping.street, pedido.shipping.extra, pedido.shipping.city,
-                    PROVINCIAS.find(([codigo]) => codigo === pedido.shipping?.province)?.[1] ?? pedido.shipping.province,
-                    pedido.shipping.postal_code && "CP " + pedido.shipping.postal_code].filter(Boolean).join(" · ")
-                : "No pudimos obtener la entrega del pedido. Escribinos para confirmarla."}</p>
-            <p className="text-sm">Estos son los datos guardados en tu pedido. Si necesitás cambiarlos, escribinos antes de pagar.</p>
+            <section className={tarjeta}>
+                <h3 className="text-sm font-semibold">Productos</h3>
+                <ul className="mt-2 space-y-1 text-sm">{pedido.items?.map(item => (
+                    <li key={item.product_id} className="flex justify-between gap-3">
+                        <span className="min-w-0">{item.current_product_name || `Producto ${item.product_id}`} <span className="text-slate-500 dark:text-slate-400">· {item.quantity} × {pesos(item.unit_price, pedido.currency)}</span></span>
+                    </li>
+                ))}</ul>
+                <div className="mt-3 text-sm">{condiciones}</div>
+            </section>
+            <section className={`${tarjeta} grid gap-3 text-sm sm:grid-cols-2`}>
+                <div>
+                    <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Contacto</h3>
+                    <p className="mt-1 break-words">{pedido.customer_name} · {pedido.customer_email} {pedido.customer_phone}</p>
+                </div>
+                <div>
+                    <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Entrega</h3>
+                    <p className="mt-1">{pedido.shipping === null ? "Retiro en el local" : pedido.shipping
+                        ? [pedido.shipping.street, pedido.shipping.extra, pedido.shipping.city,
+                            PROVINCIAS.find(([codigo]) => codigo === pedido.shipping?.province)?.[1] ?? pedido.shipping.province,
+                            pedido.shipping.postal_code && "CP " + pedido.shipping.postal_code].filter(Boolean).join(" · ")
+                        : "No pudimos obtener la entrega del pedido. Escribinos para confirmarla."}</p>
+                </div>
+            </section>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Estos son los datos guardados en tu pedido. Si necesitás cambiarlos, escribinos antes de pagar.</p>
             {r.precioCambio && (
                 <p className="rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-800 dark:bg-amber-500/10 dark:text-amber-300">
                     {"El total cambió " + pesos(r.diferencia, r.moneda) + " respecto del estimado."}{" "}
@@ -204,7 +246,7 @@ const propsDeCampo = (id: string, error?: string) => ({
     "aria-describedby": error ? `${id}-error` : undefined,
 });
 
-export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0 }: CheckoutDialogProps) {
+export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0, entregaInicial }: CheckoutDialogProps) {
     const router = useRouter();
     const { cart, destinoEnvio, removeFromCart } = useCartStore();
     const dialogRef = useRef<HTMLDialogElement>(null);
@@ -253,6 +295,28 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
         });
         return () => cancelAnimationFrame(frame);
     }, [retiroSolicitado]);
+
+    // Al abrir, la entrega arranca como la dejó el carrito (y con el destino que
+    // ya cotizó). Solo cambia la entrega: los datos personales se conservan.
+    useEffect(() => {
+        if (!abierto || !entregaInicial) return;
+        const frame = requestAnimationFrame(() => {
+            setDatos(previos =>
+                entregaInicial === "envio"
+                    ? {
+                          ...previos,
+                          entrega: "envio",
+                          direccion: {
+                              ...previos.direccion,
+                              province: previos.direccion?.province || destinoEnvio.province,
+                              postal_code: previos.direccion?.postal_code || destinoEnvio.postal_code,
+                          },
+                      }
+                    : { ...previos, entrega: "retiro" }
+            );
+        });
+        return () => cancelAnimationFrame(frame);
+    }, [abierto, entregaInicial, destinoEnvio.province, destinoEnvio.postal_code]);
 
     useEffect(() => {
         if (!abierto) return;
@@ -652,6 +716,9 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
     const cambiarDireccion = (cambio: Partial<DireccionDelFormulario>) =>
         setDatos({ ...datos, direccion: { ...datos.direccion, ...cambio } });
 
+    const paso: 1 | 2 | 3 = aConfirmar ? 3 : revision ? 2 : 1;
+    const cantidadDeProductos = cart.reduce((suma, item) => suma + item.quantity, 0);
+
     return (
             <dialog
                 ref={dialogRef}
@@ -660,17 +727,26 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                     event.preventDefault();
                     if (!enviando) onCerrar();
                 }}
-                className="fixed inset-x-0 bottom-0 top-auto m-0 hidden max-h-[90dvh] w-full max-w-lg overflow-y-auto rounded-t-2xl border-0 bg-white p-5 text-slate-950 backdrop:bg-black/50 open:block dark:bg-slate-950 dark:text-slate-50 sm:inset-0 sm:m-auto sm:rounded-2xl"
+                className="fixed inset-x-0 bottom-0 top-auto m-0 hidden max-h-[92dvh] w-full max-w-lg overflow-y-auto rounded-t-2xl border-0 bg-white p-0 text-slate-950 backdrop:bg-black/60 open:block dark:bg-slate-950 dark:text-slate-50 sm:inset-0 sm:m-auto sm:rounded-2xl"
             >
-                <div className="flex items-center justify-between">
-                    <h2 className="text-lg font-semibold text-slate-950 dark:text-slate-50">
-                        {aConfirmar ? "Revisá y confirmá tu compra" : "Tus datos y entrega"}
-                    </h2>
-                    <button type="button" onClick={onCerrar} disabled={enviando} aria-label="Volver al carrito" className="inline-flex min-h-11 items-center justify-center px-3 text-sm text-slate-500 disabled:opacity-40">
-                        Volver
-                    </button>
+                {/* Encabezado fijo: dónde está el comprador y qué está comprando. */}
+                <div className="sticky top-0 z-10 border-b border-slate-200 bg-white/95 px-5 pb-3 pt-4 backdrop-blur dark:border-slate-800 dark:bg-slate-950/95">
+                    <div className="flex items-center justify-between gap-3">
+                        <h2 className="text-lg font-semibold text-slate-950 dark:text-slate-50">
+                            {aConfirmar ? "Revisá y confirmá tu compra" : revision ? "Revisá tu pedido" : "Tus datos y entrega"}
+                        </h2>
+                        <button type="button" onClick={onCerrar} disabled={enviando} aria-label="Volver al carrito" className="inline-flex min-h-11 items-center justify-center rounded-full px-3 text-sm text-slate-600 hover:bg-slate-100 disabled:opacity-40 dark:text-slate-300 dark:hover:bg-slate-800">
+                            ← Carrito
+                        </button>
+                    </div>
+                    <Pasos actual={paso} />
+                    <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
+                        {cantidadDeProductos} {cantidadDeProductos === 1 ? "producto" : "productos"} · {pesos(estimadoDeProductos)}
+                        {paso === 1 ? (datos.entrega === "envio" ? " + envío" : " · retiro sin costo") : ""}
+                    </p>
                 </div>
 
+                <div className="px-5 pb-5">
                 {errores.carrito && (
                     <p className="mt-3 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-800 dark:bg-amber-500/10 dark:text-amber-300">
                         {errores.carrito}
@@ -681,7 +757,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                     <div className="mt-4 flex flex-col gap-3">
                         <p>Antes de continuar, recuperá tu pedido y revisá los datos que quedaron guardados.</p>
                         {fallo && <p role="alert">{fallo}</p>}
-                        <button type="button" onClick={retomarIntento} disabled={enviando || comprobandoIntento} className="min-h-12 rounded-full bg-primary px-5 text-white disabled:opacity-50">
+                        <button type="button" onClick={retomarIntento} disabled={enviando || comprobandoIntento} className="min-h-12 rounded-full bg-primary px-5 font-semibold text-white disabled:opacity-50">
                             {enviando || comprobandoIntento ? "Un momento…" : "Recuperar y revisar pedido"}
                         </button>
                     </div>
@@ -710,29 +786,98 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                     />
                 ) : revision ? (
                     <div className="mt-4 flex flex-col gap-3" aria-live="polite">
-                        <h3 className="font-semibold">Revisá tu pedido</h3>
-                        {pedidoPendiente && vencimientoReserva(pedidoPendiente) && <p>Pedido {pedidoPendiente.commerce_key}. Reservado hasta {vencimientoReserva(pedidoPendiente)}.</p>}
-                        <ul>{cart.map(item => <li key={item.cartKey}>{item.product.name} · <ProductCondition condition={item.product.storeCondition} /> · {item.quantity} × {pesos(item.product.retail_price)}</li>)}</ul>
-                        <p>{revision.datos.nombre} · {revision.datos.email} {revision.datos.telefono}</p>
-                        <p>{revision.datos.entrega === "retiro"
-                            ? retiro ? [retiro.name, retiro.address].filter(Boolean).join(" · ") : "Retiro en el local. No pudimos obtener la dirección; escribinos para confirmarla."
-                            : [revision.datos.direccion?.street, revision.datos.direccion?.number,
-                                revision.datos.direccion?.floor && "Piso " + revision.datos.direccion.floor,
-                                revision.datos.direccion?.apartment && "Depto " + revision.datos.direccion.apartment,
-                                revision.datos.direccion?.city,
-                                PROVINCIAS.find(([codigo]) => codigo === revision.datos.direccion?.province)?.[1] ?? revision.datos.direccion?.province,
-                                "CP " + revision.datos.direccion?.postal_code].filter(Boolean).join(" · ")}</p>
-                        <p>Productos: {pesos(revision.productos)} · Envío: {pesos(revision.envio)}</p>
-                        <p className="font-semibold">Total estimado: {pesos(revision.total)}</p>
-                        <p className="text-sm">Todavía no reservaste. Si cambia el total, te vamos a pedir que lo confirmes.</p>
-                        {fallo && <p role="alert">{fallo}</p>}
-                        <button type="button" disabled={enviando} onClick={confirmarRevision} className="min-h-12 rounded-full bg-primary px-5 text-white disabled:opacity-50">{enviando ? "Un momento…" : "Confirmar y pagar"}</button>
-                        <button type="button" disabled={enviando} onClick={() => { setRevision(null); setFallo(null); }} className="min-h-11 rounded-full border px-5">Cambiar datos</button>
+                        {pedidoPendiente && vencimientoReserva(pedidoPendiente) && <p className="text-sm">Pedido {pedidoPendiente.commerce_key}. Reservado hasta {vencimientoReserva(pedidoPendiente)}.</p>}
+                        <section className={tarjeta}>
+                            <h3 className="text-sm font-semibold">Productos</h3>
+                            <ul className="mt-2 space-y-2 text-sm">
+                                {cart.map(item => (
+                                    <li key={item.cartKey} className="flex items-start justify-between gap-3">
+                                        <span className="min-w-0">
+                                            {item.product.name} <ProductCondition condition={item.product.storeCondition} />
+                                            <span className="block text-xs text-slate-500 dark:text-slate-400">{item.quantity} × {pesos(item.product.retail_price)}</span>
+                                        </span>
+                                        <span className="shrink-0 tabular-nums">{pesos(item.quantity * item.product.retail_price)}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </section>
+                        <section className={`${tarjeta} grid gap-3 text-sm sm:grid-cols-2`}>
+                            <div>
+                                <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">{revision.datos.entrega === "retiro" ? "Retiro" : "Envío a"}</h3>
+                                <p className="mt-1">{revision.datos.entrega === "retiro"
+                                    ? retiro ? [retiro.name, retiro.address].filter(Boolean).join(" · ") : "Retiro en el local. No pudimos obtener la dirección; escribinos para confirmarla."
+                                    : [revision.datos.direccion?.street, revision.datos.direccion?.number,
+                                        revision.datos.direccion?.floor && "Piso " + revision.datos.direccion.floor,
+                                        revision.datos.direccion?.apartment && "Depto " + revision.datos.direccion.apartment,
+                                        revision.datos.direccion?.city,
+                                        PROVINCIAS.find(([codigo]) => codigo === revision.datos.direccion?.province)?.[1] ?? revision.datos.direccion?.province,
+                                        "CP " + revision.datos.direccion?.postal_code].filter(Boolean).join(" · ")}</p>
+                            </div>
+                            <div>
+                                <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Contacto</h3>
+                                <p className="mt-1 break-words">{revision.datos.nombre} · {revision.datos.email} {revision.datos.telefono}</p>
+                            </div>
+                        </section>
+                        <dl className="rounded-2xl bg-slate-50 p-4 text-sm dark:bg-slate-900">
+                            <div className="flex justify-between"><dt className="text-slate-600 dark:text-slate-400">Productos</dt><dd className="tabular-nums">{pesos(revision.productos)}</dd></div>
+                            <div className="mt-1 flex justify-between"><dt className="text-slate-600 dark:text-slate-400">Envío</dt><dd className="tabular-nums">{revision.envio ? pesos(revision.envio) : "Gratis"}</dd></div>
+                            <div className="mt-2 flex items-baseline justify-between border-t border-slate-200 pt-2 dark:border-slate-800"><dt className="font-semibold">Total estimado</dt><dd className="text-lg font-semibold tabular-nums">{pesos(revision.total)}</dd></div>
+                        </dl>
+                        <p className="text-xs text-slate-500 dark:text-slate-400">Todavía no reservaste. Si cambia el total, te vamos a pedir que lo confirmes.</p>
+                        {fallo && <p role="alert" className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-800 dark:bg-rose-500/10 dark:text-rose-300">{fallo}</p>}
+                        <button type="button" disabled={enviando} onClick={confirmarRevision} className="min-h-12 rounded-full bg-primary px-5 text-base font-semibold text-white transition hover:bg-primary/90 disabled:opacity-50">{enviando ? "Un momento…" : "Confirmar y pagar"}</button>
+                        <button type="button" disabled={enviando} onClick={() => { setRevision(null); setFallo(null); }} className="min-h-11 rounded-full border border-slate-300 px-5 text-sm dark:border-slate-700">Cambiar datos</button>
                     </div>
                 ) : (
-                <form className="mt-4 flex flex-col gap-3" onSubmit={onSubmit}>
-                    <fieldset disabled={enviando || pedidoPendiente !== null} className="flex flex-col gap-3 border-0 p-0">
-                    <p className="text-sm text-slate-600 dark:text-slate-400">Comprás como invitado. No necesitás crear una cuenta.</p>
+                <form className="mt-4 flex flex-col gap-4" onSubmit={onSubmit}>
+                    <fieldset disabled={enviando || pedidoPendiente !== null} className="flex flex-col gap-4 border-0 p-0">
+                    {/* Entrega primero: define el costo y qué datos hacen falta. */}
+                    <fieldset className="flex flex-col gap-2">
+                        <legend className="mb-2 text-sm font-semibold">¿Cómo lo recibís?</legend>
+                        <label className={`flex cursor-pointer items-start gap-3 rounded-2xl border p-4 text-sm transition ${!esEnvio ? "border-primary bg-primary/10" : "border-slate-300 dark:border-slate-700"}`}>
+                            <input
+                                type="radio"
+                                name="entrega"
+                                className="mt-1 accent-[#1a6dff]"
+                                checked={!esEnvio}
+                                onChange={() => setDatos({ ...datos, entrega: "retiro" })}
+                            />
+                            <span className="flex-1">
+                                <span className="flex justify-between gap-2 font-semibold">Retiro en el local <span className="text-emerald-600 dark:text-emerald-400">Gratis</span></span>
+                                {retiro && (
+                                    <span className="mt-0.5 block text-xs text-slate-500 dark:text-slate-400">
+                                        {[retiro.name, retiro.address, retiro.hours].filter(Boolean).join(" · ")}
+                                    </span>
+                                )}
+                            </span>
+                        </label>
+                        <label className={`flex items-start gap-3 rounded-2xl border p-4 text-sm transition ${soloRetiro.length ? "cursor-not-allowed opacity-60" : "cursor-pointer"} ${esEnvio ? "border-primary bg-primary/10" : "border-slate-300 dark:border-slate-700"}`}>
+                            <input
+                                type="radio"
+                                name="entrega"
+                                className="mt-1 accent-[#1a6dff]"
+                                checked={esEnvio}
+                                disabled={soloRetiro.length > 0}
+                                aria-describedby={soloRetiro.length ? "solo-retiro" : undefined}
+                                onChange={() => setDatos({ ...datos, entrega: "envio", direccion: {
+                                    ...datos.direccion,
+                                    province: datos.direccion?.province || destinoEnvio.province,
+                                    postal_code: datos.direccion?.postal_code || destinoEnvio.postal_code,
+                                } })}
+                            />
+                            <span className="flex-1">
+                                <span className="block font-semibold">Envío a domicilio</span>
+                                <span className="mt-0.5 block text-xs text-slate-500 dark:text-slate-400">El costo se calcula con tu dirección antes de reservar.</span>
+                                {soloRetiro.length > 0 && <span id="solo-retiro" className="mt-1 block text-xs">Solo retiro en el local: {soloRetiro.join(", ")}. Elegí retirar en el local.</span>}
+                            </span>
+                        </label>
+                    </fieldset>
+
+                    <section className="flex flex-col gap-3">
+                        <div>
+                            <h3 className="text-sm font-semibold">Tus datos</h3>
+                            <p className="text-xs text-slate-500 dark:text-slate-400">Comprás como invitado. No necesitás crear una cuenta.</p>
+                        </div>
                     <Campo id="ck-nombre" label="Nombre y apellido" error={errores.nombre}>
                         <input
                             {...propsDeCampo("ck-nombre", errores.nombre)}
@@ -767,51 +912,13 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                             onChange={e => setDatos({ ...datos, telefono: e.target.value })}
                         />
                     </Campo>
-
-                    <fieldset className="mt-1">
-                        <legend className="text-sm font-medium">¿Cómo lo recibís?</legend>
-                        <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:gap-4">
-                            <label className="flex items-start gap-2 text-sm">
-                                <input
-                                    type="radio"
-                                    name="entrega"
-                                    className="mt-1"
-                                    checked={!esEnvio}
-                                    onChange={() => setDatos({ ...datos, entrega: "retiro" })}
-                                />
-                                <span>
-                                    Retiro en el local
-                                    {retiro && (
-                                        <span className="block text-xs text-slate-500 dark:text-slate-400">
-                                            {[retiro.name, retiro.address, retiro.hours].filter(Boolean).join(" · ")}
-                                        </span>
-                                    )}
-                                </span>
-                            </label>
-                            <label className="flex items-start gap-2 text-sm">
-                                <input
-                                    type="radio"
-                                    name="entrega"
-                                    className="mt-1"
-                                    checked={esEnvio}
-                                    disabled={soloRetiro.length > 0}
-                                    aria-describedby={soloRetiro.length ? "solo-retiro" : undefined}
-                                    onChange={() => setDatos({ ...datos, entrega: "envio", direccion: {
-                                        ...datos.direccion,
-                                        province: datos.direccion?.province || destinoEnvio.province,
-                                        postal_code: datos.direccion?.postal_code || destinoEnvio.postal_code,
-                                    } })}
-                                />
-                                Envío a domicilio
-                                {soloRetiro.length > 0 && <span id="solo-retiro" className="block text-sm">Solo retiro en el local: {soloRetiro.join(", ")}. Elegí retirar en el local.</span>}
-                            </label>
-                        </div>
-                    </fieldset>
+                    </section>
 
                     {/* La dirección aparece solo para envío: pedirla siempre hace
                         abandonar a quien iba a retirar por el local. */}
                     {esEnvio && (
-                        <div className="flex flex-col gap-3 rounded-lg border border-slate-200 p-3 dark:border-slate-700">
+                        <section className="flex flex-col gap-3">
+                            <h3 className="text-sm font-semibold">Dirección de entrega</h3>
                             <div className="grid grid-cols-[1fr_6rem] gap-3">
                                 <Campo id="ck-calle" label="Calle" error={errores.street}>
                                     <input
@@ -883,14 +990,14 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                                     ))}
                                 </select>
                             </Campo>
-                        </div>
+                        </section>
                     )}
 
                     </fieldset>
                     {/* La revisión cotiza antes de reservar; el servidor confirma el importe. */}
                     <p className="text-xs text-slate-500 dark:text-slate-400">
                         {esEnvio
-                            ? "Antes de reservar vas a ver el costo del envío y el total estimado."
+                            ? "En el paso siguiente ves el costo del envío y el total, antes de reservar."
                             : "Retirás por el local, así que no se cobra envío."}
                     </p>
 
@@ -922,13 +1029,14 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                     <button
                         type="submit"
                         disabled={enviando || cart.length === 0 || pedidoPendiente !== null}
-                        className="mt-1 inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-white transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
+                        className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-5 text-base font-semibold text-white transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
                     >
                         {enviando ? "Un momento…" : "Revisar pedido"}
                     </button>
                 </form>
                 )}
-                <a className="mt-3 block min-h-11 text-sm underline" href={whatsappUrl("Hola, necesito ayuda con " + (numeroPedido ? "el pedido " + numeroPedido : "mi compra en la tienda") + ".")} target="_blank" rel="noopener noreferrer">Escribinos por WhatsApp</a>
+                <a className="mt-4 flex min-h-11 items-center justify-center text-sm text-slate-600 underline-offset-4 hover:underline dark:text-slate-400" href={whatsappUrl("Hola, necesito ayuda con " + (numeroPedido ? "el pedido " + numeroPedido : "mi compra en la tienda") + ".")} target="_blank" rel="noopener noreferrer">¿Dudas? Escribinos por WhatsApp</a>
+                </div>
             </dialog>
     );
 }

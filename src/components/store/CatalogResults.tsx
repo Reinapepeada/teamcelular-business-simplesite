@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+﻿import StoreImage from "./StoreImage";
 import Link from "next/link";
 import ProductCondition from "./ProductCondition";
 import CatalogRetryButton from "./CatalogRetryButton";
@@ -11,7 +11,6 @@ import {
     type CatalogFiltersState,
 } from "@/lib/catalog";
 import { buildProductSlug, slugify } from "@/lib/productSlug";
-import { cargaDirectaImagen } from "@/lib/storeCatalog";
 
 interface CatalogResultsProps {
     basePath: string;
@@ -145,7 +144,10 @@ function CatalogPagination({
     );
 }
 
-function ProductCard({ product }: { product: VidrieraProduct }) {
+// Las primeras tarjetas se ven sin scrollear: sus fotos se piden primero.
+const FOTOS_PRIORITARIAS = 3;
+
+function ProductCard({ product, prioridad = false }: { product: VidrieraProduct; prioridad?: boolean }) {
     const productImage = getProductImage(product);
     const stock = getProductStock(product);
     const productHref = `/tienda/${buildProductSlug(product)}`;
@@ -159,12 +161,12 @@ function ProductCard({ product }: { product: VidrieraProduct }) {
                 aria-label={`Ver ${product.name}`}
             >
                 <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-2xl bg-slate-50 dark:bg-slate-800/70">
-                    <Image
+                    <StoreImage
                         src={productImage}
                         alt={product.name}
                         fill
-                        unoptimized={cargaDirectaImagen(productImage)}
-                        className="object-contain p-4 transition duration-300 group-hover:scale-[1.03]"
+                        priority={prioridad}
+                        className="object-contain p-4 group-hover:scale-[1.03]"
                         sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
                     />
                 </div>
@@ -313,8 +315,8 @@ export default async function CatalogResults({
                         }}
                     />
                     <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
-                        {products.map((product) => (
-                            <ProductCard key={product.storeSlug} product={product} />
+                        {products.map((product, index) => (
+                            <ProductCard key={product.storeSlug} product={product} prioridad={index < FOTOS_PRIORITARIAS} />
                         ))}
                     </div>
                     <CatalogPagination

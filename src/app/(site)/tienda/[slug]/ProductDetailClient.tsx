@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
+import StoreImage from '@/components/store/StoreImage';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -34,7 +34,6 @@ import { formatWarranty, type Product, type ProductVariant } from '@/app/tienda/
 import useCartStore from '@/store/cartStore';
 import ProductCondition from '@/components/store/ProductCondition';
 import { BUSINESS_PROFILE } from '@/lib/businessProfile';
-import { cargaDirectaImagen } from '@/lib/storeCatalog';
 import {
     hayParaComprar,
     sePuedeRestar,
@@ -220,11 +219,10 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                                 transition={{ duration: 0.3 }}
                                 className="absolute inset-0"
                             >
-                                <Image
+                                <StoreImage
                                     src={images[selectedImageIndex]}
                                     alt={product.name}
                                     fill
-                                    unoptimized={cargaDirectaImagen(images[selectedImageIndex])}
                                     className="object-contain p-4"
                                     priority
                                     sizes="(max-width: 1024px) 100vw, 50vw"
@@ -277,11 +275,10 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                                             : 'border-transparent hover:border-gray-300'
                                     }`}
                                 >
-                                    <Image
+                                    <StoreImage
                                         src={img}
                                         alt={`${product.name} - ${index + 1}`}
                                         fill
-                                        unoptimized={cargaDirectaImagen(img)}
                                         className="object-cover"
                                         sizes="80px"
                                     />
@@ -522,15 +519,15 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                             <Card key={variant.id} className="p-4">
                                 <div className="flex items-center gap-3">
                                     {variant.images[0] && (
-                                        <Image
-                                            src={variant.images[0].image_url}
-                                            alt={`${product.name} - ${variant.color || ''} ${variant.size || ''}`}
-                                            width={60}
-                                            height={60}
-                                            unoptimized={cargaDirectaImagen(variant.images[0].image_url)}
-                                            className="rounded-lg object-cover"
-                                            sizes="60px"
-                                        />
+                                        <span className="relative block h-[60px] w-[60px] flex-none overflow-hidden rounded-lg">
+                                            <StoreImage
+                                                src={variant.images[0].image_url}
+                                                alt={`${product.name} - ${variant.color || ''} ${variant.size || ''}`}
+                                                fill
+                                                className="object-cover"
+                                                sizes="60px"
+                                            />
+                                        </span>
                                     )}
                                     <div>
                                         <p className="font-medium">
