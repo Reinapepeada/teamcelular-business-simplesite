@@ -50,7 +50,7 @@ export const BUSINESS_PROFILE = {
     "https://www.linkedin.com/company/teamcelular/",
     "https://share.google/gReN6bjAjMtsqTIcq",
     "https://share.google/QKkG7KaIMWtcfUzia",
-    "https://share.google/ATqxS65okEfOxZJYA",
+    "https://share.google/0WRBXOsplzU7udSWB",
   ],
   knowsAbout: [
     "Reparación de celulares",
@@ -141,7 +141,7 @@ export const BRANCHES = [
     latitude: -34.5638065,
     longitude: -58.4579996,
     // Ficha de Google Business Profile de Belgrano (link de compartir del dueño).
-    mapUrl: "https://share.google/ATqxS65okEfOxZJYA",
+    mapUrl: "https://share.google/0WRBXOsplzU7udSWB",
     phone: "+54 11 3173-9099",
     whatsapp: "https://wa.me/5491131739099",
     whatsappText: "Hola Team Celular, quiero consultar con la sucursal Belgrano. Marca y modelo:",
