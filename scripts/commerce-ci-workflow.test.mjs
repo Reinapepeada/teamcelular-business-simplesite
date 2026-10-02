@@ -24,6 +24,8 @@ test("CI de tienda prueba y compila sin secretos ni despliegue", () => {
     workflow,
     /NEXT_PUBLIC_BASE_URL: https:\/\/store\.example\.test/,
   );
-  assert.match(workflow, /STORE_SAME_ORIGIN_PROXY_CONFIRMED: ["']true["']/);
+  assert.match(workflow, /NODE_ENV: production/);
+  assert.match(workflow, /run: npx --no-install tsc --noEmit/);
+  assert.doesNotMatch(workflow, /STORE_SAME_ORIGIN_PROXY_CONFIRMED/);
   assert.doesNotMatch(workflow, /\b(deploy|ssh|rsync|secrets\.)\b/i);
 });
