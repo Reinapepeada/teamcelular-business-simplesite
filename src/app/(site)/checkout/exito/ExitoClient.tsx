@@ -16,6 +16,33 @@ import {
     type Intencion,
 } from "@/lib/vueltaDelPago";
 import useCartStore from "@/store/cartStore";
+import { datosParaResenas, entregaEstimada } from "@/lib/resenasGoogle";
+
+const MERCHANT_ID = 5711320288;
+
+type Gapi = { load(m: string, cb: () => void): void; surveyoptin: { render(o: Record<string, unknown>): void } };
+
+/** Opt-in de Reseñas de Clientes en Google; Google dibuja su propio cartel. */
+function OptInResenasGoogle({ clave }: { clave: string }) {
+    useEffect(() => {
+        const datos = datosParaResenas(almacen(), clave);
+        if (!datos) return;
+        const w = window as unknown as { renderOptIn?: () => void; gapi?: Gapi };
+        w.renderOptIn = () => w.gapi?.load("surveyoptin", () => w.gapi?.surveyoptin.render({
+            merchant_id: MERCHANT_ID,
+            order_id: clave,
+            email: datos.email,
+            delivery_country: "AR",
+            estimated_delivery_date: entregaEstimada(datos.envio),
+        }));
+        if (w.gapi) return w.renderOptIn();
+        const s = document.createElement("script");
+        s.src = "https://apis.google.com/js/platform.js?onload=renderOptIn";
+        s.async = true;
+        document.body.appendChild(s);
+    }, [clave]);
+    return null;
+}
 
 const almacen = () => {
     try {
@@ -273,6 +300,7 @@ export default function ExitoClient({ intencion = "exito" }: { intencion?: Inten
                     </dl>
                 ) : null}
 
+                {cobrado && estado ? <OptInResenasGoogle clave={estado.commerce_key} /> : null}
                 {cobrado ? (
                     <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
                         Volvé a este enlace para consultar el estado actualizado de tu pedido.

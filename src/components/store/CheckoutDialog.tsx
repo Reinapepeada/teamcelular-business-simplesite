@@ -1,5 +1,6 @@
 "use client";
 
+import { anotarParaResenas } from "@/lib/resenasGoogle";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PROVINCIAS } from "@/lib/provincias";
@@ -439,12 +440,12 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
         const pedido = await recuperarIntento(window.localStorage, {
             crearPedido: payload => crearPedidoConRecuperacion(createOrder, payload, window.localStorage),
             pedirLink: requestPaymentLink,
-            recordar: pedido => recordarPedido(window.localStorage, {
+            recordar: pedido => (anotarParaResenas(window.localStorage, { clave: pedido.commerce_key, email: payload.customer_email, envio: !!payload.shipping_address }), recordarPedido(window.localStorage, {
                 clave: pedido.commerce_key, checkoutKey: payload.checkout_key,
                 token: pedido.access_token, total: pedido.total_amount, moneda: pedido.currency,
                 huella: huellaDelCarrito(payload.items),
                 reserva: { reservation_expires_at: pedido.reservation_expires_at, created_at: pedido.created_at, expires_at: pedido.expires_at, reserved_until: pedido.reserved_until },
-            }),
+            })),
         });
         if (!pedido) return false;
         setPedidoPendiente(pedido);
@@ -567,6 +568,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                     recordar: (pedido) => {
                         setPedidoPendiente(pedido);
                         setHuellaPendiente(huellaDelCarrito(payload.items));
+                        anotarParaResenas(window.localStorage, { clave: pedido.commerce_key, email: payload.customer_email, envio: !!payload.shipping_address });
                         recordarPedido(window.localStorage, {
                             clave: pedido.commerce_key,
                             checkoutKey: payload.checkout_key,
