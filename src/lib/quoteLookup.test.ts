@@ -13,7 +13,7 @@ const proMax = lookupQuote("Apple", "iphone 13 pro max", ["Pantalla"]);
 assert.equal(proMax?.from, 279900);
 
 // Sin acentos ni mayusculas tiene que resolver igual.
-assert.equal(lookupQuote("", "IPHONE 14 PRO", ["Bateria"])?.from, 209900);
+assert.equal(lookupQuote("", "IPHONE 14 PRO", ["Batería"])?.from, 209900);
 
 // Marca reconocida sin modelo cargado: rango de gama, no numero puntual.
 const galaxy = lookupQuote("Samsung", "Galaxy A54", ["Pantalla"]);
@@ -22,7 +22,7 @@ assert.equal(galaxy?.from, 99900);
 assert.equal(galaxy?.to, 1199900);
 
 // Alias de submarca.
-assert.equal(lookupQuote("Redmi", "Note 13", ["Bateria"])?.precision, "range");
+assert.equal(lookupQuote("Redmi", "Note 13", ["Batería"])?.precision, "range");
 
 // Sin precio de lista para esa falla: no se inventa nada.
 assert.equal(lookupQuote("iPhone", "iPhone 13", ["Placa"]), null);
