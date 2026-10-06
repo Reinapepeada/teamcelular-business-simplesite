@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { formatArsPrice, type RepairPrice } from "@/lib/repairPrices";
 
 // Tabla y no prosa: es la estructura que mejor se extrae en motores de IA, y
@@ -46,7 +47,13 @@ export default function RepairPriceTable({
             {prices.map((price) => (
               <tr key={price.name}>
                 <td className="py-3 pr-4 text-slate-700 dark:text-slate-300">
-                  {price.name}
+                  {price.href ? (
+                    <Link href={price.href} className="underline decoration-slate-400/60 underline-offset-4 transition hover:text-primary">
+                      {price.name}
+                    </Link>
+                  ) : (
+                    price.name
+                  )}
                 </td>
                 <td className="py-3 pr-4 font-semibold tabular-nums text-slate-900 dark:text-white">
                   {formatArsPrice(price.from)}

@@ -11,7 +11,8 @@ import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 export const PRICES_UPDATED = "2026-08-20T00:00:00Z";
 
-export type RepairPrice = { name: string; from: number; to: number };
+/** `href`: la fila enlaza a la pagina que profundiza esa reparacion. */
+export type RepairPrice = { name: string; from: number; to: number; href?: string };
 
 /** Cambio de pin de carga, todas las marcas: el precio depende del dispositivo. */
 export const CHARGING_PORT_PRICE = { from: 35000, to: 150000 };
@@ -95,13 +96,23 @@ function rangeOf(values: (number | null)[]) {
  * Sale de las mismas fuentes que las guias: no hay un segundo precio que
  * mantener.
  */
+// Se muestra en zonas y sucursales, las paginas con mas fuerza local: cada fila
+// le pasa ese peso a la guia de su marca con un anchor descriptivo.
 export const POPULAR_REPAIR_PRICES: RepairPrice[] = [
-  { name: "Cambio de pantalla iPhone 11 a 17", ...rangeOf(IPHONE_MODELS.map((m) => m.screen)) },
-  { name: "Cambio de batería iPhone 11 a 17", ...rangeOf(IPHONE_MODELS.map((m) => m.battery)) },
-  { ...BRAND_REPAIR_PRICES.samsung[0], name: "Cambio de pantalla Samsung Galaxy A / M" },
-  { ...BRAND_REPAIR_PRICES.motorola[0], name: "Cambio de pantalla Motorola Moto E / G" },
-  { ...BRAND_REPAIR_PRICES.xiaomi[0], name: "Cambio de pantalla Xiaomi Redmi / Note / Poco" },
-  { name: "Cambio de pin de carga (todas las marcas)", ...CHARGING_PORT_PRICE },
+  {
+    name: "Cambio de pantalla iPhone 11 a 17",
+    ...rangeOf(IPHONE_MODELS.map((m) => m.screen)),
+    href: "/guias/reparacion-iphone-buenos-aires#costos-reparacion-iphone",
+  },
+  {
+    name: "Cambio de batería iPhone 11 a 17",
+    ...rangeOf(IPHONE_MODELS.map((m) => m.battery)),
+    href: "/guias/reparacion-iphone-buenos-aires#costos-reparacion-iphone",
+  },
+  { ...BRAND_REPAIR_PRICES.samsung[0], name: "Cambio de pantalla Samsung Galaxy A / M", href: "/guias/reparacion-samsung-buenos-aires" },
+  { ...BRAND_REPAIR_PRICES.motorola[0], name: "Cambio de pantalla Motorola Moto E / G", href: "/guias/reparacion-motorola-buenos-aires" },
+  { ...BRAND_REPAIR_PRICES.xiaomi[0], name: "Cambio de pantalla Xiaomi Redmi / Note / Poco", href: "/guias/reparacion-xiaomi-buenos-aires" },
+  { name: "Cambio de pin de carga (todas las marcas)", ...CHARGING_PORT_PRICE, href: "/reparaciones/cambio-pin-carga-caba" },
 ];
 
 export const PRICES_UPDATED_LABEL = new Date(PRICES_UPDATED).toLocaleDateString("es-AR", {
