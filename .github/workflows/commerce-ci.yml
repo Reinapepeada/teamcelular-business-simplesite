@@ -30,5 +30,7 @@ jobs:
       - name: Build with isolated same-origin topology
         run: npm run build
         env:
+          NODE_ENV: production
           NEXT_PUBLIC_BASE_URL: https://store.example.test
-          STORE_SAME_ORIGIN_PROXY_CONFIRMED: "true"
+      - name: Check TypeScript with generated Next.js types
+        run: npx --no-install tsc --noEmit
