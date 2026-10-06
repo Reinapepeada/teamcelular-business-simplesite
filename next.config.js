@@ -30,7 +30,6 @@ module.exports = {
   experimental: {
     optimizePackageImports: [
       "react-icons",
-      "@nextui-org/react",
       "framer-motion",
       "lucide-react",
       "@tabler/icons-react",

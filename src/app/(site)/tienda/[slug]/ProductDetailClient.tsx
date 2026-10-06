@@ -5,12 +5,6 @@ import StoreImage from '@/components/store/StoreImage';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-    Button, 
-    Chip, 
-    Card,
-    Divider
-} from "@nextui-org/react";
-import { 
     ShoppingCart, 
     Share2, 
     ChevronLeft, 
@@ -83,6 +77,8 @@ interface Props {
     storeSlugProp?: string | null;
 }
 
+
+const CHIP = "inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium";
 export default function ProductDetailClient({ productProp, storeSlugProp }: Props) {
 
     // El producto llega resuelto del server, que hace `notFound()` si no
@@ -253,9 +249,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                         {/* Discount badge */}
                         {discount > 0 && (
                             <div className="absolute top-4 left-4">
-                                <Chip color="danger" variant="solid" size="sm">
-                                    -{discount}%
-                                </Chip>
+                                <span className={`${CHIP} bg-red-600 text-white`}>-{discount}%</span>
                             </div>
                         )}
                     </div>
@@ -293,18 +287,17 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                     {/* Brand & Category */}
                     <div className="flex flex-wrap gap-2">
                         {product.brand && (
-                            <Chip variant="flat" color="warning" size="sm">
-                                {product.brand.name}
-                            </Chip>
+                            <span className={`${CHIP} bg-warning/20 text-warning`}>{product.brand.name}</span>
                         )}
                         {product.category && (
-                            <Chip variant="dot" color="secondary" size="sm">
+                            <span className={`${CHIP} border border-white/15 text-[#f5f5f7]`}>
+                                <span aria-hidden className="h-2 w-2 rounded-full bg-secondary" />
                                 {product.category.name}
-                            </Chip>
+                            </span>
                         )}
-                        <Chip variant="flat" color={totalStock > 0 ? 'success' : 'default'} size="sm">
+                        <span className={`${CHIP} ${totalStock > 0 ? 'bg-success/20 text-success' : 'bg-white/10 text-slate-300'}`}>
                             {totalStock > 0 ? 'Disponible' : 'Agotado'}
-                        </Chip>
+                        </span>
                     </div>
                     
                     {/* Title */}
@@ -349,7 +342,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                         </p>
                     )}
                     
-                    <Divider />
+                    <hr className="border-white/15" />
                     
                     {/* Color Selection */}
                     {availableColors.length > 0 && (
@@ -443,30 +436,33 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                         </div>
                         
                         {/* Add to Cart Button */}
-                        <Button
+                        <button
+                            type="button"
                             onClick={handleAddToCart}
                             disabled={!hayParaComprar(selectedVariant, totalStock)}
-                            color="primary"
-                            size="lg"
-                            className="flex-1 text-white"
+                            className="tc-btn tc-btn-primary h-12 flex-1 disabled:cursor-not-allowed disabled:opacity-50"
                         >
-                            <ShoppingCart className="w-5 h-5 mr-2" />
+                            <ShoppingCart className="w-5 h-5" />
                             Agregar al carrito
-                        </Button>
+                        </button>
                     </div>
                     
                     {/* Quick Actions */}
                     <div className="flex gap-4">
-                        <Button variant="ghost" size="sm" onClick={handleShare}>
-                            <Share2 className="w-4 h-4 mr-2" />
+                        <button
+                            type="button"
+                            onClick={handleShare}
+                            className="inline-flex min-h-11 items-center gap-2 rounded-full px-4 text-sm font-medium text-slate-300 transition hover:bg-white/10"
+                        >
+                            <Share2 className="w-4 h-4" />
                             Compartir
-                        </Button>
+                        </button>
                     </div>
                     <p role="status" aria-live="polite" className="text-sm text-emerald-700 dark:text-emerald-300">
                         {feedback}
                     </p>
                     
-                    <Divider />
+                    <hr className="border-white/15" />
                     
                     {/* Benefits */}
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -516,7 +512,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                     <h2 className="text-2xl font-bold mb-6">Variantes disponibles</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         {product.variants.map((variant) => (
-                            <Card key={variant.id} className="p-4">
+                            <div key={variant.id} className="rounded-2xl bg-[#1d1d1f] p-4">
                                 <div className="flex items-center gap-3">
                                     {variant.images[0] && (
                                         <span className="relative block h-[60px] w-[60px] flex-none overflow-hidden rounded-lg">
@@ -543,7 +539,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                                         </p>
                                     </div>
                                 </div>
-                            </Card>
+                            </div>
                         ))}
                     </div>
                 </div>
