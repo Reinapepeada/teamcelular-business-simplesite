@@ -96,7 +96,7 @@ export default function PhoneRepairEnglishPage() {
           explain the problem directly instead of relying on a translation app. We repair
           iPhone, Samsung, Motorola, Xiaomi and most other brands, including phones bought
           abroad. We also clean water-damaged boards in-house; for phones that will not turn
-          on, a board inspection costs ARS 45,000 and chip-level repairs go to a partner lab.
+          on, a board inspection costs ARS 45,000, deducted from the repair if you go ahead.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-4">

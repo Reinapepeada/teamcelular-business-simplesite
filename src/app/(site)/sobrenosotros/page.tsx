@@ -133,7 +133,7 @@ const differentiators = [
     {
         icon: FaMicroscope,
         title: "Microsoldadura",
-        description: "Pin de carga, flex y placas de notebook a nivel componente, bajo microscopio.",
+        description: "Placa, pin de carga y flex a nivel componente, bajo microscopio.",
     },
     {
         icon: FaTools,

@@ -177,7 +177,7 @@ const repairServices = [
   {
     title: "Placa de Samsung",
     detail:
-      "Queda en el logo, se reinicia solo o no prende después de un golpe o de mojarse. Revisión de placa $45.000; si es un chip, lo arregla un laboratorio especializado.",
+      "Queda en el logo, se reinicia solo o no prende después de un golpe o de mojarse. Revisión de placa $45.000, que se descuenta si se repara.",
     eta: "revisión 72 h",
     Icon: FaMicrochip,
   },
@@ -467,7 +467,7 @@ export default function SamsungRepairGuidePage() {
               en 2 a 4 horas según modelo y stock; el diagnóstico se hace el mismo día
               y todo sale con garantía escrita de 90 días sobre el trabajo y el repuesto
               instalado. Si el equipo no prende o se reinicia solo, la revisión de placa
-              sale ARS 45.000 y los arreglos de chips los hace un laboratorio especializado.
+              sale ARS 45.000 y se descuenta si se repara.
               Precios actualizados a agosto de 2026.
             </p>
           </div>

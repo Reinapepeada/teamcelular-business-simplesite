@@ -176,7 +176,7 @@ const repairServices = [
   {
     title: "Placa logica, PMIC y bootloop",
     detail:
-      "Se reinicia en el logo, no enciende o se quedó sin red después de una caída o de mojarse. Revisión de placa $45.000; si es un chip, lo arregla un laboratorio especializado.",
+      "Se reinicia en el logo, no enciende o se quedó sin red después de una caída o de mojarse. Revisión de placa $45.000, que se descuenta si se repara.",
     eta: "revisión 72 h",
     Icon: FaMicrochip,
   },
