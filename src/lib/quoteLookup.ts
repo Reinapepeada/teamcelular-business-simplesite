@@ -20,7 +20,7 @@ export type Quote =
 /** Solo pantalla y bateria tienen precio de lista; el resto se cotiza al diagnosticar. */
 const REPAIR_TO_KIND: Record<string, QuoteKind> = {
   Pantalla: "screen",
-  Bateria: "battery",
+  Batería: "battery",
 };
 
 function normalize(value: string): string {

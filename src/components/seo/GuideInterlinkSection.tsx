@@ -259,7 +259,7 @@ export default function GuideInterlinkSection({
   const guideKey = toGuideKey(currentGuide);
 
   return (
-    <section className="space-y-5 rounded-3xl border border-slate-200/80 bg-slate-50/90 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/45">
+    <section className="space-y-5 rounded-3xl border border-slate-200/80 bg-slate-50/90 p-8 dark:border-white/10 dark:bg-slate-950/45">
       <div className="space-y-2">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
           Otras guías que te pueden servir

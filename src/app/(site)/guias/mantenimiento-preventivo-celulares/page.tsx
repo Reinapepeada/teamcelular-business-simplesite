@@ -223,7 +223,7 @@ export default function PreventiveMaintenanceGuide() {
         </nav>
 
         {/* Hero Section */}
-        <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-16">
+        <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 text-center dark:border-white/10 dark:bg-slate-900/30 md:p-16">
           <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-primary via-secondary to-primary shadow-2xl">
             <FaTools className="text-5xl text-white" />
           </div>
@@ -256,7 +256,7 @@ export default function PreventiveMaintenanceGuide() {
         </header>
 
         {/* Introducción */}
-        <section className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
+        <section className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 dark:border-white/10 dark:bg-slate-900/30">
           <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
             ¿Por qué es importante el mantenimiento preventivo?
           </h2>
@@ -319,7 +319,7 @@ export default function PreventiveMaintenanceGuide() {
               return (
                 <div
                   key={tip.title}
-                  className="group rounded-2xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
+                  className="group rounded-2xl border border-white/15 bg-white/5 p-8 transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
                 >
                   <div className="mb-4 flex items-center justify-between">
                     <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-3xl text-white shadow-lg">
@@ -343,7 +343,7 @@ export default function PreventiveMaintenanceGuide() {
         </section>
 
         {/* Señales de advertencia */}
-        <section className="space-y-8 rounded-2xl border border-white/15 bg-white/5 p-10 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
+        <section className="space-y-8 rounded-2xl border border-white/15 bg-white/5 p-10 dark:border-white/10 dark:bg-slate-900/30">
           <div className="flex items-center gap-4">
             <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-500 to-orange-500 text-3xl text-white shadow-lg">
               <FaExclamationTriangle />
@@ -361,7 +361,7 @@ export default function PreventiveMaintenanceGuide() {
               return (
                 <div
                   key={item.signal}
-                  className="rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-6 backdrop-blur-lg dark:border-yellow-500/30 dark:bg-yellow-500/10"
+                  className="rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-6 dark:border-yellow-500/30 dark:bg-yellow-500/10"
                 >
                   <div className="mb-3 flex items-center gap-3">
                     <Icon className="text-2xl text-yellow-600 dark:text-yellow-500" />
@@ -392,7 +392,7 @@ export default function PreventiveMaintenanceGuide() {
               return (
                 <div
                   key={plan.title}
-                  className="rounded-2xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
+                  className="rounded-2xl border border-white/15 bg-white/5 p-8 transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
                 >
                   <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-2xl text-primary">
                     <Icon />
@@ -409,7 +409,7 @@ export default function PreventiveMaintenanceGuide() {
         </section>
 
         {/* Video Section */}
-        <section className="overflow-hidden rounded-2xl border border-white/15 bg-white/5 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
+        <section className="overflow-hidden rounded-2xl border border-white/15 bg-white/5 dark:border-white/10 dark:bg-slate-900/30">
           <div className="grid gap-0 md:grid-cols-2">
             <div className="order-2 md:order-1">
               <video
@@ -458,7 +458,7 @@ export default function PreventiveMaintenanceGuide() {
             {faqMaintenance.map((faq, index) => (
               <details
                 key={index}
-                className="group rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-xl transition hover:shadow-lg dark:border-white/10 dark:bg-slate-900/30"
+                className="group rounded-2xl border border-white/15 bg-white/5 p-6 transition hover:shadow-lg dark:border-white/10 dark:bg-slate-900/30"
               >
                 <summary className="flex min-h-11 items-center cursor-pointer text-lg font-bold text-secondary group-hover:text-primary dark:text-secondary/90">
                   {faq.question}
@@ -472,7 +472,7 @@ export default function PreventiveMaintenanceGuide() {
         </section>
 
         {/* CTA Final */}
-        <section className="rounded-2xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:from-slate-900/40 dark:via-slate-900/30 dark:to-slate-900/40 md:p-16">
+        <section className="rounded-2xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-10 text-center dark:border-white/10 dark:from-slate-900/40 dark:via-slate-900/30 dark:to-slate-900/40 md:p-16">
           <h2 className="mb-6 text-3xl font-bold text-slate-900 dark:text-white">
             Protegé tu inversión con mantenimiento profesional
           </h2>
@@ -497,14 +497,14 @@ export default function PreventiveMaintenanceGuide() {
         </section>
 
         {/* Related Articles */}
-        <section className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
+        <section className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 dark:border-white/10 dark:bg-slate-900/30">
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
             Artículos relacionados
           </h2>
           <div className="grid gap-4 md:grid-cols-3">
             <Link
               href="/guias/reparacion-iphone-buenos-aires"
-              className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
+              className="rounded-xl border border-white/20 bg-white/10 p-6 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
             >
               <h3 className="mb-2 font-bold text-primary">Reparación de iPhone</h3>
               <p className="text-sm text-slate-700 dark:text-slate-300">
@@ -513,7 +513,7 @@ export default function PreventiveMaintenanceGuide() {
             </Link>
             <Link
               href="/guias/microelectronica-reballing-caba"
-              className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
+              className="rounded-xl border border-white/20 bg-white/10 p-6 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
             >
               <h3 className="mb-2 font-bold text-primary">Microelectrónica y Reballing</h3>
               <p className="text-sm text-slate-700 dark:text-slate-300">
@@ -522,7 +522,7 @@ export default function PreventiveMaintenanceGuide() {
             </Link>
             <Link
               href="/guias/soporte-empresas-servicio-tecnico"
-              className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
+              className="rounded-xl border border-white/20 bg-white/10 p-6 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
             >
               <h3 className="mb-2 font-bold text-primary">Empresas y flotas</h3>
               <p className="text-sm text-slate-700 dark:text-slate-300">

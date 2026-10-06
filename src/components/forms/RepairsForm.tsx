@@ -23,13 +23,13 @@ import { FaCheckCircle, FaExclamationCircle, FaWhatsapp } from "react-icons/fa";
 
 const repairOptions = [
     "Pantalla",
-    "Bateria",
+    "Batería",
     "Carga",
     "Placa",
-    "Boton",
-    "Camara",
+    "Botón",
+    "Cámara",
     "Parlante",
-    "Microfono",
+    "Micrófono",
     "Software",
     "Otro",
 ];
@@ -131,19 +131,9 @@ export default function RepairsForm() {
         const step = BUDGET_WIZARD_STEPS[0];
         submittedRef.current = true;
 
-        track(
-            BUDGET_FUNNEL_EVENTS.submit,
-            buildBudgetFunnelPayload({
-                extra: {
-                    lead_channel: "whatsapp_direct",
-                    repair_type: repairTypeLabel,
-                    urgency: DEFAULT_URGENCY,
-                    contact_channel: DEFAULT_CONTACT_CHANNEL,
-                    preferred_branch: preferredBranch,
-                    branch_selection_method: branchSelectionMethod,
-                },
-            }),
-        );
+        // recordLeadInteraction ya manda lead_form_submit a GA4; un track() aca
+        // lo duplicaba y el key event contaba cada envio dos veces.
+        if (typeof window.clarity === "function") window.clarity("event", BUDGET_FUNNEL_EVENTS.submit);
 
         recordLeadInteraction({
             eventName: "lead_form_submit",

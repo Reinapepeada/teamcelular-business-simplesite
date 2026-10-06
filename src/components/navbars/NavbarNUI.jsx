@@ -63,7 +63,7 @@ export default function NavbarNUI() {
     }
 
     return (
-        <header className="sticky top-0 z-50 w-full bg-black/80 text-[#f5f5f7] backdrop-blur-xl backdrop-saturate-150">
+        <header className="sticky top-0 z-50 w-full bg-black/95 text-[#f5f5f7]">
             <div className="mx-auto flex min-h-[52px] w-full max-w-[1200px] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center gap-3">
                     <Link href="/" className="flex items-center gap-3 text-inherit">

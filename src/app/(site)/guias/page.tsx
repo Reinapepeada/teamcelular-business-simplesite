@@ -593,7 +593,7 @@ export default function GuidesPage() {
           </article>
         </section>
 
-        <section className="rounded-2xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:from-slate-900/40 dark:via-slate-900/30 dark:to-slate-900/40 md:p-16">
+        <section className="rounded-2xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-10 text-center dark:border-white/10 dark:from-slate-900/40 dark:via-slate-900/30 dark:to-slate-900/40 md:p-16">
           <h2 className="mb-4 text-3xl font-bold text-slate-900 dark:text-slate-100">
             Necesitas un diagnostico profesional?
           </h2>

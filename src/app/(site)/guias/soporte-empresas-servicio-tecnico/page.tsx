@@ -224,7 +224,7 @@ export default function BusinessSupportGuide() {
           ]}
         />
         {/* Hero Section */}
-        <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-16">
+        <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 text-center dark:border-white/10 dark:bg-slate-900/30 md:p-16">
           <div className="flex flex-wrap justify-center gap-3 mb-4">
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/70 bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
               Soporte corporativo
@@ -262,7 +262,7 @@ export default function BusinessSupportGuide() {
         </header>
 
         {/* Introducción */}
-        <section className="grid gap-8 overflow-hidden rounded-2xl border border-white/15 bg-white/5 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30 md:grid-cols-2">
+        <section className="grid gap-8 overflow-hidden rounded-2xl border border-white/15 bg-white/5 dark:border-white/10 dark:bg-slate-900/30 md:grid-cols-2">
           <div className="order-2 md:order-1">
             <video
               autoPlay
@@ -318,7 +318,7 @@ export default function BusinessSupportGuide() {
               return (
                 <div
                   key={benefit.title}
-                  className="group rounded-2xl border border-white/15 bg-white/5 p-8 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
+                  className="group rounded-2xl border border-white/15 bg-white/5 p-8 transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
                 >
                   <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-3xl text-white shadow-lg">
                     <Icon />
@@ -336,7 +336,7 @@ export default function BusinessSupportGuide() {
         </section>
 
         {/* SLA Features */}
-        <section className="space-y-8 rounded-2xl border border-white/15 bg-white/5 p-10 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
+        <section className="space-y-8 rounded-2xl border border-white/15 bg-white/5 p-10 dark:border-white/10 dark:bg-slate-900/30">
           <div>
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
               ¿Qué garantiza el SLA de Team Celular?
@@ -351,7 +351,7 @@ export default function BusinessSupportGuide() {
               return (
                 <div
                   key={feature.title}
-                  className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-lg dark:border-white/15 dark:bg-slate-900/40"
+                  className="rounded-xl border border-white/20 bg-white/10 p-6 dark:border-white/15 dark:bg-slate-900/40"
                 >
                   <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/20 text-2xl text-primary">
                     <Icon />
@@ -380,7 +380,7 @@ export default function BusinessSupportGuide() {
               return (
                 <div
                   key={industry.sector}
-                  className="rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-slate-900/30"
+                  className="rounded-2xl border border-white/15 bg-white/5 p-6 transition hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-slate-900/30"
                 >
                   <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-secondary/10 text-2xl text-secondary">
                     <Icon />
@@ -394,7 +394,7 @@ export default function BusinessSupportGuide() {
         </section>
 
         {/* Reportes y Compliance */}
-        <section className="overflow-hidden rounded-2xl border border-white/15 bg-white/5 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/30">
+        <section className="overflow-hidden rounded-2xl border border-white/15 bg-white/5 dark:border-white/10 dark:bg-slate-900/30">
           <div className="grid gap-0 md:grid-cols-5">
             <div className="order-2 md:order-1 md:col-span-2">
               <video
@@ -476,7 +476,7 @@ export default function BusinessSupportGuide() {
             {faqBusiness.map((faq, index) => (
               <details
                 key={index}
-                className="group rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-xl transition hover:shadow-lg dark:border-white/10 dark:bg-slate-900/30"
+                className="group rounded-2xl border border-white/15 bg-white/5 p-6 transition hover:shadow-lg dark:border-white/10 dark:bg-slate-900/30"
               >
                 <summary className="flex min-h-11 items-center cursor-pointer text-lg font-bold text-secondary group-hover:text-primary dark:text-secondary/90">
                   {faq.question}
@@ -490,7 +490,7 @@ export default function BusinessSupportGuide() {
         </section>
 
         {/* CTA Final */}
-        <section className="rounded-2xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-10 text-center backdrop-blur-2xl dark:border-white/10 dark:from-slate-900/40 dark:via-slate-900/30 dark:to-slate-900/40 md:p-16">
+        <section className="rounded-2xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-10 text-center dark:border-white/10 dark:from-slate-900/40 dark:via-slate-900/30 dark:to-slate-900/40 md:p-16">
           <h2 className="mb-6 text-3xl font-bold text-slate-900 dark:text-white">
             ¿Listo para profesionalizar el soporte técnico de tu empresa?
           </h2>

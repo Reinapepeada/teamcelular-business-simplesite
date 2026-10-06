@@ -106,8 +106,7 @@ export default function PresupuestoReparacionPage() {
                 </nav>
 
                 <header
-                    id="solicitar-presupuesto"
-                    className="grid scroll-mt-24 items-start gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-x-12 lg:gap-y-6"
+                    className="grid items-start gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-x-12 lg:gap-y-6"
                 >
                     <div className="lg:col-start-1">
                         <h1 className="tc-display text-slate-900 dark:text-[#f5f5f7]">
@@ -141,7 +140,9 @@ export default function PresupuestoReparacionPage() {
                         </div>
                     </div>
 
-                    <article className="bg-[#1d1d1f] rounded-[28px] p-5 lg:col-start-2 lg:row-span-2 lg:row-start-1 sm:p-8">
+                    <article
+                        id="solicitar-presupuesto"
+                        className="bg-[#1d1d1f] scroll-mt-24 rounded-[28px] p-5 lg:col-start-2 lg:row-span-2 lg:row-start-1 sm:p-8">
                         <p className="mb-5 text-sm font-semibold uppercase tracking-[0.14em] text-primary">
                             Te toma 20 segundos
                         </p>
