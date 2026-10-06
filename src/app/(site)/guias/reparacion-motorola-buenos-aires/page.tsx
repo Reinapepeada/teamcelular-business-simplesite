@@ -191,7 +191,7 @@ const frequentRepairs = [
   {
     title: "Placa y recuperación avanzada",
     description:
-      "Motorola que no enciende, se reinicia o no toma carga después de un golpe o de mojarse. Revisión de placa $45.000; si es un chip, lo arregla un laboratorio especializado.",
+      "Motorola que no enciende, se reinicia o no toma carga después de un golpe o de mojarse. Revisión de placa $45.000, que se descuenta si se repara.",
     eta: "revisión 72 h",
     Icon: FaMicrochip,
   },

@@ -102,7 +102,7 @@ const planSteps: GuideItem[] = [
   {
     title: "Reparación a nivel componente",
     description:
-      "Revisamos la placa por $45.000 (se descuenta si se repara). Si el arreglo es de un chip, lo hace un laboratorio especializado con precio y plazo por escrito; la limpieza por líquido la hacemos nosotros.",
+      "Revisamos la placa por $45.000, que se descuenta si se repara, y te pasamos precio y plazo por escrito antes de cualquier arreglo. La limpieza por líquido también la hacemos.",
   },
 ];
 
@@ -141,7 +141,7 @@ const comparison: { criterion: string; official: string; independent: string }[]
   {
     criterion: "Nivel de reparación",
     official: "Reemplazo de conjunto: módulo, placa o pieza completa",
-    independent: "Nivel componente: microsoldadura en el taller y laboratorio externo para chips",
+    independent: "Nivel componente: microsoldadura, reballing y reconstrucción de pistas",
   },
   {
     criterion: "Qué pasa con la garantía de fábrica",

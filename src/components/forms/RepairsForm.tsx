@@ -280,8 +280,8 @@ function PlacaConditions() {
                 {formatArsPrice(PLACA_REVISION_PRICE)}
             </p>
             <p className="mt-2 text-xs leading-5 text-slate-600 dark:text-[#86868b]">
-                Se paga al dejar el equipo y se descuenta si se repara. Informe en hasta 72 horas hábiles. Si
-                es un chip, lo arregla un laboratorio especializado y lleva semanas.{" "}
+                Se descuenta si se repara. Informe en hasta 72 horas hábiles. Si el arreglo es de un chip,
+                lleva semanas y te pasamos precio y plazo antes de empezar.{" "}
                 <a href="/reparaciones/reparacion-placa-caba" className="tc-link underline">
                     Ver condiciones
                 </a>

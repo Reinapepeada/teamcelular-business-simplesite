@@ -199,7 +199,7 @@ const frequentRepairs = [
   {
     title: "Placa lógica",
     description:
-      "No prende, se reinicia en la manzanita o no toma carga después de un cargador trucho o de mojarse. Revisión de placa $45.000; si es un chip, lo arregla un laboratorio especializado.",
+      "No prende, se reinicia en la manzanita o no toma carga después de un cargador trucho o de mojarse. Revisión de placa $45.000, que se descuenta si se repara.",
     eta: "revisión 72 h",
     Icon: FaMicrochip,
   },
@@ -324,7 +324,7 @@ const faq = [
   {
     question: "¿Team Celular es servicio oficial de Apple?",
     answer:
-      "No. Somos un laboratorio independiente: revisamos la placa por $45.000 y, si el arreglo es de un chip, lo hace un laboratorio especializado, cuando el servicio oficial lo resuelve cambiando el equipo. En cada presupuesto aclaramos si el repuesto es original o compatible, y qué funciones pueden verse afectadas, como True Tone o el aviso de pieza desconocida.",
+      "No. Somos un laboratorio independiente: revisamos la placa por $45.000 y buscamos el componente que falla, cuando el servicio oficial lo resuelve cambiando el equipo. En cada presupuesto aclaramos si el repuesto es original o compatible, y qué funciones pueden verse afectadas, como True Tone o el aviso de pieza desconocida.",
   },
   {
     question: "¿Trabajan iPhone X, XR, XS y generaciones anteriores?",
@@ -509,8 +509,8 @@ export default function IphoneRepairGuidePage() {
               Todo el trabajo sale con garantía escrita de 90 días sobre la mano de obra y
               el repuesto instalado. A diferencia del canal oficial, que reemplaza módulos
               o placas completas, acá se trabaja a nivel componente: microsoldadura
-              bajo microscopio y recuperación de equipos mojados, y los arreglos de chips
-              los hace un laboratorio especializado con precio y plazo por escrito. Team Celular trabaja hace más
+              bajo microscopio, recuperación de equipos mojados y revisión de placa por
+              ARS 45.000, con precio y plazo por escrito antes de cualquier arreglo. Team Celular trabaja hace más
               de 15 años y tiene 4,9 estrellas sobre 362 reseñas de Google.
             </p>
           </div>

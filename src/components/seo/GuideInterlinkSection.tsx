@@ -204,7 +204,7 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
         href: "/reparaciones/reparacion-placa-caba",
         title: "Revision de placa",
         description:
-          "Condiciones, plazos y laboratorio externo para equipos que no prenden.",
+          "Precio de la revision, plazos y condiciones para equipos que no prenden.",
       },
       {
         href: "/guias/mantenimiento-preventivo-celulares",

@@ -114,7 +114,7 @@ export default async function IphoneModelPage({
       name: "Reparación de placa",
       price: null,
       time: "Revisión en hasta 72 h hábiles",
-      detail: "Revisión de placa ARS 45.000, que se descuenta si se repara. Los arreglos de chips los hace un laboratorio especializado.",
+      detail: "Revisión de placa ARS 45.000, que se descuenta si se repara. Precio y plazo del arreglo por escrito.",
     },
   ];
 
@@ -236,10 +236,10 @@ export default async function IphoneModelPage({
         </h2>
         <p className="mt-4 leading-relaxed text-slate-600 dark:text-[#a1a1a6]">
           Si se mojó, traelo apagado cuanto antes: la limpieza de placa la hacemos en el
-          taller. Si no prende, la revisión de placa sale ARS 45.000, se paga al dejarlo y
-          se descuenta si se repara. Cuando el arreglo es de un chip, lo hace un laboratorio
-          especializado con precio y plazo por escrito, y lleva semanas. El canal oficial,
-          en cambio, ante una falla de placa cotiza el reemplazo completo.
+          taller. Si no prende, la revisión de placa sale ARS 45.000 y se descuenta si se
+          repara. Cuando el arreglo es de un chip, te pasamos precio y plazo por escrito
+          antes de empezar, y lleva semanas. El canal oficial, en cambio, ante una falla de
+          placa cotiza el reemplazo completo.
         </p>
         <div className="mt-4 flex flex-wrap gap-4">
           <Link

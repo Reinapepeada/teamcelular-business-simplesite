@@ -236,14 +236,14 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "celular no enciende reparacion",
       "reparacion placa notebook CABA",
     ],
-    intro: `Si tu celular no prende, se reinicia solo o quedó en corto, revisamos la placa en hasta 72 horas hábiles por ${PLACA_REVISION}. Se paga al dejarlo y se descuenta si se repara. Los arreglos de placa de celular los hace un laboratorio especializado: te pasamos su precio y plazo por escrito antes de que decidas.`,
+    intro: `Si tu celular no prende, se reinicia solo o quedó en corto, revisamos la placa en hasta 72 horas hábiles. La revisión sale ${PLACA_REVISION} y se descuenta si se repara. Si el arreglo es de placa, te pasamos precio y plazo por escrito antes de empezar: son trabajos que llevan semanas.`,
     prices: [
       { label: "Revisión de placa (celular o notebook)", value: PLACA_REVISION },
-      { label: "Arreglo de placa de celular", value: "lo cotiza el laboratorio" },
-      { label: "Placa de notebook", value: "en el taller" },
+      { label: "Arreglo de placa", value: "precio por escrito" },
+      { label: "Informe de la revisión", value: "hasta 72 h hábiles" },
     ],
     asideNotes: [
-      `Revisión de placa ${PLACA_REVISION}: se paga al dejarlo y se descuenta si se repara.`,
+      `Revisión de placa ${PLACA_REVISION}: se descuenta si se repara.`,
       "Informe en hasta 72 horas hábiles. No tomamos placas con urgencia.",
     ],
     whatsappText:
@@ -251,37 +251,37 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     breadcrumbLabel: "Reparación de placa (CABA)",
     serviceName: "Reparación de placa en CABA",
     serviceType: "Revisión y reparación de placa",
-    serviceDescription: `Revisión de placa de celulares y notebooks en CABA por ${PLACA_REVISION}, con informe escrito en hasta 72 horas hábiles. Los arreglos de placa de celular los realiza un laboratorio especializado; las placas de notebook se reparan en el taller.`,
+    serviceDescription: `Revisión de placa de celulares y notebooks en CABA por ${PLACA_REVISION}, con informe escrito en hasta 72 horas hábiles. Precio y plazo del arreglo por escrito antes de empezar.`,
     highlights: [
       {
         title: "A veces no es la placa",
-        desc: `Un celular que no prende también puede tener la batería, el pin de carga o un flex dañado. Si la revisión encuentra eso, lo arreglamos nosotros, casi siempre en el día, y los ${PLACA_REVISION} se descuentan.`,
+        desc: `Un celular que no prende también puede tener la batería, el pin de carga o un flex dañado. Si la revisión encuentra eso, se arregla casi siempre en el día y los ${PLACA_REVISION} se descuentan.`,
       },
       {
-        title: "Placa de celular: laboratorio especializado",
-        desc: "Cuando la falla está en un chip o hace falta reballing, el arreglo lo hace un laboratorio de placa con el que trabajamos. Vos dejás y retirás el equipo en nuestra sucursal.",
+        title: "Te decimos si vale la pena",
+        desc: "Hay placas que se arreglan y otras que cuestan más que el equipo. El informe dice qué tiene, cuánto sale y cuánto tarda, antes de tocar nada más.",
       },
       {
-        title: "Notebooks, en nuestro taller",
-        desc: "Las placas de notebook las reparamos nosotros. Suelen estar en una a dos semanas, según el repuesto.",
+        title: "Celulares y notebooks",
+        desc: "Revisamos placas de celulares, tablets y notebooks. Cada caso tiene su plazo, y te lo pasamos por escrito.",
       },
     ],
     conditions: [
       {
-        title: "La revisión se paga al dejar el equipo",
-        desc: `Son ${PLACA_REVISION} y no se devuelven si decidís no repararlo: cubren desarmarlo, medir la placa y el informe escrito.`,
+        title: `La revisión sale ${PLACA_REVISION}`,
+        desc: "Cubre desarmar el equipo, medir la placa y el informe escrito. Se cobra aunque decidas no repararlo.",
       },
       {
         title: "Si lo reparás, se descuenta",
-        desc: `Si aceptás el arreglo, sea nuestro o del laboratorio, los ${PLACA_REVISION} se restan del total.`,
+        desc: `Si aceptás el arreglo, los ${PLACA_REVISION} se restan del total.`,
       },
       {
         title: "Informe en hasta 72 horas hábiles",
         desc: "Una placa no se revisa en el momento. No tomamos estos trabajos con urgencia ni con fecha de entrega fija.",
       },
       {
-        title: "El arreglo de placa de celular lleva semanas",
-        desc: "Antes de mandarlo al laboratorio te pasamos su precio y su plazo por escrito. Si no te sirve, retirás el equipo con el informe.",
+        title: "Un arreglo de placa lleva semanas",
+        desc: "Antes de empezar te pasamos precio y plazo por escrito. Si no te sirve, retirás el equipo con el informe.",
       },
       {
         title: "No todas las placas tienen arreglo",
@@ -290,8 +290,8 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     ],
     workflow: [
       {
-        title: "Lo dejás y pagás la revisión",
-        desc: `${PLACA_REVISION} en Recoleta o Belgrano. Te llevás la orden con lo que nos contaste y cómo llegó el equipo.`,
+        title: "Lo dejás en la sucursal",
+        desc: "En Recoleta o Belgrano. Te llevás la orden con lo que nos contaste y cómo llegó el equipo.",
       },
       {
         title: "Revisamos la placa",
@@ -299,11 +299,11 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       },
       {
         title: "Te pasamos el informe",
-        desc: "Qué tiene, si se puede arreglar, quién lo arregla, cuánto sale y cuánto tarda. Todo por escrito.",
+        desc: "Qué tiene, si se puede arreglar, cuánto sale y cuánto tarda. Todo por escrito.",
       },
       {
         title: "Decidís vos",
-        desc: "Si aceptás, la revisión se descuenta del total. Si no, retirás el equipo con el informe.",
+        desc: `Si aceptás, los ${PLACA_REVISION} se descuentan del total. Si no, pagás la revisión y retirás el equipo con el informe.`,
       },
     ],
     brandsText:
@@ -311,15 +311,15 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     faqs: [
       {
         q: "¿Cuánto sale la revisión de placa?",
-        a: `${PLACA_REVISION}. Se paga al dejar el equipo, no se devuelve si decidís no repararlo y se descuenta del total si lo reparás.`,
+        a: `${PLACA_REVISION}. Se cobra aunque decidas no repararlo y se descuenta del total si lo reparás.`,
       },
       {
         q: "¿Hacen reballing?",
-        a: "En celulares, no en nuestro taller. El reballing y los arreglos de chips los hace un laboratorio especializado con el que trabajamos. Nosotros hacemos la revisión y te pasamos su precio y plazo por escrito; el equipo lo dejás y lo retirás en nuestra sucursal.",
+        a: "Sí, cuando el equipo tiene arreglo. Es un trabajo largo: después de la revisión te pasamos precio y plazo por escrito, y no lo tomamos con urgencia.",
       },
       {
         q: "¿Cuánto tarda un arreglo de placa?",
-        a: "La revisión, hasta 72 horas hábiles. Si hay que mandarlo al laboratorio, son semanas: el plazo exacto te lo pasamos por escrito antes de que aceptes. Las placas de notebook, una a dos semanas en nuestro taller.",
+        a: "La revisión, hasta 72 horas hábiles. El arreglo lleva semanas según el equipo y la falla: el plazo exacto te lo pasamos por escrito antes de que aceptes.",
       },
       {
         q: "¿Todas las placas tienen arreglo?",
@@ -327,7 +327,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       },
       {
         q: "¿Y si al final no era la placa?",
-        a: "Pasa seguido: batería, pin de carga o un flex. En ese caso lo reparamos nosotros, casi siempre en el día, y la revisión se descuenta del arreglo.",
+        a: "Pasa seguido: batería, pin de carga o un flex. En ese caso se arregla casi siempre en el día y la revisión se descuenta del arreglo.",
       },
     ],
   },

@@ -18,9 +18,9 @@ export type RepairPrice = { name: string; from: number; to: number; href?: strin
 export const CHARGING_PORT_PRICE = { from: 35000, to: 150000 };
 
 /**
- * Revision de placa (celular o notebook): se cobra al dejar el equipo, no se
- * devuelve y se descuenta si se repara. Los arreglos de placa de celular los
- * hace un laboratorio externo; las placas de notebook, el taller.
+ * Revision de placa (celular o notebook): se cobra aunque no se repare y se
+ * descuenta si se repara. El copy no dice quien hace el arreglo (taller u otro
+ * laboratorio, segun el caso): solo precio y plazo por escrito antes de empezar.
  */
 export const PLACA_REVISION_PRICE = 45000;
 

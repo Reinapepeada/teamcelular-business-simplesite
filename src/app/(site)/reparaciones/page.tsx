@@ -48,7 +48,7 @@ const REPAIR_SERVICES = [
   {
     title: "Revisión de placa",
     description:
-      "No prende, se reinicia solo o quedó en loop. Revisión por $45.000 que se descuenta si se repara; los chips los arregla un laboratorio especializado.",
+      "No prende, se reinicia solo o quedó en loop. Revisión de placa por $45.000, que se descuenta si se repara.",
     href: "/reparaciones/reparacion-placa-caba",
   },
   {

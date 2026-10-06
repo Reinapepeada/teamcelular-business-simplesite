@@ -170,7 +170,7 @@ export default function BannerCards() {
                 <div className={headerBase}>
                     <p className={eyebrow}>Microsoldadura</p>
                     <h3 className={heading}>
-                        Pin, flex y placas de notebook en el taller
+                        Placa, pin y flex bajo microscopio
                     </h3>
                 </div>
                 <div className="absolute inset-x-0 bottom-0 z-20 border-t border-white/20 bg-black/45 p-4 backdrop-blur-md sm:p-5">
