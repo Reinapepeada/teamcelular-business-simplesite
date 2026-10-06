@@ -16,7 +16,7 @@ test("CI de tienda prueba y compila sin secretos ni despliegue", () => {
   assert.equal(nodeVersion, "24.14.0");
   assert.equal(packageJson.engines.node, ">=22.19.0");
   assert.match(npmConfig, /^engine-strict=true\s*$/);
-  assert.match(workflow, /run: npm audit --audit-level=high --omit=dev/);
+  assert.match(workflow, /run: node scripts\/audit-prod\.mjs/);
   assert.match(workflow, /run: npm run lint/);
   assert.match(workflow, /run: npm test/);
   assert.match(workflow, /run: npm run build/);
