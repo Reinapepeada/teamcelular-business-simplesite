@@ -24,7 +24,7 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
-      - run: node scripts/audit-prod.mjs
+      - run: npm audit --audit-level=high --omit=dev
       - run: npm run lint
       - run: npm test
       - name: Build with isolated same-origin topology

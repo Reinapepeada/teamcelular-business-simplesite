@@ -1,17 +1,15 @@
 import type { Config } from "tailwindcss";
-const {nextui} = require("@nextui-org/react");
+import colors from "tailwindcss/colors";
+import animate from "tailwindcss-animate";
 
-const colors = require("tailwindcss/colors");
-const {
-  default: flattenColorPalette,
-} = require("tailwindcss/lib/util/flattenColorPalette");
+// ESM puro: con require() Node 24 carga este .ts como ESM y `next dev` falla
+// con "require is not defined".
 
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -19,6 +17,15 @@ const config: Config = {
       // remapean a la escala Apple para que todas las paginas con dark: hereden
       // el canvas negro sin tocar cada archivo.
       colors: {
+        // Tokens que antes ponia el plugin de NextUI, con sus valores del tema
+        // oscuro (el sitio fuerza dark): se usan en todo el sitio.
+        primary: "#1a6dff",
+        secondary: "#6aa6ff",
+        background: "#000000",
+        foreground: "#ecedee",
+        success: "#17c964",
+        warning: "#f5a524",
+        default: { 200: "#3f3f46" },
         slate: {
           ...colors.slate,
           700: "#424245",
@@ -60,25 +67,23 @@ const config: Config = {
   },
   darkMode: "class",
   plugins: [
-    nextui({
-      themes: {
-        light: {
-          colors: {
-            primary: "#2d2e83",
-            secondary: "#0e7490",
-          },
-        },
-        dark: {
-          colors: {
-            primary: "#1a6dff",
-            secondary: "#6aa6ff",
-          },
-        },
-      },
-    }),
+    animate,
     addVariablesForColors,
   ],
 };
+type Palette = { [key: string]: string | Palette };
+
+// Igual que tailwindcss/lib/util/flattenColorPalette: { slate: { 700 } } -> "slate-700".
+function flattenColorPalette(palette: Palette, prefix = ""): Record<string, string> {
+  return Object.assign(
+    {},
+    ...Object.entries(palette).map(([key, value]) => {
+      const name = key === "DEFAULT" ? prefix : prefix ? `${prefix}-${key}` : key;
+      return typeof value === "string" ? { [name]: value } : flattenColorPalette(value, name);
+    }),
+  );
+}
+
 function addVariablesForColors({ addBase, theme }: any) {
   let allColors = flattenColorPalette(theme("colors"));
   let newVars = Object.fromEntries(

@@ -150,6 +150,9 @@ body:has(dialog[open]) .tc-glass {
    globalmente para que las paginas existentes (font-extrabold) converjan. */
 h1, h2, h3, .font-extrabold, .font-black { font-weight: 600; }
 h1, h2 { letter-spacing: -0.015em; }
+/* Antes lo ponia el plugin de NextUI sobre :root (tema oscuro forzado). */
+:root { color-scheme: dark; color: #ecedee; background-color: #000; }
+
 body { letter-spacing: -0.011em; }
 
 @layer components {
