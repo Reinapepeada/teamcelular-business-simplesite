@@ -279,11 +279,6 @@ const guidePages = [
     changeFreq: "monthly" as const,
   },
   {
-    path: "guias/microelectronica-reballing-caba",
-    priority: 0.8,
-    changeFreq: "monthly" as const,
-  },
-  {
     path: "guias/presupuesto-service-oficial-segunda-opinion",
     priority: 0.82,
     changeFreq: "monthly" as const,

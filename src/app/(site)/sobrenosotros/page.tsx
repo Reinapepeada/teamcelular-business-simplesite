@@ -132,8 +132,8 @@ const differentiators = [
     },
     {
         icon: FaMicroscope,
-        title: "Microelectronica avanzada",
-        description: "Diagnostico a nivel componente y reballing para casos complejos.",
+        title: "Microsoldadura",
+        description: "Pin de carga, flex y placas de notebook a nivel componente, bajo microscopio.",
     },
     {
         icon: FaTools,

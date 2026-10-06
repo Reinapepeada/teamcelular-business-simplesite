@@ -199,8 +199,8 @@ const frequentRepairs = [
   {
     title: "Placa lógica",
     description:
-      "No prende, se reinicia en la manzanita o no toma carga después de un cargador trucho o de mojarse. Va a laboratorio con microscopio.",
-    eta: "24-48 h",
+      "No prende, se reinicia en la manzanita o no toma carga después de un cargador trucho o de mojarse. Revisión de placa $45.000; si es un chip, lo arregla un laboratorio especializado.",
+    eta: "revisión 72 h",
     Icon: FaMicrochip,
   },
 ];
@@ -324,7 +324,7 @@ const faq = [
   {
     question: "¿Team Celular es servicio oficial de Apple?",
     answer:
-      "No. Somos un laboratorio independiente, y por eso podemos reparar placa y hacer reballing, cosas que el servicio oficial resuelve cambiando el equipo. En cada presupuesto aclaramos si el repuesto es original o compatible, y qué funciones pueden verse afectadas, como True Tone o el aviso de pieza desconocida.",
+      "No. Somos un laboratorio independiente: revisamos la placa por $45.000 y, si el arreglo es de un chip, lo hace un laboratorio especializado, cuando el servicio oficial lo resuelve cambiando el equipo. En cada presupuesto aclaramos si el repuesto es original o compatible, y qué funciones pueden verse afectadas, como True Tone o el aviso de pieza desconocida.",
   },
   {
     question: "¿Trabajan iPhone X, XR, XS y generaciones anteriores?",
@@ -508,9 +508,9 @@ export default function IphoneRepairGuidePage() {
               pantalla y batería suelen resolverse en 2 a 4 horas según stock.
               Todo el trabajo sale con garantía escrita de 90 días sobre la mano de obra y
               el repuesto instalado. A diferencia del canal oficial, que reemplaza módulos
-              o placas completas, acá se repara a nivel componente: reballing BGA,
-              soldadura SMD bajo microscopio y recuperación de equipos mojados, incluidos
-              los que otro servicio declaró sin reparación. Team Celular trabaja hace más
+              o placas completas, acá se trabaja a nivel componente: microsoldadura
+              bajo microscopio y recuperación de equipos mojados, y los arreglos de chips
+              los hace un laboratorio especializado con precio y plazo por escrito. Team Celular trabaja hace más
               de 15 años y tiene 4,9 estrellas sobre 362 reseñas de Google.
             </p>
           </div>
@@ -652,7 +652,7 @@ export default function IphoneRepairGuidePage() {
               { servicio: "Cambio de pantalla", modelos: "iPhone 15, 16, 17 y variantes Pro", tiempo: "2–4 h", precio: "ARS 319.900–649.900" },
               { servicio: "Cambio de batería", modelos: "iPhone 11 a 14", tiempo: "1–2 h", precio: "ARS 99.900–229.900" },
               { servicio: "Cambio de batería", modelos: "iPhone 15 y 16", tiempo: "1–2 h", precio: "ARS 189.900–269.900" },
-              { servicio: "Placa lógica / microelectrónica", modelos: "Todos", tiempo: "24–48 h", precio: "Consultar" },
+              { servicio: "Revisión de placa", modelos: "Todos", tiempo: "hasta 72 h hábiles", precio: "ARS 45.000" },
             ].map((row) => (
               <div key={`${row.servicio}-${row.modelos}`} className="grid grid-cols-2 gap-x-4 gap-y-1 px-6 py-4 text-sm md:grid-cols-4">
                 <span className="font-semibold text-slate-900 dark:text-[#f5f5f7]">{row.servicio}</span>

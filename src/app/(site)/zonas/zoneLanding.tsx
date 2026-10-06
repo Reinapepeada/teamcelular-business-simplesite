@@ -118,17 +118,17 @@ const GUIDE_SIGNAL_MAP: Array<{ token: string; guide: ZoneRelatedGuide }> = [
   {
     token: "placa",
     guide: {
-      href: "/guias/microelectronica-reballing-caba",
-      title: "Guía de microelectrónica",
-      description: "Cuándo conviene revisar la placa y cómo se evalúa si tiene arreglo.",
+      href: "/reparaciones/reparacion-placa-caba",
+      title: "Revisión de placa",
+      description: "Cuánto sale, cuánto tarda y qué pasa si el equipo no tiene arreglo.",
     },
   },
   {
     token: "microelectronica",
     guide: {
-      href: "/guias/microelectronica-reballing-caba",
-      title: "Guía de microelectrónica",
-      description: "Proceso de laboratorio para equipos que no encienden o reinician.",
+      href: "/reparaciones/reparacion-placa-caba",
+      title: "Revisión de placa",
+      description: "Para equipos que no encienden o se reinician: condiciones y plazos.",
     },
   },
   {

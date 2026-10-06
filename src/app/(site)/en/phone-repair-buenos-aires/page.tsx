@@ -95,8 +95,8 @@ export default function PhoneRepairEnglishPage() {
           and parts. Alejandro Biarrieta, the founding technician, speaks English, so you can
           explain the problem directly instead of relying on a translation app. We repair
           iPhone, Samsung, Motorola, Xiaomi and most other brands, including phones bought
-          abroad. We also do board-level microsoldering for water damage and phones that will
-          not turn on, which most repair shops decline.
+          abroad. We also clean water-damaged boards in-house; for phones that will not turn
+          on, a board inspection costs ARS 45,000 and chip-level repairs go to a partner lab.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-4">

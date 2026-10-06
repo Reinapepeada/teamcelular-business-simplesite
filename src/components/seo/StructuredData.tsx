@@ -25,7 +25,7 @@ function createLocalBusinessJson(city?: string, country?: string) {
       height: LOGO.height,
     },
     description:
-      "Laboratorio tecnico especializado en reparacion de celulares, microelectronica, reballing BGA, recuperacion por liquido y venta de repuestos en Recoleta y Belgrano, CABA.",
+      "Laboratorio tecnico de reparacion de celulares y notebooks: pantalla, bateria, carga, microsoldadura, recuperacion por liquido y venta de repuestos en Recoleta y Belgrano, CABA.",
     telephone: BUSINESS_PROFILE.phone,
     email: BUSINESS_PROFILE.email,
     priceRange: "$$",

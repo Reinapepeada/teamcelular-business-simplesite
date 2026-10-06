@@ -63,6 +63,9 @@ module.exports = {
         destination: "/reparaciones/reparacion-placa-caba",
         permanent: true,
       },
+      // Oct 2026: el reballing de celulares se terceriza; la guia competia con la
+      // pagina de placa por "reballing" y ahora la pagina de placa tiene las condiciones.
+      { source: "/guias/microelectronica-reballing-caba", destination: "/reparaciones/reparacion-placa-caba", permanent: true },
       // Menos URLs compitiendo por "reparacion de celulares" / "cerca de mi" (GSC sep 2026).
       { source: "/zonas", destination: "/sucursales", permanent: true },
       { source: "/reparacion-de-celulares-cerca-de-mi", destination: "/sucursales", permanent: true },

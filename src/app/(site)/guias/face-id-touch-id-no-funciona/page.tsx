@@ -128,7 +128,7 @@ const faq: GuideFaqItem[] = [
 
 const relatedLinks: GuideRelatedLink[] = [
   { href: "/guias/reparacion-iphone-buenos-aires", label: "Reparacion de iPhone" },
-  { href: "/guias/microelectronica-reballing-caba", label: "Microelectronica y placa" },
+  { href: "/reparaciones/reparacion-placa-caba", label: "Revision de placa" },
   { href: "/reparaciones/reparacion-placa-caba", label: "Servicio de placa" },
   { href: "/presupuesto-reparacion#solicitar-presupuesto", label: "Solicitar diagnostico" },
 ];
