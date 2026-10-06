@@ -28,7 +28,7 @@ const PAGE_PATH = "/guias/reparacion-motorola-buenos-aires";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 
 export const metadata: Metadata = {
-  title: "Service Motorola en CABA: Recoleta y Belgrano | Team Celular",
+  title: "Servicio Técnico Motorola en CABA | Precios",
   description:
     "Servicio técnico Motorola en CABA, sin ser service oficial: Moto G y Edge en Recoleta y Belgrano. Pantalla desde $99.900, en 2-4 h. Garantía 90 días.",
   keywords: [

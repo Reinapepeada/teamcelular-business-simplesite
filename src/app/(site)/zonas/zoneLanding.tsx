@@ -144,7 +144,7 @@ const GUIDE_SIGNAL_MAP: Array<{ token: string; guide: ZoneRelatedGuide }> = [
 const GUIDE_FALLBACK: ZoneRelatedGuide[] = [
   {
     href: "/guias/reparacion-iphone-buenos-aires",
-    title: "Guía iPhone",
+    title: "Reparación de iPhone",
     description: "Casos reales de reparación de equipos Apple en CABA.",
   },
   {

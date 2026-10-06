@@ -26,7 +26,7 @@ const PAGE_PATH = "/guias/reparacion-xiaomi-buenos-aires";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 
 export const metadata: Metadata = {
-  title: "Servicio técnico Xiaomi, Redmi y POCO en CABA | Team Celular",
+  title: "Servicio Técnico Xiaomi, Redmi y POCO en CABA | Precios",
   description:
     "Servicio técnico Xiaomi, Redmi y POCO en Recoleta y Belgrano. Pantalla desde $99.900 y batería desde $89.900, en 2-4 h. Garantía escrita 90 días.",
   keywords: [
