@@ -43,8 +43,8 @@ const quickGuideLinks = [
     Icon: FaBatteryHalf,
   },
   {
-    href: "/guias/microelectronica-reballing-caba",
-    label: "Microelectronica",
+    href: "/reparaciones/reparacion-placa-caba",
+    label: "Placa",
     Icon: FaMicrochip,
   },
   {

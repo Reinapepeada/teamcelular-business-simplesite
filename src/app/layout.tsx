@@ -35,7 +35,6 @@ export const metadata: Metadata = {
         "reparación iPhone Argentina",
         "cambio pantalla celular Recoleta",
         "microelectrónica celulares",
-        "reballing BGA Buenos Aires",
         "reparación Samsung CABA",
         "service celulares Palermo",
         "garantía reparación celular",

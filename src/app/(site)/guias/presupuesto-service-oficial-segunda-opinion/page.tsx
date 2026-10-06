@@ -41,7 +41,7 @@ const situations: GuideItem[] = [
   {
     title: "Te cotizaron el cambio de placa completa",
     description:
-      "El service oficial trabaja por reemplazo de módulo: si falla un componente, se cambia la placa entera. A nivel microelectrónica muchas veces la falla es un integrado o una pista puntual.",
+      "El service oficial trabaja por reemplazo de módulo: si falla un componente, se cambia la placa entera. Muchas veces la falla es un integrado o una pista puntual, y eso se puede arreglar sin cambiar la placa.",
   },
   {
     title: "Te dijeron que no tiene reparación",
@@ -102,7 +102,7 @@ const planSteps: GuideItem[] = [
   {
     title: "Reparación a nivel componente",
     description:
-      "Reballing BGA, soldadura SMD y recuperación por líquido con instrumental de laboratorio. La garantía escrita de 90 días cubre trabajo y repuesto.",
+      "Revisamos la placa por $45.000 (se descuenta si se repara). Si el arreglo es de un chip, lo hace un laboratorio especializado con precio y plazo por escrito; la limpieza por líquido la hacemos nosotros.",
   },
 ];
 
@@ -110,7 +110,7 @@ const faq: GuideFaqItem[] = [
   {
     question: "¿Qué diferencia hay con el servicio oficial de la marca?",
     answer:
-      "Team Celular es un laboratorio independiente con más de 15 años en microelectrónica. El canal oficial trabaja por reemplazo: ante una falla de placa, cotiza la placa completa. Acá se repara el componente que falló, que es una fracción de ese costo.",
+      "Team Celular es un laboratorio independiente con más de 15 años en microelectrónica. El canal oficial trabaja por reemplazo: ante una falla de placa, cotiza la placa completa. Acá buscamos el componente que falló, y repararlo suele costar una fracción de la placa entera.",
   },
   {
     question: "¿Pierdo la garantía del fabricante si reparo con ustedes?",
@@ -141,7 +141,7 @@ const comparison: { criterion: string; official: string; independent: string }[]
   {
     criterion: "Nivel de reparación",
     official: "Reemplazo de conjunto: módulo, placa o pieza completa",
-    independent: "Nivel componente: reballing BGA, soldadura SMD, reconstrucción de pistas",
+    independent: "Nivel componente: microsoldadura en el taller y laboratorio externo para chips",
   },
   {
     criterion: "Qué pasa con la garantía de fábrica",
@@ -243,7 +243,6 @@ function OfficialVsIndependentTable() {
 }
 
 const relatedLinks: GuideRelatedLink[] = [
-  { href: "/guias/microelectronica-reballing-caba", label: "Microelectrónica y reballing BGA" },
   { href: "/reparaciones/reparacion-placa-caba", label: "Reparación de placa en CABA" },
   { href: "/guias/reparacion-samsung-buenos-aires", label: "Guía de reparación Samsung" },
   { href: "/presupuesto-reparacion#solicitar-presupuesto", label: "Pedir presupuesto" },

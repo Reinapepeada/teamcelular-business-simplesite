@@ -1,10 +1,11 @@
 import type { ServiceLandingConfig } from "./serviceLanding";
-import { BRAND_REPAIR_PRICES, CHARGING_PORT_PRICE, formatArsPrice } from "@/lib/repairPrices";
+import { BRAND_REPAIR_PRICES, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, formatArsPrice } from "@/lib/repairPrices";
 import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 // Precios del primer parrafo de cambio de pantalla: misma fuente que las tablas.
 const IPHONE_13_SCREEN = IPHONE_MODELS.find((m) => m.slug === "13")?.screen ?? 249900;
 const IPHONE_13_BATTERY = IPHONE_MODELS.find((m) => m.slug === "13")?.battery ?? 159900;
+const PLACA_REVISION = formatArsPrice(PLACA_REVISION_PRICE);
 const IPHONE_BATTERY_FROM = Math.min(
   ...IPHONE_MODELS.map((m) => m.battery).filter((v): v is number => v !== null),
 );
@@ -224,61 +225,109 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
   "reparacion-placa-caba": {
     slug: "reparacion-placa-caba",
     h1: "Reparación de placa en CABA",
-    metaTitle:
-      "Reparación de Placa en CABA | Microsoldadura | Team Celular",
-    metaDescription:
-      "¿No enciende, se mojó o está en corto? Reparamos la placa con microsoldadura bajo microscopio en Paraguay 2451, Recoleta. Garantía 90 días.",
+    metaTitle: `Reparación de Placa de Celular en CABA | Revisión ${PLACA_REVISION}`,
+    metaDescription: `¿No prende o quedó en corto? Revisamos la placa en hasta 72 h hábiles por ${PLACA_REVISION}, que se descuentan si se repara. Recoleta y Belgrano.`,
     socialTitle: "Reparación de Placa en CABA | Team Celular",
-    socialDescription:
-      "Team Celular, Paraguay 2451 Recoleta. Microelectrónica y reparación de placa en CABA con diagnóstico de laboratorio.",
+    socialDescription: `Team Celular, Paraguay 2451 Recoleta. Revisión de placa de celular o notebook por ${PLACA_REVISION} con informe escrito en 72 horas hábiles.`,
     keywords: [
       "reparacion de placa celular CABA",
-      "microsoldadura CABA",
+      "microsoldadura celulares",
+      "reballing celular CABA",
       "celular no enciende reparacion",
-      "reparacion celular mojado",
-      "service microelectronica",
+      "reparacion placa notebook CABA",
     ],
-    intro:
-      "Si tu celular no prende, se reinicia solo o quedó en corto después de mojarse, el problema casi siempre está en la placa. En Team Celular la revisamos bajo microscopio y te decimos si tiene arreglo antes de cotizar; si ya te dijeron que no tenía, traelo igual para una segunda opinión.",
+    intro: `Si tu celular no prende, se reinicia solo o quedó en corto, revisamos la placa en hasta 72 horas hábiles por ${PLACA_REVISION}. Se paga al dejarlo y se descuenta si se repara. Los arreglos de placa de celular los hace un laboratorio especializado: te pasamos su precio y plazo por escrito antes de que decidas.`,
+    prices: [
+      { label: "Revisión de placa (celular o notebook)", value: PLACA_REVISION },
+      { label: "Arreglo de placa de celular", value: "lo cotiza el laboratorio" },
+      { label: "Placa de notebook", value: "en el taller" },
+    ],
+    asideNotes: [
+      `Revisión de placa ${PLACA_REVISION}: se paga al dejarlo y se descuenta si se repara.`,
+      "Informe en hasta 72 horas hábiles. No tomamos placas con urgencia.",
+    ],
     whatsappText:
-      "Hola! Quiero un presupuesto para reparacion de placa en CABA. Marca y modelo:",
+      "Hola! Mi celular no prende / se reinicia / está en corto y quiero la revisión de placa. Marca y modelo:",
     breadcrumbLabel: "Reparación de placa (CABA)",
     serviceName: "Reparación de placa en CABA",
-    serviceType: "Microelectrónica / reparación de placa",
-    serviceDescription:
-      "Servicio de microelectrónica para reparación de placa de celulares en CABA con diagnóstico bajo microscopio y garantía escrita.",
+    serviceType: "Revisión y reparación de placa",
+    serviceDescription: `Revisión de placa de celulares y notebooks en CABA por ${PLACA_REVISION}, con informe escrito en hasta 72 horas hábiles. Los arreglos de placa de celular los realiza un laboratorio especializado; las placas de notebook se reparan en el taller.`,
     highlights: [
       {
-        title: "Diagnóstico de laboratorio",
-        desc: "Medimos consumo y líneas de alimentación y miramos la placa con microscopio para encontrar el componente que falla.",
+        title: "A veces no es la placa",
+        desc: `Un celular que no prende también puede tener la batería, el pin de carga o un flex dañado. Si la revisión encuentra eso, lo arreglamos nosotros, casi siempre en el día, y los ${PLACA_REVISION} se descuentan.`,
       },
       {
-        title: "Los casos que otros descartan",
-        desc: "No enciende, mojado, reinicios en loop o corto. Son el trabajo diario del laboratorio, incluido el reballing de chips.",
+        title: "Placa de celular: laboratorio especializado",
+        desc: "Cuando la falla está en un chip o hace falta reballing, el arreglo lo hace un laboratorio de placa con el que trabajamos. Vos dejás y retirás el equipo en nuestra sucursal.",
       },
       {
-        title: "Si no conviene, te lo decimos",
-        desc: "Hay placas que se arreglan y otras que no valen la pena. Te pasamos costo y plazo antes de tocar nada, y si no conviene reparar, te lo decimos de frente.",
+        title: "Notebooks, en nuestro taller",
+        desc: "Las placas de notebook las reparamos nosotros. Suelen estar en una a dos semanas, según el repuesto.",
+      },
+    ],
+    conditions: [
+      {
+        title: "La revisión se paga al dejar el equipo",
+        desc: `Son ${PLACA_REVISION} y no se devuelven si decidís no repararlo: cubren desarmarlo, medir la placa y el informe escrito.`,
+      },
+      {
+        title: "Si lo reparás, se descuenta",
+        desc: `Si aceptás el arreglo, sea nuestro o del laboratorio, los ${PLACA_REVISION} se restan del total.`,
+      },
+      {
+        title: "Informe en hasta 72 horas hábiles",
+        desc: "Una placa no se revisa en el momento. No tomamos estos trabajos con urgencia ni con fecha de entrega fija.",
+      },
+      {
+        title: "El arreglo de placa de celular lleva semanas",
+        desc: "Antes de mandarlo al laboratorio te pasamos su precio y su plazo por escrito. Si no te sirve, retirás el equipo con el informe.",
+      },
+      {
+        title: "No todas las placas tienen arreglo",
+        desc: "Muchas no se recuperan, o el arreglo cuesta más que el equipo. Si es así, te lo decimos en el informe y no seguimos sin tu aprobación.",
+      },
+    ],
+    workflow: [
+      {
+        title: "Lo dejás y pagás la revisión",
+        desc: `${PLACA_REVISION} en Recoleta o Belgrano. Te llevás la orden con lo que nos contaste y cómo llegó el equipo.`,
+      },
+      {
+        title: "Revisamos la placa",
+        desc: "En hasta 72 horas hábiles medimos consumo y alimentación y buscamos el componente que falla.",
+      },
+      {
+        title: "Te pasamos el informe",
+        desc: "Qué tiene, si se puede arreglar, quién lo arregla, cuánto sale y cuánto tarda. Todo por escrito.",
+      },
+      {
+        title: "Decidís vos",
+        desc: "Si aceptás, la revisión se descuenta del total. Si no, retirás el equipo con el informe.",
       },
     ],
     brandsText:
-      "Trabajamos placas de iPhone y Android según estado del equipo y disponibilidad técnica.",
+      "Revisamos placas de iPhone, Samsung, Motorola, Xiaomi y otros Android, y de notebooks Lenovo, Dell, HP, Asus y MacBook.",
     faqs: [
       {
-        q: "¿Todos los equipos con falla de placa tienen arreglo?",
-        a: "No siempre. Primero validamos si la reparación es técnicamente viable y si el costo tiene sentido frente al valor del equipo.",
+        q: "¿Cuánto sale la revisión de placa?",
+        a: `${PLACA_REVISION}. Se paga al dejar el equipo, no se devuelve si decidís no repararlo y se descuenta del total si lo reparás.`,
       },
       {
-        q: "¿Cuánto tarda una reparación de placa?",
-        a: "Suele requerir más tiempo que una reparación simple. Te pasamos el plazo estimado luego del diagnóstico inicial.",
+        q: "¿Hacen reballing?",
+        a: "En celulares, no en nuestro taller. El reballing y los arreglos de chips los hace un laboratorio especializado con el que trabajamos. Nosotros hacemos la revisión y te pasamos su precio y plazo por escrito; el equipo lo dejás y lo retirás en nuestra sucursal.",
       },
       {
-        q: "¿Reparan equipos mojados?",
-        a: "Sí, siempre que se intervenga rápido. Cuanto antes llegue el equipo al taller, mejor el pronóstico de recuperación.",
+        q: "¿Cuánto tarda un arreglo de placa?",
+        a: "La revisión, hasta 72 horas hábiles. Si hay que mandarlo al laboratorio, son semanas: el plazo exacto te lo pasamos por escrito antes de que aceptes. Las placas de notebook, una a dos semanas en nuestro taller.",
       },
       {
-        q: "¿Dan garantía en microelectrónica?",
-        a: "Sí, con alcance y plazo por escrito según el caso técnico específico realizado.",
+        q: "¿Todas las placas tienen arreglo?",
+        a: "No. Muchas no se recuperan, o el arreglo cuesta más que el equipo. Si es así, te lo decimos en el informe.",
+      },
+      {
+        q: "¿Y si al final no era la placa?",
+        a: "Pasa seguido: batería, pin de carga o un flex. En ese caso lo reparamos nosotros, casi siempre en el día, y la revisión se descuenta del arreglo.",
       },
     ],
   },

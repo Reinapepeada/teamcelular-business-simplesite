@@ -38,10 +38,10 @@ const ARTICLES: KnowledgeItem[] = [
     readingTime: "6 min de lectura",
   },
   {
-    title: "Microelectrónica y reballing profesional",
+    title: "Celular que no prende: revisión de placa",
     summary:
-      "Cuándo conviene optar por microelectrónica, qué herramientas usamos y cómo cuidamos los chips BGA en reparaciones críticas.",
-    href: "/guias/microelectronica-reballing-caba",
+      "Cuánto sale la revisión, qué pasa si es placa y por qué esos arreglos llevan semanas.",
+    href: "/reparaciones/reparacion-placa-caba",
     readingTime: "6 min de lectura",
   },
   {

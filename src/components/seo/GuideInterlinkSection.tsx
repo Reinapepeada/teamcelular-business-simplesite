@@ -3,7 +3,6 @@ import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 type GuidePath =
   | "/guias/cambio-bateria-celular"
   | "/guias/mantenimiento-preventivo-celulares"
-  | "/guias/microelectronica-reballing-caba"
   | "/guias/reparacion-iphone-buenos-aires"
   | "/guias/reparacion-motorola-buenos-aires"
   | "/guias/reparacion-pantalla-celular"
@@ -12,7 +11,10 @@ type GuidePath =
   | "/guias/soporte-empresas-servicio-tecnico";
 
 /** Destino: incluye guias que no tienen bloque propio de interlinks. */
-type GuideTarget = GuidePath | "/guias/presupuesto-service-oficial-segunda-opinion";
+type GuideTarget =
+  | GuidePath
+  | "/guias/presupuesto-service-oficial-segunda-opinion"
+  | "/reparaciones/reparacion-placa-caba";
 
 interface RelatedGuide {
   href: GuideTarget;
@@ -71,30 +73,6 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
         title: "Soporte para empresas",
         description:
           "Planifica mantenimiento por flota con SLA y trazabilidad completa.",
-      },
-    ],
-  },
-  "/guias/microelectronica-reballing-caba": {
-    guidance:
-      "Si tu equipo no enciende o reinicia, comparar guias por marca y soporte te permite estimar riesgo y tiempos antes de intervenir.",
-    links: [
-      {
-        href: "/guias/reparacion-iphone-buenos-aires",
-        title: "Diagnostico avanzado iPhone",
-        description:
-          "Casos de placa, consumo inestable y recuperacion de funciones criticas.",
-      },
-      {
-        href: "/guias/reparacion-samsung-buenos-aires",
-        title: "Diagnostico avanzado Samsung",
-        description:
-          "Fallas complejas en Galaxy S, A y Z con criterio de reparacion real.",
-      },
-      {
-        href: "/guias/soporte-empresas-servicio-tecnico",
-        title: "Escalar a soporte corporativo",
-        description:
-          "Para equipos de trabajo, convenios preventivos y gestion por ticket.",
       },
     ],
   },
@@ -220,13 +198,13 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
   },
   "/guias/soporte-empresas-servicio-tecnico": {
     guidance:
-      "Para consolidar politica tecnica, combina esta guia corporativa con contenidos de microelectronica, mantenimiento y fallas por componente.",
+      "Para armar la politica tecnica, combina esta guia corporativa con mantenimiento, placa y fallas por componente.",
     links: [
       {
-        href: "/guias/microelectronica-reballing-caba",
-        title: "Microelectronica y reballing",
+        href: "/reparaciones/reparacion-placa-caba",
+        title: "Revision de placa",
         description:
-          "Cobertura para casos complejos de placa en equipos críticos.",
+          "Condiciones, plazos y laboratorio externo para equipos que no prenden.",
       },
       {
         href: "/guias/mantenimiento-preventivo-celulares",

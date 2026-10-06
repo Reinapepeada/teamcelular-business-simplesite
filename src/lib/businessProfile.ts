@@ -60,7 +60,6 @@ export const BUSINESS_PROFILE = {
     "Cambio de batería",
     "Cambio de pin de carga",
     "Microelectrónica de celulares",
-    "Reballing BGA",
     "Recuperación de celulares mojados",
     "Diagnóstico de placa lógica",
     "Venta de repuestos y accesorios para celulares",

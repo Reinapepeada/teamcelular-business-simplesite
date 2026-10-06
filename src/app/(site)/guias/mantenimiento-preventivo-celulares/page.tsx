@@ -512,12 +512,12 @@ export default function PreventiveMaintenanceGuide() {
               </p>
             </Link>
             <Link
-              href="/guias/microelectronica-reballing-caba"
+              href="/reparaciones/reparacion-placa-caba"
               className="rounded-xl border border-white/20 bg-white/10 p-6 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
             >
-              <h3 className="mb-2 font-bold text-primary">Microelectrónica y Reballing</h3>
+              <h3 className="mb-2 font-bold text-primary">Revisión de placa</h3>
               <p className="text-sm text-slate-700 dark:text-slate-300">
-                Reparaciones avanzadas de placas y chips BGA
+                Si no prende o se reinicia solo: condiciones y plazos
               </p>
             </Link>
             <Link

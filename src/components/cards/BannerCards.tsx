@@ -109,13 +109,13 @@ export default function BannerCards() {
                     </h3>
                 </div>
                 <TrackedCtaLink
-                    href="/guias/microelectronica-reballing-caba"
-                    ctaName="home_cards_guia_microelectronica"
+                    href="/reparaciones/reparacion-placa-caba"
+                    ctaName="home_cards_placa"
                     ctaLocation="home_cards"
                     ctaVariant="other"
                     className={cardLink}
                 >
-                    <span className={cardLinkLabel}>Cuándo conviene microelectrónica <span aria-hidden>→</span></span>
+                    <span className={cardLinkLabel}>Revisión de placa y condiciones <span aria-hidden>→</span></span>
                 </TrackedCtaLink>
             </article>
 
@@ -168,9 +168,9 @@ export default function BannerCards() {
                 <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-32 bg-gradient-to-b from-black/45 to-transparent" />
                 <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(circle_at_82%_16%,rgba(99,68,245,0.22),transparent_40%)]" />
                 <div className={headerBase}>
-                    <p className={eyebrow}>Microelectrónica</p>
+                    <p className={eyebrow}>Microsoldadura</p>
                     <h3 className={heading}>
-                        Reparaciones de placa a nivel componente
+                        Pin, flex y placas de notebook en el taller
                     </h3>
                 </div>
                 <div className="absolute inset-x-0 bottom-0 z-20 border-t border-white/20 bg-black/45 p-4 backdrop-blur-md sm:p-5">

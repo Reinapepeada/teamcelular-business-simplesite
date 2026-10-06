@@ -48,7 +48,7 @@ const SERVICE_VISUALS: Record<string, ServiceVisual> = {
     cover: "/images/reparacion_placa.webp",
     glow:
       "bg-[radial-gradient(circle_at_82%_16%,rgba(139,92,246,0.35),transparent_42%)]",
-    badge: "Microelectrónica",
+    badge: "Placa y microsoldadura",
   },
   "cambio-flex-caba": {
     cover: "/images/celuPorDentro.webp",
@@ -133,9 +133,9 @@ const DEFAULT_RELATED_GUIDES: RelatedGuide[] = [
     description: "Señales de desgaste y criterios para reemplazo sin gastar de más.",
   },
   {
-    href: "/guias/microelectronica-reballing-caba",
-    title: "Guía de microelectrónica",
-    description: "Cuándo conviene diagnóstico de placa y qué esperar de un caso complejo.",
+    href: "/guias/presupuesto-service-oficial-segunda-opinion",
+    title: "Segunda opinión",
+    description: "Qué comparar si el service oficial te pasó un presupuesto alto.",
   },
 ];
 
@@ -193,14 +193,14 @@ const SERVICE_RELATED_GUIDES: Record<string, RelatedGuide[]> = {
   ],
   "reparacion-placa-caba": [
     {
-      href: "/guias/microelectronica-reballing-caba",
-      title: "Guía de microelectrónica",
-      description: "Proceso real para placa, reballing y evaluación de viabilidad.",
+      href: "/guias/celular-mojado-que-hacer",
+      title: "Guía de celular mojado",
+      description: "Qué hacer en la primera hora para que la placa tenga chances.",
     },
     {
-      href: "/guias/soporte-empresas-servicio-tecnico",
-      title: "Guía de soporte empresas",
-      description: "Cómo gestionar casos críticos cuando el equipo es de trabajo.",
+      href: "/guias/presupuesto-service-oficial-segunda-opinion",
+      title: "Segunda opinión",
+      description: "Si el service oficial te dijo que hay que cambiar la placa entera.",
     },
     {
       href: "/guias/reparacion-iphone-buenos-aires",
@@ -283,9 +283,9 @@ const SERVICE_RELATED_GUIDES: Record<string, RelatedGuide[]> = {
       description: "Pasos urgentes para reducir daño y mejorar chances de recuperación.",
     },
     {
-      href: "/guias/microelectronica-reballing-caba",
-      title: "Guía de microelectrónica",
-      description: "Cuándo un caso por líquidos escala a diagnóstico de placa.",
+      href: "/guias/pin-de-carga-suelto-solucion",
+      title: "Guía de pin de carga",
+      description: "Cuando el líquido deja sulfato en el puerto y carga a medias.",
     },
     {
       href: "/guias/face-id-touch-id-no-funciona",
@@ -323,6 +323,12 @@ export interface ServiceLandingConfig {
   brandsText: string;
   /** Precios cortos para el hero (una fila por caso). Mejor que meterlos en el parrafo. */
   prices?: { label: string; value: string }[];
+  /** Reemplaza las dos ultimas lineas de "¿Dónde reparamos?" cuando la garantia o el plazo general no aplican. */
+  asideNotes?: [string, string];
+  /** Reglas que el cliente tiene que leer antes de dejar el equipo. */
+  conditions?: ServiceHighlight[];
+  /** Pasos propios cuando el recorrido no es el de una reparacion en el dia. */
+  workflow?: ServiceHighlight[];
   faqs: ServiceFaq[];
 }
 
@@ -358,6 +364,11 @@ export default function ServiceLandingPage({
   )}`;
   const visual = SERVICE_VISUALS[config.slug] ?? DEFAULT_VISUAL;
   const relatedGuides = SERVICE_RELATED_GUIDES[config.slug] ?? DEFAULT_RELATED_GUIDES;
+  const workflow = config.workflow ?? WORKFLOW.map(({ title, desc }) => ({ title, desc }));
+  const [warrantyNote, timeNote] = config.asideNotes ?? [
+    "Garantía escrita de 90 días sobre trabajo y repuesto instalado.",
+    "Pantalla y batería en 2 a 4 horas si el repuesto está en stock.",
+  ];
 
   const serviceJsonLd = {
     "@context": "https://schema.org",
@@ -457,11 +468,11 @@ export default function ServiceLandingPage({
               </li>
               <li className="flex items-start gap-3">
                 <FaShieldAlt className="mt-1 shrink-0 text-[#6aa6ff]" aria-hidden />
-                Garantía escrita de 90 días sobre trabajo y repuesto instalado.
+                {warrantyNote}
               </li>
               <li className="flex items-start gap-3">
                 <FaStopwatch className="mt-1 shrink-0 text-[#6aa6ff]" aria-hidden />
-                Pantalla y batería en 2 a 4 horas si el repuesto está en stock.
+                {timeNote}
               </li>
             </ul>
           </aside>
@@ -480,13 +491,32 @@ export default function ServiceLandingPage({
         </ul>
       </section>
 
+      {config.conditions?.length ? (
+        <section className="tc-section !pt-0">
+          <div className="tc-reveal grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+            <h2 className="tc-heading">Antes de dejarlo, leé esto</h2>
+            <ul className="divide-y divide-[#333336] rounded-[28px] bg-[#1d1d1f] px-7">
+              {config.conditions.map((item) => (
+                <li key={item.title} className="flex gap-4 py-6">
+                  <BsCheckCircleFill className="mt-1 shrink-0 text-[#6aa6ff]" aria-hidden />
+                  <div>
+                    <h3 className="text-[19px] font-semibold leading-tight">{item.title}</h3>
+                    <p className="mt-2 text-[15px] leading-6 text-[#a1a1a6]">{item.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : null}
+
       <section className="w-full bg-[#f5f5f7] text-[#1d1d1f]">
         <div className="tc-section">
           <h2 className="tc-heading tc-reveal max-w-3xl !text-[#1d1d1f]">
             ¿Qué pasa con tu equipo desde que lo dejás?
           </h2>
           <ol className="tc-stagger mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {WORKFLOW.map((step, index) => (
+            {workflow.map((step, index) => (
               <li key={step.title} className="rounded-[28px] bg-white p-7">
                 <span className="text-[14px] tabular-nums text-[#86868b]">{String(index + 1).padStart(2, "0")}</span>
                 <h3 className="mt-6 text-[21px] font-semibold leading-tight">{step.title.replace(/^\d+\.\s*/, "")}</h3>

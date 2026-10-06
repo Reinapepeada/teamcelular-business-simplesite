@@ -17,8 +17,12 @@ export type RepairPrice = { name: string; from: number; to: number; href?: strin
 /** Cambio de pin de carga, todas las marcas: el precio depende del dispositivo. */
 export const CHARGING_PORT_PRICE = { from: 35000, to: 150000 };
 
-/** Reballing: depende de la gama. El trabajo lleva cerca de un mes y medio. */
-export const REBALLING_PRICE = { from: 280000, to: 580000 };
+/**
+ * Revision de placa (celular o notebook): se cobra al dejar el equipo, no se
+ * devuelve y se descuenta si se repara. Los arreglos de placa de celular los
+ * hace un laboratorio externo; las placas de notebook, el taller.
+ */
+export const PLACA_REVISION_PRICE = 45000;
 
 export const BRAND_REPAIR_PRICES: Record<string, RepairPrice[]> = {
   samsung: [

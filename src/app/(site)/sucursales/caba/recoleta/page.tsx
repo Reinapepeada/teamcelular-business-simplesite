@@ -44,7 +44,7 @@ const faqs = [
 const trustSignals = [
   {
     title: "El laboratorio está acá",
-    desc: "Es el laboratorio principal: acá se hacen los trabajos de placa y reballing bajo microscopio.",
+    desc: "Es el laboratorio principal: acá se hacen la microsoldadura, la limpieza por líquido y las revisiones de placa.",
     Icon: FaTools,
   },
   {

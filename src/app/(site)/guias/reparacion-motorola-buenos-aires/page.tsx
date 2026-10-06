@@ -191,8 +191,8 @@ const frequentRepairs = [
   {
     title: "Placa y recuperación avanzada",
     description:
-      "Diagnóstico y reparación de placa para Motorola que no enciende, reinicia o no toma carga luego de un golpe o daño por líquidos.",
-    eta: "24-48 h",
+      "Motorola que no enciende, se reinicia o no toma carga después de un golpe o de mojarse. Revisión de placa $45.000; si es un chip, lo arregla un laboratorio especializado.",
+    eta: "revisión 72 h",
     Icon: FaMicrochip,
   },
 ];
@@ -219,7 +219,7 @@ const motorolaSymptomRows = [
   {
     symptom: "Queda en el logo, reinicia o no enciende",
     urgency: "Alta: puede ser batería, software o placa",
-    typicalTime: "24-48 h para diagnóstico de placa y energía",
+    typicalTime: "Hasta 72 h hábiles para la revisión de placa",
     nextStep: "Evitar reinicios repetidos y solicitar diagnóstico técnico",
   },
   {

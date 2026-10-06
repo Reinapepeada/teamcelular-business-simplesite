@@ -151,7 +151,7 @@ const slaFeatures = [
   {
     title: "Tiempo de respuesta garantizado",
     description:
-      "SLA configurable según criticidad: 4 horas para incidencias críticas, 24 horas para reparaciones estándar, 72 horas para microelectrónica avanzada.",
+      "SLA configurable según criticidad: 4 horas para incidencias críticas, 24 horas para reparaciones estándar, 72 horas hábiles para revisión de placa.",
     Icon: FaClock,
   },
   {
@@ -177,7 +177,7 @@ const faqBusiness = [
   {
     question: "¿Ofrecen servicio on-site o solo en taller?",
     answer:
-      "Nuestro servicio se realiza en los talleres de Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032), donde contamos con equipamiento profesional: microscopio, estación de reballing y cámara de diagnóstico. Para diagnósticos iniciales o mantenimientos preventivos programados coordinamos visitas on-site en CABA sin cargo adicional en planes anuales.",
+      "Nuestro servicio se realiza en los talleres de Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032), donde contamos con equipamiento profesional: microscopio, estación de soldadura y cámara de diagnóstico. Para diagnósticos iniciales o mantenimientos preventivos programados coordinamos visitas on-site en CABA sin cargo adicional en planes anuales.",
   },
   {
     question: "¿Qué marcas y modelos están incluidos en el soporte corporativo?",
@@ -449,10 +449,10 @@ export default function BusinessSupportGuide() {
             <p>
               Podés combinar nuestros servicios de{" "}
               <Link
-              href="/guias/microelectronica-reballing-caba"
+              href="/reparaciones/reparacion-placa-caba"
               className="font-semibold text-primary underline decoration-primary/30 hover:decoration-primary"
             >
-              microelectrónica avanzada y reballing
+              revisión de placa
             </Link>{" "}
             con soporte on-site, capacitaciones técnicas para tu equipo de IT y consultorías para
             optimización de procesos de mantenimiento.

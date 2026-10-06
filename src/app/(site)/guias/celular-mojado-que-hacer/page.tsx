@@ -128,7 +128,7 @@ const faq: GuideFaqItem[] = [
 
 const relatedLinks: GuideRelatedLink[] = [
   { href: "/reparaciones/reparacion-placa-caba", label: "Servicio de reparacion de placa" },
-  { href: "/guias/microelectronica-reballing-caba", label: "Guia de microelectronica" },
+  { href: "/guias/pin-de-carga-suelto-solucion", label: "Pin de carga con sulfato" },
   { href: "/guias/pin-de-carga-suelto-solucion", label: "Pin de carga suelto" },
   { href: "/presupuesto-reparacion#solicitar-presupuesto", label: "Pedir diagnostico urgente" },
 ];

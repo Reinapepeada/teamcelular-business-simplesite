@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { track } from "@/lib/analytics/track";
 import { lookupQuote, quotableModels } from "@/lib/quoteLookup";
-import { formatArsPrice } from "@/lib/repairPrices";
+import { PLACA_REVISION_PRICE, formatArsPrice } from "@/lib/repairPrices";
 import {
     BUDGET_FUNNEL_EVENTS,
     BUDGET_WIZARD_STEPS,
@@ -247,6 +247,8 @@ export default function RepairsForm() {
  * ganan cotizadores que devuelven un numero en el momento.
  */
 function QuoteEstimate({ model, repairTypes }: { model: string; repairTypes: string[] }) {
+    if (repairTypes.includes("Placa")) return <PlacaConditions />;
+
     const quote = lookupQuote("", model, repairTypes);
     if (!quote) return null;
 
@@ -264,6 +266,25 @@ function QuoteEstimate({ model, repairTypes }: { model: string; repairTypes: str
                 {quote.precision === "exact"
                     ? "Sale en 2 a 4 horas, con garantía escrita de 90 días. Puede variar según el estado del equipo."
                     : "Es un rango por gama, no un valor cerrado."}
+            </p>
+        </div>
+    );
+}
+
+/** Placa no tiene precio de lista: lo que hay que saber antes de ir a WhatsApp son las condiciones. */
+function PlacaConditions() {
+    return (
+        <div className="rounded-2xl border border-primary/30 bg-primary/5 p-4">
+            <p className="text-xs font-semibold uppercase tracking-wide text-primary">Revisión de placa</p>
+            <p className="mt-1 text-2xl font-semibold tabular-nums text-slate-900 dark:text-[#f5f5f7]">
+                {formatArsPrice(PLACA_REVISION_PRICE)}
+            </p>
+            <p className="mt-2 text-xs leading-5 text-slate-600 dark:text-[#86868b]">
+                Se paga al dejar el equipo y se descuenta si se repara. Informe en hasta 72 horas hábiles. Si
+                es un chip, lo arregla un laboratorio especializado y lleva semanas.{" "}
+                <a href="/reparaciones/reparacion-placa-caba" className="tc-link underline">
+                    Ver condiciones
+                </a>
             </p>
         </div>
     );

@@ -176,8 +176,8 @@ const repairServices = [
   {
     title: "Placa logica, PMIC y bootloop",
     detail:
-      "Microelectronica para equipos que reinician en logo, no encienden o quedan sin red luego de caidas o humedad.",
-    eta: "24-48 h",
+      "Se reinicia en el logo, no enciende o se quedó sin red después de una caída o de mojarse. Revisión de placa $45.000; si es un chip, lo arregla un laboratorio especializado.",
+    eta: "revisión 72 h",
     Icon: FaMicrochip,
   },
   {
@@ -211,7 +211,7 @@ const xiaomiSymptomRows = [
   {
     symptom: "Queda en el logo, reinicia o no enciende",
     urgency: "Alta: puede ser software, memoria, batería o PMIC",
-    typicalTime: "24-48 h para diagnóstico de placa y sistema",
+    typicalTime: "Hasta 72 h hábiles para la revisión de placa",
     nextStep: "Evitar reinicios repetidos y solicitar diagnóstico técnico",
   },
   {
@@ -601,7 +601,7 @@ export default function XiaomiRepairGuidePage() {
                   { servicio: "Cambio de batería", modelos: "Alta gama", tiempo: "1–2 h", precio: "119.900 – 229.900" },
                   { servicio: "Cambio de batería", modelos: "Redmi, Redmi Note, POCO", tiempo: "1–2 h", precio: "89.900 – 179.900" },
                   { servicio: "Pin USB-C / turbo charge", modelos: "Todos", tiempo: "2–3 h", precio: "35.000 – 150.000" },
-                  { servicio: "Placa / bootloop / PMIC", modelos: "Todos", tiempo: "24–48 h", precio: "Consultar" },
+                  { servicio: "Revisión de placa (bootloop, PMIC)", modelos: "Todos", tiempo: "hasta 72 h hábiles", precio: "45.000" },
                 ].map((row) => (
                   <tr key={`${row.servicio}-${row.modelos}`}>
                     <td className="py-3 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">{row.servicio}</td>

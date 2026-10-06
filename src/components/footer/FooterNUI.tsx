@@ -50,8 +50,8 @@ const footerSections = {
       icon: FaMobileAlt,
     },
     {
-      name: "Microelectrónica y reballing",
-      href: "/guias/microelectronica-reballing-caba",
+      name: "Reparación de placa",
+      href: "/reparaciones/reparacion-placa-caba",
       icon: FaTools,
     },
     {
@@ -71,7 +71,6 @@ const footerSections = {
     { name: "Reparación de Samsung", href: "/guias/reparacion-samsung-buenos-aires" },
     { name: "Reparación de Xiaomi", href: "/guias/reparacion-xiaomi-buenos-aires" },
     { name: "Reparación de Motorola", href: "/guias/reparacion-motorola-buenos-aires" },
-    { name: "Microelectrónica", href: "/guias/microelectronica-reballing-caba" },
     {
       name: "Mantenimiento preventivo",
       href: "/guias/mantenimiento-preventivo-celulares",

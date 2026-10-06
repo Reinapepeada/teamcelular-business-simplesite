@@ -417,9 +417,9 @@ export default function LabPage() {
           Por qué confiar en TC Lab
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">
-          TC Lab nació de más de 15 años haciendo microelectrónica de precisión en el
-          laboratorio de Team Celular: reballing BGA, reparación de placa lógica,
-          recuperación de equipos con daño por líquidos y diagnóstico avanzado.
+          TC Lab nació de más de 15 años haciendo microelectrónica en el
+          laboratorio de Team Celular: microsoldadura, diagnóstico de placa y
+          recuperación de equipos con daño por líquidos.
           El mismo instrumental, el mismo criterio técnico, aplicado a proyectos
           de producto electrónico en Argentina. ¿Necesitás reparar un equipo
           en lugar de ensamblar?{" "}
@@ -429,10 +429,10 @@ export default function LabPage() {
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
-            href="/guias/microelectronica-reballing-caba"
+            href="/guias/celular-mojado-que-hacer"
             className="rounded-full border border-white/15 bg-white/70 px-4 py-2 text-sm font-semibold text-slate-800 transition hover:border-primary/40 hover:text-primary dark:border-white/10 dark:bg-slate-900/45 dark:text-slate-200"
           >
-            Guía: microelectrónica y reballing
+            Guía: celular mojado
           </Link>
           <Link
             href="/reparaciones/reparacion-placa-caba"

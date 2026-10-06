@@ -177,8 +177,8 @@ const repairServices = [
   {
     title: "Placa de Samsung",
     detail:
-      "Queda en el logo, se reinicia solo o no prende después de un golpe o de mojarse. Va a laboratorio con microscopio.",
-    eta: "24-48 h",
+      "Queda en el logo, se reinicia solo o no prende después de un golpe o de mojarse. Revisión de placa $45.000; si es un chip, lo arregla un laboratorio especializado.",
+    eta: "revisión 72 h",
     Icon: FaMicrochip,
   },
   {
@@ -466,8 +466,8 @@ export default function SamsungRepairGuidePage() {
               carga entre ARS 35.000 y 150.000. Pantalla, batería y carga se resuelven
               en 2 a 4 horas según modelo y stock; el diagnóstico se hace el mismo día
               y todo sale con garantía escrita de 90 días sobre el trabajo y el repuesto
-              instalado. Los equipos que no se resuelven por reemplazo pasan al
-              laboratorio de microelectrónica, con reballing BGA y reparación de placa.
+              instalado. Si el equipo no prende o se reinicia solo, la revisión de placa
+              sale ARS 45.000 y los arreglos de chips los hace un laboratorio especializado.
               Precios actualizados a agosto de 2026.
             </p>
           </div>

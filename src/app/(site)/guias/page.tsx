@@ -69,17 +69,6 @@ const ARTICLES = [
     keywords: ["reparacion Motorola", "Moto G Buenos Aires", "service Motorola CABA"],
   },
   {
-    title: "Microelectronica y reballing profesional",
-    description:
-      "Como abordamos reparaciones avanzadas de placa y chips para recuperar equipos complejos.",
-    href: "/guias/microelectronica-reballing-caba",
-    category: "Laboratorio",
-    readingTime: "6 min",
-    Icon: FaMicrochip,
-    datePublished: "2024-02-20",
-    keywords: ["microelectronica", "reballing", "BGA", "placa logica"],
-  },
-  {
     title: "Soporte tecnico para empresas y gremios",
     description:
       "Beneficios de tercerizar mantenimiento de dispositivos moviles con SLAs y trazabilidad.",
@@ -208,9 +197,6 @@ const articleVisuals: Record<string, { cover: string }> = {
   "/guias/reparacion-motorola-buenos-aires": {
     cover: "/images/portada_moto.webp",
   },
-  "/guias/microelectronica-reballing-caba": {
-    cover: "/images/guia_microelectronica.webp",
-  },
   "/guias/soporte-empresas-servicio-tecnico": {
     cover: "/images/guia_corporativo.webp",
   },
@@ -281,12 +267,6 @@ const articleLinkTargets: Record<
     siblingHref: "/reparaciones/cambio-bateria-caba",
     siblingLabel: "Servicio: cambio de batería",
   },
-  "/guias/microelectronica-reballing-caba": {
-    serviceHref: "/reparaciones/reparacion-placa-caba",
-    serviceLabel: "Servicio: reparacion de placa",
-    siblingHref: "/guias/soporte-empresas-servicio-tecnico",
-    siblingLabel: "Guia hermana: soporte empresas",
-  },
   "/guias/soporte-empresas-servicio-tecnico": {
     serviceHref: "/reparaciones",
     serviceLabel: "Servicios: plan tecnico integral",
@@ -320,8 +300,8 @@ const articleLinkTargets: Record<
   "/guias/celular-mojado-que-hacer": {
     serviceHref: "/reparaciones/reparacion-placa-caba",
     serviceLabel: "Servicio: reparacion de placa",
-    siblingHref: "/guias/microelectronica-reballing-caba",
-    siblingLabel: "Guia hermana: microelectronica",
+    siblingHref: "/guias/pin-de-carga-suelto-solucion",
+    siblingLabel: "Guia hermana: pin de carga",
   },
   "/guias/face-id-touch-id-no-funciona": {
     serviceHref: "/reparaciones/reparacion-placa-caba",

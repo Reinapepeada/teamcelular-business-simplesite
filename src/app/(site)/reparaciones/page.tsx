@@ -46,9 +46,9 @@ const REPAIR_SERVICES = [
     href: "/reparaciones/recuperacion-celular-mojado-caba",
   },
   {
-    title: "Placa y microelectrónica",
+    title: "Revisión de placa",
     description:
-      "No prende, se reinicia solo o quedó en loop. Trabajo bajo microscopio, incluido reballing de chips.",
+      "No prende, se reinicia solo o quedó en loop. Revisión por $45.000 que se descuenta si se repara; los chips los arregla un laboratorio especializado.",
     href: "/reparaciones/reparacion-placa-caba",
   },
   {

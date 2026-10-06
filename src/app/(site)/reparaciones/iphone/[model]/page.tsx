@@ -113,8 +113,8 @@ export default async function IphoneModelPage({
     {
       name: "Reparación de placa",
       price: null,
-      time: "24 a 48 horas",
-      detail: "Microelectrónica con microscopio para equipos que no encienden, reinician o se mojaron.",
+      time: "Revisión en hasta 72 h hábiles",
+      detail: "Revisión de placa ARS 45.000, que se descuenta si se repara. Los arreglos de chips los hace un laboratorio especializado.",
     },
   ];
 
@@ -235,11 +235,11 @@ export default async function IphoneModelPage({
           ¿Qué pasa si el {model.name} no enciende o se mojó?
         </h2>
         <p className="mt-4 leading-relaxed text-slate-600 dark:text-[#a1a1a6]">
-          Esos casos no se resuelven cambiando un módulo. Van al laboratorio de
-          microelectrónica, donde se trabaja a nivel componente con microscopio: reballing
-          BGA, soldadura SMD y limpieza de placa por daño de líquido. Es la diferencia con
-          el canal oficial, que ante una falla de placa cotiza el reemplazo completo. Si el
-          equipo no tiene reparación posible, te lo decimos antes de intervenir: solo se cobra el diagnóstico (ARS 15.000 a 25.000 según el equipo).
+          Si se mojó, traelo apagado cuanto antes: la limpieza de placa la hacemos en el
+          taller. Si no prende, la revisión de placa sale ARS 45.000, se paga al dejarlo y
+          se descuenta si se repara. Cuando el arreglo es de un chip, lo hace un laboratorio
+          especializado con precio y plazo por escrito, y lleva semanas. El canal oficial,
+          en cambio, ante una falla de placa cotiza el reemplazo completo.
         </p>
         <div className="mt-4 flex flex-wrap gap-4">
           <Link
