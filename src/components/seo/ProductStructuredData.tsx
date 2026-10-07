@@ -1,10 +1,11 @@
 import React from 'react';
 import { buildProductSlug } from '@/lib/productSlug';
-import { BUSINESS_PROFILE, businessId } from '@/lib/businessProfile';
+import { BUSINESS_PROFILE, absoluteUrl, businessId, getBranch } from '@/lib/businessProfile';
 import { formatWarranty } from '@/app/tienda/product';
 import { condicionSchema } from '@/lib/fixbeeCatalog';
 
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || 'https://teamcelular.com';
+const PICKUP_BRANCH = getBranch('recoleta');
 
 interface ProductStructuredDataProps {
   product: any;
@@ -43,11 +44,9 @@ export default function ProductStructuredData({ product, images = [] }: ProductS
     url: productUrl,
     seller: { "@id": businessId("localbusiness") },
     itemCondition: condicionSchema(product.storeCondition),
-    availableAtOrFrom: {
-      "@type": "Place",
-      name: "Team Celular Recoleta",
-      address: `${BUSINESS_PROFILE.primaryAddress.street}, ${BUSINESS_PROFILE.primaryAddress.neighborhood}, CABA`,
-    },
+    // El retiro de la tienda online sale de una sola sucursal (/store/pickup-point);
+    // se referencia la misma entidad que declara su página para no crear otra.
+    availableAtOrFrom: { "@id": `${absoluteUrl(PICKUP_BRANCH.url)}#localbusiness` },
     // La politica publicada en /devoluciones da 10 dias corridos desde la entrega.
     hasMerchantReturnPolicy: {
       "@type": "MerchantReturnPolicy",
@@ -99,7 +98,7 @@ export default function ProductStructuredData({ product, images = [] }: ProductS
       {
         "@type": "PropertyValue",
         name: "Retiro",
-        value: "Recoleta o Belgrano, CABA",
+        value: `${PICKUP_BRANCH.street}, ${PICKUP_BRANCH.neighborhood}, CABA`,
       },
       {
         "@type": "PropertyValue",
