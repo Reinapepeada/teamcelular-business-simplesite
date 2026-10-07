@@ -50,7 +50,7 @@ Mejoras al feed y al schema de producto que suben aprobación y visibilidad en t
 
 - **Envío:** ni el feed (`g:shipping`) ni el `Offer` (`shippingDetails`) declaran envío. El envío se cotiza en vivo, así que hay que acordar una tarifa de referencia (por ejemplo, CABA) o configurar el envío a nivel cuenta en Merchant Center. Sin eso Google limita el resultado enriquecido de producto.
 - **Retiro:** `g:pickup_method` y `g:pickup_sla` habilitan la etiqueta "retiro hoy". La tienda ya publica "retiro en el día" en las categorías; confirmar que es cierto para todo el stock antes de declararlo.
-- **`g:google_product_category`:** mapear las categorías propias a la taxonomía de Google mejora el matching en Shopping y Meta.
+- **`g:google_product_category`:** hecho en este PR para las 7 categorías publicadas (adaptador, auricular, auricular BT, cable, cargador, cargador portátil, power bank). Una categoría nueva sin mapeo sale sin el campo y Google la infiere; sumarla en `merchantFeed.ts` cuando se cree.
 - **`g:item_group_id`** para variantes (color/capacidad), si el catálogo las expone.
 - **Identificadores:** cargar GTIN donde exista. Los productos con `identifier_exists=no` compiten peor.
 - **Fichas de producto:** son las que se indexan y comparten. Una descripción propia de 2-3 oraciones por producto (compatibilidad, qué incluye, garantía) rinde más que la genérica.
