@@ -5,7 +5,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { feedMerchant } from "./merchantFeed.ts";
+import { categoriaGoogle, feedMerchant } from "./merchantFeed.ts";
 import type { CatalogProduct } from "./storeCatalog.ts";
 
 const base: CatalogProduct = {
@@ -51,4 +51,13 @@ test("con GTIN no declara identifier_exists; sin precio o foto no entra", () => 
     assert.match(xml, /<g:condition>used<\/g:condition>/);
     assert.doesNotMatch(xml, /identifier_exists/);
     assert.doesNotMatch(xml, /gratis|sin-foto/);
+});
+
+test("mapea la categoría a la taxonomía de Google y omite las desconocidas", () => {
+    assert.match(feedMerchant([base], "https://teamcelular.com"), /<g:google_product_category>258<\/g:google_product_category>/);
+    assert.equal(categoriaGoogle("Cargador  Portátil"), "505295");
+    assert.equal(categoriaGoogle("auricular bt"), "543626");
+    assert.equal(categoriaGoogle("FUNDA"), undefined);
+    assert.equal(categoriaGoogle(null), undefined);
+    assert.doesNotMatch(feedMerchant([{ ...base, category: "FUNDA" }], "https://teamcelular.com"), /google_product_category/);
 });

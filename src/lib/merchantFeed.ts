@@ -35,6 +35,25 @@ const condicionMerchant = (condicion: string) => {
     }
 };
 
+/**
+ * Categorías del catálogo → taxonomía de Google (IDs de taxonomy-with-ids.en-US.txt).
+ * Sin mapeo no se manda: Google infiere la categoría, y una equivocada es peor.
+ */
+const CATEGORIA_GOOGLE: Record<string, string> = {
+    ADAPTADOR: "258", // Electronics Accessories > Adapters
+    AURICULAR: "543626", // Audio Components > Headphones & Headsets > Headphones
+    "AURICULAR BT": "543626",
+    CABLE: "259", // Electronics Accessories > Cables
+    CARGADOR: "505295", // Power > Power Adapters & Chargers
+    "CARGADOR PORTATIL": "505295",
+    "POWER BANK": "505295",
+};
+
+export const categoriaGoogle = (categoria: string | null) =>
+    categoria
+        ? CATEGORIA_GOOGLE[categoria.normalize("NFD").replace(/\p{Diacritic}/gu, "").trim().toUpperCase().replace(/\s+/g, " ")]
+        : undefined;
+
 const campo = (nombre: string, valor: string | null | undefined) =>
     valor ? `<g:${nombre}>${escapar(valor)}</g:${nombre}>` : "";
 
@@ -61,6 +80,7 @@ export const itemMerchant = (p: CatalogProduct, siteUrl: string): string | null 
         // Sin GTIN ni MPN hay que decirlo; si no, Merchant lo marca como faltante.
         !p.gtin && !p.model ? campo("identifier_exists", "no") : "",
         campo("product_type", p.category),
+        campo("google_product_category", categoriaGoogle(p.category)),
         "</item>",
     ].join("");
 };

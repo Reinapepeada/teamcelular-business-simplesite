@@ -9,10 +9,12 @@ import { formatWarranty, type Product } from '@/app/tienda/product';
 import { verProducto } from '@/lib/storeCatalog';
 import { productoDeVidriera, type VidrieraProduct } from '@/lib/fixbeeCatalog';
 import { slugsAProbar } from '@/lib/legacySlug';
+import { BUSINESS_PROFILE } from '@/lib/businessProfile';
 
 const SITE_URL = getSiteUrl();
-const DEFAULT_LAT = process.env.NEXT_PUBLIC_BUSINESS_LAT || '-34.6037';
-const DEFAULT_LON = process.env.NEXT_PUBLIC_BUSINESS_LON || '-58.3816';
+// El default era el Obelisco; el retiro es en Recoleta.
+const DEFAULT_LAT = process.env.NEXT_PUBLIC_BUSINESS_LAT || String(BUSINESS_PROFILE.primaryAddress.latitude);
+const DEFAULT_LON = process.env.NEXT_PUBLIC_BUSINESS_LON || String(BUSINESS_PROFILE.primaryAddress.longitude);
 const MAX_META_DESCRIPTION_LENGTH = 155;
 
 function slugify(text = '') {
@@ -153,7 +155,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             // Custom meta tags (geo + product info)
             other: {
                 'geo.region': 'AR',
-                'geo.placename': 'Buenos Aires',
+                'geo.placename': 'Recoleta, Buenos Aires',
                 'geo.position': `${lat};${lon}`,
                 ICBM: `${lat}, ${lon}`,
                 'product:price:amount': product.retail_price?.toString(),
