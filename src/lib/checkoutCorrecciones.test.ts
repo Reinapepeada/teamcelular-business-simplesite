@@ -7,6 +7,7 @@ import { intentoDeCheckout, prepararIntento } from "./checkoutKey.ts";
 import { vencimientoReserva } from "./resumenDelPedido.ts";
 import { estadoDeEntrega, pedidoGuardado, recordarPedido } from "./vueltaDelPago.ts";
 import { etiquetaCondicion } from "./fixbeeCatalog.ts";
+import { leerConPartes } from "../../tools/leerFuente.mjs";
 
 const items = [{ slug: "equipo", nombre: "Equipo", quantity: 1 }];
 const datos = { nombre: "Ana", email: "ana@example.com", entrega: "retiro" as const };
@@ -15,7 +16,7 @@ const almacenNuevo = () => {
     return { getItem: (k: string) => valores.get(k) ?? null, setItem: (k: string, v: string) => { valores.set(k, v); }, removeItem: (k: string) => { valores.delete(k); } };
 };
 const rechazo = (code: string, status = 422, details = {}) => parseStoreError(status, { error: { code, message: "Revisá tu compra", details } });
-const fuente = readFileSync(new URL("../components/store/CheckoutDialog.tsx", import.meta.url), "utf8");
+const fuente = leerConPartes("src/components/store/CheckoutDialog.tsx", "src/components/store/checkout");
 
 test("F1 conserva mensaje, slug, slugs y todos los campos del sobre público", () => {
     const error = rechazo("validation_error", 422, { field: "postal_code", fields: ["postal_code", "street_name", 1], slugs: ["equipo", null], slug: "equipo" });

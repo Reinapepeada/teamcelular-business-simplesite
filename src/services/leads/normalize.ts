@@ -1,197 +1,25 @@
-import { getToken } from "@/services/auth";
-
-const DEFAULT_API_URL = "https://fastapi-teamcelular-dev.up.railway.app";
-const apiUrl = (process.env.NEXT_PUBLIC_API_URL?.trim() || DEFAULT_API_URL).replace(/\/+$/, "");
-
-export type RepairLeadStatus =
-    | "new"
-    | "contacted"
-    | "qualified"
-    | "converted"
-    | "discarded"
-    | "duplicated";
-
-export interface RepairLead {
-    id: string;
-    fullName: string;
-    phone: string;
-    email: string;
-    brand: string;
-    model: string;
-    repairType: string;
-    urgency: string;
-    description: string;
-    contactChannel: string;
-    contact: string;
-    preferredBranch: string;
-    branchSelectionMethod: string;
-    leadAttemptId: string;
-    wizardSource: string;
-    duplicateOf: string;
-    whatsappUrl: string;
-    utm: RepairLeadUtm | null;
-    metadata: RepairLeadMetadata | null;
-    status: RepairLeadStatus;
-    source: string;
-    createdAt: string;
-    updatedAt: string;
-}
-
-export interface RepairLeadUtm {
-    source: string;
-    medium: string;
-    campaign: string;
-    content: string;
-    term: string;
-}
-
-export interface RepairLeadMetadata {
-    ip: string;
-    userAgent: string;
-    referrer: string;
-}
-
-export interface RepairLeadStatusChange {
-    id: string;
-    fromStatus: string;
-    toStatus: string;
-    changedAt: string;
-    changedBy: string;
-}
-
-export interface RepairLeadNote {
-    id: string;
-    note: string;
-    createdAt: string;
-    createdBy: string;
-}
-
-export interface RepairLeadDetail {
-    lead: RepairLead;
-    statusHistory: RepairLeadStatusChange[];
-    notes: RepairLeadNote[];
-}
-
-export interface RepairLeadsQuery {
-    status?: RepairLeadStatus;
-    urgency?: string;
-    contactChannel?: string;
-    repairType?: string;
-    dateFrom?: string;
-    dateTo?: string;
-    page?: number;
-    size?: number;
-}
-
-export interface RepairLeadsListResponse {
-    items: RepairLead[];
-    total: number;
-    page: number;
-    size: number;
-    pages: number;
-}
-
-export interface RepairLeadsMetricBucket {
-    key: string;
-    value: number;
-}
-
-export interface RepairLeadsDateBucket {
-    date: string;
-    value: number;
-}
-
-export interface RepairLeadsMetricsResponse {
-    totalLeads: number;
-    totalRealLeads: number;
-    convertedLeads: number;
-    conversionRate: number;
-    byStatus: RepairLeadsMetricBucket[];
-    byContactChannel: RepairLeadsMetricBucket[];
-    byDate: RepairLeadsDateBucket[];
-}
-
-export interface LeadInteraction {
-    interactionId: number;
-    eventName: string;
-    ctaName: string;
-    ctaLocation: string;
-    ctaVariant: string;
-    destination: string;
-    pagePath: string;
-    pageTitle: string;
-    leadId: string;
-    leadAttemptId: string;
-    formName: string;
-    formLocation: string;
-    formVersion: string;
-    stepIndex: number;
-    stepId: string;
-    stepLabel: string;
-    totalSteps: number;
-    brand: string;
-    model: string;
-    repairType: string;
-    urgency: string;
-    contactChannel: string;
-    contact: string;
-    description: string;
-    payloadJson: string;
-    ip: string;
-    userAgent: string;
-    referrer: string;
-    createdAt: string;
-}
-
-export interface LeadInteractionsQuery {
-    eventName?: string;
-    ctaVariant?: string;
-    ctaLocation?: string;
-    pagePath?: string;
-    leadAttemptId?: string;
-    dateFrom?: string;
-    dateTo?: string;
-    page?: number;
-    size?: number;
-}
-
-export interface LeadInteractionsListResponse {
-    items: LeadInteraction[];
-    total: number;
-    page: number;
-    size: number;
-    pages: number;
-}
-
-export interface LeadInteractionMetricBucket {
-    key: string;
-    value: number;
-}
-
-export interface LeadInteractionDateBucket {
-    date: string;
-    value: number;
-}
-
-export interface LeadInteractionsMetricsResponse {
-    totalInteractions: number;
-    byEvent: LeadInteractionMetricBucket[];
-    byCtaName: LeadInteractionMetricBucket[];
-    byCtaVariant: LeadInteractionMetricBucket[];
-    byPage: LeadInteractionMetricBucket[];
-    byLocation: LeadInteractionMetricBucket[];
-    byDate: LeadInteractionDateBucket[];
-}
-
-class LeadsApiError extends Error {
-    status: number;
-
-    constructor(status: number, message: string) {
-        super(message);
-        this.name = "LeadsApiError";
-        this.status = status;
-    }
-}
+// Normaliza las respuestas del backend de leads: acepta variantes de nombres
+// de campos y completa valores por defecto. Sin red ni estado.
+import type {
+    LeadInteraction,
+    LeadInteractionDateBucket,
+    LeadInteractionMetricBucket,
+    LeadInteractionsListResponse,
+    LeadInteractionsMetricsResponse,
+    LeadInteractionsQuery,
+    RepairLead,
+    RepairLeadDetail,
+    RepairLeadMetadata,
+    RepairLeadNote,
+    RepairLeadStatus,
+    RepairLeadStatusChange,
+    RepairLeadUtm,
+    RepairLeadsDateBucket,
+    RepairLeadsListResponse,
+    RepairLeadsMetricBucket,
+    RepairLeadsMetricsResponse,
+    RepairLeadsQuery,
+} from "./types";
 
 const KNOWN_STATUSES: RepairLeadStatus[] = [
     "new",
@@ -202,11 +30,11 @@ const KNOWN_STATUSES: RepairLeadStatus[] = [
     "duplicated",
 ];
 
-function isRecord(value: unknown): value is Record<string, unknown> {
+export function isRecord(value: unknown): value is Record<string, unknown> {
     return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
-function pickFirst(record: Record<string, unknown>, keys: string[]): unknown {
+export function pickFirst(record: Record<string, unknown>, keys: string[]): unknown {
     for (const key of keys) {
         if (record[key] !== undefined && record[key] !== null) {
             return record[key];
@@ -215,7 +43,7 @@ function pickFirst(record: Record<string, unknown>, keys: string[]): unknown {
     return undefined;
 }
 
-function asString(value: unknown, fallback = ""): string {
+export function asString(value: unknown, fallback = ""): string {
     if (typeof value === "string") {
         return value;
     }
@@ -225,7 +53,7 @@ function asString(value: unknown, fallback = ""): string {
     return fallback;
 }
 
-function asNumber(value: unknown, fallback = 0): number {
+export function asNumber(value: unknown, fallback = 0): number {
     if (typeof value === "number" && Number.isFinite(value)) {
         return value;
     }
@@ -240,7 +68,7 @@ function asNumber(value: unknown, fallback = 0): number {
     return fallback;
 }
 
-function normalizeStatus(value: unknown): RepairLeadStatus {
+export function normalizeStatus(value: unknown): RepairLeadStatus {
     const normalized = asString(value, "new").toLowerCase();
     if (KNOWN_STATUSES.includes(normalized as RepairLeadStatus)) {
         return normalized as RepairLeadStatus;
@@ -248,7 +76,7 @@ function normalizeStatus(value: unknown): RepairLeadStatus {
     return "new";
 }
 
-function normalizeUtm(raw: unknown): RepairLeadUtm | null {
+export function normalizeUtm(raw: unknown): RepairLeadUtm | null {
     const record = isRecord(raw) ? raw : {};
 
     const source = asString(pickFirst(record, ["source", "utm_source", "utmSource"]), "");
@@ -270,7 +98,7 @@ function normalizeUtm(raw: unknown): RepairLeadUtm | null {
     };
 }
 
-function normalizeMetadata(raw: unknown): RepairLeadMetadata | null {
+export function normalizeMetadata(raw: unknown): RepairLeadMetadata | null {
     const record = isRecord(raw) ? raw : {};
 
     const ip = asString(pickFirst(record, ["ip"]), "");
@@ -288,7 +116,7 @@ function normalizeMetadata(raw: unknown): RepairLeadMetadata | null {
     };
 }
 
-function unwrapData(raw: unknown): unknown {
+export function unwrapData(raw: unknown): unknown {
     if (!isRecord(raw)) {
         return raw;
     }
@@ -300,7 +128,7 @@ function unwrapData(raw: unknown): unknown {
     return raw;
 }
 
-function normalizeLead(raw: unknown): RepairLead {
+export function normalizeLead(raw: unknown): RepairLead {
     const record = isRecord(raw) ? raw : {};
     const device = isRecord(record.device) ? record.device : {};
 
@@ -368,7 +196,7 @@ function normalizeLead(raw: unknown): RepairLead {
     };
 }
 
-function normalizeStatusHistory(raw: unknown): RepairLeadStatusChange[] {
+export function normalizeStatusHistory(raw: unknown): RepairLeadStatusChange[] {
     if (!Array.isArray(raw)) {
         return [];
     }
@@ -396,7 +224,7 @@ function normalizeStatusHistory(raw: unknown): RepairLeadStatusChange[] {
     });
 }
 
-function normalizeNotes(raw: unknown): RepairLeadNote[] {
+export function normalizeNotes(raw: unknown): RepairLeadNote[] {
     if (!Array.isArray(raw)) {
         return [];
     }
@@ -417,7 +245,7 @@ function normalizeNotes(raw: unknown): RepairLeadNote[] {
     });
 }
 
-function normalizeListResponse(
+export function normalizeListResponse(
     raw: unknown,
     fallbackPage: number,
     fallbackSize: number
@@ -448,7 +276,7 @@ function normalizeListResponse(
     };
 }
 
-function normalizeMetricBucketList(
+export function normalizeMetricBucketList(
     raw: unknown,
     keyCandidates: string[]
 ): RepairLeadsMetricBucket[] {
@@ -480,7 +308,7 @@ function normalizeMetricBucketList(
     return [];
 }
 
-function normalizeDateMetricList(raw: unknown): RepairLeadsDateBucket[] {
+export function normalizeDateMetricList(raw: unknown): RepairLeadsDateBucket[] {
     return normalizeMetricBucketList(raw, ["date", "day"])
         .map((bucket) => ({
             date: bucket.key,
@@ -498,7 +326,7 @@ function normalizeDateMetricList(raw: unknown): RepairLeadsDateBucket[] {
         });
 }
 
-function normalizeMetricsResponse(raw: unknown): RepairLeadsMetricsResponse {
+export function normalizeMetricsResponse(raw: unknown): RepairLeadsMetricsResponse {
     const unwrapped = unwrapData(raw);
     const container = isRecord(unwrapped) ? unwrapped : {};
 
@@ -561,7 +389,7 @@ function normalizeMetricsResponse(raw: unknown): RepairLeadsMetricsResponse {
     };
 }
 
-function normalizeInteraction(raw: unknown): LeadInteraction {
+export function normalizeInteraction(raw: unknown): LeadInteraction {
     const record = isRecord(raw) ? raw : {};
     const nowIso = new Date().toISOString();
 
@@ -598,7 +426,7 @@ function normalizeInteraction(raw: unknown): LeadInteraction {
     };
 }
 
-function normalizeInteractionListResponse(
+export function normalizeInteractionListResponse(
     raw: unknown,
     fallbackPage: number,
     fallbackSize: number
@@ -632,7 +460,7 @@ function normalizeInteractionListResponse(
     };
 }
 
-function normalizeInteractionMetricBucketList(
+export function normalizeInteractionMetricBucketList(
     raw: unknown,
     keyCandidates: string[]
 ): LeadInteractionMetricBucket[] {
@@ -661,7 +489,7 @@ function normalizeInteractionMetricBucketList(
     return [];
 }
 
-function normalizeInteractionDateMetricList(raw: unknown): LeadInteractionDateBucket[] {
+export function normalizeInteractionDateMetricList(raw: unknown): LeadInteractionDateBucket[] {
     return normalizeInteractionMetricBucketList(raw, ["date", "day"])
         .map((bucket) => ({
             date: bucket.key,
@@ -679,7 +507,7 @@ function normalizeInteractionDateMetricList(raw: unknown): LeadInteractionDateBu
         });
 }
 
-function normalizeInteractionMetricsResponse(raw: unknown): LeadInteractionsMetricsResponse {
+export function normalizeInteractionMetricsResponse(raw: unknown): LeadInteractionsMetricsResponse {
     const unwrapped = unwrapData(raw);
     const container = isRecord(unwrapped) ? unwrapped : {};
 
@@ -728,7 +556,7 @@ function normalizeInteractionMetricsResponse(raw: unknown): LeadInteractionsMetr
     };
 }
 
-function buildLeadsQueryParams(
+export function buildLeadsQueryParams(
     query: RepairLeadsQuery,
     includePagination: boolean
 ): URLSearchParams {
@@ -778,7 +606,7 @@ function buildLeadsQueryParams(
     return params;
 }
 
-function buildInteractionQueryParams(
+export function buildInteractionQueryParams(
     query: LeadInteractionsQuery,
     includePagination: boolean
 ): URLSearchParams {
@@ -821,7 +649,7 @@ function buildInteractionQueryParams(
     return params;
 }
 
-function normalizeDetailResponse(raw: unknown): RepairLeadDetail {
+export function normalizeDetailResponse(raw: unknown): RepairLeadDetail {
     const unwrapped = unwrapData(raw);
     const container = isRecord(unwrapped) ? unwrapped : {};
 
@@ -849,150 +677,4 @@ function normalizeDetailResponse(raw: unknown): RepairLeadDetail {
         statusHistory,
         notes,
     };
-}
-
-async function authenticatedLeadsRequest<T>(
-    endpoint: string,
-    options: RequestInit = {}
-): Promise<T> {
-    const token = getToken();
-
-    if (!token) {
-        throw new LeadsApiError(401, "No hay sesión activa");
-    }
-
-    const headers = new Headers(options.headers);
-    headers.set("Authorization", `Bearer ${token}`);
-    headers.set("Content-Type", "application/json");
-
-    const response = await fetch(`${apiUrl}${endpoint}`, {
-        ...options,
-        headers,
-        cache: "no-store",
-    });
-
-    const payload = await response.json().catch(() => ({}));
-
-    if (!response.ok) {
-        const message = isRecord(payload)
-            ? asString(pickFirst(payload, ["detail", "message", "error"]), "Error al consultar leads")
-            : "Error al consultar leads";
-
-        throw new LeadsApiError(response.status, message);
-    }
-
-    return payload as T;
-}
-
-export async function getRepairLeads(query: RepairLeadsQuery = {}): Promise<RepairLeadsListResponse> {
-    const params = buildLeadsQueryParams(query, true);
-    const page = query.page ?? 1;
-    const size = query.size ?? 20;
-
-    const response = await authenticatedLeadsRequest<unknown>(
-        `/v1/leads/repair?${params.toString()}`,
-        { method: "GET" }
-    );
-
-    return normalizeListResponse(response, page, size);
-}
-
-export async function getRepairLeadsMetrics(
-    query: RepairLeadsQuery = {}
-): Promise<RepairLeadsMetricsResponse> {
-    const params = buildLeadsQueryParams(query, false);
-    const queryString = params.toString();
-    const endpoint = queryString
-        ? `/v1/leads/repair/metrics?${queryString}`
-        : "/v1/leads/repair/metrics";
-
-    const response = await authenticatedLeadsRequest<unknown>(endpoint, {
-        method: "GET",
-    });
-
-    return normalizeMetricsResponse(response);
-}
-
-export async function getRepairLeadById(leadId: string): Promise<RepairLeadDetail> {
-    const response = await authenticatedLeadsRequest<unknown>(
-        `/v1/leads/repair/${leadId}`,
-        { method: "GET" }
-    );
-
-    return normalizeDetailResponse(response);
-}
-
-export async function updateRepairLeadStatus(
-    leadId: string,
-    status: RepairLeadStatus
-): Promise<RepairLead> {
-    const response = await authenticatedLeadsRequest<unknown>(
-        `/v1/leads/repair/${leadId}/status`,
-        {
-            method: "PATCH",
-            body: JSON.stringify({ status }),
-        }
-    );
-
-    const detail = normalizeDetailResponse(response);
-    return {
-        ...detail.lead,
-        id: detail.lead.id || leadId,
-        status,
-    };
-}
-
-export async function addRepairLeadNote(leadId: string, note: string): Promise<RepairLeadNote> {
-    const response = await authenticatedLeadsRequest<unknown>(
-        `/v1/leads/repair/${leadId}/notes`,
-        {
-            method: "POST",
-            body: JSON.stringify({ note }),
-        }
-    );
-
-    const unwrapped = unwrapData(response);
-    const container = isRecord(unwrapped) ? unwrapped : {};
-    const noteCandidate = pickFirst(container, ["note", "item", "data"]) ?? container;
-    const [normalized] = normalizeNotes([noteCandidate]);
-
-    return (
-        normalized ?? {
-            id: `note-${Date.now()}`,
-            note,
-            createdAt: new Date().toISOString(),
-            createdBy: "Sistema",
-        }
-    );
-}
-
-export async function getLeadInteractions(
-    query: LeadInteractionsQuery = {}
-): Promise<LeadInteractionsListResponse> {
-    const params = buildInteractionQueryParams(query, true);
-    const page = query.page ?? 1;
-    const size = query.size ?? 10;
-
-    const response = await authenticatedLeadsRequest<unknown>(
-        `/v1/leads/interactions?${params.toString()}`,
-        { method: "GET" }
-    );
-
-    return normalizeInteractionListResponse(response, page, size);
-}
-
-export async function getLeadInteractionsMetrics(
-    query: LeadInteractionsQuery = {}
-): Promise<LeadInteractionsMetricsResponse> {
-    const params = buildInteractionQueryParams(query, false);
-    const queryString = params.toString();
-    const endpoint = queryString
-        ? `/v1/leads/interactions/metrics?${queryString}`
-        : "/v1/leads/interactions/metrics";
-
-    const response = await authenticatedLeadsRequest<unknown>(endpoint, {
-        method: "GET",
-    });
-
-    return normalizeInteractionMetricsResponse(response);
 }

@@ -7,6 +7,7 @@ import { productosSoloRetiro } from "./cartLines.ts";
 import { armarPedido, crearPedidoConRecuperacion, ErrorDeCompra, problemaDeCheckout, revisarPedido, validarDatos, type DatosDeCompra } from "./checkoutFlow.ts";
 import { intentoDeCheckout, prepararIntento } from "./checkoutKey.ts";
 import { parseStoreError, StoreApiError, type StoreProduct } from "./storeApi.ts";
+import { leerConPartes } from "../../tools/leerFuente.mjs";
 
 const items = [{ slug: "equipo", nombre: "Equipo", quantity: 1, shipping_enabled: false }, { slug: "funda", nombre: "Funda", quantity: 1 }];
 const datos: DatosDeCompra = { nombre: "Ana", email: "ana@example.com", entrega: "envio", direccion: {
@@ -91,7 +92,7 @@ test("fallo al borrar no pierde el intento recuperable", async () => {
 
 test("las pantallas conectan la restricción y ofrecen retiro sin borrar datos personales", () => {
     const carrito = readFileSync(new URL("../components/store/StoreCartSheet.tsx", import.meta.url), "utf8");
-    const checkout = readFileSync(new URL("../components/store/CheckoutDialog.tsx", import.meta.url), "utf8");
+    const checkout = leerConPartes("src/components/store/CheckoutDialog.tsx", "src/components/store/checkout");
     const ficha = readFileSync(new URL("../app/(site)/tienda/[slug]/ProductDetailClient.tsx", import.meta.url), "utf8");
     assert.match(ficha, /product.shipping_enabled === false \? "Solo retiro en el local"/);
     assert.match(carrito, /cart.length > 0 && soloRetiro.length === 0 &&/);

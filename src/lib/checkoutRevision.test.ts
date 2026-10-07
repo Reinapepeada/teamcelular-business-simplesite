@@ -6,6 +6,7 @@ import { intentoDeCheckout, prepararIntento } from "./checkoutKey.ts";
 import { parseStoreError, StoreApiError, type StoreOrder } from "./storeApi.ts";
 import { vencimientoReserva, resumenParaConfirmar } from "./resumenDelPedido.ts";
 import { recordarPedido, pedidoGuardado } from "./vueltaDelPago.ts";
+import { leerConPartes } from "../../tools/leerFuente.mjs";
 
 const datos: DatosDeCompra = { nombre: "Ana", email: "ana@example.com", entrega: "retiro" };
 const items = [{ slug: "pantalla", quantity: 2, nombre: "Pantalla" }];
@@ -24,7 +25,7 @@ test("revisar cotiza provincia y CP sin crear pedido; retiro no cotiza", async (
     assert.equal((await revisarPedido(datos, items, 100, cotizar)).total, 100);
     assert.equal(cotizaciones, 1);
     // Verifica que el formulario sigue conectado solo a la revisión.
-    const fuente = readFileSync(new URL("../components/store/CheckoutDialog.tsx", import.meta.url), "utf8");
+    const fuente = leerConPartes("src/components/store/CheckoutDialog.tsx", "src/components/store/checkout");
     const submit = fuente.slice(fuente.indexOf("const onSubmit ="), fuente.indexOf("const confirmarRevision ="));
     assert.match(submit, /await revisarPedido\(/);
     assert.doesNotMatch(submit, /await (reservar|createOrder|prepararCheckout)/);
@@ -156,7 +157,7 @@ test("recarga sin tc.pedido y proveedor caído: recupera la reserva original sin
     assert.equal(recuperado?.shipping_amount, 20);
     assert.equal(cotizaciones, 0);
     // El componente debe elegir la recuperación antes de validar datos nuevos o cotizar.
-    const fuente = readFileSync(new URL("../components/store/CheckoutDialog.tsx", import.meta.url), "utf8");
+    const fuente = leerConPartes("src/components/store/CheckoutDialog.tsx", "src/components/store/checkout");
     const submit = fuente.slice(fuente.indexOf("const onSubmit ="), fuente.indexOf("const confirmarRevision ="));
     assert.ok(submit.indexOf("await retomarIntento()") < submit.indexOf("validarDatos("));
     assert.ok(submit.indexOf("await retomarIntento()") < submit.indexOf("await revisarPedido("));
