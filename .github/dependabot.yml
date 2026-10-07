@@ -1,0 +1,23 @@
+# Actualizaciones semanales agrupadas: un PR de npm y uno de Actions, cada uno
+# con el CI completo. Las mayores llegan aparte para revisarlas una por una.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: America/Argentina/Buenos_Aires
+    open-pull-requests-limit: 5
+    groups:
+      npm-minor-patch:
+        update-types: [minor, patch]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: America/Argentina/Buenos_Aires
+    groups:
+      actions:
+        patterns: ["*"]
