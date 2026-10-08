@@ -2,7 +2,7 @@ import ProductDetailClient from './ProductDetailClient';
 import { getAllProductImages, getPrimaryImage } from '@/services/products';
 import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd';
 import ProductStructuredData from '@/components/seo/ProductStructuredData';
-import { redirect, notFound } from 'next/navigation';
+import { redirect, notFound, permanentRedirect } from 'next/navigation';
 import type { Metadata } from 'next';
 import { buildWebsiteMetadata, getSiteUrl } from '@/lib/seoMetadata';
 import { formatWarranty, type Product } from '@/app/tienda/product';
@@ -10,6 +10,7 @@ import { verProducto } from '@/lib/storeCatalog';
 import { productoDeVidriera, type VidrieraProduct } from '@/lib/fixbeeCatalog';
 import { slugsAProbar } from '@/lib/legacySlug';
 import { BUSINESS_PROFILE } from '@/lib/businessProfile';
+import { iphoneModelPageForProductSlug } from '@/app/(site)/reparaciones/iphone/iphoneModels';
 
 const SITE_URL = getSiteUrl();
 // El default era el Obelisco; el retiro es en Recoleta.
@@ -180,6 +181,15 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     const encontrado = await buscarProducto(slug);
 
     if (!encontrado) {
+        // Los cambios de batería de iPhone salieron de la tienda con el
+        // catálogo de Fixbee, pero Google todavía los muestra para "cambio
+        // bateria iphone 13". Mandarlos a la página del modelo (o a la guía
+        // de batería) conserva esa señal en lugar de tirar un 404. Solo pasa
+        // si el catálogo dijo que el producto no existe.
+        if (slug.startsWith('cambio-de-bateria-iphone-')) {
+            const modelo = iphoneModelPageForProductSlug(slug);
+            permanentRedirect(modelo ? `/reparaciones/iphone/${modelo.slug}` : '/guias/cambio-bateria-celular');
+        }
         notFound();
     }
 
