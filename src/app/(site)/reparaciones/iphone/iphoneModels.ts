@@ -168,6 +168,27 @@ export function getIphoneModel(slug: string): IphoneModelPrice | undefined {
   return IPHONE_MODELS.find((model) => model.slug === slug);
 }
 
+/**
+ * La página de modelo que corresponde a un producto viejo de cambio de batería
+ * de la tienda, ej. `cambio-de-bateria-iphone-13-ck-13` → iPhone 13.
+ *
+ * Había 2 o 3 productos casi iguales por modelo (uno por marca de batería) y
+ * Google todavía los muestra para "cambio bateria iphone 13". Ya no existen en
+ * el catálogo: la ficha de la tienda los redirige a la página del modelo.
+ *
+ * Gana el slug más largo de todo el catálogo, así `13-pro-max` no se confunde
+ * con `13-pro`; si ese modelo no tiene página propia, no hay enlace.
+ */
+export function iphoneModelPageForProductSlug(productSlug: string): IphoneModelPrice | undefined {
+  const prefix = "cambio-de-bateria-iphone-";
+  if (!productSlug.startsWith(prefix)) return undefined;
+  const rest = productSlug.slice(prefix.length);
+  const match = IPHONE_MODELS.filter((m) => rest.startsWith(`${m.slug}-`)).sort(
+    (a, b) => b.slug.length - a.slug.length,
+  )[0];
+  return match && (IPHONE_MODELS_WITH_PAGE as readonly string[]).includes(match.slug) ? match : undefined;
+}
+
 export function getIphoneModelNotes(slug: string): IphoneModelNotes | undefined {
   return IPHONE_MODEL_NOTES[slug];
 }
