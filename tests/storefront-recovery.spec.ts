@@ -202,7 +202,8 @@ for (const kind of ['missing', 'unavailable', 'temporary'] as const) {
         await fillBuyer(page);
         const review = page.getByRole('button', { name: 'Revisar pedido', exact: true });
         await expect(review).toBeDisabled();
-        await expect(page.getByText(kind === 'missing' ? /todavía no informó el horario/ : kind === 'unavailable' ? /no tiene un punto de retiro confirmado/ : /Puede ser una falla temporal/)).toBeVisible();
+        await expect(page.getByRole('dialog', { name: 'Finalizar compra' }).getByText(kind === 'missing' ? /todavía no informó el horario/ : kind === 'unavailable' ? /no tiene un punto de retiro confirmado/ : /Puede ser una falla temporal/)).toBeVisible();
+        await page.getByRole('dialog', { name: 'Finalizar compra' }).locator('[data-pickup-details]').scrollIntoViewIfNeeded();
         await page.screenshot({ path: testInfo.outputPath(`pickup-${kind}.png`) });
         const before = calls; ready = true;
         await page.getByRole('button', { name: 'Reintentar datos de retiro' }).click();
@@ -211,9 +212,10 @@ for (const kind of ['missing', 'unavailable', 'temporary'] as const) {
         await expect(page.getByLabel('Nombre y apellido', { exact: true })).toHaveValue('Ana Prueba');
         await review.click();
         await expect(page.getByRole('heading', { name: 'Revisá tu pedido' })).toBeVisible();
-        await expect(page.getByText('Local de prueba · Dirección ficticia 123 · Lunes 10 a 18')).toBeVisible();
+        await expect(page.getByRole('dialog', { name: 'Finalizar compra' }).getByText('Local de prueba · Dirección ficticia 123 · Lunes 10 a 18')).toBeVisible();
         await expect(page.getByRole('button', { name: 'Confirmar y pagar' })).toBeEnabled();
         expect(creates).toBe(0);
+        await page.getByRole('dialog', { name: 'Finalizar compra' }).locator('[data-pickup-details]').scrollIntoViewIfNeeded();
         await page.screenshot({ path: testInfo.outputPath(`pickup-confirmed-${kind}.png`) });
     });
 }
@@ -229,7 +231,7 @@ test('retiro incompleto permite envío válido sin crear pedido y conserva datos
     await fillShipping(page);
     await page.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
     await expect(page.getByRole('heading', { name: 'Revisá tu pedido' })).toBeVisible();
-    await expect(page.getByText(/Dirección de prueba 123.*CP C1425ABC/)).toBeVisible();
+    await expect(page.getByText(/Dirección de prueba · 123.*CP C1425ABC/)).toBeVisible();
     expect(creates).toBe(0);
 });
 
@@ -250,7 +252,8 @@ for (const failure of ['SHIPPING_UNAVAILABLE', 'http500', 'network'] as const) {
         page.on('request', req => { if (new URL(req.url()).pathname === '/store/checkout') creates++; });
         await page.goto('/tienda');
         await page.getByRole('button', { name: /Abrir carrito/ }).click();
-        await page.locator('input[name="carrito-entrega"]').nth(1).check();
+        await page.getByRole('dialog', { name: 'Resumen del carrito' }).locator('label').filter({ has: page.locator('input[name="carrito-entrega"]') }).nth(1).click();
+        await expect(page.locator('input[name="carrito-entrega"]').nth(1)).toBeChecked();
         await expect(page.getByText(/No pudimos (cotizar|calcular) el envío/)).toBeVisible();
         await expect(page.getByText('No hay envío', { exact: false })).toHaveCount(0);
         await expect(page.locator('#carrito-cp')).toHaveValue('C1425ABC');
@@ -392,3 +395,52 @@ for (const terminal of ['paid', 'expired', 'payment_reversed']) {
         expect(creates).toBe(1); expect(payments).toBe(0);
     });
 }
+
+test('falla de cotización en checkout conserva toda la dirección al reintentar', async ({ page }) => {
+    await seed(page, 1, false);
+    await isolate(page, () => status());
+    const destinations: unknown[] = [];
+    let ready = false, creates = 0;
+    await page.route('**/store/shipping/quote', route => {
+        if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: cors });
+        destinations.push(route.request().postDataJSON());
+        return route.fulfill(ready ? { headers: cors, json: { cheapest: { price: 20 }, options: [{ price: 20 }] } } : { status: 503, headers: cors, json: { error: { code: 'SHIPPING_UNAVAILABLE' } } });
+    });
+    page.on('request', req => { if (new URL(req.url()).pathname === '/store/checkout') creates++; });
+    await openCheckout(page);
+    await fillShipping(page);
+    await page.getByLabel('Piso (opcional)', { exact: true }).fill('2');
+    await page.getByLabel('Depto (opcional)', { exact: true }).fill('B');
+    await page.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
+    await expect(page.getByRole('dialog', { name: 'Finalizar compra' }).getByRole('alert')).toHaveText(/No pudimos cotizar el envío/);
+    for (const [label, value] of [['Calle', 'Dirección de prueba'], ['Número', '123'], ['Piso (opcional)', '2'], ['Depto (opcional)', 'B'], ['Localidad', 'CABA'], ['Código postal', 'C1425ABC']]) {
+        await expect(page.getByLabel(label, { exact: true })).toHaveValue(value);
+    }
+    ready = true;
+    await page.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Revisá tu pedido' })).toBeVisible();
+    expect(destinations).toHaveLength(2); expect(destinations[0]).toEqual(destinations[1]); expect(creates).toBe(0);
+});
+
+test('error contractual tras confirmar vuelve al campo completo y mantiene el destino', async ({ page }, testInfo) => {
+    await page.setViewportSize({ width: 320, height: 568 });
+    await seed(page, 1, false);
+    await isolate(page, () => status());
+    await page.route('**/store/shipping/quote', route => route.fulfill({ headers: cors, json: { cheapest: { price: 20 }, options: [{ price: 20 }] } }));
+    await page.route('**/store/checkout', route => route.request().method() === 'OPTIONS' ? route.fulfill({ status: 204, headers: cors }) : route.fulfill({ status: 422, headers: cors, json: { error: { code: 'VALIDATION_ERROR', details: { fields: ['street_name'] } } } }));
+    await openCheckout(page);
+    await fillShipping(page);
+    await page.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
+    await page.getByRole('button', { name: 'Confirmar y pagar' }).click();
+    const street = page.getByLabel('Calle', { exact: true });
+    await expect(street).toBeFocused();
+    await expect(street).toHaveValue('Dirección de prueba');
+    await expect.poll(() => street.evaluate(input => {
+        const field = input.closest('[data-checkout-field]')!.getBoundingClientRect();
+        const header = document.querySelector('[data-checkout-header]')!.getBoundingClientRect();
+        const scroll = document.querySelector('[data-checkout-scroll]')!.getBoundingClientRect();
+        return field.top >= header.bottom && field.bottom <= scroll.bottom;
+    })).toBe(true);
+    expect(await page.evaluate(() => localStorage.getItem('tc.checkout'))).toBeNull();
+    await page.screenshot({ path: testInfo.outputPath('server-error-visible-320.png') });
+});

@@ -217,8 +217,8 @@ export interface PickupPoint {
 /**
  * Dónde se retira, o `null` si la tienda no lo informa.
  *
- * Un fallo acá no puede frenar la compra: sin el dato, la opción de retiro se
- * muestra sin detalle.
+ * Wrapper opcional para contenido informativo existente. El checkout usa
+ * fetchPickupPointDetails para distinguir errores y confirmar los datos.
  */
 /** La compra necesita distinguir falta de configuración de una falla de consulta. */
 export const fetchPickupPointDetails = () => pedir<PickupPoint>("/store/pickup-point");

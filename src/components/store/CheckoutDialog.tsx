@@ -69,9 +69,10 @@ interface CheckoutDialogProps {
     /** Lo que el comprador ya eligió en el carrito: no se le vuelve a preguntar. */
     entregaInicial?: "retiro" | "envio";
     onCerrar: () => void;
+    onEntregaChange?: (entrega: "retiro" | "envio") => void;
 }
 
-export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0, entregaInicial }: CheckoutDialogProps) {
+export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0, entregaInicial, onEntregaChange }: CheckoutDialogProps) {
     const router = useRouter();
     const { cart, destinoEnvio, removeFromCart } = useCartStore();
     const dialogRef = useRef<HTMLDialogElement>(null);
@@ -487,6 +488,15 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
     const esEnvio = datos.entrega === "envio";
     const cambiarDireccion = (cambio: Partial<DireccionDelFormulario>) =>
         setDatos({ ...datos, direccion: { ...datos.direccion, ...cambio } });
+    const cambiarEntrega = (entrega: "retiro" | "envio") => {
+        // El carrito debe reflejar lo que eligió acá: cerrar y volver no cambia la modalidad.
+        onEntregaChange?.(entrega);
+        setDatos(previos => ({ ...previos, entrega, direccion: {
+            ...previos.direccion,
+            province: previos.direccion?.province || destinoEnvio.province,
+            postal_code: previos.direccion?.postal_code || destinoEnvio.postal_code,
+        } }));
+    };
 
     const paso: 1 | 2 | 3 = aConfirmar ? 3 : revision ? 2 : 1;
     const cantidadDeProductos = cart.reduce((suma, item) => suma + item.quantity, 0);
@@ -616,11 +626,10 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                                 name="entrega"
                                 className="mt-1 accent-[#1a6dff]"
                                 checked={!esEnvio}
-                                onChange={() => setDatos({ ...datos, entrega: "retiro" })}
+                                onChange={() => cambiarEntrega("retiro")}
                             />
                             <span className="flex-1">
                                 <span className="flex justify-between gap-2 font-semibold">Retiro en el local <span className="text-emerald-600 dark:text-emerald-400">Gratis</span></span>
-
                             </span>
                         </label>
                         <label className={`flex items-start gap-3 rounded-2xl border p-4 text-sm transition ${soloRetiro.length ? "cursor-not-allowed opacity-60" : "cursor-pointer"} ${esEnvio ? "border-primary bg-primary/10" : "border-slate-300 dark:border-slate-700"}`}>
@@ -631,11 +640,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                                 checked={esEnvio}
                                 disabled={soloRetiro.length > 0}
                                 aria-describedby={soloRetiro.length ? "solo-retiro" : undefined}
-                                onChange={() => setDatos({ ...datos, entrega: "envio", direccion: {
-                                    ...datos.direccion,
-                                    province: datos.direccion?.province || destinoEnvio.province,
-                                    postal_code: datos.direccion?.postal_code || destinoEnvio.postal_code,
-                                } })}
+                                onChange={() => cambiarEntrega("envio")}
                             />
                             <span className="flex-1">
                                 <span className="block font-semibold">Envío a domicilio</span>
@@ -777,7 +782,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                     {fallo && (
                         <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-500/10 dark:text-red-300">
                             <p role="alert">{fallo}</p>
-                            {!pedidoPendiente && problema?.ofrecerRetiro && <button type="button" className="min-h-11 underline" onClick={() => { setDatos({ ...datos, entrega: "retiro" }); setErrores({}); setRevision(null); setFallo(null); setProblema(null); }}>Retirar en el local</button>}
+                            {!pedidoPendiente && problema?.ofrecerRetiro && <button type="button" className="min-h-11 underline" onClick={() => { cambiarEntrega("retiro"); setErrores({}); setRevision(null); setFallo(null); setProblema(null); }}>Retirar en el local</button>}
                             {!pedidoPendiente && problema?.quitarSlug && <button type="button" className="min-h-11 underline" onClick={() => { cart.filter(i => i.storeSlug === problema.quitarSlug).forEach(i => removeFromCart(i.cartKey)); setFallo(null); setProblema(null); }}>Quitar del carrito</button>}
                             {pedidoPendiente && (
                                 <>

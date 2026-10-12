@@ -488,6 +488,7 @@ export default function StoreCartSheet() {
                 retiroSolicitado={retiroSolicitado}
                 entregaInicial={soloRetiro.length ? "retiro" : entrega}
                 abierto={comprando}
+                onEntregaChange={setEntrega}
                 onCerrar={() => {
                     setComprando(false);
                     openCart();
