@@ -554,7 +554,7 @@ for (const [code, width] of [['shipping_quote_required', 320], ['shipping_quote_
             const body = route.request().postDataJSON(); payloads.push(body);
             if (payloads.length === 1) return route.fulfill({ status: 409, headers: cors, json: { error: { code } } });
             reservations++;
-            return route.fulfill({ headers: cors, json: { ...createdOrder, shipping: body.shipping_address, shipping_amount: 20, total_amount: 120.01 } });
+            return route.fulfill({ headers: cors, json: { ...createdOrder, shipping: body.shipping_address, items: [{ ...createdOrder.items[0], unit_price: 100.01 }], subtotal_amount: 100.01, shipping_amount: 20, total_amount: 120.01 } });
         });
         page.on('request', req => { if (req.method() === 'POST' && /\/pay$/.test(req.url())) payments++; });
         await openCheckout(page); await fillShipping(page);
@@ -562,6 +562,7 @@ for (const [code, width] of [['shipping_quote_required', 320], ['shipping_quote_
         await checkout.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
         await checkout.getByRole('button', { name: 'Confirmar y pagar' }).click();
         await expect(checkout.getByRole('alert')).toContainText('Necesitamos actualizar el envío');
+        await expect(checkout.locator('[data-checkout-header]')).toContainText('Estimado:');
         expect(payloads[0].quote_id).toBe(quoteId);
         expect(await page.evaluate(() => localStorage.getItem('tc.checkout'))).toBeNull();
         await expect(checkout.getByLabel('Calle', { exact: true })).toHaveValue('Dirección de prueba');
@@ -572,6 +573,8 @@ for (const [code, width] of [['shipping_quote_required', 320], ['shipping_quote_
         await checkout.getByRole('button', { name: 'Confirmar y pagar' }).click();
         await expect(checkout.getByRole('heading', { name: 'Revisá y confirmá tu compra' })).toBeVisible();
         await expect(checkout.getByText(/Los importes cambiaron respecto de la revisión/)).toBeVisible();
+        await expect(checkout.locator('[data-checkout-header]')).toContainText(/100,01/);
+        await expect(checkout.locator('[data-checkout-header]')).not.toContainText('Estimado:');
         await expect(checkout.getByText(/120,01/, { exact: false })).toBeVisible();
         expect(payloads[1].quote_id).toBe(nextQuoteId); expect(payloads[1].checkout_key).not.toBe(payloads[0].checkout_key);
         expect(reservations).toBe(1); expect(payments).toBe(0);

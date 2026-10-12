@@ -498,7 +498,9 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
 
     if (!abierto) return null;
 
-    const numeroPedido = (aConfirmar ?? pedidoPendiente)?.commerce_key;
+    const pedidoEncabezado = aConfirmar ?? pedidoPendiente;
+    const numeroPedido = pedidoEncabezado?.commerce_key;
+    const subtotalEncabezado = pedidoEncabezado ? importeConfirmado(pedidoEncabezado.subtotal_amount) : estimadoDeProductos;
     const soloRetiro = productosSoloRetiro(items);
     const esEnvio = datos.entrega === "envio";
     const cambiarDireccion = (cambio: Partial<DireccionDelFormulario>) =>
@@ -538,7 +540,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                     </div>
                     <Pasos actual={paso} />
                     <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-                        {cantidadDeProductos} {cantidadDeProductos === 1 ? "producto" : "productos"} · {pesos(estimadoDeProductos)}
+                        {cantidadDeProductos} {cantidadDeProductos === 1 ? "producto" : "productos"} · {!pedidoEncabezado && "Estimado: "}{subtotalEncabezado === null ? "Productos por confirmar" : pesos(subtotalEncabezado)}
                         {paso === 1 ? (datos.entrega === "envio" ? " + envío" : " · retiro sin costo") : ""}
                     </p>
                 </div>
