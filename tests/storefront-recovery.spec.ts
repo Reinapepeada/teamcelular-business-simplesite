@@ -88,7 +88,7 @@ test('F8 validación de nombre y CPA antes de cotizar, sin crear pedido', async 
         if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: cors });
         quotes++;
         expect(route.request().postDataJSON().postal_code).toBe('C1425ABC');
-        return route.fulfill({ headers: cors, json: { cheapest: { price: 20 }, options: [{ price: 20 }] } });
+        return route.fulfill({ headers: cors, json: { quote_id: "11111111-1111-4111-8111-111111111111", expires_at: "2099-01-01T12:00:00Z", checkout_ready: true, cheapest: { price: 20 }, options: [{ price: 20 }] } });
     });
     page.on('request', req => { if (new URL(req.url()).pathname === '/store/checkout') creates++; });
     await page.goto('/tienda');
@@ -224,7 +224,7 @@ test('retiro incompleto permite envío válido sin crear pedido y conserva datos
     await seed(page, 1, false);
     await isolate(page, () => status());
     await page.route('**/store/pickup-point', route => route.fulfill({ headers: cors, json: { name: 'Local de prueba', address: '', hours: null } }));
-    await page.route('**/store/shipping/quote', route => route.fulfill({ headers: cors, json: { cheapest: { price: 20 }, options: [{ price: 20 }] } }));
+    await page.route('**/store/shipping/quote', route => route.fulfill({ headers: cors, json: { quote_id: "11111111-1111-4111-8111-111111111111", expires_at: "2099-01-01T12:00:00Z", checkout_ready: true, cheapest: { price: 20 }, options: [{ price: 20 }] } }));
     let creates = 0;
     page.on('request', req => { if (new URL(req.url()).pathname === '/store/checkout') creates++; });
     await openCheckout(page);
@@ -245,7 +245,7 @@ for (const failure of ['SHIPPING_UNAVAILABLE', 'http500', 'network'] as const) {
             if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: cors });
             quotes++;
             expect(route.request().postDataJSON().postal_code).toBe('C1425ABC');
-            if (ready) return route.fulfill({ headers: cors, json: { cheapest: { price: 20 }, options: [{ price: 20 }] } });
+            if (ready) return route.fulfill({ headers: cors, json: { quote_id: "11111111-1111-4111-8111-111111111111", expires_at: "2099-01-01T12:00:00Z", checkout_ready: true, cheapest: { price: 20 }, options: [{ price: 20 }] } });
             if (failure === 'network') return route.abort();
             return route.fulfill({ status: failure === 'http500' ? 500 : 409, headers: cors, json: { error: { code: failure } } });
         });
@@ -404,7 +404,7 @@ test('falla de cotización en checkout conserva toda la dirección al reintentar
     await page.route('**/store/shipping/quote', route => {
         if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: cors });
         destinations.push(route.request().postDataJSON());
-        return route.fulfill(ready ? { headers: cors, json: { cheapest: { price: 20 }, options: [{ price: 20 }] } } : { status: 503, headers: cors, json: { error: { code: 'SHIPPING_UNAVAILABLE' } } });
+        return route.fulfill(ready ? { headers: cors, json: { quote_id: "11111111-1111-4111-8111-111111111111", expires_at: "2099-01-01T12:00:00Z", checkout_ready: true, cheapest: { price: 20 }, options: [{ price: 20 }] } } : { status: 503, headers: cors, json: { error: { code: 'SHIPPING_UNAVAILABLE' } } });
     });
     page.on('request', req => { if (new URL(req.url()).pathname === '/store/checkout') creates++; });
     await openCheckout(page);
@@ -426,7 +426,7 @@ test('error contractual tras confirmar vuelve al campo completo y mantiene el de
     await page.setViewportSize({ width: 320, height: 568 });
     await seed(page, 1, false);
     await isolate(page, () => status());
-    await page.route('**/store/shipping/quote', route => route.fulfill({ headers: cors, json: { cheapest: { price: 20 }, options: [{ price: 20 }] } }));
+    await page.route('**/store/shipping/quote', route => route.fulfill({ headers: cors, json: { quote_id: "11111111-1111-4111-8111-111111111111", expires_at: "2099-01-01T12:00:00Z", checkout_ready: true, cheapest: { price: 20 }, options: [{ price: 20 }] } }));
     await page.route('**/store/checkout', route => route.request().method() === 'OPTIONS' ? route.fulfill({ status: 204, headers: cors }) : route.fulfill({ status: 422, headers: cors, json: { error: { code: 'VALIDATION_ERROR', details: { fields: ['street_name'] } } } }));
     await openCheckout(page);
     await fillShipping(page);
@@ -450,7 +450,7 @@ test('cambiar modalidad desde carrito invalida sólo la revisión sin reservar',
     await seed(page, 1, false);
     await isolate(page, () => status());
     let creates = 0;
-    await page.route('**/store/shipping/quote', route => route.fulfill({ headers: cors, json: { cheapest: { price: 20 }, options: [{ price: 20 }] } }));
+    await page.route('**/store/shipping/quote', route => route.fulfill({ headers: cors, json: { quote_id: "11111111-1111-4111-8111-111111111111", expires_at: "2099-01-01T12:00:00Z", checkout_ready: true, cheapest: { price: 20 }, options: [{ price: 20 }] } }));
     page.on('request', req => { if (new URL(req.url()).pathname === '/store/checkout') creates++; });
     await openCheckout(page);
     await fillShipping(page);
@@ -471,4 +471,216 @@ test('cambiar modalidad desde carrito invalida sólo la revisión sin reservar',
     await expect(page.getByText(/Dirección de prueba · 123.*CP C1425ABC/)).toBeVisible();
     expect(creates).toBe(0);
     expect(await page.evaluate(() => localStorage.getItem('tc.checkout'))).toBeNull();
+});
+
+const quoteId = '11111111-1111-4111-8111-111111111111';
+const nextQuoteId = '22222222-2222-4222-8222-222222222222';
+const readyShippingQuote = (id = quoteId) => ({ quote_id: id, expires_at: '2099-01-01T12:00:00Z', checkout_ready: true, package_status: 'estimated', hours_basis: 'carrier_transit_after_dispatch', cheapest: { price: 20, hours: 48 }, options: [{ price: 20 }] });
+
+for (const [width, height] of [[320, 568], [375, 667], [1280, 900]]) {
+    test(`stock repartido conserva carrito y destino sin cobrar ni pedir quitar productos ${width}px`, async ({ page }, testInfo) => {
+        await page.setViewportSize({ width, height });
+        await seed(page, 2, false); // Dos unidades agregadas, que el servidor no puede servir desde un solo local.
+        await isolate(page, () => status());
+        let creates = 0, payments = 0;
+        await page.route('**/store/shipping/quote', route => route.request().method() === 'OPTIONS'
+            ? route.fulfill({ status: 204, headers: cors })
+            : route.fulfill({ status: 409, headers: cors, json: { error: { code: 'stock_requires_consolidation' } } }));
+        page.on('request', req => { if (req.method() !== 'POST') return; if (new URL(req.url()).pathname === '/store/checkout') creates++; if (/\/pay$/.test(req.url())) payments++; });
+        await openCheckout(page);
+        await fillShipping(page);
+        const checkout = page.getByRole('dialog', { name: 'Finalizar compra' });
+        await checkout.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
+        await expect(checkout.getByRole('alert')).toHaveText(/Necesitamos reunir estos productos en un local/);
+        await expect(checkout.getByRole('button', { name: 'Quitar del carrito' })).toHaveCount(0);
+        await expect(checkout.getByRole('button', { name: 'Retirar en el local', exact: true })).toHaveCount(0);
+        await expect(checkout.getByRole('button', { name: 'Confirmar y pagar' })).toHaveCount(0);
+        await expect(checkout.getByRole('link', { name: 'Consultar por este envío' })).toBeVisible();
+        await expect(checkout.getByLabel('Código postal', { exact: true })).toHaveValue('C1425ABC');
+        await expect(checkout.getByLabel(/Origen|Peso|Ancho|Largo|Alto|Seguro/)).toHaveCount(0);
+        await checkout.getByRole('alert').scrollIntoViewIfNeeded();
+        expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+        await page.screenshot({ path: testInfo.outputPath(`consolidation-preserved-${width}.png`) });
+        await checkout.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
+        expect(creates).toBe(0); expect(payments).toBe(0);
+        expect(await page.evaluate(() => localStorage.getItem('tc.checkout'))).toBeNull();
+        expect(await page.evaluate(() => JSON.parse(localStorage.getItem('cart-storage')!).state.cart[0].quantity)).toBe(2);
+        await page.getByRole('button', { name: 'Volver al carrito' }).click();
+        const cart = page.getByRole('dialog', { name: 'Resumen del carrito' });
+        await expect(cart.getByText(/Necesitamos reunir estos productos en un local/)).toBeVisible();
+        await expect(cart.getByRole('link', { name: 'Consultar por este envío' })).toBeVisible();
+        await expect(cart.locator('#carrito-cp')).toHaveValue('C1425ABC');
+    });
+}
+
+for (const [code, text] of [
+    ['shipping_configuration_required', 'Estamos preparando los envíos'],
+    ['shipping_package_review_required', 'Necesitamos revisar el paquete'],
+]) {
+    test(`${code} preserva datos y sólo retiro elegido explícitamente sigue disponible`, async ({ page }, testInfo) => {
+        await page.setViewportSize({ width: 375, height: 667 });
+        await seed(page, 1, false); await isolate(page, () => status());
+        await page.route('**/store/shipping/quote', route => route.request().method() === 'OPTIONS' ? route.fulfill({ status: 204, headers: cors }) : route.fulfill({ status: 409, headers: cors, json: { error: { code } } }));
+        let creates = 0, payments = 0;
+        page.on('request', req => { if (req.method() !== 'POST') return; if (new URL(req.url()).pathname === '/store/checkout') creates++; if (/\/pay$/.test(req.url())) payments++; });
+        await openCheckout(page); await fillShipping(page);
+        const checkout = page.getByRole('dialog', { name: 'Finalizar compra' });
+        await checkout.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
+        await expect(checkout.getByRole('alert')).toContainText(text);
+        await expect(checkout.getByRole('button', { name: 'Confirmar y pagar' })).toHaveCount(0);
+        await checkout.getByRole('alert').scrollIntoViewIfNeeded();
+        await page.screenshot({ path: testInfo.outputPath(`${code}.png`) });
+        await checkout.getByRole('radio', { name: /Retiro en el local/ }).check();
+        await checkout.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
+        await expect(checkout.getByRole('heading', { name: 'Revisá tu pedido' })).toBeVisible();
+        await expect(checkout.getByText('Local de prueba · Dirección ficticia 123 · Lunes 10 a 18')).toBeVisible();
+        expect(creates).toBe(0); expect(payments).toBe(0);
+    });
+}
+
+for (const [code, width] of [['shipping_quote_required', 320], ['shipping_quote_expired', 375], ['shipping_quote_changed', 1280]] as const) {
+    test(`${code} exige nueva revisión aun con mismo precio y conserva destino ${width}px`, async ({ page }, testInfo) => {
+        await page.setViewportSize({ width, height: width === 320 ? 568 : width === 375 ? 667 : 900 });
+        await seed(page, 1, false); await isolate(page, () => status());
+        let quotes = 0, reservations = 0, payments = 0;
+        const payloads: Record<string, unknown>[] = [];
+        await page.route('**/store/shipping/quote', route => {
+            if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: cors });
+            quotes++;
+            return route.fulfill({ headers: cors, json: readyShippingQuote(quotes === 1 ? quoteId : nextQuoteId) });
+        });
+        await page.route('**/store/checkout', route => {
+            if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: cors });
+            const body = route.request().postDataJSON(); payloads.push(body);
+            if (payloads.length === 1) return route.fulfill({ status: 409, headers: cors, json: { error: { code } } });
+            reservations++;
+            return route.fulfill({ headers: cors, json: { ...createdOrder, shipping: body.shipping_address, shipping_amount: 20, total_amount: 120.01 } });
+        });
+        page.on('request', req => { if (req.method() === 'POST' && /\/pay$/.test(req.url())) payments++; });
+        await openCheckout(page); await fillShipping(page);
+        const checkout = page.getByRole('dialog', { name: 'Finalizar compra' });
+        await checkout.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
+        await checkout.getByRole('button', { name: 'Confirmar y pagar' }).click();
+        await expect(checkout.getByRole('alert')).toContainText('Necesitamos actualizar el envío');
+        expect(payloads[0].quote_id).toBe(quoteId);
+        expect(await page.evaluate(() => localStorage.getItem('tc.checkout'))).toBeNull();
+        await expect(checkout.getByLabel('Calle', { exact: true })).toHaveValue('Dirección de prueba');
+        await expect(checkout.getByLabel('Código postal', { exact: true })).toHaveValue('C1425ABC');
+        await checkout.getByRole('button', { name: 'Volver a calcular envío' }).click();
+        await expect(checkout.getByRole('heading', { name: 'Revisá tu pedido' })).toBeVisible();
+        expect(payloads).toHaveLength(1); expect(reservations).toBe(0); expect(payments).toBe(0);
+        await checkout.getByRole('button', { name: 'Confirmar y pagar' }).click();
+        await expect(checkout.getByRole('heading', { name: 'Revisá y confirmá tu compra' })).toBeVisible();
+        await expect(checkout.getByText(/Los importes cambiaron respecto de la revisión/)).toBeVisible();
+        await expect(checkout.getByText(/120,01/, { exact: false })).toBeVisible();
+        expect(payloads[1].quote_id).toBe(nextQuoteId); expect(payloads[1].checkout_key).not.toBe(payloads[0].checkout_key);
+        expect(reservations).toBe(1); expect(payments).toBe(0);
+        expect(await page.evaluate(() => JSON.parse(localStorage.getItem('tc.checkout')!).payload.quote_id)).toBe(nextQuoteId);
+        await checkout.getByRole('button', { name: 'Ir a pagar' }).scrollIntoViewIfNeeded();
+        await page.screenshot({ path: testInfo.outputPath(`quote-reviewed-exact-${width}.png`) });
+        await page.reload();
+        await page.getByRole('button', { name: /Abrir carrito/ }).click();
+        expect(await page.evaluate(() => JSON.parse(localStorage.getItem('cart-storage')!).state.cart[0].quantity)).toBe(1);
+        expect(reservations).toBe(1); expect(payments).toBe(0);
+    });
+}
+
+test('snapshot guardado recupera misma compra tras respuesta perdida, sin recotizar ni pagar', async ({ page }) => {
+    await seed(page, 1, false); await isolate(page, () => status());
+    let quotes = 0, payments = 0;
+    const payloads: Record<string, unknown>[] = [];
+    await page.route('**/store/shipping/quote', route => {
+        if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: cors });
+        quotes++; return route.fulfill({ headers: cors, json: readyShippingQuote() });
+    });
+    await page.route('**/store/checkout', route => {
+        if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: cors });
+        const body = route.request().postDataJSON(); payloads.push(body);
+        if (payloads.length === 1) return route.abort(); // Servidor podría haber creado: nunca sustituir el intento.
+        return route.fulfill({ headers: cors, json: { ...createdOrder, shipping: body.shipping_address, shipping_amount: 20, total_amount: 120 } });
+    });
+    page.on('request', req => { if (req.method() === 'POST' && /\/pay$/.test(req.url())) payments++; });
+    await openCheckout(page); await fillShipping(page);
+    await page.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
+    await page.getByRole('button', { name: 'Confirmar y pagar' }).click();
+    await expect(page.getByRole('button', { name: 'Recuperar y revisar pedido' })).toBeVisible();
+    expect(await page.evaluate(() => JSON.parse(localStorage.getItem('tc.checkout')!).payload.quote_id)).toBe(quoteId);
+    await page.reload();
+    await page.getByRole('button', { name: /Abrir carrito/ }).click();
+    await page.getByRole('button', { name: 'Continuar con la compra' }).click();
+    await page.getByRole('button', { name: 'Recuperar y revisar pedido' }).click();
+    await expect(page.getByRole('heading', { name: 'Revisá y confirmá tu compra' })).toBeVisible();
+    expect(payloads).toHaveLength(2); expect(payloads[1]).toEqual(payloads[0]);
+    expect(quotes).toBe(1); expect(payments).toBe(0);
+});
+
+test('destino cambiado desde carrito invalida snapshot previo sin borrar contacto ni calle', async ({ page }) => {
+    await seed(page, 1, false); await isolate(page, () => status());
+    const destinations: string[] = []; let creates = 0;
+    await page.route('**/store/shipping/quote', route => {
+        if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: cors });
+        destinations.push(route.request().postDataJSON().postal_code);
+        return route.fulfill({ headers: cors, json: readyShippingQuote() });
+    });
+    page.on('request', req => { if (req.method() === 'POST' && new URL(req.url()).pathname === '/store/checkout') creates++; });
+    await openCheckout(page); await fillShipping(page);
+    await page.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
+    await page.getByRole('button', { name: 'Volver al carrito' }).click();
+    await page.locator('#carrito-cp').fill('C1414ABC');
+    await page.getByRole('button', { name: 'Continuar con la compra' }).click();
+    const checkout = page.getByRole('dialog', { name: 'Finalizar compra' });
+    await expect(checkout.getByRole('heading', { name: 'Tus datos y entrega' })).toBeVisible();
+    await expect(checkout.getByLabel('Código postal', { exact: true })).toHaveValue('C1414ABC');
+    await expect(checkout.getByLabel('Nombre y apellido', { exact: true })).toHaveValue('Ana Prueba');
+    await expect(checkout.getByLabel('Calle', { exact: true })).toHaveValue('Dirección de prueba');
+    expect(creates).toBe(0);
+    await checkout.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
+    await expect(checkout.getByText(/CP C1414ABC/)).toBeVisible();
+    expect(destinations.at(-1)).toBe('C1414ABC'); expect(creates).toBe(0);
+});
+
+test('respuesta tardía de quote no reactiva revisión para destino viejo de otra pestaña', async ({ page, context }) => {
+    await seed(page, 1, false); await isolate(page, () => status());
+    let release: (() => void) | undefined; let quotes = 0, creates = 0;
+    await page.route('**/store/shipping/quote', async route => {
+        if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: cors });
+        quotes++;
+        if (quotes === 1) await new Promise<void>(resolve => { release = resolve; });
+        return route.fulfill({ headers: cors, json: readyShippingQuote() });
+    });
+    page.on('request', req => { if (req.method() === 'POST' && new URL(req.url()).pathname === '/store/checkout') creates++; });
+    await openCheckout(page); await fillShipping(page);
+    await page.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
+    await expect.poll(() => !!release).toBe(true);
+    const other = await context.newPage(); await other.goto('/tienda');
+    await other.getByRole('button', { name: /Abrir carrito/ }).click();
+    await other.getByRole('dialog', { name: 'Resumen del carrito' }).locator('label').filter({ has: other.locator('input[name="carrito-entrega"]') }).nth(1).click();
+    await other.locator('#carrito-cp').fill('C1414ABC');
+    await expect(page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Código postal', { exact: true })).toHaveValue('C1414ABC');
+    release!();
+    await expect(page.getByRole('dialog', { name: 'Finalizar compra' }).getByRole('alert')).toContainText('El carrito o el destino cambió');
+    await expect(page.getByRole('button', { name: 'Confirmar y pagar' })).toHaveCount(0);
+    expect(creates).toBe(0); expect(await page.evaluate(() => localStorage.getItem('tc.checkout'))).toBeNull();
+});
+
+test('readiness ausente no habilita compra y horas sin base no prometen llegada', async ({ page }) => {
+    await seed(page, 1, false); await isolate(page, () => status());
+    await page.route('**/store/shipping/quote', route => route.fulfill({ headers: cors, json: { ...readyShippingQuote(), checkout_ready: undefined } }));
+    await openCheckout(page); await fillShipping(page);
+    await page.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
+    await expect(page.getByRole('dialog', { name: 'Finalizar compra' }).getByRole('alert')).toContainText('Estamos preparando los envíos');
+    await expect(page.getByRole('button', { name: 'Confirmar y pagar' })).toHaveCount(0);
+    expect(await page.evaluate(() => localStorage.getItem('tc.checkout'))).toBeNull();
+});
+
+test('cotización lista muestra sólo tránsito desde despacho, sin prometer llegada ni seguro', async ({ page }, testInfo) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await seed(page, 1, false); await isolate(page, () => status());
+    await page.route('**/store/shipping/quote', route => route.fulfill({ headers: cors, json: readyShippingQuote() }));
+    await page.goto('/tienda'); await page.getByRole('button', { name: /Abrir carrito/ }).click();
+    const cart = page.getByRole('dialog', { name: 'Resumen del carrito' });
+    await cart.locator('label').filter({ has: page.locator('input[name="carrito-entrega"]') }).nth(1).click();
+    await expect(cart.getByText(/Tránsito estimado: ~48 h desde el despacho. No incluye preparación./)).toBeVisible();
+    await expect(cart.getByText(/llega en|envío asegurado|tarifa reservada/i)).toHaveCount(0);
+    await page.screenshot({ path: testInfo.outputPath('shipping-transit-estimate-375.png') });
 });

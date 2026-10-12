@@ -68,8 +68,7 @@ export function ResumenAConfirmar({
             <p className="text-xs text-slate-500 dark:text-slate-400">Estos son los datos guardados en tu pedido. Si necesitás cambiarlos, escribinos antes de pagar.</p>
             {r.precioCambio && (
                 <p className="rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-800 dark:bg-amber-500/10 dark:text-amber-300">
-                    {"El total cambió " + pesos(r.diferencia, r.moneda) + " respecto del estimado."}{" "}
-                    Este es el importe que se va a cobrar.
+                    Los importes cambiaron respecto de la revisión. Confirmá el envío y el total antes de pagar.
                 </p>
             )}
 

@@ -16,7 +16,7 @@ test("F8 CP4 y CPA se conservan completos y canónicos en cotización y pedido",
         assert.deepEqual(validarDatos(compra, items), {});
         await revisarPedido(compra, items, 100, async (_province, cp) => {
             assert.equal(cp, normalizado);
-            return { cheapest: { price: 20 }, options: [] };
+            return { quote_id: "11111111-1111-4111-8111-111111111111", expires_at: "2099-01-01T12:00:00Z", checkout_ready: true, cheapest: { price: 20 }, options: [] };
         });
         const direccion = armarPedido(compra, items, "ck-1").shipping_address!;
         assert.equal(direccion.postal_code, normalizado);

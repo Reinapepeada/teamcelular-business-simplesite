@@ -76,6 +76,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
     const router = useRouter();
     const { cart, destinoEnvio, removeFromCart } = useCartStore();
     const dialogRef = useRef<HTMLDialogElement>(null);
+    const ultimoDestinoCarrito = useRef(destinoEnvio);
 
     const [datos, setDatos] = useState<DatosDeCompra>({
         nombre: "",
@@ -85,7 +86,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
         direccion: {},
     });
     const ocupado = useRef(false);
-    const [revision, setRevision] = useState<(Awaited<ReturnType<typeof revisarPedido>> & { huella: string; datos: DatosDeCompra }) | null>(null);
+    const [revision, setRevision] = useState<(Awaited<ReturnType<typeof revisarPedido>> & { huella: string; datos: DatosDeCompra; destinoCarrito: typeof destinoEnvio }) | null>(null);
     const [problema, setProblema] = useState<ProblemaDeCheckout | null>(null);
     const [productosRevisados, setProductosRevisados] = useState(0);
     const [estimadoEnvio, setEstimadoEnvio] = useState(0);
@@ -125,8 +126,10 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
     useEffect(() => {
         if (!abierto || !entregaInicial) return;
         const frame = requestAnimationFrame(() => {
-            // Una revisión anterior todavía no reservó nada: cambiar de modalidad exige revisarla otra vez.
-            setRevision(actual => actual && actual.datos.entrega !== entregaInicial ? null : actual);
+            const cambioDestino = JSON.stringify(ultimoDestinoCarrito.current) !== JSON.stringify(destinoEnvio);
+            ultimoDestinoCarrito.current = destinoEnvio;
+            // Sólo la revisión no reservada se invalida; nunca se cambia un payload enviado.
+            setRevision(actual => actual && (actual.datos.entrega !== entregaInicial || (entregaInicial === "envio" && cambioDestino)) ? null : actual);
             setDatos(previos =>
                 entregaInicial === "envio"
                     ? {
@@ -134,15 +137,15 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                           entrega: "envio",
                           direccion: {
                               ...previos.direccion,
-                              province: previos.direccion?.province || destinoEnvio.province,
-                              postal_code: previos.direccion?.postal_code || destinoEnvio.postal_code,
+                              province: cambioDestino ? destinoEnvio.province : previos.direccion?.province || destinoEnvio.province,
+                              postal_code: cambioDestino ? destinoEnvio.postal_code : previos.direccion?.postal_code || destinoEnvio.postal_code,
                           },
                       }
                     : { ...previos, entrega: "retiro" }
             );
         });
         return () => cancelAnimationFrame(frame);
-    }, [abierto, entregaInicial, destinoEnvio.province, destinoEnvio.postal_code]);
+    }, [abierto, entregaInicial, destinoEnvio]);
 
     useEffect(() => {
         if (!abierto) return;
@@ -197,6 +200,10 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
         () => huellaDelCarrito(aLineasDeCheckout(items).lineas),
         [items]
     );
+
+    const contextoRevision = JSON.stringify([datos, huellaActual, estimadoDeProductos, destinoEnvio, abierto]);
+    const contextoActual = useRef(contextoRevision);
+    useEffect(() => { contextoActual.current = contextoRevision; }, [contextoRevision]);
 
     // **Un pedido creado y sin pagar sobrevive a la recarga**, y se suelta si
     // el carrito pasa a ser otro. La regla completa, con sus bordes, vive en
@@ -336,13 +343,21 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
         setProblema(null);
         try {
             const r = await revisarPedido(datos, items, estimadoDeProductos, quoteShipping);
-            setRevision({ ...r, datos: structuredClone(datos), huella: huellaActual });
+            if (contextoActual.current !== contextoRevision) {
+                setFallo("El carrito o el destino cambió. Revisá el pedido otra vez.");
+                return;
+            }
+            setRevision({ ...r, datos: structuredClone(datos), huella: huellaActual, destinoCarrito: { ...destinoEnvio } });
             setEstimadoEnvio(r.envio);
             setProductosRevisados(r.productos);
         } catch (error) {
+            if (contextoActual.current !== contextoRevision) {
+                setFallo("El carrito o el destino cambió. Revisá el pedido otra vez.");
+                return;
+            }
             const p = problemaDeCheckout(error, items);
             setErrores(p.campos ?? {});
-            setProblema({ ...p, ofrecerRetiro: datos.entrega === "envio" || p.ofrecerRetiro });
+            setProblema(p);
             setFallo(p.mensaje);
         } finally {
             ocupado.current = false;
@@ -353,7 +368,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
     const confirmarRevision = async () => {
         if (!revision || ocupado.current || pedidoPendiente || aConfirmar) return;
         if (revision.datos.entrega === "retiro" && retiro.status !== "ready") return;
-        if (revision.datos.entrega !== datos.entrega || (entregaInicial && revision.datos.entrega !== entregaInicial) || hayErrores(validarDatos(revision.datos, items)) || revision.huella !== huellaActual || revision.productos !== estimadoDeProductos) {
+        if (revision.datos.entrega !== datos.entrega || (entregaInicial && revision.datos.entrega !== entregaInicial) || hayErrores(validarDatos(revision.datos, items)) || revision.huella !== huellaActual || revision.productos !== estimadoDeProductos || JSON.stringify(revision.datos) !== JSON.stringify(datos) || (revision.datos.entrega === "envio" && JSON.stringify(revision.destinoCarrito) !== JSON.stringify(destinoEnvio))) {
             setRevision(null);
             setFallo("El carrito cambió. Revisá el pedido otra vez.");
             return;
@@ -368,7 +383,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
         setFallo(null);
         try {
             const { payload, recuperado } = await prepararIntento(window.localStorage, aLineasDeCheckout(items).lineas,
-                (clave, secreto) => armarPedido(revision.datos, items, clave, secreto));
+                (clave, secreto) => armarPedido(revision.datos, items, clave, secreto, revision.quoteId));
             setIntentoPendiente(true);
             const { pedido, checkoutUrl } = await reservarYPagarSiCoincide(
                 {
@@ -453,11 +468,9 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
             // servir para recuperar el mismo pedido.
             irAPagar(url);
         } catch (error) {
-            setFallo(
-                error instanceof ErrorDeCompra
-                    ? error.message
-                    : "No pudimos abrir el pago. Probá de nuevo."
-            );
+            const p = problemaDeCheckout(error, items);
+            setProblema(p);
+            setFallo(p.mensaje);
             // El pedido sigue vivo y con su token: se ofrece reintentar solo el
             // link en vez de crear otro.
             setPedidoPendiente(aConfirmar);
@@ -811,11 +824,11 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                         disabled={enviando || cart.length === 0 || pedidoPendiente !== null || (!esEnvio && retiro.status !== "ready")}
                         className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-5 text-base font-semibold text-white transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
                     >
-                        {enviando ? "Un momento…" : "Revisar pedido"}
+                        {enviando ? "Un momento…" : problema?.recalcularEnvio ? "Volver a calcular envío" : "Revisar pedido"}
                     </button>
                 </form>
                 )}
-                <a className="mt-4 flex min-h-11 items-center justify-center text-sm text-slate-600 underline-offset-4 hover:underline dark:text-slate-400" href={whatsappUrl("Hola, necesito ayuda con " + (numeroPedido ? "el pedido " + numeroPedido : "mi compra en la tienda") + ".")} target="_blank" rel="noopener noreferrer">¿Dudas? Escribinos por WhatsApp</a>
+                <a className="mt-4 flex min-h-11 items-center justify-center text-sm text-slate-600 underline-offset-4 hover:underline dark:text-slate-400" href={whatsappUrl("Hola, necesito ayuda con " + (numeroPedido ? "el pedido " + numeroPedido : "mi compra en la tienda") + ".")} target="_blank" rel="noopener noreferrer">{problema?.consultarEnvio ? "Consultar por este envío" : "¿Dudas? Escribinos por WhatsApp"}</a>
                 </div>
             </dialog>
     );

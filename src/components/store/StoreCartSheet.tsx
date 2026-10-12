@@ -17,6 +17,7 @@ import {
 import { buildProductSlug } from "@/lib/productSlug";
 import useCartStore, { type CartItem } from "@/store/cartStore";
 import { codigoPostalValido, errorDeCantidades, errorDeDestino, normalizarCodigoPostal } from "@/lib/commerceValidation";
+import { exigirCotizacionLista, plazoDeTransporte } from "@/lib/shippingQuote";
 import { problemaDeCheckout } from "@/lib/checkoutFlow";
 import CheckoutDialog from "./CheckoutDialog";
 import { usePickupPoint } from "@/hooks/usePickupPoint";
@@ -84,8 +85,8 @@ export default function StoreCartSheet() {
     // Las sumas viven en src/lib/totalesDelCarrito.ts, que explica por que
     // esto es un estimado: los precios salen de lo que el navegador guardo.
     const { unidades: totalItems, productos: totalPrice } = totalesDelCarrito(cart);
-    const [cotizacion, setCotizacion] = useState<{ clave: string; opcion: ShippingQuote["cheapest"] } | null>(null);
-    const [falloEnvio, setFalloEnvio] = useState<{ clave: string; mensaje: string; soloRetiro?: boolean } | null>(null);
+    const [cotizacion, setCotizacion] = useState<{ clave: string; opcion: ShippingQuote["cheapest"]; plazo: string | null } | null>(null);
+    const [falloEnvio, setFalloEnvio] = useState<{ clave: string; mensaje: string; soloRetiro?: boolean; consultar?: boolean } | null>(null);
     const [calculando, setCalculando] = useState(false);
     const solicitudEnvio = useRef(0);
     const items = cart.map(item => ({ slug: item.storeSlug, quantity: item.quantity, nombre: item.product.name, shipping_enabled: item.shipping_enabled }));
@@ -118,22 +119,23 @@ export default function StoreCartSheet() {
         }
         setCalculando(true);
         try {
-            const resultado = await quoteShipping(destinoEnvio.province, normalizarCodigoPostal(destinoEnvio.postal_code), lineasEnvio.lineas);
+            const resultado = exigirCotizacionLista(await quoteShipping(destinoEnvio.province, normalizarCodigoPostal(destinoEnvio.postal_code), lineasEnvio.lineas));
             if (solicitud !== solicitudEnvio.current || claveActual.current !== claveEnvio) return;
             if (totalEstimadoConEnvio(totalPrice, resultado.cheapest?.price ?? null) === null) throw new Error("Cotización inválida");
-            setCotizacion({ clave: claveEnvio, opcion: resultado.cheapest });
+            setCotizacion({ clave: claveEnvio, opcion: resultado.cheapest, plazo: plazoDeTransporte(resultado) });
         } catch (error) {
             if (solicitud !== solicitudEnvio.current || claveActual.current !== claveEnvio) return;
             if (error instanceof StoreApiError && error.code === "PICKUP_ONLY") {
                 setFalloEnvio({ clave: claveEnvio, mensaje: problemaDeCheckout(error, items).mensaje, soloRetiro: true });
                 return;
             }
-            const mensaje = error instanceof StoreApiError && error.code === "SHIPPING_UNAVAILABLE"
-                ? "No pudimos cotizar el envío. Reintentá con el mismo destino o elegí retiro."
+            const problema = problemaDeCheckout(error, items);
+            const mensaje = error instanceof StoreApiError && (error.code.startsWith("SHIPPING_") || error.code === "STOCK_REQUIRES_CONSOLIDATION")
+                ? problema.mensaje
                 : error instanceof StoreApiError && error.code === "PRODUCT_NOT_FOUND"
                   ? "Un producto ya no está disponible. Revisá el carrito."
                   : "No pudimos calcular el envío en este momento. Reintentá sin cambiar tus datos.";
-            setFalloEnvio({ clave: claveEnvio, mensaje });
+            setFalloEnvio({ clave: claveEnvio, mensaje, consultar: problema.consultarEnvio });
         } finally {
             if (solicitud === solicitudEnvio.current) setCalculando(false);
         }
@@ -431,12 +433,13 @@ export default function StoreCartSheet() {
                                     {envio && (
                                         <p className="text-slate-600 dark:text-slate-400">
                                             Envío a CP {destinoEnvio.postal_code.trim()}: <strong className="text-slate-950 dark:text-slate-50">${formatPrice(envio.price)}</strong>
-                                            {envio.hours != null && Number.isFinite(envio.hours) && envio.hours > 0 ? ` · llega en ~${envio.hours} h` : ""}
+                                            {cotizacion?.plazo && <span className="mt-1 block">{cotizacion.plazo}</span>}
                                         </p>
                                     )}
                                     {falloEnvio?.clave === claveEnvio && (
                                         <div className="text-rose-600 dark:text-rose-300">
                                             <p>{falloEnvio.mensaje}</p>
+                                            {falloEnvio.consultar && <a className="inline-flex min-h-11 items-center underline" href={`https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`} target="_blank" rel="noopener noreferrer">Consultar por este envío</a>}
                                             {falloEnvio.soloRetiro && <button type="button" className="min-h-11 underline" onClick={() => { setEntrega("retiro"); setRetiroSolicitado(value => value + 1); closeCart(); setComprando(true); }}>Retirar en el local</button>}
                                         </div>
                                     )}

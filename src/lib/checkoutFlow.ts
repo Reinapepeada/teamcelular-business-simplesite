@@ -1,3 +1,4 @@
+import { exigirCotizacionLista } from "./shippingQuote";
 /**
  * El camino del carrito a la pantalla de pago.
  *
@@ -137,7 +138,8 @@ export const armarPedido = (
     datos: DatosDeCompra,
     items: ItemComprable[],
     checkoutKey: string,
-    recoveryToken?: string
+    recoveryToken?: string,
+    quoteId?: string
 ): CheckoutPayload => {
     const { lineas } = aLineasDeCheckout(items);
     const payload: CheckoutPayload = {
@@ -151,6 +153,7 @@ export const armarPedido = (
     if (telefono) payload.customer_phone = telefono;
 
     if (datos.entrega === "envio") {
+        if (quoteId) payload.quote_id = quoteId;
         const d = datos.direccion ?? {};
         // Conservamos los textos combinados para versiones anteriores del backend.
         const piso = d.floor?.trim();
@@ -341,6 +344,8 @@ export interface ProblemaDeCheckout {
     quitarSlug?: string;
     ofrecerRetiro?: boolean;
     campos?: ErroresDeCompra;
+    consultarEnvio?: boolean;
+    recalcularEnvio?: boolean;
 }
 
 export const problemaDeCheckout = (causa: unknown, items: ItemComprable[] = []): ProblemaDeCheckout => {
@@ -358,9 +363,21 @@ export const problemaDeCheckout = (causa: unknown, items: ItemComprable[] = []):
                 : productosSoloRetiro(items);
             return { mensaje: `Solo retiro en el local: ${nombres.join(", ") || "uno o más productos del carrito"}. Elegí retirar en el local para continuar.`, ofrecerRetiro: true };
         }
+        if (code === "STOCK_REQUIRES_CONSOLIDATION") {
+            return { mensaje: "Necesitamos reunir estos productos en un local para enviarlos juntos. Consultanos; tu carrito queda guardado.", consultarEnvio: true };
+        }
+        if (code === "SHIPPING_CONFIGURATION_REQUIRED") {
+            return { mensaje: "Estamos preparando los envíos. Consultanos; tu carrito queda guardado.", consultarEnvio: true };
+        }
+        if (code === "SHIPPING_PACKAGE_REVIEW_REQUIRED") {
+            return { mensaje: "Necesitamos revisar el paquete antes de cotizar este envío. Consultanos; tu carrito queda guardado.", consultarEnvio: true };
+        }
+        if (["SHIPPING_QUOTE_REQUIRED", "SHIPPING_QUOTE_EXPIRED", "SHIPPING_QUOTE_CHANGED"].includes(code)) {
+            return { mensaje: "Necesitamos actualizar el envío. Volvé a calcular y revisá el total antes de confirmar.", recalcularEnvio: true };
+        }
         if (code === "SHIPPING_UNAVAILABLE") {
             // También incluye fallas del proveedor: no afirma falta de cobertura.
-            return { mensaje: "No pudimos cotizar el envío. Probá de nuevo o retirá en el local.", ofrecerRetiro: true };
+            return { mensaje: "No pudimos cotizar el envío. Reintentá sin cambiar tus datos." };
         }
         if (code === "SHIPPING_FIELD_TOO_LONG" || (error.status === 422 && (error.field || error.fields.length))) {
             const campos: ErroresDeCompra = {};
@@ -385,12 +402,13 @@ export const revisarPedido = async (
 ) => {
     const errores = validarDatos(datos, items);
     if (hayErrores(errores)) throw new StoreApiError(Object.values(errores)[0]!, 422, "VALIDATION_ERROR");
-    const envio = datos.entrega === "retiro" ? 0 : (await cotizar(
+    const cotizacion = datos.entrega === "retiro" ? null : exigirCotizacionLista(await cotizar(
         datos.direccion!.province!.trim(), normalizarCodigoPostal(datos.direccion!.postal_code!), aLineasDeCheckout(items).lineas,
-    )).cheapest?.price;
+    ));
+    const envio = cotizacion ? cotizacion.cheapest?.price : 0;
     const total = totalEstimadoConEnvio(productos, envio ?? null);
     if (total === null) throw new StoreApiError("Sin cotización", 409, "SHIPPING_UNAVAILABLE");
-    return { productos, envio, total };
+    return { productos, envio, total, quoteId: cotizacion?.quote_id };
 };
 
 export const reservarYPagarSiCoincide = async (

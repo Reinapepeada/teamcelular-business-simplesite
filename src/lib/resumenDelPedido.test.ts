@@ -79,10 +79,8 @@ describe("avisar que el precio cambio", () => {
         assert.equal(resumenParaConfirmar(pedido({ subtotal_amount: 15000 }), 15000).precioCambio, false);
     });
 
-    test("no avisa por un peso de redondeo", () => {
-        // Los importes vuelven del proveedor con centavos: asustar por eso es
-        // peor que no decir nada.
-        assert.equal(resumenParaConfirmar(pedido({ subtotal_amount: 15000.5 }), 15000).precioCambio, false);
+    test("cualquier cambio de centavos requiere confirmación", () => {
+        assert.equal(resumenParaConfirmar(pedido({ subtotal_amount: 15000.5 }), 15000).precioCambio, true);
     });
 
     test("sin estimado no se afirma que cambio", () => {

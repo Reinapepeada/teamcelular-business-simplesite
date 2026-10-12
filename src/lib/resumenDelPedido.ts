@@ -39,13 +39,8 @@ export interface ResumenParaConfirmar {
 export const importeConfirmado = (n: unknown): number | null =>
     typeof n === "number" && Number.isFinite(n) && n >= 0 ? n : null;
 
-/**
- * Un peso de tolerancia.
- *
- * Los importes viajan como número y pueden volver con centavos de redondeo del
- * proveedor. Avisar "el precio cambió" por un centavo asusta sin motivo.
- */
-const TOLERANCIA = 1;
+/** Comparar dinero en centavos evita diferencias sólo de representación binaria. */
+const centavos = (importe: number) => Math.round(importe * 100);
 
 /**
  * El resumen, a partir del pedido del servidor y de lo que el carrito mostraba.
@@ -78,7 +73,10 @@ export const resumenParaConfirmar = (
         // Sin estimado no se afirma que cambió: un carrito recuperado de una
         // versión vieja puede no tener con qué comparar, y decir "el precio
         // cambió" sobre eso es inventar.
-        precioCambio: importesConfirmados && (estimadoDeEnvio !== undefined || estimado > 0) && Math.abs(diferencia) > TOLERANCIA,
+        precioCambio: importesConfirmados && (estimadoDeEnvio !== undefined
+            ? centavos(subtotal!) !== centavos(estimado) || centavos(envio!) !== centavos(estimadoDeEnvio)
+                || centavos(total!) !== centavos(estimado) + centavos(estimadoDeEnvio)
+            : estimado > 0 && centavos(subtotal!) !== centavos(estimado)),
         diferencia,
     };
 };

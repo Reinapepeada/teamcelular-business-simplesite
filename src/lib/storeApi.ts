@@ -58,6 +58,12 @@ export interface ShippingAddress {
 }
 
 export interface ShippingQuote {
+    /** Referencia del snapshot propio; no reserva tarifa ni stock del transportista. */
+    quote_id?: string;
+    expires_at?: string;
+    checkout_ready?: boolean;
+    package_status?: "estimated";
+    hours_basis?: "carrier_transit_after_dispatch";
     options: { price: number; hours?: number | null; service?: string | null; carrier?: string | null }[];
     cheapest: { price: number; hours?: number | null; service?: string | null; carrier?: string | null };
 }
@@ -240,6 +246,8 @@ export const quoteShipping = (province: string, postalCode: string, items: Store
 export interface CheckoutPayload {
     checkout_key: string;
     recovery_token?: string;
+    /** Sólo para envío nuevo; los intentos antiguos se recuperan sin modificar. */
+    quote_id?: string;
     customer_name: string;
     customer_email: string;
     customer_phone?: string | null;

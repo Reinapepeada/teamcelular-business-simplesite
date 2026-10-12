@@ -1,4 +1,4 @@
-﻿import { test } from "node:test";
+import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { revisarPedido, reservarYPagarSiCoincide, recuperarIntento, abrirElPago, armarPedido, problemaDeCheckout, ErrorDeCompra, type DatosDeCompra } from "./checkoutFlow.ts";
@@ -18,7 +18,7 @@ test("revisar cotiza provincia y CP sin crear pedido; retiro no cotiza", async (
         cotizaciones++;
         assert.equal(province, "B"); assert.equal(cp, "1900");
         assert.deepEqual(lineas, [{ slug: "pantalla", quantity: 2 }]);
-        return { cheapest: { price: 20 }, options: [{ price: 20 }] };
+        return { quote_id: "11111111-1111-4111-8111-111111111111", expires_at: "2099-01-01T12:00:00Z", checkout_ready: true, cheapest: { price: 20 }, options: [{ price: 20 }] };
     };
     const r = await revisarPedido({ ...datos, entrega: "envio", direccion: { street: "Calle", number: "123", city: "La Plata", province: "B", postal_code: "1900" } }, items, 100, cotizar);
     assert.equal(r.total, 120);
@@ -32,11 +32,11 @@ test("revisar cotiza provincia y CP sin crear pedido; retiro no cotiza", async (
 });
 
 test("sin cotización válida no se presenta envío gratis", async () => {
-    await assert.rejects(revisarPedido({ ...datos, entrega: "envio", direccion: { street: "Calle", number: "123", city: "La Plata", province: "B", postal_code: "1900" } }, items, 100, async () => ({ cheapest: { price: NaN }, options: [] })), StoreApiError);
+    await assert.rejects(revisarPedido({ ...datos, entrega: "envio", direccion: { street: "Calle", number: "123", city: "La Plata", province: "B", postal_code: "1900" } }, items, 100, async () => ({ quote_id: "11111111-1111-4111-8111-111111111111", expires_at: "2099-01-01T12:00:00Z", checkout_ready: true, cheapest: { price: NaN }, options: [] })), StoreApiError);
 });
 
-for (const total of [119, 120, 121, 118.99, 121.01]) {
-    test(`confirmar total ${total}: tolerancia de un peso y reserva única`, async () => {
+for (const total of [119, 120, 121, 118.99, 121.01, 120.01, 120.99, 119.99]) {
+    test(`confirmar total ${total}: centavos exactos y reserva única`, async () => {
         const pasos: string[] = [];
         const puertos = {
             crearPedido: async () => { pasos.push("crear"); return pedido(total); },
@@ -44,7 +44,7 @@ for (const total of [119, 120, 121, 118.99, 121.01]) {
             pedirLink: async (token: string) => { assert.equal(token, "token"); pasos.push("link"); return { checkout_url: "https://pago.example" }; },
         };
         const resultado = await reservarYPagarSiCoincide(puertos, armarPedido(datos, items, "checkout-1"), 100, 20);
-        const cambio = Math.abs(total - 120) > 1;
+        const cambio = Math.round(total * 100) !== 12000;
         assert.equal(resultado.checkoutUrl, cambio ? null : "https://pago.example");
         assert.deepEqual(pasos, cambio ? ["crear", "recordar"] : ["crear", "recordar", "link"]);
         if (cambio) {
@@ -69,7 +69,7 @@ test("códigos: stock identificable, envío, campo largo, pausa y desconocido", 
     const stock = problemaDeCheckout(error("product_unavailable", { slug: "pantalla" }), items);
     assert.match(stock.mensaje, /Ya no hay stock de Pantalla/); assert.equal(stock.quitarSlug, "pantalla");
     assert.equal(problemaDeCheckout(error("product_not_found")).quitarSlug, undefined);
-    assert.equal(problemaDeCheckout(error("shipping_unavailable")).ofrecerRetiro, true);
+    assert.equal(problemaDeCheckout(error("shipping_unavailable")).ofrecerRetiro, undefined);
     assert.match(problemaDeCheckout(error("shipping_unavailable")).mensaje, /No pudimos cotizar/);
     for (const [field, campo] of [["customer_name", "nombre"], ["customer_email", "email"], ["street", "street"], ["city", "city"], ["extra", "floor"]] as const) {
         assert.ok(problemaDeCheckout(error("shipping_field_too_long", { field })).campos?.[campo]);
@@ -188,7 +188,7 @@ test("sin intento enviado puede revisar y cotizar; una recuperación fallida con
     let cotizaciones = 0;
     await revisarPedido(datosConEnvio, items, 100, async () => {
         cotizaciones++;
-        return { cheapest: { price: 20 }, options: [] };
+        return { quote_id: "11111111-1111-4111-8111-111111111111", expires_at: "2099-01-01T12:00:00Z", checkout_ready: true, cheapest: { price: 20 }, options: [] };
     });
     assert.equal(cotizaciones, 1);
     const intento = await prepararIntento(almacen, items, (key, secret) => armarPedido(datosConEnvio, items, key, secret));

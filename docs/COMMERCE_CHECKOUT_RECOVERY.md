@@ -55,3 +55,11 @@ La reversión es revertir el commit de esta PR mediante otra revisión. No hay m
 - El vencimiento se muestra sólo con un timestamp explícito válido que incluya zona/offset, en hora de Argentina y con fecha. `created_at` no produce un plazo estimado; `reservation_expires_at: null` no se reemplaza por otro vencimiento.
 
 Las nuevas pruebas siguen bloqueando todos los orígenes externos y usan datos ficticios. Los casos de pago verifican ausencia de llamadas al proveedor; las recuperaciones repiten exactamente la misma clave y payload. No se modifica footer, política de garantía, backend ni datos comerciales. La validación de navegador y sus capturas se conservan en el artefacto del workflow de esta PR.
+
+## Envío completo desde un local
+
+Las nuevas compras con envío necesitan una cotización lista (`checkout_ready: true`) con `quote_id` y vencimiento ISO con zona. La referencia identifica un snapshot propio; no significa que el transportista reserve una tarifa. Se conserva en la revisión y en el payload idempotente. El backend valida carrito, destino, origen, paquete, servicio y configuración antes de reservar. El comprador no elige origen ni medidas internas.
+
+Si hace falta reunir productos, revisar el paquete o terminar la configuración, la tienda conserva el carrito y ofrece consulta. No pide quitar productos por stock repartido ni promete retiro como alternativa. Una cotización vencida o cambiada vuelve a cálculo y revisión. El retiro existente sigue sin quote y en el local informado. Seguro y valor declarado pendientes no habilitan envío pagable.
+
+La recuperación del mismo pedido gana antes de validar una cotización vencida o ausente en un payload antiguo. Reintentos inciertos mantienen cuerpo y clave. Todo cambio de importes en centavos requiere confirmar el pedido existente, incluso cuando el total coincide pero cambia su desglose. El plazo del transportista se muestra sólo como tránsito desde despacho, sin preparación ni fecha de llegada prometida.
