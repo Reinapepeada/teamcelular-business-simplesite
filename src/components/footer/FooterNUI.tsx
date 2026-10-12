@@ -1,4 +1,5 @@
 import React from "react";
+import FooterSection from "./FooterSection";
 import {
   BsFacebook,
   BsInstagram,
@@ -97,17 +98,17 @@ export default function FooterNUI() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative mt-16 w-full overflow-hidden border-t border-white/10 bg-[#171820] text-white">
-      <div className="relative z-10 mx-auto w-full max-w-[100rem] px-4 py-12 sm:px-6 lg:px-8">
-        <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-          <div className="flex flex-col space-y-4">
+    <footer className="relative mt-8 w-full md:mt-16 overflow-hidden border-t border-white/10 bg-[#171820] text-white">
+      <div className="relative z-10 mx-auto w-full max-w-[100rem] px-4 py-6 md:py-12 sm:px-6 lg:px-8">
+        <div className="mb-6 grid grid-cols-1 gap-0 md:mb-12 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+          <div className="flex min-w-0 flex-col space-y-4 pb-5 md:pb-0">
             <div className="flex flex-col">
               <Image
                 src="/images/IMAGOTIPO/PNG/IMAGOTIPO_6.png"
                 alt="Team Celular"
                 width={300}
                 height={300}
-                className="mb-2 h-auto w-48"
+                className="mb-2 h-auto w-36 md:w-48"
               />
               <p className="text-sm text-slate-200">
                 Más de 15 años de experiencia en reparación profesional de
@@ -115,7 +116,7 @@ export default function FooterNUI() {
               </p>
             </div>
 
-            <div className="flex space-x-3 pt-4">
+            <div className="flex space-x-3 md:pt-4">
               <BranchWhatsAppButton
                 ctaName="footer_whatsapp"
                 ctaLocation="footer_socials"
@@ -157,8 +158,7 @@ export default function FooterNUI() {
             </div>
           </div>
 
-          <div className="flex flex-col space-y-3">
-            <h2 className="mb-2 text-lg font-bold text-primary">Servicios</h2>
+          <FooterSection title="Servicios">
             {footerSections.servicios.map((service) => {
               const Icon = service.icon;
               return (
@@ -173,10 +173,10 @@ export default function FooterNUI() {
                 </Link>
               );
             })}
-          </div>
+          </FooterSection>
 
-          <div className="flex flex-col space-y-3">
-            <h2 className="mb-2 text-lg font-bold text-secondary">Guías técnicas</h2>
+          <div className="min-w-0">
+            <FooterSection title="Guías técnicas">
             {footerSections.guias.map((guia) => (
               <Link
                 key={guia.href}
@@ -188,9 +188,9 @@ export default function FooterNUI() {
               </Link>
             ))}
 
-            <div className="my-6 h-px w-full bg-white/10" />
-
-            <h2 className="mb-2 text-lg font-bold text-secondary">Recursos</h2>
+            </FooterSection>
+            <div className="hidden md:my-6 md:block md:h-px md:w-full md:bg-white/10" />
+            <FooterSection title="Recursos">
             {footerSections.recursos.map((recurso) => (
               <Link
                 key={recurso.href}
@@ -202,10 +202,11 @@ export default function FooterNUI() {
                 {recurso.name}
               </Link>
             ))}
+            </FooterSection>
           </div>
 
-          <div className="flex flex-col space-y-4">
-            <h2 className="mb-2 text-lg font-bold text-primary">Contacto</h2>
+          <div className="flex min-w-0 flex-col gap-3 pt-5 md:gap-4 md:pt-0">
+            <h2 className="text-base font-semibold text-white md:mb-2 md:text-lg">Contacto</h2>
 
             <div className="flex items-start space-x-3 text-sm">
               <BsGeoAlt className="mt-1 flex-shrink-0 text-primary" />
@@ -263,12 +264,12 @@ export default function FooterNUI() {
           </div>
         </div>
 
-        <div className="my-8 h-px w-full bg-white/10" />
+        <div className="my-5 h-px w-full bg-white/10 md:my-8" />
 
         <div className="flex flex-col items-center justify-between space-y-4 text-sm text-slate-200 md:flex-row md:space-y-0">
           <div className="flex flex-col items-center space-y-2 md:flex-row md:space-x-4 md:space-y-0">
-            <p>© {currentYear} Team Celular. Todos los derechos reservados.</p>
-            <div className="flex space-x-4">
+            <p className="text-center">© {currentYear} Team Celular. Todos los derechos reservados.</p>
+            <div className="flex flex-wrap justify-center gap-x-4">
               <Link
                 href="/terminos"
                 prefetch={false}
