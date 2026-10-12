@@ -275,7 +275,7 @@ export default function ExitoClient({ intencion = "exito" }: { intencion?: Inten
                 {textoParaCopiar && <input ref={copiaRef} aria-label="Texto para copiar" readOnly value={textoParaCopiar} onFocus={event => event.target.select()} className="mt-2 w-full rounded-lg border p-3 text-base dark:bg-slate-900" />}
 
                 <div className="mt-8 flex flex-wrap gap-3">
-                    {!sinPedido && <button type="button" disabled={consultando} onClick={() => actualizarRef.current?.()} className="min-h-12 rounded-full border px-5 text-sm disabled:opacity-50">{consultando ? "Actualizando…" : "Actualizar estado"}</button>}
+                    {!sinPedido && <button type="button" aria-disabled={consultando} onClick={() => actualizarRef.current?.()} className="min-h-12 rounded-full border px-5 text-sm aria-disabled:opacity-50">{consultando ? "Actualizando…" : "Actualizar estado"}</button>}
                     {estado && !sinPedido && <>
                         {vista.canRetry && <button type="button" disabled={reintentando} onClick={() => void reintentarPago()} className="min-h-12 rounded-full bg-primary px-5 text-sm font-semibold text-white disabled:opacity-50">{reintentando ? "Abriendo el pago…" : "Reintentar el pago"}</button>}
                         <button type="button" onClick={() => void copiar(`${window.location.origin}${enlaceDelPedido(estado.commerce_key)}`)} className="min-h-12 rounded-full border px-5 text-sm">Copiar enlace del pedido</button>

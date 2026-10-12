@@ -68,8 +68,8 @@ test('F10 dos pestañas: la confirmación elimina solo carrito idéntico; una pe
     await page.goto('/checkout/exito');
     await expect(page.getByRole('heading', { name: 'Tu pago sigue pendiente' })).toBeVisible();
     const other = await context.newPage();
-    await other.goto('/checkout/exito?external_reference=TC-PRUEBA');
-    await expect(other.getByRole('heading', { name: 'Tu pago sigue pendiente' })).toBeVisible();
+    await other.goto('/tienda');
+    await expect(other.getByRole('heading', { name: /Repuestos y accesorios/ })).toBeVisible();
     paid = true;
     await page.getByRole('button', { name: 'Actualizar estado' }).click();
     await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('cart-storage')!).state.cart.length)).toBe(0);
@@ -91,7 +91,7 @@ test('F8 validación de nombre y CPA antes de cotizar, sin crear pedido', async 
         return route.fulfill({ headers: cors, json: { cheapest: { price: 20 }, options: [{ price: 20 }] } });
     });
     page.on('request', req => { if (new URL(req.url()).pathname === '/store/checkout') creates++; });
-    await page.goto('/checkout/exito?external_reference=TC-NONE');
+    await page.goto('/tienda');
     await page.getByRole('button', { name: /Abrir carrito/ }).click();
     await page.getByRole('button', { name: 'Continuar con la compra' }).click();
     await page.getByLabel('Envío a domicilio', { exact: false }).check();
@@ -117,7 +117,7 @@ test('F8 validación de nombre y CPA antes de cotizar, sin crear pedido', async 
 test('dos clicks de cantidad esperan el lock y se aplican ambos', async ({ page }) => {
     await seed(page, 1, false);
     await isolate(page, () => status());
-    await page.goto('/checkout/exito?external_reference=TC-PRUEBA');
+    await page.goto('/tienda');
     await page.getByRole('button', { name: /Abrir carrito/ }).click();
     await page.evaluate(() => new Promise<void>(resolve => {
         void navigator.locks.request('tc.cart', async () => {

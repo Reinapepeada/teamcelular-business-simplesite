@@ -9,7 +9,7 @@ http.createServer((request, response) => {
     if (request.method === 'OPTIONS') { response.writeHead(204); return response.end(); }
     if (path === '/health') return response.end('{}');
     if (request.method !== 'GET') { response.writeHead(405); return response.end('{}'); }
-    if (path === '/store/facets') return response.end(JSON.stringify({ categories: ['Accesorios'], brands: ['Prueba'], price_min: 100, price_max: 100 }));
+    if (path === '/store/facets') return response.end(JSON.stringify({ categories: ['Accesorios'], brands: ['Prueba'], min_price: 100, max_price: 100 }));
     if (path === '/store/products') return response.end(JSON.stringify({ items: [product], page: 1, size: 12, total: 1 }));
     if (path === '/store/products/funda-prueba') return response.end(JSON.stringify(product));
     if (path === '/store/pickup-point') return response.end(JSON.stringify({ name: 'Local de prueba', address: 'Dirección ficticia 123', hours: 'Lunes 10 a 18' }));
