@@ -218,6 +218,7 @@ export const mensajePedidoTerminado = (pedido: StoreOrder): string | null => {
     if (pedido.status === "paid" || pedido.status === "paid_pending_stock_commit") {
         return `El pedido ${pedido.commerce_key} ya recibió el pago. No vuelvas a pagarlo.`;
     }
+    if (pedido.status === "payment_reversed") return `El pago del pedido ${pedido.commerce_key} fue revertido. Consultá su estado antes de intentar otro pago.`;
     if (pedido.status === "expired" || pedido.status === "cancelled") {
         return `El pedido ${pedido.commerce_key} está ${pedido.status === "expired" ? "vencido" : "cancelado"}. Podés iniciar una nueva compra.`;
     }
@@ -297,6 +298,9 @@ export const abrirElPago = async (
     pedido: StoreOrder
 ): Promise<string> => {
     exigirPedidoPendiente(pedido);
+    if (!resumenParaConfirmar(pedido, 0).importesConfirmados) {
+        throw new ErrorDeCompra("El importe del pedido todavía no está confirmado. Actualizá este mismo pedido antes de pagar; no crees otro.", pedido, null);
+    }
     if (!pedido.access_token) {
         throw new ErrorDeCompra(
             `El pedido ${pedido.commerce_key} ya existe, pero este navegador no tiene su acceso. Escribinos con ese número antes de volver a comprar.`,
@@ -394,8 +398,8 @@ export const reservarYPagarSiCoincide = async (
     recuperado = false,
 ) => {
     const pedido = await reservar(puertos, payload);
-    const cambio = resumenParaConfirmar(pedido, productos, envio).precioCambio;
-    const checkoutUrl = cambio || recuperado ? null : await abrirElPago(puertos, pedido);
+    const resumen = resumenParaConfirmar(pedido, productos, envio);
+    const checkoutUrl = resumen.precioCambio || !resumen.importesConfirmados || recuperado ? null : await abrirElPago(puertos, pedido);
     return { pedido, checkoutUrl };
 };
 

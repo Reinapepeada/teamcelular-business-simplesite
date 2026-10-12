@@ -220,9 +220,12 @@ export interface PickupPoint {
  * Un fallo acá no puede frenar la compra: sin el dato, la opción de retiro se
  * muestra sin detalle.
  */
+/** La compra necesita distinguir falta de configuración de una falla de consulta. */
+export const fetchPickupPointDetails = () => pedir<PickupPoint>("/store/pickup-point");
+
 export const fetchPickupPoint = async (): Promise<PickupPoint | null> => {
     try {
-        return await pedir<PickupPoint>("/store/pickup-point");
+        return await fetchPickupPointDetails();
     } catch {
         return null;
     }

@@ -41,9 +41,10 @@ describe("los importes salen del servidor", () => {
         assert.equal(r.total, 17000);
     });
 
-    test("un importe ilegible cuenta como cero y no como NaN", () => {
+    test("un importe ilegible queda desconocido y no como cero", () => {
         const r = resumenParaConfirmar(pedido({ total_amount: undefined }), 15000);
-        assert.equal(r.total, 0);
+        assert.equal(r.total, null);
+        assert.equal(r.importesConfirmados, false);
     });
 
     test("sin moneda se asume ARS", () => {

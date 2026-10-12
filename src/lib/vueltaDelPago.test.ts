@@ -534,7 +534,7 @@ describe("contrato público 1A", () => {
         assert.equal(vueltaMostrable(estado({ paid: true, can_retry: true })).canRetry, false);
         for (const cambios of [{ payment_result: "reversed" as const }, { status: "payment_reversed" }]) {
             const pedido = estado({ ...cambios, paid: true, can_retry: true, fulfillment_status: "ready_for_pickup" });
-            assert.equal(vueltaMostrable(pedido).titulo, "Este pago se devolvió");
+            assert.equal(vueltaMostrable(pedido).titulo, "Este pago fue revertido");
             assert.equal(vueltaMostrable(pedido).canRetry, false);
             assert.equal(estadoDeEntrega(pedido), null);
         }

@@ -19,11 +19,13 @@ import useCartStore, { type CartItem } from "@/store/cartStore";
 import { codigoPostalValido, errorDeCantidades, errorDeDestino, normalizarCodigoPostal } from "@/lib/commerceValidation";
 import { problemaDeCheckout } from "@/lib/checkoutFlow";
 import CheckoutDialog from "./CheckoutDialog";
+import { usePickupPoint } from "@/hooks/usePickupPoint";
+import { PickupDetails } from "./PickupDetails";
 import ProductCondition from "./ProductCondition";
 import StoreImage from "./StoreImage";
 import { PROVINCIAS } from "@/lib/provincias";
 import { aLineasDeCheckout, carritoComprable, productosSoloRetiro } from "@/lib/cartLines";
-import { fetchPickupPoint, quoteShipping, StoreApiError, type PickupPoint, type ShippingQuote } from "@/lib/storeApi";
+import { quoteShipping, StoreApiError, type ShippingQuote } from "@/lib/storeApi";
 import {
     nombreDeVariante,
     totalDeLinea,
@@ -73,10 +75,11 @@ export default function StoreCartSheet() {
     const [comprando, setComprando] = useState(false);
     const [retiroSolicitado, setRetiroSolicitado] = useState(0);
     const [entrega, setEntrega] = useState<Entrega>("retiro");
-    const [retiro, setRetiro] = useState<PickupPoint | null>(null);
     const dialogRef = useRef<HTMLDialogElement>(null);
     const triggerRef = useRef<HTMLButtonElement>(null);
     const { cart, removeFromCart, adjustQuantity, clearCart, open, openCart, closeCart, destinoEnvio, setDestinoEnvio } = useCartStore();
+
+    const { state: retiro, retry: reintentarRetiro } = usePickupPoint(open);
 
     // Las sumas viven en src/lib/totalesDelCarrito.ts, que explica por que
     // esto es un estimado: los precios salen de lo que el navegador guardo.
@@ -126,10 +129,10 @@ export default function StoreCartSheet() {
                 return;
             }
             const mensaje = error instanceof StoreApiError && error.code === "SHIPPING_UNAVAILABLE"
-                ? "No hay envío para estos productos o este código postal. Revisá el destino o elegí retiro."
+                ? "No pudimos cotizar el envío. Reintentá con el mismo destino o elegí retiro."
                 : error instanceof StoreApiError && error.code === "PRODUCT_NOT_FOUND"
                   ? "Un producto ya no está disponible. Revisá el carrito."
-                  : "No pudimos calcular el envío. Revisá provincia y código postal, o elegí retiro.";
+                  : "No pudimos calcular el envío en este momento. Reintentá sin cambiar tus datos.";
             setFalloEnvio({ clave: claveEnvio, mensaje });
         } finally {
             if (solicitud === solicitudEnvio.current) setCalculando(false);
@@ -150,18 +153,6 @@ export default function StoreCartSheet() {
         return () => window.clearTimeout(espera);
     }, [open, eligeEnvio, destinoEnvio.province, cpCompleto, yaCotizado, claveEnvio]);
 
-    useEffect(() => {
-        if (!open || retiro) return;
-        let vivo = true;
-        fetchPickupPoint()
-            .then(punto => {
-                if (vivo) setRetiro(punto);
-            })
-            .catch(() => undefined);
-        return () => {
-            vivo = false;
-        };
-    }, [open, retiro]);
 
     useEffect(() => {
         const dialog = dialogRef.current;
@@ -406,9 +397,7 @@ export default function StoreCartSheet() {
                         </fieldset>
 
                         {soloRetiro.length > 0 && <p className="mt-2 text-xs text-slate-600 dark:text-slate-400">Solo retiro en el local: {soloRetiro.join(", ")}. Podés retirar tu compra en el local.</p>}
-                        {!eligeEnvio && soloRetiro.length === 0 && retiro && (
-                            <p className="mt-2 truncate text-xs text-slate-600 dark:text-slate-400" title={[retiro.name, retiro.address, retiro.hours].filter(Boolean).join(" · ")}>{[retiro.address, retiro.hours].filter(Boolean).join(" · ")}</p>
-                        )}
+                        {!eligeEnvio && <PickupDetails state={retiro} retry={reintentarRetiro} />}
 
                         {cart.length > 0 && soloRetiro.length === 0 && eligeEnvio && (
                             <form className="mt-3" onSubmit={event => { event.preventDefault(); void calcularEnvio(); }}>
@@ -435,7 +424,7 @@ export default function StoreCartSheet() {
                                         className="min-h-11 w-full rounded-xl border border-slate-300 bg-transparent px-3 text-base sm:text-sm dark:border-slate-700 dark:bg-slate-900"
                                     />
                                     <button disabled={calculando || !destinoEnvio.postal_code.trim()} className="col-span-2 min-h-11 rounded-xl border border-slate-300 px-3 text-sm font-medium transition hover:bg-slate-100 disabled:opacity-50 sm:col-span-1 dark:border-slate-700 dark:hover:bg-slate-800">
-                                        {calculando ? "…" : "Calcular"}
+                                        {calculando ? "Calculando…" : falloEnvio?.clave === claveEnvio ? "Reintentar envío" : "Calcular"}
                                     </button>
                                 </div>
                                 <div aria-live="polite" className="mt-2 text-xs">

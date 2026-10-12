@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
-import { fetchOrderStatus, fetchPickupPoint, requestPaymentLink, type PickupPoint, type StoreOrderStatus } from "@/lib/storeApi";
+import { fetchOrderStatus, requestPaymentLink, type StoreOrderStatus } from "@/lib/storeApi";
 import {
     claveDeLaVuelta,
     enlaceDelPedido,
@@ -15,6 +15,9 @@ import {
     vueltaMostrable,
     type Intencion,
 } from "@/lib/vueltaDelPago";
+import { usePickupPoint } from "@/hooks/usePickupPoint";
+import { PickupDetails } from "@/components/store/PickupDetails";
+import { vencimientoReserva, importeConfirmado } from "@/lib/resumenDelPedido";
 import { consultarPedido } from "@/lib/consultaDelPedido";
 import useCartStore from "@/store/cartStore";
 import { datosParaResenas, entregaEstimada } from "@/lib/resenasGoogle";
@@ -66,7 +69,8 @@ export default function ExitoClient({ intencion = "exito" }: { intencion?: Inten
     const clearPurchasedCart = useCartStore((s) => s.clearPurchasedCart);
     const [consultando, setConsultando] = useState(false);
     const actualizarRef = useRef<(() => void) | null>(null);
-    const [retiro, setRetiro] = useState<PickupPoint | null>(null);
+    const necesitaRetiro = estadoDeEntrega(estado) === "Listo para retirar" || (vueltaMostrable(estado).canRetry && (estado?.delivery_mode === "pickup" || (estado?.delivery_mode === undefined && estado?.shipping === null)));
+    const { state: retiro, retry: reintentarRetiro } = usePickupPoint(necesitaRetiro);
     const [reintentando, setReintentando] = useState(false);
     const bloqueoPago = useRef(false);
     const [aviso, setAviso] = useState("");
@@ -80,12 +84,6 @@ export default function ExitoClient({ intencion = "exito" }: { intencion?: Inten
         }
     }, [textoParaCopiar]);
 
-    useEffect(() => {
-        if (estadoDeEntrega(estado) !== "Listo para retirar") return;
-        let vivo = true;
-        void fetchPickupPoint().then(punto => { if (vivo) setRetiro(punto); });
-        return () => { vivo = false; };
-    }, [estado]);
 
     const copiar = async (texto: string) => {
         setTextoParaCopiar("");
@@ -99,7 +97,7 @@ export default function ExitoClient({ intencion = "exito" }: { intencion?: Inten
     };
 
     const reintentarPago = async () => {
-        if (!estado || !vueltaMostrable(estado).canRetry || bloqueoPago.current) return;
+        if (!estado || !vueltaMostrable(estado).canRetry || bloqueoPago.current || (necesitaRetiro && retiro.status !== "ready")) return;
         const guardado = almacen();
         const pedido = guardado ? pedidoGuardado(guardado) : null;
         const token = tokenParaReintentar(estado, pedido);
@@ -236,11 +234,14 @@ export default function ExitoClient({ intencion = "exito" }: { intencion?: Inten
                             </dd>
                         </div>
                         <div className="flex justify-between gap-4">
-                            <dt className="text-slate-600 dark:text-slate-400">Total</dt>
+                            <dt className="text-slate-600 dark:text-slate-400">Total del pedido</dt>
                             <dd className="min-w-0 break-all text-right font-medium text-slate-900 dark:text-slate-100">
-                                {plata(estado.total_amount, estado.currency)}
+                                {importeConfirmado(estado.total_amount) === null ? "Por confirmar" : plata(estado.total_amount, estado.currency)}
                             </dd>
                         </div>
+                        {!estado.paid && estado.payment_result !== "reversed" && estado.status !== "payment_reversed" && vencimientoReserva(estado) && <div>
+                            <dt>Reserva hasta</dt><dd>{vencimientoReserva(estado)}</dd>
+                        </div>}
                         {entrega ? (
                             <div className="flex justify-between gap-4">
                                 <dt className="text-slate-600 dark:text-slate-400">Entrega</dt>
@@ -268,8 +269,8 @@ export default function ExitoClient({ intencion = "exito" }: { intencion?: Inten
                         Tu carrito todavía tiene productos. Revisalos antes de iniciar otra compra para evitar repetir este pedido.
                     </p>
                 )}
-                {entrega === "Listo para retirar" && (
-                    <p className="mt-3 text-sm">{retiro ? [retiro.name, retiro.address, retiro.hours].filter(Boolean).join(" · ") : "Escribinos para confirmar la dirección y el horario de retiro."}</p>
+                {necesitaRetiro && (
+                    <PickupDetails state={retiro} retry={reintentarRetiro} existingOrder />
                 )}
                 <p role="status" className="mt-3 text-sm">{aviso}</p>
                 {textoParaCopiar && <input ref={copiaRef} aria-label="Texto para copiar" readOnly value={textoParaCopiar} onFocus={event => event.target.select()} className="mt-2 w-full rounded-lg border p-3 text-base dark:bg-slate-900" />}
@@ -277,7 +278,7 @@ export default function ExitoClient({ intencion = "exito" }: { intencion?: Inten
                 <div className="mt-8 flex flex-wrap gap-3">
                     {!sinPedido && <button type="button" aria-disabled={consultando} onClick={() => actualizarRef.current?.()} className="min-h-12 rounded-full border px-5 text-sm aria-disabled:opacity-50">{consultando ? "Actualizando…" : "Actualizar estado"}</button>}
                     {estado && !sinPedido && <>
-                        {vista.canRetry && <button type="button" disabled={reintentando} onClick={() => void reintentarPago()} className="min-h-12 rounded-full bg-primary px-5 text-sm font-semibold text-white disabled:opacity-50">{reintentando ? "Abriendo el pago…" : "Reintentar el pago"}</button>}
+                        {vista.canRetry && <button type="button" disabled={reintentando || (necesitaRetiro && retiro.status !== "ready")} onClick={() => void reintentarPago()} className="min-h-12 rounded-full bg-primary px-5 text-sm font-semibold text-white disabled:opacity-50">{reintentando ? "Abriendo el pago…" : "Reintentar el pago"}</button>}
                         <button type="button" onClick={() => void copiar(`${window.location.origin}${enlaceDelPedido(estado.commerce_key)}`)} className="min-h-12 rounded-full border px-5 text-sm">Copiar enlace del pedido</button>
                         {cobrado && estado.tracking_url && /^https?:\/\//i.test(estado.tracking_url)
                             ? <a href={estado.tracking_url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center rounded-full border px-5 text-sm">Seguir el envío</a>

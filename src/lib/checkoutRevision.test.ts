@@ -78,10 +78,10 @@ test("códigos: stock identificable, envío, campo largo, pausa y desconocido", 
     assert.match(problemaDeCheckout(error("desconocido")).mensaje, /Probá de nuevo/);
 });
 
-test("reserva exacta o aproximada persiste sin extenderse al recuperar", () => {
+test("reserva exacta persiste sin extenderse ni inferirse de created_at", () => {
     const created_at = "2026-09-27T12:00:00Z";
     const expires_at = "2026-09-27T12:10:00Z";
-    assert.match(vencimientoReserva({ created_at })!, /\(aprox\.\)$/);
+    assert.equal(vencimientoReserva({ created_at }), null);
     assert.doesNotMatch(vencimientoReserva({ created_at, expires_at })!, /aprox/);
     assert.equal(vencimientoReserva({ reserved_until: expires_at }), vencimientoReserva({ expires_at }));
     assert.equal(vencimientoReserva({}), null);

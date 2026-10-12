@@ -16,7 +16,7 @@ export function Campo({
     children: React.ReactNode;
 }) {
     return (
-        <div>
+        <div data-checkout-field className="scroll-my-3">
             <label className="text-sm font-medium" htmlFor={id}>{label}</label>
             {children}
             {error && (
