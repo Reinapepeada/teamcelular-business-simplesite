@@ -14,7 +14,7 @@
  * existe, el backend no cuenta nada.
  */
 
-import { olvidarClave, type AlmacenClave } from "./checkoutKey";
+import { claveDeCheckoutGuardada, olvidarClave, revisionDelIntento, type AlmacenClave } from "./checkoutKey";
 import type { StoreOrder, StoreOrderStatus } from "./storeApi";
 
 const ESPACIO = "tc.pedido";
@@ -25,6 +25,8 @@ export interface PedidoGuardado {
     clave: string;
     /** Clave idempotente exacta de este pedido, para limpieza condicional. */
     checkoutKey?: string;
+    /** Generación exacta del carrito antes de enviar el checkout. */
+    cartRevision?: string | null;
     /**
      * La credencial para pedir el link de pago de ESE pedido.
      *
@@ -75,33 +77,53 @@ export const recordarPedido = (
         reserva?: Pick<StoreOrder, "reservation_expires_at" | "created_at" | "expires_at" | "reserved_until">;
         clave: string;
         checkoutKey?: string;
+        cartRevision?: string | null;
         token?: string | null;
         total?: number | null;
         moneda?: string | null;
         huella?: string | null;
-    }
+    },
+    exigirPersistencia = false,
 ): void => {
     try {
         if (pedido?.clave) {
             const anterior = pedidoGuardado(almacen);
             const mismo = anterior?.clave === pedido.clave ? anterior : null;
             const checkoutKey = pedido.checkoutKey ?? mismo?.checkoutKey;
-            almacen.setItem(
-                ESPACIO,
-                JSON.stringify({
-                    clave: pedido.clave,
-                    ...(pedido.reserva ? { reserva: pedido.reserva } : mismo?.reserva ? { reserva: mismo.reserva } : {}),
-                    ...(checkoutKey ? { checkoutKey } : {}),
-                    token: pedido.token || mismo?.token || null,
-                    total: pedido.total ?? null,
-                    moneda: pedido.moneda ?? null,
-                    huella: pedido.huella ?? null,
-                })
-            );
+            const contenido = JSON.stringify({
+                clave: pedido.clave,
+                ...(pedido.reserva ? { reserva: pedido.reserva } : mismo?.reserva ? { reserva: mismo.reserva } : {}),
+                ...(checkoutKey ? { checkoutKey } : {}),
+                cartRevision: pedido.cartRevision ?? mismo?.cartRevision ?? null,
+                token: pedido.token || mismo?.token || null,
+                total: pedido.total ?? null,
+                moneda: pedido.moneda ?? null,
+                huella: pedido.huella ?? null,
+            });
+            almacen.setItem(ESPACIO, contenido);
+            if (exigirPersistencia && almacen.getItem(ESPACIO) !== contenido) {
+                throw new Error("El navegador no conservó el pedido.");
+            }
         }
     } catch {
-        // Sin poder guardar la compra sigue: la vuelta usa el parámetro.
+        if (exigirPersistencia) throw new Error("No pudimos guardar el acceso a tu pedido. Recuperá el intento antes de abrir el pago.");
+        // Lectores anteriores permiten usar la referencia pública como respaldo.
     }
+};
+
+/** Una respuesta vieja no puede reemplazar el acceso de un checkout más nuevo. */
+export const recordarPedidoDelIntento = async (
+    almacen: AlmacenClave, pedido: Parameters<typeof recordarPedido>[1] & { checkoutKey: string },
+    locks: LockManager | undefined = globalThis.navigator?.locks,
+): Promise<void> => {
+    if (!locks) throw new Error("No pudimos proteger tu compra entre pestañas. Volvé a abrir el carrito.");
+    await locks.request("tc.checkout", async () => {
+        const actual = claveDeCheckoutGuardada(almacen);
+        if (actual && actual !== pedido.checkoutKey) {
+            throw new Error("La compra cambió en otra pestaña. Volvé a abrir el carrito para recuperar el pedido actual.");
+        }
+        recordarPedido(almacen, { ...pedido, cartRevision: revisionDelIntento(almacen, pedido.checkoutKey) }, true);
+    });
 };
 
 export const pedidoGuardado = (almacen: AlmacenClave): PedidoGuardado | null => {
@@ -120,6 +142,7 @@ export const pedidoGuardado = (almacen: AlmacenClave): PedidoGuardado | null => 
                     ...(dato.reserva && typeof dato.reserva === "object" ? { reserva: Object.fromEntries(Object.entries(dato.reserva).filter(([k, v]) => ["reservation_expires_at", "created_at", "expires_at", "reserved_until"].includes(k) && (k === "reservation_expires_at" && v === null || typeof v === "string" && Number.isFinite(Date.parse(v))))) } : {}),
                     ...(typeof dato.checkoutKey === "string" && dato.checkoutKey
                         ? { checkoutKey: dato.checkoutKey } : {}),
+                    ...(typeof dato.cartRevision === "string" ? { cartRevision: dato.cartRevision } : {}),
                     token: typeof dato.token === "string" && dato.token ? dato.token : null,
                     total: typeof dato.total === "number" && Number.isFinite(dato.total)
                         ? dato.total
@@ -208,6 +231,23 @@ export const claveDeLaVuelta = (
     return null;
 };
 
+/** Enlace durable de consulta: nunca incluye la credencial de pago. */
+export const enlaceDelPedido = (clave: string): string =>
+    `/checkout/exito?external_reference=${encodeURIComponent(clave)}`;
+
+/** Limpieza del pedido actual, protegida frente a otro checkout entre pestañas. */
+export const finalizarPedidoPagado = async (
+    almacen: AlmacenClave, clave: string, limpiarCarrito: (clave: string) => Promise<boolean>,
+    locks: LockManager | undefined = globalThis.navigator?.locks,
+): Promise<void> => {
+    if (!locks) return;
+    await locks.request("tc.checkout", async () => {
+        if (pedidoGuardado(almacen)?.clave !== clave) return;
+        await limpiarCarrito(clave);
+        olvidarPedido(almacen, clave);
+    });
+};
+
 export type Desenlace = "pagado" | "esperando" | "rechazado" | "sin_pedido";
 
 /**
@@ -242,16 +282,15 @@ const ESPERANDO: VueltaMostrable = {
 /**
  * Un pago que puede tardar horas o días: efectivo, Rapipago, transferencia.
  *
- * **Deja de preguntar.** Ninguna espera razonable en una pestaña abierta
- * alcanza para un pago que se completa en un local mañana, y dejar el reintento
- * corriendo solo castiga al backend con una pestaña olvidada.
+ * Se consulta durante una ventana limitada: pending también puede ser un
+ * aviso transitorio. Después queda la actualización manual, sin otro cobro.
  */
 const DEMORADO: VueltaMostrable = {
     desenlace: "esperando",
     titulo: "Tu pago sigue pendiente",
     detalle:
         "La reserva de stock tiene un plazo corto. Si elegiste un medio de pago demorado, consultanos antes de completarlo.",
-    seguirPreguntando: false,
+    seguirPreguntando: true,
 };
 
 /**

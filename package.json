@@ -14,7 +14,8 @@
     "lint": "eslint .",
     "seo:audit": "lighthouse http://localhost:3000 --chrome-flags=\"--headless\" --output html --output json --output-path ./reports/lighthouse-report",
     "seo:indexnow": "node scripts/indexnow-submit.mjs",
-    "test": "node --import ./tools/node-test-resolver.mjs --test src/lib/*.test.ts scripts/*.test.mjs"
+    "test": "node --import ./tools/node-test-resolver.mjs --test src/lib/*.test.ts scripts/*.test.mjs",
+    "test:browser": "playwright test"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -57,6 +58,7 @@
     "zustand": "^5.0.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.64.0",
     "@types/js-cookie": "^3.0.6",
     "@types/lodash": "^4.17.7",
     "@types/node": "^20",

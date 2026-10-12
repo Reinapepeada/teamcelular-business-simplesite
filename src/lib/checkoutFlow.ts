@@ -6,6 +6,7 @@
  * mitad de camino**.
  */
 
+import { errorDeCantidades, errorDeDestino, errorDeNombre, normalizarCodigoPostal } from "./commerceValidation";
 import type { CheckoutPayload, ShippingAddress, StoreOrder } from "./storeApi";
 import { resumenParaConfirmar } from "./resumenDelPedido";
 import { totalEstimadoConEnvio } from "./totalesDelCarrito";
@@ -79,7 +80,8 @@ export const validarDatos = (
 ): ErroresDeCompra => {
     const errores: ErroresDeCompra = {};
 
-    if (!datos.nombre?.trim()) errores.nombre = "Poné tu nombre.";
+    const nombreInvalido = errorDeNombre(datos.nombre, datos.entrega === "envio");
+    if (nombreInvalido) errores.nombre = nombreInvalido;
     if (!datos.email?.trim()) {
         errores.email = "Poné tu mail.";
     } else if (!FORMA_DE_MAIL.test(datos.email.trim())) {
@@ -106,6 +108,8 @@ export const validarDatos = (
             errores.email = `Para el envío, el mail puede tener hasta ${L.email} caracteres.`;
         }
         if (!d.province?.trim()) errores.province = "Elegí la provincia.";
+        const destinoInvalido = errorDeDestino(d.province ?? "", d.postal_code ?? "");
+        if (d.province?.trim() && destinoInvalido) errores.postal_code = destinoInvalido;
         if (!d.postal_code?.trim()) errores.postal_code = "Poné el código postal.";
     }
 
@@ -121,6 +125,8 @@ export const validarDatos = (
             : "Tu carrito está vacío.";
     }
 
+    const cantidadesInvalidas = errorDeCantidades(items);
+    if (cantidadesInvalidas) errores.carrito = cantidadesInvalidas;
     return errores;
 };
 
@@ -160,7 +166,7 @@ export const armarPedido = (
             street: [d.street?.trim(), d.number?.trim()].filter(Boolean).join(" "),
             city: d.city!.trim(),
             province: d.province!.trim(),
-            postal_code: d.postal_code!.trim(),
+            postal_code: normalizarCodigoPostal(d.postal_code!),
             extra: complemento || d.extra?.trim() || null,
         };
     }
@@ -183,11 +189,10 @@ export interface PuertosDeCompra {
     /**
      * Se llama apenas el pedido existe, antes de pedir el link.
      *
-     * Opcional porque no cambia el resultado de la compra: es lo que le permite
-     * al comprador volver si el link falla. Que no pueda guardar no puede
-     * impedir pagar.
+     * Esperamos su persistencia antes de pagar. Si otra pestaña inició un
+     * checkout distinto, este callback lo detecta y frena el enlace viejo.
      */
-    recordar?: (pedido: StoreOrder) => void;
+    recordar?: (pedido: StoreOrder) => void | Promise<void>;
 }
 
 /**
@@ -263,7 +268,7 @@ export const reservar = async (
     // ese hueco es más largo, porque en el medio hay una pantalla donde el
     // comprador puede irse.
     pedido.created_at ??= new Date().toISOString();
-    puertos.recordar?.(pedido);
+    await puertos.recordar?.(pedido);
     exigirPedidoPendiente(pedido);
 
     if (!pedido.access_token) {
@@ -374,8 +379,10 @@ export const revisarPedido = async (
     datos: DatosDeCompra, items: ItemComprable[], productos: number,
     cotizar: typeof import("./storeApi").quoteShipping,
 ) => {
+    const errores = validarDatos(datos, items);
+    if (hayErrores(errores)) throw new StoreApiError(Object.values(errores)[0]!, 422, "VALIDATION_ERROR");
     const envio = datos.entrega === "retiro" ? 0 : (await cotizar(
-        datos.direccion!.province!.trim(), datos.direccion!.postal_code!.trim(), aLineasDeCheckout(items).lineas,
+        datos.direccion!.province!.trim(), normalizarCodigoPostal(datos.direccion!.postal_code!), aLineasDeCheckout(items).lineas,
     )).cheapest?.price;
     const total = totalEstimadoConEnvio(productos, envio ?? null);
     if (total === null) throw new StoreApiError("Sin cotización", 409, "SHIPPING_UNAVAILABLE");

@@ -9,9 +9,10 @@ import ProductCondition from "./ProductCondition";
 import { intentoDeCheckout, prepararIntento } from "@/lib/checkoutKey";
 import {
     olvidarPedido,
+    enlaceDelPedido,
     pedidoGuardado,
     pedidoYaNoSePuedePagar,
-    recordarPedido,
+    recordarPedidoDelIntento,
 } from "@/lib/vueltaDelPago";
 import {
     abrirElPago,
@@ -265,12 +266,15 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
         const pedido = await recuperarIntento(window.localStorage, {
             crearPedido: payload => crearPedidoConRecuperacion(createOrder, payload, window.localStorage),
             pedirLink: requestPaymentLink,
-            recordar: pedido => (anotarParaResenas(window.localStorage, { clave: pedido.commerce_key, email: payload.customer_email, envio: !!payload.shipping_address }), recordarPedido(window.localStorage, {
-                clave: pedido.commerce_key, checkoutKey: payload.checkout_key,
-                token: pedido.access_token, total: pedido.total_amount, moneda: pedido.currency,
-                huella: huellaDelCarrito(payload.items),
-                reserva: { reservation_expires_at: pedido.reservation_expires_at, created_at: pedido.created_at, expires_at: pedido.expires_at, reserved_until: pedido.reserved_until },
-            })),
+            recordar: async pedido => {
+                await recordarPedidoDelIntento(window.localStorage, {
+                    clave: pedido.commerce_key, checkoutKey: payload.checkout_key,
+                    token: pedido.access_token, total: pedido.total_amount, moneda: pedido.currency,
+                    huella: huellaDelCarrito(payload.items),
+                    reserva: { reservation_expires_at: pedido.reservation_expires_at, created_at: pedido.created_at, expires_at: pedido.expires_at, reserved_until: pedido.reserved_until },
+                });
+                anotarParaResenas(window.localStorage, { clave: pedido.commerce_key, email: payload.customer_email, envio: !!payload.shipping_address });
+            },
         });
         if (!pedido) return false;
         setPedidoPendiente(pedido);
@@ -299,7 +303,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                 setIntentoPendiente(!!intentoDeCheckout(window.localStorage));
             } else if (error instanceof ErrorDeCompra && error.pedido && mensajePedidoTerminado(error.pedido)) {
                 if (error.pedido.status === "paid" || error.pedido.status === "paid_pending_stock_commit") {
-                    router.push("/checkout/exito");
+                    router.push(enlaceDelPedido(error.pedido.commerce_key));
                 } else {
                     olvidarPedido(window.localStorage, error.pedido.commerce_key);
                     setIntentoPendiente(false);
@@ -390,11 +394,8 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                     // es lo que permite volver si el pago no llega a abrirse, y
                     // lo que la pantalla de vuelta usa para preguntar el estado
                     // sin depender de los parametros de la URL.
-                    recordar: (pedido) => {
-                        setPedidoPendiente(pedido);
-                        setHuellaPendiente(huellaDelCarrito(payload.items));
-                        anotarParaResenas(window.localStorage, { clave: pedido.commerce_key, email: payload.customer_email, envio: !!payload.shipping_address });
-                        recordarPedido(window.localStorage, {
+                    recordar: async (pedido) => {
+                        await recordarPedidoDelIntento(window.localStorage, {
                             clave: pedido.commerce_key,
                             checkoutKey: payload.checkout_key,
                             token: pedido.access_token ?? null,
@@ -406,6 +407,9 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                             huella: huellaDelCarrito(payload.items),
                             reserva: { reservation_expires_at: pedido.reservation_expires_at, created_at: pedido.created_at, expires_at: pedido.expires_at, reserved_until: pedido.reserved_until },
                         });
+                        setPedidoPendiente(pedido);
+                        setHuellaPendiente(huellaDelCarrito(payload.items));
+                        anotarParaResenas(window.localStorage, { clave: pedido.commerce_key, email: payload.customer_email, envio: !!payload.shipping_address });
                     },
                 },
                 payload, revision.productos, revision.envio, recuperado
@@ -426,7 +430,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                 setRevision(null);
                 if (error.pedido && mensajePedidoTerminado(error.pedido)) {
                     if (error.pedido.status === "paid" || error.pedido.status === "paid_pending_stock_commit") {
-                        router.push("/checkout/exito");
+                        router.push(enlaceDelPedido(error.pedido.commerce_key));
                     } else {
                         olvidarPedido(window.localStorage, error.pedido.commerce_key);
                         setIntentoPendiente(false);

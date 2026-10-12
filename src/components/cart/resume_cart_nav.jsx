@@ -81,7 +81,7 @@ const colorNames = {
 };
 
 export default function ResumeCartNav() {
-    const { cart, updateQuantity, removeFromCart, clearCart } = useCartStore();
+    const { cart, adjustQuantity, removeFromCart, clearCart } = useCartStore();
     const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
     const [isSending, setIsSending] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
@@ -282,9 +282,9 @@ export default function ResumeCartNav() {
                                                 className="h-7 w-7"
                                                 aria-label={`Reducir cantidad de ${item.product.name}`}
                                                 onClick={() =>
-                                                    updateQuantity(
+                                                    adjustQuantity(
                                                         item.cartKey,
-                                                        item.quantity - 1
+                                                        -1
                                                     )
                                                 }
                                             >
@@ -299,9 +299,9 @@ export default function ResumeCartNav() {
                                                 className="h-7 w-7"
                                                 aria-label={`Aumentar cantidad de ${item.product.name}`}
                                                 onClick={() =>
-                                                    updateQuantity(
+                                                    adjustQuantity(
                                                         item.cartKey, 
-                                                        item.quantity + 1
+                                                        1
                                                     )
                                                 }
                                             >

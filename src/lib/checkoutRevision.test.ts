@@ -8,7 +8,7 @@ import { vencimientoReserva, resumenParaConfirmar } from "./resumenDelPedido.ts"
 import { recordarPedido, pedidoGuardado } from "./vueltaDelPago.ts";
 import { leerConPartes } from "../../tools/leerFuente.mjs";
 
-const datos: DatosDeCompra = { nombre: "Ana", email: "ana@example.com", entrega: "retiro" };
+const datos: DatosDeCompra = { nombre: "Ana Perez", email: "ana@example.com", entrega: "retiro" };
 const items = [{ slug: "pantalla", quantity: 2, nombre: "Pantalla" }];
 const pedido = (total = 120): StoreOrder => ({ commerce_key: "TC-1", access_token: "token", status: "pending_payment", subtotal_amount: 100, shipping_amount: 20, total_amount: total, currency: "ARS" });
 
@@ -20,7 +20,7 @@ test("revisar cotiza provincia y CP sin crear pedido; retiro no cotiza", async (
         assert.deepEqual(lineas, [{ slug: "pantalla", quantity: 2 }]);
         return { cheapest: { price: 20 }, options: [{ price: 20 }] };
     };
-    const r = await revisarPedido({ ...datos, entrega: "envio", direccion: { province: "B", postal_code: "1900" } }, items, 100, cotizar);
+    const r = await revisarPedido({ ...datos, entrega: "envio", direccion: { street: "Calle", number: "123", city: "La Plata", province: "B", postal_code: "1900" } }, items, 100, cotizar);
     assert.equal(r.total, 120);
     assert.equal((await revisarPedido(datos, items, 100, cotizar)).total, 100);
     assert.equal(cotizaciones, 1);
@@ -32,7 +32,7 @@ test("revisar cotiza provincia y CP sin crear pedido; retiro no cotiza", async (
 });
 
 test("sin cotización válida no se presenta envío gratis", async () => {
-    await assert.rejects(revisarPedido({ ...datos, entrega: "envio", direccion: { province: "B", postal_code: "1900" } }, items, 100, async () => ({ cheapest: { price: NaN }, options: [] })), StoreApiError);
+    await assert.rejects(revisarPedido({ ...datos, entrega: "envio", direccion: { street: "Calle", number: "123", city: "La Plata", province: "B", postal_code: "1900" } }, items, 100, async () => ({ cheapest: { price: NaN }, options: [] })), StoreApiError);
 });
 
 for (const total of [119, 120, 121, 118.99, 121.01]) {

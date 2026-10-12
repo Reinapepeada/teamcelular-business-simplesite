@@ -227,11 +227,11 @@ describe("vueltaMostrable segun la puerta por la que volvio", () => {
         assert.match(v.detalle, /revisá si Mercado Pago registró un cargo/i);
     });
 
-    test("un pago demorado tampoco se espera con la pestana abierta", () => {
+    test("un pago demorado se consulta dentro del límite de la pantalla", () => {
         // Efectivo o Rapipago pueden tardar dias: reintentar es dejar una
         // pestana olvidada golpeando el backend.
         const v = vueltaMostrable(estado({ paid: false }), "pendiente");
-        assert.equal(v.seguirPreguntando, false);
+        assert.equal(v.seguirPreguntando, true);
         assert.notEqual(v.desenlace, "rechazado");
         assert.doesNotMatch(v.detalle, /stock te queda reservado/i);
     });
@@ -395,8 +395,8 @@ describe("sin respuesta del backend no se afirma nada sobre el cobro", () => {
         assert.equal(vueltaMostrable(estado({ paid: false }), "error").desenlace, "rechazado");
     });
 
-    test("un pago demorado, con respuesta, deja de preguntar", () => {
-        assert.equal(vueltaMostrable(estado({ paid: false }), "pendiente").seguirPreguntando, false);
+    test("un pago demorado, con respuesta, sigue consultando con límite", () => {
+        assert.equal(vueltaMostrable(estado({ paid: false }), "pendiente").seguirPreguntando, true);
     });
 });
 

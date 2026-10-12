@@ -16,6 +16,7 @@ import {
 } from "react-icons/bs";
 import { buildProductSlug } from "@/lib/productSlug";
 import useCartStore, { type CartItem } from "@/store/cartStore";
+import { codigoPostalValido, errorDeCantidades, errorDeDestino, normalizarCodigoPostal } from "@/lib/commerceValidation";
 import { problemaDeCheckout } from "@/lib/checkoutFlow";
 import CheckoutDialog from "./CheckoutDialog";
 import ProductCondition from "./ProductCondition";
@@ -46,9 +47,6 @@ import {
 const WHATSAPP_NUMBER =
     process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.trim() || "5491151034595";
 
-// CP argentino: 4 dígitos o CPA (letra + 4 dígitos + 3 letras).
-const CP_VALIDO = /^(\d{4}|[A-Za-z]\d{4}[A-Za-z]{3})$/;
-
 function formatPrice(price: number) {
     return new Intl.NumberFormat("es-AR").format(price);
 }
@@ -78,7 +76,7 @@ export default function StoreCartSheet() {
     const [retiro, setRetiro] = useState<PickupPoint | null>(null);
     const dialogRef = useRef<HTMLDialogElement>(null);
     const triggerRef = useRef<HTMLButtonElement>(null);
-    const { cart, removeFromCart, updateQuantity, clearCart, open, openCart, closeCart, destinoEnvio, setDestinoEnvio } = useCartStore();
+    const { cart, removeFromCart, adjustQuantity, clearCart, open, openCart, closeCart, destinoEnvio, setDestinoEnvio } = useCartStore();
 
     // Las sumas viven en src/lib/totalesDelCarrito.ts, que explica por que
     // esto es un estimado: los precios salen de lo que el navegador guardo.
@@ -98,7 +96,7 @@ export default function StoreCartSheet() {
     const eligeEnvio = entrega === "envio" && soloRetiro.length === 0;
     const envio = eligeEnvio && cotizacion?.clave === claveEnvio ? cotizacion.opcion : null;
     const totalEstimado = eligeEnvio ? totalEstimadoConEnvio(totalPrice, envio?.price ?? null) : totalPrice;
-    const cpCompleto = CP_VALIDO.test(destinoEnvio.postal_code.trim());
+    const cpCompleto = codigoPostalValido(destinoEnvio.postal_code);
 
     const calcularEnvio = async () => {
         if (soloRetiro.length) return;
@@ -109,9 +107,15 @@ export default function StoreCartSheet() {
             setFalloEnvio({ clave: claveEnvio, mensaje: "Volvé a agregar los productos desde la tienda para calcular el envío." });
             return;
         }
+        const validacion = errorDeCantidades(items) || errorDeDestino(destinoEnvio.province, destinoEnvio.postal_code);
+        if (validacion) {
+            setCalculando(false);
+            setFalloEnvio({ clave: claveEnvio, mensaje: validacion });
+            return;
+        }
         setCalculando(true);
         try {
-            const resultado = await quoteShipping(destinoEnvio.province, destinoEnvio.postal_code.trim(), lineasEnvio.lineas);
+            const resultado = await quoteShipping(destinoEnvio.province, normalizarCodigoPostal(destinoEnvio.postal_code), lineasEnvio.lineas);
             if (solicitud !== solicitudEnvio.current || claveActual.current !== claveEnvio) return;
             if (totalEstimadoConEnvio(totalPrice, resultado.cheapest?.price ?? null) === null) throw new Error("Cotización inválida");
             setCotizacion({ clave: claveEnvio, opcion: resultado.cheapest });
@@ -312,7 +316,7 @@ export default function StoreCartSheet() {
                                                     <button
                                                         type="button"
                                                         disabled={item.quantity <= 1}
-                                                        onClick={() => updateQuantity(item.cartKey, item.quantity - 1)}
+                                                        onClick={() => adjustQuantity(item.cartKey, -1)}
                                                         className="inline-flex h-10 w-10 items-center justify-center rounded-full text-slate-700 transition hover:bg-slate-100 disabled:opacity-30 dark:text-slate-300 dark:hover:bg-slate-800"
                                                         aria-label={`Reducir cantidad de ${item.product.name}`}
                                                     >
@@ -324,7 +328,7 @@ export default function StoreCartSheet() {
                                                     <button
                                                         type="button"
                                                         disabled={item.quantity >= stock}
-                                                        onClick={() => updateQuantity(item.cartKey, item.quantity + 1)}
+                                                        onClick={() => adjustQuantity(item.cartKey, 1)}
                                                         className="inline-flex h-10 w-10 items-center justify-center rounded-full text-slate-700 transition hover:bg-slate-100 disabled:opacity-30 dark:text-slate-300 dark:hover:bg-slate-800"
                                                         aria-label={`Aumentar cantidad de ${item.product.name}`}
                                                     >
@@ -408,13 +412,13 @@ export default function StoreCartSheet() {
 
                         {cart.length > 0 && soloRetiro.length === 0 && eligeEnvio && (
                             <form className="mt-3" onSubmit={event => { event.preventDefault(); void calcularEnvio(); }}>
-                                <div className="grid grid-cols-[1fr_7rem_auto] gap-2">
+                                <div className="grid grid-cols-2 gap-2 sm:grid-cols-[1fr_7rem_auto]">
                                     <label className="sr-only" htmlFor="carrito-provincia">Provincia</label>
                                     <select
                                         id="carrito-provincia"
                                         required
                                         value={destinoEnvio.province}
-                                        onChange={event => setDestinoEnvio({ ...destinoEnvio, province: event.target.value })}
+                                        onChange={event => setDestinoEnvio({ province: event.target.value })}
                                         className="min-h-11 w-full rounded-xl border border-slate-300 bg-transparent px-2 text-base sm:text-sm dark:border-slate-700 dark:bg-slate-900"
                                     >
                                         <option value="">Provincia</option>
@@ -427,10 +431,10 @@ export default function StoreCartSheet() {
                                         autoComplete="postal-code"
                                         placeholder="Cód. postal"
                                         value={destinoEnvio.postal_code}
-                                        onChange={event => setDestinoEnvio({ ...destinoEnvio, postal_code: event.target.value })}
+                                        onChange={event => setDestinoEnvio({ postal_code: event.target.value })}
                                         className="min-h-11 w-full rounded-xl border border-slate-300 bg-transparent px-3 text-base sm:text-sm dark:border-slate-700 dark:bg-slate-900"
                                     />
-                                    <button disabled={calculando || !destinoEnvio.postal_code.trim()} className="min-h-11 rounded-xl border border-slate-300 px-3 text-sm font-medium transition hover:bg-slate-100 disabled:opacity-50 dark:border-slate-700 dark:hover:bg-slate-800">
+                                    <button disabled={calculando || !destinoEnvio.postal_code.trim()} className="col-span-2 min-h-11 rounded-xl border border-slate-300 px-3 text-sm font-medium transition hover:bg-slate-100 disabled:opacity-50 sm:col-span-1 dark:border-slate-700 dark:hover:bg-slate-800">
                                         {calculando ? "…" : "Calcular"}
                                     </button>
                                 </div>
