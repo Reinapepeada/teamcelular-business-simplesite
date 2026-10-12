@@ -687,3 +687,28 @@ test('cotización lista muestra sólo tránsito desde despacho, sin prometer lle
     await expect(cart.getByText(/llega en|envío asegurado|tarifa reservada/i)).toHaveCount(0);
     await page.screenshot({ path: testInfo.outputPath('shipping-transit-estimate-375.png') });
 });
+
+test('pedido guardado con configuración de envío pendiente no se atribuye a Mercado Pago', async ({ page }, testInfo) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await seed(page);
+    let requests = 0, mutations = 0;
+    await isolate(page, () => { requests++; return { ...status(), payment_result: 'none', reason_code: 'shipping_configuration_required', can_retry: false, delivery_mode: 'shipping' }; });
+    page.on('request', req => { if (req.url().includes('/store/') && ['POST', 'PUT', 'PATCH', 'DELETE'].includes(req.method())) mutations++; });
+    await page.goto('/checkout/exito?external_reference=TC-PRUEBA');
+    await expect(page.getByRole('heading', { name: 'Tu envío necesita revisión' })).toBeVisible();
+    await expect(page.getByText(/Tu pedido sigue guardado/)).toBeVisible();
+    await expect(page.getByText(/Si ya pagaste, conservá el comprobante/)).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Reintentar el pago' })).toHaveCount(0);
+    await expect(page.getByText(/Mercado Pago está demorando|Tu pago sigue pendiente/)).toHaveCount(0);
+    const help = page.getByRole('link', { name: /Escribinos|Ayuda|WhatsApp/i }).first();
+    await expect(help).toHaveAttribute('href', /TC-PRUEBA/);
+    expect(await help.getAttribute('href')).not.toContain(saved.token);
+    await page.screenshot({ path: testInfo.outputPath('saved-order-shipping-configuration-375.png') });
+    await page.getByRole('button', { name: 'Actualizar estado' }).click();
+    await expect.poll(() => requests).toBe(2);
+    await page.reload();
+    await expect(page.getByRole('heading', { name: 'Tu envío necesita revisión' })).toBeVisible();
+    expect(mutations).toBe(0);
+    expect(await page.evaluate(() => JSON.parse(localStorage.getItem('cart-storage')!).state.cart[0].quantity)).toBe(1);
+    expect(await page.evaluate(() => JSON.parse(localStorage.getItem('tc.checkout')!).payload.checkout_key)).toBe(attempt.checkout_key);
+});

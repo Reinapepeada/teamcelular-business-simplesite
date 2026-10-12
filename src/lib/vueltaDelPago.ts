@@ -368,6 +368,15 @@ const vueltaBase = (
     // exactamente lo que no puede afirmar.
     if (!estado) return ESPERANDO;
 
+    if (estado.reason_code === "shipping_configuration_required" && !["expired", "cancelled"].includes(estado.status)) {
+        return {
+            desenlace: "esperando",
+            titulo: "Tu envío necesita revisión",
+            detalle: "Tu pedido sigue guardado. Escribinos con su número para confirmar cómo seguir con el envío. Si ya pagaste, conservá el comprobante; no hagas otro pedido.",
+            seguirPreguntando: false,
+        };
+    }
+
     if (estado.payment_result === "rejected" || estado.reason_code === "expired") {
         const motivos = {
             insufficient_funds: "La tarjeta no tenía saldo suficiente",
@@ -378,7 +387,7 @@ const vueltaBase = (
         };
         return {
             ...RECHAZADO,
-            titulo: motivos[estado.reason_code ?? "other"] ?? motivos.other,
+            titulo: motivos[(estado.reason_code ?? "other") as keyof typeof motivos] ?? motivos.other,
             detalle: estado.can_retry === true
                 ? "Podés reintentar el pago de este mismo pedido."
                 : "Escribinos con el número de pedido para consultar cómo seguir.",
@@ -404,7 +413,7 @@ const vueltaBase = (
 export const vueltaMostrable = (estado: StoreOrderStatus | null, intencion: Intencion = "exito") => ({
     ...vueltaBase(estado, intencion),
     // Un campo ausente nunca habilita un nuevo intento de cobro.
-    canRetry: estado?.can_retry === true && importeConfirmado(estado.total_amount) !== null && !estado.paid && estado.payment_result !== "approved" && estado.payment_result !== "reversed" && estado.status !== "payment_reversed",
+    canRetry: estado?.can_retry === true && estado.reason_code !== "shipping_configuration_required" && importeConfirmado(estado.total_amount) !== null && !estado.paid && estado.payment_result !== "approved" && estado.payment_result !== "reversed" && estado.status !== "payment_reversed",
 });
 
 /** El enlace compartido identifica un pedido, pero nunca presta el token de otro. */

@@ -4,6 +4,7 @@ import { exigirCotizacionLista, plazoDeTransporte } from './shippingQuote.ts';
 import { armarPedido, crearPedidoConRecuperacion, problemaDeCheckout, recuperarIntento, revisarPedido, type DatosDeCompra } from './checkoutFlow.ts';
 import { intentoDeCheckout, prepararIntento } from './checkoutKey.ts';
 import { parseStoreError, type ShippingQuote } from './storeApi.ts';
+import { vueltaMostrable } from './vueltaDelPago.ts';
 import { resumenParaConfirmar } from './resumenDelPedido.ts';
 
 const id = '11111111-1111-4111-8111-111111111111';
@@ -98,4 +99,24 @@ test('comparación exacta de centavos también detecta cambios compensados entre
         assert.equal(resumenParaConfirmar({ ...order, subtotal_amount: 100 - difference, shipping_amount: 20 + difference }, 100, 20).precioCambio, true);
     }
     assert.equal(resumenParaConfirmar({ subtotal_amount: 0.1 + 0.2, shipping_amount: 0.2, total_amount: 0.5, currency: 'ARS' }, 0.3, 0.2).precioCambio, false);
+});
+
+
+test('estado público con configuración pendiente no culpa al pago ni abre otro intento', () => {
+    const base = { commerce_key: 'TC-TEST', status: 'pending_payment', paid: false, total_amount: 120, currency: 'ARS', fulfillment_status: 'pending', tracking_ref: null, reason_code: 'shipping_configuration_required' as const, can_retry: false };
+    for (const payment_result of ['none', 'pending', 'rejected'] as const) {
+        const view = vueltaMostrable({ ...base, payment_result });
+        assert.equal(view.titulo, 'Tu envío necesita revisión');
+        assert.equal(view.canRetry, false); assert.equal(view.seguirPreguntando, false);
+        assert.match(view.detalle, /Si ya pagaste, conservá el comprobante/);
+        assert.doesNotMatch(view.detalle, /Mercado Pago|no se cobró|no hubo cargo/i);
+    }
+    assert.equal(vueltaMostrable({ ...base, can_retry: true }).canRetry, false);
+});
+
+test('motivo logístico no reemplaza un pago confirmado, una reversa o un pedido terminado', () => {
+    const base = { commerce_key: 'TC-TEST', status: 'pending_payment', paid: false, total_amount: 120, currency: 'ARS', fulfillment_status: 'pending', tracking_ref: null, reason_code: 'shipping_configuration_required' as const, can_retry: false };
+    assert.equal(vueltaMostrable({ ...base, paid: true, status: 'paid', payment_result: 'approved' }).desenlace, 'pagado');
+    assert.equal(vueltaMostrable({ ...base, status: 'payment_reversed', payment_result: 'reversed' }).titulo, 'Este pago fue revertido');
+    for (const status of ['expired', 'cancelled']) assert.equal(vueltaMostrable({ ...base, status }).titulo, 'Este pedido ya no se puede pagar');
 });
