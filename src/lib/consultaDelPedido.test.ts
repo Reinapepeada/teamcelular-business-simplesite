@@ -55,3 +55,16 @@ test("F11 doble actualización/foco no solapa; navegar descarta respuesta tardí
     c.consulta.detener(); resolver(estado(true)); await esperar();
     assert.equal(c.recibidos.length, 0); assert.equal(c.pagos, 0); assert.equal(c.programado, false);
 });
+
+
+test("configuración de envío pendiente no programa polling; refresh manual consulta una vez sin pagar", async () => {
+    let llamadas = 0;
+    const c = armar(async () => { llamadas++; return { ...estado(), payment_result: "none", reason_code: "shipping_configuration_required", can_retry: false }; });
+    await esperar();
+    assert.equal(llamadas, 1); assert.equal(c.programado, false); assert.equal(c.pagos, 0);
+    await c.siguiente(); await c.siguiente();
+    assert.equal(llamadas, 1); assert.equal(c.agotado, false);
+    c.consulta.actualizar(); await esperar();
+    assert.equal(llamadas, 2); assert.equal(c.programado, false); assert.equal(c.pagos, 0);
+    c.consulta.detener();
+});

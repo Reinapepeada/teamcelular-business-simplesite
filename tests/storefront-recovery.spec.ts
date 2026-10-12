@@ -704,8 +704,14 @@ test('pedido guardado con configuración de envío pendiente no se atribuye a Me
     await expect(help).toHaveAttribute('href', /TC-PRUEBA/);
     expect(await help.getAttribute('href')).not.toContain(saved.token);
     await page.screenshot({ path: testInfo.outputPath('saved-order-shipping-configuration-375.png') });
-    await page.getByRole('button', { name: 'Actualizar estado' }).click();
-    await expect.poll(() => requests).toBe(2);
+    const refresh = page.getByRole('button', { name: 'Actualizar estado' });
+    await expect(refresh).toHaveAttribute('aria-disabled', 'false');
+    const beforeRefresh = requests; // Desarrollo puede montar dos consultas iniciales; el clic debe sumar exactamente una.
+    await refresh.click();
+    await expect.poll(() => requests).toBe(beforeRefresh + 1);
+    // Ventana deliberada: no debe reaparecer el polling de 2/4/8 segundos tras este estado.
+    await page.waitForTimeout(15_000);
+    expect(requests).toBe(beforeRefresh + 1);
     await page.reload();
     await expect(page.getByRole('heading', { name: 'Tu envío necesita revisión' })).toBeVisible();
     expect(mutations).toBe(0);
