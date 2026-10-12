@@ -36,7 +36,7 @@ import { aLineasDeCheckout, productosSoloRetiro } from "@/lib/cartLines";
 import { huellaDelCarrito } from "@/lib/checkoutKey";
 import { queHacerConElPendiente } from "@/lib/pedidoPendiente";
 import { whatsappUrl } from "@/lib/businessProfile";
-import { vencimientoReserva } from "@/lib/resumenDelPedido";
+import { vencimientoReserva, importeConfirmado } from "@/lib/resumenDelPedido";
 import { totalesDelCarrito } from "@/lib/totalesDelCarrito";
 import {
     quoteShipping,
@@ -125,6 +125,8 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
     useEffect(() => {
         if (!abierto || !entregaInicial) return;
         const frame = requestAnimationFrame(() => {
+            // Una revisión anterior todavía no reservó nada: cambiar de modalidad exige revisarla otra vez.
+            setRevision(actual => actual && actual.datos.entrega !== entregaInicial ? null : actual);
             setDatos(previos =>
                 entregaInicial === "envio"
                     ? {
@@ -351,7 +353,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
     const confirmarRevision = async () => {
         if (!revision || ocupado.current || pedidoPendiente || aConfirmar) return;
         if (revision.datos.entrega === "retiro" && retiro.status !== "ready") return;
-        if (hayErrores(validarDatos(revision.datos, items)) || revision.huella !== huellaActual || revision.productos !== estimadoDeProductos) {
+        if (revision.datos.entrega !== datos.entrega || (entregaInicial && revision.datos.entrega !== entregaInicial) || hayErrores(validarDatos(revision.datos, items)) || revision.huella !== huellaActual || revision.productos !== estimadoDeProductos) {
             setRevision(null);
             setFallo("El carrito cambió. Revisá el pedido otra vez.");
             return;
@@ -788,7 +790,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                                 <>
                                     <p className="mt-1 text-xs">
                                         Tu pedido {pedidoPendiente.commerce_key} quedó reservado por{" "}
-                                        {Number.isFinite(pedidoPendiente.total_amount) ? pesos(pedidoPendiente.total_amount, pedidoPendiente.currency) : "un importe por confirmar"}. No lo
+                                        {importeConfirmado(pedidoPendiente.total_amount) !== null ? pesos(pedidoPendiente.total_amount, pedidoPendiente.currency) : "un importe por confirmar"}. No lo
                                         pidas de nuevo: reintentá el pago. {vencimientoReserva(pedidoPendiente) && `Reservado hasta ${vencimientoReserva(pedidoPendiente)}.`}
                                     </p>
                                     <button

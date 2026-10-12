@@ -94,20 +94,20 @@ test('F8 validación de nombre y CPA antes de cotizar, sin crear pedido', async 
     await page.goto('/tienda');
     await page.getByRole('button', { name: /Abrir carrito/ }).click();
     await page.getByRole('button', { name: 'Continuar con la compra' }).click();
-    await page.getByLabel('Envío a domicilio', { exact: false }).check();
-    await page.getByLabel('Nombre y apellido', { exact: true }).fill('Ana');
-    await page.getByLabel('Mail', { exact: true }).fill('ana@example.test');
-    await page.getByLabel('Calle', { exact: true }).fill('Calle de prueba');
-    await page.getByLabel('Número', { exact: true }).fill('123');
-    await page.getByLabel('Localidad', { exact: true }).fill('CABA');
-    await page.getByLabel('Código postal', { exact: true }).fill('C1425');
+    await page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Envío a domicilio', { exact: false }).check();
+    await page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Nombre y apellido', { exact: true }).fill('Ana');
+    await page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Mail', { exact: true }).fill('ana@example.test');
+    await page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Calle', { exact: true }).fill('Calle de prueba');
+    await page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Número', { exact: true }).fill('123');
+    await page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Localidad', { exact: true }).fill('CABA');
+    await page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Código postal', { exact: true }).fill('C1425');
     await page.getByRole('button', { name: /Revisar pedido/ }).click();
     await expect(page.getByText('Para el envío, poné tu nombre y apellido.')).toBeVisible();
-    await expect(page.getByLabel('Nombre y apellido', { exact: true })).toBeFocused();
+    await expect(page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Nombre y apellido', { exact: true })).toBeFocused();
     expect(quotes).toBe(0); expect(creates).toBe(0);
     await page.screenshot({ path: testInfo.outputPath('shipping-validation-320.png'), fullPage: true });
-    await page.getByLabel('Nombre y apellido', { exact: true }).fill('Ana Prueba');
-    await page.getByLabel('Código postal', { exact: true }).fill(' c1425abc ');
+    await page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Nombre y apellido', { exact: true }).fill('Ana Prueba');
+    await page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Código postal', { exact: true }).fill(' c1425abc ');
     await page.getByRole('button', { name: /Revisar pedido/ }).click();
     await expect.poll(() => quotes).toBe(1);
     expect(creates).toBe(0);
@@ -139,17 +139,17 @@ async function openCheckout(page: Page) {
 }
 
 async function fillBuyer(page: Page) {
-    await page.getByLabel('Nombre y apellido', { exact: true }).fill('Ana Prueba');
-    await page.getByLabel('Mail', { exact: true }).fill('ana@example.test');
+    await page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Nombre y apellido', { exact: true }).fill('Ana Prueba');
+    await page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Mail', { exact: true }).fill('ana@example.test');
 }
 
 async function fillShipping(page: Page) {
-    await page.getByLabel('Envío a domicilio', { exact: false }).check();
+    await page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Envío a domicilio', { exact: false }).check();
     await fillBuyer(page);
-    await page.getByLabel('Calle', { exact: true }).fill('Dirección de prueba');
-    await page.getByLabel('Número', { exact: true }).fill('123');
-    await page.getByLabel('Localidad', { exact: true }).fill('CABA');
-    await page.getByLabel('Código postal', { exact: true }).fill('C1425ABC');
+    await page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Calle', { exact: true }).fill('Dirección de prueba');
+    await page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Número', { exact: true }).fill('123');
+    await page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Localidad', { exact: true }).fill('CABA');
+    await page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Código postal', { exact: true }).fill('C1425ABC');
 }
 
 for (const [width, height] of [[320, 568], [375, 667], [1280, 900]]) {
@@ -159,7 +159,7 @@ for (const [width, height] of [[320, 568], [375, 667], [1280, 900]]) {
         await isolate(page, () => status());
         await openCheckout(page);
         await fillShipping(page);
-        const name = page.getByLabel('Nombre y apellido', { exact: true });
+        const name = page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Nombre y apellido', { exact: true });
         await name.fill('Ana');
         await page.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
         await expect(name).toBeFocused();
@@ -171,14 +171,14 @@ for (const [width, height] of [[320, 568], [375, 667], [1280, 900]]) {
         })).toBe(true);
         await page.screenshot({ path: testInfo.outputPath(`first-error-visible-${width}.png`) });
         await name.press('Tab');
-        await expect(page.getByLabel('Mail', { exact: true })).toBeFocused();
+        await expect(page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Mail', { exact: true })).toBeFocused();
         await page.keyboard.press('Shift+Tab');
         await expect(name).toBeFocused();
         await page.keyboard.press('Escape');
         await expect(page.getByRole('dialog', { name: 'Finalizar compra' })).not.toBeVisible();
         await page.getByRole('button', { name: 'Continuar con la compra' }).click();
         await expect(name).toHaveValue('Ana');
-        await expect(page.getByLabel('Calle', { exact: true })).toHaveValue('Dirección de prueba');
+        await expect(page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Calle', { exact: true })).toHaveValue('Dirección de prueba');
         await name.fill('Ana Prueba');
         expect(await page.evaluate(() => JSON.parse(localStorage.getItem('cart-storage')!).state.cart.length)).toBe(1);
     });
@@ -209,7 +209,7 @@ for (const kind of ['missing', 'unavailable', 'temporary'] as const) {
         await page.getByRole('button', { name: 'Reintentar datos de retiro' }).click();
         await expect.poll(() => calls).toBeGreaterThan(before);
         await expect(review).toBeEnabled();
-        await expect(page.getByLabel('Nombre y apellido', { exact: true })).toHaveValue('Ana Prueba');
+        await expect(page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Nombre y apellido', { exact: true })).toHaveValue('Ana Prueba');
         await review.click();
         await expect(page.getByRole('heading', { name: 'Revisá tu pedido' })).toBeVisible();
         await expect(page.getByRole('dialog', { name: 'Finalizar compra' }).getByText('Local de prueba · Dirección ficticia 123 · Lunes 10 a 18')).toBeVisible();
@@ -409,12 +409,12 @@ test('falla de cotización en checkout conserva toda la dirección al reintentar
     page.on('request', req => { if (new URL(req.url()).pathname === '/store/checkout') creates++; });
     await openCheckout(page);
     await fillShipping(page);
-    await page.getByLabel('Piso (opcional)', { exact: true }).fill('2');
-    await page.getByLabel('Depto (opcional)', { exact: true }).fill('B');
+    await page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Piso (opcional)', { exact: true }).fill('2');
+    await page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Depto (opcional)', { exact: true }).fill('B');
     await page.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
     await expect(page.getByRole('dialog', { name: 'Finalizar compra' }).getByRole('alert')).toHaveText(/No pudimos cotizar el envío/);
     for (const [label, value] of [['Calle', 'Dirección de prueba'], ['Número', '123'], ['Piso (opcional)', '2'], ['Depto (opcional)', 'B'], ['Localidad', 'CABA'], ['Código postal', 'C1425ABC']]) {
-        await expect(page.getByLabel(label, { exact: true })).toHaveValue(value);
+        await expect(page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel(label, { exact: true })).toHaveValue(value);
     }
     ready = true;
     await page.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
@@ -432,7 +432,7 @@ test('error contractual tras confirmar vuelve al campo completo y mantiene el de
     await fillShipping(page);
     await page.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
     await page.getByRole('button', { name: 'Confirmar y pagar' }).click();
-    const street = page.getByLabel('Calle', { exact: true });
+    const street = page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Calle', { exact: true });
     await expect(street).toBeFocused();
     await expect(street).toHaveValue('Dirección de prueba');
     await expect.poll(() => street.evaluate(input => {
@@ -443,4 +443,32 @@ test('error contractual tras confirmar vuelve al campo completo y mantiene el de
     })).toBe(true);
     expect(await page.evaluate(() => localStorage.getItem('tc.checkout'))).toBeNull();
     await page.screenshot({ path: testInfo.outputPath('server-error-visible-320.png') });
+});
+
+test('cambiar modalidad desde carrito invalida sólo la revisión sin reservar', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await seed(page, 1, false);
+    await isolate(page, () => status());
+    let creates = 0;
+    await page.route('**/store/shipping/quote', route => route.fulfill({ headers: cors, json: { cheapest: { price: 20 }, options: [{ price: 20 }] } }));
+    page.on('request', req => { if (new URL(req.url()).pathname === '/store/checkout') creates++; });
+    await openCheckout(page);
+    await fillShipping(page);
+    await page.getByRole('radio', { name: /Retiro en el local/ }).check();
+    await page.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Revisá tu pedido' })).toBeVisible();
+    await page.getByRole('button', { name: 'Volver al carrito' }).click();
+    await page.getByRole('dialog', { name: 'Resumen del carrito' }).locator('label').filter({ has: page.locator('input[name="carrito-entrega"]') }).nth(1).click();
+    await page.getByRole('button', { name: 'Continuar con la compra' }).click();
+    await expect(page.getByRole('heading', { name: 'Tus datos y entrega' })).toBeVisible();
+    await expect(page.getByRole('radio', { name: /Envío a domicilio/ })).toBeChecked();
+    await expect(page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Nombre y apellido', { exact: true })).toHaveValue('Ana Prueba');
+    await expect(page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Calle', { exact: true })).toHaveValue('Dirección de prueba');
+    await expect(page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Código postal', { exact: true })).toHaveValue('C1425ABC');
+    expect(creates).toBe(0);
+    await page.getByRole('button', { name: 'Revisar pedido', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Envío a', exact: true })).toBeVisible();
+    await expect(page.getByText(/Dirección de prueba · 123.*CP C1425ABC/)).toBeVisible();
+    expect(creates).toBe(0);
+    expect(await page.evaluate(() => localStorage.getItem('tc.checkout'))).toBeNull();
 });
