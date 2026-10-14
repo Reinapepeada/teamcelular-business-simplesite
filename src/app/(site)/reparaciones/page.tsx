@@ -10,6 +10,12 @@ const SITE_URL = getSiteUrl();
 
 const REPAIR_SERVICES = [
   {
+    title: "Virus y publicidad invasiva",
+    description:
+      "Anuncios que tapan la pantalla o apps que no podés borrar. Limpieza conservando tus datos o reinstalación con backup.",
+    href: "/reparaciones/eliminar-virus-celular-caba",
+  },
+  {
     title: "Cambio de batería",
     description:
       "Se descarga al mediodía, se apaga con 20% o está hinchada. En la mayoría de los modelos sale en el día.",
