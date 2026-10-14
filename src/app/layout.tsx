@@ -8,6 +8,7 @@ import StructuredData from "@/components/seo/StructuredData";
 import { ThemeProvider } from "@/app/providers";
 import { getSiteUrl } from "@/lib/seoMetadata";
 import Script from "next/script";
+import { GA4_INIT_SCRIPT } from "@/lib/analytics/ga4";
 
 const SITE_URL = getSiteUrl();
 
@@ -123,31 +124,8 @@ export default function RootLayout({
     return (
         <html lang="es" className="dark" style={{ colorScheme: "dark" }} suppressHydrationWarning>
             <head>
-                {/* ponytail: GA4 en root layout = todas las páginas. next/script, sin dep nueva. */}
-                <Script
-                    src="https://www.googletagmanager.com/gtag/js?id=G-1S64KMRF99"
-                    strategy="afterInteractive"
-                />
                 <Script id="ga4" strategy="afterInteractive">
-                    {`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-1S64KMRF99');
-// ponytail: un listener global en vez de envolver cada link a wa.me (habia 14 paginas
-// sin medir). BranchWhatsAppButton abre con window.open, no con <a>: no cuenta doble.
-document.addEventListener('click', function (e) {
-  var a = e.target && e.target.closest && e.target.closest('a[href*="wa.me/"]');
-  if (!a) return;
-  // cta_location: el explicito si el link lo trae; si no, la zona de la pagina.
-  var tagged = a.closest('[data-cta-location]');
-  var zone = tagged ? tagged.getAttribute('data-cta-location')
-    : a.closest('.tc-sticky-cta') ? 'sticky'
-    : a.closest('nav') ? 'nav'
-    : a.closest('header') ? 'hero'
-    : a.closest('footer') ? 'footer'
-    : 'body';
-  gtag('event', 'whatsapp_click', { link_url: a.href, page_path: location.pathname, cta_location: zone });
-}, true);`}
+                    {GA4_INIT_SCRIPT}
                 </Script>
                 {/* ponytail: filtro por hostname y no NODE_ENV, `next start` local también es production. */}
                 <Script id="microsoft-clarity" strategy="lazyOnload">

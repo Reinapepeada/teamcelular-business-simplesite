@@ -6,6 +6,7 @@ const clarityCalls: unknown[][] = [];
 const gtagCalls: unknown[][] = [];
 
 (globalThis as Record<string, unknown>).window = globalThis;
+Object.defineProperty(globalThis, "location", { value: { hostname: "teamcelular.com" }, configurable: true });
 (globalThis as unknown as Window).gtag = (...args: unknown[]) => {
   gtagCalls.push(args);
 };
@@ -43,6 +44,11 @@ assert.deepEqual(clarityCalls, [["event", "cta_click"]]);
 clarityCalls.length = 0;
 track("branch_selector_open");
 assert.deepEqual(clarityCalls, [["event", "branch_selector_open"]]);
+
+gtagCalls.length = 0;
+Object.defineProperty(globalThis, "location", { value: { hostname: "localhost" }, configurable: true });
+track("budget_wizard_view");
+assert.equal(gtagCalls.length, 0);
 
 console.log("track: ok");
 }

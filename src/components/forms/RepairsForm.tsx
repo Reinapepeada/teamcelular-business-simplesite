@@ -145,6 +145,7 @@ export default function RepairsForm() {
             formName: "repair_budget_wizard",
             formLocation: "presupuesto_reparacion",
             formVersion: BUDGET_WIZARD_VERSION,
+            preferredBranch,
             stepIndex: 1,
             stepId: step.id,
             stepLabel: step.label,

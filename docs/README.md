@@ -6,6 +6,7 @@ Análisis y planes del sitio. `DESIGN.md`, `PRODUCT.md` y `AGENTS.md` quedan en 
 - `SEO-LOCAL-CANALES.md`: SEO local y canales de producto (Merchant, Bing, Meta).
 - `SEO-LANDING-VIRUS.md`: contenido, diseño y medición del servicio para quitar virus y publicidad.
 - `SEO-HOME-PALERMO-SAMSUNG.md`: cambios por consultas reales, evidencia y medición posterior.
+- `GA4-IPHONE-MEASUREMENT.md`: exclusión de pruebas, sucursal en GA4 y conversión de la guía de iPhone.
 - `MATRIZ_INTENCION_URL_SEO_COPY.md`: intención de búsqueda por URL y copy.
 - `GUIAS_COMPLETAS.md`: guías de reparación por marca.
 - `ADS-PLAN.md` y `ads/`: plan de Google Ads, importables de palabras clave, anuncios y negativas.
