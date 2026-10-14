@@ -15,7 +15,7 @@ import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import { BsWhatsapp } from "react-icons/bs";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
-import { getBranch } from "@/lib/businessProfile";
+import { BRANCHES, getBranch } from "@/lib/businessProfile";
 import RepairPriceTable from "@/components/seo/RepairPriceTable";
 import { POPULAR_REPAIR_PRICES, PRICES_UPDATED_LABEL } from "@/lib/repairPrices";
 import { ZONE_CONFIGS } from "./zoneConfigs";
@@ -64,6 +64,7 @@ export interface ZoneLandingConfig {
   metaDescription: string;
   socialDescription: string;
   heroBadge: string;
+  heroTitle?: string;
   heroIntro: string;
   heroImage: string;
   heroGlowClass: string;
@@ -219,7 +220,7 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${url}#service`,
-    name: `Arreglo de celulares en ${displayZone} (CABA)`,
+    name: config.heroTitle ?? `Arreglo de celulares en ${displayZone} (CABA)`,
     serviceType: "Reparacion de celulares",
     url,
     areaServed: [
@@ -253,7 +254,7 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
       <header className="tc-intro mx-auto max-w-[1200px] px-4 pt-12 text-center sm:px-6 sm:pt-16">
         <p className="tc-eyebrow">{config.heroBadge}</p>
         <h1 className="tc-display mx-auto mt-3 max-w-4xl">
-          Arreglo de celulares en {displayZone}
+          {config.heroTitle ?? `Arreglo de celulares en ${displayZone}`}
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-pretty text-[19px] leading-[1.42] text-[#86868b] sm:text-[21px]">
           {config.heroIntro}
@@ -298,6 +299,15 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
           </Link>
           .
         </p>
+        {config.slug === "palermo" && (
+          <nav aria-label="Talleres que atienden Palermo" className="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm">
+            {BRANCHES.map((branch) => (
+              <Link key={branch.slug} href={branch.url} className="tc-link inline-flex min-h-11 items-center">
+                Cómo llegar a {branch.shortName}: {branch.street}
+              </Link>
+            ))}
+          </nav>
+        )}
       </header>
 
       <div className="mx-auto mt-12 max-w-[1200px] px-4 sm:px-6">

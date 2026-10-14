@@ -2,6 +2,8 @@ import Image from "next/image";
 import { BsArrowRight, BsCheck2, BsWhatsapp } from "react-icons/bs";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
+import Link from "next/link";
+import { BRANCHES } from "@/lib/businessProfile";
 
 const intakeProofs = [
     "Diagnóstico antes de intervenir",
@@ -15,10 +17,10 @@ export default function BannerHome() {
             <div className="tc-intro mx-auto max-w-[1200px] px-4 pt-14 text-center sm:px-6 sm:pt-20">
                 <p className="tc-eyebrow">Recoleta y Belgrano · Lun–Vie, 10:30–18:00</p>
                 <h1 className="tc-display mx-auto mt-3 max-w-[15em]">
-                    Reparación de celulares en CABA: pantalla y batería en el día
+                    Reparación de celulares en CABA
                 </h1>
                 <p className="mx-auto mt-5 max-w-[38rem] text-pretty text-[19px] leading-[1.4] text-[#86868b] sm:text-[21px]">
-                    Sin turno, en Recoleta y Belgrano. Si el repuesto está en stock, te lo llevás en 2 a 4 horas. Contanos la falla por WhatsApp y te pasamos precio y plazo antes de que vengas.
+                    Servicio técnico de iPhone, Samsung, Motorola y Xiaomi en Recoleta y Belgrano, sin turno. Pantalla, batería, carga y placa, con presupuesto antes de reparar. Pantalla y batería en 2 a 4 horas si hay stock.
                 </p>
 
                 <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5">
@@ -43,7 +45,15 @@ export default function BannerHome() {
                     </BranchWhatsAppButton>
                 </div>
 
-                <ul className="mx-auto mt-10 flex max-w-3xl flex-wrap justify-center gap-x-8 gap-y-2 text-[14px] text-[#86868b]">
+                <nav aria-label="Precios y sucursales de reparación" className="mx-auto mt-5 flex max-w-3xl flex-wrap justify-center gap-x-6 gap-y-1 text-sm">
+                    <a href="#precios" className="tc-link inline-flex min-h-11 items-center">Ver precios de reparación</a>
+                    {BRANCHES.map((branch) => (
+                        <Link key={branch.slug} href={branch.url} className="tc-link inline-flex min-h-11 items-center">
+                            {branch.shortName}: {branch.street}
+                        </Link>
+                    ))}
+                </nav>
+                <ul className="mx-auto mt-5 flex max-w-3xl flex-wrap justify-center gap-x-8 gap-y-2 text-[14px] text-[#86868b]">
                     {intakeProofs.map((item) => (
                         <li key={item} className="flex items-center gap-1.5">
                             <BsCheck2 className="text-[#6aa6ff]" aria-hidden />
