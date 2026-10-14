@@ -8,7 +8,8 @@ import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards
 import GuideByline from "@/components/seo/GuideByline";
 import RepairPriceTable from "@/components/seo/RepairPriceTable";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
-import { BRAND_REPAIR_PRICES, PRICES_UPDATED, formatArsPrice } from "@/lib/repairPrices";
+import RepairPriceInquiry from "@/components/repairs/RepairPriceInquiry";
+import { BRAND_REPAIR_PRICES, PRICES_UPDATED_LABEL, formatArsPrice } from "@/lib/repairPrices";
 import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 import {
   FaMobileAlt,
@@ -19,7 +20,6 @@ import {
   FaExclamationTriangle,
   FaEye,
   FaFingerprint,
-  FaCertificate,
   FaApple,
   FaAndroid,
   FaChartLine,
@@ -39,17 +39,11 @@ const SCREEN_PRICES = [
   ),
 ];
 const SCREEN_FROM = formatArsPrice(Math.min(...SCREEN_PRICES.map((p) => p.from)));
-const PRICES_UPDATED_LABEL = new Date(PRICES_UPDATED).toLocaleDateString("es-AR", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-  timeZone: "UTC",
-});
 
 export const metadata: Metadata = {
-  title: "Cambio de Pantalla de Celular en CABA: Precios y Qué Pasa con tus Datos",
+  title: "Cambio de Pantalla de Celular: Precios por Marca en CABA",
   description:
-    `Precios reales por marca desde ${SCREEN_FROM}, en el día y con garantía de 90 días. Qué pasa con tus fotos y cuándo la falla no es la pantalla sino el flex o la placa.`,
+    `Cambio de pantalla desde ${SCREEN_FROM}, según modelo y repuesto. Compará precios por marca y consultá stock por WhatsApp en Recoleta o Belgrano.`,
   keywords: [
     "cambio pantalla celular Buenos Aires",
     "pantalla iPhone original",
@@ -75,9 +69,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Cambio de Pantalla de Celular en CABA: Precios y Qué Pasa con tus Datos",
+    title: "Cambio de Pantalla de Celular: Precios por Marca en CABA",
     description:
-      `Precios por marca desde ${SCREEN_FROM}, listo en el día. Team Celular, Recoleta y Belgrano, CABA.`,
+      `Precios por marca desde ${SCREEN_FROM}, según modelo y repuesto. Confirmá precio y stock en Recoleta o Belgrano.`,
     type: "article",
     locale: "es_AR",
     url: "https://teamcelular.com/guias/reparacion-pantalla-celular",
@@ -94,7 +88,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Cambio de Pantalla Celular Buenos Aires",
-    description: "Displays OLED originales con True Tone y garantia escrita segun repuesto y trabajo. Service 2-4hs.",
+    description: `Precios por marca desde ${SCREEN_FROM}. Consultá modelo, repuesto y stock por WhatsApp.`,
     images: ["https://teamcelular.com/images/guia_cambio_modulo.webp"],
   },
   // Se canonicalizo hacia /reparaciones/cambio-pantalla-caba y se revirtio:
@@ -154,32 +148,30 @@ const damageTypes = [
 
 const screenTypes = [
   {
-    type: "Pantalla Original (OEM)",
-    description: "Fabricada por los mismos proveedores del fabricante. Para iPhone: LG, Samsung, BOE. Para Samsung: Samsung Display.",
+    type: "Pantalla original, según disponibilidad",
+    description: "Consultamos la opción original disponible para tu modelo y te indicamos su procedencia y las condiciones de instalación antes de presupuestar.",
     pros: [
-      "100% compatible con el equipo",
-      "True Tone / Always On Display preservado",
-      "Colores y brillo idénticos al original",
+      "Opción acorde al modelo del equipo",
+      "Funciones y calibración confirmadas antes de reparar",
+      "Tecnología de pantalla del modelo",
       "Garantía escrita de 90 días",
-      "Certificación de autenticidad"
     ],
     cons: ["Precio más alto"],
     price: "$$$$",
     recommended: "iPhone 12+, Samsung S20+",
   },
   {
-    type: "Pantalla OLED AAA+ (Incell)",
-    description: "Aftermarket de alta calidad con tecnología OLED/Incell. Especificaciones similares a la original.",
+    type: "Pantalla compatible",
+    description: "Repuesto de otro fabricante. Puede ser OLED o LCD, según la opción disponible; Incell es una opción LCD. Consultá qué tecnología incluye el presupuesto de tu modelo.",
     pros: [
-      "Excelente calidad de imagen",
-      "Touch sensible y preciso",
-      "Certificaciones CE, FCC, RoHS",
+      "Alternativas de precio según repuesto",
+      "Prueba de imagen y táctil antes de entregar",
       "Garantia escrita segun repuesto y trabajo",
       "Precio competitivo"
     ],
     cons: [
-      "True Tone puede perderse",
-      "Brillo ligeramente menor"
+      "Las funciones disponibles pueden variar",
+      "Brillo y colores pueden diferir del original"
     ],
     price: "$$$",
     recommended: "iPhone 7-11, Samsung A/M series",
@@ -217,13 +209,13 @@ const replacementProcess = [
   },
   {
     step: "3. Transferencia de componentes",
-    detail: "Transferimos módulos originales: cámara frontal, sensor de proximidad, altavoz auricular, placa Home/Face ID. Esto preserva funciones biométricas.",
+    detail: "Según el modelo, conservamos o transferimos los componentes necesarios y revisamos el estado de los sensores originales. Te avisamos si el golpe dañó alguna función antes de avanzar.",
     duration: "15-25 min",
     Icon: FaFingerprint,
   },
   {
     step: "4. Instalación y calibración",
-    detail: "Instalamos pantalla nueva, conectamos todos los flex, aplicamos adhesivo resistente al agua. Calibramos True Tone con programador especializado (iPhone).",
+    detail: "Instalamos la pantalla, conectamos los flex y renovamos el adhesivo. La configuración o calibración depende del modelo y del repuesto; abrir el equipo no garantiza recuperar la resistencia al agua original.",
     duration: "20-30 min",
     Icon: FaCheckCircle,
   },
@@ -236,6 +228,10 @@ const replacementProcess = [
 ];
 
 const quickAnswers = [
+  {
+    question: "¿Cuánto cuesta cambiar la pantalla de un celular?",
+    answer: `Los precios publicados empiezan en ${SCREEN_FROM}. El importe depende de la marca, el modelo y el repuesto disponible. La tabla de esta guía muestra rangos por familia; por WhatsApp te confirmamos el precio para tu equipo, el stock y el plazo antes de avanzar.`,
+  },
   {
     question: "¿Se puede cambiar la pantalla de un celular?",
     answer:
@@ -262,11 +258,11 @@ const faqScreen = [
   ...quickAnswers,
   {
     question: "¿Se pierde Face ID o Touch ID al cambiar la pantalla?",
-    answer: "No, si se hace bien. Desde el iPhone 13 la pantalla viene emparejada con el equipo: si no se transfiere el IC original por microsoldadura, se pierden Face ID y True Tone. Nosotros hacemos esa transferencia en cada cambio.",
+    answer: "Depende del modelo, del repuesto y del estado de los sensores originales. Revisamos Face ID o Touch ID antes y después del cambio y te explicamos las funciones que se pueden conservar antes de aprobar el trabajo. Cambiar la pantalla no repara un sensor dañado por el golpe.",
   },
   {
     question: "¿Qué es True Tone y se puede mantener?",
-    answer: "Es la función de iPhone que ajusta el color de la pantalla según la luz. Se mantiene si transferimos los datos de la pantalla original a la nueva, y para eso la original tiene que funcionar, aunque esté rota.",
+    answer: "True Tone ajusta el color de la pantalla del iPhone según la luz ambiente. Su funcionamiento después del cambio depende del modelo, del repuesto y de la configuración o calibración necesaria. Te confirmamos las condiciones de la opción disponible para tu equipo.",
   },
   {
     question: "¿Cuánto tiempo tarda el cambio de pantalla?",
@@ -286,10 +282,10 @@ export default function ScreenReplacementGuide() {
   return (
     <div className="flex w-full justify-center px-4 py-16">
       <ArticleSchema
-        title="Cambio de pantalla celular en Buenos Aires | Display original Team Celular"
-        description="Cambio de pantalla con displays OLED originales, True Tone preservado y garantia escrita segun repuesto y trabajo. Service express 2-4 horas en CABA."
+        title="Cambio de pantalla de celular: precios por marca en CABA"
+        description={`Precios de cambio de pantalla desde ${SCREEN_FROM}, según modelo y repuesto. Consulta por WhatsApp en Recoleta y Belgrano.`}
         publishedTime="2024-11-30T00:00:00Z"
-        modifiedTime="2026-09-30T00:00:00Z"
+        modifiedTime="2026-10-14T00:00:00Z"
         image="https://teamcelular.com/images/guia_cambio_modulo.webp"
         url="https://teamcelular.com/guias/reparacion-pantalla-celular"
       />
@@ -316,62 +312,49 @@ export default function ScreenReplacementGuide() {
           </span>
         </nav>
 
-        {/* Hero Section */}
-        <header className="bg-[#1d1d1f] space-y-6 rounded-[28px] p-10 text-center md:p-16">
-          <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-[20px] bg-[#333336] text-[#6aa6ff]">
-            <FaMobileAlt className="text-5xl text-white" />
-          </div>
-          <h1 className="text-4xl font-semibold tracking-[-0.01em] text-slate-900 dark:text-[#f5f5f7] md:text-5xl">
-            Cambio de pantalla de celular: qué es el módulo y cuándo cambiarlo
+        <header className="space-y-5 rounded-[28px] bg-[#1d1d1f] p-5 sm:p-10 md:p-12">
+          <p className="text-sm font-semibold text-[#6aa6ff]">Recoleta y Belgrano · CABA</p>
+          <h1 className="max-w-4xl text-[clamp(1.9rem,4.5vw,3.25rem)] font-semibold leading-tight tracking-tight text-white">
+            Cambio de pantalla de celular: precios y opciones para tu modelo
           </h1>
-          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-[#a1a1a6]">
-            La pantalla se cambia cuando el daño está en el módulo: vidrio partido, líneas fijas, manchas
-            que crecen o touch que no responde en una zona. Si la imagen se ve bien pero el táctil falla
-            entero, o el equipo parpadea al moverlo, suele ser <strong>flex o placa</strong> y el reemplazo
-            de módulo no lo resuelve. Por eso conviene el diagnóstico antes de aprobar el cambio.
-            Team Celular lo hace el mismo día en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA:
-            el cambio de módulo sale en <strong>2 a 4 horas</strong> con garantía escrita de 90 días.
+          <p className="max-w-3xl text-lg leading-8 text-[#a1a1a6]">
+            Los cambios de pantalla publicados empiezan en <strong className="text-white">{SCREEN_FROM}</strong>.
+            El precio depende del modelo y del repuesto; no todas las pantallas cuestan lo mismo.
+            Te confirmamos el valor, las funciones del repuesto y el stock antes de reparar.
+            Con repuesto disponible, el cambio suele llevar de 2 a 4 horas.
           </p>
-          <div className="mt-4 flex justify-center">
-            <GuideByline modifiedTime="2026-09-30T00:00:00Z" tone="light" />
-          </div>
-
-          {/* Quick Stats */}
-          <div className="grid gap-6 md:grid-cols-3 mt-8">
-            <div className="bg-[#1d1d1f] rounded-[28px] p-6">
-              <FaClock className="mx-auto text-3xl text-blue-500 mb-2" />
-              <div className="text-2xl font-semibold text-blue-500">2-4hs</div>
-              <div className="text-sm text-slate-600 dark:text-[#86868b]">Service express</div>
-            </div>
-            <div className="bg-[#1d1d1f] rounded-[28px] p-6">
-              <FaShieldAlt className="mx-auto text-3xl text-secondary mb-2" />
-              <div className="text-2xl font-semibold text-secondary">90 días</div>
-              <div className="text-sm text-slate-600 dark:text-[#86868b]">Garantía escrita sobre trabajo y repuesto</div>
-            </div>
-            <div className="bg-[#1d1d1f] rounded-[28px] p-6">
-              <FaCertificate className="mx-auto text-3xl text-blue-500 mb-2" />
-              <div className="text-2xl font-semibold text-blue-500">desde {SCREEN_FROM}</div>
-              <div className="text-sm text-slate-600 dark:text-[#86868b]">Según modelo y repuesto</div>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-4 mt-8">
-            <Link
-              href="/presupuesto-reparacion"
-              className="tc-btn tc-btn-primary"
-            >
-              Solicitar cambio de pantalla
-            </Link>
-            <BranchWhatsAppButton
-              ctaName="guide_screen_hero_whatsapp"
-              ctaLocation="guide_screen_hero"
-              message="Necesito cambiar la pantalla de mi celular"
-              className="rounded-full border-2 border-blue-700 px-8 py-4 text-lg font-semibold text-blue-800 transition hover:bg-blue-100 dark:border-blue-500 dark:text-blue-200"
-            >
-              WhatsApp directo
-            </BranchWhatsAppButton>
+          <p className="text-sm leading-6 text-[#a1a1a6]">
+            Paraguay 2451, Recoleta · Amenábar 2032, Belgrano. Garantía escrita de 90 días sobre trabajo y repuesto.
+          </p>
+          <RepairPriceInquiry
+            repair="cambiar la pantalla de mi celular"
+            symptoms={["Vidrio roto", "Líneas o manchas", "Táctil no responde", "Pantalla negra", "Pantalla levantada"]}
+            ctaName="screen_guide_price_whatsapp"
+            ctaLocation="screen_guide_hero"
+          />
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
+            <Link href="#precios-pantalla" className="inline-flex min-h-11 items-center font-semibold text-[#6aa6ff] underline underline-offset-4">Ver precios por marca</Link>
+            <GuideByline modifiedTime="2026-10-14T00:00:00Z" tone="light" />
           </div>
         </header>
+
+        <section id="precios-pantalla" className="scroll-mt-24 space-y-6">
+          <RepairPriceTable
+            brand="celular"
+            prices={SCREEN_PRICES}
+            updatedLabel={PRICES_UPDATED_LABEL}
+            title="¿Cuánto sale cambiar la pantalla? Precios por marca"
+            timingText="El cambio suele llevar de 2 a 4 horas con repuesto en stock. Confirmá disponibilidad y plazo para tu modelo."
+          />
+          <BranchWhatsAppButton
+            ctaName="screen_guide_prices_whatsapp"
+            ctaLocation="screen_guide_prices"
+            message="Hola Team Celular, vi la tabla de precios de pantallas. Quiero confirmar el precio y el stock para mi modelo."
+            className="tc-btn tc-btn-primary w-full sm:w-auto"
+          >
+            Confirmar precio de mi pantalla
+          </BranchWhatsAppButton>
+        </section>
 
         <section className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
           <div>
@@ -379,8 +362,8 @@ export default function ScreenReplacementGuide() {
               Lo que más nos preguntan antes de cambiar la pantalla
             </h2>
             <p className="mt-4 text-lg leading-8 text-slate-700 dark:text-[#a1a1a6]">
-              Team Celular, en Paraguay 2451 Recoleta, cambia pantallas de celular en 2 a 4 horas sin
-              borrar los datos, con garantía escrita de 90 días sobre repuesto y trabajo.
+              El cambio de pantalla no borra los datos. Antes de reparar revisamos si el daño está en el
+              módulo, en el flex o en la placa, y te confirmamos el precio. El plazo depende del stock y del diagnóstico.
             </p>
             <Link
               href="/reparaciones/cambio-pantalla-caba"
@@ -398,8 +381,6 @@ export default function ScreenReplacementGuide() {
             ))}
           </div>
         </section>
-
-        <RepairPriceTable brand="celular" prices={SCREEN_PRICES} updatedLabel={PRICES_UPDATED_LABEL} />
 
         {/* Tipos de daños */}
         <section className="space-y-8">
@@ -567,15 +548,17 @@ export default function ScreenReplacementGuide() {
             ¿Tu pantalla está rota o no funciona?
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-[#a1a1a6]">
-            {REVIEW_COST_MESSAGE} Service express en 2-4 horas con garantia escrita segun repuesto y trabajo.
+            {REVIEW_COST_MESSAGE} Confirmá modelo, precio y stock con la sucursal que te quede más cerca.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              href="/presupuesto-reparacion"
+            <BranchWhatsAppButton
+              ctaName="screen_guide_footer_whatsapp"
+              ctaLocation="screen_guide_footer"
+              message="Hola Team Celular, leí la guía de cambio de pantalla. Quiero consultar el precio para mi celular."
               className="tc-btn tc-btn-primary"
             >
-              Solicitar presupuesto
-            </Link>
+              Consultar precio por WhatsApp
+            </BranchWhatsAppButton>
             <Link
               href="/contacto"
               className="rounded-full border-2 border-blue-600 px-8 py-4 text-lg font-semibold text-blue-600 transition hover:bg-blue-600/10"

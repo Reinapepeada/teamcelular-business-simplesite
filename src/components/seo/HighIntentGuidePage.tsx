@@ -52,6 +52,8 @@ interface HighIntentGuidePageProps {
   planSteps: GuideItem[];
   faq: GuideFaqItem[];
   priceTable?: React.ReactNode;
+  priceTablePosition?: "after-plan" | "after-hero";
+  heroActions?: React.ReactNode;
   relatedLinks: GuideRelatedLink[];
   whatsappText: string;
 }
@@ -88,6 +90,8 @@ export default function HighIntentGuidePage({
   planSteps,
   faq,
   priceTable,
+  priceTablePosition = "after-plan",
+  heroActions,
   relatedLinks,
   whatsappText,
 }: HighIntentGuidePageProps) {
@@ -169,7 +173,7 @@ export default function HighIntentGuidePage({
                 <GuideByline modifiedTime={modifiedTime} />
               </div>
 
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              {heroActions ?? <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <TrackedCtaLink
                   href="/presupuesto-reparacion#solicitar-presupuesto"
                   ctaName={`guide_high_intent_budget_${guideKey}`}
@@ -191,7 +195,7 @@ export default function HighIntentGuidePage({
                   <FaWhatsapp aria-hidden />
                   Hablar por WhatsApp
                 </TrackedCtaLink>
-              </div>
+              </div>}
             </div>
 
             <aside className="relative overflow-hidden bg-black">
@@ -226,6 +230,8 @@ export default function HighIntentGuidePage({
             ))}
           </ul>
         </header>
+
+        {priceTablePosition === "after-hero" && priceTable}
 
         <section className="space-y-5">
           <div>
@@ -317,7 +323,7 @@ export default function HighIntentGuidePage({
           </ol>
         </section>
 
-        {priceTable}
+        {priceTablePosition === "after-plan" && priceTable}
 
         <section className="space-y-5">
           <div className="flex items-center gap-3">
