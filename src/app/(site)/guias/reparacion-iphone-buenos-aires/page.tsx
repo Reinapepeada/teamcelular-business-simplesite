@@ -8,10 +8,14 @@ import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { INSTALLMENTS_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import GuideByline from "@/components/seo/GuideByline";
+import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
+import IphonePriceQuote from "@/components/repairs/IphonePriceQuote";
 import { formatArsPrice } from "@/lib/repairPrices";
+import { BRANCHES } from "@/lib/businessProfile";
 import {
   IPHONE_MODELS,
   IPHONE_MODELS_WITH_PAGE,
+  IPHONE_PRICES_UPDATED,
 } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 // Precio citable en el primer parrafo: sale de la misma fuente que la tabla.
@@ -19,6 +23,9 @@ const IPHONE_13 = IPHONE_MODELS.find((m) => m.slug === "13");
 // Precio minimo publicado: sale de la misma tabla que la pagina, no se hardcodea.
 const IPHONE_SCREEN_FROM = formatArsPrice(
   Math.min(...IPHONE_MODELS.map((m) => m.screen).filter((v): v is number => Boolean(v))),
+);
+const IPHONE_BATTERY_FROM = formatArsPrice(
+  Math.min(...IPHONE_MODELS.map((m) => m.battery).filter((v): v is number => v !== null)),
 );
 import {
   FaApple,
@@ -39,9 +46,9 @@ const PAGE_PATH = "/guias/reparacion-iphone-buenos-aires";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 
 export const metadata: Metadata = {
-  title: "Reparación y Servicio Técnico iPhone en CABA | Precios",
+  title: "Reparación de iPhone en CABA | Precios por Modelo",
   description:
-    `Servicio técnico de iPhone en Recoleta y Belgrano, CABA. Pantalla desde ${IPHONE_SCREEN_FROM}, lista en 2–4 h, con precio por modelo y garantía de 90 días.`,
+    `Elegí tu iPhone y consultá precios de pantalla y batería. Reparación en Recoleta y Belgrano, sin turno. Confirmamos repuesto y stock antes de reparar.`,
   keywords: [
     "reparacion iphone buenos aires",
     "service iphone caba",
@@ -75,9 +82,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Reparación de iPhone en Buenos Aires, CABA | Team Celular",
+    title: "Reparación de iPhone en CABA | Precios por Modelo",
     description:
-      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla y batería en 2–4 h, diagnóstico el mismo día y garantía escrita 90 días. iPhone 8 a 17 Pro Max.",
+      "Elegí tu modelo para ver precios de pantalla y batería. Recoleta y Belgrano, sin turno, con precio y stock confirmados antes de reparar.",
     type: "article",
     url: PAGE_URL,
     locale: "es_AR",
@@ -90,14 +97,14 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2024-01-15T00:00:00Z",
-    modifiedTime: "2026-09-23T00:00:00Z",
+    modifiedTime: "2026-10-14T00:00:00Z",
     section: "Guías técnicas",
   },
   twitter: {
     card: "summary_large_image",
     title: "Reparación de iPhone en CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta. Pantalla y batería en 2–4 h, garantía escrita 90 días. iPhone 8 a 17 Pro Max.",
+      "Precios de pantalla y batería por modelo de iPhone. Recoleta y Belgrano, sin turno. Consultá el repuesto y el stock antes de venir.",
     images: ["https://teamcelular.com/images/portada_iphone.webp"],
   },
 };
@@ -147,7 +154,7 @@ const quickSteps = [
   {
     step: "Cambio de la pieza",
     detail:
-      "Pasamos el chip IC de tu pantalla original a la nueva para que no pierdas Face ID ni True Tone. Es el paso que muchos talleres se saltean.",
+      "Antes de instalar, te explicamos qué módulo está disponible y qué funciones conserva en tu modelo. Revisamos si requiere transferencia de datos o del IC original y probamos True Tone, táctil y Face ID.",
     duration: "2-4 h",
     Icon: FaWrench,
   },
@@ -162,9 +169,9 @@ const quickSteps = [
 
 const frequentRepairs = [
   {
-    title: "Cambio de pantalla OLED para iPhone",
+    title: "Cambio de pantalla para iPhone",
     description:
-      "Módulo completo, nunca solo el vidrio. Transferimos el IC de la pantalla original para conservar True Tone y evitar el aviso de pieza desconocida.",
+      "Cambiamos el módulo completo. Te explicamos las opciones de repuesto, la calibración disponible y si puede aparecer un aviso de pieza. True Tone y ProMotion dependen del modelo y del módulo elegido.",
     eta: "2-4 h",
     Icon: FaMobileAlt,
   },
@@ -239,7 +246,7 @@ const iphoneSymptomRows = [
 ];
 
 const repairLinks: Record<string, string> = {
-  "Cambio de pantalla OLED para iPhone": "/reparaciones/cambio-pantalla-caba",
+  "Cambio de pantalla para iPhone": "/reparaciones/cambio-pantalla-caba",
   "Cambio de batería": "/reparaciones/cambio-bateria-caba",
   "Puerto de carga y audio inferior": "/reparaciones/cambio-pin-carga-caba",
   "Cámaras traseras y estabilización": "/reparaciones/cambio-camara-caba",
@@ -283,6 +290,14 @@ const iphoneModels = [
 
 const faq = [
   {
+    question: "¿Cuánto cuesta cambiar la pantalla o batería de mi iPhone?",
+    answer: `La pantalla cuesta desde ${IPHONE_SCREEN_FROM} y la batería desde ${IPHONE_BATTERY_FROM}, según modelo. Elegí tu equipo en el selector para ver su precio publicado. Confirmamos el repuesto, el stock y el valor exacto antes de reparar; si el precio figura como Consultar, necesitamos revisar la disponibilidad.`,
+  },
+  {
+    question: "¿El precio corresponde a una pantalla original o compatible?",
+    answer: "La tabla no identifica una única calidad de repuesto para todos los modelos. Antes de avanzar aclaramos qué opción está disponible, su precio y qué funciones conserva, incluyendo True Tone, brillo, ProMotion y el historial de piezas. Somos un servicio técnico independiente de Apple.",
+  },
+  {
     question: "¿Cuánto tarda la reparación de pantalla de iPhone?",
     answer:
       "Entre 2 y 4 horas si el módulo está en stock. Si el marco está doblado o hay otro daño, tarda más y te avisamos antes.",
@@ -290,7 +305,7 @@ const faq = [
   {
     question: "¿Pueden mantener True Tone después de cambiar pantalla?",
     answer:
-      "Sí: pasamos el chip IC de tu pantalla original a la nueva y True Tone sigue andando. Si la original llega tan destruida que no se puede leer el chip, te lo decimos antes de cambiarla.",
+      "Depende del modelo, del estado de la pantalla original y del repuesto elegido. Revisamos si se pueden transferir los datos o el IC y te confirmamos qué funciones se pueden conservar antes de instalar.",
   },
   {
     question: "¿Reparan iPhone con daño por agua o humedad?",
@@ -342,10 +357,10 @@ export default function IphoneRepairGuidePage() {
   return (
     <div className="flex w-full justify-center px-4 py-16">
       <ArticleSchema
-        title="Reparación de iPhone en Buenos Aires | Team Celular"
-        description="Precios por modelo, tiempos y fallas comunes de iPhone, con transferencia de IC en pantallas y garantía escrita de 90 días en CABA."
+        title="Reparación de iPhone en CABA: precios por modelo"
+        description="Precios de pantalla y batería por modelo, opciones de repuesto y consultas en Recoleta y Belgrano, con garantía escrita de 90 días."
         publishedTime="2024-01-15T00:00:00Z"
-        modifiedTime="2026-09-23T00:00:00Z"
+        modifiedTime="2026-10-14T00:00:00Z"
         about={[
           "reparacion de iPhone en Buenos Aires",
           "service tecnico Apple en CABA",
@@ -387,18 +402,18 @@ export default function IphoneRepairGuidePage() {
               Especialistas por marca
             </span>
             <span className="rounded-full border border-emerald-700/80 bg-emerald-700 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white">
-              Recoleta - CABA
+              Recoleta y Belgrano · CABA
             </span>
           </div>
 
           <div className="space-y-4">
             <h1 className="text-4xl font-semibold tracking-[-0.01em] text-slate-900 dark:text-[#f5f5f7] md:text-5xl">
-              Reparación de iPhone en Buenos Aires
+              Reparación de iPhone en CABA: precios por modelo
             </h1>
             <p className="max-w-4xl text-lg leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
-              Team Celular, en Paraguay 2451 Recoleta CABA, repara iPhone con
-              diagnóstico el mismo día, pantalla y batería en 2–4 h, y garantía
-              escrita de 90 días sobre trabajo y repuesto. iPhone 8 a 17 Pro Max.
+              Pantalla desde {IPHONE_SCREEN_FROM} y batería desde {IPHONE_BATTERY_FROM}.
+              Elegí tu modelo para ver el precio y consultanos qué repuesto hay disponible.
+              Te atendemos sin turno en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).
               {IPHONE_13?.screen && IPHONE_13.battery ? (
                 <>
                   {" "}Por ejemplo, en un iPhone 13 el cambio de pantalla cuesta{" "}
@@ -408,39 +423,30 @@ export default function IphoneRepairGuidePage() {
               ) : null}
             </p>
             <div className="mt-4">
-              <GuideByline modifiedTime="2026-09-23T00:00:00Z" tone="light" />
+              <GuideByline modifiedTime="2026-10-14T00:00:00Z" tone="light" />
             </div>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-3">
-            <div className="bg-[#1d1d1f] rounded-[28px] p-5">
-              <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-[#86868b]">
-                Diagnóstico
-              </p>
-              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-primary">Mismo día</p>
-              <p className="mt-1 text-sm text-slate-600 dark:text-[#a1a1a6]">
-                Informe claro con pasos y presupuesto
-              </p>
-            </div>
-            <div className="bg-[#1d1d1f] rounded-[28px] p-5">
-              <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-[#86868b]">
-                Garantía
-              </p>
-              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-secondary">90 días</p>
-              <p className="mt-1 text-sm text-slate-600 dark:text-[#a1a1a6]">
-                Garantía escrita sobre trabajo y repuesto
-              </p>
-            </div>
-            <div className="bg-[#1d1d1f] rounded-[28px] p-5">
-              <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-[#86868b]">
-                Rapidez
-              </p>
-              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-primary">2-4 h</p>
-              <p className="mt-1 text-sm text-slate-600 dark:text-[#a1a1a6]">
-                Pantalla, batería y carga en el día
-              </p>
-            </div>
+          <div className="flex flex-wrap gap-4">
+            <TrackedCtaLink
+              href="https://wa.me/5491151034595?text=Hola%20Team%20Celular%2C%20quiero%20confirmar%20precio%20y%20stock%20para%20mi%20iPhone.%20Modelo%3A%20%20Falla%3A"
+              ctaName="iphone_guide_price_whatsapp"
+              ctaLocation="iphone_guide_hero"
+              ctaVariant="whatsapp"
+              external
+              className="tc-btn tc-btn-primary"
+            >
+              Consultar precio y stock por WhatsApp
+            </TrackedCtaLink>
+            <a href="#costos-reparacion-iphone" className="tc-btn tc-btn-ghost">Ver precio de mi modelo</a>
           </div>
+          <p className="text-sm leading-6 text-[#a1a1a6]">
+            Pantalla en 2 a 4 horas y batería en 1 a 2 horas si hay stock.
+            Garantía escrita de 90 días sobre trabajo y repuesto.
+          </p>
+          <nav aria-label="Sucursales para reparar tu iPhone" className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+            {BRANCHES.map((branch) => <Link key={branch.slug} href={branch.url} className="tc-link inline-flex min-h-11 items-center">{branch.shortName}: {branch.street}</Link>)}
+          </nav>
 
           <div className="flex flex-wrap gap-3">
             {brandLinks.map((item) => (
@@ -459,21 +465,6 @@ export default function IphoneRepairGuidePage() {
             ))}
           </div>
 
-          <div className="flex flex-wrap gap-4">
-            <Link
-              href="/presupuesto-reparacion"
-              className="tc-btn tc-btn-primary"
-            >
-              Quiero presupuesto para mi iPhone
-            </Link>
-            <Link
-              href="https://wa.me/5491151034595?text=Hola%20Team%20Celular%2C%20quiero%20cotizar%20una%20reparacion%20de%20iPhone"
-              className="tc-btn tc-btn-ghost"
-            >
-              Hablar por WhatsApp
-            </Link>
-          </div>
-
           <div className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-slate-600 dark:text-[#a1a1a6]">
             <span className="rounded-full border border-primary/80 bg-primary px-3 py-1 text-white">
               Reseñas reales de Google
@@ -487,7 +478,80 @@ export default function IphoneRepairGuidePage() {
           </div>
         </header>
 
-        <AuthorByline updatedLabel="agosto de 2026" className="mt-6" />
+        <section id="costos-reparacion-iphone" className="scroll-mt-24 bg-[#1d1d1f] rounded-[28px]">
+          <div className="border-b border-slate-100 px-8 py-5 dark:border-slate-800">
+            <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
+              ¿Cuánto sale cambiar la pantalla o batería de tu iPhone?
+            </h2>
+            <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-[#86868b]">
+              Precios publicados en {IPHONE_PRICES_UPDATED}, en pesos argentinos. Confirmamos calidad del repuesto, stock y precio antes de trabajar. {INSTALLMENTS_MESSAGE}
+            </p>
+          </div>
+          <IphonePriceQuote />
+          <details className="border-t border-white/10 px-6 py-6 md:px-8">
+            <summary className="cursor-pointer text-lg font-semibold text-white">
+              Ver la tabla completa de precios por modelo
+            </summary>
+            <div className="mt-4 overflow-x-auto">
+              <table className="w-full min-w-[22rem] text-left text-sm">
+                <caption className="sr-only">
+                  Precios de cambio de pantalla y batería de iPhone en Team Celular, CABA, agosto de 2026
+                </caption>
+                <thead>
+                  <tr className="text-xs uppercase tracking-wide text-slate-500 dark:text-[#86868b]">
+                    <th scope="col" className="py-2 pr-4 font-semibold">Modelo</th>
+                    <th scope="col" className="py-2 pr-4 font-semibold">Pantalla</th>
+                    <th scope="col" className="py-2 font-semibold">Batería</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                  {IPHONE_MODELS.map((model) => (
+                    <tr key={model.slug}>
+                      <th scope="row" className="py-2.5 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">
+                        {(IPHONE_MODELS_WITH_PAGE as readonly string[]).includes(model.slug) ? (
+                          <Link href={`/reparaciones/iphone/${model.slug}`} className="hover:text-primary hover:underline">
+                            {model.name}
+                          </Link>
+                        ) : (
+                          model.name
+                        )}
+                      </th>
+                      <td className="py-2.5 pr-4 tabular-nums text-slate-700 dark:text-[#a1a1a6]">
+                        {model.screen ? formatArsPrice(model.screen) : "Consultar"}
+                      </td>
+                      <td className="py-2.5 tabular-nums text-slate-700 dark:text-[#a1a1a6]">
+                        {model.battery ? formatArsPrice(model.battery) : "Consultar"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </details>
+          <div className="space-y-4 px-8 py-6">
+            <p className="text-sm leading-6 text-slate-600 dark:text-[#86868b]">
+              Si tu falla es de carga, cámara o placa, necesitamos diagnosticarla.
+              La revisión técnica va de $15.000 a $25.000; la revisión de placa cuesta $45.000.
+              Informamos el costo antes de abrir el equipo y se descuenta si avanzás con la reparación.
+            </p>
+            <p className="text-sm leading-6 text-[#a1a1a6]">
+              Aclaramos si el módulo es original o compatible y qué cambia en True Tone,
+              brillo, ProMotion o el aviso de pieza. En iPhone 17, la batería queda a consultar.
+              Para otras fallas, enviá el modelo y qué le pasa al equipo.
+            </p>
+            <TrackedCtaLink
+              href="/presupuesto-reparacion#solicitar-presupuesto"
+              ctaName="iphone_guide_other_repair_budget"
+              ctaLocation="iphone_guide_prices"
+              ctaVariant="secondary"
+              className="inline-flex min-h-11 items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
+            >
+              Pedir presupuesto para otra falla de mi iPhone
+            </TrackedCtaLink>
+          </div>
+        </section>
+
+        <AuthorByline updatedLabel="14 de octubre de 2026" className="mt-6" />
 
         <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
           <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">
@@ -501,9 +565,9 @@ export default function IphoneRepairGuidePage() {
               Para reparar un iPhone en Buenos Aires, Team Celular atiende en Paraguay 2451,
               Recoleta, y Amenábar 2032, Belgrano, de lunes a viernes de 10:30 a 18:00, sin
               turno previo. Cubrimos desde iPhone 8 hasta 17 Pro Max: cambio de pantalla,
-              batería, puerto de carga, cámaras y fallas de placa. El cambio de pantalla
-              va de ARS 129.900 en iPhone 11 a ARS 299.900 en iPhone 14 Pro Max, y la
-              batería de ARS 99.900 a ARS 229.900 según modelo. El diagnóstico se hace
+              batería, puerto de carga, cámaras y fallas de placa. Podés consultar
+              el precio de pantalla y batería de cada modelo en el selector de esta guía.
+              El diagnóstico se hace
               el mismo día y el presupuesto se entrega antes de intervenir el equipo;
               pantalla y batería suelen resolverse en 2 a 4 horas según stock.
               Todo el trabajo sale con garantía escrita de 90 días sobre la mano de obra y
@@ -634,86 +698,7 @@ export default function IphoneRepairGuidePage() {
           </div>
         </section>
 
-        <section id="costos-reparacion-iphone" className="bg-[#1d1d1f] rounded-[28px]">
-          <div className="border-b border-slate-100 px-8 py-5 dark:border-slate-800">
-            <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
-              ¿Cuánto cuesta reparar un iPhone en Buenos Aires?
-            </h2>
-            <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-[#86868b]">
-              Precios actualizados a agosto de 2026. El valor exacto depende del modelo y del estado del equipo; te lo confirmamos tras el diagnóstico, antes de intervenir. {INSTALLMENTS_MESSAGE}
-            </p>
-          </div>
-          <div className="divide-y divide-slate-100 dark:divide-slate-800">
-            {[
-              { servicio: "Diagnóstico técnico", modelos: "Todos los modelos", tiempo: "30–45 min", precio: "ARS 15.000–25.000" },
-              { servicio: "Cambio de pantalla", modelos: "iPhone 11, 11 Pro, 12 Mini, 13 Mini", tiempo: "2–4 h", precio: "ARS 129.900–199.900" },
-              { servicio: "Cambio de pantalla", modelos: "iPhone 12, 12 Pro, 12 Pro Max, 13", tiempo: "2–4 h", precio: "ARS 209.900–249.900" },
-              { servicio: "Cambio de pantalla", modelos: "iPhone 13 Pro, 14, 14 Pro, 14 Pro Max", tiempo: "2–4 h", precio: "ARS 249.900–299.900" },
-              { servicio: "Cambio de pantalla", modelos: "iPhone 15, 16, 17 y variantes Pro", tiempo: "2–4 h", precio: "ARS 319.900–649.900" },
-              { servicio: "Cambio de batería", modelos: "iPhone 11 a 14", tiempo: "1–2 h", precio: "ARS 99.900–229.900" },
-              { servicio: "Cambio de batería", modelos: "iPhone 15 y 16", tiempo: "1–2 h", precio: "ARS 189.900–269.900" },
-              { servicio: "Revisión de placa", modelos: "Todos", tiempo: "hasta 72 h hábiles", precio: "ARS 45.000" },
-            ].map((row) => (
-              <div key={`${row.servicio}-${row.modelos}`} className="grid grid-cols-2 gap-x-4 gap-y-1 px-6 py-4 text-sm md:grid-cols-4">
-                <span className="font-semibold text-slate-900 dark:text-[#f5f5f7]">{row.servicio}</span>
-                <span className="text-slate-500 dark:text-[#86868b]">{row.modelos}</span>
-                <span className="text-slate-500 dark:text-[#86868b]">{row.tiempo}</span>
-                <span className="font-semibold text-primary">{row.precio}</span>
-              </div>
-            ))}
-          </div>
-          <div className="border-t border-slate-100 px-6 py-6 dark:border-slate-800 md:px-8">
-            <h3 className="text-lg font-semibold text-slate-900 dark:text-[#f5f5f7]">
-              Precio de pantalla y batería por modelo de iPhone
-            </h3>
-            <div className="mt-4 overflow-x-auto">
-              <table className="w-full min-w-[22rem] text-left text-sm">
-                <caption className="sr-only">
-                  Precios de cambio de pantalla y batería de iPhone en Team Celular, CABA, agosto de 2026
-                </caption>
-                <thead>
-                  <tr className="text-xs uppercase tracking-wide text-slate-500 dark:text-[#86868b]">
-                    <th scope="col" className="py-2 pr-4 font-semibold">Modelo</th>
-                    <th scope="col" className="py-2 pr-4 font-semibold">Pantalla</th>
-                    <th scope="col" className="py-2 font-semibold">Batería</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                  {IPHONE_MODELS.map((model) => (
-                    <tr key={model.slug}>
-                      <th scope="row" className="py-2.5 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">
-                        {(IPHONE_MODELS_WITH_PAGE as readonly string[]).includes(model.slug) ? (
-                          <Link href={`/reparaciones/iphone/${model.slug}`} className="hover:text-primary hover:underline">
-                            {model.name}
-                          </Link>
-                        ) : (
-                          model.name
-                        )}
-                      </th>
-                      <td className="py-2.5 pr-4 tabular-nums text-slate-700 dark:text-[#a1a1a6]">
-                        {model.screen ? formatArsPrice(model.screen) : "Consultar"}
-                      </td>
-                      <td className="py-2.5 tabular-nums text-slate-700 dark:text-[#a1a1a6]">
-                        {model.battery ? formatArsPrice(model.battery) : "Consultar"}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div className="space-y-4 px-8 py-6">
-            <p className="text-sm leading-6 text-slate-600 dark:text-[#86868b]">
-              Team Celular, en Paraguay 2451 Recoleta CABA, informa el costo de diagnóstico antes de abrir el equipo. Si avanzás con la reparación, ese monto se descuenta del trabajo final. La garantía escrita de 90 días aplica sobre trabajo y repuesto instalado.
-            </p>
-            <Link
-              href="/presupuesto-reparacion#solicitar-presupuesto"
-              className="inline-flex min-h-11 items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
-            >
-              Pedir presupuesto exacto para mi iPhone
-            </Link>
-          </div>
-        </section>
+
 
 
 

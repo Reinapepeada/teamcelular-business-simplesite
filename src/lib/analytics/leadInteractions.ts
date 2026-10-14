@@ -1,3 +1,6 @@
+import type { BranchSlug } from "@/lib/branchPreference";
+import { isGa4ProductionHost } from "./ga4";
+
 export type LeadInteractionCtaVariant =
   | "primary"
   | "secondary"
@@ -20,6 +23,7 @@ export interface LeadInteractionPayload {
   formName?: string;
   formLocation?: string;
   formVersion?: string;
+  preferredBranch?: BranchSlug;
   stepIndex?: number;
   stepId?: string;
   stepLabel?: string;
@@ -36,6 +40,9 @@ export interface LeadInteractionPayload {
 const LEAD_INTERACTIONS_ENDPOINT = "/api/lead-interactions";
 
 function buildPayload(payload: LeadInteractionPayload) {
+  // El parámetro de GA4 no amplía el contrato del endpoint de interacciones.
+  const interaction = { ...payload };
+  delete interaction.preferredBranch;
   const pagePath =
     payload.pagePath ||
     (typeof window !== "undefined"
@@ -46,7 +53,7 @@ function buildPayload(payload: LeadInteractionPayload) {
   const referrer = typeof document !== "undefined" && document.referrer ? document.referrer : undefined;
 
   return {
-    ...payload,
+    ...interaction,
     pagePath,
     pageTitle,
     referrer,
@@ -68,7 +75,7 @@ declare global {
  * sees page views and there is nothing to mark as a key event.
  */
 function sendToGa4(payload: LeadInteractionPayload) {
-  if (typeof window.gtag !== "function") return;
+  if (!isGa4ProductionHost(window.location.hostname) || typeof window.gtag !== "function") return;
 
   window.gtag("event", payload.eventName, {
     cta_name: payload.ctaName,
@@ -76,6 +83,8 @@ function sendToGa4(payload: LeadInteractionPayload) {
     cta_variant: payload.ctaVariant,
     destination: payload.destination,
     form_name: payload.formName,
+    form_version: payload.formVersion,
+    preferred_branch: payload.preferredBranch,
     step_id: payload.stepId,
     brand: payload.brand,
     model: payload.model,

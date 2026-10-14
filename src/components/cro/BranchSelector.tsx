@@ -167,6 +167,7 @@ export default function BranchWhatsAppButton({
     const destination = branchWhatsappUrl(selected, message);
     recordLeadInteraction({
       eventName: "branch_whatsapp_redirect",
+      preferredBranch: selected,
       ctaName: `${ctaName}_${selected}`,
       ctaLocation,
       ctaVariant: "whatsapp",

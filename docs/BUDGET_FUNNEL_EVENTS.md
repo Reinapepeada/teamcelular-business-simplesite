@@ -1,5 +1,7 @@
 # Budget Funnel Events
 
+Este documento conserva el diseño histórico v1. El formulario actual usa v3, de una sola pantalla. Ver `GA4-IPHONE-MEASUREMENT.md` y `src/lib/analytics/budgetFunnel.ts` para los eventos y parámetros vigentes.
+
 ## Objetivo
 Documentar el mapa de eventos del wizard de presupuesto para medir:
 - inicio del flujo
