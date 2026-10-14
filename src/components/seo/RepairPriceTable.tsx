@@ -7,15 +7,19 @@ export default function RepairPriceTable({
   brand,
   prices,
   updatedLabel,
+  title,
+  timingText = "Pantalla y batería salen en 2 a 4 horas.",
 }: {
   brand: string;
   prices: RepairPrice[];
   updatedLabel: string;
+  title?: string;
+  timingText?: string;
 }) {
   return (
     <section className="w-full">
       <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white md:text-3xl">
-        ¿Cuánto sale reparar un {brand} en CABA?
+        {title ?? `¿Cuánto sale reparar un ${brand} en CABA?`}
       </h2>
       <p className="mt-3 max-w-3xl text-[15px] leading-7 text-slate-600 dark:text-slate-300">
         Precios de mostrador de Team Celular, Paraguay 2451 Recoleta y Amenábar
@@ -68,8 +72,7 @@ export default function RepairPriceTable({
       </div>
 
       <p className="mt-3 text-[13px] text-slate-500 dark:text-slate-400">
-        Precios actualizados el {updatedLabel}. Pantalla y batería salen en 2 a
-        4 horas.
+        Precios actualizados el {updatedLabel}. {timingText}
       </p>
     </section>
   );

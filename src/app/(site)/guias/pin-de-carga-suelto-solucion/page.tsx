@@ -5,20 +5,23 @@ import HighIntentGuidePage, {
   type GuideRelatedLink,
 } from "@/components/seo/HighIntentGuidePage";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
-import RepairPriceTable from "@/components/seo/RepairPriceTable";
-import { CHARGING_PORT_PRICE, PRICES_UPDATED, formatArsPrice } from "@/lib/repairPrices";
+import Link from "next/link";
+import RepairPriceInquiry from "@/components/repairs/RepairPriceInquiry";
+import BranchWhatsAppButton from "@/components/cro/BranchSelector";
+import { CHARGING_PORT_PRICE, PRICES_UPDATED_LABEL, formatArsPrice } from "@/lib/repairPrices";
 
 // SXO 2026-09: "cuanto sale cambiar el pin de carga" llegaba aca sin precio visible.
 const PORT_FROM = formatArsPrice(CHARGING_PORT_PRICE.from);
+const PORT_TO = formatArsPrice(CHARGING_PORT_PRICE.to);
 
 const SITE_URL = getSiteUrl();
 const PAGE_PATH = "/guias/pin-de-carga-suelto-solucion";
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
-  title: "Pin de Carga Dañado: Cómo Saberlo y Cuánto Sale Cambiarlo en CABA",
+  title: "Pin de Carga Suelto: Síntomas y Precio en CABA",
   description:
-    `3 pruebas para saber si se dañó el pin de carga: otro cable, linterna y ángulo. Cambio en el día desde ${PORT_FROM}, con garantía 90 días.`,
+    `Cambio de pin de carga de ${PORT_FROM} a ${PORT_TO}, según modelo. Identificá la falla y consultá precio en Recoleta o Belgrano, CABA.`,
   keywords: [
     "pin de carga suelto",
     "como saber si se daño el pin de carga",
@@ -26,9 +29,9 @@ export const metadata: Metadata = buildWebsiteMetadata({
     "cambio pin de carga caba",
     "reparacion puerto usb celular",
   ],
-  openGraphTitle: "Pin de Carga Suelto: Cómo Saber si Está Dañado | Team Celular",
+  openGraphTitle: "Pin de Carga Suelto: Síntomas y Precio en CABA",
   openGraphDescription:
-    "Cómo distinguir si el problema es el cable, la batería o el pin de carga antes de gastar de más.",
+    `Pin de carga: de ${PORT_FROM} a ${PORT_TO}, según modelo. Consultá precio y disponibilidad en Recoleta o Belgrano.`,
   openGraphImagePath: "/images/reparacion_placa.webp",
   openGraphImageAlt: "Diagnóstico de pin de carga en Team Celular",
   twitterTitle: "Pin de Carga Suelto: Cómo Saber si Está Dañado | Team Celular",
@@ -110,6 +113,10 @@ const planSteps: GuideItem[] = [
 
 const faq: GuideFaqItem[] = [
   {
+    question: "¿Cuánto sale cambiar el pin de carga?",
+    answer: `El cambio de pin de carga va de ${PORT_FROM} a ${PORT_TO}, según el modelo y la pieza que haya que cambiar. La limpieza técnica y las fallas de placa se cotizan aparte: ese rango corresponde al cambio de pin o flex. Pasanos marca, modelo y qué falla para confirmar el precio antes de reparar.`,
+  },
+  {
     question: "¿Cómo saber si se dañó el pin de carga del celular?",
     answer:
       "Hay cuatro señales claras: carga solo si sostenés el cable en una posición, el enchufe tiene juego hacia los costados, dejó de cargar rápido, o la computadora no reconoce el equipo por cable. Si además aparece un aviso de humedad o de accesorio no compatible con el puerto seco, también apunta al pin o al flex.",
@@ -135,11 +142,6 @@ const faq: GuideFaqItem[] = [
       "Sí. Forzar el cable en mala posición puede dañar pistas internas y pasar de una reparación simple a una intervención de placa.",
   },
   {
-    question: "¿Cuánto sale cambiar el pin de carga?",
-    answer:
-      "Entre $35.000 y $150.000, según el dispositivo. El diagnóstico cuesta entre $15.000 y $25.000 y te confirmamos el número exacto antes de abrir el equipo.",
-  },
-  {
     question: "¿Cuánto tarda el diagnóstico?",
     answer:
       "El diagnóstico sale el mismo día hábil. Con eso decidís si conviene reparar antes de que toquemos el equipo.",
@@ -159,18 +161,24 @@ export default function ChargingPortGuidePage() {
       siteUrl={SITE_URL}
       pagePath={PAGE_PATH}
       pageLabel="Pin de carga suelto"
-      title="Pin de carga suelto: cómo saber si está dañado"
-      heroDescription="Para saber si se dañó el pin de carga, probá con otro cable y otro cargador. Si el problema sigue, mirá el puerto con una linterna: si el cable queda flojo, carga solo en cierto ángulo o hay pelusa compactada al fondo, el problema está en el pin. Team Celular, en Paraguay 2451 Recoleta, lo confirma con microscopio el mismo día."
+      title="Pin de carga suelto: síntomas y cuánto sale cambiarlo"
+      heroDescription={`El cambio de pin o flex de carga va de ${PORT_FROM} a ${PORT_TO}, según modelo. Si solo carga al mover el cable, el conector queda flojo o se desconecta, revisamos si necesita limpieza, cambio de pieza o diagnóstico de placa. Te atendemos sin turno en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).`}
       badge="Falla frecuente"
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
-      modifiedTime="2026-09-30T00:00:00Z"
+      modifiedTime="2026-10-14T00:00:00Z"
       imagePath="/images/reparacion_placa.webp"
       heroPoints={[
-        "Cuatro señales para reconocer un pin dañado.",
-        "Cómo descartar el cable y la batería.",
-        "Por qué no conviene limpiarlo en casa.",
+        "Confirmamos precio antes de reparar.",
+        "Descartamos cable y suciedad antes de cambiar piezas.",
+        "Garantía escrita de 90 días sobre trabajo y repuesto.",
       ]}
+      heroActions={<RepairPriceInquiry
+        repair="revisar el pin de carga de mi celular"
+        symptoms={["Carga al mover el cable", "Conector flojo", "No carga", "Carga lento", "Aviso de humedad"]}
+        ctaName="pin_guide_price_whatsapp"
+        ctaLocation="pin_guide_hero"
+      />}
       symptomsTitle="¿Cuáles son las señales de un pin de carga dañado?"
       symptomsDescription="Suelen aparecer antes de que el equipo deje de cargar por completo."
       symptoms={symptoms}
@@ -182,12 +190,18 @@ export default function ChargingPortGuidePage() {
       planSteps={planSteps}
       faq={faq}
       priceTable={
-        <RepairPriceTable
-          brand="celular"
-          prices={[{ name: "Cambio de pin de carga (todas las marcas)", ...CHARGING_PORT_PRICE }]}
-          updatedLabel={new Date(PRICES_UPDATED).toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}
-        />
+        <section id="precios-pin-carga" className="scroll-mt-24 space-y-5 rounded-[28px] bg-[#1d1d1f] p-6 sm:p-8">
+          <h2 className="text-2xl font-semibold text-white">Precio del cambio de pin de carga en CABA</h2>
+          <p className="text-3xl font-semibold text-white tabular-nums">{PORT_FROM} a {PORT_TO}</p>
+          <p className="max-w-3xl leading-7 text-[#a1a1a6]">El rango corresponde al cambio de pin o flex, según dispositivo. Si alcanza con limpiar el conector o la falla está en la placa, cotizamos ese trabajo antes de avanzar. La revisión técnica suele costar de $15.000 a $25.000; confirmamos el importe según la falla.</p>
+          <p className="text-sm text-[#86868b]">Precios publicados el {PRICES_UPDATED_LABEL}. Confirmamos pieza, stock y plazo para tu modelo.</p>
+          <div className="flex flex-wrap gap-4">
+            <BranchWhatsAppButton ctaName="pin_guide_prices_whatsapp" ctaLocation="pin_guide_prices" message="Hola Team Celular, vi el rango de cambio de pin de carga y quiero confirmar el precio para mi equipo." className="tc-btn tc-btn-primary">Confirmar precio de mi pin de carga</BranchWhatsAppButton>
+            <Link href="/reparaciones/cambio-pin-carga-caba" className="tc-link inline-flex min-h-11 items-center">Ver el servicio de cambio de pin de carga</Link>
+          </div>
+        </section>
       }
+      priceTablePosition="after-hero"
       relatedLinks={relatedLinks}
       whatsappText="Hola Team Celular, vi la guía de pin de carga y quiero un diagnóstico para mi equipo"
     />
