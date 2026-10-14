@@ -94,6 +94,11 @@ const mainPages = [
     changeFreq: "weekly" as const,
   },
   {
+    path: "reparaciones/eliminar-virus-celular-caba",
+    priority: 0.9,
+    changeFreq: "monthly" as const,
+  },
+  {
     path: "reparaciones/cambio-camara-caba",
     priority: 0.88,
     changeFreq: "weekly" as const,

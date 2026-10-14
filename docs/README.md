@@ -4,6 +4,7 @@ Análisis y planes del sitio. `DESIGN.md`, `PRODUCT.md` y `AGENTS.md` quedan en 
 
 - `SXO-ANALYSIS.md`, `GEO-ANALYSIS.md`, `MAPS-ANALYSIS-teamcelular.com.md`: diagnósticos de búsqueda, IA generativa y Google Maps.
 - `SEO-LOCAL-CANALES.md`: SEO local y canales de producto (Merchant, Bing, Meta).
+- `SEO-LANDING-VIRUS.md`: contenido, diseño y medición del servicio para quitar virus y publicidad.
 - `MATRIZ_INTENCION_URL_SEO_COPY.md`: intención de búsqueda por URL y copy.
 - `GUIAS_COMPLETAS.md`: guías de reparación por marca.
 - `ADS-PLAN.md` y `ads/`: plan de Google Ads, importables de palabras clave, anuncios y negativas.

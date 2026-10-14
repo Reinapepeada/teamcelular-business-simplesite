@@ -316,8 +316,8 @@ const articleLinkTargets: Record<
     siblingLabel: "Guia hermana: guia de pantalla",
   },
   "/guias/celular-con-virus-que-hacer": {
-    serviceHref: "/reparaciones/cambio-bateria-caba",
-    serviceLabel: "Servicio: cambio de bateria",
+    serviceHref: "/reparaciones/eliminar-virus-celular-caba",
+    serviceLabel: "Servicio: quitar virus y publicidad",
     siblingHref: "/guias/mantenimiento-preventivo-celulares",
     siblingLabel: "Guia hermana: mantenimiento preventivo",
   },
