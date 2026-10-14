@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import AuthorByline from "@/components/seo/AuthorByline";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { INSTALLMENTS_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
@@ -19,17 +20,24 @@ import {
 } from "react-icons/fa";
 import { SiSamsung } from "react-icons/si";
 import GuideByline from "@/components/seo/GuideByline";
-import { BRAND_REPAIR_PRICES, buildPriceOffers, formatArsPrice, priceRangeOf } from "@/lib/repairPrices";
+import { BRAND_REPAIR_PRICES, CHARGING_PORT_PRICE, PRICES_UPDATED_LABEL, buildPriceOffers, formatArsPrice, priceRangeOf } from "@/lib/repairPrices";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 const PAGE_PATH = "/guias/reparacion-samsung-buenos-aires";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 
+const SCREEN_A = BRAND_REPAIR_PRICES.samsung[0];
+const SCREEN_S = BRAND_REPAIR_PRICES.samsung[1];
+const BATTERY_A = BRAND_REPAIR_PRICES.samsung[2];
+const BATTERY_S = BRAND_REPAIR_PRICES.samsung[3];
+const formatRange = (price: { from: number; to: number }) =>
+  `${formatArsPrice(price.from)} a ${formatArsPrice(price.to)}`;
+
 export const metadata: Metadata = {
-  title: "Servicio Técnico Samsung Galaxy en CABA | Precios",
+  title: "Reparación Samsung en CABA | Precios de Pantalla",
   description:
-    `Alternativa al service oficial en CABA. Pantalla Galaxy A desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[0].from)} y S desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[1].from)}. Diagnóstico en el día, garantía 90 días.`,
+    `¿Cuánto sale cambiar la pantalla de un Samsung? Galaxy A/M desde ${formatArsPrice(SCREEN_A.from)} y S/Ultra desde ${formatArsPrice(SCREEN_S.from)}. Recoleta y Belgrano, CABA.`,
   keywords: [
     "reparacion samsung buenos aires",
     "service samsung caba",
@@ -265,6 +273,18 @@ const samsungModels = [
 
 const faq = [
   {
+    question: "¿Cuánto sale cambiar la pantalla de un celular Samsung?",
+    answer: `En Team Celular, el cambio de pantalla Galaxy A / M va de ${formatRange(SCREEN_A)} y Galaxy S / Ultra de ${formatRange(SCREEN_S)}. Son rangos en pesos argentinos por familia, no un precio único para todos los modelos. El valor exacto depende del modelo, la calidad del módulo y el stock; lo confirmamos antes de reparar.`,
+  },
+  {
+    question: "¿Cuánto cuesta la pantalla de un Samsung A16, A35, A54 o A55?",
+    answer: `Esos modelos pertenecen a la línea Galaxy A, cuyo cambio de pantalla va de ${formatRange(SCREEN_A)}. Cada modelo usa un módulo distinto. Mandanos el modelo exacto para confirmar las opciones, el precio y la disponibilidad; el rango no significa que todos cuesten lo mismo.`,
+  },
+  {
+    question: "¿Por qué cambia tanto el precio de una pantalla Samsung?",
+    answer: "Cambia por el modelo y por el módulo que se instala. Un Service Pack, una OLED compatible y una alternativa económica pueden conservar distintas prestaciones de brillo, color, huella o tasa de refresco. Te explicamos las opciones disponibles para tu equipo antes de elegir y de instalar.",
+  },
+  {
     question: "¿Cuánto tarda un cambio de pantalla Samsung?",
     answer:
       "Si el módulo está en stock, entre 2 y 4 horas en las líneas S y A. Si hay que pedirlo, te avisamos el plazo antes de que lo dejes.",
@@ -319,10 +339,10 @@ export default function SamsungRepairGuidePage() {
   return (
     <div className="flex w-full justify-center px-4 py-16">
       <ArticleSchema
-        title="Reparación de Samsung Galaxy en Buenos Aires | Team Celular"
+        title="Reparación de Samsung en CABA: precios y opciones"
         description="Precios, tiempos y fallas comunes de Samsung Galaxy, con diagnóstico el mismo día y garantía escrita de 90 días en CABA."
         publishedTime="2026-03-12T00:00:00Z"
-        modifiedTime="2026-09-23T00:00:00Z"
+        modifiedTime="2026-10-14T00:00:00Z"
         about={[
           "reparacion de Samsung en Buenos Aires",
           "service tecnico Samsung Galaxy en CABA",
@@ -370,48 +390,38 @@ export default function SamsungRepairGuidePage() {
 
           <div className="space-y-4">
             <h1 className="text-4xl font-semibold tracking-[-0.01em] text-slate-900 dark:text-[#f5f5f7] md:text-5xl">
-              Reparación de Samsung Galaxy en Buenos Aires
+              Reparación de Samsung en CABA: precios y opciones
             </h1>
             <p className="max-w-4xl text-lg leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
-              Team Celular, en Paraguay 2451 Recoleta CABA, repara Samsung
-              Galaxy con diagnóstico el mismo día, pantalla AMOLED y batería en
-              2–4 h, y garantía escrita de 90 días sobre trabajo y repuesto.
-              Galaxy S, A, Note, Z Fold y Z Flip.
+              El cambio de pantalla Samsung Galaxy A / M cuesta desde {formatArsPrice(SCREEN_A.from)}{" "}
+              y Galaxy S / Ultra desde {formatArsPrice(SCREEN_S.from)}. El modelo y el módulo
+              elegido definen el valor exacto. Confirmamos precio y stock antes de trabajar,
+              en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).
             </p>
             <div className="mt-4">
-              <GuideByline modifiedTime="2026-09-23T00:00:00Z" tone="light" />
+              <GuideByline modifiedTime="2026-10-14T00:00:00Z" tone="light" />
             </div>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-3">
-            <div className="bg-[#1d1d1f] rounded-[28px] p-5">
-              <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-[#86868b]">
-                Diagnóstico
-              </p>
-              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-primary">24 h</p>
-              <p className="mt-1 text-sm text-slate-600 dark:text-[#a1a1a6]">
-                Te decimos qué tiene y cuánto sale
-              </p>
-            </div>
-            <div className="bg-[#1d1d1f] rounded-[28px] p-5">
-              <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-[#86868b]">
-                Garantía
-              </p>
-              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-secondary">90 días</p>
-              <p className="mt-1 text-sm text-slate-600 dark:text-[#a1a1a6]">
-                Garantía escrita sobre trabajo y repuesto
-              </p>
-            </div>
-            <div className="bg-[#1d1d1f] rounded-[28px] p-5">
-              <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-[#86868b]">
-                Servicio express
-              </p>
-              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-primary">2-4 h</p>
-              <p className="mt-1 text-sm text-slate-600 dark:text-[#a1a1a6]">
-                Pantalla, batería y carga en el día
-              </p>
-            </div>
-          </div>
+          <section aria-labelledby="samsung-screen-prices" className="space-y-4">
+            <h2 id="samsung-screen-prices" className="text-2xl font-semibold text-white">
+              ¿Cuánto sale cambiar la pantalla de un celular Samsung?
+            </h2>
+            <dl className="grid gap-4 sm:grid-cols-2">
+              {[SCREEN_A, SCREEN_S].map((price) => (
+                <div key={price.name} className="rounded-2xl bg-black/25 p-5">
+                  <dt className="text-sm text-[#c7c7cc]">{price.name}</dt>
+                  <dd className="mt-2 text-xl font-semibold leading-snug text-white tabular-nums">
+                    {formatRange(price)}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+            <p className="text-sm leading-6 text-[#a1a1a6]">
+              Precios en pesos argentinos. El modelo y la calidad del módulo definen el valor exacto.
+              Pantalla en 2 a 4 horas si hay stock, con garantía escrita de 90 días.
+            </p>
+          </section>
 
           <div className="flex flex-wrap gap-3">
             {brandLinks.map((item) => (
@@ -437,16 +447,81 @@ export default function SamsungRepairGuidePage() {
             >
               Cotizar reparación Samsung
             </Link>
-            <Link
-              href="https://wa.me/5491151034595?text=Hola%20Team%20Celular%2C%20quiero%20cotizar%20una%20reparacion%20de%20Samsung"
+            <TrackedCtaLink
+              href="https://wa.me/5491151034595?text=Hola%20Team%20Celular%2C%20quiero%20saber%20el%20precio%20del%20cambio%20de%20pantalla%20de%20mi%20Samsung.%20Modelo%3A"
+              ctaName="samsung_screen_price_whatsapp"
+              ctaLocation="samsung_guide_hero"
+              ctaVariant="whatsapp"
+              external
               className="tc-btn tc-btn-ghost"
             >
-              Hablar con un técnico
-            </Link>
+              Consultar precio de mi Samsung
+            </TrackedCtaLink>
+            <a href="#costos-reparacion-samsung" className="tc-link inline-flex min-h-11 items-center text-sm">
+              Ver todos los precios
+            </a>
           </div>
         </header>
 
-        <AuthorByline updatedLabel="agosto de 2026" className="mt-6" />
+        <section id="costos-reparacion-samsung" className="scroll-mt-24 bg-[#1d1d1f] rounded-[28px]">
+          <div className="border-b border-slate-100 px-8 py-5 dark:border-slate-800">
+            <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
+              ¿Cuánto cuesta reparar un Samsung Galaxy en Buenos Aires?
+            </h2>
+            <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-[#86868b]">
+              Precios publicados el {PRICES_UPDATED_LABEL}. El rango depende del modelo dentro de cada línea y del repuesto disponible: te confirmamos el número exacto tras el diagnóstico, antes de intervenir el equipo. {INSTALLMENTS_MESSAGE}
+            </p>
+          </div>
+          <div className="overflow-x-auto px-6 py-2">
+            <table className="w-full min-w-[38rem] border-collapse text-left text-sm">
+              <caption className="sr-only">
+                Precios de reparación de Samsung Galaxy en CABA, actualizados en agosto de 2026
+              </caption>
+              <thead>
+                <tr className="border-b border-slate-200 dark:border-slate-800">
+                  <th scope="col" className="py-3 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">Servicio</th>
+                  <th scope="col" className="py-3 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">Modelos</th>
+                  <th scope="col" className="py-3 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">Tiempo</th>
+                  <th scope="col" className="py-3 font-semibold text-slate-900 dark:text-[#f5f5f7]">Precio ARS</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                {[
+                  { servicio: "Diagnóstico técnico", modelos: "Todos los modelos", tiempo: "30–45 min", precio: "$15.000 a $25.000" },
+                  { servicio: "Cambio de pantalla", modelos: "Galaxy S / Ultra (S22 a S25)", tiempo: "2–4 h", precio: formatRange(SCREEN_S) },
+                  { servicio: "Cambio de pantalla", modelos: "Galaxy A / M (A16, A26, A35, A36, A54, A55, A56)", tiempo: "2–4 h", precio: formatRange(SCREEN_A) },
+                  { servicio: "Cambio de batería", modelos: "Galaxy S / Ultra", tiempo: "1–2 h", precio: formatRange(BATTERY_S) },
+                  { servicio: "Cambio de batería", modelos: "Galaxy A / M", tiempo: "1–2 h", precio: formatRange(BATTERY_A) },
+                  { servicio: "Cambio de pin de carga", modelos: "Línea S y A", tiempo: "2–3 h", precio: formatRange(CHARGING_PORT_PRICE) },
+                  { servicio: "Bisagra / flex", modelos: "Z Fold, Z Flip", tiempo: "24–72 h", precio: "Consultar" },
+                ].map((row) => (
+                  <tr key={`${row.servicio}-${row.modelos}`}>
+                    <td className="py-3 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">{row.servicio}</td>
+                    <td className="py-3 pr-4 text-slate-500 dark:text-[#86868b]">{row.modelos}</td>
+                    <td className="py-3 pr-4 text-slate-500 dark:text-[#86868b]">{row.tiempo}</td>
+                    <td className="py-3 font-semibold tabular-nums text-primary">{row.precio}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="space-y-4 px-8 py-6">
+            <p className="text-sm leading-6 text-slate-600 dark:text-[#86868b]">
+              Team Celular, con sucursales en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032) CABA, informa el costo de diagnóstico antes de abrir el equipo. Si avanzás con la reparación, ese monto se descuenta del trabajo final.
+            </p>
+            <TrackedCtaLink
+              ctaName="samsung_price_table_budget"
+              ctaLocation="samsung_guide_prices"
+              ctaVariant="primary"
+              href="/presupuesto-reparacion#solicitar-presupuesto"
+              className="inline-flex min-h-11 items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
+            >
+              Pedir presupuesto exacto para mi Samsung
+            </TrackedCtaLink>
+          </div>
+        </section>
+
+        <AuthorByline updatedLabel="14 de octubre de 2026" className="mt-6" />
 
         <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
           <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">
@@ -454,21 +529,19 @@ export default function SamsungRepairGuidePage() {
               Respuesta directa
             </p>
             <h2 className="mt-3 text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
-              Dónde reparar un Samsung Galaxy en Buenos Aires
+              Cómo pedir el precio exacto de tu Samsung
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-700 dark:text-slate-200">
-              Para reparar un Samsung Galaxy en Buenos Aires, Team Celular atiende en
-              Paraguay 2451, Recoleta, y Amenábar 2032, Belgrano, de lunes a viernes
-              de 10:30 a 18:00. El cambio de pantalla cuesta entre ARS 99.900 y 399.900
-              en la línea A (A16, A26, A35, A36, A54, A55, A56) y entre ARS 299.900 y
-              1.199.900 en la línea S (S22 a S25). La batería va de ARS 89.900 a 179.900
-              en línea A y de ARS 119.900 a 219.900 en línea S, y el cambio de pin de
-              carga entre ARS 35.000 y 150.000. Pantalla, batería y carga se resuelven
-              en 2 a 4 horas según modelo y stock; el diagnóstico se hace el mismo día
-              y todo sale con garantía escrita de 90 días sobre el trabajo y el repuesto
-              instalado. Si el equipo no prende o se reinicia solo, la revisión de placa
-              sale ARS 45.000 y se descuenta si se repara.
-              Precios actualizados a agosto de 2026.
+              Para cotizar tu Samsung, necesitamos el modelo exacto y la falla.
+              En la línea A / M, la pantalla va de {formatRange(SCREEN_A)} y la batería
+              de {formatRange(BATTERY_A)}. En S / Ultra, la pantalla va de {formatRange(SCREEN_S)}{" "}
+              y la batería de {formatRange(BATTERY_S)}. Son rangos por familia: confirmamos
+              qué módulo está disponible y qué funciones conserva antes de instalarlo.
+              Podés comparar las opciones del{' '}
+              <Link href="/reparaciones/cambio-pantalla-caba" className="tc-link underline underline-offset-4">
+                servicio de cambio de pantalla
+              </Link>{' '}
+              o consultar el precio de tu modelo por WhatsApp.
             </p>
           </div>
 
@@ -589,62 +662,6 @@ export default function SamsungRepairGuidePage() {
             })}
           </div>
         </section>
-
-        <section id="costos-reparacion-samsung" className="bg-[#1d1d1f] rounded-[28px]">
-          <div className="border-b border-slate-100 px-8 py-5 dark:border-slate-800">
-            <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
-              ¿Cuánto cuesta reparar un Samsung Galaxy en Buenos Aires?
-            </h2>
-            <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-[#86868b]">
-              Precios actualizados a agosto de 2026. El rango depende del modelo dentro de cada línea y del repuesto disponible: te confirmamos el número exacto tras el diagnóstico, antes de intervenir el equipo. {INSTALLMENTS_MESSAGE}
-            </p>
-          </div>
-          <div className="overflow-x-auto px-6 py-2">
-            <table className="w-full min-w-[38rem] border-collapse text-left text-sm">
-              <caption className="sr-only">
-                Precios de reparación de Samsung Galaxy en CABA, actualizados en agosto de 2026
-              </caption>
-              <thead>
-                <tr className="border-b border-slate-200 dark:border-slate-800">
-                  <th scope="col" className="py-3 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">Servicio</th>
-                  <th scope="col" className="py-3 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">Modelos</th>
-                  <th scope="col" className="py-3 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">Tiempo</th>
-                  <th scope="col" className="py-3 font-semibold text-slate-900 dark:text-[#f5f5f7]">Precio ARS</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                {[
-                  { servicio: "Diagnóstico técnico", modelos: "Todos los modelos", tiempo: "30–45 min", precio: "15.000 – 25.000" },
-                  { servicio: "Cambio de pantalla", modelos: "Galaxy S / Ultra (S22 a S25)", tiempo: "2–4 h", precio: "299.900 – 1.199.900" },
-                  { servicio: "Cambio de pantalla", modelos: "Galaxy A / M (A16, A26, A35, A36, A54, A55, A56)", tiempo: "2–4 h", precio: "99.900 – 399.900" },
-                  { servicio: "Cambio de batería", modelos: "Galaxy S / Ultra", tiempo: "1–2 h", precio: "119.900 – 219.900" },
-                  { servicio: "Cambio de batería", modelos: "Galaxy A / M", tiempo: "1–2 h", precio: "89.900 – 179.900" },
-                  { servicio: "Cambio de pin de carga", modelos: "Línea S y A", tiempo: "2–3 h", precio: "35.000 – 150.000" },
-                  { servicio: "Bisagra / flex", modelos: "Z Fold, Z Flip", tiempo: "24–72 h", precio: "Consultar" },
-                ].map((row) => (
-                  <tr key={`${row.servicio}-${row.modelos}`}>
-                    <td className="py-3 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">{row.servicio}</td>
-                    <td className="py-3 pr-4 text-slate-500 dark:text-[#86868b]">{row.modelos}</td>
-                    <td className="py-3 pr-4 text-slate-500 dark:text-[#86868b]">{row.tiempo}</td>
-                    <td className="py-3 font-semibold tabular-nums text-primary">{row.precio}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="space-y-4 px-8 py-6">
-            <p className="text-sm leading-6 text-slate-600 dark:text-[#86868b]">
-              Team Celular, con sucursales en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032) CABA, informa el costo de diagnóstico antes de abrir el equipo. Si avanzás con la reparación, ese monto se descuenta del trabajo final.
-            </p>
-            <Link
-              href="/presupuesto-reparacion#solicitar-presupuesto"
-              className="inline-flex min-h-11 items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
-            >
-              Pedir presupuesto exacto para mi Samsung
-            </Link>
-          </div>
-        </section>
-
 
 
         <section className="bg-[#1d1d1f] space-y-5 rounded-[28px] p-8 md:p-10">

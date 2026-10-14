@@ -4,14 +4,15 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
   palermo: {
     slug: "palermo",
     zoneName: "Palermo",
-    metaTitle: "Reparación de Celulares en Palermo, CABA | Sin Turno",
+    metaTitle: "Reparación de Celulares desde Palermo | Cómo Llegar",
     metaDescription:
-      "Servicio técnico a minutos de Palermo: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032). Pantalla y batería en 2–4 h, garantía 90 días.",
+      "¿Estás en Palermo? Elegí Recoleta, Paraguay 2451, o Belgrano, Amenábar 2032. Cómo llegar al taller, precios y reparación sin turno en CABA.",
     socialDescription:
       "Team Celular atiende Palermo desde Recoleta y Belgrano. Pantalla, batería y carga con garantía escrita 90 días.",
     heroBadge: "Cobertura Palermo",
+    heroTitle: "Reparación de celulares desde Palermo",
     heroIntro:
-      "Si estás en Palermo, la sucursal más cerca depende del lado: desde Palermo Chico, Botánico y Plaza Italia te conviene Recoleta (Paraguay 2451); desde Palermo Hollywood, Las Cañitas y Colegiales, Belgrano (Amenábar 2032). En las dos hay diagnóstico el mismo día, pantalla y batería en 2 a 4 horas y garantía escrita de 90 días.",
+      "Si estás en Palermo, te atendemos sin turno en Recoleta (Paraguay 2451) o Belgrano (Amenábar 2032). Desde Palermo Chico o Botánico, acercate a Recoleta; desde Hollywood o Las Cañitas, a Belgrano. Te confirmamos precio y plazo antes de reparar.",
     heroImage: "/images/dispositivoshdpro.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(59,130,246,0.32),transparent_44%)]",

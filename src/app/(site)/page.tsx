@@ -20,9 +20,9 @@ const motoG = BRAND_REPAIR_PRICES.motorola[0];
 
 export const metadata = buildWebsiteMetadata({
     path: "/",
-    title: "Reparación de Celulares en CABA | Team Celular",
+    title: "Reparación de Celulares en CABA | Recoleta y Belgrano",
     description:
-        "Team Celular repara celulares en CABA con diagnóstico el mismo día y garantía escrita de 90 días. Sucursales en Recoleta y Belgrano, sin turno.",
+        "Servicio técnico de celulares en Recoleta y Belgrano, CABA. Pantalla, batería, carga y placa. Sin turno, presupuesto antes de reparar y garantía escrita.",
     keywords: [
         "reparacion de celulares Buenos Aires",
         "reparacion de celulares cerca de mi",
@@ -143,7 +143,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <section aria-labelledby="prices-title" className="w-full bg-[#f5f5f7] text-[#1d1d1f]">
+            <section id="precios" aria-labelledby="prices-title" className="w-full scroll-mt-24 bg-[#f5f5f7] text-[#1d1d1f]">
                 <div className="tc-section grid gap-10 lg:grid-cols-2 lg:items-center">
                     <div>
                         <h2 id="prices-title" className="tc-heading !text-[#1d1d1f]">¿Cuánto sale reparar un celular en CABA?</h2>
@@ -154,7 +154,7 @@ export default function Home() {
                         </p>
                         <div className="mt-6 flex flex-col gap-2 text-[17px] text-[#0066cc]">
                             <Link href="/guias/reparacion-iphone-buenos-aires#costos-reparacion-iphone" className="hover:underline">Precios de iPhone por modelo ›</Link>
-                            <Link href="/guias/reparacion-samsung-buenos-aires" className="hover:underline">Precios de Samsung ›</Link>
+                            <Link href="/guias/reparacion-samsung-buenos-aires#costos-reparacion-samsung" className="hover:underline">Precios de pantalla y batería Samsung ›</Link>
                             <Link href="/guias/reparacion-motorola-buenos-aires" className="hover:underline">Precios de Motorola ›</Link>
                         </div>
                     </div>
@@ -214,8 +214,8 @@ export default function Home() {
                 </div>
             </section>
 
-            <section aria-labelledby="locations-title" className="tc-section">
-                <h2 id="locations-title" className="tc-heading">Dónde estamos</h2>
+            <section id="sucursales" aria-labelledby="locations-title" className="tc-section scroll-mt-24">
+                <h2 id="locations-title" className="tc-heading">¿Dónde reparar un celular cerca de vos?</h2>
                 <p className="tc-body mt-4">Lunes a viernes de 10:30 a 18:00, sin turno.</p>
                 <div className="tc-stagger mt-10 grid gap-5 md:grid-cols-2">
                     {BRANCHES.map((branch) => (

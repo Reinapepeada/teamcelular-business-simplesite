@@ -46,7 +46,7 @@ const footerSections = {
     },
     {
       name: "Reparación de celulares",
-      href: "/reparaciones",
+      href: "/",
       icon: FaMobileAlt,
     },
     {
