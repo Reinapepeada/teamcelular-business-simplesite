@@ -20,6 +20,7 @@ import {
     requestPaymentLink,
     quoteShipping,
     storeRequestUrl,
+    fetchStoreProduct,
 } from "./storeApi.ts";
 import { claveDeCheckout, huellaDelCarrito, olvidarClave, type AlmacenClave } from "./checkoutKey.ts";
 
@@ -85,6 +86,28 @@ const conFetch = async (
         globalThis.fetch = original;
     }
 };
+
+test("la ficha SSR usa el backend con el host de tienda y sin cachear stock", async () => {
+    const anterior = process.env.NEXT_PUBLIC_BASE_URL;
+    process.env.NEXT_PUBLIC_BASE_URL = "https://teamcelular.com";
+    try {
+        await conFetch({ body: { slug: "cargador" } }, async (llamadas) => {
+            await fetchStoreProduct("cargador");
+            assert.equal(llamadas[0].url, "https://api.beescend.com/store/products/cargador");
+            assert.equal(new Headers(llamadas[0].init?.headers).get("X-Forwarded-Host"), "teamcelular.com");
+            assert.equal(llamadas[0].init?.cache, "no-store");
+        });
+        process.env.NEXT_PUBLIC_BASE_URL = "https://example.test";
+        await conFetch({ body: { slug: "cargador" } }, async (llamadas) => {
+            await fetchStoreProduct("cargador");
+            assert.equal(llamadas[0].url, "https://example.test/store/products/cargador");
+            assert.equal(new Headers(llamadas[0].init?.headers).get("X-Forwarded-Host"), null);
+        });
+    } finally {
+        if (anterior === undefined) delete process.env.NEXT_PUBLIC_BASE_URL;
+        else process.env.NEXT_PUBLIC_BASE_URL = anterior;
+    }
+});
 
 // --- el total lo pone el servidor ---------------------------------------
 
