@@ -10,10 +10,9 @@ import { getSiteUrl } from "@/lib/seoMetadata";
 export const COMPARISON_DATE = "2026-10-15T00:00:00Z";
 
 export const COMPARISON_LINKS = [
-  { href: "/guias/presupuesto-service-oficial-segunda-opinion", label: "Service oficial o independiente" },
   { href: "/guias/reparacion-pantalla-celular#comparar-pantallas", label: "Pantalla original, OLED o InCell" },
   { href: "/guias/reparar-celular-o-comprar-otro", label: "Reparar o comprar otro celular" },
-  { href: "/guias/team-celular-vs-gofix-view-phone", label: "Team Celular, GoFix y View Phone" },
+  { href: "/guias/presupuesto-service-oficial-segunda-opinion", label: "Service oficial o independiente" },
 ];
 
 export function ComparisonTable({ caption, columns, rows }: {
@@ -91,8 +90,9 @@ export default function ComparisonGuidePage({ path, title, description, faq, chi
           {faq.map(({ question, answer }) => <details key={question} className="border-b border-slate-200 py-4 dark:border-white/20"><summary className="min-h-11 cursor-pointer font-semibold text-slate-950 dark:text-white">{question}</summary><p className="mt-3 leading-7">{answer}</p></details>)}
         </section>
         <aside className="border-y border-slate-200 py-8 dark:border-white/20">
-          <h2 className="text-xl font-semibold text-slate-950 dark:text-white">Otras comparativas para decidir</h2>
+          <h2 className="text-xl font-semibold text-slate-950 dark:text-white">Comparativas técnicas para decidir</h2>
           <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-3">{COMPARISON_LINKS.filter((item) => !item.href.startsWith(path)).map((item) => <li key={item.href}><Link className="inline-flex min-h-11 items-center text-blue-700 underline dark:text-[#6aa6ff]" href={item.href}>{item.label}</Link></li>)}</ul>
+          <p className="mt-5"><Link className="inline-flex min-h-11 items-center text-blue-700 underline dark:text-[#6aa6ff]" href="/reparaciones">Ver servicios de reparación en CABA</Link></p>
         </aside>
         <footer>
           <h2 className="text-2xl font-semibold text-slate-950 dark:text-white">Contanos qué equipo tenés y qué le pasa</h2>

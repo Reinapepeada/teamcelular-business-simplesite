@@ -18,6 +18,25 @@ const read = async (path) => {
 
 const index = await read("/guias");
 const sitemap = await read("/sitemap.xml");
+const visibleIndex = index.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ");
+const services = visibleIndex.match(/<section id="servicios-de-reparacion"[\s\S]*?<\/section>/)?.[0];
+const featured = visibleIndex.match(/<section id="guias-destacadas"[\s\S]*?<\/section>/)?.[0];
+assert.ok(services && featured, "Guías: servicios y lecturas destacadas disponibles");
+assert.ok(visibleIndex.indexOf(services) < visibleIndex.indexOf(featured), "Servicios antes de las guías");
+for (const path of ["cambio-pantalla-caba", "cambio-bateria-caba", "cambio-pin-carga-caba"]) {
+  assert.ok(services.includes(`href="/reparaciones/${path}"`), `Acceso directo a ${path}`);
+  await read(`/reparaciones/${path}`);
+}
+const priorities = ["reparacion-iphone-buenos-aires", "reparacion-samsung-buenos-aires", "reparacion-pantalla-celular", "reparar-celular-o-comprar-otro", "presupuesto-service-oficial-segunda-opinion"];
+let previousPosition = -1;
+for (const slug of priorities) {
+  const position = featured.indexOf(`href="/guias/${slug}"`);
+  assert.ok(position > previousPosition, `Orden destacado: ${slug}`);
+  previousPosition = position;
+}
+const workshopPath = paths[3];
+assert.ok(!featured.includes(`href="${workshopPath}"`), "Talleres fuera de tarjetas destacadas");
+assert.match(visibleIndex, /<aside[^>]*aria-labelledby="otras-lecturas"[\s\S]*?href="\/guias\/team-celular-vs-gofix-view-phone"[\s\S]*?<\/aside>/);
 for (const path of paths) {
   const html = await read(path);
   assert.equal([...html.matchAll(/<h1(?:\s[^>]*)?>/g)].length, 1, `${path}: un H1`);
@@ -39,9 +58,12 @@ for (const path of paths) {
     assert.ok(visibleText.includes(normalize(question.acceptedAnswer.text)), `${path}: respuesta visible: ${question.name}`);
   }
   assert.ok(html.includes('href="/presupuesto-reparacion'), `${path}: presupuesto`);
+  if (path !== workshopPath) {
+    assert.ok(!html.includes(`href="${workshopPath}"`), `${path}: prioriza reparación y comparativas técnicas`);
+  }
   console.log(`OK ${path}: HTTP, H1, canonical, tabla, enlaces y ${faq.mainEntity.length} FAQ coherentes`);
 }
 const comparison = await read(paths[3]);
 assert.match(comparison, /viewphone\.com\.ar/);
 assert.match(comparison, /gofix\.com\.ar/);
-console.log("OK cuatro propuestas; fuentes de GoFix y View Phone presentes");
+console.log("OK servicios y comparativas técnicas prioritarios; talleres accesible en lectura secundaria, fuentes y sitemap conservados");

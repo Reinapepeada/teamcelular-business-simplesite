@@ -91,7 +91,7 @@ export default function SecondOpinionGuidePage() {
           <li><a href="https://www.samsung.com/ar/support/" rel="noopener noreferrer">Samsung Argentina: garantía, soporte y acceso a precios sugeridos</a>.</li>
           <li><Link href="/presupuesto-reparacion">Team Celular: revisión y presupuesto</Link>; <Link href="/reparaciones/reparacion-placa-caba">condiciones de revisión de placa</Link>.</li>
         </ul>
-        <p>Si estás comparando talleres por nombre, también podés leer <Link href="/guias/team-celular-vs-gofix-view-phone">Team Celular, GoFix y View Phone</Link>. La dirección, el horario y las condiciones del lugar elegido deben confirmarse antes de llevar el equipo.</p>
+        <p>Para una segunda opinión, consultá el <Link href="/reparaciones/cambio-pantalla-caba">servicio de cambio de pantalla</Link> o la <Link href="/reparaciones/reparacion-placa-caba">revisión de placa</Link>, según la falla. Confirmamos el costo de revisión, el alcance y el plazo antes de avanzar.</p>
       </section>
     </ComparisonGuidePage>
   );

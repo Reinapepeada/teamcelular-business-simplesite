@@ -25,39 +25,9 @@ const PAGE_URL = `${SITE_URL}/guias`;
 
 const ARTICLES = [
   {
-    title: "Service oficial o taller independiente en CABA",
-    description: "Compará cobertura, repuestos, revisión y presupuesto antes de elegir dónde reparar tu equipo.",
-    href: "/guias/presupuesto-service-oficial-segunda-opinion",
-    category: "Comparativas",
-    readingTime: "8 min",
-    Icon: FaTools,
-    datePublished: "2026-08-12",
-    keywords: ["service oficial vs independiente", "segunda opinión", "reparación iPhone"],
-  },
-  {
-    title: "¿Conviene reparar el celular o comprar otro?",
-    description: "Cómo comparar diagnóstico, costo total, estado del equipo y recuperación de datos antes de gastar.",
-    href: "/guias/reparar-celular-o-comprar-otro",
-    category: "Comparativas",
-    readingTime: "8 min",
-    Icon: FaMobileAlt,
-    datePublished: "2026-10-15",
-    keywords: ["reparar o comprar celular", "cambio de pantalla", "cambio de batería"],
-  },
-  {
-    title: "Team Celular, GoFix y View Phone: qué comparar",
-    description: "Marcas, sucursales, turnos, plazos y garantía con fuentes públicas y condiciones por confirmar.",
-    href: "/guias/team-celular-vs-gofix-view-phone",
-    category: "Comparativas",
-    readingTime: "8 min",
-    Icon: FaBookOpen,
-    datePublished: "2026-10-15",
-    keywords: ["Team Celular vs GoFix", "View Phone", "reparación en Belgrano"],
-  },
-  {
     title: "Reparacion de iPhone en Buenos Aires",
     description:
-      "Service tecnico premium para iPhone con diagnostico claro, repuestos certificados y garantia escrita.",
+      "Pantalla, batería, carga y placa: opciones de reparación y presupuesto para tu modelo de iPhone.",
     href: "/guias/reparacion-iphone-buenos-aires",
     category: "Landing por marca",
     readingTime: "6 min",
@@ -75,6 +45,37 @@ const ARTICLES = [
     Icon: SiSamsung,
     datePublished: "2026-03-12",
     keywords: ["reparacion Samsung", "Galaxy S", "Galaxy A", "service Samsung"],
+  },
+  {
+    title: "Reparación de pantalla: original, OLED o InCell",
+    description:
+      "Compará tecnologías, procedencia y condición del repuesto antes de pedir el precio instalado para tu modelo.",
+    href: "/guias/reparacion-pantalla-celular",
+    category: "Reparaciones",
+    readingTime: "6 min",
+    Icon: FaMobileAlt,
+    datePublished: "2024-11-30",
+    keywords: ["cambio pantalla", "display OLED", "pantalla celular"],
+  },
+  {
+    title: "¿Conviene reparar el celular o comprar otro?",
+    description: "Cómo comparar diagnóstico, costo total, estado del equipo y recuperación de datos antes de gastar.",
+    href: "/guias/reparar-celular-o-comprar-otro",
+    category: "Comparativas técnicas",
+    readingTime: "8 min",
+    Icon: FaMobileAlt,
+    datePublished: "2026-10-15",
+    keywords: ["reparar o comprar celular", "cambio de pantalla", "cambio de batería"],
+  },
+  {
+    title: "Service oficial o taller independiente en CABA",
+    description: "Compará cobertura, repuestos, revisión y presupuesto antes de elegir dónde reparar tu equipo.",
+    href: "/guias/presupuesto-service-oficial-segunda-opinion",
+    category: "Comparativas técnicas",
+    readingTime: "8 min",
+    Icon: FaTools,
+    datePublished: "2026-08-12",
+    keywords: ["service oficial vs independiente", "segunda opinión", "reparación iPhone"],
   },
   {
     title: "Reparacion de Xiaomi, Redmi y POCO",
@@ -130,17 +131,6 @@ const ARTICLES = [
     Icon: FaBatteryFull,
     datePublished: "2024-11-30",
     keywords: ["cambio bateria", "bateria certificada", "autonomia celular"],
-  },
-  {
-    title: "Reparacion de pantalla de celular",
-    description:
-      "Todo sobre cambio de pantalla, tipos de panel, calidad de repuestos y control post reparacion.",
-    href: "/guias/reparacion-pantalla-celular",
-    category: "Reparaciones",
-    readingTime: "6 min",
-    Icon: FaMobileAlt,
-    datePublished: "2024-11-30",
-    keywords: ["cambio pantalla", "display OLED", "pantalla celular"],
   },
   {
     title: "Pin de carga suelto: causas y solucion",
@@ -244,9 +234,6 @@ const articleVisuals: Record<string, { cover: string }> = {
   },
   "/guias/reparar-celular-o-comprar-otro": {
     cover: "/images/guia_cambio_bateria.webp",
-  },
-  "/guias/team-celular-vs-gofix-view-phone": {
-    cover: "/images/reparacion_placa.webp",
   },
   "/guias/pin-de-carga-suelto-solucion": {
     cover: "/images/guia_cambio_modulo.webp",
@@ -440,8 +427,8 @@ export default function GuidesPage() {
               Explicamos síntomas, diagnóstico y opciones de reparación con el mismo criterio que usamos en el laboratorio. Sin alarmismo y sin cambiar piezas por descarte.
             </p>
             <div className="mt-5 hidden flex-wrap gap-3 sm:mt-8 sm:flex">
-              <Link href="#guias-destacadas" className="hidden min-h-12 items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#20216b] transition hover:bg-slate-100 sm:inline-flex">
-                Elegir una guía <FaArrowRight aria-hidden />
+              <Link href="#servicios-de-reparacion" className="hidden min-h-12 items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#20216b] transition hover:bg-slate-100 sm:inline-flex">
+                Ver servicios de reparación <FaArrowRight aria-hidden />
               </Link>
               <TrackedCtaLink href="/presupuesto-reparacion#solicitar-presupuesto" ctaName="guides_hero_budget" ctaLocation="guides_hero" ctaVariant="secondary" className="hidden min-h-12 items-center rounded-lg border border-white/35 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10 sm:inline-flex">
                 Consultar una falla
@@ -457,6 +444,73 @@ export default function GuidesPage() {
             </div>
           </div>
         </header>
+
+        <section id="servicios-de-reparacion" aria-label="Servicios de reparación y presupuesto" className="scroll-mt-28 grid gap-4 rounded-2xl border border-slate-200/80 bg-white/85 p-6 shadow-md dark:border-white/10 dark:bg-slate-900/85 md:grid-cols-3 md:p-8">
+          <article className="space-y-3 rounded-xl border border-slate-200/80 bg-slate-50/90 p-4 dark:border-white/10 dark:bg-slate-950/45">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.12em] text-slate-700 dark:text-slate-200">
+              Si ya sabés la falla
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              <Link href="/reparaciones/cambio-pantalla-caba" className="inline-flex min-h-11 items-center rounded-full border border-primary/25 bg-white px-4 py-2 text-[13px] font-semibold text-slate-800 transition hover:bg-primary/10 dark:bg-slate-900/70 dark:text-slate-100">
+                Cambio de pantalla
+              </Link>
+              <Link href="/reparaciones/cambio-bateria-caba" className="inline-flex min-h-11 items-center rounded-full border border-primary/25 bg-white px-4 py-2 text-[13px] font-semibold text-slate-800 transition hover:bg-primary/10 dark:bg-slate-900/70 dark:text-slate-100">
+                Cambio de batería
+              </Link>
+              <Link href="/reparaciones/cambio-pin-carga-caba" className="inline-flex min-h-11 items-center rounded-full border border-primary/25 bg-white px-4 py-2 text-[13px] font-semibold text-slate-800 transition hover:bg-primary/10 dark:bg-slate-900/70 dark:text-slate-100">
+                Pin de carga
+              </Link>
+            </div>
+          </article>
+
+          <article className="space-y-3 rounded-xl border border-slate-200/80 bg-slate-50/90 p-4 dark:border-white/10 dark:bg-slate-950/45">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.12em] text-slate-700 dark:text-slate-200">
+              Si aún estás evaluando
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              <TrackedCtaLink
+                href="/presupuesto-reparacion#solicitar-presupuesto"
+                ctaName="guides_cluster_budget"
+                ctaLocation="guides_cluster_links"
+                ctaVariant="primary"
+                className="inline-flex min-h-11 items-center rounded-full bg-primary px-4 py-2 text-[13px] font-semibold text-white transition hover:bg-primary/90"
+              >
+                Diagnostico y presupuesto
+              </TrackedCtaLink>
+              <TrackedCtaLink
+                href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20quiero%20asesoria%20tecnica%20desde%20las%20guias"
+                ctaName="guides_cluster_whatsapp"
+                ctaLocation="guides_cluster_links"
+                ctaVariant="whatsapp"
+                external
+                target="_blank"
+                className="inline-flex min-h-11 items-center rounded-full border border-emerald-700 px-4 py-2 text-[13px] font-semibold text-white bg-emerald-700 transition hover:bg-emerald-800"
+              >
+                WhatsApp tecnico
+              </TrackedCtaLink>
+            </div>
+          </article>
+
+          <article className="space-y-3 rounded-xl border border-slate-200/80 bg-slate-50/90 p-4 dark:border-white/10 dark:bg-slate-950/45">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.12em] text-slate-700 dark:text-slate-200">
+              Reparación por marca
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              <Link href="/guias/reparacion-iphone-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
+                iPhone
+              </Link>
+              <Link href="/guias/reparacion-samsung-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
+                Samsung
+              </Link>
+              <Link href="/guias/reparacion-motorola-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
+                Motorola
+              </Link>
+              <Link href="/guias/reparacion-xiaomi-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
+                Xiaomi
+              </Link>
+            </div>
+          </article>
+        </section>
 
         <section id="guias-destacadas" className="space-y-4 scroll-mt-28 sm:space-y-8">
           <div className="max-w-3xl">
@@ -545,73 +599,6 @@ export default function GuidesPage() {
           </div>
         </section>
 
-        <section className="grid gap-4 rounded-2xl border border-slate-200/80 bg-white/85 p-6 shadow-md dark:border-white/10 dark:bg-slate-900/85 md:grid-cols-3 md:p-8">
-          <article className="space-y-3 rounded-xl border border-slate-200/80 bg-slate-50/90 p-4 dark:border-white/10 dark:bg-slate-950/45">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.12em] text-slate-700 dark:text-slate-200">
-              Si ya sabes la falla
-            </h2>
-            <div className="flex flex-wrap gap-2">
-              <Link href="/reparaciones/cambio-pantalla-caba" className="inline-flex min-h-11 items-center rounded-full border border-primary/25 bg-white px-4 py-2 text-[13px] font-semibold text-slate-800 transition hover:bg-primary/10 dark:bg-slate-900/70 dark:text-slate-100">
-                Cambio de pantalla
-              </Link>
-              <Link href="/reparaciones/cambio-bateria-caba" className="inline-flex min-h-11 items-center rounded-full border border-primary/25 bg-white px-4 py-2 text-[13px] font-semibold text-slate-800 transition hover:bg-primary/10 dark:bg-slate-900/70 dark:text-slate-100">
-                Cambio de bateria
-              </Link>
-              <Link href="/reparaciones/cambio-pin-carga-caba" className="inline-flex min-h-11 items-center rounded-full border border-primary/25 bg-white px-4 py-2 text-[13px] font-semibold text-slate-800 transition hover:bg-primary/10 dark:bg-slate-900/70 dark:text-slate-100">
-                Pin de carga
-              </Link>
-            </div>
-          </article>
-
-          <article className="space-y-3 rounded-xl border border-slate-200/80 bg-slate-50/90 p-4 dark:border-white/10 dark:bg-slate-950/45">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.12em] text-slate-700 dark:text-slate-200">
-              Si aun estas evaluando
-            </h2>
-            <div className="flex flex-wrap gap-2">
-              <TrackedCtaLink
-                href="/presupuesto-reparacion#solicitar-presupuesto"
-                ctaName="guides_cluster_budget"
-                ctaLocation="guides_cluster_links"
-                ctaVariant="primary"
-                className="inline-flex min-h-11 items-center rounded-full bg-primary px-4 py-2 text-[13px] font-semibold text-white transition hover:bg-primary/90"
-              >
-                Diagnostico y presupuesto
-              </TrackedCtaLink>
-              <TrackedCtaLink
-                href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20quiero%20asesoria%20tecnica%20desde%20las%20guias"
-                ctaName="guides_cluster_whatsapp"
-                ctaLocation="guides_cluster_links"
-                ctaVariant="whatsapp"
-                external
-                target="_blank"
-                className="inline-flex min-h-11 items-center rounded-full border border-emerald-700 px-4 py-2 text-[13px] font-semibold text-white bg-emerald-700 transition hover:bg-emerald-800"
-              >
-                WhatsApp tecnico
-              </TrackedCtaLink>
-            </div>
-          </article>
-
-          <article className="space-y-3 rounded-xl border border-slate-200/80 bg-slate-50/90 p-4 dark:border-white/10 dark:bg-slate-950/45">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.12em] text-slate-700 dark:text-slate-200">
-              Si buscas comparar marcas
-            </h2>
-            <div className="flex flex-wrap gap-2">
-              <Link href="/guias/reparacion-iphone-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
-                iPhone
-              </Link>
-              <Link href="/guias/reparacion-samsung-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
-                Samsung
-              </Link>
-              <Link href="/guias/reparacion-motorola-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
-                Motorola
-              </Link>
-              <Link href="/guias/reparacion-xiaomi-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
-                Xiaomi
-              </Link>
-            </div>
-          </article>
-        </section>
-
         <section className="rounded-2xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-10 text-center dark:border-white/10 dark:from-slate-900/40 dark:via-slate-900/30 dark:to-slate-900/40 md:p-16">
           <h2 className="mb-4 text-3xl font-bold text-slate-900 dark:text-slate-100">
             Necesitas un diagnostico profesional?
@@ -635,6 +622,11 @@ export default function GuidesPage() {
             </Link>
           </div>
         </section>
+
+        <aside aria-labelledby="otras-lecturas" className="border-t border-slate-200 pt-6 text-sm dark:border-slate-800">
+          <h2 id="otras-lecturas" className="font-semibold text-slate-800 dark:text-slate-200">Otras lecturas</h2>
+          <Link href="/guias/team-celular-vs-gofix-view-phone" className="mt-2 inline-flex min-h-11 items-center text-slate-600 underline underline-offset-4 hover:text-primary dark:text-slate-400 dark:hover:text-white">Comparación de talleres: Team Celular, GoFix y View Phone</Link>
+        </aside>
 
         <script
           type="application/ld+json"
