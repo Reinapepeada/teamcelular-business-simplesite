@@ -2,7 +2,7 @@ import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import RepairsForm from "@/components/forms/RepairsForm";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
-import { BUDGET_RESPONSE_MESSAGE, REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
+import { BUDGET_RESPONSE_MESSAGE, REVIEW_COST_MESSAGE, SCREEN_BATTERY_TIMING_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import GuideByline from "@/components/seo/GuideByline";
 import { PRICES_UPDATED } from "@/lib/repairPrices";
@@ -16,7 +16,7 @@ export const metadata = buildWebsiteMetadata({
     path: "/presupuesto-reparacion",
     title: "Presupuesto de Reparación de Celulares | Team Celular",
     description:
-        "Presupuesto sin compromiso y garantía escrita de 90 días. Respondemos en 2 h. Team Celular, Recoleta y Belgrano, CABA.",
+        "Presupuesto sin compromiso y garantía escrita de 90 días. Respondemos en hasta 2 horas hábiles. Team Celular, Recoleta y Belgrano, CABA.",
     keywords: [
         "presupuesto reparación celulares",
         "servicio técnico celulares buenos aires",
@@ -31,11 +31,11 @@ export const metadata = buildWebsiteMetadata({
     openGraphTitle:
         "Presupuesto Reparación Celulares en CABA | Team Celular",
     openGraphDescription:
-        "Team Celular, dos sucursales en CABA: Paraguay 2451 Recoleta y Amenábar 2032 Belgrano. Respuesta en 2 h por WhatsApp y garantía escrita 90 días.",
+        "Team Celular, dos sucursales en CABA: Recoleta y Belgrano. Respuesta en hasta 2 horas hábiles por WhatsApp y garantía escrita de 90 días.",
     openGraphImageAlt: "Laboratorio de Team Celular en CABA",
     twitterTitle: "Presupuesto Reparación Celulares CABA | Team Celular",
     twitterDescription:
-        "Cotizá por WhatsApp en 2 h. Pantalla, batería, carga y microelectrónica. Dos sucursales en CABA: Recoleta y Belgrano. Garantía escrita 90 días.",
+        "Consultá por WhatsApp: respondemos en hasta 2 horas hábiles. Pantalla, batería, carga y placa en Recoleta y Belgrano. Garantía escrita de 90 días.",
 });
 
 const processSteps = [
@@ -50,13 +50,13 @@ const processSteps = [
     {
         title: "Lo traés y te lo llevás reparado",
         description:
-            "Recoleta (Paraguay 2451) o Belgrano (Amenábar 2032), sin turno. Pantalla y batería salen en 2 a 4 horas, con garantía escrita de 90 días.",
+            `Recoleta (Paraguay 2451) o Belgrano (Amenábar 2032), sin turno. ${SCREEN_BATTERY_TIMING_MESSAGE} Garantía escrita de 90 días.`,
     },
 ];
 
 const stats = [
-    { value: "2 h", label: "para responderte" },
-    { value: "2-4 h", label: "pantalla o batería" },
+    { value: "Hasta 2 h hábiles", label: "para responderte" },
+    { value: "2-4 h", label: "pantalla o batería con stock, según diagnóstico" },
     { value: "90 días", label: "garantía escrita" },
     { value: "15+ años", label: "de trayectoria" },
 ];
@@ -113,7 +113,7 @@ export default function PresupuestoReparacionPage() {
                             Presupuesto de reparación de celulares en CABA
                         </h1>
                         <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-[#86868b]">
-                            Decinos qué le pasa a tu celular y te pasamos el precio por WhatsApp en hasta 2 horas.
+                            Decinos qué le pasa a tu celular. Respondemos por WhatsApp en hasta 2 horas hábiles y confirmamos el precio según el diagnóstico.
                             Team Celular repara en{" "}
                             <strong className="text-slate-900 dark:text-[#f5f5f7]">Paraguay 2451, Recoleta</strong> y{" "}
                             <strong className="text-slate-900 dark:text-[#f5f5f7]">Amenábar 2032, Belgrano</strong>, con

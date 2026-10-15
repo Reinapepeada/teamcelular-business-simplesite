@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { formatArsPrice, type RepairPrice } from "@/lib/repairPrices";
+import { SCREEN_BATTERY_TIMING_MESSAGE } from "@/lib/copyStandards";
 
-// Tabla y no prosa: es la estructura que mejor se extrae en motores de IA, y
-// ningun competidor de CABA publica precios.
 export default function RepairPriceTable({
   brand,
   prices,
   updatedLabel,
   title,
-  timingText = "Pantalla y batería salen en 2 a 4 horas.",
+  timingText = SCREEN_BATTERY_TIMING_MESSAGE,
 }: {
   brand: string;
   prices: RepairPrice[];
