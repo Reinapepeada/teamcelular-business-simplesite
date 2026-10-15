@@ -14,17 +14,17 @@ const source = readFileSync(new URL("../src/components/seo/StructuredData.tsx", 
 const { outputText } = ts.transpileModule(source, {
   compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX },
 });
-const module = { exports: {} };
+const compiledModule = { exports: {} };
 runInNewContext(outputText, {
-  module,
-  exports: module.exports,
+  module: compiledModule,
+  exports: compiledModule.exports,
   require: (name) => {
     if (name === "next/navigation") return { usePathname: () => pathname };
     if (name === "@/lib/businessProfile") return businessProfile;
     return require(name);
   },
 });
-const StructuredData = module.exports.default;
+const StructuredData = compiledModule.exports.default;
 
 function renderSchema(path) {
   pathname = path;
