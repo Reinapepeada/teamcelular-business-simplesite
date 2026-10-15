@@ -6,6 +6,8 @@ import type {
 } from "@/components/seo/HighIntentGuidePage";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import { businessId } from "@/lib/businessProfile";
+import { PLACA_REVISION_PRICE, formatArsPrice } from "@/lib/repairPrices";
+import { INSTALLMENTS_MESSAGE } from "@/lib/copyStandards";
 
 const SITE_URL = getSiteUrl();
 
@@ -52,6 +54,9 @@ type BrandGuideSeed = {
    */
   repairPrices?: { name: string; from: number; to: number }[];
   extraFaq?: GuideFaqItem[];
+  diagnosisAnswerOverride?: string;
+  heroPointsOverride?: string[];
+  extraRelatedLinks?: GuideRelatedLink[];
 };
 
 export type BrandGuideConfig = {
@@ -517,22 +522,38 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     slug: "reparacion-tcl-buenos-aires",
     seoTitleOverride: "Servicio técnico TCL celulares en CABA | Team Celular",
     metaDescriptionOverride:
-      "Celulares TCL sin red oficial en el país: pantalla, batería y pin de carga en Recoleta y Belgrano (CABA), diagnóstico en el día, garantía 90 días.",
+      "Taller independiente para celulares TCL en Recoleta y Belgrano, CABA. Presupuesto según modelo, falla y repuesto. Garantía escrita de 90 días.",
     titleOverride:
       "Reparacion de celulares TCL en Buenos Aires: quien los arregla en CABA",
     heroDescriptionOverride:
-      "Buscar servicio tecnico TCL en Argentina lleva casi siempre a la linea de electrodomesticos, no a celulares: para telefonos TCL no hay una red oficial visible en el pais. Team Celular es un taller independiente de microelectronica en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), CABA, y si recibe celulares TCL. Diagnosticamos el mismo dia y entregamos garantia escrita de 90 dias sobre trabajo y repuesto. Resolvemos pantalla, bateria y pin de carga, y en equipos que no encienden trabajamos a nivel componente con microscopio, que es lo que permite recuperar placas en marcas donde conseguir un repuesto completo es dificil. El presupuesto se confirma antes de tocar el equipo y la orden tecnica queda por escrito al ingresar. Atendemos de lunes a viernes de 10:30 a 18:00, sin turno, con pago en 3 cuotas sin interes.",
+      "Recibimos celulares TCL para revisar pantalla, batería y carga en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA. Somos un taller independiente. Pasanos el modelo exacto y qué le ocurre: confirmamos si la reparación es viable, si hay repuesto y cuánto cuesta antes de empezar. La reparación tiene garantía escrita de 90 días sobre trabajo y repuesto. Si tu consulta es por la garantía del fabricante, consultá primero los canales oficiales de TCL Argentina.",
+    modifiedTime: "2026-10-15T00:00:00Z",
+    heroPointsOverride: [
+      "Plazo de revisión según la falla; placa: informe hasta 72 horas hábiles.",
+      "Garantía escrita de 90 días sobre trabajo y repuesto.",
+      "Opiniones de clientes en Google de la sucursal Recoleta.",
+      `Atención sin turno de lunes a viernes de 10:30 a 18:00. ${INSTALLMENTS_MESSAGE}`,
+    ],
+    diagnosisAnswerOverride:
+      "El plazo depende de la falla. Si requiere revisión de placa, el informe se entrega en hasta 72 horas hábiles. El arreglo de placa lleva semanas y confirmamos precio y plazo por escrito antes de empezar. Para cambios de pantalla, batería o puerto, el plazo depende del modelo y del repuesto disponible.",
     extraFaq: [
       {
-        question: "TCL tiene servicio tecnico oficial de celulares en Argentina?",
+        question: "¿TCL tiene soporte oficial de celulares en Argentina?",
         answer:
-          "Las busquedas de servicio tecnico TCL en Argentina devuelven mayormente la linea de electrodomesticos. Para celulares no hay una red oficial visible en el pais, asi que las reparaciones se resuelven en talleres independientes.",
+          "TCL Argentina publica soporte para celulares y canales de postventa. Si buscás atención por la garantía del fabricante, consultá allí qué opciones corresponden a tu modelo y comprobante de compra. Team Celular es un taller independiente: no somos un service oficial de TCL. Te confirmamos por escrito el alcance de nuestra reparación y garantía antes de intervenir.",
       },
       {
-        question: "Vale la pena reparar un celular TCL o conviene cambiarlo?",
+        question: "¿Cuánto cuesta reparar un celular TCL?",
         answer:
-          "Depende del costo del repuesto contra el valor del equipo. En TCL los modulos completos suelen ser dificiles de conseguir, y ahi la reparacion a nivel componente puede ser la unica via razonable. Te damos el numero y la recomendacion antes de intervenir, y si no conviene, solo pagás el diagnóstico (ARS 15.000 a 25.000).",
+          `El precio de pantalla, batería o pin depende del modelo y del repuesto disponible; lo cotizamos antes de reparar. La revisión técnica sin placa va de $15.000 a $25.000. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles. Informamos el costo antes de abrir el equipo y se descuenta si aceptás la reparación. El arreglo de placa lleva semanas y se presupuesta por separado, con precio y plazo por escrito.`,
       },
+    ],
+    extraRelatedLinks: [
+      { href: "/reparaciones/cambio-bateria-caba", label: "Servicio de cambio de batería" },
+      { href: "/reparaciones/cambio-pin-carga-caba", label: "Servicio de pin de carga" },
+      { href: "/reparaciones/reparacion-placa-caba", label: "Condiciones de revisión de placa" },
+      { href: "https://www.tcl.com/ar/es/support-mobile", label: "TCL Argentina: soporte de celulares" },
+      { href: "https://www.tcl.com/ar/es/contacto", label: "TCL Argentina: canales de postventa" },
     ],
     brand: "TCL",
     badge: "Android",
@@ -691,6 +712,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     {
       question: "¿Cuánto tarda el diagnóstico?",
       answer:
+        seed.diagnosisAnswerOverride ??
         "El diagnóstico sale el mismo día hábil, y con eso decidís si conviene reparar antes de que toquemos el equipo.",
     },
     {
@@ -710,6 +732,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     { href: "/lab", label: "Laboratorio de microelectrónica" },
     { href: "/reparaciones", label: "Ver todos los servicios" },
     { href: "/presupuesto-reparacion#solicitar-presupuesto", label: "Pedir presupuesto" },
+    ...(seed.extraRelatedLinks ?? []),
   ];
 
   return {
@@ -730,7 +753,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
       `Servicio tecnico ${seed.brand} en CABA`,
       ...seed.models,
     ],
-    heroPoints: [
+    heroPoints: seed.heroPointsOverride ?? [
       "Diagnóstico el mismo día, sin turno.",
       "Garantía escrita de 90 días sobre trabajo y repuesto.",
       "Opiniones de clientes en Google de la sucursal Recoleta.",
