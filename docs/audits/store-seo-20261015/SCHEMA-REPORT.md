@@ -54,7 +54,7 @@ Se aplicó la revisión de necesidades de `seo-image-gen`. No hay ausencia de im
 
 ## Validación
 
-362 pruebas aprobadas, incluidas nueve nuevas sobre metadata, paridad ficha/schema, condición, stock, entrega y serialización. Lint con cero advertencias, TypeScript, build de producción y `npm audit --audit-level=high --omit=dev` aprobados, sin dependencias añadidas. Las 22 URLs locales conservan canónica y robots; 14/14 fichas muestran tabla y no declaran MPN derivado del modelo ni dimensiones Open Graph inventadas.
+364 pruebas aprobadas con main vigente incorporado, incluidas nueve nuevas sobre metadata, paridad ficha/schema, condición, stock, entrega y serialización. Lint con cero advertencias, TypeScript, build de producción y `npm audit --audit-level=high --omit=dev` aprobados, sin dependencias añadidas. Las 22 URLs locales conservan canónica y robots; 14/14 fichas muestran tabla y no declaran MPN derivado del modelo ni dimensiones Open Graph inventadas.
 
 Se revisó el diff completo, los llamadores de JSON-LD y el contrato público del catálogo. No cambian llamadas, checkout, reservas, importes ni stock. La revisión React conserva SSR, no agrega fetches ni efectos, y usa tablas semánticas y enlaces del servidor. Playwright verificó ficha a 390×844 y categoría a 390 y 1440 px, sin desbordamiento horizontal, con fotos cargadas y sin errores de consola. CI del último head y publicación del SHA integrado se registran por separado al cerrar la entrega.
 
