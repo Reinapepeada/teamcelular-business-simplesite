@@ -144,8 +144,8 @@ function CatalogPagination({
     );
 }
 
-// Las primeras tarjetas se ven sin scrollear: sus fotos se piden primero.
-const FOTOS_PRIORITARIAS = 3;
+// En móvil sólo la primera tarjeta necesita competir por prioridad de carga.
+const FOTOS_PRIORITARIAS = 1;
 
 function ProductCard({ product, prioridad = false }: { product: VidrieraProduct; prioridad?: boolean }) {
     const productImage = getProductImage(product);
@@ -167,7 +167,7 @@ function ProductCard({ product, prioridad = false }: { product: VidrieraProduct;
                         fill
                         priority={prioridad}
                         className="object-contain p-4 group-hover:scale-[1.03]"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                        sizes="(max-width: 639px) calc(100vw - 96px), (max-width: 1023px) calc(50vw - 80px), (max-width: 1279px) calc(50vw - 220px), 360px"
                     />
                 </div>
             </Link>

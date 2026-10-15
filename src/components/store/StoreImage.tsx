@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image, { type ImageProps } from "next/image";
-import { cargaDirectaImagen } from "@/lib/storeCatalog";
+import { imagenParaOptimizar } from "@/lib/storeCatalog";
 
 const PLACEHOLDER = "/placeholder.jpg";
 
@@ -21,7 +21,7 @@ export default function StoreImage({ src, alt, className = "", onLoad, onError, 
     // variante) vuelve el skeleton sin tener que resetear nada a mano.
     const [cargada, setCargada] = useState<string | null>(null);
     const [fallida, setFallida] = useState<string | null>(null);
-    const origen = fallida === src ? PLACEHOLDER : src;
+    const origen = fallida === src ? PLACEHOLDER : imagenParaOptimizar(src);
     const lista = cargada === origen;
 
     return (
@@ -37,7 +37,6 @@ export default function StoreImage({ src, alt, className = "", onLoad, onError, 
                 src={origen}
                 alt={alt}
                 fetchPriority={props.fetchPriority ?? (props.priority ? "high" : undefined)}
-                unoptimized={props.unoptimized ?? cargaDirectaImagen(origen)}
                 className={`${className} transition-transform duration-300`}
                 onLoad={event => {
                     setCargada(origen);

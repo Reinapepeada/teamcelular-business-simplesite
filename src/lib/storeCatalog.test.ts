@@ -11,7 +11,7 @@
 import { test, describe } from "node:test";
 import assert from "node:assert/strict";
 
-import { adaptarProducto, cargaDirectaImagen, lineasDelCarrito, imagenDe } from "./storeCatalog.ts";
+import { adaptarProducto, imagenParaOptimizar, lineasDelCarrito, imagenDe } from "./storeCatalog.ts";
 import type { StoreProduct } from "./storeApi.ts";
 
 const crudo = (over: Partial<StoreProduct> = {}): StoreProduct => ({
@@ -74,9 +74,12 @@ describe("el stock", () => {
 });
 
 describe("la foto", () => {
-    test("la imagen protegida de Fixbee evita el optimizador de Vercel", () => {
-        assert.equal(cargaDirectaImagen("/store/products/a/images/0/version"), true);
-        assert.equal(cargaDirectaImagen("/placeholder.jpg"), false);
+    test("la imagen pública conserva su ruta versionada y el dominio de la tienda", () => {
+        const path = "/store/products/cable-usb-c/images/0/012345abcdef";
+        assert.equal(imagenParaOptimizar(path), `https://teamcelular.com${path}`);
+        for (const src of ["/placeholder.jpg", "https://cdn.test/a.jpg", "//otro.test/store/products/a"]) {
+            assert.equal(imagenParaOptimizar(src), src);
+        }
     });
 
     test("una URL completa se usa tal cual", () => {
