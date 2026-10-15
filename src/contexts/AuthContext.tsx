@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, useCallback, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useRef, useState, useCallback, ReactNode } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useHydrated } from '@/hooks/use-hydrated';
 import {
@@ -44,33 +44,38 @@ function AuthSessionProvider({ children }: AuthProviderProps) {
     const [user, setUser] = useState<AdminUser | null>(() => session?.user ?? null);
     const [token, setToken] = useState<string | null>(() => session?.token ?? null);
     const [isLoading, setIsLoading] = useState(() => !!session?.token);
+    const authVersion = useRef(0);
 
     // Verificar sesión existente al cargar
     useEffect(() => {
         if (!session?.token) return;
         let active = true;
-        let applied = false;
+        const version = authVersion.current;
         getCurrentAdmin(session.token).then((freshUser) => {
-            if (!active || getToken() !== session.token) return;
-            applied = true;
+            if (!active || version !== authVersion.current) return;
+            if (getToken() !== session.token) {
+                setToken(null);
+                setUser(null);
+                return;
+            }
             setUser(freshUser);
             saveSession(session.token, freshUser);
         }).catch((error) => {
-            if (!active || getToken() !== session.token) return;
-            applied = true;
-            if (error instanceof AuthError && error.status === 401) {
-                clearSession();
+            if (!active || version !== authVersion.current) return;
+            if (getToken() !== session.token || (error instanceof AuthError && error.status === 401)) {
+                if (getToken() === session.token) clearSession();
                 setToken(null);
                 setUser(null);
             }
         }).finally(() => {
-            if (active && applied) setIsLoading(false);
+            if (active && version === authVersion.current) setIsLoading(false);
         });
         return () => { active = false; };
     }, [session]);
 
     // Login
     const login = async (identifier: string, password: string) => {
+        const version = ++authVersion.current;
         setIsLoading(true);
         
         try {
@@ -88,6 +93,7 @@ function AuthSessionProvider({ children }: AuthProviderProps) {
             }
             
             // Guardar sesión
+            if (version !== authVersion.current) return;
             saveSession(accessToken, adminUser);
             setToken(accessToken);
             setUser(adminUser);
@@ -95,6 +101,7 @@ function AuthSessionProvider({ children }: AuthProviderProps) {
             
             router.replace('/admin');
         } catch (error) {
+            if (version !== authVersion.current) return;
             setIsLoading(false);
             throw error;
         }
@@ -102,7 +109,9 @@ function AuthSessionProvider({ children }: AuthProviderProps) {
 
     // Logout
     const logout = useCallback(() => {
+        authVersion.current += 1;
         clearSession();
+        setIsLoading(false);
         setToken(null);
         setUser(null);
         router.push('/admin/login');
