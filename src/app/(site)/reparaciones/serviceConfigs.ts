@@ -577,62 +577,97 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
   },
   "recuperacion-celular-mojado-caba": {
     slug: "recuperacion-celular-mojado-caba",
-    h1: "Recuperación de celular mojado en CABA",
+    h1: "Celular mojado en CABA: diagnóstico y reparación",
     metaTitle:
-      "Recuperación de Celular Mojado en CABA | Daño por Líquidos",
+      "Celular mojado en CABA: servicio técnico | Team Celular",
     metaDescription:
-      "¿Se mojó el celular? No lo cargues. En Paraguay 2451, Recoleta (CABA), hacemos limpieza técnica, secado controlado y diagnóstico de placa.",
-    socialTitle: "Recuperación de Celular Mojado en CABA | Team Celular",
+      "¿Celular mojado en CABA? Consultá por diagnóstico en Recoleta o Belgrano. Conocé costos y opciones antes de reparar. Escribinos por WhatsApp.",
+    socialTitle: "Celular mojado en CABA: servicio técnico | Team Celular",
     socialDescription:
-      "Team Celular, Paraguay 2451 Recoleta. Servicio urgente para daño por líquidos con limpieza técnica y diagnóstico de laboratorio.",
+      "Revisión de celulares con daño por líquidos en Recoleta y Belgrano. Costo de revisión y alcance del trabajo informados antes de avanzar.",
     keywords: [
-      "celular mojado reparacion CABA",
-      "reparacion dano por liquidos",
-      "celular se mojo no enciende",
-      "limpieza placa celular mojado",
-      "microelectronica celular mojado",
+      "celular mojado en CABA",
+      "reparación de celular mojado",
+      "servicio técnico de celulares mojados",
+      "daño por líquidos",
+      "celular que no prende después de mojarse",
+      "limpieza de placa",
+      "recuperación de datos celular mojado",
     ],
     intro:
-      "Si se te mojó el celular, apagalo, no lo cargues y traelo cuanto antes: la corrosión avanza aunque el equipo parezca andar. Lo abrimos, limpiamos la placa en laboratorio y te decimos si se puede recuperar el equipo o al menos los datos.",
+      "Team Celular revisa tu celular mojado en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano). Evaluamos el daño por líquidos y te explicamos si alcanza con limpieza, hace falta reparar o conviene priorizar los datos. El costo de revisión se informa antes de ingresar el equipo; el resultado depende del daño que encontremos.",
+    modifiedTime: "2026-10-15T00:00:00-03:00",
+    asideNotes: [
+      "Garantía escrita con alcance según el estado inicial y el trabajo realizado; se informa antes de avanzar.",
+      "Diagnóstico inicial y reparación son etapas distintas. Confirmamos el plazo según el daño; placa tiene su propio proceso.",
+    ],
+    closingDescription:
+      "Mandanos marca, modelo, qué líquido fue, cuándo pasó y si el celular sigue encendido. Si tu prioridad son las fotos o los contactos, contanos eso también. No envíes contraseñas.",
     whatsappText:
-      "Hola! Quiero un presupuesto para recuperacion de celular mojado en CABA. Marca y modelo:",
+      "Hola Team Celular, quiero consultar por un celular mojado en CABA. Marca y modelo: . Líquido y cuándo pasó: . Estado actual: . Mi prioridad es el equipo / los datos.",
     breadcrumbLabel: "Celular mojado (CABA)",
     serviceName: "Recuperación de celular mojado en CABA",
     serviceType: "Recuperación por daño de líquidos y humedad",
     serviceDescription:
-      "Servicio técnico urgente para recuperación de celulares con daño por líquidos en CABA con diagnóstico de laboratorio.",
+      "Diagnóstico, limpieza de placa y evaluación de reparación de celulares con daño por líquidos en Recoleta y Belgrano, CABA. Costos y alcance informados antes de avanzar, sin recuperación garantizada.",
     highlights: [
       {
-        title: "Pasa adelante en la fila",
-        desc: "Un celular mojado no espera turno. Cuanto antes se abre, menos corrosión hay que limpiar.",
+        title: "¿Qué hacer antes de traerlo?",
+        desc: "Apagalo si podés hacerlo sin forzarlo y no lo cargues ni pruebes encenderlo de nuevo. No uses arroz, secador ni calor. Consultanos para coordinar el ingreso: que vuelva a prender no confirma que esté libre de daño interno.",
       },
       {
-        title: "Limpieza de la placa",
-        desc: "Desarmamos el equipo y limpiamos la placa y los conectores. El arroz no saca el agua de adentro: solo hace perder tiempo.",
+        title: "¿Qué revisamos en el laboratorio?",
+        desc: "Buscamos rastros de líquido y corrosión en placa y conectores. La limpieza técnica y el secado controlado permiten evaluar el estado de los componentes. Un daño por líquidos no implica automáticamente cambiar la placa entera.",
       },
       {
-        title: "Te decimos qué se puede salvar",
-        desc: "Después de la limpieza sabemos si vuelve a andar, si hay que reparar placa o si conviene rescatar fotos y contactos.",
+        title: "¿Qué resultados son posibles?",
+        desc: "Puede alcanzar con limpieza, hacer falta cambiar un componente o requerirse trabajo de placa. También puede no ser recuperable o no convenir el arreglo. Te explicamos lo que encontramos antes de que decidas cómo seguir.",
+      },
+    ],
+    workflow: [
+      {
+        title: "Nos contás qué pasó",
+        desc: "Registramos marca, modelo, líquido, tiempo desde el accidente y estado del equipo. Antes de ingresarlo te informamos el costo de revisión. Avisanos si necesitás priorizar fotos o contactos.",
+      },
+      {
+        title: "Evaluamos el daño",
+        desc: "Inspeccionamos placa y conectores y definimos qué limpieza y pruebas corresponden. Te explicamos el alcance del trabajo antes de intervenir; no forzamos el encendido de un equipo mojado para mostrar la falla.",
+      },
+      {
+        title: "Decidís con el presupuesto",
+        desc: "Te informamos qué se puede intentar recuperar, costo, plazo y límites. Si aparecen daños que requieren otro trabajo o un repuesto, te avisamos antes de seguir. No todas las fallas tienen arreglo.",
+      },
+      {
+        title: "Revisamos el resultado con vos",
+        desc: "Te explicamos qué funciones se recuperaron, cuáles siguen afectadas y qué alcance tiene la garantía escrita. Te confirmamos cuándo podés retirarlo según el trabajo aprobado y el resultado de las pruebas.",
       },
     ],
     brandsText:
       "Trabajamos iPhone y Android con protocolos de microelectrónica según nivel de daño por líquido.",
     faqs: [
       {
-        q: "¿Sirve poner el celular en arroz?",
-        a: "No es un método confiable. El arroz no elimina la corrosión interna y puede demorar la intervención técnica, que es lo que realmente importa.",
+        q: "¿Tiene arreglo un celular mojado que ya no prende?",
+        a: "Puede tenerlo, pero no se puede confirmar por el síntoma solo. Revisamos placa, conectores y componentes afectados antes de proponer el trabajo. No lo cargues ni intentes encenderlo repetidamente: necesitamos evaluar el daño sin sumar pruebas de uso.",
       },
       {
-        q: "¿Si prende después de mojarse, igual hay que revisarlo?",
-        a: "Sí. Muchos equipos vuelven a fallar por corrosión progresiva aunque enciendan al principio. Lo recomendable es revisarlo cuanto antes.",
+        q: "¿Conviene revisarlo aunque haya vuelto a funcionar?",
+        a: "Sí, si hubo ingreso de líquido conviene evaluar el interior aunque el celular prenda. Los residuos y la corrosión pueden afectar conectores o componentes después. Contanos qué líquido fue y qué síntomas tuvo para orientar la revisión.",
       },
       {
-        q: "¿Cuánto tarda el diagnóstico de un celular mojado?",
-        a: "El diagnóstico inicial se realiza en el mismo día hábil para definir viabilidad técnica y pasarte un presupuesto concreto.",
+        q: "¿Qué se cobra si no se puede recuperar o decido no repararlo?",
+        a: "La revisión técnica tiene costo y se informa antes de ingresar el equipo. Si no aceptás el arreglo, pagás la revisión acordada. Antes de autorizar una limpieza o reparación, confirmá qué incluye el presupuesto y qué se cobra si el intento no recupera el equipo.",
       },
       {
-        q: "¿Tiene garantía?",
-        a: "Sí, se entrega garantía escrita cuyo alcance depende del estado inicial del equipo y el trabajo realizado; se detalla antes de avanzar.",
+        q: "¿Se pueden recuperar fotos sin reparar todo el celular?",
+        a: "Se evalúa según el daño y el acceso a la información. Puede ser necesario recuperar primero alguna función del equipo. Avisanos que los datos son tu prioridad antes de autorizar el trabajo; reparar el teléfono y recuperar sus archivos no son el mismo resultado.",
+      },
+      {
+        q: "¿Qué garantía tiene el trabajo por daño de líquidos?",
+        a: "Se entrega garantía escrita con el alcance que corresponda al estado inicial y al trabajo realizado. Te lo informamos antes de avanzar. La garantía de una intervención no significa que todos los componentes afectados por líquido queden recuperados ni que se garantice rescatar los datos.",
+      },
+      {
+        q: "¿Sirve poner el celular mojado en arroz?",
+        a: "No es un método confiable para tratar un daño por líquidos. El arroz no elimina la corrosión interna y puede dejar partículas en los conectores. Evitá también el secador y el calor; consultá cómo ingresar el equipo a revisión.",
       },
     ],
   },
