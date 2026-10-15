@@ -11,7 +11,7 @@
     "clean": "node -e \"require('fs').rmSync('.next',{recursive:true,force:true})\"",
     "build": "npm run clean && next build --webpack",
     "start": "next start",
-    "lint": "eslint .",
+    "lint": "eslint . --max-warnings=0",
     "seo:audit": "lighthouse http://localhost:3000 --chrome-flags=\"--headless\" --output html --output json --output-path ./reports/lighthouse-report",
     "seo:indexnow": "node scripts/indexnow-submit.mjs",
     "test": "node --import ./tools/node-test-resolver.mjs --test src/lib/*.test.ts scripts/*.test.mjs"
