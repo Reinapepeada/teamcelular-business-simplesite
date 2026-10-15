@@ -35,7 +35,7 @@ test("arma el item con URLs absolutas, precio y XML escapado", () => {
     assert.match(xml, /<g:additional_image_link>https:\/\/cdn.x\/b.jpg<\/g:additional_image_link>/);
     assert.match(xml, /<g:price>30000.00 ARS<\/g:price>/);
     assert.match(xml, /<g:availability>out_of_stock<\/g:availability>/);
-    assert.match(xml, /<g:identifier_exists>no<\/g:identifier_exists>/);
+    assert.doesNotMatch(xml, /<g:(?:mpn|identifier_exists)>/);
 });
 
 test("con GTIN no declara identifier_exists; sin precio o foto no entra", () => {
@@ -51,6 +51,19 @@ test("con GTIN no declara identifier_exists; sin precio o foto no entra", () => 
     assert.match(xml, /<g:condition>used<\/g:condition>/);
     assert.doesNotMatch(xml, /identifier_exists/);
     assert.doesNotMatch(xml, /gratis|sin-foto/);
+});
+
+test("no deduce MPN ni ausencia de identificadores de un modelo o datos faltantes", () => {
+    const xml = feedMerchant([
+        { ...base, slug: "power-bank-slim", model: "Slim" },
+        { ...base, slug: "cargador-cw-45", model: "CW-45", gtin: "696603080459" },
+        { ...base, slug: "sin-identificadores", brand: null },
+    ], "https://teamcelular.com");
+
+    assert.doesNotMatch(xml, /<g:(?:mpn|identifier_exists)>/);
+    assert.match(xml, /<g:brand>CLD<\/g:brand>/);
+    assert.match(xml, /<g:gtin>696603080459<\/g:gtin>/);
+    assert.equal([...xml.matchAll(/<item>/g)].length, 3);
 });
 
 test("mapea la categoría a la taxonomía de Google y omite las desconocidas", () => {
