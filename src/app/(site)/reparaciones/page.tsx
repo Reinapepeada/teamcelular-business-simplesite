@@ -5,6 +5,7 @@ import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
+import { IPHONE_MODELS_WITH_PAGE, getIphoneModel } from "./iphone/iphoneModels";
 
 const SITE_URL = getSiteUrl();
 
@@ -236,6 +237,25 @@ export default function ReparacionesPage() {
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="mt-10" aria-labelledby="reparaciones-iphone-modelos">
+        <h2 id="reparaciones-iphone-modelos" className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
+          Reparación de iPhone por modelo
+        </h2>
+        <p className="mt-3 text-slate-600 dark:text-[#a1a1a6]">
+          Elegí tu equipo para ver precios de pantalla y batería, qué funciones
+          revisar y cómo consultar por otra falla.
+        </p>
+        <ul className="mt-4 flex flex-wrap gap-3">
+          {IPHONE_MODELS_WITH_PAGE.map((slug) => (
+            <li key={slug}>
+              <Link href={`/reparaciones/iphone/${slug}`} className="tc-btn tc-btn-ghost">
+                {getIphoneModel(slug)?.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="mt-10 grid gap-6 md:grid-cols-2">
