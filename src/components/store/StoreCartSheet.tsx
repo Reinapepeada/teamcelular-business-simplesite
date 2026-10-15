@@ -218,6 +218,8 @@ export default function StoreCartSheet() {
                 id="store-cart-sheet"
                 aria-label="Resumen del carrito"
                 onClose={() => {
+                    // Un close pendiente del montaje no debe cerrar el diálogo ya reabierto.
+                    if (dialogRef.current?.open) return;
                     closeCart();
                     setConfirmarVaciado(false);
                     if (!comprando) triggerRef.current?.focus();

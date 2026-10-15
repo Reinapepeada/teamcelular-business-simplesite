@@ -1,5 +1,6 @@
 import { defineConfig } from '@playwright/test';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 export default defineConfig({
     testDir: './tests',
@@ -24,7 +25,7 @@ export default defineConfig({
                 NEXT_PUBLIC_STORE_API_URL: 'http://127.0.0.1:3101',
                 NEXT_PUBLIC_API_URL: 'http://127.0.0.1:3101',
                 NEXT_TELEMETRY_DISABLED: '1',
-                NODE_OPTIONS: `--import ${path.resolve('tests/fixtures/local-network-only.mjs')}`,
+                NODE_OPTIONS: `--import ${pathToFileURL(path.resolve('tests/fixtures/local-network-only.mjs')).href}`,
             },
         },
     ],
