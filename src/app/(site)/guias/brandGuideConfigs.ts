@@ -7,9 +7,20 @@ import type {
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import { businessId } from "@/lib/businessProfile";
 import { PLACA_REVISION_PRICE, formatArsPrice } from "@/lib/repairPrices";
-import { INSTALLMENTS_MESSAGE } from "@/lib/copyStandards";
+import { INSTALLMENTS_MESSAGE, SCREEN_BATTERY_TIMING_MESSAGE } from "@/lib/copyStandards";
 
 const SITE_URL = getSiteUrl();
+
+const REVISED_DIAGNOSIS = {
+  modifiedTime: "2026-10-15T00:00:00Z",
+  heroPointsOverride: [
+    "Plazo de revisión según la falla; placa: informe hasta 72 horas hábiles.",
+    "Garantía escrita de 90 días sobre trabajo y repuesto.",
+    "Opiniones de clientes en Google de la sucursal Recoleta.",
+  ],
+  diagnosisAnswerOverride:
+    `El plazo depende de la falla. La revisión técnica sin placa cuesta entre $15.000 y $25.000; confirmamos costo y plazo antes de abrir el equipo. La revisión de placa cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles. Se cobra aunque no se repare y se descuenta del total si aceptás el arreglo. La reparación de placa lleva semanas, con precio y plazo por escrito antes de empezar. Pantalla, batería y puerto dependen del modelo y del repuesto disponible.`,
+};
 
 export type BrandGuideSlug =
   | "reparacion-google-pixel-buenos-aires"
@@ -93,15 +104,16 @@ export type BrandGuideConfig = {
 const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   {
     slug: "reparacion-google-pixel-buenos-aires",
+    ...REVISED_DIAGNOSIS,
     titleOverride: "Reparacion de Google Pixel en Buenos Aires",
     metaDescriptionOverride:
-      "Pantalla de Google Pixel desde $360.000 y batería desde $150.000. Pixel 6 a 10 Pro reparados en CABA el mismo día, con garantía escrita 90 días.",
+      "Pantalla de Google Pixel desde $360.000 y batería desde $150.000 en CABA. Plazo según modelo y stock. Garantía escrita de 90 días.",
     repairPrices: [
       { name: "Cambio de pantalla", from: 360000, to: 590000 },
       { name: "Cambio de bateria", from: 150000, to: 200000 },
     ],
     heroDescriptionOverride:
-      "Team Celular repara Google Pixel en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. El cambio de pantalla va de ARS 360.000 a 590.000 y el de bateria de ARS 150.000 a 200.000, segun el modelo: cubrimos desde Pixel 6 y 6a hasta Pixel 10 Pro, incluidas las variantes Pro y Pro XL. Pantalla y bateria salen en 2 a 4 horas. Tambien revisamos las fallas de placa que aparecen seguido en equipos ingresados por importacion: la revision de placa sale $45.000 y se descuenta si se repara. Garantia escrita de 90 dias sobre trabajo y repuesto, y pago en 3 cuotas sin interes. Google no tiene local propio de atencion en el pais, asi que estas reparaciones terminan en talleres independientes: la diferencia esta en si el taller puede trabajar la placa o solo reemplazar modulos completos.",
+      `Team Celular repara Google Pixel en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. El cambio de pantalla va de ARS 360.000 a 590.000 y el de batería de ARS 150.000 a 200.000, según el modelo: cubrimos desde Pixel 6 y 6a hasta Pixel 10 Pro, incluidas las variantes Pro y Pro XL. ${SCREEN_BATTERY_TIMING_MESSAGE} Si la falla requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)} y el informe se entrega en hasta 72 horas hábiles. El arreglo de placa lleva semanas; confirmamos precio y plazo por escrito antes de empezar. Garantía escrita de 90 días sobre trabajo y repuesto, y pago en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "Google tiene servicio tecnico de Pixel en Argentina?",
@@ -133,7 +145,6 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
       "Pixel 6",
       "Pixel 6a",
     ],
-    modifiedTime: "2026-08-20T00:00:00Z",
     specialtyFocus:
       "enfoque de camara computacional, pantalla OLED y estabilidad de carga USB-C",
     knownWeakPoints: [
@@ -157,22 +168,23 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-honor-buenos-aires",
+    ...REVISED_DIAGNOSIS,
     metaDescriptionOverride:
-      "Honor Magic y X reparados en CABA sin mandar el equipo por correo: diagnóstico el mismo día en Recoleta y Belgrano, garantía escrita 90 días.",
+      "Reparación de Honor Magic y X en Recoleta y Belgrano, CABA. Diagnóstico y plazo según la falla, con presupuesto y garantía escrita de 90 días.",
     titleOverride:
       "Reparacion de Honor en Buenos Aires: alternativa presencial al canal oficial",
     heroDescriptionOverride:
-      "Team Celular repara Honor en CABA con diagnostico el mismo dia y entrega en mano: es un taller independiente de microelectronica en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Resolvemos pantalla, bateria y modulo de carga de las lineas Magic y X. Si el equipo no prende, revisamos la placa por $45.000 y buscamos el componente que fallo, en vez de cambiar el conjunto completo. Todo sale con garantia escrita de 90 dias sobre trabajo y repuesto, y se puede abonar en 3 cuotas sin interes. Honor tambien ofrece soporte propio en el pais, por hotline y reparacion via envio postal: la diferencia es el tiempo de ida y vuelta del correo frente a dejar el equipo en el mostrador y tener el diagnostico ese mismo dia.",
+      `Team Celular repara Honor en CABA con atención presencial: somos un taller independiente de microelectrónica en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Revisamos pantalla, batería y módulo de carga de las líneas Magic y X; confirmamos disponibilidad del repuesto y plazo para tu modelo antes de que dejes el equipo. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles. La reparación de placa lleva semanas, con precio y plazo por escrito antes de empezar. Garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés. Si buscás cobertura de fábrica, consultá primero el canal de soporte de Honor.`,
     extraFaq: [
       {
         question: "Que diferencia hay entre el canal de Honor y Team Celular?",
         answer:
-          "Honor opera su propio canal de soporte en Argentina, con hotline y reparacion por envio postal. Team Celular es un taller independiente de microelectronica: atendemos en persona en Recoleta y Belgrano, el diagnostico se hace el mismo dia y reparamos a nivel componente, algo que el canal de la marca resuelve reemplazando el conjunto completo.",
+          "Team Celular es un taller independiente con atención presencial en Recoleta y Belgrano. La revisión depende de la falla: si requiere placa, el informe se entrega en hasta 72 horas hábiles y el arreglo lleva semanas. Confirmamos precio y plazo por escrito. Para garantía de fábrica, consultá primero las condiciones y los canales de soporte de Honor.",
       },
       {
         question: "Conviene el canal oficial de Honor o un taller independiente?",
         answer:
-          "Si el equipo esta en garantia de fabrica, el canal oficial: cualquier intervencion externa la anula. Si la garantia ya vencio, pesa el tiempo y el tipo de falla. El canal oficial trabaja por envio y por reemplazo de modulo; nosotros entregamos el equipo en mano y reparamos a nivel componente cuando la falla esta en la placa.",
+          "Si el equipo tiene garantía de fábrica, consultá primero el canal oficial y sus condiciones antes de autorizar una intervención. Fuera de garantía, compará presupuesto, disponibilidad de repuesto y plazo para la falla concreta. En Team Celular te informamos esas condiciones antes de reparar; una falla de placa requiere revisión y un presupuesto separado.",
       },
     ],
     brand: "Honor",
@@ -266,13 +278,14 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-infinix-buenos-aires",
+    ...REVISED_DIAGNOSIS,
     seoTitleOverride: "Servicio técnico Infinix en CABA | Team Celular",
     metaDescriptionOverride:
-      "Infinix Note, Hot y Zero: sin service oficial físico en el país, los reparamos en Recoleta y Belgrano con diagnóstico en el día y garantía 90 días.",
+      "Reparación de Infinix Note, Hot y Zero en Recoleta y Belgrano. Plazo según falla y repuesto disponible, con garantía escrita de 90 días.",
     titleOverride:
       "Reparacion de Infinix en Buenos Aires: donde arreglarlo sin red oficial",
     heroDescriptionOverride:
-      "Infinix no tiene una red de service centers fisicos verificable en Argentina: la marca atiende por canales de contacto a distancia, sin local propio donde dejar el equipo. Team Celular es un taller independiente de microelectronica en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), CABA, con diagnostico el mismo dia y garantia escrita de 90 dias sobre trabajo y repuesto. Reparamos pantalla, bateria y pin de carga de las lineas Note, Hot y Zero, y limpiamos la placa de los equipos mojados. Si no enciende, la revision de placa sale $45.000 y se busca el componente que fallo en vez de reemplazar la placa entera. El presupuesto se confirma antes de intervenir el equipo, y si no tiene reparación posible te lo decimos antes de intervenir: solo se cobra el diagnóstico (ARS 15.000 a 25.000 según el equipo). Atendemos de lunes a viernes de 10:30 a 18:00, sin turno, con pago en 3 cuotas sin interes.",
+      `Team Celular es un taller independiente de microelectrónica en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA. Revisamos pantalla, batería y pin de carga de las líneas Infinix Note, Hot y Zero, además de equipos mojados o que no encienden. La revisión técnica sin placa cuesta entre ARS 15.000 y 25.000. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles: se cobra aunque no se repare y se descuenta del total si aceptás el arreglo. La reparación de placa lleva semanas, con precio y plazo por escrito antes de empezar. Para pantalla, batería y carga confirmamos modelo, repuesto y plazo antes de que dejes el equipo. Atendemos de lunes a viernes de 10:30 a 18:00, sin turno, con garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "Infinix tiene servicio tecnico oficial en Argentina?",
@@ -303,13 +316,13 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-zte-buenos-aires",
+    ...REVISED_DIAGNOSIS,
     seoTitleOverride: "Servicio técnico ZTE y Nubia en CABA | Team Celular",
-    modifiedTime: "2026-09-02T00:00:00Z",
     titleOverride: "Reparacion de ZTE en Buenos Aires: audio, carga y reinicios",
     metaDescriptionOverride:
-      "ZTE Blade, Nubia y Axon con audio distorsionado, carga floja o reinicios: reparación en CABA el mismo día, con garantía escrita 90 días.",
+      "Reparación de ZTE Blade, Nubia y Axon en CABA: audio, carga y reinicios. Plazo según la falla y repuesto, con garantía escrita de 90 días.",
     heroDescriptionOverride:
-      "Team Celular repara ZTE en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Las tres fallas que mas entran en las familias Blade y Nubia son de tipo distinto entre si: el audio bajo o distorsionado suele ser el parlante o su filtro, la carga que corta cuando se mueve el cable casi siempre es el pin y no el cargador, y los reinicios intermitentes en equipos de varios años apuntan a la placa. Esa ultima es la que separa un taller de otro: en vez de cotizar el reemplazo del conjunto, se busca el componente que fallo. Todo sale con garantia escrita de 90 dias sobre trabajo y repuesto, y se puede pagar en 3 cuotas sin interes.",
+      `Team Celular repara ZTE en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. En las familias Blade, Nubia y Axon revisamos audio bajo o distorsionado, carga intermitente y reinicios. Probamos parlante, cable, cargador y conector antes de decidir qué pieza cambiar. Los reinicios también pueden requerir medir la placa: esa revisión cuesta ${formatArsPrice(PLACA_REVISION_PRICE)} y el informe se entrega en hasta 72 horas hábiles. Si hay que reparar la placa, el trabajo lleva semanas y confirmamos precio y plazo por escrito antes de empezar. Para otras reparaciones, el plazo depende del modelo y del repuesto disponible. Garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "Por que mi ZTE se reinicia solo?",
@@ -340,12 +353,13 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-tecno-buenos-aires",
+    ...REVISED_DIAGNOSIS,
     seoTitleOverride: "Tecno: reparación y servicio técnico en CABA | Team Celular",
     titleOverride: "Reparacion de Tecno en Buenos Aires: Camon, Pova y Spark",
     metaDescriptionOverride:
       "Tecno Camon, Pova, Spark y Phantom: pantalla con rayas, cámara sin nitidez y batería que cae. Reparación en CABA con garantía escrita de 90 días.",
     heroDescriptionOverride:
-      "Team Celular repara Tecno en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Tecno es una marca de llegada reciente al pais, asi que la pregunta real no suele ser si la falla tiene arreglo sino si el repuesto esta: por eso confirmamos disponibilidad para tu modelo antes de que dejes el equipo, y no despues. En las lineas Camon y Pova lo que mas vemos es pantalla con rayas o toque fantasma, camara que perdio nitidez y bateria que cae rapido en uso mixto. La pantalla y la bateria se resuelven en 2 a 4 horas cuando hay repuesto; la camara conviene diagnosticarla antes de cotizar, porque a veces es el vidrio del lente y no el modulo completo. Garantia escrita de 90 dias y 3 cuotas sin interes.",
+      `Team Celular repara Tecno en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Confirmamos disponibilidad de repuesto para tu modelo antes de que dejes el equipo. En las líneas Camon, Pova, Spark y Phantom revisamos pantalla con rayas o toque fantasma, cámara sin nitidez y batería que pierde autonomía. ${SCREEN_BATTERY_TIMING_MESSAGE} Para la cámara, primero revisamos el vidrio del lente y el módulo. Si la falla requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; el arreglo lleva semanas, con precio y plazo por escrito antes de empezar. Garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "Consiguen repuestos para Tecno en Argentina?",
