@@ -25,6 +25,36 @@ const PAGE_URL = `${SITE_URL}/guias`;
 
 const ARTICLES = [
   {
+    title: "Service oficial o taller independiente en CABA",
+    description: "Compará cobertura, repuestos, revisión y presupuesto antes de elegir dónde reparar tu equipo.",
+    href: "/guias/presupuesto-service-oficial-segunda-opinion",
+    category: "Comparativas",
+    readingTime: "8 min",
+    Icon: FaTools,
+    datePublished: "2026-08-12",
+    keywords: ["service oficial vs independiente", "segunda opinión", "reparación iPhone"],
+  },
+  {
+    title: "¿Conviene reparar el celular o comprar otro?",
+    description: "Cómo comparar diagnóstico, costo total, estado del equipo y recuperación de datos antes de gastar.",
+    href: "/guias/reparar-celular-o-comprar-otro",
+    category: "Comparativas",
+    readingTime: "8 min",
+    Icon: FaMobileAlt,
+    datePublished: "2026-10-15",
+    keywords: ["reparar o comprar celular", "cambio de pantalla", "cambio de batería"],
+  },
+  {
+    title: "Team Celular, GoFix y View Phone: qué comparar",
+    description: "Marcas, sucursales, turnos, plazos y garantía con fuentes públicas y condiciones por confirmar.",
+    href: "/guias/team-celular-vs-gofix-view-phone",
+    category: "Comparativas",
+    readingTime: "8 min",
+    Icon: FaBookOpen,
+    datePublished: "2026-10-15",
+    keywords: ["Team Celular vs GoFix", "View Phone", "reparación en Belgrano"],
+  },
+  {
     title: "Reparacion de iPhone en Buenos Aires",
     description:
       "Service tecnico premium para iPhone con diagnostico claro, repuestos certificados y garantia escrita.",
@@ -208,6 +238,15 @@ const articleVisuals: Record<string, { cover: string }> = {
   },
   "/guias/reparacion-pantalla-celular": {
     cover: "/images/guia_cambio_modulo.webp",
+  },
+  "/guias/presupuesto-service-oficial-segunda-opinion": {
+    cover: "/images/reparacion_placa.webp",
+  },
+  "/guias/reparar-celular-o-comprar-otro": {
+    cover: "/images/guia_cambio_bateria.webp",
+  },
+  "/guias/team-celular-vs-gofix-view-phone": {
+    cover: "/images/reparacion_placa.webp",
   },
   "/guias/pin-de-carga-suelto-solucion": {
     cover: "/images/guia_cambio_modulo.webp",

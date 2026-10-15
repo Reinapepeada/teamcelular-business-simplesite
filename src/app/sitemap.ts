@@ -202,6 +202,16 @@ const mainPages = [
 
 // Guias y contenido educativo
 const guidePages = [
+  {
+    path: "guias/reparar-celular-o-comprar-otro",
+    priority: 0.78,
+    changeFreq: "monthly" as const,
+  },
+  {
+    path: "guias/team-celular-vs-gofix-view-phone",
+    priority: 0.76,
+    changeFreq: "monthly" as const,
+  },
   { path: "guias", priority: 0.8, changeFreq: "weekly" as const },
   {
     path: "guias/reparacion-iphone-buenos-aires",
