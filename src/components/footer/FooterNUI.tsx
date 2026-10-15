@@ -222,17 +222,20 @@ export default function FooterNUI() {
             <div className="flex items-start space-x-3 text-sm">
               <BsTelephone className="mt-1 flex-shrink-0 text-primary" />
               <div>
-                <p className="font-semibold">Teléfono</p>
-                <TrackedCtaLink
-                  href="tel:+5491151034595"
-                  ctaName="footer_phone"
-                  ctaLocation="footer_contact"
-                  ctaVariant="phone"
-                  external
-                  className="inline-flex min-h-11 items-center text-slate-200 transition-colors hover:text-white"
-                >
-                  +54 11 5103-4595
-                </TrackedCtaLink>
+                <p className="font-semibold">Teléfonos por sucursal</p>
+                {BRANCHES.map((branch) => (
+                  <TrackedCtaLink
+                    key={branch.slug}
+                    href={`tel:${branch.phone.replace(/[^+\d]/g, "")}`}
+                    ctaName="footer_phone"
+                    ctaLocation="footer_contact"
+                    ctaVariant="phone"
+                    external
+                    className="flex min-h-11 items-center text-slate-200 transition-colors hover:text-white"
+                  >
+                    {branch.shortName}: {branch.phone}
+                  </TrackedCtaLink>
+                ))}
               </div>
             </div>
 
