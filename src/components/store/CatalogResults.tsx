@@ -11,6 +11,7 @@ import {
     type CatalogFiltersState,
 } from "@/lib/catalog";
 import { buildProductSlug, slugify } from "@/lib/productSlug";
+import { serializeJsonLd } from "@/lib/jsonLd";
 
 interface CatalogResultsProps {
     basePath: string;
@@ -313,7 +314,7 @@ export default async function CatalogResults({
                     <script
                         type="application/ld+json"
                         dangerouslySetInnerHTML={{
-                            __html: JSON.stringify(buildItemListJsonLd(products, siteUrl)),
+                            __html: serializeJsonLd(buildItemListJsonLd(products, siteUrl)),
                         }}
                     />
                     <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">

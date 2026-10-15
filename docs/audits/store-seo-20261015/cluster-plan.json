@@ -1,0 +1,298 @@
+{
+  "date": "2026-10-15",
+  "status": "Arquitectura del catálogo existente; agrupación editorial provisional. Sin matriz top 10 Google localizada ni volúmenes.",
+  "pillar": {
+    "title": "Tienda Team Celular",
+    "keyword": "accesorios para celulares",
+    "volume": null,
+    "template": "catalogo",
+    "wordCount": 0,
+    "url": "https://teamcelular.com/tienda"
+  },
+  "clusters": [
+    {
+      "name": "Carga y energía",
+      "color": "#4E79A7",
+      "posts": [
+        {
+          "title": "Cargadores para celulares",
+          "slug": "cargador",
+          "keyword": "cargadores usb c",
+          "secondaryKeywords": [
+            "cargador usb c",
+            "cargador carga rapida",
+            "cargador 25w",
+            "cargador 45w",
+            "cargador 65w",
+            "cargador para auto",
+            "cargador inalambrico magsafe"
+          ],
+          "intent": "transactional",
+          "volume": null,
+          "template": "categoria",
+          "wordCount": 0,
+          "url": "https://teamcelular.com/tienda/categoria/cargador",
+          "status": "written"
+        },
+        {
+          "title": "Cargadores portátiles",
+          "slug": "cargador-portatil",
+          "keyword": "cargadores portátiles",
+          "secondaryKeywords": [
+            "cargador portatil",
+            "cargador portatil usb c",
+            "bateria externa para celular",
+            "cargador portatil 5000 mah"
+          ],
+          "intent": "transactional",
+          "volume": null,
+          "template": "categoria",
+          "wordCount": 0,
+          "url": "https://teamcelular.com/tienda/categoria/cargador-portatil",
+          "status": "written"
+        },
+        {
+          "title": "Power banks",
+          "slug": "power-bank",
+          "keyword": "power bank",
+          "secondaryKeywords": [
+            "power bank",
+            "power bank 10000 mah",
+            "power bank carga rapida",
+            "power bank para iphone",
+            "power bank para samsung"
+          ],
+          "intent": "transactional",
+          "volume": null,
+          "template": "categoria",
+          "wordCount": 0,
+          "url": "https://teamcelular.com/tienda/categoria/power-bank",
+          "status": "written"
+        }
+      ]
+    },
+    {
+      "name": "Audio",
+      "color": "#59A14F",
+      "posts": [
+        {
+          "title": "Auriculares Bluetooth",
+          "slug": "auricular-bt",
+          "keyword": "auriculares bluetooth",
+          "secondaryKeywords": [
+            "auriculares bluetooth",
+            "auriculares inalambricos",
+            "auriculares tws",
+            "auriculares open ear",
+            "auriculares de clip",
+            "auriculares enc"
+          ],
+          "intent": "transactional",
+          "volume": null,
+          "template": "categoria",
+          "wordCount": 0,
+          "url": "https://teamcelular.com/tienda/categoria/auricular-bt",
+          "status": "written"
+        },
+        {
+          "title": "Auriculares con cable",
+          "slug": "auricular",
+          "keyword": "auriculares con cable usb c",
+          "secondaryKeywords": [
+            "auriculares con cable",
+            "auriculares usb c",
+            "auriculares tipo c con microfono",
+            "auriculares in ear"
+          ],
+          "intent": "transactional",
+          "volume": null,
+          "template": "categoria",
+          "wordCount": 0,
+          "url": "https://teamcelular.com/tienda/categoria/auricular",
+          "status": "written"
+        }
+      ]
+    },
+    {
+      "name": "Conectividad",
+      "color": "#F28E2B",
+      "posts": [
+        {
+          "title": "Cables para celulares",
+          "slug": "cable",
+          "keyword": "cables usb c",
+          "secondaryKeywords": [
+            "cable usb c",
+            "cable usb c a lightning",
+            "cable usb c a usb c",
+            "cable usb c 60w",
+            "cable usb c a hdmi"
+          ],
+          "intent": "transactional",
+          "volume": null,
+          "template": "categoria",
+          "wordCount": 0,
+          "url": "https://teamcelular.com/tienda/categoria/cable",
+          "status": "written"
+        },
+        {
+          "title": "Adaptadores y hubs",
+          "slug": "adaptador",
+          "keyword": "hub usb c",
+          "secondaryKeywords": [
+            "hub usb c",
+            "hub usb c hdmi",
+            "adaptador usb c rj45",
+            "hub usb c para notebook"
+          ],
+          "intent": "transactional",
+          "volume": null,
+          "template": "categoria",
+          "wordCount": 0,
+          "url": "https://teamcelular.com/tienda/categoria/adaptador",
+          "status": "written"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "from": "pillar",
+      "to": "cluster-0-post-0",
+      "type": "mandatory"
+    },
+    {
+      "from": "cluster-0-post-0",
+      "to": "pillar",
+      "type": "mandatory"
+    },
+    {
+      "from": "pillar",
+      "to": "cluster-0-post-1",
+      "type": "mandatory"
+    },
+    {
+      "from": "cluster-0-post-1",
+      "to": "pillar",
+      "type": "mandatory"
+    },
+    {
+      "from": "pillar",
+      "to": "cluster-0-post-2",
+      "type": "mandatory"
+    },
+    {
+      "from": "cluster-0-post-2",
+      "to": "pillar",
+      "type": "mandatory"
+    },
+    {
+      "from": "pillar",
+      "to": "cluster-1-post-0",
+      "type": "mandatory"
+    },
+    {
+      "from": "cluster-1-post-0",
+      "to": "pillar",
+      "type": "mandatory"
+    },
+    {
+      "from": "pillar",
+      "to": "cluster-1-post-1",
+      "type": "mandatory"
+    },
+    {
+      "from": "cluster-1-post-1",
+      "to": "pillar",
+      "type": "mandatory"
+    },
+    {
+      "from": "pillar",
+      "to": "cluster-2-post-0",
+      "type": "mandatory"
+    },
+    {
+      "from": "cluster-2-post-0",
+      "to": "pillar",
+      "type": "mandatory"
+    },
+    {
+      "from": "pillar",
+      "to": "cluster-2-post-1",
+      "type": "mandatory"
+    },
+    {
+      "from": "cluster-2-post-1",
+      "to": "pillar",
+      "type": "mandatory"
+    },
+    {
+      "from": "cluster-0-post-0",
+      "to": "cluster-2-post-0",
+      "type": "recommended"
+    },
+    {
+      "from": "cluster-0-post-0",
+      "to": "cluster-0-post-2",
+      "type": "recommended"
+    },
+    {
+      "from": "cluster-0-post-1",
+      "to": "cluster-0-post-2",
+      "type": "recommended"
+    },
+    {
+      "from": "cluster-0-post-1",
+      "to": "cluster-2-post-0",
+      "type": "recommended"
+    },
+    {
+      "from": "cluster-0-post-2",
+      "to": "cluster-0-post-1",
+      "type": "recommended"
+    },
+    {
+      "from": "cluster-0-post-2",
+      "to": "cluster-0-post-0",
+      "type": "recommended"
+    },
+    {
+      "from": "cluster-1-post-1",
+      "to": "cluster-1-post-0",
+      "type": "recommended"
+    },
+    {
+      "from": "cluster-1-post-0",
+      "to": "cluster-1-post-1",
+      "type": "recommended"
+    },
+    {
+      "from": "cluster-2-post-1",
+      "to": "cluster-2-post-0",
+      "type": "recommended"
+    },
+    {
+      "from": "cluster-2-post-0",
+      "to": "cluster-0-post-0",
+      "type": "recommended"
+    },
+    {
+      "from": "cluster-2-post-0",
+      "to": "cluster-2-post-1",
+      "type": "recommended"
+    }
+  ],
+  "serp_matrix": null,
+  "limitations": [
+    "Las búsquedas de search-evidence.json devuelven resultados combinados; no acreditan solapamiento 7–10 ni rankings locales.",
+    "No crear páginas nuevas por estas variantes sin validar intención y solapamiento.",
+    "Las categorías cargador-portatil y power-bank siguen separadas por catálogo; comprobar GSC antes de consolidar o redirigir."
+  ],
+  "meta": {
+    "totalPosts": 8,
+    "totalClusters": 3,
+    "totalLinks": 25,
+    "estimatedWords": 0,
+    "keywordVariants": 35
+  }
+}

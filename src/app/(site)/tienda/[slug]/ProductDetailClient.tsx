@@ -26,6 +26,7 @@ import {
 import { formatWarranty, type Product } from '@/app/tienda/product';
 import useCartStore from '@/store/cartStore';
 import ProductCondition from '@/components/store/ProductCondition';
+import { buildProductFacts } from '@/lib/productSeo';
 import { BUSINESS_PROFILE } from '@/lib/businessProfile';
 import {
     hayParaComprar,
@@ -469,7 +470,22 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                 </div>
             </div>
 
-            <section className="mt-10 rounded-2xl border border-default-200 bg-white/80 p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900/60 sm:p-6">
+            <section aria-labelledby="product-facts" className="mt-10 rounded-2xl border border-default-200 bg-white/80 p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900/60 sm:p-6">
+                <h2 id="product-facts" className="text-xl font-bold">Ficha del producto</h2>
+                <table className="mt-4 w-full text-left text-sm">
+                    <caption className="sr-only">Datos publicados de {product.name}</caption>
+                    <tbody>
+                        {buildProductFacts(product).map(([label, value]) => (
+                            <tr key={label} className="border-b border-gray-200 last:border-0 dark:border-gray-700">
+                                <th scope="row" className="w-1/3 py-3 pr-4 align-top font-medium">{label}</th>
+                                <td className="break-words py-3 text-muted-foreground">{value}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </section>
+
+            <section className="mt-6 rounded-2xl border border-default-200 bg-white/80 p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900/60 sm:p-6">
                 <h2 className="text-xl font-bold">Antes de comprar</h2>
                 <p className="mt-3 text-sm text-muted-foreground">
                     ¿Tenés dudas sobre compatibilidad? <a href={BUSINESS_PROFILE.whatsapp} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">Consultanos por WhatsApp</a> con el modelo de tu equipo.
