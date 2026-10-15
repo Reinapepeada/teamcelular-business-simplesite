@@ -1,4 +1,3 @@
-import { GOOGLE_RATING_FALLBACK } from "@/lib/googleReviews";
 import type { Metadata } from "next";
 import type {
   GuideFaqItem,
@@ -734,7 +733,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     heroPoints: [
       "Diagnóstico el mismo día, sin turno.",
       "Garantía escrita de 90 días sobre trabajo y repuesto.",
-      `Google ${GOOGLE_RATING_FALLBACK.rating.toFixed(1).replace(".", ",")} con ${GOOGLE_RATING_FALLBACK.total} reseñas en Recoleta.`,
+      "Opiniones de clientes en Google de la sucursal Recoleta.",
     ],
     symptomsTitle: `¿Cuáles son las fallas más frecuentes en ${seed.brand}?`,
     symptomsDescription:

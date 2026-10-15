@@ -470,7 +470,7 @@ export default function IphoneRepairGuidePage() {
               Reseñas reales de Google
             </span>
             <span className="rounded-full border border-secondary/25 bg-secondary/10 px-3 py-1 text-secondary">
-              4,9 sobre 362 reseñas
+              Sucursal Recoleta
             </span>
             <span className="rounded-full border border-emerald-700/70 bg-emerald-700 px-3 py-1 text-white">
               Más de 15 años reparando
@@ -488,6 +488,18 @@ export default function IphoneRepairGuidePage() {
             </p>
           </div>
           <IphonePriceQuote />
+          <nav aria-label="Reparaciones por modelo de iPhone" className="px-6 pb-6 md:px-8">
+            <p className="text-sm text-[#a1a1a6]">Precios y detalles de reparación de tu modelo:</p>
+            <ul className="mt-3 flex flex-wrap gap-3">
+              {IPHONE_MODELS_WITH_PAGE.map((slug) => (
+                <li key={slug}>
+                  <Link href={`/reparaciones/iphone/${slug}`} className="inline-flex min-h-11 items-center rounded-full border border-white/25 px-4 py-2 text-sm font-semibold text-white hover:border-primary hover:text-primary">
+                    {IPHONE_MODELS.find((model) => model.slug === slug)?.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
           <details className="border-t border-white/10 px-6 py-6 md:px-8">
             <summary className="cursor-pointer text-lg font-semibold text-white">
               Ver la tabla completa de precios por modelo
@@ -575,7 +587,7 @@ export default function IphoneRepairGuidePage() {
               o placas completas, acá se trabaja a nivel componente: microsoldadura
               bajo microscopio, recuperación de equipos mojados y revisión de placa por
               ARS 45.000, con precio y plazo por escrito antes de cualquier arreglo. Team Celular trabaja hace más
-              de 15 años y tiene 4,9 estrellas sobre 362 reseñas de Google.
+              de 15 años y cuenta con opiniones de clientes en Google.
             </p>
           </div>
 
