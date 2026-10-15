@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import type { CatalogProduct } from "./storeCatalog";
 
 /**
@@ -57,6 +58,13 @@ export const categoriaGoogle = (categoria: string | null) =>
 const campo = (nombre: string, valor: string | null | undefined) =>
     valor ? `<g:${nombre}>${escapar(valor)}</g:${nombre}>` : "";
 
+// Conservar los IDs aceptados; solo los slugs que exceden el límite de Google
+// usan un ID determinista de 43 caracteres basado en el slug completo.
+const idMerchant = (slug: string) =>
+    slug.length <= 50
+        ? slug
+        : `tc-${createHash("sha256").update(slug).digest("hex").slice(0, 40)}`;
+
 export const itemMerchant = (p: CatalogProduct, siteUrl: string): string | null => {
     // Sin precio o sin foto Merchant lo rechaza; mejor no mandarlo.
     if (!(p.price > 0) || p.imageUrls.length === 0) return null;
@@ -65,7 +73,7 @@ export const itemMerchant = (p: CatalogProduct, siteUrl: string): string | null 
     const descripcion = (p.description?.trim() || `${p.name} disponible en Team Celular.`).slice(0, 5000);
     return [
         "<item>",
-        campo("id", p.slug),
+        campo("id", idMerchant(p.slug)),
         campo("title", p.name.slice(0, 150)),
         campo("description", descripcion),
         campo("link", link),

@@ -61,3 +61,21 @@ test("mapea la categoría a la taxonomía de Google y omite las desconocidas", (
     assert.equal(categoriaGoogle(null), undefined);
     assert.doesNotMatch(feedMerchant([{ ...base, category: "FUNDA" }], "https://teamcelular.com"), /google_product_category/);
 });
+
+test("conserva IDs de hasta 50 caracteres y acorta solo los inválidos sin cambiar enlaces", () => {
+    const slugs = [base.slug, "a".repeat(50), "a".repeat(51), `${"a".repeat(50)}b`];
+    const products = slugs.map((slug) => ({ ...base, slug }));
+    const xml = feedMerchant(products, "https://teamcelular.com");
+    const ids = [...xml.matchAll(/<g:id>([^<]+)<\/g:id>/g)].map((match) => match[1]);
+
+    assert.equal(ids.length, slugs.length);
+    assert.deepEqual(ids.slice(0, 2), slugs.slice(0, 2));
+    assert.ok(ids.every((id) => id.length <= 50));
+    assert.equal(new Set(ids).size, slugs.length);
+    assert.match(ids[2], /^tc-[a-f0-9]{40}$/);
+    assert.match(ids[3], /^tc-[a-f0-9]{40}$/);
+    assert.equal(feedMerchant(products, "https://teamcelular.com"), xml);
+    for (const slug of slugs) {
+        assert.ok(xml.includes(`<g:link>https://teamcelular.com/tienda/${slug}</g:link>`));
+    }
+});
