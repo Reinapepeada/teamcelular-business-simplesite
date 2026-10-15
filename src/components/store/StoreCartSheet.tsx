@@ -20,6 +20,7 @@ import useCartStore, { type CartItem } from "@/store/cartStore";
 import { problemaDeCheckout } from "@/lib/checkoutFlow";
 import ProductCondition from "./ProductCondition";
 import StoreImage from "./StoreImage";
+import StoreCartButton from "./StoreCartButton";
 import { PROVINCIAS } from "@/lib/provincias";
 import { aLineasDeCheckout, carritoComprable, productosSoloRetiro } from "@/lib/cartLines";
 import { fetchPickupPoint, quoteShipping, StoreApiError, type PickupPoint, type ShippingQuote } from "@/lib/storeApi";
@@ -213,21 +214,7 @@ export default function StoreCartSheet() {
 
     return (
         <>
-            <button
-                ref={triggerRef}
-                type="button"
-                onClick={() => openCart()}
-                aria-expanded={open}
-                aria-controls="store-cart-sheet"
-                aria-label={`Abrir carrito, ${totalItems} artículo${totalItems === 1 ? "" : "s"}`}
-                className="fixed bottom-5 right-5 z-40 inline-flex min-h-14 items-center gap-3 rounded-full bg-slate-950 pl-5 pr-2 text-sm font-semibold text-white shadow-xl ring-1 ring-white/10 transition hover:bg-slate-800"
-            >
-                <BsBag aria-hidden="true" className="h-5 w-5" />
-                <span>Carrito</span>
-                <span className="inline-flex min-h-10 min-w-10 items-center justify-center rounded-full bg-primary px-2 text-xs font-bold">
-                    {totalItems}
-                </span>
-            </button>
+            <StoreCartButton triggerRef={triggerRef} />
 
             <dialog
                 ref={dialogRef}

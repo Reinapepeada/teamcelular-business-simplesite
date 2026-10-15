@@ -70,8 +70,7 @@ export default function NavbarNUI() {
                 <div className="flex items-center gap-3">
                     <Link href="/" className="flex items-center gap-3 text-inherit">
                         <div className="hidden sm:block">
-                            {/* El tema es siempre oscuro (forcedTheme): la variante clara
-                                nunca se veia y su priority precargaba un logo de mas. */}
+                            {/* Sin precarga: en móvil este logo está oculto. */}
                             <Image
                                 className="h-7 w-auto"
                                 src="/images/brand/imagotipo-dark.png"
@@ -79,7 +78,6 @@ export default function NavbarNUI() {
                                 width={1725}
                                 height={591}
                                 sizes="(max-width: 640px) 140px, 170px"
-                                priority
                             />
                         </div>
                         <div className="sm:hidden">
