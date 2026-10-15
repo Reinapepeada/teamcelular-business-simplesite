@@ -5,7 +5,7 @@ import ProductStructuredData from '@/components/seo/ProductStructuredData';
 import { redirect, notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { buildWebsiteMetadata, getSiteUrl } from '@/lib/seoMetadata';
-import { formatWarranty, type Product } from '@/app/tienda/product';
+import { buildProductSeoDescription } from '@/lib/productSeo';
 import { verProducto } from '@/lib/storeCatalog';
 import { productoDeVidriera, type VidrieraProduct } from '@/lib/fixbeeCatalog';
 import { slugsAProbar } from '@/lib/legacySlug';
@@ -15,7 +15,6 @@ const SITE_URL = getSiteUrl();
 // El default era el Obelisco; el retiro es en Recoleta.
 const DEFAULT_LAT = process.env.NEXT_PUBLIC_BUSINESS_LAT || String(BUSINESS_PROFILE.primaryAddress.latitude);
 const DEFAULT_LON = process.env.NEXT_PUBLIC_BUSINESS_LON || String(BUSINESS_PROFILE.primaryAddress.longitude);
-const MAX_META_DESCRIPTION_LENGTH = 155;
 
 function slugify(text = '') {
     return text
@@ -56,36 +55,6 @@ const buscarProducto = async (
     }
     return null;
 };
-
-function truncateMetaDescription(text: string) {
-    return text.length > MAX_META_DESCRIPTION_LENGTH
-        ? `${text.slice(0, MAX_META_DESCRIPTION_LENGTH - 3).trim()}...`
-        : text;
-}
-
-function buildProductSeoDescription(product: Product) {
-    const name = product.name?.trim() || 'Repuesto para celular';
-    const brand = product.brand?.name?.trim();
-    const category = product.category?.name?.trim();
-    const warrantyText = formatWarranty(product, '');
-    const warranty = warrantyText ? `Garantía ${warrantyText}.` : 'Garantía según producto.';
-
-    // Product names usually already carry the brand ("... CK"); appending it again
-    // shipped duplicates like "CK CK" to the meta description.
-    const nameIncludesBrand =
-        !!brand && name.toLowerCase().includes(brand.toLowerCase());
-
-    // La primera oración de la descripción vende mejor que la categoría interna
-    // en mayúsculas ("AURICULAR BT"); sin descripción queda el armado anterior.
-    const intro = product.description?.split('\n')[0]?.split(/(?<=\.)\s/)[0]?.trim();
-    if (intro) {
-        return truncateMetaDescription(`${intro} Envío o retiro en CABA. ${warranty}`);
-    }
-
-    return truncateMetaDescription(
-        `${name}${brand && !nameIncludesBrand ? ` ${brand}` : ''}${category ? `, ${category}` : ''}. Retiro en el local o envío a domicilio. ${warranty}`
-    );
-}
 
 /**
  * Server-side metadata generation for product pages.
@@ -145,6 +114,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             openGraphTitle: title,
             openGraphDescription: description,
             openGraphImagePath: absoluteImage,
+            openGraphImageDimensions: null,
             openGraphImageAlt: product.name || 'Imagen del producto',
             twitterTitle: title,
             twitterDescription: description,

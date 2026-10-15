@@ -44,6 +44,7 @@ type BuildWebsiteMetadataInput = {
   openGraphTitle?: string;
   openGraphDescription?: string;
   openGraphImagePath?: string;
+  openGraphImageDimensions?: { width: number; height: number } | null;
   openGraphImageAlt?: string;
   twitterTitle?: string;
   twitterDescription?: string;
@@ -64,6 +65,7 @@ export function buildWebsiteMetadata({
   openGraphTitle,
   openGraphDescription,
   openGraphImagePath = DEFAULT_OG_IMAGE_PATH,
+  openGraphImageDimensions = { width: 1200, height: 630 },
   openGraphImageAlt,
   twitterTitle,
   twitterDescription,
@@ -100,8 +102,7 @@ export function buildWebsiteMetadata({
       images: [
         {
           url: imageUrl,
-          width: 1200,
-          height: 630,
+          ...(openGraphImageDimensions ?? {}),
           alt: openGraphImageAlt || `${siteName} - ${title}`,
         },
       ],

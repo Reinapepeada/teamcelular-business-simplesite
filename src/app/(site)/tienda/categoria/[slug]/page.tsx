@@ -66,7 +66,7 @@ export async function generateMetadata({
   // The count keeps each category's snippet distinct instead of shipping one
   // identical description across every category page.
   const stockText = productCount > 0 ? `${productCount} productos publicados. ` : '';
-  const rawCatDesc = `${categoryName} — Team Celular, Recoleta y Belgrano CABA. ${stockText}Retiro en el día y compatibilidad validada por WhatsApp.`;
+  const rawCatDesc = `${categoryName} en Team Celular. ${stockText}Retiro en Recoleta o envío según producto. Consultá compatibilidad antes de comprar.`;
   const snippetDescription = rawCatDesc.length > 155 ? rawCatDesc.slice(0, 152) + '...' : rawCatDesc;
 
   return buildWebsiteMetadata({
@@ -84,7 +84,7 @@ export async function generateMetadata({
     openGraphDescription: `Team Celular, Paraguay 2451 Recoleta. ${category.name} para celular con asesoramiento real y retiro en CABA.`,
     openGraphImageAlt: `${category.name} para celulares - Team Celular Recoleta`,
     twitterTitle: snippetTitle,
-    twitterDescription: `Team Celular, Paraguay 2451 Recoleta. ${category.name} con retiro el mismo día y envio en CABA.`,
+    twitterDescription: `Team Celular, Paraguay 2451 Recoleta. ${category.name} con retiro en Recoleta o envío según producto.`,
   });
 }
 
@@ -116,6 +116,9 @@ export default async function CategoryPage({
 
   const categoryUrl = `${SITE_URL}/tienda/categoria/${canonicalSlug}`;
   const content = getCategoryContent(category.name);
+  const relatedCategories = filterOptions.categories.filter((name) =>
+    content.relatedSlugs.includes(slugify(name)),
+  );
 
   return (
     <div className="w-full bg-slate-50 dark:bg-[#1d1d1f] pb-16">
@@ -175,6 +178,26 @@ export default async function CategoryPage({
           title={`Productos en ${category.name}`}
           emptyMessage={`No encontramos productos en ${category.name} con esos filtros. Prueba otra marca o rango de precio.`}
         />
+      </section>
+
+      <section aria-labelledby="category-buying-advice" className="mx-auto max-w-screen-2xl px-4 pt-8 sm:px-6 lg:px-8">
+        <div className="rounded-3xl border border-slate-200 bg-white p-6 dark:border-slate-700/70 dark:bg-slate-900">
+          <h2 id="category-buying-advice" className="text-xl font-semibold">Qué revisar antes de elegir</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-400">{content.buyingAdvice}</p>
+          {relatedCategories.length > 0 ? (
+            <p className="mt-4 text-sm leading-7">
+              Compará también: {relatedCategories.map((name, index) => (
+                <span key={name}>
+                  {index > 0 ? ", " : ""}
+                  <Link href={`/tienda/categoria/${slugify(name)}`} prefetch={false} className="underline underline-offset-4">
+                    {getCategoryContent(name).title}
+                  </Link>
+                </span>
+              ))}.
+            </p>
+          ) : null}
+          <p className="mt-3 text-sm"><Link href="/tienda" className="underline underline-offset-4">Ver todo el catálogo de accesorios y repuestos</Link></p>
+        </div>
       </section>
     </div>
   );
