@@ -122,7 +122,7 @@ export default function RootLayout({
     return (
         <html lang="es" className="dark" style={{ colorScheme: "dark" }} suppressHydrationWarning>
             <head>
-                <link rel="preload" href="/fonts/inter/inter-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+                <link rel="preload" href="/fonts/inter/inter-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" fetchPriority="low" />
                 <Script id="ga4" strategy="afterInteractive">
                     {GA4_INIT_SCRIPT}
                 </Script>
