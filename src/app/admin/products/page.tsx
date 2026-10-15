@@ -115,41 +115,43 @@ export default function ProductsListPage() {
     }, []);
 
     // Fetch products
-    const fetchProducts = useCallback(async (page = 1) => {
-        setIsLoading(true);
-        try {
-            const params = new URLSearchParams();
-            if (selectedCategory) params.set("categories", selectedCategory);
-            if (selectedBrand) params.set("brands", selectedBrand);
+    const fetchProducts = useCallback((page = 1) => {
+        const params = new URLSearchParams();
+        if (selectedCategory) params.set("categories", selectedCategory);
+        if (selectedBrand) params.set("brands", selectedBrand);
             
-            const response = await getAllProductsPaginated(
-                page, 
-                ITEMS_PER_PAGE, 
-                params.toString()
-            );
-            
+        return getAllProductsPaginated(
+            page,
+            ITEMS_PER_PAGE,
+            params.toString()
+        ).then((response) => {
             setProducts(response.products || []);
             setPagination({
                 page: response.page || 1,
                 pages: response.pages || 1,
                 total: response.total || 0,
             });
-        } catch (error) {
+        }).catch((error) => {
             console.error("Error fetching products:", error);
             toast({
                 variant: "destructive",
                 title: "Error",
                 description: "No se pudieron cargar los productos",
             });
-        } finally {
+        }).finally(() => {
             setIsLoading(false);
-        }
+        });
     }, [selectedCategory, selectedBrand]);
 
     useEffect(() => {
         fetchProducts(pagination.page);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [fetchProducts]);
+
+    const reloadProducts = (page: number) => {
+        setIsLoading(true);
+        return fetchProducts(page);
+    };
 
     // Handle delete
     const handleDeleteClick = (product: Product) => {
@@ -167,7 +169,7 @@ export default function ProductsListPage() {
                 title: "Producto eliminado",
                 description: `"${productToDelete.name}" fue eliminado correctamente`,
             });
-            fetchProducts(pagination.page);
+            reloadProducts(pagination.page);
         } catch (error) {
             console.error("Error deleting product:", error);
             toast({
@@ -281,7 +283,9 @@ export default function ProductsListPage() {
                         <Select 
                             value={selectedCategory} 
                             onValueChange={(value) => {
-                                setSelectedCategory(value === "all" ? "" : value);
+                                const next = value === "all" ? "" : value;
+                                if (next !== selectedCategory) setIsLoading(true);
+                                setSelectedCategory(next);
                             }}
                         >
                             <SelectTrigger className="w-full md:w-48">
@@ -301,7 +305,9 @@ export default function ProductsListPage() {
                         <Select 
                             value={selectedBrand} 
                             onValueChange={(value) => {
-                                setSelectedBrand(value === "all" ? "" : value);
+                                const next = value === "all" ? "" : value;
+                                if (next !== selectedBrand) setIsLoading(true);
+                                setSelectedBrand(next);
                             }}
                         >
                             <SelectTrigger className="w-full md:w-48">
@@ -330,7 +336,7 @@ export default function ProductsListPage() {
                         <Button 
                             variant="outline" 
                             size="icon"
-                            onClick={() => fetchProducts(pagination.page)}
+                            onClick={() => reloadProducts(pagination.page)}
                         >
                             <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
                         </Button>
@@ -584,7 +590,7 @@ export default function ProductsListPage() {
                                 <Button
                                     variant="outline"
                                     size="sm"
-                                    onClick={() => fetchProducts(pagination.page - 1)}
+                                    onClick={() => reloadProducts(pagination.page - 1)}
                                     disabled={pagination.page <= 1}
                                 >
                                     <ChevronLeft className="w-4 h-4 mr-1" />
@@ -593,7 +599,7 @@ export default function ProductsListPage() {
                                 <Button
                                     variant="outline"
                                     size="sm"
-                                    onClick={() => fetchProducts(pagination.page + 1)}
+                                    onClick={() => reloadProducts(pagination.page + 1)}
                                     disabled={pagination.page >= pagination.pages}
                                 >
                                     Siguiente

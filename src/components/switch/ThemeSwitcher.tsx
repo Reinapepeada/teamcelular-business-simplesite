@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useHydrated } from "@/hooks/use-hydrated";
 import { useTheme } from "next-themes";
 import { BsMoonStarsFill, BsSunFill } from "react-icons/bs";
 
@@ -9,12 +9,8 @@ function ThemeSwitcherButton({
 }: {
     readonly className?: string;
 }) {
-    const [mounted, setMounted] = useState(false);
+    const mounted = useHydrated();
     const { resolvedTheme, setTheme } = useTheme();
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
 
     if (!mounted) {
         return null;

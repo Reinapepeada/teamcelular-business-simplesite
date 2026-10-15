@@ -224,6 +224,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         </>
     )}
     <ProductDetailClient
+        key={encontrado.slug}
         productProp={product}
         storeSlugProp={encontrado.slug}
     />

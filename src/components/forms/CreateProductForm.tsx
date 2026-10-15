@@ -138,20 +138,17 @@ export default function ProductForm() {
   const [showNewBrandForm, setShowNewBrandForm] = useState(false);
   const [showNewCategoryForm, setShowNewCategoryForm] = useState(false);
 
-  async function fetchBrands() {
-      const brands_server  = await getbrands();
-      setBrands(brands_server || []);
-  }
-  
-  async function fetchCategories() {
-      const categories_server  = await getcategories();
-      setCategories(categories_server || []);
-  }
-  
-    useEffect(() => {
-        fetchCategories();
-        fetchBrands();
-    }, [showNewBrandForm, showNewCategoryForm]);
+  useEffect(() => {
+    let active = true;
+    Promise.all([getcategories(), getbrands()]).then(([categories, brands]) => {
+      if (!active) return;
+      setCategories(categories || []);
+      setBrands(brands || []);
+    }).catch(() => {
+      if (active) toast({ variant: "destructive", title: "No se pudieron cargar las marcas y categorías" });
+    });
+    return () => { active = false; };
+  }, [showNewBrandForm, showNewCategoryForm, toast]);
 
 
   return (

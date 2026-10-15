@@ -33,11 +33,13 @@ export default function NavbarNUI() {
     const [desktopMenuOpen, setDesktopMenuOpen] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const desktopMenuRef = useRef(null);
+    const [previousPath, setPreviousPath] = useState(pathname);
 
-    useEffect(() => {
+    if (previousPath !== pathname) {
+        setPreviousPath(pathname);
         setDesktopMenuOpen(false);
         setMobileMenuOpen(false);
-    }, [pathname]);
+    }
 
     useEffect(() => {
         function handleClickOutside(event) {

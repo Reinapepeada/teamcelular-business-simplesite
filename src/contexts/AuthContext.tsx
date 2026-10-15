@@ -1,7 +1,8 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, useCallback, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useRef, useState, useCallback, ReactNode } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
+import { useHydrated } from '@/hooks/use-hydrated';
 import {
     login as apiLogin,
     getCurrentAdmin,
@@ -32,44 +33,49 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
+    const hydrated = useHydrated();
+    return hydrated ? <AuthSessionProvider>{children}</AuthSessionProvider> : null;
+}
+
+function AuthSessionProvider({ children }: AuthProviderProps) {
     const router = useRouter();
     const pathname = usePathname();
-    const [user, setUser] = useState<AdminUser | null>(null);
-    const [token, setToken] = useState<string | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const [session] = useState(getSession);
+    const [user, setUser] = useState<AdminUser | null>(() => session?.user ?? null);
+    const [token, setToken] = useState<string | null>(() => session?.token ?? null);
+    const [isLoading, setIsLoading] = useState(() => !!session?.token);
+    const authVersion = useRef(0);
 
     // Verificar sesión existente al cargar
-    const checkSession = useCallback(async () => {
-        const session = getSession();
-        
-        if (session?.token) {
-            setToken(session.token);
-            setUser(session.user);
-            
-            // Intentar refrescar info del usuario
-            try {
-                const freshUser = await getCurrentAdmin(session.token);
-                setUser(freshUser);
-                saveSession(session.token, freshUser);
-            } catch (error) {
-                // Si el token es inválido, limpiar sesión
-                if (error instanceof AuthError && error.status === 401) {
-                    clearSession();
-                    setToken(null);
-                    setUser(null);
-                }
-            }
-        }
-        
-        setIsLoading(false);
-    }, []);
-
     useEffect(() => {
-        checkSession();
-    }, [checkSession]);
+        if (!session?.token) return;
+        let active = true;
+        const version = authVersion.current;
+        getCurrentAdmin(session.token).then((freshUser) => {
+            if (!active || version !== authVersion.current) return;
+            if (getToken() !== session.token) {
+                setToken(null);
+                setUser(null);
+                return;
+            }
+            setUser(freshUser);
+            saveSession(session.token, freshUser);
+        }).catch((error) => {
+            if (!active || version !== authVersion.current) return;
+            if (getToken() !== session.token || (error instanceof AuthError && error.status === 401)) {
+                if (getToken() === session.token) clearSession();
+                setToken(null);
+                setUser(null);
+            }
+        }).finally(() => {
+            if (active && version === authVersion.current) setIsLoading(false);
+        });
+        return () => { active = false; };
+    }, [session]);
 
     // Login
     const login = async (identifier: string, password: string) => {
+        const version = ++authVersion.current;
         setIsLoading(true);
         
         try {
@@ -87,17 +93,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
             }
             
             // Guardar sesión
+            if (version !== authVersion.current) return;
             saveSession(accessToken, adminUser);
             setToken(accessToken);
             setUser(adminUser);
             setIsLoading(false);
             
-            // Pequeño delay para asegurar que el estado se actualice
-            await new Promise(resolve => setTimeout(resolve, 100));
-            
-            // Redirigir al dashboard usando window.location para forzar recarga completa
-            window.location.href = '/admin';
+            router.replace('/admin');
         } catch (error) {
+            if (version !== authVersion.current) return;
             setIsLoading(false);
             throw error;
         }
@@ -105,7 +109,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     // Logout
     const logout = useCallback(() => {
+        authVersion.current += 1;
         clearSession();
+        setIsLoading(false);
         setToken(null);
         setUser(null);
         router.push('/admin/login');

@@ -57,31 +57,32 @@ export default function BrandsPage() {
     const [brandToDelete, setBrandToDelete] = useState<Brand | null>(null);
     const [isDeleting, setIsDeleting] = useState(false);
 
-    const fetchBrands = useCallback(async () => {
-        setIsLoading(true);
-        try {
-            const data = await getbrands();
-            setBrands(data || []);
-        } catch (error) {
-            console.error("Error fetching brands:", error);
-            toast({
-                variant: "destructive",
-                title: "Error",
-                description: "No se pudieron cargar las marcas",
-            });
-        } finally {
-            setIsLoading(false);
-        }
-    }, []);
+    const fetchBrands = useCallback(() => getbrands().then((data) => {
+        setBrands(data || []);
+    }).catch((error) => {
+        console.error("Error fetching brands:", error);
+        toast({
+            variant: "destructive",
+            title: "Error",
+            description: "No se pudieron cargar las marcas",
+        });
+    }).finally(() => {
+        setIsLoading(false);
+    }), []);
 
     useEffect(() => {
         fetchBrands();
     }, [fetchBrands]);
 
+    const refreshBrands = () => {
+        setIsLoading(true);
+        return fetchBrands();
+    };
+
     const handleCreateOpenChange = (open: boolean) => {
         setCreateOpen(open);
         if (!open) {
-            fetchBrands();
+            refreshBrands();
         }
     };
 
@@ -130,7 +131,7 @@ export default function BrandsPage() {
             });
             setEditOpen(false);
             setEditState(null);
-            fetchBrands();
+            refreshBrands();
         } catch (error) {
             console.error("Error updating brand:", error);
             toast({
@@ -169,7 +170,7 @@ export default function BrandsPage() {
             });
             setDeleteOpen(false);
             setBrandToDelete(null);
-            fetchBrands();
+            refreshBrands();
         } catch (error) {
             console.error("Error deleting brand:", error);
             toast({

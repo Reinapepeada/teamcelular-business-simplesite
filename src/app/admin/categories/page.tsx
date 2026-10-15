@@ -59,31 +59,32 @@ export default function CategoriesPage() {
     const [categoryToDelete, setCategoryToDelete] = useState<Category | null>(null);
     const [isDeleting, setIsDeleting] = useState(false);
 
-    const fetchCategories = useCallback(async () => {
-        setIsLoading(true);
-        try {
-            const data = await getcategories();
-            setCategories(data || []);
-        } catch (error) {
-            console.error("Error fetching categories:", error);
-            toast({
-                variant: "destructive",
-                title: "Error",
-                description: "No se pudieron cargar las categorias",
-            });
-        } finally {
-            setIsLoading(false);
-        }
-    }, []);
+    const fetchCategories = useCallback(() => getcategories().then((data) => {
+        setCategories(data || []);
+    }).catch((error) => {
+        console.error("Error fetching categories:", error);
+        toast({
+            variant: "destructive",
+            title: "Error",
+            description: "No se pudieron cargar las categorias",
+        });
+    }).finally(() => {
+        setIsLoading(false);
+    }), []);
 
     useEffect(() => {
         fetchCategories();
     }, [fetchCategories]);
 
+    const refreshCategories = () => {
+        setIsLoading(true);
+        return fetchCategories();
+    };
+
     const handleCreateOpenChange = (open: boolean) => {
         setCreateOpen(open);
         if (!open) {
-            fetchCategories();
+            refreshCategories();
         }
     };
 
@@ -144,7 +145,7 @@ export default function CategoriesPage() {
             });
             setEditOpen(false);
             setEditState(null);
-            fetchCategories();
+            refreshCategories();
         } catch (error) {
             console.error("Error updating category:", error);
             toast({
@@ -183,7 +184,7 @@ export default function CategoriesPage() {
             });
             setDeleteOpen(false);
             setCategoryToDelete(null);
-            fetchCategories();
+            refreshCategories();
         } catch (error) {
             console.error("Error deleting category:", error);
             toast({

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useHydrated } from "@/hooks/use-hydrated";
 
 import { fetchOrderStatus, fetchPickupPoint, requestPaymentLink, type PickupPoint, type StoreOrderStatus } from "@/lib/storeApi";
 import {
@@ -67,8 +68,17 @@ const INTENTOS = 12;
 
 export default function ExitoClient({ intencion = "exito" }: { intencion?: Intencion }) {
     const params = useSearchParams();
+    const hydrated = useHydrated();
+    return hydrated
+        ? <OrderReturn key={`${intencion}:${params.toString()}`} intencion={intencion} />
+        : <p role="status" className="px-4 py-12 text-center">Consultando el estado del pedido...</p>;
+}
+
+function OrderReturn({ intencion }: { intencion: Intencion }) {
+    const params = useSearchParams();
+    const [pedido] = useState(() => claveDeLaVuelta(almacen(), params));
     const [estado, setEstado] = useState<StoreOrderStatus | null>(null);
-    const [sinPedido, setSinPedido] = useState(false);
+    const [sinPedido, setSinPedido] = useState(() => !pedido);
     const [seGastaronLosIntentos, setSeGastaronLosIntentos] = useState(false);
     const clearCart = useCartStore((s) => s.clearCart);
     const [retiro, setRetiro] = useState<PickupPoint | null>(null);
@@ -135,17 +145,8 @@ export default function ExitoClient({ intencion = "exito" }: { intencion?: Inten
     };
 
     useEffect(() => {
-        setEstado(null);
-        setSinPedido(false);
-        setSeGastaronLosIntentos(false);
-        setAviso("");
-        setTextoParaCopiar("");
         const guardado = almacen();
-        const pedido = claveDeLaVuelta(guardado, params);
-        if (!pedido) {
-            setSinPedido(true);
-            return;
-        }
+        if (!pedido) return;
 
         let vivo = true;
         let intento = 0;
@@ -216,7 +217,7 @@ export default function ExitoClient({ intencion = "exito" }: { intencion?: Inten
             vivo = false;
             clearTimeout(timer);
         };
-    }, [params, clearCart, intencion]);
+    }, [pedido, clearCart, intencion]);
 
     const vista = vueltaMostrable(estado, intencion);
     const entrega = estadoDeEntrega(estado);

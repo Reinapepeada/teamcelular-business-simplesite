@@ -3,6 +3,7 @@
 import { anotarParaResenas } from "@/lib/resenasGoogle";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useHydrated } from "@/hooks/use-hydrated";
 import { PROVINCIAS } from "@/lib/provincias";
 import useCartStore from "@/store/cartStore";
 import ProductCondition from "./ProductCondition";
@@ -73,6 +74,7 @@ interface CheckoutDialogProps {
 }
 
 export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0, entregaInicial }: CheckoutDialogProps) {
+    const hydrated = useHydrated();
     const router = useRouter();
     const { cart, destinoEnvio, removeFromCart } = useCartStore();
     const dialogRef = useRef<HTMLDialogElement>(null);
@@ -213,41 +215,35 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
     // **Un pedido creado y sin pagar sobrevive a la recarga**, y se suelta si
     // el carrito pasa a ser otro. La regla completa, con sus bordes, vive en
     // `src/lib/pedidoPendiente.ts`, que es lo que se puede probar.
-    useEffect(() => {
-        let almacen: Storage | null = null;
+    const decisionPendiente = (() => {
+        if (!hydrated) return { accion: "nada" } as const;
         try {
-            almacen = window.localStorage;
+            return queHacerConElPendiente({
+                guardado: pedidoGuardado(window.localStorage),
+                huellaActual,
+                huellaEnPantalla: huellaPendiente,
+            });
         } catch {
-            // Modo privado: no hay pedido que recuperar ni que soltar.
-            return;
+            return { accion: "nada" } as const;
         }
-
-        const decision = queHacerConElPendiente({
-            guardado: almacen ? pedidoGuardado(almacen) : null,
-            huellaActual,
-            huellaEnPantalla: huellaPendiente,
-        });
-
-        if (decision.accion === "recuperar") {
-            const g = decision.pedido;
-            setPedidoPendiente({
-                ...g.reserva,
-                commerce_key: g.clave,
-                access_token: g.token,
-                total_amount: g.total ?? 0,
-                currency: g.moneda ?? "ARS",
-            } as StoreOrder);
-            setHuellaPendiente(g.huella);
-            setFallo("Tenés un pedido reservado esperando el pago.");
-            return;
-        }
-
-        if (decision.accion === "soltar") {
-            setPedidoPendiente(null);
-            setHuellaPendiente(null);
-            setFallo(null);
-        }
-    }, [huellaActual, huellaPendiente]);
+    })();
+    // Ajuste condicionado durante render: nunca se presenta un pedido de otro carrito.
+    if (decisionPendiente.accion === "recuperar") {
+        const g = decisionPendiente.pedido;
+        setPedidoPendiente({
+            ...g.reserva,
+            commerce_key: g.clave,
+            access_token: g.token,
+            total_amount: g.total ?? 0,
+            currency: g.moneda ?? "ARS",
+        } as StoreOrder);
+        setHuellaPendiente(g.huella);
+        setFallo("Tenés un pedido reservado esperando el pago.");
+    } else if (decisionPendiente.accion === "soltar") {
+        setPedidoPendiente(null);
+        setHuellaPendiente(null);
+        setFallo(null);
+    }
 
     useEffect(() => {
         if (!abierto || enviando || revision || aConfirmar || intentoPendiente) return;
