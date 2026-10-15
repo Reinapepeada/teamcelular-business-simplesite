@@ -181,25 +181,27 @@ async function pedir<T>(path: string, init?: RequestInit): Promise<T> {
     return (await res.json()) as T;
 }
 
+function pedirCatalogo<T>(path: string): Promise<T> {
+    if (typeof window === "undefined" && new URL(storeRequestUrl(path)).origin === "https://teamcelular.com") {
+        // El catálogo SSR evita volver a entrar por Vercel. Es el mismo destino
+        // de /store en next.config.js; el host identifica el catálogo público.
+        // pedir conserva no-store: precio y disponibilidad siguen frescos.
+        return pedir<T>(`https://api.beescend.com${path}`, {
+            headers: { "X-Forwarded-Host": "teamcelular.com" },
+        });
+    }
+    return pedir<T>(path);
+}
+
 export const fetchStoreProducts = (params: Record<string, string | number> = {}) => {
     const query = new URLSearchParams(
         Object.entries(params).map(([k, v]) => [k, String(v)])
     ).toString();
-    return pedir<StoreProductPage>(`/store/products${query ? `?${query}` : ""}`);
+    return pedirCatalogo<StoreProductPage>(`/store/products${query ? `?${query}` : ""}`);
 };
 
-export const fetchStoreProduct = (slug: string) => {
-    const path = `/store/products/${encodeURIComponent(slug)}`;
-    if (typeof window === "undefined" && new URL(storeRequestUrl(path)).origin === "https://teamcelular.com") {
-        // La ficha SSR evita volver a entrar por Vercel. Es el mismo destino
-        // de /store en next.config.js; el host identifica el catálogo público.
-        // pedir conserva no-store: precio y disponibilidad siguen frescos.
-        return pedir<StoreProduct>(`https://api.beescend.com${path}`, {
-            headers: { "X-Forwarded-Host": "teamcelular.com" },
-        });
-    }
-    return pedir<StoreProduct>(path);
-};
+export const fetchStoreProduct = (slug: string) =>
+    pedirCatalogo<StoreProduct>(`/store/products/${encodeURIComponent(slug)}`);
 
 /**
  * Lo que necesitan los filtros, en una sola llamada.
@@ -215,7 +217,7 @@ export interface StoreFacets {
     max_price: number;
 }
 
-export const fetchStoreFacets = () => pedir<StoreFacets>("/store/facets");
+export const fetchStoreFacets = () => pedirCatalogo<StoreFacets>("/store/facets");
 
 /** El local donde se retira, tal como lo resuelve el backend para esta tienda. */
 export interface PickupPoint {
