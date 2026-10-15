@@ -1,0 +1,754 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://teamcelular.com/tienda/adaptador-hub-usb-c-8-en-1-cld-hdmi-4k-rj45#product",
+    "url": "https://teamcelular.com/tienda/adaptador-hub-usb-c-8-en-1-cld-hdmi-4k-rj45",
+    "name": "Adaptador Hub USB-C 8 en 1 CLD HDMI 4K, Ethernet RJ45, USB 3.0, SD/TF y Carga PD",
+    "description": "Hub USB-C 8 en 1 CLD para ampliar los puertos de tu notebook, MacBook, tablet o celular con un solo conector Tipo C. Cuerpo de aluminio gris espacial, liviano (65 g) y fácil de llevar.\n\n• HDMI 4K UHD para conectar un monitor, TV o proyector.\n• Puerto Ethernet RJ45 para internet por cable, más estable que el Wi-Fi.\n• 2 puertos USB 3.0 de alta velocidad para mouse, teclado o pendrive.\n• Lector de tarjetas SD y microSD (TF).\n• USB-C PD de carga de hasta 87 W: cargá la notebook mientras usás el hub.\n• USB-C adicional de datos.\n• Compatible con MacBook, notebooks con USB-C, iPad Pro, Samsung DeX, Windows, Chrome OS y Linux.\n• Producto nuevo.",
+    "category": "ADAPTADOR",
+    "image": [
+      "https://teamcelular.com/store/products/adaptador-hub-usb-c-8-en-1-cld-hdmi-4k-rj45/images/0/638df3e9b240",
+      "https://teamcelular.com/store/products/adaptador-hub-usb-c-8-en-1-cld-hdmi-4k-rj45/images/1/eb3bc3ec2be1"
+    ],
+    "brand": {
+      "@type": "Brand",
+      "name": "CLD"
+    },
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Garantía",
+        "value": "1 mes"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Retiro",
+        "value": "Paraguay 2451, Recoleta, CABA"
+      }
+    ],
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "ARS",
+      "price": "30000",
+      "availability": "https://schema.org/OutOfStock",
+      "url": "https://teamcelular.com/tienda/adaptador-hub-usb-c-8-en-1-cld-hdmi-4k-rj45",
+      "seller": {
+        "@id": "https://teamcelular.com#localbusiness"
+      },
+      "itemCondition": "https://schema.org/NewCondition",
+      "availableAtOrFrom": {
+        "@id": "https://teamcelular.com/sucursales/caba/recoleta#localbusiness"
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AR",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 10,
+        "returnMethod": "https://schema.org/ReturnInStore",
+        "merchantReturnLink": "https://teamcelular.com/devoluciones",
+        "name": "10 días corridos desde la entrega del producto"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://teamcelular.com/tienda/auriculares-bluetooth-puxida-c-81-tws-enc-negro#product",
+    "url": "https://teamcelular.com/tienda/auriculares-bluetooth-puxida-c-81-tws-enc-negro",
+    "name": "Auriculares Bluetooth PUXIDA C-81 TWS con Cancelación de Ruido ENC Negro",
+    "description": "Auriculares inalámbricos PUXIDA C-81 TWS con Bluetooth 6.0 y micrófono con cancelación de ruido ENC, que filtra el ruido ambiente para que te escuchen claro en las llamadas. Diseño semi in-ear liviano y cómodo para usar todo el día.\n\n• Bluetooth 6.0: conexión rápida y estable con Android y iPhone.\n• Hasta 5 horas de música por carga y 130 horas en reposo.\n• Estuche de carga de 200 mAh con indicador LED y puerto USB-C.\n• Batería de 30 mAh por auricular.\n• Color negro. Producto nuevo, en caja sellada.",
+    "category": "AURICULAR BT",
+    "image": [
+      "https://teamcelular.com/store/products/auriculares-bluetooth-puxida-c-81-tws-enc-negro/images/0/a5cc4e716a65",
+      "https://teamcelular.com/store/products/auriculares-bluetooth-puxida-c-81-tws-enc-negro/images/1/a0aec2c33bd9"
+    ],
+    "brand": {
+      "@type": "Brand",
+      "name": "PUXIDA"
+    },
+    "model": "C-81",
+    "gtin": "6982089741101",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Garantía",
+        "value": "1 mes"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Retiro",
+        "value": "Paraguay 2451, Recoleta, CABA"
+      }
+    ],
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "ARS",
+      "price": "37000",
+      "availability": "https://schema.org/OutOfStock",
+      "url": "https://teamcelular.com/tienda/auriculares-bluetooth-puxida-c-81-tws-enc-negro",
+      "seller": {
+        "@id": "https://teamcelular.com#localbusiness"
+      },
+      "itemCondition": "https://schema.org/NewCondition",
+      "availableAtOrFrom": {
+        "@id": "https://teamcelular.com/sucursales/caba/recoleta#localbusiness"
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AR",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 10,
+        "returnMethod": "https://schema.org/ReturnInStore",
+        "merchantReturnLink": "https://teamcelular.com/devoluciones",
+        "name": "10 días corridos desde la entrega del producto"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://teamcelular.com/tienda/auriculares-bluetooth-puxida-c-82-open-ear-clip-gris#product",
+    "url": "https://teamcelular.com/tienda/auriculares-bluetooth-puxida-c-82-open-ear-clip-gris",
+    "name": "Auriculares Bluetooth PUXIDA C-82 Open Ear de Clip Gris",
+    "description": "Auriculares Bluetooth PUXIDA C-82 Music de oído abierto con clip: se sujetan a la oreja sin entrar en el canal auditivo, así no molestan en uso prolongado y seguís escuchando tu entorno. Ideales para caminar, entrenar o trabajar.\n\n• Bluetooth 6.0 con alcance de hasta 10 metros.\n• Hasta 6 horas de reproducción por carga.\n• Estuche de carga de 250 mAh con puerto USB-C.\n• Sonido estéreo y reducción de ruido en llamadas.\n• Compatibles con Android, iPhone, tablet y PC.\n• Color gris. Producto nuevo, en caja sellada.",
+    "category": "AURICULAR BT",
+    "image": [
+      "https://teamcelular.com/store/products/auriculares-bluetooth-puxida-c-82-open-ear-clip-gris/images/0/939fff46305c",
+      "https://teamcelular.com/store/products/auriculares-bluetooth-puxida-c-82-open-ear-clip-gris/images/1/158022983bde"
+    ],
+    "brand": {
+      "@type": "Brand",
+      "name": "PUXIDA"
+    },
+    "model": "C-82",
+    "gtin": "6982025061201",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Garantía",
+        "value": "1 mes"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Retiro",
+        "value": "Paraguay 2451, Recoleta, CABA"
+      }
+    ],
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "ARS",
+      "price": "45000",
+      "availability": "https://schema.org/InStock",
+      "url": "https://teamcelular.com/tienda/auriculares-bluetooth-puxida-c-82-open-ear-clip-gris",
+      "seller": {
+        "@id": "https://teamcelular.com#localbusiness"
+      },
+      "itemCondition": "https://schema.org/NewCondition",
+      "availableAtOrFrom": {
+        "@id": "https://teamcelular.com/sucursales/caba/recoleta#localbusiness"
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AR",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 10,
+        "returnMethod": "https://schema.org/ReturnInStore",
+        "merchantReturnLink": "https://teamcelular.com/devoluciones",
+        "name": "10 días corridos desde la entrega del producto"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://teamcelular.com/tienda/auriculares-in-ear-cld-x2-cable-usb-tipo-c-microfono-negro#product",
+    "url": "https://teamcelular.com/tienda/auriculares-in-ear-cld-x2-cable-usb-tipo-c-microfono-negro",
+    "name": "Auriculares In-Ear CLD X2 con Cable USB Tipo C y Micrófono Negro",
+    "description": "Auriculares intraurales con cable USB Tipo C y control en el cable, con gancho que se engancha a la oreja para que no se caigan al entrenar.\n\n• Modelo: X2\n• Conector: USB Tipo C\n• Driver: 11,6 mm\n• Impedancia: 16 Ω ±15 %\n• Sensibilidad: 96 dB ±3 dB\n• Respuesta de frecuencia: 20–20.000 Hz\n• Control inteligente en el cable, compatible con los principales sistemas operativos\n• Diseño con sujeción en la oreja, liviano\n• Incluye: auriculares, 2 pares de gomitas extra (tallas distintas) y clip para ropa\n\nColor negro. Producto nuevo.",
+    "category": "AURICULAR",
+    "image": [
+      "https://teamcelular.com/store/products/auriculares-in-ear-cld-x2-cable-usb-tipo-c-microfono-negro/images/0/53cd25e2c2a7",
+      "https://teamcelular.com/store/products/auriculares-in-ear-cld-x2-cable-usb-tipo-c-microfono-negro/images/1/99ffecda1f90",
+      "https://teamcelular.com/store/products/auriculares-in-ear-cld-x2-cable-usb-tipo-c-microfono-negro/images/2/4d1c99d5c2c4"
+    ],
+    "brand": {
+      "@type": "Brand",
+      "name": "CLD"
+    },
+    "model": "X2",
+    "gtin": "6975828110108",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Garantía",
+        "value": "1 mes"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Retiro",
+        "value": "Paraguay 2451, Recoleta, CABA"
+      }
+    ],
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "ARS",
+      "price": "28000",
+      "availability": "https://schema.org/InStock",
+      "url": "https://teamcelular.com/tienda/auriculares-in-ear-cld-x2-cable-usb-tipo-c-microfono-negro",
+      "seller": {
+        "@id": "https://teamcelular.com#localbusiness"
+      },
+      "itemCondition": "https://schema.org/NewCondition",
+      "availableAtOrFrom": {
+        "@id": "https://teamcelular.com/sucursales/caba/recoleta#localbusiness"
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AR",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 10,
+        "returnMethod": "https://schema.org/ReturnInStore",
+        "merchantReturnLink": "https://teamcelular.com/devoluciones",
+        "name": "10 días corridos desde la entrega del producto"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://teamcelular.com/tienda/cable-usb-c-a-hdmi-4k-cld#product",
+    "url": "https://teamcelular.com/tienda/cable-usb-c-a-hdmi-4k-cld",
+    "name": "Cable USB-C a HDMI 4K CLD para Celular, Notebook y Tablet",
+    "description": "Cable CLD de USB-C a HDMI con resolución 4K para ver en la TV, el monitor o el proyector lo que tenés en tu celular, tablet o notebook: videos, juegos, presentaciones y documentos. Enchufar y usar, sin instalar drivers.\n\n• Salida HDMI macho compatible con 4K y Full HD.\n• Transmite video y audio por el mismo cable.\n• Conectores bañados en oro para una señal estable.\n• Compatible con equipos con USB-C con salida de video (DisplayPort Alt Mode): MacBook, notebooks, iPad Pro, iPhone 15/16/17 y celulares Samsung Galaxy con DeX.\n• Funciona con Windows, macOS, Chrome OS y HarmonyOS.\n• Producto nuevo.",
+    "category": "CABLE",
+    "image": [
+      "https://teamcelular.com/store/products/cable-usb-c-a-hdmi-4k-cld/images/0/ab0075ba58e5",
+      "https://teamcelular.com/store/products/cable-usb-c-a-hdmi-4k-cld/images/1/2cd53e21b093"
+    ],
+    "brand": {
+      "@type": "Brand",
+      "name": "CLD"
+    },
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Garantía",
+        "value": "1 mes"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Retiro",
+        "value": "Paraguay 2451, Recoleta, CABA"
+      }
+    ],
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "ARS",
+      "price": "18000",
+      "availability": "https://schema.org/InStock",
+      "url": "https://teamcelular.com/tienda/cable-usb-c-a-hdmi-4k-cld",
+      "seller": {
+        "@id": "https://teamcelular.com#localbusiness"
+      },
+      "itemCondition": "https://schema.org/NewCondition",
+      "availableAtOrFrom": {
+        "@id": "https://teamcelular.com/sucursales/caba/recoleta#localbusiness"
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AR",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 10,
+        "returnMethod": "https://schema.org/ReturnInStore",
+        "merchantReturnLink": "https://teamcelular.com/devoluciones",
+        "name": "10 días corridos desde la entrega del producto"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://teamcelular.com/tienda/cable-usb-c-a-lightning-cld-nylon-2-metros-iphone#product",
+    "url": "https://teamcelular.com/tienda/cable-usb-c-a-lightning-cld-nylon-2-metros-iphone",
+    "name": "Cable USB-C a Lightning CLD Nylon Charge 2 Metros Carga Rápida para iPhone",
+    "description": "Cable CLD Nylon Charge de USB-C a Lightning de 2 metros para cargar tu iPhone o iPad rápido con cualquier cargador USB-C. Mallado de nylon trenzado, resistente y duradero, con conductor de cobre de alta pureza y protección contra interferencias.\n\n• Carga rápida Power Delivery: hasta 27 W en iPhone (cable preparado para 60 W).\n• Carga y transferencia de datos en el mismo cable.\n• Largo de 2 metros: cómodo para usar el celular mientras carga, en la cama o en el auto.\n• Compatible con iPhone 14, 13, 12, 11, SE, XR y anteriores con conector Lightning, iPad y AirPods.\n• Nylon trenzado, resistente a tirones y dobleces.\n• Producto nuevo.",
+    "category": "CABLE",
+    "image": [
+      "https://teamcelular.com/store/products/cable-usb-c-a-lightning-cld-nylon-2-metros-iphone/images/0/6fcea2b61ee0",
+      "https://teamcelular.com/store/products/cable-usb-c-a-lightning-cld-nylon-2-metros-iphone/images/1/5adca0ee4e4b"
+    ],
+    "brand": {
+      "@type": "Brand",
+      "name": "CLD"
+    },
+    "model": "CNC02",
+    "gtin": "6902303301010",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Garantía",
+        "value": "1 mes"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Retiro",
+        "value": "Paraguay 2451, Recoleta, CABA"
+      }
+    ],
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "ARS",
+      "price": "15000",
+      "availability": "https://schema.org/InStock",
+      "url": "https://teamcelular.com/tienda/cable-usb-c-a-lightning-cld-nylon-2-metros-iphone",
+      "seller": {
+        "@id": "https://teamcelular.com#localbusiness"
+      },
+      "itemCondition": "https://schema.org/NewCondition",
+      "availableAtOrFrom": {
+        "@id": "https://teamcelular.com/sucursales/caba/recoleta#localbusiness"
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AR",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 10,
+        "returnMethod": "https://schema.org/ReturnInStore",
+        "merchantReturnLink": "https://teamcelular.com/devoluciones",
+        "name": "10 días corridos desde la entrega del producto"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://teamcelular.com/tienda/cable-usb-c-a-usb-c-cld-mesh-60w-2-metros#product",
+    "url": "https://teamcelular.com/tienda/cable-usb-c-a-usb-c-cld-mesh-60w-2-metros",
+    "name": "Cable USB-C a USB-C CLD Mesh 60W Carga Rápida 2 Metros",
+    "description": "Cable CLD Mesh USB-C a USB-C de 2 metros con carga rápida de 60 W. Mallado de nylon trenzado, resistente a tirones y a los enredos, con conductor de cobre de alta pureza y protección contra interferencias.\n\n• Carga rápida de hasta 60 W (Power Delivery) para celulares, tablets y notebooks con USB-C.\n• Transferencia y sincronización de datos en el mismo cable.\n• Largo de 2 metros: cómodo para usar el celular mientras carga.\n• Conectores reforzados y cable grueso de alta durabilidad.\n• Compatible con Samsung, Motorola, Xiaomi, iPhone 15/16/17, iPad y MacBook.\n• Color blanco. Producto nuevo.",
+    "category": "CABLE",
+    "image": [
+      "https://teamcelular.com/store/products/cable-usb-c-a-usb-c-cld-mesh-60w-2-metros/images/0/0cc20c390531",
+      "https://teamcelular.com/store/products/cable-usb-c-a-usb-c-cld-mesh-60w-2-metros/images/1/5ae048f6e5e2"
+    ],
+    "brand": {
+      "@type": "Brand",
+      "name": "CLD"
+    },
+    "model": "C-45CC",
+    "gtin": "692025121251",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Garantía",
+        "value": "1 mes"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Retiro",
+        "value": "Paraguay 2451, Recoleta, CABA"
+      }
+    ],
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "ARS",
+      "price": "15000",
+      "availability": "https://schema.org/InStock",
+      "url": "https://teamcelular.com/tienda/cable-usb-c-a-usb-c-cld-mesh-60w-2-metros",
+      "seller": {
+        "@id": "https://teamcelular.com#localbusiness"
+      },
+      "itemCondition": "https://schema.org/NewCondition",
+      "availableAtOrFrom": {
+        "@id": "https://teamcelular.com/sucursales/caba/recoleta#localbusiness"
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AR",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 10,
+        "returnMethod": "https://schema.org/ReturnInStore",
+        "merchantReturnLink": "https://teamcelular.com/devoluciones",
+        "name": "10 días corridos desde la entrega del producto"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://teamcelular.com/tienda/cargador-auto-cld-38w-usb-c-pd-qc3-con-cable-tipo-c#product",
+    "url": "https://teamcelular.com/tienda/cargador-auto-cld-38w-usb-c-pd-qc3-con-cable-tipo-c",
+    "name": "Cargador para Auto CLD 38W USB-C PD + USB QC 3.0 con Cable Tipo C",
+    "description": "Cargador para auto CLD de 38 W con dos salidas: un puerto USB-C Power Delivery y un USB-A Quick Charge 3.0, para cargar dos dispositivos al mismo tiempo mientras manejás. Cuerpo metálico de aluminio compacto e incluye cable de nylon trenzado con conector Tipo C.\n\n• Potencia total de 38 W: carga rápida PD por USB-C y QC 3.0 por USB-A.\n• Carga dos dispositivos a la vez.\n• Chip inteligente que ajusta la corriente a cada equipo, con protección contra sobrecarga y sobrevoltaje.\n• Láminas laterales elásticas que lo sujetan firme al encendedor del auto, sin cortes de energía.\n• Incluye cable trenzado Tipo C.\n• Compatible con iPhone, Samsung, Motorola, Xiaomi y cualquier celular o tablet USB.\n• Producto nuevo.",
+    "category": "CARGADOR",
+    "image": [
+      "https://teamcelular.com/store/products/cargador-auto-cld-38w-usb-c-pd-qc3-con-cable-tipo-c/images/0/e85eb8abef16",
+      "https://teamcelular.com/store/products/cargador-auto-cld-38w-usb-c-pd-qc3-con-cable-tipo-c/images/1/6d1a2e0627c4",
+      "https://teamcelular.com/store/products/cargador-auto-cld-38w-usb-c-pd-qc3-con-cable-tipo-c/images/2/70c58a9fcfde"
+    ],
+    "brand": {
+      "@type": "Brand",
+      "name": "CLD"
+    },
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Garantía",
+        "value": "1 mes"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Retiro",
+        "value": "Paraguay 2451, Recoleta, CABA"
+      }
+    ],
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "ARS",
+      "price": "28000",
+      "availability": "https://schema.org/InStock",
+      "url": "https://teamcelular.com/tienda/cargador-auto-cld-38w-usb-c-pd-qc3-con-cable-tipo-c",
+      "seller": {
+        "@id": "https://teamcelular.com#localbusiness"
+      },
+      "itemCondition": "https://schema.org/NewCondition",
+      "availableAtOrFrom": {
+        "@id": "https://teamcelular.com/sucursales/caba/recoleta#localbusiness"
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AR",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 10,
+        "returnMethod": "https://schema.org/ReturnInStore",
+        "merchantReturnLink": "https://teamcelular.com/devoluciones",
+        "name": "10 días corridos desde la entrega del producto"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://teamcelular.com/tienda/cargador-carga-rapida-cld-cw-65-65w-usb-c-pd-con-cable#product",
+    "url": "https://teamcelular.com/tienda/cargador-carga-rapida-cld-cw-65-65w-usb-c-pd-con-cable",
+    "name": "Cargador Carga Rápida CLD CW-65 65W 2 USB-C PD + USB QC 3.0 con Cable C a C",
+    "description": "Cargador de pared CLD CW-65 de 65 W con tres salidas: dos USB-C Power Delivery 3.0 y un USB-A Quick Charge 3.0. Incluye cable USB-C a USB-C. Tiene potencia para cargar una notebook o MacBook y al mismo tiempo el celular.\n\n• USB-C 1: hasta 65 W, ideal para notebooks, MacBook, tablets y celulares.\n• USB-C 2: hasta 20 W.\n• USB-A QC 3.0: hasta 18 W.\n• Carga hasta tres dispositivos a la vez.\n• Incluye cable USB-C a USB-C.\n• Ficha plana argentina, entrada 100-240 V.\n• Protección contra sobrecarga y recalentamiento.\n• Color blanco. Producto nuevo.",
+    "category": "CARGADOR",
+    "image": [
+      "https://teamcelular.com/store/products/cargador-carga-rapida-cld-cw-65-65w-usb-c-pd-con-cable/images/0/213a145198e9",
+      "https://teamcelular.com/store/products/cargador-carga-rapida-cld-cw-65-65w-usb-c-pd-con-cable/images/1/5c6702382757"
+    ],
+    "brand": {
+      "@type": "Brand",
+      "name": "CLD"
+    },
+    "model": "CW-65",
+    "gtin": "696603080657",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Garantía",
+        "value": "1 mes"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Retiro",
+        "value": "Paraguay 2451, Recoleta, CABA"
+      }
+    ],
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "ARS",
+      "price": "55000",
+      "availability": "https://schema.org/InStock",
+      "url": "https://teamcelular.com/tienda/cargador-carga-rapida-cld-cw-65-65w-usb-c-pd-con-cable",
+      "seller": {
+        "@id": "https://teamcelular.com#localbusiness"
+      },
+      "itemCondition": "https://schema.org/NewCondition",
+      "availableAtOrFrom": {
+        "@id": "https://teamcelular.com/sucursales/caba/recoleta#localbusiness"
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AR",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 10,
+        "returnMethod": "https://schema.org/ReturnInStore",
+        "merchantReturnLink": "https://teamcelular.com/devoluciones",
+        "name": "10 días corridos desde la entrega del producto"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://teamcelular.com/tienda/cargador-inalambrico-magnetico-cld-15w-magsafe-iphone#product",
+    "url": "https://teamcelular.com/tienda/cargador-inalambrico-magnetico-cld-15w-magsafe-iphone",
+    "name": "Cargador Inalámbrico Magnético CLD 15W Tipo MagSafe para iPhone con Entrada USB-C",
+    "description": "Cargador inalámbrico magnético CLD de 15 W, tipo MagSafe: se engancha solo en la parte trasera del iPhone y carga sin cables, alineado siempre en el punto justo. Compacto y liviano, ideal para la mesa de luz o el escritorio.\n\n• Carga inalámbrica de hasta 15 W (también 10 W, 7,5 W y 5 W según el equipo).\n• Imán que se alinea automáticamente con el iPhone.\n• Compatible con iPhone 12, 13, 14, 15, 16 y 17 (todas las versiones) y fundas MagSafe.\n• También carga AirPods con estuche inalámbrico y celulares Android con carga Qi.\n• Entrada USB-C (5V 2A / 9V 2A / 12V 1,5A): para los 15 W usá un cargador de pared de 20 W o más.\n• Medidas: 80 x 80 x 13 mm, peso 70 g.\n• Color blanco. Producto nuevo.",
+    "category": "CARGADOR",
+    "image": [
+      "https://teamcelular.com/store/products/cargador-inalambrico-magnetico-cld-15w-magsafe-iphone/images/0/2b7c5c0932f0",
+      "https://teamcelular.com/store/products/cargador-inalambrico-magnetico-cld-15w-magsafe-iphone/images/1/a3569eb9f9a9"
+    ],
+    "brand": {
+      "@type": "Brand",
+      "name": "CLD"
+    },
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Garantía",
+        "value": "1 mes"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Retiro",
+        "value": "Paraguay 2451, Recoleta, CABA"
+      }
+    ],
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "ARS",
+      "price": "25000",
+      "availability": "https://schema.org/InStock",
+      "url": "https://teamcelular.com/tienda/cargador-inalambrico-magnetico-cld-15w-magsafe-iphone",
+      "seller": {
+        "@id": "https://teamcelular.com#localbusiness"
+      },
+      "itemCondition": "https://schema.org/NewCondition",
+      "availableAtOrFrom": {
+        "@id": "https://teamcelular.com/sucursales/caba/recoleta#localbusiness"
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AR",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 10,
+        "returnMethod": "https://schema.org/ReturnInStore",
+        "merchantReturnLink": "https://teamcelular.com/devoluciones",
+        "name": "10 días corridos desde la entrega del producto"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://teamcelular.com/tienda/cw-08-cargador-25w-cable-c-a-iph#product",
+    "url": "https://teamcelular.com/tienda/cw-08-cargador-25w-cable-c-a-iph",
+    "name": "Cargador Carga Rápida CLD CW-08 25W USB-C PD con Cable USB-C a Lightning para iPhone",
+    "description": "Cargador de pared CLD CW-08 de 25 W con salida USB-C Power Delivery 3.0 e incluye cable USB-C a Lightning. Carga tu iPhone hasta el 50 % en unos 30 minutos, mucho más rápido que un cargador común de 5 W.\n\n• Salida USB-C PD de hasta 25 W (5V 3A / 9V 2,77A / 12V 2,08A).\n• Incluye cable USB-C a Lightning para iPhone y iPad.\n• Compatible con iPhone 14, 13, 12, 11, SE y anteriores con Lightning; con otro cable USB-C carga también Samsung, Motorola, Xiaomi y iPhone 15 en adelante.\n• Ficha plana argentina, entrada 100-240 V.\n• Protección contra sobrecarga y recalentamiento.\n• Color blanco. Producto nuevo.",
+    "category": "CARGADOR",
+    "image": [
+      "https://teamcelular.com/store/products/cw-08-cargador-25w-cable-c-a-iph/images/0/544cf8f33ce2",
+      "https://teamcelular.com/store/products/cw-08-cargador-25w-cable-c-a-iph/images/1/977318eed6c3"
+    ],
+    "brand": {
+      "@type": "Brand",
+      "name": "CLD"
+    },
+    "model": "CW-08",
+    "gtin": "696603080251",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Garantía",
+        "value": "1 mes"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Retiro",
+        "value": "Paraguay 2451, Recoleta, CABA"
+      }
+    ],
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "ARS",
+      "price": "39000",
+      "availability": "https://schema.org/InStock",
+      "url": "https://teamcelular.com/tienda/cw-08-cargador-25w-cable-c-a-iph",
+      "seller": {
+        "@id": "https://teamcelular.com#localbusiness"
+      },
+      "itemCondition": "https://schema.org/NewCondition",
+      "availableAtOrFrom": {
+        "@id": "https://teamcelular.com/sucursales/caba/recoleta#localbusiness"
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AR",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 10,
+        "returnMethod": "https://schema.org/ReturnInStore",
+        "merchantReturnLink": "https://teamcelular.com/devoluciones",
+        "name": "10 días corridos desde la entrega del producto"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://teamcelular.com/tienda/cw-45-cargador-45w-tipo-c-c-a-c#product",
+    "url": "https://teamcelular.com/tienda/cw-45-cargador-45w-tipo-c-c-a-c",
+    "name": "Cargador Carga Rápida CLD CW-45 45W USB-C PD + USB QC 3.0 con Cable C a C",
+    "description": "Cargador de pared CLD CW-45 de 45 W con dos salidas, USB-C Power Delivery 3.0 y USB-A Quick Charge 3.0, e incluye cable USB-C a USB-C. Carga a máxima velocidad celulares Samsung, Motorola, Xiaomi, iPhone 15/16/17, tablets y hasta notebooks livianas con USB-C.\n\n• Salida USB-C PD de hasta 45 W (Super Fast Charging en Samsung compatibles).\n• Salida USB-A QC 3.0 de hasta 20 W.\n• Carga dos dispositivos al mismo tiempo.\n• Incluye cable USB-C a USB-C.\n• Ficha plana argentina, entrada 100-240 V.\n• Protección contra sobrecarga y recalentamiento.\n• Color blanco. Producto nuevo.",
+    "category": "CARGADOR",
+    "image": [
+      "https://teamcelular.com/store/products/cw-45-cargador-45w-tipo-c-c-a-c/images/0/7bed2251ce6d",
+      "https://teamcelular.com/store/products/cw-45-cargador-45w-tipo-c-c-a-c/images/1/f0cf7e6055d2"
+    ],
+    "brand": {
+      "@type": "Brand",
+      "name": "CLD"
+    },
+    "model": "CW-45",
+    "gtin": "696603080459",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Garantía",
+        "value": "1 mes"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Retiro",
+        "value": "Paraguay 2451, Recoleta, CABA"
+      }
+    ],
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "ARS",
+      "price": "39000",
+      "availability": "https://schema.org/InStock",
+      "url": "https://teamcelular.com/tienda/cw-45-cargador-45w-tipo-c-c-a-c",
+      "seller": {
+        "@id": "https://teamcelular.com#localbusiness"
+      },
+      "itemCondition": "https://schema.org/NewCondition",
+      "availableAtOrFrom": {
+        "@id": "https://teamcelular.com/sucursales/caba/recoleta#localbusiness"
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AR",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 10,
+        "returnMethod": "https://schema.org/ReturnInStore",
+        "merchantReturnLink": "https://teamcelular.com/devoluciones",
+        "name": "10 días corridos desde la entrega del producto"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://teamcelular.com/tienda/power-bank-fast-cld-10000-mah#product",
+    "url": "https://teamcelular.com/tienda/power-bank-fast-cld-10000-mah",
+    "name": "Power Bank CLD Fast 10000 mAh con Pantalla Digital, 2 USB + USB-C Carga Rápida",
+    "description": "Batería externa CLD Fast de 10000 mAh con pantalla digital que muestra el porcentaje exacto de carga. Delgada y liviana, apta para llevar en vuelos, para no quedarte sin batería en viajes, salidas o el día a día.\n\n• Capacidad de 10000 mAh: rinde entre 2 y 3 cargas completas de un celular promedio.\n• Carga rápida.\n• 3 salidas: 2 USB-A y 1 USB-C, para cargar varios dispositivos a la vez.\n• Pantalla LED con el nivel de batería en porcentaje.\n• Chip inteligente con protección contra sobrecarga, sobrecorriente y cortocircuito.\n• Compatible con iPhone, Samsung, Motorola, Xiaomi, auriculares, smartwatch y cualquier equipo USB.\n• Incluye cable USB-A a USB-C.\n• Color negro. Producto nuevo.",
+    "category": "CARGADOR PORTATIL",
+    "image": [
+      "https://teamcelular.com/store/products/power-bank-fast-cld-10000-mah/images/0/1866891d808e",
+      "https://teamcelular.com/store/products/power-bank-fast-cld-10000-mah/images/1/a54a2898836a",
+      "https://teamcelular.com/store/products/power-bank-fast-cld-10000-mah/images/2/47bb4a5b95e6",
+      "https://teamcelular.com/store/products/power-bank-fast-cld-10000-mah/images/3/29da6f75e510"
+    ],
+    "brand": {
+      "@type": "Brand",
+      "name": "CLD"
+    },
+    "gtin": "6803450651945",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Garantía",
+        "value": "1 mes"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Retiro",
+        "value": "Paraguay 2451, Recoleta, CABA"
+      }
+    ],
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "ARS",
+      "price": "49000",
+      "availability": "https://schema.org/InStock",
+      "url": "https://teamcelular.com/tienda/power-bank-fast-cld-10000-mah",
+      "seller": {
+        "@id": "https://teamcelular.com#localbusiness"
+      },
+      "itemCondition": "https://schema.org/NewCondition",
+      "availableAtOrFrom": {
+        "@id": "https://teamcelular.com/sucursales/caba/recoleta#localbusiness"
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AR",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 10,
+        "returnMethod": "https://schema.org/ReturnInStore",
+        "merchantReturnLink": "https://teamcelular.com/devoluciones",
+        "name": "10 días corridos desde la entrega del producto"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://teamcelular.com/tienda/power-bank-slim-5000mah-cld#product",
+    "url": "https://teamcelular.com/tienda/power-bank-slim-5000mah-cld",
+    "name": "Power Bank Magnética CLD Slim 5000 mAh Tipo MagSafe Carga Inalámbrica 15W para iPhone",
+    "description": "Batería externa CLD Slim de 5000 mAh con carga inalámbrica magnética tipo MagSafe: se pega atrás del iPhone y lo carga sin cables mientras lo seguís usando. Ultra delgada y liviana, entra en cualquier bolsillo y es apta para llevar en vuelos.\n\n• Capacidad de 5000 mAh, batería de polímero de litio (Li-Po).\n• Carga inalámbrica magnética de hasta 15 W (también 10 W, 7,5 W y 5 W).\n• Puerto USB-C de entrada y salida con carga rápida de hasta 20 W.\n• Compatible con iPhone 12 a 17 y fundas MagSafe; por cable carga cualquier celular USB-C.\n• Indicador LED de batería.\n• Protección contra sobrecarga, sobrecorriente, sobretensión, cortocircuitos y control de temperatura.\n• Incluye cable USB-A a USB-C.\n• Color gris. Producto nuevo.",
+    "category": "POWER BANK",
+    "image": [
+      "https://teamcelular.com/store/products/power-bank-slim-5000mah-cld/images/0/14f28902a61c",
+      "https://teamcelular.com/store/products/power-bank-slim-5000mah-cld/images/1/5e2b1655d84d",
+      "https://teamcelular.com/store/products/power-bank-slim-5000mah-cld/images/2/a2f0c586bd43",
+      "https://teamcelular.com/store/products/power-bank-slim-5000mah-cld/images/3/2da53a6ba65a"
+    ],
+    "brand": {
+      "@type": "Brand",
+      "name": "CLD"
+    },
+    "model": "Slim",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Garantía",
+        "value": "1 mes"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Retiro",
+        "value": "Paraguay 2451, Recoleta, CABA"
+      }
+    ],
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "ARS",
+      "price": "59000",
+      "availability": "https://schema.org/InStock",
+      "url": "https://teamcelular.com/tienda/power-bank-slim-5000mah-cld",
+      "seller": {
+        "@id": "https://teamcelular.com#localbusiness"
+      },
+      "itemCondition": "https://schema.org/NewCondition",
+      "availableAtOrFrom": {
+        "@id": "https://teamcelular.com/sucursales/caba/recoleta#localbusiness"
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "AR",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 10,
+        "returnMethod": "https://schema.org/ReturnInStore",
+        "merchantReturnLink": "https://teamcelular.com/devoluciones",
+        "name": "10 días corridos desde la entrega del producto"
+      }
+    }
+  }
+]
