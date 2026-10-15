@@ -188,8 +188,18 @@ export const fetchStoreProducts = (params: Record<string, string | number> = {})
     return pedir<StoreProductPage>(`/store/products${query ? `?${query}` : ""}`);
 };
 
-export const fetchStoreProduct = (slug: string) =>
-    pedir<StoreProduct>(`/store/products/${encodeURIComponent(slug)}`);
+export const fetchStoreProduct = (slug: string) => {
+    const path = `/store/products/${encodeURIComponent(slug)}`;
+    if (typeof window === "undefined" && new URL(storeRequestUrl(path)).origin === "https://teamcelular.com") {
+        // La ficha SSR evita volver a entrar por Vercel. Es el mismo destino
+        // de /store en next.config.js; el host identifica el catálogo público.
+        // pedir conserva no-store: precio y disponibilidad siguen frescos.
+        return pedir<StoreProduct>(`https://api.beescend.com${path}`, {
+            headers: { "X-Forwarded-Host": "teamcelular.com" },
+        });
+    }
+    return pedir<StoreProduct>(path);
+};
 
 /**
  * Lo que necesitan los filtros, en una sola llamada.
