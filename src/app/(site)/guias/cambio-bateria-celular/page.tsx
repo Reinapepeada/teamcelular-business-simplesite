@@ -9,7 +9,7 @@ import GuideByline from "@/components/seo/GuideByline";
 import RepairPriceTable from "@/components/seo/RepairPriceTable";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 import { BRAND_REPAIR_PRICES, PLACA_REVISION_PRICE, PRICES_UPDATED_LABEL, formatArsPrice, type RepairPrice } from "@/lib/repairPrices";
-import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
+import { IPHONE_MODELS, IPHONE_MODELS_WITH_PAGE, priceLabel } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 // Precios citables: minimos reales de las mismas fuentes que las tablas.
 const ANDROID_BATTERY_FROM = Math.min(
@@ -17,6 +17,11 @@ const ANDROID_BATTERY_FROM = Math.min(
     .flat()
     .filter((p) => /bater/i.test(p.name))
     .map((p) => p.from),
+);
+// Una entrada por página de modelo: así las búsquedas de batería por modelo
+// tienen un enlace a esa URL y no solo a los productos de la tienda.
+const IPHONE_BATTERY_PAGES = IPHONE_MODELS.filter((m) =>
+  (IPHONE_MODELS_WITH_PAGE as readonly string[]).includes(m.slug),
 );
 const IPHONE_BATTERY_FROM = Math.min(
   ...IPHONE_MODELS.map((m) => m.battery).filter((v): v is number => v !== null),
@@ -274,6 +279,17 @@ export default function BatteryReplacementGuide() {
             Team Celular, en Paraguay 2451 Recoleta, cambia la batería de Samsung, Motorola y Xiaomi desde{" "}
             {formatArsPrice(ANDROID_BATTERY_FROM)} y de iPhone desde {formatArsPrice(IPHONE_BATTERY_FROM)}, en 1 a 2
             horas con repuesto en stock. El cambio no requiere borrar datos; recomendamos respaldo previo.
+          </p>
+          <p className="mx-auto mt-3 max-w-3xl text-sm text-slate-600 dark:text-[#86868b]">
+            Batería de iPhone por modelo:{" "}
+            {IPHONE_BATTERY_PAGES.map((model, i) => (
+              <React.Fragment key={model.slug}>
+                {i > 0 && " · "}
+                <Link href={`/reparaciones/iphone/${model.slug}`} className="underline underline-offset-4 hover:text-primary">
+                  {model.name} {priceLabel(model.battery)}
+                </Link>
+              </React.Fragment>
+            ))}
           </p>
           <div className="mt-4 flex justify-center">
             <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
