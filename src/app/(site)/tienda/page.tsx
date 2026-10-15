@@ -84,6 +84,8 @@ export default async function TiendaPage({
   searchParams?: Promise<CatalogSearchParams>;
 }) {
   const filters = normalizeCatalogFilters((await searchParams) ?? {});
+  // Iniciar productos y filtros en paralelo; Suspense conserva la respuesta progresiva.
+  const catalogPage = getCatalogPage(filters);
   const filterOptions = await getCatalogFilters();
   const suspenseKey = JSON.stringify(filters);
 
@@ -143,6 +145,7 @@ export default async function TiendaPage({
         />
         <Suspense key={suspenseKey} fallback={<CatalogResultsFallback />}>
           <CatalogResults
+            catalogPage={catalogPage}
             basePath="/tienda"
             filters={filters}
             siteUrl={SITE_URL}

@@ -19,6 +19,7 @@ interface CatalogResultsProps {
     siteUrl: string;
     title?: string;
     emptyMessage?: string;
+    catalogPage?: ReturnType<typeof getCatalogPage>;
 }
 
 function formatPrice(price: number) {
@@ -265,11 +266,12 @@ export default async function CatalogResults({
     siteUrl,
     title = "Productos disponibles",
     emptyMessage = "No encontramos productos con esos filtros.",
+    catalogPage,
 }: CatalogResultsProps) {
-    const data = await getCatalogPage(
+    const data = await (catalogPage ?? getCatalogPage(
         filters,
         forcedCategoryName,
-    );
+    ));
     if (data.error) {
         return (
             <section className="rounded-3xl border border-slate-200 bg-white p-8 text-center dark:border-slate-700 dark:bg-slate-900">
