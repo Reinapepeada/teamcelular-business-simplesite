@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+/* La fuente comparte la hoja principal: una hoja extra bloqueaba el pintado
+   aunque la foto LCP ya estuviera descargada. Mismas métricas que next/font. */
+@font-face {
+	font-family: "Inter";
+	src: url("/fonts/inter/inter-latin.woff2") format("woff2");
+	font-display: swap;
+	font-weight: 100 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Inter Fallback";
+	src: local("Arial");
+	ascent-override: 89.79%;
+	descent-override: 22.36%;
+	line-gap-override: 0%;
+	size-adjust: 107.89%;
+}
+
+.font-inter {
+	font-family: "Inter", "Inter Fallback";
+	font-style: normal;
+}
+
 /* Custom utilities for multi-line truncation and focus outlines */
 @layer components {
 	.line-clamp-2 {
