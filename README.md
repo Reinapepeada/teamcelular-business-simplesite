@@ -24,6 +24,8 @@ Crea un nuevo pull request en GitHub.
 ## Despliegue 🚀
 Este proyecto está desplegado en Vercel y puedes acceder a él.  https://teamcelular.com 
 
+El contrato de deploy, las señales que deben aprobar un PR y las acciones administrativas pendientes están en [DEPLOYMENT.md](DEPLOYMENT.md). Antes de integrar se exige `validate` y el status `Vercel` del último commit del PR, además de verificar el preview. Un build aislado en CI o un deploy de producción posterior no sustituyen esa validación.
+
 ## SEO y descubrimiento por IA 📈
 - El sitio define metadatos enriquecidos (Open Graph, Twitter y keywords) enfocados en "reparación de celulares" para mejorar el posicionamiento en buscadores.
 - Se añadió marcado estructurado JSON-LD (LocalBusiness, Service y WebSite) para ayudar a Google, Bing y modelos como ChatGPT, Gemini o Claude a comprender la propuesta de valor y ofrecer respuestas relevantes.
