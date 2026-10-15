@@ -1,8 +1,6 @@
 ﻿
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
-const inter = localFont({ src: "../../public/fonts/inter/inter-latin.woff2", weight: "100 900", style: "normal", display: "swap" });
 import Plugins from "@/components/vercel/Plugins";
 import StructuredData from "@/components/seo/StructuredData";
 import { ThemeProvider } from "@/app/providers";
@@ -124,6 +122,7 @@ export default function RootLayout({
     return (
         <html lang="es" className="dark" style={{ colorScheme: "dark" }} suppressHydrationWarning>
             <head>
+                <link rel="preload" href="/fonts/inter/inter-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
                 <Script id="ga4" strategy="afterInteractive">
                     {GA4_INIT_SCRIPT}
                 </Script>
@@ -136,7 +135,7 @@ export default function RootLayout({
 })(window, document, "clarity", "script", "y1c74jznnm");`}
                 </Script>
             </head>
-            <body className={`${inter.className} bg-black text-[#f5f5f7] antialiased`}>
+            <body className="font-inter bg-black text-[#f5f5f7] antialiased">
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="dark"
