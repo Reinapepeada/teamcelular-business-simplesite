@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
+import { ComparisonTable } from "@/components/seo/ComparisonGuidePage";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
@@ -47,6 +48,7 @@ export const metadata: Metadata = {
   keywords: [
     "cambio pantalla celular Buenos Aires",
     "pantalla iPhone original",
+    "pantalla original vs Soft OLED vs InCell",
     "display Samsung OLED",
     "reparación pantalla CABA",
     "cambio modulo display",
@@ -146,54 +148,6 @@ const damageTypes = [
   },
 ];
 
-const screenTypes = [
-  {
-    type: "Pantalla original, según disponibilidad",
-    description: "Consultamos la opción original disponible para tu modelo y te indicamos su procedencia y las condiciones de instalación antes de presupuestar.",
-    pros: [
-      "Opción acorde al modelo del equipo",
-      "Funciones y calibración confirmadas antes de reparar",
-      "Tecnología de pantalla del modelo",
-      "Garantía escrita de 90 días",
-    ],
-    cons: ["Precio más alto"],
-    price: "$$$$",
-    recommended: "iPhone 12+, Samsung S20+",
-  },
-  {
-    type: "Pantalla compatible",
-    description: "Repuesto de otro fabricante. Puede ser OLED o LCD, según la opción disponible; Incell es una opción LCD. Consultá qué tecnología incluye el presupuesto de tu modelo.",
-    pros: [
-      "Alternativas de precio según repuesto",
-      "Prueba de imagen y táctil antes de entregar",
-      "Garantia escrita segun repuesto y trabajo",
-      "Precio competitivo"
-    ],
-    cons: [
-      "Las funciones disponibles pueden variar",
-      "Brillo y colores pueden diferir del original"
-    ],
-    price: "$$$",
-    recommended: "iPhone 7-11, Samsung A/M series",
-  },
-  {
-    type: "Pantalla LCD (TFT)",
-    description: "Tecnología LCD para modelos que originalmente traen LCD. Calidad AAA+.",
-    pros: [
-      "Compatible con modelos LCD",
-      "Buena relación calidad-precio",
-      "Garantia escrita segun repuesto y trabajo",
-      "Colores aceptables"
-    ],
-    cons: [
-      "Menor contraste que OLED",
-      "Ángulos de visión limitados"
-    ],
-    price: "$$",
-    recommended: "iPhone 8, XR, 11, Samsung A10-A30",
-  },
-];
-
 const replacementProcess = [
   {
     step: "1. Diagnóstico completo",
@@ -274,7 +228,15 @@ const faqScreen = [
   },
   {
     question: "¿Puedo usar el celular normalmente después del cambio?",
-    answer: "Sí. Conviene esperar 2 o 3 horas antes de exigirlo para que cure el adhesivo, y no mojarlo durante las primeras 24 horas.",
+    answer: "Seguí los cuidados y el tiempo de asentamiento que te indiquemos según el adhesivo utilizado. Renovar el adhesivo no garantiza recuperar la resistencia al agua de fábrica; evitá exponer el equipo a líquidos.",
+  },
+  {
+    question: "¿Qué diferencia hay entre pantalla original, Soft OLED e InCell?",
+    answer: "Original describe la procedencia y requiere confirmar la condición de la pieza. Soft OLED es una alternativa OLED flexible; InCell, en estas ofertas de repuestos, es LCD. La compatibilidad, funciones, configuración y precio instalado se confirman para cada modelo. No todas las opciones están disponibles para todos los equipos.",
+  },
+  {
+    question: "¿Todas las pantallas llamadas originales son nuevas?",
+    answer: "No. Pedí que se indique si la pantalla es nueva, usada o reacondicionada, su procedencia y qué proceso de instalación o configuración requiere. El nombre comercial no reemplaza el detalle del presupuesto ni las pruebas del equipo.",
   },
 ];
 
@@ -285,7 +247,7 @@ export default function ScreenReplacementGuide() {
         title="Cambio de pantalla de celular: precios por marca en CABA"
         description={`Precios de cambio de pantalla desde ${SCREEN_FROM}, según modelo y repuesto. Consulta por WhatsApp en Recoleta y Belgrano.`}
         publishedTime="2024-11-30T00:00:00Z"
-        modifiedTime="2026-10-14T00:00:00Z"
+        modifiedTime="2026-10-15T00:00:00Z"
         image="https://teamcelular.com/images/guia_cambio_modulo.webp"
         url="https://teamcelular.com/guias/reparacion-pantalla-celular"
       />
@@ -334,7 +296,7 @@ export default function ScreenReplacementGuide() {
           />
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
             <Link href="#precios-pantalla" className="inline-flex min-h-11 items-center font-semibold text-[#6aa6ff] underline underline-offset-4">Ver precios por marca</Link>
-            <GuideByline modifiedTime="2026-10-14T00:00:00Z" tone="light" />
+            <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
           </div>
         </header>
 
@@ -419,55 +381,27 @@ export default function ScreenReplacementGuide() {
           </div>
         </section>
 
-        {/* Tipos de pantallas */}
-        <section className="space-y-8">
-          <div className="text-center">
-            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
-              Tipos de pantallas que instalamos
-            </h2>
-            <p className="mt-3 text-lg text-slate-600 dark:text-[#a1a1a6]">
-              Comparativa de calidad, tecnología y precio
-            </p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {screenTypes.map((screen) => (
-              <div
-                key={screen.type}
-                className="bg-[#1d1d1f] rounded-[28px] p-6 transition"
-              >
-                <h3 className="mb-2 text-xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
-                  {screen.type}
-                </h3>
-                <p className="mb-4 text-sm text-slate-700 dark:text-[#a1a1a6]">{screen.description}</p>
-                <div className="mb-4">
-                  <p className="text-2xl font-semibold text-blue-500">{screen.price}</p>
-                  <p className="text-xs text-slate-600 dark:text-[#86868b] mt-1">
-                    Recomendado: {screen.recommended}
-                  </p>
-                </div>
-                <div className="space-y-2 mb-4">
-                  <p className="text-sm font-semibold text-slate-900 dark:text-[#f5f5f7]">Ventajas:</p>
-                  {screen.pros.map((pro) => (
-                    <div key={pro} className="flex items-start gap-2 text-sm text-slate-700 dark:text-[#a1a1a6]">
-                      <FaCheckCircle className="text-green-500 flex-shrink-0 mt-0.5" />
-                      <span>{pro}</span>
-                    </div>
-                  ))}
-                </div>
-                {screen.cons && (
-                  <div className="space-y-2">
-                    <p className="text-sm font-semibold text-slate-900 dark:text-[#f5f5f7]">Desventajas:</p>
-                    {screen.cons.map((con) => (
-                      <div key={con} className="flex items-start gap-2 text-sm text-orange-700 dark:text-orange-300">
-                        <FaExclamationTriangle className="flex-shrink-0 mt-0.5" />
-                        <span>{con}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+        <section id="comparar-pantallas" className="scroll-mt-24 space-y-6 text-slate-700 dark:text-[#c7c7cc]">
+          <h2 className="text-2xl font-semibold text-slate-900 dark:text-white md:text-3xl">Pantalla original, Soft OLED, Hard OLED o InCell: ¿qué conviene?</h2>
+          <p className="leading-8">Para comparar presupuestos de iPhone, separá procedencia y tecnología. Original indica el origen de una pieza; OLED y LCD describen tecnologías de pantalla. En los repuestos ofrecidos como InCell hablamos de una alternativa LCD, no de OLED. Soft OLED y Hard OLED son dos construcciones de panel OLED. Ningún nombre comercial garantiza por sí solo todas las funciones del teléfono.</p>
+          <ComparisonTable caption="Opciones de pantalla: disponibilidad y resultado a confirmar para cada modelo" columns={["Criterio", "Original", "Soft OLED", "Hard OLED", "InCell LCD"]} rows={[
+            { label: "Qué describe", values: ["Procedencia: confirmar si es nueva, usada o reacondicionada.", "Panel OLED alternativo con sustrato flexible.", "Panel OLED alternativo con sustrato rígido.", "Conjunto LCD alternativo con tecnología in-cell."] },
+            { label: "Qué conviene comprobar", values: ["Origen, condición, compatibilidad y proceso de configuración.", "Proveedor, ajuste, brillo y funciones para el modelo.", "Ajuste, terminación y condiciones de uso para el modelo.", "Compatibilidad, brillo, contraste y funciones frente al panel de fábrica."] },
+            { label: "Cuándo compararla", values: ["Si priorizás una pieza de procedencia original verificable.", "Si el modelo trae OLED y querés evaluar una alternativa OLED.", "Si existe una opción para tu modelo y querés comparar su costo y condiciones.", "Si priorizás presupuesto y aceptás las diferencias explicadas para tu equipo."] },
+            { label: "Lo que no asegura el nombre", values: ["Que sea nueva, que esté configurada o que no tenga desgaste previo.", "Funciones idénticas al original ni calibración automática.", "Un precio o una resistencia universal frente a Soft OLED.", "Equivalencia a OLED ni un resultado igual en todos los modelos."] },
+            { label: "Precio instalado", values: ["Pedir cotización por modelo y condición.", "Pedir cotización por modelo y proveedor.", "Pedir cotización por modelo y proveedor.", "Pedir cotización por modelo y proveedor."] },
+          ]} />
+          <p className="leading-8">No todos los iPhone traen OLED: por ejemplo, el <a href="https://www.apple.com/la/iphone/compare/?modelList=iphone-11,iphone-11-pro" className="text-blue-600 underline dark:text-[#6aa6ff]" rel="noopener noreferrer">iPhone 11 común usa LCD y el 11 Pro usa OLED</a>. En Android también cambia según el modelo exacto. No recomendamos una tecnología por el nombre de una familia completa. Los precios por marca de esta guía son referencias del catálogo publicado; no son un tarifario de cada calidad de panel.</p>
+          <BranchWhatsAppButton ctaName="screen_comparison_whatsapp" ctaLocation="screen_comparison_after_table" message="Hola Team Celular, quiero comparar pantallas original, OLED o InCell para mi equipo. Marca y modelo: __. Falla: __. Quiero saber el precio instalado y las funciones de cada opción." className="tc-btn tc-btn-primary w-full sm:w-auto">Comparar opciones para mi modelo</BranchWhatsAppButton>
+          <h3 className="text-xl font-semibold text-slate-900 dark:text-white">¿Original significa nuevo y sin avisos?</h3>
+          <p className="leading-8">No necesariamente. Pedí que se aclare si la pieza es nueva, retirada de otro equipo o reacondicionada. Una pantalla reacondicionada puede conservar un panel original con otras partes reemplazadas; la palabra original, sola, no explica ese trabajo ni el estado del conjunto. La configuración necesaria depende del iPhone y de la pieza utilizada.</p>
+          <p className="leading-8">Apple explica cómo consultar el historial de piezas y servicios en los modelos compatibles y qué mensajes pueden aparecer. Un aviso requiere interpretación para ese equipo; no ofrecemos borrarlo como promesa general. Revisamos antes de reparar qué funciones se pueden conservar y qué debe quedar asentado en el presupuesto.</p>
+          <h3 className="text-xl font-semibold text-slate-900 dark:text-white">¿Qué probamos antes de entregar la pantalla?</h3>
+          <p className="leading-8">Probamos imagen, brillo, respuesta táctil y las funciones relacionadas con el trabajo. El estado previo de sensores, flex y cámaras importa: cambiar el display no repara por sí solo un sensor dañado. True Tone, funciones de pantalla y configuración se confirman según modelo y repuesto; no dependen solo de que la etiqueta diga OLED.</p>
+          <p className="leading-8">La apertura tampoco garantiza recuperar la resistencia al agua de fábrica. Preguntá por el adhesivo y los cuidados que correspondan al trabajo. Si el costo del módulo te hace dudar, compará el presupuesto con <Link href="/guias/reparar-celular-o-comprar-otro" className="text-blue-600 underline dark:text-[#6aa6ff]">la alternativa de comprar otro celular</Link>. Si tenés cobertura vigente, revisá primero <Link href="/guias/presupuesto-service-oficial-segunda-opinion" className="text-blue-600 underline dark:text-[#6aa6ff]">el canal oficial y las opciones independientes</Link>.</p>
+          <h3 className="text-xl font-semibold text-slate-900 dark:text-white">¿Qué fuentes usamos para esta comparación?</h3>
+          <p className="text-sm leading-7">Revisada el 15 de octubre de 2026. Fuentes: <a href="https://support.apple.com/es-lamr/103256" className="text-blue-600 underline dark:text-[#6aa6ff]" rel="noopener noreferrer">Apple: pantallas originales, funciones e historial de piezas</a>; <a href="https://www.phonerepairspares.com/products/screens-grade-guide" className="text-blue-600 underline dark:text-[#6aa6ff]" rel="noopener noreferrer">PRSPARES: clasificación de sus paneles Soft OLED, Hard OLED e InCell</a>. La clasificación del proveedor explica términos comerciales, no acredita las prestaciones de un repuesto instalado por Team. Confirmamos la pieza disponible y sus condiciones antes de cotizar.</p>
+          <p className="leading-8">Si además estás eligiendo taller, revisá <Link href="/guias/team-celular-vs-gofix-view-phone" className="text-blue-600 underline dark:text-[#6aa6ff]">qué comparar entre Team Celular, GoFix y View Phone</Link>. Pedí el mismo modelo, tecnología y condición del repuesto en cada presupuesto para que los importes sean comparables.</p>
         </section>
 
         {/* Proceso de reemplazo */}
@@ -477,7 +411,7 @@ export default function ScreenReplacementGuide() {
               Proceso de cambio de pantalla
             </h2>
             <p className="mt-3 text-lg text-slate-600 dark:text-[#a1a1a6]">
-              Procedimiento profesional certificado
+              Del diagnóstico a las pruebas de entrega
             </p>
           </div>
           <div className="space-y-6">
