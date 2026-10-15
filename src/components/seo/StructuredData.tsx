@@ -1,3 +1,6 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { BRANCHES, BUSINESS_PROFILE, LOGO, SITE_URL, TECHNICAL_AUTHOR, absoluteUrl, businessId } from "@/lib/businessProfile";
 
 interface StructuredDataProps {
@@ -81,7 +84,7 @@ function createLocalBusinessJson(city?: string, country?: string) {
   };
 }
 
-function createOrganizationJson() {
+function createOrganizationJson(includeContact: boolean) {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -96,7 +99,7 @@ function createOrganizationJson() {
       height: LOGO.height,
     },
     email: BUSINESS_PROFILE.email,
-    telephone: BUSINESS_PROFILE.phone,
+    telephone: includeContact ? BUSINESS_PROFILE.phone : undefined,
     sameAs: BUSINESS_PROFILE.sameAs,
     knowsAbout: BUSINESS_PROFILE.knowsAbout,
     founder: {
@@ -107,7 +110,7 @@ function createOrganizationJson() {
       url: TECHNICAL_AUTHOR.url,
       sameAs: TECHNICAL_AUTHOR.sameAs,
     },
-    contactPoint: [
+    contactPoint: includeContact ? [
       {
         "@type": "ContactPoint",
         contactType: "customer service",
@@ -116,7 +119,7 @@ function createOrganizationJson() {
         areaServed: "AR",
         availableLanguage: ["es-AR", "en"],
       },
-    ],
+    ] : undefined,
   };
 }
 
@@ -152,10 +155,13 @@ export default function StructuredData({
   city,
   country,
 }: StructuredDataProps) {
+  const pathname = usePathname();
+  // Las páginas de sucursal ya publican su LocalBusiness en el servidor.
+  const isBranchPage = BRANCHES.some((branch) => branch.url === pathname);
   const data = [
-    createOrganizationJson(),
+    createOrganizationJson(!isBranchPage),
     createWebsiteJson(),
-    createLocalBusinessJson(city, country),
+    ...(!isBranchPage ? [createLocalBusinessJson(city, country)] : []),
   ];
 
   return (
