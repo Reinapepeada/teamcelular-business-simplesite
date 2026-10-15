@@ -20,10 +20,10 @@ test("el carrito conserva condición, admite compras viejas y no persiste su ape
         else Reflect.deleteProperty(globalThis, "localStorage");
     });
     const { default: useCartStore } = await import("@/store/cartStore");
-    useCartStore.getState().clearCart();
+    await useCartStore.getState().clearCart();
     assert.deepEqual(useCartStore.getState().destinoEnvio, { province: "", postal_code: "" });
-    useCartStore.getState().setDestinoEnvio({ province: "B", postal_code: "1900" });
-    useCartStore.getState().addToCart(product, null, 1, product.storeSlug);
+    await useCartStore.getState().setDestinoEnvio({ province: "B", postal_code: "1900" });
+    await useCartStore.getState().addToCart(product, null, 1, product.storeSlug);
     useCartStore.getState().openCart();
     assert.equal(useCartStore.getState().open, true);
     const persisted = JSON.parse(saved!);
@@ -48,19 +48,19 @@ test("el carrito conserva condición, admite compras viejas y no persiste su ape
     assert.equal(oldItem.storeSlug, "equipo-usado");
     assert.equal(oldItem.quantity, 1);
     assert.equal(oldItem.shipping_enabled, undefined);
-    useCartStore.getState().updateQuantity(oldItem.cartKey, 2);
+    await useCartStore.getState().updateQuantity(oldItem.cartKey, 2);
     assert.equal(useCartStore.getState().totalPrice, 200);
-    useCartStore.getState().addToCart(product, null, 1, product.storeSlug);
+    await useCartStore.getState().addToCart(product, null, 1, product.storeSlug);
     assert.equal(useCartStore.getState().cart[0].product.storeCondition, "used");
     assert.equal(useCartStore.getState().cart[0].quantity, 3);
-    useCartStore.getState().addToCart({ ...product, shipping_enabled: false }, null, 1, product.storeSlug);
+    await useCartStore.getState().addToCart({ ...product, shipping_enabled: false }, null, 1, product.storeSlug);
     assert.equal(useCartStore.getState().cart[0].shipping_enabled, false);
     await useCartStore.persist.rehydrate();
     assert.equal(useCartStore.getState().cart[0].shipping_enabled, false);
-    useCartStore.getState().clearCart();
-    useCartStore.getState().addToCart({ ...product, shipping_enabled: false }, null, 1, product.storeSlug);
+    await useCartStore.getState().clearCart();
+    await useCartStore.getState().addToCart({ ...product, shipping_enabled: false }, null, 1, product.storeSlug);
     assert.equal(useCartStore.getState().cart[0].shipping_enabled, false);
-    useCartStore.getState().clearCart();
+    await useCartStore.getState().clearCart();
 });
 
 test("condición en español sin inventar estado para datos ausentes", () => {

@@ -10,7 +10,7 @@ import { parseStoreError, StoreApiError, type StoreProduct } from "./storeApi.ts
 import { leerConPartes } from "../../tools/leerFuente.mjs";
 
 const items = [{ slug: "equipo", nombre: "Equipo", quantity: 1, shipping_enabled: false }, { slug: "funda", nombre: "Funda", quantity: 1 }];
-const datos: DatosDeCompra = { nombre: "Ana", email: "ana@example.com", entrega: "envio", direccion: {
+const datos: DatosDeCompra = { nombre: "Ana Perez", email: "ana@example.com", entrega: "envio", direccion: {
     street: " Rivadavia ", number: " 123 ", floor: " 5 ", apartment: " B ", city: "CABA", province: "C", postal_code: "1000",
 } };
 const rechazo = () => parseStoreError(422, { error: { code: "pickup_only", details: { slugs: ["equipo", "funda", 123] } } });

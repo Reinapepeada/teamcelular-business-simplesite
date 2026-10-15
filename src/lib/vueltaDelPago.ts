@@ -14,8 +14,9 @@
  * existe, el backend no cuenta nada.
  */
 
-import { olvidarClave, type AlmacenClave } from "./checkoutKey";
+import { claveDeCheckoutGuardada, olvidarClave, revisionDelIntento, type AlmacenClave } from "./checkoutKey";
 import type { StoreOrder, StoreOrderStatus } from "./storeApi";
+import { importeConfirmado } from "./resumenDelPedido";
 
 const ESPACIO = "tc.pedido";
 
@@ -25,6 +26,8 @@ export interface PedidoGuardado {
     clave: string;
     /** Clave idempotente exacta de este pedido, para limpieza condicional. */
     checkoutKey?: string;
+    /** Generación exacta del carrito antes de enviar el checkout. */
+    cartRevision?: string | null;
     /**
      * La credencial para pedir el link de pago de ESE pedido.
      *
@@ -75,33 +78,53 @@ export const recordarPedido = (
         reserva?: Pick<StoreOrder, "reservation_expires_at" | "created_at" | "expires_at" | "reserved_until">;
         clave: string;
         checkoutKey?: string;
+        cartRevision?: string | null;
         token?: string | null;
         total?: number | null;
         moneda?: string | null;
         huella?: string | null;
-    }
+    },
+    exigirPersistencia = false,
 ): void => {
     try {
         if (pedido?.clave) {
             const anterior = pedidoGuardado(almacen);
             const mismo = anterior?.clave === pedido.clave ? anterior : null;
             const checkoutKey = pedido.checkoutKey ?? mismo?.checkoutKey;
-            almacen.setItem(
-                ESPACIO,
-                JSON.stringify({
-                    clave: pedido.clave,
-                    ...(pedido.reserva ? { reserva: pedido.reserva } : mismo?.reserva ? { reserva: mismo.reserva } : {}),
-                    ...(checkoutKey ? { checkoutKey } : {}),
-                    token: pedido.token || mismo?.token || null,
-                    total: pedido.total ?? null,
-                    moneda: pedido.moneda ?? null,
-                    huella: pedido.huella ?? null,
-                })
-            );
+            const contenido = JSON.stringify({
+                clave: pedido.clave,
+                ...(pedido.reserva ? { reserva: pedido.reserva } : mismo?.reserva ? { reserva: mismo.reserva } : {}),
+                ...(checkoutKey ? { checkoutKey } : {}),
+                cartRevision: pedido.cartRevision ?? mismo?.cartRevision ?? null,
+                token: pedido.token || mismo?.token || null,
+                total: pedido.total ?? null,
+                moneda: pedido.moneda ?? null,
+                huella: pedido.huella ?? null,
+            });
+            almacen.setItem(ESPACIO, contenido);
+            if (exigirPersistencia && almacen.getItem(ESPACIO) !== contenido) {
+                throw new Error("El navegador no conservó el pedido.");
+            }
         }
     } catch {
-        // Sin poder guardar la compra sigue: la vuelta usa el parámetro.
+        if (exigirPersistencia) throw new Error("No pudimos guardar el acceso a tu pedido. Recuperá el intento antes de abrir el pago.");
+        // Lectores anteriores permiten usar la referencia pública como respaldo.
     }
+};
+
+/** Una respuesta vieja no puede reemplazar el acceso de un checkout más nuevo. */
+export const recordarPedidoDelIntento = async (
+    almacen: AlmacenClave, pedido: Parameters<typeof recordarPedido>[1] & { checkoutKey: string },
+    locks: LockManager | undefined = globalThis.navigator?.locks,
+): Promise<void> => {
+    if (!locks) throw new Error("No pudimos proteger tu compra entre pestañas. Volvé a abrir el carrito.");
+    await locks.request("tc.checkout", async () => {
+        const actual = claveDeCheckoutGuardada(almacen);
+        if (actual && actual !== pedido.checkoutKey) {
+            throw new Error("La compra cambió en otra pestaña. Volvé a abrir el carrito para recuperar el pedido actual.");
+        }
+        recordarPedido(almacen, { ...pedido, cartRevision: revisionDelIntento(almacen, pedido.checkoutKey) }, true);
+    });
 };
 
 export const pedidoGuardado = (almacen: AlmacenClave): PedidoGuardado | null => {
@@ -120,6 +143,7 @@ export const pedidoGuardado = (almacen: AlmacenClave): PedidoGuardado | null => 
                     ...(dato.reserva && typeof dato.reserva === "object" ? { reserva: Object.fromEntries(Object.entries(dato.reserva).filter(([k, v]) => ["reservation_expires_at", "created_at", "expires_at", "reserved_until"].includes(k) && (k === "reservation_expires_at" && v === null || typeof v === "string" && Number.isFinite(Date.parse(v))))) } : {}),
                     ...(typeof dato.checkoutKey === "string" && dato.checkoutKey
                         ? { checkoutKey: dato.checkoutKey } : {}),
+                    ...(typeof dato.cartRevision === "string" ? { cartRevision: dato.cartRevision } : {}),
                     token: typeof dato.token === "string" && dato.token ? dato.token : null,
                     total: typeof dato.total === "number" && Number.isFinite(dato.total)
                         ? dato.total
@@ -208,6 +232,23 @@ export const claveDeLaVuelta = (
     return null;
 };
 
+/** Enlace durable de consulta: nunca incluye la credencial de pago. */
+export const enlaceDelPedido = (clave: string): string =>
+    `/checkout/exito?external_reference=${encodeURIComponent(clave)}`;
+
+/** Limpieza del pedido actual, protegida frente a otro checkout entre pestañas. */
+export const finalizarPedidoPagado = async (
+    almacen: AlmacenClave, clave: string, limpiarCarrito: (clave: string) => Promise<boolean>,
+    locks: LockManager | undefined = globalThis.navigator?.locks,
+): Promise<void> => {
+    if (!locks) return;
+    await locks.request("tc.checkout", async () => {
+        if (pedidoGuardado(almacen)?.clave !== clave) return;
+        await limpiarCarrito(clave);
+        olvidarPedido(almacen, clave);
+    });
+};
+
 export type Desenlace = "pagado" | "esperando" | "rechazado" | "sin_pedido";
 
 /**
@@ -242,16 +283,15 @@ const ESPERANDO: VueltaMostrable = {
 /**
  * Un pago que puede tardar horas o días: efectivo, Rapipago, transferencia.
  *
- * **Deja de preguntar.** Ninguna espera razonable en una pestaña abierta
- * alcanza para un pago que se completa en un local mañana, y dejar el reintento
- * corriendo solo castiga al backend con una pestaña olvidada.
+ * Se consulta durante una ventana limitada: pending también puede ser un
+ * aviso transitorio. Después queda la actualización manual, sin otro cobro.
  */
 const DEMORADO: VueltaMostrable = {
     desenlace: "esperando",
     titulo: "Tu pago sigue pendiente",
     detalle:
-        "La reserva de stock tiene un plazo corto. Si elegiste un medio de pago demorado, consultanos antes de completarlo.",
-    seguirPreguntando: false,
+        "Todavía no se confirmó el pago. Si elegiste un medio de pago demorado, consultanos antes de completarlo. No hagas otro pedido.",
+    seguirPreguntando: true,
 };
 
 /**
@@ -268,6 +308,19 @@ const RECHAZADO: VueltaMostrable = {
     seguirPreguntando: false,
 };
 
+/** El modo y el avance son datos del servidor; un campo antiguo ausente queda neutral. */
+function detalleDeEntrega(estado: StoreOrderStatus): string {
+    const modo = estado.delivery_mode ?? (estado.shipping === null ? "pickup" : estado.shipping ? "shipping" : undefined);
+    if (estado.fulfillment_status === "delivered") return modo === "pickup"
+        ? "Tu pedido ya fue retirado. Gracias por tu compra."
+        : "Tu pedido figura como entregado. Gracias por tu compra.";
+    if (estado.fulfillment_status === "shipped") return "Tu pedido ya fue despachado. Podés consultar el seguimiento disponible acá.";
+    if (estado.fulfillment_status === "ready_for_pickup") return "Tu pedido está listo para retirar. Revisá la dirección y el horario antes de acercarte.";
+    if (modo === "pickup") return "Registramos tu pedido para retirar en el local. Esperá a que figure listo para retirar antes de acercarte.";
+    if (modo === "shipping") return "Registramos tu pedido con envío a domicilio. Acá podés consultar su preparación y despacho.";
+    return "Registramos tu pedido. Acá podés consultar cómo avanza la entrega.";
+}
+
 /**
  * Traduce el estado del pedido a lo que ve el comprador.
  *
@@ -283,8 +336,8 @@ const vueltaBase = (
     if (estado?.payment_result === "reversed" || estado?.status === "payment_reversed") {
         return {
             desenlace: "rechazado",
-            titulo: "Este pago se devolvió",
-            detalle: "Escribinos con el número de pedido para consultar cómo seguir.",
+            titulo: "Este pago fue revertido",
+            detalle: "El proveedor informó una reversa del pago. Revisá el movimiento en Mercado Pago y escribinos con el número de pedido para confirmar su alcance y cómo seguir.",
             seguirPreguntando: false,
         };
     }
@@ -303,8 +356,7 @@ const vueltaBase = (
         return {
             desenlace: "pagado",
             titulo: "¡Listo! Tu pago entró",
-            detalle:
-                "Registramos tu pedido. Te avisaremos por mail cuando salga.",
+            detalle: detalleDeEntrega(estado),
             seguirPreguntando: false,
         };
     }
@@ -316,6 +368,15 @@ const vueltaBase = (
     // exactamente lo que no puede afirmar.
     if (!estado) return ESPERANDO;
 
+    if (estado.reason_code === "shipping_configuration_required" && !["expired", "cancelled"].includes(estado.status)) {
+        return {
+            desenlace: "esperando",
+            titulo: "Tu envío necesita revisión",
+            detalle: "Tu pedido sigue guardado. Escribinos con su número para confirmar cómo seguir con el envío. Si ya pagaste, conservá el comprobante; no hagas otro pedido.",
+            seguirPreguntando: false,
+        };
+    }
+
     if (estado.payment_result === "rejected" || estado.reason_code === "expired") {
         const motivos = {
             insufficient_funds: "La tarjeta no tenía saldo suficiente",
@@ -326,7 +387,7 @@ const vueltaBase = (
         };
         return {
             ...RECHAZADO,
-            titulo: motivos[estado.reason_code ?? "other"] ?? motivos.other,
+            titulo: motivos[(estado.reason_code ?? "other") as keyof typeof motivos] ?? motivos.other,
             detalle: estado.can_retry === true
                 ? "Podés reintentar el pago de este mismo pedido."
                 : "Escribinos con el número de pedido para consultar cómo seguir.",
@@ -352,7 +413,7 @@ const vueltaBase = (
 export const vueltaMostrable = (estado: StoreOrderStatus | null, intencion: Intencion = "exito") => ({
     ...vueltaBase(estado, intencion),
     // Un campo ausente nunca habilita un nuevo intento de cobro.
-    canRetry: estado?.can_retry === true && !estado.paid && estado.payment_result !== "approved" && estado.payment_result !== "reversed" && estado.status !== "payment_reversed",
+    canRetry: estado?.can_retry === true && estado.reason_code !== "shipping_configuration_required" && importeConfirmado(estado.total_amount) !== null && !estado.paid && estado.payment_result !== "approved" && estado.payment_result !== "reversed" && estado.status !== "payment_reversed",
 });
 
 /** El enlace compartido identifica un pedido, pero nunca presta el token de otro. */
@@ -368,7 +429,7 @@ export const estadoDeEntrega = (estado: StoreOrderStatus | null): string | null 
         case "preparing": return "En preparación";
         case "ready_for_pickup": return "Listo para retirar";
         case "shipped": return "Despachado";
-        case "delivered": return estado.delivery_mode === "pickup" || estado.shipping === null ? "Retirado" : "Entregado";
+        case "delivered": return estado.delivery_mode === "pickup" || (estado.delivery_mode === undefined && estado.shipping === null) ? "Retirado" : "Entregado";
         default: return "Pendiente de preparación";
     }
 };

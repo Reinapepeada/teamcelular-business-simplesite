@@ -17,13 +17,17 @@ import {
 } from "react-icons/bs";
 import { buildProductSlug } from "@/lib/productSlug";
 import useCartStore, { type CartItem } from "@/store/cartStore";
+import { codigoPostalValido, errorDeCantidades, errorDeDestino, normalizarCodigoPostal } from "@/lib/commerceValidation";
+import { exigirCotizacionLista, plazoDeTransporte } from "@/lib/shippingQuote";
 import { problemaDeCheckout } from "@/lib/checkoutFlow";
+import { usePickupPoint } from "@/hooks/usePickupPoint";
+import { PickupDetails } from "./PickupDetails";
 import ProductCondition from "./ProductCondition";
 import StoreImage from "./StoreImage";
 import StoreCartButton from "./StoreCartButton";
 import { PROVINCIAS } from "@/lib/provincias";
 import { aLineasDeCheckout, carritoComprable, productosSoloRetiro } from "@/lib/cartLines";
-import { fetchPickupPoint, quoteShipping, StoreApiError, type PickupPoint, type ShippingQuote } from "@/lib/storeApi";
+import { quoteShipping, StoreApiError, type ShippingQuote } from "@/lib/storeApi";
 import {
     nombreDeVariante,
     totalDeLinea,
@@ -50,9 +54,6 @@ const CheckoutDialog = dynamic(() => import("./CheckoutDialog"), {
 
 const WHATSAPP_NUMBER =
     process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.trim() || "5491151034595";
-
-// CP argentino: 4 dígitos o CPA (letra + 4 dígitos + 3 letras).
-const CP_VALIDO = /^(\d{4}|[A-Za-z]\d{4}[A-Za-z]{3})$/;
 
 function formatPrice(price: number) {
     return new Intl.NumberFormat("es-AR").format(price);
@@ -81,10 +82,11 @@ export default function StoreCartSheet() {
     const [checkoutSolicitado, setCheckoutSolicitado] = useState(false);
     const [retiroSolicitado, setRetiroSolicitado] = useState(0);
     const [entrega, setEntrega] = useState<Entrega>("retiro");
-    const [retiro, setRetiro] = useState<PickupPoint | null>(null);
     const dialogRef = useRef<HTMLDialogElement>(null);
     const triggerRef = useRef<HTMLButtonElement>(null);
-    const { cart, removeFromCart, updateQuantity, clearCart, open, openCart, closeCart, destinoEnvio, setDestinoEnvio } = useCartStore();
+    const { cart, removeFromCart, adjustQuantity, clearCart, open, openCart, closeCart, destinoEnvio, setDestinoEnvio } = useCartStore();
+
+    const { state: retiro, retry: reintentarRetiro } = usePickupPoint(open);
 
     function abrirCheckout() {
         setCheckoutSolicitado(true);
@@ -95,8 +97,8 @@ export default function StoreCartSheet() {
     // Las sumas viven en src/lib/totalesDelCarrito.ts, que explica por que
     // esto es un estimado: los precios salen de lo que el navegador guardo.
     const { unidades: totalItems, productos: totalPrice } = totalesDelCarrito(cart);
-    const [cotizacion, setCotizacion] = useState<{ clave: string; opcion: ShippingQuote["cheapest"] } | null>(null);
-    const [falloEnvio, setFalloEnvio] = useState<{ clave: string; mensaje: string; soloRetiro?: boolean } | null>(null);
+    const [cotizacion, setCotizacion] = useState<{ clave: string; opcion: ShippingQuote["cheapest"]; plazo: string | null } | null>(null);
+    const [falloEnvio, setFalloEnvio] = useState<{ clave: string; mensaje: string; soloRetiro?: boolean; consultar?: boolean } | null>(null);
     const [calculando, setCalculando] = useState(false);
     const solicitudEnvio = useRef(0);
     const items = cart.map(item => ({ slug: item.storeSlug, quantity: item.quantity, nombre: item.product.name, shipping_enabled: item.shipping_enabled }));
@@ -110,7 +112,7 @@ export default function StoreCartSheet() {
     const eligeEnvio = entrega === "envio" && soloRetiro.length === 0;
     const envio = eligeEnvio && cotizacion?.clave === claveEnvio ? cotizacion.opcion : null;
     const totalEstimado = eligeEnvio ? totalEstimadoConEnvio(totalPrice, envio?.price ?? null) : totalPrice;
-    const cpCompleto = CP_VALIDO.test(destinoEnvio.postal_code.trim());
+    const cpCompleto = codigoPostalValido(destinoEnvio.postal_code);
 
     const calcularEnvio = async () => {
         if (soloRetiro.length) return;
@@ -121,24 +123,31 @@ export default function StoreCartSheet() {
             setFalloEnvio({ clave: claveEnvio, mensaje: "Volvé a agregar los productos desde la tienda para calcular el envío." });
             return;
         }
+        const validacion = errorDeCantidades(items) || errorDeDestino(destinoEnvio.province, destinoEnvio.postal_code);
+        if (validacion) {
+            setCalculando(false);
+            setFalloEnvio({ clave: claveEnvio, mensaje: validacion });
+            return;
+        }
         setCalculando(true);
         try {
-            const resultado = await quoteShipping(destinoEnvio.province, destinoEnvio.postal_code.trim(), lineasEnvio.lineas);
+            const resultado = exigirCotizacionLista(await quoteShipping(destinoEnvio.province, normalizarCodigoPostal(destinoEnvio.postal_code), lineasEnvio.lineas));
             if (solicitud !== solicitudEnvio.current || claveActual.current !== claveEnvio) return;
             if (totalEstimadoConEnvio(totalPrice, resultado.cheapest?.price ?? null) === null) throw new Error("Cotización inválida");
-            setCotizacion({ clave: claveEnvio, opcion: resultado.cheapest });
+            setCotizacion({ clave: claveEnvio, opcion: resultado.cheapest, plazo: plazoDeTransporte(resultado) });
         } catch (error) {
             if (solicitud !== solicitudEnvio.current || claveActual.current !== claveEnvio) return;
             if (error instanceof StoreApiError && error.code === "PICKUP_ONLY") {
                 setFalloEnvio({ clave: claveEnvio, mensaje: problemaDeCheckout(error, items).mensaje, soloRetiro: true });
                 return;
             }
-            const mensaje = error instanceof StoreApiError && error.code === "SHIPPING_UNAVAILABLE"
-                ? "No hay envío para estos productos o este código postal. Revisá el destino o elegí retiro."
+            const problema = problemaDeCheckout(error, items);
+            const mensaje = error instanceof StoreApiError && (error.code.startsWith("SHIPPING_") || error.code === "STOCK_REQUIRES_CONSOLIDATION")
+                ? problema.mensaje
                 : error instanceof StoreApiError && error.code === "PRODUCT_NOT_FOUND"
                   ? "Un producto ya no está disponible. Revisá el carrito."
-                  : "No pudimos calcular el envío. Revisá provincia y código postal, o elegí retiro.";
-            setFalloEnvio({ clave: claveEnvio, mensaje });
+                  : "No pudimos calcular el envío en este momento. Reintentá sin cambiar tus datos.";
+            setFalloEnvio({ clave: claveEnvio, mensaje, consultar: problema.consultarEnvio });
         } finally {
             if (solicitud === solicitudEnvio.current) setCalculando(false);
         }
@@ -158,18 +167,6 @@ export default function StoreCartSheet() {
         return () => window.clearTimeout(espera);
     }, [open, eligeEnvio, destinoEnvio.province, cpCompleto, yaCotizado, claveEnvio]);
 
-    useEffect(() => {
-        if (!open || retiro) return;
-        let vivo = true;
-        fetchPickupPoint()
-            .then(punto => {
-                if (vivo) setRetiro(punto);
-            })
-            .catch(() => undefined);
-        return () => {
-            vivo = false;
-        };
-    }, [open, retiro]);
 
     useEffect(() => {
         const dialog = dialogRef.current;
@@ -310,7 +307,7 @@ export default function StoreCartSheet() {
                                                     <button
                                                         type="button"
                                                         disabled={item.quantity <= 1}
-                                                        onClick={() => updateQuantity(item.cartKey, item.quantity - 1)}
+                                                        onClick={() => adjustQuantity(item.cartKey, -1)}
                                                         className="inline-flex h-10 w-10 items-center justify-center rounded-full text-slate-700 transition hover:bg-slate-100 disabled:opacity-30 dark:text-slate-300 dark:hover:bg-slate-800"
                                                         aria-label={`Reducir cantidad de ${item.product.name}`}
                                                     >
@@ -322,7 +319,7 @@ export default function StoreCartSheet() {
                                                     <button
                                                         type="button"
                                                         disabled={item.quantity >= stock}
-                                                        onClick={() => updateQuantity(item.cartKey, item.quantity + 1)}
+                                                        onClick={() => adjustQuantity(item.cartKey, 1)}
                                                         className="inline-flex h-10 w-10 items-center justify-center rounded-full text-slate-700 transition hover:bg-slate-100 disabled:opacity-30 dark:text-slate-300 dark:hover:bg-slate-800"
                                                         aria-label={`Aumentar cantidad de ${item.product.name}`}
                                                     >
@@ -400,19 +397,17 @@ export default function StoreCartSheet() {
                         </fieldset>
 
                         {soloRetiro.length > 0 && <p className="mt-2 text-xs text-slate-600 dark:text-slate-400">Solo retiro en el local: {soloRetiro.join(", ")}. Podés retirar tu compra en el local.</p>}
-                        {!eligeEnvio && soloRetiro.length === 0 && retiro && (
-                            <p className="mt-2 truncate text-xs text-slate-600 dark:text-slate-400" title={[retiro.name, retiro.address, retiro.hours].filter(Boolean).join(" · ")}>{[retiro.address, retiro.hours].filter(Boolean).join(" · ")}</p>
-                        )}
+                        {!eligeEnvio && <PickupDetails state={retiro} retry={reintentarRetiro} />}
 
                         {cart.length > 0 && soloRetiro.length === 0 && eligeEnvio && (
                             <form className="mt-3" onSubmit={event => { event.preventDefault(); void calcularEnvio(); }}>
-                                <div className="grid grid-cols-[1fr_7rem_auto] gap-2">
+                                <div className="grid grid-cols-2 gap-2 sm:grid-cols-[1fr_7rem_auto]">
                                     <label className="sr-only" htmlFor="carrito-provincia">Provincia</label>
                                     <select
                                         id="carrito-provincia"
                                         required
                                         value={destinoEnvio.province}
-                                        onChange={event => setDestinoEnvio({ ...destinoEnvio, province: event.target.value })}
+                                        onChange={event => setDestinoEnvio({ province: event.target.value })}
                                         className="min-h-11 w-full rounded-xl border border-slate-300 bg-transparent px-2 text-base sm:text-sm dark:border-slate-700 dark:bg-slate-900"
                                     >
                                         <option value="">Provincia</option>
@@ -425,23 +420,24 @@ export default function StoreCartSheet() {
                                         autoComplete="postal-code"
                                         placeholder="Cód. postal"
                                         value={destinoEnvio.postal_code}
-                                        onChange={event => setDestinoEnvio({ ...destinoEnvio, postal_code: event.target.value })}
+                                        onChange={event => setDestinoEnvio({ postal_code: event.target.value })}
                                         className="min-h-11 w-full rounded-xl border border-slate-300 bg-transparent px-3 text-base sm:text-sm dark:border-slate-700 dark:bg-slate-900"
                                     />
-                                    <button disabled={calculando || !destinoEnvio.postal_code.trim()} className="min-h-11 rounded-xl border border-slate-300 px-3 text-sm font-medium transition hover:bg-slate-100 disabled:opacity-50 dark:border-slate-700 dark:hover:bg-slate-800">
-                                        {calculando ? "…" : "Calcular"}
+                                    <button disabled={calculando || !destinoEnvio.postal_code.trim()} className="col-span-2 min-h-11 rounded-xl border border-slate-300 px-3 text-sm font-medium transition hover:bg-slate-100 disabled:opacity-50 sm:col-span-1 dark:border-slate-700 dark:hover:bg-slate-800">
+                                        {calculando ? "Calculando…" : falloEnvio?.clave === claveEnvio ? "Reintentar envío" : "Calcular"}
                                     </button>
                                 </div>
                                 <div aria-live="polite" className="mt-2 text-xs">
                                     {envio && (
                                         <p className="text-slate-600 dark:text-slate-400">
                                             Envío a CP {destinoEnvio.postal_code.trim()}: <strong className="text-slate-950 dark:text-slate-50">${formatPrice(envio.price)}</strong>
-                                            {envio.hours != null && Number.isFinite(envio.hours) && envio.hours > 0 ? ` · llega en ~${envio.hours} h` : ""}
+                                            {cotizacion?.plazo && <span className="mt-1 block">{cotizacion.plazo}</span>}
                                         </p>
                                     )}
                                     {falloEnvio?.clave === claveEnvio && (
                                         <div className="text-rose-600 dark:text-rose-300">
                                             <p>{falloEnvio.mensaje}</p>
+                                            {falloEnvio.consultar && <a className="inline-flex min-h-11 items-center underline" href={`https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`} target="_blank" rel="noopener noreferrer">Consultar por este envío</a>}
                                             {falloEnvio.soloRetiro && <button type="button" className="min-h-11 underline" onClick={() => { setEntrega("retiro"); setRetiroSolicitado(value => value + 1); abrirCheckout(); }}>Retirar en el local</button>}
                                         </div>
                                     )}
@@ -490,6 +486,7 @@ export default function StoreCartSheet() {
                 retiroSolicitado={retiroSolicitado}
                 entregaInicial={soloRetiro.length ? "retiro" : entrega}
                 abierto={comprando}
+                onEntregaChange={setEntrega}
                 onCerrar={() => {
                     setComprando(false);
                     openCart();

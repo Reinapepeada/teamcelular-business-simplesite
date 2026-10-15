@@ -227,11 +227,11 @@ describe("vueltaMostrable segun la puerta por la que volvio", () => {
         assert.match(v.detalle, /revisá si Mercado Pago registró un cargo/i);
     });
 
-    test("un pago demorado tampoco se espera con la pestana abierta", () => {
+    test("un pago demorado se consulta dentro del límite de la pantalla", () => {
         // Efectivo o Rapipago pueden tardar dias: reintentar es dejar una
         // pestana olvidada golpeando el backend.
         const v = vueltaMostrable(estado({ paid: false }), "pendiente");
-        assert.equal(v.seguirPreguntando, false);
+        assert.equal(v.seguirPreguntando, true);
         assert.notEqual(v.desenlace, "rechazado");
         assert.doesNotMatch(v.detalle, /stock te queda reservado/i);
     });
@@ -395,8 +395,8 @@ describe("sin respuesta del backend no se afirma nada sobre el cobro", () => {
         assert.equal(vueltaMostrable(estado({ paid: false }), "error").desenlace, "rechazado");
     });
 
-    test("un pago demorado, con respuesta, deja de preguntar", () => {
-        assert.equal(vueltaMostrable(estado({ paid: false }), "pendiente").seguirPreguntando, false);
+    test("un pago demorado, con respuesta, sigue consultando con límite", () => {
+        assert.equal(vueltaMostrable(estado({ paid: false }), "pendiente").seguirPreguntando, true);
     });
 });
 
@@ -534,7 +534,7 @@ describe("contrato público 1A", () => {
         assert.equal(vueltaMostrable(estado({ paid: true, can_retry: true })).canRetry, false);
         for (const cambios of [{ payment_result: "reversed" as const }, { status: "payment_reversed" }]) {
             const pedido = estado({ ...cambios, paid: true, can_retry: true, fulfillment_status: "ready_for_pickup" });
-            assert.equal(vueltaMostrable(pedido).titulo, "Este pago se devolvió");
+            assert.equal(vueltaMostrable(pedido).titulo, "Este pago fue revertido");
             assert.equal(vueltaMostrable(pedido).canRetry, false);
             assert.equal(estadoDeEntrega(pedido), null);
         }

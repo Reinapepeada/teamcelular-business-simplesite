@@ -1,3 +1,4 @@
+import { exigirCotizacionLista } from "./shippingQuote";
 /**
  * El camino del carrito a la pantalla de pago.
  *
@@ -6,6 +7,7 @@
  * mitad de camino**.
  */
 
+import { errorDeCantidades, errorDeDestino, errorDeNombre, normalizarCodigoPostal } from "./commerceValidation";
 import type { CheckoutPayload, ShippingAddress, StoreOrder } from "./storeApi";
 import { resumenParaConfirmar } from "./resumenDelPedido";
 import { totalEstimadoConEnvio } from "./totalesDelCarrito";
@@ -79,7 +81,8 @@ export const validarDatos = (
 ): ErroresDeCompra => {
     const errores: ErroresDeCompra = {};
 
-    if (!datos.nombre?.trim()) errores.nombre = "Poné tu nombre.";
+    const nombreInvalido = errorDeNombre(datos.nombre, datos.entrega === "envio");
+    if (nombreInvalido) errores.nombre = nombreInvalido;
     if (!datos.email?.trim()) {
         errores.email = "Poné tu mail.";
     } else if (!FORMA_DE_MAIL.test(datos.email.trim())) {
@@ -106,6 +109,8 @@ export const validarDatos = (
             errores.email = `Para el envío, el mail puede tener hasta ${L.email} caracteres.`;
         }
         if (!d.province?.trim()) errores.province = "Elegí la provincia.";
+        const destinoInvalido = errorDeDestino(d.province ?? "", d.postal_code ?? "");
+        if (d.province?.trim() && destinoInvalido) errores.postal_code = destinoInvalido;
         if (!d.postal_code?.trim()) errores.postal_code = "Poné el código postal.";
     }
 
@@ -121,6 +126,8 @@ export const validarDatos = (
             : "Tu carrito está vacío.";
     }
 
+    const cantidadesInvalidas = errorDeCantidades(items);
+    if (cantidadesInvalidas) errores.carrito = cantidadesInvalidas;
     return errores;
 };
 
@@ -131,7 +138,8 @@ export const armarPedido = (
     datos: DatosDeCompra,
     items: ItemComprable[],
     checkoutKey: string,
-    recoveryToken?: string
+    recoveryToken?: string,
+    quoteId?: string
 ): CheckoutPayload => {
     const { lineas } = aLineasDeCheckout(items);
     const payload: CheckoutPayload = {
@@ -145,6 +153,7 @@ export const armarPedido = (
     if (telefono) payload.customer_phone = telefono;
 
     if (datos.entrega === "envio") {
+        if (quoteId) payload.quote_id = quoteId;
         const d = datos.direccion ?? {};
         // Conservamos los textos combinados para versiones anteriores del backend.
         const piso = d.floor?.trim();
@@ -160,7 +169,7 @@ export const armarPedido = (
             street: [d.street?.trim(), d.number?.trim()].filter(Boolean).join(" "),
             city: d.city!.trim(),
             province: d.province!.trim(),
-            postal_code: d.postal_code!.trim(),
+            postal_code: normalizarCodigoPostal(d.postal_code!),
             extra: complemento || d.extra?.trim() || null,
         };
     }
@@ -183,11 +192,10 @@ export interface PuertosDeCompra {
     /**
      * Se llama apenas el pedido existe, antes de pedir el link.
      *
-     * Opcional porque no cambia el resultado de la compra: es lo que le permite
-     * al comprador volver si el link falla. Que no pueda guardar no puede
-     * impedir pagar.
+     * Esperamos su persistencia antes de pagar. Si otra pestaña inició un
+     * checkout distinto, este callback lo detecta y frena el enlace viejo.
      */
-    recordar?: (pedido: StoreOrder) => void;
+    recordar?: (pedido: StoreOrder) => void | Promise<void>;
 }
 
 /**
@@ -213,6 +221,7 @@ export const mensajePedidoTerminado = (pedido: StoreOrder): string | null => {
     if (pedido.status === "paid" || pedido.status === "paid_pending_stock_commit") {
         return `El pedido ${pedido.commerce_key} ya recibió el pago. No vuelvas a pagarlo.`;
     }
+    if (pedido.status === "payment_reversed") return `El pago del pedido ${pedido.commerce_key} fue revertido. Consultá su estado antes de intentar otro pago.`;
     if (pedido.status === "expired" || pedido.status === "cancelled") {
         return `El pedido ${pedido.commerce_key} está ${pedido.status === "expired" ? "vencido" : "cancelado"}. Podés iniciar una nueva compra.`;
     }
@@ -263,7 +272,7 @@ export const reservar = async (
     // ese hueco es más largo, porque en el medio hay una pantalla donde el
     // comprador puede irse.
     pedido.created_at ??= new Date().toISOString();
-    puertos.recordar?.(pedido);
+    await puertos.recordar?.(pedido);
     exigirPedidoPendiente(pedido);
 
     if (!pedido.access_token) {
@@ -292,6 +301,9 @@ export const abrirElPago = async (
     pedido: StoreOrder
 ): Promise<string> => {
     exigirPedidoPendiente(pedido);
+    if (!resumenParaConfirmar(pedido, 0).importesConfirmados) {
+        throw new ErrorDeCompra("El importe del pedido todavía no está confirmado. Actualizá este mismo pedido antes de pagar; no crees otro.", pedido, null);
+    }
     if (!pedido.access_token) {
         throw new ErrorDeCompra(
             `El pedido ${pedido.commerce_key} ya existe, pero este navegador no tiene su acceso. Escribinos con ese número antes de volver a comprar.`,
@@ -332,6 +344,8 @@ export interface ProblemaDeCheckout {
     quitarSlug?: string;
     ofrecerRetiro?: boolean;
     campos?: ErroresDeCompra;
+    consultarEnvio?: boolean;
+    recalcularEnvio?: boolean;
 }
 
 export const problemaDeCheckout = (causa: unknown, items: ItemComprable[] = []): ProblemaDeCheckout => {
@@ -349,12 +363,21 @@ export const problemaDeCheckout = (causa: unknown, items: ItemComprable[] = []):
                 : productosSoloRetiro(items);
             return { mensaje: `Solo retiro en el local: ${nombres.join(", ") || "uno o más productos del carrito"}. Elegí retirar en el local para continuar.`, ofrecerRetiro: true };
         }
-        if (["SHIPPING_QUOTE_REQUIRED", "SHIPPING_QUOTE_CHANGED", "SHIPPING_QUOTE_EXPIRED"].includes(code)) {
-            return { mensaje: "La cotización del envío cambió o venció. Volvé a revisar el pedido para actualizarla." };
+        if (code === "STOCK_REQUIRES_CONSOLIDATION") {
+            return { mensaje: "Necesitamos reunir estos productos en un local para enviarlos juntos. Consultanos; tu carrito queda guardado.", consultarEnvio: true };
+        }
+        if (code === "SHIPPING_CONFIGURATION_REQUIRED") {
+            return { mensaje: "Estamos preparando los envíos. Consultanos; tu carrito queda guardado.", consultarEnvio: true };
+        }
+        if (code === "SHIPPING_PACKAGE_REVIEW_REQUIRED") {
+            return { mensaje: "Necesitamos revisar el paquete antes de cotizar este envío. Consultanos; tu carrito queda guardado.", consultarEnvio: true };
+        }
+        if (["SHIPPING_QUOTE_REQUIRED", "SHIPPING_QUOTE_EXPIRED", "SHIPPING_QUOTE_CHANGED"].includes(code)) {
+            return { mensaje: "Necesitamos actualizar el envío. Volvé a calcular y revisá el total antes de confirmar.", recalcularEnvio: true };
         }
         if (code === "SHIPPING_UNAVAILABLE") {
             // También incluye fallas del proveedor: no afirma falta de cobertura.
-            return { mensaje: "No pudimos cotizar el envío. Probá de nuevo o retirá en el local.", ofrecerRetiro: true };
+            return { mensaje: "No pudimos cotizar el envío. Reintentá sin cambiar tus datos." };
         }
         if (code === "SHIPPING_FIELD_TOO_LONG" || (error.status === 422 && (error.field || error.fields.length))) {
             const campos: ErroresDeCompra = {};
@@ -377,13 +400,15 @@ export const revisarPedido = async (
     datos: DatosDeCompra, items: ItemComprable[], productos: number,
     cotizar: typeof import("./storeApi").quoteShipping,
 ) => {
-    const cotizacion = datos.entrega === "retiro" ? null : await cotizar(
-        datos.direccion!.province!.trim(), datos.direccion!.postal_code!.trim(), aLineasDeCheckout(items).lineas,
-    );
-    const envio = datos.entrega === "retiro" ? 0 : cotizacion?.cheapest?.price;
+    const errores = validarDatos(datos, items);
+    if (hayErrores(errores)) throw new StoreApiError(Object.values(errores)[0]!, 422, "VALIDATION_ERROR");
+    const cotizacion = datos.entrega === "retiro" ? null : exigirCotizacionLista(await cotizar(
+        datos.direccion!.province!.trim(), normalizarCodigoPostal(datos.direccion!.postal_code!), aLineasDeCheckout(items).lineas,
+    ));
+    const envio = cotizacion ? cotizacion.cheapest?.price : 0;
     const total = totalEstimadoConEnvio(productos, envio ?? null);
-    if (envio === undefined || total === null) throw new StoreApiError("Sin cotización", 409, "SHIPPING_UNAVAILABLE");
-    return { productos, envio, total, quote_id: cotizacion?.quote_id };
+    if (total === null) throw new StoreApiError("Sin cotización", 409, "SHIPPING_UNAVAILABLE");
+    return { productos, envio, total, quoteId: cotizacion?.quote_id };
 };
 
 export const reservarYPagarSiCoincide = async (
@@ -391,8 +416,8 @@ export const reservarYPagarSiCoincide = async (
     recuperado = false,
 ) => {
     const pedido = await reservar(puertos, payload);
-    const cambio = resumenParaConfirmar(pedido, productos, envio).precioCambio;
-    const checkoutUrl = cambio || recuperado ? null : await abrirElPago(puertos, pedido);
+    const resumen = resumenParaConfirmar(pedido, productos, envio);
+    const checkoutUrl = resumen.precioCambio || !resumen.importesConfirmados || recuperado ? null : await abrirElPago(puertos, pedido);
     return { pedido, checkoutUrl };
 };
 
