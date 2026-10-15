@@ -58,6 +58,12 @@ export interface ShippingAddress {
 }
 
 export interface ShippingQuote {
+    /** Referencia del snapshot propio; no reserva tarifa ni stock del transportista. */
+    quote_id?: string;
+    expires_at?: string;
+    checkout_ready?: boolean;
+    package_status?: "estimated";
+    hours_basis?: "carrier_transit_after_dispatch";
     options: { price: number; hours?: number | null; service?: string | null; carrier?: string | null }[];
     cheapest: { price: number; hours?: number | null; service?: string | null; carrier?: string | null };
 }
@@ -93,7 +99,7 @@ export interface StoreOrderStatus {
     /** Sale de la base, no de la redirección del proveedor. */
     paid: boolean;
     payment_result?: "none" | "pending" | "approved" | "rejected" | "reversed";
-    reason_code?: "insufficient_funds" | "invalid_card_data" | "rejected_by_bank" | "expired" | "other" | null;
+    reason_code?: "insufficient_funds" | "invalid_card_data" | "rejected_by_bank" | "expired" | "shipping_configuration_required" | "other" | null;
     can_retry?: boolean;
     tracking_url?: string | null;
     total_amount: number;
@@ -229,12 +235,15 @@ export interface PickupPoint {
 /**
  * Dónde se retira, o `null` si la tienda no lo informa.
  *
- * Un fallo acá no puede frenar la compra: sin el dato, la opción de retiro se
- * muestra sin detalle.
+ * Wrapper opcional para contenido informativo existente. El checkout usa
+ * fetchPickupPointDetails para distinguir errores y confirmar los datos.
  */
+/** La compra necesita distinguir falta de configuración de una falla de consulta. */
+export const fetchPickupPointDetails = () => pedir<PickupPoint>("/store/pickup-point");
+
 export const fetchPickupPoint = async (): Promise<PickupPoint | null> => {
     try {
-        return await pedir<PickupPoint>("/store/pickup-point");
+        return await fetchPickupPointDetails();
     } catch {
         return null;
     }
@@ -249,6 +258,8 @@ export const quoteShipping = (province: string, postalCode: string, items: Store
 export interface CheckoutPayload {
     checkout_key: string;
     recovery_token?: string;
+    /** Sólo para envío nuevo; los intentos antiguos se recuperan sin modificar. */
+    quote_id?: string;
     customer_name: string;
     customer_email: string;
     customer_phone?: string | null;

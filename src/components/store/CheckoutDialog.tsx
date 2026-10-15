@@ -10,9 +10,9 @@ import ProductCondition from "./ProductCondition";
 import { intentoDeCheckout, prepararIntento } from "@/lib/checkoutKey";
 import {
     olvidarPedido,
+    enlaceDelPedido,
     pedidoGuardado,
-    pedidoYaNoSePuedePagar,
-    recordarPedido,
+    recordarPedidoDelIntento,
 } from "@/lib/vueltaDelPago";
 import {
     abrirElPago,
@@ -37,15 +37,12 @@ import { aLineasDeCheckout, productosSoloRetiro } from "@/lib/cartLines";
 import { huellaDelCarrito } from "@/lib/checkoutKey";
 import { queHacerConElPendiente } from "@/lib/pedidoPendiente";
 import { whatsappUrl } from "@/lib/businessProfile";
-import { vencimientoReserva } from "@/lib/resumenDelPedido";
+import { vencimientoReserva, importeConfirmado } from "@/lib/resumenDelPedido";
 import { totalesDelCarrito } from "@/lib/totalesDelCarrito";
 import {
     quoteShipping,
     createOrder,
-    fetchOrderStatus,
-    fetchPickupPoint,
     requestPaymentLink,
-    type PickupPoint,
     type StoreOrder,
 } from "@/lib/storeApi";
 
@@ -64,6 +61,8 @@ import { Campo, propsDeCampo } from "./checkout/Campo";
 import { pesos, tarjeta } from "./checkout/estilo";
 import { Pasos } from "./checkout/Pasos";
 import { ResumenAConfirmar } from "./checkout/ResumenAConfirmar";
+import { usePickupPoint } from "@/hooks/usePickupPoint";
+import { PickupDetails } from "./PickupDetails";
 
 interface CheckoutDialogProps {
     abierto: boolean;
@@ -71,13 +70,15 @@ interface CheckoutDialogProps {
     /** Lo que el comprador ya eligió en el carrito: no se le vuelve a preguntar. */
     entregaInicial?: "retiro" | "envio";
     onCerrar: () => void;
+    onEntregaChange?: (entrega: "retiro" | "envio") => void;
 }
 
-export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0, entregaInicial }: CheckoutDialogProps) {
+export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0, entregaInicial, onEntregaChange }: CheckoutDialogProps) {
     const hydrated = useHydrated();
     const router = useRouter();
     const { cart, destinoEnvio, removeFromCart } = useCartStore();
     const dialogRef = useRef<HTMLDialogElement>(null);
+    const ultimoDestinoCarrito = useRef(destinoEnvio);
 
     const [datos, setDatos] = useState<DatosDeCompra>({
         nombre: "",
@@ -87,7 +88,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
         direccion: {},
     });
     const ocupado = useRef(false);
-    const [revision, setRevision] = useState<(Awaited<ReturnType<typeof revisarPedido>> & { huella: string; datos: DatosDeCompra }) | null>(null);
+    const [revision, setRevision] = useState<(Awaited<ReturnType<typeof revisarPedido>> & { huella: string; datos: DatosDeCompra; destinoCarrito: typeof destinoEnvio }) | null>(null);
     const [problema, setProblema] = useState<ProblemaDeCheckout | null>(null);
     const [productosRevisados, setProductosRevisados] = useState(0);
     const [estimadoEnvio, setEstimadoEnvio] = useState(0);
@@ -108,9 +109,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
     // vez, al recuperarlo, no alcanza: el comprador puede cambiar el carrito
     // DESPUÉS y quedarse con un botón que ofrece pagar otra cosa.
     const [huellaPendiente, setHuellaPendiente] = useState<string | null>(null);
-    // El local donde se retira de verdad: lo elige el backend, no esta página.
-    // Si no se puede saber, la opción queda sin detalle antes que con uno falso.
-    const [retiro, setRetiro] = useState<PickupPoint | null>(null);
+    const { state: retiro, retry: reintentarRetiro } = usePickupPoint(abierto);
 
     useEffect(() => {
         if (!retiroSolicitado) return;
@@ -129,6 +128,10 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
     useEffect(() => {
         if (!abierto || !entregaInicial) return;
         const frame = requestAnimationFrame(() => {
+            const cambioDestino = JSON.stringify(ultimoDestinoCarrito.current) !== JSON.stringify(destinoEnvio);
+            ultimoDestinoCarrito.current = destinoEnvio;
+            // Sólo la revisión no reservada se invalida; nunca se cambia un payload enviado.
+            setRevision(actual => actual && (actual.datos.entrega !== entregaInicial || (entregaInicial === "envio" && cambioDestino)) ? null : actual);
             setDatos(previos =>
                 entregaInicial === "envio"
                     ? {
@@ -136,15 +139,15 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                           entrega: "envio",
                           direccion: {
                               ...previos.direccion,
-                              province: previos.direccion?.province || destinoEnvio.province,
-                              postal_code: previos.direccion?.postal_code || destinoEnvio.postal_code,
+                              province: cambioDestino ? destinoEnvio.province : previos.direccion?.province || destinoEnvio.province,
+                              postal_code: cambioDestino ? destinoEnvio.postal_code : previos.direccion?.postal_code || destinoEnvio.postal_code,
                           },
                       }
                     : { ...previos, entrega: "retiro" }
             );
         });
         return () => cancelAnimationFrame(frame);
-    }, [abierto, entregaInicial, destinoEnvio.province, destinoEnvio.postal_code]);
+    }, [abierto, entregaInicial, destinoEnvio]);
 
     useEffect(() => {
         if (!abierto) return;
@@ -166,18 +169,6 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
         };
     }, [abierto]);
 
-    useEffect(() => {
-        if (!abierto) return;
-        let vivo = true;
-        fetchPickupPoint()
-            .then(punto => {
-                if (vivo) setRetiro(punto);
-            })
-            .catch(() => undefined);
-        return () => {
-            vivo = false;
-        };
-    }, [abierto]);
 
     useEffect(() => {
         const dialog = dialogRef.current;
@@ -212,6 +203,10 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
         [items]
     );
 
+    const contextoRevision = JSON.stringify([datos, huellaActual, estimadoDeProductos, destinoEnvio, abierto]);
+    const contextoActual = useRef(contextoRevision);
+    useEffect(() => { contextoActual.current = contextoRevision; }, [contextoRevision]);
+
     // **Un pedido creado y sin pagar sobrevive a la recarga**, y se suelta si
     // el carrito pasa a ser otro. La regla completa, con sus bordes, vive en
     // `src/lib/pedidoPendiente.ts`, que es lo que se puede probar.
@@ -234,7 +229,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
             ...g.reserva,
             commerce_key: g.clave,
             access_token: g.token,
-            total_amount: g.total ?? 0,
+            total_amount: g.total ?? NaN,
             currency: g.moneda ?? "ARS",
         } as StoreOrder);
         setHuellaPendiente(g.huella);
@@ -247,7 +242,9 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
 
     useEffect(() => {
         if (!abierto || enviando || revision || aConfirmar || intentoPendiente) return;
-        dialogRef.current?.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+        const input = dialogRef.current?.querySelector<HTMLElement>('[aria-invalid="true"]');
+        input?.focus({ preventScroll: true });
+        input?.closest("[data-checkout-field]")?.scrollIntoView({ block: "nearest" });
     }, [errores, abierto, enviando, revision, aConfirmar, intentoPendiente]);
 
     const irAPagar = (url: string) => {
@@ -261,12 +258,15 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
         const pedido = await recuperarIntento(window.localStorage, {
             crearPedido: payload => crearPedidoConRecuperacion(createOrder, payload, window.localStorage),
             pedirLink: requestPaymentLink,
-            recordar: pedido => (anotarParaResenas(window.localStorage, { clave: pedido.commerce_key, email: payload.customer_email, envio: !!payload.shipping_address }), recordarPedido(window.localStorage, {
-                clave: pedido.commerce_key, checkoutKey: payload.checkout_key,
-                token: pedido.access_token, total: pedido.total_amount, moneda: pedido.currency,
-                huella: huellaDelCarrito(payload.items),
-                reserva: { reservation_expires_at: pedido.reservation_expires_at, created_at: pedido.created_at, expires_at: pedido.expires_at, reserved_until: pedido.reserved_until },
-            })),
+            recordar: async pedido => {
+                await recordarPedidoDelIntento(window.localStorage, {
+                    clave: pedido.commerce_key, checkoutKey: payload.checkout_key,
+                    token: pedido.access_token, total: pedido.total_amount, moneda: pedido.currency,
+                    huella: huellaDelCarrito(payload.items),
+                    reserva: { reservation_expires_at: pedido.reservation_expires_at, created_at: pedido.created_at, expires_at: pedido.expires_at, reserved_until: pedido.reserved_until },
+                });
+                anotarParaResenas(window.localStorage, { clave: pedido.commerce_key, email: payload.customer_email, envio: !!payload.shipping_address });
+            },
         });
         if (!pedido) return false;
         setPedidoPendiente(pedido);
@@ -294,8 +294,8 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                 setRevision(null);
                 setIntentoPendiente(!!intentoDeCheckout(window.localStorage));
             } else if (error instanceof ErrorDeCompra && error.pedido && mensajePedidoTerminado(error.pedido)) {
-                if (error.pedido.status === "paid" || error.pedido.status === "paid_pending_stock_commit") {
-                    router.push("/checkout/exito");
+                if (error.pedido.status === "paid" || error.pedido.status === "paid_pending_stock_commit" || error.pedido.status === "payment_reversed") {
+                    router.push(enlaceDelPedido(error.pedido.commerce_key));
                 } else {
                     olvidarPedido(window.localStorage, error.pedido.commerce_key);
                     setIntentoPendiente(false);
@@ -330,28 +330,30 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
         setErrores(encontrados);
         setFallo(null);
         if (hayErrores(encontrados)) {
-            // El foco va al primer campo con error: en el celular el mensaje
-            // puede quedar fuera de la pantalla y el botón no parece hacer nada.
-            requestAnimationFrame(() => {
-                dialogRef.current
-                    ?.querySelector<HTMLElement>('[aria-invalid="true"]')
-                    ?.focus();
-            });
             return;
         }
+        if (datos.entrega === "retiro" && retiro.status !== "ready") return;
         if (ocupado.current || pedidoPendiente || aConfirmar) return;
         ocupado.current = true;
         setEnviando(true);
         setProblema(null);
         try {
             const r = await revisarPedido(datos, items, estimadoDeProductos, quoteShipping);
-            setRevision({ ...r, datos: structuredClone(datos), huella: huellaActual });
+            if (contextoActual.current !== contextoRevision) {
+                setFallo("El carrito o el destino cambió. Revisá el pedido otra vez.");
+                return;
+            }
+            setRevision({ ...r, datos: structuredClone(datos), huella: huellaActual, destinoCarrito: { ...destinoEnvio } });
             setEstimadoEnvio(r.envio);
             setProductosRevisados(r.productos);
         } catch (error) {
+            if (contextoActual.current !== contextoRevision) {
+                setFallo("El carrito o el destino cambió. Revisá el pedido otra vez.");
+                return;
+            }
             const p = problemaDeCheckout(error, items);
             setErrores(p.campos ?? {});
-            setProblema({ ...p, ofrecerRetiro: datos.entrega === "envio" || p.ofrecerRetiro });
+            setProblema(p);
             setFallo(p.mensaje);
         } finally {
             ocupado.current = false;
@@ -361,7 +363,8 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
 
     const confirmarRevision = async () => {
         if (!revision || ocupado.current || pedidoPendiente || aConfirmar) return;
-        if (hayErrores(validarDatos(revision.datos, items)) || revision.huella !== huellaActual || revision.productos !== estimadoDeProductos) {
+        if (revision.datos.entrega === "retiro" && retiro.status !== "ready") return;
+        if (revision.datos.entrega !== datos.entrega || (entregaInicial && revision.datos.entrega !== entregaInicial) || hayErrores(validarDatos(revision.datos, items)) || revision.huella !== huellaActual || revision.productos !== estimadoDeProductos || JSON.stringify(revision.datos) !== JSON.stringify(datos) || (revision.datos.entrega === "envio" && JSON.stringify(revision.destinoCarrito) !== JSON.stringify(destinoEnvio))) {
             setRevision(null);
             setFallo("El carrito cambió. Revisá el pedido otra vez.");
             return;
@@ -376,7 +379,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
         setFallo(null);
         try {
             const { payload, recuperado } = await prepararIntento(window.localStorage, aLineasDeCheckout(items).lineas,
-                (clave, secreto) => armarPedido(revision.datos, items, clave, secreto));
+                (clave, secreto) => armarPedido(revision.datos, items, clave, secreto, revision.quoteId));
             setIntentoPendiente(true);
             const { pedido, checkoutUrl } = await reservarYPagarSiCoincide(
                 {
@@ -386,11 +389,8 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                     // es lo que permite volver si el pago no llega a abrirse, y
                     // lo que la pantalla de vuelta usa para preguntar el estado
                     // sin depender de los parametros de la URL.
-                    recordar: (pedido) => {
-                        setPedidoPendiente(pedido);
-                        setHuellaPendiente(huellaDelCarrito(payload.items));
-                        anotarParaResenas(window.localStorage, { clave: pedido.commerce_key, email: payload.customer_email, envio: !!payload.shipping_address });
-                        recordarPedido(window.localStorage, {
+                    recordar: async (pedido) => {
+                        await recordarPedidoDelIntento(window.localStorage, {
                             clave: pedido.commerce_key,
                             checkoutKey: payload.checkout_key,
                             token: pedido.access_token ?? null,
@@ -402,6 +402,9 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                             huella: huellaDelCarrito(payload.items),
                             reserva: { reservation_expires_at: pedido.reservation_expires_at, created_at: pedido.created_at, expires_at: pedido.expires_at, reserved_until: pedido.reserved_until },
                         });
+                        setPedidoPendiente(pedido);
+                        setHuellaPendiente(huellaDelCarrito(payload.items));
+                        anotarParaResenas(window.localStorage, { clave: pedido.commerce_key, email: payload.customer_email, envio: !!payload.shipping_address });
                     },
                 },
                 payload, revision.productos, revision.envio, recuperado
@@ -421,8 +424,8 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                 setErrores(p.campos ?? {});
                 setRevision(null);
                 if (error.pedido && mensajePedidoTerminado(error.pedido)) {
-                    if (error.pedido.status === "paid" || error.pedido.status === "paid_pending_stock_commit") {
-                        router.push("/checkout/exito");
+                    if (error.pedido.status === "paid" || error.pedido.status === "paid_pending_stock_commit" || error.pedido.status === "payment_reversed") {
+                        router.push(enlaceDelPedido(error.pedido.commerce_key));
                     } else {
                         olvidarPedido(window.localStorage, error.pedido.commerce_key);
                         setIntentoPendiente(false);
@@ -447,7 +450,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
     };
 
     const confirmarYPagar = async () => {
-        if (!aConfirmar || ocupado.current) return;
+        if (!aConfirmar || ocupado.current || (aConfirmar.shipping === null && retiro.status !== "ready")) return;
         ocupado.current = true;
         setEnviando(true);
         setFallo(null);
@@ -461,11 +464,9 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
             // servir para recuperar el mismo pedido.
             irAPagar(url);
         } catch (error) {
-            setFallo(
-                error instanceof ErrorDeCompra
-                    ? error.message
-                    : "No pudimos abrir el pago. Probá de nuevo."
-            );
+            const p = problemaDeCheckout(error, items);
+            setProblema(p);
+            setFallo(p.mensaje);
             // El pedido sigue vivo y con su token: se ofrece reintentar solo el
             // link en vez de crear otro.
             setPedidoPendiente(aConfirmar);
@@ -478,66 +479,37 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
 
     const reintentarSoloElLink = async () => {
         if (!pedidoPendiente?.access_token || ocupado.current) return;
-        ocupado.current = true;
-        setEnviando(true);
-        setFallo(null);
         try {
-            const { checkout_url } = await requestPaymentLink(pedidoPendiente.access_token);
-            irAPagar(checkout_url);
-        } catch (error) {
-            const status = (error as { status?: number } | null)?.status;
-
-            // **El 409 no dice qué pasó.** El backend contesta lo mismo para
-            // "el pedido ya no acepta un link" y para "la tienda no puede
-            // cobrar ahora" —credenciales vencidas o ilegibles—, y lo hace a
-            // propósito, para no delatar qué empresas cobran online. Tomarlo
-            // como "este pedido murió" tira el token de un pedido perfectamente
-            // pagable cada vez que la tienda tiene un problema de credenciales.
-            //
-            // Quién sabe de verdad es el estado del pedido, que es lo que se
-            // pregunta acá antes de soltar nada.
-            if (status === 409) {
-                let terminado = false;
-                try {
-                    const estado = await fetchOrderStatus(pedidoPendiente.commerce_key);
-                    terminado = pedidoYaNoSePuedePagar(estado);
-                } catch {
-                    // Sin poder confirmarlo, el pedido se conserva: perderlo es
-                    // irreversible y volver a intentar no cuesta nada.
-                }
-
-                if (terminado) {
-                    try {
-                        olvidarPedido(window.localStorage, pedidoPendiente.commerce_key);
-                    } catch {
-                        // Si no se puede limpiar, al menos el diálogo se destraba.
-                    }
-                    setPedidoPendiente(null);
-                    setHuellaPendiente(null);
-                    setFallo(
-                        "Ese pedido ya no se puede pagar: puede que ya esté pagado o que haya vencido. Revisá tu mail o escribinos."
-                    );
-                } else {
-                    setFallo(
-                        "No pudimos abrir el pago ahora. Tu pedido sigue reservado: probá de nuevo en un rato o escribinos."
-                    );
-                }
-            } else {
-                setFallo("Seguimos sin poder abrir el pago. Escribinos y lo resolvemos.");
+            if (intentoDeCheckout(window.localStorage)) {
+                await retomarIntento();
+                return;
             }
-            setEnviando(false);
-        } finally {
-            ocupado.current = false;
+            // Los guardados antiguos no tienen payload/importes completos. Consultar
+            // la referencia pública permite recuperar su estado sin crear otro pedido.
+            router.push(enlaceDelPedido(pedidoPendiente.commerce_key));
+        } catch {
+            setFallo("No pudimos recuperar el acceso. Escribinos con el número de este pedido antes de volver a comprar.");
         }
     };
 
     if (!abierto) return null;
 
-    const numeroPedido = (aConfirmar ?? pedidoPendiente)?.commerce_key;
+    const pedidoEncabezado = aConfirmar ?? pedidoPendiente;
+    const numeroPedido = pedidoEncabezado?.commerce_key;
+    const subtotalEncabezado = pedidoEncabezado ? importeConfirmado(pedidoEncabezado.subtotal_amount) : estimadoDeProductos;
     const soloRetiro = productosSoloRetiro(items);
     const esEnvio = datos.entrega === "envio";
     const cambiarDireccion = (cambio: Partial<DireccionDelFormulario>) =>
         setDatos({ ...datos, direccion: { ...datos.direccion, ...cambio } });
+    const cambiarEntrega = (entrega: "retiro" | "envio") => {
+        // El carrito debe reflejar lo que eligió acá: cerrar y volver no cambia la modalidad.
+        onEntregaChange?.(entrega);
+        setDatos(previos => ({ ...previos, entrega, direccion: {
+            ...previos.direccion,
+            province: previos.direccion?.province || destinoEnvio.province,
+            postal_code: previos.direccion?.postal_code || destinoEnvio.postal_code,
+        } }));
+    };
 
     const paso: 1 | 2 | 3 = aConfirmar ? 3 : revision ? 2 : 1;
     const cantidadDeProductos = cart.reduce((suma, item) => suma + item.quantity, 0);
@@ -550,10 +522,10 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                     event.preventDefault();
                     if (!enviando) onCerrar();
                 }}
-                className="fixed inset-x-0 bottom-0 top-auto m-0 hidden max-h-[92dvh] w-full max-w-lg overflow-y-auto rounded-t-2xl border-0 bg-white p-0 text-slate-950 backdrop:bg-black/60 open:block dark:bg-slate-950 dark:text-slate-50 sm:inset-0 sm:m-auto sm:rounded-2xl"
+                className="fixed inset-x-0 bottom-0 top-auto m-0 hidden max-h-[92dvh] w-full max-w-lg flex-col overflow-hidden rounded-t-2xl border-0 bg-white p-0 text-slate-950 backdrop:bg-black/60 open:flex dark:bg-slate-950 dark:text-slate-50 sm:inset-0 sm:m-auto sm:rounded-2xl"
             >
                 {/* Encabezado fijo: dónde está el comprador y qué está comprando. */}
-                <div className="sticky top-0 z-10 border-b border-slate-200 bg-white/95 px-5 pb-3 pt-4 backdrop-blur dark:border-slate-800 dark:bg-slate-950/95">
+                <div data-checkout-header className="shrink-0 border-b border-slate-200 bg-white/95 px-5 pb-3 pt-4 backdrop-blur dark:border-slate-800 dark:bg-slate-950/95">
                     <div className="flex items-center justify-between gap-3">
                         <h2 className="text-lg font-semibold text-slate-950 dark:text-slate-50">
                             {aConfirmar ? "Revisá y confirmá tu compra" : revision ? "Revisá tu pedido" : "Tus datos y entrega"}
@@ -564,12 +536,12 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                     </div>
                     <Pasos actual={paso} />
                     <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-                        {cantidadDeProductos} {cantidadDeProductos === 1 ? "producto" : "productos"} · {pesos(estimadoDeProductos)}
+                        {cantidadDeProductos} {cantidadDeProductos === 1 ? "producto" : "productos"} · {!pedidoEncabezado && "Estimado: "}{subtotalEncabezado === null ? "Productos por confirmar" : pesos(subtotalEncabezado)}
                         {paso === 1 ? (datos.entrega === "envio" ? " + envío" : " · retiro sin costo") : ""}
                     </p>
                 </div>
 
-                <div className="px-5 pb-5">
+                <div data-checkout-scroll className="min-h-0 overflow-y-auto overscroll-contain px-5 pb-5">
                 {errores.carrito && (
                     <p className="mt-3 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-800 dark:bg-amber-500/10 dark:text-amber-300">
                         {errores.carrito}
@@ -597,6 +569,9 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                         enviando={enviando}
                         fallo={fallo}
                         onPagar={confirmarYPagar}
+                        onActualizar={retomarIntento}
+                        retiro={<PickupDetails state={retiro} retry={reintentarRetiro} existingOrder />}
+                        entregaConfirmada={aConfirmar.shipping !== null || retiro.status === "ready"}
                         onVolver={() => {
                             // **No se cancela el pedido.** Ya tiene stock
                             // reservado; queda recuperable por el mismo camino
@@ -628,13 +603,14 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                             <div>
                                 <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">{revision.datos.entrega === "retiro" ? "Retiro" : "Envío a"}</h3>
                                 <p className="mt-1">{revision.datos.entrega === "retiro"
-                                    ? retiro ? [retiro.name, retiro.address].filter(Boolean).join(" · ") : "Retiro en el local. No pudimos obtener la dirección; escribinos para confirmarla."
+                                    ? "Retiro en el local"
                                     : [revision.datos.direccion?.street, revision.datos.direccion?.number,
                                         revision.datos.direccion?.floor && "Piso " + revision.datos.direccion.floor,
                                         revision.datos.direccion?.apartment && "Depto " + revision.datos.direccion.apartment,
                                         revision.datos.direccion?.city,
                                         PROVINCIAS.find(([codigo]) => codigo === revision.datos.direccion?.province)?.[1] ?? revision.datos.direccion?.province,
                                         "CP " + revision.datos.direccion?.postal_code].filter(Boolean).join(" · ")}</p>
+                                {revision.datos.entrega === "retiro" && <PickupDetails state={retiro} retry={reintentarRetiro} />}
                             </div>
                             <div>
                                 <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Contacto</h3>
@@ -648,7 +624,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                         </dl>
                         <p className="text-xs text-slate-500 dark:text-slate-400">Todavía no reservaste. Si cambia el total, te vamos a pedir que lo confirmes.</p>
                         {fallo && <p role="alert" className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-800 dark:bg-rose-500/10 dark:text-rose-300">{fallo}</p>}
-                        <button type="button" disabled={enviando} onClick={confirmarRevision} className="min-h-12 rounded-full bg-primary px-5 text-base font-semibold text-white transition hover:bg-primary/90 disabled:opacity-50">{enviando ? "Un momento…" : "Confirmar y pagar"}</button>
+                        <button type="button" disabled={enviando || (revision.datos.entrega === "retiro" && retiro.status !== "ready")} onClick={confirmarRevision} className="min-h-12 rounded-full bg-primary px-5 text-base font-semibold text-white transition hover:bg-primary/90 disabled:opacity-50">{enviando ? "Un momento…" : "Confirmar y pagar"}</button>
                         <button type="button" disabled={enviando} onClick={() => { setRevision(null); setFallo(null); }} className="min-h-11 rounded-full border border-slate-300 px-5 text-sm dark:border-slate-700">Cambiar datos</button>
                     </div>
                 ) : (
@@ -663,15 +639,10 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                                 name="entrega"
                                 className="mt-1 accent-[#1a6dff]"
                                 checked={!esEnvio}
-                                onChange={() => setDatos({ ...datos, entrega: "retiro" })}
+                                onChange={() => cambiarEntrega("retiro")}
                             />
                             <span className="flex-1">
                                 <span className="flex justify-between gap-2 font-semibold">Retiro en el local <span className="text-emerald-600 dark:text-emerald-400">Gratis</span></span>
-                                {retiro && (
-                                    <span className="mt-0.5 block text-xs text-slate-500 dark:text-slate-400">
-                                        {[retiro.name, retiro.address, retiro.hours].filter(Boolean).join(" · ")}
-                                    </span>
-                                )}
                             </span>
                         </label>
                         <label className={`flex items-start gap-3 rounded-2xl border p-4 text-sm transition ${soloRetiro.length ? "cursor-not-allowed opacity-60" : "cursor-pointer"} ${esEnvio ? "border-primary bg-primary/10" : "border-slate-300 dark:border-slate-700"}`}>
@@ -682,11 +653,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                                 checked={esEnvio}
                                 disabled={soloRetiro.length > 0}
                                 aria-describedby={soloRetiro.length ? "solo-retiro" : undefined}
-                                onChange={() => setDatos({ ...datos, entrega: "envio", direccion: {
-                                    ...datos.direccion,
-                                    province: datos.direccion?.province || destinoEnvio.province,
-                                    postal_code: datos.direccion?.postal_code || destinoEnvio.postal_code,
-                                } })}
+                                onChange={() => cambiarEntrega("envio")}
                             />
                             <span className="flex-1">
                                 <span className="block font-semibold">Envío a domicilio</span>
@@ -695,6 +662,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                             </span>
                         </label>
                     </fieldset>
+                    {!esEnvio && <PickupDetails state={retiro} retry={reintentarRetiro} />}
 
                     <section className="flex flex-col gap-3">
                         <div>
@@ -827,13 +795,13 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                     {fallo && (
                         <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-500/10 dark:text-red-300">
                             <p role="alert">{fallo}</p>
-                            {!pedidoPendiente && problema?.ofrecerRetiro && <button type="button" className="min-h-11 underline" onClick={() => { setDatos({ ...datos, entrega: "retiro" }); setErrores({}); setRevision(null); setFallo(null); setProblema(null); }}>Retirar en el local</button>}
+                            {!pedidoPendiente && problema?.ofrecerRetiro && <button type="button" className="min-h-11 underline" onClick={() => { cambiarEntrega("retiro"); setErrores({}); setRevision(null); setFallo(null); setProblema(null); }}>Retirar en el local</button>}
                             {!pedidoPendiente && problema?.quitarSlug && <button type="button" className="min-h-11 underline" onClick={() => { cart.filter(i => i.storeSlug === problema.quitarSlug).forEach(i => removeFromCart(i.cartKey)); setFallo(null); setProblema(null); }}>Quitar del carrito</button>}
                             {pedidoPendiente && (
                                 <>
                                     <p className="mt-1 text-xs">
                                         Tu pedido {pedidoPendiente.commerce_key} quedó reservado por{" "}
-                                        {pesos(pedidoPendiente.total_amount, pedidoPendiente.currency)}. No lo
+                                        {importeConfirmado(pedidoPendiente.total_amount) !== null ? pesos(pedidoPendiente.total_amount, pedidoPendiente.currency) : "un importe por confirmar"}. No lo
                                         pidas de nuevo: reintentá el pago. {vencimientoReserva(pedidoPendiente) && `Reservado hasta ${vencimientoReserva(pedidoPendiente)}.`}
                                     </p>
                                     <button
@@ -851,14 +819,14 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
 
                     <button
                         type="submit"
-                        disabled={enviando || cart.length === 0 || pedidoPendiente !== null}
+                        disabled={enviando || cart.length === 0 || pedidoPendiente !== null || (!esEnvio && retiro.status !== "ready")}
                         className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-5 text-base font-semibold text-white transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
                     >
-                        {enviando ? "Un momento…" : "Revisar pedido"}
+                        {enviando ? "Un momento…" : problema?.recalcularEnvio ? "Volver a calcular envío" : "Revisar pedido"}
                     </button>
                 </form>
                 )}
-                <a className="mt-4 flex min-h-11 items-center justify-center text-sm text-slate-600 underline-offset-4 hover:underline dark:text-slate-400" href={whatsappUrl("Hola, necesito ayuda con " + (numeroPedido ? "el pedido " + numeroPedido : "mi compra en la tienda") + ".")} target="_blank" rel="noopener noreferrer">¿Dudas? Escribinos por WhatsApp</a>
+                <a className="mt-4 flex min-h-11 items-center justify-center text-sm text-slate-600 underline-offset-4 hover:underline dark:text-slate-400" href={whatsappUrl("Hola, necesito ayuda con " + (numeroPedido ? "el pedido " + numeroPedido : "mi compra en la tienda") + ".")} target="_blank" rel="noopener noreferrer">{problema?.consultarEnvio ? "Consultar por este envío" : "¿Dudas? Escribinos por WhatsApp"}</a>
                 </div>
             </dialog>
     );

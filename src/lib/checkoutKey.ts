@@ -45,12 +45,15 @@ const nuevaClave = (): string => {
     return `ck-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 12)}`;
 };
 
+import { aLineasDeCheckout, carritoComprable } from "./cartLines";
+import { errorDeCantidades } from "./commerceValidation";
 import type { CheckoutPayload } from "./storeApi";
 
 interface Guardada {
     key: string;
     huella: string;
     recoveryToken?: string;
+    cartRevision?: string | null;
     payload?: CheckoutPayload;
 }
 
@@ -67,6 +70,27 @@ const leer = (almacen: AlmacenClave): Guardada | null => {
         return null;
     }
 };
+
+/** Revisión capturada antes de enviar el intento, nunca la actual al recibirlo. */
+export const revisionDelIntento = (almacen: AlmacenClave, clave: string): string | null => {
+    const intento = leer(almacen);
+    return intento?.key === clave && typeof intento.cartRevision === "string" ? intento.cartRevision : null;
+};
+
+const capturarRevisionCarrito = (almacen: AlmacenClave, items: { slug: string; quantity: number }[]): string | null => {
+    const crudo = almacen.getItem("cart-storage");
+    if (!crudo) return null; // Intento anterior o consumidor sin carrito persistido.
+    const estado = JSON.parse(crudo)?.state;
+    if (!Array.isArray(estado?.cart)) throw new Error("No pudimos comprobar el carrito guardado.");
+    const actual = estado.cart.map((item: { storeSlug?: string; quantity: number }) => ({ slug: item.storeSlug, quantity: item.quantity }));
+    const resumen = aLineasDeCheckout(actual);
+    if (errorDeCantidades(actual) || !carritoComprable(resumen) || huellaDelCarrito(resumen.lineas) !== huellaDelCarrito(items)) {
+        throw new Error("El carrito cambió en otra pestaña. Revisá el pedido otra vez.");
+    }
+    return typeof estado.cartRevision === "string" ? estado.cartRevision : null;
+};
+
+export const claveDeCheckoutGuardada = (almacen: AlmacenClave): string | null => leer(almacen)?.key ?? null;
 
 /** Un intento enviado nunca se reemplaza por datos editados, ni por otro carrito. */
 export const intentoDeCheckout = (almacen: AlmacenClave): CheckoutPayload | null => {
@@ -89,14 +113,17 @@ export const prepararIntento = async (
     return locks.request("tc.checkout", async () => {
         const anterior = intentoDeCheckout(almacen);
         if (anterior) return { payload: anterior, recuperado: true };
-        const clave = claveDeCheckout(almacen, items);
-        const secreto = secretoDeCheckout(almacen, clave);
-        const payload = construir(clave, secreto);
-        const contenido = JSON.stringify({ ...leer(almacen), payload });
-        // Sin el cuerpo original persistido, una respuesta perdida no es recuperable con seguridad.
-        almacen.setItem(ESPACIO, contenido);
-        if (almacen.getItem(ESPACIO) !== contenido) throw new Error("No pudimos guardar tu compra en este navegador.");
-        return { payload, recuperado: false };
+        return locks.request("tc.cart", async () => {
+            const cartRevision = capturarRevisionCarrito(almacen, items);
+            const clave = claveDeCheckout(almacen, items);
+            const secreto = secretoDeCheckout(almacen, clave);
+            const payload = construir(clave, secreto);
+            const contenido = JSON.stringify({ ...leer(almacen), payload, cartRevision });
+            // Sin el cuerpo original persistido, una respuesta perdida no es recuperable con seguridad.
+            almacen.setItem(ESPACIO, contenido);
+            if (almacen.getItem(ESPACIO) !== contenido) throw new Error("No pudimos guardar tu compra en este navegador.");
+            return { payload, recuperado: false };
+        });
     });
 };
 

@@ -14,12 +14,13 @@ import type { StoreOrder } from "./storeApi";
  */
 
 export interface ResumenParaConfirmar {
+    importesConfirmados: boolean;
     /** Los productos, al precio del servidor. */
-    subtotal: number;
+    subtotal: number | null;
     /** Lo que cotizó el envío. Cero cuando retira por el local. */
-    envio: number;
+    envio: number | null;
     /** **Lo que se cobra.** */
-    total: number;
+    total: number | null;
     moneda: string;
     /** `true` cuando hay envío que mostrar como renglón aparte. */
     hayEnvio: boolean;
@@ -35,16 +36,11 @@ export interface ResumenParaConfirmar {
     diferencia: number;
 }
 
-const numeroSano = (n: unknown): number =>
-    typeof n === "number" && Number.isFinite(n) ? n : 0;
+export const importeConfirmado = (n: unknown): number | null =>
+    typeof n === "number" && Number.isFinite(n) && n >= 0 ? n : null;
 
-/**
- * Un peso de tolerancia.
- *
- * Los importes viajan como número y pueden volver con centavos de redondeo del
- * proveedor. Avisar "el precio cambió" por un centavo asusta sin motivo.
- */
-const TOLERANCIA = 1;
+/** Comparar dinero en centavos evita diferencias sólo de representación binaria. */
+const centavos = (importe: number) => Math.round(importe * 100);
 
 /**
  * El resumen, a partir del pedido del servidor y de lo que el carrito mostraba.
@@ -57,25 +53,30 @@ export const resumenParaConfirmar = (
     estimadoDeProductos: number,
     estimadoDeEnvio?: number
 ): ResumenParaConfirmar => {
-    const subtotal = numeroSano(pedido?.subtotal_amount);
-    const envio = numeroSano(pedido?.shipping_amount);
-    const total = numeroSano(pedido?.total_amount);
-    const estimado = numeroSano(estimadoDeProductos);
+    const subtotal = importeConfirmado(pedido?.subtotal_amount);
+    const envio = importeConfirmado(pedido?.shipping_amount);
+    const total = importeConfirmado(pedido?.total_amount);
+    const estimado = importeConfirmado(estimadoDeProductos) ?? 0;
+    const importesConfirmados = subtotal !== null && envio !== null && total !== null;
 
-    const diferencia = estimadoDeEnvio === undefined
-        ? subtotal - estimado
-        : total - estimado - estimadoDeEnvio;
+    const diferencia = !importesConfirmados ? 0 : estimadoDeEnvio === undefined
+        ? subtotal! - estimado
+        : total! - estimado - estimadoDeEnvio;
 
     return {
+        importesConfirmados,
         subtotal,
         envio,
         total,
         moneda: pedido?.currency || "ARS",
-        hayEnvio: envio > 0,
+        hayEnvio: envio === null || envio > 0,
         // Sin estimado no se afirma que cambió: un carrito recuperado de una
         // versión vieja puede no tener con qué comparar, y decir "el precio
         // cambió" sobre eso es inventar.
-        precioCambio: (estimadoDeEnvio !== undefined || estimado > 0) && Math.abs(diferencia) > TOLERANCIA,
+        precioCambio: importesConfirmados && (estimadoDeEnvio !== undefined
+            ? centavos(subtotal!) !== centavos(estimado) || centavos(envio!) !== centavos(estimadoDeEnvio)
+                || centavos(total!) !== centavos(estimado) + centavos(estimadoDeEnvio)
+            : estimado > 0 && centavos(subtotal!) !== centavos(estimado)),
         diferencia,
     };
 };
@@ -84,9 +85,10 @@ export const resumenParaConfirmar = (
 export const vencimientoReserva = (pedido: Pick<StoreOrder, "reservation_expires_at" | "expires_at" | "reserved_until" | "created_at">): string | null => {
     // null confirma que no quedan reservas activas; no se inventa un vencimiento.
     if (pedido.reservation_expires_at === null) return null;
-    const exacto = [pedido.reservation_expires_at, pedido.expires_at, pedido.reserved_until].find(v => v && Number.isFinite(Date.parse(v)));
-    const creado = pedido.created_at ? Date.parse(pedido.created_at) : NaN;
-    if (!exacto && !Number.isFinite(creado)) return null;
-    const fecha = new Date(exacto ? Date.parse(exacto) : creado + 15 * 60_000);
-    return fecha.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit" }) + (exacto ? "" : " (aprox.)");
+    // Una fecha sin offset no confirma un instante: no depende de la zona del navegador.
+    const exacto = [pedido.reservation_expires_at, pedido.expires_at, pedido.reserved_until].find(v => v && /(?:Z|[+-]\d{2}:\d{2})$/i.test(v) && Number.isFinite(Date.parse(v)));
+    if (!exacto) return null;
+    return new Intl.DateTimeFormat("es-AR", {
+        timeZone: "America/Argentina/Buenos_Aires", day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit", hourCycle: "h23",
+    }).format(new Date(exacto)) + " (hora de Argentina)";
 };

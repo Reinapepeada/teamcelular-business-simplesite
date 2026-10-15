@@ -53,7 +53,8 @@ test("F1 conecta todos los campos del servidor con aria-invalid y foco tras rend
     }
     assert.match(fuente, /"aria-invalid": error \? true : undefined/);
     assert.match(fuente, /\[errores, abierto, enviando, revision, aConfirmar, intentoPendiente\]/);
-    assert.match(fuente, /querySelector<HTMLElement>\('\[aria-invalid="true"\]'\)\?\.focus\(\)/);
+    assert.match(fuente, /input\?\.focus\(\{ preventScroll: true \}\)/);
+    assert.match(fuente, /scrollIntoView\(\{ block: "nearest" \}\)/);
     assert.match(fuente, /removeFromCart\(i.cartKey\)/);
     assert.match(fuente, /Quitar del carrito/);
 });
@@ -91,12 +92,12 @@ test("#16 rechazo tardío no borra otro intento y rechazo de pago no descarta pe
     assert.equal(rechazoDefinitivo(new ErrorDeCompra("Falló pago", pedido, rechazo("validation_error"))), false);
 });
 
-test("F2 prioriza vencimiento real, persiste null y estima solamente sin dato", () => {
+test("F2 prioriza vencimiento real, persiste null y no inventa plazo", () => {
     const created_at = "2026-09-27T12:00:00Z";
     const exacto = "2026-09-27T12:07:00Z";
-    const esperado = new Date(exacto).toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit" });
+    const esperado = "27/09/2026, 09:07 (hora de Argentina)";
     assert.equal(vencimientoReserva({ created_at, reservation_expires_at: exacto, expires_at: created_at }), esperado);
-    assert.match(vencimientoReserva({ created_at })!, /aprox\./);
+    assert.equal(vencimientoReserva({ created_at }), null);
     assert.equal(vencimientoReserva({ created_at, reservation_expires_at: null }), null);
     for (const reservation_expires_at of [exacto, null]) {
         const almacen = almacenNuevo();

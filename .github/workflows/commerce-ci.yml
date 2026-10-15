@@ -18,8 +18,8 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
           cache: npm
@@ -30,5 +30,19 @@ jobs:
       - name: Build with isolated same-origin topology
         run: npm run build
         env:
+          NODE_ENV: production
           NEXT_PUBLIC_BASE_URL: https://store.example.test
-          STORE_SAME_ORIGIN_PROXY_CONFIRMED: "true"
+      - name: Check TypeScript with generated Next.js types
+        run: npx --no-install tsc --noEmit
+      - name: Install isolated test browser
+        run: npx playwright install --with-deps chromium
+      - name: Checkout recovery with fake services only
+        run: npm run test:browser
+      - name: Preserve browser evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: checkout-recovery-browser-evidence
+          path: test-results/
+          retention-days: 14
+          if-no-files-found: ignore

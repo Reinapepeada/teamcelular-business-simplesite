@@ -3,6 +3,10 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import type { Product, ProductVariant } from "@/app/tienda/product";
 import { claveDeCarrito } from "@/lib/cartKey";
+import { errorDeCantidades } from "@/lib/commerceValidation";
+import { aLineasDeCheckout, carritoComprable } from "@/lib/cartLines";
+import { claveDeCheckoutGuardada, huellaDelCarrito } from "@/lib/checkoutKey";
+import { pedidoGuardado } from "@/lib/vueltaDelPago";
 import { limitarCantidadAlStock } from "@/lib/stockDeLaFicha";
 
 // Item del carrito con variante seleccionada opcional
@@ -30,11 +34,12 @@ export interface CartItem {
 
 interface CartState {
     destinoEnvio: { province: string; postal_code: string };
-    setDestinoEnvio: (destino: { province: string; postal_code: string }) => void;
+    setDestinoEnvio: (destino: Partial<{ province: string; postal_code: string }>) => Promise<void>;
     open: boolean;
     openCart: () => void;
     closeCart: () => void;
     cart: CartItem[];
+    cartRevision: string | null;
     totalItems: number;
     totalPrice: number;
     
@@ -44,10 +49,12 @@ interface CartState {
         variant?: ProductVariant | null,
         quantity?: number,
         storeSlug?: string | null
-    ) => void;
-    removeFromCart: (cartKey: string) => void;
-    updateQuantity: (cartKey: string, newQuantity: number) => void;
-    clearCart: () => void;
+    ) => Promise<void>;
+    removeFromCart: (cartKey: string) => Promise<void>;
+    updateQuantity: (cartKey: string, newQuantity: number) => Promise<void>;
+    adjustQuantity: (cartKey: string, delta: number) => Promise<void>;
+    clearCart: () => Promise<void>;
+    clearPurchasedCart: (orderKey: string) => Promise<boolean>;
     
     // Utilidades
     getItemByKey: (cartKey: string) => CartItem | undefined;
@@ -66,19 +73,46 @@ function calculateTotals(cart: CartItem[]) {
     };
 }
 
+function changeQuantity(cart: CartItem[], cartKey: string, quantity: (actual: number) => number): CartItem[] {
+    return cart.flatMap(item => {
+        if (item.cartKey !== cartKey) return [item];
+        const next = quantity(item.quantity);
+        if (next <= 0) return [];
+        return [{ ...item, quantity: limitarCantidadAlStock(next,
+            item.variant?.stock ?? item.product.variants.reduce((sum, variant) => sum + variant.stock, 0)) || item.quantity }];
+    });
+}
+
+// Toda escritura persistida usa el mismo lock y relee el carrito de las otras
+// pestañas. Abrir/cerrar el panel no puede volver a guardar una copia vieja.
+const newCartRevision = () => globalThis.crypto?.randomUUID?.()
+    ?? `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+let persistChange = false;
+async function changeCart<T>(change: () => T): Promise<T> {
+    const run = async () => {
+        await useCartStore.persist.rehydrate();
+        persistChange = true;
+        try { return change(); } finally { persistChange = false; }
+    };
+    return globalThis.navigator?.locks
+        ? navigator.locks.request("tc.cart", run)
+        : run();
+}
+
 const useCartStore = create<CartState>()(
     persist(
         (set, get) => ({
             destinoEnvio: { province: "", postal_code: "" },
-            setDestinoEnvio: (destinoEnvio) => set({ destinoEnvio }),
+            setDestinoEnvio: (cambios) => changeCart(() => { set({ destinoEnvio: { ...get().destinoEnvio, ...cambios } }); }),
             open: false,
             openCart: () => set({ open: true }),
             closeCart: () => set({ open: false }),
             cart: [],
+            cartRevision: null,
             totalItems: 0,
             totalPrice: 0,
 
-            addToCart: (product, variant = null, quantity = 1, storeSlug = null) => {
+            addToCart: (product, variant = null, quantity = 1, storeSlug = null) => changeCart(() => {
                 const { cart } = get();
                 const cartKey = generateCartKey(product.id, variant?.id, storeSlug);
                 const existingItem = cart.find((item) => item.cartKey === cartKey);
@@ -120,42 +154,47 @@ const useCartStore = create<CartState>()(
                 }
 
                 const totals = calculateTotals(updatedCart);
-                set({ cart: updatedCart, ...totals });
-            },
+                set({ cart: updatedCart, cartRevision: newCartRevision(), ...totals });
+            }),
 
-            removeFromCart: (cartKey) => {
+            removeFromCart: (cartKey) => changeCart(() => {
                 const { cart } = get();
                 const updatedCart = cart.filter((item) => item.cartKey !== cartKey);
                 const totals = calculateTotals(updatedCart);
-                set({ cart: updatedCart, ...totals });
-            },
+                set({ cart: updatedCart, cartRevision: newCartRevision(), ...totals });
+            }),
 
-            updateQuantity: (cartKey, newQuantity) => {
-                const { cart, removeFromCart } = get();
+            updateQuantity: (cartKey, newQuantity) => changeCart(() => {
+                const updatedCart = changeQuantity(get().cart, cartKey, () => newQuantity);
+                set({ cart: updatedCart, cartRevision: newCartRevision(), ...calculateTotals(updatedCart) });
+            }),
+            adjustQuantity: (cartKey, delta) => changeCart(() => {
+                const updatedCart = changeQuantity(get().cart, cartKey, actual => actual + delta);
+                set({ cart: updatedCart, cartRevision: newCartRevision(), ...calculateTotals(updatedCart) });
+            }),
 
-                if (newQuantity <= 0) {
-                    removeFromCart(cartKey);
-                    return;
-                }
-
-                const updatedCart = cart.map((item) =>
-                    item.cartKey === cartKey 
-                        ? {
-                            ...item,
-                            quantity: limitarCantidadAlStock(
-                                newQuantity,
-                                item.variant?.stock ?? item.product.variants.reduce((sum, variant) => sum + variant.stock, 0),
-                            ) || item.quantity,
-                        }
-                        : item
-                );
-                
-                const totals = calculateTotals(updatedCart);
-                set({ cart: updatedCart, ...totals });
-            },
-
-            clearCart: () => {
-                set({ cart: [], totalItems: 0, totalPrice: 0 });
+            clearCart: () => changeCart(() => {
+                set({ cart: [], cartRevision: newCartRevision(), totalItems: 0, totalPrice: 0 });
+            }),
+            clearPurchasedCart: async (orderKey) => {
+                // Sin exclusión entre pestañas, conservar es más seguro que borrar.
+                if (!globalThis.navigator?.locks) return false;
+                return changeCart(() => {
+                    const order = pedidoGuardado(localStorage);
+                    const checkoutKey = claveDeCheckoutGuardada(localStorage);
+                    if (checkoutKey && checkoutKey !== order?.checkoutKey) return false;
+                    // Quitar y volver a agregar lo mismo crea otra selección,
+                    // aunque termine con las mismas cantidades.
+                    if (!order?.cartRevision || order.cartRevision !== get().cartRevision) return false;
+                    const items = get().cart.map(item => ({ slug: item.storeSlug, quantity: item.quantity }));
+                    if (errorDeCantidades(items)) return false;
+                    const lines = aLineasDeCheckout(items);
+                    if (order?.clave !== orderKey || !order.huella || !carritoComprable(lines)
+                        || lines.lineas.some(item => !Number.isSafeInteger(item.quantity))
+                        || huellaDelCarrito(lines.lineas) !== order.huella) return false;
+                    set({ cart: [], cartRevision: newCartRevision(), totalItems: 0, totalPrice: 0 });
+                    return true;
+                });
             },
             
             getItemByKey: (cartKey) => {
@@ -169,11 +208,25 @@ const useCartStore = create<CartState>()(
         }),
         {
             name: 'cart-storage',
-            storage: createJSONStorage(() => localStorage),
+            storage: createJSONStorage(() => ({
+                getItem: (name) => localStorage.getItem(name),
+                setItem: (name, value) => { if (persistChange) localStorage.setItem(name, value); },
+                removeItem: (name) => localStorage.removeItem(name),
+            })),
+            merge: (persisted, current) => {
+                const saved = (persisted ?? {}) as Partial<CartState>;
+                return { ...current, ...saved, cartRevision: typeof saved.cartRevision === "string" ? saved.cartRevision : null };
+            },
             // Abrir el carrito es transitorio; recargar conserva solo la compra.
-            partialize: ({ cart, totalItems, totalPrice, destinoEnvio }) => ({ cart, totalItems, totalPrice, destinoEnvio }),
+            partialize: ({ cart, cartRevision, totalItems, totalPrice, destinoEnvio }) => ({ cart, cartRevision, totalItems, totalPrice, destinoEnvio }),
         }
     )
 );
+
+if (typeof window !== "undefined") {
+    window.addEventListener("storage", event => {
+        if (event.key === "cart-storage") void useCartStore.persist.rehydrate();
+    });
+}
 
 export default useCartStore;

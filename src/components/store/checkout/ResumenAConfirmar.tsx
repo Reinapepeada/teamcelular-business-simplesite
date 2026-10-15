@@ -20,6 +20,9 @@ export function ResumenAConfirmar({
     enviando,
     fallo,
     onPagar,
+    onActualizar,
+    retiro,
+    entregaConfirmada,
     onVolver,
 }: {
     pedido: StoreOrder;
@@ -29,6 +32,9 @@ export function ResumenAConfirmar({
     enviando: boolean;
     fallo: string | null;
     onPagar: () => void;
+    onActualizar: () => void;
+    retiro: React.ReactNode;
+    entregaConfirmada: boolean;
     onVolver: () => void;
 }) {
     const r = resumenParaConfirmar(pedido, estimadoDeProductos, estimadoDeEnvio);
@@ -56,31 +62,31 @@ export function ResumenAConfirmar({
                             PROVINCIAS.find(([codigo]) => codigo === pedido.shipping?.province)?.[1] ?? pedido.shipping.province,
                             pedido.shipping.postal_code && "CP " + pedido.shipping.postal_code].filter(Boolean).join(" · ")
                         : "No pudimos obtener la entrega del pedido. Escribinos para confirmarla."}</p>
+                    {pedido.shipping === null && retiro}
                 </div>
             </section>
             <p className="text-xs text-slate-500 dark:text-slate-400">Estos son los datos guardados en tu pedido. Si necesitás cambiarlos, escribinos antes de pagar.</p>
             {r.precioCambio && (
                 <p className="rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-800 dark:bg-amber-500/10 dark:text-amber-300">
-                    {"El total cambió " + pesos(r.diferencia, r.moneda) + " respecto del estimado."}{" "}
-                    Este es el importe que se va a cobrar.
+                    Los importes cambiaron respecto de la revisión. Confirmá el envío y el total antes de pagar.
                 </p>
             )}
 
             <dl className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm dark:border-slate-700/70 dark:bg-slate-800/70">
                 <div className="flex justify-between gap-4">
                     <dt className="text-slate-600 dark:text-slate-400">Productos</dt>
-                    <dd className="font-medium">{pesos(r.subtotal, r.moneda)}</dd>
+                    <dd className="font-medium">{r.subtotal === null ? "Por confirmar" : pesos(r.subtotal, r.moneda)}</dd>
                 </div>
                 {r.hayEnvio && (
                     <div className="mt-2 flex justify-between gap-4">
                         <dt className="text-slate-600 dark:text-slate-400">Envío</dt>
-                        <dd className="font-medium">{pesos(r.envio, r.moneda)}</dd>
+                        <dd className="font-medium">{r.envio === null ? "Por confirmar" : pesos(r.envio, r.moneda)}</dd>
                     </div>
                 )}
                 <div className="mt-3 flex justify-between gap-4 border-t border-slate-200 pt-3 dark:border-slate-700/70">
                     <dt className="font-semibold text-slate-900 dark:text-slate-100">Total</dt>
                     <dd className="text-lg font-bold text-slate-950 dark:text-slate-50">
-                        {pesos(r.total, r.moneda)}
+                        {r.total === null ? "Por confirmar" : pesos(r.total, r.moneda)}
                     </dd>
                 </div>
             </dl>
@@ -96,10 +102,14 @@ export function ResumenAConfirmar({
                 </p>
             )}
 
+            {!r.importesConfirmados && <div role="alert" className="text-sm">
+                <p>No pudimos confirmar los importes del pedido. Actualizá este mismo pedido antes de pagar. Tu carrito y tu reserva se conservan.</p>
+                <button type="button" disabled={enviando} onClick={onActualizar} className="min-h-11 underline">Actualizar pedido</button>
+            </div>}
             <button
                 type="button"
                 onClick={onPagar}
-                disabled={enviando || !pedido.customer_name || !pedido.customer_email || pedido.shipping === undefined || !pedido.items?.length}
+                disabled={enviando || !r.importesConfirmados || !entregaConfirmada || !pedido.customer_name || !pedido.customer_email || pedido.shipping === undefined || !pedido.items?.length}
                 className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-white transition hover:bg-primary/90 disabled:opacity-50"
             >
                 {enviando ? "Abriendo el pago…" : "Ir a pagar"}
