@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import StoreCartSheet from "@/components/store/StoreCartSheet";
+import StoreCartLauncher from "@/components/store/StoreCartLauncher";
 
 export const metadata: Metadata = {
   title: "Repuestos y Accesorios para Celulares | Team Celular",
@@ -50,7 +50,7 @@ export default function TiendaLayout({
   return (
     <>
       {children}
-      <StoreCartSheet />
+      <StoreCartLauncher />
     </>
   );
 }
