@@ -237,6 +237,10 @@ export default function RepairsForm() {
             </button>
 
             <p className="text-sm leading-6 text-slate-600 dark:text-[#86868b]">
+                La consulta por WhatsApp es gratis. La revisión técnica tiene costo; te informamos el importe antes de ingresar el equipo.
+            </p>
+
+            <p className="text-sm leading-6 text-slate-600 dark:text-[#86868b]">
                 Te respondemos en hasta 2 horas hábiles. El precio final se confirma antes de tocar el equipo.
             </p>
         </div>

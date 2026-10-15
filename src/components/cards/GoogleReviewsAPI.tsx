@@ -1,6 +1,6 @@
 ﻿import Image from "next/image";
 import { FaGoogle, FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
-import { GOOGLE_RATING_FALLBACK as FALLBACK_RATING, getGoogleReviews } from "@/lib/googleReviews";
+import { getGoogleReviews } from "@/lib/googleReviews";
 
 function StarRating({ rating }: { rating: number }) {
     const stars = [];
@@ -37,20 +37,8 @@ export default async function GoogleReviewsAPI() {
                         </h2>
                     </div>
                     <div className="rounded-2xl border border-slate-200/70 bg-white/70 p-8 shadow-md dark:border-white/10 dark:bg-slate-900/70">
-                        {/* ponytail: dato fijo del perfil de Google de Recoleta mientras
-                            falten GOOGLE_PLACES_API_KEY/GOOGLE_PLACE_ID en Vercel.
-                            Actualizar a mano o cargar las variables para verlo en vivo. */}
-                        <div className="flex flex-wrap items-center justify-center gap-3">
-                            <StarRating rating={FALLBACK_RATING.rating} />
-                            <span className="text-2xl font-bold text-primary">
-                                {FALLBACK_RATING.rating.toFixed(1).replace(".", ",")}
-                            </span>
-                            <span className="text-slate-600 dark:text-slate-400">
-                                ({FALLBACK_RATING.total} reseñas en Google, sucursal Recoleta)
-                            </span>
-                        </div>
                         <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
-                            Leé las opiniones completas en nuestro perfil de Google.
+                            Leé las opiniones de la sucursal Recoleta en nuestro perfil de Google.
                         </p>
                         <div className="mt-6">
                             <a
@@ -83,10 +71,10 @@ export default async function GoogleReviewsAPI() {
                 <div className="flex flex-wrap items-center justify-center gap-3">
                     <StarRating rating={rating} />
                     <span className="text-2xl font-bold text-primary">
-                        {rating.toFixed(1)}
+                        {rating.toFixed(1).replace(".", ",")}
                     </span>
                     <span className="text-slate-600 dark:text-slate-400">
-                        ({user_ratings_total} reseñas en Google)
+                        ({user_ratings_total} reseñas en Google, sucursal Recoleta)
                     </span>
                 </div>
                 <p className="mx-auto max-w-3xl text-[1.02rem] leading-7 text-slate-700 dark:text-slate-300">
