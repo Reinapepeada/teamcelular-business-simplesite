@@ -68,7 +68,7 @@ export default function DevolucionesPage() {
           Política de devoluciones y reembolsos
         </h1>
         <p className="text-slate-600 dark:text-slate-300">
-          Última actualización: 12 de enero de 2026.
+          Última actualización: 15 de octubre de 2026.
         </p>
         <p className="text-sm text-slate-500 dark:text-slate-400">
           Esta política es informativa y no limita los derechos del consumidor
@@ -134,9 +134,10 @@ export default function DevolucionesPage() {
           Si el producto presenta una falla o defecto, contactanos para
           evaluar el caso y ofrecerte la solución que corresponda (cambio,
           reparación, nota de crédito o reembolso), de acuerdo con la normativa
-          aplicable. Cuando corresponda, rige la garantía legal (Ley 24.240):
-          <strong> 3 meses para productos nuevos</strong> y{" "}
-          <strong>30 dias para productos usados</strong>.
+          aplicable. Rige la garantía legal (artículo 11 de la Ley 24.240):
+          <strong> 6 meses para productos nuevos</strong> y{" "}
+          <strong>3 meses para productos usados</strong>, desde la entrega del
+          producto, sin perjuicio de plazos mayores que se hayan acordado.
         </p>
 
         <h2>4. Reembolsos</h2>
