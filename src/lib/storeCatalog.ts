@@ -62,8 +62,8 @@ export const imagenDe = (imageKey: string | null): string | null => {
     return `${BASE_IMAGENES}/${imageKey.replace(/^\/+/, "")}`;
 };
 
-// Estas rutas redirigen a una URL firmada. Vercel no puede resolverlas desde
-// su optimizador de imágenes, pero el navegador sí puede seguir la redirección.
+// Estas rutas redirigen a una URL firmada: el optimizador necesita el host
+// público completo; si falla, el navegador todavía puede cargarlas directamente.
 export const cargaDirectaImagen = (url: string): boolean =>
     url.startsWith("/store/products/");
 

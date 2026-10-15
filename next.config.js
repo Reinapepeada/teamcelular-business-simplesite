@@ -43,6 +43,13 @@ module.exports = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "teamcelular.com",
+        port: "",
+        pathname: "/store/products/*/images/*/*",
+        search: "",
+      },
+      {
+        protocol: "https",
         hostname: "i.ibb.co",
       },
       {

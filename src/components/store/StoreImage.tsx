@@ -21,8 +21,13 @@ export default function StoreImage({ src, alt, className = "", onLoad, onError, 
     // variante) vuelve el skeleton sin tener que resetear nada a mano.
     const [cargada, setCargada] = useState<string | null>(null);
     const [fallida, setFallida] = useState<string | null>(null);
+    const [directa, setDirecta] = useState<string | null>(null);
     const origen = fallida === src ? PLACEHOLDER : src;
     const lista = cargada === origen;
+    const rutaPublica = cargaDirectaImagen(origen) && !props.unoptimized;
+    // La URL absoluta conserva el host público al resolver la redirección firmada.
+    const optimizable = rutaPublica && directa !== origen;
+    const imagen = optimizable ? `https://teamcelular.com${origen}` : origen;
 
     return (
         <>
@@ -34,17 +39,18 @@ export default function StoreImage({ src, alt, className = "", onLoad, onError, 
             )}
             <Image
                 {...props}
-                src={origen}
+                src={imagen}
                 alt={alt}
                 fetchPriority={props.fetchPriority ?? (props.priority ? "high" : undefined)}
-                unoptimized={props.unoptimized ?? cargaDirectaImagen(origen)}
+                unoptimized={props.unoptimized ?? directa === origen}
                 className={`${className} transition-transform duration-300`}
                 onLoad={event => {
                     setCargada(origen);
                     onLoad?.(event);
                 }}
                 onError={event => {
-                    if (origen !== PLACEHOLDER) setFallida(src);
+                    if (optimizable) setDirecta(origen);
+                    else if (origen !== PLACEHOLDER) setFallida(src);
                     else setCargada(origen);
                     onError?.(event);
                 }}
