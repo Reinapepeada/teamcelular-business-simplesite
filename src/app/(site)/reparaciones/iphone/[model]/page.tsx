@@ -10,6 +10,7 @@ import { INSTALLMENTS_MESSAGE } from "@/lib/copyStandards";
 import {
   IPHONE_MODELS_WITH_PAGE,
   IPHONE_PRICES_UPDATED,
+  IPHONE_CONTENT_REVIEWED,
   formatArs,
   getIphoneModel,
   getIphoneModelNotes,
@@ -49,8 +50,7 @@ export async function generateMetadata({
   }
 
   const path = `/reparaciones/iphone/${model.slug}`;
-  // El precio en la meta es el diferencial: ninguno de los competidores que
-  // aparecen citados por motores de IA publica cuánto sale la reparación.
+  // La descripción conserva los precios de la misma fuente que la página.
   const priceHint =
     model.screen !== null
       ? `Pantalla ${formatArs(model.screen)}, batería ${priceLabel(model.battery)}.`
@@ -93,8 +93,8 @@ export default async function IphoneModelPage({
       price: model.screen,
       time: "2 a 4 horas",
       detail: modelNotes
-        ? `Módulo ${modelNotes.panel}. Pasamos el chip IC de tu pantalla a la nueva para que no pierdas True Tone ni Face ID.`
-        : `Módulo completo del ${model.name}. Pasamos el chip IC de tu pantalla a la nueva para que no pierdas True Tone ni Face ID.`,
+        ? `Pantalla de fábrica: ${modelNotes.panel}. Confirmamos la tecnología del repuesto disponible, la calibración y qué funciones conserva antes de instalar.`
+        : `Módulo completo del ${model.name}. Confirmamos repuesto, calibración y funciones antes de instalar.`,
     },
     {
       name: "Cambio de batería",
@@ -139,7 +139,6 @@ export default async function IphoneModelPage({
           "@type": "Offer",
           price: String(repair.price),
           priceCurrency: "ARS",
-          availability: "https://schema.org/InStock",
           itemOffered: {
             "@type": "Service",
             name: `${repair.name} ${model.name}`,
@@ -167,6 +166,12 @@ export default async function IphoneModelPage({
           Reparación de {model.name} en CABA
         </h1>
 
+        {modelNotes ? (
+          <p className="mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-[#a1a1a6]">
+            {modelNotes.summary}
+          </p>
+        ) : null}
+
         {/* Respuesta autocontenida: entidad, precio, plazo, garantía y ubicación
             en el primer bloque de la página, que es de donde salen las citas. */}
         <p className="mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-[#a1a1a6]">
@@ -181,7 +186,7 @@ export default async function IphoneModelPage({
           actualizados a {IPHONE_PRICES_UPDATED}.
         </p>
 
-        <AuthorByline updatedLabel={IPHONE_PRICES_UPDATED} className="mt-6" />
+        <AuthorByline updatedLabel={IPHONE_CONTENT_REVIEWED} className="mt-6" />
 
         <div className="mt-8 flex flex-wrap gap-4">
           <TrackedCtaLink
@@ -216,10 +221,10 @@ export default async function IphoneModelPage({
           {repairs.map((repair) => (
             <div key={repair.name} className="grid gap-2 px-6 py-5 md:grid-cols-[1.1fr_0.6fr_0.6fr]">
               <div>
-                <p className="font-semibold text-slate-900 dark:text-[#f5f5f7]">{repair.name}</p>
-                <p className="mt-1 text-sm text-slate-500 dark:text-[#86868b]">{repair.detail}</p>
+                <p className="font-semibold text-[#f5f5f7]">{repair.name}</p>
+                <p className="mt-1 text-sm text-[#a1a1a6]">{repair.detail}</p>
               </div>
-              <p className="text-sm text-slate-500 dark:text-[#86868b]">{repair.time}</p>
+              <p className="text-sm text-[#a1a1a6]">{repair.time}</p>
               <p className="font-semibold text-primary">{priceLabel(repair.price)}</p>
             </div>
           ))}
@@ -230,11 +235,40 @@ export default async function IphoneModelPage({
         </p>
       </section>
 
+      {modelNotes ? (
+        <section className="mt-12">
+          <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
+            Qué revisar antes de reparar un {model.name}
+          </h2>
+          <ul className="mt-6 space-y-4">
+            {modelNotes.notes.map((note) => (
+              <li
+                key={note}
+                className="bg-[#1d1d1f] rounded-[28px] p-6 leading-relaxed text-[#a1a1a6]"
+              >
+                {note}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 text-sm text-slate-500 dark:text-[#a1a1a6]">
+            Las características de fábrica se pueden consultar en las{" "}
+            <a href={modelNotes.specsUrl} className="font-semibold text-primary underline underline-offset-4">
+              especificaciones del {model.name} publicadas por Apple
+            </a>
+            . No describen la calidad ni el stock del repuesto ofrecido. También podés leer{" "}
+            <a href="https://support.apple.com/es-la/103256" className="font-semibold text-primary underline underline-offset-4">
+              qué puede cambiar al reemplazar una pantalla
+            </a>
+            . Somos un servicio técnico independiente de Apple.
+          </p>
+        </section>
+      ) : null}
+
       <section className="bg-[#1d1d1f] mt-12 rounded-[28px] p-8">
-        <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
+        <h2 className="text-2xl font-semibold text-[#f5f5f7]">
           ¿Qué pasa si el {model.name} no enciende o se mojó?
         </h2>
-        <p className="mt-4 leading-relaxed text-slate-600 dark:text-[#a1a1a6]">
+        <p className="mt-4 leading-relaxed text-[#a1a1a6]">
           Si se mojó, traelo apagado cuanto antes: la limpieza de placa la hacemos en el
           taller. Si no prende, la revisión de placa sale ARS 45.000 y se descuenta si se
           repara. Cuando el arreglo es de un chip, te pasamos precio y plazo por escrito
@@ -254,27 +288,14 @@ export default async function IphoneModelPage({
         </div>
       </section>
 
-      {modelNotes ? (
-        <section className="mt-12">
-          <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
-            Qué tiene de particular reparar un {model.name}
-          </h2>
-          <p className="mt-4 max-w-3xl leading-relaxed text-slate-600 dark:text-[#a1a1a6]">
-            Cada modelo trae su propia trampa. Esto es lo que cambia el trabajo, el
-            repuesto o el presupuesto en este equipo concreto.
-          </p>
-          <ul className="mt-6 space-y-4">
-            {modelNotes.notes.map((note) => (
-              <li
-                key={note}
-                className="bg-[#1d1d1f] rounded-[28px] p-6 leading-relaxed text-slate-600 dark:text-[#a1a1a6]"
-              >
-                {note}
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
+      <nav aria-label={`Servicios para ${model.name}`} className="mt-8 flex flex-wrap gap-4">
+        <Link href="/reparaciones/cambio-pantalla-caba" className="inline-flex min-h-11 items-center font-semibold text-primary hover:underline">
+          Qué incluye el cambio de pantalla
+        </Link>
+        <Link href="/reparaciones/cambio-bateria-caba" className="inline-flex min-h-11 items-center font-semibold text-primary hover:underline">
+          Cómo revisamos la batería
+        </Link>
+      </nav>
 
       <section className="mt-12">
         <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">Otros modelos</h2>

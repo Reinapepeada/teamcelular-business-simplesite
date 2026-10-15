@@ -9,6 +9,7 @@
  */
 
 export const IPHONE_PRICES_UPDATED = "agosto de 2026";
+export const IPHONE_CONTENT_REVIEWED = "15 de octubre de 2026";
 
 export interface IphoneModelPrice {
   /** Slug de URL, ej. "14-pro-max" */
@@ -73,14 +74,12 @@ export const IPHONE_MODELS_WITH_PAGE = [
 ] as const;
 
 /**
- * Particularidades de reparación por modelo. Sin esto las 8 páginas por modelo
- * son la misma plantilla con otro nombre y otro precio: ~96% de tokens
- * compartidos, que es exactamente el patrón que Google colapsa en una sola URL.
- *
- * Solo datos de hardware verificables que cambian el trabajo o el presupuesto.
- * Si un modelo no tiene nada propio que decir, no merece página propia.
+ * Datos del equipo original y orientación por falla. La ficha de Apple describe
+ * el hardware de fábrica, no la calidad ni la disponibilidad del repuesto.
  */
 export interface IphoneModelNotes {
+  summary: string;
+  specsUrl: string;
   /** Tecnología del panel: define el repuesto y el precio del módulo. */
   panel: string;
   /** Puerto de carga: define el repuesto del pin. */
@@ -91,75 +90,91 @@ export interface IphoneModelNotes {
 
 export const IPHONE_MODEL_NOTES: Record<string, IphoneModelNotes> = {
   "11": {
+    summary: "El iPhone 11 usa una pantalla LCD de 6,1 pulgadas, a diferencia de los modelos OLED de esta lista. Si el vidrio está roto, la imagen tiene manchas o el táctil falla, necesitás cotizar el módulo específico del 11, no el del 11 Pro.",
+    specsUrl: "https://support.apple.com/es-la/111865",
     panel: 'LCD IPS de 6,1"',
     port: "Lightning",
     notes: [
-      "Es el único de esta lista con panel LCD y no OLED, por eso el módulo es el más barato del catálogo. También significa que un golpe fuerte suele romper el vidrio y el LCD juntos: no hay cambio de vidrio suelto que valga la pena.",
-      "Por antigüedad, la mayoría de los iPhone 11 que entran al taller llegan con la batería por debajo del 80% de capacidad. Antes de cotizar medimos el consumo real, porque un equipo que se apaga al 30% puede ser batería o puede ser placa.",
-      "La tapa trasera es de vidrio y se rompe seguido. Se cambia, pero es un trabajo aparte del de pantalla y se presupuesta por separado.",
+      "Vidrio, imagen y táctil: cambiamos el módulo completo. Contanos si todavía muestra imagen y si responde al toque; son dos datos distintos para revisar el daño antes de abrirlo.",
+      "Batería y carga: este modelo tiene conector Lightning y admite carga inalámbrica Qi. Si carga de forma inalámbrica pero no por cable, contanos esa diferencia para revisar el recorrido de carga; no alcanza para decidir que hay que cambiar la batería.",
+      "Cámara trasera: tiene dos cámaras de 12 MP, con gran angular y ultra gran angular. Si una imagen sale bien y la otra no, indicá en cuál ocurre. El vidrio exterior del lente y el módulo de cámara se presupuestan por separado.",
     ],
   },
   "12": {
+    summary: "El iPhone 12 lleva pantalla OLED de 6,1 pulgadas, frente Ceramic Shield y carga MagSafe. Que tenga el mismo tamaño de pantalla que el iPhone 11 no significa que use el mismo repuesto. Para cotizar, distinguimos daño de pantalla, batería y carga por Lightning.",
+    specsUrl: "https://support.apple.com/es-la/111876",
     panel: 'OLED Super Retina XDR de 6,1" con Ceramic Shield',
     port: "Lightning",
     notes: [
-      "Estrena Ceramic Shield y MagSafe: el módulo trae los imanes y los sensores asociados, así que el repuesto es más caro que el de un iPhone 11 aunque el tamaño de pantalla sea el mismo.",
-      "Es el modelo de la serie donde más vemos fallas de señal y de módem. Cuando entra un iPhone 12 con 'Sin servicio' intermitente, primero descartamos antena y placa: cambiar la pantalla no lo arregla y no queremos cobrarte un trabajo que no resuelve nada.",
-      "El flex de Face ID corre por debajo del módulo y es sensible al desarme. Se transfiere con el equipo apoyado, nunca colgando de los cables.",
+      "Pantalla OLED y Ceramic Shield: el vidrio frontal forma parte del conjunto que revisamos. Antes de instalar, aclaramos la tecnología del módulo disponible y las diferencias de brillo, color y True Tone respecto de la pantalla original.",
+      "Carga por cable o MagSafe: el iPhone 12 admite ambos sistemas. Decinos si falla uno solo, los dos o si carga pero se descarga rápido; cada síntoma requiere una revisión distinta del puerto, la batería o la placa.",
+      "Sin servicio: este equipo admite 5G, pero una pérdida de señal no confirma por sí sola una falla de módem. Revisamos la línea, la configuración y el equipo antes de presupuestar una intervención en placa.",
     ],
   },
   "13": {
+    summary: "El iPhone 13 combina pantalla OLED de 6,1 pulgadas y dos cámaras traseras. Es distinto del 13 mini y del 13 Pro: el nombre completo importa al pedir pantalla, batería o cámara. Si ya fue reparado, contanos qué pieza se cambió y qué dejó de funcionar.",
+    specsUrl: "https://support.apple.com/es-la/111872",
     panel: 'OLED Super Retina XDR de 6,1"',
     port: "Lightning",
     notes: [
-      "Apple emparejó el Face ID con la pantalla en esta generación: si se cambia el módulo sin transferir el chip original por microsoldadura, se pierden el Face ID y el True Tone. Nosotros hacemos esa transferencia, así que salís con Face ID andando. Es la pregunta número uno que recibimos sobre este modelo.",
-      "Por el mismo emparejamiento, un cambio de pantalla mal hecho en otro lado suele llegarnos con Face ID muerto y el mensaje de pantalla no genuina. En muchos casos se recupera, pero conviene revisarlo antes de que el equipo acumule intentos.",
-      "La batería es de las que mejor aguantan de la serie: si tu iPhone 13 dura poco, vale medir consumo antes de asumir que es la batería.",
+      "Pantalla y Face ID: probamos el reconocimiento facial antes y después del trabajo. El estado de los sensores, la versión de iOS y el repuesto influyen en el resultado; no prometemos conservar funciones mediante una transferencia de chip en todos los casos.",
+      "Aviso de pieza: si aparece después de una reparación anterior, mandanos el mensaje exacto del historial de piezas. El aviso, la ausencia de True Tone y una falla de Face ID son situaciones distintas y se revisan por separado.",
+      "Cámara y batería: la cámara principal tiene estabilización por desplazamiento del sensor. Si la imagen tiembla o no enfoca, indicá si ocurre en foto, video o ambos. Si el problema es autonomía, pasanos la salud de batería y si se apaga o solamente dura menos.",
     ],
   },
   "13-mini": {
+    summary: "El iPhone 13 mini usa una pantalla OLED de 5,4 pulgadas. Sus repuestos se cotizan por separado de los del iPhone 13 de 6,1 pulgadas, aunque compartan generación.",
+    specsUrl: "https://support.apple.com/es-la/111873",
     panel: 'OLED Super Retina XDR de 5,4"',
     port: "Lightning",
     notes: [
-      "Es el iPhone con la batería más chica de todo el catálogo que reparamos. Eso hace que la degradación se note mucho antes que en un modelo grande: a los dos años, la diferencia de autonomía es evidente aunque la salud de batería todavía marque un número aceptable.",
-      "Comparte con el iPhone 13 el emparejamiento de Face ID con la pantalla, así que el cambio de módulo también lleva transferencia del chip (IC) por microsoldadura; sin eso se pierden Face ID y True Tone.",
-      "Al ser un equipo compacto, todo adentro está más apretado: el desarme lleva más cuidado y por eso el tiempo de pantalla se va al borde alto de las 2 a 4 horas.",
+      "Pantalla compacta: confirmá que en Ajustes figure iPhone 13 mini antes de pedir el módulo. No corresponde usar el precio ni la pieza del iPhone 13 común.",
+      "Autonomía: mirá la salud de batería y contanos si se apaga con carga o si llega a cero más rápido. Medimos el consumo antes de decidir si necesita batería o revisión de otra falla.",
+      "Face ID y True Tone se prueban por separado. Aclaramos qué funciones conserva el repuesto disponible y si requiere calibración, según el estado del equipo y la versión de iOS.",
     ],
   },
   "13-pro": {
+    summary: "El iPhone 13 Pro tiene pantalla OLED de 6,1 pulgadas con ProMotion hasta 120 Hz, tres cámaras traseras y LiDAR. El módulo de pantalla se cotiza como Pro, no como iPhone 13 común.",
+    specsUrl: "https://support.apple.com/es-la/111871",
     panel: 'OLED Super Retina XDR de 6,1" con ProMotion a 120 Hz',
     port: "Lightning",
     notes: [
-      "Tiene ProMotion, la pantalla de frecuencia variable hasta 120 Hz. Un módulo que no la soporta se ve fluido al principio pero pierde el refresco alto, y esa es la queja típica de quien cambió la pantalla barato en otro lado.",
-      "También lleva el emparejamiento de Face ID con el módulo, con la misma transferencia por microsoldadura que el iPhone 13.",
-      "El bloque de tres cámaras con LiDAR es más pesado y más caro de reemplazar. Si el golpe fue en la parte trasera, conviene diagnosticar antes de cotizar: a veces el vidrio del lente se cambia solo y no hace falta el módulo entero.",
+      "ProMotion: antes del cambio de pantalla aclaramos si el módulo disponible soporta la frecuencia variable del equipo original y qué diferencia hay en el presupuesto.",
+      "Face ID y True Tone: comprobamos cómo funcionan al recibirlo. El repuesto y la calibración disponible condicionan el resultado; no damos una garantía universal de conservación por transferir un chip.",
+      "Cámaras: contanos si falla el gran angular, el ultra gran angular o el teleobjetivo. Un lente exterior roto no obliga por sí solo a reemplazar las tres cámaras.",
     ],
   },
   "14": {
+    summary: "El iPhone 14 tiene pantalla OLED de 6,1 pulgadas y dos cámaras traseras. Para pedir un repuesto hay que distinguirlo del 14 Plus y de los modelos Pro.",
+    specsUrl: "https://support.apple.com/es-la/111850",
     panel: 'OLED Super Retina XDR de 6,1"',
     port: "Lightning",
     notes: [
-      "Es el modelo donde Apple rediseñó el interior: la tapa trasera se saca desde atrás en lugar de tener que abrir todo el equipo desde la pantalla. En la práctica, cambiar el vidrio trasero de un iPhone 14 sale bastante menos que en un iPhone 13, que es la misma reparación con mucho más trabajo.",
-      "Ese mismo rediseño hace que el acceso a batería sea más directo, así que la reparación cae en el borde bajo de la ventana de 1 a 2 horas.",
-      "La pantalla sigue emparejada con Face ID, así que el cambio de módulo lleva transferencia del chip (IC) original; sin eso se pierden Face ID y True Tone.",
+      "Pantalla: usa OLED Super Retina XDR; no es el módulo con Dynamic Island de los modelos Pro. Confirmamos repuesto y funciones antes de presupuestar.",
+      "Tapa o batería: si la parte trasera está rota o levantada, contanos si hubo un golpe o si se abrió sola. Primero se revisa el equipo antes de cambiar o volver a pegar la tapa.",
+      "Face ID y True Tone: se prueban al ingreso y a la entrega. El alcance de la calibración depende del repuesto y del estado del equipo; no se promete resolver cualquier falla transfiriendo el chip de pantalla.",
     ],
   },
   "14-pro": {
+    summary: "El iPhone 14 Pro usa una pantalla OLED de 6,1 pulgadas con Dynamic Island, ProMotion y pantalla siempre activa. Su cámara principal es de 48 MP. Antes de cotizar, necesitamos saber si falla la imagen, el táctil, Face ID o una cámara concreta.",
+    specsUrl: "https://support.apple.com/es-la/111849",
     panel: 'OLED de 6,1" con Dynamic Island y ProMotion a 120 Hz',
     port: "Lightning",
     notes: [
-      "Estrena la Dynamic Island: el recorte deja de ser un notch fijo y pasa a integrar sensores de Face ID y cámara frontal en una zona activa. El módulo es específico de este modelo y no es intercambiable con el del iPhone 14 común.",
-      "Lleva ProMotion hasta 120 Hz, así que un módulo genérico sin soporte de frecuencia variable se nota al usarlo.",
-      "La cámara principal de 48 MP con estabilización es el módulo más caro de la generación. Cuando llega con la imagen temblorosa o con ruido al grabar, casi siempre es el estabilizador y no el sensor.",
+      "Dynamic Island y Face ID: el recorte de pantalla no es lo mismo que el sistema de reconocimiento facial. Si la imagen funciona pero Face ID no, contanos ese síntoma para revisar los sensores antes de ofrecer un módulo nuevo.",
+      "ProMotion y pantalla siempre activa: forman parte del equipo original. Preguntá qué funciones conserva la pantalla ofrecida; el precio publicado no describe por sí solo todas las prestaciones del repuesto.",
+      "Cámara principal de 48 MP: tiene estabilización óptica por desplazamiento del sensor de segunda generación. Si tiembla, hace ruido o no enfoca, revisamos la cámara y su conexión antes de cotizar. No se puede confirmar la pieza averiada solo por el síntoma.",
     ],
   },
   "14-pro-max": {
+    summary: "El iPhone 14 Pro Max lleva pantalla OLED de 6,7 pulgadas con Dynamic Island y ProMotion. Es más grande que el 14 Pro de 6,1 pulgadas: aunque compartan funciones, no usan el mismo módulo de pantalla ni el mismo precio de reparación.",
+    specsUrl: "https://support.apple.com/es-la/111846",
     panel: 'OLED de 6,7" con Dynamic Island y ProMotion a 120 Hz',
     port: "Lightning",
     notes: [
-      "Es la pantalla más cara que reparamos de la serie 14: 6,7 pulgadas, OLED, ProMotion y Dynamic Island en el mismo módulo. Por eso conviene diagnosticar bien antes de reemplazar: si el táctil responde y solo hay líneas, a veces el problema está en el conector y no en el panel.",
-      "Tiene la batería más grande de la generación. Un iPhone 14 Pro Max que dura menos que un 14 común casi nunca es un tema de capacidad: suele haber una app o un componente drenando, y eso se mide antes de cotizar.",
-      "Comparte con el 14 Pro el módulo de cámara de 48 MP y su estabilizador, la reparación de cámara más frecuente de este modelo.",
+      "Pantalla de 6,7 pulgadas: si aparecen líneas, manchas o zonas sin táctil, contanos si empezó después de un golpe. Verificamos el panel y las conexiones antes de instalar; aclaramos soporte de ProMotion, brillo y pantalla siempre activa del repuesto.",
+      "Batería y autonomía: indicá la salud de batería y si calienta, se apaga o pierde carga estando en reposo. El tamaño del Pro Max no permite descartar desgaste de batería ni confirmar una falla de placa sin medirlo.",
+      "Cámara principal de 48 MP y teleobjetivo: señalá en qué aumento aparece la falla y si pasa también al grabar. El diagnóstico de cámara se cotiza por separado de pantalla y batería.",
     ],
   },
 };
