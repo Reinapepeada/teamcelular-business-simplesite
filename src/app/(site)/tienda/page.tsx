@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import CatalogFilters from "@/components/store/CatalogFilters";
 import CatalogCategoryLinks from "@/components/store/CatalogCategoryLinks";
-import CatalogResults, {
-  CatalogResultsFallback,
-} from "@/components/store/CatalogResults";
+import CatalogResults from "@/components/store/CatalogResults";
 import {
   buildPageHref,
   getCatalogFilters,
@@ -84,10 +81,10 @@ export default async function TiendaPage({
   searchParams?: Promise<CatalogSearchParams>;
 }) {
   const filters = normalizeCatalogFilters((await searchParams) ?? {});
-  // Iniciar productos y filtros en paralelo; Suspense conserva la respuesta progresiva.
+  // La primera foto debe precargarse en el head, antes de emitir el catálogo.
+  // Ambas lecturas siguen en paralelo y conservan precio/stock sin caché.
   const catalogPage = getCatalogPage(filters);
-  const filterOptions = await getCatalogFilters();
-  const suspenseKey = JSON.stringify(filters);
+  const [filterOptions] = await Promise.all([getCatalogFilters(), catalogPage]);
 
   return (
     <div className="w-full bg-slate-50 dark:bg-slate-800/70 pb-16">
@@ -143,16 +140,14 @@ export default async function TiendaPage({
           filters={filters}
           options={filterOptions}
         />
-        <Suspense key={suspenseKey} fallback={<CatalogResultsFallback />}>
-          <CatalogResults
-            catalogPage={catalogPage}
-            basePath="/tienda"
-            filters={filters}
-            siteUrl={SITE_URL}
-            title="Productos para compra inmediata"
-            emptyMessage="No encontramos productos con esos filtros. Prueba otra marca, categoria o rango de precio."
-          />
-        </Suspense>
+        <CatalogResults
+          catalogPage={catalogPage}
+          basePath="/tienda"
+          filters={filters}
+          siteUrl={SITE_URL}
+          title="Productos para compra inmediata"
+          emptyMessage="No encontramos productos con esos filtros. Prueba otra marca, categoria o rango de precio."
+        />
       </section>
 
       <section className="mx-auto max-w-screen-2xl px-4 pt-8 sm:px-6 lg:px-8">
