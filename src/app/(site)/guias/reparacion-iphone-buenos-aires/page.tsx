@@ -470,7 +470,7 @@ export default function IphoneRepairGuidePage() {
               Reseñas reales de Google
             </span>
             <span className="rounded-full border border-secondary/25 bg-secondary/10 px-3 py-1 text-secondary">
-              4,9 sobre 362 reseñas
+              Sucursal Recoleta
             </span>
             <span className="rounded-full border border-emerald-700/70 bg-emerald-700 px-3 py-1 text-white">
               Más de 15 años reparando
@@ -587,7 +587,7 @@ export default function IphoneRepairGuidePage() {
               o placas completas, acá se trabaja a nivel componente: microsoldadura
               bajo microscopio, recuperación de equipos mojados y revisión de placa por
               ARS 45.000, con precio y plazo por escrito antes de cualquier arreglo. Team Celular trabaja hace más
-              de 15 años y tiene 4,9 estrellas sobre 362 reseñas de Google.
+              de 15 años y cuenta con opiniones de clientes en Google.
             </p>
           </div>
 

@@ -4,6 +4,7 @@ import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 import Link from "next/link";
 import { BRANCHES } from "@/lib/businessProfile";
+import { SCREEN_BATTERY_TIMING_MESSAGE } from "@/lib/copyStandards";
 
 const intakeProofs = [
     "Diagnóstico antes de intervenir",
@@ -20,7 +21,7 @@ export default function BannerHome() {
                     Reparación de celulares en CABA
                 </h1>
                 <p className="mx-auto mt-5 max-w-[38rem] text-pretty text-[19px] leading-[1.4] text-[#86868b] sm:text-[21px]">
-                    Servicio técnico de iPhone, Samsung, Motorola y Xiaomi en Recoleta y Belgrano, sin turno. Pantalla, batería, carga y placa, con presupuesto antes de reparar. Pantalla y batería en 2 a 4 horas si hay stock.
+                    Servicio técnico de iPhone, Samsung, Motorola y Xiaomi en Recoleta y Belgrano, sin turno. Pantalla, batería, carga y placa, con presupuesto antes de reparar. {SCREEN_BATTERY_TIMING_MESSAGE}
                 </p>
 
                 <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5">
