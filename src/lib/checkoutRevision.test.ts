@@ -31,6 +31,17 @@ test("revisar cotiza provincia y CP sin crear pedido; retiro no cotiza", async (
     assert.doesNotMatch(submit, /await (reservar|createOrder|prepararCheckout)/);
 });
 
+test("la revisión conserva la identidad de cotización para confirmar el mismo envío", async () => {
+    const quote_id = "11111111-1111-4111-8111-111111111111";
+    const revision = await revisarPedido({ ...datos, entrega: "envio", direccion: { province: "B", postal_code: "1900" } }, items, 100,
+        async () => ({ quote_id, cheapest: { price: 20 }, options: [] }));
+    assert.equal(revision.quote_id, quote_id);
+    assert.equal(revision.total, 120);
+    const fuente = leerConPartes("src/components/store/CheckoutDialog.tsx", "src/components/store/checkout");
+    assert.match(fuente, /quote_id: revision.quote_id/);
+    assert.match(problemaDeCheckout(parseStoreError(409, { detail: { code: "shipping_quote_expired" } })).mensaje, /Volvé a revisar/);
+});
+
 test("sin cotización válida no se presenta envío gratis", async () => {
     await assert.rejects(revisarPedido({ ...datos, entrega: "envio", direccion: { province: "B", postal_code: "1900" } }, items, 100, async () => ({ cheapest: { price: NaN }, options: [] })), StoreApiError);
 });

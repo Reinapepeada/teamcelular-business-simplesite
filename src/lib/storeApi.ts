@@ -58,6 +58,7 @@ export interface ShippingAddress {
 }
 
 export interface ShippingQuote {
+    quote_id?: string;
     options: { price: number; hours?: number | null; service?: string | null; carrier?: string | null }[];
     cheapest: { price: number; hours?: number | null; service?: string | null; carrier?: string | null };
 }
@@ -247,6 +248,7 @@ export const quoteShipping = (province: string, postalCode: string, items: Store
     });
 
 export interface CheckoutPayload {
+    quote_id?: string;
     checkout_key: string;
     recovery_token?: string;
     customer_name: string;

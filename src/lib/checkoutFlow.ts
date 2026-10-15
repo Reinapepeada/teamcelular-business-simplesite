@@ -349,6 +349,9 @@ export const problemaDeCheckout = (causa: unknown, items: ItemComprable[] = []):
                 : productosSoloRetiro(items);
             return { mensaje: `Solo retiro en el local: ${nombres.join(", ") || "uno o más productos del carrito"}. Elegí retirar en el local para continuar.`, ofrecerRetiro: true };
         }
+        if (["SHIPPING_QUOTE_REQUIRED", "SHIPPING_QUOTE_CHANGED", "SHIPPING_QUOTE_EXPIRED"].includes(code)) {
+            return { mensaje: "La cotización del envío cambió o venció. Volvé a revisar el pedido para actualizarla." };
+        }
         if (code === "SHIPPING_UNAVAILABLE") {
             // También incluye fallas del proveedor: no afirma falta de cobertura.
             return { mensaje: "No pudimos cotizar el envío. Probá de nuevo o retirá en el local.", ofrecerRetiro: true };
@@ -374,12 +377,13 @@ export const revisarPedido = async (
     datos: DatosDeCompra, items: ItemComprable[], productos: number,
     cotizar: typeof import("./storeApi").quoteShipping,
 ) => {
-    const envio = datos.entrega === "retiro" ? 0 : (await cotizar(
+    const cotizacion = datos.entrega === "retiro" ? null : await cotizar(
         datos.direccion!.province!.trim(), datos.direccion!.postal_code!.trim(), aLineasDeCheckout(items).lineas,
-    )).cheapest?.price;
+    );
+    const envio = datos.entrega === "retiro" ? 0 : cotizacion?.cheapest?.price;
     const total = totalEstimadoConEnvio(productos, envio ?? null);
-    if (total === null) throw new StoreApiError("Sin cotización", 409, "SHIPPING_UNAVAILABLE");
-    return { productos, envio, total };
+    if (envio === undefined || total === null) throw new StoreApiError("Sin cotización", 409, "SHIPPING_UNAVAILABLE");
+    return { productos, envio, total, quote_id: cotizacion?.quote_id };
 };
 
 export const reservarYPagarSiCoincide = async (

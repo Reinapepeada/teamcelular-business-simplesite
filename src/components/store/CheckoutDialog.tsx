@@ -376,7 +376,10 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
         setFallo(null);
         try {
             const { payload, recuperado } = await prepararIntento(window.localStorage, aLineasDeCheckout(items).lineas,
-                (clave, secreto) => armarPedido(revision.datos, items, clave, secreto));
+                (clave, secreto) => ({
+                    ...armarPedido(revision.datos, items, clave, secreto),
+                    ...(revision.quote_id ? { quote_id: revision.quote_id } : {}),
+                }));
             setIntentoPendiente(true);
             const { pedido, checkoutUrl } = await reservarYPagarSiCoincide(
                 {
