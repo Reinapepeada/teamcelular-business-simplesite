@@ -161,7 +161,7 @@ const stats = [
     { icon: FaClock, value: "15+", label: "Años de experiencia" },
     { icon: FaUsers, value: "10.000+", label: "Equipos reparados" },
     { icon: FaGlobe, value: "3", label: "Países" },
-    { icon: FaStar, value: "4,9", label: "en Google (362 reseñas)" },
+    { icon: FaStar, value: "Google", label: "Opiniones de clientes" },
 ];
 
 export default function SobreNosotrosPage() {

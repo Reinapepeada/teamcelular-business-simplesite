@@ -13,7 +13,6 @@ import {
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
-import { GOOGLE_RATING_FALLBACK } from "@/lib/googleReviews";
 import { PRICES_UPDATED } from "@/lib/repairPrices";
 
 const SITE_URL = getSiteUrl();
@@ -430,7 +429,7 @@ export default function ServiceLandingPage({
           </TrackedCtaLink>
         </div>
         <p className="mt-4 text-[14px] text-[#86868b]">
-          Dos sucursales en CABA (Recoleta y Belgrano). {GOOGLE_RATING_FALLBACK.rating.toFixed(1).replace(".", ",")} en Google con {GOOGLE_RATING_FALLBACK.total} reseñas (Recoleta).
+          Dos sucursales en CABA (Recoleta y Belgrano). Opiniones de clientes en Google de la sucursal Recoleta.
         </p>
       </header>
 

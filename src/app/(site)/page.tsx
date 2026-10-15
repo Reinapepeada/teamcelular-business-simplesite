@@ -9,7 +9,6 @@ import BranchMap from "@/components/cards/BranchMap";
 import { BRANCHES, BUSINESS_PROFILE } from "@/lib/businessProfile";
 import { BUDGET_RESPONSE_MESSAGE } from "@/lib/copyStandards";
 import { buildWebsiteMetadata } from "@/lib/seoMetadata";
-import { GOOGLE_RATING_FALLBACK } from "@/lib/googleReviews";
 import { BRAND_REPAIR_PRICES, formatArsPrice } from "@/lib/repairPrices";
 import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
@@ -148,9 +147,8 @@ export default function Home() {
                     <div>
                         <h2 id="prices-title" className="tc-heading !text-[#1d1d1f]">¿Cuánto sale reparar un celular en CABA?</h2>
                         <p className="mt-5 max-w-lg text-pretty text-[19px] leading-[1.42] text-[#424245]">
-                            Más de 15 años reparando celulares, con{" "}
-                            {GOOGLE_RATING_FALLBACK.rating.toFixed(1).replace(".", ",")} estrellas en Google sobre{" "}
-                            {GOOGLE_RATING_FALLBACK.total} reseñas. Pantalla y batería salen en 2 a 4 horas.
+                            Más de 15 años reparando celulares, con opiniones de clientes en Google.
+                            Pantalla y batería salen en 2 a 4 horas.
                         </p>
                         <div className="mt-6 flex flex-col gap-2 text-[17px] text-[#0066cc]">
                             <Link href="/guias/reparacion-iphone-buenos-aires#costos-reparacion-iphone" className="hover:underline">Precios de iPhone por modelo ›</Link>
