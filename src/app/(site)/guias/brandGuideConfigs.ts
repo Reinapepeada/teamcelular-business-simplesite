@@ -205,12 +205,12 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-poco-buenos-aires",
-    modifiedTime: "2026-09-02T00:00:00Z",
+    modifiedTime: "2026-10-15T00:00:00Z",
     titleOverride: "Reparacion de POCO en Buenos Aires: temperatura, bateria y carga",
     metaDescriptionOverride:
       "POCO F6 Pro, F6, X6 Pro y M6 Pro: sobrecalentamiento, batería exigida y pin de carga gastado. Reparación en CABA con garantía escrita 90 días.",
     heroDescriptionOverride:
-      "Team Celular repara POCO en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. POCO vende potencia a precio contenido, y esa ecuacion se paga en calor: son los equipos que mas entran por sobrecalentamiento en sesiones largas. El calor sostenido no es solo una molestia, es lo que despues acelera la degradacion de la bateria y castiga la placa, asi que las tres fallas tipicas de la linea suelen ser la misma historia contada en orden. La carga rapida agrega su parte: el pin se desgasta antes que en un equipo de carga convencional. Si tu POCO calienta y ademas perdio autonomia, conviene diagnosticar las dos cosas juntas en vez de cambiar la bateria y volver en tres meses. Garantia escrita de 90 dias y 3 cuotas sin interes.",
+      `Team Celular repara POCO en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. En F6 Pro, F6, X6 Pro y M6 Pro revisamos sobrecalentamiento, pérdida de autonomía y carga intermitente. Medimos temperatura y consumo y probamos cable, cargador y puerto antes de cotizar una batería o un conector. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; la reparación lleva semanas, con precio y plazo por escrito antes de empezar. Para pantalla, batería y carga confirmamos repuesto y plazo según el modelo. Garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "Es normal que mi POCO caliente tanto?",
@@ -220,7 +220,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
       {
         question: "El sobrecalentamiento arruina la bateria?",
         answer:
-          "La acelera. Por eso cuando entra un POCO que calienta, medimos tambien el estado de la bateria: cambiar una sin revisar lo otro suele terminar en una segunda visita.",
+          "El calor sostenido puede acelerar el desgaste de la batería, pero no identifica por sí solo la causa de la falla. Revisamos el estado de la batería y medimos consumo y temperatura antes de cotizar; el presupuesto depende de lo que encontremos.",
       },
     ],
     brand: "POCO",
@@ -242,17 +242,17 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   {
     slug: "reparacion-oppo-buenos-aires",
     seoTitleOverride: "Servicio técnico OPPO en CABA: Reno y A | Team Celular",
-    modifiedTime: "2026-09-02T00:00:00Z",
+    modifiedTime: "2026-10-15T00:00:00Z",
     titleOverride: "Reparacion de OPPO en Buenos Aires: Reno y serie A",
     metaDescriptionOverride:
       "OPPO Reno12, Reno11, A79 y A58: touch inestable, poca autonomía y puerto de carga gastado. Reparación en CABA con garantía escrita 90 días.",
     heroDescriptionOverride:
-      "Team Celular repara OPPO en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. En las lineas Reno y A la consulta que mas se repite es el touch que responde mal sin que la pantalla este rota: se toca y no reacciona, o reacciona donde no es. Eso no siempre es el modulo. Muchas veces es el conector del flex, que se afloja despues de una caida sin marca visible, y revisarlo primero evita cambiar una pantalla que estaba sana. Las otras dos habituales son la autonomia que no llega al final del dia y el puerto de carga desgastado, que en equipos con carga rapida propietaria aparece antes de lo que uno espera. Pantalla y bateria salen en 2 a 4 horas segun stock. Garantia escrita de 90 dias sobre trabajo y repuesto, y 3 cuotas sin interes.",
+      `Team Celular repara OPPO en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. En Reno y serie A, un touch que no responde puede requerir revisar el flex y su conector antes de cambiar la pantalla. También medimos batería y consumo cuando la autonomía cae, y probamos cable, cargador y puerto si la carga es inestable. ${SCREEN_BATTERY_TIMING_MESSAGE} Si la falla requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles. La reparación de placa lleva semanas, con precio y plazo por escrito antes de empezar. Garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "El touch de mi OPPO falla pero la pantalla no esta rota",
         answer:
-          "Es una consulta frecuente. Antes de cotizar un modulo revisamos el conector del flex: si se aflojo por un golpe, se reasienta y el touch vuelve, sin cambiar la pantalla. Recien si el panel esta dañado se reemplaza.",
+          "Antes de cotizar un módulo revisamos el flex y su conector. Si la falla está en esa conexión, puede resolverse sin cambiar la pantalla. Si el panel está dañado o la falla viene del circuito de la placa, te explicamos qué trabajo corresponde y su presupuesto antes de reparar.",
       },
       {
         question: "Cuanto tarda un cambio de pantalla en un OPPO Reno?",
@@ -390,22 +390,23 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-alcatel-buenos-aires",
+    modifiedTime: "2026-10-15T00:00:00Z",
     seoTitleOverride: "Servicio técnico Alcatel en CABA | Team Celular",
     titleOverride: "Reparacion de Alcatel en Buenos Aires: conviene arreglarlo?",
     metaDescriptionOverride:
-      "Alcatel series 1, 3, 5 y T: te decimos si conviene reparar antes de cobrarte. Diagnóstico el mismo día en CABA y garantía de 90 días.",
+      "Reparación de Alcatel 1, 3, 5 y T en CABA. Revisión arancelada y presupuesto antes de reparar, con plazo según falla y garantía escrita de 90 días.",
     heroDescriptionOverride:
-      "Team Celular repara Alcatel en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Con Alcatel la conversacion honesta es otra: son equipos de gama accesible, y en varios casos el costo de la reparacion se acerca demasiado al valor del telefono. Por eso el diagnostico incluye decirte si conviene o no repararlo, aunque la respuesta nos deje sin el trabajo. Lo que si vale casi siempre la pena es la bateria degradada por antiguedad y el conector de carga desgastado: son reparaciones de bajo costo que devuelven un par de años de uso. La pantalla partida es la que hay que pensar, porque el modulo es la pieza mas cara del equipo. Garantia escrita de 90 dias sobre trabajo y repuesto, y 3 cuotas sin interes.",
+      `Team Celular repara Alcatel en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. En las series 1, 3, 5 y T conviene comparar el presupuesto con el valor y el estado del equipo antes de decidir. Revisamos batería, conector de carga y pantalla; confirmamos repuesto, costo y plazo para tu modelo. La revisión técnica es arancelada: sin placa va de ARS 15.000 a 25.000. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; el arreglo lleva semanas y se presupuesta por separado. Garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "Conviene reparar un Alcatel o comprar otro?",
         answer:
-          "Depende de que se rompio. Bateria o pin de carga casi siempre conviene: son reparaciones baratas que estiran la vida del equipo. Pantalla en un modelo de entrada es la que hay que evaluar con numeros, y te los damos antes de que decidas.",
+          "Compará el costo de la reparación con el valor de reemplazo y el estado del equipo. Una batería o un pin de carga pueden justificar el arreglo, pero depende del modelo, el repuesto disponible y si hay otras fallas. Te pasamos el presupuesto para que decidas; no hace falta aceptar la reparación por haber pagado la revisión.",
       },
       {
         question: "Cobran el diagnostico si al final no lo reparo?",
         answer:
-          "El diagnostico se hace primero y el presupuesto se confirma antes de intervenir el equipo. Si decidis no avanzar, te lo devolvemos como vino.",
+          `Sí, la revisión es arancelada aunque no aceptes el arreglo. Sin revisión de placa, cuesta entre ARS 15.000 y 25.000; te confirmamos el importe antes de abrir el equipo. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)} y se descuenta del total si aceptás reparar. El presupuesto del arreglo se informa por separado antes de empezar.`,
       },
     ],
     brand: "Alcatel",
@@ -426,17 +427,17 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-asus-buenos-aires",
-    modifiedTime: "2026-09-02T00:00:00Z",
+    modifiedTime: "2026-10-15T00:00:00Z",
     titleOverride: "Reparacion de Asus ROG y Zenfone en Buenos Aires",
     metaDescriptionOverride:
       "Reparación de Asus ROG Phone y Zenfone en CABA: sobretemperatura, batería exigida y fallas por estrés térmico. Garantía escrita 90 días.",
     heroDescriptionOverride:
-      "Team Celular repara Asus ROG Phone y Zenfone en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Un ROG Phone no falla como un telefono comun: esta pensado para sostener carga de trabajo alta durante horas, y eso deja marca. La sobretemperatura en uso gaming, la bateria degradada por ciclos de carga exigentes y las fallas de placa por estres termico son el mismo problema en tres etapas distintas. La ultima es donde termina la mayoria de los talleres, porque implica trabajar el componente y no cambiar el modulo: aca revisamos la placa por $45.000 y te decimos si tiene arreglo antes de seguir. Si un ROG se apaga bajo carga pero anda bien en escritorio, ese sintoma se mide, no se adivina. Garantia escrita de 90 dias y 3 cuotas sin interes.",
+      `Team Celular repara Asus ROG Phone y Zenfone en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Si el equipo se apaga al jugar, se calienta o perdió autonomía, medimos consumo y alimentación antes de proponer una batería o un trabajo de placa. La revisión de placa cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; se cobra aunque no se repare y se descuenta del total si aceptás el arreglo. La reparación de placa lleva semanas, con precio y plazo por escrito. Para cambios de módulos confirmamos disponibilidad del repuesto y plazo para tu ROG o Zenfone antes de empezar. Garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "Mi ROG Phone se apaga cuando juego, es la bateria?",
         answer:
-          "Puede ser bateria, pero tambien puede ser gestion de energia en la placa: el equipo se apaga justo cuando mas corriente pide. La diferencia se ve midiendo consumo bajo carga, y cambiar la bateria sin medir es tirar una moneda.",
+          "Puede ser la batería o una falla de alimentación en la placa. Medimos consumo bajo carga y revisamos la batería antes de cotizar una pieza. Si hace falta revisión de placa, te informamos su costo y el plazo del informe antes de ingresarla a ese proceso.",
       },
       {
         question: "Reparan placas de Asus o solo cambian modulos?",
@@ -462,22 +463,22 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-oneplus-buenos-aires",
-    modifiedTime: "2026-09-02T00:00:00Z",
+    modifiedTime: "2026-10-15T00:00:00Z",
     titleOverride: "Reparacion de OnePlus en Buenos Aires: pantalla, bateria y carga",
     metaDescriptionOverride:
       "OnePlus 12, 11, 10 Pro y Nord: pantalla, batería y fallas del puerto USB-C. Reparación en CABA con garantía escrita 90 días.",
     heroDescriptionOverride:
-      "Team Celular repara OnePlus en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. La falla mas caracteristica de la linea no es la pantalla sino la carga: son equipos construidos alrededor de la carga ultra rapida, y el puerto USB-C es la pieza que absorbe todo ese trabajo. Cuando un OnePlus empieza a cargar lento o solo en cierta posicion del cable, el problema esta en el conector mucho antes que en la bateria, y cambiar la bateria no lo resuelve. La pantalla por impacto y la perdida de capacidad de bateria son las otras dos que mas entran, y ambas salen en el dia. Tambien trabajamos las fallas de placa que en otros lados se cotizan como cambio de conjunto. Garantia escrita de 90 dias sobre trabajo y repuesto, y 3 cuotas sin interes.",
+      `Team Celular repara OnePlus en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Si tu OnePlus 12, 11, 10 Pro o Nord carga lento o solo en cierta posición, probamos cable, cargador compatible y puerto USB-C y medimos consumo antes de cotizar piezas. ${SCREEN_BATTERY_TIMING_MESSAGE} Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; el arreglo lleva semanas, con precio y plazo por escrito antes de empezar. Garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "Mi OnePlus carga lento, es la bateria o el cargador?",
         answer:
-          "Antes de esas dos, revisamos el puerto. En equipos de carga ultra rapida el conector es lo que mas se desgasta, y una carga lenta o intermitente casi siempre empieza ahi. Es ademas la reparacion mas barata de las tres.",
+          "Probamos cable y cargador compatibles, revisamos el puerto USB-C y medimos consumo para distinguir un problema de conexión, batería o circuito de carga. El síntoma solo no alcanza para elegir una pieza. Te confirmamos qué revisión corresponde y su costo antes de abrir el equipo.",
       },
       {
         question: "Cambiar la pantalla de un OnePlus afecta la carga rapida?",
         answer:
-          "No, son sistemas separados. Si despues de un cambio de pantalla aparecio un problema de carga, lo que hay que revisar es el armado, y eso lo vemos en el diagnóstico (ARS 15.000 a 25.000 según el equipo).",
+          "El cambio de pantalla no debería alterar la carga rápida. Si el problema apareció después de una reparación, revisamos las conexiones y el alcance de su garantía antes de presupuestar otro trabajo. No se puede confirmar por ese síntoma solo si hace falta revisar un conector o la placa.",
       },
     ],
     brand: "OnePlus",
@@ -498,22 +499,23 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-huawei-buenos-aires",
+    modifiedTime: "2026-10-15T00:00:00Z",
     seoTitleOverride: "Servicio técnico Huawei en CABA | Team Celular",
     titleOverride: "Reparacion de Huawei en Buenos Aires: camara, sensores y placa",
     metaDescriptionOverride:
       "Huawei P60, P50, Mate y Nova: cámara que no enfoca, sensores tras humedad o golpes y fallas de placa. Reparación en CABA, garantía 90 días.",
     heroDescriptionOverride:
-      "Team Celular repara Huawei en CABA con diagnostico el mismo dia, en Paraguay 2451 (Recoleta) y Amenabar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. La linea P y Mate se compro en buena medida por la camara, asi que cuando el enfoque empieza a fallar el equipo pierde justo aquello por lo que se eligio. Ese es el trabajo mas frecuente que nos llega de la marca, junto con los sensores que dejan de responder despues de un golpe o de humedad: proximidad, giroscopio, huella. Los sensores son el caso donde mas se nota la diferencia entre cambiar un modulo y trabajar la placa, porque muchas veces lo que fallo es la linea que los alimenta y no el sensor. Eso se revisa bajo microscopio: puede ser una pista, un conector o un chip, y el precio cambia mucho entre uno y otro. Confirmamos disponibilidad de repuesto para tu modelo antes de que dejes el equipo. Garantia escrita de 90 dias y 3 cuotas sin interes.",
+      `Team Celular repara Huawei en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. En P60, P50, Mate y Nova revisamos cámara sin enfoque y fallas de sensores después de golpes o humedad. Comprobamos módulo, flex, conectores y alimentación antes de decidir si hay que cambiar una pieza o revisar la placa. La revisión técnica sin placa cuesta entre ARS 15.000 y 25.000. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; el arreglo lleva semanas, con precio y plazo por escrito antes de empezar. Confirmamos disponibilidad de repuesto para tu modelo antes de que dejes el equipo. Garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "La camara de mi Huawei enfoca mal, tiene arreglo?",
         answer:
-          "Casi siempre si. Puede ser el modulo de camara, el vidrio del lente o el estabilizador. Son tres reparaciones de costo muy distinto, y por eso se diagnostica antes de cotizar.",
+          "Puede tener arreglo, pero primero hay que identificar la causa: vidrio del lente, módulo, estabilizador o alimentación. La revisión permite cotizar el trabajo concreto y confirmar si hay repuesto para tu modelo antes de que decidas reparar.",
       },
       {
         question: "Mi Huawei se mojo y dejaron de andar algunos sensores",
         answer:
-          "Es el cuadro tipico de daño por liquido: el equipo enciende pero pierde funciones sueltas. Va al laboratorio de microelectronica para limpieza de placa y revision de las lineas afectadas. Si no tiene reparación posible, te lo decimos antes de intervenir: solo se cobra el diagnóstico (ARS 15.000 a 25.000 según el equipo).",
+          `Después de un ingreso de líquido, revisamos sensores, flex, conectores y líneas de alimentación. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)} y el informe se entrega en hasta 72 horas hábiles. Esa revisión se cobra aunque el equipo no se recupere y se descuenta si aceptás el arreglo. La reparación de placa lleva semanas, con precio y plazo por escrito; la viabilidad y el alcance del trabajo dependen del daño.`,
       },
     ],
     brand: "Huawei",
@@ -727,7 +729,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
       question: "¿Cuánto tarda el diagnóstico?",
       answer:
         seed.diagnosisAnswerOverride ??
-        "El diagnóstico sale el mismo día hábil, y con eso decidís si conviene reparar antes de que toquemos el equipo.",
+        REVISED_DIAGNOSIS.diagnosisAnswerOverride,
     },
     {
       question: `¿Qué modelos de ${seed.brand} reciben?`,
@@ -756,7 +758,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     title,
     heroDescription:
       seed.heroDescriptionOverride ??
-      `Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), repara ${seed.brand} con diagnóstico el mismo día y garantía escrita de 90 días sobre trabajo y repuesto. Esta guía explica las fallas más comunes, cómo las diagnosticamos y el paso recomendado según el estado del equipo.`,
+      `Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), repara ${seed.brand} con diagnóstico y plazo según la falla y garantía escrita de 90 días sobre trabajo y repuesto. Esta guía explica las fallas más comunes, cómo las diagnosticamos y el paso recomendado según el estado del equipo.`,
     badge: seed.badge,
     readingTime: "5 min",
     publishedTime: "2026-04-20T00:00:00Z",
@@ -767,11 +769,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
       `Servicio tecnico ${seed.brand} en CABA`,
       ...seed.models,
     ],
-    heroPoints: seed.heroPointsOverride ?? [
-      "Diagnóstico el mismo día, sin turno.",
-      "Garantía escrita de 90 días sobre trabajo y repuesto.",
-      "Opiniones de clientes en Google de la sucursal Recoleta.",
-    ],
+    heroPoints: seed.heroPointsOverride ?? REVISED_DIAGNOSIS.heroPointsOverride,
     symptomsTitle: `¿Cuáles son las fallas más frecuentes en ${seed.brand}?`,
     symptomsDescription:
       `Estas son las señales que más vemos en ${seed.brand}. Conviene resolverlas antes de que lleguen a la placa.`,
@@ -797,7 +795,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
       title: seed.seoTitleOverride ?? `Reparación de ${seed.brand} en CABA | Team Celular`,
       description:
         seed.metaDescriptionOverride ??
-        `Taller en Recoleta y Belgrano que repara ${seed.brand}: pantalla, batería y carga con diagnóstico el mismo día en CABA. Garantía escrita 90 días.`,
+        `Taller en Recoleta y Belgrano que repara ${seed.brand}: pantalla, batería y carga con plazo según la falla y el repuesto. Garantía escrita 90 días.`,
       keywords: [
         ...seed.keywords,
         `reparacion ${seed.brand.toLowerCase()} buenos aires`,
