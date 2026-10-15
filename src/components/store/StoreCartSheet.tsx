@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import {
     BsArrowRight,
     BsBag,
@@ -17,7 +18,6 @@ import {
 import { buildProductSlug } from "@/lib/productSlug";
 import useCartStore, { type CartItem } from "@/store/cartStore";
 import { problemaDeCheckout } from "@/lib/checkoutFlow";
-import CheckoutDialog from "./CheckoutDialog";
 import ProductCondition from "./ProductCondition";
 import StoreImage from "./StoreImage";
 import { PROVINCIAS } from "@/lib/provincias";
@@ -29,6 +29,10 @@ import {
     totalEstimadoConEnvio,
     totalesDelCarrito,
 } from "@/lib/totalesDelCarrito";
+
+const CheckoutDialog = dynamic(() => import("./CheckoutDialog"), {
+    loading: () => <p role="status" className="fixed inset-x-4 bottom-5 z-50 rounded-2xl bg-slate-900 p-4 text-center text-white">Preparando la compra…</p>,
+});
 
 /**
  * El carrito.
@@ -73,12 +77,19 @@ type Entrega = "retiro" | "envio";
 export default function StoreCartSheet() {
     const [confirmarVaciado, setConfirmarVaciado] = useState(false);
     const [comprando, setComprando] = useState(false);
+    const [checkoutSolicitado, setCheckoutSolicitado] = useState(false);
     const [retiroSolicitado, setRetiroSolicitado] = useState(0);
     const [entrega, setEntrega] = useState<Entrega>("retiro");
     const [retiro, setRetiro] = useState<PickupPoint | null>(null);
     const dialogRef = useRef<HTMLDialogElement>(null);
     const triggerRef = useRef<HTMLButtonElement>(null);
     const { cart, removeFromCart, updateQuantity, clearCart, open, openCart, closeCart, destinoEnvio, setDestinoEnvio } = useCartStore();
+
+    function abrirCheckout() {
+        setCheckoutSolicitado(true);
+        closeCart();
+        setComprando(true);
+    }
 
     // Las sumas viven en src/lib/totalesDelCarrito.ts, que explica por que
     // esto es un estimado: los precios salen de lo que el navegador guardo.
@@ -444,7 +455,7 @@ export default function StoreCartSheet() {
                                     {falloEnvio?.clave === claveEnvio && (
                                         <div className="text-rose-600 dark:text-rose-300">
                                             <p>{falloEnvio.mensaje}</p>
-                                            {falloEnvio.soloRetiro && <button type="button" className="min-h-11 underline" onClick={() => { setEntrega("retiro"); setRetiroSolicitado(value => value + 1); closeCart(); setComprando(true); }}>Retirar en el local</button>}
+                                            {falloEnvio.soloRetiro && <button type="button" className="min-h-11 underline" onClick={() => { setEntrega("retiro"); setRetiroSolicitado(value => value + 1); abrirCheckout(); }}>Retirar en el local</button>}
                                         </div>
                                     )}
                                 </div>
@@ -473,10 +484,7 @@ export default function StoreCartSheet() {
                             y a pagar. WhatsApp queda arriba como consulta. */}
                         <button
                             type="button"
-                            onClick={() => {
-                                closeCart();
-                                setComprando(true);
-                            }}
+                            onClick={abrirCheckout}
                             disabled={vacio}
                             className="mt-3 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-5 text-base font-semibold text-white transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
                         >
@@ -491,7 +499,7 @@ export default function StoreCartSheet() {
                 )}
             </dialog>
 
-            <CheckoutDialog
+            {checkoutSolicitado && <CheckoutDialog
                 retiroSolicitado={retiroSolicitado}
                 entregaInicial={soloRetiro.length ? "retiro" : entrega}
                 abierto={comprando}
@@ -499,7 +507,7 @@ export default function StoreCartSheet() {
                     setComprando(false);
                     openCart();
                 }}
-            />
+            />}
         </>
     );
 }

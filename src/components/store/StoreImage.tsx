@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image, { type ImageProps } from "next/image";
-import { cargaDirectaImagen } from "@/lib/storeCatalog";
+import { imagenParaOptimizar } from "@/lib/storeCatalog";
 
 const PLACEHOLDER = "/placeholder.jpg";
 
@@ -22,12 +22,9 @@ export default function StoreImage({ src, alt, className = "", onLoad, onError, 
     const [cargada, setCargada] = useState<string | null>(null);
     const [fallida, setFallida] = useState<string | null>(null);
     const [directa, setDirecta] = useState<string | null>(null);
-    const origen = fallida === src ? PLACEHOLDER : src;
+    const original = fallida === src ? PLACEHOLDER : src;
+    const origen = props.unoptimized || directa === original ? original : imagenParaOptimizar(original);
     const lista = cargada === origen;
-    const rutaPublica = cargaDirectaImagen(origen) && !props.unoptimized;
-    // La URL absoluta conserva el host público al resolver la redirección firmada.
-    const optimizable = rutaPublica && directa !== origen;
-    const imagen = optimizable ? `https://teamcelular.com${origen}` : origen;
 
     return (
         <>
@@ -39,18 +36,18 @@ export default function StoreImage({ src, alt, className = "", onLoad, onError, 
             )}
             <Image
                 {...props}
-                src={imagen}
+                src={origen}
                 alt={alt}
                 fetchPriority={props.fetchPriority ?? (props.priority ? "high" : undefined)}
-                unoptimized={props.unoptimized ?? directa === origen}
+                unoptimized={props.unoptimized ?? directa === original}
                 className={`${className} transition-transform duration-300`}
                 onLoad={event => {
                     setCargada(origen);
                     onLoad?.(event);
                 }}
                 onError={event => {
-                    if (optimizable) setDirecta(origen);
-                    else if (origen !== PLACEHOLDER) setFallida(src);
+                    if (origen !== original) setDirecta(original);
+                    else if (original !== PLACEHOLDER) setFallida(src);
                     else setCargada(origen);
                     onError?.(event);
                 }}

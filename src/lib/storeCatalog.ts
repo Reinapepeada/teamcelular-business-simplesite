@@ -62,10 +62,11 @@ export const imagenDe = (imageKey: string | null): string | null => {
     return `${BASE_IMAGENES}/${imageKey.replace(/^\/+/, "")}`;
 };
 
-// Estas rutas redirigen a una URL firmada: el optimizador necesita el host
-// público completo; si falla, el navegador todavía puede cargarlas directamente.
-export const cargaDirectaImagen = (url: string): boolean =>
-    url.startsWith("/store/products/");
+// El optimizador de Vercel no resuelve el rewrite relativo /store. La URL
+// pública completa conserva el dominio de la tienda al llegar a Fixbee.
+// La firma temporal de S3 nunca forma parte de la clave del optimizador.
+export const imagenParaOptimizar = (url: string): string =>
+    url.startsWith("/store/products/") ? `https://teamcelular.com${url}` : url;
 
 /**
  * Adapta un producto del backend a lo que muestra la tienda.
