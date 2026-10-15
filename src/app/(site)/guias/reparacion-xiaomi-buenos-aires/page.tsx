@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Reparación de Xiaomi, Redmi y POCO en Buenos Aires, CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y turbo charge en el día, garantía escrita 90 días. Xiaomi, Redmi y POCO.",
+      "Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga según modelo, stock y falla. Garantía escrita 90 días. Xiaomi, Redmi y POCO.",
     type: "article",
     url: PAGE_URL,
     locale: "es_AR",
@@ -74,14 +74,14 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2026-03-12T00:00:00Z",
-    modifiedTime: "2026-08-20T00:00:00Z",
+    modifiedTime: "2026-10-15T00:00:00Z",
     section: "Guias Tecnicas",
   },
   twitter: {
     card: "summary_large_image",
     title: "Servicio técnico Xiaomi, Redmi y POCO en CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta. Pantalla AMOLED y batería en el día, garantía escrita 90 días. Xiaomi, Redmi y POCO.",
+      "Team Celular, Paraguay 2451 Recoleta. Pantalla y batería según modelo y stock, garantía escrita 90 días. Xiaomi, Redmi y POCO.",
     images: ["https://teamcelular.com/images/guia_xiaomi.webp"],
   },
 };
@@ -124,15 +124,15 @@ const processSteps = [
   {
     title: "Diagnostico de consumo y placa",
     description:
-      "Medimos lineas de potencia, circuito de carga y estabilidad en reposo. Esto permite diferenciar falla de bateria, modulo de carga o PMIC.",
-    duration: "30-45 min",
+      "Medimos consumo y alimentación para distinguir batería, módulo de carga o placa. Si requiere revisión de placa, el informe tarda hasta 72 horas hábiles; el arreglo lleva semanas y se presupuesta por separado.",
+    duration: "según la falla",
     Icon: FaTools,
   },
   {
     title: "Reparacion segun familia Xiaomi",
     description:
-      "Aplicamos procedimiento segun modelo Xiaomi, Redmi o POCO para mantener rendimiento, autonomia y estabilidad de uso diario.",
-    duration: "2-4 h",
+      "Reparamos según el modelo y el presupuesto aprobado. Pantalla en 2-4 h y batería en 1-2 h con repuesto en stock; para otros trabajos confirmamos el plazo por escrito.",
+    duration: "según el trabajo",
     Icon: FaWrench,
   },
   {
@@ -176,8 +176,8 @@ const repairServices = [
   {
     title: "Placa logica, PMIC y bootloop",
     detail:
-      "Se reinicia en el logo, no enciende o se quedó sin red después de una caída o de mojarse. Revisión de placa $45.000, que se descuenta si se repara.",
-    eta: "revisión 72 h",
+      "Se reinicia en el logo, no enciende o se quedó sin red después de una caída o de mojarse. Revisión de placa $45.000, con informe en hasta 72 horas hábiles. Se descuenta si se repara; el arreglo lleva semanas y se confirma precio y plazo por escrito.",
+    eta: "informe hasta 72 h hábiles",
     Icon: FaMicrochip,
   },
   {
@@ -217,7 +217,7 @@ const xiaomiSymptomRows = [
   {
     symptom: "Se mojó o empezó a fallar después de humedad",
     urgency: "Crítica: no cargar, encender ni aplicar calor",
-    typicalTime: "24-48 h para apertura, limpieza y medición",
+    typicalTime: "Si requiere placa: informe hasta 72 h hábiles; arreglo por presupuesto",
     nextStep: "Traerlo apagado al laboratorio lo antes posible",
   },
 ];
@@ -302,7 +302,7 @@ const faq = [
   {
     question: "Cuanto cuesta el diagnostico si no hago la reparacion?",
     answer:
-      "El diagnóstico tiene costo y se informa antes de abrir el equipo. Si aprobás la reparación, ese monto se descuenta del trabajo final. Confirmamos el valor exacto al recibir el dispositivo.",
+      "La revisión técnica va de $15.000 a $25.000, según la falla; la revisión de placa cuesta $45.000 y su informe se entrega en hasta 72 horas hábiles. Informamos el costo antes de abrir el equipo y se descuenta si aceptás la reparación. Si requiere arreglo de placa, lleva semanas y confirmamos precio y plazo por escrito.",
   },
 ];
 
@@ -311,9 +311,9 @@ export default function XiaomiRepairGuidePage() {
     <div className="flex w-full justify-center px-4 py-16">
       <ArticleSchema
         title="Reparacion de Xiaomi en Buenos Aires | Servicio Tecnico Team Celular"
-        description="Guia completa de reparacion Xiaomi, Redmi y POCO con diagnostico en 24 horas, repuestos premium y garantia escrita."
+        description="Reparación de Xiaomi, Redmi y POCO con informe de revisión de placa en hasta 72 horas hábiles, arreglo por presupuesto y garantía escrita."
         publishedTime="2026-03-12T00:00:00Z"
-        modifiedTime="2026-08-20T00:00:00Z"
+        modifiedTime="2026-10-15T00:00:00Z"
         about={[
           "reparacion de Xiaomi en Buenos Aires",
           "service tecnico Xiaomi en CABA",
@@ -365,12 +365,12 @@ export default function XiaomiRepairGuidePage() {
             </h1>
             <p className="max-w-4xl text-lg leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
               Team Celular, con sucursales en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032) CABA, repara Xiaomi,
-              Redmi y POCO con diagnóstico el mismo día, pantalla y batería en
-              2–4 h, y garantía escrita de 90 días sobre trabajo y repuesto.
+              Redmi y POCO con presupuesto antes de reparar. Pantalla en 2–4 h y batería en
+              1–2 h con stock, con garantía escrita de 90 días sobre trabajo y repuesto.
               Xiaomi 13/14/15, Redmi Note y POCO.
             </p>
             <div className="mt-4">
-              <GuideByline modifiedTime="2026-08-20T00:00:00Z" tone="light" />
+              <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
             </div>
           </div>
 
@@ -379,9 +379,9 @@ export default function XiaomiRepairGuidePage() {
               <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-[#86868b]">
                 Diagnostico
               </p>
-              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-primary">24 h</p>
+              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-primary">Según la falla</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-[#a1a1a6]">
-                Causa real y plan tecnico claro
+                Placa: informe en hasta 72 h hábiles
               </p>
             </div>
             <div className="bg-[#1d1d1f] rounded-[28px] p-5">
@@ -397,9 +397,9 @@ export default function XiaomiRepairGuidePage() {
               <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-[#86868b]">
                 Tiempo express
               </p>
-              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-primary">2-4 h</p>
+              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-primary">1-4 h</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-[#a1a1a6]">
-                Pantalla, bateria y carga rapida
+                Según modelo, stock y falla
               </p>
             </div>
           </div>
@@ -447,9 +447,8 @@ export default function XiaomiRepairGuidePage() {
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-700 dark:text-slate-200">
               Para reparar un Xiaomi, Redmi o POCO en Buenos Aires, Team Celular atiende
-              en Paraguay 2451, Recoleta, y Amenábar 2032, Belgrano. Hacemos diagnóstico
-              el mismo día y resolvemos pantalla, batería o carga USB-C en 2-4 h según
-              modelo y stock, con garantía escrita sobre trabajo y repuesto instalado.
+              en Paraguay 2451, Recoleta, y Amenábar 2032, Belgrano. Con repuesto en stock, resolvemos pantalla, batería o carga USB-C en 1-4 h según el trabajo.
+              Si requiere revisión de placa, el informe tarda hasta 72 horas hábiles; el arreglo lleva semanas y se confirma precio y plazo por escrito. La reparación tiene garantía escrita sobre trabajo y repuesto instalado.
             </p>
           </div>
 
@@ -595,13 +594,13 @@ export default function XiaomiRepairGuidePage() {
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {[
-                  { servicio: "Diagnóstico técnico", modelos: "Todos los modelos", tiempo: "30–45 min", precio: "15.000 – 25.000" },
+                  { servicio: "Revisión técnica (sin placa)", modelos: "Según la falla", tiempo: "a confirmar al ingreso", precio: "15.000 – 25.000" },
                   { servicio: "Cambio de pantalla OLED", modelos: "Xiaomi 13, 14, 15 y POCO alta gama", tiempo: "2–4 h", precio: "249.900 – 599.900" },
                   { servicio: "Cambio de pantalla", modelos: "Redmi, Redmi Note, POCO", tiempo: "2–4 h", precio: "99.900 – 349.900" },
                   { servicio: "Cambio de batería", modelos: "Alta gama", tiempo: "1–2 h", precio: "119.900 – 229.900" },
                   { servicio: "Cambio de batería", modelos: "Redmi, Redmi Note, POCO", tiempo: "1–2 h", precio: "89.900 – 179.900" },
                   { servicio: "Pin USB-C / turbo charge", modelos: "Todos", tiempo: "2–3 h", precio: "35.000 – 150.000" },
-                  { servicio: "Revisión de placa (bootloop, PMIC)", modelos: "Todos", tiempo: "hasta 72 h hábiles", precio: "45.000" },
+                  { servicio: "Revisión de placa (bootloop, PMIC)", modelos: "Todos", tiempo: "informe hasta 72 h hábiles", precio: "45.000" },
                 ].map((row) => (
                   <tr key={`${row.servicio}-${row.modelos}`}>
                     <td className="py-3 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">{row.servicio}</td>
