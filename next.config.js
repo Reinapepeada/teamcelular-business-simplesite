@@ -98,6 +98,10 @@ module.exports = {
         headers: securityHeaders,
       },
       {
+        source: "/:section(admin|checkout)/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+      {
         source: "/images/:path*",
         headers: [
           {

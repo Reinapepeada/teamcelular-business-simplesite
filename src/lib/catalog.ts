@@ -54,7 +54,7 @@ function parseListParam(value: string | string[] | undefined) {
 
 function parsePage(value: string | string[] | undefined) {
     const pageValue = Number(ensureArray(value)[0] || 1);
-    return Number.isFinite(pageValue) && pageValue > 0 ? pageValue : 1;
+    return Number.isSafeInteger(pageValue) && pageValue > 0 ? pageValue : 1;
 }
 
 export function normalizeCatalogFilters(
@@ -78,7 +78,6 @@ export function normalizeCatalogFilters(
 
 export function isCatalogIndexable(filters: CatalogFiltersState) {
     return (
-        filters.page === 1 &&
         !filters.search &&
         filters.categories.length === 0 &&
         filters.brands.length === 0 &&

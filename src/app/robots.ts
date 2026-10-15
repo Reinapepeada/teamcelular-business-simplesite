@@ -1,10 +1,11 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 
 export default function robots(): MetadataRoute.Robots {
-  const sharedDisallow = ["/admin", "/api", "/private", "/cart", "/checkout"];
+  // Admin y checkout sirven noindex: el rastreador debe poder leerlo.
+  const sharedDisallow = ["/api", "/private", "/cart"];
 
   return {
     rules: [

@@ -139,6 +139,10 @@ describe("proxy", () => {
             proxy(req("/contacto", { accept: CHROME })).headers.get("link"),
             '</contacto.md>; rel="alternate"; type="text/markdown"',
         );
+        assert.equal(
+            proxy(req("/tienda?page=2", { accept: CHROME })).headers.get("link"),
+            '</tienda.md?page=2>; rel="alternate"; type="text/markdown"',
+        );
     });
     test("/pagina.md e /index.md sirven Markdown sin importar el Accept", () => {
         assert.equal(
@@ -181,13 +185,32 @@ describe("GET /api/markdown", () => {
         assert.equal(res.status, 200);
         assert.equal(res.headers.get("content-type"), "text/markdown; charset=utf-8");
         assert.equal(res.headers.get("vary"), "Accept");
+        assert.equal(res.headers.get("link"), '<https://teamcelular.com/contacto>; rel="canonical"');
         assert.match(await res.text(), /^# Contacto\n\nHola/);
+    });
+    test("conserva la canónica paginada del HTML y la usa como fuente", async () => {
+        globalThis.fetch = (async () => new Response('<link rel="canonical" href="https://teamcelular.com/tienda?page=2"><main><h1>Tienda</h1></main>')) as typeof fetch;
+        const res = await call(["tienda"], "https://teamcelular.com/tienda.md?page=2&utm_source=audit");
+        assert.equal(res.headers.get("link"), '<https://teamcelular.com/tienda?page=2>; rel="canonical"');
+        assert.match(await res.text(), /Fuente: https:\/\/teamcelular\.com\/tienda\?page=2\n$/);
+    });
+    test("conserva noindex del HTML o del header y no cachea esas representaciones", async () => {
+        for (const via of ["meta", "header"]) {
+            globalThis.fetch = (async () => new Response(
+                `${via === "meta" ? '<meta name="robots" content="noindex, follow">' : ''}<main><h1>Estado</h1></main>`,
+                { headers: via === "header" ? { "X-Robots-Tag": "noindex, nofollow" } : {} },
+            )) as typeof fetch;
+            const res = await call(["checkout", "exito"]);
+            assert.match(res.headers.get("x-robots-tag") || "", /noindex/);
+            assert.equal(res.headers.get("cache-control"), "no-store");
+        }
     });
     test("página inexistente → 404 real con cuerpo Markdown", async () => {
         globalThis.fetch = (async () => new Response("<html>404</html>", { status: 404 })) as unknown as typeof fetch;
         const res = await call(["no-existe"]);
         assert.equal(res.status, 404);
         assert.equal(res.headers.get("content-type"), "text/markdown; charset=utf-8");
+        assert.equal(res.headers.get("x-robots-tag"), "noindex");
         assert.match(await res.text(), /llms\.txt/);
     });
     test("rutas /api no se autoconsultan", async () => {

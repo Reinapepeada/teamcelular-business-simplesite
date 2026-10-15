@@ -11,7 +11,7 @@ export async function GET(
 ) {
     const { slug = [] } = await params;
     const pathname = `/${slug.map(encodeURIComponent).join("/")}`;
-    const headers = {
+    const headers: Record<string, string> = {
         "Content-Type": "text/markdown; charset=utf-8",
         Vary: "Accept",
     };
@@ -20,7 +20,7 @@ export async function GET(
     if (slug[0] === "api") {
         return new Response(notFoundMarkdown(pathname), {
             status: 404,
-            headers: { ...headers, "Cache-Control": "public, s-maxage=300" },
+            headers: { ...headers, "X-Robots-Tag": "noindex", "Cache-Control": "public, s-maxage=300" },
         });
     }
 
@@ -32,7 +32,7 @@ export async function GET(
     if (page.status === 404 || page.status === 410) {
         return new Response(notFoundMarkdown(pathname), {
             status: page.status,
-            headers: { ...headers, "Cache-Control": "public, s-maxage=300" },
+            headers: { ...headers, "X-Robots-Tag": "noindex", "Cache-Control": "public, s-maxage=300" },
         });
     }
     if (!page.ok) {
@@ -42,8 +42,21 @@ export async function GET(
         });
     }
 
-    const markdown = htmlToMarkdown(await page.text(), `${SITE_URL}${pathname}`);
+    const html = await page.text();
+    // HTML propio de Next: mantener sus señales SEO también en la representación Markdown.
+    const canonical = html.match(/<link\b[^>]*rel="canonical"[^>]*href="([^"]+)"/i)?.[1];
+    const canonicalUrl = new URL(canonical?.replace(/&amp;/g, "&") || pathname + search, SITE_URL).toString();
+    const robots = [
+        page.headers.get("x-robots-tag"),
+        html.match(/<meta\b[^>]*name="robots"[^>]*content="([^"]+)"/i)?.[1],
+    ].filter(Boolean).join(", ");
+    headers.Link = `<${canonicalUrl}>; rel="canonical"`;
+    if (robots) headers["X-Robots-Tag"] = robots;
+    const markdown = htmlToMarkdown(html, canonicalUrl);
     return new Response(markdown, {
-        headers: { ...headers, "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400" },
+        headers: {
+            ...headers,
+            "Cache-Control": /noindex/i.test(robots) ? "no-store" : "public, s-maxage=3600, stale-while-revalidate=86400",
+        },
     });
 }

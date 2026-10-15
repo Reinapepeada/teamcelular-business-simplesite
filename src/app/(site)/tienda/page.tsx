@@ -8,7 +8,9 @@ import CatalogResults, {
   CatalogResultsFallback,
 } from "@/components/store/CatalogResults";
 import {
+  buildPageHref,
   getCatalogFilters,
+  getCatalogPage,
   isCatalogIndexable,
   normalizeCatalogFilters,
   type CatalogSearchParams,
@@ -49,10 +51,13 @@ export async function generateMetadata({
   searchParams?: Promise<CatalogSearchParams>;
 }): Promise<Metadata> {
   const filters = normalizeCatalogFilters((await searchParams) ?? {});
-  const shouldIndex = isCatalogIndexable(filters);
+  const shouldIndex = isCatalogIndexable(filters) && (
+    filters.page === 1 || (await getCatalogPage(filters)).products.length > 0
+  );
+  const canonicalPath = buildPageHref("/tienda", normalizeCatalogFilters({}), filters.page);
 
   return buildWebsiteMetadata({
-    path: "/tienda",
+    path: canonicalPath,
     title: "Repuestos y Accesorios para Celulares en CABA | Team Celular",
     description:
       "Repuestos, fundas y cargadores para celular. Retiro en el local o envío a domicilio. Consultanos por compatibilidad antes de comprar.",
@@ -61,7 +66,7 @@ export async function generateMetadata({
       follow: true,
     },
     languages: {
-      "es-AR": "/tienda",
+      "es-AR": canonicalPath,
     },
     openGraphTitle: "Repuestos y Accesorios para Celulares en CABA | Team Celular",
     openGraphDescription:
