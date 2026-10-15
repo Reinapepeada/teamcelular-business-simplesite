@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import AuthorByline from "@/components/seo/AuthorByline";
@@ -97,7 +96,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2024-01-15T00:00:00Z",
-    modifiedTime: "2026-10-14T00:00:00Z",
+    modifiedTime: "2026-10-15T00:00:00Z",
     section: "Guías técnicas",
   },
   twitter: {
@@ -147,15 +146,15 @@ const quickSteps = [
   {
     step: "Buscamos la falla de origen",
     detail:
-      "Medimos consumo, líneas de carga y placa con instrumental de laboratorio. Si hay líquido o golpe adentro, le sacamos fotos con el microscopio y te las mandamos.",
-    duration: "30-45 min",
+      "Revisamos la falla antes de cotizar. Si requiere revisión de placa, el informe se entrega en hasta 72 horas hábiles y cuesta $45.000, que se descuentan si aceptás la reparación. El arreglo de placa lleva semanas y se presupuesta por separado.",
+    duration: "según la falla",
     Icon: FaTools,
   },
   {
-    step: "Cambio de la pieza",
+    step: "Aprobás el presupuesto y reparamos",
     detail:
-      "Antes de instalar, te explicamos qué módulo está disponible y qué funciones conserva en tu modelo. Revisamos si requiere transferencia de datos o del IC original y probamos True Tone, táctil y Face ID.",
-    duration: "2-4 h",
+      "Antes de instalar, te explicamos qué repuesto está disponible y qué funciones conserva en tu modelo. Con tu aprobación hacemos el trabajo: pantalla en 2-4 h y batería en 1-2 h si hay stock. Si la falla requiere otro trabajo, confirmamos su plazo por escrito.",
+    duration: "según el trabajo",
     Icon: FaWrench,
   },
   {
@@ -206,8 +205,8 @@ const frequentRepairs = [
   {
     title: "Placa lógica",
     description:
-      "No prende, se reinicia en la manzanita o no toma carga después de un cargador trucho o de mojarse. Revisión de placa $45.000, que se descuenta si se repara.",
-    eta: "revisión 72 h",
+      "Si no prende, se reinicia en la manzanita o no toma carga, primero descartamos batería, flex y puerto. La revisión de placa cuesta $45.000 y se descuenta si se repara; el arreglo lleva semanas y se cotiza por escrito.",
+    eta: "revisión hasta 72 h hábiles",
     Icon: FaMicrochip,
   },
 ];
@@ -234,7 +233,7 @@ const iphoneSymptomRows = [
   {
     symptom: "Se mojó, no prende o se reinicia",
     urgency: "Urgente: no lo cargues ni le des calor",
-    typicalTime: "24-48 h para limpieza y diagnóstico de placa",
+    typicalTime: "Placa: informe en hasta 72 h hábiles; arreglo por presupuesto",
     nextStep: "Traelo apagado lo antes posible (el arroz no sirve)",
   },
   {
@@ -310,7 +309,7 @@ const faq = [
   {
     question: "¿Reparan iPhone con daño por agua o humedad?",
     answer:
-      "Sí. Lo abrimos, limpiamos la placa y medimos la corrosión en laboratorio. Lo importante es no enchufarlo ni meterlo en arroz: traelo apagado.",
+      "Sí. Lo abrimos, revisamos los conectores y limpiamos la corrosión para evaluar el daño. No lo cargues ni le des calor: traelo apagado. Si necesita revisión de placa, el informe tarda hasta 72 horas hábiles; el precio y el plazo del arreglo se confirman por escrito.",
   },
   {
     question: "¿La garantía cubre mano de obra y repuesto?",
@@ -327,19 +326,19 @@ const faq = [
       "En iPhone 14 y 15 el Face ID está en el módulo frontal separado, por lo que un cambio de display correcto no lo afecta. Verificamos su funcionamiento antes y después de cada reemplazo.",
   },
   {
-    question: "¿El iPhone 12 tiene problemas frecuentes de placa?",
+    question: "¿Cómo saben si mi iPhone tiene una falla de placa?",
     answer:
-      "El iPhone 12 puede presentar fallas de placa relacionadas con el chip de batería (PMIC) o con el chip de carga inalámbrica luego de humedad. Diagnosticamos con instrumental antes de cotizar reparación.",
+      "Que no encienda o se reinicie no alcanza para saberlo: también puede fallar la batería, el puerto de carga o un flex. Medimos consumo y alimentación antes de cotizar. Si requiere revisión de placa, cuesta $45.000 y el informe se entrega en hasta 72 horas hábiles; se descuenta si aceptás reparar.",
   },
   {
     question: "¿Cuánto tarda un cambio de batería de iPhone?",
     answer:
-      "Entre 1 y 2 horas en la mayoría de los modelos. En iPhone 14 y 15, que llevan la batería más pegada, puede llegar a 2,5 horas.",
+      "Entre 1 y 2 horas si hay repuesto en stock. Si el equipo tiene otro daño o requiere trabajo adicional, confirmamos el plazo antes de empezar.",
   },
   {
     question: "¿Team Celular es servicio oficial de Apple?",
     answer:
-      "No. Somos un laboratorio independiente: revisamos la placa por $45.000 y buscamos el componente que falla, cuando el servicio oficial lo resuelve cambiando el equipo. En cada presupuesto aclaramos si el repuesto es original o compatible, y qué funciones pueden verse afectadas, como True Tone o el aviso de pieza desconocida.",
+      "No. Somos un servicio técnico independiente de Apple. En cada presupuesto aclaramos si el repuesto es original o compatible, y qué funciones pueden verse afectadas, como True Tone o el aviso de pieza desconocida. La revisión de placa cuesta $45.000 y se descuenta si aceptás la reparación.",
   },
   {
     question: "¿Trabajan iPhone X, XR, XS y generaciones anteriores?",
@@ -360,7 +359,7 @@ export default function IphoneRepairGuidePage() {
         title="Reparación de iPhone en CABA: precios por modelo"
         description="Precios de pantalla y batería por modelo, opciones de repuesto y consultas en Recoleta y Belgrano, con garantía escrita de 90 días."
         publishedTime="2024-01-15T00:00:00Z"
-        modifiedTime="2026-10-14T00:00:00Z"
+        modifiedTime="2026-10-15T00:00:00Z"
         about={[
           "reparacion de iPhone en Buenos Aires",
           "service tecnico Apple en CABA",
@@ -423,7 +422,7 @@ export default function IphoneRepairGuidePage() {
               ) : null}
             </p>
             <div className="mt-4">
-              <GuideByline modifiedTime="2026-10-14T00:00:00Z" tone="light" />
+              <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
             </div>
           </div>
 
@@ -563,7 +562,7 @@ export default function IphoneRepairGuidePage() {
           </div>
         </section>
 
-        <AuthorByline updatedLabel="14 de octubre de 2026" className="mt-6" />
+        <AuthorByline updatedLabel="15 de octubre de 2026" className="mt-6" />
 
         <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
           <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">
@@ -579,15 +578,16 @@ export default function IphoneRepairGuidePage() {
               turno previo. Cubrimos desde iPhone 8 hasta 17 Pro Max: cambio de pantalla,
               batería, puerto de carga, cámaras y fallas de placa. Podés consultar
               el precio de pantalla y batería de cada modelo en el selector de esta guía.
-              El diagnóstico se hace
-              el mismo día y el presupuesto se entrega antes de intervenir el equipo;
-              pantalla y batería suelen resolverse en 2 a 4 horas según stock.
-              Todo el trabajo sale con garantía escrita de 90 días sobre la mano de obra y
-              el repuesto instalado. A diferencia del canal oficial, que reemplaza módulos
-              o placas completas, acá se trabaja a nivel componente: microsoldadura
-              bajo microscopio, recuperación de equipos mojados y revisión de placa por
-              ARS 45.000, con precio y plazo por escrito antes de cualquier arreglo. Team Celular trabaja hace más
-              de 15 años y cuenta con opiniones de clientes en Google.
+              Somos un servicio técnico de iPhone independiente de Apple, con más de
+              15 años de trayectoria. Antes de abrir el equipo informamos el costo de
+              revisión y antes de reparar te damos el presupuesto por escrito.
+            </p>
+            <p className="mt-4 text-base leading-7 text-slate-700 dark:text-slate-200">
+              Con repuesto en stock, la pantalla tarda 2 a 4 horas y la batería 1 a 2 horas.
+              Si la falla es de placa, la revisión cuesta $45.000 y el informe se entrega
+              en hasta 72 horas hábiles. El arreglo de placa lleva semanas: confirmamos
+              precio y plazo por escrito y descontamos la revisión si aceptás repararlo.
+              {" "}{WARRANTY_SCOPE_MESSAGE}
             </p>
           </div>
 
@@ -631,10 +631,10 @@ export default function IphoneRepairGuidePage() {
         <section className="space-y-7">
           <div className="text-center">
             <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
-              ¿Cómo es el proceso de reparación de iPhone en Team Celular?
+              Servicio técnico de iPhone: del diagnóstico a la entrega
             </h2>
             <p className="mt-2 text-lg text-slate-600 dark:text-[#a1a1a6]">
-              Cuatro etapas con tiempos reales, desde el ingreso hasta la entrega con garantía
+              Qué revisamos, cuándo recibís el presupuesto y qué probamos antes de entregarlo
             </p>
           </div>
           <div className="grid gap-5 md:grid-cols-2">
@@ -761,6 +761,14 @@ export default function IphoneRepairGuidePage() {
 
 
 
+        <p className="text-sm leading-6 text-[#a1a1a6]">
+          Para entender las diferencias entre repuestos, consultá la información de Apple sobre{" "}
+          <a href="https://support.apple.com/es-la/103256" className="tc-link">
+            pantallas de iPhone, True Tone e historial de piezas
+          </a>.
+          Las opciones disponibles para tu equipo se aclaran en el presupuesto.
+        </p>
+
         <GuideInterlinkSection currentGuide="/guias/reparacion-iphone-buenos-aires" />
 
         <script
@@ -771,7 +779,7 @@ export default function IphoneRepairGuidePage() {
               "@type": "Service",
               name: "Reparación de iPhone en Buenos Aires",
               description:
-                "Reparación de iPhone en CABA: pantalla con transferencia de IC, batería, carga y placa, con garantía escrita de 90 días.",
+                "Servicio técnico independiente de iPhone en CABA: pantalla, batería, carga y placa, con repuesto, precio y plazo confirmados antes de reparar y garantía escrita de 90 días.",
               provider: { "@id": "https://teamcelular.com#localbusiness" },
               areaServed: {
                 "@type": "City",
