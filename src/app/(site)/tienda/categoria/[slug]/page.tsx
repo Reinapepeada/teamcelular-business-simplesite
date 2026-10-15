@@ -5,9 +5,11 @@ import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import CatalogFilters from "@/components/store/CatalogFilters";
 import CatalogResults from "@/components/store/CatalogResults";
 import {
+  buildPageHref,
   getCatalogCategoryBySlug,
   getCatalogFilters,
   getCatalogPage,
+  isCatalogIndexable,
   normalizeCatalogFilters,
   type CatalogSearchParams,
 } from "@/lib/catalog";
@@ -15,20 +17,6 @@ import { slugify } from "@/lib/productSlug";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 
 const SITE_URL = getSiteUrl();
-
-function isCategoryPageIndexable(
-  filters: Awaited<ReturnType<typeof normalizeCatalogFilters>>,
-) {
-  return (
-    filters.page === 1 &&
-    !filters.search &&
-    filters.categories.length === 0 &&
-    filters.brands.length === 0 &&
-    !filters.minPrice &&
-    !filters.maxPrice &&
-    !filters.sort
-  );
-}
 
 export async function generateMetadata({
   params,
@@ -50,9 +38,12 @@ export async function generateMetadata({
   }
 
   const canonicalSlug = slugify(category.name);
-  const canonicalPath = `/tienda/categoria/${canonicalSlug}`;
-  const categoryUrl = `${SITE_URL}${canonicalPath}`;
   const filters = normalizeCatalogFilters((await searchParams) ?? {});
+  const canonicalPath = buildPageHref(
+    `/tienda/categoria/${canonicalSlug}`,
+    normalizeCatalogFilters({}),
+    filters.page,
+  );
   const categoryPage = await getCatalogPage(
     {
       ...filters,
@@ -61,7 +52,7 @@ export async function generateMetadata({
     category.name,
   );
   const hasProducts = (categoryPage.products || []).length > 0;
-  const shouldIndex = hasProducts && isCategoryPageIndexable(filters);
+  const shouldIndex = hasProducts && isCatalogIndexable(filters);
 
   // Category names arrive from the API with stray whitespace ("Modulos "),
   // which shipped a double space into every title.

@@ -45,7 +45,7 @@ export function proxy(req: NextRequest) {
     res.headers.set("Vary", withVaryAccept(res.headers.get("Vary")));
     if (chosen === "text/html") {
         const md = pathname === "/" ? "/index.md" : `${pathname}.md`;
-        res.headers.set("Link", `<${md}>; rel="alternate"; type="text/markdown"`);
+        res.headers.set("Link", `<${md}${search}>; rel="alternate"; type="text/markdown"`);
     }
     return res;
 }

@@ -14,13 +14,32 @@ import assert from "node:assert/strict";
 
 import {
     ITEMS_PER_PAGE,
+    buildPageHref,
     getCatalogPage,
+    isCatalogIndexable,
     normalizeCatalogFilters,
     parametrosDeCatalogo,
     type CatalogFiltersState,
 } from "./catalog.ts";
 import { condicionSchema, productoDeVidriera } from "./fixbeeCatalog.ts";
 import type { CatalogProduct } from "./storeCatalog.ts";
+
+test("paginación sin filtros es indexable con canónica propia; facetas y búsquedas no", () => {
+    const first = normalizeCatalogFilters({});
+    const second = normalizeCatalogFilters({ page: "2" });
+    assert.equal(isCatalogIndexable(first), true);
+    assert.equal(isCatalogIndexable(second), true);
+    for (const basePath of ["/tienda", "/tienda/categoria/cargadores"]) {
+        assert.equal(buildPageHref(basePath, first, first.page), basePath);
+        assert.equal(buildPageHref(basePath, first, second.page), `${basePath}?page=2`);
+    }
+    for (const facet of [{ search: "iphone" }, { categories: "Pantallas" }, { brands: "Apple" }, { minPrice: "1000" }, { maxPrice: "5000" }, { sort: "price-asc" }]) {
+        assert.equal(isCatalogIndexable(normalizeCatalogFilters({ ...facet, page: "2" })), false);
+    }
+    for (const page of ["1.5", "-1", "Infinity", "9007199254740992", "no-es-pagina"]) {
+        assert.equal(normalizeCatalogFilters({ page }).page, 1);
+    }
+});
 
 describe("carga del catálogo", () => {
     test("una respuesta vacía es válida y conserva la página solicitada", async (t) => {
