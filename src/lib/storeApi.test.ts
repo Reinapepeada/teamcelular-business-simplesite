@@ -21,6 +21,8 @@ import {
     quoteShipping,
     storeRequestUrl,
     fetchStoreProduct,
+    fetchStoreProducts,
+    fetchStoreFacets,
 } from "./storeApi.ts";
 import { claveDeCheckout, huellaDelCarrito, olvidarClave, type AlmacenClave } from "./checkoutKey.ts";
 
@@ -87,20 +89,46 @@ const conFetch = async (
     }
 };
 
-test("la ficha SSR usa el backend con el host de tienda y sin cachear stock", async () => {
+test("el catálogo SSR usa el backend con el host de tienda y sin cachear stock", async () => {
     const anterior = process.env.NEXT_PUBLIC_BASE_URL;
+    const leerCatalogo = async () => {
+        await fetchStoreProduct("cargador");
+        await fetchStoreProducts({ page: 2, category: "Cables y adaptadores" });
+        await fetchStoreFacets();
+    };
+    const rutas = ["/store/products/cargador", "/store/products?page=2&category=Cables+y+adaptadores", "/store/facets"];
     process.env.NEXT_PUBLIC_BASE_URL = "https://teamcelular.com";
     try {
-        await conFetch({ body: { slug: "cargador" } }, async (llamadas) => {
-            await fetchStoreProduct("cargador");
-            assert.equal(llamadas[0].url, "https://api.beescend.com/store/products/cargador");
-            assert.equal(new Headers(llamadas[0].init?.headers).get("X-Forwarded-Host"), "teamcelular.com");
-            assert.equal(llamadas[0].init?.cache, "no-store");
+        await conFetch({ body: {} }, async (llamadas) => {
+            await leerCatalogo();
+            assert.deepEqual(llamadas.map(l => l.url), rutas.map(r => `https://api.beescend.com${r}`));
+            for (const llamada of llamadas) {
+                assert.equal(new Headers(llamada.init?.headers).get("X-Forwarded-Host"), "teamcelular.com");
+                assert.equal(llamada.init?.cache, "no-store");
+                assert.equal(llamada.init?.method ?? "GET", "GET");
+            }
         });
         process.env.NEXT_PUBLIC_BASE_URL = "https://example.test";
-        await conFetch({ body: { slug: "cargador" } }, async (llamadas) => {
-            await fetchStoreProduct("cargador");
-            assert.equal(llamadas[0].url, "https://example.test/store/products/cargador");
+        await conFetch({ body: {} }, async (llamadas) => {
+            await leerCatalogo();
+            assert.deepEqual(llamadas.map(l => l.url), rutas.map(r => `https://example.test${r}`));
+            assert.ok(llamadas.every(l => new Headers(l.init?.headers).get("X-Forwarded-Host") === null));
+        });
+        process.env.NEXT_PUBLIC_BASE_URL = "https://teamcelular.com";
+        Object.defineProperty(globalThis, "window", { value: {}, configurable: true });
+        try {
+            await conFetch({ body: {} }, async (llamadas) => {
+                await leerCatalogo();
+                assert.deepEqual(llamadas.map(l => l.url), rutas);
+                assert.ok(llamadas.every(l => new Headers(l.init?.headers).get("X-Forwarded-Host") === null));
+            });
+        } finally {
+            Reflect.deleteProperty(globalThis, "window");
+        }
+        await conFetch({ body: {} }, async (llamadas) => {
+            await createOrder({ checkout_key: "test", customer_name: "Prueba", customer_email: "test@example.com", items: [] });
+            assert.equal(llamadas[0].url, "https://teamcelular.com/store/checkout");
+            assert.equal(llamadas[0].init?.method, "POST");
             assert.equal(new Headers(llamadas[0].init?.headers).get("X-Forwarded-Host"), null);
         });
     } finally {
