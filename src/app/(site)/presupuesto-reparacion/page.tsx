@@ -113,7 +113,7 @@ export default function PresupuestoReparacionPage() {
                             Presupuesto de reparación de celulares en CABA
                         </h1>
                         <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-[#86868b]">
-                            Decinos qué le pasa a tu celular y te pasamos el precio por WhatsApp en hasta 2 horas.
+                            Decinos qué le pasa a tu celular. Respondemos por WhatsApp en hasta 2 horas hábiles y confirmamos el precio según el diagnóstico.
                             Team Celular repara en{" "}
                             <strong className="text-slate-900 dark:text-[#f5f5f7]">Paraguay 2451, Recoleta</strong> y{" "}
                             <strong className="text-slate-900 dark:text-[#f5f5f7]">Amenábar 2032, Belgrano</strong>, con
