@@ -20,7 +20,7 @@ import {
 } from "react-icons/fa";
 import { SiSamsung } from "react-icons/si";
 import GuideByline from "@/components/seo/GuideByline";
-import { BRAND_REPAIR_PRICES, CHARGING_PORT_PRICE, PRICES_UPDATED_LABEL, buildPriceOffers, formatArsPrice, priceRangeOf } from "@/lib/repairPrices";
+import { BRAND_REPAIR_PRICES, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, PRICES_UPDATED_LABEL, buildPriceOffers, formatArsPrice, priceRangeOf } from "@/lib/repairPrices";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Reparación de Samsung Galaxy en Buenos Aires, CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla AMOLED, batería y USB-C en el día, diagnóstico mismo día y garantía escrita 90 días. Galaxy S, A y Z.",
+      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla, batería y USB-C según modelo y stock. Informe de placa en hasta 72 h hábiles y arreglo por presupuesto. Garantía escrita 90 días. Galaxy S, A y Z.",
     type: "article",
     url: PAGE_URL,
     locale: "es_AR",
@@ -83,14 +83,14 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2026-03-12T00:00:00Z",
-    modifiedTime: "2026-09-23T00:00:00Z",
+    modifiedTime: "2026-10-15T00:00:00Z",
     section: "Guías técnicas",
   },
   twitter: {
     card: "summary_large_image",
     title: "Reparación de Samsung Galaxy en CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta. Pantalla AMOLED y batería en el día, garantía escrita 90 días. Galaxy S, A, Note y Z Fold.",
+      "Team Celular, Paraguay 2451 Recoleta. Pantalla y batería según modelo y stock, garantía escrita 90 días. Galaxy S, A, Note y Z Fold.",
     images: ["https://teamcelular.com/images/guia_samsung.webp"],
   },
 };
@@ -133,15 +133,15 @@ const processSteps = [
   {
     title: "Buscamos la falla de origen",
     description:
-      "Medimos consumo, líneas de carga del USB-C y estabilidad de la placa. Un Galaxy que se apaga no siempre necesita batería: a veces es el pin o un corto en placa.",
-    duration: "30-45 min",
+      "Medimos consumo y revisamos batería y USB-C. Si requiere revisión de placa, el informe se entrega en hasta 72 horas hábiles; el arreglo lleva semanas y se presupuesta por separado.",
+    duration: "según la falla",
     Icon: FaTools,
   },
   {
     title: "Cambio de la pieza",
     description:
-      "Antes de instalar te decimos si el repuesto es Service Pack (original de Samsung) u OLED compatible, y qué cambia entre uno y otro en tu modelo.",
-    duration: "2-4 h",
+      "Antes de instalar te decimos qué repuesto hay para tu modelo y qué funciones conserva. Con stock, pantalla en 2-4 h y batería en 1-2 h; para otros trabajos confirmamos el plazo antes de empezar.",
+    duration: "según el trabajo",
     Icon: FaWrench,
   },
   {
@@ -185,8 +185,8 @@ const repairServices = [
   {
     title: "Placa de Samsung",
     detail:
-      "Queda en el logo, se reinicia solo o no prende después de un golpe o de mojarse. Revisión de placa $45.000, que se descuenta si se repara.",
-    eta: "revisión 72 h",
+      "Queda en el logo, se reinicia solo o no prende después de un golpe o de mojarse. Revisión de placa $45.000, con informe en hasta 72 horas hábiles. Se descuenta si se repara; el arreglo lleva semanas y se confirma precio y plazo por escrito.",
+    eta: "informe hasta 72 h hábiles",
     Icon: FaMicrochip,
   },
   {
@@ -220,7 +220,7 @@ const samsungSymptomRows = [
   {
     symptom: "Queda en el logo, reinicia o se mojó",
     urgency: "Crítica si tuvo contacto con líquido: no cargar ni aplicar calor",
-    typicalTime: "24-48 h para limpieza y diagnóstico de placa",
+    typicalTime: "Si requiere placa: informe hasta 72 h hábiles; arreglo por presupuesto",
     nextStep: "Traerlo apagado al laboratorio lo antes posible",
   },
   {
@@ -331,7 +331,7 @@ const faq = [
   {
     question: "¿Cuánto cuesta el diagnóstico si no hago la reparación?",
     answer:
-      "El diagnóstico tiene costo y se informa antes de abrir el equipo. Si aprobás la reparación, ese monto se descuenta del trabajo final. Confirmamos el valor exacto al recibir el Samsung.",
+      "La revisión técnica va de $15.000 a $25.000, según la falla; la revisión de placa cuesta $45.000 y su informe se entrega en hasta 72 horas hábiles. Informamos el costo antes de abrir el equipo y se descuenta si aceptás la reparación. Si requiere arreglo de placa, lleva semanas y confirmamos precio y plazo por escrito.",
   },
 ];
 
@@ -340,9 +340,9 @@ export default function SamsungRepairGuidePage() {
     <div className="flex w-full justify-center px-4 py-16">
       <ArticleSchema
         title="Reparación de Samsung en CABA: precios y opciones"
-        description="Precios, tiempos y fallas comunes de Samsung Galaxy, con diagnóstico el mismo día y garantía escrita de 90 días en CABA."
+        description="Precios, tiempos y fallas comunes de Samsung Galaxy. Informe de revisión de placa en hasta 72 horas hábiles y garantía escrita de 90 días en CABA."
         publishedTime="2026-03-12T00:00:00Z"
-        modifiedTime="2026-10-14T00:00:00Z"
+        modifiedTime="2026-10-15T00:00:00Z"
         about={[
           "reparacion de Samsung en Buenos Aires",
           "service tecnico Samsung Galaxy en CABA",
@@ -399,7 +399,7 @@ export default function SamsungRepairGuidePage() {
               en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).
             </p>
             <div className="mt-4">
-              <GuideByline modifiedTime="2026-10-14T00:00:00Z" tone="light" />
+              <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
             </div>
           </div>
 
@@ -487,7 +487,8 @@ export default function SamsungRepairGuidePage() {
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {[
-                  { servicio: "Diagnóstico técnico", modelos: "Todos los modelos", tiempo: "30–45 min", precio: "$15.000 a $25.000" },
+                  { servicio: "Revisión técnica (sin placa)", modelos: "Según la falla", tiempo: "a confirmar al ingreso", precio: "$15.000 a $25.000" },
+                  { servicio: "Revisión de placa", modelos: "Según la falla", tiempo: "hasta 72 h hábiles para el informe", precio: formatArsPrice(PLACA_REVISION_PRICE) },
                   { servicio: "Cambio de pantalla", modelos: "Galaxy S / Ultra (S22 a S25)", tiempo: "2–4 h", precio: formatRange(SCREEN_S) },
                   { servicio: "Cambio de pantalla", modelos: "Galaxy A / M (A16, A26, A35, A36, A54, A55, A56)", tiempo: "2–4 h", precio: formatRange(SCREEN_A) },
                   { servicio: "Cambio de batería", modelos: "Galaxy S / Ultra", tiempo: "1–2 h", precio: formatRange(BATTERY_S) },
@@ -521,7 +522,7 @@ export default function SamsungRepairGuidePage() {
           </div>
         </section>
 
-        <AuthorByline updatedLabel="14 de octubre de 2026" className="mt-6" />
+        <AuthorByline updatedLabel="15 de octubre de 2026" className="mt-6" />
 
         <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
           <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">

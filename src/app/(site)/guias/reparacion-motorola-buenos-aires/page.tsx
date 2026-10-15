@@ -30,7 +30,7 @@ const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 export const metadata: Metadata = {
   title: "Servicio Técnico Motorola en CABA | Precios",
   description:
-    "Servicio técnico Motorola en CABA, sin ser service oficial: Moto G y Edge en Recoleta y Belgrano. Pantalla desde $99.900, en 2-4 h. Garantía 90 días.",
+    "Servicio técnico Motorola en CABA, sin ser service oficial: Moto G y Edge en Recoleta y Belgrano. Pantalla desde $99.900, en 2-4 h con stock. Garantía 90 días.",
   keywords: [
     "reparacion motorola buenos aires",
     "service motorola caba",
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Service Motorola en CABA: Recoleta y Belgrano | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla, batería y pin de carga de Motorola en el día, garantía escrita 90 días. Moto G, Edge y E.",
+      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla, batería y pin de carga de Motorola según modelo, stock y falla. Garantía escrita 90 días. Moto G, Edge y E.",
     type: "article",
     url: PAGE_URL,
     locale: "es_AR",
@@ -76,14 +76,14 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2026-05-08T00:00:00Z",
-    modifiedTime: "2026-08-20T00:00:00Z",
+    modifiedTime: "2026-10-15T00:00:00Z",
     section: "Guías Técnicas",
   },
   twitter: {
     card: "summary_large_image",
     title: "Reparación de Motorola en CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga de Motorola en el día. Garantía escrita 90 días.",
+      "Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga de Motorola según modelo, stock y falla. Garantía escrita 90 días.",
     images: ["https://teamcelular.com/images/portada_moto.webp"],
   },
 };
@@ -133,15 +133,15 @@ const quickSteps = [
   {
     step: "Diagnóstico de laboratorio",
     detail:
-      "Analizamos pin de carga, estado de batería y consumo con instrumental. Si hay daño por líquido o golpe fuerte, documentamos con fotos antes de cotizar.",
-    duration: "30-45 min",
+      "Revisamos pin de carga, batería y consumo antes de cotizar. Si hace falta revisión de placa, el informe tarda hasta 72 horas hábiles. El arreglo de placa lleva semanas y se confirma precio y plazo por escrito.",
+    duration: "según la falla",
     Icon: FaTools,
   },
   {
     step: "Reparación y calibración",
     detail:
-      "Instalamos repuestos certificados y verificamos calibración táctil, autonomía de batería y estabilidad de carga para sostener el uso diario.",
-    duration: "1-4 h",
+      "Instalamos el repuesto aprobado y probamos táctil, batería y carga. Pantalla en 2-4 h y batería en 1-2 h con stock; para otras fallas confirmamos el plazo antes de empezar.",
+    duration: "según el trabajo",
     Icon: FaWrench,
   },
   {
@@ -191,8 +191,8 @@ const frequentRepairs = [
   {
     title: "Placa y recuperación avanzada",
     description:
-      "Motorola que no enciende, se reinicia o no toma carga después de un golpe o de mojarse. Revisión de placa $45.000, que se descuenta si se repara.",
-    eta: "revisión 72 h",
+      "Motorola que no enciende, se reinicia o no toma carga después de un golpe o de mojarse. Revisión de placa $45.000, con informe en hasta 72 horas hábiles. Se descuenta si se repara; el arreglo lleva semanas y se confirma precio y plazo por escrito.",
+    eta: "informe hasta 72 h hábiles",
     Icon: FaMicrochip,
   },
 ];
@@ -225,7 +225,7 @@ const motorolaSymptomRows = [
   {
     symptom: "Se mojó o falla después de humedad",
     urgency: "Crítica: no cargar, encender ni aplicar calor",
-    typicalTime: "24-48 h para apertura, limpieza y medición",
+    typicalTime: "Si requiere placa: informe hasta 72 h hábiles; arreglo por presupuesto",
     nextStep: "Traerlo apagado al laboratorio lo antes posible",
   },
 ];
@@ -309,7 +309,7 @@ const faq = [
   {
     question: "¿Cuánto cuesta el diagnóstico si no avanzo con la reparación?",
     answer:
-      "El diagnóstico tiene costo fijo que se informa antes de abrir el equipo. Si avanzás con la reparación, ese valor se descuenta del trabajo final.",
+      "La revisión técnica va de $15.000 a $25.000, según la falla; la revisión de placa cuesta $45.000 y su informe se entrega en hasta 72 horas hábiles. Informamos el costo antes de abrir el equipo y se descuenta si aceptás la reparación. Si requiere arreglo de placa, lleva semanas y confirmamos precio y plazo por escrito.",
   },
   {
     question: "¿Atienden todos los modelos de Motorola?",
@@ -340,7 +340,7 @@ export default function MotorolaRepairGuidePage() {
         title="Reparación de Motorola en Buenos Aires | Servicio Técnico Team Celular"
         description="Guía completa para reparar Motorola en CABA con diagnóstico profesional, repuestos de calidad y garantía escrita 90 días."
         publishedTime="2026-05-08T00:00:00Z"
-        modifiedTime="2026-08-20T00:00:00Z"
+        modifiedTime="2026-10-15T00:00:00Z"
         about={[
           "reparacion de Motorola en Buenos Aires",
           "service tecnico Motorola en CABA",
@@ -391,11 +391,11 @@ export default function MotorolaRepairGuidePage() {
               Reparación de Motorola en Buenos Aires
             </h1>
             <p className="max-w-4xl text-lg leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
-              Team Celular repara Motorola en dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2032, Belgrano</strong>. Diagnóstico el mismo día, pantalla y batería en 2–4 h, y garantía
+              Team Celular repara Motorola en dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2032, Belgrano</strong>. Presupuesto antes de reparar. Pantalla en 2–4 h y batería en 1–2 h con stock, con garantía
               escrita de 90 días sobre trabajo y repuesto. Moto G, Edge y E.
             </p>
             <div className="mt-4">
-              <GuideByline modifiedTime="2026-08-20T00:00:00Z" tone="light" />
+              <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
             </div>
           </div>
 
@@ -404,9 +404,9 @@ export default function MotorolaRepairGuidePage() {
               <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-[#86868b]">
                 Diagnóstico
               </p>
-              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-primary">Mismo día</p>
+              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-primary">Según la falla</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-[#a1a1a6]">
-                Informe claro con pasos y presupuesto
+                Placa: informe en hasta 72 h hábiles
               </p>
             </div>
             <div className="bg-[#1d1d1f] rounded-[28px] p-5">
@@ -424,7 +424,7 @@ export default function MotorolaRepairGuidePage() {
               </p>
               <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-primary">1-4 h</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-[#a1a1a6]">
-                Pantalla, batería y carga en el día
+                Según modelo, stock y falla
               </p>
             </div>
           </div>
@@ -474,9 +474,9 @@ export default function MotorolaRepairGuidePage() {
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-700 dark:text-slate-200">
               Para reparar un Motorola en Buenos Aires, Team Celular atiende en Paraguay
-              2451, Recoleta, y Amenábar 2032, Belgrano. Hacemos diagnóstico el mismo día
-              y resolvemos pantalla, batería o carga USB-C en 1-4 h según modelo y stock,
-              con garantía escrita sobre trabajo y repuesto instalado.
+              2451, Recoleta, y Amenábar 2032, Belgrano. Con repuesto en stock, resolvemos pantalla, batería o carga USB-C en 1-4 h según el trabajo.
+              Si requiere revisión de placa, el informe tarda hasta 72 horas hábiles; el arreglo lleva semanas y se confirma precio y plazo por escrito.
+              La reparación tiene garantía escrita sobre trabajo y repuesto instalado.
             </p>
           </div>
 
@@ -646,7 +646,8 @@ export default function MotorolaRepairGuidePage() {
               </thead>
               <tbody className="divide-y divide-white/10 dark:divide-white/5">
                 {[
-                  ["Diagnóstico técnico", "15.000 – 25.000"],
+                  ["Revisión técnica (sin placa)", "15.000 – 25.000"],
+                  ["Revisión de placa (informe hasta 72 h hábiles)", "45.000"],
                   ["Pantalla Moto E / G", "99.900 – 199.900"],
                   ["Pantalla Edge (pOLED)", "299.900 – 599.900"],
                   ["Pantalla Razr (plegable)", "999.900 – 1.399.900"],

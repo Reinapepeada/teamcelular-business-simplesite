@@ -8,11 +8,12 @@ import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import Link from "next/link";
 import RepairPriceInquiry from "@/components/repairs/RepairPriceInquiry";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
-import { CHARGING_PORT_PRICE, PRICES_UPDATED_LABEL, formatArsPrice } from "@/lib/repairPrices";
+import { CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, PRICES_UPDATED_LABEL, formatArsPrice } from "@/lib/repairPrices";
 
 // SXO 2026-09: "cuanto sale cambiar el pin de carga" llegaba aca sin precio visible.
 const PORT_FROM = formatArsPrice(CHARGING_PORT_PRICE.from);
 const PORT_TO = formatArsPrice(CHARGING_PORT_PRICE.to);
+const PLACA_REVISION = formatArsPrice(PLACA_REVISION_PRICE);
 
 const SITE_URL = getSiteUrl();
 const PAGE_PATH = "/guias/pin-de-carga-suelto-solucion";
@@ -102,7 +103,7 @@ const planSteps: GuideItem[] = [
   {
     title: "Microsoldadura en placa",
     description:
-      "Si el daño llegó a las pistas o al circuito de carga, se corrige en el laboratorio de microelectrónica.",
+      "Si requiere revisión de placa, el informe se entrega en hasta 72 horas hábiles. El arreglo lleva semanas y se confirma precio y plazo por escrito antes de empezar.",
   },
   {
     title: "Pruebas finales",
@@ -117,6 +118,11 @@ const faq: GuideFaqItem[] = [
     answer: `El cambio de pin de carga va de ${PORT_FROM} a ${PORT_TO}, según el modelo y la pieza que haya que cambiar. La limpieza técnica y las fallas de placa se cotizan aparte: ese rango corresponde al cambio de pin o flex. Pasanos marca, modelo y qué falla para confirmar el precio antes de reparar.`,
   },
   {
+    question: "¿Cómo cargar un celular con el pin de carga dañado?",
+    answer:
+      "No fuerces el cable ni lo mantengas presionado para que cargue. La carga inalámbrica puede ser una alternativa temporal solo si tu modelo la admite y el equipo no se mojó, no tiene la batería hinchada ni se calienta de forma anormal. Si no admite carga inalámbrica, apagalo para conservar la batería y traelo a revisar. Ante humedad o daño de batería, no intentes cargarlo. Si todavía enciende y está en condiciones de uso, respaldá tus datos por WiFi.",
+  },
+  {
     question: "¿Cómo saber si se dañó el pin de carga del celular?",
     answer:
       "Hay cuatro señales claras: carga solo si sostenés el cable en una posición, el enchufe tiene juego hacia los costados, dejó de cargar rápido, o la computadora no reconoce el equipo por cable. Si además aparece un aviso de humedad o de accesorio no compatible con el puerto seco, también apunta al pin o al flex.",
@@ -124,7 +130,7 @@ const faq: GuideFaqItem[] = [
   {
     question: "¿Es el pin de carga, el cable o la batería?",
     answer:
-      "Si con otro cable y otro cargador carga normal, era el accesorio. Si carga pero el porcentaje baja muy rápido, suele ser la batería. Si el cable se desconecta o solo carga en cierto ángulo, es el pin.",
+      "Si con otro cable y otro cargador carga normal, era el accesorio. Si carga pero el porcentaje baja muy rápido, suele ser la batería. Si el cable se desconecta o solo carga en cierto ángulo, puede ser el puerto: lo confirmamos antes de cambiar la pieza.",
   },
   {
     question: "¿Conviene limpiar o cambiar el pin de carga?",
@@ -144,11 +150,13 @@ const faq: GuideFaqItem[] = [
   {
     question: "¿Cuánto tarda el diagnóstico?",
     answer:
-      "El diagnóstico sale el mismo día hábil. Con eso decidís si conviene reparar antes de que toquemos el equipo.",
+      `El plazo depende de la falla: primero descartamos cable, cargador y suciedad. Si hace falta revisión de placa, cuesta ${PLACA_REVISION} y el informe se entrega en hasta 72 horas hábiles. El arreglo de placa lleva semanas, se presupuesta aparte y descontamos la revisión si aceptás repararlo.`,
   },
 ];
 
 const relatedLinks: GuideRelatedLink[] = [
+  { href: "https://support.apple.com/es-es/108805", label: "Apple: si el iPhone no se carga" },
+  { href: "https://www.samsung.com/ar/support/mobile-devices/issues-with-wireless-charging/", label: "Samsung: compatibilidad y problemas de carga inalámbrica" },
   { href: "/reparaciones/cambio-pin-carga-caba", label: "Precio del cambio de pin de carga" },
   { href: "/guias/celular-mojado-que-hacer", label: "Celular mojado: primeros pasos" },
   { href: "/guias/cambio-bateria-celular", label: "Guía de batería" },
@@ -166,7 +174,7 @@ export default function ChargingPortGuidePage() {
       badge="Falla frecuente"
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
-      modifiedTime="2026-10-14T00:00:00Z"
+      modifiedTime="2026-10-15T00:00:00Z"
       imagePath="/images/reparacion_placa.webp"
       heroPoints={[
         "Confirmamos precio antes de reparar.",
@@ -193,7 +201,7 @@ export default function ChargingPortGuidePage() {
         <section id="precios-pin-carga" className="scroll-mt-24 space-y-5 rounded-[28px] bg-[#1d1d1f] p-6 sm:p-8">
           <h2 className="text-2xl font-semibold text-white">Precio del cambio de pin de carga en CABA</h2>
           <p className="text-3xl font-semibold text-white tabular-nums">{PORT_FROM} a {PORT_TO}</p>
-          <p className="max-w-3xl leading-7 text-[#a1a1a6]">El rango corresponde al cambio de pin o flex, según dispositivo. Si alcanza con limpiar el conector o la falla está en la placa, cotizamos ese trabajo antes de avanzar. La revisión técnica suele costar de $15.000 a $25.000; confirmamos el importe según la falla.</p>
+          <p className="max-w-3xl leading-7 text-[#a1a1a6]">El rango corresponde al cambio de pin o flex, según dispositivo. Si alcanza con limpiar el conector o la falla está en la placa, cotizamos ese trabajo antes de avanzar. La revisión técnica va de $15.000 a $25.000. Si requiere revisión de placa, cuesta {PLACA_REVISION}, con informe en hasta 72 horas hábiles. Informamos el costo antes de abrir el equipo y se descuenta si aceptás la reparación. El arreglo de placa lleva semanas y se presupuesta por separado.</p>
           <p className="text-sm text-[#86868b]">Precios publicados el {PRICES_UPDATED_LABEL}. Confirmamos pieza, stock y plazo para tu modelo.</p>
           <div className="flex flex-wrap gap-4">
             <BranchWhatsAppButton ctaName="pin_guide_prices_whatsapp" ctaLocation="pin_guide_prices" message="Hola Team Celular, vi el rango de cambio de pin de carga y quiero confirmar el precio para mi equipo." className="tc-btn tc-btn-primary">Confirmar precio de mi pin de carga</BranchWhatsAppButton>
