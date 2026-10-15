@@ -7,11 +7,10 @@ import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 import BranchMap from "@/components/cards/BranchMap";
 import { BRANCHES, BUSINESS_PROFILE } from "@/lib/businessProfile";
-import { BUDGET_RESPONSE_MESSAGE } from "@/lib/copyStandards";
+import { BUDGET_RESPONSE_MESSAGE, REVIEW_COST_MESSAGE, SCREEN_BATTERY_TIMING_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import { buildWebsiteMetadata } from "@/lib/seoMetadata";
-import { GOOGLE_RATING_FALLBACK } from "@/lib/googleReviews";
-import { BRAND_REPAIR_PRICES, formatArsPrice } from "@/lib/repairPrices";
-import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
+import { BRAND_REPAIR_PRICES, PLACA_REVISION_PRICE, PRICES_UPDATED_LABEL, formatArsPrice } from "@/lib/repairPrices";
+import { IPHONE_MODELS, IPHONE_PRICES_UPDATED } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 // Precios citables de la home: salen de las mismas fuentes que las tablas.
 const iphone13 = IPHONE_MODELS.find((m) => m.slug === "13");
@@ -75,11 +74,11 @@ const process = [
 const faqs = [
     {
         question: "¿Tienen servicio técnico de celulares cerca?",
-        answer: "Team Celular tiene dos talleres en CABA: Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano). Desde Palermo, Almagro, Balvanera, Caballito o Microcentro estás a entre 10 y 15 minutos de alguno de los dos.",
+        answer: "Team Celular tiene dos talleres en CABA: Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano). El tiempo de viaje depende de tu punto de partida, el transporte y el tránsito. Consultá el recorrido en el mapa de cada sucursal antes de salir.",
     },
     {
         question: "¿Dónde arreglar el celular en CABA?",
-        answer: "Podés acercarte a cualquiera de las dos sucursales de lunes a viernes de 10:30 a 18:00, sin turno. El diagnóstico se hace el mismo día y te pasamos el presupuesto antes de intervenir el equipo.",
+        answer: "Podés acercarte a cualquiera de las dos sucursales de lunes a viernes de 10:30 a 18:00, sin turno. Te informamos el costo de la revisión antes de ingresar el equipo y el presupuesto antes de repararlo.",
     },
     {
         question: "¿Qué marcas reparan?",
@@ -90,6 +89,12 @@ const faqs = [
         answer: "Sí, con moto, de lunes a viernes. Cuesta ARS 15.000 y el horario depende del barrio: escribinos y lo coordinamos.",
     },
     { question: "¿Cuánto tarda un presupuesto?", answer: BUDGET_RESPONSE_MESSAGE },
+    {
+        question: "¿La revisión técnica tiene costo?",
+        answer: `${REVIEW_COST_MESSAGE} La revisión de placa cuesta ${formatArsPrice(PLACA_REVISION_PRICE)} y se descuenta si se repara. Te informamos el costo antes de ingresar el equipo.`,
+    },
+    { question: "¿Cuánto tarda un cambio de pantalla o batería?", answer: SCREEN_BATTERY_TIMING_MESSAGE },
+    { question: "¿Qué cubre la garantía?", answer: WARRANTY_SCOPE_MESSAGE },
 ];
 
 export default function Home() {
@@ -148,9 +153,10 @@ export default function Home() {
                     <div>
                         <h2 id="prices-title" className="tc-heading !text-[#1d1d1f]">¿Cuánto sale reparar un celular en CABA?</h2>
                         <p className="mt-5 max-w-lg text-pretty text-[19px] leading-[1.42] text-[#424245]">
-                            Más de 15 años reparando celulares, con{" "}
-                            {GOOGLE_RATING_FALLBACK.rating.toFixed(1).replace(".", ",")} estrellas en Google sobre{" "}
-                            {GOOGLE_RATING_FALLBACK.total} reseñas. Pantalla y batería salen en 2 a 4 horas.
+                            El precio depende del modelo y de la calidad del repuesto. Confirmamos el valor antes de reparar. {SCREEN_BATTERY_TIMING_MESSAGE}
+                        </p>
+                        <p className="mt-3 max-w-lg text-sm leading-6 text-[#424245]">
+                            Precios orientativos en pesos argentinos. iPhone: publicados en {IPHONE_PRICES_UPDATED}; Samsung y Motorola: el {PRICES_UPDATED_LABEL}.
                         </p>
                         <div className="mt-6 flex flex-col gap-2 text-[17px] text-[#0066cc]">
                             <Link href="/guias/reparacion-iphone-buenos-aires#costos-reparacion-iphone" className="hover:underline">Precios de iPhone por modelo ›</Link>
