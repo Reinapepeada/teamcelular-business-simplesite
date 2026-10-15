@@ -59,3 +59,34 @@ test("sitemap has no product URL when the published catalog is empty", async () 
     globalThis.fetch = originalFetch;
   }
 });
+
+test("sitemap omits unknown modification dates and matches the HTML language alternatives", async () => {
+  const { default: sitemap } = await import("../src/app/sitemap.ts");
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async (url) => new Response(JSON.stringify(
+    new URL(url).pathname === "/store/facets"
+      ? { categories: ["Cargadores"] }
+      : { items: [{ slug: "cargador-usb-c" }], total: 1 }
+  ), { status: 200 });
+  try {
+    const entries = await sitemap();
+    assert.ok(entries.every((entry) => entry.lastModified === undefined));
+    const expectedLanguages = {
+      "es-AR": "https://teamcelular.com",
+      en: "https://teamcelular.com/en/phone-repair-buenos-aires",
+      "x-default": "https://teamcelular.com",
+    };
+    for (const url of [expectedLanguages["es-AR"], expectedLanguages.en]) {
+      const entry = entries.find((item) => item.url === url);
+      assert.deepEqual(entry?.alternates?.languages, expectedLanguages);
+    }
+    for (const path of ["reparaciones", "guias", "tienda/categoria/cargadores", "tienda/cargador-usb-c"]) {
+      const url = `https://teamcelular.com/${path}`;
+      const entry = entries.find((item) => item.url === url);
+      assert.deepEqual(entry?.alternates?.languages, { "es-AR": url });
+    }
+    assert.deepEqual(await sitemap(), entries);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});

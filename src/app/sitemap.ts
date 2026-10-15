@@ -336,27 +336,29 @@ const guidePages = [
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const currentDate = new Date();
-  const lastMod = currentDate;
+  // Omit lastModified until each page has a reliable content modification date.
+  const homeLanguages = {
+    "es-AR": SITE_URL,
+    en: `${SITE_URL}/en/phone-repair-buenos-aires`,
+    "x-default": SITE_URL,
+  };
   const [categories, productSlugs] = await Promise.all([
     getCategoriesForSitemap(), getProductsForSitemap(),
   ]);
 
   const mainSitemap = mainPages.map((page) => ({
     url: page.path ? `${SITE_URL}/${page.path}` : SITE_URL,
-    lastModified: lastMod,
     changeFrequency: page.changeFreq,
     priority: page.priority,
     alternates: {
-      languages: {
-        "es-AR": page.path ? `${SITE_URL}/${page.path}` : SITE_URL,
-      },
+      languages: !page.path || page.path === "en/phone-repair-buenos-aires"
+        ? homeLanguages
+        : { "es-AR": `${SITE_URL}/${page.path}` },
     },
   }));
 
   const guidesSitemap = guidePages.map((page) => ({
     url: `${SITE_URL}/${page.path}`,
-    lastModified: lastMod,
     changeFrequency: page.changeFreq,
     priority: page.priority,
     alternates: {
@@ -371,7 +373,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   );
   const categoryEntries = categorySlugs.map((slug) => ({
     url: `${SITE_URL}/tienda/categoria/${slug}`,
-    lastModified: lastMod,
     changeFrequency: "weekly" as const,
     priority: 0.7,
     alternates: {
