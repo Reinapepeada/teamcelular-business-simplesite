@@ -1,5 +1,17 @@
 # Comparativas de reparación de Team Celular
 
+## Priorización comercial del 15/10/2026
+
+Después de evaluar consultas locales y datos de Argentina, se priorizan los accesos a reparación, las guías por marca y las comparativas técnicas. En `/guias` se reutiliza el bloque existente de servicios y presupuesto antes de las lecturas; iPhone, Samsung y pantallas abren las tarjetas. Reparar/comprar y oficial/independiente siguen destacadas.
+
+La comparación con GoFix/View Phone conserva URL, contenido, fuentes, canonical, indexabilidad y sitemap. Su acceso desde el índice pasa a una lectura secundaria al final, sin tarjeta destacada. Las guías técnicas dejan de recomendar esa comparación y enlazan servicios propios. No se cambian títulos/H1 de las páginas, precios, condiciones, seguimiento de eventos ni dependencias.
+
+Teveotecno se incorpora al seguimiento competitivo privado de la automatización existente, junto con GoFix y View Phone. No se crea otra comparativa pública. La observación puntual de Google no demuestra un pico histórico ni el volumen de demanda; las métricas comerciales se evalúan con segmentos y períodos equivalentes, separando contactos de clientes confirmados.
+
+El script `scripts/check-comparison-pages.mjs` verifica HTML servido: servicios antes de guías, orden de tarjetas, enlace secundario de talleres, ausencia de ese enlace en las comparativas técnicas, accesibilidad HTTP de los destinos, canonicals, sitemap y paridad de FAQ. Las referencias previas de esta auditoría se conservan como contexto de la publicación inicial.
+
+Validación local de esta priorización: 366 pruebas aprobadas, lint sin advertencias, TypeScript, build de producción y auditoría de dependencias productivas sin vulnerabilidades. El script pasó contra el build servido. Navegador a 1280 y 390 píxeles: sin desborde horizontal ni errores de consola; enlace del hero al bloque de servicios y navegación móvil a cambio de pantalla correctos, sin enviar formularios ni mensajes.
+
 Implementación del 15 de octubre de 2026. Se amplían dos URLs existentes y se crean dos. No se cambia el catálogo, sus precios ni los datos comerciales. No se agregan dependencias.
 
 ## Selección de competidores y límite del dato de posicionamiento
