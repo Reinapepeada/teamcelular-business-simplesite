@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { BsCheckCircleFill, BsWhatsapp } from "react-icons/bs";
@@ -318,6 +319,8 @@ export interface ServiceLandingConfig {
   serviceName: string;
   serviceType: string;
   serviceDescription: string;
+  modifiedTime?: string;
+  closingDescription?: string;
   highlights: ServiceHighlight[];
   brandsText: string;
   /** Precios cortos para el hero (una fila por caso). Mejor que meterlos en el parrafo. */
@@ -354,8 +357,10 @@ export function buildServiceMetadata(config: ServiceLandingConfig): Metadata {
 
 export default function ServiceLandingPage({
   config,
+  children,
 }: {
   config: ServiceLandingConfig;
+  children?: ReactNode;
 }) {
   const serviceUrl = `${SITE_URL}/reparaciones/${config.slug}`;
   const whatsappUrl = `https://wa.me/5491151034595?text=${encodeURIComponent(
@@ -373,7 +378,7 @@ export default function ServiceLandingPage({
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${serviceUrl}#service`,
-    dateModified: PRICES_UPDATED,
+    dateModified: config.modifiedTime ?? PRICES_UPDATED,
     name: config.serviceName,
     serviceType: config.serviceType,
     description: config.serviceDescription,
@@ -526,6 +531,8 @@ export default function ServiceLandingPage({
         </div>
       </section>
 
+      {children}
+
       <section className="tc-section">
         <div className="tc-reveal grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-baseline">
           <h2 className="tc-heading">¿Qué marcas reparan?</h2>
@@ -571,7 +578,7 @@ export default function ServiceLandingPage({
       <section className="tc-section tc-reveal text-center">
         <h2 className="tc-heading mx-auto max-w-3xl">¿Querés que lo revisemos hoy?</h2>
         <p className="tc-body mx-auto mt-5 max-w-xl">
-          Mandanos marca, modelo y falla por WhatsApp y te pasamos precio y plazo.
+          {config.closingDescription ?? "Mandanos marca, modelo y falla por WhatsApp y te pasamos precio y plazo."}
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5">
           <TrackedCtaLink
