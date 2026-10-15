@@ -84,9 +84,8 @@ export const itemMerchant = (p: CatalogProduct, siteUrl: string): string | null 
         campo("condition", condicionMerchant(p.condition)),
         campo("brand", p.brand),
         campo("gtin", p.gtin),
-        campo("mpn", p.model),
-        // Sin GTIN ni MPN hay que decirlo; si no, Merchant lo marca como faltante.
-        !p.gtin && !p.model ? campo("identifier_exists", "no") : "",
+        // El catálogo público no expone MPN ni ausencia de identificadores verificados.
+        // Un modelo o un campo vacío no permiten deducir ninguno de esos datos.
         campo("product_type", p.category),
         campo("google_product_category", categoriaGoogle(p.category)),
         "</item>",
