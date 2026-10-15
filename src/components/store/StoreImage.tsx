@@ -11,8 +11,8 @@ const PLACEHOLDER = "/placeholder.jpg";
  *
  * Las fotos de la tienda llegan por una ruta firmada que se resuelve después de
  * pintar la página: sin esto el hueco quedaba vacío y la foto aparecía de golpe.
- * Mientras carga se ve un bloque que late. La foto no depende de la hidratación
- * para ser visible. Si falla, queda el placeholder en vez de un ícono roto.
+ * El skeleton queda detrás de la imagen: el navegador puede mostrarla sin
+ * esperar a la hidratación ni a onLoad. Si falla, queda el placeholder.
  *
  * El padre tiene que ser `relative` (igual que con `fill`).
  */
@@ -36,6 +36,7 @@ export default function StoreImage({ src, alt, className = "", onLoad, onError, 
                 {...props}
                 src={origen}
                 alt={alt}
+                fetchPriority={props.fetchPriority ?? (props.priority ? "high" : undefined)}
                 className={`${className} transition-transform duration-300`}
                 onLoad={event => {
                     setCargada(origen);
