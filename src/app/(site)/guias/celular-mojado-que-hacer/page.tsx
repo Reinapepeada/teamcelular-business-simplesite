@@ -13,7 +13,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
   title: "Celular Mojado: Qué Hacer (y Qué No) en las Primeras 2 Horas",
   description:
-    "Apagalo, no lo cargues y no lo metas en arroz. Qué hacer en las primeras 2 horas para frenar la corrosión, y cuándo llevarlo a revisar el mismo día.",
+    "Apagalo, no lo cargues y no lo metas en arroz. Qué hacer tras mojar el celular, cuándo llevarlo a revisar y cómo se evalúa el daño por líquidos.",
   keywords: [
     "celular mojado que hacer",
     "telefono mojado solucion",
@@ -122,11 +122,12 @@ const faq: GuideFaqItem[] = [
   {
     question: "¿En cuánto tiempo hay que actuar?",
     answer:
-      "Lo ideal es dentro de las primeras 2 horas. Ese margen mejora mucho la posibilidad de recuperacion.",
+      "Consultá cuanto antes para coordinar la revisión. No hay un plazo que garantice la recuperación: depende del líquido, del daño y del estado del equipo.",
   },
 ];
 
 const relatedLinks: GuideRelatedLink[] = [
+  { href: "/reparaciones/recuperacion-celular-mojado-caba", label: "Diagnóstico y reparación de celular mojado en CABA" },
   { href: "/reparaciones/reparacion-placa-caba", label: "Servicio de reparacion de placa" },
   { href: "/guias/pin-de-carga-suelto-solucion", label: "Pin de carga con sulfato" },
   { href: "/guias/pin-de-carga-suelto-solucion", label: "Pin de carga suelto" },
@@ -140,11 +141,11 @@ export default function WetPhoneGuidePage() {
       pagePath={PAGE_PATH}
       pageLabel="Celular mojado"
       title="Celular mojado: que hacer en las primeras 2 horas"
-      heroDescription="Si se te mojó el celular: apagalo ya, no lo cargues, sacale la funda y la SIM, y no lo metas en arroz ni le pases secador. Lo que daña la placa es la corrosión, que avanza durante horas aunque el equipo prenda. Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), lo revisa bajo microscopio el mismo día."
+      heroDescription="Si se te mojó el celular: apagalo, no lo cargues y no lo metas en arroz ni le pases secador. La corrosión puede avanzar aunque el equipo prenda. Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), evalúa el daño bajo microscopio. Confirmamos el plazo según el estado del equipo; si requiere revisión de placa, el informe lleva hasta 72 horas hábiles."
       badge="Emergencia tecnica"
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
-      modifiedTime="2026-09-22T00:00:00Z"
+      modifiedTime="2026-10-15T00:00:00-03:00"
       imagePath="/images/guia_microelectronica.webp"
       heroPoints={[
         "Pasos concretos para minimizar corto y corrosion.",
