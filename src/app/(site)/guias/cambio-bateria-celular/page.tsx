@@ -6,8 +6,9 @@ import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import GuideByline from "@/components/seo/GuideByline";
+import RepairPriceTable from "@/components/seo/RepairPriceTable";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
-import { BRAND_REPAIR_PRICES, formatArsPrice } from "@/lib/repairPrices";
+import { BRAND_REPAIR_PRICES, PLACA_REVISION_PRICE, PRICES_UPDATED_LABEL, formatArsPrice, type RepairPrice } from "@/lib/repairPrices";
 import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 // Precios citables: minimos reales de las mismas fuentes que las tablas.
@@ -20,6 +21,23 @@ const ANDROID_BATTERY_FROM = Math.min(
 const IPHONE_BATTERY_FROM = Math.min(
   ...IPHONE_MODELS.map((m) => m.battery).filter((v): v is number => v !== null),
 );
+const batteryPriceRows: RepairPrice[] = [
+  {
+    name: "Cambio de batería iPhone",
+    from: IPHONE_BATTERY_FROM,
+    to: Math.max(...IPHONE_MODELS.map((model) => model.battery).filter((value): value is number => value !== null)),
+    href: "/reparaciones/cambio-bateria-caba",
+  },
+  ...Object.entries(BRAND_REPAIR_PRICES).map(([brand, prices]) => {
+    const batteries = prices.filter((price) => /bater/i.test(price.name));
+    return {
+      name: `Cambio de batería ${brand.charAt(0).toUpperCase()}${brand.slice(1)}`,
+      from: Math.min(...batteries.map((price) => price.from)),
+      to: Math.max(...batteries.map((price) => price.to)),
+      href: "/reparaciones/cambio-bateria-caba",
+    };
+  }),
+];
 import {
   FaBatteryFull,
   FaBatteryHalf,
@@ -31,8 +49,6 @@ import {
   FaExclamationTriangle,
   FaMobileAlt,
   FaChartLine,
-  FaCertificate,
-  FaApple,
 } from "react-icons/fa";
 
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
@@ -40,7 +56,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelula
 export const metadata: Metadata = {
   title: "Cambio de batería de celular en CABA: en 1 a 2 horas",
   description:
-    "Cambio de batería de celular en Recoleta y Belgrano, CABA. Sale en 1 a 2 horas, no borra tus datos y tiene garantía escrita de 90 días. Desde $89.900.",
+    "Cambio de batería de celular en Recoleta y Belgrano, CABA, desde $89.900. En 1 a 2 horas con repuesto en stock. Precio y plazo confirmados antes de reparar.",
   keywords: [
     "cambio batería celular Buenos Aires",
     "batería iPhone original",
@@ -68,7 +84,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Cambio de Batería Celular Buenos Aires | Service Certificado",
     description:
-      "Cambio de batería con repuestos originales y certificados. Sale en 1 a 2 horas con garantía escrita de 90 días.",
+      "Cambio de batería según modelo y repuesto disponible. En 1 a 2 horas con stock y garantía escrita de 90 días sobre trabajo y repuesto.",
     type: "article",
     locale: "es_AR",
     url: "https://teamcelular.com/guias/cambio-bateria-celular",
@@ -85,7 +101,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Cambio de Batería Celular Buenos Aires",
-    description: "Baterías originales o certificadas con garantía escrita de 90 días. Cambio en 1 a 2 horas.",
+    description: "Cambio de batería con repuesto y plazo confirmados antes de empezar. En 1 a 2 horas con stock. Garantía escrita de 90 días.",
     images: ["https://teamcelular.com/images/guia_cambio_bateria.webp"],
   },
   alternates: {
@@ -102,7 +118,7 @@ const batterySignals = [
   },
   {
     title: "Carga lenta o errática",
-    description: "La batería tarda más de 3 horas en cargar completamente o el porcentaje sube y baja sin razón.",
+    description: "La carga tarda más de lo habitual o el porcentaje salta. Antes de atribuirlo a la batería, revisamos cable, cargador, puerto y consumo.",
     Icon: FaBatteryHalf,
     severity: "Media",
   },
@@ -114,19 +130,19 @@ const batterySignals = [
   },
   {
     title: "Duración reducida",
-    description: "La batería dura menos de 4 horas con uso moderado o necesitas cargar 2-3 veces al día.",
+    description: "La autonomía bajó respecto de antes con un uso similar. Revisamos batería y consumo de aplicaciones para distinguir las causas.",
     Icon: FaBatteryQuarter,
     severity: "Media",
   },
   {
     title: "Hinchazón visible",
-    description: "La tapa trasera se levanta, la pantalla se separa del marco o el equipo no cierra correctamente.",
+    description: "La tapa se levanta o la pantalla se separa del marco. Dejá de usarlo y cargarlo; no presiones la batería y traelo a revisar.",
     Icon: FaExclamationTriangle,
     severity: "Crítica",
   },
   {
     title: "Salud de batería baja",
-    description: "En iPhone: Ajustes > Batería > Salud muestra menos de 80%. En Android: apps como AccuBattery indican degradación.",
+    description: "Revisá el estado de batería y las recomendaciones del sistema cuando estén disponibles. Las estimaciones de apps Android no reemplazan una revisión técnica.",
     Icon: FaChartLine,
     severity: "Media",
   },
@@ -134,52 +150,45 @@ const batterySignals = [
 
 const batteryTypes = [
   {
-    type: "Batería Original",
-    description: "Fabricada por el mismo proveedor del fabricante (Apple, Samsung). Incluye chip de autenticación y certificación de calidad.",
-    pros: ["100% compatible", "Chip de autenticación", "Garantía escrita de 90 días", "Salud al 100%"],
-    price: "$$$$",
-    recommended: true,
+    type: "Origen y documentación",
+    description: "Antes de elegir, verificá qué pieza se ofrece para tu equipo. La procedencia informada debe respaldar cualquier afirmación de originalidad o certificación.",
+    pros: ["Repuesto identificado en el presupuesto", "Garantía escrita de 90 días"],
   },
   {
-    type: "Batería Certificada AAA+",
-    description: "Aftermarket de alta calidad con certificación CE, FCC y RoHS. Capacidad igual o superior a la original.",
-    pros: ["Excelente calidad", "Certificaciones internacionales", "Garantía escrita de 90 días", "Precio competitivo"],
-    price: "$$$",
-    recommended: true,
+    type: "Compatibilidad y capacidad",
+    description: "La batería debe corresponder al modelo exacto. Confirmamos las características del repuesto disponible; una etiqueta comercial como AAA+ no demuestra por sí sola capacidad ni procedencia.",
+    pros: ["Compatibilidad confirmada antes de instalar", "Precio y condiciones por escrito"],
   },
   {
-    type: "Batería Genérica",
-    description: "Sin certificaciones, capacidad real menor a la especificada. No recomendada por riesgo de hinchazón y corta duración.",
-    pros: ["Precio bajo"],
-    cons: ["Sin garantía", "Riesgo de hinchazón", "Duración reducida", "Sin certificaciones"],
-    price: "$$",
-    recommended: false,
+    type: "Información de salud en iPhone",
+    description: "La información de salud y los mensajes del historial de piezas dependen del modelo, del repuesto y de su verificación o vinculación. Te explicamos qué esperar antes de reparar.",
+    pros: ["Funciones y límites informados", "Pruebas de carga y funcionamiento"],
   },
 ];
 
 const replacementProcess = [
   {
     step: "1. Diagnóstico y verificación",
-    detail: "Revisamos el estado actual de la batería con software especializado, verificamos ciclos de carga, salud y capacidad real. Fotografiamos el estado inicial del equipo.",
-    duration: "15 min",
+    detail: "Revisamos consumo, carga y la información de salud o ciclos que muestre el modelo. Si la falla requiere placa, se informa el costo y el plazo de esa revisión antes de continuar.",
+    duration: "según modelo y falla",
     Icon: FaTools,
   },
   {
     step: "2. Desmontaje profesional",
     detail: "Abrimos el equipo con herramientas especializadas, desconectamos la batería de forma segura y verificamos que no haya daños en conectores o placa.",
-    duration: "20 min",
+    duration: "según modelo",
     Icon: FaMobileAlt,
   },
   {
     step: "3. Instalación de batería nueva",
-    detail: "Instalamos batería original o certificada, verificamos polaridad correcta, aplicamos adhesivo térmico y reconectamos todos los flex cables.",
-    duration: "15 min",
+    detail: "Instalamos el repuesto presupuestado y aprobado, con la fijación correspondiente al modelo, y revisamos sus conexiones.",
+    duration: "según modelo y falla",
     Icon: FaBatteryFull,
   },
   {
     step: "4. Calibración y pruebas",
-    detail: "Hacemos un test de carga y descarga, verificamos temperatura y entregamos el equipo con informe de salud de la batería.",
-    duration: "30 min",
+    detail: "Probamos carga, temperatura y funcionamiento. Te informamos qué datos de salud y mensajes de pieza muestra ese equipo tras el cambio.",
+    duration: "según modelo",
     Icon: FaCheckCircle,
   },
 ];
@@ -188,19 +197,19 @@ const faqBattery = [
   {
     question: "¿Vale la pena cambiar la batería o conviene comprar otro celular?",
     answer:
-      "Si lo único que falla es la autonomía, casi siempre conviene cambiar la batería: cuesta una fracción de un equipo nuevo y le devuelve el día completo de uso. Si además tiene la pantalla rota o fallas de placa, sumá los presupuestos antes de decidir y te decimos con números cuál opción conviene.",
+      "Si la falla está en la batería y el resto del equipo funciona bien, compará el presupuesto con el costo de reemplazar el celular. Si además hay pantalla rota o falla de placa, conviene considerar el total. La autonomía después del cambio depende del modelo, del repuesto y del uso.",
   },
   {
     question: "¿Cuánto dura una batería nueva de celular?",
-    answer: `Una batería original o certificada AAA+ dura entre 2 y 3 años con uso normal (entre 300 y 500 ciclos de carga completos). La duración depende de los hábitos de carga. Evitar descargas completas, no dejar el equipo cargando toda la noche y mantener la batería entre el 20 % y el 80 % puede extender su vida útil. ${WARRANTY_SCOPE_MESSAGE}`,
+    answer: `La vida útil depende del modelo, del repuesto, del uso y de la temperatura; no corresponde prometer la misma cantidad de años o ciclos para todos. Como referencia de diseño de Apple en condiciones ideales, iPhone 14 y anteriores están diseñados para conservar el 80 % de capacidad tras 500 ciclos completos, e iPhone 15 y posteriores tras 1000. Esas cifras no garantizan la duración de cualquier batería de reemplazo. ${WARRANTY_SCOPE_MESSAGE}`,
   },
   {
     question: "¿Pierdo datos al cambiar la batería?",
-    answer: "No, el cambio de batería NO borra datos, fotos, contactos ni aplicaciones. Es un procedimiento puramente físico que no afecta la memoria interna del dispositivo. Sin embargo, siempre recomendamos hacer un backup preventivo en iCloud/Google Drive antes de cualquier reparación como medida de seguridad estándar.",
+    answer: "El cambio de batería no requiere borrar fotos, contactos ni aplicaciones. Recomendamos respaldar los datos antes de cualquier reparación. Si el diagnóstico indica otro procedimiento que pueda afectarlos, te lo consultamos antes de avanzar.",
   },
   {
-    question: "¿Qué diferencia hay entre batería original y certificada?",
-    answer: `Las baterias originales son fabricadas por los mismos proveedores del fabricante (ej: ATL, Desay para Apple) e incluyen chip de autenticacion. Las certificadas AAA+ son aftermarket de alta calidad con certificaciones CE, FCC y RoHS, capacidad igual o superior, pero sin chip oficial. ${WARRANTY_SCOPE_MESSAGE} La diferencia de precio suele ser del 30-40%. Para iPhone 12 en adelante recomendamos original para preservar funciones de salud de bateria.`,
+    question: "¿Qué diferencia hay entre una batería original y una compatible?",
+    answer: `Una pieza original debe tener un origen verificable; que un proveedor también fabrique para una marca no basta para identificarla como original. Una compatible es una alternativa fabricada para un modelo concreto: confirmamos procedencia, compatibilidad y condiciones antes de instalarla. ${WARRANTY_SCOPE_MESSAGE} En iPhone, los mensajes de pieza y la información de salud dependen del modelo, del repuesto y de su verificación o vinculación; te explicamos qué se puede conservar en tu caso.`,
   },
   {
     question: "¿Cuánto tiempo tarda el cambio de batería?",
@@ -217,9 +226,9 @@ export default function BatteryReplacementGuide() {
     <div className="flex w-full justify-center px-4 py-16">
       <ArticleSchema
         title="Cambio de batería celular en Buenos Aires | Service Certificado Team Celular"
-        description="Cambio de batería con repuestos originales y certificados. Garantía escrita y service express en 1-2 horas. Atención iPhone, Samsung y Motorola en CABA."
+        description="Cambio de batería en CABA con repuesto y precio confirmados antes de reparar. Plazo de 1 a 2 horas con stock y garantía escrita de 90 días."
         publishedTime="2024-11-30T00:00:00Z"
-        modifiedTime="2026-09-30T00:00:00Z"
+        modifiedTime="2026-10-15T00:00:00Z"
         image="https://teamcelular.com/images/guia_cambio_bateria.webp"
         url="https://teamcelular.com/guias/cambio-bateria-celular"
       />
@@ -255,21 +264,19 @@ export default function BatteryReplacementGuide() {
             Cambio de batería de celular: cuándo conviene y cuánto sale en CABA
           </h1>
           <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-[#a1a1a6]">
-            La batería se cambia cuando perdió capacidad real: dura menos de media jornada de uso normal,
-            se apaga con carga por encima del 20% o el equipo se calienta en reposo. Si en cambio se descarga
-            solo con una app abierta, o carga lento pero aguanta bien, el problema suele ser
-            <strong> consumo de software o el pin de carga</strong>, y reemplazar la batería no cambia nada.
-            Team Celular revisa ciclos, consumo y puerto antes de tocar la pieza, en Paraguay 2451 (Recoleta)
-            y Amenábar 2032 (Belgrano), CABA. El cambio sale en <strong>1 a 2 horas</strong> con garantía
-            escrita de 90 días.
+            Si el celular perdió autonomía, se apaga con carga o se calienta, revisamos la batería,
+            el consumo de aplicaciones y el puerto antes de decidir qué cambiar. Te atendemos en
+            Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA. Con repuesto en stock,
+            el cambio de batería lleva <strong>1 a 2 horas</strong>; confirmamos el plazo para tu modelo
+            antes de empezar. La reparación tiene garantía escrita de 90 días sobre trabajo y repuesto.
           </p>
           <p className="mx-auto mt-3 max-w-3xl text-lg font-semibold text-slate-800 dark:text-[#f5f5f7]">
             Team Celular, en Paraguay 2451 Recoleta, cambia la batería de Samsung, Motorola y Xiaomi desde{" "}
             {formatArsPrice(ANDROID_BATTERY_FROM)} y de iPhone desde {formatArsPrice(IPHONE_BATTERY_FROM)}, en 1 a 2
-            horas y sin borrar datos.
+            horas con repuesto en stock. El cambio no requiere borrar datos; recomendamos respaldo previo.
           </p>
           <div className="mt-4 flex justify-center">
-            <GuideByline modifiedTime="2026-09-30T00:00:00Z" tone="light" />
+            <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
           </div>
 
           {/* Quick Stats */}
@@ -277,7 +284,7 @@ export default function BatteryReplacementGuide() {
             <div className="bg-[#1d1d1f] rounded-[28px] p-6">
               <FaClock className="mx-auto mb-2 text-3xl text-green-700 dark:text-green-300" />
               <div className="text-2xl font-semibold text-green-700 dark:text-green-300">1-2hs</div>
-              <div className="text-sm text-slate-600 dark:text-[#86868b]">Service express</div>
+              <div className="text-sm text-slate-600 dark:text-[#86868b]">Con repuesto en stock</div>
             </div>
             <div className="bg-[#1d1d1f] rounded-[28px] p-6">
               <FaShieldAlt className="mx-auto text-3xl text-secondary mb-2" />
@@ -285,9 +292,9 @@ export default function BatteryReplacementGuide() {
               <div className="text-sm text-slate-600 dark:text-[#86868b]">Garantía escrita</div>
             </div>
             <div className="bg-[#1d1d1f] rounded-[28px] p-6">
-              <FaCertificate className="mx-auto mb-2 text-3xl text-green-700 dark:text-green-300" />
-              <div className="text-2xl font-semibold text-green-700 dark:text-green-300">100%</div>
-              <div className="text-sm text-slate-600 dark:text-[#86868b]">Baterías certificadas</div>
+              <FaCheckCircle className="mx-auto mb-2 text-3xl text-green-700 dark:text-green-300" />
+              <div className="text-2xl font-semibold text-green-700 dark:text-green-300">Según modelo</div>
+              <div className="text-sm text-slate-600 dark:text-[#86868b]">Repuesto informado antes de reparar</div>
             </div>
           </div>
 
@@ -309,6 +316,17 @@ export default function BatteryReplacementGuide() {
           </div>
         </header>
 
+        <RepairPriceTable
+          brand="baterías de celular"
+          prices={batteryPriceRows}
+          updatedLabel={PRICES_UPDATED_LABEL}
+          title="¿Cuánto cuesta cambiar la batería del celular en CABA?"
+          timingText="Cambio de batería en 1 a 2 horas con repuesto en stock. Confirmamos el plazo según modelo y diagnóstico."
+        />
+        <p className="text-sm text-slate-600 dark:text-[#a1a1a6]">
+          <Link href="/reparaciones/cambio-bateria-caba" className="underline underline-offset-4">Ver el servicio de cambio de batería y pedir presupuesto</Link>.
+        </p>
+
         {/* Señales de que necesitas cambiar la batería */}
         <section className="space-y-8">
           <div className="text-center">
@@ -316,7 +334,7 @@ export default function BatteryReplacementGuide() {
               ¿Cuándo cambiar la batería de tu celular?
             </h2>
             <p className="mt-3 text-lg text-slate-600 dark:text-[#a1a1a6]">
-              Señales claras de que tu batería necesita reemplazo urgente
+              Señales para pedir una revisión antes de decidir qué pieza cambiar
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -356,34 +374,22 @@ export default function BatteryReplacementGuide() {
         <section className="space-y-8">
           <div className="text-center">
             <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
-              Tipos de baterías que instalamos
+              Qué revisar antes de elegir una batería
             </h2>
             <p className="mt-3 text-lg text-slate-600 dark:text-[#a1a1a6]">
-              Comparativa de calidad, garantía y precio
+              Procedencia, compatibilidad y condiciones informadas antes de reparar
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {batteryTypes.map((battery) => (
               <div
                 key={battery.type}
-                className={`rounded-[28px] bg-[#1d1d1f] p-6 transition ${
-                  battery.recommended ? "ring-1 ring-inset ring-emerald-500/60" : ""
-                }`}
+                className="rounded-[28px] bg-[#1d1d1f] p-6"
               >
-                {battery.recommended && (
-                  <div className="mb-4 flex justify-center">
-                    <span className="rounded-full bg-green-800 px-3 py-1 text-xs font-semibold text-white">
-                      ? Recomendado
-                    </span>
-                  </div>
-                )}
                 <h3 className="mb-2 text-xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
                   {battery.type}
                 </h3>
                 <p className="mb-4 text-sm text-slate-700 dark:text-[#a1a1a6]">{battery.description}</p>
-                <div className="mb-4">
-                  <p className="text-2xl font-semibold text-green-500">{battery.price}</p>
-                </div>
                 {battery.pros && (
                   <ul className="space-y-2 mb-4">
                     {battery.pros.map((pro) => (
@@ -394,20 +400,15 @@ export default function BatteryReplacementGuide() {
                     ))}
                   </ul>
                 )}
-                {battery.cons && (
-                  <ul className="space-y-2">
-                    {battery.cons.map((con) => (
-                      <li key={con} className="flex items-center gap-2 text-sm text-red-700 dark:text-red-300">
-                        <FaExclamationTriangle className="flex-shrink-0" />
-                        {con}
-                      </li>
-                    ))}
-                  </ul>
-                )}
               </div>
             ))}
           </div>
         </section>
+
+        <p className="text-sm leading-6 text-slate-600 dark:text-[#a1a1a6]">
+          Fuentes: <a href="https://support.apple.com/es-es/103269" className="underline underline-offset-4">Apple: baterías originales e información de piezas</a> y{" "}
+          <a href="https://support.apple.com/es-es/106348" className="underline underline-offset-4">Apple: salud, rendimiento y ciclos según modelo</a>.
+        </p>
 
         {/* Proceso de reemplazo */}
         <section className="space-y-8">
@@ -481,7 +482,7 @@ export default function BatteryReplacementGuide() {
             ¿Tu celular necesita batería nueva?
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-[#a1a1a6]">
-            {REVIEW_COST_MESSAGE} Cambio en 1 a 2 horas con garantía escrita de 90 días.
+            {REVIEW_COST_MESSAGE} Si requiere revisión de placa, cuesta {formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; el arreglo lleva semanas y se confirma precio y plazo por escrito. Para el cambio de batería confirmamos modelo, repuesto, stock y plazo antes de empezar. {WARRANTY_SCOPE_MESSAGE}
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
