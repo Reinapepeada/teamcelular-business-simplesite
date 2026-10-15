@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image, { type ImageProps } from "next/image";
-import { cargaDirectaImagen } from "@/lib/storeCatalog";
+import { imagenParaOptimizar } from "@/lib/storeCatalog";
 
 const PLACEHOLDER = "/placeholder.jpg";
 
@@ -11,8 +11,8 @@ const PLACEHOLDER = "/placeholder.jpg";
  *
  * Las fotos de la tienda llegan por una ruta firmada que se resuelve después de
  * pintar la página: sin esto el hueco quedaba vacío y la foto aparecía de golpe.
- * Mientras carga se ve un bloque que late; al llegar, la foto entra con un
- * fundido corto. Si falla, queda el placeholder en vez de un ícono roto.
+ * Mientras carga se ve un bloque que late. La foto no depende de la hidratación
+ * para ser visible. Si falla, queda el placeholder en vez de un ícono roto.
  *
  * El padre tiene que ser `relative` (igual que con `fill`).
  */
@@ -21,7 +21,7 @@ export default function StoreImage({ src, alt, className = "", onLoad, onError, 
     // variante) vuelve el skeleton sin tener que resetear nada a mano.
     const [cargada, setCargada] = useState<string | null>(null);
     const [fallida, setFallida] = useState<string | null>(null);
-    const origen = fallida === src ? PLACEHOLDER : src;
+    const origen = fallida === src ? PLACEHOLDER : imagenParaOptimizar(src);
     const lista = cargada === origen;
 
     return (
@@ -36,8 +36,7 @@ export default function StoreImage({ src, alt, className = "", onLoad, onError, 
                 {...props}
                 src={origen}
                 alt={alt}
-                unoptimized={props.unoptimized ?? cargaDirectaImagen(origen)}
-                className={`${className} transition-[opacity,transform] duration-300 ${lista ? "opacity-100" : "opacity-0"}`}
+                className={`${className} transition-transform duration-300`}
                 onLoad={event => {
                     setCargada(origen);
                     onLoad?.(event);

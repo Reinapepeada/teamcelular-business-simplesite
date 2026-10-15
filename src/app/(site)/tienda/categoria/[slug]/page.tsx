@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import CatalogFilters from "@/components/store/CatalogFilters";
+import CatalogCategoryLinks from "@/components/store/CatalogCategoryLinks";
+import { getCategoryContent } from "@/lib/catalogCategories";
 import CatalogResults from "@/components/store/CatalogResults";
 import {
   buildPageHref,
@@ -56,14 +58,15 @@ export async function generateMetadata({
 
   // Category names arrive from the API with stray whitespace ("Modulos "),
   // which shipped a double space into every title.
-  const categoryName = category.name.trim();
-  const productCount = (categoryPage.products || []).length;
+  const content = getCategoryContent(category.name);
+  const categoryName = content.title;
+  const productCount = categoryPage.total;
 
-  const snippetTitle = `${categoryName} para Celulares en CABA | Team Celular`;
+  const snippetTitle = `${categoryName} en CABA | Team Celular`;
   // The count keeps each category's snippet distinct instead of shipping one
   // identical description across every category page.
-  const stockText = productCount > 0 ? `${productCount} modelos en stock. ` : '';
-  const rawCatDesc = `${categoryName} para celulares — Team Celular, Recoleta y Belgrano CABA. ${stockText}Retiro en el día y compatibilidad validada por WhatsApp.`;
+  const stockText = productCount > 0 ? `${productCount} productos publicados. ` : '';
+  const rawCatDesc = `${categoryName} — Team Celular, Recoleta y Belgrano CABA. ${stockText}Retiro en el día y compatibilidad validada por WhatsApp.`;
   const snippetDescription = rawCatDesc.length > 155 ? rawCatDesc.slice(0, 152) + '...' : rawCatDesc;
 
   return buildWebsiteMetadata({
@@ -112,6 +115,7 @@ export default async function CategoryPage({
   }
 
   const categoryUrl = `${SITE_URL}/tienda/categoria/${canonicalSlug}`;
+  const content = getCategoryContent(category.name);
 
   return (
     <div className="w-full bg-slate-50 dark:bg-[#1d1d1f] pb-16">
@@ -143,15 +147,15 @@ export default async function CategoryPage({
             Categoria destacada
           </p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 dark:text-slate-50 sm:text-4xl">
-            {category.name}
+            {content.title}
           </h1>
           <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600 dark:text-slate-400">
-            Team Celular, en Paraguay 2451 Recoleta, tiene {category.name} con retiro
-            en el día y envio en CABA. Filtra por marca o precio y validamos
-            compatibilidad por WhatsApp antes de comprar.
+            {content.description}
           </p>
         </div>
       </section>
+
+      <CatalogCategoryLinks categories={filterOptions.categories} activeSlug={canonicalSlug} />
 
       <section className="mx-auto grid max-w-screen-2xl gap-6 px-4 sm:px-6 lg:grid-cols-[320px_minmax(0,1fr)] lg:px-8">
         <CatalogFilters

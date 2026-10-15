@@ -4,6 +4,7 @@ import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import CatalogFilters from "@/components/store/CatalogFilters";
+import CatalogCategoryLinks from "@/components/store/CatalogCategoryLinks";
 import CatalogResults, {
   CatalogResultsFallback,
 } from "@/components/store/CatalogResults";
@@ -131,6 +132,8 @@ export default async function TiendaPage({
                 </TrackedCtaLink>
         </div>
       </section>
+
+      <CatalogCategoryLinks categories={filterOptions.categories} />
 
       <section className="mx-auto grid max-w-screen-2xl items-start gap-6 px-4 sm:px-6 lg:grid-cols-[260px_minmax(0,1fr)] lg:px-8">
         <CatalogFilters

@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import StoreImage from '@/components/store/StoreImage';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
 import { 
     ShoppingCart, 
     Share2, 
@@ -186,13 +185,8 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                 {/* Image Gallery */}
                 <div className="space-y-4">
                     <div className="relative aspect-square rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800">
-                        <AnimatePresence mode="wait">
-                            <motion.div
+                            <div
                                 key={selectedImageIndex}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.3 }}
                                 className="absolute inset-0"
                             >
                                 <StoreImage
@@ -203,8 +197,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                                     priority
                                     sizes="(max-width: 1024px) 100vw, 50vw"
                                 />
-                            </motion.div>
-                        </AnimatePresence>
+                            </div>
                         
                         {/* Navigation arrows */}
                         {images.length > 1 && (
