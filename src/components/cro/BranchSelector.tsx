@@ -140,9 +140,11 @@ export default function BranchWhatsAppButton({
   ariaLabel,
 }: ButtonProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<BranchSlug | "">("");
 
   function openSelector() {
+    setOpen(true);
     setSelected(readBranchPreference()?.slug ?? "");
     recordLeadInteraction({
       eventName: "branch_selector_open",
@@ -180,10 +182,11 @@ export default function BranchWhatsAppButton({
       </button>
       <dialog
         ref={dialogRef}
+        onClose={() => setOpen(false)}
         aria-labelledby={`${ctaName}-branch-title`}
         className="mb-0 mt-auto w-full max-w-xl rounded-t-2xl bg-white p-0 text-slate-900 shadow-2xl backdrop:bg-slate-950/55 dark:bg-slate-900 dark:text-slate-100 sm:m-auto sm:rounded-2xl"
       >
-        <div className="p-5 sm:p-6">
+        {open && <div className="p-5 sm:p-6">
           <div className="flex items-start justify-between gap-4">
             <div>
               {/* No es <h2>: el selector se renderiza varias veces por pagina y metia
@@ -215,7 +218,7 @@ export default function BranchWhatsAppButton({
             <FaWhatsapp aria-hidden />
             {selected ? `Continuar con ${BRANCHES.find((branch) => branch.slug === selected)?.shortName}` : "Elegí una sucursal"}
           </button>
-        </div>
+        </div>}
       </dialog>
     </>
   );
