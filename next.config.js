@@ -44,7 +44,8 @@ module.exports = {
       {
         protocol: "https",
         hostname: "teamcelular.com",
-        pathname: "/store/products/**",
+        port: "",
+        pathname: "/store/products/*/images/*/*",
         search: "",
       },
       {

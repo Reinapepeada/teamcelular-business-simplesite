@@ -21,7 +21,9 @@ export default function StoreImage({ src, alt, className = "", onLoad, onError, 
     // variante) vuelve el skeleton sin tener que resetear nada a mano.
     const [cargada, setCargada] = useState<string | null>(null);
     const [fallida, setFallida] = useState<string | null>(null);
-    const origen = fallida === src ? PLACEHOLDER : imagenParaOptimizar(src);
+    const [directa, setDirecta] = useState<string | null>(null);
+    const original = fallida === src ? PLACEHOLDER : src;
+    const origen = props.unoptimized || directa === original ? original : imagenParaOptimizar(original);
     const lista = cargada === origen;
 
     return (
@@ -37,13 +39,15 @@ export default function StoreImage({ src, alt, className = "", onLoad, onError, 
                 src={origen}
                 alt={alt}
                 fetchPriority={props.fetchPriority ?? (props.priority ? "high" : undefined)}
+                unoptimized={props.unoptimized ?? directa === original}
                 className={`${className} transition-transform duration-300`}
                 onLoad={event => {
                     setCargada(origen);
                     onLoad?.(event);
                 }}
                 onError={event => {
-                    if (origen !== PLACEHOLDER) setFallida(src);
+                    if (origen !== original) setDirecta(original);
+                    else if (original !== PLACEHOLDER) setFallida(src);
                     else setCargada(origen);
                     onError?.(event);
                 }}
