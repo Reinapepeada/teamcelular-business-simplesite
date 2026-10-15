@@ -95,17 +95,19 @@ function AdminSidebar({
     const { user, logout } = useAuth();
     const [expandedItems, setExpandedItems] = useState<string[]>(["Productos"]);
 
-    useEffect(() => {
-        if (!pathname) return;
+    const [previousPath, setPreviousPath] = useState(pathname);
+    if (previousPath !== pathname) {
+        setPreviousPath(pathname);
         const activeParents = navItems
             .filter((item) =>
-                item.children?.some((child) => pathname.startsWith(child.href))
+                item.children?.some((child) => pathname?.startsWith(child.href))
             )
             .map((item) => item.label);
 
-        if (activeParents.length === 0) return;
-        setExpandedItems((prev) => Array.from(new Set([...prev, ...activeParents])));
-    }, [pathname]);
+        if (activeParents.length > 0) {
+            setExpandedItems((prev) => Array.from(new Set([...prev, ...activeParents])));
+        }
+    }
 
     const toggleExpand = (label: string) => {
         setExpandedItems(prev =>

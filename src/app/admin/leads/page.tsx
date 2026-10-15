@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
     Card,
@@ -100,7 +100,10 @@ export default function AdminLeadsPage() {
     const [interactionData, setInteractionData] = useState(EMPTY_INTERACTION_DATA);
     const [interactionMetrics, setInteractionMetrics] = useState(EMPTY_INTERACTION_METRICS);
 
-    const [isLoading, setIsLoading] = useState(true);
+    const queryKey = JSON.stringify([channelFilter, currentPage, dateFrom, dateTo, pageSize, ctaLocationFilter, repairTypeFilter, statusFilter, urgencyFilter]);
+    const [loadedQuery, setLoadedQuery] = useState<string | null>(null);
+    const isLoading = loadedQuery !== queryKey;
+    const latestRequest = useRef(0);
     const [isRefreshing, setIsRefreshing] = useState(false);
     const [updatingLeadId, setUpdatingLeadId] = useState<string | null>(null);
     const [selectedInteraction, setSelectedInteraction] = useState<LeadInteraction | null>(null);
@@ -133,44 +136,38 @@ export default function AdminLeadsPage() {
         setCurrentPage(1);
     };
 
-    const fetchLeads = useCallback(async (showRefresh = false) => {
-        if (showRefresh) {
-            setIsRefreshing(true);
-        } else {
-            setIsLoading(true);
-        }
+    const fetchLeads = useCallback(() => {
+        const requestId = ++latestRequest.current;
+        const baseQuery = {
+            status: statusFilter === "all" ? undefined : statusFilter,
+            urgency: urgencyFilter === "all" ? undefined : urgencyFilter,
+            contactChannel: channelFilter === "all" ? undefined : channelFilter,
+            repairType: repairTypeFilter.trim() || undefined,
+            dateFrom: dateFrom || undefined,
+            dateTo: dateTo || undefined,
+        };
 
-        try {
-            const baseQuery = {
-                status: statusFilter === "all" ? undefined : statusFilter,
-                urgency: urgencyFilter === "all" ? undefined : urgencyFilter,
-                contactChannel: channelFilter === "all" ? undefined : channelFilter,
-                repairType: repairTypeFilter.trim() || undefined,
+        return Promise.allSettled([
+            getRepairLeads({
+                ...baseQuery,
+                page: currentPage,
+                size: pageSize,
+            }),
+            getRepairLeadsMetrics(baseQuery),
+            getLeadInteractions({
                 dateFrom: dateFrom || undefined,
                 dateTo: dateTo || undefined,
-            };
-
-            const [tableResponse, analyticsResponse, interactionResponse, interactionMetricsResponse] = await Promise.allSettled([
-                getRepairLeads({
-                    ...baseQuery,
-                    page: currentPage,
-                    size: pageSize,
-                }),
-                getRepairLeadsMetrics(baseQuery),
-                getLeadInteractions({
-                    dateFrom: dateFrom || undefined,
-                    dateTo: dateTo || undefined,
-                    ctaLocation: ctaLocationFilter === "all" ? undefined : ctaLocationFilter,
-                    page: 1,
-                    size: 10,
-                }),
-                getLeadInteractionsMetrics({
-                    dateFrom: dateFrom || undefined,
-                    dateTo: dateTo || undefined,
-                    ctaLocation: ctaLocationFilter === "all" ? undefined : ctaLocationFilter,
-                }),
-            ]);
-
+                ctaLocation: ctaLocationFilter === "all" ? undefined : ctaLocationFilter,
+                page: 1,
+                size: 10,
+            }),
+            getLeadInteractionsMetrics({
+                dateFrom: dateFrom || undefined,
+                dateTo: dateTo || undefined,
+                ctaLocation: ctaLocationFilter === "all" ? undefined : ctaLocationFilter,
+            }),
+        ]).then(([tableResponse, analyticsResponse, interactionResponse, interactionMetricsResponse]) => {
+            if (requestId !== latestRequest.current) return;
             const failedSections: string[] = [];
 
             if (tableResponse.status === "fulfilled") {
@@ -230,7 +227,8 @@ export default function AdminLeadsPage() {
             } else {
                 setLoadWarning(null);
             }
-        } catch (error) {
+        }).catch((error) => {
+            if (requestId !== latestRequest.current) return;
             console.error("Error cargando leads:", error);
             setLoadWarning("No se pudieron cargar los datos del panel.");
             toast({
@@ -238,10 +236,12 @@ export default function AdminLeadsPage() {
                 title: "Error al cargar leads",
                 description: "No se pudieron obtener los datos de leads. Intentá nuevamente.",
             });
-        } finally {
-            setIsLoading(false);
-            setIsRefreshing(false);
-        }
+        }).finally(() => {
+            if (requestId === latestRequest.current) {
+                setLoadedQuery(queryKey);
+                setIsRefreshing(false);
+            }
+        });
     }, [
         channelFilter,
         currentPage,
@@ -252,6 +252,7 @@ export default function AdminLeadsPage() {
         repairTypeFilter,
         statusFilter,
         urgencyFilter,
+        queryKey,
     ]);
 
     const loadLeadDetail = useCallback(async (leadId: string) => {
@@ -273,7 +274,13 @@ export default function AdminLeadsPage() {
 
     useEffect(() => {
         void fetchLeads();
+        return () => { latestRequest.current += 1; };
     }, [fetchLeads]);
+
+    const refreshLeads = () => {
+        setIsRefreshing(true);
+        return fetchLeads();
+    };
 
     const statusCounts = useMemo(() => {
         const seed: Record<RepairLeadStatus, number> = {
@@ -436,7 +443,7 @@ export default function AdminLeadsPage() {
                 description: `El lead quedó en estado ${STATUS_LABELS[nextStatus]}.`,
             });
 
-            await fetchLeads(true);
+            await refreshLeads();
 
             if (selectedLeadDetail?.lead.id === lead.id) {
                 await loadLeadDetail(lead.id);
@@ -505,7 +512,7 @@ export default function AdminLeadsPage() {
 
                 <Button
                     variant="outline"
-                    onClick={() => fetchLeads(true)}
+                    onClick={refreshLeads}
                     disabled={isRefreshing}
                 >
                     <RefreshCw className={`mr-2 h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`} />

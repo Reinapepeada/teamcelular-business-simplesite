@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, useCallback, ReactNode } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
+import { useHydrated } from '@/hooks/use-hydrated';
 import {
     login as apiLogin,
     getCurrentAdmin,
@@ -32,41 +33,41 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
+    const hydrated = useHydrated();
+    return hydrated ? <AuthSessionProvider>{children}</AuthSessionProvider> : null;
+}
+
+function AuthSessionProvider({ children }: AuthProviderProps) {
     const router = useRouter();
     const pathname = usePathname();
-    const [user, setUser] = useState<AdminUser | null>(null);
-    const [token, setToken] = useState<string | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const [session] = useState(getSession);
+    const [user, setUser] = useState<AdminUser | null>(() => session?.user ?? null);
+    const [token, setToken] = useState<string | null>(() => session?.token ?? null);
+    const [isLoading, setIsLoading] = useState(() => !!session?.token);
 
     // Verificar sesión existente al cargar
-    const checkSession = useCallback(async () => {
-        const session = getSession();
-        
-        if (session?.token) {
-            setToken(session.token);
-            setUser(session.user);
-            
-            // Intentar refrescar info del usuario
-            try {
-                const freshUser = await getCurrentAdmin(session.token);
-                setUser(freshUser);
-                saveSession(session.token, freshUser);
-            } catch (error) {
-                // Si el token es inválido, limpiar sesión
-                if (error instanceof AuthError && error.status === 401) {
-                    clearSession();
-                    setToken(null);
-                    setUser(null);
-                }
-            }
-        }
-        
-        setIsLoading(false);
-    }, []);
-
     useEffect(() => {
-        checkSession();
-    }, [checkSession]);
+        if (!session?.token) return;
+        let active = true;
+        let applied = false;
+        getCurrentAdmin(session.token).then((freshUser) => {
+            if (!active || getToken() !== session.token) return;
+            applied = true;
+            setUser(freshUser);
+            saveSession(session.token, freshUser);
+        }).catch((error) => {
+            if (!active || getToken() !== session.token) return;
+            applied = true;
+            if (error instanceof AuthError && error.status === 401) {
+                clearSession();
+                setToken(null);
+                setUser(null);
+            }
+        }).finally(() => {
+            if (active && applied) setIsLoading(false);
+        });
+        return () => { active = false; };
+    }, [session]);
 
     // Login
     const login = async (identifier: string, password: string) => {
@@ -92,11 +93,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
             setUser(adminUser);
             setIsLoading(false);
             
-            // Pequeño delay para asegurar que el estado se actualice
-            await new Promise(resolve => setTimeout(resolve, 100));
-            
-            // Redirigir al dashboard usando window.location para forzar recarga completa
-            window.location.href = '/admin';
+            router.replace('/admin');
         } catch (error) {
             setIsLoading(false);
             throw error;

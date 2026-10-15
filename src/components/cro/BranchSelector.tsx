@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { FaLocationArrow, FaMapMarkerAlt, FaTimes, FaWhatsapp } from "react-icons/fa";
 import { BRANCHES } from "@/lib/businessProfile";
 import { recordLeadInteraction } from "@/lib/analytics/leadInteractions";
@@ -142,12 +142,8 @@ export default function BranchWhatsAppButton({
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [selected, setSelected] = useState<BranchSlug | "">("");
 
-  useEffect(() => {
-    const preference = readBranchPreference();
-    if (preference) setSelected(preference.slug);
-  }, []);
-
   function openSelector() {
+    setSelected(readBranchPreference()?.slug ?? "");
     recordLeadInteraction({
       eventName: "branch_selector_open",
       ctaName,

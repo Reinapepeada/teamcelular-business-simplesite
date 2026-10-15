@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import StoreImage from '@/components/store/StoreImage';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -24,7 +24,7 @@ import {
     getAvailableSizes,
     calculateTotalStock
 } from '@/services/products';
-import { formatWarranty, type Product, type ProductVariant } from '@/app/tienda/product';
+import { formatWarranty, type Product } from '@/app/tienda/product';
 import useCartStore from '@/store/cartStore';
 import ProductCondition from '@/components/store/ProductCondition';
 import { BUSINESS_PROFILE } from '@/lib/businessProfile';
@@ -84,47 +84,27 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
     // El producto llega resuelto del server, que hace `notFound()` si no
     // existe: no hay estado que actualizar ni error que mostrar acá.
     const product: Product | null = productProp ?? null;
+    const availableColors = product ? getAvailableColors(product.variants) : [];
+    const availableSizes = product ? getAvailableSizes(product.variants) : [];
 
     
     // UI States
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-    const [selectedColor, setSelectedColor] = useState<string | null>(null);
-    const [selectedSize, setSelectedSize] = useState<string | null>(null);
-    const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null);
+    const [selectedColor, setSelectedColor] = useState<string | null>(() => availableColors[0] ?? null);
+    const [selectedSize, setSelectedSize] = useState<string | null>(() => availableSizes[0] ?? null);
     const [quantity, setQuantity] = useState(1);
     const [feedback, setFeedback] = useState('');
     
     const { addToCart, openCart } = useCartStore();
     
-    // Las selecciones por defecto salen del producto que trajo el server.
-    useEffect(() => {
-        if (!product) return;
-
-        const colors = getAvailableColors(product.variants);
-        const sizes = getAvailableSizes(product.variants);
-
-        if (colors.length > 0) setSelectedColor((previo) => previo ?? colors[0]);
-        if (sizes.length > 0) setSelectedSize((previo) => previo ?? sizes[0]);
-    }, [product]);
-
-
-    // Update selected variant when color/size changes
-    useEffect(() => {
-        if (!product) return;
-        
-        const variant = product.variants.find(v => {
+    const selectedVariant = product?.variants.find(v => {
             const colorMatch = !selectedColor || v.color === selectedColor;
             const sizeMatch = !selectedSize || v.size === selectedSize;
             return colorMatch && sizeMatch;
-        });
-        
-        setSelectedVariant(variant || null);
-    }, [product, selectedColor, selectedSize]);
+        }) ?? null;
     
     // Get images
     const images = product ? getAllProductImages(product) : ['/placeholder.jpg'];
-    const availableColors = product ? getAvailableColors(product.variants) : [];
-    const availableSizes = product ? getAvailableSizes(product.variants) : [];
     const totalStock = product ? calculateTotalStock(product.variants) : 0;
     
     // Handle image navigation

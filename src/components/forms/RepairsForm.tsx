@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useBranchPreference } from "@/hooks/use-branch-preference";
 import { track } from "@/lib/analytics/track";
 import { lookupQuote, quotableModels } from "@/lib/quoteLookup";
 import { PLACA_REVISION_PRICE, formatArsPrice } from "@/lib/repairPrices";
@@ -14,7 +15,6 @@ import { recordLeadInteraction } from "@/lib/analytics/leadInteractions";
 import { BranchPreferencePicker } from "@/components/cro/BranchSelector";
 import {
     branchWhatsappUrl,
-    readBranchPreference,
     saveBranchPreference,
     type BranchSelectionMethod,
     type BranchSlug,
@@ -43,10 +43,11 @@ const UNKNOWN = "sin especificar";
 export default function RepairsForm() {
     const [model, setModel] = useState("");
     const [repairTypes, setRepairTypes] = useState<string[]>([]);
-    const [preferredBranch, setPreferredBranch] = useState<BranchSlug | "">("");
-    const [branchSelectionMethod, setBranchSelectionMethod] = useState<BranchSelectionMethod>("manual");
+    const rememberedBranch = useBranchPreference();
+    const [selectedBranch, setPreferredBranch] = useState<BranchSlug | "">("");
+    const preferredBranch = selectedBranch || rememberedBranch;
     const [errorMessage, setErrorMessage] = useState("");
-    const [leadAttemptId, setLeadAttemptId] = useState("");
+    const leadAttemptId = useRef("");
 
     const repairTypeLabel = repairTypes.join(", ");
     const modelValue = model.trim() || UNKNOWN;
@@ -61,17 +62,9 @@ export default function RepairsForm() {
     }, [repairTypeLabel]);
 
     useEffect(() => {
-        const preference = readBranchPreference();
-        if (preference) {
-            setPreferredBranch(preference.slug);
-            setBranchSelectionMethod("remembered");
-        }
-
-        setLeadAttemptId(
-            typeof window.crypto?.randomUUID === "function"
-                ? window.crypto.randomUUID()
-                : `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`,
-        );
+        leadAttemptId.current = typeof window.crypto?.randomUUID === "function"
+            ? window.crypto.randomUUID()
+            : `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
 
         track(
             BUDGET_FUNNEL_EVENTS.wizardViewed,
@@ -105,7 +98,6 @@ export default function RepairsForm() {
     function selectBranch(slug: BranchSlug, method: BranchSelectionMethod) {
         markStarted();
         setPreferredBranch(slug);
-        setBranchSelectionMethod(method);
         saveBranchPreference(slug, method);
         setErrorMessage("");
     }
@@ -141,7 +133,7 @@ export default function RepairsForm() {
             ctaLocation: "presupuesto_reparacion_wizard",
             ctaVariant: "whatsapp",
             destination,
-            leadAttemptId,
+            leadAttemptId: leadAttemptId.current,
             formName: "repair_budget_wizard",
             formLocation: "presupuesto_reparacion",
             formVersion: BUDGET_WIZARD_VERSION,

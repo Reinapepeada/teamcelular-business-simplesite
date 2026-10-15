@@ -58,31 +58,32 @@ export default function BranchesPage() {
     const [branchToDelete, setBranchToDelete] = useState<Branch | null>(null);
     const [isDeleting, setIsDeleting] = useState(false);
 
-    const fetchBranches = useCallback(async () => {
-        setIsLoading(true);
-        try {
-            const data = await getbranches();
-            setBranches(data || []);
-        } catch (error) {
-            console.error("Error fetching branches:", error);
-            toast({
-                variant: "destructive",
-                title: "Error",
-                description: "No se pudieron cargar las sucursales",
-            });
-        } finally {
-            setIsLoading(false);
-        }
-    }, []);
+    const fetchBranches = useCallback(() => getbranches().then((data) => {
+        setBranches(data || []);
+    }).catch((error) => {
+        console.error("Error fetching branches:", error);
+        toast({
+            variant: "destructive",
+            title: "Error",
+            description: "No se pudieron cargar las sucursales",
+        });
+    }).finally(() => {
+        setIsLoading(false);
+    }), []);
 
     useEffect(() => {
         fetchBranches();
     }, [fetchBranches]);
 
+    const refreshBranches = () => {
+        setIsLoading(true);
+        return fetchBranches();
+    };
+
     const handleCreateOpenChange = (open: boolean) => {
         setCreateOpen(open);
         if (!open) {
-            fetchBranches();
+            refreshBranches();
         }
     };
 
@@ -143,7 +144,7 @@ export default function BranchesPage() {
             });
             setEditOpen(false);
             setEditState(null);
-            fetchBranches();
+            refreshBranches();
         } catch (error) {
             console.error("Error updating branch:", error);
             toast({
@@ -182,7 +183,7 @@ export default function BranchesPage() {
             });
             setDeleteOpen(false);
             setBranchToDelete(null);
-            fetchBranches();
+            refreshBranches();
         } catch (error) {
             console.error("Error deleting branch:", error);
             toast({
