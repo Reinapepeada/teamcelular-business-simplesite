@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
+  FaGoogle,
   FaMapMarkerAlt,
   FaRegClock,
   FaShieldAlt,
@@ -10,7 +11,6 @@ import {
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import { getBranch, whatsappUrl as buildWhatsappUrl } from "@/lib/businessProfile";
 import BranchMap from "@/components/cards/BranchMap";
-import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import RepairPriceTable from "@/components/seo/RepairPriceTable";
 import { POPULAR_REPAIR_PRICES, PRICES_UPDATED_LABEL } from "@/lib/repairPrices";
 
@@ -326,8 +326,23 @@ export default function SucursalBelgranoPage() {
         />
       </section>
 
-      <section className="mt-10">
-        <GoogleReviewsAPI />
+      <section className="mt-10 space-y-4 text-center">
+        <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
+          Reseñas de nuestra sucursal Belgrano
+        </h2>
+        <p className="text-slate-600 dark:text-slate-300">
+          Leé las opiniones de quienes se atendieron en Amenábar 2032 en la ficha
+          de Google de esta sucursal.
+        </p>
+        <a
+          href={branch.mapUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex min-h-11 items-center gap-2 rounded-full bg-primary px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
+        >
+          <FaGoogle aria-hidden="true" />
+          Ver reseñas de Belgrano en Google
+        </a>
       </section>
 
       <section className="bg-[#1d1d1f] mt-10 rounded-[28px] p-8">
