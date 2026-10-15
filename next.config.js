@@ -60,6 +60,11 @@ module.exports = {
   },
   async redirects() {
     return [
+      {
+        source: "/tienda/categoria/cables",
+        destination: "/tienda/categoria/cable",
+        permanent: true,
+      },
       // Consolidacion de head terms (GSC 2026-07-15/08-09): estas URLs no
       // ranqueaban (8, 6, 8 y 0 impresiones en 26 dias) y aparecian en pos
       // 60-99 para "reparacion de celulares caba", diluyendo la eleccion de
