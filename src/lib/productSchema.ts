@@ -1,5 +1,5 @@
 import type { Product } from "@/app/tienda/product";
-import { formatWarranty } from "@/app/tienda/product";
+import { getProductWarranty } from "@/app/tienda/product";
 import { buildProductSlug } from "./productSlug";
 import { absoluteUrl, businessId, getBranch } from "./businessProfile";
 import { condicionSchema, etiquetaCondicion } from "./fixbeeCatalog";
@@ -8,6 +8,7 @@ import { getSiteUrl, toAbsoluteUrl } from "./seoMetadata";
 export function buildProductSchema(product: Product, images: string[] = [], siteUrl = getSiteUrl()) {
   const pickup = getBranch("recoleta");
   const productUrl = toAbsoluteUrl(`/tienda/${buildProductSlug(product)}`, siteUrl);
+  const warranty = getProductWarranty(product);
   return {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -23,7 +24,7 @@ export function buildProductSchema(product: Product, images: string[] = [], site
     // El modelo no acredita un MPN del fabricante. El catálogo no expone MPN.
     gtin: product.gtin || undefined,
     additionalProperty: [
-      { "@type": "PropertyValue", name: "Garantía", value: formatWarranty(product) },
+      { "@type": "PropertyValue", name: warranty.label, value: warranty.value },
       { "@type": "PropertyValue", name: "Retiro", value: `${pickup.street}, ${pickup.neighborhood}, CABA` },
     ],
     offers: {

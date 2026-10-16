@@ -23,7 +23,7 @@ import {
     getAvailableSizes,
     calculateTotalStock
 } from '@/services/products';
-import { formatWarranty, type Product } from '@/app/tienda/product';
+import { getProductWarranty, type Product } from '@/app/tienda/product';
 import useCartStore from '@/store/cartStore';
 import ProductCondition from '@/components/store/ProductCondition';
 import { buildProductFacts } from '@/lib/productSeo';
@@ -159,6 +159,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
     const discount = 0;
     const originalPrice = product.retail_price;
     const discountedPrice = originalPrice * (1 - discount / 100);
+    const warranty = getProductWarranty(product);
     
     return (
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 pt-4 pb-28 sm:py-8">
@@ -450,8 +451,8 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                         <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
                             <Shield className="w-6 h-6 text-primary" />
                             <div>
-                                {product.warranty_time ? (
-                                    <p className="text-sm font-medium">Garantía: {formatWarranty(product)}</p>
+                                {warranty.value !== 'consultar antes de comprar' ? (
+                                    <p className="text-sm font-medium">{warranty.label}: {warranty.value}</p>
                                 ) : (
                                     <a href={BUSINESS_PROFILE.whatsapp} target="_blank" rel="noopener noreferrer" className="text-sm underline underline-offset-4">
                                         Garantía: consultanos antes de comprar
