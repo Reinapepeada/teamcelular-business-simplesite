@@ -28,6 +28,35 @@ export function formatWarranty(
   return `${time} ${time === 1 ? labels[0] : labels[1]}`;
 }
 
+/** Presentación pública según /devoluciones; no altera la garantía del catálogo. */
+export function getProductWarranty(
+  product: Pick<Product, 'storeCondition' | 'warranty_time' | 'warranty_unit'>,
+): { label: string; value: string } {
+  const condition = product.storeCondition?.trim().toLowerCase();
+  const legalMonths = condition === 'new' || condition === 'nuevo'
+    ? 6
+    : condition === 'used' || condition === 'usado' ? 3 : null;
+  const time = product.warranty_time;
+  const declared = time !== null && Number.isFinite(time) && time > 0
+    ? formatWarranty(product, '')
+    : '';
+
+  if (legalMonths === null) {
+    return { label: 'Garantía informada', value: declared || 'consultar antes de comprar' };
+  }
+
+  // Los días no se convierten a meses: se conserva ese dato por separado.
+  const retainDeclared = declared && time !== null && (
+    product.warranty_unit === 'DAYS'
+    || (product.warranty_unit === 'MONTHS' && time > legalMonths)
+    || (product.warranty_unit === 'YEARS' && time * 12 > legalMonths)
+  );
+  return {
+    label: 'Garantía legal',
+    value: `${legalMonths} meses${retainDeclared ? `; garantía informada: ${declared}` : ''}`,
+  };
+}
+
 export interface ProductImage {
   id: number;
   variant_id: number;

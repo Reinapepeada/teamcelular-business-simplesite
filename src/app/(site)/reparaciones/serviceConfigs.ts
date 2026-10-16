@@ -87,7 +87,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Cambio de Pantalla y Módulo en CABA | Team Celular",
     metaDescription:
-      "Cambio de pantalla en CABA en 2 a 4 horas, siempre módulo completo. iPhone 13 $249.900, Samsung Galaxy A desde $99.900. Garantía escrita de 90 días.",
+      "Cambio de pantalla en CABA: 2 a 4 horas con módulo en stock, según diagnóstico. iPhone 13 $249.900, Samsung Galaxy A desde $99.900. Garantía escrita de 90 días.",
     socialTitle: "Cambio de Pantalla en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Cambio de pantalla en CABA con test completo y garantía escrita 90 días.",
@@ -101,7 +101,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "touch no responde celular",
     ],
     intro:
-      "Cambiamos la pantalla de tu celular en 2 a 4 horas, siempre con módulo completo y garantía escrita de 90 días. Team Celular, Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano).",
+      "El cambio de pantalla suele llevar de 2 a 4 horas con módulo en stock, según modelo y diagnóstico. Confirmamos precio y plazo antes de reparar. Siempre cambiamos el módulo completo, con garantía escrita de 90 días. Team Celular, Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano).",
     prices: [
       { label: "iPhone 13", value: formatArsPrice(IPHONE_13_SCREEN) },
       { label: "Samsung Galaxy A", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[0].from)}` },
@@ -137,7 +137,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       },
       {
         q: "¿Se pierde Face ID o huella al cambiar pantalla?",
-        a: "No debería perderse en una reparación correcta. Hacemos test completo al finalizar para confirmar que todas las funciones responden bien.",
+        a: "Depende del modelo, del repuesto y del estado previo de los sensores. Los probamos antes y después y te explicamos qué funciones se pueden conservar antes de que apruebes el trabajo.",
       },
       {
         q: "¿Cuánto demora el cambio de pantalla?",
