@@ -31,6 +31,25 @@ async function isolate(page: Page, getStatus: () => ReturnType<typeof status>) {
     });
 }
 
+test('carrito espera la hidratación antes de permitir el primer clic', async ({ page }) => {
+    await seed(page, 1, false);
+    await isolate(page, () => status());
+    let releaseScripts!: () => void;
+    const scriptsReady = new Promise<void>(resolve => { releaseScripts = resolve; });
+    await page.route(/\/_next\/.*\.js(?:\?.*)?$/, async route => {
+        await scriptsReady;
+        await route.continue();
+    });
+    try {
+        await page.goto('/tienda', { waitUntil: 'commit' });
+        await expect(page.getByRole('button', { name: 'Preparando carrito…' })).toBeDisabled();
+    } finally {
+        releaseScripts();
+    }
+    await page.getByRole('button', { name: 'Abrir carrito, 1 artículo' }).click();
+    await expect(page.getByRole('dialog', { name: 'Resumen del carrito' })).toBeVisible();
+});
+
 for (const width of [320, 375, 1280]) {
     test(`F10–12 regreso pendiente, actualización y recarga a ${width}px`, async ({ page }, testInfo) => {
         await page.setViewportSize({ width, height: 900 });
