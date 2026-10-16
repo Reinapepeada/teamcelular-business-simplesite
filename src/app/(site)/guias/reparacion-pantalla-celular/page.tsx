@@ -11,7 +11,7 @@ import RepairPriceTable from "@/components/seo/RepairPriceTable";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 import RepairPriceInquiry from "@/components/repairs/RepairPriceInquiry";
 import { BRAND_REPAIR_PRICES, PRICES_UPDATED_LABEL, formatArsPrice } from "@/lib/repairPrices";
-import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
+import { IPHONE_MODELS, IPHONE_MODELS_WITH_PAGE, IPHONE_PRICES_UPDATED } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 import {
   FaMobileAlt,
   FaTools,
@@ -30,16 +30,35 @@ const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelula
 
 // SXO 2026-09: la guia recibia busquedas de compra ("cambio de pantalla") sin
 // mostrar un precio y convertia 0%. Solo pantallas de marcas con precio cargado.
-const IPHONE_SCREENS = IPHONE_MODELS.map((m) => m.screen).filter((v): v is number => v !== null);
-const SCREEN_PRICES = [
-  { name: "Cambio de pantalla iPhone 11 a 17", from: Math.min(...IPHONE_SCREENS), to: Math.max(...IPHONE_SCREENS) },
-  ...Object.entries(BRAND_REPAIR_PRICES).flatMap(([brand, prices]) =>
-    prices
-      .filter((p) => p.name.startsWith("Cambio de pantalla"))
-      .map((p) => ({ ...p, name: `${p.name} (${brand[0].toUpperCase()}${brand.slice(1)})` })),
-  ),
+const SCREEN_PRICE_GROUPS = [
+  ...Object.entries(BRAND_REPAIR_PRICES).map(([brand, prices]) => ({
+    id: brand,
+    brand: `${brand[0].toUpperCase()}${brand.slice(1)}`,
+    href: `/guias/reparacion-${brand}-buenos-aires`,
+    updatedLabel: PRICES_UPDATED_LABEL,
+    title: `Pantallas ${brand[0].toUpperCase()}${brand.slice(1)}: precios por familia`,
+    prices: prices.filter((p) => p.name.startsWith("Cambio de pantalla")).map((p) => ({
+      ...p,
+      href: `/guias/reparacion-${brand}-buenos-aires`,
+    })),
+  })),
+  {
+    id: "iphone",
+    brand: "iPhone",
+    href: "/guias/reparacion-iphone-buenos-aires",
+    updatedLabel: IPHONE_PRICES_UPDATED,
+    title: "Pantallas iPhone: precio por modelo",
+    prices: IPHONE_MODELS.flatMap((model) => model.screen === null ? [] : [{
+      name: model.name,
+      from: model.screen,
+      to: model.screen,
+      href: IPHONE_MODELS_WITH_PAGE.some((slug) => slug === model.slug)
+        ? `/reparaciones/iphone/${model.slug}`
+        : undefined,
+    }]),
+  },
 ];
-const SCREEN_FROM = formatArsPrice(Math.min(...SCREEN_PRICES.map((p) => p.from)));
+const SCREEN_FROM = formatArsPrice(Math.min(...SCREEN_PRICE_GROUPS.flatMap((group) => group.prices.map((price) => price.from))));
 
 export const metadata: Metadata = {
   title: "Cambio de Pantalla de Celular: Precios por Marca en CABA",
@@ -288,26 +307,38 @@ export default function ScreenReplacementGuide() {
           <p className="text-sm leading-6 text-[#a1a1a6]">
             Paraguay 2451, Recoleta · Amenábar 2032, Belgrano. Garantía escrita de 90 días sobre trabajo y repuesto.
           </p>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
+            <Link href="#precios-pantalla" className="inline-flex min-h-11 items-center font-semibold text-[#6aa6ff] underline underline-offset-4">Ver precios por marca y modelo</Link>
+            <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
+          </div>
           <RepairPriceInquiry
             repair="cambiar la pantalla de mi celular"
             symptoms={["Vidrio roto", "Líneas o manchas", "Táctil no responde", "Pantalla negra", "Pantalla levantada"]}
             ctaName="screen_guide_price_whatsapp"
             ctaLocation="screen_guide_hero"
           />
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
-            <Link href="#precios-pantalla" className="inline-flex min-h-11 items-center font-semibold text-[#6aa6ff] underline underline-offset-4">Ver precios por marca</Link>
-            <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
-          </div>
         </header>
 
         <section id="precios-pantalla" className="scroll-mt-24 space-y-6">
-          <RepairPriceTable
-            brand="celular"
-            prices={SCREEN_PRICES}
-            updatedLabel={PRICES_UPDATED_LABEL}
-            title="¿Cuánto sale cambiar la pantalla? Precios por marca"
-            timingText="El cambio suele llevar de 2 a 4 horas con repuesto en stock. Confirmá disponibilidad y plazo para tu modelo."
-          />
+          <nav aria-label="Precios de pantalla por marca" className="flex flex-wrap gap-3">
+            {SCREEN_PRICE_GROUPS.map((group) => (
+              <Link key={group.id} href={`#precios-pantalla-${group.id}`} className="inline-flex min-h-11 items-center rounded-full border border-slate-300 px-4 py-2 font-semibold text-blue-700 underline underline-offset-4 dark:border-slate-600 dark:text-[#6aa6ff]">{group.brand}</Link>
+            ))}
+          </nav>
+          {SCREEN_PRICE_GROUPS.map((group, index) => (
+            <section key={group.id} id={`precios-pantalla-${group.id}`} className="scroll-mt-24 space-y-3">
+              <RepairPriceTable
+                brand={group.brand}
+                prices={group.prices}
+                updatedLabel={group.updatedLabel}
+                title={group.title}
+                timingText={index === 0 ? "El cambio suele llevar de 2 a 4 horas con repuesto en stock. Confirmá disponibilidad y plazo para tu modelo." : ""}
+                singlePriceColumn
+                showIntroduction={index === 0}
+              />
+              <Link href={group.href} className="inline-flex min-h-11 items-center font-semibold text-blue-700 underline underline-offset-4 dark:text-[#6aa6ff]">Ver reparaciones de {group.brand}</Link>
+            </section>
+          ))}
           <BranchWhatsAppButton
             ctaName="screen_guide_prices_whatsapp"
             ctaLocation="screen_guide_prices"
