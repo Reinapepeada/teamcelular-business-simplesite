@@ -137,12 +137,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         } as Metadata;
     } catch (err) {
         console.error('generateMetadata error:', err);
-        return buildWebsiteMetadata({
-            path: '/tienda',
-            title: 'Producto no encontrado | Team Celular',
-            description: 'Producto no disponible en Team Celular.',
-            robots: { index: false, follow: false },
-        });
+        // buscarProducto ya distingue el 404 real; una falla temporal no retira la ficha.
+        throw err;
     }
 }
 

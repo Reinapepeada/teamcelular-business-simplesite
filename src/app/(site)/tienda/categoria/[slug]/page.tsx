@@ -114,6 +114,10 @@ export default async function CategoryPage({
     permanentRedirect(`/tienda/categoria/${canonicalSlug}`);
   }
 
+  // Resolver antes de emitir HTML evita enviar 200 si luego falla el catálogo.
+  const catalogPage = getCatalogPage({ ...filters, categories: [] }, category.name);
+  await catalogPage;
+
   const categoryUrl = `${SITE_URL}/tienda/categoria/${canonicalSlug}`;
   const content = getCategoryContent(category.name);
   const relatedCategories = filterOptions.categories.filter((name) =>
@@ -168,6 +172,7 @@ export default async function CategoryPage({
           forcedCategoryName={category.name}
         />
         <CatalogResults
+          catalogPage={catalogPage}
           basePath={`/tienda/categoria/${canonicalSlug}`}
           filters={{
             ...filters,
