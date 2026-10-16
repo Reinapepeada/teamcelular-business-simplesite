@@ -34,7 +34,7 @@ export default function RepairPriceTable({
       <div className="mt-6 overflow-x-auto">
         <table className={`w-full border-collapse text-left text-sm ${singlePriceColumn ? "table-fixed" : "min-w-[34rem]"}`}>
           <caption className="sr-only">
-            Precios de reparación de {brand} en CABA, actualizados el{" "}
+            Precios de reparación de {brand} en CABA, actualizados{singlePriceColumn ? ": " : " el "}
             {updatedLabel}
           </caption>
           <thead>
@@ -77,7 +77,7 @@ export default function RepairPriceTable({
       </div>
 
       <p className="mt-3 text-[13px] text-slate-500 dark:text-slate-400">
-        Precios actualizados el {updatedLabel}. {timingText}
+        {singlePriceColumn ? "Precios actualizados: " : "Precios actualizados el "}{updatedLabel}. {timingText}
       </p>
     </section>
   );
