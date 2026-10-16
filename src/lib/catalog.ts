@@ -224,31 +224,20 @@ export async function getCatalogPage(
     filters: CatalogFiltersState,
     forcedCategory?: string,
 ): Promise<ProductsPaginatedResponse & { error: boolean }> {
-    const vacia = {
-        products: [],
-        total: 0,
-        page: filters.page,
-        size: ITEMS_PER_PAGE,
-        pages: 1,
+    // Una falla técnica debe llegar al límite de error de Next (5xx), no
+    // convertirse en una página vacía con 200 o metadata noindex.
+    const pagina = await listarCatalogo(
+        parametrosDeCatalogo(filters, forcedCategory),
+    );
+    const size = pagina.size || ITEMS_PER_PAGE;
+    return {
+        error: false,
+        products: pagina.items.map(productoDeVidriera),
+        total: pagina.total,
+        page: pagina.page || filters.page,
+        size,
+        pages: Math.max(1, Math.ceil(pagina.total / size)),
     };
-
-    try {
-        const pagina = await listarCatalogo(
-            parametrosDeCatalogo(filters, forcedCategory),
-        );
-        const size = pagina.size || ITEMS_PER_PAGE;
-        return {
-            error: false,
-            products: pagina.items.map(productoDeVidriera),
-            total: pagina.total,
-            page: pagina.page || filters.page,
-            size,
-            pages: Math.max(1, Math.ceil(pagina.total / size)),
-        };
-    } catch (error) {
-        console.error("Catalog fetch failed", error);
-        return { ...vacia, error: true };
-    }
 }
 
 /**
@@ -259,7 +248,11 @@ export async function getCatalogPage(
  * que pedir: el catalogo publico expone nombres.
  */
 export async function getCatalogCategoryBySlug(slug: string) {
-    const { categories } = await getCatalogFilters();
+    // El fallback vacío de los filtros es solo de UI; aquí produciría un 404 falso.
+    const { categories } = await fetchStoreFacets();
+    if (!Array.isArray(categories) || !categories.every((name) => typeof name === "string")) {
+        throw new Error("Respuesta inválida de categorías publicadas");
+    }
     const nombre = categories.find((c) => slugify(c) === slug);
     return nombre ? { name: nombre } : null;
 }

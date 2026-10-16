@@ -31,14 +31,13 @@ async function getCategoriesForSitemap(): Promise<string[]> {
     }
 
     const data = (await response.json()) as { categories?: unknown };
-    return Array.isArray(data.categories)
-      ? data.categories.filter(
-          (category): category is string => typeof category === "string",
-        )
-      : [];
+    if (!Array.isArray(data.categories) || !data.categories.every((category) => typeof category === "string")) {
+      throw new Error("Respuesta inválida de categorías publicadas");
+    }
+    return data.categories;
   } catch (error) {
     console.error("Error fetching store facets for sitemap:", error);
-    return [];
+    throw error;
   }
 }
 
@@ -65,11 +64,15 @@ async function getProductsForSitemap(): Promise<string[]> {
         }
       }
       total = data.total!;
-      if (data.items.length === 0) break;
+      if (data.items.length === 0) {
+        if ((page - 1) * 60 < total) throw new Error("Catálogo público incompleto");
+        break;
+      }
       page += 1;
     } while ((page - 1) * 60 < total);
   } catch (error) {
     console.error("Error fetching published products for sitemap:", error);
+    throw error;
   }
   return [...slugs];
 }

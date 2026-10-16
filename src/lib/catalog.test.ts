@@ -16,6 +16,7 @@ import {
     ITEMS_PER_PAGE,
     buildPageHref,
     getCatalogPage,
+    getCatalogCategoryBySlug,
     isCatalogIndexable,
     normalizeCatalogFilters,
     parametrosDeCatalogo,
@@ -42,6 +43,17 @@ test("paginación sin filtros es indexable con canónica propia; facetas y búsq
 });
 
 describe("carga del catálogo", () => {
+    test("un error de facetas no convierte una categoría existente en inexistente", async (t) => {
+        t.mock.method(console, "error", () => {});
+        t.mock.method(globalThis, "fetch", async () => new Response("", { status: 503 }));
+        await assert.rejects(getCatalogCategoryBySlug("cable"));
+    });
+
+    test("una categoría solo es inexistente después de consultar las facetas correctamente", async (t) => {
+        t.mock.method(globalThis, "fetch", async () => Response.json({ categories: ["CABLE"] }));
+        assert.deepEqual(await getCatalogCategoryBySlug("cable"), { name: "CABLE" });
+        assert.equal(await getCatalogCategoryBySlug("no-publicada"), null);
+    });
     test("una respuesta vacía es válida y conserva la página solicitada", async (t) => {
         t.mock.method(globalThis, "fetch", async () => Response.json({ items: [], total: 0, page: 2, size: 12 }));
         const result = await getCatalogPage(normalizeCatalogFilters({ page: "2" }));
@@ -57,9 +69,7 @@ describe("carga del catálogo", () => {
                 if (failure === "red") throw new TypeError("sin conexión");
                 return new Response("respuesta inválida", { status: failure === "http" ? 503 : 200 });
             });
-            const result = await getCatalogPage(normalizeCatalogFilters({}));
-            assert.equal(result.error, true);
-            assert.deepEqual(result.products, []);
+            await assert.rejects(getCatalogPage(normalizeCatalogFilters({})));
         });
     }
 
@@ -72,7 +82,7 @@ describe("carga del catálogo", () => {
             return Response.json({ items: [], total: 0, page: 1, size: 12 });
         });
         const filters = normalizeCatalogFilters({ search: "pantalla", brands: "Apple" });
-        assert.equal((await getCatalogPage(filters)).error, true);
+        await assert.rejects(getCatalogPage(filters));
         assert.equal((await getCatalogPage(filters)).error, false);
         assert.equal(urls[0], urls[1]);
         assert.match(urls[1], /search=pantalla/);

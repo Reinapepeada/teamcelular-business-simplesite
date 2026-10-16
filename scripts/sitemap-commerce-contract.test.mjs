@@ -60,6 +60,25 @@ test("sitemap has no product URL when the published catalog is empty", async () 
   }
 });
 
+for (const failure of ["facets", "products", "second-page", "invalid-facets"]) {
+  test(`sitemap no publica una lista incompleta ante falla de ${failure}`, async (t) => {
+    const { default: sitemap } = await import("../src/app/sitemap.ts");
+    t.mock.method(console, "error", () => {});
+    t.mock.method(globalThis, "fetch", async (url) => {
+      const parsed = new URL(url);
+      const facet = parsed.pathname === "/store/facets";
+      if (facet && failure === "invalid-facets") return Response.json({});
+      if (facet && failure === "facets" || !facet && failure === "products" || parsed.searchParams.get("page") === "2" && failure === "second-page") {
+        return new Response("", { status: 503 });
+      }
+      return Response.json(facet ? { categories: ["CABLE"] } : {
+        items: Array.from({ length: 60 }, (_, i) => ({ slug: `producto-${i}` })), total: 61,
+      });
+    });
+    await assert.rejects(sitemap());
+  });
+}
+
 test("sitemap omits unknown modification dates and matches the HTML language alternatives", async () => {
   const { default: sitemap } = await import("../src/app/sitemap.ts");
   const originalFetch = globalThis.fetch;
