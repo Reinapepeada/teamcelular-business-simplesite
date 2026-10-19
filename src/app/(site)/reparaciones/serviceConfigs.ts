@@ -250,6 +250,9 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "reparacion placa notebook CABA",
     ],
     intro: `Si tu celular no prende, se reinicia solo o quedó en corto, revisamos la placa en hasta 72 horas hábiles. La revisión sale ${PLACA_REVISION} y se descuenta si se repara. Si el arreglo es de placa, te pasamos precio y plazo por escrito antes de empezar: son trabajos que llevan semanas.`,
+    budgetCtaLabel: "Consultar revisión de placa",
+    quoteHint:
+      "Contanos marca y modelo, qué falla y si el equipo ya tuvo una reparación. No envíes contraseñas.",
     prices: [
       { label: "Revisión de placa (celular o notebook)", value: PLACA_REVISION },
       { label: "Arreglo de placa", value: "precio por escrito" },
@@ -267,16 +270,16 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     serviceDescription: `Revisión de placa de celulares y notebooks en CABA por ${PLACA_REVISION}, con informe escrito en hasta 72 horas hábiles. Precio y plazo del arreglo por escrito antes de empezar.`,
     highlights: [
       {
+        title: "Microsoldadura y reballing",
+        desc: "El reballing es una de las intervenciones posibles sobre la placa; no es la solución para cualquier celular que no prende. La revisión define si corresponde ese trabajo, otra reparación o si no conviene avanzar.",
+      },
+      {
         title: "A veces no es la placa",
         desc: `Un celular que no prende también puede tener la batería, el pin de carga o un flex dañado. Si la revisión encuentra eso, se arregla casi siempre en el día y los ${PLACA_REVISION} se descuentan.`,
       },
       {
         title: "Te decimos si vale la pena",
         desc: "Hay placas que se arreglan y otras que cuestan más que el equipo. El informe dice qué tiene, cuánto sale y cuánto tarda, antes de tocar nada más.",
-      },
-      {
-        title: "Celulares y notebooks",
-        desc: "Revisamos placas de celulares, tablets y notebooks. Cada caso tiene su plazo, y te lo pasamos por escrito.",
       },
     ],
     conditions: [
@@ -546,6 +549,31 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     ],
     intro:
       "Si no te escuchan en las llamadas, el parlante suena bajo o el audio sale con ruido, lo reparamos con garantía escrita de 90 días. Muchas veces es suciedad en la rejilla y se resuelve con una limpieza; otras, el flex o el módulo.",
+    budgetCtaLabel: "Consultar por una falla de audio",
+    quoteHint:
+      "Decinos marca y modelo y si falla el micrófono, el auricular de llamadas o el altavoz. Contanos si pasa al llamar, escuchar audios o grabarlos.",
+    asideNotes: [
+      "Garantía escrita de 90 días sobre trabajo y repuesto instalado.",
+      "Con repuesto disponible, la reparación de audio suele resolverse dentro del día hábil. Confirmamos el plazo según el diagnóstico.",
+    ],
+    workflow: [
+      {
+        title: "Probamos qué falla",
+        desc: "Revisamos la rejilla, el flex y el módulo antes de hablar de placa. Lo más simple se prueba primero.",
+      },
+      {
+        title: "Confirmamos precio y plazo",
+        desc: "Te explicamos qué encontramos, qué trabajo hace falta y si está disponible el repuesto. Con esa información decidís si avanzar.",
+      },
+      {
+        title: "Reparamos el audio",
+        desc: "Según el diagnóstico, puede hacer falta una limpieza técnica o cambiar el componente que falla. No te cobramos el módulo entero si no hace falta. Si encontramos otro daño, te avisamos antes de seguir.",
+      },
+      {
+        title: "Probamos llamadas y audios",
+        desc: "Hacemos una llamada, grabamos un audio y probamos el altavoz antes de devolvértelo. Revisás el resultado con nosotros y te llevás la garantía de 90 días por escrito.",
+      },
+    ],
     whatsappText:
       "Hola! Quiero un presupuesto para reparacion de audio de celular en CABA. Marca y modelo:",
     breadcrumbLabel: "Reparación de audio (CABA)",
@@ -555,16 +583,16 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "Servicio técnico para resolver fallas de audio en celulares en CABA con diagnóstico preciso y garantía escrita 90 días.",
     highlights: [
       {
-        title: "Primero descartamos lo simple",
-        desc: "Revisamos la rejilla, el flex y el módulo antes de hablar de placa. Lo más barato se prueba primero.",
+        title: "No te escuchan al hablar",
+        desc: "Contanos si pasa en llamadas, al grabar audios o en ambos casos. Esa diferencia ayuda a revisar el micrófono y el resto del circuito de audio, sin dar por roto un componente antes de probarlo.",
       },
       {
-        title: "Lo probamos con una llamada",
-        desc: "Hacemos una llamada real, grabamos un audio de WhatsApp y probamos el altavoz antes de devolvértelo.",
+        title: "No escuchás a la otra persona",
+        desc: "Si falla al acercarte el celular al oído, contanos si al activar el altavoz escuchás bien. El auricular de llamadas y el altavoz son partes distintas y se prueban por separado.",
       },
       {
-        title: "Solo lo que falla",
-        desc: "Si es el micrófono, cambiamos el micrófono. No te cobramos el módulo entero si no hace falta.",
+        title: "El altavoz suena bajo o distorsiona",
+        desc: "Contanos si ocurre con música, audios o llamadas en altavoz. Primero revisamos si hay suciedad en la rejilla y después evaluamos el módulo o el flex; no siempre hace falta reemplazarlos.",
       },
     ],
     brandsText:
