@@ -37,6 +37,7 @@ for (const width of [320, 390, 1280]) {
         await expect(page.getByRole('link', { name: 'Consultar precio para mi modelo', exact: true }))
             .toHaveAttribute('href', '/presupuesto-reparacion#solicitar-presupuesto');
         await expect(page.locator('main a[href="/guias/pin-de-carga-suelto-solucion"]')).toBeVisible();
+        await prices.evaluate(el => el.scrollIntoView({ block: 'center' }));
         await prices.screenshot({ path: test.info().outputPath(`pin-${width}.png`) });
     });
 }
