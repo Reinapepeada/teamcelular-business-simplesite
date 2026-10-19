@@ -20,26 +20,31 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       "Hola! Quiero un presupuesto para arreglo de celular desde Palermo. Marca y modelo:",
     highlights: [
       {
-        title: "Pantalla que quedó mal",
-        desc: "Si el display tiene líneas, manchas o el touch responde a medias, lo revisamos completo antes de darte un camino.",
+        title: "Pantalla rota o touch que falla",
+        desc: "Si tiene líneas, manchas o no responde al tocarla, consultá las opciones para tu modelo.",
         icon: "screen",
+        href: "/reparaciones/cambio-pantalla-caba",
       },
       {
         title: "Batería que ya no rinde",
-        desc: "Cuando el equipo se descarga rápido o se apaga solo, miramos consumo, batería y puerto de carga para no cambiar por cambiar.",
+        desc: "Si dura poco o el equipo se apaga, revisamos el consumo antes de indicar un cambio.",
         icon: "battery",
+        href: "/reparaciones/cambio-bateria-caba",
       },
       {
-        title: "Fallas que confunden",
-        desc: "Si reinicia, no enciende o hace cosas raras, vamos a placa y diagnóstico fino para detectar la causa de verdad.",
+        title: "Carga que hace falso contacto",
+        desc: "Si carga sólo al mover el cable o no reconoce el cargador, primero verificamos la causa.",
+        icon: "repair",
+        href: "/reparaciones/cambio-pin-carga-caba",
+      },
+      {
+        title: "No enciende o se reinicia",
+        desc: "Consultá por revisión de placa para identificar la falla y conocer las opciones de reparación.",
         icon: "chip",
+        href: "/reparaciones/reparacion-placa-caba",
       },
     ],
-    localScenarios: [
-      "Muchos equipos llegan por caidas: pantalla rota, glass trasero o flex dañado.",
-      "En iPhone es comun ver bateria degradada y conectores de carga con desgaste.",
-      "En Android suele entrar modulo display y problemas de energia por uso intensivo.",
-    ],
+    localScenarios: [],
     transportTip:
       "Desde Palermo podés llegar a Recoleta (Paraguay 2451) por Subte D hasta Pueyrredón (Av. Santa Fe y Pueyrredón), o a Belgrano (Amenábar 2032) por Subte D hasta Juramento. Ambas opciones están a pocas cuadras de la estación.",
     nearbyZones: [
