@@ -37,6 +37,7 @@ export interface ZoneHighlight {
   title: string;
   desc: string;
   icon: HighlightIcon;
+  href?: string;
 }
 
 export interface ZoneFaq {
@@ -204,6 +205,7 @@ export function buildZoneMetadata(config: ZoneLandingConfig): Metadata {
 export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig }) {
   const url = pageUrl(config.slug);
   const displayZone = config.zoneAlias || config.zoneName;
+  const isPalermo = config.slug === "palermo";
   const relatedGuides = getZoneRelatedGuides(config.focusServices);
   const whatsappUrl = `https://wa.me/5491151034595?text=${encodeURIComponent(
     config.whatsappText
@@ -280,6 +282,7 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
           >
             <BsWhatsapp aria-hidden /> WhatsApp directo ›
           </TrackedCtaLink>
+          {isPalermo && <a href="#precios" className="tc-link inline-flex min-h-11 items-center text-[17px]">Ver precios de reparación</a>}
         </div>
         <p className="mt-4 text-[14px] text-[#86868b]">
           Atención presencial en Recoleta y Belgrano, sin turno.
@@ -309,6 +312,12 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
           </nav>
         )}
       </header>
+
+      {isPalermo && (
+        <section id="precios" className="tc-section !pb-0 scroll-mt-24">
+          <RepairPriceTable brand="celular" prices={POPULAR_REPAIR_PRICES} updatedLabel={PRICES_UPDATED_LABEL} singlePriceColumn />
+        </section>
+      )}
 
       <div className="mx-auto mt-12 max-w-[1200px] px-4 sm:px-6">
         <div className="tc-zoom relative aspect-[3/4] overflow-hidden rounded-[28px] sm:aspect-[16/9] lg:aspect-[16/7]">
@@ -344,7 +353,7 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
       </div>
 
       <section className="tc-section">
-        <div className="tc-stagger grid gap-5 md:grid-cols-3">
+        <div className={`tc-stagger grid gap-5 ${isPalermo ? "md:grid-cols-2 xl:grid-cols-4" : "md:grid-cols-3"}`}>
           {config.highlights.map((item) => {
             const Icon = iconMap[item.icon];
             return (
@@ -352,18 +361,18 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
                 <Icon className="text-3xl text-[#f5f5f7]" aria-hidden />
                 <h2 className="tc-subheading mt-auto pt-8">{item.title}</h2>
                 <p className="tc-body mt-3">{item.desc}</p>
+                {item.href && <Link href={item.href} className="tc-link mt-5 inline-flex min-h-11 items-center" aria-label={`${item.title}: ver servicio`}>Ver servicio ›</Link>}
               </article>
             );
           })}
         </div>
       </section>
 
-      {/* SEO local 2026-09: Palermo convierte 23% pero no mostraba precios. */}
-      <section className="tc-section !pt-0">
+      {!isPalermo && <section className="tc-section !pt-0">
         <RepairPriceTable brand="celular" prices={POPULAR_REPAIR_PRICES} updatedLabel={PRICES_UPDATED_LABEL} />
-      </section>
+      </section>}
 
-      <section className="w-full bg-[#f5f5f7] text-[#1d1d1f]">
+      {config.localScenarios.length > 0 && <section className="w-full bg-[#f5f5f7] text-[#1d1d1f]">
         <div className="tc-section grid gap-10 lg:grid-cols-2">
           <div className="tc-reveal">
             <h2 className="tc-heading !text-[#1d1d1f]">Casos frecuentes desde {displayZone}</h2>
@@ -383,7 +392,7 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
             ))}
           </ul>
         </div>
-      </section>
+      </section>}
 
       <section className="tc-section">
         <div className="tc-card tc-reveal grid gap-8 !p-8 sm:!p-12 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">

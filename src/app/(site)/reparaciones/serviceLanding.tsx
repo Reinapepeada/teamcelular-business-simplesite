@@ -176,6 +176,11 @@ const SERVICE_RELATED_GUIDES: Record<string, RelatedGuide[]> = {
   ],
   "cambio-pin-carga-caba": [
     {
+      href: "/guias/pin-de-carga-suelto-solucion",
+      title: "Pin de carga suelto: qué hacer y qué evitar",
+      description: "Cómo reconocer el problema y qué evitar para no agravar el daño.",
+    },
+    {
       href: "/guias/reparacion-samsung-buenos-aires",
       title: "Guía Samsung",
       description: "Casos comunes de USB-C, humedad y falso contacto en Galaxy.",
@@ -184,11 +189,6 @@ const SERVICE_RELATED_GUIDES: Record<string, RelatedGuide[]> = {
       href: "/guias/reparacion-xiaomi-buenos-aires",
       title: "Guía Xiaomi",
       description: "Recomendaciones para puertos exigidos por carga rápida diaria.",
-    },
-    {
-      href: "/guias/mantenimiento-preventivo-celulares",
-      title: "Guía de mantenimiento",
-      description: "Cuidados simples para evitar daño progresivo en conectores.",
     },
   ],
   "reparacion-placa-caba": [
@@ -314,6 +314,9 @@ export interface ServiceLandingConfig {
   socialDescription: string;
   keywords: string[];
   intro: string;
+  budgetCtaLabel?: string;
+  quoteHint?: string;
+  priceNote?: string;
   whatsappText: string;
   breadcrumbLabel: string;
   serviceName: string;
@@ -419,7 +422,7 @@ export default function ServiceLandingPage({
             ctaVariant="primary"
             className="tc-btn tc-btn-primary"
           >
-            Pedir presupuesto
+            {config.budgetCtaLabel ?? "Pedir presupuesto"}
           </TrackedCtaLink>
           <TrackedCtaLink
             href={whatsappUrl}
@@ -433,13 +436,14 @@ export default function ServiceLandingPage({
             <BsWhatsapp aria-hidden /> WhatsApp directo ›
           </TrackedCtaLink>
         </div>
+        {config.quoteHint && <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-6 text-[#a1a1a6]">{config.quoteHint}</p>}
         <p className="mt-4 text-[14px] text-[#86868b]">
           Dos sucursales en CABA (Recoleta y Belgrano). Opiniones de clientes en Google de la sucursal Recoleta.
         </p>
       </header>
 
       <div className="mx-auto mt-12 grid max-w-[1200px] gap-5 px-4 sm:px-6 lg:grid-cols-[1.4fr_1fr]">
-        <div className="tc-zoom relative aspect-[4/3] overflow-hidden rounded-[28px] lg:aspect-auto lg:min-h-[26rem]">
+        <div className={`tc-zoom relative aspect-[4/3] overflow-hidden rounded-[28px] lg:aspect-auto lg:min-h-[26rem] ${config.slug === "cambio-pin-carga-caba" ? "order-2 lg:order-none" : ""}`}>
           <Image
             src={visual.cover}
             alt={config.serviceName}
@@ -450,16 +454,20 @@ export default function ServiceLandingPage({
             className="object-cover"
           />
         </div>
-        <div className="flex flex-col gap-5">
+        <div className={`flex flex-col gap-5 ${config.slug === "cambio-pin-carga-caba" ? "order-1 lg:order-none" : ""}`}>
           {config.prices?.length ? (
-            <dl className="rounded-[28px] bg-[#f5f5f7] px-7 py-3 text-[#1d1d1f]">
+            <div className="rounded-[28px] bg-[#f5f5f7] px-7 py-3 text-[#1d1d1f]">
+              {config.priceNote && <h2 className="pt-3 text-xl font-semibold">Precio y revisión técnica</h2>}
+              <dl>
               {config.prices.map((row) => (
                 <div key={row.label} className="flex items-baseline justify-between gap-4 border-b border-[#d2d2d7] py-4 last:border-0">
                   <dt className="text-[15px] text-[#424245]">{row.label}</dt>
                   <dd className="text-[19px] font-semibold tabular-nums">{row.value}</dd>
                 </div>
               ))}
-            </dl>
+              </dl>
+              {config.priceNote && <p className="pb-3 text-[15px] leading-6 text-[#424245]">{config.priceNote}</p>}
+            </div>
           ) : null}
           <aside className="tc-card flex-1">
             <h2 className="text-[12px] uppercase tracking-[0.08em] text-[#86868b]">

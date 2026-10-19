@@ -168,6 +168,19 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     ],
     intro:
       "Cambiamos el pin de carga con garantía escrita de 90 días. Antes lo revisamos con microscopio: a veces alcanza con una limpieza técnica.",
+    budgetCtaLabel: "Consultar precio para mi modelo",
+    quoteHint: "Mandanos marca, modelo y qué pasa al cargar: si no reconoce el cable, hace falso contacto o carga lento. Si requiere revisión física, te lo indicamos.",
+    priceNote: "El valor depende del dispositivo. Te confirmamos el costo de revisión antes de abrir el equipo y el presupuesto de reparación antes de avanzar. Si alcanza con una limpieza, te lo informamos antes de indicar un cambio.",
+    asideNotes: [
+      "Garantía escrita de 90 días sobre trabajo y repuesto instalado.",
+      "Si el repuesto está disponible, la reparación de carga suele resolverse en el día. Te confirmamos el plazo al cotizar, según el diagnóstico y la disponibilidad del repuesto.",
+    ],
+    workflow: [
+      { title: "Lo revisamos", desc: "Lo probamos con vos adelante y buscamos la falla de origen, no solo el síntoma que se ve." },
+      { title: "Te pasamos el precio", desc: "Precio, plazo y tipo de repuesto antes de tocar nada. Si no te cierra, te lo llevás y pagás solo la revisión." },
+      { title: "Lo reparamos", desc: "Si el repuesto está disponible, la reparación de carga suele resolverse en el día. Te confirmamos el plazo al cotizar, según el diagnóstico y la disponibilidad del repuesto." },
+      { title: "Lo probás y te lo llevás", desc: "Lo revisás con nosotros antes de irte y te llevás la garantía de 90 días por escrito. Cualquier cosa, nos escribís al mismo WhatsApp." },
+    ],
     prices: [
       { label: "Cambio de pin de carga", value: `${formatArsPrice(CHARGING_PORT_PRICE.from)} a ${formatArsPrice(CHARGING_PORT_PRICE.to)}` },
       { label: "Diagnóstico", value: "$ 15.000 a $ 25.000" },
