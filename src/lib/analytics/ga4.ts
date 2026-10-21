@@ -19,7 +19,7 @@ export const GA4_INIT_SCRIPT = `if (${JSON.stringify(PRODUCTION_HOSTS)}.includes
   window.gtag('config', '${MEASUREMENT_ID}');
   document.addEventListener('click', function (e) {
     var a = e.target && e.target.closest && e.target.closest('a[href*="wa.me/"]');
-    if (!a) return;
+    if (!a || a.getAttribute('data-whatsapp-tracked') === 'true') return;
     var tagged = a.closest('[data-cta-location]');
     var zone = tagged ? tagged.getAttribute('data-cta-location')
       : a.closest('.tc-sticky-cta') ? 'sticky'

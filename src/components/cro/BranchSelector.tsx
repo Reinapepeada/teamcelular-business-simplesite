@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type ReactNode } from "react";
+import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { FaLocationArrow, FaMapMarkerAlt, FaTimes, FaWhatsapp } from "react-icons/fa";
 import { BRANCHES } from "@/lib/businessProfile";
 import { recordLeadInteraction } from "@/lib/analytics/leadInteractions";
@@ -142,17 +142,26 @@ export default function BranchWhatsAppButton({
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<BranchSlug | "">("");
+  const destination = selected ? branchWhatsappUrl(selected, message) : undefined;
+
+  useLayoutEffect(() => {
+    // Abrir con el contenido montado evita medir y enfocar un diálogo vacío.
+    const dialog = dialogRef.current;
+    if (open && dialog && !dialog.open) dialog.showModal();
+  }, [open]);
 
   function openSelector() {
     setOpen(true);
     setSelected(readBranchPreference()?.slug ?? "");
-    recordLeadInteraction({
-      eventName: "branch_selector_open",
-      ctaName,
-      ctaLocation,
-      ctaVariant: "whatsapp",
+    // La medición de apertura puede esperar al pintado del selector.
+    requestAnimationFrame(() => {
+      setTimeout(() => recordLeadInteraction({
+        eventName: "branch_selector_open",
+        ctaName,
+        ctaLocation,
+        ctaVariant: "whatsapp",
+      }), 0);
     });
-    dialogRef.current?.showModal();
   }
 
   function choose(slug: BranchSlug, method: BranchSelectionMethod) {
@@ -162,7 +171,6 @@ export default function BranchWhatsAppButton({
 
   function continueToWhatsApp() {
     if (!selected) return;
-    const destination = branchWhatsappUrl(selected, message);
     recordLeadInteraction({
       eventName: "branch_whatsapp_redirect",
       preferredBranch: selected,
@@ -171,7 +179,6 @@ export default function BranchWhatsAppButton({
       ctaVariant: "whatsapp",
       destination,
     });
-    window.open(destination, "_blank", "noopener,noreferrer");
     dialogRef.current?.close();
   }
 
@@ -209,15 +216,20 @@ export default function BranchWhatsAppButton({
           <div className="mt-5">
             <BranchPreferencePicker value={selected} onChange={choose} compact />
           </div>
-          <button
-            type="button"
-            disabled={!selected}
+          <a
+            href={destination}
+            role="link"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-disabled={!selected}
+            tabIndex={selected ? 0 : -1}
+            data-whatsapp-tracked="true"
             onClick={continueToWhatsApp}
-            className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-emerald-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-800 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-700/25 disabled:cursor-not-allowed disabled:opacity-50"
+            className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-emerald-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-800 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-700/25 aria-disabled:cursor-not-allowed aria-disabled:opacity-50"
           >
             <FaWhatsapp aria-hidden />
             {selected ? `Continuar con ${BRANCHES.find((branch) => branch.slug === selected)?.shortName}` : "Elegí una sucursal"}
-          </button>
+          </a>
         </div>}
       </dialog>
     </>
