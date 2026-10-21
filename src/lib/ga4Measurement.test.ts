@@ -45,12 +45,23 @@ test("GA4 conserva carga y page view automático en ambos dominios públicos", (
 test("los enlaces directos a WhatsApp identifican la sucursal por destino", () => {
   const result = boot("teamcelular.com");
   for (const [phone, branch] of [["5491151034595", "recoleta"], ["5491131739099", "belgrano"]]) {
-    const anchor = { href: `https://wa.me/${phone}?text=Consulta`, closest: () => null };
+    const anchor = { href: `https://wa.me/${phone}?text=Consulta`, closest: () => null, getAttribute: () => null };
     result.listeners.click({ target: { closest: () => anchor } });
     const event = Array.from(result.browser.dataLayer.at(-1)!);
     assert.equal(event[1], "whatsapp_click");
     assert.equal((event[2] as Record<string, unknown>).preferred_branch, branch);
   }
+});
+
+test("el enlace nativo del selector conserva su evento sin sumar whatsapp_click genérico", () => {
+  const result = boot("teamcelular.com");
+  const before = result.browser.dataLayer.length;
+  const anchor = {
+    href: "https://wa.me/5491131739099?text=Consulta",
+    getAttribute: (name: string) => name === "data-whatsapp-tracked" ? "true" : null,
+  };
+  result.listeners.click({ target: { closest: () => anchor } });
+  assert.equal(result.browser.dataLayer.length, before);
 });
 
 test("selector y formulario envían una sucursal explícita una sola vez y no envían a GA4 en local", (t) => {

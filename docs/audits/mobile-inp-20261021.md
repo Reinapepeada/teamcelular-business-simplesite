@@ -12,6 +12,24 @@ de una sesión con interacciones. Detecta tareas largas de GA4 (96 y 72 ms),
 Clarity (68 ms) y un chunk propio (95 ms). Estos tiempos no atribuyen por sí
 solos el INP de campo a un script o control concreto.
 
+La atribución de Speed Insights sí ubica interacciones lentas en WhatsApp.
+Consulta `vercel.speed_insights.inp_ms`, producción, `deviceType:mobile`,
+agrupada por destino/evento/ruta, con p75 y conteos separados. `--since 28d`
+con granularidad diaria devolvió la ventana 23/09 00:00–22/10 00:00 UTC
+(el extremo futuro no tiene observaciones al consultar el 21/10).
+
+| Control en la portada | Evento | p75 | Observaciones |
+| --- | --- | --- | --- |
+| Continuar con la sucursal | click | 224 ms | 23 |
+| WhatsApp del hero | click | 408 ms | 12 |
+| WhatsApp de la barra fija | click | 272 ms | 11 |
+
+Son muestras pequeñas y una población diferente a CrUX. Identifican controles
+afectados, pero no separan el costo del navegador, renderizado y terceros.
+La consulta se limitó a los 100 grupos más frecuentes; no es un inventario
+completo de todas las interacciones. El p75 móvil global de Speed Insights
+fue 208 ms y el de escritorio 64 ms.
+
 ## Cambios
 
 El menú móvil se montaba dentro del flujo del encabezado: a 390 × 844 el
@@ -26,6 +44,14 @@ controles; el foco inicial llega al botón de cerrar. La medición
 [recomendación de Chrome para INP](https://web.dev/articles/optimize-inp).
 Se conserva un evento por apertura y el envío de WhatsApp sigue en su gesto
 original, con la sucursal y el mensaje existentes.
+
+La continuación a WhatsApp usa ahora un enlace nativo con `target="_blank"`
+y `rel="noopener noreferrer"`, en lugar de abrir una ventana desde JavaScript.
+Sin sucursal no tiene destino y se indica deshabilitado. Conserva el evento
+`branch_whatsapp_redirect` previo a la navegación; una marca explícita evita
+sumar un `whatsapp_click` genérico que antes no existía en ese control.
+Una regresión ejecutable comprueba esa exclusión y los enlaces directos
+existentes siguen medidos.
 
 ## Verificación y límites
 
@@ -52,7 +78,7 @@ devolución de foco. Portada, guía, servicio y presupuesto sin desbordamiento
 horizontal, con un solo diálogo abierto y sin errores de consola.
 El proxy recibió un evento por apertura, sin escrituras comerciales reales.
 
-455 pruebas aprobadas, lint sin advertencias, TypeScript/build aprobados y
+456 pruebas aprobadas, lint sin advertencias, TypeScript/build aprobados y
 auditoría productiva sin vulnerabilidades. El lint local excluyó
 `.claude/**`: un checkout histórico anidado contiene archivos generados
 ajenos al proyecto actual; se conservó intacto. CI ejecuta el lint completo
