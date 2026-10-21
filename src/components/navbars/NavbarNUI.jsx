@@ -196,7 +196,7 @@ export default function NavbarNUI() {
             {mobileMenuOpen ? (
                 <div
                     id="mobile-site-menu"
-                    className="h-[calc(100dvh-52px)] overflow-y-auto bg-black px-6 py-6 lg:hidden"
+                    className="absolute inset-x-0 top-full h-[calc(100dvh-52px)] overflow-y-auto bg-black px-6 py-6 lg:hidden"
                 >
                     <div className="mx-auto w-full max-w-[100rem] space-y-3">
                         <ul className="space-y-1">

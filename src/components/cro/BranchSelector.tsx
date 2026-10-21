@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type ReactNode } from "react";
+import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { FaLocationArrow, FaMapMarkerAlt, FaTimes, FaWhatsapp } from "react-icons/fa";
 import { BRANCHES } from "@/lib/businessProfile";
 import { recordLeadInteraction } from "@/lib/analytics/leadInteractions";
@@ -143,16 +143,24 @@ export default function BranchWhatsAppButton({
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<BranchSlug | "">("");
 
+  useLayoutEffect(() => {
+    // Abrir con el contenido montado evita medir y enfocar un diálogo vacío.
+    const dialog = dialogRef.current;
+    if (open && dialog && !dialog.open) dialog.showModal();
+  }, [open]);
+
   function openSelector() {
     setOpen(true);
     setSelected(readBranchPreference()?.slug ?? "");
-    recordLeadInteraction({
-      eventName: "branch_selector_open",
-      ctaName,
-      ctaLocation,
-      ctaVariant: "whatsapp",
+    // La medición de apertura puede esperar al pintado del selector.
+    requestAnimationFrame(() => {
+      setTimeout(() => recordLeadInteraction({
+        eventName: "branch_selector_open",
+        ctaName,
+        ctaLocation,
+        ctaVariant: "whatsapp",
+      }), 0);
     });
-    dialogRef.current?.showModal();
   }
 
   function choose(slug: BranchSlug, method: BranchSelectionMethod) {
