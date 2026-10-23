@@ -72,6 +72,7 @@ type BrandGuideSeed = {
 
 export type BrandGuideConfig = {
   slug: BrandGuideSlug;
+  brand: string;
   /** JSON-LD de Service con rangos de precio. null cuando no hay precios cargados. */
   serviceJsonLd: Record<string, unknown> | null;
   pagePath: string;
@@ -225,7 +226,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "POCO",
     badge: "Gaming y rendimiento",
-    imagePath: "/images/micro_diagnos_fino.webp",
+    imagePath: "/opengraph-image.png",
     models: ["POCO F6 Pro", "POCO F6", "POCO X6 Pro", "POCO M6 Pro"],
     specialtyFocus:
       "equipos de alto rendimiento con foco en temperatura, bateria y carga",
@@ -262,7 +263,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "OPPO",
     badge: "Android",
-    imagePath: "/images/micro_diagnos_fino.webp",
+    imagePath: "/opengraph-image.png",
     models: ["OPPO Reno12", "OPPO Reno11", "OPPO A79", "OPPO A58"],
     specialtyFocus:
       "linea Reno y A con foco en pantalla, bateria y tecnologia de carga rapida",
@@ -300,7 +301,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "Infinix",
     badge: "Android",
-    imagePath: "/images/guia_cambio_bateria.webp",
+    imagePath: "/opengraph-image.png",
     models: ["Infinix Note 40", "Infinix GT 20 Pro", "Infinix Hot 40", "Infinix Smart 8"],
     specialtyFocus:
       "equipos de gama media con foco en bateria, pantalla y conectores",
@@ -337,7 +338,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "ZTE",
     badge: "Android",
-    imagePath: "/images/micro_diagnos_fino.webp",
+    imagePath: "/opengraph-image.png",
     models: ["ZTE Blade V50", "ZTE Blade A73", "ZTE Nubia", "ZTE Axon"],
     specialtyFocus:
       "familias Blade y Nubia con foco en audio, carga y estabilidad de placa",
@@ -374,7 +375,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "Tecno",
     badge: "Android",
-    imagePath: "/images/landings/landing-audio-celular-caba-hero.webp",
+    imagePath: "/opengraph-image.png",
     models: ["Tecno Camon 30", "Tecno Pova", "Tecno Spark 20", "Tecno Phantom"],
     specialtyFocus:
       "modelos Camon y Pova con foco en pantalla, camara y consumo de energia",
@@ -411,7 +412,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "Alcatel",
     badge: "Android",
-    imagePath: "/images/guia_mantenimiento.webp",
+    imagePath: "/opengraph-image.png",
     models: ["Alcatel 1", "Alcatel 3", "Alcatel 5", "Alcatel serie T"],
     specialtyFocus:
       "equipos con uso cotidiano donde importa costo-beneficio de la reparacion",
@@ -483,7 +484,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "OnePlus",
     badge: "Android premium",
-    imagePath: "/images/landings/landing-cambio-camara-caba-apoyo.webp",
+    imagePath: "/opengraph-image.png",
     models: ["OnePlus 12", "OnePlus 11", "OnePlus Nord", "OnePlus 10 Pro"],
     specialtyFocus:
       "linea premium con foco en pantalla, bateria y carga ultra rapida",
@@ -520,7 +521,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "Huawei",
     badge: "Android y EMUI",
-    imagePath: "/images/micro_diagnos_fino.webp",
+    imagePath: "/opengraph-image.png",
     models: ["Huawei P60", "Huawei P50", "Huawei Nova", "Huawei Mate"],
     specialtyFocus:
       "camara, sensores y placa en linea P, Mate y Nova",
@@ -573,7 +574,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ],
     brand: "TCL",
     badge: "Android",
-    imagePath: "/images/guia_cambio_modulo.webp",
+    imagePath: "/opengraph-image.png",
     models: ["TCL 50", "TCL 40", "TCL 30", "TCL serie 20"],
     specialtyFocus:
       "equipos de uso diario con foco en pantalla, bateria y conectividad",
@@ -753,6 +754,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
 
   return {
     slug: seed.slug,
+    brand: seed.brand,
     pagePath,
     pageLabel,
     title,

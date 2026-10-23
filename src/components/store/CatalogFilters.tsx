@@ -82,7 +82,7 @@ export default function CatalogFilters({
         >
             <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-2 text-slate-950 dark:text-slate-50">
                 <span className="text-base font-semibold">Filtros</span>
-                <span className="text-sm font-medium text-primary lg:hidden">
+                <span className="text-sm font-medium text-primary dark:text-secondary lg:hidden">
                     Ver opciones
                 </span>
             </summary>
@@ -154,7 +154,7 @@ export default function CatalogFilters({
                                     name="categories"
                                     value=""
                                     defaultChecked={filters.categories.length === 0}
-                                    className="h-5 w-5 shrink-0 border-slate-300 dark:border-slate-600 text-primary focus:ring-primary"
+                                    className="h-5 w-5 shrink-0 border-slate-300 dark:border-slate-600 text-primary dark:text-secondary focus:ring-primary"
                                 />
                                 <span>Todas</span>
                             </label>
@@ -170,7 +170,7 @@ export default function CatalogFilters({
                                         defaultChecked={filters.categories.includes(
                                             category,
                                         )}
-                                        className="h-5 w-5 shrink-0 border-slate-300 dark:border-slate-600 text-primary focus:ring-primary"
+                                        className="h-5 w-5 shrink-0 border-slate-300 dark:border-slate-600 text-primary dark:text-secondary focus:ring-primary"
                                     />
                                     <span>{category}</span>
                                 </label>
@@ -203,7 +203,7 @@ export default function CatalogFilters({
                                 name="brands"
                                 value=""
                                 defaultChecked={filters.brands.length === 0}
-                                className="h-5 w-5 shrink-0 border-slate-300 dark:border-slate-600 text-primary focus:ring-primary"
+                                className="h-5 w-5 shrink-0 border-slate-300 dark:border-slate-600 text-primary dark:text-secondary focus:ring-primary"
                             />
                             <span>Todas</span>
                         </label>
@@ -217,7 +217,7 @@ export default function CatalogFilters({
                                     name="brands"
                                     value={brand}
                                     defaultChecked={filters.brands.includes(brand)}
-                                    className="h-5 w-5 shrink-0 border-slate-300 dark:border-slate-600 text-primary focus:ring-primary"
+                                    className="h-5 w-5 shrink-0 border-slate-300 dark:border-slate-600 text-primary dark:text-secondary focus:ring-primary"
                                 />
                                 <span>{brand}</span>
                             </label>

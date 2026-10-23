@@ -1,10 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { Metadata } from "next";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
-import { formatArgentinaDate } from "@/lib/date";
 import { BRAND_GUIDE_LIST } from "./brandGuideConfigs";
 import {
   FaApple,
@@ -12,9 +10,6 @@ import {
   FaBatteryFull,
   FaBookOpen,
   FaBuilding,
-  FaChartLine,
-  FaClock,
-  FaMicrochip,
   FaMobileAlt,
   FaTools,
 } from "react-icons/fa";
@@ -25,7 +20,7 @@ const PAGE_URL = `${SITE_URL}/guias`;
 
 const ARTICLES = [
   {
-    title: "Reparacion de iPhone en Buenos Aires",
+    title: "Reparación de iPhone en Buenos Aires",
     description:
       "Pantalla, batería, carga y placa: opciones de reparación y presupuesto para tu modelo de iPhone.",
     href: "/guias/reparacion-iphone-buenos-aires",
@@ -36,7 +31,7 @@ const ARTICLES = [
     keywords: ["reparacion iPhone", "service Apple", "CABA", "true tone"],
   },
   {
-    title: "Reparacion de Samsung Galaxy en Buenos Aires",
+    title: "Reparación de Samsung Galaxy en Buenos Aires",
     description:
       "Guia completa para Galaxy S, A y Z Fold: pantalla AMOLED, bateria, puerto USB-C y placa logica.",
     href: "/guias/reparacion-samsung-buenos-aires",
@@ -78,7 +73,7 @@ const ARTICLES = [
     keywords: ["service oficial vs independiente", "segunda opinión", "reparación iPhone"],
   },
   {
-    title: "Reparacion de Xiaomi, Redmi y POCO",
+    title: "Reparación de Xiaomi, Redmi y POCO",
     description:
       "Diagnostico para equipos Xiaomi con foco en pantalla, bateria, carga rapida y microelectronica.",
     href: "/guias/reparacion-xiaomi-buenos-aires",
@@ -177,7 +172,7 @@ const ARTICLES = [
     keywords: ["pantalla con lineas", "display con rayas", "reparacion pantalla"],
   },
   {
-    title: "Celular con virus: como saberlo y que hacer",
+    title: "Celular con virus: cómo saberlo y qué hacer",
     description:
       "Que sintomas son malware, cuales son bateria o placa, y los pasos para limpiar el equipo sin perder datos.",
     href: "/guias/celular-con-virus-que-hacer",
@@ -188,7 +183,7 @@ const ARTICLES = [
     keywords: ["celular con virus", "publicidad invasiva", "celular hackeado"],
   },
   ...BRAND_GUIDE_LIST.map((item) => ({
-    title: `Reparacion de ${item.brand} en Buenos Aires`,
+    title: `Reparación de ${item.brand} en Buenos Aires`,
     description:
       `Guia practica para ${item.brand}: fallas frecuentes, diagnostico tecnico y siguiente paso recomendado en CABA.`,
     href: item.path,
@@ -203,151 +198,6 @@ const ARTICLES = [
     ],
   })),
 ];
-
-const articleVisuals: Record<string, { cover: string }> = {
-  "/guias/reparacion-iphone-buenos-aires": {
-    cover: "/images/portada_iphone.webp",
-  },
-  "/guias/reparacion-samsung-buenos-aires": {
-    cover: "/images/guia_samsung.webp",
-  },
-  "/guias/reparacion-xiaomi-buenos-aires": {
-    cover: "/images/guia_xiaomi.webp",
-  },
-  "/guias/reparacion-motorola-buenos-aires": {
-    cover: "/images/portada_moto.webp",
-  },
-  "/guias/soporte-empresas-servicio-tecnico": {
-    cover: "/images/guia_corporativo.webp",
-  },
-  "/guias/mantenimiento-preventivo-celulares": {
-    cover: "/images/guia_mantenimiento.webp",
-  },
-  "/guias/cambio-bateria-celular": {
-    cover: "/images/guia_cambio_bateria.webp",
-  },
-  "/guias/reparacion-pantalla-celular": {
-    cover: "/images/guia_cambio_modulo.webp",
-  },
-  "/guias/presupuesto-service-oficial-segunda-opinion": {
-    cover: "/images/reparacion_placa.webp",
-  },
-  "/guias/reparar-celular-o-comprar-otro": {
-    cover: "/images/guia_cambio_bateria.webp",
-  },
-  "/guias/pin-de-carga-suelto-solucion": {
-    cover: "/images/guia_cambio_modulo.webp",
-  },
-  "/guias/celular-mojado-que-hacer": {
-    cover: "/images/guia_microelectronica.webp",
-  },
-  "/guias/face-id-touch-id-no-funciona": {
-    cover: "/images/guia_iphone.webp",
-  },
-  "/guias/pantalla-con-lineas-causas-reparacion": {
-    cover: "/images/guia_cambio_modulo.webp",
-  },
-  "/guias/celular-con-virus-que-hacer": {
-    cover: "/images/guia_mantenimiento.webp",
-  },
-  ...Object.fromEntries(
-    BRAND_GUIDE_LIST.map((item) => [
-      item.path,
-      {
-        cover: item.imagePath,
-      },
-    ])
-  ),
-};
-
-const articleLinkTargets: Record<
-  string,
-  {
-    serviceHref: string;
-    serviceLabel: string;
-    siblingHref: string;
-    siblingLabel: string;
-  }
-> = {
-  "/guias/reparacion-iphone-buenos-aires": {
-    serviceHref: "/reparaciones/cambio-pantalla-caba",
-    serviceLabel: "Servicio: cambio de pantalla",
-    siblingHref: "/guias/cambio-bateria-celular",
-    siblingLabel: "Guia hermana: bateria",
-  },
-  "/guias/reparacion-samsung-buenos-aires": {
-    serviceHref: "/reparaciones/cambio-pin-carga-caba",
-    serviceLabel: "Servicio: pin de carga",
-    siblingHref: "/guias/reparacion-pantalla-celular",
-    siblingLabel: "Guia hermana: pantallas",
-  },
-  "/guias/reparacion-xiaomi-buenos-aires": {
-    serviceHref: "/reparaciones/cambio-bateria-caba",
-    serviceLabel: "Servicio: cambio de bateria",
-    siblingHref: "/guias/reparacion-pantalla-celular",
-    siblingLabel: "Guia hermana: pantallas",
-  },
-  "/guias/reparacion-motorola-buenos-aires": {
-    serviceHref: "/reparaciones/cambio-pantalla-caba",
-    serviceLabel: "Servicio: cambio de pantalla",
-    siblingHref: "/reparaciones/cambio-bateria-caba",
-    siblingLabel: "Servicio: cambio de batería",
-  },
-  "/guias/soporte-empresas-servicio-tecnico": {
-    serviceHref: "/reparaciones",
-    serviceLabel: "Servicios: plan tecnico integral",
-    siblingHref: "/guias/mantenimiento-preventivo-celulares",
-    siblingLabel: "Guia hermana: mantenimiento",
-  },
-  "/guias/mantenimiento-preventivo-celulares": {
-    serviceHref: "/reparaciones",
-    serviceLabel: "Servicios: mantenimiento y reparacion",
-    siblingHref: "/guias/soporte-empresas-servicio-tecnico",
-    siblingLabel: "Guia hermana: soporte empresas",
-  },
-  "/guias/cambio-bateria-celular": {
-    serviceHref: "/reparaciones/cambio-bateria-caba",
-    serviceLabel: "Servicio: cambio de bateria",
-    siblingHref: "/guias/reparacion-pantalla-celular",
-    siblingLabel: "Guia hermana: pantallas",
-  },
-  "/guias/reparacion-pantalla-celular": {
-    serviceHref: "/reparaciones/cambio-pantalla-caba",
-    serviceLabel: "Servicio: cambio de pantalla",
-    siblingHref: "/guias/cambio-bateria-celular",
-    siblingLabel: "Guia hermana: bateria",
-  },
-  "/guias/pin-de-carga-suelto-solucion": {
-    serviceHref: "/reparaciones/cambio-pin-carga-caba",
-    serviceLabel: "Servicio: pin de carga",
-    siblingHref: "/guias/celular-mojado-que-hacer",
-    siblingLabel: "Guia hermana: celular mojado",
-  },
-  "/guias/celular-mojado-que-hacer": {
-    serviceHref: "/reparaciones/reparacion-placa-caba",
-    serviceLabel: "Servicio: reparacion de placa",
-    siblingHref: "/guias/pin-de-carga-suelto-solucion",
-    siblingLabel: "Guia hermana: pin de carga",
-  },
-  "/guias/face-id-touch-id-no-funciona": {
-    serviceHref: "/reparaciones/reparacion-placa-caba",
-    serviceLabel: "Servicio: placa y sensores",
-    siblingHref: "/guias/reparacion-iphone-buenos-aires",
-    siblingLabel: "Guia hermana: reparacion iPhone",
-  },
-  "/guias/pantalla-con-lineas-causas-reparacion": {
-    serviceHref: "/reparaciones/cambio-pantalla-caba",
-    serviceLabel: "Servicio: cambio de pantalla",
-    siblingHref: "/guias/reparacion-pantalla-celular",
-    siblingLabel: "Guia hermana: guia de pantalla",
-  },
-  "/guias/celular-con-virus-que-hacer": {
-    serviceHref: "/reparaciones/eliminar-virus-celular-caba",
-    serviceLabel: "Servicio: quitar virus y publicidad",
-    siblingHref: "/guias/mantenimiento-preventivo-celulares",
-    siblingLabel: "Guia hermana: mantenimiento preventivo",
-  },
-};
 
 export const metadata: Metadata = {
   ...buildWebsiteMetadata({
@@ -382,8 +232,8 @@ export const metadata: Metadata = {
     openGraphTitle: "Guías de Reparación de Celulares en CABA | Team Celular",
     openGraphDescription:
       "Aprende y decide mejor antes de reparar: guias tecnicas reales por marca, falla y nivel de complejidad.",
-    openGraphImagePath: "/images/guia_microelectronica.webp",
-    openGraphImageAlt: "Diagnóstico de celulares en el laboratorio de Team Celular",
+    openGraphImagePath: "/opengraph-image.png",
+    openGraphImageAlt: "Team Celular: guías de reparación de celulares",
     twitterTitle: "Guías de Reparación de Celulares en CABA | Team Celular",
     twitterDescription:
       "Guias claras para iPhone, Samsung y Xiaomi: fallas comunes, criterios tecnicos y siguiente paso recomendado.",
@@ -394,268 +244,65 @@ export const metadata: Metadata = {
 };
 
 export default function GuidesPage() {
+  const groups = [
+    { id: "por-marca", title: "Por marca", articles: ARTICLES.filter(item => item.category === "Landing por marca") },
+    { id: "por-falla", title: "Por falla y tipo de servicio", articles: ARTICLES.filter(item => item.category !== "Landing por marca") },
+  ];
   return (
-    <div className="flex w-full justify-center bg-[#f7f8fc] px-4 py-4 text-slate-950 sm:px-6 sm:py-8 lg:px-8 dark:bg-slate-950 dark:text-white">
-      <div className="w-full max-w-[100rem] space-y-6 sm:space-y-16">
-        <BreadcrumbJsonLd
-          items={[
-            { name: "Inicio", url: `${SITE_URL}/` },
-            { name: "Guias", url: PAGE_URL },
-          ]}
-        />
-
-        <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-          <Link href="/" className="transition hover:text-primary">
-            Inicio
-          </Link>
-          <span>/</span>
-          <span className="font-semibold text-slate-900 dark:text-slate-100">
-            Guias
-          </span>
+    <div className="mx-auto w-full max-w-[1100px] space-y-10 bg-black px-4 py-8 text-[#f5f5f7] sm:px-6 sm:py-12">
+      <BreadcrumbJsonLd items={[{ name: "Inicio", url: `${SITE_URL}/` }, { name: "Guías", url: PAGE_URL }]} />
+      <nav aria-label="Ruta de navegación" className="flex items-center gap-2 text-sm text-[#a1a1a6]">
+        <Link href="/" className="tc-link inline-flex min-h-11 items-center">Inicio</Link><span aria-hidden>/</span><span aria-current="page">Guías</span>
+      </nav>
+      <header>
+        <h1 className="max-w-[850px] text-balance text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-[1.1] tracking-[-0.025em]">Entendé la falla antes de decidir la reparación.</h1>
+        <p className="mt-4 max-w-[65ch] text-[17px] leading-relaxed text-[#a1a1a6]">Qué podés revisar, cuándo dejar de usar el equipo y qué datos conviene tener antes de pedir un presupuesto.</p>
+        <nav aria-label="Buscar una guía" className="mt-5 flex flex-wrap gap-x-6 gap-y-2">
+          <a href="#por-marca" className="tc-link inline-flex min-h-11 items-center">Por marca</a>
+          <a href="#por-falla" className="tc-link inline-flex min-h-11 items-center">Por falla</a>
+          <TrackedCtaLink href="/presupuesto-reparacion#solicitar-presupuesto" ctaName="guides_hero_budget" ctaLocation="guides_hero" ctaVariant="primary" className="tc-link inline-flex min-h-11 items-center">Consultar una falla</TrackedCtaLink>
         </nav>
+      </header>
 
-        <header className="grid overflow-hidden bg-[#171820] text-white lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="flex flex-col justify-center p-5 sm:p-10 lg:p-14">
-            <div className="flex items-center gap-3 text-sm text-white/70">
-              <FaBookOpen aria-hidden />
-              <span>Guías del laboratorio · Recoleta y Belgrano</span>
-            </div>
-            <h1 className="mt-4 max-w-3xl text-balance text-[clamp(1.9rem,6vw,5rem)] sm:mt-8 font-extrabold leading-[0.98] tracking-[-0.035em]">
-              Entendé la falla antes de decidir la reparación.
-            </h1>
-            <p className="mt-3 max-w-2xl text-pretty text-[15px] leading-6 text-slate-300 sm:mt-6 sm:text-lg sm:leading-8">
-              Explicamos síntomas, diagnóstico y opciones de reparación con el mismo criterio que usamos en el laboratorio. Sin alarmismo y sin cambiar piezas por descarte.
-            </p>
-            <div className="mt-5 hidden flex-wrap gap-3 sm:mt-8 sm:flex">
-              <Link href="#servicios-de-reparacion" className="hidden min-h-12 items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#20216b] transition hover:bg-slate-100 sm:inline-flex">
-                Ver servicios de reparación <FaArrowRight aria-hidden />
-              </Link>
-              <TrackedCtaLink href="/presupuesto-reparacion#solicitar-presupuesto" ctaName="guides_hero_budget" ctaLocation="guides_hero" ctaVariant="secondary" className="hidden min-h-12 items-center rounded-lg border border-white/35 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10 sm:inline-flex">
-                Consultar una falla
-              </TrackedCtaLink>
-            </div>
-          </div>
-          <div className="relative hidden min-h-[24rem] sm:block lg:min-h-[38rem]">
-            <Image src="/images/guia_microelectronica.webp" alt="Diagnóstico de un celular en el laboratorio de Team Celular" fill priority sizes="(max-width: 1024px) 100vw, 55vw" className="object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#171820]/70 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#171820]/30 lg:via-transparent" />
-            <div className="liquid-glass absolute bottom-5 left-5 right-5 rounded-2xl px-5 py-4 sm:bottom-7 sm:left-7 sm:right-7">
-              <p className="font-bold">Contenido revisado por el equipo técnico</p>
-              <p className="mt-1 text-sm text-white/75">Marca, falla y siguiente paso en una lectura clara.</p>
-            </div>
-          </div>
-        </header>
-
-        <section id="servicios-de-reparacion" aria-label="Servicios de reparación y presupuesto" className="scroll-mt-28 grid gap-4 rounded-2xl border border-slate-200/80 bg-white/85 p-6 shadow-md dark:border-white/10 dark:bg-slate-900/85 md:grid-cols-3 md:p-8">
-          <article className="space-y-3 rounded-xl border border-slate-200/80 bg-slate-50/90 p-4 dark:border-white/10 dark:bg-slate-950/45">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.12em] text-slate-700 dark:text-slate-200">
-              Si ya sabés la falla
-            </h2>
-            <div className="flex flex-wrap gap-2">
-              <Link href="/reparaciones/cambio-pantalla-caba" className="inline-flex min-h-11 items-center rounded-full border border-primary/25 bg-white px-4 py-2 text-[13px] font-semibold text-slate-800 transition hover:bg-primary/10 dark:bg-slate-900/70 dark:text-slate-100">
-                Cambio de pantalla
-              </Link>
-              <Link href="/reparaciones/cambio-bateria-caba" className="inline-flex min-h-11 items-center rounded-full border border-primary/25 bg-white px-4 py-2 text-[13px] font-semibold text-slate-800 transition hover:bg-primary/10 dark:bg-slate-900/70 dark:text-slate-100">
-                Cambio de batería
-              </Link>
-              <Link href="/reparaciones/cambio-pin-carga-caba" className="inline-flex min-h-11 items-center rounded-full border border-primary/25 bg-white px-4 py-2 text-[13px] font-semibold text-slate-800 transition hover:bg-primary/10 dark:bg-slate-900/70 dark:text-slate-100">
-                Pin de carga
-              </Link>
-            </div>
-          </article>
-
-          <article className="space-y-3 rounded-xl border border-slate-200/80 bg-slate-50/90 p-4 dark:border-white/10 dark:bg-slate-950/45">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.12em] text-slate-700 dark:text-slate-200">
-              Si aún estás evaluando
-            </h2>
-            <div className="flex flex-wrap gap-2">
-              <TrackedCtaLink
-                href="/presupuesto-reparacion#solicitar-presupuesto"
-                ctaName="guides_cluster_budget"
-                ctaLocation="guides_cluster_links"
-                ctaVariant="primary"
-                className="inline-flex min-h-11 items-center rounded-full bg-primary px-4 py-2 text-[13px] font-semibold text-white transition hover:bg-primary/90"
-              >
-                Diagnostico y presupuesto
-              </TrackedCtaLink>
-              <TrackedCtaLink
-                href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20quiero%20asesoria%20tecnica%20desde%20las%20guias"
-                ctaName="guides_cluster_whatsapp"
-                ctaLocation="guides_cluster_links"
-                ctaVariant="whatsapp"
-                external
-                target="_blank"
-                className="inline-flex min-h-11 items-center rounded-full border border-emerald-700 px-4 py-2 text-[13px] font-semibold text-white bg-emerald-700 transition hover:bg-emerald-800"
-              >
-                WhatsApp tecnico
-              </TrackedCtaLink>
-            </div>
-          </article>
-
-          <article className="space-y-3 rounded-xl border border-slate-200/80 bg-slate-50/90 p-4 dark:border-white/10 dark:bg-slate-950/45">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.12em] text-slate-700 dark:text-slate-200">
-              Reparación por marca
-            </h2>
-            <div className="flex flex-wrap gap-2">
-              <Link href="/guias/reparacion-iphone-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
-                iPhone
-              </Link>
-              <Link href="/guias/reparacion-samsung-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
-                Samsung
-              </Link>
-              <Link href="/guias/reparacion-motorola-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
-                Motorola
-              </Link>
-              <Link href="/guias/reparacion-xiaomi-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
-                Xiaomi
-              </Link>
-            </div>
-          </article>
-        </section>
-
-        <section id="guias-destacadas" className="space-y-4 scroll-mt-28 sm:space-y-8">
-          <div className="max-w-3xl">
-            <h2 className="text-balance text-xl font-extrabold tracking-[-0.025em] sm:text-3xl md:text-4xl">
-              Buscá por marca o por síntoma
-            </h2>
-            <p className="mt-2 hidden text-pretty text-[15px] leading-6 text-slate-600 sm:mt-4 sm:block sm:text-lg sm:leading-8 dark:text-slate-300">
-              Cada guía separa lo que podés comprobar en casa de lo que requiere diagnóstico técnico.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-12 gap-0 divide-y divide-slate-200 sm:gap-6 sm:divide-y-0 dark:divide-slate-800">
-            {ARTICLES.map((article, index) => {
+      <div id="guias-destacadas" className="space-y-10 scroll-mt-28">
+        {groups.map(group => <section key={group.id} id={group.id} className="scroll-mt-28">
+          <h2 className="tc-heading !text-[clamp(1.5rem,3vw,2.25rem)]">{group.title}</h2>
+          <ul className="mt-5 grid gap-x-10 md:grid-cols-2">
+            {group.articles.map(article => {
               const Icon = article.Icon;
-              const visual = articleVisuals[article.href] ?? {
-                cover: "/images/fondofooter.webp",
-              };
-              const links = articleLinkTargets[article.href] ?? {
-                serviceHref: "/reparaciones",
-                serviceLabel: "Servicio: reparaciones en CABA",
-                siblingHref: "/presupuesto-reparacion#solicitar-presupuesto",
-                siblingLabel: "Paso siguiente: pedir presupuesto",
-              };
-              const updatedDate = formatArgentinaDate(article.datePublished);
-
-              return (
-                <article
-                  key={article.href}
-                  className={`group relative col-span-12 overflow-hidden bg-white transition sm:hover:-translate-y-1 dark:bg-slate-900 ${index % 5 === 3 ? "md:col-span-7" : index % 5 === 4 ? "md:col-span-5" : "md:col-span-6"}`}
-                >
-                  <div className="relative hidden h-40 overflow-hidden sm:block sm:h-64">
-                    <Image
-                      src={visual.cover}
-                      alt={article.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover transition duration-500 group-hover:scale-[1.02]"
-                    />
-                    <div className="liquid-glass absolute left-3 top-3 inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-semibold text-white">
-                      <FaClock className="text-[11px]" />
-                      {article.readingTime}
-                    </div>
+              return <li key={article.href} className="border-t border-[#333336] py-2">
+                <div className="flex items-start gap-4">
+                  <Icon aria-hidden className="mt-2 h-6 w-6 shrink-0 text-[#c7c7cc]" />
+                  <div className="min-w-0">
+                    <h3 className="text-[17px] font-semibold leading-snug"><Link href={article.href} className="inline-flex min-h-11 items-center rounded-lg hover:underline underline-offset-4">{article.title}<FaArrowRight aria-hidden className="ml-3 h-4 w-4 shrink-0 text-[#6aa6ff]" /></Link></h3>
                   </div>
-
-                  <div className="py-3 sm:p-7">
-                    <div className="flex items-center justify-between gap-4">
-                      <div className="flex items-center gap-3 text-sm font-bold text-[#2d2e83] dark:text-[#aebaff]">
-                        <Icon aria-hidden />
-                        <span>{article.category}</span>
-                      </div>
-                      <time
-                        dateTime={article.datePublished}
-                        className="text-xs font-medium text-slate-500 dark:text-slate-400"
-                      >
-                        {updatedDate}
-                      </time>
-                    </div>
-
-  <h3 className="mt-2 text-base font-bold leading-snug tracking-[-0.02em] text-slate-950 sm:mt-5 sm:text-2xl sm:font-extrabold dark:text-white">
-                      {article.title}
-                    </h3>
-                    <Link
-                      href={article.href}
-                      aria-label={`Leer ${article.title}`}
-                      className="absolute inset-0 sm:hidden"
-                    />
-
-                    <p className="mt-2 hidden max-w-2xl text-sm leading-6 text-slate-600 sm:mt-3 sm:block sm:text-base sm:leading-7 dark:text-slate-300">
-                      {article.description}
-                    </p>
-
-                    <div className="mt-4 hidden flex-wrap items-center gap-3 border-t border-slate-200 pt-4 sm:mt-6 sm:flex sm:pt-5 dark:border-slate-700">
-                    <Link
-                      href={article.href}
-                      className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-[#2d2e83] px-5 py-2 text-sm font-bold text-white transition group-hover:gap-3 group-hover:bg-[#20216b]"
-                    >
-                      Leer guía
-                      <FaArrowRight />
-                    </Link>
-                      <Link href={links.serviceHref} className="hidden min-h-11 items-center text-sm font-bold text-slate-600 hover:text-[#2d2e83] sm:inline-flex dark:text-slate-300 dark:hover:text-white">{links.serviceLabel}</Link>
-                    </div>
-                  </div>
-                </article>
-              );
+                </div>
+              </li>;
             })}
-          </div>
-        </section>
-
-        <section className="rounded-2xl border border-white/15 bg-gradient-to-br from-primary/10 via-white/5 to-secondary/10 p-10 text-center dark:border-white/10 dark:from-slate-900/40 dark:via-slate-900/30 dark:to-slate-900/40 md:p-16">
-          <h2 className="mb-4 text-3xl font-bold text-slate-900 dark:text-slate-100">
-            Necesitas un diagnostico profesional?
-          </h2>
-          <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-slate-300">
-            Nuestro equipo responde consultas y cotizaciones para iPhone,
-            Samsung y Xiaomi con enfoque tecnico y comercial.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              href="/contacto"
-              className="rounded-full bg-secondary px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-secondary/90"
-            >
-              Contactar expertos
-            </Link>
-            <Link
-              href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20quiero%20asesoria%20tecnica%20para%20reparar%20mi%20celular"
-              className="rounded-full border-2 border-secondary px-8 py-4 text-lg font-semibold text-secondary transition hover:bg-secondary/10"
-            >
-              WhatsApp directo
-            </Link>
-          </div>
-        </section>
-
-        <aside aria-labelledby="otras-lecturas" className="border-t border-slate-200 pt-6 text-sm dark:border-slate-800">
-          <h2 id="otras-lecturas" className="font-semibold text-slate-800 dark:text-slate-200">Otras lecturas</h2>
-          <Link href="/guias/team-celular-vs-gofix-view-phone" className="mt-2 inline-flex min-h-11 items-center text-slate-600 underline underline-offset-4 hover:text-primary dark:text-slate-400 dark:hover:text-white">Comparación de talleres: Team Celular, GoFix y View Phone</Link>
-        </aside>
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "CollectionPage",
-              name: "Guias tecnicas de reparacion de celulares",
-              description:
-                "Centro de guías técnicas de Team Celular — Paraguay 2451 Recoleta y Amenábar 2032 Belgrano, CABA. Reparación por marca, microelectrónica y soporte corporativo.",
-               image: `${SITE_URL}/images/guia_microelectronica.webp`,
-              provider: { "@id": `${SITE_URL}#localbusiness` },
-              hasPart: ARTICLES.map((article) => ({
-                "@type": "Article",
-                headline: article.title,
-                description: article.description,
-                url: `${SITE_URL}${article.href}`,
-                datePublished: article.datePublished,
-                author: {
-                  "@type": "Organization",
-                  name: "Team Celular",
-                },
-                keywords: article.keywords.join(", "),
-              })),
-            }),
-          }}
-        />
+          </ul>
+        </section>)}
       </div>
-      </div>
-        );
+      <nav id="servicios-de-reparacion" aria-label="Servicios de reparación y presupuesto" className="flex scroll-mt-28 flex-wrap items-center gap-x-6 gap-y-2 border-y border-[#333336] py-4 text-sm">
+        <span className="font-semibold">¿Ya sabés qué necesitás?</span>
+        <Link href="/reparaciones/cambio-pantalla-caba" className="tc-link inline-flex min-h-11 items-center">Cambio de pantalla</Link>
+        <Link href="/reparaciones/cambio-bateria-caba" className="tc-link inline-flex min-h-11 items-center">Cambio de batería</Link>
+        <Link href="/reparaciones/cambio-pin-carga-caba" className="tc-link inline-flex min-h-11 items-center">Pin de carga</Link>
+      </nav>
+      <section className="border-t border-[#333336] py-6">
+        <h2 className="text-2xl font-semibold">¿Necesitás que lo revisemos?</h2>
+        <p className="mt-3 max-w-[65ch] text-[17px] leading-relaxed text-[#a1a1a6]">Contanos marca, modelo y qué le pasa. Te orientamos para consultar en Recoleta o Belgrano.</p>
+        <div className="mt-5 flex flex-wrap items-center gap-5"><Link href="/contacto" className="tc-btn tc-btn-primary">Consultar al taller</Link><Link href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20quiero%20asesoria%20tecnica%20para%20reparar%20mi%20celular" className="tc-link inline-flex min-h-11 items-center">WhatsApp directo</Link></div>
+      </section>
+      <aside aria-labelledby="otras-lecturas" className="border-t border-[#333336] pt-5 text-sm">
+        <h2 id="otras-lecturas" className="font-semibold">Otras lecturas</h2>
+        <Link href="/guias/team-celular-vs-gofix-view-phone" className="tc-link mt-2 inline-flex min-h-11 items-center underline underline-offset-4">Comparación de talleres: Team Celular, GoFix y View Phone</Link>
+      </aside>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org", "@type": "CollectionPage", name: "Guias tecnicas de reparacion de celulares",
+        description: "Centro de guías técnicas de Team Celular — Paraguay 2451 Recoleta y Amenábar 2032 Belgrano, CABA. Reparación por marca, microelectrónica y soporte corporativo.",
+        image: `${SITE_URL}/opengraph-image.png`, provider: { "@id": `${SITE_URL}#localbusiness` },
+        hasPart: ARTICLES.map(article => ({ "@type": "Article", headline: article.title, description: article.description, url: `${SITE_URL}${article.href}`, datePublished: article.datePublished, author: { "@type": "Organization", name: "Team Celular" }, keywords: article.keywords.join(", ") })),
+      }) }} />
+    </div>
+  );
 }
-

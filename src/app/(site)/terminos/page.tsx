@@ -54,12 +54,12 @@ export default function TerminosPage() {
       <nav className="mb-8 text-sm text-slate-600 dark:text-slate-400">
         <ol className="flex items-center gap-2">
           <li>
-            <Link href="/" className="hover:text-primary transition-colors">
+            <Link href="/" className="hover:text-primary dark:hover:text-secondary transition-colors">
               Inicio
             </Link>
           </li>
           <li>/</li>
-          <li className="text-primary font-semibold">Términos</li>
+          <li className="text-primary dark:text-secondary font-semibold">Términos</li>
         </ol>
       </nav>
 

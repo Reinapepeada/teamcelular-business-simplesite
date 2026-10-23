@@ -18,7 +18,6 @@ import {
   FaTools,
   FaWrench,
 } from "react-icons/fa";
-import { SiMotorola } from "react-icons/si";
 import GuideByline from "@/components/seo/GuideByline";
 import { BRAND_REPAIR_PRICES, buildPriceOffers, priceRangeOf } from "@/lib/repairPrices";
 
@@ -69,7 +68,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/portada_moto.webp",
+        url: "https://teamcelular.com/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Reparación técnica de Motorola en Team Celular, Recoleta CABA",
@@ -84,7 +83,7 @@ export const metadata: Metadata = {
     title: "Reparación de Motorola en CABA | Team Celular",
     description:
       "Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga de Motorola según modelo, stock y falla. Garantía escrita 90 días.",
-    images: ["https://teamcelular.com/images/portada_moto.webp"],
+    images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
 
@@ -95,32 +94,6 @@ const repairLinks: Record<string, string> = {
   "Placa y recuperación avanzada": "/reparaciones/reparacion-placa-caba",
 };
 
-const brandLinks = [
-  {
-    href: "/guias/reparacion-iphone-buenos-aires",
-    label: "iPhone",
-    helper: "Apple con True Tone y Face ID",
-    active: false,
-  },
-  {
-    href: "/guias/reparacion-samsung-buenos-aires",
-    label: "Samsung",
-    helper: "Galaxy S, A, Z Fold y Z Flip",
-    active: false,
-  },
-  {
-    href: "/guias/reparacion-motorola-buenos-aires",
-    label: "Motorola",
-    helper: "Moto G, Edge y E",
-    active: true,
-  },
-  {
-    href: "/guias/reparacion-xiaomi-buenos-aires",
-    label: "Xiaomi",
-    helper: "Xiaomi, Redmi y POCO",
-    active: false,
-  },
-];
 
 const quickSteps = [
   {
@@ -335,7 +308,7 @@ const faq = [
 
 export default function MotorolaRepairGuidePage() {
   return (
-    <div className="flex w-full justify-center px-4 py-16">
+    <div className="flex w-full justify-center px-4 py-8 sm:py-12">
       <ArticleSchema
         title="Reparación de Motorola en Buenos Aires | Servicio Técnico Team Celular"
         description="Guía completa para reparar Motorola en CABA con diagnóstico profesional, repuestos de calidad y garantía escrita 90 días."
@@ -348,7 +321,7 @@ export default function MotorolaRepairGuidePage() {
           "reparacion de Motorola Edge",
           "cambio de pantalla, bateria y USB-C Motorola",
         ]}
-        image="https://teamcelular.com/images/portada_moto.webp"
+        image="https://teamcelular.com/opengraph-image.png"
         url={PAGE_URL}
       />
 
@@ -362,11 +335,11 @@ export default function MotorolaRepairGuidePage() {
         />
 
         <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-[#86868b]">
-          <Link href="/" className="transition hover:text-primary">
+          <Link href="/" className="transition hover:text-primary dark:hover:text-secondary">
             Inicio
           </Link>
           <span>/</span>
-          <Link href="/guias" className="transition hover:text-primary">
+          <Link href="/guias" className="transition hover:text-primary dark:hover:text-secondary">
             Guías
           </Link>
           <span>/</span>
@@ -375,76 +348,17 @@ export default function MotorolaRepairGuidePage() {
           </span>
         </nav>
 
-        <header className="bg-[#1d1d1f] space-y-8 rounded-[28px] p-8 md:p-14">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/70 bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
-              <SiMotorola />
-              Especialistas por marca
-            </span>
-            <span className="rounded-full border border-emerald-700/80 bg-emerald-700 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white">
-              Recoleta y Belgrano · CABA
-            </span>
-          </div>
-
+        <header className="bg-[#1d1d1f] space-y-6 rounded-[28px] p-6 sm:p-8 md:p-10">
           <div className="space-y-4">
             <h1 className="text-4xl font-semibold tracking-[-0.01em] text-slate-900 dark:text-[#f5f5f7] md:text-5xl">
               Reparación de Motorola en Buenos Aires
             </h1>
-            <p className="max-w-4xl text-lg leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
+            <p className="max-w-[65ch] text-lg leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
               Team Celular repara Motorola en dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2032, Belgrano</strong>. Presupuesto antes de reparar. Pantalla en 2–4 h y batería en 1–2 h con stock, con garantía
               escrita de 90 días sobre trabajo y repuesto. Moto G, Edge y E.
             </p>
-            <div className="mt-4">
-              <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
-            </div>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-3">
-            <div className="bg-[#1d1d1f] rounded-[28px] p-5">
-              <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-[#86868b]">
-                Diagnóstico
-              </p>
-              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-primary">Según la falla</p>
-              <p className="mt-1 text-sm text-slate-600 dark:text-[#a1a1a6]">
-                Placa: informe en hasta 72 h hábiles
-              </p>
-            </div>
-            <div className="bg-[#1d1d1f] rounded-[28px] p-5">
-              <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-[#86868b]">
-                Garantía
-              </p>
-              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-secondary">90 días</p>
-              <p className="mt-1 text-sm text-slate-600 dark:text-[#a1a1a6]">
-                Garantía escrita sobre trabajo y repuesto
-              </p>
-            </div>
-            <div className="bg-[#1d1d1f] rounded-[28px] p-5">
-              <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-[#86868b]">
-                Tiempo express
-              </p>
-              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-primary">1-4 h</p>
-              <p className="mt-1 text-sm text-slate-600 dark:text-[#a1a1a6]">
-                Según modelo, stock y falla
-              </p>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap gap-3">
-            {brandLinks.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`rounded-full border px-5 py-3 text-sm font-semibold transition ${
-                  item.active
-                    ? "border-primary bg-primary text-white shadow-lg shadow-primary/25"
-                    : "border-slate-300/80 bg-white/80 text-slate-700 hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200"
-                }`}
-              >
-                {item.label}
-                <span className="ml-2 text-xs font-medium">{item.helper}</span>
-              </Link>
-            ))}
-          </div>
 
           <div className="flex flex-wrap gap-4">
             <Link
@@ -462,11 +376,56 @@ export default function MotorolaRepairGuidePage() {
               Hablar por WhatsApp
             </Link>
           </div>
+          <p className="text-sm leading-6 text-[#a1a1a6]">Revisión de placa: informe en hasta 72 horas hábiles. El arreglo lleva semanas; confirmamos precio y plazo por escrito.</p>
+
+            <div className="mt-4">
+              <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
+            </div>
         </header>
+
+        <section id="costos-reparacion-motorola" className="scroll-mt-24 bg-[#1d1d1f] rounded-[28px] p-8">
+          <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
+            ¿Cuánto cuesta reparar un Motorola en CABA?
+          </h2>
+          <p className="mt-3 text-sm text-slate-600 dark:text-[#a1a1a6]">
+            Precios orientativos en ARS — el valor exacto depende del modelo y el estado del equipo. Team Celular informa el costo de diagnóstico antes de abrir el equipo; si avanzás con la reparación, ese monto se descuenta del trabajo final.
+          </p>
+          <div className="mt-5 overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-white/20 dark:border-white/10">
+                  <th className="pb-2 text-left font-semibold text-slate-900 dark:text-[#f5f5f7]">Servicio</th>
+                  <th className="pb-2 text-right font-semibold text-slate-900 dark:text-[#f5f5f7]">Precio estimado ARS</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/10 dark:divide-white/5">
+                {[
+                  ["Revisión técnica (sin placa)", "15.000 – 25.000"],
+                  ["Revisión de placa (informe hasta 72 h hábiles)", "45.000"],
+                  ["Pantalla Moto E / G", "99.900 – 199.900"],
+                  ["Pantalla Edge (pOLED)", "299.900 – 599.900"],
+                  ["Pantalla Razr (plegable)", "999.900 – 1.399.900"],
+                  ["Batería Moto E / G", "89.900 – 169.900"],
+                  ["Batería Edge / Razr", "119.900 – 229.900"],
+                  ["Pin de carga USB-C", "35.000 – 150.000"],
+                  ["Reparación de placa", "Consultar"],
+                ].map(([service, price]) => (
+                  <tr key={service}>
+                    <td className="py-2.5 text-slate-700 dark:text-[#a1a1a6]">{service}</td>
+                    <td className="py-2.5 text-right font-semibold text-slate-900 dark:text-[#f5f5f7]">{price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-4 text-xs text-slate-500 dark:text-[#86868b]">
+            Precios orientativos sujetos a actualización. Consultá por WhatsApp o presupuesto online para valores exactos según modelo.
+          </p>
+        </section>
 
         <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
           <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary dark:text-secondary">
               Respuesta directa
             </p>
             <h2 className="mt-3 text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
@@ -516,11 +475,11 @@ export default function MotorolaRepairGuidePage() {
 
         <GoogleReviewsAPI />
 
-        <section className="space-y-7">
+        <details className="rounded-[28px] border border-white/15 bg-[#1d1d1f] p-6 sm:p-8">
+          <summary className="cursor-pointer text-xl font-semibold text-white"><h2 className="inline">¿Cómo trabajamos tu Motorola de punta a punta?</h2></summary>
+          <div className="mt-6">
           <div className="text-center">
-            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
-              ¿Cómo trabajamos tu Motorola de punta a punta?
-            </h2>
+
             <p className="mt-2 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Método técnico para confirmar la falla real antes de tocar el equipo
             </p>
@@ -551,13 +510,14 @@ export default function MotorolaRepairGuidePage() {
               );
             })}
           </div>
-        </section>
+        </div>
+        </details>
 
-        <section className="space-y-7">
+        <details className="rounded-[28px] border border-white/15 bg-[#1d1d1f] p-6 sm:p-8">
+          <summary className="cursor-pointer text-xl font-semibold text-white"><h2 className="inline">¿Cuáles son las reparaciones de Motorola más frecuentes en CABA?</h2></summary>
+          <div className="mt-6">
           <div className="text-center">
-            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
-              ¿Cuáles son las reparaciones de Motorola más frecuentes en CABA?
-            </h2>
+
             <p className="mt-2 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Servicios para Moto G, Edge y E con diagnóstico previo y garantía escrita
             </p>
@@ -570,7 +530,7 @@ export default function MotorolaRepairGuidePage() {
                   key={repair.title}
                   className="bg-[#1d1d1f] rounded-[28px] p-6 transition"
                 >
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-xl text-primary">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-xl text-primary dark:text-secondary">
                     <Icon />
                   </div>
                   <h3 className="text-xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
@@ -587,7 +547,7 @@ export default function MotorolaRepairGuidePage() {
                   {repairLinks[repair.title] && (
                     <Link
                       href={repairLinks[repair.title]}
-                      className="mt-3 inline-flex text-xs font-semibold text-primary hover:underline"
+                      className="mt-3 inline-flex text-xs font-semibold text-primary dark:text-secondary hover:underline"
                     >
                       Ver precio y detalles →
                     </Link>
@@ -596,13 +556,14 @@ export default function MotorolaRepairGuidePage() {
               );
             })}
           </div>
-        </section>
+        </div>
+        </details>
 
-        <section className="bg-[#1d1d1f] rounded-[28px]">
+        <details className="rounded-[28px] border border-white/15 bg-[#1d1d1f] p-6 sm:p-8">
+          <summary className="cursor-pointer text-xl font-semibold text-white"><h2 className="inline">¿Por qué elegir Team Celular para tu Motorola?</h2></summary>
+          <div className="mt-6">
           <div className="border-b border-slate-100 px-8 py-5 dark:border-slate-800">
-            <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
-              ¿Por qué elegir Team Celular para tu Motorola?
-            </h2>
+
             <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-[#86868b]">
               Cuatro puntos concretos que marcan la diferencia en cada trabajo.
             </p>
@@ -612,7 +573,7 @@ export default function MotorolaRepairGuidePage() {
               const Icon = block.Icon;
               return (
                 <div key={block.title} className="flex gap-4 px-8 py-5">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-lg text-primary">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-lg text-primary dark:text-secondary">
                     <Icon aria-hidden />
                   </div>
                   <div>
@@ -627,53 +588,16 @@ export default function MotorolaRepairGuidePage() {
               );
             })}
           </div>
-        </section>
-
-        <section id="costos-reparacion-motorola" className="bg-[#1d1d1f] rounded-[28px] p-8">
-          <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
-            ¿Cuánto cuesta reparar un Motorola en CABA?
-          </h2>
-          <p className="mt-3 text-sm text-slate-600 dark:text-[#a1a1a6]">
-            Precios orientativos en ARS — el valor exacto depende del modelo y el estado del equipo. Team Celular informa el costo de diagnóstico antes de abrir el equipo; si avanzás con la reparación, ese monto se descuenta del trabajo final.
-          </p>
-          <div className="mt-5 overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-white/20 dark:border-white/10">
-                  <th className="pb-2 text-left font-semibold text-slate-900 dark:text-[#f5f5f7]">Servicio</th>
-                  <th className="pb-2 text-right font-semibold text-slate-900 dark:text-[#f5f5f7]">Precio estimado ARS</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/10 dark:divide-white/5">
-                {[
-                  ["Revisión técnica (sin placa)", "15.000 – 25.000"],
-                  ["Revisión de placa (informe hasta 72 h hábiles)", "45.000"],
-                  ["Pantalla Moto E / G", "99.900 – 199.900"],
-                  ["Pantalla Edge (pOLED)", "299.900 – 599.900"],
-                  ["Pantalla Razr (plegable)", "999.900 – 1.399.900"],
-                  ["Batería Moto E / G", "89.900 – 169.900"],
-                  ["Batería Edge / Razr", "119.900 – 229.900"],
-                  ["Pin de carga USB-C", "35.000 – 150.000"],
-                  ["Reparación de placa", "Consultar"],
-                ].map(([service, price]) => (
-                  <tr key={service}>
-                    <td className="py-2.5 text-slate-700 dark:text-[#a1a1a6]">{service}</td>
-                    <td className="py-2.5 text-right font-semibold text-slate-900 dark:text-[#f5f5f7]">{price}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="mt-4 text-xs text-slate-500 dark:text-[#86868b]">
-            Precios orientativos sujetos a actualización. Consultá por WhatsApp o presupuesto online para valores exactos según modelo.
-          </p>
-        </section>
+        </div>
+        </details>
 
 
-        <section className="bg-[#1d1d1f] space-y-5 rounded-[28px] p-8 md:p-10">
-          <h2 className="text-center text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
-            ¿Qué modelos de Motorola reparamos?
-          </h2>
+
+
+        <details className="rounded-[28px] border border-white/15 bg-[#1d1d1f] p-6 sm:p-8">
+          <summary className="cursor-pointer text-xl font-semibold text-white"><h2 className="inline">¿Qué modelos de Motorola reparamos?</h2></summary>
+          <div className="bg-[#1d1d1f] space-y-5 rounded-[28px] p-8 md:p-10 mt-6">
+
           <p className="text-center text-slate-600 dark:text-[#a1a1a6]">
             Cubrimos líneas actuales y generaciones anteriores con repuestos de calidad.
           </p>
@@ -687,7 +611,8 @@ export default function MotorolaRepairGuidePage() {
               </span>
             ))}
           </div>
-        </section>
+        </div>
+        </details>
 
         <section className="space-y-7">
           <div className="text-center">

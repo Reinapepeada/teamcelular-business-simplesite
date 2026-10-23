@@ -127,7 +127,7 @@ export default function SucursalesPage() {
       <section className="mt-10 grid gap-4 md:grid-cols-3">
         <article className="bg-[#1d1d1f] rounded-[28px] p-5">
           <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-[#f5f5f7]">
-            <FaMapMarkedAlt className="text-primary" />
+            <FaMapMarkedAlt className="text-primary dark:text-secondary" />
             Sucursales
           </h2>
           <p className="mt-2 text-slate-600 dark:text-[#a1a1a6]">
@@ -136,7 +136,7 @@ export default function SucursalesPage() {
         </article>
         <article className="bg-[#1d1d1f] rounded-[28px] p-5">
           <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-[#f5f5f7]">
-            <FaRegClock className="text-primary" />
+            <FaRegClock className="text-primary dark:text-secondary" />
             Horario
           </h2>
           <p className="mt-2 text-slate-600 dark:text-[#a1a1a6]">
@@ -145,7 +145,7 @@ export default function SucursalesPage() {
         </article>
         <article className="bg-[#1d1d1f] rounded-[28px] p-5">
           <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-[#f5f5f7]">
-            <FaPhoneAlt className="text-primary" />
+            <FaPhoneAlt className="text-primary dark:text-secondary" />
             Contacto
           </h2>
           <p className="mt-2 text-slate-600 dark:text-[#a1a1a6]">+54 11 5103-4595</p>
@@ -154,7 +154,7 @@ export default function SucursalesPage() {
 
       <section className="mt-8 grid gap-6 md:grid-cols-2">
         <article className="bg-[#1d1d1f] rounded-[28px] p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary dark:text-secondary">
             Sucursal 1
           </p>
           <h2 className="mt-2 text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">

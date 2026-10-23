@@ -185,7 +185,7 @@ export default function ReparacionesPage() {
 
       <section className="bg-[#1d1d1f] mt-10 divide-y divide-slate-200 rounded-[28px] dark:divide-slate-700/60">
         <div className="flex items-start gap-3 p-5">
-          <FaTools className="mt-1 shrink-0 text-primary" />
+          <FaTools className="mt-1 shrink-0 text-primary dark:text-secondary" />
           <p className="text-slate-700 dark:text-[#a1a1a6]">
             <strong className="text-slate-900 dark:text-[#f5f5f7]">Primero confirmamos la falla.</strong>{" "}
             Un celular que no carga puede ser el pin, el flex o la placa; no te
@@ -193,14 +193,14 @@ export default function ReparacionesPage() {
           </p>
         </div>
         <div className="flex items-start gap-3 p-5">
-          <FaStopwatch className="mt-1 shrink-0 text-primary" />
+          <FaStopwatch className="mt-1 shrink-0 text-primary dark:text-secondary" />
           <p className="text-slate-700 dark:text-[#a1a1a6]">
             <strong className="text-slate-900 dark:text-[#f5f5f7]">¿Cuánto sale revisarlo?</strong>{" "}
             {REVIEW_COST_MESSAGE}
           </p>
         </div>
         <div className="flex items-start gap-3 p-5">
-          <FaShieldAlt className="mt-1 shrink-0 text-primary" />
+          <FaShieldAlt className="mt-1 shrink-0 text-primary dark:text-secondary" />
           <p className="text-slate-700 dark:text-[#a1a1a6]">
             <strong className="text-slate-900 dark:text-[#f5f5f7]">Garantía por escrito.</strong>{" "}
             {WARRANTY_SCOPE_MESSAGE}
@@ -230,7 +230,7 @@ export default function ReparacionesPage() {
               </p>
               <Link
                 href={item.href}
-                className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-primary underline-offset-4 hover:underline"
+                className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-primary dark:text-secondary underline-offset-4 hover:underline"
               >
                 {item.cta}
               </Link>
@@ -265,11 +265,11 @@ export default function ReparacionesPage() {
             href={service.href}
             className="bg-[#1d1d1f] group rounded-[28px] p-8 transition"
           >
-            <h2 className="text-2xl font-semibold text-slate-900 transition group-hover:text-primary dark:text-[#f5f5f7]">
+            <h2 className="text-2xl font-semibold text-slate-900 transition group-hover:text-primary dark:hover:text-secondary dark:text-[#f5f5f7]">
               {service.title}
             </h2>
             <p className="mt-3 text-slate-600 dark:text-[#a1a1a6]">{service.description}</p>
-            <p className="mt-6 text-sm font-semibold text-primary">Ver servicio →</p>
+            <p className="mt-6 text-sm font-semibold text-primary dark:text-secondary">Ver servicio →</p>
           </Link>
         ))}
       </section>

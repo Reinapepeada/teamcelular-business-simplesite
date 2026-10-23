@@ -128,11 +128,11 @@ export default async function CategoryPage({
     <div className="w-full bg-slate-50 dark:bg-[#1d1d1f] pb-16">
       <div className="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
         <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-          <Link href="/" className="transition hover:text-primary">
+          <Link href="/" className="transition hover:text-primary dark:hover:text-secondary">
             Inicio
           </Link>
           <span>/</span>
-          <Link href="/tienda" className="transition hover:text-primary">
+          <Link href="/tienda" className="transition hover:text-primary dark:hover:text-secondary">
             Tienda
           </Link>
           <span>/</span>
@@ -150,7 +150,7 @@ export default async function CategoryPage({
 
       <section className="mx-auto max-w-screen-2xl px-4 pb-8 sm:px-6 lg:px-8">
         <div className="rounded-[2rem] border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 px-6 py-8 sm:px-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary dark:text-secondary">
             Categoria destacada
           </p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 dark:text-slate-50 sm:text-4xl">

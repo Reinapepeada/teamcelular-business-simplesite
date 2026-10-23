@@ -225,7 +225,7 @@ export default async function IphoneModelPage({
                 <p className="mt-1 text-sm text-[#a1a1a6]">{repair.detail}</p>
               </div>
               <p className="text-sm text-[#a1a1a6]">{repair.time}</p>
-              <p className="font-semibold text-primary">{priceLabel(repair.price)}</p>
+              <p className="font-semibold text-primary dark:text-secondary">{priceLabel(repair.price)}</p>
             </div>
           ))}
         </div>
@@ -252,11 +252,11 @@ export default async function IphoneModelPage({
           </ul>
           <p className="mt-4 text-sm text-slate-500 dark:text-[#a1a1a6]">
             Las características de fábrica se pueden consultar en las{" "}
-            <a href={modelNotes.specsUrl} className="font-semibold text-primary underline underline-offset-4">
+            <a href={modelNotes.specsUrl} className="font-semibold text-primary dark:text-secondary underline underline-offset-4">
               especificaciones del {model.name} publicadas por Apple
             </a>
             . No describen la calidad ni el stock del repuesto ofrecido. También podés leer{" "}
-            <a href="https://support.apple.com/es-la/103256" className="font-semibold text-primary underline underline-offset-4">
+            <a href="https://support.apple.com/es-la/103256" className="font-semibold text-primary dark:text-secondary underline underline-offset-4">
               qué puede cambiar al reemplazar una pantalla
             </a>
             . Somos un servicio técnico independiente de Apple.
@@ -278,21 +278,21 @@ export default async function IphoneModelPage({
         <div className="mt-4 flex flex-wrap gap-4">
           <Link
             href="/guias/presupuesto-service-oficial-segunda-opinion"
-            className="font-semibold text-primary hover:underline"
+            className="font-semibold text-primary dark:text-secondary hover:underline"
           >
             Segunda opinión al presupuesto del service oficial →
           </Link>
-          <Link href="/lab" className="font-semibold text-primary hover:underline">
+          <Link href="/lab" className="font-semibold text-primary dark:text-secondary hover:underline">
             Conocé el laboratorio →
           </Link>
         </div>
       </section>
 
       <nav aria-label={`Servicios para ${model.name}`} className="mt-8 flex flex-wrap gap-4">
-        <Link href="/reparaciones/cambio-pantalla-caba" className="inline-flex min-h-11 items-center font-semibold text-primary hover:underline">
+        <Link href="/reparaciones/cambio-pantalla-caba" className="inline-flex min-h-11 items-center font-semibold text-primary dark:text-secondary hover:underline">
           Qué incluye el cambio de pantalla
         </Link>
-        <Link href="/reparaciones/cambio-bateria-caba" className="inline-flex min-h-11 items-center font-semibold text-primary hover:underline">
+        <Link href="/reparaciones/cambio-bateria-caba" className="inline-flex min-h-11 items-center font-semibold text-primary dark:text-secondary hover:underline">
           Cómo revisamos la batería
         </Link>
       </nav>
@@ -307,7 +307,7 @@ export default async function IphoneModelPage({
               <Link
                 key={other}
                 href={`/reparaciones/iphone/${other}`}
-                className="rounded-full border border-slate-300 px-5 py-2 text-sm font-medium text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-[#a1a1a6]"
+                className="rounded-full border border-slate-300 px-5 py-2 text-sm font-medium text-slate-700 transition hover:border-primary hover:text-primary dark:hover:text-secondary dark:border-slate-600 dark:text-[#a1a1a6]"
               >
                 {target.name}
               </Link>
@@ -315,7 +315,7 @@ export default async function IphoneModelPage({
           })}
           <Link
             href="/guias/reparacion-iphone-buenos-aires"
-            className="rounded-full border border-slate-300 px-5 py-2 text-sm font-medium text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-[#a1a1a6]"
+            className="rounded-full border border-slate-300 px-5 py-2 text-sm font-medium text-slate-700 transition hover:border-primary hover:text-primary dark:hover:text-secondary dark:border-slate-600 dark:text-[#a1a1a6]"
           >
             Ver todos los iPhone
           </Link>

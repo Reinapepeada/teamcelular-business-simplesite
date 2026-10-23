@@ -3,10 +3,10 @@
 import React, { useState } from 'react';
 import StoreImage from '@/components/store/StoreImage';
 import Link from 'next/link';
-import { 
-    ShoppingCart, 
-    Share2, 
-    ChevronLeft, 
+import {
+    ShoppingCart,
+    Share2,
+    ChevronLeft,
     ChevronRight,
     Shield,
     Truck,
@@ -16,8 +16,8 @@ import {
     Plus,
 } from "lucide-react";
 
-import { 
-    formatPrice, 
+import {
+    formatPrice,
     getAllProductImages,
     getAvailableColors,
     getAvailableSizes,
@@ -87,44 +87,44 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
     const availableColors = product ? getAvailableColors(product.variants) : [];
     const availableSizes = product ? getAvailableSizes(product.variants) : [];
 
-    
+
     // UI States
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [selectedColor, setSelectedColor] = useState<string | null>(() => availableColors[0] ?? null);
     const [selectedSize, setSelectedSize] = useState<string | null>(() => availableSizes[0] ?? null);
     const [quantity, setQuantity] = useState(1);
     const [feedback, setFeedback] = useState('');
-    
+
     const { addToCart, openCart } = useCartStore();
-    
+
     const selectedVariant = product?.variants.find(v => {
             const colorMatch = !selectedColor || v.color === selectedColor;
             const sizeMatch = !selectedSize || v.size === selectedSize;
             return colorMatch && sizeMatch;
         }) ?? null;
-    
+
     // Get images
     const images = product ? getAllProductImages(product) : ['/placeholder.jpg'];
     const totalStock = product ? calculateTotalStock(product.variants) : 0;
-    
+
     // Handle image navigation
     const nextImage = () => {
         setSelectedImageIndex((prev) => (prev + 1) % images.length);
     };
-    
+
     const prevImage = () => {
         setSelectedImageIndex((prev) => (prev - 1 + images.length) % images.length);
     };
-    
+
     // Handle quantity
     const incrementQuantity = () => {
         if (sePuedeSumar(quantity, selectedVariant, totalStock)) setQuantity(q => q + 1);
     };
-    
+
     const decrementQuantity = () => {
         if (sePuedeRestar(quantity)) setQuantity(q => q - 1);
     };
-    
+
     // Handle add to cart
     const handleAddToCart = () => {
         if (product) {
@@ -148,7 +148,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
             }
         }
     };
-    
+
     // **No hay pantalla de carga ni de error.** El producto lo resuelve el
     // server component, que hace `notFound()` cuando el slug no existe: acá no
     // queda ningún camino en el que falte. El `if` es para el tipo, no para el
@@ -160,20 +160,20 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
     const originalPrice = product.retail_price;
     const discountedPrice = originalPrice * (1 - discount / 100);
     const warranty = getProductWarranty(product);
-    
+
     return (
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 pt-4 pb-28 sm:py-8">
             {/* Breadcrumb */}
             <nav className="flex items-center space-x-2 text-xs sm:text-sm mb-4 sm:mb-6 overflow-x-auto pb-2">
-                <Link href="/tienda" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link href="/tienda" className="text-muted-foreground hover:text-primary dark:hover:text-secondary transition-colors">
                     Tienda
                 </Link>
                 <span className="text-muted-foreground">/</span>
                 {product?.category && (
                     <>
-                        <Link 
+                        <Link
                             href={`/tienda/categoria/${(product.category.name || '').toString().normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
-                            className="text-muted-foreground hover:text-primary transition-colors"
+                            className="text-muted-foreground hover:text-primary dark:hover:text-secondary transition-colors"
                         >
                             {product.category.name}
                         </Link>
@@ -182,7 +182,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                 )}
                 <span className="font-medium">{product?.name}</span>
             </nav>
-            
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
                 {/* Image Gallery */}
                 <div className="space-y-4">
@@ -200,7 +200,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                                     sizes="(max-width: 1024px) 100vw, 50vw"
                                 />
                             </div>
-                        
+
                         {/* Navigation arrows */}
                         {images.length > 1 && (
                             <>
@@ -220,7 +220,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                                 </button>
                             </>
                         )}
-                        
+
                         {/* Discount badge */}
                         {discount > 0 && (
                             <div className="absolute top-4 left-4">
@@ -228,7 +228,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                             </div>
                         )}
                     </div>
-                    
+
                     {/* Thumbnails */}
                     {images.length > 1 && (
                         <div className="flex gap-2 overflow-x-auto pb-2">
@@ -239,8 +239,8 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                                     aria-label={`Ver foto ${index + 1}`}
                                     aria-pressed={selectedImageIndex === index}
                                     className={`relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 border-2 transition-colors ${
-                                        selectedImageIndex === index 
-                                            ? 'border-primary' 
+                                        selectedImageIndex === index
+                                            ? 'border-primary'
                                             : 'border-transparent hover:border-gray-300'
                                     }`}
                                 >
@@ -256,7 +256,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                         </div>
                     )}
                 </div>
-                
+
                 {/* Product Info */}
                 <div className="space-y-6">
                     {/* Brand & Category */}
@@ -274,7 +274,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                             {totalStock > 0 ? 'Disponible' : 'Agotado'}
                         </span>
                     </div>
-                    
+
                     {/* Title */}
                     <h1 className="text-3xl font-bold">{product.name}</h1>
 
@@ -316,9 +316,9 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                             {product.description}
                         </p>
                     )}
-                    
+
                     <hr className="border-white/15" />
-                    
+
                     {/* Color Selection */}
                     {availableColors.length > 0 && (
                         <div className="space-y-3">
@@ -331,8 +331,8 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                                         key={color}
                                         onClick={() => setSelectedColor(color)}
                                         className={`w-10 h-10 rounded-full border-2 transition-all flex items-center justify-center ${
-                                            selectedColor === color 
-                                                ? 'border-primary scale-110' 
+                                            selectedColor === color
+                                                ? 'border-primary scale-110'
                                                 : 'border-gray-300 hover:border-gray-400'
                                         }`}
                                         style={{ backgroundColor: colorMap[color] || '#gray' }}
@@ -346,7 +346,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                             </div>
                         </div>
                     )}
-                    
+
                     {/* Size Selection */}
                     {availableSizes.length > 0 && (
                         <div className="space-y-3">
@@ -359,8 +359,8 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                                         key={size}
                                         onClick={() => setSelectedSize(size)}
                                         className={`px-4 py-2 rounded-lg border-2 transition-all font-medium ${
-                                            selectedSize === size 
-                                                ? 'border-primary bg-primary/10 text-primary' 
+                                            selectedSize === size
+                                                ? 'border-primary bg-primary/10 text-primary dark:text-secondary'
                                                 : 'border-gray-300 hover:border-gray-400'
                                         }`}
                                     >
@@ -370,7 +370,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                             </div>
                         </div>
                     )}
-                    
+
                     {/* Stock Info */}
                     <div className="flex items-center gap-2">
                         {hayParaComprar(selectedVariant, totalStock) ? (
@@ -384,7 +384,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                             <span className="text-red-500 font-medium">Sin stock</span>
                         )}
                     </div>
-                    
+
                     {/* Quantity & Add to Cart */}
                     <div className="flex flex-col sm:flex-row gap-4">
                         {/* Quantity Selector */}
@@ -409,7 +409,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                                 <Plus className="w-4 h-4" />
                             </button>
                         </div>
-                        
+
                         {/* Add to Cart Button */}
                         <button
                             type="button"
@@ -421,7 +421,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                             Agregar al carrito
                         </button>
                     </div>
-                    
+
                     {/* Quick Actions */}
                     <div className="flex gap-4">
                         <button
@@ -436,20 +436,20 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                     <p role="status" aria-live="polite" className="text-sm text-emerald-700 dark:text-emerald-300">
                         {feedback}
                     </p>
-                    
+
                     <hr className="border-white/15" />
-                    
+
                     {/* Benefits */}
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
-                            <Truck className="w-6 h-6 text-primary" />
+                            <Truck className="w-6 h-6 text-primary dark:text-secondary" />
                                 <div>
                                     <p className="text-sm font-medium">Envío</p>
                                     <p className="text-xs text-muted-foreground">Costo al confirmar la compra</p>
                                 </div>
                         </div>
                         <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
-                            <Shield className="w-6 h-6 text-primary" />
+                            <Shield className="w-6 h-6 text-primary dark:text-secondary" />
                             <div>
                                 {warranty.value !== 'consultar antes de comprar' ? (
                                     <p className="text-sm font-medium">{warranty.label}: {warranty.value}</p>
@@ -461,7 +461,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                             </div>
                         </div>
                         <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
-                            <RotateCcw className="w-6 h-6 text-primary" />
+                            <RotateCcw className="w-6 h-6 text-primary dark:text-secondary" />
                             <div>
                                 <p className="text-sm font-medium">Devoluciones</p>
                                 <Link href="/devoluciones" className="text-xs text-muted-foreground underline">Ver condiciones</Link>
@@ -495,7 +495,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                     {product.shipping_enabled === false ? "Solo retiro en el local" : "Retiro en el local o envío a domicilio. Las opciones disponibles se confirman al comprar."}
                 </p>
             </section>
-            
+
             {/* Product Details Section */}
             {product.variants.some(variant => variant.color || variant.size) && (
                 <div className="mt-12">

@@ -19,7 +19,7 @@ const config: Config = {
       colors: {
         // Tokens que antes ponia el plugin de NextUI, con sus valores del tema
         // oscuro (el sitio fuerza dark): se usan en todo el sitio.
-        primary: "#1a6dff",
+        primary: "#1766f2",
         secondary: "#6aa6ff",
         background: "#000000",
         foreground: "#ecedee",
@@ -42,8 +42,8 @@ const config: Config = {
           700: "#1f7a35",
         },
         tc: {
-          action: "#1a6dff",
-          "action-hover": "#3d84ff",
+          action: "#1766f2",
+          "action-hover": "#125bd6",
           link: "#6aa6ff",
           silk: "#f5f5f7",
           ash: "#86868b",
@@ -89,7 +89,7 @@ function addVariablesForColors({ addBase, theme }: any) {
   let newVars = Object.fromEntries(
     Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
   );
- 
+
   addBase({
     ":root": newVars,
   });

@@ -98,7 +98,7 @@ export default function PresupuestoReparacionPage() {
                 />
 
                 <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-[#86868b]">
-                    <Link href="/" className="transition hover:text-primary">
+                    <Link href="/" className="transition hover:text-primary dark:hover:text-secondary">
                         Inicio
                     </Link>
                     <span>/</span>
@@ -143,7 +143,7 @@ export default function PresupuestoReparacionPage() {
                     <article
                         id="solicitar-presupuesto"
                         className="bg-[#1d1d1f] scroll-mt-24 rounded-[28px] p-5 lg:col-start-2 lg:row-span-2 lg:row-start-1 sm:p-8">
-                        <p className="mb-5 text-sm font-semibold uppercase tracking-[0.14em] text-primary">
+                        <p className="mb-5 text-sm font-semibold uppercase tracking-[0.14em] text-primary dark:text-secondary">
                             Te toma 20 segundos
                         </p>
                         <RepairsForm />
@@ -166,7 +166,7 @@ export default function PresupuestoReparacionPage() {
                     <ol className="divide-y divide-slate-200 dark:divide-slate-700/70">
                         {processSteps.map((step, index) => (
                             <li key={step.title} className="flex gap-5 py-5 first:pt-0">
-                                <span className="text-2xl font-semibold tabular-nums text-primary">
+                                <span className="text-2xl font-semibold tabular-nums text-primary dark:text-secondary">
                                     {String(index + 1).padStart(2, "0")}
                                 </span>
                                 <div>
@@ -189,7 +189,7 @@ export default function PresupuestoReparacionPage() {
                             <details key={faq.question} className="group py-4 first:pt-0">
                                 <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold text-slate-900 dark:text-[#f5f5f7]">
                                     {faq.question}
-                                    <span aria-hidden className="text-xl text-primary transition group-open:rotate-45">
+                                    <span aria-hidden className="text-xl text-primary dark:text-secondary transition group-open:rotate-45">
                                         +
                                     </span>
                                 </summary>

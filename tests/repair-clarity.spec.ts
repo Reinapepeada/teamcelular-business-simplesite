@@ -31,7 +31,7 @@ for (const width of [320, 390, 1280]) {
         await page.goto('/reparaciones/cambio-pantalla-caba');
         await expect(page.locator('main dl').first()).toContainText('249.900');
         const prices = await page.locator('main dl').first().boundingBox();
-        const image = await page.locator('.tc-zoom img').first().boundingBox();
+        const image = await page.locator('main figure img').first().boundingBox();
         if (width < 1024) expect(prices!.y + prices!.height).toBeLessThan(image!.y);
         const comparison = page.getByText('Qué comparar al cambiar la pantalla', { exact: true });
         await comparison.click();
@@ -97,7 +97,12 @@ test('El botón primario conserva contraste AA en reposo y hover', async ({ page
     await page.goto('/sucursales');
     const button = page.locator('main .tc-btn-primary').first();
     for (const state of ['normal', 'hover']) {
-        if (state === 'hover') await button.hover();
+        if (state === 'hover') {
+            await button.hover();
+            await button.evaluate(async element => {
+                await Promise.all(element.getAnimations().map(animation => animation.finished));
+            });
+        }
         await expect.poll(async () => button.evaluate(element => {
             const style = getComputedStyle(element);
             const luminance = (color: string) => {

@@ -96,7 +96,7 @@ export const metadata: Metadata = {
     siteName: "Team Celular",
     images: [
       {
-        url: "https://teamcelular.com/images/guia_cambio_bateria.webp",
+        url: "https://teamcelular.com/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Cambio de bateria de celular en Team Celular",
@@ -107,7 +107,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Cambio de Batería Celular Buenos Aires",
     description: "Cambio de batería con repuesto y plazo confirmados antes de empezar. En 1 a 2 horas con stock. Garantía escrita de 90 días.",
-    images: ["https://teamcelular.com/images/guia_cambio_bateria.webp"],
+    images: ["https://teamcelular.com/opengraph-image.png"],
   },
   alternates: {
     canonical: "https://teamcelular.com/guias/cambio-bateria-celular",
@@ -228,13 +228,13 @@ const faqBattery = [
 
 export default function BatteryReplacementGuide() {
   return (
-    <div className="flex w-full justify-center px-4 py-16">
+    <div className="flex w-full justify-center px-4 py-8 sm:py-12">
       <ArticleSchema
         title="Cambio de batería celular en Buenos Aires | Service Certificado Team Celular"
         description="Cambio de batería en CABA con repuesto y precio confirmados antes de reparar. Plazo de 1 a 2 horas con stock y garantía escrita de 90 días."
         publishedTime="2024-11-30T00:00:00Z"
         modifiedTime="2026-10-15T00:00:00Z"
-        image="https://teamcelular.com/images/guia_cambio_bateria.webp"
+        image="https://teamcelular.com/opengraph-image.png"
         url="https://teamcelular.com/guias/cambio-bateria-celular"
       />
       <BreadcrumbJsonLd
@@ -247,11 +247,11 @@ export default function BatteryReplacementGuide() {
       <article className="w-full max-w-6xl space-y-16">
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-[#86868b]">
-          <Link href="/" className="hover:text-primary transition">
+          <Link href="/" className="hover:text-primary dark:hover:text-secondary transition">
             Inicio
           </Link>
           <span>/</span>
-          <Link href="/guias" className="hover:text-primary transition">
+          <Link href="/guias" className="hover:text-primary dark:hover:text-secondary transition">
             Guías
           </Link>
           <span>/</span>
@@ -261,60 +261,22 @@ export default function BatteryReplacementGuide() {
         </nav>
 
         {/* Hero Section */}
-        <header className="bg-[#1d1d1f] space-y-6 rounded-[28px] p-10 text-center md:p-16">
-          <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-[20px] bg-[#333336] text-[#6aa6ff]">
-            <FaBatteryFull className="text-5xl text-white" />
-          </div>
+        <header className="bg-[#1d1d1f] space-y-6 rounded-[28px] p-6 sm:p-8 md:p-10">
           <h1 className="text-4xl font-semibold tracking-[-0.01em] text-slate-900 dark:text-[#f5f5f7] md:text-5xl">
             Cambio de batería de celular: cuándo conviene y cuánto sale en CABA
           </h1>
-          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-[#a1a1a6]">
+          <p className="max-w-[65ch] text-lg leading-relaxed text-slate-600 dark:text-[#a1a1a6]">
             Si el celular perdió autonomía, se apaga con carga o se calienta, revisamos la batería,
             el consumo de aplicaciones y el puerto antes de decidir qué cambiar. Te atendemos en
             Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA. Con repuesto en stock,
             el cambio de batería lleva <strong>1 a 2 horas</strong>; confirmamos el plazo para tu modelo
             antes de empezar. La reparación tiene garantía escrita de 90 días sobre trabajo y repuesto.
           </p>
-          <p className="mx-auto mt-3 max-w-3xl text-lg font-semibold text-slate-800 dark:text-[#f5f5f7]">
-            Team Celular, en Paraguay 2451 Recoleta, cambia la batería de Samsung, Motorola y Xiaomi desde{" "}
-            {formatArsPrice(ANDROID_BATTERY_FROM)} y de iPhone desde {formatArsPrice(IPHONE_BATTERY_FROM)}, en 1 a 2
-            horas con repuesto en stock. El cambio no requiere borrar datos; recomendamos respaldo previo.
+          <p className="mt-3 max-w-[65ch] text-lg font-semibold text-slate-800 dark:text-[#f5f5f7]">
+            Cambio de batería de Samsung, Motorola y Xiaomi desde{" "}
+            {formatArsPrice(ANDROID_BATTERY_FROM)} y de iPhone desde {formatArsPrice(IPHONE_BATTERY_FROM)}. El cambio no requiere borrar datos; recomendamos respaldo previo.
           </p>
-          <p className="mx-auto mt-3 max-w-3xl text-sm text-slate-600 dark:text-[#86868b]">
-            Batería de iPhone por modelo:{" "}
-            {IPHONE_BATTERY_PAGES.map((model, i) => (
-              <React.Fragment key={model.slug}>
-                {i > 0 && " · "}
-                <Link href={`/reparaciones/iphone/${model.slug}`} className="underline underline-offset-4 hover:text-primary">
-                  {model.name} {priceLabel(model.battery)}
-                </Link>
-              </React.Fragment>
-            ))}
-          </p>
-          <div className="mt-4 flex justify-center">
-            <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
-          </div>
-
-          {/* Quick Stats */}
-          <div className="grid gap-6 md:grid-cols-3 mt-8">
-            <div className="bg-[#1d1d1f] rounded-[28px] p-6">
-              <FaClock className="mx-auto mb-2 text-3xl text-green-700 dark:text-green-300" />
-              <div className="text-2xl font-semibold text-green-700 dark:text-green-300">1-2hs</div>
-              <div className="text-sm text-slate-600 dark:text-[#86868b]">Con repuesto en stock</div>
-            </div>
-            <div className="bg-[#1d1d1f] rounded-[28px] p-6">
-              <FaShieldAlt className="mx-auto text-3xl text-secondary mb-2" />
-              <div className="text-2xl font-semibold text-secondary">90 días</div>
-              <div className="text-sm text-slate-600 dark:text-[#86868b]">Garantía escrita</div>
-            </div>
-            <div className="bg-[#1d1d1f] rounded-[28px] p-6">
-              <FaCheckCircle className="mx-auto mb-2 text-3xl text-green-700 dark:text-green-300" />
-              <div className="text-2xl font-semibold text-green-700 dark:text-green-300">Según modelo</div>
-              <div className="text-sm text-slate-600 dark:text-[#86868b]">Repuesto informado antes de reparar</div>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-4 mt-8">
+          <div className="flex flex-wrap gap-4">
             <Link
               href="/presupuesto-reparacion"
               className="tc-btn tc-btn-primary"
@@ -325,10 +287,27 @@ export default function BatteryReplacementGuide() {
               ctaName="guide_battery_hero_whatsapp"
               ctaLocation="guide_battery_hero"
               message="Necesito cambiar la batería de mi celular"
-              className="rounded-full border-2 border-green-700 px-8 py-4 text-lg font-semibold text-green-800 transition hover:bg-green-100 dark:border-green-500 dark:text-green-200 dark:hover:bg-green-900/30"
+              className="tc-btn tc-btn-ghost"
             >
               WhatsApp directo
             </BranchWhatsAppButton>
+          </div>
+          <p className="mt-3 max-w-[65ch] text-sm text-slate-600 dark:text-[#86868b]">
+            Batería de iPhone por modelo:{" "}
+            {IPHONE_BATTERY_PAGES.map((model, i) => (
+              <React.Fragment key={model.slug}>
+                {i > 0 && " · "}
+                <Link href={`/reparaciones/iphone/${model.slug}`} className="underline underline-offset-4 hover:text-primary dark:hover:text-secondary">
+                  {model.name} {priceLabel(model.battery)}
+                </Link>
+              </React.Fragment>
+            ))}
+          </p>
+
+
+
+          <div className="mt-4 flex">
+            <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
           </div>
         </header>
 
@@ -362,7 +341,7 @@ export default function BatteryReplacementGuide() {
                   : signal.severity === "Alta"
                   ? { text: "text-orange-700 dark:text-orange-300", bg: "bg-orange-100 dark:bg-orange-900/40" }
                   : { text: "text-yellow-700 dark:text-yellow-300", bg: "bg-yellow-100 dark:bg-yellow-900/40" };
-              
+
               return (
                 <div
                   key={signal.title}
@@ -481,7 +460,7 @@ export default function BatteryReplacementGuide() {
                 key={index}
                 className="bg-[#1d1d1f] group rounded-[28px] p-6 transition"
               >
-                <summary className="flex min-h-11 items-center cursor-pointer text-lg font-semibold text-secondary group-hover:text-primary dark:text-secondary/90">
+                <summary className="flex min-h-11 items-center cursor-pointer text-lg font-semibold text-secondary group-hover:text-primary dark:hover:text-secondary dark:text-secondary/90">
                   {faq.question}
                 </summary>
                 <p className="mt-4 leading-relaxed text-slate-700 dark:text-[#a1a1a6]">

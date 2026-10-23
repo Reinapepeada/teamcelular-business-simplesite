@@ -211,7 +211,7 @@ export default function LabPage() {
         <div className="mt-8 flex flex-wrap gap-8 border-y border-white/15 py-6 dark:border-white/10">
           {stats.map((s) => (
             <div key={s.label}>
-              <p className="text-2xl font-black text-primary">{s.value}</p>
+              <p className="text-2xl font-black text-primary dark:text-secondary">{s.value}</p>
               <p className="mt-0.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500 dark:text-slate-400">
                 {s.label}
               </p>
@@ -239,7 +239,7 @@ export default function LabPage() {
         </div>
         <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">
           TC Lab es una división de{" "}
-          <Link href="/" className="font-semibold text-primary hover:underline">
+          <Link href="/" className="font-semibold text-primary dark:text-secondary hover:underline">
             Team Celular
           </Link>
           . El laboratorio de electrónica de consumo y el de prototipos industriales
@@ -248,17 +248,7 @@ export default function LabPage() {
       </header>
 
       {/* VISUAL + COPY */}
-      <section className="mt-10 grid gap-6 rounded-3xl border border-white/15 bg-white/5 p-6 shadow-xl backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:grid-cols-[1.15fr_0.85fr] md:items-center md:p-8">
-        <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-slate-900/40">
-          <Image
-            src="/images/micro_diagnos_fino.webp"
-            alt="Ensamble y testing de PCB en laboratorio TC Lab, Recoleta CABA"
-            width={1200}
-            height={900}
-            sizes="(max-width: 768px) 100vw, 60vw"
-            className="h-auto w-full object-cover"
-          />
-        </div>
+      <section className="mt-10 grid gap-6 rounded-3xl border border-white/15 bg-white/5 p-6 shadow-xl backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/30 md:p-8">
         <article className="space-y-4">
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
             Laboratorio real en Buenos Aires, no un intermediario
@@ -300,7 +290,7 @@ export default function LabPage() {
                 key={s.title}
                 className="flex gap-4 rounded-2xl border border-white/15 bg-white/70 p-5 dark:border-white/10 dark:bg-slate-900/45"
               >
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-lg text-primary">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-lg text-primary dark:text-secondary">
                   <Icon aria-hidden />
                 </div>
                 <div>
@@ -333,7 +323,7 @@ export default function LabPage() {
               className="rounded-xl border border-white/10 bg-white/70 p-5 dark:border-white/5 dark:bg-slate-900/40"
             >
               <div className="flex items-center gap-2">
-                <FaCheckCircle className="shrink-0 text-primary" />
+                <FaCheckCircle className="shrink-0 text-primary dark:text-secondary" />
                 <h3 className="font-semibold text-slate-900 dark:text-slate-100">
                   {t.label}
                 </h3>
@@ -351,12 +341,13 @@ export default function LabPage() {
         <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-slate-900/40 md:order-2">
           <Image
             src="/images/reparacion_placa.webp"
-            alt="Diagnóstico y testing de placas electrónicas en TC Lab"
+            alt="Imagen ilustrativa de una placa electrónica y herramientas de medición"
             width={1200}
             height={900}
             sizes="(max-width: 768px) 100vw, 55vw"
             className="h-auto w-full object-cover"
           />
+          <p className="px-4 py-3 text-sm text-slate-300">Imagen ilustrativa de electrónica; no documenta un trabajo de TC Lab.</p>
         </div>
         <article className="space-y-4 md:order-1">
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
@@ -381,7 +372,7 @@ export default function LabPage() {
               href={LAB_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-11 items-center rounded-full border border-primary/40 px-5 text-sm font-semibold text-primary transition hover:bg-primary/10"
+              className="inline-flex min-h-11 items-center rounded-full border border-primary/40 px-5 text-sm font-semibold text-primary dark:text-secondary transition hover:bg-primary/10"
             >
               Ver TC Lab →
             </a>
@@ -423,26 +414,26 @@ export default function LabPage() {
           El mismo instrumental, el mismo criterio técnico, aplicado a proyectos
           de producto electrónico en Argentina. ¿Necesitás reparar un equipo
           en lugar de ensamblar?{" "}
-          <Link href="/presupuesto-reparacion" className="font-semibold text-primary hover:underline">
+          <Link href="/presupuesto-reparacion" className="font-semibold text-primary dark:text-secondary hover:underline">
             Pedí diagnóstico en Team Celular
           </Link>.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
             href="/guias/celular-mojado-que-hacer"
-            className="rounded-full border border-white/15 bg-white/70 px-4 py-2 text-sm font-semibold text-slate-800 transition hover:border-primary/40 hover:text-primary dark:border-white/10 dark:bg-slate-900/45 dark:text-slate-200"
+            className="rounded-full border border-white/15 bg-white/70 px-4 py-2 text-sm font-semibold text-slate-800 transition hover:border-primary/40 hover:text-primary dark:hover:text-secondary dark:border-white/10 dark:bg-slate-900/45 dark:text-slate-200"
           >
             Guía: celular mojado
           </Link>
           <Link
             href="/reparaciones/reparacion-placa-caba"
-            className="rounded-full border border-white/15 bg-white/70 px-4 py-2 text-sm font-semibold text-slate-800 transition hover:border-primary/40 hover:text-primary dark:border-white/10 dark:bg-slate-900/45 dark:text-slate-200"
+            className="rounded-full border border-white/15 bg-white/70 px-4 py-2 text-sm font-semibold text-slate-800 transition hover:border-primary/40 hover:text-primary dark:hover:text-secondary dark:border-white/10 dark:bg-slate-900/45 dark:text-slate-200"
           >
             Servicio: reparación de placa CABA
           </Link>
           <Link
             href="/sobrenosotros"
-            className="rounded-full border border-white/15 bg-white/70 px-4 py-2 text-sm font-semibold text-slate-800 transition hover:border-primary/40 hover:text-primary dark:border-white/10 dark:bg-slate-900/45 dark:text-slate-200"
+            className="rounded-full border border-white/15 bg-white/70 px-4 py-2 text-sm font-semibold text-slate-800 transition hover:border-primary/40 hover:text-primary dark:hover:text-secondary dark:border-white/10 dark:bg-slate-900/45 dark:text-slate-200"
           >
             Sobre Team Celular
           </Link>

@@ -33,6 +33,8 @@ export default function NavbarNUI() {
     const [desktopMenuOpen, setDesktopMenuOpen] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const desktopMenuRef = useRef(null);
+    const mobileToggleRef = useRef(null);
+    const desktopToggleRef = useRef(null);
     const [previousPath, setPreviousPath] = useState(pathname);
 
     if (previousPath !== pathname) {
@@ -54,6 +56,46 @@ export default function NavbarNUI() {
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
+
+    useEffect(() => {
+        if (!mobileMenuOpen && !desktopMenuOpen) return;
+        const previousOverflow = document.body.style.overflow;
+        if (mobileMenuOpen) {
+            document.body.style.overflow = "hidden";
+            document.querySelector("#mobile-site-menu a")?.focus();
+        }
+        function handleKey(event) {
+            // A branch dialog manages its own keyboard and focus.
+            if (document.querySelector("dialog[open]")) return;
+            if (event.key === "Escape") {
+                event.preventDefault();
+                (mobileMenuOpen ? mobileToggleRef : desktopToggleRef).current?.focus();
+                setMobileMenuOpen(false);
+                setDesktopMenuOpen(false);
+            }
+            if (event.key === "Tab" && mobileMenuOpen) {
+                const header = mobileToggleRef.current?.closest("header");
+                const controls = [...(header?.querySelectorAll("a[href],button") ?? [])]
+                    .filter(element => element.getClientRects().length && !element.disabled);
+                const first = controls[0];
+                const last = controls.at(-1);
+                if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault(); last?.focus();
+                } else if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault(); first?.focus();
+                }
+            }
+        }
+        const desktopViewport = window.matchMedia("(min-width: 1024px)");
+        const handleResize = () => { if (desktopViewport.matches) setMobileMenuOpen(false); };
+        desktopViewport.addEventListener("change", handleResize);
+        document.addEventListener("keydown", handleKey);
+        return () => {
+            document.body.style.overflow = previousOverflow;
+            document.removeEventListener("keydown", handleKey);
+            desktopViewport.removeEventListener("change", handleResize);
+        };
+    }, [mobileMenuOpen, desktopMenuOpen]);
 
     function trackNavbarCta(ctaName, ctaLocation, ctaVariant, destination) {
         track("cta_click", {
@@ -119,7 +161,8 @@ export default function NavbarNUI() {
                                 desktopMenuOpen ? "text-white" : "text-[#cccccc]/80 hover:text-white"
                             }`}
                             aria-expanded={desktopMenuOpen}
-                            aria-haspopup="menu"
+                            ref={desktopToggleRef}
+                            aria-controls="more-site-links"
                         >
                             Más
                             <BsChevronDown
@@ -129,7 +172,7 @@ export default function NavbarNUI() {
                         </button>
 
                         {desktopMenuOpen ? (
-                            <div className="absolute right-0 top-[calc(100%+0.5rem)] z-20 w-60 rounded-[18px] bg-[#1d1d1f] p-2">
+                            <div id="more-site-links" className="absolute right-0 top-[calc(100%+0.5rem)] z-20 w-60 rounded-[18px] bg-[#1d1d1f] p-2">
                                 <ul className="space-y-1">
                                     {SECONDARY_LINKS.map((item) => {
                                         const active = isActivePath(pathname, item.href);
@@ -186,6 +229,7 @@ export default function NavbarNUI() {
                     onClick={() => setMobileMenuOpen((current) => !current)}
                     className="inline-flex min-h-11 min-w-11 items-center justify-center text-xl text-[#f5f5f7] lg:hidden"
                     aria-expanded={mobileMenuOpen}
+                    ref={mobileToggleRef}
                     aria-controls="mobile-site-menu"
                     aria-label={mobileMenuOpen ? "Cerrar menu" : "Abrir menu"}
                 >
@@ -196,6 +240,8 @@ export default function NavbarNUI() {
             {mobileMenuOpen ? (
                 <div
                     id="mobile-site-menu"
+                    role="navigation"
+                    aria-label="Navegación móvil"
                     className="absolute inset-x-0 top-full h-[calc(100dvh-52px)] overflow-y-auto bg-black px-6 py-6 lg:hidden"
                 >
                     <div className="mx-auto w-full max-w-[100rem] space-y-3">

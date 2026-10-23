@@ -86,7 +86,7 @@ export function BranchPreferencePicker({ value, onChange, compact = false }: Pic
               onClick={() => onChange(branch.slug, "manual")}
               className={`min-h-16 rounded-2xl border px-4 py-3 text-left transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20 ${
                 selected
-                  ? "border-primary bg-primary/10 text-primary"
+                  ? "border-primary bg-primary/10 text-primary dark:text-secondary"
                   : "border-slate-200 bg-white text-slate-700 hover:border-primary/40 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
               }`}
             >
@@ -104,7 +104,7 @@ export function BranchPreferencePicker({ value, onChange, compact = false }: Pic
         type="button"
         onClick={useLocation}
         disabled={locationState === "loading"}
-        className="inline-flex min-h-11 items-center gap-2 rounded-full px-2 text-sm font-semibold text-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20 disabled:opacity-60"
+        className="inline-flex min-h-11 items-center gap-2 rounded-full px-2 text-sm font-semibold text-primary dark:text-secondary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20 disabled:opacity-60"
       >
         <FaLocationArrow aria-hidden />
         {locationState === "loading" ? "Comparando distancias..." : "Usar mi ubicación para elegir"}

@@ -148,7 +148,7 @@ export default function FooterNUI() {
             </div>
 
             <div className="flex items-start space-x-2 pt-2 text-sm">
-              <BsClock className="mt-1 flex-shrink-0 text-primary" />
+              <BsClock className="mt-1 flex-shrink-0 text-primary dark:text-secondary" />
               <div>
                 <p className="font-semibold">Horario de atención</p>
                 <p className="text-slate-200">Lunes a viernes</p>
@@ -158,7 +158,7 @@ export default function FooterNUI() {
           </div>
 
           <div className="flex flex-col space-y-3">
-            <h2 className="mb-2 text-lg font-bold text-primary">Servicios</h2>
+            <h2 className="mb-2 text-lg font-bold text-primary dark:text-secondary">Servicios</h2>
             {footerSections.servicios.map((service) => {
               const Icon = service.icon;
               return (
@@ -168,7 +168,7 @@ export default function FooterNUI() {
                   prefetch={false}
                   className="flex min-h-11 items-center space-x-2 text-sm text-slate-200 transition-all duration-200 hover:translate-x-1 hover:text-white"
                 >
-                  <Icon className="text-primary" aria-hidden="true" />
+                  <Icon className="text-primary dark:text-secondary" aria-hidden="true" />
                   <span>{service.name}</span>
                 </Link>
               );
@@ -205,10 +205,10 @@ export default function FooterNUI() {
           </div>
 
           <div className="flex flex-col space-y-4">
-            <h2 className="mb-2 text-lg font-bold text-primary">Contacto</h2>
+            <h2 className="mb-2 text-lg font-bold text-primary dark:text-secondary">Contacto</h2>
 
             <div className="flex items-start space-x-3 text-sm">
-              <BsGeoAlt className="mt-1 flex-shrink-0 text-primary" />
+              <BsGeoAlt className="mt-1 flex-shrink-0 text-primary dark:text-secondary" />
               <div>
                 <p className="font-semibold">Sucursales</p>
                 {BRANCHES.map((branch) => (
@@ -220,7 +220,7 @@ export default function FooterNUI() {
             </div>
 
             <div className="flex items-start space-x-3 text-sm">
-              <BsTelephone className="mt-1 flex-shrink-0 text-primary" />
+              <BsTelephone className="mt-1 flex-shrink-0 text-primary dark:text-secondary" />
               <div>
                 <p className="font-semibold">Teléfonos por sucursal</p>
                 {BRANCHES.map((branch) => (
@@ -240,7 +240,7 @@ export default function FooterNUI() {
             </div>
 
             <div className="flex items-start space-x-3 text-sm">
-              <BsEnvelope className="mt-1 flex-shrink-0 text-primary" />
+              <BsEnvelope className="mt-1 flex-shrink-0 text-primary dark:text-secondary" />
               <div>
                 <p className="font-semibold">Email</p>
                 <TrackedCtaLink

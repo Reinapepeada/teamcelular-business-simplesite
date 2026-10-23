@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import {
   FaBolt,
@@ -319,20 +318,7 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
         </section>
       )}
 
-      <div className="mx-auto mt-12 max-w-[1200px] px-4 sm:px-6">
-        <div className="tc-zoom relative aspect-[3/4] overflow-hidden rounded-[28px] sm:aspect-[16/9] lg:aspect-[16/7]">
-          <Image
-            src={config.heroImage}
-            alt={`Arreglo de celulares en ${displayZone}`}
-            fill
-            priority
-            quality={82}
-            sizes="(max-width: 768px) 200vw, 1200px"
-            className="object-cover"
-          />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-          {/* Señales locales de confianza sobre la foto, en vidrio. */}
-          <section aria-label="Señales locales de confianza" className="tc-glass absolute bottom-4 left-4 right-4 rounded-[24px] px-5 py-4 sm:bottom-6 sm:left-6 sm:right-6">
+      <section aria-label="Señales locales de confianza" className="mx-auto mt-8 max-w-[1200px] border-y border-white/15 px-5 py-6 sm:px-6">
             <h2 className="sr-only">Señales locales de confianza</h2>
             <ul className="grid gap-2 text-[14px] text-white/90 md:grid-cols-3 md:gap-6">
               <li className="flex items-start gap-2.5">
@@ -349,9 +335,6 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
               </li>
             </ul>
           </section>
-        </div>
-      </div>
-
       <section className="tc-section">
         <div className={`tc-stagger grid gap-5 ${isPalermo ? "md:grid-cols-2 xl:grid-cols-4" : "md:grid-cols-3"}`}>
           {config.highlights.map((item) => {

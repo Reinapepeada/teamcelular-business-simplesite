@@ -82,7 +82,7 @@ function CatalogPagination({
                 className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border px-4 text-sm font-medium transition ${
                     currentPage === 1
                         ? "pointer-events-none border-slate-200 dark:border-slate-700/70 text-slate-400"
-                        : "border-slate-300 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary"
+                        : "border-slate-300 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-secondary"
                 }`}
             >
                 Anterior
@@ -91,7 +91,7 @@ function CatalogPagination({
                 <Link
                     href={buildPageHref(basePath, filters, 1)}
                     prefetch={false}
-                    className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-slate-300 dark:border-slate-600 px-4 text-sm font-medium text-slate-700 dark:text-slate-300 transition hover:border-primary hover:text-primary"
+                    className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-slate-300 dark:border-slate-600 px-4 text-sm font-medium text-slate-700 dark:text-slate-300 transition hover:border-primary hover:text-primary dark:hover:text-secondary"
                 >
                     1
                 </Link>
@@ -108,7 +108,7 @@ function CatalogPagination({
                     className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border px-4 text-sm font-medium transition ${
                         page === currentPage
                             ? "border-primary bg-primary text-white"
-                            : "border-slate-300 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary"
+                            : "border-slate-300 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-secondary"
                     }`}
                 >
                     {page}
@@ -121,7 +121,7 @@ function CatalogPagination({
                 <Link
                     href={buildPageHref(basePath, filters, totalPages)}
                     prefetch={false}
-                    className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-slate-300 dark:border-slate-600 px-4 text-sm font-medium text-slate-700 dark:text-slate-300 transition hover:border-primary hover:text-primary"
+                    className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-slate-300 dark:border-slate-600 px-4 text-sm font-medium text-slate-700 dark:text-slate-300 transition hover:border-primary hover:text-primary dark:hover:text-secondary"
                 >
                     {totalPages}
                 </Link>
@@ -137,7 +137,7 @@ function CatalogPagination({
                 className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border px-4 text-sm font-medium transition ${
                     currentPage === totalPages
                         ? "pointer-events-none border-slate-200 dark:border-slate-700/70 text-slate-400"
-                        : "border-slate-300 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary"
+                        : "border-slate-300 text-slate-700 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-secondary"
                 }`}
             >
                 Siguiente
@@ -180,7 +180,7 @@ function ProductCard({ product, prioridad = false }: { product: VidrieraProduct;
                         <Link
                             href={`/tienda/categoria/${slugify(product.category.name)}`}
                             prefetch={false}
-                            className="inline-flex min-h-11 items-center rounded-full border border-slate-200 dark:border-slate-700/70 px-3 text-xs font-medium text-slate-600 dark:text-slate-400 transition hover:border-primary hover:text-primary"
+                            className="inline-flex min-h-11 items-center rounded-full border border-slate-200 dark:border-slate-700/70 px-3 text-xs font-medium text-slate-600 dark:text-slate-400 transition hover:border-primary hover:text-primary dark:hover:text-secondary"
                         >
                             {product.category.name}
                         </Link>
@@ -195,7 +195,7 @@ function ProductCard({ product, prioridad = false }: { product: VidrieraProduct;
                 <Link
                     href={productHref}
                     prefetch={false}
-                    className="mt-3 block text-lg font-semibold leading-snug text-slate-950 dark:text-slate-50 transition hover:text-primary"
+                    className="mt-3 block text-lg font-semibold leading-snug text-slate-950 dark:text-slate-50 transition hover:text-primary dark:hover:text-secondary"
                 >
                     {product.name}
                 </Link>
@@ -291,7 +291,7 @@ export default async function CatalogResults({
         <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6 dark:border-slate-700/70 dark:bg-slate-900">
             <div className="flex flex-col gap-2 border-b border-slate-100 pb-3 sm:flex-row sm:items-end sm:justify-between sm:gap-3 sm:pb-5 dark:border-slate-800">
                 <div>
-                    <p className="hidden text-sm font-semibold uppercase tracking-[0.18em] text-primary sm:block">
+                    <p className="hidden text-sm font-semibold uppercase tracking-[0.18em] text-primary dark:text-secondary sm:block">
                         Catalogo
                     </p>
                     <h2 className="text-xl font-semibold text-slate-950 sm:mt-2 sm:text-2xl dark:text-slate-50">
