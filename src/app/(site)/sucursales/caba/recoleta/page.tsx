@@ -10,6 +10,8 @@ import {
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import { getBranch, whatsappUrl as buildWhatsappUrl } from "@/lib/businessProfile";
 import BranchMap from "@/components/cards/BranchMap";
+import RepairFaqList from "@/components/repairs/RepairFaqList";
+import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import RepairPriceTable from "@/components/seo/RepairPriceTable";
 import { POPULAR_REPAIR_PRICES, PRICES_UPDATED_LABEL } from "@/lib/repairPrices";
@@ -184,20 +186,11 @@ export default function SucursalRecoletaPage() {
             <h1 className="tc-display">
               Reparación de celulares en Recoleta CABA
             </h1>
-            <p className="text-lg leading-relaxed text-[#a1a1a6]">
-              Team Celular, en Paraguay 2451 Recoleta, repara celulares con diagnóstico
-              el mismo día, pantalla y batería en 2–4 h, y garantía escrita de 90 días
-              sobre trabajo y repuesto. Atendemos toda CABA.
-            </p>
+            <p className="max-w-[50ch] text-lg leading-relaxed text-[#a1a1a6]">Pantalla, batería, carga y placa. Te informamos el costo de revisión y el presupuesto antes de reparar. Garantía escrita de 90 días.</p>
             <div className="flex flex-wrap gap-3">
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="tc-btn tc-btn-primary"
-              >
-                WhatsApp directo
-              </a>
+              <TrackedCtaLink href={whatsappUrl} external target="_blank" directBranch ctaName="branch_recoleta_whatsapp" ctaLocation="branch_recoleta_hero" ctaVariant="whatsapp" className="tc-btn tc-btn-primary">
+                WhatsApp de Recoleta
+              </TrackedCtaLink>
               <a
                 href="tel:+541151034595"
                 className="tc-btn tc-btn-ghost"
@@ -232,6 +225,7 @@ export default function SucursalRecoletaPage() {
                   Pantalla, batería, carga, placa y notebook
                 </li>
               </ul>
+              <a href={branch.mapUrl} target="_blank" rel="noopener noreferrer" className="tc-link mt-4 inline-flex min-h-11 items-center gap-2 text-[17px]"><FaMapMarkerAlt aria-hidden /> Cómo llegar en Maps</a>
             </div>
           </aside>
         </div>
@@ -279,9 +273,9 @@ export default function SucursalRecoletaPage() {
           ].map((service) => (
             <div
               key={service}
-              className="bg-[#1d1d1f] rounded-xl p-5 text-sm text-slate-700 dark:text-[#a1a1a6]"
+              className="flex items-center gap-3 border-b border-[#333336] py-4 text-[15px] text-[#a1a1a6]"
             >
-              {service}
+              <FaTools aria-hidden className="shrink-0 text-[#6aa6ff]" />{service}
             </div>
           ))}
         </div>
@@ -311,17 +305,7 @@ export default function SucursalRecoletaPage() {
         <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
           Preguntas frecuentes
         </h2>
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          {faqs.map((faq) => (
-            <article
-              key={faq.q}
-              className="bg-[#1d1d1f] rounded-xl p-5 text-sm leading-relaxed text-slate-700 dark:text-[#a1a1a6]"
-            >
-              <h3 className="font-semibold text-primary">{faq.q}</h3>
-              <p className="mt-2">{faq.a}</p>
-            </article>
-          ))}
-        </div>
+        <div className="mt-6"><RepairFaqList items={faqs.map(({ q, a }) => ({ question: q, answer: a }))} /></div>
       </section>
 
       <section className="bg-[#1d1d1f] mt-10 rounded-[28px] p-8">

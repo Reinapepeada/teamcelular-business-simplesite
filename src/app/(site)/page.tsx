@@ -6,6 +6,8 @@ import KnowledgeGrid from "@/components/cards/KnowledgeGrid";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 import BranchMap from "@/components/cards/BranchMap";
+import RepairFaqList from "@/components/repairs/RepairFaqList";
+import ScreenQuoteDetails from "@/components/repairs/ScreenQuoteDetails";
 import { BRANCHES, BUSINESS_PROFILE } from "@/lib/businessProfile";
 import { BUDGET_RESPONSE_MESSAGE, REVIEW_COST_MESSAGE, SCREEN_BATTERY_TIMING_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import { buildWebsiteMetadata } from "@/lib/seoMetadata";
@@ -136,9 +138,9 @@ export default function Home() {
                 </p>
                 <div className="tc-stagger mt-12 grid gap-5 md:grid-cols-3">
                     {priorityRepairs.map(({ icon: Icon, ...repair }) => (
-                        <Link key={repair.href} href={repair.href} className="tc-card group flex min-h-[18rem] flex-col transition-colors hover:bg-[#262628]">
+                        <Link key={repair.href} href={repair.href} className="tc-card group flex flex-col transition-colors hover:bg-[#262628]">
                             <Icon className="text-4xl text-[#f5f5f7]" aria-hidden />
-                            <h3 className="tc-subheading mt-auto pt-10">{repair.title}</h3>
+                            <h3 className="tc-subheading mt-5">{repair.title}</h3>
                             <p className="tc-body mt-3">{repair.description}</p>
                             <span className="tc-link mt-5 inline-flex items-center gap-1 text-[17px]">
                                 Ver reparación <BsArrowRight aria-hidden className="text-sm transition-transform group-hover:translate-x-1" />
@@ -153,25 +155,30 @@ export default function Home() {
                     <div>
                         <h2 id="prices-title" className="tc-heading !text-[#1d1d1f]">¿Cuánto sale reparar un celular en CABA?</h2>
                         <p className="mt-5 max-w-lg text-pretty text-[19px] leading-[1.42] text-[#424245]">
-                            El precio depende del modelo y de la calidad del repuesto. Confirmamos el valor antes de reparar. {SCREEN_BATTERY_TIMING_MESSAGE}
+                            El modelo y el repuesto definen el precio. Te lo confirmamos antes de reparar.
                         </p>
                         <p className="mt-3 max-w-lg text-sm leading-6 text-[#424245]">
                             Precios orientativos en pesos argentinos. iPhone: publicados en {IPHONE_PRICES_UPDATED}; Samsung y Motorola: el {PRICES_UPDATED_LABEL}.
                         </p>
+                        <p className="mt-4 max-w-lg text-[15px] leading-6 text-[#424245]">{SCREEN_BATTERY_TIMING_MESSAGE}</p>
+                        <ScreenQuoteDetails light />
                         <div className="mt-6 flex flex-col gap-2 text-[17px] text-[#0066cc]">
                             <Link href="/guias/reparacion-iphone-buenos-aires#costos-reparacion-iphone" className="hover:underline">Precios de iPhone por modelo ›</Link>
                             <Link href="/guias/reparacion-samsung-buenos-aires#costos-reparacion-samsung" className="hover:underline">Precios de pantalla y batería Samsung ›</Link>
                             <Link href="/guias/reparacion-motorola-buenos-aires" className="hover:underline">Precios de Motorola ›</Link>
                         </div>
                     </div>
-                    <dl className="tc-reveal rounded-[28px] bg-white p-7 sm:p-9">
+                    <div className="rounded-[28px] bg-white p-5 sm:p-8">
+                    <dl>
                         {prices.map(([label, value]) => (
-                            <div key={label} className="flex items-baseline justify-between gap-4 border-b border-[#d2d2d7] py-4 first:pt-0 last:border-0 last:pb-0">
+                            <div key={label} className="grid gap-1 border-b border-[#d2d2d7] py-4 first:pt-0 last:border-0 sm:grid-cols-[1fr_auto] sm:items-baseline sm:gap-4">
                                 <dt className="text-[17px] text-[#424245]">{label}</dt>
                                 <dd className="text-[21px] font-semibold tabular-nums">{value}</dd>
                             </div>
                         ))}
                     </dl>
+                    <p className="mt-5 border-t border-[#d2d2d7] pt-4 text-sm leading-6 text-[#424245]">Revisión técnica: {BUSINESS_PROFILE.reviewCostRange}. Revisión de placa: {formatArsPrice(PLACA_REVISION_PRICE)}, descontable si se repara. Te informamos el costo antes del ingreso.</p>
+                    </div>
                 </div>
             </section>
 
@@ -210,13 +217,8 @@ export default function Home() {
 
             <section aria-labelledby="faq-title" className="tc-section">
                 <h2 id="faq-title" className="tc-heading">Antes de traer el equipo</h2>
-                <div className="mt-10 divide-y divide-[#333336] border-y border-[#333336]">
-                    {faqs.map((faq) => (
-                        <article key={faq.question} className="grid gap-3 py-7 md:grid-cols-[1fr_1.4fr] md:gap-10">
-                            <h3 className="text-[19px] font-semibold leading-snug sm:text-[21px]">{faq.question}</h3>
-                            <p className="tc-body">{faq.answer}</p>
-                        </article>
-                    ))}
+                <div className="mt-8">
+                    <RepairFaqList items={faqs} />
                 </div>
             </section>
 

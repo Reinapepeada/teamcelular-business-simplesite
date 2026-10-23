@@ -20,6 +20,8 @@ import {
 } from "react-icons/fa";
 import { SiSamsung } from "react-icons/si";
 import GuideByline from "@/components/seo/GuideByline";
+import RepairBrandLinks from "@/components/repairs/RepairBrandLinks";
+import ScreenQuoteDetails from "@/components/repairs/ScreenQuoteDetails";
 import { BRAND_REPAIR_PRICES, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, PRICES_UPDATED_LABEL, buildPriceOffers, formatArsPrice, priceRangeOf } from "@/lib/repairPrices";
 
 const SITE_URL =
@@ -83,7 +85,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2026-03-12T00:00:00Z",
-    modifiedTime: "2026-10-15T00:00:00Z",
+    modifiedTime: "2026-10-23T00:00:00Z",
     section: "Guías técnicas",
   },
   twitter: {
@@ -94,33 +96,6 @@ export const metadata: Metadata = {
     images: ["https://teamcelular.com/images/guia_samsung.webp"],
   },
 };
-
-const brandLinks = [
-  {
-    href: "/guias/reparacion-iphone-buenos-aires",
-    label: "iPhone",
-    helper: "Apple con True Tone y Face ID",
-    active: false,
-  },
-  {
-    href: "/guias/reparacion-samsung-buenos-aires",
-    label: "Samsung",
-    helper: "Galaxy S, A, Z Fold y Z Flip",
-    active: true,
-  },
-  {
-    href: "/guias/reparacion-xiaomi-buenos-aires",
-    label: "Xiaomi",
-    helper: "Xiaomi, Redmi y POCO",
-    active: false,
-  },
-  {
-    href: "/guias/reparacion-motorola-buenos-aires",
-    label: "Motorola",
-    helper: "Moto G, Edge y Razr",
-    active: false,
-  },
-];
 
 const processSteps = [
   {
@@ -342,7 +317,7 @@ export default function SamsungRepairGuidePage() {
         title="Reparación de Samsung en CABA: precios y opciones"
         description="Precios, tiempos y fallas comunes de Samsung Galaxy. Informe de revisión de placa en hasta 72 horas hábiles y garantía escrita de 90 días en CABA."
         publishedTime="2026-03-12T00:00:00Z"
-        modifiedTime="2026-10-15T00:00:00Z"
+        modifiedTime="2026-10-23T00:00:00Z"
         about={[
           "reparacion de Samsung en Buenos Aires",
           "service tecnico Samsung Galaxy en CABA",
@@ -378,66 +353,18 @@ export default function SamsungRepairGuidePage() {
         </nav>
 
         <header className="bg-[#1d1d1f] space-y-8 rounded-[28px] p-8 md:p-14">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/70 bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
-              <SiSamsung />
-              Especialistas por marca
-            </span>
-            <span className="rounded-full border border-emerald-700/80 bg-emerald-700 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white">
-              Recoleta y Belgrano · CABA
-            </span>
-          </div>
+          <SiSamsung aria-label="Samsung" viewBox="0 9 24 6" className="h-10 w-24 text-[#f5f5f7]" />
 
           <div className="space-y-4">
             <h1 className="text-4xl font-semibold tracking-[-0.01em] text-slate-900 dark:text-[#f5f5f7] md:text-5xl">
               Reparación de Samsung en CABA: precios y opciones
             </h1>
             <p className="max-w-4xl text-lg leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
-              El cambio de pantalla Samsung Galaxy A / M cuesta desde {formatArsPrice(SCREEN_A.from)}{" "}
-              y Galaxy S / Ultra desde {formatArsPrice(SCREEN_S.from)}. El modelo y el módulo
-              elegido definen el valor exacto. Confirmamos precio y stock antes de trabajar,
-              en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).
+              Pantalla rota, poca batería o problemas con el USB-C. Revisamos tu Galaxy en Recoleta o Belgrano y te confirmamos repuesto, precio y plazo antes de reparar.
             </p>
             <div className="mt-4">
-              <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
+              <GuideByline modifiedTime="2026-10-23T00:00:00Z" tone="light" />
             </div>
-          </div>
-
-          <section aria-labelledby="samsung-screen-prices" className="space-y-4">
-            <h2 id="samsung-screen-prices" className="text-2xl font-semibold text-white">
-              ¿Cuánto sale cambiar la pantalla de un celular Samsung?
-            </h2>
-            <dl className="grid gap-4 sm:grid-cols-2">
-              {[SCREEN_A, SCREEN_S].map((price) => (
-                <div key={price.name} className="rounded-2xl bg-black/25 p-5">
-                  <dt className="text-sm text-[#c7c7cc]">{price.name}</dt>
-                  <dd className="mt-2 text-xl font-semibold leading-snug text-white tabular-nums">
-                    {formatRange(price)}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-            <p className="text-sm leading-6 text-[#a1a1a6]">
-              Precios en pesos argentinos. El modelo y la calidad del módulo definen el valor exacto.
-              Pantalla en 2 a 4 horas si hay stock, con garantía escrita de 90 días.
-            </p>
-          </section>
-
-          <div className="flex flex-wrap gap-3">
-            {brandLinks.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`rounded-full border px-5 py-3 text-sm font-semibold transition ${
-                  item.active
-                    ? "border-primary bg-primary text-white shadow-lg shadow-primary/25"
-                    : "border-slate-300/80 bg-white/80 text-slate-700 hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200"
-                }`}
-              >
-                {item.label}
-                <span className="ml-2 text-xs font-medium">{item.helper}</span>
-              </Link>
-            ))}
           </div>
 
           <div className="flex flex-wrap gap-4">
@@ -461,6 +388,29 @@ export default function SamsungRepairGuidePage() {
               Ver todos los precios
             </a>
           </div>
+
+          <section aria-labelledby="samsung-screen-prices" className="space-y-4">
+            <h2 id="samsung-screen-prices" className="text-2xl font-semibold text-white">
+              ¿Cuánto sale cambiar la pantalla de un celular Samsung?
+            </h2>
+            <dl className="grid gap-4 sm:grid-cols-2">
+              {[SCREEN_A, SCREEN_S].map((price) => (
+                <div key={price.name} className="rounded-2xl bg-black/25 p-5">
+                  <dt className="text-sm text-[#c7c7cc]">{price.name}</dt>
+                  <dd className="mt-2 text-xl font-semibold leading-snug text-white tabular-nums">
+                    {formatRange(price)}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+            <p className="text-sm leading-6 text-[#a1a1a6]">
+              Precios en pesos argentinos. El modelo y la calidad del módulo definen el valor exacto.
+              Pantalla en 2 a 4 horas si hay stock, con garantía escrita de 90 días.
+            </p>
+          </section>
+          <ScreenQuoteDetails />
+
+
         </header>
 
         <section id="costos-reparacion-samsung" className="scroll-mt-24 bg-[#1d1d1f] rounded-[28px]">
@@ -522,7 +472,7 @@ export default function SamsungRepairGuidePage() {
           </div>
         </section>
 
-        <AuthorByline updatedLabel="15 de octubre de 2026" className="mt-6" />
+        <AuthorByline updatedLabel="23 de octubre de 2026" className="mt-6" />
 
         <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
           <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">
@@ -582,16 +532,16 @@ export default function SamsungRepairGuidePage() {
 
         <GoogleReviewsAPI />
 
-        <section className="space-y-7">
-          <div className="text-center">
+        <details className="group border-y border-[#333336] py-6">
+          <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#6aa6ff] [&::-webkit-details-marker]:hidden"><div>
             <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
               ¿Cómo es el proceso de reparación de Samsung en Team Celular?
             </h2>
             <p className="mt-2 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Así trabajamos cada Galaxy que entra al taller
             </p>
-          </div>
-          <div className="grid gap-5 md:grid-cols-2">
+          </div><span aria-hidden className="text-3xl text-[#a1a1a6] group-open:rotate-45">+</span></summary>
+          <div className="mt-6 grid gap-5 md:grid-cols-2">
             {processSteps.map((step) => {
               const Icon = step.Icon;
               return (
@@ -600,7 +550,7 @@ export default function SamsungRepairGuidePage() {
                   className="bg-[#1d1d1f] rounded-[28px] p-6 transition"
                 >
                   <div className="mb-4 flex items-center justify-between">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-2xl text-white">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-black text-2xl text-white">
                       <Icon />
                     </div>
                     <span className="rounded-full bg-primary px-3 py-1 text-xs font-semibold text-white">
@@ -617,7 +567,7 @@ export default function SamsungRepairGuidePage() {
               );
             })}
           </div>
-        </section>
+        </details>
 
         <section className="space-y-7">
           <div className="text-center">
@@ -632,33 +582,16 @@ export default function SamsungRepairGuidePage() {
             {repairServices.map((service) => {
               const Icon = service.Icon;
               return (
-                <article
-                  key={service.title}
-                  className="bg-[#1d1d1f] rounded-[28px] p-6 transition"
-                >
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-xl text-primary">
-                    <Icon />
-                  </div>
-                  <h3 className="text-xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
-                    {service.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
-                    {service.detail}
-                  </p>
-                  <div className="mt-4 flex items-center justify-between text-xs font-semibold">
-                    <span className="rounded-full bg-primary px-3 py-1 text-white">
-                      {service.eta}
-                    </span>
-                  </div>
-                  {repairLinks[service.title] && (
-                    <Link
-                      href={repairLinks[service.title]}
-                      className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-primary transition hover:underline"
-                    >
-                      Ver precio y detalles →
-                    </Link>
-                  )}
-                </article>
+                <details key={service.title} className="group rounded-[28px] bg-[#1d1d1f] p-5">
+                  <summary className="flex min-h-11 cursor-pointer list-none items-center gap-3 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#6aa6ff] [&::-webkit-details-marker]:hidden">
+                    <Icon aria-hidden className="shrink-0 text-xl text-[#6aa6ff]" />
+                    <h3 className="text-lg font-semibold text-[#f5f5f7]">{service.title}</h3>
+                    <span aria-hidden className="ml-auto text-2xl text-[#a1a1a6] group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="mt-4 text-[15px] leading-relaxed text-[#a1a1a6]">{service.detail}</p>
+                  <p className="mt-3 text-sm text-[#a1a1a6]">Plazo orientativo: {service.eta}, según diagnóstico y repuesto.</p>
+                  {repairLinks[service.title] && <Link href={repairLinks[service.title]} className="tc-link mt-3 inline-flex min-h-11 items-center text-sm">Ver precio y detalles →</Link>}
+                </details>
               );
             })}
           </div>
@@ -712,6 +645,7 @@ export default function SamsungRepairGuidePage() {
 
 
 
+        <RepairBrandLinks />
         <GuideInterlinkSection currentGuide="/guias/reparacion-samsung-buenos-aires" />
 
         <script

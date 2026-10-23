@@ -14,7 +14,11 @@ import {
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
-import { PRICES_UPDATED } from "@/lib/repairPrices";
+import { PRICES_UPDATED, PRICES_UPDATED_LABEL } from "@/lib/repairPrices";
+import { IPHONE_PRICES_UPDATED } from "./iphone/iphoneModels";
+import { BUSINESS_PROFILE } from "@/lib/businessProfile";
+import RepairBrandLinks from "@/components/repairs/RepairBrandLinks";
+import ScreenQuoteDetails from "@/components/repairs/ScreenQuoteDetails";
 
 const SITE_URL = getSiteUrl();
 
@@ -33,13 +37,13 @@ const SERVICE_VISUALS: Record<string, ServiceVisual> = {
     badge: "Batería y energía",
   },
   "cambio-pantalla-caba": {
-    cover: "/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp",
+    cover: "/images/landings/pantalla-concepto-20261023.webp",
     glow:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(59,130,246,0.35),transparent_42%)]",
     badge: "Pantallas y módulos",
   },
   "cambio-pin-carga-caba": {
-    cover: "/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp",
+    cover: "/images/landings/carga-concepto-20261023.webp",
     glow:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(14,165,233,0.32),transparent_42%)]",
     badge: "Carga y conectividad",
@@ -370,8 +374,20 @@ export default function ServiceLandingPage({
     config.whatsappText
   )}`;
   const visual = SERVICE_VISUALS[config.slug] ?? DEFAULT_VISUAL;
+  const compact = ["cambio-pantalla-caba", "cambio-pin-carga-caba"].includes(config.slug);
   const relatedGuides = SERVICE_RELATED_GUIDES[config.slug] ?? DEFAULT_RELATED_GUIDES;
   const workflow = config.workflow ?? WORKFLOW.map(({ title, desc }) => ({ title, desc }));
+  const workflowSteps = (
+    <ol className="tc-stagger mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+      {workflow.map((step, index) => (
+        <li key={step.title} className="rounded-[28px] bg-white p-7">
+          <span className="text-[14px] tabular-nums text-[#86868b]">{String(index + 1).padStart(2, "0")}</span>
+          <h3 className="mt-6 text-[21px] font-semibold leading-tight">{step.title.replace(/^\d+\.\s*/, "")}</h3>
+          <p className="mt-3 text-[15px] leading-6 text-[#424245]">{step.desc}</p>
+        </li>
+      ))}
+    </ol>
+  );
   const [warrantyNote, timeNote] = config.asideNotes ?? [
     "Garantía escrita de 90 días sobre trabajo y repuesto instalado.",
     "Pantalla y batería en 2 a 4 horas si el repuesto está en stock.",
@@ -409,7 +425,7 @@ export default function ServiceLandingPage({
       />
 
       <header className="tc-intro mx-auto max-w-[1200px] px-4 pt-12 text-center sm:px-6 sm:pt-16">
-        <p className="tc-eyebrow">{visual.badge}</p>
+        {!compact && <p className="tc-eyebrow">{visual.badge}</p>}
         <h1 className="tc-display mx-auto mt-3 max-w-4xl">{config.h1}</h1>
         <p className="mx-auto mt-5 max-w-2xl text-pretty text-[19px] leading-[1.42] text-[#86868b] sm:text-[21px]">
           {config.intro}
@@ -437,36 +453,38 @@ export default function ServiceLandingPage({
           </TrackedCtaLink>
         </div>
         {config.quoteHint && <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-6 text-[#a1a1a6]">{config.quoteHint}</p>}
-        <p className="mt-4 text-[14px] text-[#86868b]">
-          Dos sucursales en CABA (Recoleta y Belgrano). Opiniones de clientes en Google de la sucursal Recoleta.
+        <p className="mt-4 text-[14px] text-[#a1a1a6]">
+          {compact ? "Recoleta y Belgrano · Sin turno · Lun–Vie 10:30–18:00" : "Dos sucursales en CABA (Recoleta y Belgrano). Opiniones de clientes en Google de la sucursal Recoleta."}
         </p>
       </header>
 
       <div className="mx-auto mt-12 grid max-w-[1200px] gap-5 px-4 sm:px-6 lg:grid-cols-[1.4fr_1fr]">
-        <div className={`tc-zoom relative aspect-[4/3] overflow-hidden rounded-[28px] lg:aspect-auto lg:min-h-[26rem] ${config.slug === "cambio-pin-carga-caba" ? "order-2 lg:order-none" : ""}`}>
+        <div className={`tc-zoom relative aspect-[4/3] overflow-hidden rounded-[28px] lg:aspect-auto lg:min-h-[26rem] ${compact ? "order-2 lg:order-none" : ""}`}>
           <Image
             src={visual.cover}
-            alt={config.serviceName}
+            alt={compact ? `Ilustración del servicio: ${config.serviceName}` : config.serviceName}
             fill
             priority
             quality={82}
-            sizes="(max-width: 1024px) 150vw, 720px"
-            className="object-cover"
+            sizes={compact ? "(max-width: 1024px) 100vw, 720px" : "(max-width: 1024px) 150vw, 720px"}
+            className={compact ? "bg-black object-contain" : "object-cover"}
           />
+          {compact && <p className="absolute inset-x-0 bottom-0 bg-black/85 px-5 py-3 text-xs text-[#a1a1a6]">Ilustración del componente. La reparación depende del modelo y el diagnóstico.</p>}
         </div>
-        <div className={`flex flex-col gap-5 ${config.slug === "cambio-pin-carga-caba" ? "order-1 lg:order-none" : ""}`}>
+        <div className={`flex min-w-0 flex-col gap-5 ${compact ? "order-1 lg:order-none" : ""}`}>
           {config.prices?.length ? (
             <div className="rounded-[28px] bg-[#f5f5f7] px-7 py-3 text-[#1d1d1f]">
               {config.priceNote && <h2 className="pt-3 text-xl font-semibold">Precio y revisión técnica</h2>}
               <dl>
               {config.prices.map((row) => (
-                <div key={row.label} className="flex items-baseline justify-between gap-4 border-b border-[#d2d2d7] py-4 last:border-0">
+                <div key={row.label} className={`border-b border-[#d2d2d7] py-4 last:border-0 ${compact ? "grid gap-1 sm:flex sm:items-baseline sm:justify-between sm:gap-4" : "flex items-baseline justify-between gap-4"}`}>
                   <dt className="text-[15px] text-[#424245]">{row.label}</dt>
                   <dd className="text-[19px] font-semibold tabular-nums">{row.value}</dd>
                 </div>
               ))}
               </dl>
               {config.priceNote && <p className="pb-3 text-[15px] leading-6 text-[#424245]">{config.priceNote}</p>}
+              {config.slug === "cambio-pantalla-caba" && <div className="pb-4"><p className="text-sm leading-6 text-[#424245]">Precios orientativos. iPhone: {IPHONE_PRICES_UPDATED}; Samsung y Motorola: {PRICES_UPDATED_LABEL}.</p><p className="mt-3 text-sm leading-6 text-[#424245]">Revisión técnica arancelada: {BUSINESS_PROFILE.reviewCostRange}. Confirmamos el valor antes de ingresar el equipo.</p><ScreenQuoteDetails light /></div>}
             </div>
           ) : null}
           <aside className="tc-card flex-1">
@@ -492,9 +510,14 @@ export default function ServiceLandingPage({
       </div>
 
       <section className="tc-section">
-        <ul className="tc-stagger grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <ul className={compact ? "divide-y divide-[#333336]" : "tc-stagger grid gap-5 md:grid-cols-2 lg:grid-cols-3"}>
           {config.highlights.map((item) => (
-            <li key={item.title} className="tc-card">
+            compact ? <li key={item.title}>
+              <details className="group py-5">
+                <summary className="flex min-h-11 cursor-pointer list-none items-center gap-4 rounded-lg text-[19px] font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#6aa6ff] [&::-webkit-details-marker]:hidden"><BsCheckCircleFill aria-hidden className="shrink-0 text-[#6aa6ff]" />{item.title}<span aria-hidden className="ml-auto text-2xl text-[#a1a1a6] group-open:rotate-45">+</span></summary>
+                <p className="mt-3 max-w-[65ch] pl-9 text-[16px] leading-relaxed text-[#a1a1a6]">{item.desc}</p>
+              </details>
+            </li> : <li key={item.title} className="tc-card">
               <BsCheckCircleFill className="text-2xl text-[#6aa6ff]" aria-hidden />
               <h2 className="tc-subheading mt-6">{item.title}</h2>
               <p className="tc-body mt-3">{item.desc}</p>
@@ -524,24 +547,22 @@ export default function ServiceLandingPage({
 
       <section className="w-full bg-[#f5f5f7] text-[#1d1d1f]">
         <div className="tc-section">
-          <h2 className="tc-heading tc-reveal max-w-3xl !text-[#1d1d1f]">
+          {compact ? <details className="group">
+          <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-5 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1a6dff] [&::-webkit-details-marker]:hidden">
+          <h2 className="tc-heading max-w-3xl !text-[#1d1d1f]">
             ¿Qué pasa con tu equipo desde que lo dejás?
           </h2>
-          <ol className="tc-stagger mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {workflow.map((step, index) => (
-              <li key={step.title} className="rounded-[28px] bg-white p-7">
-                <span className="text-[14px] tabular-nums text-[#86868b]">{String(index + 1).padStart(2, "0")}</span>
-                <h3 className="mt-6 text-[21px] font-semibold leading-tight">{step.title.replace(/^\d+\.\s*/, "")}</h3>
-                <p className="mt-3 text-[15px] leading-6 text-[#424245]">{step.desc}</p>
-              </li>
-            ))}
-          </ol>
+          <span aria-hidden className="text-3xl group-open:rotate-45">+</span>
+          </summary>
+          {workflowSteps}
+          </details> : <><h2 className="tc-heading tc-reveal max-w-3xl !text-[#1d1d1f]">¿Qué pasa con tu equipo desde que lo dejás?</h2>{workflowSteps}</>}
         </div>
       </section>
 
       {children}
 
       <section className="tc-section">
+        {compact && <div className="mb-8"><RepairBrandLinks /></div>}
         <div className="tc-reveal grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-baseline">
           <h2 className="tc-heading">¿Qué marcas reparan?</h2>
           <p className="text-[19px] leading-[1.42] text-[#a1a1a6] sm:text-[21px]">{config.brandsText}</p>

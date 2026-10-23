@@ -65,18 +65,34 @@ Estándar visual para **todas las páginas**. Referencia: página de producto de
 
 ## Ritmo de página
 
-1. Hero centrado: eyebrow → H1 `tc-display` → bajada 19–21px → CTA primario + link WhatsApp → foto en card 28px con barra `tc-glass`.
+1. Hero compacto: H1 → bajada breve → CTA primario + WhatsApp → imagen de apoyo. En escritorio puede dividirse en dos columnas. Evitar secuencias de scroll que demoren llegar a precios o servicios.
 2. Secciones negras con `tc-heading` a la izquierda y link a la derecha; grilla de 3 `tc-card`.
 3. Una banda clara (#F5F5F7, texto #1D1D1F) por página para datos duros (precios, tablas).
 4. Cierre centrado con un único CTA primario.
 
 ## Do / Don't
 
-- **Do** conservar H1, H2, textos y enlaces existentes al migrar una página: el diseño cambia, el contenido SEO no.
+- **Do** conservar intención, entidades, enlaces y hechos al simplificar una página. Reescribir repeticiones y usar desplegables nativos para detalles, manteniendo su contenido en el HTML y su correspondencia con el schema.
 - **Do** usar iconos de `react-icons/bs` monocromos (#F5F5F7 o #6aa6ff).
 - **Don't** gradientes en fondos de texto, sombras, bordes + sombra, ni pesos 700/800.
 - **Don't** un segundo color de botón relleno.
 - **Don't** radios menores a 10px en elementos interactivos.
+
+## Lectura rápida y voz humana
+
+El cliente necesita identificar el servicio, entender las condiciones y elegir cómo consultar. Mostrar primero modelo o falla, precio orientativo cuando exista, ubicación real y siguiente paso. El detalle técnico se puede abrir después.
+
+- Una acción primaria por bloque. Los accesos a precios, llamada y Maps son secundarios; no competir con varios botones rellenos.
+- Una idea por párrafo, con frases directas en español rioplatense. Usar palabras del cliente, como «no carga» o «pantalla con líneas», y explicar los términos técnicos cuando sean necesarios.
+- Los iconos acompañan etiquetas. Reutilizar Bootstrap Icons y, para las marcas, Simple Icons ya instalado. No usar logos como avales ni como sustituto del nombre accesible.
+- Usar `details` y `summary` para FAQ, proceso y comparaciones extensas. Deben funcionar sin JavaScript, por teclado, con foco visible y objetivos de al menos 44 px.
+- Costos de revisión, garantía, disponibilidad, restricciones y fecha de precios quedan cerca de la oferta. No esconder una condición necesaria para decidir en un desplegable.
+- Mantener párrafos legibles, con contraste AA y ancho aproximado de 65 caracteres. Revisar 320, 390 y 1280 px; tablas y precios no deben ensanchar toda la página.
+- Las imágenes generadas son ilustraciones de componentes, con pie y texto alternativo claros. No presentarlas como fotos del local, personal, repuestos disponibles o reparaciones realizadas. Las fotos reales siguen siendo la evidencia de trabajo.
+- Optimizar assets para web, reservar su proporción y priorizar solo la imagen inicial. No añadir carruseles, video o animación para reemplazar información útil.
+- Conservar precios, plazos, direcciones y garantías desde sus fuentes del proyecto. Humanizar no autoriza inventar testimonios, resultados, certificaciones ni nuevas condiciones comerciales.
+
+Las ilustraciones de pantalla y USB-C del 23/10/2026 son originales generadas para estas páginas, exportadas a WebP y reutilizadas. Sus fuentes PNG se conservan fuera del repositorio; no se retiraron marcas de agua de terceros.
 
 ## Tienda y carrito
 
