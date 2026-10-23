@@ -90,7 +90,7 @@ export default async function TiendaPage({
     <div className="w-full bg-slate-50 dark:bg-slate-800/70 pb-16">
       <div className="mx-auto max-w-screen-2xl px-4 py-3 sm:py-6 sm:px-6 lg:px-8">
         <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-          <Link href="/" className="transition hover:text-primary">
+          <Link href="/" className="transition hover:text-primary dark:hover:text-secondary">
             Inicio
           </Link>
           <span>/</span>
@@ -108,7 +108,7 @@ export default async function TiendaPage({
       <section className="mx-auto max-w-screen-2xl px-4 pb-4 sm:px-6 sm:pb-8 lg:px-8">
         <div className="flex flex-col justify-between gap-4 rounded-3xl border border-slate-200 bg-white px-4 py-3 shadow-sm dark:border-slate-700/70 dark:bg-slate-900 sm:flex-row sm:items-center sm:px-6 sm:py-5">
             <div className="space-y-2 sm:space-y-3">
-              <p className="hidden text-xs font-semibold uppercase tracking-[0.2em] text-primary sm:block sm:text-sm">
+              <p className="hidden text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-secondary sm:block sm:text-sm">
                 Tienda Team Celular
               </p>
               <h1 className="text-xl font-semibold tracking-tight text-slate-950 dark:text-slate-50 sm:text-3xl">
@@ -125,7 +125,7 @@ export default async function TiendaPage({
                   ctaVariant="whatsapp"
                   external
                   target="_blank"
-                  className="hidden min-h-11 shrink-0 items-center justify-center rounded-full border border-slate-300 px-4 text-sm font-medium text-slate-700 transition hover:border-primary hover:text-primary dark:border-slate-600 dark:text-slate-300 sm:inline-flex"
+                  className="hidden min-h-11 shrink-0 items-center justify-center rounded-full border border-slate-300 px-4 text-sm font-medium text-slate-700 transition hover:border-primary hover:text-primary dark:hover:text-secondary dark:border-slate-600 dark:text-slate-300 sm:inline-flex"
                 >
                   ¿Necesitás ayuda para elegir?
                 </TrackedCtaLink>
@@ -161,13 +161,13 @@ export default async function TiendaPage({
                 Te ayudamos a validar compatibilidad por marca y modelo antes de pagar. Si el cambio no conviene, te derivamos al servicio de reparacion para evitar compras innecesarias.
               </p>
               <div className="flex flex-wrap gap-2">
-                <Link href="/guias/reparacion-iphone-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
+                <Link href="/guias/reparacion-iphone-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:hover:text-secondary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
                   Guia iPhone
                 </Link>
-                <Link href="/guias/reparacion-samsung-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
+                <Link href="/guias/reparacion-samsung-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:hover:text-secondary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
                   Guia Samsung
                 </Link>
-                <Link href="/guias/reparacion-xiaomi-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
+                <Link href="/guias/reparacion-xiaomi-buenos-aires" className="inline-flex min-h-11 items-center rounded-full border border-slate-300/80 bg-white px-4 py-2 text-[13px] font-semibold text-slate-700 transition hover:border-primary/35 hover:text-primary dark:hover:text-secondary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200">
                   Guia Xiaomi
                 </Link>
               </div>

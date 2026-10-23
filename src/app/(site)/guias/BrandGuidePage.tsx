@@ -1,5 +1,7 @@
 import HighIntentGuidePage from "@/components/seo/HighIntentGuidePage";
 import RepairPriceTable from "@/components/seo/RepairPriceTable";
+import { BUSINESS_PROFILE } from "@/lib/businessProfile";
+import { PLACA_REVISION_PRICE, formatArsPrice } from "@/lib/repairPrices";
 import {
   type BrandGuideSlug,
   getBrandGuideConfig,
@@ -23,6 +25,8 @@ export default function BrandGuidePage({ slug }: { slug: BrandGuideSlug }) {
       pageLabel={config.pageLabel}
       title={config.title}
       heroDescription={config.heroDescription}
+      heroSummary={`Revisamos pantalla, batería, carga y fallas de placa de ${config.brand} en Recoleta y Belgrano. Contanos el modelo y qué le pasa para confirmar si podemos repararlo y qué repuesto necesita.`}
+      commercialNote={`Revisión técnica sin placa: ${BUSINESS_PROFILE.reviewCostRange}. Revisión de placa: ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles. Se cobra aunque no se repare y se descuenta si aceptás el arreglo. La reparación de placa lleva semanas; precio y plazo se confirman por escrito.`}
       badge={config.badge}
       readingTime={config.readingTime}
       publishedTime={config.publishedTime}
@@ -51,6 +55,7 @@ export default function BrandGuidePage({ slug }: { slug: BrandGuideSlug }) {
           />
         ) : null
       }
+      priceTablePosition="after-hero"
     />
     </>
   );

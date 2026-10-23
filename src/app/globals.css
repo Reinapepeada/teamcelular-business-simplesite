@@ -179,6 +179,14 @@ h1, h2 { letter-spacing: -0.015em; }
 
 body { letter-spacing: -0.011em; }
 
+main :is(a, button, summary, input, select, textarea):focus-visible {
+	outline: 2px solid var(--tc-action);
+	outline-offset: 4px;
+}
+
+main summary { scroll-margin-top: 6rem; }
+main :is(p, li, dt, dd) { overflow-wrap: break-word; }
+
 @layer components {
 	.tc-eyebrow {
 		font-size: 17px;
@@ -239,7 +247,7 @@ body { letter-spacing: -0.011em; }
 		letter-spacing: -0.022em;
 		transition: background-color .2s, color .2s;
 	}
-	.tc-btn:focus-visible { outline: 2px solid var(--tc-link); outline-offset: 3px; }
+	.tc-btn:focus-visible { outline: 2px solid var(--tc-action); outline-offset: 3px; }
 	.tc-btn-primary { background: var(--tc-action); color: #fff; }
 	.tc-btn-primary:hover { background: var(--tc-action-hover); }
 	.tc-btn-ghost { color: rgba(255,255,255,.85); background: var(--tc-smoke); }

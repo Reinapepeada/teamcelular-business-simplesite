@@ -8,13 +8,13 @@ import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import GuideByline from "@/components/seo/GuideByline";
 import VideoSchema from "@/components/seo/VideoSchema";
-import { 
-  FaShieldAlt, 
-  FaTruck, 
-  FaHeadset, 
-  FaTools, 
-  FaChartLine, 
-  FaClock, 
+import {
+  FaShieldAlt,
+  FaTruck,
+  FaHeadset,
+  FaTools,
+  FaChartLine,
+  FaClock,
   FaCheckCircle,
   FaFileContract,
   FaBuilding,
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/guia_corporativo.webp",
+        url: "https://teamcelular.com/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Servicio Técnico Corporativo - Team Celular",
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Servicio Técnico de Celulares para Empresas en CABA | Team Celular",
     description: "Team Celular, Recoleta y Belgrano CABA. Soporte de celulares para empresas: SLA, logística puerta a puerta y garantía escrita 90 días.",
-    images: ["https://teamcelular.com/images/guia_corporativo.webp"],
+    images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
 
@@ -89,27 +89,27 @@ const PAGE_URL = `${SITE_URL}/guias/soporte-empresas-servicio-tecnico`;
 
 const benefits = [
   {
-    title: "Diagnóstico técnico en menos de 24 horas",
+    title: "Diagnóstico y presupuesto por escrito",
     detail:
-      "Evaluación profesional con presupuesto digital detallado, trazabilidad completa de cada equipo mediante sistema de tickets y fotografía del estado inicial. Identificamos fallas de hardware, software y daño por líquidos con equipamiento de diagnóstico especializado.",
+      "Revisamos la falla y entregamos un presupuesto antes de reparar. Si requiere revisión de placa, el informe tarda hasta 72 horas hábiles; la reparación lleva semanas y se confirma precio y plazo por escrito.",
     Icon: FaClock,
   },
   {
     title: "Logística corporativa puerta a puerta",
     detail:
-      "Coordinamos retiros y entregas programadas dentro de CABA. Disponibilidad de equipos de reemplazo (loaner) para garantizar continuidad operativa durante reparaciones complejas.",
+      "Coordinamos retiros y entregas programadas dentro de CABA. Consultá cobertura, costo y disponibilidad de equipos de reemplazo antes de contratar el plan.",
     Icon: FaTruck,
   },
   {
     title: "Mesa de ayuda técnica multicanal",
     detail:
-      "Soporte vía WhatsApp Business, email corporativo y línea telefónica directa con seguimiento proactivo de incidencias. Reportes de estado en tiempo real y notificaciones automáticas por cada etapa del proceso de reparación.",
+      "Contacto por WhatsApp, email y teléfono. Acordamos con tu organización quién recibe el presupuesto y cómo se informa el avance de cada equipo.",
     Icon: FaHeadset,
   },
   {
     title: "Planes de mantenimiento preventivo",
     detail:
-      "Inspecciones programadas, limpieza de conectores, cambio de batería preventivo y actualización de software para extender la vida útil de tu flota de dispositivos. Reducción de hasta 40% en costos de reparación mediante mantenimiento planificado.",
+      "Inspecciones programadas y revisión de conectores, batería y software según el estado de cada equipo. Definimos las tareas y su costo en la propuesta; el ahorro depende de las fallas y del uso de la flota.",
     Icon: FaTools,
   },
 ];
@@ -149,9 +149,9 @@ const industries = [
 
 const slaFeatures = [
   {
-    title: "Tiempo de respuesta garantizado",
+    title: "Plazos acordados por escrito",
     description:
-      "SLA configurable según criticidad: 4 horas para incidencias críticas, 24 horas para reparaciones estándar, 72 horas hábiles para revisión de placa.",
+      "El SLA define prioridades y tiempos según el servicio contratado. La revisión de placa puede llevar hasta 72 horas hábiles; no equivale al plazo de reparación. Confirmamos los compromisos antes de aceptar el trabajo.",
     Icon: FaClock,
   },
   {
@@ -161,9 +161,9 @@ const slaFeatures = [
     Icon: FaShieldAlt,
   },
   {
-    title: "Repuestos originales certificados",
+    title: "Repuestos y stock confirmados",
     description:
-      "Stock permanente de pantallas, baterías y componentes originales o de calidad AAA para las marcas más utilizadas en entornos corporativos.",
+      "Confirmamos disponibilidad, tipo de repuesto y precio para cada modelo antes de reparar. La propuesta identifica la pieza ofrecida y la garantía aplicable.",
     Icon: FaCheckCircle,
   },
 ];
@@ -198,7 +198,7 @@ const faqBusiness = [
 
 export default function BusinessSupportGuide() {
   return (
-    <div className="flex w-full justify-center px-4 py-16">
+    <div className="flex w-full justify-center px-4 py-8 sm:py-12">
       <VideoSchema
         name="Diagnóstico de placa bajo microscopio en Team Celular"
         description="Inspección de una placa de celular bajo microscopio en el laboratorio de Team Celular, Paraguay 2451 Recoleta CABA, para ubicar el componente dañado antes de intervenir."
@@ -209,10 +209,10 @@ export default function BusinessSupportGuide() {
       />
       <ArticleSchema
         title="Servicio Técnico de Celulares para Empresas y Organizaciones | Team Celular"
-        description="Soporte técnico corporativo especializado en reparación de dispositivos móviles con SLA garantizado, logística incluida y planes preventivos en CABA."
+        description="Soporte técnico corporativo especializado en reparación de dispositivos móviles con SLA acordado por escrito, logística incluida y planes preventivos en CABA."
         publishedTime="2024-03-10T00:00:00Z"
         modifiedTime="2026-08-20T00:00:00Z"
-        image="https://teamcelular.com/images/guia_corporativo.webp"
+        image="https://teamcelular.com/opengraph-image.png"
         url={PAGE_URL}
       />
       <article className="w-full max-w-6xl space-y-16">
@@ -224,28 +224,15 @@ export default function BusinessSupportGuide() {
           ]}
         />
         {/* Hero Section */}
-        <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 text-center dark:border-white/10 dark:bg-slate-900/30 md:p-16">
-          <div className="flex flex-wrap justify-center gap-3 mb-4">
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/70 bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
-              Soporte corporativo
-            </span>
-            <span className="rounded-full border border-emerald-700/80 bg-emerald-700 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white">
-              Recoleta y Belgrano · CABA
-            </span>
-          </div>
-          <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-primary via-secondary to-primary shadow-2xl">
-            <FaBuilding className="text-5xl text-white" />
-          </div>
-          <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
+        <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-6 sm:p-8 dark:border-white/10 dark:bg-slate-900/30 md:p-10">
+          <h1 className="text-[clamp(1.75rem,4.5vw,3rem)] font-semibold tracking-tight text-slate-900 dark:text-white">
             Servicio Técnico de Celulares para Empresas en CABA
           </h1>
-          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
-            Team Celular, en <strong>Paraguay 2451 Recoleta</strong> y <strong>Amenábar 2032 Belgrano</strong> (CABA), presta soporte técnico de celulares para empresas con flota desde 5 dispositivos. Diagnóstico en menos de 24 horas, SLA configurable (4 h crítico · 24 h estándar), logística puerta a puerta en CABA y garantía escrita de <strong>90 días</strong> sobre trabajo y repuesto. 10 años de experiencia en reparación avanzada.
+          <p className="max-w-[65ch] text-lg leading-relaxed text-slate-300">
+            Revisamos y reparamos celulares de empresas con flotas desde 5 dispositivos en Recoleta y Belgrano.
+            Definimos diagnóstico, repuestos, logística y plazos en la propuesta, con garantía escrita de 90 días sobre trabajo y repuesto.
           </p>
-          <div className="mt-4 flex justify-center">
-            <GuideByline modifiedTime="2026-08-20T00:00:00Z" tone="light" />
-          </div>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap gap-4">
             <Link
               href="/contacto"
               className="rounded-full bg-primary px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
@@ -254,10 +241,14 @@ export default function BusinessSupportGuide() {
             </Link>
             <Link
               href="/presupuesto-reparacion"
-              className="rounded-full border-2 border-primary px-8 py-4 text-lg font-semibold text-primary transition hover:bg-primary/10"
+              className="rounded-full border-2 border-primary px-8 py-4 text-lg font-semibold text-primary dark:text-secondary transition hover:bg-primary/10"
             >
               Pedir propuesta de SLA
             </Link>
+          </div>
+
+          <div className="mt-4 flex justify-center">
+            <GuideByline modifiedTime="2026-08-20T00:00:00Z" tone="light" />
           </div>
         </header>
 
@@ -265,9 +256,9 @@ export default function BusinessSupportGuide() {
         <section className="grid gap-8 overflow-hidden rounded-2xl border border-white/15 bg-white/5 dark:border-white/10 dark:bg-slate-900/30 md:grid-cols-2">
           <div className="order-2 md:order-1">
             <video
-              autoPlay
-              loop
-              muted
+              controls
+              preload="none"
+              poster="/images/poster-microscopio.jpg"
               playsInline
               className="h-full w-full rounded-xl object-cover shadow-lg"
             >
@@ -286,8 +277,8 @@ export default function BusinessSupportGuide() {
               En flotas de 5 o más equipos, cada hora sin respuesta técnica multiplica ese impacto.
             </p>
             <p>
-              <strong className="text-primary">Team Celular</strong>, con talleres en Recoleta (Paraguay 2451)
-              y Belgrano (Amenábar 2032), resuelve el diagnóstico en menos de 24 horas y trabaja con
+              <strong className="text-primary dark:text-secondary">Team Celular</strong>, con talleres en Recoleta (Paraguay 2451)
+              y Belgrano (Amenábar 2032), entrega diagnóstico y presupuesto por escrito, y trabaja con
               SLA firmado para que los tiempos de reparación sean predecibles, no una promesa verbal.
               Llevamos más de 15 años reparando dispositivos móviles con microscopio, instrumental de
               laboratorio y garantía escrita.
@@ -353,10 +344,10 @@ export default function BusinessSupportGuide() {
                   key={feature.title}
                   className="rounded-xl border border-white/20 bg-white/10 p-6 dark:border-white/15 dark:bg-slate-900/40"
                 >
-                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/20 text-2xl text-primary">
+                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/20 text-2xl text-primary dark:text-secondary">
                     <Icon />
                   </div>
-                  <h3 className="mb-3 text-lg font-bold text-primary">{feature.title}</h3>
+                  <h3 className="mb-3 text-lg font-bold text-primary dark:text-secondary">{feature.title}</h3>
                   <p className="text-slate-700 dark:text-slate-300">{feature.description}</p>
                 </div>
               );
@@ -385,7 +376,7 @@ export default function BusinessSupportGuide() {
                   <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-secondary/10 text-2xl text-secondary">
                     <Icon />
                   </div>
-                  <h3 className="mb-2 text-xl font-bold text-primary">{industry.sector}</h3>
+                  <h3 className="mb-2 text-xl font-bold text-primary dark:text-secondary">{industry.sector}</h3>
                   <p className="text-slate-700 dark:text-slate-300">{industry.description}</p>
                 </div>
               );
@@ -395,20 +386,8 @@ export default function BusinessSupportGuide() {
 
         {/* Reportes y Compliance */}
         <section className="overflow-hidden rounded-2xl border border-white/15 bg-white/5 dark:border-white/10 dark:bg-slate-900/30">
-          <div className="grid gap-0 md:grid-cols-5">
-            <div className="order-2 md:order-1 md:col-span-2">
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="h-full w-full object-cover"
-              >
-                <source src="/videos/5028622-hd_1280_720_25fps.mp4" type="video/mp4" />
-                Tu navegador no soporta el elemento de video.
-              </video>
-            </div>
-            <div className="order-1 space-y-6 p-10 md:order-2 md:col-span-3">
+          <div className="grid gap-0">
+            <div className="space-y-6 p-6 sm:p-10">
               <div className="flex items-center gap-4">
                 <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-3xl text-white shadow-lg">
                   <FaChartLine />
@@ -425,7 +404,7 @@ export default function BusinessSupportGuide() {
               garantía escrita con firma y sello del técnico responsable.
             </p>
             <p>
-              Generamos <strong className="text-primary">reportes mensuales consolidados</strong>{" "}
+              Generamos <strong className="text-primary dark:text-secondary">reportes mensuales consolidados</strong>{" "}
               para:
             </p>
             <ul className="ml-6 list-disc space-y-2">
@@ -450,7 +429,7 @@ export default function BusinessSupportGuide() {
               Podés combinar nuestros servicios de{" "}
               <Link
               href="/reparaciones/reparacion-placa-caba"
-              className="font-semibold text-primary underline decoration-primary/30 hover:decoration-primary"
+              className="font-semibold text-primary dark:text-secondary underline decoration-primary/30 hover:decoration-primary"
             >
               revisión de placa
             </Link>{" "}
@@ -478,7 +457,7 @@ export default function BusinessSupportGuide() {
                 key={index}
                 className="group rounded-2xl border border-white/15 bg-white/5 p-6 transition hover:shadow-lg dark:border-white/10 dark:bg-slate-900/30"
               >
-                <summary className="flex min-h-11 items-center cursor-pointer text-lg font-bold text-secondary group-hover:text-primary dark:text-secondary/90">
+                <summary className="flex min-h-11 items-center cursor-pointer text-lg font-bold text-secondary group-hover:text-primary dark:hover:text-secondary dark:text-secondary/90">
                   {faq.question}
                 </summary>
                 <p className="mt-4 leading-relaxed text-slate-700 dark:text-slate-300">
@@ -531,7 +510,7 @@ export default function BusinessSupportGuide() {
                 "name": "Ciudad Autónoma de Buenos Aires (CABA)"
               },
               "description":
-                "Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), presta soporte técnico de celulares para empresas desde 5 dispositivos: SLA garantizado, logística puerta a puerta, planes preventivos y diagnóstico en menos de 24 horas.",
+                "Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), presta soporte técnico de celulares para empresas desde 5 dispositivos: SLA acordado por escrito, logística puerta a puerta, planes preventivos y diagnóstico y presupuesto por escrito.",
               "provider": {
                 "@id": "https://teamcelular.com#localbusiness",
                 "location": [

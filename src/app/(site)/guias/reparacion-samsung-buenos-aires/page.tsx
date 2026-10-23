@@ -78,7 +78,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/guia_samsung.webp",
+        url: "https://teamcelular.com/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Reparación de Samsung Galaxy en Team Celular",
@@ -93,7 +93,7 @@ export const metadata: Metadata = {
     title: "Reparación de Samsung Galaxy en CABA | Team Celular",
     description:
       "Team Celular, Paraguay 2451 Recoleta. Pantalla y batería según modelo y stock, garantía escrita 90 días. Galaxy S, A, Note y Z Fold.",
-    images: ["https://teamcelular.com/images/guia_samsung.webp"],
+    images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
 
@@ -325,7 +325,7 @@ export default function SamsungRepairGuidePage() {
           "cambio de bateria Samsung Galaxy",
           "reparacion de Galaxy S, A, Z Fold y Z Flip",
         ]}
-        image="https://teamcelular.com/images/guia_samsung.webp"
+        image="https://teamcelular.com/opengraph-image.png"
         url={PAGE_URL}
       />
 
@@ -339,11 +339,11 @@ export default function SamsungRepairGuidePage() {
         />
 
         <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-[#86868b]">
-          <Link href="/" className="transition hover:text-primary">
+          <Link href="/" className="transition hover:text-primary dark:hover:text-secondary">
             Inicio
           </Link>
           <span>/</span>
-          <Link href="/guias" className="transition hover:text-primary">
+          <Link href="/guias" className="transition hover:text-primary dark:hover:text-secondary">
             Guías
           </Link>
           <span>/</span>
@@ -450,7 +450,7 @@ export default function SamsungRepairGuidePage() {
                     <td className="py-3 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">{row.servicio}</td>
                     <td className="py-3 pr-4 text-slate-500 dark:text-[#86868b]">{row.modelos}</td>
                     <td className="py-3 pr-4 text-slate-500 dark:text-[#86868b]">{row.tiempo}</td>
-                    <td className="py-3 font-semibold tabular-nums text-primary">{row.precio}</td>
+                    <td className="py-3 font-semibold tabular-nums text-primary dark:text-secondary">{row.precio}</td>
                   </tr>
                 ))}
               </tbody>
@@ -476,7 +476,7 @@ export default function SamsungRepairGuidePage() {
 
         <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
           <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary dark:text-secondary">
               Respuesta directa
             </p>
             <h2 className="mt-3 text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">

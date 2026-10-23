@@ -85,18 +85,9 @@ export default function PhoneRepairEnglishPage() {
           Phone repair in Buenos Aires
         </h1>
 
-        {/* Bloque citable: respuesta completa y autocontenida en el primer 30%. */}
-        <p className="mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          Team Celular repairs phones in Buenos Aires at two walk-in workshops: Paraguay 2451
-          in Recoleta and Amenábar 2032 in Belgrano. No appointment is needed. We are open
-          Monday to Friday, 10:30 to 18:00. Screen and battery replacements are usually done
-          in 2 to 4 hours, diagnostics are free of commitment and quoted before any work
-          starts, and every repair comes with a 90-day written warranty covering both labour
-          and parts. Alejandro Biarrieta, the founding technician, speaks English, so you can
-          explain the problem directly instead of relying on a translation app. We repair
-          iPhone, Samsung, Motorola, Xiaomi and most other brands, including phones bought
-          abroad. We also clean water-damaged boards in-house; for phones that will not turn
-          on, a board inspection costs ARS 45,000, deducted from the repair if you go ahead.
+        <p className="mt-5 max-w-[65ch] text-lg leading-relaxed text-slate-300">
+          Walk-in phone repairs in Recoleta (Paraguay 2451) and Belgrano (Amenábar 2032).
+          English spoken. Monday to Friday, 10:30–18:00. We confirm the part, price and timing before you approve the repair.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-4">
@@ -117,11 +108,25 @@ export default function PhoneRepairEnglishPage() {
             ctaName="en_phone_repair_budget"
             ctaLocation="en_hero"
             ctaVariant="primary"
-            className="inline-flex min-h-12 items-center rounded-full border-2 border-primary px-8 py-4 text-base font-semibold text-primary transition hover:bg-primary/10"
+            className="inline-flex min-h-12 items-center rounded-full border-2 border-primary px-8 py-4 text-base font-semibold text-primary dark:text-secondary transition hover:bg-primary/10"
           >
             Request a quote
           </TrackedCtaLink>
         </div>
+        <p className="mt-5 max-w-[65ch] text-sm leading-6 text-slate-300">
+          Technical inspection: ARS 15,000–25,000. Board inspection: ARS 45,000, with a report in up to 72 business hours.
+          The inspection is charged even if you decline the repair, and deducted if you proceed.
+          Board repairs take weeks; the repair price and timing are confirmed in writing.
+        </p>
+        <details className="mt-4 max-w-[65ch]">
+          <summary className="tc-link min-h-11 cursor-pointer py-3">Repair times, parts and warranty</summary>
+          <p className="mt-2 leading-relaxed text-slate-300">
+            Screen replacements usually take 2–4 hours and batteries 1–2 hours when the part is in stock, subject to diagnosis.
+            Repairs carry a 90-day written warranty covering the work and installed part.
+            Alejandro Biarrieta, the founding technician, speaks English. We work on iPhone, Samsung, Motorola,
+            Xiaomi and other brands, including phones bought abroad. We also clean water-damaged boards in-house.
+          </p>
+        </details>
       </header>
 
       <section className="mt-12">
@@ -146,7 +151,7 @@ export default function PhoneRepairEnglishPage() {
                   href={branch.mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-3 inline-block font-semibold text-primary hover:underline"
+                  className="mt-3 inline-block font-semibold text-primary dark:text-secondary hover:underline"
                 >
                   Open in Google Maps →
                 </a>
@@ -184,7 +189,7 @@ export default function PhoneRepairEnglishPage() {
           })}
         </div>
         <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">
-          Other brands and models are quoted after a free diagnostic. Send us the model and
+          For other brands and models, we confirm the inspection fee before accepting the phone. Send us the model and
           the fault on WhatsApp and we will give you a figure before you come.
         </p>
       </section>
@@ -196,10 +201,8 @@ export default function PhoneRepairEnglishPage() {
         <p className="mt-4 leading-relaxed text-slate-600 dark:text-slate-300">
           Yes. Where the phone was purchased does not change the technical work, only parts
           availability for some models, which we confirm before you leave the phone with us.
-          Keep in mind that a manufacturer warranty from another country will usually not be
-          honoured locally, and that any repair outside the official channel voids a warranty
-          that is still active. If your phone is still under warranty at home, it is worth
-          checking that first. Our own 90-day written warranty covers the work we do.
+          If your phone is still under manufacturer warranty, check its coverage and service options
+          before authorizing an independent repair. Our own 90-day written warranty covers our work and the installed part.
         </p>
       </section>
 
@@ -236,7 +239,7 @@ export default function PhoneRepairEnglishPage() {
 
       <p className="mt-12 text-sm text-slate-500 dark:text-slate-400">
         ¿Preferís leer esta página en español?{" "}
-        <Link href="/" className="font-semibold text-primary hover:underline">
+        <Link href="/" className="font-semibold text-primary dark:text-secondary hover:underline">
           Ir a la versión en español
         </Link>
       </p>

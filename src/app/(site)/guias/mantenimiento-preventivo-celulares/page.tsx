@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import type { Metadata } from "next";
 import {
   FaBatteryFull,
@@ -62,7 +61,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/guia_mantenimiento.webp",
+        url: "https://teamcelular.com/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Mantenimiento Preventivo de Celulares - Team Celular",
@@ -77,7 +76,7 @@ export const metadata: Metadata = {
     title: "Mantenimiento de Celular: Qué Incluye y Cada Cuánto Hacerlo",
     description:
       "Team Celular, Paraguay 2451 Recoleta CABA. Limpieza interna, revisión de batería y diagnóstico preventivo con garantía escrita 90 días.",
-    images: ["https://teamcelular.com/images/guia_mantenimiento.webp"],
+    images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
 
@@ -190,13 +189,13 @@ const faqMaintenance = [
 
 export default function PreventiveMaintenanceGuide() {
   return (
-    <div className="flex w-full justify-center px-4 py-16">
+    <div className="flex w-full justify-center px-4 py-8 sm:py-12">
       <ArticleSchema
         title="Mantenimiento Preventivo de Celulares | Team Celular"
         description="Guía completa de mantenimiento preventivo para smartphones: checklist profesional, cuidado de batería, actualización de software y limpieza especializada."
         publishedTime="2024-04-05T00:00:00Z"
         modifiedTime="2026-08-20T00:00:00Z"
-        image="https://teamcelular.com/images/guia_mantenimiento.webp"
+        image="https://teamcelular.com/opengraph-image.png"
         url={PAGE_URL}
       />
       <article className="w-full max-w-6xl space-y-16">
@@ -209,11 +208,11 @@ export default function PreventiveMaintenanceGuide() {
         />
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-          <Link href="/" className="hover:text-primary transition">
+          <Link href="/" className="hover:text-primary dark:hover:text-secondary transition">
             Inicio
           </Link>
           <span>/</span>
-          <Link href="/guias" className="hover:text-primary transition">
+          <Link href="/guias" className="hover:text-primary dark:hover:text-secondary transition">
             Guías
           </Link>
           <span>/</span>
@@ -223,23 +222,17 @@ export default function PreventiveMaintenanceGuide() {
         </nav>
 
         {/* Hero Section */}
-        <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-10 text-center dark:border-white/10 dark:bg-slate-900/30 md:p-16">
-          <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-primary via-secondary to-primary shadow-2xl">
-            <FaTools className="text-5xl text-white" />
-          </div>
-          <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
+        <header className="space-y-6 rounded-2xl border border-white/15 bg-white/5 p-6 sm:p-8 dark:border-white/10 dark:bg-slate-900/30 md:p-10">
+          <h1 className="text-[clamp(1.75rem,4.5vw,3rem)] font-semibold tracking-tight text-slate-900 dark:text-white">
             Mantenimiento Preventivo de Celulares en CABA
           </h1>
-          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-300">
+          <p className="max-w-[65ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">
             Team Celular, en Paraguay 2451 Recoleta CABA, realiza mantenimiento
             preventivo de celulares con limpieza interna por ultrasonido,
             diagnóstico técnico y revisión de batería cada 6 meses. Cada servicio
             dura entre 2 y 4 horas y sale con garantía escrita de 90 días.
           </p>
-          <div className="mt-4 flex justify-center">
-            <GuideByline modifiedTime="2026-08-20T00:00:00Z" tone="light" />
-          </div>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap gap-4">
             <Link
               href="/contacto"
               className="rounded-full bg-primary px-8 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
@@ -248,10 +241,14 @@ export default function PreventiveMaintenanceGuide() {
             </Link>
             <Link
               href="/presupuesto-reparacion"
-              className="rounded-full border-2 border-primary px-8 py-4 text-lg font-semibold text-primary transition hover:bg-primary/10"
+              className="rounded-full border-2 border-primary px-8 py-4 text-lg font-semibold text-primary dark:text-secondary transition hover:bg-primary/10"
             >
               Solicitar diagnóstico
             </Link>
+          </div>
+
+          <div className="mt-4 flex justify-center">
+            <GuideByline modifiedTime="2026-08-20T00:00:00Z" tone="light" />
           </div>
         </header>
 
@@ -263,7 +260,7 @@ export default function PreventiveMaintenanceGuide() {
           <div className="space-y-4 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
             <p>
               El mantenimiento preventivo es la estrategia más efectiva para{" "}
-              <strong className="text-primary">evitar reparaciones costosas</strong> y asegurar que tu smartphone
+              <strong className="text-primary dark:text-secondary">evitar reparaciones costosas</strong> y asegurar que tu smartphone
               rinda al máximo durante toda su vida útil. En <strong>Team Celular</strong> desarrollamos rutinas
               personalizadas basadas en más de 15 años de experiencia atendiendo usuarios particulares y empresas con
               flotas de dispositivos.
@@ -275,26 +272,26 @@ export default function PreventiveMaintenanceGuide() {
             </p>
             <ul className="ml-6 space-y-2">
               <li className="flex items-start gap-3">
-                <FaCheckCircle className="mt-1 text-primary flex-shrink-0" />
+                <FaCheckCircle className="mt-1 text-primary dark:text-secondary flex-shrink-0" />
                 <span>
                   <strong>Reducción de costos:</strong> Detectar problemas antes de que se vuelvan críticos puede ahorrarte
                   hasta 70% en reparaciones
                 </span>
               </li>
               <li className="flex items-start gap-3">
-                <FaCheckCircle className="mt-1 text-primary flex-shrink-0" />
+                <FaCheckCircle className="mt-1 text-primary dark:text-secondary flex-shrink-0" />
                 <span>
                   <strong>Mayor rendimiento:</strong> Dispositivos optimizados funcionan 30-40% más rápido y consumen menos batería
                 </span>
               </li>
               <li className="flex items-start gap-3">
-                <FaCheckCircle className="mt-1 text-primary flex-shrink-0" />
+                <FaCheckCircle className="mt-1 text-primary dark:text-secondary flex-shrink-0" />
                 <span>
                   <strong>Protección de datos:</strong> Backups automáticos y actualizaciones de seguridad minimizan riesgos de pérdida
                 </span>
               </li>
               <li className="flex items-start gap-3">
-                <FaCheckCircle className="mt-1 text-primary flex-shrink-0" />
+                <FaCheckCircle className="mt-1 text-primary dark:text-secondary flex-shrink-0" />
                 <span>
                   <strong>Mayor valor de reventa:</strong> Equipos en buen estado conservan hasta 50% más de su valor original
                 </span>
@@ -368,7 +365,7 @@ export default function PreventiveMaintenanceGuide() {
                     <h3 className="font-bold text-slate-900 dark:text-white">{item.signal}</h3>
                   </div>
                   <p className="text-sm text-slate-700 dark:text-slate-300">
-                    <strong className="text-primary">Acción recomendada:</strong> {item.action}
+                    <strong className="text-primary dark:text-secondary">Acción recomendada:</strong> {item.action}
                   </p>
                 </div>
               );
@@ -394,14 +391,14 @@ export default function PreventiveMaintenanceGuide() {
                   key={plan.title}
                   className="rounded-2xl border border-white/15 bg-white/5 p-8 transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/30"
                 >
-                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-2xl text-primary">
+                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-2xl text-primary dark:text-secondary">
                     <Icon />
                   </div>
                   <h3 className="mb-2 text-xl font-bold text-slate-900 dark:text-white">
                     {plan.title}
                   </h3>
                   <p className="mb-4 text-slate-700 dark:text-slate-300">{plan.description}</p>
-                  <p className="text-2xl font-bold text-primary">{plan.price}</p>
+                  <p className="text-2xl font-bold text-primary dark:text-secondary">{plan.price}</p>
                 </div>
               );
             })}
@@ -410,26 +407,14 @@ export default function PreventiveMaintenanceGuide() {
 
         {/* Video Section */}
         <section className="overflow-hidden rounded-2xl border border-white/15 bg-white/5 dark:border-white/10 dark:bg-slate-900/30">
-          <div className="grid gap-0 md:grid-cols-2">
-            <div className="order-2 md:order-1">
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="h-full w-full object-cover"
-              >
-                <source src="/videos/3866849-hd_1280_720_50fps.mp4" type="video/mp4" />
-                Tu navegador no soporta el elemento de video.
-              </video>
-            </div>
+          <div className="grid gap-0">
             <div className="order-1 space-y-6 p-10 md:order-2">
               <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
                 ¿Cómo hacemos el mantenimiento preventivo en Team Celular?
               </h2>
               <div className="space-y-4 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
                 <p>
-                  En <strong className="text-primary">Team Celular</strong> utilizamos equipamiento profesional y
+                  En <strong className="text-primary dark:text-secondary">Team Celular</strong> utilizamos equipamiento profesional y
                   protocolos certificados para asegurar que tu dispositivo reciba el mejor cuidado posible.
                 </p>
                 <ul className="ml-6 space-y-2 list-disc">
@@ -460,7 +445,7 @@ export default function PreventiveMaintenanceGuide() {
                 key={index}
                 className="group rounded-2xl border border-white/15 bg-white/5 p-6 transition hover:shadow-lg dark:border-white/10 dark:bg-slate-900/30"
               >
-                <summary className="flex min-h-11 items-center cursor-pointer text-lg font-bold text-secondary group-hover:text-primary dark:text-secondary/90">
+                <summary className="flex min-h-11 items-center cursor-pointer text-lg font-bold text-secondary group-hover:text-primary dark:hover:text-secondary dark:text-secondary/90">
                   {faq.question}
                 </summary>
                 <p className="mt-4 leading-relaxed text-slate-700 dark:text-slate-300">
@@ -506,7 +491,7 @@ export default function PreventiveMaintenanceGuide() {
               href="/guias/reparacion-iphone-buenos-aires"
               className="rounded-xl border border-white/20 bg-white/10 p-6 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
             >
-              <h3 className="mb-2 font-bold text-primary">Reparación de iPhone</h3>
+              <h3 className="mb-2 font-bold text-primary dark:text-secondary">Reparación de iPhone</h3>
               <p className="text-sm text-slate-700 dark:text-slate-300">
                 Proceso completo de reparación con repuestos originales
               </p>
@@ -515,7 +500,7 @@ export default function PreventiveMaintenanceGuide() {
               href="/reparaciones/reparacion-placa-caba"
               className="rounded-xl border border-white/20 bg-white/10 p-6 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
             >
-              <h3 className="mb-2 font-bold text-primary">Revisión de placa</h3>
+              <h3 className="mb-2 font-bold text-primary dark:text-secondary">Revisión de placa</h3>
               <p className="text-sm text-slate-700 dark:text-slate-300">
                 Si no prende o se reinicia solo: condiciones y plazos
               </p>
@@ -524,7 +509,7 @@ export default function PreventiveMaintenanceGuide() {
               href="/guias/soporte-empresas-servicio-tecnico"
               className="rounded-xl border border-white/20 bg-white/10 p-6 transition hover:border-primary dark:border-white/15 dark:bg-slate-900/40"
             >
-              <h3 className="mb-2 font-bold text-primary">Empresas y flotas</h3>
+              <h3 className="mb-2 font-bold text-primary dark:text-secondary">Empresas y flotas</h3>
               <p className="text-sm text-slate-700 dark:text-slate-300">
                 Planes de mantenimiento para empresas con SLA
               </p>
@@ -543,7 +528,7 @@ export default function PreventiveMaintenanceGuide() {
               "@type": "HowTo",
               "name": "Mantenimiento Preventivo de Celulares",
               "description": "Guía completa de mantenimiento preventivo para smartphones con checklist profesional y consejos de expertos.",
-              "image": "https://teamcelular.com/images/guia_mantenimiento.webp",
+              "image": "https://teamcelular.com/opengraph-image.png",
               "totalTime": "PT120M",
               "supply": ["Smartphone", "Paño de microfibra", "Software de diagnóstico"],
               "tool": ["Aire comprimido", "IPA 99%", "Microscopio (para servicio profesional)"],
@@ -560,7 +545,7 @@ export default function PreventiveMaintenanceGuide() {
             }),
           }}
         />
-        
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

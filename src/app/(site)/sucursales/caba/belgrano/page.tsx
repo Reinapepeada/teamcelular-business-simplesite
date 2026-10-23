@@ -215,15 +215,15 @@ export default function SucursalBelgranoPage() {
               </h2>
               <ul className="mt-4 space-y-3 text-sm text-white/90">
                 <li className="flex items-start gap-2">
-                  <FaMapMarkerAlt className="mt-0.5 text-primary" />
+                  <FaMapMarkerAlt className="mt-0.5 text-primary dark:text-secondary" />
                   Amenábar 2032, Belgrano, CABA
                 </li>
                 <li className="flex items-start gap-2">
-                  <FaRegClock className="mt-0.5 text-primary" />
+                  <FaRegClock className="mt-0.5 text-primary dark:text-secondary" />
                   Lunes a viernes, 10:30 a 18:00 hs
                 </li>
                 <li className="flex items-start gap-2">
-                  <FaTools className="mt-0.5 text-primary" />
+                  <FaTools className="mt-0.5 text-primary dark:text-secondary" />
                   Pantalla, batería, carga, placa y notebook
                 </li>
               </ul>
@@ -242,7 +242,7 @@ export default function SucursalBelgranoPage() {
               className="bg-[#1d1d1f] rounded-[28px] p-6"
             >
               <h2 className="flex items-center gap-2 text-xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
-                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-primary">
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-primary dark:text-secondary">
                   <Icon className="text-sm" />
                 </span>
                 {signal.title}
@@ -296,7 +296,7 @@ export default function SucursalBelgranoPage() {
           </Link>
           <Link
             href="/presupuesto-reparacion#solicitar-presupuesto"
-            className="rounded-full border border-primary/40 px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10"
+            className="rounded-full border border-primary/40 px-6 py-3 text-sm font-semibold text-primary dark:text-secondary transition hover:bg-primary/10"
           >
             Pedir presupuesto
           </Link>

@@ -16,7 +16,6 @@ import {
   FaTools,
   FaWrench,
 } from "react-icons/fa";
-import { SiXiaomi } from "react-icons/si";
 import GuideByline from "@/components/seo/GuideByline";
 import { BRAND_REPAIR_PRICES, buildPriceOffers, priceRangeOf } from "@/lib/repairPrices";
 
@@ -67,7 +66,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/guia_xiaomi.webp",
+        url: "https://teamcelular.com/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Servicio tecnico para Xiaomi Redmi y POCO en Team Celular",
@@ -82,36 +81,10 @@ export const metadata: Metadata = {
     title: "Servicio técnico Xiaomi, Redmi y POCO en CABA | Team Celular",
     description:
       "Team Celular, Paraguay 2451 Recoleta. Pantalla y batería según modelo y stock, garantía escrita 90 días. Xiaomi, Redmi y POCO.",
-    images: ["https://teamcelular.com/images/guia_xiaomi.webp"],
+    images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
 
-const brandLinks = [
-  {
-    href: "/guias/reparacion-iphone-buenos-aires",
-    label: "iPhone",
-    helper: "Apple con True Tone y Face ID",
-    active: false,
-  },
-  {
-    href: "/guias/reparacion-samsung-buenos-aires",
-    label: "Samsung",
-    helper: "Galaxy S, A, Z Fold y Z Flip",
-    active: false,
-  },
-  {
-    href: "/guias/reparacion-xiaomi-buenos-aires",
-    label: "Xiaomi",
-    helper: "Xiaomi, Redmi y POCO",
-    active: true,
-  },
-  {
-    href: "/guias/reparacion-motorola-buenos-aires",
-    label: "Motorola",
-    helper: "Moto G, Edge y Razr",
-    active: false,
-  },
-];
 
 const processSteps = [
   {
@@ -308,7 +281,7 @@ const faq = [
 
 export default function XiaomiRepairGuidePage() {
   return (
-    <div className="flex w-full justify-center px-4 py-16">
+    <div className="flex w-full justify-center px-4 py-8 sm:py-12">
       <ArticleSchema
         title="Reparacion de Xiaomi en Buenos Aires | Servicio Tecnico Team Celular"
         description="Reparación de Xiaomi, Redmi y POCO con informe de revisión de placa en hasta 72 horas hábiles, arreglo por presupuesto y garantía escrita."
@@ -321,7 +294,7 @@ export default function XiaomiRepairGuidePage() {
           "reparacion de celulares POCO",
           "cambio de pantalla, bateria y USB-C Xiaomi",
         ]}
-        image="https://teamcelular.com/images/guia_xiaomi.webp"
+        image="https://teamcelular.com/opengraph-image.png"
         url={PAGE_URL}
       />
 
@@ -335,11 +308,11 @@ export default function XiaomiRepairGuidePage() {
         />
 
         <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-[#86868b]">
-          <Link href="/" className="transition hover:text-primary">
+          <Link href="/" className="transition hover:text-primary dark:hover:text-secondary">
             Inicio
           </Link>
           <span>/</span>
-          <Link href="/guias" className="transition hover:text-primary">
+          <Link href="/guias" className="transition hover:text-primary dark:hover:text-secondary">
             Guias
           </Link>
           <span>/</span>
@@ -348,78 +321,19 @@ export default function XiaomiRepairGuidePage() {
           </span>
         </nav>
 
-        <header className="bg-[#1d1d1f] space-y-8 rounded-[28px] p-8 md:p-14">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/70 bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
-              <SiXiaomi />
-              Especialistas por marca
-            </span>
-            <span className="rounded-full border border-emerald-700/80 bg-emerald-700 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white">
-              Recoleta y Belgrano · CABA
-            </span>
-          </div>
-
+        <header className="bg-[#1d1d1f] space-y-6 rounded-[28px] p-6 sm:p-8 md:p-10">
           <div className="space-y-4">
             <h1 className="text-4xl font-semibold tracking-[-0.01em] text-slate-900 dark:text-[#f5f5f7] md:text-5xl">
               Reparación de Xiaomi, Redmi y POCO en Buenos Aires
             </h1>
-            <p className="max-w-4xl text-lg leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
+            <p className="max-w-[65ch] text-lg leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
               Team Celular, con sucursales en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032) CABA, repara Xiaomi,
               Redmi y POCO con presupuesto antes de reparar. Pantalla en 2–4 h y batería en
               1–2 h con stock, con garantía escrita de 90 días sobre trabajo y repuesto.
               Xiaomi 13/14/15, Redmi Note y POCO.
             </p>
-            <div className="mt-4">
-              <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
-            </div>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-3">
-            <div className="bg-[#1d1d1f] rounded-[28px] p-5">
-              <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-[#86868b]">
-                Diagnostico
-              </p>
-              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-primary">Según la falla</p>
-              <p className="mt-1 text-sm text-slate-600 dark:text-[#a1a1a6]">
-                Placa: informe en hasta 72 h hábiles
-              </p>
-            </div>
-            <div className="bg-[#1d1d1f] rounded-[28px] p-5">
-              <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-[#86868b]">
-                Garantia
-              </p>
-              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-secondary">90 días</p>
-              <p className="mt-1 text-sm text-slate-600 dark:text-[#a1a1a6]">
-                Garantía escrita sobre trabajo y repuesto
-              </p>
-            </div>
-            <div className="bg-[#1d1d1f] rounded-[28px] p-5">
-              <p className="text-xs uppercase tracking-[0.14em] text-slate-500 dark:text-[#86868b]">
-                Tiempo express
-              </p>
-              <p className="mt-2 text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-primary">1-4 h</p>
-              <p className="mt-1 text-sm text-slate-600 dark:text-[#a1a1a6]">
-                Según modelo, stock y falla
-              </p>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap gap-3">
-            {brandLinks.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`rounded-full border px-5 py-3 text-sm font-semibold transition ${
-                  item.active
-                    ? "border-primary bg-primary text-white shadow-lg shadow-primary/25"
-                    : "border-slate-300/80 bg-white/80 text-slate-700 hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200"
-                }`}
-              >
-                {item.label}
-                <span className="ml-2 text-xs font-medium">{item.helper}</span>
-              </Link>
-            ))}
-          </div>
 
           <div className="flex flex-wrap gap-4">
             <Link
@@ -435,11 +349,72 @@ export default function XiaomiRepairGuidePage() {
               WhatsApp tecnico directo
             </Link>
           </div>
+          <p className="text-sm leading-6 text-[#a1a1a6]">Revisión de placa: informe en hasta 72 horas hábiles. El arreglo lleva semanas; confirmamos precio y plazo por escrito.</p>
+
+            <div className="mt-4">
+              <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
+            </div>
         </header>
+
+        <section id="costos-reparacion-xiaomi" className="scroll-mt-24 bg-[#1d1d1f] rounded-[28px]">
+          <div className="border-b border-slate-100 px-8 py-5 dark:border-slate-800">
+            <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
+              ¿Cuánto cuesta reparar un Xiaomi, Redmi o POCO en Buenos Aires?
+            </h2>
+            <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-[#86868b]">
+              Rangos orientativos para 2026. El precio exacto depende del modelo y el repuesto disponible.
+            </p>
+          </div>
+          <p className="px-6 pt-4 text-sm text-slate-300 sm:hidden">Deslizá la tabla para ver modelos, plazos y precios.</p>
+          <div className="overflow-x-auto px-6 py-2" role="region" aria-label="Precios de reparación de Xiaomi" tabIndex={0}>
+            <table className="w-full min-w-[38rem] border-collapse text-left text-sm">
+              <caption className="sr-only">
+                Precios de reparación de Xiaomi, Redmi y POCO en CABA, actualizados en agosto de 2026
+              </caption>
+              <thead>
+                <tr className="border-b border-slate-200 dark:border-slate-800">
+                  <th scope="col" className="py-3 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">Servicio</th>
+                  <th scope="col" className="py-3 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">Modelos</th>
+                  <th scope="col" className="py-3 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">Tiempo</th>
+                  <th scope="col" className="py-3 font-semibold text-slate-900 dark:text-[#f5f5f7]">Precio ARS</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                {[
+                  { servicio: "Revisión técnica (sin placa)", modelos: "Según la falla", tiempo: "a confirmar al ingreso", precio: "15.000 – 25.000" },
+                  { servicio: "Cambio de pantalla OLED", modelos: "Xiaomi 13, 14, 15 y POCO alta gama", tiempo: "2–4 h", precio: "249.900 – 599.900" },
+                  { servicio: "Cambio de pantalla", modelos: "Redmi, Redmi Note, POCO", tiempo: "2–4 h", precio: "99.900 – 349.900" },
+                  { servicio: "Cambio de batería", modelos: "Alta gama", tiempo: "1–2 h", precio: "119.900 – 229.900" },
+                  { servicio: "Cambio de batería", modelos: "Redmi, Redmi Note, POCO", tiempo: "1–2 h", precio: "89.900 – 179.900" },
+                  { servicio: "Pin USB-C / turbo charge", modelos: "Todos", tiempo: "2–3 h", precio: "35.000 – 150.000" },
+                  { servicio: "Revisión de placa (bootloop, PMIC)", modelos: "Todos", tiempo: "informe hasta 72 h hábiles", precio: "45.000" },
+                ].map((row) => (
+                  <tr key={`${row.servicio}-${row.modelos}`}>
+                    <td className="py-3 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">{row.servicio}</td>
+                    <td className="py-3 pr-4 text-slate-500 dark:text-[#86868b]">{row.modelos}</td>
+                    <td className="py-3 pr-4 text-slate-500 dark:text-[#86868b]">{row.tiempo}</td>
+                    <td className="py-3 font-semibold tabular-nums text-primary dark:text-secondary">{row.precio}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="space-y-4 px-8 py-6">
+            <p className="text-sm leading-6 text-slate-600 dark:text-[#86868b]">
+              Team Celular, con sucursales en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032) CABA, informa el costo de diagnóstico antes de abrir el equipo. Si avanzás con la reparación, ese monto se descuenta del trabajo final.
+            </p>
+            <Link
+              href="/presupuesto-reparacion#solicitar-presupuesto"
+              className="inline-flex min-h-11 items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
+            >
+              Pedir presupuesto exacto para mi Xiaomi
+            </Link>
+          </div>
+        </section>
 
         <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
           <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary dark:text-secondary">
               Respuesta directa
             </p>
             <h2 className="mt-3 text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
@@ -488,11 +463,11 @@ export default function XiaomiRepairGuidePage() {
 
         <GoogleReviewsAPI />
 
-        <section className="space-y-7">
+        <details className="rounded-[28px] border border-white/15 bg-[#1d1d1f] p-6 sm:p-8">
+          <summary className="cursor-pointer text-xl font-semibold text-white"><h2 className="inline">¿Cómo es el proceso de reparación de Xiaomi en Team Celular?</h2></summary>
+          <div className="space-y-7 mt-6">
           <div className="text-center">
-            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
-              ¿Cómo es el proceso de reparación de Xiaomi en Team Celular?
-            </h2>
+
             <p className="mt-2 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Cuatro etapas para resolver la causa raíz y no repetir fallas
             </p>
@@ -523,7 +498,8 @@ export default function XiaomiRepairGuidePage() {
               );
             })}
           </div>
-        </section>
+        </div>
+        </details>
 
         <section className="space-y-7">
           <div className="text-center">
@@ -542,7 +518,7 @@ export default function XiaomiRepairGuidePage() {
                   key={service.title}
                   className="bg-[#1d1d1f] rounded-[28px] p-6 transition"
                 >
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-xl text-primary">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-xl text-primary dark:text-secondary">
                     <Icon />
                   </div>
                   <h3 className="text-xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
@@ -559,7 +535,7 @@ export default function XiaomiRepairGuidePage() {
                   {repairLinks[service.title] && (
                     <Link
                       href={repairLinks[service.title]}
-                      className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-primary transition hover:underline"
+                      className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-primary dark:text-secondary transition hover:underline"
                     >
                       Ver precio y detalles →
                     </Link>
@@ -570,66 +546,13 @@ export default function XiaomiRepairGuidePage() {
           </div>
         </section>
 
-        <section id="costos-reparacion-xiaomi" className="bg-[#1d1d1f] rounded-[28px]">
-          <div className="border-b border-slate-100 px-8 py-5 dark:border-slate-800">
-            <h2 className="text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
-              ¿Cuánto cuesta reparar un Xiaomi, Redmi o POCO en Buenos Aires?
-            </h2>
-            <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-[#86868b]">
-              Rangos orientativos para 2026. El precio exacto depende del modelo y el repuesto disponible.
-            </p>
-          </div>
-          <div className="overflow-x-auto px-6 py-2">
-            <table className="w-full min-w-[38rem] border-collapse text-left text-sm">
-              <caption className="sr-only">
-                Precios de reparación de Xiaomi, Redmi y POCO en CABA, actualizados en agosto de 2026
-              </caption>
-              <thead>
-                <tr className="border-b border-slate-200 dark:border-slate-800">
-                  <th scope="col" className="py-3 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">Servicio</th>
-                  <th scope="col" className="py-3 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">Modelos</th>
-                  <th scope="col" className="py-3 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">Tiempo</th>
-                  <th scope="col" className="py-3 font-semibold text-slate-900 dark:text-[#f5f5f7]">Precio ARS</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                {[
-                  { servicio: "Revisión técnica (sin placa)", modelos: "Según la falla", tiempo: "a confirmar al ingreso", precio: "15.000 – 25.000" },
-                  { servicio: "Cambio de pantalla OLED", modelos: "Xiaomi 13, 14, 15 y POCO alta gama", tiempo: "2–4 h", precio: "249.900 – 599.900" },
-                  { servicio: "Cambio de pantalla", modelos: "Redmi, Redmi Note, POCO", tiempo: "2–4 h", precio: "99.900 – 349.900" },
-                  { servicio: "Cambio de batería", modelos: "Alta gama", tiempo: "1–2 h", precio: "119.900 – 229.900" },
-                  { servicio: "Cambio de batería", modelos: "Redmi, Redmi Note, POCO", tiempo: "1–2 h", precio: "89.900 – 179.900" },
-                  { servicio: "Pin USB-C / turbo charge", modelos: "Todos", tiempo: "2–3 h", precio: "35.000 – 150.000" },
-                  { servicio: "Revisión de placa (bootloop, PMIC)", modelos: "Todos", tiempo: "informe hasta 72 h hábiles", precio: "45.000" },
-                ].map((row) => (
-                  <tr key={`${row.servicio}-${row.modelos}`}>
-                    <td className="py-3 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">{row.servicio}</td>
-                    <td className="py-3 pr-4 text-slate-500 dark:text-[#86868b]">{row.modelos}</td>
-                    <td className="py-3 pr-4 text-slate-500 dark:text-[#86868b]">{row.tiempo}</td>
-                    <td className="py-3 font-semibold tabular-nums text-primary">{row.precio}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="space-y-4 px-8 py-6">
-            <p className="text-sm leading-6 text-slate-600 dark:text-[#86868b]">
-              Team Celular, con sucursales en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032) CABA, informa el costo de diagnóstico antes de abrir el equipo. Si avanzás con la reparación, ese monto se descuenta del trabajo final.
-            </p>
-            <Link
-              href="/presupuesto-reparacion#solicitar-presupuesto"
-              className="inline-flex min-h-11 items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary/90"
-            >
-              Pedir presupuesto exacto para mi Xiaomi
-            </Link>
-          </div>
-        </section>
 
 
-        <section className="bg-[#1d1d1f] space-y-5 rounded-[28px] p-8 md:p-10">
-          <h2 className="text-center text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
-            ¿Qué modelos Xiaomi, Redmi y POCO reparan en Team Celular?
-          </h2>
+
+        <details className="rounded-[28px] border border-white/15 bg-[#1d1d1f] p-6 sm:p-8">
+          <summary className="cursor-pointer text-xl font-semibold text-white"><h2 className="inline">¿Qué modelos Xiaomi, Redmi y POCO reparan en Team Celular?</h2></summary>
+          <div className="bg-[#1d1d1f] space-y-5 rounded-[28px] p-8 md:p-10 mt-6">
+
           <p className="text-center text-slate-600 dark:text-[#a1a1a6]">
             Cobertura para gamas premium, media y entrada con foco en reparaciones rentables.
           </p>
@@ -643,7 +566,8 @@ export default function XiaomiRepairGuidePage() {
               </span>
             ))}
           </div>
-        </section>
+        </div>
+        </details>
 
         <section className="space-y-7">
           <div className="text-center">

@@ -99,7 +99,7 @@ export const metadata: Metadata = {
     siteName: "Team Celular",
     images: [
       {
-        url: "https://teamcelular.com/images/guia_cambio_modulo.webp",
+        url: "https://teamcelular.com/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Cambio de pantalla de celular en Team Celular",
@@ -110,7 +110,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Cambio de Pantalla Celular Buenos Aires",
     description: `Precios por marca desde ${SCREEN_FROM}. Consultá modelo, repuesto y stock por WhatsApp.`,
-    images: ["https://teamcelular.com/images/guia_cambio_modulo.webp"],
+    images: ["https://teamcelular.com/opengraph-image.png"],
   },
   // Se canonicalizo hacia /reparaciones/cambio-pantalla-caba y se revirtio:
   // GSC muestra 14% de solapamiento de queries entre ambas (12 de 86). Esta
@@ -267,7 +267,7 @@ export default function ScreenReplacementGuide() {
         description={`Precios de cambio de pantalla desde ${SCREEN_FROM}, según modelo y repuesto. Consulta por WhatsApp en Recoleta y Belgrano.`}
         publishedTime="2024-11-30T00:00:00Z"
         modifiedTime="2026-10-15T00:00:00Z"
-        image="https://teamcelular.com/images/guia_cambio_modulo.webp"
+        image="https://teamcelular.com/opengraph-image.png"
         url="https://teamcelular.com/guias/reparacion-pantalla-celular"
       />
       <BreadcrumbJsonLd
@@ -280,11 +280,11 @@ export default function ScreenReplacementGuide() {
       <article className="w-full max-w-6xl space-y-16">
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-[#86868b]">
-          <Link href="/" className="hover:text-primary transition">
+          <Link href="/" className="hover:text-primary dark:hover:text-secondary transition">
             Inicio
           </Link>
           <span>/</span>
-          <Link href="/guias" className="hover:text-primary transition">
+          <Link href="/guias" className="hover:text-primary dark:hover:text-secondary transition">
             Guías
           </Link>
           <span>/</span>
@@ -496,7 +496,7 @@ export default function ScreenReplacementGuide() {
                 key={index}
                 className="bg-[#1d1d1f] group rounded-[28px] p-6 transition"
               >
-                <summary className="flex min-h-11 items-center cursor-pointer text-lg font-semibold text-secondary group-hover:text-primary dark:text-secondary/90">
+                <summary className="flex min-h-11 items-center cursor-pointer text-lg font-semibold text-secondary group-hover:text-primary dark:hover:text-secondary dark:text-secondary/90">
                   {faq.question}
                 </summary>
                 <p className="mt-4 leading-relaxed text-slate-700 dark:text-[#a1a1a6]">

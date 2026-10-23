@@ -173,7 +173,7 @@ export default function RepairsForm() {
                                 onClick={() => toggleRepairType(option)}
                                 className={`flex min-h-11 items-center justify-between gap-2 rounded-2xl border px-4 py-3 text-sm font-medium transition ${
                                     selected
-                                        ? "border-primary bg-primary/10 text-primary"
+                                        ? "border-primary bg-primary/10 text-primary dark:text-secondary"
                                         : "border-slate-200 bg-white text-slate-700 hover:border-primary/40 hover:bg-primary/5 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
                                 }`}
                             >
@@ -257,7 +257,7 @@ function QuoteEstimate({ model, repairTypes }: { model: string; repairTypes: str
 
     return (
         <div className="rounded-2xl border border-primary/30 bg-primary/5 p-4">
-            <p className="text-xs font-semibold uppercase tracking-wide text-primary">Precio de referencia</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-primary dark:text-secondary">Precio de referencia</p>
             <p className="mt-1 text-sm text-slate-700 dark:text-[#a1a1a6]">{quote.label}</p>
             <p className="mt-1 text-2xl font-semibold tabular-nums text-slate-900 dark:text-[#f5f5f7]">{price}</p>
             <p className="mt-2 text-xs leading-5 text-slate-600 dark:text-[#86868b]">
@@ -273,12 +273,12 @@ function QuoteEstimate({ model, repairTypes }: { model: string; repairTypes: str
 function PlacaConditions() {
     return (
         <div className="rounded-2xl border border-primary/30 bg-primary/5 p-4">
-            <p className="text-xs font-semibold uppercase tracking-wide text-primary">Revisión de placa</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-primary dark:text-secondary">Revisión de placa</p>
             <p className="mt-1 text-2xl font-semibold tabular-nums text-slate-900 dark:text-[#f5f5f7]">
                 {formatArsPrice(PLACA_REVISION_PRICE)}
             </p>
             <p className="mt-2 text-xs leading-5 text-slate-600 dark:text-[#86868b]">
-                Se descuenta si se repara. Informe en hasta 72 horas hábiles. Si el arreglo es de un chip,
+                La revisión se cobra aunque no se repare y se descuenta si aceptás el arreglo. Informe en hasta 72 horas hábiles. Si el arreglo es de un chip,
                 lleva semanas y te pasamos precio y plazo antes de empezar.{" "}
                 <a href="/reparaciones/reparacion-placa-caba" className="tc-link underline">
                     Ver condiciones

@@ -32,7 +32,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   openGraphTitle: "Celular con virus: cómo saberlo y qué hacer | Team Celular",
   openGraphDescription:
     "Qué síntomas son malware, cuáles son batería o placa, y los pasos para limpiar el equipo sin perder datos.",
-  openGraphImagePath: "/images/guia_mantenimiento.webp",
+  openGraphImagePath: "/opengraph-image.png",
   openGraphImageAlt: "Diagnóstico de celular con síntomas de virus en Team Celular",
   twitterTitle: "Celular con virus: qué hacer | Team Celular",
   twitterDescription:
@@ -185,7 +185,7 @@ export default function PhoneVirusGuidePage() {
       readingTime="6 min"
       publishedTime="2026-09-14T00:00:00Z"
       modifiedTime="2026-10-14T00:00:00Z"
-      imagePath="/images/guia_mantenimiento.webp"
+      imagePath="/opengraph-image.png"
       articleAbout={["Malware en celulares", "Seguridad móvil", "Diagnóstico de celulares"]}
       heroPoints={[
         "Publicidad fuera de las apps: casi siempre una app instalada.",

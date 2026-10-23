@@ -177,7 +177,7 @@ export default function SobreNosotrosPage() {
             />
             <div className="mx-auto flex w-full max-w-[100rem] flex-col gap-12 px-4 py-12 sm:px-6 lg:px-8">
                 <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-                    <Link href="/" className="transition hover:text-primary">
+                    <Link href="/" className="transition hover:text-primary dark:hover:text-secondary">
                         Inicio
                     </Link>
                     <span>/</span>
@@ -188,7 +188,7 @@ export default function SobreNosotrosPage() {
 
                 <header className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-lg md:p-12">
                     <div className="mx-auto max-w-4xl text-center">
-                        <span className="inline-flex rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+                        <span className="inline-flex rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-secondary">
                             Empresa familiar
                         </span>
                         <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
@@ -211,7 +211,7 @@ export default function SobreNosotrosPage() {
                                     key={stat.label}
                                     className="rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-6 text-center"
                                 >
-                                    <Icon className="mx-auto text-3xl text-primary" />
+                                    <Icon className="mx-auto text-3xl text-primary dark:text-secondary" />
                                     <p className="mt-3 text-3xl font-black text-slate-900 dark:text-slate-100">
                                         {stat.value}
                                     </p>
@@ -263,7 +263,7 @@ export default function SobreNosotrosPage() {
                                 className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-md"
                             >
                                 <div className="flex items-center justify-between gap-4">
-                                    <span className="text-3xl font-black text-primary">
+                                    <span className="text-3xl font-black text-primary dark:text-secondary">
                                         {event.year}
                                     </span>
                                     <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
@@ -300,7 +300,7 @@ export default function SobreNosotrosPage() {
                                     key={value.title}
                                     className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-md"
                                 >
-                                    <div className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
+                                    <div className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary dark:text-secondary">
                                         <Icon className="text-2xl" />
                                     </div>
                                     <h3 className="mt-5 text-xl font-bold text-slate-900 dark:text-slate-100">
@@ -333,7 +333,7 @@ export default function SobreNosotrosPage() {
                                     className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-md"
                                 >
                                     <div className="flex items-start gap-4">
-                                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary dark:text-secondary">
                                             <Icon className="text-xl" />
                                         </div>
                                         <div>
@@ -408,7 +408,7 @@ export default function SobreNosotrosPage() {
                         </Link>
                         <Link
                             href="/guias"
-                            className="inline-flex min-h-12 items-center justify-center rounded-full border border-primary px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10"
+                            className="inline-flex min-h-12 items-center justify-center rounded-full border border-primary px-6 py-3 text-sm font-semibold text-primary dark:text-secondary transition hover:bg-primary/10"
                         >
                             Ver guias tecnicas
                         </Link>

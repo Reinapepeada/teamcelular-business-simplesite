@@ -172,7 +172,7 @@ export default function ContactoPage() {
                 />
 
                 <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-                    <Link href="/" className="transition hover:text-primary">
+                    <Link href="/" className="transition hover:text-primary dark:hover:text-secondary">
                         Inicio
                     </Link>
                     <span>/</span>
@@ -181,7 +181,7 @@ export default function ContactoPage() {
 
                 <header className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-lg md:p-12">
                     <div className="mx-auto max-w-3xl text-center">
-                        <span className="inline-flex rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+                        <span className="inline-flex rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-secondary">
                             Recoleta y Belgrano · CABA
                         </span>
                         <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
@@ -201,7 +201,7 @@ export default function ContactoPage() {
                             </BranchWhatsAppButton>
                             <Link
                                 href="/presupuesto-reparacion"
-                                className="inline-flex min-h-12 items-center justify-center rounded-full border border-primary px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10"
+                                className="inline-flex min-h-12 items-center justify-center rounded-full border border-primary px-6 py-3 text-sm font-semibold text-primary dark:text-secondary transition hover:bg-primary/10"
                             >
                                 Solicitar presupuesto
                             </Link>
@@ -263,7 +263,7 @@ export default function ContactoPage() {
                                 key={item.question}
                                 className="rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-5"
                             >
-                                <h3 className="text-base font-semibold text-primary">
+                                <h3 className="text-base font-semibold text-primary dark:text-secondary">
                                     {item.question}
                                 </h3>
                                 <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
@@ -281,7 +281,7 @@ export default function ContactoPage() {
                     <div className="grid gap-6 lg:grid-cols-2">
                         <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md">
                             <div className="flex items-start gap-4">
-                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary dark:text-secondary">
                                     <FaMapMarkerAlt className="text-2xl" />
                                 </div>
                                 <div>
@@ -311,7 +311,7 @@ export default function ContactoPage() {
                                     const Icon = transport.icon;
                                     return (
                                         <div key={transport.title} className="flex gap-3">
-                                            <Icon className="mt-1 shrink-0 text-primary" />
+                                            <Icon className="mt-1 shrink-0 text-primary dark:text-secondary" />
                                             <div>
                                                 <p className="font-semibold text-slate-900 dark:text-slate-100">{transport.title}</p>
                                                 <p className="text-sm text-slate-600 dark:text-slate-400">{transport.description}</p>
@@ -333,7 +333,7 @@ export default function ContactoPage() {
 
                         <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md">
                             <div className="flex items-start gap-4">
-                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary dark:text-secondary">
                                     <FaMapMarkerAlt className="text-2xl" />
                                 </div>
                                 <div>
@@ -360,14 +360,14 @@ export default function ContactoPage() {
                             </div>
                             <div className="mt-6 space-y-3">
                                 <div className="flex gap-3">
-                                    <FaSubway className="mt-1 shrink-0 text-primary" />
+                                    <FaSubway className="mt-1 shrink-0 text-primary dark:text-secondary" />
                                     <div>
                                         <p className="font-semibold text-slate-900 dark:text-slate-100">Subte</p>
                                         <p className="text-sm text-slate-600 dark:text-slate-400">Línea D – Estación Juramento, a pocas cuadras.</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-3">
-                                    <FaMapMarkerAlt className="mt-1 shrink-0 text-primary" />
+                                    <FaMapMarkerAlt className="mt-1 shrink-0 text-primary dark:text-secondary" />
                                     <div>
                                         <p className="font-semibold text-slate-900 dark:text-slate-100">Ubicación</p>
                                         <p className="text-sm text-slate-600 dark:text-slate-400">Amenábar 2032, Belgrano, CABA. CP C1428.</p>
@@ -416,7 +416,7 @@ export default function ContactoPage() {
                                     target="_blank"
                                     className="flex min-h-16 items-center gap-4 rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 px-5 py-4 transition hover:border-primary/40 hover:bg-primary/5"
                                 >
-                                    <Icon className="text-2xl text-primary" />
+                                    <Icon className="text-2xl text-primary dark:text-secondary" />
                                     <div>
                                         <p className="font-semibold text-slate-900 dark:text-slate-100">
                                             {social.name}
@@ -441,7 +441,7 @@ export default function ContactoPage() {
                                 key={faq.question}
                                 className="rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-5"
                             >
-                                <h3 className="text-lg font-semibold text-primary">
+                                <h3 className="text-lg font-semibold text-primary dark:text-secondary">
                                     {faq.question}
                                 </h3>
                                 <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">

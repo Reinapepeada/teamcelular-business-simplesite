@@ -290,7 +290,7 @@ export default function StoreCartSheet() {
                                                     href={`/tienda/${buildProductSlug(item.product)}`}
                                                     prefetch={false}
                                                     onClick={() => closeCart()}
-                                                    className="line-clamp-2 text-sm font-semibold leading-snug transition hover:text-primary"
+                                                    className="line-clamp-2 text-sm font-semibold leading-snug transition hover:text-primary dark:hover:text-secondary"
                                                 >
                                                     {item.product.name}
                                                 </Link>

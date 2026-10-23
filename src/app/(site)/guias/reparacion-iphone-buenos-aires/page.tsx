@@ -18,7 +18,6 @@ import {
 } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 // Precio citable en el primer parrafo: sale de la misma fuente que la tabla.
-const IPHONE_13 = IPHONE_MODELS.find((m) => m.slug === "13");
 // Precio minimo publicado: sale de la misma tabla que la pagina, no se hardcodea.
 const IPHONE_SCREEN_FROM = formatArsPrice(
   Math.min(...IPHONE_MODELS.map((m) => m.screen).filter((v): v is number => Boolean(v))),
@@ -27,7 +26,6 @@ const IPHONE_BATTERY_FROM = formatArsPrice(
   Math.min(...IPHONE_MODELS.map((m) => m.battery).filter((v): v is number => v !== null)),
 );
 import {
-  FaApple,
   FaBatteryFull,
   FaBolt,
   FaCamera,
@@ -89,7 +87,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     images: [
       {
-        url: "https://teamcelular.com/images/portada_iphone.webp",
+        url: "https://teamcelular.com/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Laboratorio de reparación de iPhone en Team Celular",
@@ -104,36 +102,10 @@ export const metadata: Metadata = {
     title: "Reparación de iPhone en CABA | Team Celular",
     description:
       "Precios de pantalla y batería por modelo de iPhone. Recoleta y Belgrano, sin turno. Consultá el repuesto y el stock antes de venir.",
-    images: ["https://teamcelular.com/images/portada_iphone.webp"],
+    images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
 
-const brandLinks = [
-  {
-    href: "/guias/reparacion-iphone-buenos-aires",
-    label: "iPhone",
-    helper: "Apple con True Tone y Face ID",
-    active: true,
-  },
-  {
-    href: "/guias/reparacion-samsung-buenos-aires",
-    label: "Samsung",
-    helper: "Galaxy S, A, Z Fold y Z Flip",
-    active: false,
-  },
-  {
-    href: "/guias/reparacion-xiaomi-buenos-aires",
-    label: "Xiaomi",
-    helper: "Xiaomi, Redmi y POCO",
-    active: false,
-  },
-  {
-    href: "/guias/reparacion-motorola-buenos-aires",
-    label: "Motorola",
-    helper: "Moto G, Edge y Razr",
-    active: false,
-  },
-];
 
 const quickSteps = [
   {
@@ -353,7 +325,7 @@ const faq = [
 
 export default function IphoneRepairGuidePage() {
   return (
-    <div className="flex w-full justify-center px-4 py-16">
+    <div className="flex w-full justify-center px-4 py-8 sm:py-12">
       <ArticleSchema
         title="Reparación de iPhone en CABA: precios por modelo"
         description="Precios de pantalla y batería por modelo, opciones de repuesto y consultas en Recoleta y Belgrano, con garantía escrita de 90 días."
@@ -366,7 +338,7 @@ export default function IphoneRepairGuidePage() {
           "cambio de bateria iPhone",
           "microelectronica para iPhone",
         ]}
-        image="https://teamcelular.com/images/portada_iphone.webp"
+        image="https://teamcelular.com/opengraph-image.png"
         url={PAGE_URL}
       />
 
@@ -380,11 +352,11 @@ export default function IphoneRepairGuidePage() {
         />
 
         <nav className="flex items-center gap-2 text-sm text-slate-600 dark:text-[#86868b]">
-          <Link href="/" className="transition hover:text-primary">
+          <Link href="/" className="transition hover:text-primary dark:hover:text-secondary">
             Inicio
           </Link>
           <span>/</span>
-          <Link href="/guias" className="transition hover:text-primary">
+          <Link href="/guias" className="transition hover:text-primary dark:hover:text-secondary">
             Guías
           </Link>
           <span>/</span>
@@ -393,36 +365,16 @@ export default function IphoneRepairGuidePage() {
           </span>
         </nav>
 
-        <header className="bg-[#1d1d1f] space-y-8 rounded-[28px] p-8 md:p-14">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/70 bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
-              <FaApple />
-              Especialistas por marca
-            </span>
-            <span className="rounded-full border border-emerald-700/80 bg-emerald-700 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white">
-              Recoleta y Belgrano · CABA
-            </span>
-          </div>
-
+        <header className="bg-[#1d1d1f] space-y-6 rounded-[28px] p-6 sm:p-8 md:p-10">
           <div className="space-y-4">
             <h1 className="text-4xl font-semibold tracking-[-0.01em] text-slate-900 dark:text-[#f5f5f7] md:text-5xl">
               Reparación de iPhone en CABA: precios por modelo
             </h1>
-            <p className="max-w-4xl text-lg leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
+            <p className="max-w-[65ch] text-lg leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
               Pantalla desde {IPHONE_SCREEN_FROM} y batería desde {IPHONE_BATTERY_FROM}.
               Elegí tu modelo para ver el precio y consultanos qué repuesto hay disponible.
               Te atendemos sin turno en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).
-              {IPHONE_13?.screen && IPHONE_13.battery ? (
-                <>
-                  {" "}Por ejemplo, en un iPhone 13 el cambio de pantalla cuesta{" "}
-                  {formatArsPrice(IPHONE_13.screen)} y el de batería{" "}
-                  {formatArsPrice(IPHONE_13.battery)}.
-                </>
-              ) : null}
             </p>
-            <div className="mt-4">
-              <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
-            </div>
           </div>
 
           <div className="flex flex-wrap gap-4">
@@ -446,34 +398,11 @@ export default function IphoneRepairGuidePage() {
             {BRANCHES.map((branch) => <Link key={branch.slug} href={branch.url} className="tc-link inline-flex min-h-11 items-center">{branch.shortName}: {branch.street}</Link>)}
           </nav>
 
-          <div className="flex flex-wrap gap-3">
-            {brandLinks.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`rounded-full border px-5 py-3 text-sm font-semibold transition ${
-                  item.active
-                    ? "border-primary bg-primary text-white shadow-lg shadow-primary/25"
-                    : "border-slate-300/80 bg-white/80 text-slate-700 hover:border-primary/40 hover:text-primary dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-200"
-                }`}
-              >
-                {item.label}
-                <span className="ml-2 text-xs font-medium">{item.helper}</span>
-              </Link>
-            ))}
-          </div>
 
-          <div className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-slate-600 dark:text-[#a1a1a6]">
-            <span className="rounded-full border border-primary/80 bg-primary px-3 py-1 text-white">
-              Reseñas reales de Google
-            </span>
-            <span className="rounded-full border border-secondary/25 bg-secondary/10 px-3 py-1 text-secondary">
-              Sucursal Recoleta
-            </span>
-            <span className="rounded-full border border-emerald-700/70 bg-emerald-700 px-3 py-1 text-white">
-              Más de 15 años reparando
-            </span>
-          </div>
+
+            <div className="mt-4">
+              <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
+            </div>
         </header>
 
         <section id="costos-reparacion-iphone" className="scroll-mt-24 bg-[#1d1d1f] rounded-[28px]">
@@ -491,7 +420,7 @@ export default function IphoneRepairGuidePage() {
             <ul className="mt-3 flex flex-wrap gap-3">
               {IPHONE_MODELS_WITH_PAGE.map((slug) => (
                 <li key={slug}>
-                  <Link href={`/reparaciones/iphone/${slug}`} className="inline-flex min-h-11 items-center rounded-full border border-white/25 px-4 py-2 text-sm font-semibold text-white hover:border-primary hover:text-primary">
+                  <Link href={`/reparaciones/iphone/${slug}`} className="inline-flex min-h-11 items-center rounded-full border border-white/25 px-4 py-2 text-sm font-semibold text-white hover:border-primary hover:text-primary dark:hover:text-secondary">
                     {IPHONE_MODELS.find((model) => model.slug === slug)?.name}
                   </Link>
                 </li>
@@ -519,7 +448,7 @@ export default function IphoneRepairGuidePage() {
                     <tr key={model.slug}>
                       <th scope="row" className="py-2.5 pr-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">
                         {(IPHONE_MODELS_WITH_PAGE as readonly string[]).includes(model.slug) ? (
-                          <Link href={`/reparaciones/iphone/${model.slug}`} className="hover:text-primary hover:underline">
+                          <Link href={`/reparaciones/iphone/${model.slug}`} className="hover:text-primary dark:hover:text-secondary hover:underline">
                             {model.name}
                           </Link>
                         ) : (
@@ -565,7 +494,7 @@ export default function IphoneRepairGuidePage() {
 
         <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
           <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary dark:text-secondary">
               Respuesta directa
             </p>
             <h2 className="mt-3 text-2xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
@@ -627,11 +556,11 @@ export default function IphoneRepairGuidePage() {
 
         <GoogleReviewsAPI />
 
-        <section className="space-y-7">
+        <details className="rounded-[28px] border border-white/15 bg-[#1d1d1f] p-6 sm:p-8">
+          <summary className="cursor-pointer text-xl font-semibold text-white"><h2 className="inline">Servicio técnico de iPhone: del diagnóstico a la entrega</h2></summary>
+          <div className="space-y-7 mt-6">
           <div className="text-center">
-            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
-              Servicio técnico de iPhone: del diagnóstico a la entrega
-            </h2>
+
             <p className="mt-2 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Qué revisamos, cuándo recibís el presupuesto y qué probamos antes de entregarlo
             </p>
@@ -662,13 +591,14 @@ export default function IphoneRepairGuidePage() {
               );
             })}
           </div>
-        </section>
+        </div>
+        </details>
 
-        <section className="space-y-7">
+        <details className="rounded-[28px] border border-white/15 bg-[#1d1d1f] p-6 sm:p-8">
+          <summary className="cursor-pointer text-xl font-semibold text-white"><h2 className="inline">¿Cuáles son las reparaciones de iPhone más comunes en Buenos Aires?</h2></summary>
+          <div className="space-y-7 mt-6">
           <div className="text-center">
-            <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
-              ¿Cuáles son las reparaciones de iPhone más comunes en Buenos Aires?
-            </h2>
+
             <p className="mt-2 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Pantalla, batería, carga y placa: los seis trabajos que más se piden en el laboratorio
             </p>
@@ -681,7 +611,7 @@ export default function IphoneRepairGuidePage() {
                   key={repair.title}
                   className="bg-[#1d1d1f] rounded-[28px] p-6 transition"
                 >
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-xl text-primary">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-xl text-primary dark:text-secondary">
                     <Icon />
                   </div>
                   <h3 className="text-xl font-semibold text-slate-900 dark:text-[#f5f5f7]">
@@ -698,7 +628,7 @@ export default function IphoneRepairGuidePage() {
                   {repairLinks[repair.title] && (
                     <Link
                       href={repairLinks[repair.title]}
-                      className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-primary transition hover:underline"
+                      className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-primary dark:text-secondary transition hover:underline"
                     >
                       Ver precio y detalles →
                     </Link>
@@ -707,16 +637,17 @@ export default function IphoneRepairGuidePage() {
               );
             })}
           </div>
-        </section>
+        </div>
+        </details>
 
 
 
 
 
-        <section className="bg-[#1d1d1f] space-y-5 rounded-[28px] p-8 md:p-10">
-          <h2 className="text-center text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
-            Modelos de iPhone que trabajamos
-          </h2>
+        <details className="rounded-[28px] border border-white/15 bg-[#1d1d1f] p-6 sm:p-8">
+          <summary className="cursor-pointer text-xl font-semibold text-white"><h2 className="inline">Modelos de iPhone que trabajamos</h2></summary>
+          <div className="bg-[#1d1d1f] space-y-5 rounded-[28px] p-8 md:p-10 mt-6">
+
           <p className="text-center text-slate-600 dark:text-[#a1a1a6]">
             Desde iPhone 8 hasta la línea 17. Si el tuyo no está, preguntanos igual.
           </p>
@@ -730,7 +661,8 @@ export default function IphoneRepairGuidePage() {
               </span>
             ))}
           </div>
-        </section>
+        </div>
+        </details>
 
         <section className="space-y-7">
           <div className="text-center">

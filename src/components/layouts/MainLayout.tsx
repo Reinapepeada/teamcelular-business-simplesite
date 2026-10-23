@@ -45,8 +45,9 @@ export default function MainLayout({
 }) {
     return (
         <>
+            <a href="#contenido-principal" className="sr-only z-[100] rounded-lg bg-white p-4 font-semibold text-black focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Saltar al contenido</a>
             <NavbarNUI />
-            <main className="flex min-h-screen flex-col items-center">
+            <main id="contenido-principal" tabIndex={-1} className="flex min-h-screen flex-col items-center">
                 {children}
             </main>
             <FooterNUI />

@@ -31,7 +31,8 @@ export default function RepairPriceTable({
         de 90 días sobre trabajo y repuesto.
       </p>}
 
-      <div className="mt-6 overflow-x-auto">
+      {!singlePriceColumn && <p className="mt-4 text-sm text-slate-300 sm:hidden">Deslizá la tabla para ver todos los precios.</p>}
+      <div className="mt-6 overflow-x-auto" role="region" aria-label={`Precios de reparación de ${brand}`} tabIndex={singlePriceColumn ? undefined : 0}>
         <table className={`w-full border-collapse text-left text-sm ${singlePriceColumn ? "table-fixed" : "min-w-[34rem]"}`}>
           <caption className="sr-only">
             Precios de reparación de {brand} en CABA, actualizados{singlePriceColumn ? ": " : " el "}
@@ -55,7 +56,7 @@ export default function RepairPriceTable({
               <tr key={price.name}>
                 <td className={`py-3 pr-4 text-slate-700 dark:text-slate-300 ${singlePriceColumn ? "break-words" : ""}`}>
                   {price.href ? (
-                    <Link href={price.href} className="underline decoration-slate-400/60 underline-offset-4 transition hover:text-primary">
+                    <Link href={price.href} className="underline decoration-slate-400/60 underline-offset-4 transition hover:text-primary dark:hover:text-secondary">
                       {price.name}
                     </Link>
                   ) : (

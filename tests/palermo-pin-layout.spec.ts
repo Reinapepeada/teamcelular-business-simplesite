@@ -8,7 +8,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 for (const width of [320, 390, 1280]) {
-    test(`Palermo: precios legibles antes de la imagen a ${width}px`, async ({ page }) => {
+    test(`Palermo: precios legibles antes de las condiciones locales a ${width}px`, async ({ page }) => {
         await page.setViewportSize({ width, height: 900 });
         await page.goto('/zonas/palermo');
         const table = page.locator('#precios table');
@@ -16,8 +16,9 @@ for (const width of [320, 390, 1280]) {
         await expect(table.locator('thead th')).toHaveCount(2);
         await expect(table.locator('tbody tr')).toHaveCount(6);
         const tableBox = await table.boundingBox();
-        const imageBox = await page.locator('.tc-zoom img').first().boundingBox();
-        expect(tableBox!.y + tableBox!.height).toBeLessThan(imageBox!.y);
+        const conditionsBox = await page.getByRole('region', { name: 'Señales locales de confianza' }).boundingBox();
+        expect(tableBox!.y + tableBox!.height).toBeLessThan(conditionsBox!.y);
+        await expect(page.locator('main img')).toHaveCount(0);
         expect(await table.evaluate(el => el.scrollWidth <= el.clientWidth + 1)).toBe(true);
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
         await expect(page.locator('article a[href^="/reparaciones/"]')).toHaveCount(4);
@@ -31,7 +32,7 @@ for (const width of [320, 390, 1280]) {
         await expect(prices).toBeVisible();
         await expect(prices.locator('dt')).toHaveCount(2);
         const pricesBox = await prices.boundingBox();
-        const imageBox = await page.locator('.tc-zoom img').first().boundingBox();
+        const imageBox = await page.locator('main figure img').first().boundingBox();
         if (width < 1024) expect(pricesBox!.y + pricesBox!.height).toBeLessThan(imageBox!.y);
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
         await expect(page.getByRole('link', { name: 'Consultar precio para mi modelo', exact: true }))
