@@ -37,7 +37,7 @@ Las casillas pendientes describen trabajo restante del objetivo completo. Las va
 
 ## Revisión y correcciones adicionales
 
-Las guías propias de iPhone, Motorola y Xiaomi adelantan contacto y precios. Se retiraron badges y estadísticas duplicadas del encabezado; autoría y fecha se conservan. El proceso y los modelos quedan en desplegables nativos cuando el detalle no es necesario para decidir. Las preguntas, tablas, enlaces por modelo y condiciones siguen en HTML. El índice conserva las 28 guías, con navegación por marca y falla.
+Las guías propias de iPhone, Motorola y Xiaomi adelantan contacto y precios. Se retiraron badges y estadísticas duplicadas del encabezado; autoría y fecha se conservan. El proceso y los modelos quedan en desplegables nativos cuando el detalle no es necesario para decidir. Las preguntas, tablas, enlaces por modelo y condiciones siguen en HTML. El índice conserva las 27 guías, con navegación por marca y falla.
 
 Las páginas de zonas prescinden de la imagen genérica; conservan sedes reales, garantía y acceso por transporte como información textual. En TC Lab se retiró la escena que decía representar el laboratorio sin procedencia comprobada. La ilustración restante de electrónica está identificada como tal. No se fabricaron fotos, casos, técnicos ni reseñas. La foto familiar, las fotos del catálogo y las ilustraciones de componentes útiles se conservan.
 
@@ -65,7 +65,7 @@ Las ventanas de observación de Search Console y CrUX continúan vigentes. Los c
 
 ## Decisión después de la revisión visual
 
-El primer borrador del índice había eliminado las portadas pero seguía mostrando demasiadas descripciones en móvil. La versión final conserva títulos y destinos de las 28 guías como lista, adelanta las marcas y traslada los enlaces de servicios después de las guías. Captura a 390 px: primera guía a y=625 px, antes de la barra inferior en una pantalla de 900 px; sin desbordamiento. El contenido del artículo permanece en su URL. El índice conserva schema, enlaces y accesos históricos de sección.
+El primer borrador del índice había eliminado las portadas pero seguía mostrando demasiadas descripciones en móvil. La versión final conserva títulos y destinos de las 27 guías como lista, adelanta las marcas y traslada los enlaces de servicios después de las guías. Captura a 390 px: primera guía a y=625 px, antes de la barra inferior en una pantalla de 900 px; sin desbordamiento. El contenido del artículo permanece en su URL. El índice conserva schema, enlaces y accesos históricos de sección.
 
 La confirmación visual final se limita a los ajustes necesarios detectados en la primera pasada; no se rehace la portada ni se cambian los precios, las URLs o los title/H1 de las páginas en observación. Las cifras de palabras/altura del entorno local no se presentan como mejora productiva: las reseñas y el catálogo son ficticios y pueden modificar la comparación. El contraste final de producción usa las mismas condiciones que la captura pública inicial.
 
@@ -80,3 +80,9 @@ La confirmación visual final se limita a los ajustes necesarios detectados en l
 El último ajuste del índice, posterior a las capturas por familia, se comprobó en una captura adicional móvil/escritorio con medición de su primer enlace. No afecta los recorridos de compra; CI repetirá la suite completa en el head del PR. La comparación final de las 84 URL se registra junto al PR y al estado de comercio.
 
 Build de producción aprobado, 87 rutas generadas; lint estricto sin advertencias. La comprobación TypeScript independiente se ejecuta con los tipos generados de Next.js antes de versionar la entrega.
+
+## Preview del commit de implementación
+
+Vercel `dpl_UsN2wWkSXF4nsRoqLZSY9ZZ6w8H5` READY para `a647cdaedf6f0b3156469cef2649da036d81f359`. Comparación de las 84 URL: todas HTTP200; title, H1, descripción, canonical y robots conservados; JSON-LD válido y 271 respuestas FAQ presentes en HTML, incluidos los desplegables. El índice contiene 27 guías, con todos sus destinos accesibles. Ninguna imagen editorial retirada reaparece en las páginas rastreadas. El commit de cierre documental no cambia el código de estas comprobaciones; requiere sus propios checks y preview del head antes de integrar.
+
+La auditoría ampliada de desarrollo informa cuatro dependencias moderadas por un solo aviso transitivo de `postcss-selector-parser` 6.1.4 en Tailwind 3.4.19. La auditoría productiva permanece en cero. El [aviso original](https://github.com/advisories/GHSA-rj75-hqrm-r3gf) distingue el parseo de selectores no confiables dentro de peticiones del build normal con fuentes confiables, que no está afectado. Aquí se compila CSS propio y no se ofrece ese parser como servicio público. npm no propone una corrección automática compatible de toda la cadena actual; queda registrado para actualizar la herramienta cuando corresponda, sin forzar una migración mayor en este cambio.
