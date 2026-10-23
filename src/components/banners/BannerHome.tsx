@@ -1,116 +1,53 @@
 import Image from "next/image";
-import { BsArrowRight, BsCheck2, BsWhatsapp } from "react-icons/bs";
+import Link from "next/link";
+import { BsArrowRight, BsClipboardCheck, BsClock, BsGeoAlt, BsShieldCheck, BsWhatsapp } from "react-icons/bs";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
-import Link from "next/link";
-import { BRANCHES } from "@/lib/businessProfile";
-import { SCREEN_BATTERY_TIMING_MESSAGE } from "@/lib/copyStandards";
-
-const intakeProofs = [
-    "Diagnóstico antes de intervenir",
-    "Orden técnica al ingresar",
-    "Garantía escrita de 90 días",
-];
+import RepairBrandLinks from "@/components/repairs/RepairBrandLinks";
+import { BRANCHES, BUSINESS_PROFILE } from "@/lib/businessProfile";
 
 export default function BannerHome() {
     return (
-        <section className="relative w-full overflow-x-clip bg-black text-[#f5f5f7]">
-            <div className="tc-intro mx-auto max-w-[1200px] px-4 pt-14 text-center sm:px-6 sm:pt-20">
-                <p className="tc-eyebrow">Recoleta y Belgrano · Lun–Vie, 10:30–18:00</p>
-                <h1 className="tc-display mx-auto mt-3 max-w-[15em]">
-                    Reparación de celulares en CABA
-                </h1>
-                <p className="mx-auto mt-5 max-w-[38rem] text-pretty text-[19px] leading-[1.4] text-[#86868b] sm:text-[21px]">
-                    Servicio técnico de iPhone, Samsung, Motorola y Xiaomi en Recoleta y Belgrano, sin turno. Pantalla, batería, carga y placa, con presupuesto antes de reparar. {SCREEN_BATTERY_TIMING_MESSAGE}
-                </p>
-
-                <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5">
-                    <TrackedCtaLink
-                        href="/presupuesto-reparacion#solicitar-presupuesto"
-                        ctaName="home_hero_budget"
-                        ctaLocation="home_hero"
-                        ctaVariant="primary"
-                        className="tc-btn tc-btn-primary"
-                    >
-                        Pedir presupuesto
-                    </TrackedCtaLink>
-                    <BranchWhatsAppButton
-                        ctaName="home_hero_whatsapp"
-                        ctaLocation="home_hero"
-                        message="Hola Team Celular, necesito una reparación."
-                        className="tc-link inline-flex min-h-11 items-center gap-2 text-[17px]"
-                    >
-                        <BsWhatsapp aria-hidden />
-                        Consultar por WhatsApp
-                        <BsArrowRight aria-hidden className="text-sm" />
-                    </BranchWhatsAppButton>
-                </div>
-
-                <nav aria-label="Precios y sucursales de reparación" className="mx-auto mt-5 flex max-w-3xl flex-wrap justify-center gap-x-6 gap-y-1 text-sm">
-                    <a href="#precios" className="tc-link inline-flex min-h-11 items-center">Ver precios de reparación</a>
-                    {BRANCHES.map((branch) => (
-                        <Link key={branch.slug} href={branch.url} className="tc-link inline-flex min-h-11 items-center">
-                            {branch.shortName}: {branch.street}
-                        </Link>
-                    ))}
-                </nav>
-                <ul className="mx-auto mt-5 flex max-w-3xl flex-wrap justify-center gap-x-8 gap-y-2 text-[14px] text-[#86868b]">
-                    {intakeProofs.map((item) => (
-                        <li key={item} className="flex items-center gap-1.5">
-                            <BsCheck2 className="text-[#6aa6ff]" aria-hidden />
-                            <span>{item}</span>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-
-            {/* Foto fija (sticky) mientras las frases pasan por encima, al estilo
-                de las secciones de producto de Apple. Sin JS: sticky + scroll-driven CSS. */}
-            <div className="tc-hero relative mt-12">
-                <div className="sticky top-[52px] h-[calc(100svh-52px)] px-4 pb-24 sm:px-6 md:pb-6">
-                    <div className="tc-zoom relative mx-auto h-full max-w-[1200px] overflow-hidden rounded-[28px]">
-                        <Image
-                            src="/images/handsome-young-man-smiling-while-repairing-old-smartphone-male-technician-using-screwdriver-fix-brok.webp"
-                            alt="Técnico de Team Celular trabajando sobre un smartphone"
-                            fill
-                            quality={82}
-                            sizes="(max-width: 768px) 250vw, (max-width: 1200px) 100vw, 1200px"
-                            className="object-cover object-[center_30%]"
-                            priority
-                        />
-                        <div className="tc-dim pointer-events-none absolute inset-0 bg-black/70" />
-
-                        {/* Frases dentro de la tarjeta: se turnan con el scroll del
-                            contenedor (.tc-hero), nunca salen del recuadro. */}
-                        <div className="tc-phrases absolute inset-x-0 top-0 bottom-24 flex flex-col items-center justify-center gap-4 px-6 text-center">
-                            {[
-                                "Más de 15 años reparando celulares.",
-                                "Diagnóstico antes de tocar el equipo.",
-                                "Garantía escrita de 90 días.",
-                            ].map((line) => (
-                                <p key={line} className="text-balance text-[clamp(1.6rem,5.5vw,4.5rem)] font-semibold leading-[1.05] tracking-[-0.015em] text-white">
-                                    {line}
-                                </p>
-                            ))}
-                        </div>
-
-                        <div className="tc-glass absolute bottom-4 left-4 right-4 z-10 flex flex-wrap items-center justify-between gap-3 rounded-[36px] px-5 py-3 sm:bottom-6 sm:left-auto sm:right-6 sm:gap-6 sm:pl-7">
-                            <div className="text-left">
-                                <p className="text-[14px] font-semibold text-white">Dos sucursales en CABA</p>
-                                <p className="text-[12px] text-white/75">Paraguay 2451 · Amenábar 2032</p>
-                            </div>
-                            <TrackedCtaLink
-                                href="/sucursales"
-                                ctaName="home_hero_branches"
-                                ctaLocation="home_hero"
-                                ctaVariant="secondary"
-                                className="tc-btn tc-btn-primary !min-h-10 !py-2 !text-[15px]"
-                            >
-                                Elegir sucursal
+        <section className="w-full bg-black text-[#f5f5f7]">
+            <div className="mx-auto max-w-[1200px] px-4 pt-10 sm:px-6 sm:pt-16">
+                <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_1fr] lg:gap-10">
+                    <div>
+                        <h1 className="text-balance text-[clamp(2.25rem,5vw,4rem)] font-semibold leading-[1.05] tracking-[-0.025em]">
+                            Reparación de celulares en CABA
+                        </h1>
+                        <p className="mt-5 max-w-[38rem] text-pretty text-[19px] leading-relaxed text-[#a1a1a6]">
+                            Pantalla, batería, carga y placa. Traé tu iPhone, Samsung, Motorola o Xiaomi a Recoleta o Belgrano, sin turno.
+                        </p>
+                        <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
+                            <TrackedCtaLink href="/presupuesto-reparacion#solicitar-presupuesto" ctaName="home_hero_budget" ctaLocation="home_hero" ctaVariant="primary" className="tc-btn tc-btn-primary">
+                                Pedir presupuesto
                             </TrackedCtaLink>
+                            <BranchWhatsAppButton ctaName="home_hero_whatsapp" ctaLocation="home_hero" message="Hola Team Celular, necesito una reparación. Marca y modelo: " className="tc-link inline-flex min-h-11 items-center gap-2 text-[17px]">
+                                <BsWhatsapp aria-hidden /> WhatsApp <BsArrowRight aria-hidden className="text-sm" />
+                            </BranchWhatsAppButton>
                         </div>
+                        <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm text-[#c7c7cc]">
+                            <li className="flex items-center gap-2"><BsClipboardCheck aria-hidden className="text-[#6aa6ff]" /> Presupuesto antes de reparar</li>
+                            <li className="flex items-center gap-2"><BsShieldCheck aria-hidden className="text-[#6aa6ff]" /> Garantía escrita de 90 días</li>
+                        </ul>
+                        <a href="#precios" className="tc-link mt-4 inline-flex min-h-11 items-center gap-2 text-[17px]">Ver precios de reparación <BsArrowRight aria-hidden /></a>
                     </div>
+                    <figure className="min-w-0">
+                        <div className="relative aspect-[16/11] overflow-hidden rounded-[28px] bg-[#1d1d1f]">
+                            <Image src="/images/landings/pantalla-concepto-20261023.webp" alt="Ilustración de un celular con el módulo de pantalla separado del equipo" fill priority quality={82} sizes="(max-width: 1023px) 100vw, 550px" className="bg-black object-contain" />
+                        </div>
+                        <figcaption className="mt-2 text-right text-xs text-[#a1a1a6]">Ilustración del módulo de pantalla.</figcaption>
+                    </figure>
                 </div>
+                <div className="mt-8 flex flex-col justify-between gap-3 border-t border-[#333336] py-4 text-sm text-[#a1a1a6] sm:flex-row sm:items-center">
+                    <nav aria-label="Sucursales de reparación" className="flex flex-wrap gap-x-6 gap-y-1">
+                        {BRANCHES.map((branch) => (
+                            <Link key={branch.slug} href={branch.url} className="tc-link inline-flex min-h-11 items-center gap-2"><BsGeoAlt aria-hidden /> {branch.shortName}: {branch.street}</Link>
+                        ))}
+                    </nav>
+                    <p className="flex items-center gap-2"><BsClock aria-hidden /> {BUSINESS_PROFILE.hours.text}</p>
+                </div>
+                <RepairBrandLinks />
             </div>
         </section>
     );

@@ -101,7 +101,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "touch no responde celular",
     ],
     intro:
-      "El cambio de pantalla suele llevar de 2 a 4 horas con módulo en stock, según modelo y diagnóstico. Confirmamos precio y plazo antes de reparar. Siempre cambiamos el módulo completo, con garantía escrita de 90 días. Team Celular, Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano).",
+      "Vidrio roto, líneas o touch que no responde. Revisamos tu celular y te explicamos qué módulo hay para tu modelo, cuánto sale y cuándo podés retirarlo.",
     prices: [
       { label: "iPhone 13", value: formatArsPrice(IPHONE_13_SCREEN) },
       { label: "Samsung Galaxy A", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[0].from)}` },
