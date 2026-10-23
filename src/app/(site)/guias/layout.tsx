@@ -111,7 +111,7 @@ export default function GuidesLayout({
                       : "bg-[#1d1d1f] text-[#cccccc] hover:bg-[#333336] hover:text-white"
                   }`}
                 >
-                  <Icon className="text-[13px]" />
+                  <Icon className="text-[13px]" aria-hidden />
                   {item.label}
                   {isActive ? <span className="sr-only"> (estas aca)</span> : null}
                 </Link>
