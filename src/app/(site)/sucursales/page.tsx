@@ -216,6 +216,22 @@ export default function SucursalesPage() {
         </article>
       </section>
 
+      <nav
+        aria-label="Cómo llegar desde otros barrios"
+        className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm"
+      >
+        <span className="inline-flex items-center gap-2 text-[#a1a1a6]">
+          <FaMapMarkedAlt aria-hidden="true" />
+          ¿Venís desde otro barrio?
+        </span>
+        <Link href="/zonas/palermo" className="tc-link inline-flex min-h-11 items-center underline underline-offset-4">
+          Desde Palermo
+        </Link>
+        <Link href="/zonas/balvanera" className="tc-link inline-flex min-h-11 items-center underline underline-offset-4">
+          Desde Balvanera / Once
+        </Link>
+      </nav>
+
       <section className="mt-10 grid gap-6 md:grid-cols-2">
         <BranchMap
           address={`${recoleta.street}, ${recoleta.neighborhood}, CABA`}
