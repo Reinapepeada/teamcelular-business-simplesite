@@ -72,3 +72,42 @@ test('La información de presupuesto y las FAQ funcionan sin JavaScript', async 
     await expect(page.locator('a[href="/presupuesto-reparacion#solicitar-presupuesto"]').first()).toBeVisible();
     await context.close();
 });
+
+for (const width of [320, 390, 1280]) {
+    test(`Sucursales: cobertura rastreable sin JavaScript a ${width}px`, async ({ browser }) => {
+        const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width, height: 900 } });
+        const page = await context.newPage();
+        await page.route('**/*', route => ['127.0.0.1', 'localhost'].includes(new URL(route.request().url()).hostname) ? route.continue() : route.abort());
+        await page.goto('http://127.0.0.1:3100/sucursales');
+        const coverage = page.getByRole('navigation', { name: 'Cómo llegar desde otros barrios' });
+        await expect(coverage).toBeVisible();
+        await expect(coverage.getByRole('link')).toHaveCount(2);
+        expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+        for (const [label, path] of [['Desde Palermo', '/zonas/palermo'], ['Desde Balvanera / Once', '/zonas/balvanera']]) {
+            await expect(coverage.getByRole('link', { name: label, exact: true })).toHaveAttribute('href', path);
+            const response = await page.request.get(path);
+            expect(response.status()).toBe(200);
+        }
+        await page.screenshot({ path: test.info().outputPath(`cobertura-${width}.png`), fullPage: true });
+        await context.close();
+    });
+}
+
+test('El botón primario conserva contraste AA en reposo y hover', async ({ page }) => {
+    await page.goto('/sucursales');
+    const button = page.locator('main .tc-btn-primary').first();
+    for (const state of ['normal', 'hover']) {
+        if (state === 'hover') await button.hover();
+        await expect.poll(async () => button.evaluate(element => {
+            const style = getComputedStyle(element);
+            const luminance = (color: string) => {
+                const rgb = color.match(/[\d.]+/g)!.slice(0, 3).map(value => Number(value) / 255);
+                return rgb.map(value => value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4)
+                    .reduce((total, value, index) => total + value * [0.2126, 0.7152, 0.0722][index], 0);
+            };
+            const fg = luminance(style.color);
+            const bg = luminance(style.backgroundColor);
+            return (Math.max(fg, bg) + 0.05) / (Math.min(fg, bg) + 0.05);
+        })).toBeGreaterThanOrEqual(4.5);
+    }
+});

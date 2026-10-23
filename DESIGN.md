@@ -8,8 +8,8 @@ colors:
   graphite: "#424245"
   ash: "#86868B"
   silk: "#F5F5F7"
-  action: "#1a6dff"
-  action-hover: "#3d84ff"
+  action: "#1766f2"
+  action-hover: "#125bd6"
   link: "#6aa6ff"
   link-on-light: "#0066CC"
   brand-indigo: "#2D2E83"
@@ -37,7 +37,7 @@ Estándar visual para **todas las páginas**. Referencia: página de producto de
 ## Principios
 
 - **Canvas negro puro** (#000). La fotografía del trabajo real aporta el color.
-- **Un solo color de acción**: azul Team `#1a6dff` en botones primarios (Presupuesto, Pedir presupuesto, Elegir sucursal). Nunca otro color de botón relleno.
+- **Un solo color de acción**: azul Team `#1766f2` en botones primarios (Presupuesto, Pedir presupuesto, Elegir sucursal), con hover `#125bd6`. Estas variantes conservan el azul y dan contraste con texto blanco de 4,98:1 y 6,01:1. Mantener al menos 4,5:1 en ambos estados para texto normal. Nunca otro color de botón relleno.
 - **Un solo color de link**: `#6aa6ff` sobre negro, `#0066CC` sobre bandas claras.
 - **WhatsApp** conserva su verde solo en la barra CTA mobile; en el resto va como link o botón ghost.
 - **Sin sombras.** La profundidad sale del contraste tonal (#000 → #1D1D1F) y del radio 28px.

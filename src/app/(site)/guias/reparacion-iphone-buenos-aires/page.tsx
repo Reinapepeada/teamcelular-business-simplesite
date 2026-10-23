@@ -256,7 +256,6 @@ const repairLinks: Record<string, string> = {
 const iphoneModels = [
   "iPhone 17 Pro Max",
   "iPhone 17 Pro",
-  "iPhone 17 Plus",
   "iPhone 17",
   "iPhone Air",
   "iPhone 16 Pro Max",

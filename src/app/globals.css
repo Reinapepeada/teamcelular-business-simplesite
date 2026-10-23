@@ -164,8 +164,8 @@ body:has(dialog[open]) .tc-glass {
 	--tc-graphite: #424245;
 	--tc-ash: #86868b;
 	--tc-silk: #f5f5f7;
-	--tc-action: #1a6dff;
-	--tc-action-hover: #3d84ff;
+	--tc-action: #1766f2;
+	--tc-action-hover: #125bd6;
 	--tc-link: #6aa6ff;
 	--tc-radius-card: 28px;
 }
