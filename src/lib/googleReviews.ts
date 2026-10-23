@@ -5,12 +5,52 @@ export interface GoogleReview {
     relative_time_description: string;
     text: string;
     time: number;
+    author_url?: string;
+    review_url?: string;
 }
 
 export interface PlaceDetails {
     rating: number;
     user_ratings_total: number;
     reviews: GoogleReview[];
+}
+
+function googleMapsUrl(value: unknown): string | undefined {
+    if (typeof value !== "string") return undefined;
+    try {
+        const url = new URL(value);
+        if (url.protocol === "https:" && (url.hostname === "google.com" || url.hostname.endsWith(".google.com"))) return url.href;
+    } catch { /* No publicar enlaces externos inválidos. */ }
+    return undefined;
+}
+
+export function normalizeGoogleReviews(data: unknown): PlaceDetails | null {
+    if (!data || typeof data !== "object") return null;
+    const place = data as Record<string, unknown>;
+    if (typeof place.rating !== "number" || !Number.isFinite(place.rating) || place.rating < 1 || place.rating > 5 ||
+        typeof place.userRatingCount !== "number" || !Number.isInteger(place.userRatingCount) || place.userRatingCount < 1) return null;
+    const reviews: GoogleReview[] = [];
+    for (const value of Array.isArray(place.reviews) ? place.reviews : []) {
+        if (!value || typeof value !== "object") continue;
+        const review = value as Record<string, any>;
+        const source = googleMapsUrl(review.googleMapsUri);
+        const text = review.originalText?.text || review.text?.text;
+        if (!source || typeof text !== "string" || !text.trim() ||
+            typeof review.rating !== "number" || !Number.isFinite(review.rating) || review.rating < 1 || review.rating > 5) continue;
+        const published = typeof review.publishTime === "string" ? Date.parse(review.publishTime) : NaN;
+        reviews.push({
+            author_name: typeof review.authorAttribution?.displayName === "string" ? review.authorAttribution.displayName : "Usuario de Google",
+            profile_photo_url: typeof review.authorAttribution?.photoUri === "string" ? review.authorAttribution.photoUri : null,
+            author_url: googleMapsUrl(review.authorAttribution?.uri),
+            review_url: source,
+            rating: review.rating,
+            text,
+            relative_time_description: typeof review.relativePublishTimeDescription === "string" ? review.relativePublishTimeDescription : "",
+            time: Number.isFinite(published) ? published / 1000 : 0,
+        });
+    }
+    // Conservar la relevancia que entrega Google; no seleccionar por estrellas.
+    return { rating: place.rating, user_ratings_total: place.userRatingCount, reviews };
 }
 
 export async function getGoogleReviews(): Promise<PlaceDetails | null> {
@@ -30,7 +70,7 @@ export async function getGoogleReviews(): Promise<PlaceDetails | null> {
                     "Content-Type": "application/json",
                     "X-Goog-Api-Key": apiKey,
                     "X-Goog-FieldMask":
-                        "displayName,rating,userRatingCount,reviews.authorAttribution,reviews.rating,reviews.text,reviews.originalText,reviews.publishTime,reviews.relativePublishTimeDescription",
+                        "displayName,rating,userRatingCount,reviews.authorAttribution,reviews.googleMapsUri,reviews.rating,reviews.text,reviews.originalText,reviews.publishTime,reviews.relativePublishTimeDescription",
                     Referer:
                         process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
                 },
@@ -42,30 +82,7 @@ export async function getGoogleReviews(): Promise<PlaceDetails | null> {
             return null;
         }
 
-        const data = await response.json();
-        const reviews = (data.reviews || [])
-            .map((review: any) => ({
-                author_name:
-                    review.authorAttribution?.displayName || "Usuario de Google",
-                profile_photo_url: review.authorAttribution?.photoUri || null,
-                rating: review.rating || 0,
-                text: review.originalText?.text || review.text?.text || "",
-                relative_time_description:
-                    review.relativePublishTimeDescription || "Recientemente",
-                time: review.publishTime
-                    ? new Date(review.publishTime).getTime() / 1000
-                    : Date.now() / 1000,
-            }))
-            .sort((a: GoogleReview, b: GoogleReview) => {
-                if (b.rating !== a.rating) return b.rating - a.rating;
-                return b.time - a.time;
-            });
-
-        return {
-            rating: data.rating || 0,
-            user_ratings_total: data.userRatingCount || 0,
-            reviews,
-        };
+        return normalizeGoogleReviews(await response.json());
     } catch (error) {
         console.error("Error loading Google reviews", error);
         return null;

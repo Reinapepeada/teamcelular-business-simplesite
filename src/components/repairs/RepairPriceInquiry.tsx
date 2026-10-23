@@ -17,7 +17,7 @@ export default function RepairPriceInquiry({
   const id = useId();
   const [model, setModel] = useState("");
   const [symptom, setSymptom] = useState("");
-  const message = `Hola Team Celular, quiero confirmar el precio y el stock para ${repair}.\nMarca y modelo: ${model.trim() || "a confirmar"}.\nFalla: ${symptom || "a confirmar"}.`;
+  const message = `Hola Team Celular, quiero confirmar el precio y el stock para ${repair}.\nMarca y modelo: ${model.trim() || "a confirmar"}.\nFalla: ${symptom || "a confirmar"}.\n¿Qué repuesto incluye y cuál es el precio final con colocación, pruebas y garantía?`;
 
   return (
     <div className="mt-6 space-y-4 rounded-2xl bg-black/25 p-5 text-left">

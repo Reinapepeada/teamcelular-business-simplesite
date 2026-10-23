@@ -98,7 +98,7 @@ export default function SucursalesPage() {
           </h1>
           <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-[#a1a1a6]">
             Team Celular tiene dos sucursales en CABA: Paraguay 2451 en Recoleta y
-            Amenábar 2032 en Belgrano. Diagnóstico el mismo día, garantía escrita de
+            Amenábar 2032 en Belgrano. Presupuesto previo, garantía escrita de
             90 días y atención de lunes a viernes 10:30–18:00.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -146,9 +146,11 @@ export default function SucursalesPage() {
         <article className="bg-[#1d1d1f] rounded-[28px] p-5">
           <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-[#f5f5f7]">
             <FaPhoneAlt className="text-primary dark:text-secondary" />
-            Contacto
+            Contacto por sucursal
           </h2>
-          <p className="mt-2 text-slate-600 dark:text-[#a1a1a6]">+54 11 5103-4595</p>
+          <p className="mt-2 flex flex-col text-slate-600 dark:text-[#a1a1a6]">
+            {[recoleta, belgrano].map((branch) => <a key={branch.slug} href={`tel:${branch.phone.replace(/[^\d+]/g, "")}`} className="tc-link inline-flex min-h-11 items-center">{branch.shortName}: {branch.phone}</a>)}
+          </p>
         </article>
       </section>
 
@@ -164,7 +166,7 @@ export default function SucursalesPage() {
             Paraguay 2451 · Lun–Vie 10:30–18:00
           </p>
           <p className="mt-3 text-slate-600 dark:text-[#a1a1a6]">
-            Laboratorio principal: acá se hacen pantalla, batería y carga en el día, y los trabajos de placa bajo microscopio. También tablets y notebooks.
+            Laboratorio principal: pantalla, batería, carga y trabajos de placa bajo microscopio. También tablets y notebooks. Confirmamos repuesto y plazo antes de avanzar.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
@@ -181,6 +183,7 @@ export default function SucursalesPage() {
             >
               Cotizar en Recoleta
             </a>
+            <a href={recoleta.mapUrl} target="_blank" rel="noopener noreferrer" className="tc-link inline-flex min-h-11 items-center underline underline-offset-4">Cómo llegar a Recoleta</a>
           </div>
         </article>
 
@@ -195,7 +198,7 @@ export default function SucursalesPage() {
             Amenábar 2032 · Lun–Vie 10:30–18:00
           </p>
           <p className="mt-3 text-slate-600 dark:text-[#a1a1a6]">
-            Segunda sucursal en Belgrano con los mismos servicios: pantalla, batería, carga, placa y recuperación por agua. Diagnóstico el mismo día y garantía escrita 90 días.
+            Pantalla, batería, carga, placa y recuperación por agua. Consultá repuesto y plazo antes de acercarte. Garantía escrita de 90 días.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
@@ -212,6 +215,7 @@ export default function SucursalesPage() {
             >
               Cotizar en Belgrano
             </a>
+            <a href={belgrano.mapUrl} target="_blank" rel="noopener noreferrer" className="tc-link inline-flex min-h-11 items-center underline underline-offset-4">Cómo llegar a Belgrano</a>
           </div>
         </article>
       </section>

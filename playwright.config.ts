@@ -24,6 +24,8 @@ export default defineConfig({
                 NEXT_PUBLIC_BASE_URL: 'http://127.0.0.1:3100',
                 NEXT_PUBLIC_STORE_API_URL: 'http://127.0.0.1:3101',
                 NEXT_PUBLIC_API_URL: 'http://127.0.0.1:3101',
+                GOOGLE_PLACES_API_KEY: 'fixture-not-a-real-key',
+                GOOGLE_PLACE_ID: 'fixture-recoleta',
                 NEXT_TELEMETRY_DISABLED: '1',
                 NODE_OPTIONS: `--import ${pathToFileURL(path.resolve('tests/fixtures/local-network-only.mjs')).href}`,
             },
