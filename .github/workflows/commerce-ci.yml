@@ -34,6 +34,13 @@ jobs:
           NEXT_PUBLIC_BASE_URL: https://store.example.test
       - name: Check TypeScript with generated Next.js types
         run: npx --no-install tsc --noEmit
+      - name: Use Ubuntu fallback mirrors with bounded APT downloads
+        run: |
+          if [ -f /etc/apt/apt-mirrors.txt ]; then
+            sudo sed -i '/azure\.archive\.ubuntu\.com/d' /etc/apt/apt-mirrors.txt
+            test -s /etc/apt/apt-mirrors.txt
+          fi
+          printf 'Acquire::http::Timeout "30";\nAcquire::https::Timeout "30";\nAcquire::Retries "2";\n' | sudo tee /etc/apt/apt.conf.d/80-playwright-network
       - name: Install isolated test browser
         run: npx playwright install --with-deps chromium
       - name: Checkout recovery with fake services only

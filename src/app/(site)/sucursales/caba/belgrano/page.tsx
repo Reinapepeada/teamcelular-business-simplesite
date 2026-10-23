@@ -35,7 +35,7 @@ const faqs = [
   },
   {
     q: "¿Qué reparaciones hacen en la sucursal Belgrano?",
-    a: "Pantalla, batería, pin de carga, cámara, microelectrónica y recuperación por agua. El diagnóstico se hace el mismo día.",
+    a: "Pantalla, batería, pin de carga, cámara, microelectrónica y recuperación por agua. Te confirmamos el costo de revisión y el plazo según la falla antes de avanzar.",
   },
   {
     q: "¿Dan garantía escrita en Belgrano?",

@@ -44,7 +44,7 @@ export default function IphonePriceQuote() {
             ctaName={`iphone_model_price_${model.slug}`}
             ctaLocation="iphone_guide_prices"
             className="tc-btn tc-btn-primary"
-            message={`Hola Team Celular, quiero confirmar precio y stock para mi ${model.name}. Falla: `}
+            message={`Hola Team Celular, quiero confirmar precio y stock para mi ${model.name}.\n¿Qué calidad de repuesto ofrecen y cuál es el precio final con colocación, pruebas y garantía?\nFalla: `}
           >
             Consultar precio y stock de mi {model.name}
           </BranchWhatsAppButton>

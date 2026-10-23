@@ -27,8 +27,8 @@ export default function RepairPriceTable({
       {showIntroduction && <p className="mt-3 max-w-3xl text-[15px] leading-7 text-slate-600 dark:text-slate-300">
         Precios de mostrador de Team Celular, Paraguay 2451 Recoleta y Amenábar
         2032 Belgrano. El valor final depende del modelo y de la calidad del
-        repuesto; te lo confirmamos antes de avanzar. Incluye garantía escrita
-        de 90 días sobre trabajo y repuesto.
+        repuesto. Antes de aprobar, confirmá qué repuesto, colocación y pruebas
+        cubre el presupuesto. Garantía escrita de 90 días sobre trabajo y repuesto.
       </p>}
 
       {!singlePriceColumn && <p className="mt-4 text-sm text-slate-300 sm:hidden">Deslizá la tabla para ver todos los precios.</p>}

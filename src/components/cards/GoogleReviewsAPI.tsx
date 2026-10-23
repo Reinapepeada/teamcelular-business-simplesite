@@ -1,146 +1,72 @@
-﻿import Image from "next/image";
-import { FaGoogle, FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
+import Image from "next/image";
+import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { getGoogleReviews } from "@/lib/googleReviews";
+import { getBranch } from "@/lib/businessProfile";
 
 function StarRating({ rating }: { rating: number }) {
-    const stars = [];
-
-    for (let index = 1; index <= 5; index += 1) {
-        if (rating >= index) {
-            stars.push(<FaStar key={index} className="text-yellow-400" />);
-        } else if (rating >= index - 0.5) {
-            stars.push(<FaStarHalfAlt key={index} className="text-yellow-400" />);
-        } else {
-            stars.push(
-                <FaRegStar
-                    key={index}
-                    className="text-slate-300 dark:text-slate-600"
-                />,
-            );
-        }
-    }
-
-    return <div className="flex items-center gap-1">{stars}</div>;
+    return (
+        <span role="img" aria-label={`${rating.toLocaleString("es-AR")} de 5 estrellas`} className="inline-flex gap-1 text-yellow-400">
+            {[1, 2, 3, 4, 5].map(index => {
+                const Icon = rating >= index ? FaStar : rating >= index - 0.5 ? FaStarHalfAlt : FaRegStar;
+                return <Icon key={index} aria-hidden />;
+            })}
+        </span>
+    );
 }
 
 export default async function GoogleReviewsAPI() {
     const placeData = await getGoogleReviews();
-
-    if (!placeData) {
-        return (
-            <article className="space-y-8">
-                <div className="space-y-4 text-center">
-                    <div className="flex items-center justify-center gap-3">
-                        <FaGoogle className="text-4xl text-primary" />
-                        <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-[2.2rem]">
-                            Lo que dicen nuestros clientes
-                        </h2>
-                    </div>
-                    <div className="rounded-2xl border border-slate-200/70 bg-white/70 p-8 shadow-md dark:border-white/10 dark:bg-slate-900/70">
-                        <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
-                            Leé las opiniones de la sucursal Recoleta en nuestro perfil de Google.
-                        </p>
-                        <div className="mt-6">
-                            <a
-                                href="https://share.google/EyVELq4ujwgdGKEEJ"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex min-h-11 items-center gap-2 rounded-full bg-primary px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
-                            >
-                                <FaGoogle />
-                                Ver reseñas en Google
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        );
-    }
-
-    const { rating, reviews, user_ratings_total } = placeData;
+    const branch = getBranch("recoleta");
+    const reviews = placeData?.reviews.slice(0, 3) ?? [];
 
     return (
-        <article className="space-y-8">
-            <div className="space-y-4 text-center">
-                <div className="flex items-center justify-center gap-3">
-                    <FaGoogle className="text-4xl text-primary" />
-                    <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-[2.2rem]">
-                        Lo que dicen nuestros clientes
-                    </h2>
-                </div>
-                <div className="flex flex-wrap items-center justify-center gap-3">
-                    <StarRating rating={rating} />
-                    <span className="text-2xl font-bold text-primary">
-                        {rating.toFixed(1).replace(".", ",")}
-                    </span>
-                    <span className="text-slate-600 dark:text-slate-400">
-                        ({user_ratings_total} reseñas en Google, sucursal Recoleta)
-                    </span>
-                </div>
-                <p className="mx-auto max-w-3xl text-[1.02rem] leading-7 text-slate-700 dark:text-slate-300">
-                    Estas opiniones reflejan reparaciones y diagnósticos realizados
-                    en nuestro laboratorio.
-                </p>
-            </div>
+        <article className="space-y-6">
+            <header className="space-y-3 text-center">
+                <h2 className="tc-heading text-white">Lo que dicen nuestros clientes</h2>
+                <p className="text-sm text-[#a1a1a6]">Opiniones de la sucursal Recoleta · Paraguay 2451</p>
+                {placeData && (
+                    <p className="flex flex-wrap items-center justify-center gap-3 text-[#f5f5f7]">
+                        <StarRating rating={placeData.rating} />
+                        <span className="text-2xl font-semibold tabular-nums">{placeData.rating.toFixed(1).replace(".", ",")}</span>
+                        <span>{placeData.user_ratings_total} reseñas</span>
+                    </p>
+                )}
+                {reviews.length > 0 && <p className="text-sm text-[#a1a1a6]">Hasta tres opiniones en el orden de relevancia de Google, sin filtrar por puntuación. Se conserva el texto original.</p>}
+            </header>
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-                {reviews.slice(0, 3).map((review, index) => (
-                    <article
-                        key={`${review.author_name}-${index}`}
-                        className="rounded-2xl border border-slate-200/75 bg-white/75 p-5 shadow-md transition hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-slate-900/75"
-                    >
-                        <div className="space-y-4">
-                            <div className="flex items-start justify-between gap-3">
-                                <div className="flex items-center gap-3">
-                                    {review.profile_photo_url ? (
-                                        <div className="relative h-12 w-12 overflow-hidden rounded-full">
-                                            <Image
-                                                src={review.profile_photo_url}
-                                                alt={review.author_name}
-                                                fill
-                                                className="object-cover"
-                                                sizes="48px"
-                                            />
-                                        </div>
-                                    ) : (
-                                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary text-lg font-bold text-white">
-                                            {review.author_name.charAt(0)}
-                                        </div>
-                                    )}
-                                    <div>
-                                        <p className="text-[0.98rem] font-semibold leading-snug text-slate-900 dark:text-slate-100">
-                                            {review.author_name}
-                                        </p>
-                                        <p className="text-xs text-slate-500 dark:text-slate-400">
-                                            {review.relative_time_description}
-                                        </p>
-                                    </div>
+            {reviews.length > 0 && (
+                <div className="grid gap-4 md:grid-cols-3">
+                    {reviews.map((review, index) => (
+                        <article key={`${review.review_url}-${index}`} className="tc-card min-w-0 space-y-4">
+                            <div className="flex items-center gap-3">
+                                {review.profile_photo_url && <Image src={review.profile_photo_url} alt={review.author_name} width={40} height={40} className="h-10 w-10 shrink-0 rounded-full object-cover" />}
+                                <div className="min-w-0">
+                                    <p className="break-words font-semibold text-white">
+                                        {review.author_url ? <a href={review.author_url} target="_blank" rel="noopener noreferrer" className="tc-link underline underline-offset-4">{review.author_name}</a> : review.author_name}
+                                    </p>
+                                    {review.relative_time_description && <p className="mt-1 text-xs text-[#a1a1a6]">{review.relative_time_description}</p>}
                                 </div>
-                                <FaGoogle className="mt-1 text-xl text-primary" />
                             </div>
-
                             <StarRating rating={review.rating} />
+                            {review.text.length > 220 ? (
+                                <details className="group text-[15px] leading-6 text-[#c7c7cc]">
+                                    <summary className="min-h-11 cursor-pointer rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
+                                        <span className="group-open:hidden">{review.text.slice(0, 220).replace(/\s+\S*$/, "")}… </span>
+                                        <span className="tc-link underline underline-offset-4">Leer reseña completa</span>
+                                    </summary>
+                                    <p className="mt-3 whitespace-pre-line break-words">{review.text}</p>
+                                </details>
+                            ) : <p className="whitespace-pre-line break-words text-[15px] leading-6 text-[#c7c7cc]">{review.text}</p>}
+                            <a href={review.review_url} target="_blank" rel="noopener noreferrer" className="tc-link inline-flex min-h-11 items-center text-sm underline underline-offset-4">Ver reseña original</a>
+                        </article>
+                    ))}
+                </div>
+            )}
 
-                            <p className="text-[0.92rem] leading-6 text-slate-600 dark:text-slate-300">
-                                &ldquo;{review.text}&rdquo;
-                            </p>
-                        </div>
-                    </article>
-                ))}
-            </div>
-
-            <div className="text-center">
-                <a
-                    href="https://www.google.com/search?sca_esv=9624f88e5d8f48a2&sxsrf=ANbL-n6PeKIqm41-bypsB-8HWDe7zFQalg:1771801721760&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOXEE8cC5R2ZYv4fXETPwAQ_JiykyTTHr0oxDxZtD8WSXZVUA8OJCZms9nfxGPg4g-4NYVf2hADghUJ9PwquRPKZ1OkM6cS4CtSrNj4eOc4Uy6Eo-NUm93lZz-nFxWLJzPj4rj8BiTRaZ549Idwxp3wqfzJNfJTNLhnDHazg_E2kkHZJKjQ%3D%3D&q=Team+celular+%7C+Reparacion+de+celulares+%7C+Reparacion+de+computadoras+Opiniones&sa=X&ved=2ahUKEwjZufPhm-6SAxWxqpUCHT-THJQQ0bkNegQIJxAH&biw=1745&bih=828&dpr=1.1"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-11 items-center gap-2 rounded-full bg-primary px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-primary/90 hover:shadow-xl"
-                >
-                    <FaGoogle />
-                    Ver todas las reseñas en Google
-                </a>
-            </div>
+            <footer className="space-y-3 text-center">
+                <p translate="no" className="whitespace-nowrap text-sm font-normal not-italic tracking-normal text-white">Google Maps</p>
+                <a href={branch.mapUrl} target="_blank" rel="noopener noreferrer" className="tc-btn tc-btn-ghost">Ver reseñas de Recoleta en Google Maps</a>
+            </footer>
         </article>
     );
 }
-
