@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { FaMapMarkedAlt, FaPhoneAlt, FaRegClock } from "react-icons/fa";
+import { FaMapMarkedAlt, FaPhoneAlt } from "react-icons/fa";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import { getBranch, whatsappUrl as buildWhatsappUrl } from "@/lib/businessProfile";
 import BranchMap from "@/components/cards/BranchMap";
@@ -13,7 +13,7 @@ const PAGE_URL = `${SITE_URL}/sucursales`;
 export const metadata: Metadata = {
   title: "Sucursales Team Celular en CABA | Recoleta y Belgrano",
   description:
-    "Dos talleres en CABA con diagnóstico el mismo día y garantía escrita de 90 días: Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano).",
+    "Sucursales Team Celular en CABA: Paraguay 2451, Recoleta, y Amenábar 2032, Belgrano. Consultá repuesto y plazo antes de acercarte.",
   alternates: {
     canonical: PAGE_URL,
     languages: {
@@ -124,36 +124,6 @@ export default function SucursalesPage() {
         </div>
       </header>
 
-      <section className="mt-10 grid gap-4 md:grid-cols-3">
-        <article className="bg-[#1d1d1f] rounded-[28px] p-5">
-          <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-[#f5f5f7]">
-            <FaMapMarkedAlt className="text-primary dark:text-secondary" />
-            Sucursales
-          </h2>
-          <p className="mt-2 text-slate-600 dark:text-[#a1a1a6]">
-            Recoleta: Paraguay 2451. Belgrano: Amenabar 2032.
-          </p>
-        </article>
-        <article className="bg-[#1d1d1f] rounded-[28px] p-5">
-          <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-[#f5f5f7]">
-            <FaRegClock className="text-primary dark:text-secondary" />
-            Horario
-          </h2>
-          <p className="mt-2 text-slate-600 dark:text-[#a1a1a6]">
-            Lunes a viernes de 10:30 a 18:00 hs.
-          </p>
-        </article>
-        <article className="bg-[#1d1d1f] rounded-[28px] p-5">
-          <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-[#f5f5f7]">
-            <FaPhoneAlt className="text-primary dark:text-secondary" />
-            Contacto por sucursal
-          </h2>
-          <p className="mt-2 flex flex-col text-slate-600 dark:text-[#a1a1a6]">
-            {[recoleta, belgrano].map((branch) => <a key={branch.slug} href={`tel:${branch.phone.replace(/[^\d+]/g, "")}`} className="tc-link inline-flex min-h-11 items-center">{branch.shortName}: {branch.phone}</a>)}
-          </p>
-        </article>
-      </section>
-
       <section className="mt-8 grid gap-6 md:grid-cols-2">
         <article className="bg-[#1d1d1f] rounded-[28px] p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary dark:text-secondary">
@@ -168,6 +138,9 @@ export default function SucursalesPage() {
           <p className="mt-3 text-slate-600 dark:text-[#a1a1a6]">
             Laboratorio principal: pantalla, batería, carga y trabajos de placa bajo microscopio. También tablets y notebooks. Confirmamos repuesto y plazo antes de avanzar.
           </p>
+          <a href={`tel:${recoleta.phone.replace(/[^\d+]/g, "")}`} aria-label={`${recoleta.shortName}: ${recoleta.phone}`} className="tc-link mt-3 inline-flex min-h-11 items-center gap-2">
+            <FaPhoneAlt aria-hidden className="shrink-0" /> {recoleta.phone}
+          </a>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/sucursales/caba/recoleta"
@@ -200,6 +173,9 @@ export default function SucursalesPage() {
           <p className="mt-3 text-slate-600 dark:text-[#a1a1a6]">
             Pantalla, batería, carga, placa y recuperación por agua. Consultá repuesto y plazo antes de acercarte. Garantía escrita de 90 días.
           </p>
+          <a href={`tel:${belgrano.phone.replace(/[^\d+]/g, "")}`} aria-label={`${belgrano.shortName}: ${belgrano.phone}`} className="tc-link mt-3 inline-flex min-h-11 items-center gap-2">
+            <FaPhoneAlt aria-hidden className="shrink-0" /> {belgrano.phone}
+          </a>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/sucursales/caba/belgrano"
