@@ -47,7 +47,7 @@ export default function BannerHome() {
                     </nav>
                     <p className="flex items-center gap-2"><BsClock aria-hidden /> {BUSINESS_PROFILE.hours.text}</p>
                 </div>
-                <RepairBrandLinks />
+                <RepairBrandLinks dividers={false} />
             </div>
         </section>
     );

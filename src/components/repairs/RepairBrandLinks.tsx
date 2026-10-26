@@ -8,9 +8,9 @@ const brands = [
   { label: "Xiaomi", slug: "xiaomi", Icon: SiXiaomi },
 ];
 
-export default function RepairBrandLinks() {
+export default function RepairBrandLinks({ dividers = true }: { readonly dividers?: boolean }) {
   return (
-    <nav aria-label="Reparaciones por marca" className="grid grid-cols-4 gap-2 py-4">
+    <nav aria-label="Reparaciones por marca" className={`grid grid-cols-4 gap-2 py-4${dividers ? " border-y border-[#333336]" : ""}`}>
       {brands.map(({ label, slug, Icon }) => (
         <Link key={slug} href={`/guias/reparacion-${slug}-buenos-aires`}
           className="flex min-h-20 flex-col items-center justify-center gap-3 rounded-xl text-[#c7c7cc] transition-colors hover:bg-[#1d1d1f] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#6aa6ff]">
