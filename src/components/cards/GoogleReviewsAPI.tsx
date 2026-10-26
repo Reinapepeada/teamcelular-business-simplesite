@@ -17,7 +17,7 @@ function StarRating({ rating }: { rating: number }) {
 export default async function GoogleReviewsAPI() {
     const placeData = await getGoogleReviews();
     const branch = getBranch("recoleta");
-    const reviews = placeData?.reviews.slice(0, 3) ?? [];
+    const reviews = placeData?.reviews.filter(review => review.rating === 5).slice(0, 3) ?? [];
 
     return (
         <article className="space-y-6">
@@ -31,7 +31,7 @@ export default async function GoogleReviewsAPI() {
                         <span>{placeData.user_ratings_total} reseñas</span>
                     </p>
                 )}
-                {reviews.length > 0 && <p className="text-sm text-[#a1a1a6]">Hasta tres opiniones en el orden de relevancia de Google, sin filtrar por puntuación. Se conserva el texto original.</p>}
+                {reviews.length > 0 && <p className="text-sm text-[#a1a1a6]">Selección de reseñas de 5 estrellas. Consultá todas las opiniones en Google Maps.</p>}
             </header>
 
             {reviews.length > 0 && (
