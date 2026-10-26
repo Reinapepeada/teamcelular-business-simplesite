@@ -57,12 +57,12 @@ const symptoms: GuideItem[] = [
   {
     title: "No activa la carga rápida",
     description:
-      "Si solo carga lento o se desconecta mientras usás el equipo, puede haber daño en las líneas de datos del flex de carga.",
+      "La carga lenta no confirma una falla del flex. Primero hay que revisar que el cable y el cargador sean compatibles y, en los modelos que lo permiten, que la carga rápida esté activada.",
   },
   {
     title: "Aviso de humedad o accesorio no compatible",
     description:
-      "Si Samsung muestra \"humedad detectada\" o iPhone \"accesorio no compatible\" con el puerto seco, apunta al pin o al flex.",
+      "Un aviso de humedad en Samsung o de accesorio incompatible en iPhone no confirma un pin dañado. También hay que revisar el cable y el cargador. Ante humedad, desconectá el cable y no cargues por ese puerto hasta que esté seco.",
   },
 ];
 
@@ -125,7 +125,7 @@ const faq: GuideFaqItem[] = [
   {
     question: "¿Cómo saber si se dañó el pin de carga del celular?",
     answer:
-      "Hay cuatro señales claras: carga solo si sostenés el cable en una posición, el enchufe tiene juego hacia los costados, dejó de cargar rápido, o la computadora no reconoce el equipo por cable. Si además aparece un aviso de humedad o de accesorio no compatible con el puerto seco, también apunta al pin o al flex.",
+      "Que cargue solo en cierta posición, tenga juego o no conecte con la computadora puede indicar un problema de cable o puerto. La carga lenta y los avisos de humedad o accesorio incompatible tampoco confirman un pin dañado. Primero descartamos cable, cargador y suciedad; después revisamos el conector y el flex. Si aparece humedad, desconectá el cable.",
   },
   {
     question: "¿Es el pin de carga, el cable o la batería?",
@@ -157,6 +157,7 @@ const faq: GuideFaqItem[] = [
 const relatedLinks: GuideRelatedLink[] = [
   { href: "https://support.apple.com/es-es/108805", label: "Apple: si el iPhone no se carga" },
   { href: "https://www.samsung.com/ar/support/mobile-devices/issues-with-wireless-charging/", label: "Samsung: compatibilidad y problemas de carga inalámbrica" },
+  { href: "https://www.samsung.com/ar/support/mobile-devices/issues-with-wired-charging/", label: "Samsung: cable, carga rápida y aviso de humedad" },
   { href: "/reparaciones/cambio-pin-carga-caba", label: "Precio del cambio de pin de carga" },
   { href: "/guias/celular-mojado-que-hacer", label: "Celular mojado: primeros pasos" },
   { href: "/guias/cambio-bateria-celular", label: "Guía de batería" },

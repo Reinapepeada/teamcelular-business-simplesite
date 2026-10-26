@@ -29,7 +29,11 @@ export function readBranchPreference(): BranchPreference | null {
 
 export function saveBranchPreference(slug: BranchSlug, method: BranchSelectionMethod) {
   if (typeof window === "undefined") return;
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ slug, method, selectedAt: Date.now() }));
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ slug, method, selectedAt: Date.now() }));
+  } catch {
+    // Recordar la sucursal es opcional; la elección actual sigue en el formulario o selector.
+  }
 }
 
 export function branchWhatsappUrl(slug: BranchSlug, text?: string) {

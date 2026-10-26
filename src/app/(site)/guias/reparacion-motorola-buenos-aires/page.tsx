@@ -143,7 +143,7 @@ const frequentRepairs = [
   {
     title: "Pin de carga USB-C Motorola",
     description:
-      "Reparamos pin, flex de carga y micrófonos inferiores. Frecuente en Moto G14, G24, G54 y Edge por uso intensivo con carga rápida.",
+      "Revisamos cable, cargador y puerto antes de confirmar si hace falta reparar el pin o el flex de carga. También comprobamos el micrófono inferior cuando comparte el conjunto.",
     eta: "1-3 h",
     Icon: FaBolt,
   },
@@ -263,12 +263,12 @@ const faq = [
   {
     question: "¿Trabajan Motorola Edge con pantalla curva?",
     answer:
-      "Sí. Los modelos Edge 30, 40 y 50 tienen pantalla curva que requiere herramientas específicas para el despegue. Diagnosticamos antes de cotizar para confirmar viabilidad según el nivel de daño.",
+      "Sí. Confirmamos el modelo y la variante de Edge antes de cotizar: el módulo y el procedimiento cambian según la pantalla. En equipos con pantalla curva, evaluamos también el marco y el daño antes de confirmar la reparación.",
   },
   {
     question: "¿El Moto G14/G24 tiene problemas frecuentes de pin de carga?",
     answer:
-      "Sí, el puerto USB-C del Moto G14 y G24 presenta desgaste por uso intensivo con carga rápida. Revisamos pin y flex antes de confirmar si el problema es mecánico o eléctrico.",
+      "Que un Moto G14 o G24 no cargue no confirma una falla del pin ni que la carga rápida la haya causado. Revisamos el cable, el cargador y la conexión USB-C; después comprobamos el pin y el flex según el síntoma.",
   },
   {
     question: "¿La garantía cubre trabajo y repuesto?",
@@ -448,28 +448,18 @@ export default function MotorolaRepairGuidePage() {
                 Una referencia rápida para proteger el equipo antes del diagnóstico.
               </p>
             </div>
-            <div className="overflow-x-auto">
-              <table className="min-w-[760px] w-full text-left text-sm">
-                <thead className="bg-slate-100/80 text-slate-700 dark:bg-slate-800/80 dark:text-slate-200">
-                  <tr>
-                    <th scope="col" className="px-5 py-4 font-semibold">Síntoma</th>
-                    <th scope="col" className="px-5 py-4 font-semibold">Urgencia</th>
-                    <th scope="col" className="px-5 py-4 font-semibold">Tiempo típico</th>
-                    <th scope="col" className="px-5 py-4 font-semibold">Siguiente paso</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
-                  {motorolaSymptomRows.map((row) => (
-                    <tr key={row.symptom} className="bg-white/70 dark:bg-slate-900/40">
-                      <td className="px-5 py-4 font-semibold text-slate-900 dark:text-[#f5f5f7]">{row.symptom}</td>
-                      <td className="px-5 py-4 text-slate-700 dark:text-[#a1a1a6]">{row.urgency}</td>
-                      <td className="px-5 py-4 text-slate-700 dark:text-[#a1a1a6]">{row.typicalTime}</td>
-                      <td className="px-5 py-4 text-slate-700 dark:text-[#a1a1a6]">{row.nextStep}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <dl className="divide-y divide-slate-200 dark:divide-slate-700">
+              {motorolaSymptomRows.map((row) => (
+                <div key={row.symptom} className="px-6 py-5">
+                  <dt className="font-semibold text-slate-900 dark:text-[#f5f5f7]">{row.symptom}</dt>
+                  <dd className="mt-2 space-y-2 text-sm leading-6 text-slate-700 dark:text-[#a1a1a6]">
+                    <p className="text-slate-900 dark:text-[#f5f5f7]">{row.nextStep}</p>
+                    <p><span className="font-semibold">Urgencia: </span>{row.urgency}</p>
+                    <p><span className="font-semibold">Tiempo típico: </span>{row.typicalTime}</p>
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </section>
 
