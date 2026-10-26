@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Contacto, horarios y WhatsApp | Team Celular",
         description:
-            "Team Celular, dos sucursales en CABA: Paraguay 2451 Recoleta y Amenábar 2032 Belgrano. Diagnóstico el mismo día y garantía escrita 90 días. WhatsApp +54 11 5103-4595.",
+            "Team Celular en Recoleta y Belgrano, CABA. Direcciones, horarios y WhatsApp de cada sucursal. Consultá repuesto y plazo antes de acercarte.",
         type: "website",
         url: "https://teamcelular.com/contacto",
         locale: "es_AR",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "Contacto, horarios y WhatsApp | Team Celular",
-        description: "Team Celular, Paraguay 2451 Recoleta y Amenábar 2032 Belgrano. Reparación de celulares en CABA, diagnóstico el mismo día y garantía escrita 90 días.",
+        description: "Team Celular en Recoleta y Belgrano, CABA. Direcciones, horarios y WhatsApp de cada sucursal. Consultá repuesto y plazo antes de acercarte.",
         images: ["https://teamcelular.com/opengraph-image.png"],
     },
 };
@@ -143,7 +143,7 @@ const repairFaqs = [
     {
         question: "¿Cuánto tarda una reparación típica?",
         answer:
-            "Pantalla o batería suelen resolverse en el día. Para placa, el informe se entrega en hasta 72 horas hábiles; si el arreglo es de un chip, lleva semanas. Confirmamos precio y plazo antes de empezar.",
+            "Pantalla o batería suelen resolverse en el día, con repuesto en stock y según el diagnóstico. Para placa, el informe se entrega en hasta 72 horas hábiles; si el arreglo es de un chip, lleva semanas. Confirmamos precio y plazo antes de empezar.",
     },
     {
         question: "¿Ofrecen garantía?",

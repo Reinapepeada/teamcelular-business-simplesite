@@ -64,7 +64,7 @@ const trustSignals = [
 export const metadata: Metadata = {
   title: "Reparación de Celulares en Recoleta CABA | Team Celular",
   description:
-    "Team Celular en Paraguay 2451, Recoleta: pantalla, batería y carga el mismo día, sin turno. Lunes a viernes 10:30–18:00, garantía escrita 90 días.",
+    "Team Celular, Paraguay 2451, Recoleta. Reparación de celulares con garantía escrita de 90 días. Confirmamos repuesto y plazo antes de avanzar.",
   alternates: {
     canonical: PAGE_URL,
     languages: {
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Reparación de Celulares en Recoleta CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla, batería y carga el mismo día, diagnóstico técnico y garantía escrita 90 días. Lun–Vie 10:30–18:00.",
+      "Team Celular, Paraguay 2451, Recoleta. Reparación de celulares con garantía escrita de 90 días. Confirmamos repuesto y plazo antes de avanzar.",
     url: PAGE_URL,
     type: "website",
     locale: "es_AR",
@@ -95,7 +95,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Reparación de Celulares en Recoleta CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla y batería el mismo día, garantía escrita 90 días. Lun–Vie 10:30–18:00.",
+      "Team Celular, Paraguay 2451, Recoleta. Reparación de celulares con garantía escrita de 90 días. Confirmamos repuesto y plazo antes de avanzar.",
     images: [`${SITE_URL}/opengraph-image.png`],
   },
 };
@@ -253,7 +253,7 @@ export default function SucursalRecoletaPage() {
 
       <section className="mt-10">
 
-        <RepairPriceTable brand="celular" prices={POPULAR_REPAIR_PRICES} updatedLabel={PRICES_UPDATED_LABEL} />
+        <RepairPriceTable brand="celular" prices={POPULAR_REPAIR_PRICES} updatedLabel={PRICES_UPDATED_LABEL} singlePriceColumn />
 
       </section>
 
