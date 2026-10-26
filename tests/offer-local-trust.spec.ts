@@ -32,12 +32,17 @@ test('Sucursales ofrece teléfonos y Maps propios sin JavaScript', async ({ brow
     await context.close();
 });
 
-test('Las opiniones muestran fuente, autor y detalle completo por teclado', async ({ page }) => {
+test('Los testimonios seleccionan hasta tres reseñas de cinco estrellas y conservan la reputación global', async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 900 });
     await page.goto('/sucursales/caba/recoleta');
     const section = page.locator('article').filter({ has: page.getByRole('heading', { name: 'Lo que dicen nuestros clientes', exact: true }) });
     const authors = section.locator('article p.font-semibold');
-    await expect(authors).toHaveText(['Cliente ficticio A', 'Cliente ficticio B']);
+    await expect(authors).toHaveText(['Cliente ficticio A', 'Cliente ficticio B', 'Cliente ficticio C']);
+    await expect(section.getByRole('img', { name: '5 de 5 estrellas', exact: true })).toHaveCount(3);
+    await expect(section.getByRole('img', { name: '4,5 de 5 estrellas', exact: true })).toBeVisible();
+    await expect(section).toContainText('12 reseñas');
+    await expect(section).toContainText('Selección de reseñas de 5 estrellas');
+    await expect(section.getByRole('link', { name: 'Ver reseñas de Recoleta en Google Maps', exact: true })).toBeVisible();
     await expect(section.getByRole('link', { name: 'Cliente ficticio A', exact: true })).toHaveAttribute('href', 'https://www.google.com/maps/contrib/fixture-a');
     await expect(section.getByRole('link', { name: 'Ver reseña original' }).first()).toHaveAttribute('href', 'https://www.google.com/maps/reviews/fixture-a');
     const detail = section.locator('details');
