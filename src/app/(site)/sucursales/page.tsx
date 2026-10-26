@@ -138,7 +138,7 @@ export default function SucursalesPage() {
           <p className="mt-3 text-slate-600 dark:text-[#a1a1a6]">
             Laboratorio principal: pantalla, batería, carga y trabajos de placa bajo microscopio. También tablets y notebooks. Confirmamos repuesto y plazo antes de avanzar.
           </p>
-          <a href={`tel:${recoleta.phone.replace(/[^\d+]/g, "")}`} className="tc-link mt-3 inline-flex min-h-11 items-center gap-2">
+          <a href={`tel:${recoleta.phone.replace(/[^\d+]/g, "")}`} aria-label={`${recoleta.shortName}: ${recoleta.phone}`} className="tc-link mt-3 inline-flex min-h-11 items-center gap-2">
             <FaPhoneAlt aria-hidden className="shrink-0" /> {recoleta.phone}
           </a>
           <div className="mt-6 flex flex-wrap gap-3">
@@ -173,7 +173,7 @@ export default function SucursalesPage() {
           <p className="mt-3 text-slate-600 dark:text-[#a1a1a6]">
             Pantalla, batería, carga, placa y recuperación por agua. Consultá repuesto y plazo antes de acercarte. Garantía escrita de 90 días.
           </p>
-          <a href={`tel:${belgrano.phone.replace(/[^\d+]/g, "")}`} className="tc-link mt-3 inline-flex min-h-11 items-center gap-2">
+          <a href={`tel:${belgrano.phone.replace(/[^\d+]/g, "")}`} aria-label={`${belgrano.shortName}: ${belgrano.phone}`} className="tc-link mt-3 inline-flex min-h-11 items-center gap-2">
             <FaPhoneAlt aria-hidden className="shrink-0" /> {belgrano.phone}
           </a>
           <div className="mt-6 flex flex-wrap gap-3">
