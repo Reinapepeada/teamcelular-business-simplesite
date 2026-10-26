@@ -60,26 +60,26 @@ const contactMethods = [
     {
         icon: FaWhatsapp,
         title: "WhatsApp",
-        value: "+54 11 5103-4595",
+        label: "WhatsApp por sucursal",
+        value: "Recoleta o Belgrano",
         description: "Precio y stock en hasta 2 h hábiles",
         href: whatsappUrl(),
-        tone: "bg-emerald-50 text-emerald-700 border-emerald-200",
     },
     {
         icon: FaPhone,
         title: "Teléfono",
+        label: "Teléfono de Recoleta",
         value: "+54 11 5103-4595",
         description: "Llamadas de 10:30 a 18:00",
         href: "tel:+5491151034595",
-        tone: "bg-sky-50 text-sky-700 border-sky-200",
     },
     {
         icon: FaEnvelope,
         title: "Email",
+        label: "Email",
         value: "teamcelular.arg@gmail.com",
         description: "Para empresas o consultas con fotos y detalle",
         href: "mailto:teamcelular.arg@gmail.com",
-        tone: "bg-violet-50 text-violet-700 border-violet-200",
     },
 ];
 
@@ -87,7 +87,7 @@ const socialMedia = [
     {
         icon: FaInstagram,
         name: "Instagram",
-        handle: "@teamcelular.arg",
+        handle: "@teamcelular.ar",
         href: "https://www.instagram.com/teamcelular.ar/",
     },
     {
@@ -98,11 +98,11 @@ const socialMedia = [
     },
 ];
 
-const quickFaqs = [
+const faqs = [
     {
         question: "¿Necesito turno para acercarme?",
         answer:
-            "No. Atendemos por orden de llegada. Si nos escribís antes, te confirmamos que tenemos el repuesto y no hacés el viaje de balde.",
+            "No. Atendemos por orden de llegada. Si nos escribís antes con el modelo, te confirmamos que tenemos el repuesto y no hacés el viaje de balde.",
     },
     {
         question: "¿Coordinan retiros en CABA?",
@@ -134,12 +134,7 @@ const transportInfo = [
     },
 ];
 
-const faqs = [
-    {
-        question: "¿Necesito turno previo?",
-        answer:
-            "No. Pero si escribís antes con el modelo, te confirmamos que hay repuesto y te ahorrás la espera.",
-    },
+const repairFaqs = [
     {
         question: "¿La revisión técnica tiene costo?",
         answer:
@@ -148,7 +143,7 @@ const faqs = [
     {
         question: "¿Cuánto tarda una reparación típica?",
         answer:
-            "Pantalla o batería suelen resolverse en el día. Casos complejos pueden tomar entre 24 y 72 horas.",
+            "Pantalla o batería suelen resolverse en el día. Para placa, el informe se entrega en hasta 72 horas hábiles; si el arreglo es de un chip, lleva semanas. Confirmamos precio y plazo antes de empezar.",
     },
     {
         question: "¿Ofrecen garantía?",
@@ -157,13 +152,15 @@ const faqs = [
     },
 ];
 
+const contactFaqs = [...faqs, ...repairFaqs];
+
 export default function ContactoPage() {
     const recoleta = getBranch("recoleta");
     const belgrano = getBranch("belgrano");
 
     return (
         <section className="w-full">
-            <div className="mx-auto flex w-full max-w-[100rem] flex-col gap-12 px-4 py-12 sm:px-6 lg:px-8">
+            <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-8 sm:px-6 sm:py-12">
                 <BreadcrumbJsonLd
                     items={[
                         { name: "Inicio", url: "https://teamcelular.com/" },
@@ -179,35 +176,166 @@ export default function ContactoPage() {
                     <span className="font-semibold text-slate-900 dark:text-slate-100">Contacto</span>
                 </nav>
 
-                <header className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-lg md:p-12">
-                    <div className="mx-auto max-w-3xl text-center">
-                        <span className="inline-flex rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-secondary">
-                            Recoleta y Belgrano · CABA
-                        </span>
-                        <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
+                <header className="max-w-3xl">
+                        <h1 className="text-[clamp(1.875rem,4.5vw,3rem)] font-semibold leading-tight tracking-tight text-white">
                             Contacto directo con el laboratorio en CABA
                         </h1>
-                        <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-400">
-                            Team Celular tiene dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2032, Belgrano</strong>. Atendemos lunes a viernes de 10:30 a 18:00 sin turno previo. Podés venir al taller más cercano, escribir por WhatsApp o pedir presupuesto por formulario.
+                        <p className="mt-4 text-base leading-7 text-[#a1a1a6] sm:text-lg">
+                            Atendemos en Recoleta y Belgrano, de lunes a viernes de 10:30 a 18:00, sin turno previo. Elegí la sucursal para ver cómo llegar o preparar tu consulta por WhatsApp.
                         </p>
-                        <div className="mt-8 flex flex-wrap justify-center gap-4">
+                        <div className="mt-5 flex flex-wrap gap-3">
                             <BranchWhatsAppButton
                                 ctaName="contact_hero_whatsapp"
                                 ctaLocation="contact_hero"
-                                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-emerald-700"
+                                className="tc-btn tc-btn-primary"
                             >
                                 <FaWhatsapp aria-hidden />
-                                Escribinos por WhatsApp
+                                Elegir sucursal y abrir WhatsApp
                             </BranchWhatsAppButton>
                             <Link
                                 href="/presupuesto-reparacion"
-                                className="inline-flex min-h-12 items-center justify-center rounded-full border border-primary px-6 py-3 text-sm font-semibold text-primary dark:text-secondary transition hover:bg-primary/10"
+                                className="tc-link inline-flex min-h-11 items-center px-2"
                             >
-                                Solicitar presupuesto
+                                Preparar consulta por modelo
                             </Link>
                         </div>
-                    </div>
                 </header>
+
+                <section id="ubicacion" className="scroll-mt-24 space-y-6">
+                    <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
+                        Nuestras sucursales en CABA
+                    </h2>
+                    <div className="grid gap-6 lg:grid-cols-2">
+                        <article className="rounded-[28px] bg-[#1d1d1f] p-6">
+                            <div className="flex items-start gap-4">
+                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary dark:text-secondary">
+                                    <FaMapMarkerAlt className="text-2xl" />
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
+                                        Sucursal Recoleta
+                                    </h3>
+                                    <p className="mt-1 text-lg text-slate-700 dark:text-slate-300">
+                                        Paraguay 2451, Recoleta
+                                    </p>
+                                    <p className="text-slate-600 dark:text-slate-400">
+                                        Ciudad Autónoma de Buenos Aires
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="mt-6 flex items-start gap-4">
+                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary/10 text-secondary">
+                                    <FaClock className="text-2xl" />
+                                </div>
+                                <div>
+                                    <p className="font-semibold text-slate-900 dark:text-slate-100">Horario de atención</p>
+                                    <p className="mt-1 text-slate-700 dark:text-slate-300">Lunes a Viernes: 10:30 – 18:00</p>
+                                    <p className="text-sm text-slate-500 dark:text-slate-400">Sábados y domingos: cerrado</p>
+                                </div>
+                            </div>
+                            <details className="mt-4">
+                                <summary className="tc-link list-item min-h-11 cursor-pointer py-2 marker:text-[#a1a1a6]">Transporte y ubicación de Recoleta</summary>
+                                <div className="mt-3 space-y-3">
+                                {transportInfo.map((transport) => {
+                                    const Icon = transport.icon;
+                                    return (
+                                        <div key={transport.title} className="flex gap-3">
+                                            <Icon className="mt-1 shrink-0 text-primary dark:text-secondary" />
+                                            <div>
+                                                <p className="font-semibold text-slate-900 dark:text-slate-100">{transport.title}</p>
+                                                <p className="text-sm text-slate-600 dark:text-slate-400">{transport.description}</p>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                                </div>
+                            </details>
+                            <Link href={recoleta.url} className="tc-link mt-3 inline-flex min-h-11 items-center">
+                                Ver contacto de Recoleta
+                            </Link>
+                            <Link
+                                href={recoleta.mapUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="tc-btn tc-btn-ghost mt-3 w-full"
+                            >
+                                <FaDirections aria-hidden />
+                                Cómo llegar — Recoleta
+                            </Link>
+                        </article>
+
+                        <article className="rounded-[28px] bg-[#1d1d1f] p-6">
+                            <div className="flex items-start gap-4">
+                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary dark:text-secondary">
+                                    <FaMapMarkerAlt className="text-2xl" />
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
+                                        Sucursal Belgrano
+                                    </h3>
+                                    <p className="mt-1 text-lg text-slate-700 dark:text-slate-300">
+                                        Amenábar 2032, Belgrano
+                                    </p>
+                                    <p className="text-slate-600 dark:text-slate-400">
+                                        Ciudad Autónoma de Buenos Aires
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="mt-6 flex items-start gap-4">
+                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary/10 text-secondary">
+                                    <FaClock className="text-2xl" />
+                                </div>
+                                <div>
+                                    <p className="font-semibold text-slate-900 dark:text-slate-100">Horario de atención</p>
+                                    <p className="mt-1 text-slate-700 dark:text-slate-300">Lunes a Viernes: 10:30 – 18:00</p>
+                                    <p className="text-sm text-slate-500 dark:text-slate-400">Apertura: julio 2026</p>
+                                </div>
+                            </div>
+                            <details className="mt-4">
+                                <summary className="tc-link list-item min-h-11 cursor-pointer py-2 marker:text-[#a1a1a6]">Transporte y ubicación de Belgrano</summary>
+                                <div className="mt-3 space-y-3">
+                                <div className="flex gap-3">
+                                    <FaSubway className="mt-1 shrink-0 text-primary dark:text-secondary" />
+                                    <div>
+                                        <p className="font-semibold text-slate-900 dark:text-slate-100">Subte</p>
+                                        <p className="text-sm text-slate-600 dark:text-slate-400">Línea D – Estación Juramento, a pocas cuadras.</p>
+                                    </div>
+                                </div>
+                                <div className="flex gap-3">
+                                    <FaMapMarkerAlt className="mt-1 shrink-0 text-primary dark:text-secondary" />
+                                    <div>
+                                        <p className="font-semibold text-slate-900 dark:text-slate-100">Ubicación</p>
+                                        <p className="text-sm text-slate-600 dark:text-slate-400">Amenábar 2032, Belgrano, CABA. CP C1428.</p>
+                                    </div>
+                                </div>
+                                </div>
+                            </details>
+                            <Link href={belgrano.url} className="tc-link mt-3 inline-flex min-h-11 items-center">
+                                Ver contacto de Belgrano
+                            </Link>
+                            <Link
+                                href={belgrano.mapUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="tc-btn tc-btn-ghost mt-3 w-full"
+                            >
+                                <FaDirections aria-hidden />
+                                Cómo llegar — Belgrano
+                            </Link>
+                        </article>
+                    </div>
+
+                    <details className="border-t border-[#333336] pt-3">
+                        <summary className="tc-link list-item min-h-11 cursor-pointer py-2 marker:text-[#a1a1a6]">Ver mapa de Recoleta</summary>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.262305984237!2d-58.40523692350382!3d-34.59752805717274!2m3!1f0!2f0!3f0!2m3!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccb9f6e9910cb%3A0xb492115ba59bc4f2!2sTeam%20celular%20%7C%20Reparacion%20de%20celulares%20%7C%20Reparacion%20de%20computadoras!5e0!3m2!1ses!2sar!4v1712864201522!5m2!1ses!2sar"
+                            className="min-h-[400px] w-full"
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                            title="Mapa Team Celular Recoleta — Paraguay 2451"
+                        />
+                    </details>
+                </section>
 
                 <section className="grid gap-6 md:grid-cols-3">
                     {contactMethods.map((method) => {
@@ -232,15 +360,11 @@ export default function ContactoPage() {
                                 ctaVariant={ctaVariant}
                                 external={external}
                                 target={external && method.href.startsWith("http") ? "_blank" : undefined}
-                                className="group h-full rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-6 shadow-md transition hover:-translate-y-1 hover:shadow-lg"
+                                className="group border-t border-[#333336] py-5"
                             >
-                                <div
-                                    className={`inline-flex h-14 w-14 items-center justify-center rounded-2xl border ${method.tone}`}
-                                >
-                                    <Icon className="text-2xl" />
-                                </div>
-                                <h2 className="mt-5 text-xl font-bold text-slate-900 dark:text-slate-100">
-                                    {method.title}
+                                <Icon className="text-xl text-[#a1a1a6]" aria-hidden />
+                                <h2 className="tc-link mt-3 text-lg font-semibold">
+                                    {method.label}
                                 </h2>
                                 <p className="mt-2 font-semibold text-slate-800 dark:text-slate-200">
                                     {method.value}
@@ -253,152 +377,8 @@ export default function ContactoPage() {
                     })}
                 </section>
 
-                <section className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md">
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-                        Dudas rápidas antes de venir
-                    </h2>
-                    <div className="mt-6 grid gap-4 md:grid-cols-3">
-                        {quickFaqs.map((item) => (
-                            <article
-                                key={item.question}
-                                className="rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-5"
-                            >
-                                <h3 className="text-base font-semibold text-primary dark:text-secondary">
-                                    {item.question}
-                                </h3>
-                                <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
-                                    {item.answer}
-                                </p>
-                            </article>
-                        ))}
-                    </div>
-                </section>
-
-                <section id="ubicacion" className="scroll-mt-24 space-y-6">
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-                        Nuestras sucursales en CABA
-                    </h2>
-                    <div className="grid gap-6 lg:grid-cols-2">
-                        <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md">
-                            <div className="flex items-start gap-4">
-                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary dark:text-secondary">
-                                    <FaMapMarkerAlt className="text-2xl" />
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
-                                        Sucursal Recoleta
-                                    </h3>
-                                    <p className="mt-1 text-lg text-slate-700 dark:text-slate-300">
-                                        Paraguay 2451, Recoleta
-                                    </p>
-                                    <p className="text-slate-600 dark:text-slate-400">
-                                        Ciudad Autónoma de Buenos Aires
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="mt-6 flex items-start gap-4">
-                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary/10 text-secondary">
-                                    <FaClock className="text-2xl" />
-                                </div>
-                                <div>
-                                    <p className="font-semibold text-slate-900 dark:text-slate-100">Horarios</p>
-                                    <p className="mt-1 text-slate-700 dark:text-slate-300">Lunes a Viernes: 10:30 – 18:00</p>
-                                    <p className="text-sm text-slate-500 dark:text-slate-400">Sábados y domingos: cerrado</p>
-                                </div>
-                            </div>
-                            <div className="mt-6 space-y-3">
-                                {transportInfo.map((transport) => {
-                                    const Icon = transport.icon;
-                                    return (
-                                        <div key={transport.title} className="flex gap-3">
-                                            <Icon className="mt-1 shrink-0 text-primary dark:text-secondary" />
-                                            <div>
-                                                <p className="font-semibold text-slate-900 dark:text-slate-100">{transport.title}</p>
-                                                <p className="text-sm text-slate-600 dark:text-slate-400">{transport.description}</p>
-                                            </div>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                            <Link
-                                href={recoleta.mapUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-primary/90"
-                            >
-                                <FaDirections aria-hidden />
-                                Cómo llegar — Recoleta
-                            </Link>
-                        </article>
-
-                        <article className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md">
-                            <div className="flex items-start gap-4">
-                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary dark:text-secondary">
-                                    <FaMapMarkerAlt className="text-2xl" />
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
-                                        Sucursal Belgrano
-                                    </h3>
-                                    <p className="mt-1 text-lg text-slate-700 dark:text-slate-300">
-                                        Amenábar 2032, Belgrano
-                                    </p>
-                                    <p className="text-slate-600 dark:text-slate-400">
-                                        Ciudad Autónoma de Buenos Aires
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="mt-6 flex items-start gap-4">
-                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary/10 text-secondary">
-                                    <FaClock className="text-2xl" />
-                                </div>
-                                <div>
-                                    <p className="font-semibold text-slate-900 dark:text-slate-100">Horarios</p>
-                                    <p className="mt-1 text-slate-700 dark:text-slate-300">Lunes a Viernes: 10:30 – 18:00</p>
-                                    <p className="text-sm text-slate-500 dark:text-slate-400">Apertura: julio 2026</p>
-                                </div>
-                            </div>
-                            <div className="mt-6 space-y-3">
-                                <div className="flex gap-3">
-                                    <FaSubway className="mt-1 shrink-0 text-primary dark:text-secondary" />
-                                    <div>
-                                        <p className="font-semibold text-slate-900 dark:text-slate-100">Subte</p>
-                                        <p className="text-sm text-slate-600 dark:text-slate-400">Línea D – Estación Juramento, a pocas cuadras.</p>
-                                    </div>
-                                </div>
-                                <div className="flex gap-3">
-                                    <FaMapMarkerAlt className="mt-1 shrink-0 text-primary dark:text-secondary" />
-                                    <div>
-                                        <p className="font-semibold text-slate-900 dark:text-slate-100">Ubicación</p>
-                                        <p className="text-sm text-slate-600 dark:text-slate-400">Amenábar 2032, Belgrano, CABA. CP C1428.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <Link
-                                href={belgrano.mapUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-primary/90"
-                            >
-                                <FaDirections aria-hidden />
-                                Cómo llegar — Belgrano
-                            </Link>
-                        </article>
-                    </div>
-
-                    <div className="overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 shadow-md">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.262305984237!2d-58.40523692350382!3d-34.59752805717274!2m3!1f0!2f0!3f0!2m3!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccb9f6e9910cb%3A0xb492115ba59bc4f2!2sTeam%20celular%20%7C%20Reparacion%20de%20celulares%20%7C%20Reparacion%20de%20computadoras!5e0!3m2!1ses!2sar!4v1712864201522!5m2!1ses!2sar"
-                            className="min-h-[400px] w-full"
-                            loading="lazy"
-                            referrerPolicy="no-referrer-when-downgrade"
-                            title="Mapa Team Celular Recoleta — Paraguay 2451"
-                        />
-                    </div>
-                </section>
-
-                <section className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md">
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+                <section className="border-t border-[#333336] pt-6">
+                    <h2 className="text-2xl font-semibold text-white">
                         Seguinos en redes sociales
                     </h2>
                     <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -414,9 +394,9 @@ export default function ContactoPage() {
                                     ctaVariant={ctaVariant}
                                     external
                                     target="_blank"
-                                    className="flex min-h-16 items-center gap-4 rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 px-5 py-4 transition hover:border-primary/40 hover:bg-primary/5"
+                                    className="flex min-h-16 items-center gap-4 py-3"
                                 >
-                                    <Icon className="text-2xl text-primary dark:text-secondary" />
+                                    <Icon className="text-xl text-[#a1a1a6]" aria-hidden />
                                     <div>
                                         <p className="font-semibold text-slate-900 dark:text-slate-100">
                                             {social.name}
@@ -431,23 +411,20 @@ export default function ContactoPage() {
                     </div>
                 </section>
 
-                <section className="rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-8 shadow-md">
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+                <section className="border-t border-[#333336] pt-6">
+                    <h2 className="text-2xl font-semibold text-white">
                         Preguntas frecuentes
                     </h2>
                     <div className="mt-6 grid gap-4 md:grid-cols-2">
-                        {faqs.map((faq) => (
-                            <article
-                                key={faq.question}
-                                className="rounded-2xl border border-slate-200 dark:border-slate-700/70 bg-slate-50 dark:bg-slate-800/70 p-5"
-                            >
-                                <h3 className="text-lg font-semibold text-primary dark:text-secondary">
+                        {contactFaqs.map((faq) => (
+                            <details key={faq.question} className="border-b border-[#333336] py-3">
+                                <summary className="tc-link list-item min-h-11 cursor-pointer py-2 marker:text-[#a1a1a6] text-base font-semibold">
                                     {faq.question}
-                                </h3>
+                                </summary>
                                 <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
                                     {faq.answer}
                                 </p>
-                            </article>
+                            </details>
                         ))}
                     </div>
                 </section>
@@ -458,7 +435,7 @@ export default function ContactoPage() {
                         __html: JSON.stringify({
                             "@context": "https://schema.org",
                             "@type": "FAQPage",
-                            mainEntity: faqs.map((faq) => ({
+                            mainEntity: contactFaqs.map((faq) => ({
                                 "@type": "Question",
                                 name: faq.question,
                                 acceptedAnswer: {
