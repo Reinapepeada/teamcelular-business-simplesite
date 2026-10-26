@@ -223,11 +223,16 @@ export default function RepairsForm() {
             <button
                 type="button"
                 onClick={handleSend}
+                aria-describedby="budget-whatsapp-next-step"
                 className="tc-btn tc-btn-primary w-full sm:w-auto"
             >
                 <FaWhatsapp aria-hidden />
                 Pedir presupuesto por WhatsApp
             </button>
+
+            <p id="budget-whatsapp-next-step" className="text-sm leading-6 text-slate-600 dark:text-slate-300">
+                Se abre WhatsApp con los datos que completaste. Revisá el mensaje y envialo para iniciar la consulta.
+            </p>
 
             <p className="text-sm leading-6 text-slate-600 dark:text-[#86868b]">
                 La consulta por WhatsApp es gratis. La revisión técnica tiene costo; te informamos el importe antes de ingresar el equipo.

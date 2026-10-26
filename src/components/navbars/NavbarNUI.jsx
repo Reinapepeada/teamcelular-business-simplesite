@@ -106,6 +106,11 @@ export default function NavbarNUI() {
         });
     }
 
+    function closeMobileMenu() {
+        setMobileMenuOpen(false);
+        mobileToggleRef.current?.focus({ preventScroll: true });
+    }
+
     return (
         <header className="sticky top-0 z-50 w-full bg-black/95 text-[#f5f5f7]">
             <div className="mx-auto flex min-h-[52px] w-full max-w-[1200px] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
@@ -136,7 +141,7 @@ export default function NavbarNUI() {
 
                 </div>
 
-                <nav className="hidden items-center gap-7 lg:flex">
+                <nav aria-label="Navegación principal" className="hidden items-center gap-7 lg:flex">
                     {MAIN_LINKS.map((item) => {
                         const active = isActivePath(pathname, item.href);
 
@@ -144,6 +149,7 @@ export default function NavbarNUI() {
                             <Link
                                 key={item.href}
                                 href={item.href}
+                                aria-current={pathname === item.href ? "page" : active ? "location" : undefined}
                                 className={`flex min-h-11 items-center py-2 text-[12px] transition ${
                                     active ? "text-white" : "text-[#cccccc]/80 hover:text-white"
                                 }`}
@@ -153,7 +159,13 @@ export default function NavbarNUI() {
                         );
                     })}
 
-                    <div ref={desktopMenuRef} className="relative">
+                    <div
+                        ref={desktopMenuRef}
+                        className="relative"
+                        onBlur={(event) => {
+                            if (!event.currentTarget.contains(event.relatedTarget)) setDesktopMenuOpen(false);
+                        }}
+                    >
                         <button
                             type="button"
                             onClick={() => setDesktopMenuOpen((current) => !current)}
@@ -182,6 +194,11 @@ export default function NavbarNUI() {
                                                 <Link
                                                     href={item.href}
                                                     prefetch={false}
+                                                    aria-current={pathname === item.href ? "page" : active ? "location" : undefined}
+                                                    onClick={() => {
+                                                        desktopToggleRef.current?.focus({ preventScroll: true });
+                                                        setDesktopMenuOpen(false);
+                                                    }}
                                                     className={`flex min-h-11 items-center rounded-xl px-3 py-2 text-sm transition ${
                                                         active
                                                             ? "bg-slate-100 font-medium text-primary dark:bg-slate-800/70 dark:text-sky-300"
@@ -254,6 +271,8 @@ export default function NavbarNUI() {
                                         <Link
                                             href={item.href}
                                             prefetch={false}
+                                            aria-current={pathname === item.href ? "page" : active ? "location" : undefined}
+                                            onClick={closeMobileMenu}
                                             className={`flex min-h-12 items-center text-[28px] font-semibold transition ${
                                                 active ? "text-white" : "text-[#d2d2d7] hover:text-white"
                                             }`}
@@ -268,14 +287,15 @@ export default function NavbarNUI() {
                         <div className="grid gap-2 pt-2">
                             <Link
                                 href={BUDGET_URL}
-                                onClick={() =>
+                                onClick={() => {
+                                    closeMobileMenu();
                                     trackNavbarCta(
                                         "navbar_budget",
                                         "navbar_mobile_drawer",
                                         "primary",
                                         BUDGET_URL,
-                                    )
-                                }
+                                    );
+                                }}
                                 className="tc-btn tc-btn-primary"
                             >
                                 Pedir presupuesto
