@@ -206,6 +206,27 @@ export default function RepairsForm() {
                 ))}
             </datalist>
 
+            <details className="text-sm leading-6 text-slate-600 dark:text-slate-300">
+                <summary className="min-h-11 cursor-pointer py-2 font-medium text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary dark:text-slate-100">
+                    ¿Dónde encuentro el modelo?
+                </summary>
+                <ul className="list-disc space-y-2 pl-5">
+                    <li>
+                        <strong>iPhone:</strong> Configuración o Ajustes → General → Información → Nombre del modelo.{' '}
+                        <a className="underline underline-offset-2" href="https://support.apple.com/es-lamr/guide/iphone/iph3dd5fc7e/ios" target="_blank" rel="noopener noreferrer">Ayuda de Apple<span className="sr-only"> (abre otra pestaña)</span></a>.
+                    </li>
+                    <li>
+                        <strong>Samsung Galaxy:</strong> Ajustes → Acerca del teléfono → Número de modelo.{' '}
+                        <a className="underline underline-offset-2" href="https://www.samsung.com/ar/support/mobile-devices/how-to-find-phones-model-number-serial-number-or-imei-number/" target="_blank" rel="noopener noreferrer">Ayuda de Samsung<span className="sr-only"> (abre otra pestaña)</span></a>.
+                    </li>
+                    <li>
+                        <strong>Motorola:</strong> Ajustes o Configuración → Acerca del teléfono → Modelo. En algunos equipos está dentro de Detalles del dispositivo.{' '}
+                        <a className="underline underline-offset-2" href="https://es-latam.support.motorola.com/app/answers/detail/a_id/108462/" target="_blank" rel="noopener noreferrer">Ayuda de Motorola<span className="sr-only"> (abre otra pestaña)</span></a>.
+                    </li>
+                </ul>
+                <p className="mt-3">Copiá solo el modelo, sin IMEI, número de serie ni contraseñas. Si el equipo no enciende o no lo encontrás, podés dejar el campo vacío y consultarnos igual.</p>
+            </details>
+
             <QuoteEstimate model={model} repairTypes={repairTypes} />
 
             <BranchPreferencePicker value={preferredBranch} onChange={selectBranch} />
