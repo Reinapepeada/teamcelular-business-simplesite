@@ -103,6 +103,10 @@ en el catálogo envían pasos y categorías, nunca su contenido.
 La prueba de navegador usa servicios ficticios y aborta destinos externos:
 no crea pedidos, cobra ni manda eventos ficticios a PostHog. Las pruebas
 unitarias cubren redacción, importes confirmados y deduplicación.
+La prueba del SDK usa un token ficticio y bloquea destinos externos. Comprueba
+que la dependencia de rendimiento real (`web-vitals-with-attribution.js` en el
+SDK actual) está permitida. Sólo se permiten scripts de Web Vitals del proveedor
+por HTTPS; los objetos de atribución de métricas quedan fuera del contrato de envío.
 
 ## Punto de partida observado
 
