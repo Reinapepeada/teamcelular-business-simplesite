@@ -32,7 +32,7 @@ test("PostHog conserva visitas y pasos, sin respuestas ni parámetros o perfiles
 });
 
 test("PostHog excluye previews, rutas privadas y eventos fuera del alcance autorizado", () => {
-  for (const url of ["https://preview.vercel.app/", "https://teamcelular.com.evil.test/", "https://teamcelular.com/admin/leads", "https://teamcelular.com/checkout/exito?token=private", "invalid"]) {
+  for (const url of ["https://preview.vercel.app/", "https://teamcelular.com.evil.test/", "https://teamcelular.com/admin/leads", "https://teamcelular.com/api/store/orders", "https://teamcelular.com/checkout/exito?token=private", "invalid"]) {
     assert.equal(sanitizePostHogEvent(event("$pageview", url)), null);
   }
   assert.equal(isPostHogPublicPage("localhost", "/"), false);
@@ -61,4 +61,33 @@ test("Web Vitals conserva valores numéricos y elimina objetos de atribución co
   assert.equal(result?.properties.$web_vitals_LCP_value, 1234);
   assert.equal(result?.properties.$web_vitals_LCP_event, undefined);
   assert.ok(!JSON.stringify(result).includes("private"));
+});
+
+test("los errores conservan tipo y ubicaciones de código sin mensajes, contexto ni solicitudes", () => {
+  const error = event("$exception");
+  error.properties.$exception_list = [{
+    type: "TypeError", value: "Fallo para private@example.test", extra: "private",
+    mechanism: { type: "secret", handled: false, data: { token: "private" } },
+    stacktrace: { frames: [
+      { filename: "https://teamcelular.com/_next/static/chunks/app/(site)/page.js?token=private#private", lineno: 4, colno: 6,
+        function: "private", vars: { email: "private@example.test" }, pre_context: ["private"] },
+      { filename: "https://external.test/private.js", lineno: 5 },
+      { filename: "https://teamcelular.com/checkout/exito?token=private", lineno: 5 },
+      { filename: "C:\\Users\\private\\.next\\server\\app\\page.js", lineno: 9 },
+    ] },
+  }];
+  const result = sanitizePostHogEvent(error);
+  assert.ok(result);
+  assert.deepEqual(result.properties.$exception_list, [{
+    type: "TypeError", value: "Error de la aplicación",
+    mechanism: { type: "generic", handled: false },
+    stacktrace: { type: "raw", frames: [
+      { filename: "https://teamcelular.com/_next/static/chunks/app/(site)/page.js", in_app: true, function: "<redacted>", module: "application", platform: "web:javascript", lineno: 4, colno: 6 },
+      { filename: ".next/server/app/page.js", in_app: true, function: "<redacted>", module: "application", platform: "node:javascript", lineno: 9 },
+    ] },
+  }]);
+  assert.equal(JSON.stringify(result).includes("private"), false);
+  assert.equal(sanitizePostHogEvent(event("$exception")), null);
+  assert.equal(sanitizePostHogEvent({ ...error, properties: { ...error.properties,
+    $current_url: "https://teamcelular.com/checkout/exito" } }), null);
 });

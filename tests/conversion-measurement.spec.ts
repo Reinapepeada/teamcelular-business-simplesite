@@ -19,7 +19,7 @@ test.beforeEach(async ({ page, context }) => {
 });
 
 test('consulta mide apertura sin enviar respuestas ni destino de WhatsApp', async ({ page }) => {
-    const performanceScripts: string[] = [];
+    const posthogScripts: string[] = [];
     await page.addInitScript(() => {
         const events: unknown[] = [];
         Object.assign(window, { fixtureEvents: events });
@@ -28,7 +28,7 @@ test('consulta mide apertura sin enviar respuestas ni destino de WhatsApp', asyn
     });
     await page.context().route('**/*', async route => {
         const url = new URL(route.request().url());
-        if (url.hostname.endsWith('.posthog.com') && route.request().resourceType() === 'script') performanceScripts.push(url.pathname);
+        if (url.hostname.endsWith('.posthog.com') && route.request().resourceType() === 'script') posthogScripts.push(url.pathname);
         if (url.origin === origin) {
             if (url.pathname.startsWith('/api/')) return route.fulfill({ json: { ok: true } });
             const response = await route.fetch({ url: `http://127.0.0.1:3100${url.pathname}${url.search}`,
@@ -43,8 +43,9 @@ test('consulta mide apertura sin enviar respuestas ni destino de WhatsApp', asyn
     const events = await page.evaluate(() => (window as unknown as { fixtureEvents: unknown[] }).fixtureEvents);
     expect(JSON.stringify(events)).not.toMatch(/private@example|wa\.me|destination|customer_email/);
     expect(JSON.stringify(events)).toContain('organic_search');
-    await expect.poll(() => performanceScripts.some(path => /\/web-vitals-with-attribution\.js$/.test(path))).toBe(true);
-    expect(performanceScripts.every(path => /\/web-vitals(?:-with-attribution)?\.js$/.test(path))).toBe(true);
+    await expect.poll(() => posthogScripts.some(path => /\/web-vitals-with-attribution\.js$/.test(path))).toBe(true);
+    await expect.poll(() => posthogScripts.some(path => /\/exception-autocapture\.js$/.test(path))).toBe(true);
+    expect(posthogScripts.every(path => /\/(?:web-vitals(?:-with-attribution)?|exception-autocapture)\.js$/.test(path))).toBe(true);
 });
 
 test('compra exige API confirmada y no se duplica al recargar', async ({ page }) => {

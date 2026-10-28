@@ -2,6 +2,7 @@ import type { CaptureResult, PostHog } from "posthog-js";
 import { isGa4ProductionHost } from "./ga4";
 import { MEASUREMENT_EVENTS, pageType, sanitizeMeasurementProperties } from "./measurement";
 import { browserAttribution } from "./attribution";
+import { sanitizePostHogException } from "./posthogErrors";
 
 declare global {
   interface Window {
@@ -20,9 +21,13 @@ export function isPostHogPublicPage(hostname: string, pathname: string): boolean
   return isGa4ProductionHost(hostname) && !/^\/(admin|api)(\/|$)/i.test(pathname);
 }
 
+export function isPostHogErrorPage(hostname: string, pathname: string): boolean {
+  return isPostHogPublicPage(hostname, pathname) && !/^\/checkout(\/|$)/i.test(pathname);
+}
+
 // ponytail: una lista permitida evita reenviar respuestas, destinos de WhatsApp o parámetros de URL.
 export function sanitizePostHogEvent(event: CaptureResult | null): CaptureResult | null {
-  if (!event || !MEASUREMENT_EVENTS.has(event.event)) return null;
+  if (!event || (!MEASUREMENT_EVENTS.has(event.event) && event.event !== "$exception")) return null;
 
   let url: URL;
   try {
@@ -37,10 +42,13 @@ export function sanitizePostHogEvent(event: CaptureResult | null): CaptureResult
     url = new URL(event.properties.content_path, url.origin);
   }
 
+  const exception = event.event === "$exception" ? sanitizePostHogException(event.properties) : null;
+  if (event.event === "$exception" && (!exception || !isPostHogErrorPage(url.hostname, url.pathname))) return null;
+
   const metadata = Object.fromEntries(
     Object.entries(event.properties).filter(([key]) => PROPERTIES.has(key)),
   );
-  event.properties = { ...metadata, ...sanitizeMeasurementProperties({
+  event.properties = exception ? { ...metadata, ...exception } : { ...metadata, ...sanitizeMeasurementProperties({
     ...browserAttribution(), ...event.properties,
   }), measurement_version: 2, page_type: pageType(url.pathname) };
   event.properties.$current_url = `${url.origin}${url.pathname}`;
@@ -65,4 +73,9 @@ export function measure(eventName: string, properties: Record<string, unknown> =
   try { window.gtag?.("event", eventName, { ...safe,
     page_location: `${window.location.origin || "https://teamcelular.com"}${window.location.pathname || "/"}`,
   }); } catch { /* Cada destino es independiente. */ }
+}
+
+export function capturePostHogException(error: Error) {
+  if (typeof window === "undefined" || !isPostHogErrorPage(window.location.hostname, window.location.pathname)) return;
+  try { window.posthog?.captureException(error); } catch { /* Conservar la pantalla de recuperación. */ }
 }

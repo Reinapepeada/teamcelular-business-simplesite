@@ -116,6 +116,12 @@ export default function PrivacidadPage() {
           datos en su región de Estados Unidos y utiliza un identificador anónimo
           del navegador para relacionar las visitas.
         </p>
+        <p>
+          También usamos PostHog para detectar errores técnicos en páginas públicas.
+          Enviamos el tipo de error y su ubicación en el código compilado, sin el
+          mensaje original, variables, cabeceras, cookies ni contenido de solicitudes.
+          Los errores del servidor usan un identificador aleatorio por error.
+        </p>
 
         <h2>4. Cookies</h2>
         <p>
