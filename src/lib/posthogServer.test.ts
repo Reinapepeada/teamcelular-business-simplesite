@@ -34,6 +34,7 @@ test("el SDK vacía errores de servidor sin datos privados y excluye previews, D
     assert.equal(event.properties.$process_person_profile, false);
     assert.equal(JSON.stringify(batches).includes("private"), false);
     assert.match(JSON.stringify(event.properties.$exception_list), /\.next\/server\/app\/page\.js/);
+    assert.match(JSON.stringify(event.properties.$exception_list), /node:javascript/);
 
     for (const path of ["/admin/leads", "/checkout/exito?token=private", "/api/store/orders"]) {
       await capturePostHogRequestError(error, path);
