@@ -398,7 +398,6 @@ export default function ServiceLandingPage({
         {desktopScreenImage && <link
           rel="preload"
           as="image"
-          href={desktopScreenImage.src}
           imageSrcSet={desktopScreenImage.srcSet}
           imageSizes={desktopScreenImage.sizes}
           media="(min-width: 1024px)"
