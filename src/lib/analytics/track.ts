@@ -1,6 +1,5 @@
 import { track as vercelTrack } from "@vercel/analytics";
-import { isGa4ProductionHost } from "./ga4";
-import { capturePostHogEvent } from "./posthog";
+import { measure } from "./posthog";
 
 type Props = Record<string, string | number | boolean | null>;
 
@@ -19,11 +18,7 @@ export function track(eventName: string, props?: Props) {
 
   if (typeof window === "undefined") return;
 
-  capturePostHogEvent(eventName, props);
-
-  if (isGa4ProductionHost(window.location.hostname) && typeof window.gtag === "function") {
-    window.gtag("event", eventName, props ?? {});
-  }
+  measure(eventName, props);
 
   // Clarity grababa sesiones sin forma de segmentarlas: no se podia pedir "las
   // grabaciones de quien abandono el presupuesto en el paso 2". Con el evento y

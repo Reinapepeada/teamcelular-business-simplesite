@@ -12,6 +12,7 @@ import {
 } from "@/lib/catalog";
 import { buildProductSlug, slugify } from "@/lib/productSlug";
 import { serializeJsonLd } from "@/lib/jsonLd";
+import TrackView from "@/components/analytics/TrackView";
 
 interface CatalogResultsProps {
     basePath: string;
@@ -158,6 +159,7 @@ function ProductCard({ product, prioridad = false }: { product: VidrieraProduct;
         <article className="flex h-full flex-col rounded-3xl border border-slate-200 dark:border-slate-700/70 bg-white dark:bg-slate-900 p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
             <Link
                 href={productHref}
+                data-product-slug={product.storeSlug}
                 prefetch={false}
                 className="group block"
                 aria-label={`Ver ${product.name}`}
@@ -194,6 +196,7 @@ function ProductCard({ product, prioridad = false }: { product: VidrieraProduct;
 
                 <Link
                     href={productHref}
+                    data-product-slug={product.storeSlug}
                     prefetch={false}
                     className="mt-3 block text-lg font-semibold leading-snug text-slate-950 dark:text-slate-50 transition hover:text-primary dark:hover:text-secondary"
                 >
@@ -279,6 +282,7 @@ export default async function CatalogResults({
                 <h2 className="text-xl font-semibold text-slate-950 dark:text-slate-50">No pudimos cargar la tienda</h2>
                 <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">Probá de nuevo en unos instantes.</p>
                 <CatalogRetryButton />
+                <TrackView eventName="catalog_error" properties={{ error_code: "catalog_unavailable" }} />
             </section>
         );
     }
@@ -289,6 +293,11 @@ export default async function CatalogResults({
 
     return (
         <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6 dark:border-slate-700/70 dark:bg-slate-900">
+            <TrackView eventName={products.length ? "view_item_list" : "catalog_no_results"} properties={{
+                item_list_id: basePath, result_count: total, page_number: currentPage,
+                has_search: !!filters.search, has_filters: !!(filters.categories.length || filters.brands.length || filters.minPrice || filters.maxPrice || filters.sort),
+                items: products.map(product => ({ item_id: product.storeSlug, item_name: product.name, price: product.retail_price, quantity: 1 })),
+            }} />
             <div className="flex flex-col gap-2 border-b border-slate-100 pb-3 sm:flex-row sm:items-end sm:justify-between sm:gap-3 sm:pb-5 dark:border-slate-800">
                 <div>
                     <p className="hidden text-sm font-semibold uppercase tracking-[0.18em] text-primary dark:text-secondary sm:block">

@@ -12,7 +12,7 @@ function event(name = "$pageview", url = "https://teamcelular.com/presupuesto-re
       email: "private@example.test", phone: "private-phone", model: "free text",
       destination: "https://wa.me/private?text=private", repair_type: "private",
       $initial_current_url: url, $session_entry_url: url,
-      $set: { email: "private@example.test" }, $referrer: url, utm_source: "private",
+      $set: { email: "private@example.test" }, $referrer: url, utm_source: "private@example.test",
     },
   } as CaptureResult;
 }
@@ -25,6 +25,7 @@ test("PostHog conserva visitas y pasos, sin respuestas ni parámetros o perfiles
       form_name: "repair_budget_wizard", form_version: "v3", step_index: 1,
       $current_url: "https://teamcelular.com/presupuesto-reparacion",
       $pathname: "/presupuesto-reparacion",
+      measurement_version: 2, page_type: "budget",
     });
   }
 });
@@ -38,6 +39,6 @@ test("PostHog excluye previews, rutas privadas y eventos fuera del alcance autor
   assert.equal(sanitizePostHogEvent(event("$identify")), null);
   const otherForm = event("lead_form_submit");
   otherForm.properties.form_name = "other";
-  assert.equal(sanitizePostHogEvent(otherForm), null);
+  assert.ok(sanitizePostHogEvent(otherForm));
   assert.equal(sanitizePostHogEvent(null), null);
 });

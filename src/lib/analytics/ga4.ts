@@ -29,9 +29,11 @@ export const GA4_INIT_SCRIPT = `if (${JSON.stringify(PRODUCTION_HOSTS)}.includes
       : 'body';
     var branches = ${JSON.stringify(BRANCHES.map((branch) => ({ slug: branch.slug, phone: new URL(branch.whatsapp).pathname })))};
     var branch = branches.find(function (item) { return item.phone === new URL(a.href).pathname; });
-    window.gtag('event', 'whatsapp_click', {
-      link_url: a.href, page_path: location.pathname, cta_location: zone,
+    var parameters = {
+      cta_variant: 'whatsapp', cta_location: zone, conversion_kind: 'whatsapp_handoff',
       preferred_branch: branch ? branch.slug : undefined
-    });
+    };
+    if (window.tcMeasure) window.tcMeasure('whatsapp_click', parameters);
+    else window.gtag('event', 'whatsapp_click', parameters);
   }, true);
 }`;

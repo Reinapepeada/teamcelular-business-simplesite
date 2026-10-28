@@ -27,6 +27,8 @@ export default defineConfig({
                 GOOGLE_PLACES_API_KEY: 'fixture-not-a-real-key',
                 GOOGLE_PLACE_ID: 'fixture-recoleta',
                 NEXT_TELEMETRY_DISABLED: '1',
+                NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN: '',
+                NEXT_ANALYTICS_TEST_ORIGIN: '1',
                 NODE_OPTIONS: `--import ${pathToFileURL(path.resolve('tests/fixtures/local-network-only.mjs')).href}`,
             },
         },

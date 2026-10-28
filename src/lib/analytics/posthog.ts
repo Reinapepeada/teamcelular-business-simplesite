@@ -1,12 +1,12 @@
 import type { CaptureResult, PostHog } from "posthog-js";
-import { BUDGET_FUNNEL_EVENTS, BUDGET_FUNNEL_FORM_NAME } from "./budgetFunnel";
 import { isGa4ProductionHost } from "./ga4";
-
-const EVENTS = new Set<string>(["$pageview", ...Object.values(BUDGET_FUNNEL_EVENTS)]);
+import { MEASUREMENT_EVENTS, pageType, sanitizeMeasurementProperties } from "./measurement";
+import { browserAttribution } from "./attribution";
 
 declare global {
   interface Window {
     posthog?: PostHog;
+    tcMeasure?: typeof measure;
   }
 }
 const PROPERTIES = new Set([
@@ -14,18 +14,15 @@ const PROPERTIES = new Set([
   "$lib", "$lib_version", "$is_identified", "$process_person_profile",
   "$browser", "$browser_version", "$os", "$os_version", "$device_type",
   "$screen_height", "$screen_width", "$viewport_height", "$viewport_width",
-  "funnel_name", "form_name", "form_location", "form_version",
-  "step_id", "step_index", "total_steps", "wizard_source",
 ]);
 
 export function isPostHogPublicPage(hostname: string, pathname: string): boolean {
-  return isGa4ProductionHost(hostname) && !/^\/(admin|checkout)(\/|$)/i.test(pathname);
+  return isGa4ProductionHost(hostname) && !/^\/(admin|api)(\/|$)/i.test(pathname);
 }
 
 // ponytail: una lista permitida evita reenviar respuestas, destinos de WhatsApp o parámetros de URL.
 export function sanitizePostHogEvent(event: CaptureResult | null): CaptureResult | null {
-  if (!event || !EVENTS.has(event.event)) return null;
-  if (event.event !== "$pageview" && event.properties.form_name !== BUDGET_FUNNEL_FORM_NAME) return null;
+  if (!event || !MEASUREMENT_EVENTS.has(event.event)) return null;
 
   let url: URL;
   try {
@@ -34,17 +31,38 @@ export function sanitizePostHogEvent(event: CaptureResult | null): CaptureResult
     return null;
   }
   if (!isPostHogPublicPage(url.hostname, url.pathname)) return null;
+  if (url.pathname.startsWith("/checkout") && !["purchase", "payment_result", "checkout_error"].includes(event.event)) return null;
+  if (event.event === "page_engagement" && typeof event.properties.content_path === "string"
+    && /^\/(?!\/)[^?#]*$/.test(event.properties.content_path)) {
+    url = new URL(event.properties.content_path, url.origin);
+  }
 
-  event.properties = Object.fromEntries(
+  const metadata = Object.fromEntries(
     Object.entries(event.properties).filter(([key]) => PROPERTIES.has(key)),
   );
+  event.properties = { ...metadata, ...sanitizeMeasurementProperties({
+    ...browserAttribution(), ...event.properties,
+  }), measurement_version: 2, page_type: pageType(url.pathname) };
   event.properties.$current_url = `${url.origin}${url.pathname}`;
   event.properties.$pathname = url.pathname;
   return event;
 }
 
 export function capturePostHogEvent(eventName: string, properties: Record<string, unknown> = {}) {
-  if (typeof window === "undefined" || !isPostHogPublicPage(window.location.hostname, window.location.pathname)) return;
-  if (!EVENTS.has(eventName) || properties.form_name !== BUDGET_FUNNEL_FORM_NAME) return;
-  window.posthog?.capture(eventName, properties);
+  if (typeof window === "undefined" || !window.location || !isPostHogPublicPage(window.location.hostname, window.location.pathname)) return;
+  if (!MEASUREMENT_EVENTS.has(eventName)) return;
+  try { window.posthog?.capture(eventName, sanitizeMeasurementProperties(properties)); } catch { /* Medir no interrumpe la compra. */ }
+}
+
+export function measure(eventName: string, properties: Record<string, unknown> = {}) {
+  if (typeof window === "undefined" || !window.location || !isPostHogPublicPage(window.location.hostname, window.location.pathname)
+    || !MEASUREMENT_EVENTS.has(eventName) || window.navigator?.doNotTrack === "1") return;
+  if (window.location.pathname?.startsWith("/checkout") && !["purchase", "payment_result", "checkout_error"].includes(eventName)) return;
+  const safe = { ...sanitizeMeasurementProperties({ ...browserAttribution(), ...properties }),
+    measurement_version: 2, page_type: pageType(eventName === "page_engagement" && typeof properties.content_path === "string"
+      ? properties.content_path : window.location.pathname || "/") };
+  capturePostHogEvent(eventName, safe);
+  try { window.gtag?.("event", eventName, { ...safe,
+    page_location: `${window.location.origin || "https://teamcelular.com"}${window.location.pathname || "/"}`,
+  }); } catch { /* Cada destino es independiente. */ }
 }

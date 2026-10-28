@@ -16,6 +16,8 @@ import {
     BsXLg,
 } from "react-icons/bs";
 import { buildProductSlug } from "@/lib/productSlug";
+import { measure } from "@/lib/analytics/posthog";
+import { cartMeasurement } from "@/lib/analytics/storeMeasurement";
 import useCartStore, { type CartItem } from "@/store/cartStore";
 import { codigoPostalValido, errorDeCantidades, errorDeDestino, normalizarCodigoPostal } from "@/lib/commerceValidation";
 import { exigirCotizacionLista, plazoDeTransporte } from "@/lib/shippingQuote";
@@ -89,6 +91,7 @@ export default function StoreCartSheet() {
     const { state: retiro, retry: reintentarRetiro } = usePickupPoint(open);
 
     function abrirCheckout() {
+        measure("begin_checkout", { ...cartMeasurement(cart), shipping_tier: entrega === "envio" ? "shipping" : "pickup" });
         setCheckoutSolicitado(true);
         closeCart();
         setComprando(true);
