@@ -28,7 +28,7 @@ export function sanitizePostHogException(properties: Record<string, unknown>): R
       const frame = record(value);
       const filename = codeFilename(frame.filename);
       if (!filename) return [];
-      return [{ filename, in_app: true,
+      return [{ filename, in_app: true, function: "<redacted>", module: "application",
         platform: frame.platform === "node:javascript" || frame.platform === "web:javascript"
           ? frame.platform : filename.startsWith(".next/server/") ? "node:javascript" : "web:javascript",
         ...(Number.isSafeInteger(frame.lineno) && Number(frame.lineno) >= 0 ? { lineno: frame.lineno } : {}),

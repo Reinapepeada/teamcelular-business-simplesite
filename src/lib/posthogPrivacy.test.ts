@@ -82,8 +82,8 @@ test("los errores conservan tipo y ubicaciones de código sin mensajes, contexto
     type: "TypeError", value: "Error de la aplicación",
     mechanism: { type: "generic", handled: false },
     stacktrace: { type: "raw", frames: [
-      { filename: "https://teamcelular.com/_next/static/chunks/app/(site)/page.js", in_app: true, platform: "web:javascript", lineno: 4, colno: 6 },
-      { filename: ".next/server/app/page.js", in_app: true, platform: "node:javascript", lineno: 9 },
+      { filename: "https://teamcelular.com/_next/static/chunks/app/(site)/page.js", in_app: true, function: "<redacted>", module: "application", platform: "web:javascript", lineno: 4, colno: 6 },
+      { filename: ".next/server/app/page.js", in_app: true, function: "<redacted>", module: "application", platform: "node:javascript", lineno: 9 },
     ] },
   }]);
   assert.equal(JSON.stringify(result).includes("private"), false);
