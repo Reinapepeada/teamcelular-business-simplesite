@@ -11,6 +11,8 @@
 
 import { test, describe } from "node:test";
 import assert from "node:assert/strict";
+import { createServer } from "node:http";
+import { once } from "node:events";
 
 import {
     parseStoreError,
@@ -23,6 +25,7 @@ import {
     fetchStoreProduct,
     fetchStoreProducts,
     fetchStoreFacets,
+    fetchPickupPointDetails,
 } from "./storeApi.ts";
 import { claveDeCheckout, huellaDelCarrito, olvidarClave, type AlmacenClave } from "./checkoutKey.ts";
 
@@ -106,6 +109,7 @@ test("el catálogo SSR usa el backend con el host de tienda y sin cachear stock"
                 assert.equal(new Headers(llamada.init?.headers).get("X-Forwarded-Host"), "teamcelular.com");
                 assert.equal(llamada.init?.cache, "no-store");
                 assert.equal(llamada.init?.method ?? "GET", "GET");
+                assert.ok(llamada.init?.signal instanceof AbortSignal);
             }
         });
         process.env.NEXT_PUBLIC_BASE_URL = "https://example.test";
@@ -121,6 +125,7 @@ test("el catálogo SSR usa el backend con el host de tienda y sin cachear stock"
                 await leerCatalogo();
                 assert.deepEqual(llamadas.map(l => l.url), rutas);
                 assert.ok(llamadas.every(l => new Headers(l.init?.headers).get("X-Forwarded-Host") === null));
+                assert.ok(llamadas.every(l => l.init?.signal === undefined));
             });
         } finally {
             Reflect.deleteProperty(globalThis, "window");
@@ -130,12 +135,48 @@ test("el catálogo SSR usa el backend con el host de tienda y sin cachear stock"
             assert.equal(llamadas[0].url, "https://teamcelular.com/store/checkout");
             assert.equal(llamadas[0].init?.method, "POST");
             assert.equal(new Headers(llamadas[0].init?.headers).get("X-Forwarded-Host"), null);
+            assert.equal(llamadas[0].init?.signal, undefined);
+            await fetchPickupPointDetails();
+            assert.equal(llamadas[1].init?.signal, undefined);
+            assert.ok(llamadas[1].url.endsWith('/store/pickup-point'));
         });
     } finally {
         if (anterior === undefined) delete process.env.NEXT_PUBLIC_BASE_URL;
         else process.env.NEXT_PUBLIC_BASE_URL = anterior;
     }
 });
+
+for (const stage of ["headers", "body"] as const) {
+    test(`el catálogo SSR limita la espera de ${stage} y permite recuperar la lectura`, async (t) => {
+        const previous = process.env.NEXT_PUBLIC_BASE_URL;
+        let stalled = true;
+        const server = createServer((_request, response) => {
+            if (!stalled) return response.end(JSON.stringify({ items: [], total: 0, page: 1, size: 12 }));
+            if (stage === "body") { response.writeHead(200, { "Content-Type": "application/json" }); response.flushHeaders(); response.write('{"items":'); }
+        });
+        server.listen(0, "127.0.0.1");
+        await once(server, "listening");
+        const address = server.address();
+        assert.ok(address && typeof address !== "string");
+        process.env.NEXT_PUBLIC_BASE_URL = `http://127.0.0.1:${address.port}`;
+        const timeout = AbortSignal.timeout.bind(AbortSignal);
+        const deadlines: number[] = [];
+        t.mock.method(AbortSignal, "timeout", (milliseconds: number) => { deadlines.push(milliseconds); return timeout(50); });
+        try {
+            const started = Date.now();
+            await assert.rejects(fetchStoreProducts(), error => error instanceof Error && ["AbortError", "TimeoutError"].includes(error.name));
+            assert.ok(Date.now() - started < 1_500, "el cuerpo no puede quedar esperando después del plazo");
+            stalled = false;
+            assert.equal((await fetchStoreProducts()).total, 0);
+            assert.deepEqual(deadlines, [4_000, 4_000]);
+        } finally {
+            server.closeAllConnections();
+            await new Promise<void>(resolve => server.close(() => resolve()));
+            if (previous === undefined) delete process.env.NEXT_PUBLIC_BASE_URL;
+            else process.env.NEXT_PUBLIC_BASE_URL = previous;
+        }
+    });
+}
 
 // --- el total lo pone el servidor ---------------------------------------
 
