@@ -47,6 +47,7 @@ export async function measureConfirmedPayment(status: StoreOrderStatus, storage:
   try {
     const id = `tc_${await digest(`tc.purchase:${status.commerce_key}`)}`;
     const run = () => {
+      try {
       const seen: unknown = JSON.parse(storage.getItem("tc.analytics.purchases.v1") || "[]");
       const entries = Array.isArray(seen) ? seen.filter(value => typeof value === "string") : [];
       if (entries.includes(id)) return false;
@@ -59,6 +60,7 @@ export async function measureConfirmedPayment(status: StoreOrderStatus, storage:
         ...(shipping !== undefined ? { shipping, value: status.total_amount - shipping } : {}),
         ...(snapshot?.items ? { items: snapshot.items } : {}), measurement_source: "server_confirmed_browser_return" }));
       return true;
+      } catch { return false; }
     };
     return typeof navigator !== "undefined" && navigator.locks
       ? await navigator.locks.request("tc.analytics.purchase", run) : run();

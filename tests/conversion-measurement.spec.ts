@@ -6,7 +6,9 @@ const cors = { 'access-control-allow-origin': '*', 'access-control-allow-headers
 test('consulta mide apertura sin enviar respuestas ni destino de WhatsApp', async ({ page }) => {
     await page.addInitScript(() => {
         const events: unknown[] = [];
-        Object.assign(window, { fixtureEvents: events, posthog: { capture: (name: string, props: unknown) => events.push({ name, props }) } });
+        Object.assign(window, { fixtureEvents: events });
+        Object.defineProperty(window, 'gtag', { configurable: true,
+            get: () => (_command: string, name: string, props: unknown) => events.push({ name, props }), set: () => undefined });
     });
     await page.context().route('**/*', async route => {
         const url = new URL(route.request().url());
@@ -31,7 +33,9 @@ test('compra exige API confirmada y no se duplica al recargar', async ({ page })
     let mutations = 0;
     await page.addInitScript(() => {
         const events: unknown[] = [];
-        Object.assign(window, { fixtureEvents: events, posthog: { capture: (name: string, props: unknown) => events.push({ name, props }) } });
+        Object.assign(window, { fixtureEvents: events });
+        Object.defineProperty(window, 'gtag', { configurable: true,
+            get: () => (_command: string, name: string, props: unknown) => events.push({ name, props }), set: () => undefined });
         if (!localStorage.getItem('fixture-seeded')) {
             localStorage.setItem('fixture-seeded', 'true');
             localStorage.setItem('tc.pedido', JSON.stringify({ clave: 'TC-PRUEBA', token: 'private-token', total: 120, moneda: 'ARS', huella: 'fixture' }));
