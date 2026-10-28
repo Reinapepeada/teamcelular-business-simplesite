@@ -24,6 +24,9 @@ const securityHeaders = [
 ];
 
 module.exports = {
+  // Sólo la prueba aislada simula el host público contra el servidor local de Next.
+  allowedDevOrigins: process.env.NODE_ENV === "development" && process.env.NEXT_ANALYTICS_TEST_ORIGIN === "1"
+    ? ["teamcelular.com"] : undefined,
   reactStrictMode: true,
   poweredByHeader: false,
   outputFileTracingRoot: __dirname,

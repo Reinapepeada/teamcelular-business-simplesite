@@ -3,6 +3,21 @@ import { test, expect } from '@playwright/test';
 const origin = 'https://teamcelular.com';
 const cors = { 'access-control-allow-origin': '*', 'access-control-allow-headers': 'Content-Type', 'access-control-allow-methods': 'GET, OPTIONS' };
 
+test.beforeEach(async ({ page, context }) => {
+    // Sólo este contexto descartable accede a los servicios ficticios de loopback.
+    await context.grantPermissions(['local-network-access'], { origin });
+    await page.addInitScript(() => {
+        // El cliente dev espera HMR antes de hidratar. También ese canal usa el servidor ficticio.
+        const Socket = window.WebSocket;
+        window.WebSocket = class extends Socket {
+            constructor(url: string | URL, protocols?: string | string[]) {
+                const target = String(url).replace(/^wss:\/\/teamcelular\.com\/_next\/hmr/, 'ws://127.0.0.1:3100/_next/hmr');
+                super(target, protocols);
+            }
+        };
+    });
+});
+
 test('consulta mide apertura sin enviar respuestas ni destino de WhatsApp', async ({ page }) => {
     await page.addInitScript(() => {
         const events: unknown[] = [];
