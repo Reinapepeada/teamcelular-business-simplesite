@@ -162,6 +162,53 @@ async function fillBuyer(page: Page) {
     await page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Mail', { exact: true }).fill('ana@example.test');
 }
 
+for (const width of [320, 390, 1280]) {
+    test(`condiciones accesibles sin perder carrito ni formulario a ${width}px`, async ({ page, context }, testInfo) => {
+        await page.setViewportSize({ width, height: 900 });
+        await seed(page, 2, false);
+        await isolate(page, () => status());
+        let mutations = 0;
+        context.on('request', request => {
+            if (!['GET', 'HEAD', 'OPTIONS'].includes(request.method())) mutations++;
+        });
+        await page.goto('/tienda');
+        await page.getByRole('button', { name: /Abrir carrito/ }).click();
+        for (const name of ['Resumen del carrito', 'Finalizar compra']) {
+            const dialog = page.getByRole('dialog', { name });
+            await expect(dialog).toBeVisible();
+            if (name === 'Finalizar compra') await fillBuyer(page);
+            const conditions = dialog.getByRole('link', { name: 'Devoluciones y garantía (nueva pestaña)', exact: true });
+            await expect(conditions).toHaveAttribute('href', '/devoluciones');
+            await expect(conditions).toHaveAttribute('target', '_blank');
+            await expect(conditions).toHaveAttribute('rel', 'noopener noreferrer');
+            // Recorrer el modal con Tab prueba que el enlace no queda fuera del foco protegido.
+            for (let tabs = 0; tabs < 35 && !await conditions.evaluate(element => element === document.activeElement); tabs++) {
+                await page.keyboard.press('Tab');
+            }
+            await expect(conditions).toBeFocused();
+            await expect(conditions).toBeInViewport();
+            expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+            await page.screenshot({ path: testInfo.outputPath(`conditions-${name}-${width}.png`) });
+            const popupReady = context.waitForEvent('page');
+            await page.keyboard.press('Enter');
+            const popup = await popupReady;
+            await popup.waitForLoadState('domcontentloaded');
+            await expect(popup).toHaveURL(/\/devoluciones$/);
+            await expect(popup.getByRole('heading', { level: 1 })).toContainText(/devoluciones/i);
+            await popup.close();
+            await expect(dialog).toBeVisible();
+            expect(await page.evaluate(() => JSON.parse(localStorage.getItem('cart-storage')!).state.cart[0].quantity)).toBe(2);
+            if (name === 'Resumen del carrito') {
+                await dialog.getByRole('button', { name: 'Continuar con la compra', exact: true }).click();
+            } else {
+                await expect(dialog.getByLabel('Nombre y apellido', { exact: true })).toHaveValue('Ana Prueba');
+                await expect(dialog.getByLabel('Mail', { exact: true })).toHaveValue('ana@example.test');
+            }
+        }
+        expect(mutations).toBe(0);
+    });
+}
+
 async function fillShipping(page: Page) {
     await page.getByRole('dialog', { name: 'Finalizar compra' }).getByLabel('Envío a domicilio', { exact: false }).check();
     await fillBuyer(page);

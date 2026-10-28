@@ -826,6 +826,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
                     </button>
                 </form>
                 )}
+                <a href="/devoluciones" target="_blank" rel="noopener noreferrer" className="mt-4 flex min-h-11 items-center justify-center text-sm text-slate-600 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 dark:text-slate-300">Devoluciones y garantía (nueva pestaña)</a>
                 <a className="mt-4 flex min-h-11 items-center justify-center text-sm text-slate-600 underline-offset-4 hover:underline dark:text-slate-400" href={whatsappUrl("Hola, necesito ayuda con " + (numeroPedido ? "el pedido " + numeroPedido : "mi compra en la tienda") + ".")} target="_blank" rel="noopener noreferrer">{problema?.consultarEnvio ? "Consultar por este envío" : "¿Dudas? Escribinos por WhatsApp"}</a>
                 </div>
             </dialog>
