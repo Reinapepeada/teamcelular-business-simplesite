@@ -46,6 +46,20 @@ El contrato de deploy, las señales que deben aprobar un PR y las acciones admin
 - Verificá que las páginas clave (inicio, presupuesto, contacto) tengan contenido orientado a consultas conversacionales como "¿Dónde reparo mi celular en CABA?".
 - Si publicás artículos técnicos, enlazalos entre sí y hacia la landing principal usando texto descriptivo (anchor text) con palabras clave.
 
+## Analítica de PostHog
+
+La integración de Vercel administra `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` y
+`NEXT_PUBLIC_POSTHOG_HOST`. Sin ambas variables no se inicializa PostHog. Para
+desarrollo local se pueden definir manualmente en la configuración local, pero
+el SDK sólo envía datos desde `teamcelular.com` y `www.teamcelular.com`.
+
+Se registran visitas públicas y los eventos existentes del presupuesto, incluido
+`lead_form_submit` cuando se abre WhatsApp; no acredita un mensaje entregado.
+Se excluyen `/admin` y `/checkout`, respuestas del formulario, parámetros de URL,
+perfiles personales, grabaciones, autocaptura, logs y evaluaciones de flags.
+La captura respeta Do Not Track. Las pruebas de privacidad se ejecutan con
+`npm test`. Instalación según la [guía oficial de Next.js](https://posthog.com/docs/libraries/next-js).
+
 ## Licencia 📝
 Este proyecto está bajo la licencia MIT.
 

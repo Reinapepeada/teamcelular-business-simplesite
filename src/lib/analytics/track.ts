@@ -1,5 +1,6 @@
 import { track as vercelTrack } from "@vercel/analytics";
 import { isGa4ProductionHost } from "./ga4";
+import { capturePostHogEvent } from "./posthog";
 
 type Props = Record<string, string | number | boolean | null>;
 
@@ -17,6 +18,8 @@ export function track(eventName: string, props?: Props) {
   vercelTrack(eventName, props ?? {});
 
   if (typeof window === "undefined") return;
+
+  capturePostHogEvent(eventName, props);
 
   if (isGa4ProductionHost(window.location.hostname) && typeof window.gtag === "function") {
     window.gtag("event", eventName, props ?? {});
