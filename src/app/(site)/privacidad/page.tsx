@@ -68,7 +68,7 @@ export default function PrivacidadPage() {
           Política de privacidad
         </h1>
         <p className="text-slate-600 dark:text-slate-300">
-          Última actualización: 6 de enero de 2026.
+          Última actualización: 28 de octubre de 2026.
         </p>
       </header>
 
@@ -102,6 +102,15 @@ export default function PrivacidadPage() {
           (por ejemplo, Vercel Analytics/Speed Insights) y para comunicación
           (por ejemplo, WhatsApp, email). Cada proveedor tiene sus propias
           políticas.
+        </p>
+        <p>
+          Usamos PostHog para contar visitas a páginas públicas y eventos del
+          presupuesto, como su apertura o envío hacia WhatsApp. Esta medición
+          no incluye respuestas del formulario, correos, teléfonos ni grabaciones
+          de sesiones. Quitamos los parámetros y fragmentos de las URLs y
+          excluimos el panel administrativo y el checkout. PostHog aloja estos
+          datos en su región de Estados Unidos y utiliza un identificador anónimo
+          del navegador para relacionar las visitas.
         </p>
 
         <h2>4. Cookies</h2>
