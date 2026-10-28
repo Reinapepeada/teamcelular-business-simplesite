@@ -25,6 +25,7 @@ import {
 } from '@/services/products';
 import { getProductWarranty, type Product } from '@/app/tienda/product';
 import useCartStore from '@/store/cartStore';
+import TrackView from '@/components/analytics/TrackView';
 import ProductCondition from '@/components/store/ProductCondition';
 import { buildProductFacts } from '@/lib/productSeo';
 import { BUSINESS_PROFILE } from '@/lib/businessProfile';
@@ -163,6 +164,8 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
 
     return (
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 pt-4 pb-28 sm:py-8">
+            <TrackView eventName="view_item" properties={{ currency: "ARS", value: product.retail_price,
+                items: [{ item_id: storeSlugProp || `product-${product.id}`, item_name: product.name, price: product.retail_price, quantity: 1 }] }} />
             {/* Breadcrumb */}
             <nav className="flex items-center space-x-2 text-xs sm:text-sm mb-4 sm:mb-6 overflow-x-auto pb-2">
                 <Link href="/tienda" className="text-muted-foreground hover:text-primary dark:hover:text-secondary transition-colors">

@@ -104,11 +104,15 @@ export default function PrivacidadPage() {
           políticas.
         </p>
         <p>
-          Usamos PostHog para contar visitas a páginas públicas y eventos del
-          presupuesto, como su apertura o envío hacia WhatsApp. Esta medición
-          no incluye respuestas del formulario, correos, teléfonos ni grabaciones
-          de sesiones. Quitamos los parámetros y fragmentos de las URLs y
-          excluimos el panel administrativo y el checkout. PostHog aloja estos
+          Usamos PostHog y Google Analytics para medir visitas, origen de campañas,
+          uso del presupuesto, clics de contacto, navegación, rendimiento y el
+          recorrido de la tienda, incluido el pago confirmado al volver al sitio.
+          Los eventos personalizados no incluyen respuestas del formulario,
+          correos, teléfonos, direcciones de entrega ni textos de WhatsApp.
+          En PostHog no grabamos sesiones, excluimos el panel administrativo y
+          quitamos parámetros y fragmentos de las URLs. Conservamos únicamente
+          etiquetas de campaña filtradas y usamos una referencia transformada
+          para evitar contar dos veces una compra. PostHog aloja estos
           datos en su región de Estados Unidos y utiliza un identificador anónimo
           del navegador para relacionar las visitas.
         </p>

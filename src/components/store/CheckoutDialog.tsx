@@ -39,6 +39,7 @@ import { queHacerConElPendiente } from "@/lib/pedidoPendiente";
 import { whatsappUrl } from "@/lib/businessProfile";
 import { vencimientoReserva, importeConfirmado } from "@/lib/resumenDelPedido";
 import { totalesDelCarrito } from "@/lib/totalesDelCarrito";
+import { measure } from "@/lib/analytics/posthog";
 import {
     quoteShipping,
     createOrder,
@@ -110,6 +111,10 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
     // DESPUÉS y quedarse con un botón que ofrece pagar otra cosa.
     const [huellaPendiente, setHuellaPendiente] = useState<string | null>(null);
     const { state: retiro, retry: reintentarRetiro } = usePickupPoint(abierto);
+    const measurementStep = fallo ? "error" : aConfirmar ? "price_confirmation" : revision ? "review" : intentoPendiente ? "recovery" : "details";
+    useEffect(() => {
+        if (abierto) measure("checkout_step_view", { step_id: measurementStep, shipping_tier: datos.entrega === "envio" ? "shipping" : "pickup" });
+    }, [abierto, measurementStep, datos.entrega]);
 
     useEffect(() => {
         if (!retiroSolicitado) return;
@@ -248,6 +253,7 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
     }, [errores, abierto, enviando, revision, aConfirmar, intentoPendiente]);
 
     const irAPagar = (url: string) => {
+        measure("add_payment_info", { payment_type: "mercado_pago", shipping_tier: datos.entrega === "envio" ? "shipping" : "pickup" });
         window.location.href = url;
     };
 
@@ -330,6 +336,8 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
         setErrores(encontrados);
         setFallo(null);
         if (hayErrores(encontrados)) {
+            measure("checkout_validation_error", { invalid_field_count: Object.keys(encontrados).length,
+                field_name: Object.keys(encontrados)[0], step_id: "details" });
             return;
         }
         if (datos.entrega === "retiro" && retiro.status !== "ready") return;
@@ -346,12 +354,14 @@ export default function CheckoutDialog({ abierto, onCerrar, retiroSolicitado = 0
             setRevision({ ...r, datos: structuredClone(datos), huella: huellaActual, destinoCarrito: { ...destinoEnvio } });
             setEstimadoEnvio(r.envio);
             setProductosRevisados(r.productos);
+            measure("add_shipping_info", { shipping_tier: datos.entrega === "envio" ? "shipping" : "pickup", currency: "ARS", value: r.productos });
         } catch (error) {
             if (contextoActual.current !== contextoRevision) {
                 setFallo("El carrito o el destino cambió. Revisá el pedido otra vez.");
                 return;
             }
             const p = problemaDeCheckout(error, items);
+            measure("checkout_error", { error_code: "checkout_review_failed" });
             setErrores(p.campos ?? {});
             setProblema(p);
             setFallo(p.mensaje);

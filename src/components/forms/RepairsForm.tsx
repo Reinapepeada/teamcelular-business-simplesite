@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useBranchPreference } from "@/hooks/use-branch-preference";
 import { track } from "@/lib/analytics/track";
+import { measure } from "@/lib/analytics/posthog";
 import { lookupQuote, quotableModels } from "@/lib/quoteLookup";
 import { PLACA_REVISION_PRICE, formatArsPrice } from "@/lib/repairPrices";
 import { SCREEN_BATTERY_TIMING_MESSAGE } from "@/lib/copyStandards";
@@ -56,13 +57,11 @@ export default function RepairsForm() {
 
     const startedRef = useRef(false);
     const submittedRef = useRef(false);
-    // Lo lee el cleanup de abandono al desmontar, sin re-ejecutar ese effect.
-    const repairTypeRef = useRef("sin_definir");
-    useEffect(() => {
-        repairTypeRef.current = repairTypeLabel || "sin_definir";
-    }, [repairTypeLabel]);
+    const startedAt = useRef(0);
+    const abandonmentSent = useRef(false);
 
     useEffect(() => {
+        startedAt.current = Date.now();
         leadAttemptId.current = typeof window.crypto?.randomUUID === "function"
             ? window.crypto.randomUUID()
             : `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
@@ -72,14 +71,17 @@ export default function RepairsForm() {
             buildBudgetFunnelPayload({ extra: { wizard_source: `budget_wizard_${BUDGET_WIZARD_VERSION}` } }),
         );
 
-        return () => {
-            if (startedRef.current && !submittedRef.current) {
+        const abandon = () => {
+            if (startedRef.current && !submittedRef.current && !abandonmentSent.current) {
+                abandonmentSent.current = true;
                 track(
                     BUDGET_FUNNEL_EVENTS.abandoned,
-                    buildBudgetFunnelPayload({ extra: { repair_type: repairTypeRef.current } }),
+                    buildBudgetFunnelPayload({ extra: { duration_ms: Date.now() - startedAt.current } }),
                 );
             }
         };
+        window.addEventListener("pagehide", abandon);
+        return () => { window.removeEventListener("pagehide", abandon); abandon(); };
     }, []);
 
     function markStarted() {
@@ -97,6 +99,7 @@ export default function RepairsForm() {
     }
 
     function selectBranch(slug: BranchSlug, method: BranchSelectionMethod) {
+        measure("branch_preference_selected", { preferred_branch: slug, selection_method: method });
         markStarted();
         setPreferredBranch(slug);
         saveBranchPreference(slug, method);
@@ -105,10 +108,12 @@ export default function RepairsForm() {
 
     function handleSend() {
         if (repairTypes.length === 0) {
+            measure("budget_validation_error", { field_name: "repair_type", form_name: "repair_budget_wizard" });
             setErrorMessage("Tocá qué le pasa al celular.");
             return;
         }
         if (!preferredBranch) {
+            measure("budget_validation_error", { field_name: "preferred_branch", form_name: "repair_budget_wizard" });
             setErrorMessage("Elegí la sucursal que te queda más cerca.");
             return;
         }

@@ -1,6 +1,5 @@
 import type { BranchSlug } from "@/lib/branchPreference";
-import { isGa4ProductionHost } from "./ga4";
-import { capturePostHogEvent } from "./posthog";
+import { measure } from "./posthog";
 
 export type LeadInteractionCtaVariant =
   | "primary"
@@ -69,28 +68,21 @@ declare global {
   }
 }
 
-/**
- * Mirrors the interaction into GA4. Every lead path (CTA links, branch
- * WhatsApp buttons, budget form steps) funnels through recordLeadInteraction,
- * so this is the one place that has to know about gtag. Without it GA4 only
- * sees page views and there is nothing to mark as a key event.
- */
-function sendToGa4(payload: LeadInteractionPayload) {
-  if (!isGa4ProductionHost(window.location.hostname) || typeof window.gtag !== "function") return;
-
-  window.gtag("event", payload.eventName, {
+/** Comparte categorías de interacción con GA4 y PostHog, sin respuestas ni destinos. */
+function sendMeasurement(payload: LeadInteractionPayload) {
+  measure(payload.eventName, {
     cta_name: payload.ctaName,
     cta_location: payload.ctaLocation,
     cta_variant: payload.ctaVariant,
-    destination: payload.destination,
     form_name: payload.formName,
     form_version: payload.formVersion,
     preferred_branch: payload.preferredBranch,
     step_id: payload.stepId,
-    brand: payload.brand,
-    model: payload.model,
-    repair_type: payload.repairType,
-    contact_channel: payload.contactChannel,
+    form_location: payload.formLocation,
+    step_index: payload.stepIndex,
+    total_steps: payload.totalSteps,
+    conversion_kind: ["branch_whatsapp_redirect", "lead_form_submit", "whatsapp_click"].includes(payload.eventName)
+      || (payload.eventName === "cta_click" && payload.ctaVariant === "whatsapp") ? "whatsapp_handoff" : "interaction",
   });
 }
 
@@ -99,15 +91,7 @@ export function recordLeadInteraction(payload: LeadInteractionPayload): boolean 
     return false;
   }
 
-  sendToGa4(payload);
-  capturePostHogEvent(payload.eventName, {
-    form_name: payload.formName,
-    form_location: payload.formLocation,
-    form_version: payload.formVersion,
-    step_id: payload.stepId,
-    step_index: payload.stepIndex,
-    total_steps: payload.totalSteps,
-  });
+  sendMeasurement(payload);
 
   const body = JSON.stringify(buildPayload(payload));
 

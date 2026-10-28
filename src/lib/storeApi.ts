@@ -10,6 +10,8 @@
  * es lo que aceptan tanto la cotización como el checkout.
  */
 
+import { rememberAnalyticsOrder } from "./analytics/storeMeasurement";
+
 export const STORE_API_BASE = (process.env.NEXT_PUBLIC_STORE_API_URL ?? "").replace(/\/+$/, "");
 
 /** Un producto del catálogo público. No trae `id`: ver el comentario de arriba. */
@@ -269,7 +271,10 @@ export interface CheckoutPayload {
 }
 
 export const createOrder = (payload: CheckoutPayload) =>
-    pedir<StoreOrder>("/store/checkout", { method: "POST", body: JSON.stringify(payload) });
+    pedir<StoreOrder>("/store/checkout", { method: "POST", body: JSON.stringify(payload) }).then(order => {
+        rememberAnalyticsOrder(order);
+        return order;
+    });
 
 /**
  * El link donde se paga.

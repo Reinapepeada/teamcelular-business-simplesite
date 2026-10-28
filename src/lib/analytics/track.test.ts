@@ -27,7 +27,7 @@ track("budget_wizard_abandon", { step_id: "issue", step_index: 2 });
 assert.deepEqual(gtagCalls[0], [
   "event",
   "budget_wizard_abandon",
-  { step_id: "issue", step_index: 2 },
+  { step_id: "issue", step_index: 2, measurement_version: 2, page_type: "home", page_location: "https://teamcelular.com/" },
 ]);
 
 // Clarity recibe el evento y el paso como tag, que es lo que permite filtrar

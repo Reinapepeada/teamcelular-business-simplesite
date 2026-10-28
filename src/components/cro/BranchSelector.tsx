@@ -4,6 +4,7 @@ import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { FaLocationArrow, FaMapMarkerAlt, FaTimes, FaWhatsapp } from "react-icons/fa";
 import { BRANCHES } from "@/lib/businessProfile";
 import { recordLeadInteraction } from "@/lib/analytics/leadInteractions";
+import { measure } from "@/lib/analytics/posthog";
 import {
   branchWhatsappUrl,
   distanceKm,
@@ -142,6 +143,7 @@ export default function BranchWhatsAppButton({
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<BranchSlug | "">("");
+  const redirected = useRef(false);
   const destination = selected ? branchWhatsappUrl(selected, message) : undefined;
 
   useLayoutEffect(() => {
@@ -151,6 +153,7 @@ export default function BranchWhatsAppButton({
   }, [open]);
 
   function openSelector() {
+    redirected.current = false;
     setOpen(true);
     setSelected(readBranchPreference()?.slug ?? "");
     // La medición de apertura puede esperar al pintado del selector.
@@ -165,12 +168,14 @@ export default function BranchWhatsAppButton({
   }
 
   function choose(slug: BranchSlug, method: BranchSelectionMethod) {
+    measure("branch_preference_selected", { preferred_branch: slug, selection_method: method });
     setSelected(slug);
     saveBranchPreference(slug, method);
   }
 
   function continueToWhatsApp() {
     if (!selected) return;
+    redirected.current = true;
     recordLeadInteraction({
       eventName: "branch_whatsapp_redirect",
       preferredBranch: selected,
@@ -184,12 +189,17 @@ export default function BranchWhatsAppButton({
 
   return (
     <>
-      <button type="button" onClick={openSelector} className={className} aria-label={ariaLabel}>
+      <button type="button" onClick={openSelector} className={className} aria-label={ariaLabel}
+        data-cta-name={ctaName} data-cta-location={ctaLocation} data-cta-variant="whatsapp">
         {children || <><FaWhatsapp aria-hidden /> WhatsApp</>}
       </button>
       <dialog
         ref={dialogRef}
-        onClose={() => setOpen(false)}
+        onClose={() => {
+          measure("branch_selector_close", { cta_name: ctaName, cta_location: ctaLocation,
+            conversion_kind: redirected.current ? "after_handoff" : "dismissed" });
+          setOpen(false);
+        }}
         aria-labelledby={`${ctaName}-branch-title`}
         className="mb-0 mt-auto w-full max-w-xl rounded-t-2xl bg-white p-0 text-slate-900 shadow-2xl backdrop:bg-slate-950/55 dark:bg-slate-900 dark:text-slate-100 sm:m-auto sm:rounded-2xl"
       >

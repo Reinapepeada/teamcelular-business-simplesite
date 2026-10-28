@@ -22,6 +22,8 @@ import { vencimientoReserva, importeConfirmado } from "@/lib/resumenDelPedido";
 import { consultarPedido } from "@/lib/consultaDelPedido";
 import useCartStore from "@/store/cartStore";
 import { datosParaResenas, entregaEstimada } from "@/lib/resenasGoogle";
+import { measure } from "@/lib/analytics/posthog";
+import { measureConfirmedPayment } from "@/lib/analytics/storeMeasurement";
 
 const MERCHANT_ID = 5711320288;
 
@@ -73,6 +75,17 @@ function OrderReturn({ intencion }: { intencion: Intencion }) {
     const params = useSearchParams();
     const [pedido] = useState(() => claveDeLaVuelta(almacen(), params));
     const [estado, setEstado] = useState<StoreOrderStatus | null>(null);
+    const previousResult = useRef("");
+    useEffect(() => {
+        if (!estado) return;
+        const result = vueltaMostrable(estado).desenlace;
+        if (previousResult.current !== result) {
+            previousResult.current = result;
+            measure("payment_result", { payment_result: result, measurement_source: "server_status" });
+        }
+        const storage = almacen();
+        if (storage) void measureConfirmedPayment(estado, storage);
+    }, [estado]);
     const [sinPedido, setSinPedido] = useState(() => !pedido);
     const [seGastaronLosIntentos, setSeGastaronLosIntentos] = useState(false);
     const quedanProductos = useCartStore((s) => s.cart.length > 0);

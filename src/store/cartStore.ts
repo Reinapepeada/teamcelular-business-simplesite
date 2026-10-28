@@ -8,6 +8,8 @@ import { aLineasDeCheckout, carritoComprable } from "@/lib/cartLines";
 import { claveDeCheckoutGuardada, huellaDelCarrito } from "@/lib/checkoutKey";
 import { pedidoGuardado } from "@/lib/vueltaDelPago";
 import { limitarCantidadAlStock } from "@/lib/stockDeLaFicha";
+import { cartMeasurement, measureCartMutation } from "@/lib/analytics/storeMeasurement";
+import { measure } from "@/lib/analytics/posthog";
 
 // Item del carrito con variante seleccionada opcional
 export interface CartItem {
@@ -105,7 +107,10 @@ const useCartStore = create<CartState>()(
             destinoEnvio: { province: "", postal_code: "" },
             setDestinoEnvio: (cambios) => changeCart(() => { set({ destinoEnvio: { ...get().destinoEnvio, ...cambios } }); }),
             open: false,
-            openCart: () => set({ open: true }),
+            openCart: () => {
+                if (!get().open) measure("view_cart", cartMeasurement(get().cart));
+                set({ open: true });
+            },
             closeCart: () => set({ open: false }),
             cart: [],
             cartRevision: null,
@@ -155,6 +160,7 @@ const useCartStore = create<CartState>()(
 
                 const totals = calculateTotals(updatedCart);
                 set({ cart: updatedCart, cartRevision: newCartRevision(), ...totals });
+                measureCartMutation(cart, updatedCart);
             }),
 
             removeFromCart: (cartKey) => changeCart(() => {
@@ -162,19 +168,26 @@ const useCartStore = create<CartState>()(
                 const updatedCart = cart.filter((item) => item.cartKey !== cartKey);
                 const totals = calculateTotals(updatedCart);
                 set({ cart: updatedCart, cartRevision: newCartRevision(), ...totals });
+                measureCartMutation(cart, updatedCart);
             }),
 
             updateQuantity: (cartKey, newQuantity) => changeCart(() => {
-                const updatedCart = changeQuantity(get().cart, cartKey, () => newQuantity);
+                const before = get().cart;
+                const updatedCart = changeQuantity(before, cartKey, () => newQuantity);
                 set({ cart: updatedCart, cartRevision: newCartRevision(), ...calculateTotals(updatedCart) });
+                measureCartMutation(before, updatedCart);
             }),
             adjustQuantity: (cartKey, delta) => changeCart(() => {
-                const updatedCart = changeQuantity(get().cart, cartKey, actual => actual + delta);
+                const before = get().cart;
+                const updatedCart = changeQuantity(before, cartKey, actual => actual + delta);
                 set({ cart: updatedCart, cartRevision: newCartRevision(), ...calculateTotals(updatedCart) });
+                measureCartMutation(before, updatedCart);
             }),
 
             clearCart: () => changeCart(() => {
+                const before = get().cart;
                 set({ cart: [], cartRevision: newCartRevision(), totalItems: 0, totalPrice: 0 });
+                measureCartMutation(before, []);
             }),
             clearPurchasedCart: async (orderKey) => {
                 // Sin exclusión entre pestañas, conservar es más seguro que borrar.

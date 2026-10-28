@@ -102,6 +102,10 @@ export default function TrackedCtaLink({
         rel={safeRel}
         aria-label={ariaLabel}
         data-cta-location={ctaLocation}
+        data-cta-name={ctaName}
+        data-cta-variant={ctaVariant}
+        data-analytics-tracked="true"
+        data-whatsapp-tracked={ctaVariant === "whatsapp" ? "true" : undefined}
       >
         {children}
       </a>
@@ -111,6 +115,10 @@ export default function TrackedCtaLink({
   return (
     <Link
       href={href}
+      data-cta-name={ctaName}
+      data-cta-location={ctaLocation}
+      data-cta-variant={ctaVariant}
+      data-analytics-tracked="true"
       onClick={handleClick}
       className={className}
       target={target}

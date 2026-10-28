@@ -53,12 +53,15 @@ La integración de Vercel administra `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` y
 desarrollo local se pueden definir manualmente en la configuración local, pero
 el SDK sólo envía datos desde `teamcelular.com` y `www.teamcelular.com`.
 
-Se registran visitas públicas y los eventos existentes del presupuesto, incluido
-`lead_form_submit` cuando se abre WhatsApp; no acredita un mensaje entregado.
-Se excluyen `/admin` y `/checkout`, respuestas del formulario, parámetros de URL,
-perfiles personales, grabaciones, autocaptura, logs y evaluaciones de flags.
-La captura respeta Do Not Track. Las pruebas de privacidad se ejecutan con
-`npm test`. Instalación según la [guía oficial de Next.js](https://posthog.com/docs/libraries/next-js).
+Se miden adquisición, interacción, consultas y el recorrido de compra según el
+[plan de medición](docs/analytics/MEASUREMENT_PLAN.md). `lead_form_submit` indica
+la apertura de WhatsApp desde el presupuesto; no acredita un mensaje entregado.
+`purchase` requiere una confirmación de la API al regresar del pago. Se excluyen
+respuestas, contactos, direcciones, URLs completas, perfiles personales,
+grabaciones, autocaptura, logs y flags. `/checkout` sólo permite resultados de
+pago y errores controlados; `/admin` y `/api` quedan fuera. Se respeta Do Not Track.
+Pruebas: `npm test` y `npm run test:browser`. Instalación según la
+[guía oficial de Next.js](https://posthog.com/docs/libraries/next-js).
 
 ## Licencia 📝
 Este proyecto está bajo la licencia MIT.

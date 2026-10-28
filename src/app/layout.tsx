@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/app/providers";
 import { getSiteUrl } from "@/lib/seoMetadata";
 import Script from "next/script";
 import { GA4_INIT_SCRIPT } from "@/lib/analytics/ga4";
+import JourneyAnalytics from "@/components/analytics/JourneyAnalytics";
 
 const SITE_URL = getSiteUrl();
 
@@ -147,6 +148,7 @@ export default function RootLayout({
                     <StructuredData />
                     {children}
                     <Plugins />
+                    <JourneyAnalytics />
                 </ThemeProvider>
             </body>
         </html>

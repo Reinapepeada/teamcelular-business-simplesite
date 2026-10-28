@@ -5,8 +5,8 @@ export default function RepairFaqList({ items }: {
 }) {
   return (
     <div className="divide-y divide-[#333336] border-y border-[#333336]">
-      {items.map(({ question, answer }) => (
-        <details key={question} className="group py-5">
+      {items.map(({ question, answer }, index) => (
+        <details key={question} data-faq-index={index + 1} className="group py-5">
           <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-5 rounded-lg text-[17px] font-semibold leading-snug text-[#f5f5f7] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#6aa6ff] sm:text-[19px] [&::-webkit-details-marker]:hidden">
             {question}
             <BsPlus aria-hidden className="h-6 w-6 shrink-0 text-[#a1a1a6] transition-transform group-open:rotate-45 motion-reduce:transition-none" />
