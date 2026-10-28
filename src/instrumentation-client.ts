@@ -1,5 +1,6 @@
 import posthog from "posthog-js";
 import { isPostHogPublicPage, measure, sanitizePostHogEvent } from "@/lib/analytics/posthog";
+import { isPerformanceDependencyUrl } from "@/lib/analytics/measurement";
 
 const token = process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN;
 const host = process.env.NEXT_PUBLIC_POSTHOG_HOST;
@@ -22,10 +23,7 @@ if (token && host && isPostHogPublicPage(window.location.hostname, window.locati
     disable_session_recording: true,
     disable_surveys: true,
     disable_external_dependency_loading: false,
-    prepare_external_dependency_script: script => {
-      const url = new URL(script.src);
-      return url.hostname.endsWith(".posthog.com") && /\/web-vitals\.js$/.test(url.pathname) ? script : null;
-    },
+    prepare_external_dependency_script: script => isPerformanceDependencyUrl(script.src) ? script : null,
     logs: { captureConsoleLogs: false },
     person_profiles: "never",
     save_campaign_params: false,

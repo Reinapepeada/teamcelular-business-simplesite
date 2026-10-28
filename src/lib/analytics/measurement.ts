@@ -31,6 +31,14 @@ export function safeLabel(value: unknown): string | undefined {
     && /^[\p{L}\p{N}_.:/ -]+$/u.test(value) && !/\d{7,}|https?:\/\//i.test(value) ? value : undefined;
 }
 
+export function isPerformanceDependencyUrl(source: string): boolean {
+  try {
+    const url = new URL(source);
+    return url.protocol === "https:" && url.hostname.endsWith(".posthog.com")
+      && /\/web-vitals(?:-with-attribution)?\.js$/.test(url.pathname);
+  } catch { return false; }
+}
+
 export function sanitizeMeasurementProperties(input: Record<string, unknown>): Record<string, unknown> {
   const result: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(input)) {
