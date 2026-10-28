@@ -63,6 +63,21 @@ pago y errores controlados; `/admin` y `/api` quedan fuera. Se respeta Do Not Tr
 Pruebas: `npm test` y `npm run test:browser`. Instalación según la
 [guía oficial de Next.js](https://posthog.com/docs/libraries/next-js).
 
+También se capturan errores no controlados del navegador y errores de solicitudes
+Next.js en producción. Sólo se envían el tipo de error, la ruta pública y las
+ubicaciones de código compilado; se descartan mensajes libres, variables,
+cabeceras, cookies y cuerpos de solicitudes. La excepción conserva su traza,
+pero reemplaza su mensaje por «Error de la aplicación». Los errores no incluyen
+identidad de cliente; en servidor se usa un identificador aleatorio por error.
+La captura del servidor requiere `VERCEL_ENV=production` y el origen público en
+`NEXT_PUBLIC_BASE_URL`, además de las mismas dos variables de PostHog del navegador.
+Antes de activar esta captura, comprobar en la facturación de PostHog que
+`Error tracking` tiene límite de gasto USD 0. El 28/10/2026 se verificó este
+límite, junto con `Inbox`, mediante el conector oficial. La cuota gratuita de
+errores es de 100.000 excepciones por mes; el límite de gasto evita excedentes pagos.
+La subida de sourcemaps queda pendiente de una clave específica de PostHog;
+no se publica el código fuente ni se crea una clave personal automáticamente.
+
 ## Licencia 📝
 Este proyecto está bajo la licencia MIT.
 

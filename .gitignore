@@ -46,3 +46,6 @@ venv.bak/
 # Playwright artifacts
 /test-results/
 /playwright-report/
+
+# Caché local del asistente de PostHog
+.posthog-wizard-cache/
