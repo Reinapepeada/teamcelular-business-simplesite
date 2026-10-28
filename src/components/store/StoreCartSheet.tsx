@@ -375,6 +375,14 @@ export default function StoreCartSheet() {
                             )}
                         </div>
                     )}
+                    <a
+                        href="/devoluciones"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mb-3 inline-flex min-h-11 items-center text-sm text-slate-600 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 dark:text-slate-300"
+                    >
+                        Devoluciones y garantía (nueva pestaña)
+                    </a>
                 </div>
 
                 {/* Resumen fijo: entrega, totales y compra */}
