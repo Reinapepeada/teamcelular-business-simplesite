@@ -1,5 +1,6 @@
 import type { BranchSlug } from "@/lib/branchPreference";
 import { isGa4ProductionHost } from "./ga4";
+import { capturePostHogEvent } from "./posthog";
 
 export type LeadInteractionCtaVariant =
   | "primary"
@@ -99,6 +100,14 @@ export function recordLeadInteraction(payload: LeadInteractionPayload): boolean 
   }
 
   sendToGa4(payload);
+  capturePostHogEvent(payload.eventName, {
+    form_name: payload.formName,
+    form_location: payload.formLocation,
+    form_version: payload.formVersion,
+    step_id: payload.stepId,
+    step_index: payload.stepIndex,
+    total_steps: payload.totalSteps,
+  });
 
   const body = JSON.stringify(buildPayload(payload));
 
