@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import { BsCheckCircleFill, BsWhatsapp } from "react-icons/bs";
 import {
   FaCheckCircle,
@@ -308,6 +308,10 @@ export default function ServiceLandingPage({
     config.whatsappText
   )}`;
   const illustration = SERVICE_ILLUSTRATIONS[config.slug];
+  // La ilustración de pantalla aparece después de los precios en móvil; en escritorio sí es LCP.
+  const desktopScreenImage = illustration && config.slug === "cambio-pantalla-caba"
+    ? getImageProps({ src: illustration, alt: "", fill: true, quality: 82, sizes: "(max-width: 1024px) 100vw, 660px" }).props
+    : null;
   const relatedGuides = SERVICE_RELATED_GUIDES[config.slug] ?? DEFAULT_RELATED_GUIDES;
   const workflow = config.workflow ?? WORKFLOW.map(({ title, desc }) => ({ title, desc }));
   const workflowSteps = (
@@ -391,12 +395,20 @@ export default function ServiceLandingPage({
       </header>
 
       <div className={`mx-auto mt-8 grid max-w-[1200px] gap-5 px-4 sm:px-6 ${illustration ? "lg:grid-cols-[1.2fr_1fr]" : ""}`}>
+        {desktopScreenImage && <link
+          rel="preload"
+          as="image"
+          href={desktopScreenImage.src}
+          imageSrcSet={desktopScreenImage.srcSet}
+          imageSizes={desktopScreenImage.sizes}
+          media="(min-width: 1024px)"
+        />}
         {illustration && <figure className="relative order-2 aspect-[4/3] overflow-hidden rounded-[28px] lg:order-none lg:aspect-auto lg:min-h-[24rem]">
           <Image
             src={illustration}
             alt={`Imagen ilustrativa del componente: ${config.serviceName}`}
             fill
-            priority
+            priority={!desktopScreenImage}
             quality={82}
             sizes="(max-width: 1024px) 100vw, 660px"
             className="bg-black object-contain pb-12"
