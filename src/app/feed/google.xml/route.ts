@@ -2,6 +2,7 @@ import { feedMerchant } from "@/lib/merchantFeed";
 import { listarCatalogo, type CatalogProduct } from "@/lib/storeCatalog";
 
 export const dynamic = "force-dynamic";
+export const maxDuration = 30;
 
 const SITE_URL = (process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com").replace(/\/+$/, "");
 const TAMANIO = 60;

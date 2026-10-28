@@ -51,3 +51,43 @@ test('la pantalla de falla permite reintentar sin crear pedidos ni cambiar catá
     await page.getByRole('button', { name: 'Reintentar', exact: true }).click();
     await expect(page.getByRole('heading', { name: 'Accesorios', exact: true, level: 1 })).toBeVisible();
 });
+
+test('categoría comparte las lecturas de metadata, contenido y filtros solo dentro del render', async ({ request }) => {
+    await request.get(fixture());
+    for (const count of [1, 2]) {
+        const response = await request.get('/tienda/categoria/accesorios', { headers: googlebot });
+        expect(response.status()).toBe(200);
+        expect(await response.text()).toContain('Funda de prueba');
+        const calls = await (await request.get('http://127.0.0.1:3101/__fixture/catalog-counts')).json();
+        expect(calls['/store/products']).toBe(count);
+        expect(calls['/store/facets']).toBe(count);
+    }
+});
+
+for (const [failure, path, status] of [
+    ['stall-listing', '/tienda', 500],
+    ['stall-facets', '/tienda', 200],
+    ['stall-facets', '/tienda/categoria/accesorios', 500],
+    ['serial-stall-listing', '/tienda/categoria/accesorios', 500],
+    ['serial-slow-success', '/tienda/categoria/accesorios', 200],
+    ['stall-product-body', '/tienda/funda-prueba', 500],
+    ['stall-listing', '/feed/google.xml', 503],
+] as const) {
+    test(`el presupuesto SSR resuelve ${failure} en ${path} sin confundir fallas con ausencia`, async ({ request }, testInfo) => {
+        // Compilar la ruta antes de medir el plazo de red, sin incluir arranque de dev.
+        expect((await request.get(path, { headers: googlebot })).status()).toBe(200);
+        await request.get(fixture(failure));
+        const started = Date.now();
+        const response = await request.get(path, { headers: googlebot });
+        const elapsed = Date.now() - started;
+        const calls = await (await request.get('http://127.0.0.1:3101/__fixture/catalog-counts')).json();
+        await testInfo.attach('catalog-deadline', { body: JSON.stringify({ elapsed_ms: elapsed, calls }), contentType: 'application/json' });
+        expect(response.status()).toBe(status);
+        expect(elapsed).toBeLessThan(25_000);
+        if (status === 200) expect(await response.text()).toContain('Funda de prueba');
+        await request.get(fixture());
+        const recovered = await request.get(path, { headers: googlebot });
+        expect(recovered.status()).toBe(200);
+        expect(await recovered.text()).toContain(path === '/feed/google.xml' ? '<rss' : 'rel="canonical"');
+    });
+}

@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import StoreCartLauncher from "@/components/store/StoreCartLauncher";
 
+export const maxDuration = 30;
+
 export const metadata: Metadata = {
   title: "Repuestos y Accesorios para Celulares | Team Celular",
   description:
