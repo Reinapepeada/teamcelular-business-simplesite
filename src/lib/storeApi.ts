@@ -11,6 +11,7 @@
  */
 
 import { rememberAnalyticsOrder } from "./analytics/storeMeasurement";
+import { cache } from "react";
 
 export const STORE_API_BASE = (process.env.NEXT_PUBLIC_STORE_API_URL ?? "").replace(/\/+$/, "");
 
@@ -189,16 +190,26 @@ async function pedir<T>(path: string, init?: RequestInit): Promise<T> {
     return (await res.json()) as T;
 }
 
-function pedirCatalogo<T>(path: string): Promise<T> {
-    if (typeof window === "undefined" && new URL(storeRequestUrl(path)).origin === "https://teamcelular.com") {
+// El signal desactiva la deduplicación de fetch de Next. React conserva una
+// lectura por ruta dentro del render, sin guardar precios/stock entre requests.
+// El plazo es compartido: resolver una categoría antes de sus productos no lo reinicia.
+const signalCatalogoServidor = cache(() => AbortSignal.timeout(8_000));
+const pedirCatalogoServidor = cache(<T>(path: string): Promise<T> => {
+    const signal = signalCatalogoServidor();
+    if (new URL(storeRequestUrl(path)).origin === "https://teamcelular.com") {
         // El catálogo SSR evita volver a entrar por Vercel. Es el mismo destino
         // de /store en next.config.js; el host identifica el catálogo público.
         // pedir conserva no-store: precio y disponibilidad siguen frescos.
         return pedir<T>(`https://api.beescend.com${path}`, {
             headers: { "X-Forwarded-Host": "teamcelular.com" },
+            signal,
         });
     }
-    return pedir<T>(path);
+    return pedir<T>(path, { signal });
+});
+
+function pedirCatalogo<T>(path: string): Promise<T> {
+    return typeof window === "undefined" ? pedirCatalogoServidor<T>(path) : pedir<T>(path);
 }
 
 export const fetchStoreProducts = (params: Record<string, string | number> = {}) => {
