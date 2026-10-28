@@ -192,7 +192,7 @@ async function pedir<T>(path: string, init?: RequestInit): Promise<T> {
 // El signal desactiva la deduplicación de fetch de Next. React conserva una
 // lectura por ruta dentro del render, sin guardar precios/stock entre requests.
 // El plazo es compartido: resolver una categoría antes de sus productos no lo reinicia.
-const signalCatalogoServidor = cache(() => AbortSignal.timeout(4_000));
+const signalCatalogoServidor = cache(() => AbortSignal.timeout(8_000));
 const pedirCatalogoServidor = cache(<T>(path: string): Promise<T> => {
     const signal = signalCatalogoServidor();
     if (new URL(storeRequestUrl(path)).origin === "https://teamcelular.com") {

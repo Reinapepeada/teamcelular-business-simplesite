@@ -30,8 +30,13 @@ http.createServer((request, response) => {
     if (seoFailure === 'stall-listing' && path === '/store/products'
         || seoFailure === 'stall-facets' && path === '/store/facets'
         || seoFailure === 'serial-stall-listing' && path === '/store/products') return;
-    if (seoFailure === 'serial-stall-listing' && path === '/store/facets') {
+    if (['serial-stall-listing', 'serial-slow-success'].includes(seoFailure) && path === '/store/facets') {
         const timer = setTimeout(() => response.end(JSON.stringify({ categories: ['Accesorios'], brands: ['Prueba'], min_price: 100, max_price: 100 })), 3_000);
+        response.once('close', () => clearTimeout(timer));
+        return;
+    }
+    if (seoFailure === 'serial-slow-success' && path === '/store/products') {
+        const timer = setTimeout(() => response.end(JSON.stringify({ items: [product], page: 1, size: 12, total: 1 })), 3_000);
         response.once('close', () => clearTimeout(timer));
         return;
     }

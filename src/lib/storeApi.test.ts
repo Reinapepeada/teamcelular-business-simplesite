@@ -168,7 +168,7 @@ for (const stage of ["headers", "body"] as const) {
             assert.ok(Date.now() - started < 1_500, "el cuerpo no puede quedar esperando después del plazo");
             stalled = false;
             assert.equal((await fetchStoreProducts()).total, 0);
-            assert.deepEqual(deadlines, [4_000, 4_000]);
+            assert.deepEqual(deadlines, [8_000, 8_000]);
         } finally {
             server.closeAllConnections();
             await new Promise<void>(resolve => server.close(() => resolve()));

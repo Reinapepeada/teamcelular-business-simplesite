@@ -69,10 +69,11 @@ for (const [failure, path, status] of [
     ['stall-facets', '/tienda', 200],
     ['stall-facets', '/tienda/categoria/accesorios', 500],
     ['serial-stall-listing', '/tienda/categoria/accesorios', 500],
+    ['serial-slow-success', '/tienda/categoria/accesorios', 200],
     ['stall-product-body', '/tienda/funda-prueba', 500],
     ['stall-listing', '/feed/google.xml', 503],
 ] as const) {
-    test(`el plazo SSR aborta ${failure} en ${path} sin convertir la falla en ausencia`, async ({ request }, testInfo) => {
+    test(`el presupuesto SSR resuelve ${failure} en ${path} sin confundir fallas con ausencia`, async ({ request }, testInfo) => {
         // Compilar la ruta antes de medir el plazo de red, sin incluir arranque de dev.
         expect((await request.get(path, { headers: googlebot })).status()).toBe(200);
         await request.get(fixture(failure));
@@ -82,7 +83,7 @@ for (const [failure, path, status] of [
         const calls = await (await request.get('http://127.0.0.1:3101/__fixture/catalog-counts')).json();
         await testInfo.attach('catalog-deadline', { body: JSON.stringify({ elapsed_ms: elapsed, calls }), contentType: 'application/json' });
         expect(response.status()).toBe(status);
-        expect(elapsed).toBeLessThan(10_000);
+        expect(elapsed).toBeLessThan(25_000);
         if (status === 200) expect(await response.text()).toContain('Funda de prueba');
         await request.get(fixture());
         const recovered = await request.get(path, { headers: googlebot });
