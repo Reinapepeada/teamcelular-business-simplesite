@@ -87,9 +87,9 @@ const planSteps: GuideItem[] = [
       "No intentes cargarlo ni forzarlo a encender. Cortar energia reduce riesgo de corto.",
   },
   {
-    title: "Retirar funda, SIM y accesorios",
+    title: "Retirar funda y accesorios",
     description:
-      "Permite ventilacion inicial y evita que el liquido quede atrapado por mas tiempo.",
+      "Retirá la funda y desconectá los accesorios. En iPhone, esperá a que esté seco antes de abrir la bandeja SIM. En otros modelos, seguí las instrucciones del fabricante; si no sabés cuál corresponde, no fuerces la bandeja.",
   },
   {
     title: "Evitar remedios caseros",
