@@ -112,6 +112,10 @@ const maintenanceTips = [
       "Configuramos copias de seguridad automáticas en iCloud, Google Drive o soluciones enterprise. Habilitamos autenticación multifactor (2FA) y encriptación para minimizar pérdidas ante robos o fallas.",
     Icon: FaCloud,
     frequency: "Automático diario",
+    links: [
+      { href: "https://support.apple.com/es-lamr/108366", label: "Respaldo en iPhone (Apple)" },
+      { href: "https://support.google.com/android/answer/2819582?hl=es-419", label: "Copia de seguridad en Android (Google)" },
+    ],
   },
 ];
 
@@ -333,6 +337,15 @@ export default function PreventiveMaintenanceGuide() {
                   <p className="leading-relaxed text-slate-700 dark:text-slate-300">
                     {tip.detail}
                   </p>
+                  {tip.links && (
+                    <div className="mt-3 flex flex-wrap gap-x-4">
+                      {tip.links.map((link) => (
+                        <a key={link.href} href={link.href} className="tc-link inline-flex min-h-11 items-center underline underline-offset-4">
+                          {link.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
               );
             })}
