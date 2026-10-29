@@ -45,37 +45,6 @@ test("sitemap lists every published product URL and excludes invalid slugs", asy
     globalThis.fetch = originalFetch;
   }
 });
-test("sitemap evita reentrar en el host productivo y conserva otros orígenes configurados", async (t) => {
-  const previous = process.env.NEXT_PUBLIC_STORE_API_URL;
-  const calls = [];
-  t.mock.method(globalThis, "fetch", async (input, init) => {
-    const url = new URL(input);
-    calls.push({ url, init });
-    return Response.json(url.pathname === "/store/facets"
-      ? { categories: ["CABLE"] } : { items: [], total: 0 });
-  });
-  try {
-    for (const [index, configuredOrigin] of ["https://teamcelular.com", "https://fixture.example.test", "https://teamcelular.com.example.test"].entries()) {
-      process.env.NEXT_PUBLIC_STORE_API_URL = configuredOrigin;
-      const { default: sitemap } = await import(`../src/app/sitemap.ts?catalog-origin=${index}`);
-      calls.length = 0;
-      await sitemap();
-      const direct = configuredOrigin === "https://teamcelular.com";
-      assert.equal(calls.length, 2);
-      for (const { url, init } of calls) {
-        assert.equal(url.origin, direct ? "https://api.beescend.com" : configuredOrigin);
-        assert.equal(new Headers(init.headers).get("X-Forwarded-Host"), direct ? "teamcelular.com" : null);
-        assert.ok(init.signal instanceof AbortSignal);
-        assert.equal(init.method ?? "GET", "GET");
-        if (url.pathname === "/store/facets") assert.equal(init.next.revalidate, 86400);
-        else assert.equal(init.cache, "no-store");
-      }
-    }
-  } finally {
-    if (previous === undefined) delete process.env.NEXT_PUBLIC_STORE_API_URL;
-    else process.env.NEXT_PUBLIC_STORE_API_URL = previous;
-  }
-});
 for (const blockedResource of ["facets", "products", "second-page"]) {
   for (const stage of ["headers", "body"]) {
     test(`sitemap limita ${stage} de ${blockedResource} y recupera el catálogo completo`, async (t) => {

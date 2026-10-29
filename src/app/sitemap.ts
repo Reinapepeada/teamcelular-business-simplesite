@@ -8,10 +8,6 @@ export const maxDuration = 30;
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 const STORE_API_URL = process.env.NEXT_PUBLIC_STORE_API_URL?.trim() || SITE_URL;
-// Igual que el catálogo SSR: el acceso directo evita una segunda invocación en Vercel.
-const directCatalog = new URL(STORE_API_URL).origin === "https://teamcelular.com";
-const CATALOG_API_URL = directCatalog ? "https://api.beescend.com" : STORE_API_URL;
-const CATALOG_HEADERS = directCatalog ? { "X-Forwarded-Host": "teamcelular.com" } : undefined;
 
 function slugify(text = "") {
   return text
@@ -26,11 +22,10 @@ function slugify(text = "") {
 // Categories come from the same published catalog used by the store filters.
 async function getCategoriesForSitemap(signal: AbortSignal): Promise<string[]> {
   try {
-    const endpoint = new URL("/store/facets", CATALOG_API_URL).toString();
+    const endpoint = new URL("/store/facets", STORE_API_URL).toString();
     const response = await fetch(endpoint, {
       next: { revalidate: 86400 }, // Cache for 24 hours
       signal,
-      headers: CATALOG_HEADERS,
     });
 
     if (!response.ok) {
@@ -55,8 +50,8 @@ async function getProductsForSitemap(signal: AbortSignal): Promise<string[]> {
     let page = 1;
     let total = 0;
     do {
-      const endpoint = new URL(`/store/products?page=${page}&size=60`, CATALOG_API_URL);
-      const response = await fetch(endpoint, { cache: "no-store", signal, headers: CATALOG_HEADERS });
+      const endpoint = new URL(`/store/products?page=${page}&size=60`, STORE_API_URL);
+      const response = await fetch(endpoint, { cache: "no-store", signal });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = (await response.json()) as {
         items?: { slug?: unknown }[];
