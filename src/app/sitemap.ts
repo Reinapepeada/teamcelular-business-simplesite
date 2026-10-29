@@ -13,6 +13,12 @@ const directCatalog = new URL(STORE_API_URL).origin === "https://teamcelular.com
 const CATALOG_API_URL = directCatalog ? "https://api.beescend.com" : STORE_API_URL;
 const CATALOG_HEADERS = directCatalog ? { "X-Forwarded-Host": "teamcelular.com" } : undefined;
 
+function logCatalogStage(resource: string, stage: string, started: number, status?: number) {
+  if (process.env.VERCEL_ENV === "preview") {
+    console.info("SITEMAP_FETCH_DIAGNOSTIC", { resource, stage, status, elapsed_ms: Date.now() - started });
+  }
+}
+
 function slugify(text = "") {
   return text
     .toString()
@@ -25,19 +31,23 @@ function slugify(text = "") {
 
 // Categories come from the same published catalog used by the store filters.
 async function getCategoriesForSitemap(signal: AbortSignal): Promise<string[]> {
+  const started = Date.now();
   try {
+    logCatalogStage("facets", "start", started);
     const endpoint = new URL("/store/facets", CATALOG_API_URL).toString();
     const response = await fetch(endpoint, {
       next: { revalidate: 86400 }, // Cache for 24 hours
       signal,
       headers: CATALOG_HEADERS,
     });
+    logCatalogStage("facets", "headers", started, response.status);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const data = (await response.json()) as { categories?: unknown };
+    logCatalogStage("facets", "json", started, response.status);
     if (!Array.isArray(data.categories) || !data.categories.every((category) => typeof category === "string")) {
       throw new Error("Respuesta inválida de categorías publicadas");
     }
@@ -51,17 +61,21 @@ async function getCategoriesForSitemap(signal: AbortSignal): Promise<string[]> {
 /** Solo slugs de publicaciones WEB activas; la API pública aplica ese filtro. */
 async function getProductsForSitemap(signal: AbortSignal): Promise<string[]> {
   const slugs = new Set<string>();
+  const started = Date.now();
   try {
     let page = 1;
     let total = 0;
     do {
+      logCatalogStage(`products_page_${page}`, "start", started);
       const endpoint = new URL(`/store/products?page=${page}&size=60`, CATALOG_API_URL);
       const response = await fetch(endpoint, { cache: "no-store", signal, headers: CATALOG_HEADERS });
+      logCatalogStage(`products_page_${page}`, "headers", started, response.status);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = (await response.json()) as {
         items?: { slug?: unknown }[];
         total?: number;
       };
+      logCatalogStage(`products_page_${page}`, "json", started, response.status);
       if (!Array.isArray(data.items) || !Number.isSafeInteger(data.total) || data.total! < 0) {
         throw new Error("Respuesta inválida del catálogo público");
       }
