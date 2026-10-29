@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
+import { createServer } from "node:http";
+import { once } from "node:events";
 
 const source = readFileSync(
   new URL("../src/app/sitemap.ts", import.meta.url),
@@ -41,6 +43,106 @@ test("sitemap lists every published product URL and excludes invalid slugs", asy
     assert.ok(requests.includes("/store/products?page=2"));
   } finally {
     globalThis.fetch = originalFetch;
+  }
+});
+for (const blockedResource of ["facets", "products", "second-page"]) {
+  for (const stage of ["headers", "body"]) {
+    test(`sitemap limita ${stage} de ${blockedResource} y recupera el catálogo completo`, async (t) => {
+      const { default: sitemap } = await import("../src/app/sitemap.ts");
+      let blocked = true;
+      const server = createServer((request, response) => {
+        const url = new URL(request.url, "http://fixture.test");
+        const facet = url.pathname === "/store/facets";
+        const page = Number(url.searchParams.get("page"));
+        const target = blockedResource === "facets" ? facet
+          : blockedResource === "products" ? !facet : !facet && page === 2;
+        if (blocked && target) {
+          if (stage === "body") {
+            response.writeHead(200, { "Content-Type": "application/json" });
+            response.flushHeaders();
+            response.write('{"items":');
+          }
+          return;
+        }
+        response.setHeader("Content-Type", "application/json");
+        response.end(JSON.stringify(facet ? { categories: ["CABLE"] } : {
+          items: page === 1
+            ? Array.from({ length: 60 }, (_, i) => ({ slug: `producto-${i + 1}` }))
+            : [{ slug: "producto-61" }],
+          total: 61,
+        }));
+      });
+      server.listen(0, "127.0.0.1");
+      await once(server, "listening");
+      const nativeFetch = globalThis.fetch;
+      const timeout = AbortSignal.timeout.bind(AbortSignal);
+      const deadlines = [];
+      t.mock.method(AbortSignal, "timeout", (milliseconds) => {
+        deadlines.push(milliseconds);
+        return timeout(150);
+      });
+      t.mock.method(console, "error", () => {});
+      t.mock.method(globalThis, "fetch", (input, init) => {
+        const url = new URL(input);
+        return nativeFetch(`http://127.0.0.1:${server.address().port}${url.pathname}${url.search}`, init);
+      });
+      try {
+        const started = Date.now();
+        await assert.rejects(sitemap(), (error) => ["AbortError", "TimeoutError"].includes(error.name));
+        assert.ok(Date.now() - started < 1_500, "el sitemap debe fallar antes del límite de la función");
+        blocked = false;
+        const entries = await sitemap();
+        const products = entries.filter((entry) => /\/tienda\/producto-\d+$/.test(entry.url));
+        assert.equal(products.length, 61, "la siguiente petición debe recuperar todas las páginas");
+        assert.ok(entries.some((entry) => entry.url.endsWith("/tienda/categoria/cable")));
+        assert.deepEqual(deadlines, [8_000, 8_000], "cada petición tiene su propio plazo, sin reiniciarlo por página");
+      } finally {
+        server.closeAllConnections();
+        await new Promise((resolve) => server.close(resolve));
+      }
+    });
+  }
+}
+
+test("sitemap comparte el plazo entre páginas lentas y conserva una lectura sana posterior", async (t) => {
+  const { default: sitemap } = await import("../src/app/sitemap.ts");
+  let slow = true;
+  const server = createServer((request, response) => {
+    const url = new URL(request.url, "http://fixture.test");
+    const facet = url.pathname === "/store/facets";
+    const page = Number(url.searchParams.get("page"));
+    const send = () => {
+      if (response.destroyed) return;
+      response.setHeader("Content-Type", "application/json");
+      response.end(JSON.stringify(facet ? { categories: ["CABLE"] } : {
+        items: page === 1
+          ? Array.from({ length: 60 }, (_, i) => ({ slug: `producto-${i + 1}` }))
+          : [{ slug: "producto-61" }],
+        total: 61,
+      }));
+    };
+    // Cada página cabe en120ms; juntas no. Un timeout nuevo por página sería incorrecto.
+    if (slow && !facet) setTimeout(send, page === 1 ? 70 : 100);
+    else send();
+  });
+  server.listen(0, "127.0.0.1");
+  await once(server, "listening");
+  const nativeFetch = globalThis.fetch;
+  const timeout = AbortSignal.timeout.bind(AbortSignal);
+  t.mock.method(AbortSignal, "timeout", () => timeout(120));
+  t.mock.method(console, "error", () => {});
+  t.mock.method(globalThis, "fetch", (input, init) => {
+    const url = new URL(input);
+    return nativeFetch(`http://127.0.0.1:${server.address().port}${url.pathname}${url.search}`, init);
+  });
+  try {
+    await assert.rejects(sitemap(), (error) => ["AbortError", "TimeoutError"].includes(error.name));
+    slow = false;
+    const entries = await sitemap();
+    assert.ok(entries.some((entry) => entry.url.endsWith("/tienda/producto-61")));
+  } finally {
+    server.closeAllConnections();
+    await new Promise((resolve) => server.close(resolve));
   }
 });
 

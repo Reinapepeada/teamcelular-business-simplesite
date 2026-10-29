@@ -3,6 +3,7 @@ import type { MetadataRoute } from "next";
 // Revalidate sitemap every 24 hours
 export const revalidate = 86400;
 export const dynamic = "force-dynamic";
+export const maxDuration = 30;
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
@@ -19,11 +20,12 @@ function slugify(text = "") {
 }
 
 // Categories come from the same published catalog used by the store filters.
-async function getCategoriesForSitemap(): Promise<string[]> {
+async function getCategoriesForSitemap(signal: AbortSignal): Promise<string[]> {
   try {
     const endpoint = new URL("/store/facets", STORE_API_URL).toString();
     const response = await fetch(endpoint, {
       next: { revalidate: 86400 }, // Cache for 24 hours
+      signal,
     });
 
     if (!response.ok) {
@@ -42,14 +44,14 @@ async function getCategoriesForSitemap(): Promise<string[]> {
 }
 
 /** Solo slugs de publicaciones WEB activas; la API pública aplica ese filtro. */
-async function getProductsForSitemap(): Promise<string[]> {
+async function getProductsForSitemap(signal: AbortSignal): Promise<string[]> {
   const slugs = new Set<string>();
   try {
     let page = 1;
     let total = 0;
     do {
       const endpoint = new URL(`/store/products?page=${page}&size=60`, STORE_API_URL);
-      const response = await fetch(endpoint, { cache: "no-store" });
+      const response = await fetch(endpoint, { cache: "no-store", signal });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = (await response.json()) as {
         items?: { slug?: unknown }[];
@@ -349,6 +351,8 @@ const guidePages = [
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Un plazo para facetas y todas las páginas; una falla no publica un XML parcial.
+  const signal = AbortSignal.timeout(8_000);
   // Omit lastModified until each page has a reliable content modification date.
   const homeLanguages = {
     "es-AR": SITE_URL,
@@ -356,7 +360,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "x-default": SITE_URL,
   };
   const [categories, productSlugs] = await Promise.all([
-    getCategoriesForSitemap(), getProductsForSitemap(),
+    getCategoriesForSitemap(signal), getProductsForSitemap(signal),
   ]);
 
   const mainSitemap = mainPages.map((page) => ({
