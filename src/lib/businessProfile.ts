@@ -12,6 +12,8 @@ export const LOGO = {
 
 export const BUSINESS_PROFILE = {
   name: "Team Celular",
+  description: "Team Celular es un servicio técnico de celulares en CABA, Buenos Aires, Argentina, con sucursales en Recoleta y Belgrano. Repara pantallas, baterías, puertos de carga y placas de iPhone, Samsung, Motorola y Xiaomi, y vende repuestos y accesorios.",
+  disambiguatingDescription: "La marca de este sitio es Team Celular de CABA, Argentina. No corresponde a Team Celular Panamá, La Chorrera ni al dominio teamcelularpa.my.canva.site.",
   // Variantes con las que se busca la marca: ayudan a Google a asociarlas al dominio.
   alternateName: ["TeamCelular", "teamcelular.com"],
   phone: "+54 11 5103-4595",

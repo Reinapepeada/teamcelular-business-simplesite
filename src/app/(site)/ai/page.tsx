@@ -2,6 +2,7 @@ import Link from "next/link";
 import { AI_DESCRIPTION, AI_DISAMBIGUATION, AI_FILES, AI_PAGES, createAiGraph } from "@/lib/aiVisibility";
 import { BRANCHES, BUSINESS_PROFILE } from "@/lib/businessProfile";
 import { HOME_FAQS } from "@/lib/homeFaqs";
+import { REPAIR_CASE } from "@/lib/repairCase";
 import { buildWebsiteMetadata } from "@/lib/seoMetadata";
 
 export const metadata = buildWebsiteMetadata({
@@ -46,6 +47,14 @@ export default function AiBrandPage() {
             </div>
           ))}
         </div>
+      </section>
+
+      <section className="tc-section border-b border-white/15" aria-labelledby="case-title">
+        <h2 id="case-title" className="tc-heading">Un caso real del laboratorio.</h2>
+        <h3 className="tc-subheading mt-6">{REPAIR_CASE.title}</h3>
+        <p className="mt-4 max-w-3xl leading-relaxed text-slate-200">{REPAIR_CASE.summary}</p>
+        <p className="mt-4 max-w-3xl leading-relaxed text-slate-200">{REPAIR_CASE.outcome}</p>
+        <Link href={REPAIR_CASE.path} className="tc-link mt-4 inline-block py-3">Leer el caso y los repuestos utilizados →</Link>
       </section>
 
       <section className="tc-section border-b border-white/15" aria-labelledby="sources-title">

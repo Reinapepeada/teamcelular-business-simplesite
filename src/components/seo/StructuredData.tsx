@@ -64,6 +64,8 @@ function createLocalBusinessJson(city?: string, country?: string) {
       "@type": "LocalBusiness",
       "@id": `${absoluteUrl(branch.url)}#localbusiness`,
       name: branch.name,
+      image: `${SITE_URL}/opengraph-image.png`,
+      priceRange: "$$",
       url: absoluteUrl(branch.url),
       telephone: branch.phone,
       address: {
@@ -91,6 +93,8 @@ function createOrganizationJson(includeContact: boolean) {
     "@id": businessId("organization"),
     name: BUSINESS_PROFILE.name,
     alternateName: BUSINESS_PROFILE.alternateName,
+    description: BUSINESS_PROFILE.description,
+    disambiguatingDescription: BUSINESS_PROFILE.disambiguatingDescription,
     url: SITE_URL,
     logo: {
       "@type": "ImageObject",

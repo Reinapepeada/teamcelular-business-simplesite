@@ -54,9 +54,9 @@ export default async function GoogleReviewsAPI() {
                                         <span className="group-open:hidden">{review.text.slice(0, 220).replace(/\s+\S*$/, "")}… </span>
                                         <span className="tc-link underline underline-offset-4">Leer reseña completa</span>
                                     </summary>
-                                    <p className="mt-3 whitespace-pre-line break-words">{review.text}</p>
+                                    <blockquote cite={review.review_url}><p className="mt-3 whitespace-pre-line break-words">{review.text}</p></blockquote>
                                 </details>
-                            ) : <p className="whitespace-pre-line break-words text-[15px] leading-6 text-[#c7c7cc]">{review.text}</p>}
+                            ) : <blockquote cite={review.review_url}><p className="whitespace-pre-line break-words text-[15px] leading-6 text-[#c7c7cc]">{review.text}</p></blockquote>}
                             <a href={review.review_url} target="_blank" rel="noopener noreferrer" className="tc-link inline-flex min-h-11 items-center text-sm underline underline-offset-4">Ver reseña original</a>
                         </article>
                     ))}

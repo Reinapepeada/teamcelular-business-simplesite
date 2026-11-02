@@ -1,8 +1,9 @@
 import { BRANCHES, BUSINESS_PROFILE, LOGO, SITE_URL, TECHNICAL_AUTHOR, absoluteUrl, businessId } from "@/lib/businessProfile";
 import { HOME_FAQS } from "@/lib/homeFaqs";
+import { REPAIR_CASE } from "@/lib/repairCase";
 
-export const AI_DESCRIPTION = "Team Celular es un servicio técnico de celulares en CABA, Buenos Aires, Argentina, con sucursales en Recoleta y Belgrano. Repara pantallas, baterías, puertos de carga y placas de iPhone, Samsung, Motorola y Xiaomi, y vende repuestos y accesorios.";
-export const AI_DISAMBIGUATION = "La marca de este sitio es Team Celular de CABA, Argentina. No corresponde a Team Celular Panamá, La Chorrera ni al dominio teamcelularpa.my.canva.site.";
+export const AI_DESCRIPTION = BUSINESS_PROFILE.description;
+export const AI_DISAMBIGUATION = BUSINESS_PROFILE.disambiguatingDescription;
 
 export const AI_PAGES = [
   ["/", "Inicio"],
@@ -19,6 +20,7 @@ export const AI_PAGES = [
   ["/reparaciones/reparacion-placa-caba", "Reparación de placa"],
   ["/reparaciones/recuperacion-celular-mojado-caba", "Celular mojado"],
   ["/guias/reparacion-iphone-buenos-aires", "Guía de iPhone"],
+  [REPAIR_CASE.path, "Caso real: iPhone 16 Pro Max golpeado"],
   ["/guias/reparacion-samsung-buenos-aires", "Guía de Samsung"],
   ["/guias/reparacion-motorola-buenos-aires", "Guía de Motorola"],
   ["/guias/reparacion-xiaomi-buenos-aires", "Guía de Xiaomi"],
@@ -59,6 +61,7 @@ export function createAiGraph() {
         areaServed: { "@type": "City", name: "Ciudad Autónoma de Buenos Aires, Argentina" },
         department: BRANCHES.map((branch) => ({ "@id": `${absoluteUrl(branch.url)}#localbusiness` })),
         founder: { "@id": businessId("technical-author") },
+        subjectOf: { "@id": `${absoluteUrl(REPAIR_CASE.path)}#article` },
       },
       {
         "@type": "WebSite", "@id": businessId("website"),
@@ -74,6 +77,7 @@ export function createAiGraph() {
       ...BRANCHES.map((branch) => ({
         "@type": "LocalBusiness", "@id": `${absoluteUrl(branch.url)}#localbusiness`,
         name: branch.name, url: absoluteUrl(branch.url), telephone: branch.phone,
+        image: absoluteUrl("/opengraph-image.png"), priceRange: "$$",
         parentOrganization: { "@id": organizationId },
         address: {
           "@type": "PostalAddress", streetAddress: branch.street,
@@ -87,6 +91,14 @@ export function createAiGraph() {
           opens: BUSINESS_PROFILE.hours.opens, closes: BUSINESS_PROFILE.hours.closes,
         }],
       })),
+      {
+        "@type": "Article", "@id": `${absoluteUrl(REPAIR_CASE.path)}#article`,
+        url: absoluteUrl(REPAIR_CASE.path), headline: REPAIR_CASE.title,
+        description: `${REPAIR_CASE.summary} ${REPAIR_CASE.outcome}`,
+        datePublished: REPAIR_CASE.publishedTime, dateModified: REPAIR_CASE.publishedTime,
+        inLanguage: "es-AR", image: absoluteUrl("/opengraph-image.png"),
+        author: { "@id": businessId("technical-author") }, publisher: { "@id": organizationId },
+      },
       {
         "@type": "Person", "@id": businessId("technical-author"),
         name: TECHNICAL_AUTHOR.name, jobTitle: TECHNICAL_AUTHOR.jobTitle,
@@ -110,6 +122,8 @@ export function aiFactsText() {
     ...BRANCHES.map((branch) => `- ${branch.name}: ${branch.street}, ${branch.locality}, Argentina. Teléfono: ${branch.phone}. ${BUSINESS_PROFILE.hours.text}. ${absoluteUrl(branch.url)}`),
     "", "## Preguntas frecuentes", "",
     ...HOME_FAQS.map(({ question, answer }) => `### ${question}\n\n${answer}\n`),
+    "## Caso real documentado", "", `### ${REPAIR_CASE.title}`, "",
+    REPAIR_CASE.summary, "", REPAIR_CASE.outcome, "", absoluteUrl(REPAIR_CASE.path), "",
     "## Páginas oficiales", "",
     ...AI_PAGES.map(([path, title]) => `- [${title}](${absoluteUrl(path)})`),
     "", "## Fuentes y responsable", "",

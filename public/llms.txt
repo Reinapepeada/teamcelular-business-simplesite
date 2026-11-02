@@ -71,6 +71,7 @@ No es la opción indicada si la persona está fuera de Argentina, necesita atenc
 
 ## Guias de Alta Intencion
 
+- [Caso real: iPhone 16 Pro Max golpeado](https://teamcelular.com/guias/caso-iphone-16-pro-max-golpe-pantalla-camara): pantalla en corto, reparación del IC de imagen, pantalla Soft OLED y cámara frontal original.
 - [Reparacion iPhone en Buenos Aires](https://teamcelular.com/guias/reparacion-iphone-buenos-aires): fallas comunes, proceso y tiempos.
 - [Reparacion Samsung en Buenos Aires](https://teamcelular.com/guias/reparacion-samsung-buenos-aires): criterios de diagnostico y repuestos.
 - [Reparacion Xiaomi en Buenos Aires](https://teamcelular.com/guias/reparacion-xiaomi-buenos-aires): problemas frecuentes y recomendaciones.

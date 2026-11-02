@@ -4,6 +4,7 @@ import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import { BRAND_GUIDE_LIST } from "./brandGuideConfigs";
+import { REPAIR_CASE } from "@/lib/repairCase";
 import {
   FaApple,
   FaArrowRight,
@@ -19,6 +20,16 @@ const SITE_URL = getSiteUrl();
 const PAGE_URL = `${SITE_URL}/guias`;
 
 const ARTICLES = [
+  {
+    title: REPAIR_CASE.title,
+    description: REPAIR_CASE.description,
+    href: REPAIR_CASE.path,
+    category: "Caso real",
+    readingTime: "3 min",
+    Icon: FaApple,
+    datePublished: "2026-11-02",
+    keywords: ["iPhone 16 Pro Max", "pantalla en corto", "IC de imagen", "cámara frontal"],
+  },
   {
     title: "Reparación de iPhone en Buenos Aires",
     description:
