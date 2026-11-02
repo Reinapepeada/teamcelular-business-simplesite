@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { BRANCHES, BUSINESS_PROFILE, LOGO, SITE_URL, TECHNICAL_AUTHOR, absoluteUrl, businessId } from "@/lib/businessProfile";
+import { BRANCHES, BUSINESS_PROFILE, LOGO, ORGANIZATION_ADDRESS, SITE_URL, TECHNICAL_AUTHOR, absoluteUrl, businessId } from "@/lib/businessProfile";
 
 interface StructuredDataProps {
   city?: string;
@@ -96,6 +96,9 @@ function createOrganizationJson(includeContact: boolean) {
     description: BUSINESS_PROFILE.description,
     disambiguatingDescription: BUSINESS_PROFILE.disambiguatingDescription,
     url: SITE_URL,
+    image: LOGO.url,
+    // Las fichas de sucursal conservan su propia dirección y teléfono.
+    address: includeContact ? ORGANIZATION_ADDRESS : undefined,
     logo: {
       "@type": "ImageObject",
       url: LOGO.url,

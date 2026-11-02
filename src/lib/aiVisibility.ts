@@ -1,4 +1,4 @@
-import { BRANCHES, BUSINESS_PROFILE, LOGO, SITE_URL, TECHNICAL_AUTHOR, absoluteUrl, businessId } from "@/lib/businessProfile";
+import { BRANCHES, BUSINESS_PROFILE, LOGO, ORGANIZATION_ADDRESS, SITE_URL, TECHNICAL_AUTHOR, absoluteUrl, businessId } from "@/lib/businessProfile";
 import { HOME_FAQS } from "@/lib/homeFaqs";
 import { REPAIR_CASE } from "@/lib/repairCase";
 
@@ -57,6 +57,7 @@ export function createAiGraph() {
         name: BUSINESS_PROFILE.name, alternateName: BUSINESS_PROFILE.alternateName,
         url: SITE_URL, description: AI_DESCRIPTION, disambiguatingDescription: AI_DISAMBIGUATION,
         logo: LOGO.url, email: BUSINESS_PROFILE.email,
+        image: LOGO.url, address: ORGANIZATION_ADDRESS,
         sameAs: BUSINESS_PROFILE.sameAs, knowsAbout: BUSINESS_PROFILE.knowsAbout,
         areaServed: { "@type": "City", name: "Ciudad Autónoma de Buenos Aires, Argentina" },
         department: BRANCHES.map((branch) => ({ "@id": `${absoluteUrl(branch.url)}#localbusiness` })),

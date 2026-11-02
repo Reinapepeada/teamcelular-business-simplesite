@@ -33,6 +33,12 @@ for (const width of [320, 390, 1280]) {
 
         for (const branch of branches) {
             await page.goto(`/sucursales/caba/${branch.slug}`);
+            const organization = await page.locator('script[type="application/ld+json"]').evaluateAll(scripts =>
+                scripts.map(script => JSON.parse(script.textContent || '{}')).find(schema => schema['@type'] === 'Organization'),
+            );
+            expect(organization).toBeDefined();
+            expect(organization.address).toBeUndefined();
+            expect(organization.telephone).toBeUndefined();
             const table = page.locator('main table');
             await expect(table.locator('tbody tr')).toHaveCount(6);
             const geometry = await table.evaluate(element => {
