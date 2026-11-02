@@ -1,4 +1,6 @@
 // Contrato compartido por PostHog y GA4. Nunca recibe el cuerpo de un formulario.
+export const MEASUREMENT_VERSION = 3;
+
 export const MEASUREMENT_EVENTS = new Set([
   "$pageview", "$web_vitals", "cta_click", "cta_view", "whatsapp_click", "phone_click", "email_click", "directions_click",
   "branch_selector_open", "branch_selector_close", "branch_preference_selected", "branch_whatsapp_redirect",

@@ -1,6 +1,6 @@
 # Medición de consultas y tienda
 
-Versión 2, 28 de octubre de 2026. Alcance acordado: consultas de la web y compras
+Versión 3, 2 de noviembre de 2026. Alcance acordado: consultas de la web y compras
 de la tienda. Sin integración nueva con Fixbee, presupuestos vendidos o CRM.
 Sin dependencias adicionales ni activación de productos pagos. La configuración
 existente de Product analytics tiene límite de facturación USD 0; al agotarse el
@@ -28,6 +28,15 @@ estos eventos como personas distintas ni sumar `cta_click` y su posterior
 únicos con al menos un handoff; para el formulario usar visitantes únicos con
 `lead_form_submit`. Comparar tasas por visitante o sesión, siempre con el mismo
 denominador y ventana temporal.
+
+El titular confirmó el 2/11 que ambas sucursales atienden con WhatsApp Business
+en celular o Web. Esta integración no recibe confirmaciones de mensajes ni de
+conversaciones: no convertir un handoff en consulta recibida o reparación vendida.
+Sin una fuente de recepción, el contraste de consultas atendidas debe ser agregado
+y manual; no copiar conversaciones ni contactos a PostHog.
+Como contraste semanal por sucursal, registrar únicamente cuántas conversaciones
+nuevas confirman origen web y cuántas terminan en un presupuesto aceptado. Es un
+conteo operativo separado, sin unir identidades ni atribuir cada chat a un clic.
 
 ## Recorridos y decisiones
 
@@ -90,8 +99,17 @@ requeriría instrumentación de servidor fuera de este alcance.
 Un contrato compartido permite categorías, identificadores de productos públicos
 y números. Excluye respuestas, búsquedas libres, correos, teléfonos, direcciones,
 texto de WhatsApp y tokens. PostHog elimina query, fragmento y propiedades SDK
-ajenas al contrato antes del envío. No crea perfiles personales ni activa
-autocaptura, replays, heatmaps, logs o flags. Se respeta Do Not Track. Las
+ajenas al contrato antes del envío. La versión 3 conserva el user agent técnico
+del SDK, acotado a 1.024 caracteres ASCII imprimibles, para clasificar tráfico;
+las visitas anteriores sin ese campo no se reclasifican como humanas. Conserva
+salidas de página, duración, ruta anterior pública y scroll numérico. La captura
+nativa de interacción se limita a clics en enlaces y botones: se eliminan texto,
+elementos, atributos y destinos antes de enviar. No captura cambios ni envíos
+de formularios. Rebote y duración nativos requieren estos datos nuevos; no usar
+el período anterior como una referencia comparable ni equiparar duración de SDK
+con el tiempo activo propio de page_engagement.
+
+No crea perfiles personales ni activa replays, heatmaps, logs o flags. Se respeta Do Not Track. Las
 integraciones anteriores de Clarity y analítica de Vercel siguen configuradas
 como estaban; este cambio no certifica sus políticas de captura automática.
 
@@ -103,6 +121,11 @@ en el catálogo envían pasos y categorías, nunca su contenido.
 La prueba de navegador usa servicios ficticios y aborta destinos externos:
 no crea pedidos, cobra ni manda eventos ficticios a PostHog. Las pruebas
 unitarias cubren redacción, importes confirmados y deduplicación.
+Los errores conservan tipos de una lista cerrada, ámbito navegador/servidor y
+código HTTP 400–599 cuando está disponible en el error de servidor original.
+Nunca se envían mensajes libres, cuerpos de respuestas ni variables. La redacción
+histórica agrupó errores sin traza de navegador y servidor: esos incidentes no se
+consideran diagnosticados o resueltos por esta mejora de instrumentación.
 La prueba del SDK usa un token ficticio y bloquea destinos externos. Comprueba
 que la dependencia de rendimiento real (`web-vitals-with-attribution.js` en el
 SDK actual) está permitida. Sólo se permiten scripts de Web Vitals del proveedor
@@ -115,7 +138,7 @@ CTR 1,66% y posición media 5,8. Totales consultados sin dimensiones.
 GA4 por dispositivo, todos los canales, 30/9–27/10/2026: 540 sesiones móviles,
 471 de escritorio y 5 de tablet (1.016 en total). Son universos y fechas
 diferentes: no dividir clics de GSC por sesiones de GA4 como una conversión.
-PostHog comenzó hoy y todavía no permite una comparación histórica.
+PostHog comenzó a recopilar el 28/10; ese punto de partida no permite una comparación histórica previa.
 
 Revisar primero páginas con impresiones altas y CTR bajo en GSC, después su
 tasa de contacto/compra y fricción móvil. GSC aporta consultas e indexación;

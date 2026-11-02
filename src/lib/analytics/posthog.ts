@@ -1,6 +1,6 @@
 import type { CaptureResult, PostHog } from "posthog-js";
 import { isGa4ProductionHost } from "./ga4";
-import { MEASUREMENT_EVENTS, pageType, sanitizeMeasurementProperties } from "./measurement";
+import { MEASUREMENT_EVENTS, MEASUREMENT_VERSION, pageType, sanitizeMeasurementProperties } from "./measurement";
 import { browserAttribution } from "./attribution";
 import { sanitizePostHogException } from "./posthogErrors";
 
@@ -27,7 +27,8 @@ export function isPostHogErrorPage(hostname: string, pathname: string): boolean 
 
 // ponytail: una lista permitida evita reenviar respuestas, destinos de WhatsApp o parámetros de URL.
 export function sanitizePostHogEvent(event: CaptureResult | null): CaptureResult | null {
-  if (!event || (!MEASUREMENT_EVENTS.has(event.event) && event.event !== "$exception")) return null;
+  if (!event || (!MEASUREMENT_EVENTS.has(event.event) && !["$exception", "$pageleave", "$autocapture"].includes(event.event))) return null;
+  if (event.event === "$autocapture" && event.properties.$event_type !== "click") return null;
 
   let url: URL;
   try {
@@ -48,9 +49,26 @@ export function sanitizePostHogEvent(event: CaptureResult | null): CaptureResult
   const metadata = Object.fromEntries(
     Object.entries(event.properties).filter(([key]) => PROPERTIES.has(key)),
   );
+  const userAgent = event.properties.$raw_user_agent;
+  if (typeof userAgent === "string" && userAgent.length <= 1024 && /^[\x20-\x7e]+$/.test(userAgent)) {
+    metadata.$raw_user_agent = userAgent;
+  }
+  // ponytail: conservar sólo duración, ruta pública y scroll numérico del SDK, no su contexto del DOM.
+  const previousPath = event.properties.$prev_pageview_pathname;
+  if (["$pageview", "$pageleave"].includes(event.event) && typeof previousPath === "string" && /^\/(?!\/)/.test(previousPath)) {
+    const previous = new URL(previousPath, url.origin);
+    if (isPostHogPublicPage(previous.hostname, previous.pathname) && !previous.pathname.startsWith("/checkout")) {
+      metadata.$prev_pageview_pathname = previous.pathname;
+      for (const key of ["$prev_pageview_duration", "$prev_pageview_max_scroll_percentage", "$prev_pageview_last_scroll_percentage"]) {
+        const value = event.properties[key];
+        if (typeof value === "number" && Number.isFinite(value) && value >= 0 && (key === "$prev_pageview_duration" || value <= 100)) metadata[key] = value;
+      }
+    }
+  }
+  if (event.event === "$autocapture") metadata.$event_type = "click";
   event.properties = exception ? { ...metadata, ...exception } : { ...metadata, ...sanitizeMeasurementProperties({
     ...browserAttribution(), ...event.properties,
-  }), measurement_version: 2, page_type: pageType(url.pathname) };
+  }), measurement_version: MEASUREMENT_VERSION, page_type: pageType(url.pathname) };
   event.properties.$current_url = `${url.origin}${url.pathname}`;
   event.properties.$pathname = url.pathname;
   return event;
@@ -67,7 +85,7 @@ export function measure(eventName: string, properties: Record<string, unknown> =
     || !MEASUREMENT_EVENTS.has(eventName) || window.navigator?.doNotTrack === "1") return;
   if (window.location.pathname?.startsWith("/checkout") && !["purchase", "payment_result", "checkout_error"].includes(eventName)) return;
   const safe = { ...sanitizeMeasurementProperties({ ...browserAttribution(), ...properties }),
-    measurement_version: 2, page_type: pageType(eventName === "page_engagement" && typeof properties.content_path === "string"
+    measurement_version: MEASUREMENT_VERSION, page_type: pageType(eventName === "page_engagement" && typeof properties.content_path === "string"
       ? properties.content_path : window.location.pathname || "/") };
   capturePostHogEvent(eventName, safe);
   try { window.gtag?.("event", eventName, { ...safe,

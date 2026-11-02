@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import type { CaptureResult } from 'posthog-js';
 
 const origin = 'https://teamcelular.com';
 const cors = { 'access-control-allow-origin': '*', 'access-control-allow-headers': 'Content-Type', 'access-control-allow-methods': 'GET, OPTIONS' };
@@ -20,6 +21,8 @@ test.beforeEach(async ({ page, context }) => {
 
 test('consulta mide apertura sin enviar respuestas ni destino de WhatsApp', async ({ page }) => {
     const posthogScripts: string[] = [];
+    const posthogEvents: CaptureResult[] = [];
+    await page.exposeFunction('fixtureCapturePostHog', (event: CaptureResult) => posthogEvents.push(event));
     await page.addInitScript(() => {
         const events: unknown[] = [];
         Object.assign(window, { fixtureEvents: events });
@@ -46,6 +49,26 @@ test('consulta mide apertura sin enviar respuestas ni destino de WhatsApp', asyn
     await expect.poll(() => posthogScripts.some(path => /\/web-vitals-with-attribution\.js$/.test(path))).toBe(true);
     await expect.poll(() => posthogScripts.some(path => /\/exception-autocapture\.js$/.test(path))).toBe(true);
     expect(posthogScripts.every(path => /\/(?:web-vitals(?:-with-attribution)?|exception-autocapture)\.js$/.test(path))).toBe(true);
+    await page.evaluate(() => {
+        // Sólo esta prueba sin red externa: permitir que el SDK mida el navegador automatizado.
+        window.posthog!.set_config({ opt_out_useragent_filter: true });
+        window.posthog!.on('eventCaptured', (event: CaptureResult) => {
+            void (window as unknown as { fixtureCapturePostHog: (event: CaptureResult) => Promise<void> }).fixtureCapturePostHog(event);
+        });
+        // Reponer la vista inicial que el filtro de automatización descartó al arrancar.
+        window.posthog!.capture('$pageview');
+    });
+    await page.getByRole('link', { name: 'Guías', exact: true }).first().click();
+    await expect(page).toHaveURL(/\/guias$/);
+    await expect.poll(() => posthogEvents.some(event => event.event === '$autocapture')).toBe(true);
+    await expect.poll(() => posthogEvents.some(event => event.event === '$pageview'
+        && event.properties.$prev_pageview_pathname === '/presupuesto-reparacion'
+        && typeof event.properties.$prev_pageview_duration === 'number')).toBe(true);
+    // Mantener vivo el contexto para observar el payload del SDK durante pagehide.
+    await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent('pagehide', { persisted: false })));
+    await expect.poll(() => posthogEvents.some(event => event.event === '$pageleave')).toBe(true);
+    expect(posthogEvents.some(event => typeof event.properties.$raw_user_agent === 'string')).toBe(true);
+    expect(JSON.stringify(posthogEvents)).not.toMatch(/private@example|wa\.me|\$elements|\$el_text|destination/);
 });
 
 test('compra exige API confirmada y no se duplica al recargar', async ({ page }) => {
