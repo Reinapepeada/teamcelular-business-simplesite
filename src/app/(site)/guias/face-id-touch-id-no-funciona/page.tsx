@@ -13,7 +13,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
   title: "Face ID o Touch ID no Funciona: Causas y Solución",
   description:
-    "Face ID o Touch ID que dejó de andar: cuándo es flex, cuándo módulo y cuándo placa. Team Celular, Recoleta y Belgrano CABA, diagnostica el mismo día.",
+    "Face ID o Touch ID que dejó de andar: cuándo es flex, cuándo módulo y cuándo placa. Team Celular, Recoleta y Belgrano CABA, confirma el plazo según la revisión.",
   keywords: [
     "face id no funciona",
     "touch id no funciona",
@@ -122,7 +122,7 @@ const faq: GuideFaqItem[] = [
   {
     question: "Cuanto tarda un diagnostico biometrico?",
     answer:
-      "Normalmente el diagnostico inicial se entrega en el mismo dia habil, y luego se define alcance real de reparacion.",
+      "El plazo depende de la falla y de las pruebas necesarias. Si hay que revisar la placa, la evaluación puede llevar más tiempo. Te confirmamos el alcance y el plazo antes de avanzar.",
   },
 ];
 
@@ -140,7 +140,7 @@ export default function FaceIdTouchIdGuidePage() {
       pagePath={PAGE_PATH}
       pageLabel="Face ID / Touch ID"
       title="Face ID o Touch ID no funciona: causas y solucion"
-      heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), diagnostica Face ID y Touch ID el mismo día. Las fallas biométricas pueden venir de software, flex, sensores o placa — lo confirmamos antes de intervenir."
+      heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), evalúa fallas de Face ID y Touch ID. Pueden venir de software, flex, sensores o placa. Confirmamos el alcance y el plazo después de revisar el equipo."
       badge="Diagnostico avanzado"
       readingTime="6 min"
       publishedTime="2026-04-16T00:00:00Z"
