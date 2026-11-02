@@ -1,11 +1,14 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse, type NextRequest, type NextFetchEvent } from "next/server";
 import { preferredType, withVaryAccept } from "@/lib/agentMarkdown";
+import { collectFardoBot } from "@/lib/fardoCrawler";
+import { AI_FILES } from "@/lib/aiVisibility";
 
 /**
  * Negociación HTML/Markdown por `Accept` (acceptmarkdown.com): misma URL,
  * `Vary: Accept` en ambas ramas y 406 si el cliente no acepta ninguna.
  */
-export function proxy(req: NextRequest) {
+export function proxy(req: NextRequest, event?: NextFetchEvent) {
+    collectFardoBot(req, event);
     // Navegación RSC, prefetch y Server Actions traen su propio Accept: no negociar.
     if (
         (req.method !== "GET" && req.method !== "HEAD") ||
@@ -17,6 +20,8 @@ export function proxy(req: NextRequest) {
     }
 
     const { pathname, search } = req.nextUrl;
+    // Archivos reales del kit: no negociar HTML/Markdown ni reescribir agents.md.
+    if (AI_FILES.some(([path]) => path === pathname)) return NextResponse.next();
     const toMarkdown = (page: string) =>
         NextResponse.rewrite(new URL(`/api/markdown${page === "/" ? "" : page}${search}`, req.url));
 
@@ -51,6 +56,11 @@ export function proxy(req: NextRequest) {
 }
 
 export const config = {
-    // Solo páginas (y sus `.md`): fuera API, internos de Next, proxy /store, admin y demás archivos.
-    matcher: ["/((?!api/|_next/|_vercel/|store/|admin(?:/|$)|.*\\.(?!md$)\\w+$).*)"],
+    // Páginas y archivos del kit; fuera API, internos, proxy /store, admin y assets.
+    matcher: [
+        "/((?!api/|_next/|_vercel/|store/|admin(?:/|$)|.*\\.(?!md$)\\w+$).*)",
+        "/llms.txt", "/llms-full.txt", "/ai-feed.jsonld", "/knowledge-graph.json",
+        "/sitemap-ai.xml", "/sitemap.xml", "/robots.txt", "/ai.txt",
+        "/llm-training.txt", "/humans.txt", "/manifest.json",
+    ],
 };

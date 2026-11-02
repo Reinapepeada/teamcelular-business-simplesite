@@ -78,6 +78,22 @@ errores es de 100.000 excepciones por mes; el límite de gasto evita excedentes 
 La subida de sourcemaps queda pendiente de una clave específica de PostHog;
 no se publica el código fuente ni se crea una clave personal automáticamente.
 
+## Kit de visibilidad IA de Fardo
+
+La ficha pública `/ai` y los archivos del kit reutilizan `businessProfile.ts`
+y las preguntas frecuentes de la portada. Los enlaces prioritarios están en
+`aiVisibility.ts`; los cambios de datos se publican con el deploy del sitio.
+
+El collector se activa sólo cuando existe `FARDO_CRAWLER_SECRET` en el entorno
+del servidor. La clave corresponde a la fuente activa de `teamcelular.com` en
+Fardo; el titular debe cargarla directamente en las variables de producción de
+Vercel y volver a desplegar el commit aprobado. Nunca se guarda en el repositorio.
+Sin esa variable no se envía nada. El collector reconoce nombres de bots por
+su user-agent, sin verificar sus IP: esos eventos no acreditan citas ni visitas
+humanas. Envía a Fardo sólo host público, ruta de una lista cerrada, nombre
+normalizado del bot, fecha e identificador aleatorio; omite queries, IP, cookies,
+referrer y user-agent original. Las fallas no bloquean la navegación.
+
 ## Licencia 📝
 Este proyecto está bajo la licencia MIT.
 

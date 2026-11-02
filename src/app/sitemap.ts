@@ -82,6 +82,7 @@ async function getProductsForSitemap(signal: AbortSignal): Promise<string[]> {
 // Paginas principales con alta prioridad
 const mainPages = [
   { path: "", priority: 1.0, changeFreq: "weekly" as const },
+  { path: "ai", priority: 0.6, changeFreq: "monthly" as const },
   { path: "reparaciones", priority: 0.95, changeFreq: "weekly" as const },
   {
     path: "reparaciones/cambio-bateria-caba",

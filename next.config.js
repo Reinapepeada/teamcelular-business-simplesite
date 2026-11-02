@@ -63,6 +63,7 @@ module.exports = {
   },
   async redirects() {
     return [
+      { source: "/ai/index.html", destination: "/ai", permanent: true },
       {
         source: "/tienda/categoria/cables",
         destination: "/tienda/categoria/cable",

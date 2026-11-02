@@ -58,6 +58,14 @@ trust-signals:
 sitemap: https://teamcelular.com/sitemap.xml
 robots: https://teamcelular.com/robots.txt
 llms: https://teamcelular.com/llms.txt
+brand-identity: Team Celular de CABA, Buenos Aires, Argentina; no es Team Celular Panamá.
+brand-hub: https://teamcelular.com/ai
+full-reference: https://teamcelular.com/llms-full.txt
+structured-feed: https://teamcelular.com/ai-feed.jsonld
+knowledge-graph: https://teamcelular.com/knowledge-graph.json
+priority-sitemap: https://teamcelular.com/sitemap-ai.xml
+team: https://teamcelular.com/humans.txt
+agents: https://teamcelular.com/agents.md
 contact: teamcelular.arg@gmail.com
 
 usage-policy:
