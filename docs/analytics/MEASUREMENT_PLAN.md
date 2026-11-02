@@ -34,6 +34,9 @@ en celular o Web. Esta integración no recibe confirmaciones de mensajes ni de
 conversaciones: no convertir un handoff en consulta recibida o reparación vendida.
 Sin una fuente de recepción, el contraste de consultas atendidas debe ser agregado
 y manual; no copiar conversaciones ni contactos a PostHog.
+Como contraste semanal por sucursal, registrar únicamente cuántas conversaciones
+nuevas confirman origen web y cuántas terminan en un presupuesto aceptado. Es un
+conteo operativo separado, sin unir identidades ni atribuir cada chat a un clic.
 
 ## Recorridos y decisiones
 
@@ -135,7 +138,7 @@ CTR 1,66% y posición media 5,8. Totales consultados sin dimensiones.
 GA4 por dispositivo, todos los canales, 30/9–27/10/2026: 540 sesiones móviles,
 471 de escritorio y 5 de tablet (1.016 en total). Son universos y fechas
 diferentes: no dividir clics de GSC por sesiones de GA4 como una conversión.
-PostHog comenzó hoy y todavía no permite una comparación histórica.
+PostHog comenzó a recopilar el 28/10; ese punto de partida no permite una comparación histórica previa.
 
 Revisar primero páginas con impresiones altas y CTR bajo en GSC, después su
 tasa de contacto/compra y fricción móvil. GSC aporta consultas e indexación;
