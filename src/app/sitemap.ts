@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { REPAIR_CASE } from "@/lib/repairCase";
 
 // Revalidate sitemap every 24 hours
 export const revalidate = 86400;
@@ -208,6 +209,7 @@ const mainPages = [
 
 // Guias y contenido educativo
 const guidePages = [
+  { path: REPAIR_CASE.path.slice(1), priority: 0.7, changeFreq: "monthly" as const },
   {
     path: "guias/reparar-celular-o-comprar-otro",
     priority: 0.78,

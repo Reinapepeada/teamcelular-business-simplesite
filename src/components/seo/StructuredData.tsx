@@ -64,6 +64,8 @@ function createLocalBusinessJson(city?: string, country?: string) {
       "@type": "LocalBusiness",
       "@id": `${absoluteUrl(branch.url)}#localbusiness`,
       name: branch.name,
+      image: `${SITE_URL}/opengraph-image.png`,
+      priceRange: "$$",
       url: absoluteUrl(branch.url),
       telephone: branch.phone,
       address: {

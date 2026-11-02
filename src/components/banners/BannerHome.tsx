@@ -34,7 +34,7 @@ export default function BannerHome() {
                     </div>
                     <figure className="min-w-0">
                         <div className="relative aspect-[16/11] overflow-hidden rounded-[28px] bg-[#1d1d1f]">
-                            <Image src="/images/landings/pantalla-concepto-20261023.webp" alt="Ilustración de un celular con el módulo de pantalla separado del equipo" fill priority quality={82} sizes="(max-width: 1023px) 100vw, 550px" className="bg-black object-contain" />
+                            <Image src="/images/landings/pantalla-concepto-20261023.webp" alt="Ilustración de un celular con el módulo de pantalla separado del equipo" fill priority fetchPriority="high" quality={82} sizes="(max-width: 1023px) 100vw, 550px" className="bg-black object-contain" />
                         </div>
                         <figcaption className="mt-2 text-right text-xs text-[#a1a1a6]">Ilustración del módulo de pantalla.</figcaption>
                     </figure>
