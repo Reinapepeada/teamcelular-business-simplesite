@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import { AI_PAGES, createAiGraph } from "./aiVisibility";
-import { BRANCHES, absoluteUrl, businessId } from "./businessProfile";
+import { BRANCHES, LOGO, absoluteUrl, businessId, getBranch } from "./businessProfile";
 import { GET as feed } from "../app/ai-feed.jsonld/route";
 import { GET as knowledgeGraph } from "../app/knowledge-graph.json/route";
 import { GET as facts } from "../app/llms-full.txt/route";
@@ -18,6 +18,9 @@ test("el grafo identifica una sola marca y resuelve sus referencias sin mezclar 
   assert.equal(graph.filter((entity) => entity["@type"] === "WebSite").length, 1);
   const organization = graph.find((entity) => entity["@type"] === "Organization");
   assert.equal(organization?.["@id"], businessId("organization"));
+  assert.equal(organization?.image, LOGO.url);
+  assert.equal(organization?.address?.streetAddress, getBranch("recoleta").street);
+  assert.equal(organization?.address?.addressCountry, "AR");
   assert.match(organization?.disambiguatingDescription ?? "", /CABA, Argentina/);
   assert.match(organization?.disambiguatingDescription ?? "", /No corresponde a Team Celular Panamá/);
   for (const branch of BRANCHES) {

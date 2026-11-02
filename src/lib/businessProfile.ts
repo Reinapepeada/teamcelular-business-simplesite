@@ -84,6 +84,16 @@ export const BUSINESS_PROFILE = {
   },
 } as const;
 
+// Dirección pública de contacto de la organización; no es una razón social ni un domicilio legal.
+export const ORGANIZATION_ADDRESS = {
+  "@type": "PostalAddress",
+  streetAddress: BUSINESS_PROFILE.primaryAddress.street,
+  addressLocality: BUSINESS_PROFILE.primaryAddress.locality,
+  addressRegion: BUSINESS_PROFILE.primaryAddress.region,
+  postalCode: BUSINESS_PROFILE.primaryAddress.postalCode,
+  addressCountry: BUSINESS_PROFILE.primaryAddress.country,
+} as const;
+
 /**
  * Named technical author. Anonymous authorship is a weak authority signal for
  * both Google and AI search engines; a real person with verifiable credentials
