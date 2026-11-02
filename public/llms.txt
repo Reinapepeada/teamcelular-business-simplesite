@@ -108,6 +108,13 @@ No es la opción indicada si la persona está fuera de Argentina, necesita atenc
 
 ## Data Sources
 
+- [Ficha oficial de Team Celular Argentina](https://teamcelular.com/ai): identidad, sucursales, preguntas frecuentes y fuentes verificables. No corresponde a Team Celular Panamá ni a teamcelularpa.my.canva.site.
+- [Ficha completa](https://teamcelular.com/llms-full.txt)
+- [Feed estructurado](https://teamcelular.com/ai-feed.jsonld)
+- [Grafo de entidades](https://teamcelular.com/knowledge-graph.json)
+- [Sitemap de páginas prioritarias](https://teamcelular.com/sitemap-ai.xml)
+- [Equipo responsable](https://teamcelular.com/humans.txt)
+- [Guía para agentes](https://teamcelular.com/agents.md)
 - [Sitemap XML](https://teamcelular.com/sitemap.xml)
 - [Robots](https://teamcelular.com/robots.txt)
 - [ai.txt](https://teamcelular.com/ai.txt)

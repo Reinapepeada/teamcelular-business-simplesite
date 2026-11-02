@@ -17,6 +17,8 @@ export function proxy(req: NextRequest) {
     }
 
     const { pathname, search } = req.nextUrl;
+    // Archivo real del kit IA: no es la versión Markdown de una página /agents.
+    if (pathname === "/agents.md") return NextResponse.next();
     const toMarkdown = (page: string) =>
         NextResponse.rewrite(new URL(`/api/markdown${page === "/" ? "" : page}${search}`, req.url));
 
