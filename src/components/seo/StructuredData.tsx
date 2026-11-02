@@ -92,6 +92,8 @@ function createOrganizationJson(includeContact: boolean) {
     "@type": "Organization",
     "@id": businessId("organization"),
     name: BUSINESS_PROFILE.name,
+    description: BUSINESS_PROFILE.description,
+    disambiguatingDescription: BUSINESS_PROFILE.disambiguatingDescription,
     alternateName: BUSINESS_PROFILE.alternateName,
     url: SITE_URL,
     logo: {

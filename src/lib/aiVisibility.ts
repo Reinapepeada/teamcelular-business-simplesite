@@ -2,8 +2,8 @@ import { BRANCHES, BUSINESS_PROFILE, LOGO, SITE_URL, TECHNICAL_AUTHOR, absoluteU
 import { HOME_FAQS } from "@/lib/homeFaqs";
 import { REPAIR_CASE } from "@/lib/repairCase";
 
-export const AI_DESCRIPTION = "Team Celular es un servicio técnico de celulares en CABA, Buenos Aires, Argentina, con sucursales en Recoleta y Belgrano. Repara pantallas, baterías, puertos de carga y placas de iPhone, Samsung, Motorola y Xiaomi, y vende repuestos y accesorios.";
-export const AI_DISAMBIGUATION = "La marca de este sitio es Team Celular de CABA, Argentina. No corresponde a Team Celular Panamá, La Chorrera ni al dominio teamcelularpa.my.canva.site.";
+export const AI_DESCRIPTION = BUSINESS_PROFILE.description;
+export const AI_DISAMBIGUATION = BUSINESS_PROFILE.disambiguatingDescription;
 
 export const AI_PAGES = [
   ["/", "Inicio"],
