@@ -35,6 +35,15 @@ test("el SDK vacía errores de servidor sin datos privados y excluye previews, D
     assert.equal(JSON.stringify(batches).includes("private"), false);
     assert.match(JSON.stringify(event.properties.$exception_list), /\.next\/server\/app\/page\.js/);
     assert.match(JSON.stringify(event.properties.$exception_list), /node:javascript/);
+    assert.equal(event.properties.error_runtime, "server");
+
+    const upstream = Object.assign(new Error("private response body"), { name: "StoreApiError", status: 502 });
+    await capturePostHogRequestError(upstream, "/tienda");
+    assert.equal(batches.length, 2);
+    assert.equal(batches[1].batch[0].properties.http_status, 502);
+    assert.equal(batches[1].batch[0].properties.$exception_type, "StoreApiError");
+    assert.match(String(batches[1].batch[0].properties.$exception_message), /servidor, HTTP 502/);
+    assert.equal(JSON.stringify(batches).includes("private"), false);
 
     for (const path of ["/admin/leads", "/checkout/exito?token=private", "/api/store/orders"]) {
       await capturePostHogRequestError(error, path);
@@ -45,7 +54,7 @@ test("el SDK vacía errores de servidor sin datos privados y excluye previews, D
     process.env.VERCEL_ENV = "production";
     process.env.NEXT_PUBLIC_BASE_URL = "https://preview.vercel.app";
     await capturePostHogRequestError(error, "/tienda");
-    assert.equal(batches.length, 1);
+    assert.equal(batches.length, 2);
     process.env.NEXT_PUBLIC_BASE_URL = values.NEXT_PUBLIC_BASE_URL;
     process.env.NEXT_PUBLIC_POSTHOG_HOST = "http://127.0.0.1:1";
     await assert.doesNotReject(capturePostHogRequestError(error, "/tienda"));

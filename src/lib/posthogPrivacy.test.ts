@@ -26,7 +26,7 @@ test("PostHog conserva visitas y pasos, sin respuestas ni parámetros o perfiles
       form_name: "repair_budget_wizard", form_version: "v3", step_index: 1,
       $current_url: "https://teamcelular.com/presupuesto-reparacion",
       $pathname: "/presupuesto-reparacion",
-      measurement_version: 2, page_type: "budget",
+      measurement_version: 3, page_type: "budget",
     });
   }
 });
@@ -63,6 +63,47 @@ test("Web Vitals conserva valores numéricos y elimina objetos de atribución co
   assert.ok(!JSON.stringify(result).includes("private"));
 });
 
+test("la navegación conserva user agent y métricas de salida sin texto, destinos ni rutas privadas", () => {
+  const source = event("$pageleave");
+  Object.assign(source.properties, {
+    $raw_user_agent: "Mozilla/5.0 Chrome/140.0.0.0 Safari/537.36",
+    $prev_pageview_pathname: "/presupuesto-reparacion?email=private@example.test#private",
+    $prev_pageview_duration: 12.5, $prev_pageview_max_scroll_percentage: 0.75,
+    $prev_pageview_last_scroll_percentage: Infinity,
+    $elements: [{ text: "private@example.test", href: "https://wa.me/private" }],
+  });
+  const result = sanitizePostHogEvent(source);
+  assert.equal(result?.properties.$raw_user_agent, "Mozilla/5.0 Chrome/140.0.0.0 Safari/537.36");
+  assert.equal(result?.properties.$prev_pageview_pathname, "/presupuesto-reparacion");
+  assert.equal(result?.properties.$prev_pageview_duration, 12.5);
+  assert.equal(result?.properties.$prev_pageview_max_scroll_percentage, 0.75);
+  assert.equal(result?.properties.$prev_pageview_last_scroll_percentage, undefined);
+  assert.ok(!JSON.stringify(result).includes("private"));
+  for (const path of ["/admin/leads", "/checkout/exito", "//external.test/private"]) {
+    const invalid = event("$pageview");
+    Object.assign(invalid.properties, { $prev_pageview_pathname: path, $prev_pageview_duration: 5 });
+    const sanitized = sanitizePostHogEvent(invalid);
+    assert.equal(sanitized?.properties.$prev_pageview_pathname, undefined);
+    assert.equal(sanitized?.properties.$prev_pageview_duration, undefined);
+  }
+  const invalidAgent = event();
+  invalidAgent.properties.$raw_user_agent = "invalid\nagent";
+  assert.equal(sanitizePostHogEvent(invalidAgent)?.properties.$raw_user_agent, undefined);
+});
+
+test("los clics nativos sólo conservan la señal de interacción, nunca el contenido del DOM", () => {
+  const click = event("$autocapture");
+  Object.assign(click.properties, { $event_type: "click", $el_text: "private@example.test",
+    $elements: [{ text: "private", attr__href: "https://wa.me/private" }] });
+  const result = sanitizePostHogEvent(click);
+  assert.equal(result?.properties.$event_type, "click");
+  assert.ok(!JSON.stringify(result).includes("private"));
+  for (const type of ["change", "submit", "input"]) {
+    click.properties.$event_type = type;
+    assert.equal(sanitizePostHogEvent(click), null);
+  }
+});
+
 test("los errores conservan tipo y ubicaciones de código sin mensajes, contexto ni solicitudes", () => {
   const error = event("$exception");
   error.properties.$exception_list = [{
@@ -79,7 +120,7 @@ test("los errores conservan tipo y ubicaciones de código sin mensajes, contexto
   const result = sanitizePostHogEvent(error);
   assert.ok(result);
   assert.deepEqual(result.properties.$exception_list, [{
-    type: "TypeError", value: "Error de la aplicación",
+    type: "TypeError", value: "Error de la aplicación (navegador)",
     mechanism: { type: "generic", handled: false },
     stacktrace: { type: "raw", frames: [
       { filename: "https://teamcelular.com/_next/static/chunks/app/(site)/page.js", in_app: true, function: "<redacted>", module: "application", platform: "web:javascript", lineno: 4, colno: 6 },

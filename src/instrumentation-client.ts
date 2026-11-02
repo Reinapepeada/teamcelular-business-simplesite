@@ -12,8 +12,9 @@ if (token && host && isPostHogPublicPage(window.location.hostname, window.locati
     api_host: host,
     defaults: "2026-08-30",
     capture_pageview: "history_change",
-    capture_pageleave: false,
-    autocapture: false,
+    capture_pageleave: true,
+    // Sólo clics; before_send elimina texto, atributos, destinos y elementos del DOM.
+    autocapture: { dom_event_allowlist: ["click"], element_allowlist: ["a", "button"] },
     capture_dead_clicks: false,
     rageclick: false,
     capture_exceptions: { capture_unhandled_errors: true, capture_unhandled_rejections: true, capture_console_errors: false },

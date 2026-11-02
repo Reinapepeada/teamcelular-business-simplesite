@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import type { CaptureResult, PostHog } from 'posthog-js';
 
 const origin = 'https://teamcelular.com';
 const cors = { 'access-control-allow-origin': '*', 'access-control-allow-headers': 'Content-Type', 'access-control-allow-methods': 'GET, OPTIONS' };
@@ -20,11 +21,23 @@ test.beforeEach(async ({ page, context }) => {
 
 test('consulta mide apertura sin enviar respuestas ni destino de WhatsApp', async ({ page }) => {
     const posthogScripts: string[] = [];
+    const posthogEvents: CaptureResult[] = [];
+    await page.exposeFunction('fixtureCapturePostHog', (event: CaptureResult) => posthogEvents.push(event));
     await page.addInitScript(() => {
         const events: unknown[] = [];
         Object.assign(window, { fixtureEvents: events });
         Object.defineProperty(window, 'gtag', { configurable: true,
             get: () => (_command: string, name: string, props: unknown) => events.push({ name, props }), set: () => undefined });
+        let client: PostHog | undefined;
+        Object.defineProperty(window, 'posthog', { configurable: true, get: () => client, set: (value: PostHog) => {
+            client = value;
+            const sanitize = value.get_config('before_send');
+            value.set_config({ before_send: event => {
+                const safe = typeof sanitize === 'function' ? sanitize(event) : event;
+                if (safe) void (window as unknown as { fixtureCapturePostHog: (event: CaptureResult) => Promise<void> }).fixtureCapturePostHog(safe);
+                return safe;
+            } });
+        } });
     });
     await page.context().route('**/*', async route => {
         const url = new URL(route.request().url());
@@ -46,6 +59,16 @@ test('consulta mide apertura sin enviar respuestas ni destino de WhatsApp', asyn
     await expect.poll(() => posthogScripts.some(path => /\/web-vitals-with-attribution\.js$/.test(path))).toBe(true);
     await expect.poll(() => posthogScripts.some(path => /\/exception-autocapture\.js$/.test(path))).toBe(true);
     expect(posthogScripts.every(path => /\/(?:web-vitals(?:-with-attribution)?|exception-autocapture)\.js$/.test(path))).toBe(true);
+    await page.getByRole('link', { name: 'Guías', exact: true }).first().click();
+    await expect(page).toHaveURL(/\/guias$/);
+    await expect.poll(() => posthogEvents.some(event => event.event === '$autocapture')).toBe(true);
+    await expect.poll(() => posthogEvents.some(event => event.event === '$pageview'
+        && event.properties.$prev_pageview_pathname === '/presupuesto-reparacion'
+        && typeof event.properties.$prev_pageview_duration === 'number')).toBe(true);
+    await page.goto(`${origin}/ai`);
+    await expect.poll(() => posthogEvents.some(event => event.event === '$pageleave')).toBe(true);
+    expect(posthogEvents.some(event => typeof event.properties.$raw_user_agent === 'string')).toBe(true);
+    expect(JSON.stringify(posthogEvents)).not.toMatch(/private@example|wa\.me|\$elements|\$el_text|destination/);
 });
 
 test('compra exige API confirmada y no se duplica al recargar', async ({ page }) => {

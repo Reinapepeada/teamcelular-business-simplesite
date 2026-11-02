@@ -16,7 +16,7 @@ export async function capturePostHogRequestError(error: unknown, path: string, d
       enableExceptionAutocapture: false,
       before_send: event => {
         if (event.event !== "$exception") return null;
-        const exception = sanitizePostHogException(event.properties || {});
+        const exception = sanitizePostHogException(event.properties || {}, "server", error);
         return exception ? { ...event, properties: { ...exception,
           $current_url: `${url.origin}${url.pathname}`, $pathname: url.pathname,
           $geoip_disable: true, $process_person_profile: false,

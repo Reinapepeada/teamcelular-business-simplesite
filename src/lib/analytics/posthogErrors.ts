@@ -1,4 +1,4 @@
-const ERROR_TYPES = new Set(["Error", "TypeError", "ReferenceError", "RangeError", "SyntaxError", "URIError", "EvalError", "AggregateError"]);
+const ERROR_TYPES = new Set(["Error", "TypeError", "ReferenceError", "RangeError", "SyntaxError", "URIError", "EvalError", "AggregateError", "StoreApiError", "TimeoutError", "AbortError", "ChunkLoadError"]);
 
 function record(value: unknown): Record<string, unknown> {
   return value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, unknown> : {};
@@ -18,8 +18,11 @@ function codeFilename(value: unknown): string | undefined {
 }
 
 // ponytail: conservar ubicaciones de código, nunca mensajes libres, variables ni contexto de la solicitud.
-export function sanitizePostHogException(properties: Record<string, unknown>): Record<string, unknown> | null {
+export function sanitizePostHogException(properties: Record<string, unknown>, runtime: "browser" | "server" = "browser", error?: unknown): Record<string, unknown> | null {
   if (!Array.isArray(properties.$exception_list) || !properties.$exception_list.length) return null;
+  const status = runtime === "server" ? record(error).status : undefined;
+  const httpStatus = Number.isSafeInteger(status) && Number(status) >= 400 && Number(status) <= 599 ? Number(status) : undefined;
+  const message = `Error de la aplicación (${runtime === "server" ? "servidor" : "navegador"}${httpStatus ? `, HTTP ${httpStatus}` : ""})`;
   const exceptions = properties.$exception_list.slice(0, 5).map(value => {
     const exception = record(value);
     const mechanism = record(exception.mechanism);
@@ -37,7 +40,7 @@ export function sanitizePostHogException(properties: Record<string, unknown>): R
     });
     return {
       type: typeof exception.type === "string" && ERROR_TYPES.has(exception.type) ? exception.type : "Error",
-      value: "Error de la aplicación",
+      value: message,
       ...(typeof mechanism.handled === "boolean"
         ? { mechanism: { type: "generic", handled: mechanism.handled,
           ...(typeof mechanism.synthetic === "boolean" ? { synthetic: mechanism.synthetic } : {}),
@@ -48,5 +51,7 @@ export function sanitizePostHogException(properties: Record<string, unknown>): R
     };
   });
   return { $exception_list: exceptions, $exception_type: exceptions[0].type,
-    $exception_message: "Error de la aplicación", $exception_level: "error" };
+    $exception_message: message, $exception_level: "error", error_runtime: runtime,
+    ...(httpStatus ? { http_status: httpStatus } : {}),
+  };
 }
