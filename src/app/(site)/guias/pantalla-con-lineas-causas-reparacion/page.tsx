@@ -13,7 +13,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
   title: "Pantalla con Líneas en Celular: Causas y Reparación",
   description:
-    "Líneas, parpadeo o manchas en la pantalla: cómo saber si es display, flex o placa. Team Celular, Recoleta y Belgrano CABA. Módulo en el día.",
+    "Líneas, parpadeo o manchas en la pantalla: cómo saber si es display, flex o placa. Team Celular, Recoleta y Belgrano CABA. Plazo según modelo, stock y diagnóstico.",
   keywords: [
     "pantalla con lineas celular",
     "display con rayas verticales",
@@ -140,7 +140,7 @@ export default function ScreenLinesGuidePage() {
       pagePath={PAGE_PATH}
       pageLabel="Pantalla con lineas"
       title="Pantalla con lineas en celular: causas y reparacion"
-      heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), diagnostica líneas en pantalla para identificar la causa real: display, flex o placa. Cambio de módulo en el día con garantía escrita de 90 días."
+      heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), diagnostica líneas en pantalla para identificar la causa real: display, flex o placa. Confirmamos el plazo según el modelo, el stock y el diagnóstico. Garantía escrita de 90 días."
       badge="Decision de reparacion"
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
