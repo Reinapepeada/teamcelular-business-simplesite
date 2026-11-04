@@ -102,7 +102,7 @@ const maintenanceTips = [
   {
     title: "Limpieza profesional interna y externa",
     detail:
-      "Realizamos limpieza interna con aire ionizado, ultrasonido para componentes delicados y reemplazo de sellos para conservar la resistencia al agua (IP68). Evitamos oxidación en conectores y placas.",
+      "Realizamos limpieza interna con aire ionizado, ultrasonido para componentes delicados y reemplazo de adhesivos según el modelo. Abrir o volver a sellar un equipo no garantiza recuperar la resistencia al agua de fábrica.",
     Icon: FaSprayCan,
     frequency: "Cada 6-12 meses",
   },
@@ -172,12 +172,12 @@ const faqMaintenance = [
   {
     question: "¿Qué incluye el servicio de limpieza profesional?",
     answer:
-      "Nuestro servicio incluye: apertura del dispositivo en ambiente controlado ESD, limpieza de placa lógica con ultrasonido, remoción de polvo y residuos con aire ionizado, limpieza de conectores (Lightning/USB-C) con IPA 99%, reemplazo de adhesivos y sellos para mantener resistencia IP68, y verificación de todos los componentes bajo microscopio.",
+      "Nuestro servicio incluye: apertura del dispositivo en ambiente controlado ESD, limpieza de placa lógica con ultrasonido, remoción de polvo y residuos con aire ionizado, limpieza de conectores (Lightning/USB-C) con IPA 99%, reemplazo de adhesivos según el modelo y verificación de los componentes bajo microscopio. Abrir o volver a sellar el equipo no garantiza recuperar la resistencia al agua de fábrica.",
   },
   {
     question: "¿El mantenimiento preventivo anula la garantía del fabricante?",
     answer:
-      "En Team Celular seguimos protocolos certificados que NO anulan la garantía del fabricante. Documentamos cada intervención con fotografías de alta resolución y entregamos informe técnico detallado. Si tu equipo está en garantía oficial (Apple, Samsung, Motorola), te asesoramos sobre qué servicios podés realizar sin afectar la cobertura.",
+      `Si tu equipo conserva garantía oficial, consultá primero las condiciones y opciones de servicio del fabricante antes de autorizar una intervención independiente. Team Celular es un servicio técnico independiente: no podemos asegurar que un mantenimiento conserve esa cobertura. ${WARRANTY_SCOPE_MESSAGE} Esta garantía es distinta de la del fabricante.`,
   },
   {
     question: "¿Ofrecen planes de mantenimiento para empresas?",
@@ -187,7 +187,7 @@ const faqMaintenance = [
   {
     question: "¿Puedo hacer mantenimiento preventivo en casa?",
     answer:
-      "Algunas tareas básicas sí: limpieza externa con paño de microfibra, actualización de software, configuración de backups automáticos y monitoreo de salud de batería desde ajustes del sistema. Para limpieza interna, reemplazo de componentes o diagnóstico de placa, recomendamos trabajar con técnicos certificados para evitar daños permanentes o pérdida de resistencia al agua.",
+      "Algunas tareas básicas sí: limpieza externa con paño de microfibra, actualización de software, configuración de backups automáticos y monitoreo de salud de batería desde ajustes del sistema. Para limpieza interna, reemplazo de componentes o diagnóstico de placa, consultá a un servicio técnico: abrir el equipo puede dañarlo o afectar su resistencia al agua.",
   },
 ];
 
@@ -427,8 +427,8 @@ export default function PreventiveMaintenanceGuide() {
               </h2>
               <div className="space-y-4 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
                 <p>
-                  En <strong className="text-primary dark:text-secondary">Team Celular</strong> utilizamos equipamiento profesional y
-                  protocolos certificados para asegurar que tu dispositivo reciba el mejor cuidado posible.
+                  En <strong className="text-primary dark:text-secondary">Team Celular</strong> realizamos diagnóstico, limpieza y
+                  verificación de componentes. El procedimiento se define según el modelo y el estado del equipo.
                 </p>
                 <ul className="ml-6 space-y-2 list-disc">
                   <li>Diagnóstico completo con software especializado</li>
