@@ -90,7 +90,7 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
         href: "/guias/reparacion-motorola-buenos-aires",
         title: "Reparación de Motorola",
         description:
-          "Guía para Moto G, Edge y E: pantalla, batería y pin de carga en el día.",
+          "Guía para Moto G, Edge y E: pantalla, batería y pin de carga, con plazo confirmado según diagnóstico y stock.",
       },
       {
         href: "/guias/reparacion-pantalla-celular",
