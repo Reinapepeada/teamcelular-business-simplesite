@@ -23,7 +23,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   ],
   openGraphTitle: "Celular Mojado: Qué Hacer en las Primeras 2 Horas | Team Celular",
   openGraphDescription:
-    "Pasos urgentes para minimizar daño por liquidos y decidir cuando necesitas laboratorio de microelectronica.",
+    "Pasos urgentes para minimizar daño por líquidos y decidir cuándo necesitás laboratorio de microelectronica.",
   openGraphImagePath: "/opengraph-image.png",
   openGraphImageAlt: "Reparacion de celular mojado en laboratorio",
   twitterTitle: "Celular Mojado: Qué Hacer en las Primeras 2 Horas",
@@ -130,7 +130,7 @@ const relatedLinks: GuideRelatedLink[] = [
   { href: "/reparaciones/recuperacion-celular-mojado-caba", label: "Diagnóstico y reparación de celular mojado en CABA" },
   { href: "/reparaciones/reparacion-placa-caba", label: "Servicio de reparacion de placa" },
   { href: "/guias/pin-de-carga-suelto-solucion", label: "Pin de carga con sulfato" },
-  { href: "/guias/pin-de-carga-suelto-solucion", label: "Pin de carga suelto" },
+  { href: "/guias/pin-de-carga-suelto-solucion", label: "Pin de carga dañado: cómo saberlo" },
   { href: "/presupuesto-reparacion#solicitar-presupuesto", label: "Pedir diagnostico urgente" },
 ];
 

@@ -20,22 +20,23 @@ const PAGE_PATH = "/guias/pin-de-carga-suelto-solucion";
 
 export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
-  title: "Pin de Carga Suelto: Síntomas y Precio en CABA",
+  title: "Pin de Carga Dañado: Cómo Saberlo y Cuánto Sale en CABA",
   description:
-    `Cambio de pin de carga de ${PORT_FROM} a ${PORT_TO}, según modelo. Identificá la falla y consultá precio en Recoleta o Belgrano, CABA.`,
+    `Cómo saber si el pin de carga está dañado en 4 pruebas simples. Cambio de ${PORT_FROM} a ${PORT_TO}, según modelo, en Recoleta o Belgrano, CABA.`,
   keywords: [
+    "pin de carga dañado",
     "pin de carga suelto",
     "como saber si se daño el pin de carga",
     "celular no carga bien",
     "cambio pin de carga caba",
     "reparacion puerto usb celular",
   ],
-  openGraphTitle: "Pin de Carga Suelto: Síntomas y Precio en CABA",
+  openGraphTitle: "Pin de Carga Dañado: Cómo Saberlo y Cuánto Sale en CABA",
   openGraphDescription:
     `Pin de carga: de ${PORT_FROM} a ${PORT_TO}, según modelo. Consultá precio y disponibilidad en Recoleta o Belgrano.`,
   openGraphImagePath: "/images/reparacion_placa.webp",
   openGraphImageAlt: "Diagnóstico de pin de carga en Team Celular",
-  twitterTitle: "Pin de Carga Suelto: Cómo Saber si Está Dañado | Team Celular",
+  twitterTitle: "Pin de Carga Dañado: Cómo Saberlo | Team Celular",
   twitterDescription:
     "Señales claras de pin de carga dañado y qué hacer en cada caso.",
   languages: {
@@ -114,6 +115,11 @@ const planSteps: GuideItem[] = [
 
 const faq: GuideFaqItem[] = [
   {
+    question: "¿Cómo saber si el pin de carga está dañado?",
+    answer:
+      "Hacé estas 4 pruebas en casa: 1) cargá con otro cable y otro cargador que funcionen en otro equipo; 2) mirá el puerto con una linterna, sin meter nada adentro, para ver pelusa o un pin torcido; 3) enchufá el cable y fijate si entra hasta el fondo y queda firme o se mueve para los costados; 4) si tu modelo tiene carga inalámbrica, probala. Si con otro cable carga bien, era el accesorio. Si solo carga en cierto ángulo, el cable no entra hasta el fondo o el conector tiene juego, lo más probable es el pin. La carga lenta o un aviso de humedad, solos, no confirman un pin dañado; si aparece humedad, desconectá el cable.",
+  },
+  {
     question: "¿Cuánto sale cambiar el pin de carga?",
     answer: `El cambio de pin de carga va de ${PORT_FROM} a ${PORT_TO}, según el modelo y la pieza que haya que cambiar. La limpieza técnica y las fallas de placa se cotizan aparte: ese rango corresponde al cambio de pin o flex. Pasanos marca, modelo y qué falla para confirmar el precio antes de reparar.`,
   },
@@ -121,11 +127,6 @@ const faq: GuideFaqItem[] = [
     question: "¿Cómo cargar un celular con el pin de carga dañado?",
     answer:
       "No fuerces el cable ni lo mantengas presionado para que cargue. La carga inalámbrica puede ser una alternativa temporal solo si tu modelo la admite y el equipo no se mojó, no tiene la batería hinchada ni se calienta de forma anormal. Si no admite carga inalámbrica, apagalo para conservar la batería y traelo a revisar. Ante humedad o daño de batería, no intentes cargarlo. Si todavía enciende y está en condiciones de uso, respaldá tus datos por WiFi.",
-  },
-  {
-    question: "¿Cómo saber si se dañó el pin de carga del celular?",
-    answer:
-      "Que cargue solo en cierta posición, tenga juego o no conecte con la computadora puede indicar un problema de cable o puerto. La carga lenta y los avisos de humedad o accesorio incompatible tampoco confirman un pin dañado. Primero descartamos cable, cargador y suciedad; después revisamos el conector y el flex. Si aparece humedad, desconectá el cable.",
   },
   {
     question: "¿Es el pin de carga, el cable o la batería?",
@@ -169,9 +170,9 @@ export default function ChargingPortGuidePage() {
     <HighIntentGuidePage
       siteUrl={SITE_URL}
       pagePath={PAGE_PATH}
-      pageLabel="Pin de carga suelto"
-      title="Pin de carga suelto: síntomas y cuánto sale cambiarlo"
-      heroDescription={`El cambio de pin o flex de carga va de ${PORT_FROM} a ${PORT_TO}, según modelo. Si solo carga al mover el cable, el conector queda flojo o se desconecta, revisamos si necesita limpieza, cambio de pieza o diagnóstico de placa. Te atendemos sin turno en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).`}
+      pageLabel="Pin de carga dañado"
+      title="Pin de carga dañado: cómo saberlo y cuánto sale cambiarlo"
+      heroDescription={`Si solo carga al mover el cable, el conector queda flojo o se desconecta, probablemente sea el pin: abajo tenés 4 pruebas para confirmarlo en casa. El cambio de pin o flex va de ${PORT_FROM} a ${PORT_TO}, según modelo; revisamos si necesita limpieza, cambio de pieza o diagnóstico de placa. Te atendemos sin turno en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).`}
       badge="Falla frecuente"
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
@@ -195,7 +196,7 @@ export default function ChargingPortGuidePage() {
       diagnosisDescription="Separar el origen real evita cambiar piezas que no hacían falta."
       diagnostics={diagnostics}
       planTitle="¿Qué reparación corresponde en cada caso?"
-      planDescription="Siempre vamos de lo simple a lo complejo, según el daño."
+      planDescription="Primero probamos limpiar; cambiamos la pieza solo si hace falta."
       planSteps={planSteps}
       faq={faq}
       priceTable={

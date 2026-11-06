@@ -129,7 +129,7 @@ const faq: GuideFaqItem[] = [
 const relatedLinks: GuideRelatedLink[] = [
   { href: "/guias/reparacion-pantalla-celular", label: "Guia completa de pantalla" },
   { href: "/reparaciones/cambio-pantalla-caba", label: "Servicio de cambio de pantalla" },
-  { href: "/guias/pin-de-carga-suelto-solucion", label: "Pin de carga suelto" },
+  { href: "/guias/pin-de-carga-suelto-solucion", label: "Pin de carga dañado: cómo saberlo" },
   { href: "/presupuesto-reparacion#solicitar-presupuesto", label: "Solicitar presupuesto" },
 ];
 

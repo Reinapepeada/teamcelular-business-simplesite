@@ -4,13 +4,13 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
   palermo: {
     slug: "palermo",
     zoneName: "Palermo",
-    metaTitle: "Reparación de Celulares desde Palermo | Cómo Llegar",
+    metaTitle: "Reparación de Celulares cerca de Palermo, CABA | Sin Turno",
     metaDescription:
-      "¿Estás en Palermo? Elegí Recoleta, Paraguay 2451, o Belgrano, Amenábar 2032. Cómo llegar al taller, precios y reparación sin turno en CABA.",
+      "Servicio técnico a minutos de Palermo: Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032). Pantalla, batería y carga sin turno, garantía 90 días.",
     socialDescription:
       "Team Celular atiende Palermo desde Recoleta y Belgrano. Pantalla, batería y carga con garantía escrita 90 días.",
     heroBadge: "Cobertura Palermo",
-    heroTitle: "Reparación de celulares desde Palermo",
+    heroTitle: "Reparación de celulares cerca de Palermo",
     heroIntro:
       "Si estás en Palermo, te atendemos sin turno en Recoleta (Paraguay 2451) o Belgrano (Amenábar 2032). Desde Palermo Chico o Botánico, acercate a Recoleta; desde Hollywood o Las Cañitas, a Belgrano. Te confirmamos precio y plazo antes de reparar.",
     heroImage: "/images/dispositivoshdpro.webp",
@@ -56,7 +56,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     faqs: [
       {
         q: "¿Cuál es la sucursal más cerca de Palermo?",
-        a: "Depende de la zona de Palermo. Plaza Italia y Palermo Chico quedan más cerca de Recoleta (Paraguay 2451); Hollywood, Las Cañitas y Colegiales, de Belgrano (Amenábar 2032). Si no sabés cuál te conviene, escribinos por WhatsApp con tu esquina.",
+        a: "Depende de la zona de Palermo. Plaza Italia y Palermo Chico quedan más cerca de Recoleta (Paraguay 2451); Hollywood y Las Cañitas, de Belgrano (Amenábar 2032). Si no sabés cuál te conviene, escribinos por WhatsApp con tu esquina.",
       },
       {
         q: "¿Qué demora tiene una reparación común?",
