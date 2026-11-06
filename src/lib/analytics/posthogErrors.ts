@@ -1,4 +1,9 @@
 const ERROR_TYPES = new Set(["Error", "TypeError", "ReferenceError", "RangeError", "SyntaxError", "URIError", "EvalError", "AggregateError", "StoreApiError", "TimeoutError", "AbortError", "ChunkLoadError"]);
+// Códigos genéricos de Node/undici en error.cause: describen el corte, nunca el destino.
+const NETWORK_CODES = new Set(["ECONNRESET", "ECONNREFUSED", "ECONNABORTED", "ETIMEDOUT", "EPIPE", "ENOTFOUND", "EAI_AGAIN",
+  "EHOSTUNREACH", "ENETUNREACH", "UND_ERR_SOCKET", "UND_ERR_CLOSED", "UND_ERR_ABORTED", "UND_ERR_CONNECT_TIMEOUT",
+  "UND_ERR_HEADERS_TIMEOUT", "UND_ERR_BODY_TIMEOUT", "UND_ERR_INFO", "UND_ERR_RES_CONTENT_LENGTH_MISMATCH"]);
+const STORE_RESOURCES = new Set(["facets", "products", "product"]);
 
 function record(value: unknown): Record<string, unknown> {
   return value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, unknown> : {};
@@ -53,5 +58,19 @@ export function sanitizePostHogException(properties: Record<string, unknown>, ru
   return { $exception_list: exceptions, $exception_type: exceptions[0].type,
     $exception_message: message, $exception_level: "error", error_runtime: runtime,
     ...(httpStatus ? { http_status: httpStatus } : {}),
+    ...(runtime === "server" ? serverCause(error) : {}),
+  };
+}
+
+// Causa del error de servidor en valores cerrados: código del backend, código de red y recurso, sin texto libre.
+function serverCause(error: unknown): Record<string, string> {
+  const value = record(error);
+  const code = value.name === "StoreApiError" && typeof value.code === "string" ? value.code.toUpperCase() : undefined;
+  const network = record(value.cause).code;
+  return {
+    ...(code && /^[A-Z][A-Z0-9_]{0,63}$/.test(code) ? { store_error_code: code } : {}),
+    ...(typeof network === "string" && NETWORK_CODES.has(network) ? { network_error_code: network } : {}),
+    ...(typeof value.storeResource === "string" && STORE_RESOURCES.has(value.storeResource)
+      ? { store_resource: value.storeResource } : {}),
   };
 }
