@@ -1,4 +1,4 @@
-import { BRANCHES, BUSINESS_PROFILE, LOGO, ORGANIZATION_ADDRESS, SITE_URL, TECHNICAL_AUTHOR, absoluteUrl, businessId } from "@/lib/businessProfile";
+import { BRANCHES, BUSINESS_PROFILE, LOGO, ORGANIZATION_ADDRESS, SITE_URL, TECHNICAL_AUTHOR, absoluteUrl, branchId, branchLocalBusiness, businessId } from "@/lib/businessProfile";
 import { HOME_FAQS } from "@/lib/homeFaqs";
 import { REPAIR_CASE } from "@/lib/repairCase";
 
@@ -60,7 +60,7 @@ export function createAiGraph() {
         image: LOGO.url, address: ORGANIZATION_ADDRESS,
         sameAs: BUSINESS_PROFILE.sameAs, knowsAbout: BUSINESS_PROFILE.knowsAbout,
         areaServed: { "@type": "City", name: "Ciudad Autónoma de Buenos Aires, Argentina" },
-        department: BRANCHES.map((branch) => ({ "@id": `${absoluteUrl(branch.url)}#localbusiness` })),
+        department: BRANCHES.map((branch) => ({ "@id": branchId(branch) })),
         founder: { "@id": businessId("technical-author") },
         subjectOf: { "@id": `${absoluteUrl(REPAIR_CASE.path)}#article` },
       },
@@ -75,23 +75,7 @@ export function createAiGraph() {
         description: AI_DESCRIPTION, inLanguage: "es-AR",
         isPartOf: { "@id": businessId("website") }, about: { "@id": organizationId },
       },
-      ...BRANCHES.map((branch) => ({
-        "@type": "LocalBusiness", "@id": `${absoluteUrl(branch.url)}#localbusiness`,
-        name: branch.name, url: absoluteUrl(branch.url), telephone: branch.phone,
-        image: absoluteUrl("/opengraph-image.png"), priceRange: "$$",
-        parentOrganization: { "@id": organizationId },
-        address: {
-          "@type": "PostalAddress", streetAddress: branch.street,
-          addressLocality: branch.locality, addressRegion: branch.region,
-          postalCode: branch.postalCode, addressCountry: branch.country,
-        },
-        geo: { "@type": "GeoCoordinates", latitude: branch.latitude, longitude: branch.longitude },
-        hasMap: branch.mapUrl,
-        openingHoursSpecification: [{
-          "@type": "OpeningHoursSpecification", dayOfWeek: BUSINESS_PROFILE.hours.days,
-          opens: BUSINESS_PROFILE.hours.opens, closes: BUSINESS_PROFILE.hours.closes,
-        }],
-      })),
+      ...BRANCHES.map(branchLocalBusiness),
       {
         "@type": "Article", "@id": `${absoluteUrl(REPAIR_CASE.path)}#article`,
         url: absoluteUrl(REPAIR_CASE.path), headline: REPAIR_CASE.title,

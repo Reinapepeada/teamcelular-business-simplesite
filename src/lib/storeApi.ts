@@ -241,7 +241,13 @@ const pedirCatalogoServidor = cache(async <T>(path: string): Promise<T> => {
 });
 
 function pedirCatalogo<T>(path: string): Promise<T> {
-    return typeof window === "undefined" ? pedirCatalogoServidor<T>(path) : pedir<T>(path);
+    const lectura = typeof window === "undefined" ? pedirCatalogoServidor<T>(path) : pedir<T>(path);
+    return lectura.catch((error: unknown) => {
+        // El diagnóstico de PostHog lee qué recurso falló; nunca el slug ni la query.
+        if (error && typeof error === "object") Reflect.set(error, "storeResource",
+            path === "/store/facets" ? "facets" : path.startsWith("/store/products/") ? "product" : "products");
+        throw error;
+    });
 }
 
 export const fetchStoreProducts = (params: Record<string, string | number> = {}) => {

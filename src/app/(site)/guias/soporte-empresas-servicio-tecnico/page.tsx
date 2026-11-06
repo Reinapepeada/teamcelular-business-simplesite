@@ -511,33 +511,7 @@ export default function BusinessSupportGuide() {
               },
               "description":
                 "Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), presta soporte técnico de celulares para empresas desde 5 dispositivos: SLA acordado por escrito, logística puerta a puerta, planes preventivos y diagnóstico y presupuesto por escrito.",
-              "provider": {
-                "@id": "https://teamcelular.com#localbusiness",
-                "location": [
-                  {
-                    "@type": "Place",
-                    "name": "Team Celular Recoleta",
-                    "address": {
-                      "@type": "PostalAddress",
-                      "streetAddress": "Paraguay 2451",
-                      "addressLocality": "Recoleta",
-                      "addressRegion": "CABA",
-                      "addressCountry": "AR"
-                    }
-                  },
-                  {
-                    "@type": "Place",
-                    "name": "Team Celular Belgrano",
-                    "address": {
-                      "@type": "PostalAddress",
-                      "streetAddress": "Amenábar 2032",
-                      "addressLocality": "Belgrano",
-                      "addressRegion": "CABA",
-                      "addressCountry": "AR"
-                    }
-                  }
-                ]
-              },
+              "provider": { "@id": `${SITE_URL}#organization` },
               "offers": {
                 "@type": "Offer",
                 "availability": "https://schema.org/InStock",

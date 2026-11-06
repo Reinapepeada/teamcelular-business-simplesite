@@ -5,7 +5,8 @@
  * precios confirmados: sin dato real no se emite tabla ni Offer, porque un
  * precio inventado en structured data es peor que no tenerlo.
  *
- * Actualizado: agosto de 2026.
+ * Actualizado: agosto de 2026. Galaxy A / M ajustado en noviembre de 2026 a
+ * lo cobrado en órdenes cerradas de Fixbee (A03s, A04, A13 y A21s desde $69.000).
  */
 import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
@@ -26,7 +27,7 @@ export const PLACA_REVISION_PRICE = 45000;
 
 export const BRAND_REPAIR_PRICES: Record<string, RepairPrice[]> = {
   samsung: [
-    { name: "Cambio de pantalla Galaxy A / M", from: 99900, to: 399900 },
+    { name: "Cambio de pantalla Galaxy A / M", from: 69000, to: 399900 },
     { name: "Cambio de pantalla Galaxy S / Ultra", from: 299900, to: 1199900 },
     { name: "Cambio de bateria Galaxy A / M", from: 89900, to: 179900 },
     { name: "Cambio de bateria Galaxy S / Ultra", from: 119900, to: 219900 },

@@ -45,12 +45,29 @@ test("las sucursales no heredan el teléfono ni el LocalBusiness de Recoleta", (
   }
 });
 
-test("portada, servicios y productos conservan la entidad global de sus referencias", () => {
+test("la marca es una Organization y cada sucursal su único LocalBusiness", () => {
   for (const path of ["/", "/reparaciones/reparacion-placa-caba", "/tienda/cargador"]) {
     const schemas = renderSchema(path);
-    const local = schemas.find((schema) => schema["@id"] === businessProfile.businessId("localbusiness"));
-    assert.equal(local.telephone, businessProfile.BUSINESS_PROFILE.phone);
-    assert.equal(local.department.length, businessProfile.BRANCHES.length);
-    assert.equal(schemas.find((schema) => schema["@type"] === "Organization").telephone, businessProfile.BUSINESS_PROFILE.phone);
+    assert.ok(schemas.every((schema) => schema["@type"] !== "LocalBusiness"));
+    const organization = schemas.find((schema) => schema["@type"] === "Organization");
+    assert.equal(organization.telephone, businessProfile.BUSINESS_PROFILE.phone);
+    assert.deepEqual(
+      organization.department.map((branch) => [branch["@id"], branch.telephone, branch.address.streetAddress, branch.address.addressLocality]),
+      businessProfile.BRANCHES.map((branch) => [businessProfile.branchId(branch), branch.phone, branch.street, "Ciudad Autónoma de Buenos Aires"]),
+    );
+  }
+  for (const branch of businessProfile.BRANCHES) {
+    const organization = renderSchema(branch.url).find((schema) => schema["@type"] === "Organization");
+    assert.deepEqual(organization.department, businessProfile.BRANCHES.map((item) => ({ "@id": businessProfile.branchId(item) })));
+  }
+});
+
+test("los mapas y perfiles apuntan a fichas estables de Google sin duplicados", () => {
+  const { sameAs } = businessProfile.BUSINESS_PROFILE;
+  assert.equal(new Set(sameAs).size, sameAs.length);
+  assert.ok(sameAs.every((url) => !url.includes("share.google")));
+  for (const branch of businessProfile.BRANCHES) {
+    assert.match(branch.mapUrl, /^https:\/\/maps\.google\.com\/\?cid=\d+$/);
+    assert.ok(sameAs.includes(branch.mapUrl));
   }
 });

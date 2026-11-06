@@ -58,7 +58,7 @@ export default function EliminarVirusCelularPage() {
     serviceType: "Limpieza de software y reinstalación con backup de celulares",
     description: `Limpieza simple conservando datos por ${SIMPLE_PRICE} y reinstalación con backup por ${BACKUP_PRICE}. Revisión de aplicaciones, permisos y publicidad invasiva.`,
     url: `${SITE_URL}${PAGE_PATH}`,
-    provider: { "@id": `${SITE_URL}#localbusiness` },
+    provider: { "@id": `${SITE_URL}#organization` },
     areaServed: { "@type": "City", name: "Ciudad Autónoma de Buenos Aires" },
     offers: VIRUS_CLEANING_PLANS.map((plan) => ({
       "@type": "Offer", name: plan.name, price: plan.price, priceCurrency: "ARS", url: `${SITE_URL}${PAGE_PATH}#precios`,

@@ -434,3 +434,13 @@ describe("la clave del checkout", () => {
         assert.notEqual(a, b);
     });
 });
+
+test("una falla del catálogo indica el recurso sin slug ni query", async () => {
+    await conFetch({ ok: false, status: 404, body: {} }, async () => {
+        const recurso = (esperado: string) => (error: unknown) =>
+            error instanceof StoreApiError && Reflect.get(error, "storeResource") === esperado;
+        await assert.rejects(fetchStoreProduct("slug-privado"), recurso("product"));
+        await assert.rejects(fetchStoreProducts({ q: "consulta privada" }), recurso("products"));
+        await assert.rejects(fetchStoreFacets(), recurso("facets"));
+    });
+});

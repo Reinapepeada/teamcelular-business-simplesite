@@ -23,7 +23,7 @@ const PAGE_URL = `${SITE_URL}/sucursales/caba/belgrano`;
 const faqs = [
   {
     q: "¿Dónde está la sucursal Belgrano de Team Celular?",
-    a: "Estamos en Amenábar 2032, Belgrano, Ciudad Autónoma de Buenos Aires.",
+    a: "Estamos en Amenábar 2032, Belgrano, CABA, cerca de la estación Juramento de la línea D y de los colectivos de Av. Cabildo. Atendemos sin turno de lunes a viernes de 10:30 a 18:00.",
   },
   {
     q: "¿Qué horario tiene la sucursal Belgrano?",
@@ -120,11 +120,11 @@ export default function SucursalBelgranoPage() {
     image: `${SITE_URL}/opengraph-image.png`,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Amenábar 2032",
-      addressLocality: "Belgrano",
-      addressRegion: "CABA",
-      postalCode: "C1428",
-      addressCountry: "AR",
+      streetAddress: branch.street,
+      addressLocality: branch.locality,
+      addressRegion: branch.region,
+      postalCode: branch.postalCode,
+      addressCountry: branch.country,
     },
     geo: {
       "@type": "GeoCoordinates",
@@ -188,7 +188,7 @@ export default function SucursalBelgranoPage() {
             <h1 className="tc-display">
               Reparación de celulares en Belgrano CABA
             </h1>
-            <p className="max-w-[50ch] text-lg leading-relaxed text-[#a1a1a6]">Pantalla, batería, carga y placa. Te informamos el costo de revisión y el presupuesto antes de reparar. Garantía escrita de 90 días.</p>
+            <p className="max-w-[56ch] text-lg leading-relaxed text-[#a1a1a6]">Team Celular Belgrano está en Amenábar 2032, cerca de la estación Juramento de la línea D. Atendemos sin turno de lunes a viernes de 10:30 a 18:00 y reparamos pantalla, batería, carga y placa de iPhone, Samsung, Motorola y Xiaomi. Te informamos el costo de revisión y el presupuesto antes de reparar, y cada trabajo sale con garantía escrita de 90 días.</p>
             <div className="flex flex-wrap gap-3">
               <TrackedCtaLink href={whatsappUrl} external target="_blank" directBranch ctaName="branch_belgrano_whatsapp" ctaLocation="branch_belgrano_hero" ctaVariant="whatsapp" className="tc-btn tc-btn-primary">
                 WhatsApp de Belgrano

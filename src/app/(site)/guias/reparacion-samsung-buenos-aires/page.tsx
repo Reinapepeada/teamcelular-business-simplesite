@@ -360,7 +360,7 @@ export default function SamsungRepairGuidePage() {
               Reparación de Samsung en CABA: precios y opciones
             </h1>
             <p className="max-w-4xl text-lg leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
-              Pantalla rota, poca batería o problemas con el USB-C. Revisamos tu Galaxy en Recoleta o Belgrano y te confirmamos repuesto, precio y plazo antes de reparar.
+              Pantalla Galaxy A / M desde {formatArsPrice(SCREEN_A.from)} y S / Ultra desde {formatArsPrice(SCREEN_S.from)}. Revisamos tu Galaxy en Recoleta o Belgrano y te confirmamos repuesto, precio y plazo antes de reparar.
             </p>
             <div className="mt-4">
               <GuideByline modifiedTime="2026-10-23T00:00:00Z" tone="light" />
@@ -657,7 +657,7 @@ export default function SamsungRepairGuidePage() {
               name: "Reparación de Samsung en Buenos Aires",
               description:
                 "Reparación de Samsung Galaxy en CABA: pantalla, batería, carga y placa, con garantía escrita de 90 días.",
-              provider: { "@id": "https://teamcelular.com#localbusiness" },
+              provider: { "@id": `${SITE_URL}#organization` },
               // Rango y catalogo salen de repairPrices: un unico lugar donde el precio
               // visible y el structured data no pueden divergir.
               priceRange: `ARS ${priceRangeOf(BRAND_REPAIR_PRICES.samsung).low.toLocaleString("es-AR")}-${priceRangeOf(BRAND_REPAIR_PRICES.samsung).high.toLocaleString("es-AR")}`,
