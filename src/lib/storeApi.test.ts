@@ -150,7 +150,9 @@ for (const stage of ["headers", "body"] as const) {
     test(`el catálogo SSR limita la espera de ${stage} y permite recuperar la lectura`, async (t) => {
         const previous = process.env.NEXT_PUBLIC_BASE_URL;
         let stalled = true;
+        let requests = 0;
         const server = createServer((_request, response) => {
+            requests++;
             if (!stalled) return response.end(JSON.stringify({ items: [], total: 0, page: 1, size: 12 }));
             if (stage === "body") { response.writeHead(200, { "Content-Type": "application/json" }); response.flushHeaders(); response.write('{"items":'); }
         });
@@ -167,8 +169,14 @@ for (const stage of ["headers", "body"] as const) {
             await assert.rejects(fetchStoreProducts(), error => error instanceof Error && ["AbortError", "TimeoutError"].includes(error.name));
             assert.ok(Date.now() - started < 1_500, "el cuerpo no puede quedar esperando después del plazo");
             stalled = false;
+            // El render de la página de error repite la lectura: no espera otro plazo.
+            const failedRequests = requests;
+            await assert.rejects(fetchStoreProducts(), error => error instanceof Error && ["AbortError", "TimeoutError"].includes(error.name));
+            assert.equal(requests, failedRequests);
+            const now = Date.now();
+            t.mock.method(Date, "now", () => now + 5_001);
             assert.equal((await fetchStoreProducts()).total, 0);
-            assert.deepEqual(deadlines, [8_000, 8_000]);
+            assert.deepEqual(deadlines, [8_000, 4_000, 8_000, 4_000]);
         } finally {
             server.closeAllConnections();
             await new Promise<void>(resolve => server.close(() => resolve()));
@@ -177,6 +185,46 @@ for (const stage of ["headers", "body"] as const) {
         }
     });
 }
+
+test("el catálogo SSR reintenta una vez las fallas sueltas del camino y no un 404", async () => {
+    const previous = process.env.NEXT_PUBLIC_BASE_URL;
+    const pending: string[] = [];
+    let requests = 0;
+    const server = createServer((request, response) => {
+        requests++;
+        const failure = pending.shift();
+        if (failure === "reset") return request.socket.destroy();
+        if (failure === "502") { response.writeHead(502); return response.end("<html>Bad Gateway</html>"); }
+        if (failure === "404") { response.writeHead(404); return response.end("{}"); }
+        response.end(JSON.stringify({ items: [], total: 3, page: 1, size: 12 }));
+    });
+    server.listen(0, "127.0.0.1");
+    await once(server, "listening");
+    const address = server.address();
+    assert.ok(address && typeof address !== "string");
+    process.env.NEXT_PUBLIC_BASE_URL = `http://127.0.0.1:${address.port}`;
+    try {
+        for (const [index, failure] of ["reset", "502"].entries()) {
+            pending.push(failure);
+            requests = 0;
+            assert.equal((await fetchStoreProducts({ page: index + 1 })).total, 3);
+            assert.equal(requests, 2);
+        }
+        pending.push("502", "502");
+        requests = 0;
+        await assert.rejects(fetchStoreProducts({ page: 3 }), (error: unknown) => error instanceof StoreApiError && error.status === 502);
+        assert.equal(requests, 2, "un solo reintento");
+        pending.push("404");
+        requests = 0;
+        await assert.rejects(fetchStoreProducts({ page: 4 }), (error: unknown) => error instanceof StoreApiError && error.status === 404);
+        assert.equal(requests, 1);
+    } finally {
+        server.closeAllConnections();
+        await new Promise<void>(resolve => server.close(() => resolve()));
+        if (previous === undefined) delete process.env.NEXT_PUBLIC_BASE_URL;
+        else process.env.NEXT_PUBLIC_BASE_URL = previous;
+    }
+});
 
 // --- el total lo pone el servidor ---------------------------------------
 

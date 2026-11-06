@@ -1,9 +1,14 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type APIRequestContext } from '@playwright/test';
 
 const googlebot = { 'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', Accept: 'text/html' };
 const fixture = (failure = '') => `http://127.0.0.1:3101/__fixture/seo?failure=${failure}`;
 
 test.afterEach(async ({ request }) => { await request.get(fixture()); });
+// El SSR recuerda una falla 5 s para no esperar otro plazo en el render de error.
+const recuperar = async (request: APIRequestContext) => {
+    await request.get(fixture());
+    await new Promise(resolve => setTimeout(resolve, 5_100));
+};
 
 test('sitemap: falla temporal de facetas no publica una lista recortada con 200', async ({ request }) => {
     await request.get(fixture('facets'));
@@ -29,10 +34,24 @@ for (const [failure, path] of [
     test(`falla de ${failure} en ${path} conserva respuesta temporal y recupera la URL`, async ({ request }) => {
         await request.get(fixture(failure));
         expect((await request.get(path, { headers: googlebot })).status()).toBe(500);
-        await request.get(fixture());
+        await recuperar(request);
         const recovered = await request.get(path, { headers: googlebot });
         expect(recovered.status()).toBe(200);
         expect(await recovered.text()).toContain('rel="canonical"');
+    });
+}
+
+for (const [failure, path] of [
+    ['reset-once-product', '/tienda/funda-prueba'],
+    ['bad-gateway-once-listing', '/tienda/categoria/accesorios'],
+    ['stall-once-listing', '/tienda'],
+]) {
+    test(`una falla suelta (${failure}) en ${path} se reintenta y responde 200 con contenido`, async ({ request }) => {
+        expect((await request.get(path, { headers: googlebot })).status()).toBe(200);
+        await request.get(fixture(failure));
+        const response = await request.get(path, { headers: googlebot });
+        expect(response.status()).toBe(200);
+        expect(await response.text()).toContain('Funda de prueba');
     });
 }
 
@@ -47,7 +66,7 @@ test('la pantalla de falla permite reintentar sin crear pedidos ni cambiar catá
     await request.get(fixture('listing'));
     await page.goto('/tienda/categoria/accesorios');
     await expect(page.getByRole('heading', { name: 'No pudimos cargar la tienda' })).toBeVisible();
-    await request.get(fixture());
+    await recuperar(request);
     await page.getByRole('button', { name: 'Reintentar', exact: true }).click();
     await expect(page.getByRole('heading', { name: 'Accesorios', exact: true, level: 1 })).toBeVisible();
 });
@@ -83,9 +102,11 @@ for (const [failure, path, status] of [
         const calls = await (await request.get('http://127.0.0.1:3101/__fixture/catalog-counts')).json();
         await testInfo.attach('catalog-deadline', { body: JSON.stringify({ elapsed_ms: elapsed, calls }), contentType: 'application/json' });
         expect(response.status()).toBe(status);
-        expect(elapsed).toBeLessThan(25_000);
+        // Un solo plazo de 8 s por solicitud aunque Next repita el render para la página de error
+        // (antes 16 s); el caso en serie suma la relectura de 3 s de facetas en ese segundo render.
+        expect(elapsed).toBeLessThan(14_000);
         if (status === 200) expect(await response.text()).toContain('Funda de prueba');
-        await request.get(fixture());
+        await recuperar(request);
         const recovered = await request.get(path, { headers: googlebot });
         expect(recovered.status()).toBe(200);
         expect(await recovered.text()).toContain(path === '/feed/google.xml' ? '<rss' : 'rel="canonical"');
