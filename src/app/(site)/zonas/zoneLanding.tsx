@@ -318,8 +318,8 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
         </section>
       )}
 
-      <section aria-label="Señales locales de confianza" className="mx-auto mt-8 max-w-[1200px] border-y border-white/15 px-5 py-6 sm:px-6">
-            <h2 className="sr-only">Señales locales de confianza</h2>
+      <section aria-label="Datos del taller" className="mx-auto mt-8 max-w-[1200px] border-y border-white/15 px-5 py-6 sm:px-6">
+            <h2 className="sr-only">Datos del taller</h2>
             <ul className="grid gap-2 text-[14px] text-white/90 md:grid-cols-3 md:gap-6">
               <li className="flex items-start gap-2.5">
                 <FaMapMarkedAlt className="mt-0.5 shrink-0 text-[#6aa6ff]" aria-hidden />

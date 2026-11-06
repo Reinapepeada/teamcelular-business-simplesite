@@ -115,7 +115,7 @@ const SERVICE_RELATED_GUIDES: Record<string, RelatedGuide[]> = {
   "cambio-pin-carga-caba": [
     {
       href: "/guias/pin-de-carga-suelto-solucion",
-      title: "Pin de carga suelto: qué hacer y qué evitar",
+      title: "Pin de carga dañado: cómo saberlo y qué evitar",
       description: "Cómo reconocer el problema y qué evitar para no agravar el daño.",
     },
     {

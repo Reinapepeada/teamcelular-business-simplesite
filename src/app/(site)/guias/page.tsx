@@ -139,7 +139,7 @@ const ARTICLES = [
     keywords: ["cambio bateria", "bateria certificada", "autonomia celular"],
   },
   {
-    title: "Pin de carga suelto: causas y solucion",
+    title: "Pin de carga dañado: cómo saberlo y solución",
     description:
       "Aprende a diferenciar falso contacto, desgaste de conector o falla de placa para reparar con criterio.",
     href: "/guias/pin-de-carga-suelto-solucion",
@@ -152,7 +152,7 @@ const ARTICLES = [
   {
     title: "Celular mojado: que hacer en las primeras 2 horas",
     description:
-      "Protocolo urgente para reducir dano por liquidos y mejorar chances de recuperacion tecnica.",
+      "Protocolo urgente para reducir el daño por líquidos y mejorar las chances de recuperación técnica.",
     href: "/guias/celular-mojado-que-hacer",
     category: "Emergencia",
     readingTime: "5 min",

@@ -176,7 +176,7 @@ const replacementProcess = [
   },
   {
     step: "2. Desmontaje profesional",
-    detail: "Abrimos el equipo con herramientas especializadas, desconectamos batería por seguridad, removemos pantalla dañada y verificamos estado de conectores flex.",
+    detail: "Abrimos el equipo, desconectamos batería por seguridad, removemos pantalla dañada y verificamos estado de conectores flex.",
     duration: "20-30 min",
     Icon: FaMobileAlt,
   },
@@ -194,7 +194,7 @@ const replacementProcess = [
   },
   {
     step: "5. Test de calidad",
-    detail: "Probamos touch en todas las zonas, Face ID/Touch ID, sensores, brillo, colores, sellado y entregamos con garantía escrita.",
+    detail: "Probamos touch en todas las zonas, Face ID/Touch ID, sensores, brillo y colores, y entregamos con garantía escrita.",
     duration: "15 min",
     Icon: FaShieldAlt,
   },
@@ -243,7 +243,7 @@ const faqScreen = [
   },
   {
     question: "¿La pantalla nueva viene con garantía?",
-    answer: `Si. ${WARRANTY_SCOPE_MESSAGE} Cubre defectos de fabricacion del repuesto y problemas vinculados al trabajo realizado. No cubre golpes nuevos, liquidos, presion excesiva, modificaciones por terceros ni uso inadecuado. Entregamos certificado con el detalle de cobertura.`,
+    answer: `Sí. ${WARRANTY_SCOPE_MESSAGE} Cubre defectos de fabricación del repuesto y problemas vinculados al trabajo realizado. No cubre golpes nuevos, líquidos, presión excesiva, modificaciones por terceros ni uso inadecuado. Entregamos certificado con el detalle de cobertura.`,
   },
   {
     question: "¿Puedo usar el celular normalmente después del cambio?",
