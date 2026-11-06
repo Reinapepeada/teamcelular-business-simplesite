@@ -41,7 +41,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     serviceName: "Cambio de batería en CABA",
     serviceType: "Cambio de batería / reemplazo de batería",
     serviceDescription:
-      "Cambio de batería para celulares en CABA con repuestos certificados y garantía escrita de 90 días sobre trabajo y repuesto instalado.",
+      "Cambio de batería para celulares en CABA con garantía escrita de 90 días sobre trabajo y repuesto instalado.",
     highlights: [
       {
         title: "Diagnóstico primero",
