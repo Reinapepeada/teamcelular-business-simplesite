@@ -94,15 +94,15 @@ export default function HighIntentGuidePage({
         <Link href="/guias" className="tc-link inline-flex min-h-11 items-center">Guías</Link>
         <span aria-hidden>/</span><span aria-current="page">{pageLabel}</span>
       </nav>
-      <header className="max-w-[850px]">
-        <h1 className="text-balance text-[clamp(1.75rem,4.5vw,3.5rem)] font-semibold leading-[1.12] tracking-[-0.025em]">{title}</h1>
+      <header className="flex max-w-[850px] flex-col sm:block">
+        <h1 className="max-sm:order-first text-balance text-[clamp(1.75rem,4.5vw,3.5rem)] font-semibold leading-[1.12] tracking-[-0.025em]">{title}</h1>
         <p className="mt-5 max-w-[65ch] text-[17px] leading-relaxed text-[#a1a1a6]">{heroSummary ?? heroDescription}</p>
-        {heroActions ?? <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        {heroActions ?? <div className="mt-6 flex flex-col gap-3 max-sm:-order-1 sm:flex-row sm:flex-wrap">
           <TrackedCtaLink href="/presupuesto-reparacion#solicitar-presupuesto" ctaName={`guide_high_intent_budget_${guideKey}`} ctaLocation="guide_high_intent_hero" ctaVariant="primary" className="tc-btn tc-btn-primary">
             Pedir diagnóstico y presupuesto
           </TrackedCtaLink>
-          <TrackedCtaLink href={`https://wa.me/5491151034595?text=${encodeURIComponent(whatsappText)}`} ctaName={`guide_high_intent_whatsapp_${guideKey}`} ctaLocation="guide_high_intent_hero" ctaVariant="whatsapp" external target="_blank" className="tc-link inline-flex min-h-11 items-center justify-center gap-2 px-2 sm:justify-start">
-            <BsWhatsapp aria-hidden /> Hablar por WhatsApp
+          <TrackedCtaLink href={`https://wa.me/5491151034595?text=${encodeURIComponent(whatsappText)}`} ctaName={`guide_high_intent_whatsapp_${guideKey}`} ctaLocation="guide_high_intent_hero" ctaVariant="whatsapp" external target="_blank" className="tc-btn tc-btn-ghost">
+            <BsWhatsapp aria-hidden /> Consultar por WhatsApp
           </TrackedCtaLink>
         </div>}
         {commercialNote && <p className="mt-5 max-w-[65ch] text-sm leading-6 text-[#c7c7cc]">{commercialNote}</p>}
