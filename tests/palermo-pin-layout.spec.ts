@@ -16,7 +16,7 @@ for (const width of [320, 390, 1280]) {
         await expect(table.locator('thead th')).toHaveCount(2);
         await expect(table.locator('tbody tr')).toHaveCount(6);
         const tableBox = await table.boundingBox();
-        const conditionsBox = await page.getByRole('region', { name: 'Señales locales de confianza' }).boundingBox();
+        const conditionsBox = await page.getByRole('region', { name: 'Datos del taller' }).boundingBox();
         expect(tableBox!.y + tableBox!.height).toBeLessThan(conditionsBox!.y);
         await expect(page.locator('main img')).toHaveCount(0);
         expect(await table.evaluate(el => el.scrollWidth <= el.clientWidth + 1)).toBe(true);

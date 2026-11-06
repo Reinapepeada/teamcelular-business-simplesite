@@ -180,7 +180,7 @@ const replacementProcess = [
   },
   {
     step: "2. Desmontaje profesional",
-    detail: "Abrimos el equipo con herramientas especializadas, desconectamos la batería de forma segura y verificamos que no haya daños en conectores o placa.",
+    detail: "Abrimos el equipo, desconectamos la batería de forma segura y verificamos que no haya daños en conectores o placa.",
     duration: "según modelo",
     Icon: FaMobileAlt,
   },

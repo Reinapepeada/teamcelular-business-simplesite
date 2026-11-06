@@ -102,17 +102,17 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
   },
   "/guias/reparacion-pantalla-celular": {
     guidance:
-      "Una pantalla rota suele venir con otros sintomas. Estas guias te ayudan a validar bateria, mantenimiento y diagnóstico por marca.",
+      "Una pantalla rota suele venir con otros síntomas. Estas guías te ayudan a revisar batería, mantenimiento y diagnóstico por marca.",
     links: [
       {
         href: "/guias/cambio-bateria-celular",
-        title: "Cambio de bateria celular",
+        title: "Cambio de batería de celular",
         description:
-          "Detecta desgaste energetico que afecta brillo, rendimiento y estabilidad.",
+          "Una batería gastada puede apagar el equipo o bajar el rendimiento.",
       },
       {
         href: "/guias/reparacion-iphone-buenos-aires",
-        title: "Reparacion de iPhone",
+        title: "Reparación de iPhone",
         description:
           "Proceso para conservar funciones delicadas como Face ID y calibraciones.",
       },
