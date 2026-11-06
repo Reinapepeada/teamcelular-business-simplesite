@@ -60,7 +60,7 @@ export function createAiGraph() {
         image: LOGO.url, address: ORGANIZATION_ADDRESS,
         sameAs: BUSINESS_PROFILE.sameAs, knowsAbout: BUSINESS_PROFILE.knowsAbout,
         areaServed: { "@type": "City", name: "Ciudad Autónoma de Buenos Aires, Argentina" },
-        department: BRANCHES.map((branch) => ({ "@id": branchId(branch) })),
+        subOrganization: BRANCHES.map((branch) => ({ "@id": branchId(branch) })),
         founder: { "@id": businessId("technical-author") },
         subjectOf: { "@id": `${absoluteUrl(REPAIR_CASE.path)}#article` },
       },
@@ -104,7 +104,7 @@ export function aiFactsText() {
   return [
     `# ${BUSINESS_PROFILE.name} — CABA, Argentina`, "", AI_DESCRIPTION, "", AI_DISAMBIGUATION,
     "", "## Sucursales", "",
-    ...BRANCHES.map((branch) => `- ${branch.name}: ${branch.street}, ${branch.locality}, Argentina. Teléfono: ${branch.phone}. ${BUSINESS_PROFILE.hours.text}. ${absoluteUrl(branch.url)}`),
+    ...BRANCHES.map((branch) => `- ${branch.name}: ${branch.street}, ${branch.locality}, Argentina. Teléfono: ${branch.phone}. ${BUSINESS_PROFILE.hours.text}. ${absoluteUrl(branch.url)} — Google Maps: ${branch.mapUrl}`),
     "", "## Preguntas frecuentes", "",
     ...HOME_FAQS.map(({ question, answer }) => `### ${question}\n\n${answer}\n`),
     "## Caso real documentado", "", `### ${REPAIR_CASE.title}`, "",

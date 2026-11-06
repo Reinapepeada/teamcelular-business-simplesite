@@ -30,7 +30,7 @@ function createOrganizationJson(isBranchPage: boolean) {
     sameAs: BUSINESS_PROFILE.sameAs,
     knowsAbout: BUSINESS_PROFILE.knowsAbout,
     areaServed: { "@type": "City", name: "Ciudad Autónoma de Buenos Aires" },
-    department: BRANCHES.map((branch) => (isBranchPage ? { "@id": branchId(branch) } : branchLocalBusiness(branch))),
+    subOrganization: BRANCHES.map((branch) => (isBranchPage ? { "@id": branchId(branch) } : branchLocalBusiness(branch))),
     founder: {
       "@type": "Person",
       "@id": businessId("technical-author"),

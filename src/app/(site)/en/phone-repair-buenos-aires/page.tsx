@@ -55,13 +55,11 @@ export default function PhoneRepairEnglishPage() {
     name: "Phone repair in Buenos Aires",
     serviceType: "Mobile phone repair",
     url: PAGE_URL,
-    inLanguage: "en",
     areaServed: [
       { "@type": "City", name: "Buenos Aires" },
       { "@type": "City", name: "CABA" },
     ],
     provider: { "@id": businessId("organization") },
-    availableLanguage: ["es", "en"],
   };
 
   return (
