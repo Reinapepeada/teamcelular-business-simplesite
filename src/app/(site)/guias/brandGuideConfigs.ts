@@ -607,7 +607,7 @@ function buildServiceJsonLd(seed: BrandGuideSeed, pagePath: string) {
       { "@type": "City", name: "CABA" },
       { "@type": "City", name: "Buenos Aires" },
     ],
-    provider: { "@id": businessId("localbusiness") },
+    provider: { "@id": businessId("organization") },
     // AggregateOffer es el tipo correcto para un rango: un Offer con "price"
     // exigiria un valor unico que aca no existe.
     offers: {

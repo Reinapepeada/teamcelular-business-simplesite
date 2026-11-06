@@ -170,7 +170,7 @@ export default async function IphoneModelPage({
       { "@type": "City", name: "CABA" },
       { "@type": "City", name: "Buenos Aires" },
     ],
-    provider: { "@id": businessId("localbusiness") },
+    provider: { "@id": businessId("organization") },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: `Reparaciones para ${model.name}`,

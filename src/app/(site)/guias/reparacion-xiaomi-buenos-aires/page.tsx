@@ -608,7 +608,7 @@ export default function XiaomiRepairGuidePage() {
               name: "Reparacion de Xiaomi en Buenos Aires",
               description:
                 "Servicio tecnico para Xiaomi, Redmi y POCO en CABA con repuestos premium y garantia escrita.",
-              provider: { "@id": "https://teamcelular.com#localbusiness" },
+              provider: { "@id": `${SITE_URL}#organization` },
               // Rango y catalogo salen de repairPrices: un unico lugar donde el precio
               // visible y el structured data no pueden divergir.
               priceRange: `ARS ${priceRangeOf(BRAND_REPAIR_PRICES.xiaomi).low.toLocaleString("es-AR")}-${priceRangeOf(BRAND_REPAIR_PRICES.xiaomi).high.toLocaleString("es-AR")}`,

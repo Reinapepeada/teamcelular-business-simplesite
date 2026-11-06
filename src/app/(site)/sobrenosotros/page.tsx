@@ -438,7 +438,7 @@ export default function SobreNosotrosPage() {
                                         address: {
                                             "@type": "PostalAddress",
                                             streetAddress: "Paraguay 2451",
-                                            addressLocality: "Recoleta",
+                                            addressLocality: "Ciudad Autónoma de Buenos Aires",
                                             addressRegion: "CABA",
                                             addressCountry: "AR",
                                         },
@@ -449,7 +449,7 @@ export default function SobreNosotrosPage() {
                                         address: {
                                             "@type": "PostalAddress",
                                             streetAddress: "Amenábar 2032",
-                                            addressLocality: "Belgrano",
+                                            addressLocality: "Ciudad Autónoma de Buenos Aires",
                                             addressRegion: "CABA",
                                             addressCountry: "AR",
                                         },

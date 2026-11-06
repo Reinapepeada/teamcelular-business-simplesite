@@ -146,18 +146,7 @@ export default function LabPage() {
       { "@type": "Country", name: "Argentina" },
       { "@type": "City", name: "Buenos Aires" },
     ],
-    provider: {
-      "@type": "LocalBusiness",
-      "@id": `${SITE_URL}#localbusiness`,
-      name: "Team Celular",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "Paraguay 2451",
-        addressLocality: "Recoleta",
-        addressRegion: "CABA",
-        addressCountry: "AR",
-      },
-    },
+    provider: { "@id": `${SITE_URL}#organization` },
     offers: {
       "@type": "Offer",
       priceCurrency: "ARS",

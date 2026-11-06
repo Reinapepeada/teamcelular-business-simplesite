@@ -311,7 +311,7 @@ export default function GuidesPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org", "@type": "CollectionPage", name: "Guias tecnicas de reparacion de celulares",
         description: "Centro de guías técnicas de Team Celular — Paraguay 2451 Recoleta y Amenábar 2032 Belgrano, CABA. Reparación por marca, microelectrónica y soporte corporativo.",
-        image: `${SITE_URL}/opengraph-image.png`, provider: { "@id": `${SITE_URL}#localbusiness` },
+        image: `${SITE_URL}/opengraph-image.png`, provider: { "@id": `${SITE_URL}#organization` },
         hasPart: ARTICLES.map(article => ({ "@type": "Article", headline: article.title, description: article.description, url: `${SITE_URL}${article.href}`, datePublished: article.datePublished, author: { "@type": "Organization", name: "Team Celular" }, keywords: article.keywords.join(", ") })),
       }) }} />
     </div>

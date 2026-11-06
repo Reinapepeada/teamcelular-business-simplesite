@@ -34,7 +34,7 @@ export function buildProductSchema(product: Product, images: string[] = [], site
       availability: product.variants.some((variant) => variant.stock > 0)
         ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
       url: productUrl,
-      seller: { "@id": businessId("localbusiness") },
+      seller: { "@id": businessId("organization") },
       itemCondition: etiquetaCondicion(product.storeCondition) ? condicionSchema(product.storeCondition) : undefined,
       availableAtOrFrom: { "@id": `${absoluteUrl(pickup.url)}#localbusiness` },
       hasMerchantReturnPolicy: {

@@ -342,7 +342,7 @@ export default function ServiceLandingPage({
       "@type": "AdministrativeArea",
       name: "Ciudad Autonoma de Buenos Aires (CABA)",
     },
-    provider: { "@id": `${SITE_URL}#localbusiness` },
+    provider: { "@id": `${SITE_URL}#organization` },
     offers: {
       "@type": "Offer",
       url: `${SITE_URL}/presupuesto-reparacion`,

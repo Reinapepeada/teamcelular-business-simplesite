@@ -60,7 +60,7 @@ export default function PhoneRepairEnglishPage() {
       { "@type": "City", name: "Buenos Aires" },
       { "@type": "City", name: "CABA" },
     ],
-    provider: { "@id": businessId("localbusiness") },
+    provider: { "@id": businessId("organization") },
     availableLanguage: ["es", "en"],
   };
 
