@@ -9,7 +9,7 @@
  * Corre con `npm test`.
  */
 
-import { test, describe } from "node:test";
+import { test, describe, beforeEach } from "node:test";
 import assert from "node:assert/strict";
 
 import {
@@ -43,6 +43,13 @@ test("paginación sin filtros es indexable con canónica propia; facetas y búsq
 });
 
 describe("carga del catálogo", () => {
+    // Cada caso corre minutos después del anterior: la falla recordada de uno no alcanza al siguiente.
+    let reloj = Date.now();
+    beforeEach((t) => {
+        reloj += 60_000;
+        t.mock.method(Date, "now", () => reloj);
+    });
+
     test("un error de facetas no convierte una categoría existente en inexistente", async (t) => {
         t.mock.method(console, "error", () => {});
         t.mock.method(globalThis, "fetch", async () => new Response("", { status: 503 }));
@@ -78,15 +85,18 @@ describe("carga del catálogo", () => {
         const urls: string[] = [];
         t.mock.method(globalThis, "fetch", async (url: string | URL | Request) => {
             urls.push(String(url));
-            if (urls.length === 1) return new Response("", { status: 503 });
+            // El primer 503 lo absorbe el reintento interno; el segundo llega a la página.
+            if (urls.length <= 2) return new Response("", { status: 503 });
             return Response.json({ items: [], total: 0, page: 1, size: 12 });
         });
         const filters = normalizeCatalogFilters({ search: "pantalla", brands: "Apple" });
         await assert.rejects(getCatalogPage(filters));
+        reloj += 5_001;
         assert.equal((await getCatalogPage(filters)).error, false);
-        assert.equal(urls[0], urls[1]);
-        assert.match(urls[1], /search=pantalla/);
-        assert.match(urls[1], /brand=Apple/);
+        assert.equal(urls.length, 3);
+        assert.equal(urls[0], urls[2]);
+        assert.match(urls[2], /search=pantalla/);
+        assert.match(urls[2], /brand=Apple/);
     });
 });
 

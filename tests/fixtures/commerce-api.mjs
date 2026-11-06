@@ -40,6 +40,20 @@ http.createServer((request, response) => {
         response.once('close', () => clearTimeout(timer));
         return;
     }
+    // Fallas sueltas del camino al backend: la primera lectura falla y la siguiente responde.
+    if (seoFailure === 'reset-once-product' && path === '/store/products/funda-prueba') {
+        seoFailure = '';
+        return request.socket.destroy();
+    }
+    if (seoFailure === 'bad-gateway-once-listing' && path === '/store/products') {
+        seoFailure = '';
+        response.writeHead(502, { 'Content-Type': 'text/html' });
+        return response.end('<html>502 Bad Gateway</html>');
+    }
+    if (seoFailure === 'stall-once-listing' && path === '/store/products') {
+        seoFailure = '';
+        return;
+    }
     if (seoFailure === 'stall-product-body' && path === '/store/products/funda-prueba') {
         response.writeHead(200);
         response.write('{"slug":');

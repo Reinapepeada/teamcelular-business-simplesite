@@ -194,18 +194,50 @@ async function pedir<T>(path: string, init?: RequestInit): Promise<T> {
 // lectura por ruta dentro del render, sin guardar precios/stock entre requests.
 // El plazo es compartido: resolver una categoría antes de sus productos no lo reinicia.
 const signalCatalogoServidor = cache(() => AbortSignal.timeout(8_000));
-const pedirCatalogoServidor = cache(<T>(path: string): Promise<T> => {
-    const signal = signalCatalogoServidor();
-    if (new URL(storeRequestUrl(path)).origin === "https://teamcelular.com") {
-        // El catálogo SSR evita volver a entrar por Vercel. Es el mismo destino
-        // de /store en next.config.js; el host identifica el catálogo público.
-        // pedir conserva no-store: precio y disponibilidad siguen frescos.
-        return pedir<T>(`https://api.beescend.com${path}`, {
-            headers: { "X-Forwarded-Host": "teamcelular.com" },
-            signal,
-        });
+
+// Una conexión cortada, un intento colgado o un 502/503/504 suelto se reintenta
+// una vez dentro del mismo plazo: el backend responde en milisegundos y la
+// demora intermitente ocurre en el camino Vercel → Cloudflare → origen.
+const esFallaTransitoria = (error: unknown) =>
+    error instanceof TypeError // undici: "fetch failed" o "terminated"
+    || (error instanceof Error && error.name === "TimeoutError")
+    || (error instanceof StoreApiError && [502, 503, 504].includes(error.status));
+
+// Tras una falla, Next vuelve a renderizar la ruta para la página de error con
+// otro alcance de React.cache, y la misma lectura esperaba un segundo plazo
+// (16 s hasta el 500). Recordar la falla 5 s alcanza para ese segundo render,
+// que relee antes las facetas en milisegundos, y deja que "Reintentar" recupere
+// enseguida. Un 5xx seguido no cambia nada para Google.
+// ponytail: memoria por instancia; guarda solo errores, nunca precio ni stock.
+const FALLA_RECIENTE_MS = 5_000;
+const fallasRecientes = new Map<string, { error: unknown; hasta: number }>();
+
+const pedirCatalogoServidor = cache(async <T>(path: string): Promise<T> => {
+    const url = storeRequestUrl(path);
+    const reciente = fallasRecientes.get(url);
+    if (reciente && reciente.hasta > Date.now()) throw reciente.error;
+    const plazo = signalCatalogoServidor();
+    // El catálogo SSR evita volver a entrar por Vercel. Es el mismo destino
+    // de /store en next.config.js; el host identifica el catálogo público.
+    // pedir conserva no-store: precio y disponibilidad siguen frescos.
+    const directo = new URL(url).origin === "https://teamcelular.com";
+    const leer = (signal: AbortSignal) => directo
+        ? pedir<T>(`https://api.beescend.com${path}`, { headers: { "X-Forwarded-Host": "teamcelular.com" }, signal })
+        : pedir<T>(path, { signal });
+    try {
+        try {
+            return await leer(AbortSignal.any([plazo, AbortSignal.timeout(4_000)]));
+        } catch (error) {
+            if (plazo.aborted || !esFallaTransitoria(error)) throw error;
+            return await leer(plazo);
+        }
+    } catch (error) {
+        if (esFallaTransitoria(error)) {
+            if (fallasRecientes.size > 100) fallasRecientes.clear();
+            fallasRecientes.set(url, { error, hasta: Date.now() + FALLA_RECIENTE_MS });
+        }
+        throw error;
     }
-    return pedir<T>(path, { signal });
 });
 
 function pedirCatalogo<T>(path: string): Promise<T> {
