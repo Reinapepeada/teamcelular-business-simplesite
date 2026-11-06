@@ -44,13 +44,6 @@ export default function ArticleSchema({
       knowsAbout: TECHNICAL_AUTHOR.knowsAbout,
       worksFor: { "@id": businessId("organization") },
     },
-    reviewedBy: {
-      "@type": "Organization",
-      "@id": businessId("technical-reviewer"),
-      name: reviewedByName,
-      description: BUSINESS_PROFILE.technicalReviewer.description,
-      knowsAbout: BUSINESS_PROFILE.knowsAbout,
-    },
     about,
     mentions: [
       { "@type": "Thing", name: "Garantia escrita de 90 dias" },
@@ -68,9 +61,17 @@ export default function ArticleSchema({
         height: LOGO.height,
       },
     },
+    // schema.org define reviewedBy en WebPage, no en Article.
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": url,
+      reviewedBy: {
+        "@type": "Organization",
+        "@id": businessId("technical-reviewer"),
+        name: reviewedByName,
+        description: BUSINESS_PROFILE.technicalReviewer.description,
+        knowsAbout: BUSINESS_PROFILE.knowsAbout,
+      },
     },
   };
 
