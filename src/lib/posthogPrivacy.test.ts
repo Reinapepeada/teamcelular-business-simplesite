@@ -3,6 +3,7 @@ import { test } from "node:test";
 import { type CaptureResult } from "posthog-js";
 import { isPostHogPublicPage, sanitizePostHogEvent } from "./analytics/posthog";
 import { isPerformanceDependencyUrl } from "./analytics/measurement";
+import { sanitizePostHogException } from "./analytics/posthogErrors";
 
 function event(name = "$pageview", url = "https://teamcelular.com/presupuesto-reparacion?email=private@example.test#contact") {
   return {
@@ -131,4 +132,34 @@ test("los errores conservan tipo y ubicaciones de código sin mensajes, contexto
   assert.equal(sanitizePostHogEvent(event("$exception")), null);
   assert.equal(sanitizePostHogEvent({ ...error, properties: { ...error.properties,
     $current_url: "https://teamcelular.com/checkout/exito" } }), null);
+});
+
+test("los errores de servidor conservan una causa cerrada sin mensajes, destinos, slugs ni cuerpos", () => {
+  const list = { $exception_list: [{ type: "TypeError", value: "private" }] };
+  const cause = (error: unknown) => {
+    const result = sanitizePostHogException(list, "server", error);
+    assert.ok(result);
+    assert.equal(JSON.stringify(result).includes("private"), false);
+    return { status: result.http_status, code: result.store_error_code, network: result.network_error_code, resource: result.store_resource };
+  };
+  const upstream = Object.assign(new Error("private body"), { name: "StoreApiError", status: 502, code: "bad_gateway", storeResource: "products", slug: "private" });
+  assert.deepEqual(cause(upstream), { status: 502, code: "BAD_GATEWAY", network: undefined, resource: "products" });
+  const timeout = Object.assign(new DOMException("private", "TimeoutError"), { storeResource: "product" });
+  assert.deepEqual(cause(timeout), { status: undefined, code: undefined, network: undefined, resource: "product" });
+  const reset = Object.assign(new TypeError("fetch failed", { cause: Object.assign(new Error("private"), { code: "ECONNRESET", host: "private" }) }), { storeResource: "facets" });
+  assert.deepEqual(cause(reset), { status: undefined, code: undefined, network: "ECONNRESET", resource: "facets" });
+  const socket = new TypeError("terminated", { cause: Object.assign(new Error("private"), { code: "UND_ERR_SOCKET", socket: { remoteAddress: "private" } }) });
+  assert.equal(cause(socket).network, "UND_ERR_SOCKET");
+
+  for (const error of [
+    Object.assign(new Error("x"), { name: "StoreApiError", status: 503, code: "private@example.test", storeResource: "/store/products/private" }),
+    Object.assign(new TypeError("x", { cause: { code: "private" } }), { storeResource: "private" }),
+    Object.assign(new Error("x"), { code: "ECONNRESET" }),
+  ]) {
+    const result = cause(error);
+    assert.equal(result.code, undefined);
+    assert.equal(result.network, undefined);
+    assert.equal(result.resource, undefined);
+  }
+  assert.equal(sanitizePostHogException(list, "browser", reset)?.network_error_code, undefined);
 });
