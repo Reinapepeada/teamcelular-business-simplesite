@@ -5,6 +5,12 @@ import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 import RepairBrandLinks from "@/components/repairs/RepairBrandLinks";
 import { BRANCHES, BUSINESS_PROFILE } from "@/lib/businessProfile";
+import { BRAND_REPAIR_PRICES, PLACA_REVISION_PRICE, formatArsPrice } from "@/lib/repairPrices";
+
+// Precio visible junto al CTA: sale de la misma lista que las tablas.
+const rows = Object.values(BRAND_REPAIR_PRICES).flat();
+const fromOf = (kind: string) => Math.min(...rows.filter((row) => row.name.startsWith(kind)).map((row) => row.from));
+const HERO_PRICES = `Pantalla desde ${formatArsPrice(fromOf("Cambio de pantalla"))} · Batería desde ${formatArsPrice(fromOf("Cambio de bateria"))} · Revisión de placa ${formatArsPrice(PLACA_REVISION_PRICE)}`;
 
 export default function BannerHome() {
     return (
@@ -30,7 +36,8 @@ export default function BannerHome() {
                             <li className="flex items-center gap-2"><BsClipboardCheck aria-hidden className="text-[#6aa6ff]" /> Presupuesto antes de reparar</li>
                             <li className="flex items-center gap-2"><BsShieldCheck aria-hidden className="text-[#6aa6ff]" /> Garantía escrita de 90 días</li>
                         </ul>
-                        <a href="#precios" className="tc-link mt-4 inline-flex min-h-11 items-center gap-2 text-[17px]">Ver precios de reparación <BsArrowRight aria-hidden /></a>
+                        <p className="mt-5 text-[15px] text-[#c7c7cc] tabular-nums">{HERO_PRICES}</p>
+                        <a href="#precios" className="tc-link mt-1 inline-flex min-h-11 items-center gap-2 text-[17px]">Ver precios por modelo <BsArrowRight aria-hidden /></a>
                     </div>
                     <figure className="min-w-0">
                         <div className="relative aspect-[16/11] overflow-hidden rounded-[28px] bg-[#1d1d1f]">

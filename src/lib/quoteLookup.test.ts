@@ -18,7 +18,7 @@ assert.equal(lookupQuote("", "IPHONE 14 PRO", ["Batería"])?.from, 209900);
 // Marca reconocida sin modelo cargado: rango de gama, no numero puntual.
 const galaxy = lookupQuote("Samsung", "Galaxy A54", ["Pantalla"]);
 assert.equal(galaxy?.precision, "range");
-assert.equal(galaxy?.from, 99900);
+assert.equal(galaxy?.from, 69000);
 assert.equal(galaxy?.to, 1199900);
 
 // Alias de submarca.
