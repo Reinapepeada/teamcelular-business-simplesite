@@ -120,11 +120,11 @@ export default function SucursalBelgranoPage() {
     image: `${SITE_URL}/opengraph-image.png`,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Amenábar 2032",
-      addressLocality: "Belgrano",
-      addressRegion: "CABA",
-      postalCode: "C1428",
-      addressCountry: "AR",
+      streetAddress: branch.street,
+      addressLocality: branch.locality,
+      addressRegion: branch.region,
+      postalCode: branch.postalCode,
+      addressCountry: branch.country,
     },
     geo: {
       "@type": "GeoCoordinates",

@@ -119,7 +119,7 @@ export default function SucursalRecoletaPage() {
     address: {
       "@type": "PostalAddress",
       streetAddress: branch.street,
-      addressLocality: branch.neighborhood,
+      addressLocality: branch.locality,
       addressRegion: branch.region,
       postalCode: branch.postalCode,
       addressCountry: branch.country,

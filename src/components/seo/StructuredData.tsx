@@ -1,92 +1,12 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { BRANCHES, BUSINESS_PROFILE, LOGO, ORGANIZATION_ADDRESS, SITE_URL, TECHNICAL_AUTHOR, absoluteUrl, businessId } from "@/lib/businessProfile";
+import { BRANCHES, BUSINESS_PROFILE, LOGO, ORGANIZATION_ADDRESS, SITE_URL, TECHNICAL_AUTHOR, branchId, branchLocalBusiness, businessId } from "@/lib/businessProfile";
 
-interface StructuredDataProps {
-  city?: string;
-  country?: string;
-}
-
-function createLocalBusinessJson(city?: string, country?: string) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": businessId("localbusiness"),
-    additionalType: [
-      "https://schema.org/ElectronicsStore",
-      "https://schema.org/ProfessionalService",
-    ],
-    name: BUSINESS_PROFILE.name,
-    alternateName: BUSINESS_PROFILE.alternateName,
-    url: SITE_URL,
-    image: `${SITE_URL}/opengraph-image.png`,
-    logo: {
-      "@type": "ImageObject",
-      url: LOGO.url,
-      width: LOGO.width,
-      height: LOGO.height,
-    },
-    description:
-      "Laboratorio tecnico de reparacion de celulares y notebooks: pantalla, bateria, carga, microsoldadura, recuperacion por liquido y venta de repuestos en Recoleta y Belgrano, CABA.",
-    telephone: BUSINESS_PROFILE.phone,
-    email: BUSINESS_PROFILE.email,
-    priceRange: "$$",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: BUSINESS_PROFILE.primaryAddress.street,
-      addressLocality: city ?? BUSINESS_PROFILE.primaryAddress.locality,
-      addressRegion: BUSINESS_PROFILE.primaryAddress.region,
-      postalCode: BUSINESS_PROFILE.primaryAddress.postalCode,
-      addressCountry: country ?? BUSINESS_PROFILE.primaryAddress.country,
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: BUSINESS_PROFILE.primaryAddress.latitude,
-      longitude: BUSINESS_PROFILE.primaryAddress.longitude,
-    },
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: BUSINESS_PROFILE.hours.days,
-        opens: BUSINESS_PROFILE.hours.opens,
-        closes: BUSINESS_PROFILE.hours.closes,
-      },
-    ],
-    hasMap: BUSINESS_PROFILE.primaryAddress.mapUrl,
-    sameAs: BUSINESS_PROFILE.sameAs,
-    knowsAbout: BUSINESS_PROFILE.knowsAbout,
-    areaServed: BUSINESS_PROFILE.serviceAreas.map((area) => ({
-        "@type": "AdministrativeArea",
-        name: area,
-      })),
-    department: BRANCHES.map((branch) => ({
-      "@type": "LocalBusiness",
-      "@id": `${absoluteUrl(branch.url)}#localbusiness`,
-      name: branch.name,
-      image: `${SITE_URL}/opengraph-image.png`,
-      priceRange: "$$",
-      url: absoluteUrl(branch.url),
-      telephone: branch.phone,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: branch.street,
-        addressLocality: branch.neighborhood,
-        addressRegion: branch.region,
-        postalCode: branch.postalCode,
-        addressCountry: branch.country,
-      },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: branch.latitude,
-        longitude: branch.longitude,
-      },
-      hasMap: branch.mapUrl,
-    })),
-  };
-}
-
-function createOrganizationJson(includeContact: boolean) {
+// La marca es una Organization; cada sucursal es su propio LocalBusiness.
+// En la ficha de una sucursal, esa página ya publica su LocalBusiness: acá solo se referencia.
+function createOrganizationJson(isBranchPage: boolean) {
+  const includeContact = !isBranchPage;
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -109,6 +29,8 @@ function createOrganizationJson(includeContact: boolean) {
     telephone: includeContact ? BUSINESS_PROFILE.phone : undefined,
     sameAs: BUSINESS_PROFILE.sameAs,
     knowsAbout: BUSINESS_PROFILE.knowsAbout,
+    areaServed: { "@type": "City", name: "Ciudad Autónoma de Buenos Aires" },
+    department: BRANCHES.map((branch) => (isBranchPage ? { "@id": branchId(branch) } : branchLocalBusiness(branch))),
     founder: {
       "@type": "Person",
       "@id": businessId("technical-author"),
@@ -158,18 +80,11 @@ function createWebsiteJson() {
   };
 }
 
-export default function StructuredData({
-  city,
-  country,
-}: StructuredDataProps) {
+export default function StructuredData() {
   const pathname = usePathname();
   // Las páginas de sucursal ya publican su LocalBusiness en el servidor.
   const isBranchPage = BRANCHES.some((branch) => branch.url === pathname);
-  const data = [
-    createOrganizationJson(!isBranchPage),
-    createWebsiteJson(),
-    ...(!isBranchPage ? [createLocalBusinessJson(city, country)] : []),
-  ];
+  const data = [createOrganizationJson(isBranchPage), createWebsiteJson()];
 
   return (
     <>

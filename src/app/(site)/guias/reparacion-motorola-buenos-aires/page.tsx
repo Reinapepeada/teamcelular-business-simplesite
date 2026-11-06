@@ -643,7 +643,7 @@ export default function MotorolaRepairGuidePage() {
               name: "Reparación de Motorola en Buenos Aires",
               description:
                 "Servicio técnico especializado en Motorola con diagnóstico profesional, repuestos de calidad y garantía escrita 90 días en CABA.",
-              provider: { "@id": "https://teamcelular.com#localbusiness" },
+              provider: { "@id": `${SITE_URL}#organization` },
               // Rango y catalogo salen de repairPrices: un unico lugar donde el precio
               // visible y el structured data no pueden divergir.
               priceRange: `ARS ${priceRangeOf(BRAND_REPAIR_PRICES.motorola).low.toLocaleString("es-AR")}-${priceRangeOf(BRAND_REPAIR_PRICES.motorola).high.toLocaleString("es-AR")}`,

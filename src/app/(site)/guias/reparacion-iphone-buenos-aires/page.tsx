@@ -711,7 +711,7 @@ export default function IphoneRepairGuidePage() {
               name: "Reparación de iPhone en Buenos Aires",
               description:
                 "Servicio técnico independiente de iPhone en CABA: pantalla, batería, carga y placa, con repuesto, precio y plazo confirmados antes de reparar y garantía escrita de 90 días.",
-              provider: { "@id": "https://teamcelular.com#localbusiness" },
+              provider: { "@id": `${SITE_URL}#organization` },
               areaServed: {
                 "@type": "City",
                 name: "Buenos Aires",

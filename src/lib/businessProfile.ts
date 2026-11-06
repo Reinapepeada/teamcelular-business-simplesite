@@ -28,7 +28,6 @@ export const BUSINESS_PROFILE = {
     neighborhood: "Recoleta",
     latitude: -34.597528,
     longitude: -58.403048,
-    mapUrl: "https://share.google/gReN6bjAjMtsqTIcq",
   },
   secondaryAddress: {
     street: "Amenábar 2032",
@@ -50,9 +49,9 @@ export const BUSINESS_PROFILE = {
     "https://www.instagram.com/teamcelular.ar/",
     "https://www.facebook.com/TeamCelular/",
     "https://www.linkedin.com/company/teamcelular/",
-    "https://share.google/gReN6bjAjMtsqTIcq",
-    "https://share.google/QKkG7KaIMWtcfUzia",
-    "https://share.google/0WRBXOsplzU7udSWB",
+    // Fichas de Google Business Profile: Recoleta (/g/11h0091xps) y Belgrano (/g/11zgvr4gnp).
+    "https://maps.google.com/?cid=13011481358744929522",
+    "https://maps.google.com/?cid=15909603957918930500",
   ],
   knowsAbout: [
     "Reparación de celulares",
@@ -65,17 +64,6 @@ export const BUSINESS_PROFILE = {
     "Recuperación de celulares mojados",
     "Diagnóstico de placa lógica",
     "Venta de repuestos y accesorios para celulares",
-  ],
-  serviceAreas: [
-    "CABA",
-    "Recoleta",
-    "Belgrano",
-    "Palermo",
-    "Caballito",
-    "Almagro",
-    "Balvanera",
-    "Microcentro",
-    "Buenos Aires",
   ],
   technicalReviewer: {
     name: "Equipo técnico de Team Celular",
@@ -133,7 +121,8 @@ export const BRANCHES = [
     neighborhood: "Recoleta",
     latitude: -34.597528,
     longitude: -58.403048,
-    mapUrl: "https://share.google/gReN6bjAjMtsqTIcq",
+    // Ficha de Google Business Profile de Recoleta (/g/11h0091xps); el cid es estable.
+    mapUrl: "https://maps.google.com/?cid=13011481358744929522",
     phone: BUSINESS_PROFILE.phone,
     whatsapp: BUSINESS_PROFILE.whatsapp,
     whatsappText: "Hola Team Celular, quiero consultar con la sucursal Recoleta. Marca y modelo:",
@@ -151,8 +140,8 @@ export const BRANCHES = [
     neighborhood: "Belgrano",
     latitude: -34.5638065,
     longitude: -58.4579996,
-    // Ficha de Google Business Profile de Belgrano (link de compartir del dueño).
-    mapUrl: "https://share.google/0WRBXOsplzU7udSWB",
+    // Ficha de Google Business Profile de Belgrano (/g/11zgvr4gnp); el cid es estable.
+    mapUrl: "https://maps.google.com/?cid=15909603957918930500",
     phone: "+54 11 3173-9099",
     whatsapp: "https://wa.me/5491131739099",
     whatsappText: "Hola Team Celular, quiero consultar con la sucursal Belgrano. Marca y modelo:",
@@ -170,8 +159,42 @@ export function getBranch(slug: (typeof BRANCHES)[number]["slug"]) {
   return BRANCHES.find((branch) => branch.slug === slug) ?? BRANCHES[0];
 }
 
-export function businessId(fragment = "localbusiness") {
+export function businessId(fragment: "organization" | "website" | "technical-author" | "technical-reviewer") {
   return `${SITE_URL}#${fragment}`;
+}
+
+export function branchId(branch: (typeof BRANCHES)[number]) {
+  return `${absoluteUrl(branch.url)}#localbusiness`;
+}
+
+// Entidad local de cada sucursal; la marca es la Organization y no tiene LocalBusiness propio.
+export function branchLocalBusiness(branch: (typeof BRANCHES)[number]) {
+  return {
+    "@type": "LocalBusiness",
+    "@id": branchId(branch),
+    name: branch.name,
+    url: absoluteUrl(branch.url),
+    telephone: branch.phone,
+    image: `${SITE_URL}/opengraph-image.png`,
+    priceRange: "$$",
+    parentOrganization: { "@id": businessId("organization") },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: branch.street,
+      addressLocality: branch.locality,
+      addressRegion: branch.region,
+      postalCode: branch.postalCode,
+      addressCountry: branch.country,
+    },
+    geo: { "@type": "GeoCoordinates", latitude: branch.latitude, longitude: branch.longitude },
+    hasMap: branch.mapUrl,
+    openingHoursSpecification: [{
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: BUSINESS_PROFILE.hours.days,
+      opens: BUSINESS_PROFILE.hours.opens,
+      closes: BUSINESS_PROFILE.hours.closes,
+    }],
+  };
 }
 
 export function absoluteUrl(pathOrUrl: string) {

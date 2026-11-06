@@ -231,7 +231,7 @@ export default function PresupuestoReparacionPage() {
                                 { "@type": "City", name: "CABA" },
                                 { "@type": "City", name: "Buenos Aires" },
                             ],
-                            provider: { "@id": `${SITE_URL}#localbusiness` },
+                            provider: { "@id": `${SITE_URL}#organization` },
                             offers: {
                                 "@type": "Offer",
                                 priceCurrency: "ARS",
