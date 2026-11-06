@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import AuthorByline from "@/components/seo/AuthorByline";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
+import RepairFaqList from "@/components/repairs/RepairFaqList";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import { BUSINESS_PROFILE, businessId } from "@/lib/businessProfile";
 import { INSTALLMENTS_MESSAGE } from "@/lib/copyStandards";
@@ -58,7 +59,11 @@ export async function generateMetadata({
 
   return buildWebsiteMetadata({
     path,
-    title: `Reparación de ${model.name} en CABA | Team Celular`,
+    // La consulta con demanda es "cambiar pantalla <modelo> precio": el precio va en el title.
+    title:
+      model.screen !== null
+        ? `Cambio de Pantalla ${model.name}: ${formatArs(model.screen)} en CABA`
+        : `Reparación de ${model.name} en CABA | Team Celular`,
     description: `${priceHint} Team Celular repara ${model.name} en Recoleta y Belgrano, en 2-4 h y con garantía escrita de 90 días.`,
     keywords: [
       `reparacion ${model.name} caba`,
@@ -117,6 +122,42 @@ export default async function IphoneModelPage({
       detail: "Revisión de placa ARS 45.000, que se descuenta si se repara. Precio y plazo del arreglo por escrito.",
     },
   ];
+
+  const faqs = [
+    {
+      question: `¿Cuánto sale cambiar la pantalla del ${model.name}?`,
+      answer:
+        model.screen !== null
+          ? `${formatArs(model.screen)} en Team Celular, con módulo completo y garantía escrita de 90 días. Se cambia en 2 a 4 horas si hay repuesto en stock; antes te confirmamos la calidad del repuesto y qué funciones conserva.`
+          : `Se cotiza según el repuesto disponible. Te confirmamos precio, calidad del repuesto y plazo antes de reparar, con garantía escrita de 90 días.`,
+    },
+    {
+      question: `¿Cuánto sale cambiar la batería del ${model.name}?`,
+      answer:
+        model.battery !== null
+          ? `${formatArs(model.battery)}, en 1 a 2 horas según stock y con garantía escrita de 90 días. Antes medimos el consumo: si la batería está bien y la falla es otra, te lo decimos.`
+          : `Se cotiza según el repuesto disponible. Antes medimos el consumo para confirmar que la falla es la batería.`,
+    },
+    {
+      question: "¿Se borran mis datos al cambiar la pantalla o la batería?",
+      answer:
+        "No: cambiar la pantalla o la batería no borra la información del teléfono. Igual conviene tener un respaldo en iCloud antes de traerlo, por si aparece otra falla.",
+    },
+    {
+      question: "¿Necesito turno?",
+      answer: `No. Atendemos sin turno de ${BUSINESS_PROFILE.hours.text.toLowerCase()} en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano). Si querés confirmar el repuesto antes de ir, escribinos por WhatsApp.`,
+    },
+  ];
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  };
 
   const serviceJsonLd = {
     "@context": "https://schema.org",
@@ -288,6 +329,11 @@ export default async function IphoneModelPage({
         </div>
       </section>
 
+      <section className="bg-[#1d1d1f] mt-12 rounded-[28px] p-8">
+        <h2 className="text-2xl font-semibold text-[#f5f5f7]">Preguntas frecuentes sobre el {model.name}</h2>
+        <div className="mt-6"><RepairFaqList items={faqs} /></div>
+      </section>
+
       <nav aria-label={`Servicios para ${model.name}`} className="mt-8 flex flex-wrap gap-4">
         <Link href="/reparaciones/cambio-pantalla-caba" className="inline-flex min-h-11 items-center font-semibold text-primary dark:text-secondary hover:underline">
           Qué incluye el cambio de pantalla
@@ -325,6 +371,10 @@ export default async function IphoneModelPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
     </section>
   );

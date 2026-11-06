@@ -23,7 +23,7 @@ const PAGE_URL = `${SITE_URL}/sucursales/caba/recoleta`;
 const faqs = [
   {
     q: "¿Dónde está la sucursal Recoleta?",
-    a: "En Paraguay 2451, Recoleta, a unas cuadras de Santa Fe y Pueyrredón.",
+    a: "En Paraguay 2451, Recoleta, CABA, a unas cuadras de Santa Fe y Pueyrredón y de la estación Pueyrredón de la línea D. Atendemos sin turno de lunes a viernes de 10:30 a 18:00.",
   },
   {
     q: "¿Qué horario tiene la sucursal?",
@@ -186,7 +186,7 @@ export default function SucursalRecoletaPage() {
             <h1 className="tc-display">
               Reparación de celulares en Recoleta CABA
             </h1>
-            <p className="max-w-[50ch] text-lg leading-relaxed text-[#a1a1a6]">Pantalla, batería, carga y placa. Te informamos el costo de revisión y el presupuesto antes de reparar. Garantía escrita de 90 días.</p>
+            <p className="max-w-[56ch] text-lg leading-relaxed text-[#a1a1a6]">Team Celular Recoleta está en Paraguay 2451, a unas cuadras de Santa Fe y Pueyrredón y de la estación Pueyrredón de la línea D. Atendemos sin turno de lunes a viernes de 10:30 a 18:00 y reparamos pantalla, batería, carga y placa de iPhone, Samsung, Motorola y Xiaomi. Te informamos el costo de revisión y el presupuesto antes de reparar, y cada trabajo sale con garantía escrita de 90 días.</p>
             <div className="flex flex-wrap gap-3">
               <TrackedCtaLink href={whatsappUrl} external target="_blank" directBranch ctaName="branch_recoleta_whatsapp" ctaLocation="branch_recoleta_hero" ctaVariant="whatsapp" className="tc-btn tc-btn-primary">
                 WhatsApp de Recoleta
