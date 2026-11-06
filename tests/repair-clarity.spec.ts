@@ -52,11 +52,11 @@ for (const width of [320, 390, 1280]) {
     });
 }
 
-for (const [slug, phone] of [['recoleta', '+541151034595'], ['belgrano', '+541131739099']]) {
+for (const [slug, phone, cid] of [['recoleta', '+541151034595', '13011481358744929522'], ['belgrano', '+541131739099', '15909603957918930500']]) {
     test(`Sucursal ${slug}: teléfono propio y acceso directo a Maps`, async ({ page }) => {
         await page.goto(`/sucursales/caba/${slug}`);
         await expect(page.locator('header').getByRole('link', { name: /Llamar/ })).toHaveAttribute('href', `tel:${phone}`);
-        await expect(page.getByRole('link', { name: 'Cómo llegar en Maps' })).toHaveAttribute('href', /^https:\/\/share\.google\//);
+        await expect(page.getByRole('link', { name: 'Cómo llegar en Maps' })).toHaveAttribute('href', `https://maps.google.com/?cid=${cid}`);
         expect(await page.locator('main details').count()).toBeGreaterThan(0);
     });
 }

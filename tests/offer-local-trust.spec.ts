@@ -23,9 +23,9 @@ test('Sucursales ofrece teléfonos y Maps propios sin JavaScript', async ({ brow
     const page = await context.newPage();
     await page.route('**/*', route => ['127.0.0.1', 'localhost'].includes(new URL(route.request().url()).hostname) ? route.continue() : route.abort());
     await page.goto('http://127.0.0.1:3100/sucursales');
-    for (const [name, phone] of [['Recoleta', '+541151034595'], ['Belgrano', '+541131739099']]) {
+    for (const [name, phone, cid] of [['Recoleta', '+541151034595', '13011481358744929522'], ['Belgrano', '+541131739099', '15909603957918930500']]) {
         await expect(page.locator('main').getByRole('link', { name: new RegExp(`^${name}:`) })).toHaveAttribute('href', `tel:${phone}`);
-        await expect(page.getByRole('link', { name: `Cómo llegar a ${name}`, exact: true })).toHaveAttribute('href', /^https:\/\/share\.google\//);
+        await expect(page.getByRole('link', { name: `Cómo llegar a ${name}`, exact: true })).toHaveAttribute('href', `https://maps.google.com/?cid=${cid}`);
     }
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await page.screenshot({ path: test.info().outputPath('sucursales-320.png'), fullPage: true });
