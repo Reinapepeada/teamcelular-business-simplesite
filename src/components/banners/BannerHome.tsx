@@ -22,8 +22,8 @@ export default function BannerHome() {
                             <TrackedCtaLink href="/presupuesto-reparacion#solicitar-presupuesto" ctaName="home_hero_budget" ctaLocation="home_hero" ctaVariant="primary" className="tc-btn tc-btn-primary">
                                 Pedir presupuesto
                             </TrackedCtaLink>
-                            <BranchWhatsAppButton ctaName="home_hero_whatsapp" ctaLocation="home_hero" message="Hola Team Celular, necesito una reparación. Marca y modelo: " className="tc-link inline-flex min-h-11 items-center gap-2 text-[17px]">
-                                <BsWhatsapp aria-hidden /> WhatsApp <BsArrowRight aria-hidden className="text-sm" />
+                            <BranchWhatsAppButton ctaName="home_hero_whatsapp" ctaLocation="home_hero" message="Hola Team Celular, necesito una reparación. Marca y modelo: " className="tc-btn tc-btn-ghost">
+                                <BsWhatsapp aria-hidden /> Consultar por WhatsApp
                             </BranchWhatsAppButton>
                         </div>
                         <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm text-[#c7c7cc]">
