@@ -7,25 +7,26 @@ test.beforeEach(async ({ page }) => {
 });
 
 const pages = [
-    ['/', 'Consultar por WhatsApp'],
-    ['/guias/celular-mojado-que-hacer', 'Hablar por WhatsApp'],
-    ['/guias/pantalla-con-lineas-causas-reparacion', 'Hablar por WhatsApp'],
-    ['/guias/face-id-touch-id-no-funciona', 'Hablar por WhatsApp'],
-    ['/guias/celular-con-virus-que-hacer', 'Hablar por WhatsApp'],
-    ['/guias/reparacion-google-pixel-buenos-aires', 'Hablar por WhatsApp'],
+    '/',
+    '/guias/celular-mojado-que-hacer',
+    '/guias/pantalla-con-lineas-causas-reparacion',
+    '/guias/face-id-touch-id-no-funciona',
+    '/guias/celular-con-virus-que-hacer',
+    '/guias/reparacion-google-pixel-buenos-aires',
 ];
 
 for (const [width, height] of [[360, 640], [390, 844], [1280, 800]]) {
-    for (const [path, label] of pages) {
+    for (const path of pages) {
         test(`WhatsApp del hero sobre el pliegue en ${path} a ${width}x${height}`, async ({ page }) => {
             await page.setViewportSize({ width, height });
             await page.goto(path);
-            const cta = page.locator('main').getByText(label, { exact: true }).first();
+            const hero = page.locator('h1').locator('xpath=ancestor::*[self::header or self::section][1]');
+            const cta = hero.getByText('Consultar por WhatsApp', { exact: true });
             await expect(cta).toBeVisible();
             const box = (await cta.boundingBox())!;
             // La barra CTA fija de móvil tapa el borde inferior.
             expect(box.y + box.height).toBeLessThanOrEqual(height - (width < 768 ? 80 : 0));
-            if (path === '/') await page.screenshot({ path: test.info().outputPath(`hero-${width}.png`) });
+            if (['/', '/guias/celular-mojado-que-hacer'].includes(path)) await page.screenshot({ path: test.info().outputPath(`hero-${width}.png`) });
         });
     }
 }
