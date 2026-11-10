@@ -310,6 +310,10 @@ export default function SucursalBelgranoPage() {
         <p className="mt-3 text-slate-600 dark:text-[#a1a1a6]">
           La estación de subte más cercana es Juramento, de la línea D, sobre Av. Cabildo. Desde ahí caminás hasta Amenábar 2032; también te dejan cerca los colectivos que van por Cabildo.
         </p>
+        <p className="mt-3 text-slate-600 dark:text-[#a1a1a6]">
+          Si venís de Palermo, mirá{" "}
+          <Link href="/zonas/palermo" className="tc-link underline underline-offset-4">qué sucursal te queda más cerca desde Palermo</Link>.
+        </p>
         <p className="mt-3 text-sm text-slate-500 dark:text-[#86868b]">
           Si tenés dudas sobre cómo llegar, escribinos por WhatsApp y te mandamos el punto exacto.
         </p>
