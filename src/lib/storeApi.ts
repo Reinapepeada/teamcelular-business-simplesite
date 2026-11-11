@@ -243,6 +243,12 @@ const pedirCatalogoServidor = cache(async <T>(path: string): Promise<T> => {
 function pedirCatalogo<T>(path: string): Promise<T> {
     const lectura = typeof window === "undefined" ? pedirCatalogoServidor<T>(path) : pedir<T>(path);
     return lectura.catch((error: unknown) => {
+        // Next agrega contexto a message; DOMException sólo expone un getter.
+        if (error instanceof DOMException) {
+            error = Object.assign(new Error(error.message, { cause: error }), {
+                name: error.name, code: error.code,
+            });
+        }
         // El diagnóstico de PostHog lee qué recurso falló; nunca el slug ni la query.
         if (error && typeof error === "object") Reflect.set(error, "storeResource",
             path === "/store/facets" ? "facets" : path.startsWith("/store/products/") ? "product" : "products");
