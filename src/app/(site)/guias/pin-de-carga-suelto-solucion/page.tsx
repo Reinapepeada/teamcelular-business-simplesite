@@ -117,7 +117,7 @@ const faq: GuideFaqItem[] = [
   {
     question: "¿Cómo saber si el pin de carga está dañado?",
     answer:
-      "Hacé estas 4 pruebas en casa: 1) cargá con otro cable y otro cargador que funcionen en otro equipo; 2) mirá el puerto con una linterna, sin meter nada adentro, para ver pelusa o un pin torcido; 3) enchufá el cable y fijate si entra hasta el fondo y queda firme o se mueve para los costados; 4) si tu modelo tiene carga inalámbrica, probala. Si con otro cable carga bien, era el accesorio. Si solo carga en cierto ángulo, el cable no entra hasta el fondo o el conector tiene juego, lo más probable es el pin. La carga lenta o un aviso de humedad, solos, no confirman un pin dañado; si aparece humedad, desconectá el cable.",
+      "Si hay humedad, batería hinchada o calor anormal, no lo cargues: traelo a revisar. Con el equipo seco y sin esas señales, hacé estas 4 comprobaciones, sin forzar el conector: 1) probá otro cable y otro cargador compatibles, sin daños y que funcionen en otro equipo; 2) mirá el puerto con una linterna, sin meter nada adentro, para ver pelusa o un pin torcido; 3) fijate si el cable entra hasta el fondo y queda firme o se mueve para los costados; 4) si tu modelo tiene carga inalámbrica, probala. Si con otro cable carga bien, revisá el accesorio anterior. Si solo carga en cierto ángulo, el cable no entra hasta el fondo o el conector tiene juego, puede haber suciedad o daño en el cable o el puerto; estas pruebas no confirman por sí solas un pin dañado. La carga lenta o un aviso de humedad, solos, tampoco lo confirman; si aparece humedad, desconectá el cable.",
   },
   {
     question: "¿Cuánto sale cambiar el pin de carga?",
@@ -131,7 +131,7 @@ const faq: GuideFaqItem[] = [
   {
     question: "¿Es el pin de carga, el cable o la batería?",
     answer:
-      "Si con otro cable y otro cargador carga normal, era el accesorio. Si carga pero el porcentaje baja muy rápido, suele ser la batería. Si el cable se desconecta o solo carga en cierto ángulo, puede ser el puerto: lo confirmamos antes de cambiar la pieza.",
+      "Si con otro cable y otro cargador carga normal, revisá los accesorios anteriores antes de cambiar el pin. Si carga pero el porcentaje baja muy rápido, suele ser la batería. Si el cable se desconecta o solo carga en cierto ángulo, puede ser el puerto: lo confirmamos antes de cambiar la pieza.",
   },
   {
     question: "¿Conviene limpiar o cambiar el pin de carga?",
@@ -172,7 +172,7 @@ export default function ChargingPortGuidePage() {
       pagePath={PAGE_PATH}
       pageLabel="Pin de carga dañado"
       title="Pin de carga dañado: cómo saberlo y cuánto sale cambiarlo"
-      heroDescription={`Si solo carga al mover el cable, el conector queda flojo o se desconecta, probablemente sea el pin: abajo tenés 4 pruebas para confirmarlo en casa. El cambio de pin o flex va de ${PORT_FROM} a ${PORT_TO}, según modelo; revisamos si necesita limpieza, cambio de pieza o diagnóstico de placa. Te atendemos sin turno en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).`}
+      heroDescription={`Si solo carga al mover el cable, el conector queda flojo o se desconecta, puede haber un problema de cable, suciedad o puerto: abajo tenés 4 comprobaciones para orientarte antes de la revisión. El cambio de pin o flex va de ${PORT_FROM} a ${PORT_TO}, según modelo; revisamos si necesita limpieza, cambio de pieza o diagnóstico de placa. Te atendemos sin turno en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).`}
       badge="Falla frecuente"
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
