@@ -11,8 +11,7 @@ permissions:
   contents: read
 
 concurrency:
-  # A new group releases runs held by the stale pre-container workflow lock.
-  group: storefront-commerce-browser-v2-${{ github.workflow }}-${{ github.ref }}
+  group: storefront-commerce-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
