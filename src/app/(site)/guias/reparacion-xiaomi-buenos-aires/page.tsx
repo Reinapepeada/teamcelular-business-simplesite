@@ -201,6 +201,7 @@ const repairLinks: Record<string, string> = {
   "Pin de carga USB-C y turbo charge": "/reparaciones/cambio-pin-carga-caba",
   "Camara trasera y camara selfie": "/reparaciones/cambio-camara-caba",
   "Placa logica, PMIC y bootloop": "/reparaciones/reparacion-placa-caba",
+  "Speaker, microfono y audio inestable": "/reparaciones/reparacion-audio-celular-caba",
 };
 
 
