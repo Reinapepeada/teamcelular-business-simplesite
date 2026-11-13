@@ -52,22 +52,22 @@ test("la marca es una Organization y cada sucursal su único LocalBusiness", () 
     const organization = schemas.find((schema) => schema["@type"] === "Organization");
     assert.equal(organization.telephone, businessProfile.BUSINESS_PROFILE.phone);
     assert.deepEqual(
-      organization.department.map((branch) => [branch["@id"], branch.telephone, branch.address.streetAddress, branch.address.addressLocality]),
-      businessProfile.BRANCHES.map((branch) => [businessProfile.branchId(branch), branch.phone, branch.street, "Ciudad Autónoma de Buenos Aires"]),
+      organization.subOrganization.map((branch) => [branch["@id"], branch.telephone, branch.address.streetAddress, branch.address.addressLocality, branch.sameAs]),
+      businessProfile.BRANCHES.map((branch) => [businessProfile.branchId(branch), branch.phone, branch.street, "Ciudad Autónoma de Buenos Aires", [branch.mapUrl]]),
     );
   }
   for (const branch of businessProfile.BRANCHES) {
     const organization = renderSchema(branch.url).find((schema) => schema["@type"] === "Organization");
-    assert.deepEqual(organization.department, businessProfile.BRANCHES.map((item) => ({ "@id": businessProfile.branchId(item) })));
+    assert.deepEqual(organization.subOrganization, businessProfile.BRANCHES.map((item) => ({ "@id": businessProfile.branchId(item) })));
   }
 });
 
-test("los mapas y perfiles apuntan a fichas estables de Google sin duplicados", () => {
+test("las fichas de Google son de cada sucursal y usan su cid estable", () => {
   const { sameAs } = businessProfile.BUSINESS_PROFILE;
   assert.equal(new Set(sameAs).size, sameAs.length);
   assert.ok(sameAs.every((url) => !url.includes("share.google")));
   for (const branch of businessProfile.BRANCHES) {
     assert.match(branch.mapUrl, /^https:\/\/maps\.google\.com\/\?cid=\d+$/);
-    assert.ok(sameAs.includes(branch.mapUrl));
+    assert.ok(!sameAs.includes(branch.mapUrl), "La marca no se identifica con la ficha de una sucursal");
   }
 });
