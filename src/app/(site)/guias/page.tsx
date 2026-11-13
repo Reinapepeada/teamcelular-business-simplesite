@@ -26,7 +26,7 @@ const ARTICLES = [
     description: FPC_GUIDE.description,
     href: FPC_GUIDE.path,
     category: "Reparaciones",
-    readingTime: "6 min",
+    readingTime: "8 min",
     Icon: FaTools,
     datePublished: FPC_GUIDE.publishedTime,
     keywords: ["flex de interconexión", "conector FPC", "placa de carga"],
