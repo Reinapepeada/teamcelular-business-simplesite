@@ -4,6 +4,7 @@ import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import { BRAND_GUIDE_LIST } from "./brandGuideConfigs";
+import { FPC_GUIDE } from "@/lib/fpcGuide";
 import { REPAIR_CASE } from "@/lib/repairCase";
 import {
   FaApple,
@@ -20,6 +21,16 @@ const SITE_URL = getSiteUrl();
 const PAGE_URL = `${SITE_URL}/guias`;
 
 const ARTICLES = [
+  {
+    title: FPC_GUIDE.title,
+    description: FPC_GUIDE.description,
+    href: FPC_GUIDE.path,
+    category: "Reparaciones",
+    readingTime: "6 min",
+    Icon: FaTools,
+    datePublished: FPC_GUIDE.publishedTime,
+    keywords: ["flex de interconexión", "conector FPC", "placa de carga"],
+  },
   {
     title: REPAIR_CASE.title,
     description: REPAIR_CASE.description,
