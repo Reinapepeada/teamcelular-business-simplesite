@@ -75,7 +75,7 @@ const diagnostics: GuideItem[] = [
   {
     title: "Modo seguro en Android",
     description:
-      "Mantené apretado Apagar y después la opción Apagar hasta que aparezca Modo seguro. En ese modo solo corren apps de sistema: si la publicidad desaparece, la causa es una app que instalaste vos.",
+      "El modo seguro se activa de forma distinta según el modelo: seguí las instrucciones del fabricante. Desactiva temporalmente las apps descargadas; si la publicidad desaparece, una de ellas puede ser la causa. Reiniciá para salir y desinstalá las sospechosas de a una, comprobando el resultado.",
   },
   {
     title: "Apps con permisos de administrador o accesibilidad",
