@@ -49,9 +49,7 @@ export const BUSINESS_PROFILE = {
     "https://www.instagram.com/teamcelular.ar/",
     "https://www.facebook.com/TeamCelular/",
     "https://www.linkedin.com/company/teamcelular/",
-    // Fichas de Google Business Profile: Recoleta (/g/11h0091xps) y Belgrano (/g/11zgvr4gnp).
-    "https://maps.google.com/?cid=13011481358744929522",
-    "https://maps.google.com/?cid=15909603957918930500",
+    // Las fichas de Google Business Profile son de cada sucursal: van en su LocalBusiness.
   ],
   knowsAbout: [
     "Reparación de celulares",
@@ -188,6 +186,7 @@ export function branchLocalBusiness(branch: (typeof BRANCHES)[number]) {
     },
     geo: { "@type": "GeoCoordinates", latitude: branch.latitude, longitude: branch.longitude },
     hasMap: branch.mapUrl,
+    sameAs: [branch.mapUrl],
     openingHoursSpecification: [{
       "@type": "OpeningHoursSpecification",
       dayOfWeek: BUSINESS_PROFILE.hours.days,
