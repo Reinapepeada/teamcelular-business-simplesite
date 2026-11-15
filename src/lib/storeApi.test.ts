@@ -444,3 +444,29 @@ test("una falla del catálogo indica el recurso sin slug ni query", async () => 
         await assert.rejects(fetchStoreFacets(), recurso("facets"));
     });
 });
+
+test("los abortos del catálogo conservan su causa y permiten el contexto de Next", async t => {
+    const baseAnterior = process.env.NEXT_PUBLIC_BASE_URL;
+    process.env.NEXT_PUBLIC_BASE_URL = "https://catalog-error.example.test";
+    t.after(() => {
+        if (baseAnterior === undefined) delete process.env.NEXT_PUBLIC_BASE_URL;
+        else process.env.NEXT_PUBLIC_BASE_URL = baseAnterior;
+    });
+    const causa = new DOMException("The operation was aborted due to timeout", "TimeoutError");
+    t.mock.method(globalThis, "fetch", async () => { throw causa; });
+    for (const [leer, recurso] of [
+        [() => fetchStoreProduct("fixture"), "product"],
+        [() => fetchStoreProducts({ page: 987 }), "products"],
+        [() => fetchStoreFacets(), "facets"],
+    ] as const) {
+        await assert.rejects(leer(), error => {
+            assert.ok(error instanceof Error);
+            assert.equal(error.name, "TimeoutError");
+            assert.equal(Reflect.set(error, "message", "Contexto agregado por Next"), true);
+            assert.equal(error.cause, causa);
+            assert.equal(Reflect.get(error, "code"), causa.code);
+            assert.equal(Reflect.get(error, "storeResource"), recurso);
+            return true;
+        });
+    }
+});
