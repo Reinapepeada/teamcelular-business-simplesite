@@ -1,7 +1,7 @@
 import HighIntentGuidePage from "@/components/seo/HighIntentGuidePage";
 import RepairPriceTable from "@/components/seo/RepairPriceTable";
 import { BUSINESS_PROFILE } from "@/lib/businessProfile";
-import { PLACA_REVISION_PRICE, formatArsPrice } from "@/lib/repairPrices";
+import { PLACA_REVISION_PRICE, PRICES_UPDATED_LABEL, formatArsPrice } from "@/lib/repairPrices";
 import {
   type BrandGuideSlug,
   getBrandGuideConfig,
@@ -51,7 +51,7 @@ export default function BrandGuidePage({ slug }: { slug: BrandGuideSlug }) {
           <RepairPriceTable
             brand={config.pageLabel}
             prices={config.repairPrices}
-            updatedLabel="20 de agosto de 2026"
+            updatedLabel={PRICES_UPDATED_LABEL}
           />
         ) : null
       }

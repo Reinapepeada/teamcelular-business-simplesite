@@ -166,7 +166,7 @@ export default function PhoneRepairEnglishPage() {
           How much does a repair cost?
         </h2>
         <p className="mt-3 text-slate-600 dark:text-slate-300">
-          Prices in Argentine pesos, updated {IPHONE_PRICES_UPDATED === "agosto de 2026" ? "August 2026" : IPHONE_PRICES_UPDATED}. Payment in
+          Prices in Argentine pesos, current as of {IPHONE_PRICES_UPDATED === "noviembre de 2026" ? "November 2026" : IPHONE_PRICES_UPDATED}. Payment in
           cash, card, or three interest-free instalments.
         </p>
         <div className="mt-6 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white dark:divide-slate-700 dark:border-slate-700 dark:bg-slate-900">

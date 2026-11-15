@@ -419,13 +419,13 @@ export default function SamsungRepairGuidePage() {
               ¿Cuánto cuesta reparar un Samsung Galaxy en Buenos Aires?
             </h2>
             <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-[#86868b]">
-              Precios publicados el {PRICES_UPDATED_LABEL}. El rango depende del modelo dentro de cada línea y del repuesto disponible: te confirmamos el número exacto tras el diagnóstico, antes de intervenir el equipo. {INSTALLMENTS_MESSAGE}
+              Precios vigentes al {PRICES_UPDATED_LABEL}. El rango depende del modelo dentro de cada línea y del repuesto disponible: te confirmamos el número exacto tras el diagnóstico, antes de intervenir el equipo. {INSTALLMENTS_MESSAGE}
             </p>
           </div>
           <div className="overflow-x-auto px-6 py-2">
             <table className="w-full min-w-[38rem] border-collapse text-left text-sm">
               <caption className="sr-only">
-                Precios de reparación de Samsung Galaxy en CABA, actualizados en agosto de 2026
+                Precios de reparación de Samsung Galaxy en CABA, vigentes a noviembre de 2026
               </caption>
               <thead>
                 <tr className="border-b border-slate-200 dark:border-slate-800">
