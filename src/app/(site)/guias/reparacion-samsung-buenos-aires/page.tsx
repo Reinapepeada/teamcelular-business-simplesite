@@ -22,6 +22,8 @@ import { SiSamsung } from "react-icons/si";
 import GuideByline from "@/components/seo/GuideByline";
 import RepairBrandLinks from "@/components/repairs/RepairBrandLinks";
 import ScreenQuoteDetails from "@/components/repairs/ScreenQuoteDetails";
+import ModelScreenPriceTable from "@/components/seo/ModelScreenPriceTable";
+import { SAMSUNG_SCREEN_PRICES } from "@/lib/modelScreenPrices";
 import { BRAND_REPAIR_PRICES, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, PRICES_UPDATED_LABEL, buildPriceOffers, formatArsPrice, priceRangeOf } from "@/lib/repairPrices";
 
 const SITE_URL =
@@ -471,6 +473,12 @@ export default function SamsungRepairGuidePage() {
             </TrackedCtaLink>
           </div>
         </section>
+
+        <ModelScreenPriceTable
+          id="precio-pantalla-samsung-por-modelo"
+          brand="Samsung Galaxy"
+          prices={SAMSUNG_SCREEN_PRICES}
+        />
 
         <AuthorByline updatedLabel="23 de octubre de 2026" className="mt-6" />
 
