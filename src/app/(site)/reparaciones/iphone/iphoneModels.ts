@@ -5,10 +5,10 @@
  * Solo precio de venta. Los costos de repuesto son datos internos y no se
  * publican ni se guardan acá.
  *
- * Actualizado: agosto de 2026.
+ * Lista de agosto de 2026, verificada como vigente en noviembre de 2026.
  */
 
-export const IPHONE_PRICES_UPDATED = "agosto de 2026";
+export const IPHONE_PRICES_UPDATED = "noviembre de 2026";
 export const IPHONE_CONTENT_REVIEWED = "15 de octubre de 2026";
 
 export interface IphoneModelPrice {
@@ -20,6 +20,26 @@ export interface IphoneModelPrice {
   screen: number | null;
   /** Precio de cambio de batería en ARS. null = a consultar. */
   battery: number | null;
+  /**
+   * Calidad del repuesto a la que corresponde `screen`, cuando el negocio la
+   * confirmó. Sin dato confirmado no se publica.
+   */
+  screenQuality?: string;
+  /** Otra opción de pantalla confirmada por el negocio, con su precio. */
+  screenAlternative?: { quality: string; price: number; note: string };
+}
+
+/**
+ * Frase que aclara a qué calidad corresponde el precio de pantalla y, si hay,
+ * la otra opción. Vacía cuando el negocio no confirmó la calidad del modelo.
+ */
+export function screenOptionsText(model: IphoneModelPrice): string {
+  if (!model.screenQuality) return "";
+  const main = `Ese precio corresponde a pantalla ${model.screenQuality}.`;
+  const alt = model.screenAlternative;
+  if (!alt) return main;
+  const altPrice = alt.price.toLocaleString("es-AR");
+  return `${main} También hay una opción ${alt.quality} a ARS ${altPrice}, que ${alt.note}.`;
 }
 
 export const IPHONE_MODELS: IphoneModelPrice[] = [
@@ -31,7 +51,19 @@ export const IPHONE_MODELS: IphoneModelPrice[] = [
   { slug: "12-pro", name: "iPhone 12 Pro", screen: 209900, battery: 144900 },
   { slug: "12-pro-max", name: "iPhone 12 Pro Max", screen: 219900, battery: 149900 },
   { slug: "13-mini", name: "iPhone 13 Mini", screen: 149900, battery: 99900 },
-  { slug: "13", name: "iPhone 13", screen: 249900, battery: 159900 },
+  {
+    slug: "13",
+    name: "iPhone 13",
+    screen: 249900,
+    battery: 159900,
+    // Confirmado por el negocio el 15/11/2026.
+    screenQuality: "Soft OLED",
+    screenAlternative: {
+      quality: "Incell con trasplante de IC",
+      price: 139000,
+      note: "no muestra el aviso de pieza desconocida",
+    },
+  },
   { slug: "13-pro", name: "iPhone 13 Pro", screen: 269900, battery: 179900 },
   { slug: "13-pro-max", name: "iPhone 13 Pro Max", screen: 279900, battery: 189900 },
   { slug: "14", name: "iPhone 14", screen: 249900, battery: 169900 },

@@ -204,7 +204,7 @@ export default function ChargingPortGuidePage() {
           <h2 className="text-2xl font-semibold text-white">Precio del cambio de pin de carga en CABA</h2>
           <p className="text-3xl font-semibold text-white tabular-nums">{PORT_FROM} a {PORT_TO}</p>
           <p className="max-w-3xl leading-7 text-[#a1a1a6]">El rango corresponde al cambio de pin o flex, según dispositivo. Si alcanza con limpiar el conector o la falla está en la placa, cotizamos ese trabajo antes de avanzar. La revisión técnica va de $15.000 a $25.000. Si requiere revisión de placa, cuesta {PLACA_REVISION}, con informe en hasta 72 horas hábiles. Informamos el costo antes de abrir el equipo y se descuenta si aceptás la reparación. El arreglo de placa lleva semanas y se presupuesta por separado.</p>
-          <p className="text-sm text-[#86868b]">Precios publicados el {PRICES_UPDATED_LABEL}. Confirmamos pieza, stock y plazo para tu modelo.</p>
+          <p className="text-sm text-[#86868b]">Precios vigentes al {PRICES_UPDATED_LABEL}. Confirmamos pieza, stock y plazo para tu modelo.</p>
           <div className="flex flex-wrap gap-4">
             <BranchWhatsAppButton ctaName="pin_guide_prices_whatsapp" ctaLocation="pin_guide_prices" message="Hola Team Celular, vi el rango de cambio de pin de carga y quiero confirmar el precio para mi equipo." className="tc-btn tc-btn-primary">Confirmar precio de mi pin de carga</BranchWhatsAppButton>
             <Link href="/reparaciones/cambio-pin-carga-caba" className="tc-link inline-flex min-h-11 items-center">Ver el servicio de cambio de pin de carga</Link>

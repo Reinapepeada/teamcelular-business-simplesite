@@ -320,6 +320,12 @@ export default function SucursalRecoletaPage() {
           Por la línea H también quedás a una cuadra: las estaciones Santa Fe y Córdoba están sobre
           Pueyrredón, una a cada lado de Paraguay. Desde Once son dos estaciones hasta Córdoba.
         </p>
+        <p className="mt-3 text-slate-600 dark:text-[#a1a1a6]">
+          Si venís de otro barrio, tenés el recorrido detallado{" "}
+          <Link href="/zonas/palermo" className="tc-link underline underline-offset-4">desde Palermo</Link>{" "}
+          y{" "}
+          <Link href="/zonas/balvanera" className="tc-link underline underline-offset-4">desde Balvanera y Once</Link>.
+        </p>
         <p className="mt-3 text-sm text-slate-500 dark:text-[#86868b]">
           Si tenés dudas sobre cómo llegar, escribinos por WhatsApp y te mandamos el punto exacto.
         </p>

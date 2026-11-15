@@ -411,7 +411,7 @@ export default function IphoneRepairGuidePage() {
               ¿Cuánto sale cambiar la pantalla o batería de tu iPhone?
             </h2>
             <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-[#86868b]">
-              Precios publicados en {IPHONE_PRICES_UPDATED}, en pesos argentinos. Confirmamos calidad del repuesto, stock y precio antes de trabajar. {INSTALLMENTS_MESSAGE}
+              Precios vigentes a {IPHONE_PRICES_UPDATED}, en pesos argentinos. Confirmamos calidad del repuesto, stock y precio antes de trabajar. {INSTALLMENTS_MESSAGE}
             </p>
           </div>
           <IphonePriceQuote />
@@ -434,7 +434,7 @@ export default function IphoneRepairGuidePage() {
             <div className="mt-4 overflow-x-auto">
               <table className="w-full min-w-[22rem] text-left text-sm">
                 <caption className="sr-only">
-                  Precios de cambio de pantalla y batería de iPhone en Team Celular, CABA, agosto de 2026
+                  Precios de cambio de pantalla y batería de iPhone en Team Celular, CABA, vigentes a noviembre de 2026
                 </caption>
                 <thead>
                   <tr className="text-xs uppercase tracking-wide text-slate-500 dark:text-[#86868b]">
@@ -457,6 +457,14 @@ export default function IphoneRepairGuidePage() {
                       </th>
                       <td className="py-2.5 pr-4 tabular-nums text-slate-700 dark:text-[#a1a1a6]">
                         {model.screen ? formatArsPrice(model.screen) : "Consultar"}
+                        {model.screenQuality ? (
+                          <span className="block text-xs font-normal text-[#86868b]">
+                            {model.screenQuality}
+                            {model.screenAlternative
+                              ? ` · ${model.screenAlternative.quality}: ${formatArsPrice(model.screenAlternative.price)}`
+                              : ""}
+                          </span>
+                        ) : null}
                       </td>
                       <td className="py-2.5 tabular-nums text-slate-700 dark:text-[#a1a1a6]">
                         {model.battery ? formatArsPrice(model.battery) : "Consultar"}

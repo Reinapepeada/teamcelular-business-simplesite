@@ -22,6 +22,8 @@ import { SiSamsung } from "react-icons/si";
 import GuideByline from "@/components/seo/GuideByline";
 import RepairBrandLinks from "@/components/repairs/RepairBrandLinks";
 import ScreenQuoteDetails from "@/components/repairs/ScreenQuoteDetails";
+import ModelScreenPriceTable from "@/components/seo/ModelScreenPriceTable";
+import { SAMSUNG_SCREEN_PRICES } from "@/lib/modelScreenPrices";
 import { BRAND_REPAIR_PRICES, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, PRICES_UPDATED_LABEL, buildPriceOffers, formatArsPrice, priceRangeOf } from "@/lib/repairPrices";
 
 const SITE_URL =
@@ -419,13 +421,13 @@ export default function SamsungRepairGuidePage() {
               ¿Cuánto cuesta reparar un Samsung Galaxy en Buenos Aires?
             </h2>
             <p className="mt-1 text-[0.95rem] text-slate-600 dark:text-[#86868b]">
-              Precios publicados el {PRICES_UPDATED_LABEL}. El rango depende del modelo dentro de cada línea y del repuesto disponible: te confirmamos el número exacto tras el diagnóstico, antes de intervenir el equipo. {INSTALLMENTS_MESSAGE}
+              Precios vigentes al {PRICES_UPDATED_LABEL}. El rango depende del modelo dentro de cada línea y del repuesto disponible: te confirmamos el número exacto tras el diagnóstico, antes de intervenir el equipo. {INSTALLMENTS_MESSAGE}
             </p>
           </div>
           <div className="overflow-x-auto px-6 py-2">
             <table className="w-full min-w-[38rem] border-collapse text-left text-sm">
               <caption className="sr-only">
-                Precios de reparación de Samsung Galaxy en CABA, actualizados en agosto de 2026
+                Precios de reparación de Samsung Galaxy en CABA, vigentes a noviembre de 2026
               </caption>
               <thead>
                 <tr className="border-b border-slate-200 dark:border-slate-800">
@@ -471,6 +473,12 @@ export default function SamsungRepairGuidePage() {
             </TrackedCtaLink>
           </div>
         </section>
+
+        <ModelScreenPriceTable
+          id="precio-pantalla-samsung-por-modelo"
+          brand="Samsung Galaxy"
+          prices={SAMSUNG_SCREEN_PRICES}
+        />
 
         <AuthorByline updatedLabel="23 de octubre de 2026" className="mt-6" />
 

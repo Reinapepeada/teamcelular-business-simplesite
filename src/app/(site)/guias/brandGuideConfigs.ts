@@ -750,6 +750,12 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     { href: "/reparaciones", label: "Ver todos los servicios" },
     { href: "/presupuesto-reparacion#solicitar-presupuesto", label: "Pedir presupuesto" },
     ...(seed.extraRelatedLinks ?? []),
+    // Estas guías solo recibían un enlace interno (el índice /guias). Enlazarlas
+    // entre sí les da entrada desde cada guía de marca hermana.
+    ...BRAND_GUIDE_SEEDS.filter((other) => other.slug !== seed.slug).map((other) => ({
+      href: `/guias/${other.slug}`,
+      label: `Reparación de ${other.brand}`,
+    })),
   ];
 
   return {

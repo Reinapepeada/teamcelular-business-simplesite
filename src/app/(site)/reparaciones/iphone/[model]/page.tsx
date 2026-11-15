@@ -11,6 +11,7 @@ import { INSTALLMENTS_MESSAGE } from "@/lib/copyStandards";
 import {
   IPHONE_MODELS_WITH_PAGE,
   IPHONE_PRICES_UPDATED,
+  screenOptionsText,
   IPHONE_CONTENT_REVIEWED,
   formatArs,
   getIphoneModel,
@@ -123,12 +124,14 @@ export default async function IphoneModelPage({
     },
   ];
 
+  const screenNote = screenOptionsText(model);
+
   const faqs = [
     {
       question: `¿Cuánto sale cambiar la pantalla del ${model.name}?`,
       answer:
         model.screen !== null
-          ? `${formatArs(model.screen)} en Team Celular, con módulo completo y garantía escrita de 90 días. Se cambia en 2 a 4 horas si hay repuesto en stock; antes te confirmamos la calidad del repuesto y qué funciones conserva.`
+          ? `${formatArs(model.screen)} en Team Celular, con módulo completo y garantía escrita de 90 días. Se cambia en 2 a 4 horas si hay repuesto en stock; antes te confirmamos la calidad del repuesto y qué funciones conserva.${screenNote ? ` ${screenNote}` : ""}`
           : `Se cotiza según el repuesto disponible. Te confirmamos precio, calidad del repuesto y plazo antes de reparar, con garantía escrita de 90 días.`,
     },
     {
@@ -224,7 +227,7 @@ export default async function IphoneModelPage({
           hace el mismo día, el presupuesto se confirma antes de intervenir el equipo y
           todo sale con garantía escrita de 90 días sobre el trabajo y el repuesto.
           Atendemos de lunes a viernes de 10:30 a 18:00, sin turno previo. Precios
-          actualizados a {IPHONE_PRICES_UPDATED}.
+          vigentes a {IPHONE_PRICES_UPDATED}.{screenNote ? ` ${screenNote}` : ""}
         </p>
 
         <AuthorByline updatedLabel={IPHONE_CONTENT_REVIEWED} className="mt-6" />

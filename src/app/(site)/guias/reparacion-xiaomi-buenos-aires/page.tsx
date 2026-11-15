@@ -370,7 +370,7 @@ export default function XiaomiRepairGuidePage() {
           <div className="overflow-x-auto px-6 py-2" role="region" aria-label="Precios de reparación de Xiaomi" tabIndex={0}>
             <table className="w-full min-w-[38rem] border-collapse text-left text-sm">
               <caption className="sr-only">
-                Precios de reparación de Xiaomi, Redmi y POCO en CABA, actualizados en agosto de 2026
+                Precios de reparación de Xiaomi, Redmi y POCO en CABA, vigentes a noviembre de 2026
               </caption>
               <thead>
                 <tr className="border-b border-slate-200 dark:border-slate-800">

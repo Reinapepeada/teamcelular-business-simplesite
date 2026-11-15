@@ -133,7 +133,7 @@ export default function Home() {
                             El modelo y el repuesto definen el precio. Te lo confirmamos antes de reparar.
                         </p>
                         <p className="mt-3 max-w-lg text-sm leading-6 text-[#424245]">
-                            Precios orientativos en pesos argentinos. iPhone: publicados en {IPHONE_PRICES_UPDATED}; Samsung y Motorola: el {PRICES_UPDATED_LABEL}.
+                            Precios orientativos en pesos argentinos. iPhone: vigentes a {IPHONE_PRICES_UPDATED}; Samsung y Motorola: al {PRICES_UPDATED_LABEL}.
                         </p>
                         <p className="mt-4 max-w-lg text-[15px] leading-6 text-[#424245]">{SCREEN_BATTERY_TIMING_MESSAGE}</p>
                         <ScreenQuoteDetails light />

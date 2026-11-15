@@ -20,6 +20,8 @@ import {
 } from "react-icons/fa";
 import GuideByline from "@/components/seo/GuideByline";
 import { BRAND_REPAIR_PRICES, buildPriceOffers, priceRangeOf } from "@/lib/repairPrices";
+import ModelScreenPriceTable from "@/components/seo/ModelScreenPriceTable";
+import { MOTOROLA_SCREEN_PRICES } from "@/lib/modelScreenPrices";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
@@ -422,6 +424,12 @@ export default function MotorolaRepairGuidePage() {
             Precios orientativos sujetos a actualización. Consultá por WhatsApp o presupuesto online para valores exactos según modelo.
           </p>
         </section>
+
+        <ModelScreenPriceTable
+          id="precio-pantalla-motorola-por-modelo"
+          brand="Motorola"
+          prices={MOTOROLA_SCREEN_PRICES}
+        />
 
         <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
           <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">

@@ -14,7 +14,7 @@ import {
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
-import { PRICES_UPDATED, PRICES_UPDATED_LABEL } from "@/lib/repairPrices";
+import { PRICES_UPDATED_LABEL } from "@/lib/repairPrices";
 import { IPHONE_PRICES_UPDATED } from "./iphone/iphoneModels";
 import { BUSINESS_PROFILE } from "@/lib/businessProfile";
 import RepairBrandLinks from "@/components/repairs/RepairBrandLinks";
@@ -260,7 +260,6 @@ export interface ServiceLandingConfig {
   serviceName: string;
   serviceType: string;
   serviceDescription: string;
-  modifiedTime?: string;
   closingDescription?: string;
   highlights: ServiceHighlight[];
   brandsText: string;
@@ -334,7 +333,6 @@ export default function ServiceLandingPage({
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${serviceUrl}#service`,
-    dateModified: config.modifiedTime ?? PRICES_UPDATED,
     name: config.serviceName,
     serviceType: config.serviceType,
     description: config.serviceDescription,

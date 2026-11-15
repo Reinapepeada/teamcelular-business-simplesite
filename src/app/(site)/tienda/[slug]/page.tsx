@@ -11,6 +11,7 @@ import { productoDeVidriera, type VidrieraProduct } from '@/lib/fixbeeCatalog';
 import { slugsAProbar } from '@/lib/legacySlug';
 import { BUSINESS_PROFILE } from '@/lib/businessProfile';
 import { iphoneModelPageForProductSlug } from '@/app/(site)/reparaciones/iphone/iphoneModels';
+import { isRetiredSamsungScreenSlug, RETIRED_SAMSUNG_SCREEN_DESTINATION } from '@/lib/retiredSamsungScreenSlug';
 
 const SITE_URL = getSiteUrl();
 // El default era el Obelisco; el retiro es en Recoleta.
@@ -155,6 +156,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         if (slug.startsWith('cambio-de-bateria-iphone-')) {
             const modelo = iphoneModelPageForProductSlug(slug);
             permanentRedirect(modelo ? `/reparaciones/iphone/${modelo.slug}` : '/guias/cambio-bateria-celular');
+        }
+        // Mismo caso con los cambios de módulo Samsung: van a la guía de la marca.
+        if (isRetiredSamsungScreenSlug(slug)) {
+            permanentRedirect(RETIRED_SAMSUNG_SCREEN_DESTINATION);
         }
         notFound();
     }
