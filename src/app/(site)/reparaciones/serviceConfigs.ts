@@ -637,7 +637,6 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     ],
     intro:
       "Team Celular revisa tu celular mojado en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano). Evaluamos el daño por líquidos y te explicamos si alcanza con limpieza, hace falta reparar o conviene priorizar los datos. El costo de revisión se informa antes de ingresar el equipo; el resultado depende del daño que encontremos.",
-    modifiedTime: "2026-10-15T00:00:00-03:00",
     asideNotes: [
       "Garantía escrita con alcance según el estado inicial y el trabajo realizado; se informa antes de avanzar.",
       "Diagnóstico inicial y reparación son etapas distintas. Confirmamos el plazo según el daño; placa tiene su propio proceso.",
