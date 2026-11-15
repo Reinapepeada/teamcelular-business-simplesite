@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { FPC_GUIDE } from "@/lib/fpcGuide";
 import { REPAIR_CASE } from "@/lib/repairCase";
 
 // Revalidate sitemap every 24 hours
@@ -209,6 +210,7 @@ const mainPages = [
 
 // Guias y contenido educativo
 const guidePages = [
+  { path: FPC_GUIDE.path.slice(1), priority: 0.7, changeFreq: "monthly" as const },
   { path: REPAIR_CASE.path.slice(1), priority: 0.7, changeFreq: "monthly" as const },
   {
     path: "guias/reparar-celular-o-comprar-otro",
