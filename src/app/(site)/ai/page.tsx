@@ -32,6 +32,7 @@ export default function AiBrandPage() {
               <p className="mt-3">{branch.street}, {branch.locality}</p>
               <a className="tc-link inline-block py-3" href={`tel:${branch.phone.replace(/\s|-/g, "")}`}>{branch.phone}</a>
               <p><Link href={branch.url} className="tc-link inline-block py-2">Ver sucursal, ubicación y contacto →</Link></p>
+              <p><a href={branch.mapUrl} className="tc-link inline-block py-2">Ficha en Google Maps</a></p>
             </div>
           ))}
         </div>
