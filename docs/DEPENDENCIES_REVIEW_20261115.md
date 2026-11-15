@@ -13,4 +13,3 @@ Se prepara una actualización conjunta de Lucide React 1.72.0 y del grupo de onc
 Exigir instalación con lockfile, auditoría de producción, lint sin advertencias, pruebas unitarias, build, TypeScript y pruebas de navegador. Verificar el preview del último commit, y después del merge el despliegue y las páginas públicas. Los resultados y SHAs finales se consultan en la PR de esta entrega.
 
 El estado de comercio referenciado por AGENTS.md en `../../mvp-scalarbee/docs/commerce/ESTADO_IMPLEMENTACION.md` no existe en este checkout. Este documento registra la decisión y el próximo paso sin modificar un repositorio distinto.
-
