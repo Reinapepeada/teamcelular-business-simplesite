@@ -152,13 +152,13 @@ export default function IphoneHubPage() {
           </div>
         </div>
         <Image
-          src="/images/portada_iphone.webp"
-          alt="Portada de la guía de reparación de iPhone de Team Celular"
-          width={1086}
-          height={1448}
+          src="/images/celuPorDentro.webp"
+          alt="iPhone abierto, con la batería y la placa a la vista"
+          width={1280}
+          height={935}
           priority
-          sizes="(min-width: 768px) 360px, 100vw"
-          className="mx-auto max-h-[420px] w-auto rounded-[28px] object-cover"
+          sizes="(min-width: 768px) 440px, 100vw"
+          className="w-full rounded-[28px] object-cover"
         />
       </header>
 

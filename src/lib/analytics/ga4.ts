@@ -11,7 +11,7 @@ export function isGa4ProductionHost(hostname: string): boolean {
 export const GA4_INIT_SCRIPT = `if (${JSON.stringify(PRODUCTION_HOSTS)}.includes(location.hostname)) {
   window.dataLayer = window.dataLayer || [];
   window.gtag = function () { window.dataLayer.push(arguments); };
-  // gtag.js se descarga con el navegador ocioso: su evaluación competía con los
+  // gtag.js se descarga en el primer momento ocioso: su evaluación competía con los
   // primeros toques (INP móvil de campo 205 ms, nov 2026). Los eventos previos
   // quedan en dataLayer y se envían cuando carga.
   var loadGa4 = function () {
@@ -20,12 +20,10 @@ export const GA4_INIT_SCRIPT = `if (${JSON.stringify(PRODUCTION_HOSTS)}.includes
     ga4Script.src = 'https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}';
     document.head.appendChild(ga4Script);
   };
-  var whenIdle = function () {
-    if (window.requestIdleCallback) window.requestIdleCallback(loadGa4, { timeout: 2000 });
-    else setTimeout(loadGa4, 1);
-  };
-  if (document.readyState === 'complete') whenIdle();
-  else window.addEventListener('load', whenIdle, { once: true });
+  // Sin esperar a load: en una red lenta tarda y la visita que se va antes
+  // quedaría sin page view. El tope de 2 s acota esa pérdida.
+  if (window.requestIdleCallback) window.requestIdleCallback(loadGa4, { timeout: 2000 });
+  else setTimeout(loadGa4, 1);
   window.gtag('js', new Date());
   window.gtag('config', '${MEASUREMENT_ID}');
   document.addEventListener('click', function (e) {

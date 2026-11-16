@@ -3,7 +3,6 @@ import { BRAND_REPAIR_PRICES, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, formatA
 import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 // Precios del primer parrafo de cambio de pantalla: misma fuente que las tablas.
-const IPHONE_13_SCREEN = IPHONE_MODELS.find((m) => m.slug === "13")?.screen ?? 249900;
 const IPHONE_13_BATTERY = IPHONE_MODELS.find((m) => m.slug === "13")?.battery ?? 159900;
 const PLACA_REVISION = formatArsPrice(PLACA_REVISION_PRICE);
 const IPHONE_BATTERY_FROM = Math.min(
@@ -103,7 +102,12 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     intro:
       "Vidrio roto, líneas o touch que no responde. Revisamos tu celular y te explicamos qué módulo hay para tu modelo, cuánto sale y cuándo podés retirarlo.",
     prices: [
-      { label: "iPhone 13", value: formatArsPrice(IPHONE_13_SCREEN) },
+      // Los iPhone más pedidos, de la misma lista que la guía: quien busca
+      // "cambio de pantalla iphone" encuentra su precio acá sin ir a otra URL.
+      ...["11", "12", "13", "14", "15"].flatMap((slug) => {
+        const model = IPHONE_MODELS.find((m) => m.slug === slug);
+        return model?.screen ? [{ label: model.name, value: formatArsPrice(model.screen) }] : [];
+      }),
       { label: "Samsung Galaxy A", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[0].from)}` },
       { label: "Motorola Moto G", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[0].from)}` },
     ],

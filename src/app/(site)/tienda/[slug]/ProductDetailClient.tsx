@@ -189,7 +189,8 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
                 {/* Image Gallery */}
                 <div className="space-y-4">
-                    <div className="relative aspect-square rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800">
+                    {/* 4:3 en mobile: con el cuadrado, precio y compra quedaban debajo del primer pantallazo. */}
+                    <div className="relative aspect-[4/3] sm:aspect-square rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800">
                             <div
                                 key={selectedImageIndex}
                                 className="absolute inset-0"
@@ -241,7 +242,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                                     onClick={() => setSelectedImageIndex(index)}
                                     aria-label={`Ver foto ${index + 1}`}
                                     aria-pressed={selectedImageIndex === index}
-                                    className={`relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 border-2 transition-colors ${
+                                    className={`relative w-14 h-14 sm:w-20 sm:h-20 rounded-lg overflow-hidden flex-shrink-0 border-2 transition-colors ${
                                         selectedImageIndex === index
                                             ? 'border-primary'
                                             : 'border-transparent hover:border-gray-300'
@@ -279,7 +280,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                     </div>
 
                     {/* Title */}
-                    <h1 className="text-3xl font-bold">{product.name}</h1>
+                    <h1 className="text-2xl sm:text-3xl font-bold">{product.name}</h1>
 
                     {/* SKU */}
                     {product.serial_number && <p className="text-sm text-muted-foreground">

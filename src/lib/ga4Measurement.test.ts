@@ -7,7 +7,7 @@ import { recordLeadInteraction } from "./analytics/leadInteractions";
 function boot(hostname: string) {
   const scripts: { src?: string }[] = [];
   const listeners: Record<string, (event: unknown) => void> = {};
-  // El navegador de prueba ya terminó de cargar y está ocioso: gtag.js entra enseguida.
+  // El navegador de prueba está ocioso: gtag.js entra enseguida.
   const browser = {
     dataLayer: [] as Array<IArguments>,
     gtag: undefined,
@@ -17,7 +17,6 @@ function boot(hostname: string) {
     window: browser,
     location: { hostname, pathname: "/guias/reparacion-iphone-buenos-aires" },
     document: {
-      readyState: "complete",
       createElement: () => ({}),
       head: { appendChild: (script: { src?: string }) => scripts.push(script) },
       addEventListener: (name: string, handler: (event: unknown) => void) => { listeners[name] = handler; },

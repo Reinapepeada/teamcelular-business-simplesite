@@ -45,7 +45,8 @@ const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 export const metadata: Metadata = {
   title: "Reparación de iPhone en CABA | Precios por Modelo",
   description:
-    `Elegí tu iPhone y consultá precios de pantalla y batería. Reparación en Recoleta y Belgrano, sin turno. Confirmamos repuesto y stock antes de reparar.`,
+    // Con precio: las consultas de esta página son de arreglo y el snippet no decía cuánto sale (GSC nov 2026, CTR 0,88%).
+    `Arreglo de iPhone en Recoleta y Belgrano, sin turno. Pantalla desde ${IPHONE_SCREEN_FROM} y batería desde ${IPHONE_BATTERY_FROM}, en 2 a 4 horas con stock. Garantía 90 días.`,
   keywords: [
     "reparacion iphone buenos aires",
     "service iphone caba",
