@@ -13,6 +13,23 @@ export function buildProductSeoDescription(product: Product): string {
   return `${summary} ${suffix}`;
 }
 
+const PRODUCT_TITLE_LIMIT = 60;
+const BRAND_SUFFIX = " | Team Celular";
+
+/**
+ * Título de la ficha para buscadores, en 60 caracteres o menos. Los nombres
+ * del catálogo son largos y Google los cortaba a mitad de palabra: primero se
+ * sacrifica el sufijo de marca y, si no alcanza, se corta en el último espacio.
+ */
+export function buildProductSeoTitle(name: string | null | undefined): string {
+  const clean = (name ?? "").replace(/\s+/g, " ").trim() || "Producto";
+  if (clean.length + BRAND_SUFFIX.length <= PRODUCT_TITLE_LIMIT) return `${clean}${BRAND_SUFFIX}`;
+  if (clean.length <= PRODUCT_TITLE_LIMIT) return clean;
+  const cut = clean.slice(0, PRODUCT_TITLE_LIMIT + 1);
+  const lastSpace = cut.lastIndexOf(" ");
+  return (lastSpace > 20 ? cut.slice(0, lastSpace) : cut.slice(0, PRODUCT_TITLE_LIMIT)).replace(/[\s,;:/-]+$/, "");
+}
+
 /** Solo datos publicados; sin deducir potencia, compatibilidad ni códigos. */
 export function buildProductFacts(product: Product): [string, string][] {
   const warranty = getProductWarranty(product);
