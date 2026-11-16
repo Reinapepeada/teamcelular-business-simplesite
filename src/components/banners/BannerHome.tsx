@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import HeroTeardown from "@/components/banners/HeroTeardown";
 import { BsArrowRight, BsClipboardCheck, BsClock, BsGeoAlt, BsShieldCheck, BsWhatsapp } from "react-icons/bs";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
@@ -40,10 +40,8 @@ export default function BannerHome() {
                         <a href="#precios" className="tc-link mt-1 inline-flex min-h-11 items-center gap-2 text-[17px]">Ver precios por modelo <BsArrowRight aria-hidden /></a>
                     </div>
                     <figure className="min-w-0">
-                        <div className="relative aspect-[16/11] overflow-hidden rounded-[28px] bg-[#1d1d1f]">
-                            <Image src="/images/landings/pantalla-concepto-20261023.webp" alt="Ilustración de un celular con el módulo de pantalla separado del equipo" fill loading="eager" fetchPriority="high" quality={82} sizes="(max-width: 1023px) 100vw, 550px" className="bg-black object-contain" />
-                        </div>
-                        <figcaption className="mt-2 text-right text-xs text-[#a1a1a6]">Ilustración del módulo de pantalla.</figcaption>
+                        <HeroTeardown />
+                        <figcaption className="mt-2 text-right text-xs text-[#a1a1a6]">Ilustración 3D del despiece de un smartphone.</figcaption>
                     </figure>
                 </div>
                 <div className="mt-8 flex flex-col justify-between gap-3 border-t border-[#333336] py-4 text-sm text-[#a1a1a6] sm:flex-row sm:items-center">
