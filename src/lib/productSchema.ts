@@ -38,11 +38,11 @@ export function buildProductSchema(product: Product, images: string[] = [], site
       seller: { "@id": businessId("organization") },
       itemCondition: etiquetaCondicion(product.storeCondition) ? condicionSchema(product.storeCondition) : undefined,
       availableAtOrFrom: { "@id": `${absoluteUrl(pickup.url)}#localbusiness` },
-      // Solo si el producto se envía. El importe es el promedio publicado, no la
-      // cotización: la exacta sale en el checkout según la dirección.
+      // Solo si el producto se envía. Se declara el máximo: Google acepta un
+      // envío declarado mayor al cobrado, no uno menor.
       shippingDetails: product.shipping_enabled === false ? undefined : {
         "@type": "OfferShippingDetails",
-        shippingRate: { "@type": "MonetaryAmount", value: SHIPPING.averageArs, currency: "ARS" },
+        shippingRate: { "@type": "MonetaryAmount", maxValue: SHIPPING.maxArs, currency: "ARS" },
         shippingDestination: { "@type": "DefinedRegion", addressCountry: "AR" },
         deliveryTime: {
           "@type": "ShippingDeliveryTime",

@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 import type { CatalogProduct } from "./storeCatalog";
+import { SHIPPING } from "./copyStandards";
 
 /**
  * El feed de Google Merchant Center (RSS 2.0 con el namespace `g:`).
@@ -88,6 +89,9 @@ export const itemMerchant = (p: CatalogProduct, siteUrl: string): string | null 
         // Un modelo o un campo vacío no permiten deducir ninguno de esos datos.
         campo("product_type", p.category),
         campo("google_product_category", categoriaGoogle(p.category)),
+        // Costo máximo de envío: Merchant rechaza un envío declarado menor al cobrado.
+        p.shipping_enabled === false ? ""
+            : `<g:shipping><g:country>AR</g:country><g:price>${SHIPPING.maxArs.toFixed(2)} ARS</g:price></g:shipping>`,
         "</item>",
     ].join("");
 };

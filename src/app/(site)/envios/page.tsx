@@ -13,7 +13,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: PATH,
   title: "Envíos a todo el país | Team Celular",
   description:
-    "Enviamos las compras de la tienda a toda la Argentina: $12.000 en promedio y unos 5 días hábiles. También podés retirar en Recoleta, CABA.",
+    "Enviamos a toda la Argentina: $12.000 en promedio, $25.000 como máximo, unos 5 días hábiles. También podés retirar en Recoleta, CABA.",
 });
 
 export default function EnviosPage() {
@@ -22,7 +22,7 @@ export default function EnviosPage() {
 
   const facts = [
     { icon: BsGeoAlt, title: "A todo el país", text: "Despachamos a cualquier dirección de la Argentina." },
-    { icon: BsBoxSeam, title: `${formatArsPrice(SHIPPING.averageArs)} en promedio`, text: "El costo exacto lo ves al comprar, según tu dirección." },
+    { icon: BsBoxSeam, title: `${formatArsPrice(SHIPPING.averageArs)} en promedio`, text: `Como máximo ${formatArsPrice(SHIPPING.maxArs)}. El costo exacto lo ves al comprar.` },
     { icon: BsClock, title: `Unos ${SHIPPING.businessDays} días hábiles`, text: "Plazo estimado de entrega." },
     { icon: BsShop, title: "Retiro en el local", text: `${pickup.street}, ${pickup.neighborhood}. ${BUSINESS_PROFILE.hours.text}.` },
   ];

@@ -19,10 +19,10 @@ export const SCREEN_BATTERY_TIMING_MESSAGE =
 
 /**
  * Envíos de la tienda, informados por el negocio el 16/11/2026: a todo el país,
- * $12.000 en promedio y unos 5 días hábiles. El costo real lo calcula el
+ * $12.000 en promedio, $25.000 como máximo y unos 5 días hábiles. El costo real lo calcula el
  * checkout según la dirección; acá va solo la referencia que se publica.
  */
-export const SHIPPING = { averageArs: 12000, businessDays: 5 } as const;
+export const SHIPPING = { averageArs: 12000, maxArs: 25000, businessDays: 5 } as const;
 
 export const SHIPPING_MESSAGE =
-  "Enviamos a todo el país. El envío cuesta en promedio $12.000 y llega en unos 5 días hábiles; el costo exacto se confirma al comprar según tu dirección.";
+  "Enviamos a todo el país. El envío cuesta en promedio $12.000, como máximo $25.000, y llega en unos 5 días hábiles; el costo exacto se confirma al comprar según tu dirección.";

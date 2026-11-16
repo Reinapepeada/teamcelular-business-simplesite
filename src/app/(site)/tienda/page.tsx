@@ -29,7 +29,7 @@ const storeFaqs = [
   {
     question: "Hacen envios o solo retiro en sucursal?",
     answer:
-      "Retiro en el local o envío a todo el país. El envío cuesta en promedio $12.000 y llega en unos 5 días hábiles; el costo exacto se confirma durante la compra según tu dirección.",
+      "Retiro en el local o envío a todo el país. El envío cuesta en promedio $12.000, como máximo $25.000, y llega en unos 5 días hábiles; el costo exacto se confirma durante la compra según tu dirección.",
   },
   {
     question: "Que pasa si no encuentro el repuesto exacto?",

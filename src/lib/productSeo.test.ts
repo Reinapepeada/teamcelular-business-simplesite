@@ -53,7 +53,7 @@ test("la ficha muestra los mismos datos del fabricante y garantía que el schema
   assert.equal(schema.offers.url, schema.url);
   assert.ok(!("mpn" in schema));
   assert.equal(schema.offers.hasMerchantReturnPolicy.merchantReturnLink, "https://teamcelular.com/devoluciones");
-  assert.equal(schema.offers.shippingDetails?.shippingRate.value, 12000);
+  assert.equal(schema.offers.shippingDetails?.shippingRate.maxValue, 25000);
   assert.equal(schema.offers.shippingDetails?.shippingDestination.addressCountry, "AR");
   assert.equal(buildProductSchema({ ...product, shipping_enabled: false }).offers.shippingDetails, undefined);
 });
