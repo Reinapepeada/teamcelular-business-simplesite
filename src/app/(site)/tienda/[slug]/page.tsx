@@ -79,7 +79,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         const image = getPrimaryImage(product) || '/placeholder.jpg';
         const absoluteImage = image.startsWith('http') ? image : `${SITE_URL}${image.startsWith('/') ? '' : '/'}${image}`;
 
-        const title = `${product.name || 'Producto'} | Team Celular`;
+        // Los nombres del catálogo ya son largos: con el sufijo de marca pasaban de
+        // 80 caracteres y Google los cortaba. La marca va solo si entra.
+        const name = product.name || 'Producto';
+        const title = name.length > 45 ? name : `${name} | Team Celular`;
         const description = buildProductSeoDescription(product);
         // El canonico es el slug que devolvio el catalogo, no el que vino en
         // la URL: asi un link viejo apunta a la ficha nueva en vez de

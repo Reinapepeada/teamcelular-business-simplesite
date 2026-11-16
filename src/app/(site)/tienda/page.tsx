@@ -56,7 +56,10 @@ export async function generateMetadata({
 
   return buildWebsiteMetadata({
     path: canonicalPath,
-    title: "Repuestos y Accesorios para Celulares en CABA | Team Celular",
+    // Cada página del listado es indexable: sin el número, todas repetían el title de la primera.
+    title: filters.page > 1
+      ? `Repuestos y Accesorios para Celulares en CABA · Página ${filters.page} | Team Celular`
+      : "Repuestos y Accesorios para Celulares en CABA | Team Celular",
     description:
       "Repuestos, fundas y cargadores para celular. Retiro en el local o envío a domicilio. Consultanos por compatibilidad antes de comprar.",
     robots: {

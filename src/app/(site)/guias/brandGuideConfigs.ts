@@ -541,7 +541,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     metaDescriptionOverride:
       "Taller independiente para celulares TCL en Recoleta y Belgrano, CABA. Presupuesto según modelo, falla y repuesto. Garantía escrita de 90 días.",
     titleOverride:
-      "Reparación de celulares TCL en Buenos Aires: quien los arregla en CABA",
+      "Reparación de celulares TCL en Buenos Aires: quién los arregla en CABA",
     heroDescriptionOverride:
       "Recibimos celulares TCL para revisar pantalla, batería y carga en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA. Somos un taller independiente. Pasanos el modelo exacto y qué le ocurre: confirmamos si la reparación es viable, si hay repuesto y cuánto cuesta antes de empezar. La reparación tiene garantía escrita de 90 días sobre trabajo y repuesto. Si tu consulta es por la garantía del fabricante, consultá primero los canales oficiales de TCL Argentina.",
     modifiedTime: "2026-10-15T00:00:00Z",
