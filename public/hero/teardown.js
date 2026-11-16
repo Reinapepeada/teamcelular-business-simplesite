@@ -406,6 +406,7 @@ const PARTS = [
 
 // ---- Motor: despiece fijo con órbita suave, parallax y hover ----
 let ACC;
+const AWAKE_MS = 12000; // sin interacción, el giro se detiene y deja de usar GPU
 
 /**
  * Monta el despiece 3D en un canvas. Devuelve una función que libera todo.
@@ -413,7 +414,7 @@ let ACC;
  */
 export function mount(canvas, { accent = '#1766f2', poster = false, onReady } = {}) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance', preserveDrawingBuffer: poster });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(devicePixelRatio, poster ? 2 : 1.5));
   renderer.setClearColor(0x000000, 1);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.18;
@@ -428,7 +429,7 @@ export function mount(canvas, { accent = '#1766f2', poster = false, onReady } = 
 
   const camera = new THREE.PerspectiveCamera(FOV, 1, .5, 400);
   const key = new THREE.DirectionalLight(0xfff6ea, 3.2); key.position.set(9, 14, 26);
-  key.castShadow = true; key.shadow.mapSize.set(2048, 2048); key.shadow.bias = -.0004; key.shadow.normalBias = .03; key.shadow.radius = 5;
+  key.castShadow = true; key.shadow.mapSize.set(poster ? 2048 : 1024, poster ? 2048 : 1024); key.shadow.bias = -.0004; key.shadow.normalBias = .03; key.shadow.radius = 5;
   Object.assign(key.shadow.camera, { left: -17, right: 17, top: 17, bottom: -17, near: 1, far: 90 });
   const rim = new THREE.DirectionalLight(ACC, 5); rim.position.set(-8, 3, -10);
   const rim2 = new THREE.DirectionalLight(0xffffff, 1.6); rim2.position.set(9, -2, -8);
@@ -468,7 +469,7 @@ export function mount(canvas, { accent = '#1766f2', poster = false, onReady } = 
     dist = Math.max((H + 3) / th, (W * Math.cos(yaw) + ZR * Math.sin(yaw)) / (th * camera.aspect)) / .7;
   }
 
-  let mx = 0, my = 0, sx = 0, sy = 0, visible = true, raf = 0, pointer = null, t0 = 0, done = false;
+  let mx = 0, my = 0, sx = 0, sy = 0, visible = true, raf = 0, pointer = null, clock = 0, prev = 0, last = 0, awakeUntil = 0, fastUntil = 0, done = false;
   const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(), tmp = new THREE.Color();
   const canHover = matchMedia('(hover:hover)').matches;
 
@@ -487,8 +488,8 @@ export function mount(canvas, { accent = '#1766f2', poster = false, onReady } = 
   }
 
   function render(now) {
-    t0 ||= now;
-    const t = (now - t0) / 1000, idle = poster ? 0 : 1;
+    clock += Math.min(now - (prev || now), 100); prev = now; // reloj propio: al reanudar no salta
+    const t = clock / 1000, idle = poster ? 0 : 1;
     sx += (mx - sx) * .06; sy += (my - sy) * .06;
     rig.rotation.set(rad(TILT[0]) + idle * (Math.sin(t * .37) * .03 + sy * .08), rad(TILT[1]) + idle * (Math.sin(t * .45) * .1 + sx * .14), 0);
     camera.position.set(0, dist * .05, dist); camera.lookAt(0, 0, 0);
@@ -508,13 +509,14 @@ export function mount(canvas, { accent = '#1766f2', poster = false, onReady } = 
 
   function tick(now) {
     raf = 0;
-    render(now);
-    if (visible && !poster) raf = requestAnimationFrame(tick); // pausa fuera de viewport
+    awakeUntil ||= now + AWAKE_MS;
+    if (now < fastUntil || now - last >= 32) { last = now; render(now); } // 30 fps en reposo, 60 con el puntero encima
+    if (visible && !poster && now < awakeUntil) raf = requestAnimationFrame(tick); // pausa fuera de viewport o sin interacción
   }
-  const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
+  const kick = () => { awakeUntil = 0; if (!raf) raf = requestAnimationFrame(tick); };
 
   const onMove = ev => { mx = ev.clientX / innerWidth * 2 - 1; my = ev.clientY / innerHeight * 2 - 1; };
-  const onOver = ev => { pointer = { x: ev.clientX, y: ev.clientY }; };
+  const onOver = ev => { pointer = { x: ev.clientX, y: ev.clientY }; fastUntil = performance.now() + 1500; kick(); };
   const onLeave = () => { pointer = {}; };
   const ro = new ResizeObserver(() => { layout(); kick(); });
   const io = new IntersectionObserver(([en]) => { visible = en.isIntersecting; kick(); });
