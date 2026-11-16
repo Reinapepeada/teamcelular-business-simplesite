@@ -115,7 +115,7 @@ const quickSteps = [
   {
     step: "Reparación y calibración",
     detail:
-      "Instalamos el repuesto aprobado y probamos táctil, batería y carga. Pantalla en 2-4 h y batería en 1-2 h con stock; para otras fallas confirmamos el plazo antes de empezar.",
+      "Instalamos el repuesto aprobado y probamos táctil, batería y carga. Pantalla y batería en 2-4 h con stock; para otras fallas confirmamos el plazo antes de empezar.",
     duration: "según el trabajo",
     Icon: FaWrench,
   },
@@ -139,7 +139,7 @@ const frequentRepairs = [
     title: "Reemplazo de batería Motorola",
     description:
       "Batería de calidad con test de autonomía real. Ideal para Moto G que dura menos de medio día o se apaga en forma repentina.",
-    eta: "1-2 h",
+    eta: "2-4 h",
     Icon: FaBatteryFull,
   },
   {
@@ -182,7 +182,7 @@ const motorolaSymptomRows = [
   {
     symptom: "Batería dura poco, se apaga o se hincha",
     urgency: "Alta si levanta la tapa, calienta o descarga de golpe",
-    typicalTime: "1-2 h según modelo Moto G, Edge o E",
+    typicalTime: "2-4 h según modelo Moto G, Edge o E",
     nextStep: "Apagarlo si está hinchado y pedir diagnóstico de consumo",
   },
   {
@@ -441,7 +441,7 @@ export default function MotorolaRepairGuidePage() {
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-700 dark:text-slate-200">
               Para reparar un Motorola en Buenos Aires, Team Celular atiende en Paraguay
-              2451, Recoleta, y Amenábar 2032, Belgrano. Con repuesto en stock, resolvemos pantalla, batería o carga USB-C en 1-4 h según el trabajo.
+              2451, Recoleta, y Amenábar 2032, Belgrano. Con repuesto en stock, resolvemos pantalla, batería o carga USB-C en 2-4 h según el trabajo.
               Si requiere revisión de placa, el informe tarda hasta 72 horas hábiles; el arreglo lleva semanas y se confirma precio y plazo por escrito.
               La reparación tiene garantía escrita sobre trabajo y repuesto instalado.
             </p>

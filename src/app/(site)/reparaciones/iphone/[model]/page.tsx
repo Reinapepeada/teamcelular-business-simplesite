@@ -105,7 +105,7 @@ export default async function IphoneModelPage({
     {
       name: "Cambio de batería",
       price: model.battery,
-      time: "1 a 2 horas",
+      time: "2 a 4 horas",
       detail: "Antes medimos el consumo: si la batería está bien y el problema es otro, te lo decimos.",
     },
     {
@@ -138,7 +138,7 @@ export default async function IphoneModelPage({
       question: `¿Cuánto sale cambiar la batería del ${model.name}?`,
       answer:
         model.battery !== null
-          ? `${formatArs(model.battery)}, en 1 a 2 horas según stock y con garantía escrita de 90 días. Antes medimos el consumo: si la batería está bien y la falla es otra, te lo decimos.`
+          ? `${formatArs(model.battery)}, en 2 a 4 horas según stock y con garantía escrita de 90 días. Antes medimos el consumo: si la batería está bien y la falla es otra, te lo decimos.`
           : `Se cotiza según el repuesto disponible. Antes medimos el consumo para confirmar que la falla es la batería.`,
     },
     {
@@ -222,8 +222,8 @@ export default async function IphoneModelPage({
           El cambio de pantalla de {model.name} cuesta{" "}
           <strong>{priceLabel(model.screen)}</strong> y el de batería{" "}
           <strong>{priceLabel(model.battery)}</strong> en Team Celular, con sucursales en
-          Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA. La pantalla se
-          resuelve en 2 a 4 horas y la batería en 1 a 2, según stock. El diagnóstico se
+          Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA. La pantalla y
+          la batería se resuelven en 2 a 4 horas, según stock. El diagnóstico se
           hace el mismo día, el presupuesto se confirma antes de intervenir el equipo y
           todo sale con garantía escrita de 90 días sobre el trabajo y el repuesto.
           Atendemos de lunes a viernes de 10:30 a 18:00, sin turno previo. Precios
@@ -362,6 +362,12 @@ export default async function IphoneModelPage({
               </Link>
             );
           })}
+          <Link
+            href="/reparaciones/iphone"
+            className="rounded-full border border-slate-300 px-5 py-2 text-sm font-medium text-slate-700 transition hover:border-primary hover:text-primary dark:hover:text-secondary dark:border-slate-600 dark:text-[#a1a1a6]"
+          >
+            Elegir por modelo
+          </Link>
           <Link
             href="/guias/reparacion-iphone-buenos-aires"
             className="rounded-full border border-slate-300 px-5 py-2 text-sm font-medium text-slate-700 transition hover:border-primary hover:text-primary dark:hover:text-secondary dark:border-slate-600 dark:text-[#a1a1a6]"

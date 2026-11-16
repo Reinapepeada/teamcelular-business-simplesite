@@ -104,7 +104,7 @@ const processSteps = [
   {
     title: "Reparacion segun familia Xiaomi",
     description:
-      "Reparamos según el modelo y el presupuesto aprobado. Pantalla en 2-4 h y batería en 1-2 h con repuesto en stock; para otros trabajos confirmamos el plazo por escrito.",
+      "Reparamos según el modelo y el presupuesto aprobado. Pantalla y batería en 2-4 h con repuesto en stock; para otros trabajos confirmamos el plazo por escrito.",
     duration: "según el trabajo",
     Icon: FaWrench,
   },
@@ -129,7 +129,7 @@ const repairServices = [
     title: "Bateria degradada y autonomia baja",
     detail:
       "Cambio de bateria para equipos con descarga acelerada, apagados inesperados o perdida de rendimiento en uso intenso.",
-    eta: "1-2 h",
+    eta: "2-4 h",
     Icon: FaBatteryFull,
   },
   {
@@ -172,7 +172,7 @@ const xiaomiSymptomRows = [
   {
     symptom: "Batería dura poco, se apaga o calienta",
     urgency: "Alta si se hincha, levanta la tapa o descarga de golpe",
-    typicalTime: "1-2 h según Xiaomi, Redmi o POCO",
+    typicalTime: "2-4 h según Xiaomi, Redmi o POCO",
     nextStep: "Apagarlo si está hinchado y pedir diagnóstico de consumo",
   },
   {
@@ -423,7 +423,7 @@ export default function XiaomiRepairGuidePage() {
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-700 dark:text-slate-200">
               Para reparar un Xiaomi, Redmi o POCO en Buenos Aires, Team Celular atiende
-              en Paraguay 2451, Recoleta, y Amenábar 2032, Belgrano. Con repuesto en stock, resolvemos pantalla, batería o carga USB-C en 1-4 h según el trabajo.
+              en Paraguay 2451, Recoleta, y Amenábar 2032, Belgrano. Con repuesto en stock, resolvemos pantalla, batería o carga USB-C en 2-4 h según el trabajo.
               Si requiere revisión de placa, el informe tarda hasta 72 horas hábiles; el arreglo lleva semanas y se confirma precio y plazo por escrito. La reparación tiene garantía escrita sobre trabajo y repuesto instalado.
             </p>
           </div>

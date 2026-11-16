@@ -59,9 +59,9 @@ import {
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 
 export const metadata: Metadata = {
-  title: "Cambio de batería de celular en CABA: en 1 a 2 horas",
+  title: "Cambio de batería de celular en CABA: en 2 a 4 horas",
   description:
-    "Cambio de batería de celular en Recoleta y Belgrano, CABA, desde $89.900. En 1 a 2 horas con repuesto en stock. Precio y plazo confirmados antes de reparar.",
+    "Cambio de batería de celular en Recoleta y Belgrano, CABA, desde $89.900. En 2 a 4 horas con repuesto en stock. Precio y plazo confirmados antes de reparar.",
   keywords: [
     "cambio batería celular Buenos Aires",
     "batería iPhone original",
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Cambio de Batería Celular Buenos Aires | Service Certificado",
     description:
-      "Cambio de batería según modelo y repuesto disponible. En 1 a 2 horas con stock y garantía escrita de 90 días sobre trabajo y repuesto.",
+      "Cambio de batería según modelo y repuesto disponible. En 2 a 4 horas con stock y garantía escrita de 90 días sobre trabajo y repuesto.",
     type: "article",
     locale: "es_AR",
     url: "https://teamcelular.com/guias/cambio-bateria-celular",
@@ -106,7 +106,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Cambio de Batería Celular Buenos Aires",
-    description: "Cambio de batería con repuesto y plazo confirmados antes de empezar. En 1 a 2 horas con stock. Garantía escrita de 90 días.",
+    description: "Cambio de batería con repuesto y plazo confirmados antes de empezar. En 2 a 4 horas con stock. Garantía escrita de 90 días.",
     images: ["https://teamcelular.com/opengraph-image.png"],
   },
   alternates: {
@@ -218,7 +218,7 @@ const faqBattery = [
   },
   {
     question: "¿Cuánto tiempo tarda el cambio de batería?",
-    answer: "1 a 2 horas si reservás con una seña y el repuesto está en stock. Si no, unas 4 horas, siempre que lo traigas antes de las 13. El trabajo incluye diagnóstico, desmontaje, instalación y test completo.",
+    answer: "2 a 4 horas si el repuesto está en stock y lo traés antes de las 13. El trabajo incluye diagnóstico, desmontaje, instalación y test completo.",
   },
   {
     question: "¿La batería nueva viene con garantía?",
@@ -231,7 +231,7 @@ export default function BatteryReplacementGuide() {
     <div className="flex w-full justify-center px-4 py-8 sm:py-12">
       <ArticleSchema
         title="Cambio de batería celular en Buenos Aires | Service Certificado Team Celular"
-        description="Cambio de batería en CABA con repuesto y precio confirmados antes de reparar. Plazo de 1 a 2 horas con stock y garantía escrita de 90 días."
+        description="Cambio de batería en CABA con repuesto y precio confirmados antes de reparar. Plazo de 2 a 4 horas con stock y garantía escrita de 90 días."
         publishedTime="2024-11-30T00:00:00Z"
         modifiedTime="2026-10-15T00:00:00Z"
         image="https://teamcelular.com/opengraph-image.png"
@@ -269,7 +269,7 @@ export default function BatteryReplacementGuide() {
             Si el celular perdió autonomía, se apaga con carga o se calienta, revisamos la batería,
             el consumo de aplicaciones y el puerto antes de decidir qué cambiar. Te atendemos en
             Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA. Con repuesto en stock,
-            el cambio de batería lleva <strong>1 a 2 horas</strong>; confirmamos el plazo para tu modelo
+            el cambio de batería lleva <strong>2 a 4 horas</strong>; confirmamos el plazo para tu modelo
             antes de empezar. La reparación tiene garantía escrita de 90 días sobre trabajo y repuesto.
           </p>
           <p className="mt-3 max-w-[65ch] text-lg font-semibold text-slate-800 dark:text-[#f5f5f7]">
@@ -316,7 +316,7 @@ export default function BatteryReplacementGuide() {
           prices={batteryPriceRows}
           updatedLabel={PRICES_UPDATED_LABEL}
           title="¿Cuánto cuesta cambiar la batería del celular en CABA?"
-          timingText="Cambio de batería en 1 a 2 horas con repuesto en stock. Confirmamos el plazo según modelo y diagnóstico."
+          timingText="Cambio de batería en 2 a 4 horas con repuesto en stock. Confirmamos el plazo según modelo y diagnóstico."
         />
         <p className="text-sm text-slate-600 dark:text-[#a1a1a6]">
           <Link href="/reparaciones/cambio-bateria-caba" className="underline underline-offset-4">Ver el servicio de cambio de batería y pedir presupuesto</Link>.

@@ -117,7 +117,7 @@ const processSteps = [
   {
     title: "Cambio de la pieza",
     description:
-      "Antes de instalar te decimos qué repuesto hay para tu modelo y qué funciones conserva. Con stock, pantalla en 2-4 h y batería en 1-2 h; para otros trabajos confirmamos el plazo antes de empezar.",
+      "Antes de instalar te decimos qué repuesto hay para tu modelo y qué funciones conserva. Con stock, pantalla y batería en 2-4 h; para otros trabajos confirmamos el plazo antes de empezar.",
     duration: "según el trabajo",
     Icon: FaWrench,
   },
@@ -142,7 +142,7 @@ const repairServices = [
     title: "Batería que no dura",
     detail:
       "Se apaga con el frío, pasa de 30% a 0% de golpe o pierde carga sin usarlo. Si la tapa se levantó, apagalo: la batería está hinchada.",
-    eta: "1-2 h",
+    eta: "2-4 h",
     Icon: FaBolt,
   },
   {
@@ -185,7 +185,7 @@ const samsungSymptomRows = [
   {
     symptom: "Batería dura poco, se apaga o se hincha",
     urgency: "Alta si levanta la tapa, calienta o baja de golpe",
-    typicalTime: "1-2 h según modelo Galaxy",
+    typicalTime: "2-4 h según modelo Galaxy",
     nextStep: "Apagarlo si está hinchado y pedir diagnóstico de consumo",
   },
   {

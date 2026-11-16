@@ -17,7 +17,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Cambio de Batería de Celular en CABA desde $89.900",
     metaDescription:
-      "Cambio de batería en CABA desde $89.900 (Samsung A y Moto G) y $99.900 en iPhone 11. En 1 a 2 horas en Paraguay 2451, Recoleta. Garantía escrita 90 días.",
+      "Cambio de batería en CABA desde $89.900 (Samsung A y Moto G) y $99.900 en iPhone 11. En 2 a 4 horas en Paraguay 2451, Recoleta. Garantía escrita 90 días.",
     socialTitle: "Cambio de Batería en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Cambio de batería en CABA con diagnóstico previo y garantía escrita 90 días.",
@@ -29,7 +29,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "bateria celular se descarga rapido",
     ],
     intro:
-      "Cambiamos la batería de tu celular en 1 a 2 horas si el repuesto está en stock, con garantía escrita de 90 días. Antes medimos el consumo: a veces el que se come la carga es una app o la placa, no la batería.",
+      "Cambiamos la batería de tu celular en 2 a 4 horas si el repuesto está en stock, con garantía escrita de 90 días. Antes medimos el consumo: a veces el que se come la carga es una app o la placa, no la batería.",
     prices: [
       { label: "iPhone 13", value: formatArsPrice(IPHONE_13_BATTERY) },
       { label: "Samsung Galaxy A", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[2].from)}` },
@@ -61,7 +61,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     faqs: [
       {
         q: "¿Cuánto tarda el cambio de batería?",
-        a: "1 a 2 horas si reservás con una seña y el repuesto está en stock. Si no, unas 4 horas, siempre que lo traigas antes de las 13. Te confirmamos el plazo antes de abrir el equipo.",
+        a: "2 a 4 horas si el repuesto está en stock y lo traés antes de las 13. Te confirmamos el plazo antes de abrir el equipo.",
       },
       {
         q: "¿Cuánto sale cambiar la batería del celular?",
@@ -87,7 +87,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Cambio de Pantalla y Módulo en CABA | Team Celular",
     metaDescription:
-      "Cambio de pantalla en CABA: 2 a 4 horas con módulo en stock, según diagnóstico. iPhone 13 $249.900, Samsung Galaxy A desde $99.900. Garantía escrita de 90 días.",
+      "Cambio de pantalla en CABA: 2 a 4 horas con módulo en stock, según diagnóstico. iPhone 13 $249.900, Samsung Galaxy A desde $69.000. Garantía escrita de 90 días.",
     socialTitle: "Cambio de Pantalla en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Cambio de pantalla en CABA con test completo y garantía escrita 90 días.",

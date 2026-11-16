@@ -7,11 +7,17 @@ import { recordLeadInteraction } from "./analytics/leadInteractions";
 function boot(hostname: string) {
   const scripts: { src?: string }[] = [];
   const listeners: Record<string, (event: unknown) => void> = {};
-  const browser = { dataLayer: [] as Array<IArguments>, gtag: undefined };
+  // El navegador de prueba ya terminó de cargar y está ocioso: gtag.js entra enseguida.
+  const browser = {
+    dataLayer: [] as Array<IArguments>,
+    gtag: undefined,
+    requestIdleCallback: (callback: () => void) => callback(),
+  };
   runInNewContext(GA4_INIT_SCRIPT, {
     window: browser,
     location: { hostname, pathname: "/guias/reparacion-iphone-buenos-aires" },
     document: {
+      readyState: "complete",
       createElement: () => ({}),
       head: { appendChild: (script: { src?: string }) => scripts.push(script) },
       addEventListener: (name: string, handler: (event: unknown) => void) => { listeners[name] = handler; },
