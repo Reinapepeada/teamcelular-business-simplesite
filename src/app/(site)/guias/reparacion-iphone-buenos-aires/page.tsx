@@ -462,7 +462,7 @@ export default function IphoneRepairGuidePage() {
                             {[
                               model.screenQuality,
                               model.screenAlternative
-                                ? `${model.screenAlternative.quality}: ${formatArsPrice(model.screenAlternative.price)}`
+                                ? `${model.screenAlternative.quality}${model.screenAlternative.referential ? " (referencial)" : ""}: ${formatArsPrice(model.screenAlternative.price)}`
                                 : null,
                             ].filter(Boolean).join(" · ")}
                           </span>

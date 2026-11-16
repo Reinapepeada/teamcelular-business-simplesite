@@ -26,7 +26,7 @@ export interface IphoneModelPrice {
    */
   screenQuality?: string;
   /** Otra opción de pantalla confirmada por el negocio, con su precio. */
-  screenAlternative?: { quality: string; price: number; note?: string };
+  screenAlternative?: { quality: string; price: number; note?: string; referential?: boolean };
 }
 
 /**
@@ -40,20 +40,21 @@ export function screenOptionsText(model: IphoneModelPrice): string {
   const alt = model.screenAlternative;
   if (!alt) return main;
   const altPrice = alt.price.toLocaleString("es-AR");
-  const altText = `También hay una opción más económica con pantalla ${alt.quality} a ARS ${altPrice}${alt.note ? `, que ${alt.note}` : ""}.`;
+  const priceText = alt.referential ? `con precio referencial de ARS ${altPrice}` : `a ARS ${altPrice}`;
+  const altText = `También hay una opción más económica con pantalla ${alt.quality} ${priceText}${alt.note ? `, que ${alt.note}` : ""}.`;
   return main ? `${main} ${altText}` : altText;
 }
 
-// Las opciones Incell salen de órdenes cerradas de Fixbee: el negocio
-// confirmó el 15/11/2026 que toda pantalla cobrada por debajo de $200.000 es
-// Incell y que esos valores siguen vigentes.
+// Opción Incell: precio referencial definido por el negocio el 16/11/2026.
+// Solo se publica donde queda claramente por debajo del precio principal.
+// El iPhone 13 conserva el valor que el negocio confirmó aparte.
 export const IPHONE_MODELS: IphoneModelPrice[] = [
-  { slug: "11", name: "iPhone 11", screen: 129900, battery: 99900, screenAlternative: { quality: "Incell", price: 85000 } },
+  { slug: "11", name: "iPhone 11", screen: 129900, battery: 99900 },
   { slug: "11-pro", name: "iPhone 11 Pro", screen: 139900, battery: 114900 },
-  { slug: "11-pro-max", name: "iPhone 11 Pro Max", screen: 199900, battery: 129900, screenAlternative: { quality: "Incell", price: 130000 } },
+  { slug: "11-pro-max", name: "iPhone 11 Pro Max", screen: 199900, battery: 129900, screenAlternative: { quality: "Incell", price: 149900, referential: true } },
   { slug: "12-mini", name: "iPhone 12 Mini", screen: 149900, battery: 99900 },
-  { slug: "12", name: "iPhone 12", screen: 209900, battery: 144900, screenAlternative: { quality: "Incell", price: 179000 } },
-  { slug: "12-pro", name: "iPhone 12 Pro", screen: 209900, battery: 144900 },
+  { slug: "12", name: "iPhone 12", screen: 209900, battery: 144900, screenAlternative: { quality: "Incell", price: 144900, referential: true } },
+  { slug: "12-pro", name: "iPhone 12 Pro", screen: 209900, battery: 144900, screenAlternative: { quality: "Incell", price: 144900, referential: true } },
   { slug: "12-pro-max", name: "iPhone 12 Pro Max", screen: 219900, battery: 149900 },
   { slug: "13-mini", name: "iPhone 13 Mini", screen: 149900, battery: 99900 },
   {
@@ -69,20 +70,20 @@ export const IPHONE_MODELS: IphoneModelPrice[] = [
       note: "no muestra el aviso de pieza desconocida",
     },
   },
-  { slug: "13-pro", name: "iPhone 13 Pro", screen: 269900, battery: 179900 },
-  { slug: "13-pro-max", name: "iPhone 13 Pro Max", screen: 279900, battery: 189900 },
-  { slug: "14", name: "iPhone 14", screen: 249900, battery: 169900 },
-  { slug: "14-plus", name: "iPhone 14 Plus", screen: 259900, battery: 199900 },
-  { slug: "14-pro", name: "iPhone 14 Pro", screen: 279900, battery: 209900 },
-  { slug: "14-pro-max", name: "iPhone 14 Pro Max", screen: 299900, battery: 229900 },
-  { slug: "15", name: "iPhone 15", screen: 319900, battery: 189900, screenAlternative: { quality: "Incell", price: 169000 } },
-  { slug: "15-plus", name: "iPhone 15 Plus", screen: 349900, battery: 219900 },
-  { slug: "15-pro", name: "iPhone 15 Pro", screen: 389900, battery: 229900 },
-  { slug: "15-pro-max", name: "iPhone 15 Pro Max", screen: 389900, battery: 229900 },
-  { slug: "16", name: "iPhone 16", screen: 409900, battery: 194900 },
-  { slug: "16-plus", name: "iPhone 16 Plus", screen: 419900, battery: 249900 },
-  { slug: "16-pro", name: "iPhone 16 Pro", screen: 449900, battery: 209900 },
-  { slug: "16-pro-max", name: "iPhone 16 Pro Max", screen: 589900, battery: 269900 },
+  { slug: "13-pro", name: "iPhone 13 Pro", screen: 269900, battery: 179900, screenAlternative: { quality: "Incell", price: 169900, referential: true } },
+  { slug: "13-pro-max", name: "iPhone 13 Pro Max", screen: 279900, battery: 189900, screenAlternative: { quality: "Incell", price: 176900, referential: true } },
+  { slug: "14", name: "iPhone 14", screen: 249900, battery: 169900, screenAlternative: { quality: "Incell", price: 149900, referential: true } },
+  { slug: "14-plus", name: "iPhone 14 Plus", screen: 259900, battery: 199900, screenAlternative: { quality: "Incell", price: 163900, referential: true } },
+  { slug: "14-pro", name: "iPhone 14 Pro", screen: 279900, battery: 209900, screenAlternative: { quality: "Incell", price: 176900, referential: true } },
+  { slug: "14-pro-max", name: "iPhone 14 Pro Max", screen: 299900, battery: 229900, screenAlternative: { quality: "Incell", price: 258900, referential: true } },
+  { slug: "15", name: "iPhone 15", screen: 319900, battery: 189900, screenAlternative: { quality: "Incell", price: 172900, referential: true } },
+  { slug: "15-plus", name: "iPhone 15 Plus", screen: 349900, battery: 219900, screenAlternative: { quality: "Incell", price: 217900, referential: true } },
+  { slug: "15-pro", name: "iPhone 15 Pro", screen: 389900, battery: 229900, screenAlternative: { quality: "Incell", price: 176900, referential: true } },
+  { slug: "15-pro-max", name: "iPhone 15 Pro Max", screen: 389900, battery: 229900, screenAlternative: { quality: "Incell", price: 299900, referential: true } },
+  { slug: "16", name: "iPhone 16", screen: 409900, battery: 194900, screenAlternative: { quality: "Incell", price: 217900, referential: true } },
+  { slug: "16-plus", name: "iPhone 16 Plus", screen: 419900, battery: 249900, screenAlternative: { quality: "Incell", price: 213900, referential: true } },
+  { slug: "16-pro", name: "iPhone 16 Pro", screen: 449900, battery: 209900, screenAlternative: { quality: "Incell", price: 267900, referential: true } },
+  { slug: "16-pro-max", name: "iPhone 16 Pro Max", screen: 589900, battery: 269900, screenAlternative: { quality: "Incell", price: 354900, referential: true } },
   { slug: "17", name: "iPhone 17", screen: 504900, battery: null },
   { slug: "17-pro", name: "iPhone 17 Pro", screen: 579900, battery: null },
   { slug: "17-pro-max", name: "iPhone 17 Pro Max", screen: 649900, battery: null },
