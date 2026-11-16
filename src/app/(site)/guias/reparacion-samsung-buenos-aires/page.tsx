@@ -321,11 +321,11 @@ export default function SamsungRepairGuidePage() {
         publishedTime="2026-03-12T00:00:00Z"
         modifiedTime="2026-10-23T00:00:00Z"
         about={[
-          "reparacion de Samsung en Buenos Aires",
-          "service tecnico Samsung Galaxy en CABA",
+          "reparación de Samsung en Buenos Aires",
+          "service técnico Samsung Galaxy en CABA",
           "cambio de pantalla AMOLED Samsung",
-          "cambio de bateria Samsung Galaxy",
-          "reparacion de Galaxy S, A, Z Fold y Z Flip",
+          "cambio de batería Samsung Galaxy",
+          "reparación de Galaxy S, A, Z Fold y Z Flip",
         ]}
         image="https://teamcelular.com/opengraph-image.png"
         url={PAGE_URL}
@@ -666,7 +666,7 @@ export default function SamsungRepairGuidePage() {
               description:
                 "Reparación de Samsung Galaxy en CABA: pantalla, batería, carga y placa, con garantía escrita de 90 días.",
               provider: { "@id": `${SITE_URL}#organization` },
-              // Rango y catalogo salen de repairPrices: un unico lugar donde el precio
+              // Rango y catalogo salen de repairPrices: un único lugar donde el precio
               // visible y el structured data no pueden divergir.
               priceRange: `ARS ${priceRangeOf(BRAND_REPAIR_PRICES.samsung).low.toLocaleString("es-AR")}-${priceRangeOf(BRAND_REPAIR_PRICES.samsung).high.toLocaleString("es-AR")}`,
               ...buildPriceOffers(BRAND_REPAIR_PRICES.samsung, "Samsung Galaxy"),

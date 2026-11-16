@@ -155,7 +155,7 @@ const slaFeatures = [
     Icon: FaClock,
   },
   {
-    title: "Garantia escrita corporativa",
+    title: "Garantía escrita corporativa",
     description:
       `${WARRANTY_SCOPE_MESSAGE} En planes anuales, definimos cobertura y alcance en el SLA firmado.`,
     Icon: FaShieldAlt,

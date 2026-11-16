@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sucursales Team Celular en CABA",
     description:
-      "Ubicaciones oficiales de Team Celular para diagnostico y reparacion.",
+      "Ubicaciones oficiales de Team Celular para diagnóstico y reparación.",
     url: PAGE_URL,
     type: "website",
     locale: "es_AR",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Sucursales Team Celular en CABA",
-    description: "Ubicaciones oficiales para reparacion y soporte tecnico.",
+    description: "Ubicaciones oficiales para reparación y soporte técnico.",
     images: [`${SITE_URL}/opengraph-image.png`],
   },
 };
@@ -52,7 +52,7 @@ export default function SucursalesPage() {
   const recoleta = getBranch("recoleta");
   const belgrano = getBranch("belgrano");
   const whatsappUrl = buildWhatsappUrl(
-    "Hola Team Celular, quiero coordinar atencion en sucursal.",
+    "Hola Team Celular, quiero coordinar atención en sucursal.",
   );
 
   const collectionJsonLd = {

@@ -8,7 +8,7 @@ const DATE_FORMAT = new Intl.DateTimeFormat("es-AR", {
 });
 
 // La fecha vivia solo en el JSON-LD. Los extractores de los motores de IA leen
-// el texto renderizado: sin fecha visible la guia no se puede fechar y pierde
+// el texto renderizado: sin fecha visible la guía no se puede fechar y pierde
 // elegibilidad por frescura.
 export default function GuideByline({
   modifiedTime,

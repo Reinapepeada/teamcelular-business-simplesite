@@ -8,7 +8,7 @@ const ReparacionCelular = () => {
   return (
     
         <Image
-          alt="Reparacion de Celulares"
+          alt="Reparación de Celulares"
           src="/celu.webp"
           loading='lazy'
           width={500}

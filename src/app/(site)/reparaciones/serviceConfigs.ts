@@ -35,7 +35,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       { label: "Motorola Moto G", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[3].from)}` },
     ],
     whatsappText:
-      "Hola! Quiero un presupuesto para cambio de bateria en CABA. Marca y modelo:",
+      "Hola! Quiero un presupuesto para cambio de batería en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de batería (CABA)",
     serviceName: "Cambio de batería en CABA",
     serviceType: "Cambio de batería / reemplazo de batería",
@@ -493,7 +493,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     intro:
       "Si la cámara saca fotos borrosas, no enfoca, vibra o queda en negro, la cambiamos con garantía escrita de 90 días. Antes revisamos si es el módulo, el flex o solo el vidrio del lente, para no cambiar piezas de más.",
     whatsappText:
-      "Hola! Quiero un presupuesto para cambio de camara en CABA. Marca y modelo:",
+      "Hola! Quiero un presupuesto para cambio de cámara en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de cámara (CABA)",
     serviceName: "Cambio de cámara en CABA",
     serviceType: "Reemplazo de cámara frontal y trasera",
@@ -579,7 +579,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       },
     ],
     whatsappText:
-      "Hola! Quiero un presupuesto para reparacion de audio de celular en CABA. Marca y modelo:",
+      "Hola! Quiero un presupuesto para reparación de audio de celular en CABA. Marca y modelo:",
     breadcrumbLabel: "Reparación de audio (CABA)",
     serviceName: "Reparación de audio de celular en CABA",
     serviceType: "Reparación de micrófono, parlante y auricular",

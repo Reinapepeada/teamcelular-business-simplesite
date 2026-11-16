@@ -265,11 +265,11 @@ export interface ServiceLandingConfig {
   brandsText: string;
   /** Precios cortos para el hero (una fila por caso). Mejor que meterlos en el parrafo. */
   prices?: { label: string; value: string }[];
-  /** Reemplaza las dos ultimas lineas de "¿Dónde reparamos?" cuando la garantia o el plazo general no aplican. */
+  /** Reemplaza las dos últimas líneas de "¿Dónde reparamos?" cuando la garantía o el plazo general no aplican. */
   asideNotes?: [string, string];
   /** Reglas que el cliente tiene que leer antes de dejar el equipo. */
   conditions?: ServiceHighlight[];
-  /** Pasos propios cuando el recorrido no es el de una reparacion en el dia. */
+  /** Pasos propios cuando el recorrido no es el de una reparación en el dia. */
   workflow?: ServiceHighlight[];
   faqs: ServiceFaq[];
 }

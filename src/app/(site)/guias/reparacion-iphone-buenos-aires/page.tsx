@@ -18,7 +18,7 @@ import {
 } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 // Precio citable en el primer parrafo: sale de la misma fuente que la tabla.
-// Precio minimo publicado: sale de la misma tabla que la pagina, no se hardcodea.
+// Precio mínimo publicado: sale de la misma tabla que la página, no se hardcodea.
 const IPHONE_SCREEN_FROM = formatArsPrice(
   Math.min(...IPHONE_MODELS.map((m) => m.screen).filter((v): v is number => Boolean(v))),
 );
@@ -333,11 +333,11 @@ export default function IphoneRepairGuidePage() {
         publishedTime="2024-01-15T00:00:00Z"
         modifiedTime="2026-10-15T00:00:00Z"
         about={[
-          "reparacion de iPhone en Buenos Aires",
-          "service tecnico Apple en CABA",
+          "reparación de iPhone en Buenos Aires",
+          "service técnico Apple en CABA",
           "cambio de pantalla iPhone",
-          "cambio de bateria iPhone",
-          "microelectronica para iPhone",
+          "cambio de batería iPhone",
+          "microelectrónica para iPhone",
         ]}
         image="https://teamcelular.com/opengraph-image.png"
         url={PAGE_URL}
@@ -542,9 +542,9 @@ export default function IphoneRepairGuidePage() {
               <table className="min-w-full divide-y divide-slate-200 text-left text-sm dark:divide-slate-700">
                 <thead className="bg-black text-white">
                   <tr>
-                    <th scope="col" className="px-5 py-4 font-semibold">Sintoma</th>
+                    <th scope="col" className="px-5 py-4 font-semibold">Síntoma</th>
                     <th scope="col" className="px-5 py-4 font-semibold">Urgencia</th>
-                    <th scope="col" className="px-5 py-4 font-semibold">Tiempo tipico</th>
+                    <th scope="col" className="px-5 py-4 font-semibold">Tiempo típico</th>
                     <th scope="col" className="px-5 py-4 font-semibold">Siguiente paso</th>
                   </tr>
                 </thead>

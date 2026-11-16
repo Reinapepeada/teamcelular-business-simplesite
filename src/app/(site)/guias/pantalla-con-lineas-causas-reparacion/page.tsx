@@ -23,12 +23,12 @@ export const metadata: Metadata = buildWebsiteMetadata({
   ],
   openGraphTitle: "Pantalla con Líneas en Celular: Causas y Reparación | Team Celular",
   openGraphDescription:
-    "Guia para diagnosticar lineas en pantalla y saber cuando conviene cambio de modulo o revision de placa.",
+    "Guía para diagnosticar líneas en pantalla y saber cuando conviene cambio de módulo o revisión de placa.",
   openGraphImagePath: "/opengraph-image.png",
-  openGraphImageAlt: "Pantalla con lineas en celular y diagnostico tecnico",
+  openGraphImageAlt: "Pantalla con líneas en celular y diagnóstico técnico",
   twitterTitle: "Pantalla con Líneas: Causas y Reparación | Team Celular",
   twitterDescription:
-    "Checklist tecnico para decidir entre reemplazo de display, flex o reparacion de placa.",
+    "Checklist técnico para decidir entre reemplazo de display, flex o reparación de placa.",
   languages: {
     "es-AR": PAGE_PATH,
   },
@@ -36,14 +36,14 @@ export const metadata: Metadata = buildWebsiteMetadata({
 
 const symptoms: GuideItem[] = [
   {
-    title: "Lineas verticales o horizontales",
+    title: "Líneas verticales o horizontales",
     description:
-      "Suelen aparecer despues de golpes, presion o flex fatigado. Pueden ser fijas o intermitentes.",
+      "Suelen aparecer después de golpes, presión o flex fatigado. Pueden ser fijas o intermitentes.",
   },
   {
     title: "Parpadeo de pantalla",
     description:
-      "El brillo cambia solo o titila. Puede indicar dano de panel o problema de alimentacion en placa.",
+      "El brillo cambia solo o titila. Puede indicar daño de panel o problema de alimentacion en placa.",
   },
   {
     title: "Zonas sin imagen",
@@ -51,76 +51,76 @@ const symptoms: GuideItem[] = [
       "Parte del display queda negra o con color alterado, incluso cuando el touch sigue respondiendo.",
   },
   {
-    title: "Touch erratico junto a lineas",
+    title: "Touch erratico junto a líneas",
     description:
-      "Cuando falla imagen y tactil en simultaneo, suele haber compromiso de modulo completo.",
+      "Cuando falla imagen y táctil en simultaneo, suele haber compromiso de módulo completo.",
   },
 ];
 
 const diagnostics: GuideItem[] = [
   {
-    title: "Prueba visual y tactil por zonas",
+    title: "Prueba visual y táctil por zonas",
     description:
-      "Mapeamos donde falla la imagen y el tactil para definir si el problema esta en panel o conexion.",
+      "Mapeamos donde falla la imagen y el táctil para definir si el problema esta en panel o conexión.",
   },
   {
     title: "Chequeo de flex y conectores",
     description:
-      "Se revisa integridad de conectores, presion de contacto y estado del flex de display.",
+      "Se revisa integridad de conectores, presión de contacto y estado del flex de display.",
   },
   {
-    title: "Test con modulo de referencia",
+    title: "Test con módulo de referencia",
     description:
-      "Cuando aplica, se compara con modulo de prueba para confirmar si la placa esta estable.",
+      "Cuando aplica, se compara con módulo de prueba para confirmar si la placa esta estable.",
   },
   {
-    title: "Revision de linea de video en placa",
+    title: "Revisión de línea de video en placa",
     description:
-      "Si persiste la falla con modulo sano, se analiza circuito de imagen en microelectronica.",
+      "Si persiste la falla con módulo sano, se analiza circuito de imagen en microelectrónica.",
   },
 ];
 
 const planSteps: GuideItem[] = [
   {
-    title: "Definir origen del dano",
+    title: "Definir origen del daño",
     description:
       "Primero se identifica si la falla viene de display, flex o placa para no sobrediagnosticar.",
   },
   {
-    title: "Reemplazo de modulo cuando corresponde",
+    title: "Reemplazo de módulo cuando corresponde",
     description:
-      "Si el panel esta comprometido, se instala modulo de calidad y se valida brillo, color y touch.",
+      "Si el panel esta comprometido, se instala módulo de calidad y se valida brillo, color y touch.",
   },
   {
     title: "Ajuste de conectores o flex",
     description:
-      "En casos leves se corrige conexion sin cambio completo de pantalla.",
+      "En casos leves se corrige conexión sin cambio completo de pantalla.",
   },
   {
     title: "Escalar a placa solo si hace falta",
     description:
-      "Si la falla no depende del display, se avanza con reparacion de microelectronica.",
+      "Si la falla no depende del display, se avanza con reparación de microelectrónica.",
   },
 ];
 
 const faq: GuideFaqItem[] = [
   {
-    question: "Siempre hay que cambiar la pantalla cuando aparecen lineas?",
+    question: "¿Siempre hay que cambiar la pantalla cuando aparecen líneas?",
     answer:
-      "No siempre. En algunos equipos la causa es flex o conector. Por eso conviene diagnostico antes de comprar modulo.",
+      "No siempre. En algunos equipos la causa es flex o conector. Por eso conviene diagnóstico antes de comprar módulo.",
   },
   {
-    question: "Puede empeorar si sigo usando el celular asi?",
+    question: "¿Puede empeorar si sigo usando el celular así?",
     answer:
-      "Si. Golpes adicionales o presion sobre el panel pueden expandir lineas y terminar en falla total de imagen.",
+      "Sí. Golpes adicionales o presión sobre el panel pueden expandir líneas y terminar en falla total de imagen.",
   },
   {
-    question: "Las lineas pueden venir de la placa?",
+    question: "¿Las líneas pueden venir de la placa?",
     answer:
-      "Si, aunque es menos frecuente. Si el modulo esta sano y sigue la falla, se revisa circuito de video en placa.",
+      "Si, aunque es menos frecuente. Si el módulo esta sano y sigue la falla, se revisa circuito de video en placa.",
   },
   {
-    question: "Cuanto tarda un cambio de pantalla con diagnostico?",
+    question: "¿Cuánto tarda un cambio de pantalla con diagnóstico?",
     answer:
       "Depende del modelo y stock, pero en muchos casos se resuelve en el dia con pruebas completas de control final.",
   },
@@ -138,18 +138,18 @@ export default function ScreenLinesGuidePage() {
     <HighIntentGuidePage
       siteUrl={SITE_URL}
       pagePath={PAGE_PATH}
-      pageLabel="Pantalla con lineas"
-      title="Pantalla con lineas en celular: causas y reparacion"
+      pageLabel="Pantalla con líneas"
+      title="Pantalla con líneas en celular: causas y reparación"
       heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), diagnostica líneas en pantalla para identificar la causa real: display, flex o placa. Confirmamos el plazo según el modelo, el stock y el diagnóstico. Garantía escrita de 90 días."
-      badge="Decision de reparacion"
+      badge="Decisión de reparación"
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
       modifiedTime="2026-08-20T00:00:00Z"
       imagePath="/opengraph-image.png"
       heroPoints={[
-        "Diferencia causa visual vs causa electrica.",
-        "Evita reemplazar modulo sin validar placa.",
-        "Prioriza una solucion con costo/beneficio real.",
+        "Diferencia causa visual vs causa eléctrica.",
+        "Evita reemplazar módulo sin validar placa.",
+        "Prioriza una solución con costo/beneficio real.",
       ]}
       symptomsTitle="¿Cuáles son los síntomas frecuentes de pantalla con líneas?"
       symptomsDescription="Reconocer el patrón de la falla ayuda a definir mejor el tipo de reparación."
@@ -162,7 +162,7 @@ export default function ScreenLinesGuidePage() {
       planSteps={planSteps}
       faq={faq}
       relatedLinks={relatedLinks}
-      whatsappText="Hola Team Celular, vi la guia de pantalla con lineas y quiero diagnostico para mi equipo"
+      whatsappText="Hola Team Celular, vi la guía de pantalla con líneas y quiero diagnóstico para mi equipo"
     />
   );
 }

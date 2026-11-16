@@ -10,7 +10,7 @@ type GuidePath =
   | "/guias/reparacion-xiaomi-buenos-aires"
   | "/guias/soporte-empresas-servicio-tecnico";
 
-/** Destino: incluye guias que no tienen bloque propio de interlinks. */
+/** Destino: incluye guías que no tienen bloque propio de interlinks. */
 type GuideTarget =
   | GuidePath
   | "/guias/presupuesto-service-oficial-segunda-opinion"
@@ -36,37 +36,37 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
         href: "/guias/reparacion-pantalla-celular",
         title: "Guía de cambio de pantalla",
         description:
-          "Aprende cuando conviene reemplazar modulo y que revisar para evitar fallas repetidas.",
+          "Aprende cuando conviene reemplazar módulo y que revisar para evitar fallas repetidas.",
       },
       {
         href: "/guias/mantenimiento-preventivo-celulares",
         title: "Mantenimiento preventivo",
         description:
-          "Checklist para extender autonomia, estabilidad y vida util del equipo.",
+          "Checklist para extender autonomía, estabilidad y vida útil del equipo.",
       },
       {
         href: "/guias/reparacion-iphone-buenos-aires",
-        title: "Reparacion de iPhone",
+        title: "Reparación de iPhone",
         description:
-          "Proceso tecnico premium para bateria, carga y placa en equipos Apple.",
+          "Proceso técnico premium para batería, carga y placa en equipos Apple.",
       },
     ],
   },
   "/guias/mantenimiento-preventivo-celulares": {
     guidance:
-      "Cuando detectas sintomas tempranos, una guia por falla te ayuda a decidir si necesitas mantenimiento o reparacion puntual.",
+      "Cuando detectas síntomas tempranos, una guía por falla te ayuda a decidir si necesitas mantenimiento o reparación puntual.",
     links: [
       {
         href: "/guias/cambio-bateria-celular",
-        title: "Cambio de bateria",
+        title: "Cambio de batería",
         description:
-          "Senales reales de bateria degradada y pasos para un reemplazo seguro.",
+          "Señales reales de batería degradada y pasos para un reemplazo seguro.",
       },
       {
         href: "/guias/reparacion-pantalla-celular",
-        title: "Reparacion de pantalla",
+        title: "Reparación de pantalla",
         description:
-          "Que validar antes de cambiar display y como cuidar el modulo nuevo.",
+          "Que validar antes de cambiar display y como cuidar el módulo nuevo.",
       },
       {
         href: "/guias/soporte-empresas-servicio-tecnico",
@@ -78,13 +78,13 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
   },
   "/guias/reparacion-iphone-buenos-aires": {
     guidance:
-      "Si aun comparas opciones, revisa otras marcas y una guia por falla para elegir repuesto y alcance de reparacion con mejor contexto.",
+      "Si aun comparas opciones, revisa otras marcas y una guía por falla para elegir repuesto y alcance de reparación con mejor contexto.",
     links: [
       {
         href: "/guias/reparacion-samsung-buenos-aires",
-        title: "Reparacion de Samsung",
+        title: "Reparación de Samsung",
         description:
-          "Sintomas tipicos de Galaxy y tiempos de taller segun tipo de falla.",
+          "Síntomas típicos de Galaxy y tiempos de taller según tipo de falla.",
       },
       {
         href: "/guias/reparacion-motorola-buenos-aires",
@@ -96,7 +96,7 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
         href: "/guias/reparacion-pantalla-celular",
         title: "Guía de cambio de pantalla",
         description:
-          "Referencia transversal para decidir modulo y control de calidad final.",
+          "Referencia transversal para decidir módulo y control de calidad final.",
       },
     ],
   },
@@ -118,7 +118,7 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
       },
       {
         href: "/guias/reparacion-samsung-buenos-aires",
-        title: "Reparacion de Samsung",
+        title: "Reparación de Samsung",
         description:
           "Casos AMOLED, USB-C y placa para equipos Galaxy con uso intensivo.",
       },
@@ -150,13 +150,13 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
   },
   "/guias/reparacion-samsung-buenos-aires": {
     guidance:
-      "Para tomar una decision completa, compara procesos entre marcas y revisa una guia por componente para alinear costo y resultado esperado.",
+      "Para tomar una decisión completa, compara procesos entre marcas y revisa una guía por componente para alinear costo y resultado esperado.",
     links: [
       {
         href: "/guias/reparacion-iphone-buenos-aires",
-        title: "Reparacion de iPhone",
+        title: "Reparación de iPhone",
         description:
-          "Enfoque premium en Apple para diagnóstico, repuestos y calibracion.",
+          "Enfoque premium en Apple para diagnóstico, repuestos y calibración.",
       },
       {
         href: "/guias/reparacion-motorola-buenos-aires",
@@ -174,47 +174,47 @@ const GUIDE_INTERLINKS: Record<GuidePath, GuideInterlinkConfig> = {
   },
   "/guias/reparacion-xiaomi-buenos-aires": {
     guidance:
-      "Si estas comparando rendimiento por marca, estas lecturas te dan contexto tecnico para decidir entre reparacion puntual o cambio de componente.",
+      "Si estas comparando rendimiento por marca, estas lecturas te dan contexto técnico para decidir entre reparación puntual o cambio de componente.",
     links: [
       {
         href: "/guias/reparacion-iphone-buenos-aires",
-        title: "Reparacion de iPhone",
+        title: "Reparación de iPhone",
         description:
           "Guía enfocada en trazabilidad y diagnóstico de hardware crítico.",
       },
       {
         href: "/guias/reparacion-samsung-buenos-aires",
-        title: "Reparacion de Samsung",
+        title: "Reparación de Samsung",
         description:
-          "Flujo tecnico para Galaxy con foco en carga, pantalla y placa.",
+          "Flujo técnico para Galaxy con foco en carga, pantalla y placa.",
       },
       {
         href: "/guias/cambio-bateria-celular",
-        title: "Cambio de bateria",
+        title: "Cambio de batería",
         description:
-          "Ideal si notas perdida de autonomia o inestabilidad termica.",
+          "Ideal si notas pérdida de autonomía o inestabilidad térmica.",
       },
     ],
   },
   "/guias/soporte-empresas-servicio-tecnico": {
     guidance:
-      "Para armar la politica tecnica, combina esta guia corporativa con mantenimiento, placa y fallas por componente.",
+      "Para armar la política técnica, combina esta guía corporativa con mantenimiento, placa y fallas por componente.",
     links: [
       {
         href: "/reparaciones/reparacion-placa-caba",
-        title: "Revision de placa",
+        title: "Revisión de placa",
         description:
-          "Precio de la revision, plazos y condiciones para equipos que no prenden.",
+          "Precio de la revisión, plazos y condiciones para equipos que no prenden.",
       },
       {
         href: "/guias/mantenimiento-preventivo-celulares",
         title: "Mantenimiento preventivo",
         description:
-          "Rutinas que reducen incidencias y mejoran la vida util de la flota.",
+          "Rutinas que reducen incidencias y mejoran la vida útil de la flota.",
       },
       {
         href: "/guias/reparacion-pantalla-celular",
-        title: "Reparacion de pantallas",
+        title: "Reparación de pantallas",
         description:
           "Guía para estandarizar criterios de recambio en equipos de uso diario.",
       },

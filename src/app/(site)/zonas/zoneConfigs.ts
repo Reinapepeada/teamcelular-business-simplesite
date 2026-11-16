@@ -52,7 +52,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       { name: "Belgrano", slug: "belgrano" },
       { name: "Caballito", slug: "caballito" },
     ],
-    focusServices: ["pantalla", "bateria", "pin de carga", "microelectronica"],
+    focusServices: ["pantalla", "batería", "pin de carga", "microelectrónica"],
     faqs: [
       {
         q: "¿Cuál es la sucursal más cerca de Palermo?",
@@ -74,7 +74,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
   },
   caballito: {
     slug: "caballito",
-    // 1 impresion en 26 dias: fuera del indice hasta que haya demanda real.
+    // 1 impresion en 26 días: fuera del índice hasta que haya demanda real.
     noIndex: true,
     zoneName: "Caballito",
     metaTitle: "Arreglo de Celulares en Caballito (CABA) | Team Celular",
@@ -109,9 +109,9 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       },
     ],
     localScenarios: [
-      "En Caballito vemos equipos con bateria degradada por uso diario intenso.",
-      "Tras golpes, aparecen lineas o touch parcial que requieren modulo completo.",
-      "Tambien ingresan casos de humedad con necesidad de limpieza y revision interna.",
+      "En Caballito vemos equipos con batería degradada por uso diario intenso.",
+      "Tras golpes, aparecen líneas o touch parcial que requieren módulo completo.",
+      "También ingresan casos de humedad con necesidad de limpieza y revisión interna.",
     ],
     transportTip:
       "Desde Caballito podes combinar subte/colectivo hacia Recoleta. Te pasamos referencia exacta por WhatsApp para que llegues directo.",
@@ -120,7 +120,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       { name: "Balvanera", slug: "balvanera" },
       { name: "Palermo", slug: "palermo" },
     ],
-    focusServices: ["pantalla", "bateria", "pin de carga", "placa"],
+    focusServices: ["pantalla", "batería", "pin de carga", "placa"],
     faqs: [
       {
         q: "¿Atienden Caballito todos los días hábiles?",
@@ -161,12 +161,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     highlights: [
       {
         title: "Pantalla y vidrio",
-        desc: "Reemplazo de modulo con prueba final para entregar el equipo listo para uso.",
+        desc: "Reemplazo de módulo con prueba final para entregar el equipo listo para uso.",
         icon: "screen",
       },
       {
-        title: "Bateria estable",
-        desc: "Validamos si la causa real es bateria, software o consumo anormal.",
+        title: "Batería estable",
+        desc: "Validamos si la causa real es batería, software o consumo anormal.",
         icon: "battery",
       },
       {
@@ -187,23 +187,23 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       { name: "Balvanera", slug: "balvanera" },
       { name: "Microcentro", slug: "microcentro" },
     ],
-    focusServices: ["pantalla", "bateria", "pin de carga", "diagnostico"],
+    focusServices: ["pantalla", "batería", "pin de carga", "diagnóstico"],
     faqs: [
       {
-        q: "Atienden celulares de Almagro?",
-        a: "Si. Atendemos clientes de Almagro en nuestros talleres de Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).",
+        q: "¿Atienden celulares de Almagro?",
+        a: "Sí. Atendemos clientes de Almagro en nuestros talleres de Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032).",
       },
       {
-        q: "Como cotizo rapido?",
-        a: "Envia marca, modelo y falla por WhatsApp y te respondemos con estimacion inicial.",
+        q: "¿Cómo cotizo rápido?",
+        a: "Envia marca, modelo y falla por WhatsApp y te respondemos con estimación inicial.",
       },
       {
-        q: "Trabajan iPhone y Android?",
-        a: "Si, trabajamos iPhone, Samsung, Motorola, Xiaomi y otras marcas segun disponibilidad.",
+        q: "¿Trabajan iPhone y Android?",
+        a: "Si, trabajamos iPhone, Samsung, Motorola, Xiaomi y otras marcas según disponibilidad.",
       },
       {
-        q: "El presupuesto tiene costo?",
-        a: "No. Si requiere diagnostico fisico previo, te avisamos antes de intervenir.",
+        q: "¿El presupuesto tiene costo?",
+        a: "No. Si requiere diagnóstico fisico previo, te avisamos antes de intervenir.",
       },
     ],
   },
@@ -258,7 +258,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       { name: "Almagro", slug: "almagro" },
       { name: "Caballito", slug: "caballito" },
     ],
-    focusServices: ["pantalla", "carga", "bateria", "placa"],
+    focusServices: ["pantalla", "carga", "batería", "placa"],
     faqs: [
       {
         q: "¿Cuál es la sucursal más cerca de Once?",
@@ -284,7 +284,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
   },
   microcentro: {
     slug: "microcentro",
-    // 1 impresion en 26 dias: fuera del indice hasta que haya demanda real.
+    // 1 impresion en 26 días: fuera del índice hasta que haya demanda real.
     noIndex: true,
     zoneName: "Microcentro",
     metaTitle: "Arreglo de Celulares en Microcentro (CABA) | Team Celular",
@@ -302,12 +302,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       "Hola! Quiero un presupuesto para arreglo de celular desde Microcentro. Marca y modelo:",
     highlights: [
       {
-        title: "Reparacion agil",
-        desc: "Pantalla, bateria y carga con foco en devolverte el equipo lo antes posible.",
+        title: "Reparación agil",
+        desc: "Pantalla, batería y carga con foco en devolverte el equipo lo antes posible.",
         icon: "speed",
       },
       {
-        title: "Diagnostico tecnico",
+        title: "Diagnóstico técnico",
         desc: "Si hay reinicios, sin señal o sin imagen, revisamos para evitar cambios al azar.",
         icon: "repair",
       },
@@ -329,22 +329,22 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
       { name: "Recoleta", slug: "recoleta" },
       { name: "Almagro", slug: "almagro" },
     ],
-    focusServices: ["pantalla", "bateria", "carga", "soporte empresas"],
+    focusServices: ["pantalla", "batería", "carga", "soporte empresas"],
     faqs: [
       {
-        q: "Atienden Microcentro?",
-        a: "Si. Tenemos dos talleres en CABA — Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032). Coordinamos ingreso por WhatsApp para que vengas directo sin esperar.",
+        q: "¿Atienden Microcentro?",
+        a: "Sí. Tenemos dos talleres en CABA — Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032). Coordinamos ingreso por WhatsApp para que vengas directo sin esperar.",
       },
       {
-        q: "Pueden emitir factura para empresa?",
-        a: "Si. Emitimos factura y podemos organizar flujo de reparaciones para varios equipos.",
+        q: "¿Pueden emitir factura para empresa?",
+        a: "Sí. Emitimos factura y podemos organizar flujo de reparaciones para varios equipos.",
       },
       {
-        q: "Cuanto tarda un presupuesto?",
-        a: "El presupuesto inicial se responde rapido por WhatsApp o formulario. Si hace falta revision fisica, lo aclaramos antes.",
+        q: "¿Cuánto tarda un presupuesto?",
+        a: "El presupuesto inicial se responde rápido por WhatsApp o formulario. Si hace falta revisión fisica, lo aclaramos antes.",
       },
       {
-        q: "Tienen garantia escrita?",
+        q: "¿Tienen garantía escrita?",
         a: "Sí. Cada reparación sale con garantía escrita de 90 días sobre trabajo y repuesto.",
       },
     ],

@@ -317,11 +317,11 @@ export default function MotorolaRepairGuidePage() {
         publishedTime="2026-05-08T00:00:00Z"
         modifiedTime="2026-10-15T00:00:00Z"
         about={[
-          "reparacion de Motorola en Buenos Aires",
-          "service tecnico Motorola en CABA",
-          "reparacion de Moto G",
-          "reparacion de Motorola Edge",
-          "cambio de pantalla, bateria y USB-C Motorola",
+          "reparación de Motorola en Buenos Aires",
+          "service técnico Motorola en CABA",
+          "reparación de Moto G",
+          "reparación de Motorola Edge",
+          "cambio de pantalla, batería y USB-C Motorola",
         ]}
         image="https://teamcelular.com/opengraph-image.png"
         url={PAGE_URL}
@@ -652,7 +652,7 @@ export default function MotorolaRepairGuidePage() {
               description:
                 "Servicio técnico especializado en Motorola con diagnóstico profesional, repuestos de calidad y garantía escrita 90 días en CABA.",
               provider: { "@id": `${SITE_URL}#organization` },
-              // Rango y catalogo salen de repairPrices: un unico lugar donde el precio
+              // Rango y catalogo salen de repairPrices: un único lugar donde el precio
               // visible y el structured data no pueden divergir.
               priceRange: `ARS ${priceRangeOf(BRAND_REPAIR_PRICES.motorola).low.toLocaleString("es-AR")}-${priceRangeOf(BRAND_REPAIR_PRICES.motorola).high.toLocaleString("es-AR")}`,
               ...buildPriceOffers(BRAND_REPAIR_PRICES.motorola, "Motorola"),

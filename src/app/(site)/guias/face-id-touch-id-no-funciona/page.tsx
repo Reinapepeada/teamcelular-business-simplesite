@@ -18,17 +18,17 @@ export const metadata: Metadata = buildWebsiteMetadata({
     "face id no funciona",
     "touch id no funciona",
     "reparacion iphone face id",
-    "sensor biometrico celular",
+    "sensor biométrico celular",
     "microelectronica iphone caba",
   ],
   openGraphTitle: "Face ID o Touch ID no Funciona: Causas y Solución | Team Celular",
   openGraphDescription:
-    "Guia para diagnosticar fallas biometricas en iPhone y decidir reparacion segura con criterio tecnico.",
+    "Guía para diagnosticar fallas biometricas en iPhone y decidir reparación segura con criterio técnico.",
   openGraphImagePath: "/opengraph-image.png",
-  openGraphImageAlt: "Diagnostico de Face ID y Touch ID",
+  openGraphImageAlt: "Diagnóstico de Face ID y Touch ID",
   twitterTitle: "Face ID o Touch ID no Funciona | Team Celular",
   twitterDescription:
-    "Checklist de diagnostico para fallas biometricas antes de invertir en reparacion.",
+    "Checklist de diagnóstico para fallas biometricas antes de invertir en reparación.",
   languages: {
     "es-AR": PAGE_PATH,
   },
@@ -48,12 +48,12 @@ const symptoms: GuideItem[] = [
   {
     title: "Falla tras golpe o cambio de pantalla",
     description:
-      "Intervenciones previas o impacto pueden afectar sensores, flex o calibracion.",
+      "Intervenciones previas o impacto pueden afectar sensores, flex o calibración.",
   },
   {
-    title: "Camara frontal con comportamiento raro",
+    title: "Cámara frontal con comportamiento raro",
     description:
-      "Si camara frontal falla junto con Face ID, suele haber problema compartido en modulo superior.",
+      "Si cámara frontal falla junto con Face ID, suele haber problema compartido en módulo superior.",
   },
 ];
 
@@ -64,19 +64,19 @@ const diagnostics: GuideItem[] = [
       "Identificamos si hubo apertura previa, repuestos no compatibles o golpes recientes.",
   },
   {
-    title: "Prueba de modulos asociados",
+    title: "Prueba de módulos asociados",
     description:
-      "Revisamos camara frontal, sensor de proximidad y flex vinculados al sistema biometrico.",
+      "Revisamos cámara frontal, sensor de proximidad y flex vinculados al sistema biométrico.",
   },
   {
     title: "Control de conectores y soldaduras",
     description:
-      "Validamos continuidad fisica y electrica para descartar cortes o sulfatacion.",
+      "Validamos continuidad fisica y eléctrica para descartar cortes o sulfatacion.",
   },
   {
-    title: "Diagnostico de placa logica",
+    title: "Diagnóstico de placa lógica",
     description:
-      "Cuando el modulo esta sano, analizamos circuito para confirmar si requiere microelectronica.",
+      "Cuando el módulo esta sano, analizamos circuito para confirmar si requiere microelectrónica.",
   },
 ];
 
@@ -84,7 +84,7 @@ const planSteps: GuideItem[] = [
   {
     title: "Descartar problema de software",
     description:
-      "Primero se revisa configuracion, actualizacion y estado del sistema para evitar cambios innecesarios.",
+      "Primero se revisa configuración, actualización y estado del sistema para evitar cambios innecesarios.",
   },
   {
     title: "Reparar o reemplazar flex/modulo",
@@ -92,35 +92,35 @@ const planSteps: GuideItem[] = [
       "Si hay daño fisico en componentes asociados, se corrige con piezas compatibles de calidad.",
   },
   {
-    title: "Intervencion de microelectronica",
+    title: "Intervención de microelectrónica",
     description:
-      "En fallas de placa se realiza reparacion de precision con equipamiento especializado.",
+      "En fallas de placa se realiza reparación de precisión con equipamiento especializado.",
   },
   {
     title: "Pruebas funcionales finales",
     description:
-      "Se valida desbloqueo biometrico, camara frontal y estabilidad general antes de entrega.",
+      "Se valida desbloqueo biométrico, cámara frontal y estabilidad general antes de entrega.",
   },
 ];
 
 const faq: GuideFaqItem[] = [
   {
-    question: "Cambiar pantalla puede afectar Face ID o Touch ID?",
+    question: "¿Cambiar pantalla puede afectar Face ID o Touch ID?",
     answer:
-      "Si se instala un modulo de baja calidad o se manipulan mal conectores, puede impactar sensores biometricos.",
+      "Si se instala un módulo de baja calidad o se manipulan mal conectores, puede impactar sensores biometricos.",
   },
   {
-    question: "Siempre se puede recuperar Face ID?",
+    question: "¿Siempre se puede recuperar Face ID?",
     answer:
       "Depende del tipo de daño. Hay casos recuperables y otros donde el daño es irreversible en componentes clave.",
   },
   {
-    question: "Touch ID falla tambien por humedad?",
+    question: "¿Touch ID falla también por humedad?",
     answer:
-      "Si. La humedad puede sulfatar conectores y afectar lectura del sensor o comunicacion con placa.",
+      "Sí. La humedad puede sulfatar conectores y afectar lectura del sensor o comunicacion con placa.",
   },
   {
-    question: "Cuanto tarda un diagnostico biometrico?",
+    question: "¿Cuánto tarda un diagnóstico biométrico?",
     answer:
       "El plazo depende de la falla y de las pruebas necesarias. Si hay que revisar la placa, la evaluación puede llevar más tiempo. Te confirmamos el alcance y el plazo antes de avanzar.",
   },
@@ -139,17 +139,17 @@ export default function FaceIdTouchIdGuidePage() {
       siteUrl={SITE_URL}
       pagePath={PAGE_PATH}
       pageLabel="Face ID / Touch ID"
-      title="Face ID o Touch ID no funciona: causas y solucion"
+      title="Face ID o Touch ID no funciona: causas y solución"
       heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), evalúa fallas de Face ID y Touch ID. Pueden venir de software, flex, sensores o placa. Confirmamos el alcance y el plazo después de revisar el equipo."
-      badge="Diagnostico avanzado"
+      badge="Diagnóstico avanzado"
       readingTime="6 min"
       publishedTime="2026-04-16T00:00:00Z"
       modifiedTime="2026-08-20T00:00:00Z"
       imagePath="/opengraph-image.png"
       heroPoints={[
-        "Detecta la causa mas probable segun sintomas.",
-        "Evita cambios de modulo sin diagnostico previo.",
-        "Define cuando conviene pasar a microelectronica.",
+        "Detecta la causa mas probable según síntomas.",
+        "Evita cambios de módulo sin diagnóstico previo.",
+        "Define cuando conviene pasar a microelectrónica.",
       ]}
       symptomsTitle="¿Cuáles son los síntomas habituales en sensores biométricos?"
       symptomsDescription="Estos escenarios son los que más vemos en equipos que llegan a laboratorio."
@@ -162,7 +162,7 @@ export default function FaceIdTouchIdGuidePage() {
       planSteps={planSteps}
       faq={faq}
       relatedLinks={relatedLinks}
-      whatsappText="Hola Team Celular, vi la guia de Face ID/Touch ID y quiero evaluar mi iPhone"
+      whatsappText="Hola Team Celular, vi la guía de Face ID/Touch ID y quiero evaluar mi iPhone"
     />
   );
 }

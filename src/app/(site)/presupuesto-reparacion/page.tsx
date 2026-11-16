@@ -238,7 +238,7 @@ export default function PresupuestoReparacionPage() {
                                 availability: "https://schema.org/InStock",
                                 url: PAGE_URL,
                                 description:
-                                    "Revision tecnica arancelada. Rango informado antes del ingreso del equipo.",
+                                    "Revisión técnica arancelada. Rango informado antes del ingreso del equipo.",
                                 priceSpecification: {
                                     "@type": "PriceSpecification",
                                     priceCurrency: "ARS",

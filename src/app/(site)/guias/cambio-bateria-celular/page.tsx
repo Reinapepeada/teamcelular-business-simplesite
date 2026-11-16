@@ -99,7 +99,7 @@ export const metadata: Metadata = {
         url: "https://teamcelular.com/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "Cambio de bateria de celular en Team Celular",
+        alt: "Cambio de batería de celular en Team Celular",
       },
     ],
   },
@@ -222,7 +222,7 @@ const faqBattery = [
   },
   {
     question: "¿La batería nueva viene con garantía?",
-    answer: `Si. ${WARRANTY_SCOPE_MESSAGE} La cobertura exacta se detalla en la orden de trabajo y en el certificado de garantia de la bateria instalada.`,
+    answer: `Sí. ${WARRANTY_SCOPE_MESSAGE} La cobertura exacta se detalla en la orden de trabajo y en el certificado de garantía de la batería instalada.`,
   },
 ];
 

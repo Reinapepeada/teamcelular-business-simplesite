@@ -74,7 +74,7 @@ function createWebsiteJson() {
       {
         "@type": "CommunicateAction",
         target: `${SITE_URL}/contacto`,
-        name: "Consultar servicio tecnico",
+        name: "Consultar servicio técnico",
       },
     ],
   };

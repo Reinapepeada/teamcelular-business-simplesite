@@ -42,7 +42,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   },
 });
 
-// Sintomas: mezcla deliberada de malware real y falsos positivos de hardware.
+// Síntomas: mezcla deliberada de malware real y falsos positivos de hardware.
 const symptoms: GuideItem[] = [
   {
     title: "Publicidad a pantalla completa fuera de las apps",

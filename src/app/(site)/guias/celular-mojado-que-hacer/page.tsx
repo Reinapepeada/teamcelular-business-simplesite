@@ -23,12 +23,12 @@ export const metadata: Metadata = buildWebsiteMetadata({
   ],
   openGraphTitle: "Celular Mojado: Qué Hacer en las Primeras 2 Horas | Team Celular",
   openGraphDescription:
-    "Pasos urgentes para minimizar daño por líquidos y decidir cuándo necesitás laboratorio de microelectronica.",
+    "Pasos urgentes para minimizar daño por líquidos y decidir cuándo necesitás laboratorio de microelectrónica.",
   openGraphImagePath: "/opengraph-image.png",
-  openGraphImageAlt: "Reparacion de celular mojado en laboratorio",
+  openGraphImageAlt: "Reparación de celular mojado en laboratorio",
   twitterTitle: "Celular Mojado: Qué Hacer en las Primeras 2 Horas",
   twitterDescription:
-    "Evita errores comunes y actua rapido para aumentar chances de recuperacion del equipo.",
+    "Evita errores comunes y actua rápido para aumentar chances de recuperación del equipo.",
   languages: {
     "es-AR": PAGE_PATH,
   },
@@ -38,45 +38,45 @@ const symptoms: GuideItem[] = [
   {
     title: "Pantalla con manchas o parpadeo",
     description:
-      "El liquido en display o conectores puede generar lineas, brillo irregular o touch inestable.",
+      "El líquido en display o conectores puede generar líneas, brillo irregular o touch inestable.",
   },
   {
     title: "No enciende o reinicia solo",
     description:
-      "Puede haber corto temporal o daño en circuito de energia por humedad interna.",
+      "Puede haber corto temporal o daño en circuito de energía por humedad interna.",
   },
   {
     title: "Audio distorsionado",
     description:
-      "Parlante y microfono suelen degradarse rapido si no se secan y limpian correctamente.",
+      "Parlante y microfono suelen degradarse rápido si no se secan y limpian correctamente.",
   },
   {
     title: "Carga erratica tras mojarse",
     description:
-      "El puerto de carga puede quedar con residuos y corrosion, afectando energia y datos.",
+      "El puerto de carga puede quedar con residuos y corrosión, afectando energía y datos.",
   },
 ];
 
 const diagnostics: GuideItem[] = [
   {
-    title: "Evaluacion de ingreso de liquido",
+    title: "Evaluación de ingreso de líquido",
     description:
-      "Analizamos por donde entro el liquido y que modulos tienen mayor riesgo de corrosion.",
+      "Analizamos por donde entro el líquido y que módulos tienen mayor riesgo de corrosión.",
   },
   {
     title: "Limpieza quimica especializada",
     description:
-      "Aplicamos limpieza tecnica para remover residuos conductivos y detener corrosion activa.",
+      "Aplicamos limpieza técnica para remover residuos conductivos y detener corrosión activa.",
   },
   {
     title: "Secado controlado de componentes",
     description:
-      "No usamos metodos caseros. Se realiza secado en condiciones seguras para placa y conectores.",
+      "No usamos métodos caseros. Se realiza secado en condiciones seguras para placa y conectores.",
   },
   {
     title: "Prueba de encendido y consumo",
     description:
-      "Validamos estabilidad electrica para decidir si alcanza mantenimiento o requiere micro soldadura.",
+      "Validamos estabilidad eléctrica para decidir si alcanza mantenimiento o requiere micro soldadura.",
   },
 ];
 
@@ -84,7 +84,7 @@ const planSteps: GuideItem[] = [
   {
     title: "Apagar el equipo de inmediato",
     description:
-      "No intentes cargarlo ni forzarlo a encender. Cortar energia reduce riesgo de corto.",
+      "No intentes cargarlo ni forzarlo a encender. Cortar energía reduce riesgo de corto.",
   },
   {
     title: "Retirar funda y accesorios",
@@ -94,10 +94,10 @@ const planSteps: GuideItem[] = [
   {
     title: "Evitar remedios caseros",
     description:
-      "No uses arroz, secador caliente ni alcohol comun. Pueden agravar el daño interno.",
+      "No uses arroz, secador caliente ni alcohol común. Pueden agravar el daño interno.",
   },
   {
-    title: "Llevarlo a diagnostico tecnico",
+    title: "Llevarlo a diagnóstico técnico",
     description:
       "Cuanto antes ingrese al laboratorio, mayor probabilidad de recuperar funciones y datos.",
   },
@@ -107,17 +107,17 @@ const faq: GuideFaqItem[] = [
   {
     question: "¿Sirve poner el celular mojado en arroz?",
     answer:
-      "No es confiable. El arroz no elimina corrosion en placa y puede dejar residuos en puertos o rejillas.",
+      "No es confiable. El arroz no elimina corrosión en placa y puede dejar residuos en puertos o rejillas.",
   },
   {
     question: "Si vuelve a prender, ¿igual conviene revisarlo?",
     answer:
-      "Si. Muchos equipos funcionan unas horas y fallan despues por corrosion progresiva en conectores o pistas.",
+      "Sí. Muchos equipos funcionan unas horas y fallan después por corrosión progresiva en conectores o pistas.",
   },
   {
     question: "¿El agua dulce y la salada afectan igual?",
     answer:
-      "No. El agua salada acelera corrosion y suele ser mas agresiva para circuitos y soldaduras.",
+      "No. El agua salada acelera corrosión y suele ser mas agresiva para circuitos y soldaduras.",
   },
   {
     question: "¿En cuánto tiempo hay que actuar?",
@@ -142,13 +142,13 @@ export default function WetPhoneGuidePage() {
       pageLabel="Celular mojado"
       title="Celular mojado: que hacer en las primeras 2 horas"
       heroDescription="Si se te mojó el celular: apagalo, no lo cargues y no lo metas en arroz ni le pases secador. La corrosión puede avanzar aunque el equipo prenda. Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), evalúa el daño bajo microscopio. Confirmamos el plazo según el estado del equipo; si requiere revisión de placa, el informe lleva hasta 72 horas hábiles."
-      badge="Emergencia tecnica"
+      badge="Emergencia técnica"
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
       modifiedTime="2026-10-15T00:00:00-03:00"
       imagePath="/opengraph-image.png"
       heroPoints={[
-        "Pasos concretos para minimizar corto y corrosion.",
+        "Pasos concretos para minimizar corto y corrosión.",
         "Errores frecuentes que debes evitar desde el minuto uno.",
         "Criterios para decidir si requiere laboratorio avanzado.",
       ]}
@@ -163,7 +163,7 @@ export default function WetPhoneGuidePage() {
       planSteps={planSteps}
       faq={faq}
       relatedLinks={relatedLinks}
-      whatsappText="Hola Team Celular, vi la guia de celular mojado y necesito ayuda urgente con mi equipo"
+      whatsappText="Hola Team Celular, vi la guía de celular mojado y necesito ayuda urgente con mi equipo"
     />
   );
 }

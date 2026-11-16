@@ -220,7 +220,7 @@ export function getIphoneModel(slug: string): IphoneModelPrice | undefined {
  * de la tienda, ej. `cambio-de-bateria-iphone-13-ck-13` → iPhone 13.
  *
  * Había 2 o 3 productos casi iguales por modelo (uno por marca de batería) y
- * Google todavía los muestra para "cambio bateria iphone 13". Ya no existen en
+ * Google todavía los muestra para "cambio batería iphone 13". Ya no existen en
  * el catálogo: la ficha de la tienda los redirige a la página del modelo.
  *
  * Gana el slug más largo de todo el catálogo, así `13-pro-max` no se confunde

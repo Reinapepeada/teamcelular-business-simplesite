@@ -99,7 +99,7 @@ export async function submitRepairLead(formData: FormData) {
     };
 
     const message = [
-        "Hola! Quiero pedir un presupuesto de reparacion.",
+        "Hola! Quiero pedir un presupuesto de reparación.",
         brand ? `Marca: ${brand}` : null,
         model ? `Modelo: ${model}` : null,
         repairTypes.length ? `Falla: ${repairTypes.join(", ")}` : null,

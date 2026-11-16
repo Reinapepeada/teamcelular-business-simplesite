@@ -55,7 +55,7 @@ const ARTICLES = [
   {
     title: "Reparación de Samsung Galaxy en Buenos Aires",
     description:
-      "Guia completa para Galaxy S, A y Z Fold: pantalla AMOLED, bateria, puerto USB-C y placa logica.",
+      "Guía completa para Galaxy S, A y Z Fold: pantalla AMOLED, batería, puerto USB-C y placa lógica.",
     href: "/guias/reparacion-samsung-buenos-aires",
     category: "Landing por marca",
     readingTime: "6 min",
@@ -97,7 +97,7 @@ const ARTICLES = [
   {
     title: "Reparación de Xiaomi, Redmi y POCO",
     description:
-      "Diagnostico para equipos Xiaomi con foco en pantalla, bateria, carga rapida y microelectronica.",
+      "Diagnóstico para equipos Xiaomi con foco en pantalla, batería, carga rápida y microelectrónica.",
     href: "/guias/reparacion-xiaomi-buenos-aires",
     category: "Landing por marca",
     readingTime: "6 min",
@@ -117,9 +117,9 @@ const ARTICLES = [
     keywords: ["reparacion Motorola", "Moto G Buenos Aires", "service Motorola CABA"],
   },
   {
-    title: "Soporte tecnico para empresas y gremios",
+    title: "Soporte técnico para empresas y gremios",
     description:
-      "Beneficios de tercerizar mantenimiento de dispositivos moviles con SLAs y trazabilidad.",
+      "Beneficios de tercerizar mantenimiento de dispositivos móviles con SLAs y trazabilidad.",
     href: "/guias/soporte-empresas-servicio-tecnico",
     category: "Empresas",
     readingTime: "4 min",
@@ -130,7 +130,7 @@ const ARTICLES = [
   {
     title: "Mantenimiento preventivo de celulares",
     description:
-      "Buenas practicas para extender vida util de smartphones y reducir fallas recurrentes.",
+      "Buenas prácticas para extender vida útil de smartphones y reducir fallas recurrentes.",
     href: "/guias/mantenimiento-preventivo-celulares",
     category: "Cuidado",
     readingTime: "4 min",
@@ -139,9 +139,9 @@ const ARTICLES = [
     keywords: ["mantenimiento celular", "preventivo", "vida util"],
   },
   {
-    title: "Cambio de bateria de celular",
+    title: "Cambio de batería de celular",
     description:
-      "Guia sobre deterioro de bateria, criterios de reemplazo y ventajas de piezas certificadas.",
+      "Guía sobre deterioro de batería, criterios de reemplazo y ventajas de piezas certificadas.",
     href: "/guias/cambio-bateria-celular",
     category: "Reparaciones",
     readingTime: "5 min",
@@ -174,18 +174,18 @@ const ARTICLES = [
   {
     title: "Face ID o Touch ID no funciona",
     description:
-      "Checklist tecnico para identificar si la falla biometrica viene de sensor, flex o placa.",
+      "Checklist técnico para identificar si la falla biométrica viene de sensor, flex o placa.",
     href: "/guias/face-id-touch-id-no-funciona",
-    category: "Diagnostico avanzado",
+    category: "Diagnóstico avanzado",
     readingTime: "6 min",
     Icon: FaApple,
     datePublished: "2026-04-16",
     keywords: ["face id no funciona", "touch id", "reparacion iPhone"],
   },
   {
-    title: "Pantalla con lineas: causas y reparacion",
+    title: "Pantalla con líneas: causas y reparación",
     description:
-      "Como decidir entre cambio de display, ajuste de flex o revision de placa sin gastar de mas.",
+      "Como decidir entre cambio de display, ajuste de flex o revisión de placa sin gastar de mas.",
     href: "/guias/pantalla-con-lineas-causas-reparacion",
     category: "Fallas frecuentes",
     readingTime: "5 min",
@@ -196,7 +196,7 @@ const ARTICLES = [
   {
     title: "Celular con virus: cómo saberlo y qué hacer",
     description:
-      "Que sintomas son malware, cuales son bateria o placa, y los pasos para limpiar el equipo sin perder datos.",
+      "Que síntomas son malware, cuales son batería o placa, y los pasos para limpiar el equipo sin perder datos.",
     href: "/guias/celular-con-virus-que-hacer",
     category: "Fallas frecuentes",
     readingTime: "6 min",
@@ -207,7 +207,7 @@ const ARTICLES = [
   ...BRAND_GUIDE_LIST.map((item) => ({
     title: `Reparación de ${item.brand} en Buenos Aires`,
     description:
-      `Guia practica para ${item.brand}: fallas frecuentes, diagnostico tecnico y siguiente paso recomendado en CABA.`,
+      `Guía práctica para ${item.brand}: fallas frecuentes, diagnóstico técnico y siguiente paso recomendado en CABA.`,
     href: item.path,
     category: "Landing por marca",
     readingTime: "5 min",
@@ -253,12 +253,12 @@ export const metadata: Metadata = {
     },
     openGraphTitle: "Guías de Reparación de Celulares en CABA | Team Celular",
     openGraphDescription:
-      "Aprende y decide mejor antes de reparar: guias tecnicas reales por marca, falla y nivel de complejidad.",
+      "Aprende y decide mejor antes de reparar: guías técnicas reales por marca, falla y nivel de complejidad.",
     openGraphImagePath: "/opengraph-image.png",
     openGraphImageAlt: "Team Celular: guías de reparación de celulares",
     twitterTitle: "Guías de Reparación de Celulares en CABA | Team Celular",
     twitterDescription:
-      "Guias claras para iPhone, Samsung y Xiaomi: fallas comunes, criterios tecnicos y siguiente paso recomendado.",
+      "Guías claras para iPhone, Samsung y Xiaomi: fallas comunes, criterios técnicos y siguiente paso recomendado.",
   }),
   authors: [{ name: "Team Celular" }],
   creator: "Team Celular",
