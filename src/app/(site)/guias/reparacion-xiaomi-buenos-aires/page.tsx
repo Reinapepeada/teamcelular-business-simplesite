@@ -18,6 +18,8 @@ import {
 } from "react-icons/fa";
 import GuideByline from "@/components/seo/GuideByline";
 import { BRAND_REPAIR_PRICES, buildPriceOffers, priceRangeOf } from "@/lib/repairPrices";
+import ModelScreenPriceTable from "@/components/seo/ModelScreenPriceTable";
+import { XIAOMI_BATTERY_PRICES, XIAOMI_SCREEN_PRICES } from "@/lib/modelScreenPrices";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
@@ -27,7 +29,7 @@ const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 export const metadata: Metadata = {
   title: "Servicio Técnico Xiaomi, Redmi y POCO en CABA | Precios",
   description:
-    "Servicio técnico Xiaomi, Redmi y POCO en Recoleta y Belgrano. Pantalla desde $99.900 y batería desde $89.900, en 2-4 h. Garantía escrita 90 días.",
+    "Servicio técnico Xiaomi, Redmi y POCO en Recoleta y Belgrano. Pantalla desde $75.000 y batería desde $65.000, en 2-4 h. Garantía escrita 90 días.",
   keywords: [
     "reparacion xiaomi buenos aires",
     "service xiaomi caba",
@@ -412,6 +414,19 @@ export default function XiaomiRepairGuidePage() {
             </Link>
           </div>
         </section>
+
+        <ModelScreenPriceTable
+          id="precio-pantalla-xiaomi-por-modelo"
+          brand="Xiaomi, Redmi y POCO"
+          prices={XIAOMI_SCREEN_PRICES}
+        />
+
+        <ModelScreenPriceTable
+          id="precio-bateria-xiaomi-por-modelo"
+          brand="Xiaomi, Redmi y POCO"
+          service="batería"
+          prices={XIAOMI_BATTERY_PRICES}
+        />
 
         <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
           <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">

@@ -23,7 +23,7 @@ import GuideByline from "@/components/seo/GuideByline";
 import RepairBrandLinks from "@/components/repairs/RepairBrandLinks";
 import ScreenQuoteDetails from "@/components/repairs/ScreenQuoteDetails";
 import ModelScreenPriceTable from "@/components/seo/ModelScreenPriceTable";
-import { SAMSUNG_SCREEN_PRICES } from "@/lib/modelScreenPrices";
+import { SAMSUNG_BATTERY_PRICES, SAMSUNG_CHARGING_PORT_PRICES, SAMSUNG_SCREEN_PRICES } from "@/lib/modelScreenPrices";
 import { BRAND_REPAIR_PRICES, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, PRICES_UPDATED_LABEL, buildPriceOffers, formatArsPrice, priceRangeOf } from "@/lib/repairPrices";
 
 const SITE_URL =
@@ -441,7 +441,7 @@ export default function SamsungRepairGuidePage() {
                 {[
                   { servicio: "Revisión técnica (sin placa)", modelos: "Según la falla", tiempo: "a confirmar al ingreso", precio: "$15.000 a $25.000" },
                   { servicio: "Revisión de placa", modelos: "Según la falla", tiempo: "hasta 72 h hábiles para el informe", precio: formatArsPrice(PLACA_REVISION_PRICE) },
-                  { servicio: "Cambio de pantalla", modelos: "Galaxy S / Ultra (S22 a S25)", tiempo: "2–4 h", precio: formatRange(SCREEN_S) },
+                  { servicio: "Cambio de pantalla", modelos: "Galaxy S / Ultra (S20 FE a S25)", tiempo: "2–4 h", precio: formatRange(SCREEN_S) },
                   { servicio: "Cambio de pantalla", modelos: "Galaxy A / M (A16, A26, A35, A36, A54, A55, A56)", tiempo: "2–4 h", precio: formatRange(SCREEN_A) },
                   { servicio: "Cambio de batería", modelos: "Galaxy S / Ultra", tiempo: "1–2 h", precio: formatRange(BATTERY_S) },
                   { servicio: "Cambio de batería", modelos: "Galaxy A / M", tiempo: "1–2 h", precio: formatRange(BATTERY_A) },
@@ -478,6 +478,20 @@ export default function SamsungRepairGuidePage() {
           id="precio-pantalla-samsung-por-modelo"
           brand="Samsung Galaxy"
           prices={SAMSUNG_SCREEN_PRICES}
+        />
+
+        <ModelScreenPriceTable
+          id="precio-bateria-samsung-por-modelo"
+          brand="Samsung Galaxy"
+          service="batería"
+          prices={SAMSUNG_BATTERY_PRICES}
+        />
+
+        <ModelScreenPriceTable
+          id="precio-pin-de-carga-samsung-por-modelo"
+          brand="Samsung Galaxy"
+          service="pin de carga"
+          prices={SAMSUNG_CHARGING_PORT_PRICES}
         />
 
         <AuthorByline updatedLabel="23 de octubre de 2026" className="mt-6" />

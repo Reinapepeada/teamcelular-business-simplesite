@@ -21,7 +21,7 @@ import {
 import GuideByline from "@/components/seo/GuideByline";
 import { BRAND_REPAIR_PRICES, buildPriceOffers, priceRangeOf } from "@/lib/repairPrices";
 import ModelScreenPriceTable from "@/components/seo/ModelScreenPriceTable";
-import { MOTOROLA_SCREEN_PRICES } from "@/lib/modelScreenPrices";
+import { MOTOROLA_BATTERY_PRICES, MOTOROLA_SCREEN_PRICES } from "@/lib/modelScreenPrices";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
@@ -31,7 +31,7 @@ const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 export const metadata: Metadata = {
   title: "Servicio Técnico Motorola en CABA | Precios",
   description:
-    "Servicio técnico Motorola en CABA, sin ser service oficial: Moto G y Edge en Recoleta y Belgrano. Pantalla desde $99.900, en 2-4 h con stock. Garantía 90 días.",
+    "Servicio técnico Motorola en CABA, sin ser service oficial: Moto G y Edge en Recoleta y Belgrano. Pantalla desde $69.900, en 2-4 h con stock. Garantía 90 días.",
   keywords: [
     "reparacion motorola buenos aires",
     "service motorola caba",
@@ -404,10 +404,10 @@ export default function MotorolaRepairGuidePage() {
                 {[
                   ["Revisión técnica (sin placa)", "15.000 – 25.000"],
                   ["Revisión de placa (informe hasta 72 h hábiles)", "45.000"],
-                  ["Pantalla Moto E / G", "99.900 – 199.900"],
-                  ["Pantalla Edge (pOLED)", "299.900 – 599.900"],
-                  ["Pantalla Razr (plegable)", "999.900 – 1.399.900"],
-                  ["Batería Moto E / G", "89.900 – 169.900"],
+                  ["Pantalla Moto E / G", "69.900 – 199.900"],
+                  ["Pantalla Edge (pOLED)", "165.500 – 599.900"],
+                  ["Pantalla Razr (plegable)", "800.000 – 1.399.900"],
+                  ["Batería Moto E / G", "69.000 – 169.900"],
                   ["Batería Edge / Razr", "119.900 – 229.900"],
                   ["Pin de carga USB-C", "35.000 – 150.000"],
                   ["Reparación de placa", "Consultar"],
@@ -429,6 +429,13 @@ export default function MotorolaRepairGuidePage() {
           id="precio-pantalla-motorola-por-modelo"
           brand="Motorola"
           prices={MOTOROLA_SCREEN_PRICES}
+        />
+
+        <ModelScreenPriceTable
+          id="precio-bateria-motorola-por-modelo"
+          brand="Motorola"
+          service="batería"
+          prices={MOTOROLA_BATTERY_PRICES}
         />
 
         <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
