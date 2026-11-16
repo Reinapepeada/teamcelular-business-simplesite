@@ -72,7 +72,6 @@ function tex(w, h, draw, { srgb = true, repeat } = {}) {
 }
 function makeTextures(accent) {
   const t = {};
-  t.glow = tex(128, 128, (c, w) => { const g = c.createRadialGradient(w / 2, w / 2, 0, w / 2, w / 2, w / 2); g.addColorStop(0, '#fff'); g.addColorStop(1, 'rgba(255,255,255,0)'); c.fillStyle = g; c.fillRect(0, 0, w, w); });
   t.brush = tex(256, 256, (c, w, h) => { // rugosidad cepillada
     c.fillStyle = '#b4b4b4'; c.fillRect(0, 0, w, h);
     for (let i = 0; i < 1400; i++) { const v = rnd() < .5 ? 255 : 0; c.fillStyle = `rgba(${v},${v},${v},.07)`; c.fillRect(rand(-40, w), rand(0, h), rand(20, 160), 1); }
@@ -195,9 +194,6 @@ function buildOled(m) {
   const g = new THREE.Group(), s = () => rrect(W - .52, H - .52, R - .26);
   g.add(slab(s(), .06, m('black'), 0, .01), face(s(), m('screen'), .032));
   g.add(face(rrect(W - .9, H - .9, R - .4), m('steelDark'), -.032).rotateY(Math.PI));                    // respaldo metálico
-  const glow = new THREE.Sprite(new THREE.SpriteMaterial({ map: T.glow, color: ACC, blending: THREE.AdditiveBlending, opacity: .3, depthWrite: false }));
-  glow.scale.set(W * 2.1, H * 1.6, 1); glow.position.z = -.1; glow.raycast = () => {};                   // "bloom" sin postproceso
-  g.add(glow);
   const fx = new THREE.Group();                                                                          // flex: sale por debajo al desarmar
   fx.add(flexStrip(m, 1.5, 1.9, 1.3, -6.5, -.06), box(.95, .26, .07, m('conn'), 1.3, -7.15, -.03), box(.5, .16, .05, m('chip'), 1.3, -6.5, -.03));
   fx.add(inst(new THREE.BoxGeometry(.09, .045, .03), m('smd'), [...Array(10)].map((_, i) => [.75 + i % 5 * .28, -6.15 - (i / 5 | 0) * .14, -.03]), Array(10).fill(0xb9a27c)));
