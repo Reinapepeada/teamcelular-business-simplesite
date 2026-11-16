@@ -4,6 +4,7 @@ import { buildProductSlug } from "./productSlug";
 import { absoluteUrl, businessId, getBranch } from "./businessProfile";
 import { condicionSchema, etiquetaCondicion } from "./fixbeeCatalog";
 import { getSiteUrl, toAbsoluteUrl } from "./seoMetadata";
+import { SHIPPING } from "./copyStandards";
 
 export function buildProductSchema(product: Product, images: string[] = [], siteUrl = getSiteUrl()) {
   const pickup = getBranch("recoleta");
@@ -37,6 +38,18 @@ export function buildProductSchema(product: Product, images: string[] = [], site
       seller: { "@id": businessId("organization") },
       itemCondition: etiquetaCondicion(product.storeCondition) ? condicionSchema(product.storeCondition) : undefined,
       availableAtOrFrom: { "@id": `${absoluteUrl(pickup.url)}#localbusiness` },
+      // Solo si el producto se envía. El importe es el promedio publicado, no la
+      // cotización: la exacta sale en el checkout según la dirección.
+      shippingDetails: product.shipping_enabled === false ? undefined : {
+        "@type": "OfferShippingDetails",
+        shippingRate: { "@type": "MonetaryAmount", value: SHIPPING.averageArs, currency: "ARS" },
+        shippingDestination: { "@type": "DefinedRegion", addressCountry: "AR" },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          handlingTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: 1, unitCode: "DAY" },
+          transitTime: { "@type": "QuantitativeValue", minValue: 1, maxValue: SHIPPING.businessDays - 1, unitCode: "DAY" },
+        },
+      },
       hasMerchantReturnPolicy: {
         "@type": "MerchantReturnPolicy",
         applicableCountry: "AR",

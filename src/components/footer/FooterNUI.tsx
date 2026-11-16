@@ -288,6 +288,13 @@ export default function FooterNUI() {
                 Devoluciones
               </Link>
               <Link
+                href="/envios"
+                prefetch={false}
+                className="inline-flex min-h-11 items-center transition-colors hover:text-white"
+              >
+                Envíos
+              </Link>
+              <Link
                 href="/privacidad"
                 prefetch={false}
                 className="inline-flex min-h-11 items-center transition-colors hover:text-white"

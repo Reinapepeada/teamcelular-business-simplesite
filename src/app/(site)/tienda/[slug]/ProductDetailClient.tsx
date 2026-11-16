@@ -449,7 +449,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                             <Truck className="w-6 h-6 text-primary dark:text-secondary" />
                                 <div>
                                     <p className="text-sm font-medium">Envío</p>
-                                    <p className="text-xs text-muted-foreground">Costo al confirmar la compra</p>
+                                    <p className="text-xs text-muted-foreground">{product.shipping_enabled === false ? "Este producto es solo para retiro" : "A todo el país, unos 5 días hábiles. Costo al comprar"}</p>
                                 </div>
                         </div>
                         <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
