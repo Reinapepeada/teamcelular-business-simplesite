@@ -1,6 +1,7 @@
 import { BRANCHES, BUSINESS_PROFILE, LOGO, ORGANIZATION_ADDRESS, SITE_URL, TECHNICAL_AUTHOR, absoluteUrl, branchId, branchLocalBusiness, businessId } from "@/lib/businessProfile";
 import { HOME_FAQS } from "@/lib/homeFaqs";
 import { REPAIR_CASE } from "@/lib/repairCase";
+import { EDGE_50_ULTRA_CASE, GALAXY_A50_SPEAKER_CASE } from "@/lib/repairCases";
 
 export const AI_DESCRIPTION = BUSINESS_PROFILE.description;
 export const AI_DISAMBIGUATION = BUSINESS_PROFILE.disambiguatingDescription;
@@ -21,6 +22,8 @@ export const AI_PAGES = [
   ["/reparaciones/recuperacion-celular-mojado-caba", "Celular mojado"],
   ["/guias/reparacion-iphone-buenos-aires", "Guía de iPhone"],
   [REPAIR_CASE.path, "Caso real: iPhone 16 Pro Max golpeado"],
+  [EDGE_50_ULTRA_CASE.path, "Caso real: pantalla de Motorola Edge 50 Ultra"],
+  [GALAXY_A50_SPEAKER_CASE.path, "Caso real: parlante con distorsión en Galaxy A50"],
   ["/guias/reparacion-samsung-buenos-aires", "Guía de Samsung"],
   ["/guias/reparacion-motorola-buenos-aires", "Guía de Motorola"],
   ["/guias/reparacion-xiaomi-buenos-aires", "Guía de Xiaomi"],

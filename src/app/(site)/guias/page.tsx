@@ -6,6 +6,7 @@ import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import { BRAND_GUIDE_LIST } from "./brandGuideConfigs";
 import { FPC_GUIDE } from "@/lib/fpcGuide";
 import { REPAIR_CASE } from "@/lib/repairCase";
+import { EDGE_50_ULTRA_CASE, GALAXY_A50_SPEAKER_CASE } from "@/lib/repairCases";
 import {
   FaApple,
   FaArrowRight,
@@ -40,6 +41,26 @@ const ARTICLES = [
     Icon: FaApple,
     datePublished: "2026-11-02",
     keywords: ["iPhone 16 Pro Max", "pantalla en corto", "IC de imagen", "cámara frontal"],
+  },
+  {
+    title: EDGE_50_ULTRA_CASE.title,
+    description: EDGE_50_ULTRA_CASE.description,
+    href: EDGE_50_ULTRA_CASE.path,
+    category: "Caso real",
+    readingTime: "3 min",
+    Icon: FaMobileAlt,
+    datePublished: "2026-11-16",
+    keywords: ["Motorola Edge 50 Ultra", "cambio de pantalla", "pantalla original", "prueba táctil"],
+  },
+  {
+    title: GALAXY_A50_SPEAKER_CASE.title,
+    description: GALAXY_A50_SPEAKER_CASE.description,
+    href: GALAXY_A50_SPEAKER_CASE.path,
+    category: "Caso real",
+    readingTime: "2 min",
+    Icon: FaTools,
+    datePublished: "2026-11-16",
+    keywords: ["Samsung Galaxy A50", "parlante con distorsión", "marco intermedio"],
   },
   {
     title: "Reparación de iPhone en Buenos Aires",

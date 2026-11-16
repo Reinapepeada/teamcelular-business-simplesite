@@ -9,6 +9,7 @@ import {
 } from "react-icons/bs";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
+import WorkshopGallery from "@/components/cards/WorkshopGallery";
 import { getSiteUrl } from "@/lib/seoMetadata";
 import { BRANCHES, BUSINESS_PROFILE, TECHNICAL_AUTHOR, businessId } from "@/lib/businessProfile";
 
@@ -228,6 +229,10 @@ export default function SobreNosotrosPage() {
                     ))}
                 </ol>
             </section>
+
+            <div className="mt-16">
+                <WorkshopGallery />
+            </div>
 
             <section aria-labelledby="donde-title" className="mt-16">
                 <h2 id="donde-title" className="tc-heading text-[#f5f5f7]">¿Dónde estamos?</h2>
