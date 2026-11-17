@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
@@ -286,10 +287,98 @@ export const metadata: Metadata = {
   publisher: "Team Celular",
 };
 
+type Article = (typeof ARTICLES)[number];
+
+const byHref = new Map<string, Article>(ARTICLES.map((article) => [article.href, article]));
+const pick = (hrefs: string[]) => hrefs.flatMap((href) => byHref.get(href) ?? []);
+
+// Marcas con guía propia y demanda medida; el resto usa la plantilla de marca.
+const MAIN_BRAND_HREFS = [
+  "/guias/reparacion-iphone-buenos-aires",
+  "/guias/reparacion-samsung-buenos-aires",
+  "/guias/reparacion-motorola-buenos-aires",
+  "/guias/reparacion-xiaomi-buenos-aires",
+];
+
+const CASE_IMAGES: Record<string, string> = {
+  [EDGE_50_ULTRA_CASE.path]: "/images/casos/edge-50-ultra-prueba-hardware.webp",
+  [GALAXY_A50_SPEAKER_CASE.path]: "/images/casos/galaxy-a50-marco-parlante.webp",
+};
+
+// Orden dentro de cada sección: primero lo que más se busca (Search Console, nov 2026).
+// Los id "por-marca" y "por-falla" ya existían como anclas: se conservan.
+const SECTIONS = [
+  {
+    id: "por-falla",
+    title: "¿Qué le pasa al celular?",
+    intro: "Empezá por el síntoma: qué podés revisar vos y cuándo conviene traerlo.",
+    articles: pick([
+      "/guias/pin-de-carga-suelto-solucion",
+      "/guias/pantalla-con-lineas-causas-reparacion",
+      "/guias/celular-mojado-que-hacer",
+      "/guias/face-id-touch-id-no-funciona",
+      "/guias/celular-con-virus-que-hacer",
+    ]),
+  },
+  {
+    id: "precios",
+    title: "Precios y reparaciones",
+    intro: "Cuánto sale, qué repuestos hay y cuánto tarda cada trabajo.",
+    articles: pick([
+      "/guias/reparacion-pantalla-celular",
+      "/guias/cambio-bateria-celular",
+      FPC_GUIDE.path,
+      "/guias/mantenimiento-preventivo-celulares",
+    ]),
+  },
+  {
+    id: "para-decidir",
+    title: "Para decidir",
+    intro: "Antes de gastar: comparar opciones con los números a la vista.",
+    articles: pick([
+      "/guias/reparar-celular-o-comprar-otro",
+      "/guias/presupuesto-service-oficial-segunda-opinion",
+      "/guias/soporte-empresas-servicio-tecnico",
+    ]),
+  },
+];
+
+const CASES = ARTICLES.filter((article) => article.category === "Caso real");
+const MAIN_BRANDS = pick(MAIN_BRAND_HREFS);
+const OTHER_BRANDS = ARTICLES.filter(
+  (article) => article.category === "Landing por marca" && !MAIN_BRAND_HREFS.includes(article.href),
+);
+// Una guía nueva que nadie ubicó en una sección aparece acá en vez de quedar sin enlace.
+const placed = new Set([...SECTIONS.flatMap((section) => section.articles), ...CASES, ...MAIN_BRANDS, ...OTHER_BRANDS].map((article) => article.href));
+const UNPLACED = ARTICLES.filter((article) => !placed.has(article.href));
+
+function ArticleList({ articles }: { articles: Article[] }) {
+  return (
+    <ul className="mt-5 grid gap-x-10 md:grid-cols-2">
+      {articles.map((article) => {
+        const Icon = article.Icon;
+        return (
+          <li key={article.href} className="border-t border-[#333336] py-3">
+            <div className="flex items-start gap-4">
+              <Icon aria-hidden className="mt-2 h-6 w-6 shrink-0 text-[#c7c7cc]" />
+              <div className="min-w-0">
+                <h3 className="text-[17px] font-semibold leading-snug"><Link href={article.href} className="inline-flex min-h-11 items-center rounded-lg hover:underline underline-offset-4">{article.title}<FaArrowRight aria-hidden className="ml-3 h-4 w-4 shrink-0 text-[#6aa6ff]" /></Link></h3>
+                <p className="pb-1 text-sm leading-6 text-[#a1a1a6]">{article.description}</p>
+              </div>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+const H2 = "tc-heading !text-[clamp(1.5rem,3vw,2.25rem)]";
+
 export default function GuidesPage() {
-  const groups = [
-    { id: "por-marca", title: "Por marca", articles: ARTICLES.filter(item => item.category === "Landing por marca") },
-    { id: "por-falla", title: "Por falla y tipo de servicio", articles: ARTICLES.filter(item => item.category !== "Landing por marca") },
+  const [fallas, precios, decidir] = SECTIONS;
+  const anchors = [
+    [fallas.id, "Por falla"], [precios.id, "Precios"], ["por-marca", "Por marca"], ["casos", "Casos reales"], [decidir.id, "Para decidir"],
   ];
   return (
     <div className="mx-auto w-full max-w-[1100px] space-y-10 bg-black px-4 py-8 text-[#f5f5f7] sm:px-6 sm:py-12">
@@ -301,29 +390,75 @@ export default function GuidesPage() {
         <h1 className="max-w-[850px] text-balance text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-[1.1] tracking-[-0.025em]">Entendé la falla antes de decidir la reparación.</h1>
         <p className="mt-4 max-w-[65ch] text-[17px] leading-relaxed text-[#a1a1a6]">Qué podés revisar, cuándo dejar de usar el equipo y qué datos conviene tener antes de pedir un presupuesto.</p>
         <nav aria-label="Buscar una guía" className="mt-5 flex flex-wrap gap-x-6 gap-y-2">
-          <a href="#por-marca" className="tc-link inline-flex min-h-11 items-center">Por marca</a>
-          <a href="#por-falla" className="tc-link inline-flex min-h-11 items-center">Por falla</a>
+          {anchors.map(([id, label]) => <a key={id} href={`#${id}`} className="tc-link inline-flex min-h-11 items-center">{label}</a>)}
           <TrackedCtaLink href="/presupuesto-reparacion#solicitar-presupuesto" ctaName="guides_hero_budget" ctaLocation="guides_hero" ctaVariant="primary" className="tc-link inline-flex min-h-11 items-center">Consultar una falla</TrackedCtaLink>
         </nav>
       </header>
 
-      <div id="guias-destacadas" className="space-y-10 scroll-mt-28">
-        {groups.map(group => <section key={group.id} id={group.id} className="scroll-mt-28">
-          <h2 className="tc-heading !text-[clamp(1.5rem,3vw,2.25rem)]">{group.title}</h2>
-          <ul className="mt-5 grid gap-x-10 md:grid-cols-2">
-            {group.articles.map(article => {
+      <div id="guias-destacadas" className="space-y-14 scroll-mt-28">
+        {[fallas, precios].map((section) => (
+          <section key={section.id} id={section.id} className="scroll-mt-28">
+            <h2 className={H2}>{section.title}</h2>
+            <p className="mt-2 text-[#a1a1a6]">{section.intro}</p>
+            <ArticleList articles={section.articles} />
+          </section>
+        ))}
+
+        <section id="por-marca" className="scroll-mt-28">
+          <h2 className={H2}>Por marca</h2>
+          <p className="mt-2 text-[#a1a1a6]">Fallas típicas, precios y repuestos de cada marca.</p>
+          <ArticleList articles={MAIN_BRANDS} />
+          <h3 className="mt-8 text-[17px] font-semibold">Otras marcas</h3>
+          <ul className="mt-3 flex flex-wrap gap-2">
+            {OTHER_BRANDS.map((article) => (
+              <li key={article.href}>
+                <Link href={article.href} className="inline-flex min-h-11 items-center rounded-full bg-[#1d1d1f] px-4 text-sm text-[#f5f5f7] transition-colors hover:bg-[#333336]">
+                  {article.title.replace(" en Buenos Aires", "")}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section id="casos" className="scroll-mt-28">
+          <h2 className={H2}>Casos reales del taller</h2>
+          <p className="mt-2 text-[#a1a1a6]">Equipos que pasaron por el banco: qué tenían y cómo se resolvió.</p>
+          <ul className="mt-6 grid gap-4 md:grid-cols-3">
+            {CASES.map((article) => {
               const Icon = article.Icon;
-              return <li key={article.href} className="border-t border-[#333336] py-2">
-                <div className="flex items-start gap-4">
-                  <Icon aria-hidden className="mt-2 h-6 w-6 shrink-0 text-[#c7c7cc]" />
-                  <div className="min-w-0">
-                    <h3 className="text-[17px] font-semibold leading-snug"><Link href={article.href} className="inline-flex min-h-11 items-center rounded-lg hover:underline underline-offset-4">{article.title}<FaArrowRight aria-hidden className="ml-3 h-4 w-4 shrink-0 text-[#6aa6ff]" /></Link></h3>
-                  </div>
-                </div>
-              </li>;
+              const image = CASE_IMAGES[article.href];
+              return (
+                <li key={article.href}>
+                  <Link href={article.href} className="group flex h-full flex-col overflow-hidden rounded-[28px] bg-[#1d1d1f] transition-colors hover:bg-[#262628]">
+                    {image ? (
+                      <Image src={image} alt="" width={600} height={450} sizes="(min-width: 768px) 340px, 100vw" className="aspect-[4/3] w-full object-cover" />
+                    ) : (
+                      <span className="flex aspect-[4/3] w-full items-center justify-center bg-gradient-to-br from-[#1766f2]/30 to-[#2D2E83]/30"><Icon aria-hidden className="h-14 w-14 text-[#6aa6ff]" /></span>
+                    )}
+                    <span className="flex flex-1 flex-col p-6">
+                      <span className="text-[17px] font-semibold leading-snug">{article.title}</span>
+                      <span className="mt-2 text-sm leading-6 text-[#a1a1a6]">{article.description}</span>
+                      <span className="mt-auto pt-4 text-sm font-semibold text-[#6aa6ff]">Leer el caso →</span>
+                    </span>
+                  </Link>
+                </li>
+              );
             })}
           </ul>
-        </section>)}
+        </section>
+
+        <section id={decidir.id} className="scroll-mt-28">
+          <h2 className={H2}>{decidir.title}</h2>
+          <p className="mt-2 text-[#a1a1a6]">{decidir.intro}</p>
+          <ArticleList articles={decidir.articles} />
+        </section>
+
+        {UNPLACED.length > 0 && (
+          <section id="mas-guias" className="scroll-mt-28">
+            <h2 className={H2}>Más guías</h2>
+            <ArticleList articles={UNPLACED} />
+          </section>
+        )}
       </div>
       <nav id="servicios-de-reparacion" aria-label="Servicios de reparación y presupuesto" className="flex scroll-mt-28 flex-wrap items-center gap-x-6 gap-y-2 border-y border-[#333336] py-4 text-sm">
         <span className="font-semibold">¿Ya sabés qué necesitás?</span>
