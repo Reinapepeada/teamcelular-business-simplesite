@@ -4,6 +4,7 @@ import { BsArrowRight, BsClipboardCheck, BsClock, BsGeoAlt, BsShieldCheck, BsWha
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 import RepairBrandLinks from "@/components/repairs/RepairBrandLinks";
+import GoogleRatingBadge from "@/components/cards/GoogleRatingBadge";
 import { BRANCHES, BUSINESS_PROFILE } from "@/lib/businessProfile";
 import { BRAND_REPAIR_PRICES, PLACA_REVISION_PRICE, formatArsPrice } from "@/lib/repairPrices";
 
@@ -22,7 +23,7 @@ export default function BannerHome() {
                             Reparación de celulares en CABA
                         </h1>
                         <p className="mt-5 max-w-[38rem] text-pretty text-[19px] leading-relaxed text-[#a1a1a6]">
-                            Pantalla, batería, carga y placa. Traé tu iPhone, Samsung, Motorola o Xiaomi a Recoleta o Belgrano, sin turno.
+                            Pantalla, batería, carga y placa. Traé tu iPhone, Samsung, Motorola o Xiaomi a Recoleta o Belgrano, sin turno. Pantalla y batería en 2 a 4 horas con repuesto en stock.
                         </p>
                         <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
                             <TrackedCtaLink href="/presupuesto-reparacion#solicitar-presupuesto" ctaName="home_hero_budget" ctaLocation="home_hero" ctaVariant="primary" className="tc-btn tc-btn-primary">
@@ -35,6 +36,7 @@ export default function BannerHome() {
                         <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm text-[#c7c7cc]">
                             <li className="flex items-center gap-2"><BsClipboardCheck aria-hidden className="text-[#6aa6ff]" /> Presupuesto antes de reparar</li>
                             <li className="flex items-center gap-2"><BsShieldCheck aria-hidden className="text-[#6aa6ff]" /> Garantía escrita de 90 días</li>
+                            <GoogleRatingBadge />
                         </ul>
                         <p className="mt-5 text-[15px] text-[#c7c7cc] tabular-nums">{HERO_PRICES}</p>
                         <a href="#precios" className="tc-link mt-1 inline-flex min-h-11 items-center gap-2 text-[17px]">Ver precios por modelo <BsArrowRight aria-hidden /></a>

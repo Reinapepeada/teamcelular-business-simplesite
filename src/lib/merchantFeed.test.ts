@@ -36,6 +36,8 @@ test("arma el item con URLs absolutas, precio y XML escapado", () => {
     assert.match(xml, /<g:price>30000.00 ARS<\/g:price>/);
     assert.match(xml, /<g:availability>out_of_stock<\/g:availability>/);
     assert.doesNotMatch(xml, /<g:(?:mpn|identifier_exists)>/);
+    assert.match(xml, /<g:shipping><g:country>AR<\/g:country><g:price>25000.00 ARS<\/g:price><\/g:shipping>/);
+    assert.doesNotMatch(feedMerchant([{ ...base, shipping_enabled: false }], "https://teamcelular.com"), /g:shipping/);
 });
 
 test("con GTIN no declara identifier_exists; sin precio o foto no entra", () => {

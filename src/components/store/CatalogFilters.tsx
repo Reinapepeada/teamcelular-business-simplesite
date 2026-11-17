@@ -62,17 +62,19 @@ export default function CatalogFilters({
                     >
                         Buscar producto
                     </label>
+                    <div className="flex gap-2">
                     <input
                         id="catalog-search"
                         name="search"
                         type="search"
                         defaultValue={filters.search}
                         placeholder="Ej: cargador iPhone, modulo Samsung"
-                        className="min-h-12 w-full rounded-2xl border border-slate-300 dark:border-slate-600 px-4 text-base text-slate-900 dark:text-slate-100 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                        className="min-h-12 w-full min-w-0 flex-1 rounded-2xl border border-slate-300 dark:border-slate-600 px-4 text-base text-slate-900 dark:text-slate-100 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
                     />
-                    <button type="submit" className="inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-white hover:bg-primary/90">
+                    <button type="submit" className="inline-flex min-h-12 shrink-0 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-white hover:bg-primary/90">
                         Buscar
                     </button>
+                    </div>
                 </div>
 
         <details

@@ -69,12 +69,12 @@ export const metadata: Metadata = {
         url: "https://teamcelular.com/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "Servicio tecnico para Xiaomi Redmi y POCO en Team Celular",
+        alt: "Servicio técnico para Xiaomi Redmi y POCO en Team Celular",
       },
     ],
     publishedTime: "2026-03-12T00:00:00Z",
     modifiedTime: "2026-10-15T00:00:00Z",
-    section: "Guias Tecnicas",
+    section: "Guías Técnicas",
   },
   twitter: {
     card: "summary_large_image",
@@ -90,28 +90,28 @@ const processSteps = [
   {
     title: "Recepcion con checklist funcional",
     description:
-      "Revisamos estado general, touch, camaras, conectividad, carga y temperatura para detectar sintomas iniciales antes de abrir el equipo.",
+      "Revisamos estado general, touch, cámaras, conectividad, carga y temperatura para detectar síntomas iniciales antes de abrir el equipo.",
     duration: "15 min",
     Icon: FaMobileAlt,
   },
   {
-    title: "Diagnostico de consumo y placa",
+    title: "Diagnóstico de consumo y placa",
     description:
       "Medimos consumo y alimentación para distinguir batería, módulo de carga o placa. Si requiere revisión de placa, el informe tarda hasta 72 horas hábiles; el arreglo lleva semanas y se presupuesta por separado.",
     duration: "según la falla",
     Icon: FaTools,
   },
   {
-    title: "Reparacion segun familia Xiaomi",
+    title: "Reparación según familia Xiaomi",
     description:
-      "Reparamos según el modelo y el presupuesto aprobado. Pantalla en 2-4 h y batería en 1-2 h con repuesto en stock; para otros trabajos confirmamos el plazo por escrito.",
+      "Reparamos según el modelo y el presupuesto aprobado. Pantalla y batería en 2-4 h con repuesto en stock; para otros trabajos confirmamos el plazo por escrito.",
     duration: "según el trabajo",
     Icon: FaWrench,
   },
   {
-    title: "Pruebas reales y garantia escrita",
+    title: "Pruebas reales y garantía escrita",
     description:
-      `Verificamos carga rapida, consumo en reposo, red movil, camaras y audio para entregar un equipo utilizable y estable. ${WARRANTY_SCOPE_MESSAGE}`,
+      `Verificamos carga rápida, consumo en reposo, red móvil, cámaras y audio para entregar un equipo utilizable y estable. ${WARRANTY_SCOPE_MESSAGE}`,
     duration: "20 min",
     Icon: FaCheckCircle,
   },
@@ -121,33 +121,33 @@ const repairServices = [
   {
     title: "Pantalla AMOLED o IPS para Xiaomi",
     detail:
-      "Reemplazo de display con control de brillo, tactil y uniformidad de color en equipos Xiaomi 13/14, Redmi Note y POCO.",
+      "Reemplazo de display con control de brillo, táctil y uniformidad de color en equipos Xiaomi 13/14, Redmi Note y POCO.",
     eta: "2-4 h",
     Icon: FaMobileAlt,
   },
   {
-    title: "Bateria degradada y autonomia baja",
+    title: "Batería degradada y autonomía baja",
     detail:
-      "Cambio de bateria para equipos con descarga acelerada, apagados inesperados o perdida de rendimiento en uso intenso.",
-    eta: "1-2 h",
+      "Cambio de batería para equipos con descarga acelerada, apagados inesperados o pérdida de rendimiento en uso intenso.",
+    eta: "2-4 h",
     Icon: FaBatteryFull,
   },
   {
     title: "Pin de carga USB-C y turbo charge",
     detail:
-      "Solucion de carga intermitente, falso contacto y perdida de carga rapida en Xiaomi, Redmi y POCO.",
+      "Solución de carga intermitente, falso contacto y pérdida de carga rápida en Xiaomi, Redmi y POCO.",
     eta: "2-3 h",
     Icon: FaBolt,
   },
   {
-    title: "Camara trasera y camara selfie",
+    title: "Cámara trasera y cámara selfie",
     detail:
-      "Reparacion o cambio de modulo para recuperar enfoque, nitidez y estabilizacion en fotos y video.",
+      "Reparación o cambio de módulo para recuperar enfoque, nitidez y estabilizacion en fotos y video.",
     eta: "2-4 h",
     Icon: FaCamera,
   },
   {
-    title: "Placa logica, PMIC y bootloop",
+    title: "Placa lógica, PMIC y bootloop",
     detail:
       "Se reinicia en el logo, no enciende o se quedó sin red después de una caída o de mojarse. Revisión de placa $45.000, con informe en hasta 72 horas hábiles. Se descuenta si se repara; el arreglo lleva semanas y se confirma precio y plazo por escrito.",
     eta: "informe hasta 72 h hábiles",
@@ -156,7 +156,7 @@ const repairServices = [
   {
     title: "Speaker, microfono y audio inestable",
     detail:
-      "Reparacion de audio bajo, distorsionado o sin microfono en llamadas con test final de grabacion y reproduccion.",
+      "Reparación de audio bajo, distorsionado o sin microfono en llamadas con test final de grabacion y reproduccion.",
     eta: "2-3 h",
     Icon: FaShieldAlt,
   },
@@ -172,7 +172,7 @@ const xiaomiSymptomRows = [
   {
     symptom: "Batería dura poco, se apaga o calienta",
     urgency: "Alta si se hincha, levanta la tapa o descarga de golpe",
-    typicalTime: "1-2 h según Xiaomi, Redmi o POCO",
+    typicalTime: "2-4 h según Xiaomi, Redmi o POCO",
     nextStep: "Apagarlo si está hinchado y pedir diagnóstico de consumo",
   },
   {
@@ -230,51 +230,51 @@ const xiaomiModels = [
 
 const faq = [
   {
-    question: "Cuanto tarda reparar un Xiaomi con pantalla rota?",
+    question: "¿Cuánto tarda reparar un Xiaomi con pantalla rota?",
     answer:
       "En casos standard tarda entre 2 y 4 horas. Si el golpe afecto marco o sensores, puede extenderse para garantizar un armado correcto.",
   },
   {
-    question: "Reparan celulares Redmi y POCO tambien?",
+    question: "¿Reparan celulares Redmi y POCO también?",
     answer:
-      "Si. Trabajamos Xiaomi, Redmi y POCO, con procedimiento tecnico ajustado a cada modelo y tipo de falla.",
+      "Sí. Trabajamos Xiaomi, Redmi y POCO, con procedimiento técnico ajustado a cada modelo y tipo de falla.",
   },
   {
-    question: "Mi Xiaomi no carga rapido, lo pueden resolver?",
+    question: "¿Mi Xiaomi no carga rápido, lo pueden resolver?",
     answer:
-      "Si. Revisamos cable, modulo USB-C, bateria y lineas de carga en placa para detectar la causa real de la perdida de turbo charge.",
+      "Sí. Revisamos cable, módulo USB-C, batería y líneas de carga en placa para detectar la causa real de la pérdida de turbo charge.",
   },
   {
-    question: "Atienden equipos Xiaomi que reinician en logo?",
+    question: "¿Atienden equipos Xiaomi que reinician en logo?",
     answer:
-      "Si. Realizamos diagnostico de software y hardware para casos de bootloop, fallas de memoria o problemas de energia en placa.",
+      "Sí. Realizamos diagnóstico de software y hardware para casos de bootloop, fallas de memoria o problemas de energía en placa.",
   },
   {
-    question: "Que incluye la garantia?",
+    question: "¿Qué incluye la garantía?",
     answer: WARRANTY_SCOPE_MESSAGE,
   },
   {
-    question: "Reparan Redmi Note 12, Note 13 y Note 14?",
+    question: "¿Reparan Redmi Note 12, Note 13 y Note 14?",
     answer:
       "Sí. Trabajamos la línea Redmi Note y confirmamos el código exacto del equipo antes de cotizar pantalla, batería o módulo USB-C, porque un mismo nombre comercial puede tener variantes de hardware.",
   },
   {
-    question: "Reparan POCO X6, F6 y otros modelos POCO?",
+    question: "¿Reparan POCO X6, F6 y otros modelos POCO?",
     answer:
       "Sí. Diagnosticamos POCO X, F, M y C según disponibilidad de repuesto. Revisamos especialmente carga, temperatura, batería, pantalla y placa en equipos de uso intensivo.",
   },
   {
-    question: "Que diferencia hay entre pantalla AMOLED, IPS original y compatible?",
+    question: "¿Qué diferencia hay entre pantalla AMOLED, IPS original y compatible?",
     answer:
       "El tipo correcto depende del modelo. Una pantalla distinta puede cambiar brillo, color, consumo, tasa de refresco o respuesta táctil. Antes de instalar te informamos qué opción hay, su calidad y qué funciones conserva.",
   },
   {
-    question: "Es un servicio oficial Xiaomi?",
+    question: "¿Es un servicio oficial Xiaomi?",
     answer:
       "No somos un centro oficial Xiaomi. Somos un laboratorio técnico independiente en CABA y detallamos por escrito diagnóstico, repuesto, tiempo estimado y garantía antes de avanzar.",
   },
   {
-    question: "Cuanto cuesta el diagnostico si no hago la reparacion?",
+    question: "¿Cuánto cuesta el diagnóstico si no hago la reparación?",
     answer:
       "La revisión técnica va de $15.000 a $25.000, según la falla; la revisión de placa cuesta $45.000 y su informe se entrega en hasta 72 horas hábiles. Informamos el costo antes de abrir el equipo y se descuenta si aceptás la reparación. Si requiere arreglo de placa, lleva semanas y confirmamos precio y plazo por escrito.",
   },
@@ -284,16 +284,16 @@ export default function XiaomiRepairGuidePage() {
   return (
     <div className="flex w-full justify-center px-4 py-8 sm:py-12">
       <ArticleSchema
-        title="Reparacion de Xiaomi en Buenos Aires | Servicio Tecnico Team Celular"
+        title="Reparación de Xiaomi en Buenos Aires | Servicio Técnico Team Celular"
         description="Reparación de Xiaomi, Redmi y POCO con informe de revisión de placa en hasta 72 horas hábiles, arreglo por presupuesto y garantía escrita."
         publishedTime="2026-03-12T00:00:00Z"
         modifiedTime="2026-10-15T00:00:00Z"
         about={[
-          "reparacion de Xiaomi en Buenos Aires",
-          "service tecnico Xiaomi en CABA",
-          "reparacion de Redmi Note",
-          "reparacion de celulares POCO",
-          "cambio de pantalla, bateria y USB-C Xiaomi",
+          "reparación de Xiaomi en Buenos Aires",
+          "service técnico Xiaomi en CABA",
+          "reparación de Redmi Note",
+          "reparación de celulares POCO",
+          "cambio de pantalla, batería y USB-C Xiaomi",
         ]}
         image="https://teamcelular.com/opengraph-image.png"
         url={PAGE_URL}
@@ -303,8 +303,8 @@ export default function XiaomiRepairGuidePage() {
         <BreadcrumbJsonLd
           items={[
             { name: "Inicio", url: `${SITE_URL}/` },
-            { name: "Guias", url: `${SITE_URL}/guias` },
-            { name: "Reparacion de Xiaomi", url: PAGE_URL },
+            { name: "Guías", url: `${SITE_URL}/guias` },
+            { name: "Reparación de Xiaomi", url: PAGE_URL },
           ]}
         />
 
@@ -314,11 +314,11 @@ export default function XiaomiRepairGuidePage() {
           </Link>
           <span>/</span>
           <Link href="/guias" className="transition hover:text-primary dark:hover:text-secondary">
-            Guias
+            Guías
           </Link>
           <span>/</span>
           <span className="font-semibold text-slate-900 dark:text-[#f5f5f7]">
-            Reparacion Xiaomi
+            Reparación Xiaomi
           </span>
         </nav>
 
@@ -341,13 +341,13 @@ export default function XiaomiRepairGuidePage() {
               href="/presupuesto-reparacion"
               className="tc-btn tc-btn-primary"
             >
-              Cotizar reparacion Xiaomi
+              Cotizar reparación Xiaomi
             </Link>
             <Link
               href="https://wa.me/5491151034595?text=Hola%20Team%20Celular%2C%20quiero%20cotizar%20una%20reparacion%20de%20Xiaomi"
               className="tc-btn tc-btn-ghost"
             >
-              WhatsApp tecnico directo
+              WhatsApp técnico directo
             </Link>
           </div>
           <p className="text-sm leading-6 text-[#a1a1a6]">Revisión de placa: informe en hasta 72 horas hábiles. El arreglo lleva semanas; confirmamos precio y plazo por escrito.</p>
@@ -423,7 +423,7 @@ export default function XiaomiRepairGuidePage() {
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-700 dark:text-slate-200">
               Para reparar un Xiaomi, Redmi o POCO en Buenos Aires, Team Celular atiende
-              en Paraguay 2451, Recoleta, y Amenábar 2032, Belgrano. Con repuesto en stock, resolvemos pantalla, batería o carga USB-C en 1-4 h según el trabajo.
+              en Paraguay 2451, Recoleta, y Amenábar 2032, Belgrano. Con repuesto en stock, resolvemos pantalla, batería o carga USB-C en 2-4 h según el trabajo.
               Si requiere revisión de placa, el informe tarda hasta 72 horas hábiles; el arreglo lleva semanas y se confirma precio y plazo por escrito. La reparación tiene garantía escrita sobre trabajo y repuesto instalado.
             </p>
           </div>
@@ -573,7 +573,7 @@ export default function XiaomiRepairGuidePage() {
         <section className="space-y-7">
           <div className="text-center">
             <h2 className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-semibold leading-[1.1] text-slate-900 dark:text-[#f5f5f7]">
-              Preguntas frecuentes sobre reparacion Xiaomi
+              Preguntas frecuentes sobre reparación Xiaomi
             </h2>
             <p className="mt-2 text-lg text-slate-600 dark:text-[#a1a1a6]">
               Dudas comunes de clientes Xiaomi antes de confirmar el servicio
@@ -606,11 +606,11 @@ export default function XiaomiRepairGuidePage() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Service",
-              name: "Reparacion de Xiaomi en Buenos Aires",
+              name: "Reparación de Xiaomi en Buenos Aires",
               description:
-                "Servicio tecnico para Xiaomi, Redmi y POCO en CABA con repuestos premium y garantia escrita.",
+                "Servicio técnico para Xiaomi, Redmi y POCO en CABA con repuestos premium y garantía escrita.",
               provider: { "@id": `${SITE_URL}#organization` },
-              // Rango y catalogo salen de repairPrices: un unico lugar donde el precio
+              // Rango y catalogo salen de repairPrices: un único lugar donde el precio
               // visible y el structured data no pueden divergir.
               priceRange: `ARS ${priceRangeOf(BRAND_REPAIR_PRICES.xiaomi).low.toLocaleString("es-AR")}-${priceRangeOf(BRAND_REPAIR_PRICES.xiaomi).high.toLocaleString("es-AR")}`,
               ...buildPriceOffers(BRAND_REPAIR_PRICES.xiaomi, "Xiaomi"),

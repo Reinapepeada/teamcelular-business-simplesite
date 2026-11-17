@@ -21,6 +21,23 @@ const securityHeaders = [
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=(self)",
   },
+  // Solo observa: Report-Only no bloquea nada. Las violaciones salen en la
+  // consola del navegador; con esa lista se arma la política que sí bloquee.
+  {
+    key: "Content-Security-Policy-Report-Only",
+    value: [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.clarity.ms https://*.clarity.ms https://us-assets.i.posthog.com",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: blob: https:",
+      "font-src 'self' data:",
+      "connect-src 'self' https:",
+      "frame-src 'self' https://www.google.com https://www.youtube-nocookie.com https://www.youtube.com https://www.mercadopago.com.ar",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "frame-ancestors 'self'",
+    ].join("; "),
+  },
 ];
 
 module.exports = {
@@ -111,7 +128,8 @@ module.exports = {
     return [
       {
         source: "/fonts/:path*",
-        headers: [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }],
+        // 30 días: el archivo no lleva hash, si la fuente cambia hay que renombrarla.
+        headers: [{ key: "Cache-Control", value: "public, max-age=2592000, stale-while-revalidate=604800" }],
       },
       {
         source: "/(.*)",

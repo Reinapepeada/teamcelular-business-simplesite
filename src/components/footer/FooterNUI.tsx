@@ -88,7 +88,7 @@ const footerSections = {
     { name: "Sobre nosotros", href: "/sobrenosotros" },
     { name: "Contacto", href: "/contacto" },
     { name: "Información oficial de la marca", href: "/ai" },
-    // Unico enlace interno a la version en ingles: sin el, la pagina solo es
+    // Único enlace interno a la versión en inglés: sin el, la página solo es
     // alcanzable por hreflang y sitemap, sin PageRank interno que la sostenga.
     { name: "Phone repair in English", href: "/en/phone-repair-buenos-aires", lang: "en" },
   ],
@@ -286,6 +286,13 @@ export default function FooterNUI() {
                 className="inline-flex min-h-11 items-center transition-colors hover:text-white"
               >
                 Devoluciones
+              </Link>
+              <Link
+                href="/envios"
+                prefetch={false}
+                className="inline-flex min-h-11 items-center transition-colors hover:text-white"
+              >
+                Envíos
               </Link>
               <Link
                 href="/privacidad"

@@ -39,7 +39,7 @@ const quickGuideLinks = [
   },
   {
     href: "/guias/cambio-bateria-celular",
-    label: "Baterias",
+    label: "Baterías",
     Icon: FaBatteryHalf,
   },
   {
@@ -60,6 +60,11 @@ const quickGuideLinks = [
   {
     href: "/guias/celular-mojado-que-hacer",
     label: "Celular mojado",
+    Icon: FaBookOpen,
+  },
+  {
+    href: "/guias#casos",
+    label: "Casos reales",
     Icon: FaBookOpen,
   },
 ];
@@ -91,7 +96,7 @@ export default function GuidesLayout({
               <span className="truncate">Guías</span>
             </Link>
             <p className="hidden text-[12px] text-[#86868b] md:block">
-              Guias por marca y por falla con procesos reales, tiempos y garantia.
+              Guías por marca y por falla con procesos reales, tiempos y garantía.
             </p>
           </div>
 

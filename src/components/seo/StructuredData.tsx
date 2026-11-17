@@ -13,6 +13,8 @@ function createOrganizationJson(isBranchPage: boolean) {
     "@id": businessId("organization"),
     name: BUSINESS_PROFILE.name,
     alternateName: BUSINESS_PROFILE.alternateName,
+    // El primer taller familiar abrió en 2009 (ver /sobrenosotros).
+    foundingDate: "2009",
     description: BUSINESS_PROFILE.description,
     disambiguatingDescription: BUSINESS_PROFILE.disambiguatingDescription,
     url: SITE_URL,
@@ -74,7 +76,7 @@ function createWebsiteJson() {
       {
         "@type": "CommunicateAction",
         target: `${SITE_URL}/contacto`,
-        name: "Consultar servicio tecnico",
+        name: "Consultar servicio técnico",
       },
     ],
   };

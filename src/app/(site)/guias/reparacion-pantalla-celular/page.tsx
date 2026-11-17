@@ -28,7 +28,7 @@ import {
 
 const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 
-// SXO 2026-09: la guia recibia busquedas de compra ("cambio de pantalla") sin
+// SXO 2026-09: la guía recibia busquedas de compra ("cambio de pantalla") sin
 // mostrar un precio y convertia 0%. Solo pantallas de marcas con precio cargado.
 const SCREEN_PRICE_GROUPS = [
   ...Object.entries(BRAND_REPAIR_PRICES).map(([brand, prices]) => ({
@@ -63,7 +63,8 @@ const SCREEN_FROM = formatArsPrice(Math.min(...SCREEN_PRICE_GROUPS.flatMap((grou
 export const metadata: Metadata = {
   title: "Cambio de Pantalla de Celular: Precios por Marca en CABA",
   description:
-    `Cambio de pantalla desde ${SCREEN_FROM}, según modelo y repuesto. Compará precios por marca y consultá stock por WhatsApp en Recoleta o Belgrano.`,
+    // Responde la consulta con más impresiones y cero clics: "cuánto sale cambiar la pantalla de un celular" (GSC nov 2026).
+    `¿Cuánto sale cambiar la pantalla de un celular? Desde ${SCREEN_FROM}, según marca y modelo. Precios de iPhone, Samsung, Motorola y Xiaomi en Recoleta y Belgrano.`,
   keywords: [
     "cambio pantalla celular Buenos Aires",
     "pantalla iPhone original",
@@ -114,9 +115,9 @@ export const metadata: Metadata = {
   },
   // Se canonicalizo hacia /reparaciones/cambio-pantalla-caba y se revirtio:
   // GSC muestra 14% de solapamiento de queries entre ambas (12 de 86). Esta
-  // guia atiende intencion informativa ("cuanto demora un cambio de pantalla",
-  // "cuantas veces se puede cambiar") y la pagina de servicio, transaccional.
-  // Ademas rinde mas: 1524 impresiones y 7 clicks en 13 dias contra 233 y 10.
+  // guía atiende intencion informativa ("cuanto demora un cambio de pantalla",
+  // "cuantas veces se puede cambiar") y la página de servicio, transaccional.
+  // Además rinde mas: 1524 impresiones y 7 clicks en 13 días contra 233 y 10.
   alternates: {
     canonical: `${SITE_URL}/guias/reparacion-pantalla-celular`,
   },

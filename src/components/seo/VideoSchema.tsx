@@ -33,7 +33,7 @@ export default function VideoSchema({
           description,
           contentUrl: `${siteUrl}${contentPath}`,
           thumbnailUrl: `${siteUrl}${thumbnailPath}`,
-          // ponytail: Google exige zona horaria; fecha sola = "no valido". AR = -03:00.
+          // ponytail: Google exige zona horaria; fecha sola = "no válido". AR = -03:00.
           uploadDate: uploadDate.includes("T") ? uploadDate : `${uploadDate}T00:00:00-03:00`,
           duration,
         }),

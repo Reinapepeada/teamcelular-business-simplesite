@@ -3,8 +3,6 @@ import { BRAND_REPAIR_PRICES, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, formatA
 import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 // Precios del primer parrafo de cambio de pantalla: misma fuente que las tablas.
-const IPHONE_13_SCREEN = IPHONE_MODELS.find((m) => m.slug === "13")?.screen ?? 249900;
-const IPHONE_13_BATTERY = IPHONE_MODELS.find((m) => m.slug === "13")?.battery ?? 159900;
 const PLACA_REVISION = formatArsPrice(PLACA_REVISION_PRICE);
 const IPHONE_BATTERY_FROM = Math.min(
   ...IPHONE_MODELS.map((m) => m.battery).filter((v): v is number => v !== null),
@@ -17,7 +15,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Cambio de Batería de Celular en CABA desde $89.900",
     metaDescription:
-      "Cambio de batería en CABA desde $89.900 (Samsung A y Moto G) y $99.900 en iPhone 11. En 1 a 2 horas en Paraguay 2451, Recoleta. Garantía escrita 90 días.",
+      "Cambio de batería en CABA desde $89.900 (Samsung A y Moto G) y $99.900 en iPhone 11. En 2 a 4 horas en Paraguay 2451, Recoleta. Garantía escrita 90 días.",
     socialTitle: "Cambio de Batería en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Cambio de batería en CABA con diagnóstico previo y garantía escrita 90 días.",
@@ -29,14 +27,18 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "bateria celular se descarga rapido",
     ],
     intro:
-      "Cambiamos la batería de tu celular en 1 a 2 horas si el repuesto está en stock, con garantía escrita de 90 días. Antes medimos el consumo: a veces el que se come la carga es una app o la placa, no la batería.",
+      "Cambiamos la batería de tu celular en 2 a 4 horas si el repuesto está en stock, con garantía escrita de 90 días. Antes medimos el consumo: a veces el que se come la carga es una app o la placa, no la batería.",
     prices: [
-      { label: "iPhone 13", value: formatArsPrice(IPHONE_13_BATTERY) },
+      // Mismos modelos que la landing de pantalla, de la lista de precios de iPhone.
+      ...["11", "12", "13", "14", "15"].flatMap((slug) => {
+        const model = IPHONE_MODELS.find((m) => m.slug === slug);
+        return model?.battery ? [{ label: model.name, value: formatArsPrice(model.battery) }] : [];
+      }),
       { label: "Samsung Galaxy A", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[2].from)}` },
       { label: "Motorola Moto G", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[3].from)}` },
     ],
     whatsappText:
-      "Hola! Quiero un presupuesto para cambio de bateria en CABA. Marca y modelo:",
+      "Hola! Quiero un presupuesto para cambio de batería en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de batería (CABA)",
     serviceName: "Cambio de batería en CABA",
     serviceType: "Cambio de batería / reemplazo de batería",
@@ -61,7 +63,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     faqs: [
       {
         q: "¿Cuánto tarda el cambio de batería?",
-        a: "1 a 2 horas si reservás con una seña y el repuesto está en stock. Si no, unas 4 horas, siempre que lo traigas antes de las 13. Te confirmamos el plazo antes de abrir el equipo.",
+        a: "2 a 4 horas si el repuesto está en stock y lo traés antes de las 13. Te confirmamos el plazo antes de abrir el equipo.",
       },
       {
         q: "¿Cuánto sale cambiar la batería del celular?",
@@ -87,7 +89,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Cambio de Pantalla y Módulo en CABA | Team Celular",
     metaDescription:
-      "Cambio de pantalla en CABA: 2 a 4 horas con módulo en stock, según diagnóstico. iPhone 13 $249.900, Samsung Galaxy A desde $99.900. Garantía escrita de 90 días.",
+      "Cambio de pantalla en CABA: 2 a 4 horas con módulo en stock, según diagnóstico. iPhone 13 $249.900, Samsung Galaxy A desde $69.000. Garantía escrita de 90 días.",
     socialTitle: "Cambio de Pantalla en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Cambio de pantalla en CABA con test completo y garantía escrita 90 días.",
@@ -103,7 +105,12 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     intro:
       "Vidrio roto, líneas o touch que no responde. Revisamos tu celular y te explicamos qué módulo hay para tu modelo, cuánto sale y cuándo podés retirarlo.",
     prices: [
-      { label: "iPhone 13", value: formatArsPrice(IPHONE_13_SCREEN) },
+      // Los iPhone más pedidos, de la misma lista que la guía: quien busca
+      // "cambio de pantalla iphone" encuentra su precio acá sin ir a otra URL.
+      ...["11", "12", "13", "14", "15"].flatMap((slug) => {
+        const model = IPHONE_MODELS.find((m) => m.slug === slug);
+        return model?.screen ? [{ label: model.name, value: formatArsPrice(model.screen) }] : [];
+      }),
       { label: "Samsung Galaxy A", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[0].from)}` },
       { label: "Motorola Moto G", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[0].from)}` },
     ],
@@ -489,7 +496,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     intro:
       "Si la cámara saca fotos borrosas, no enfoca, vibra o queda en negro, la cambiamos con garantía escrita de 90 días. Antes revisamos si es el módulo, el flex o solo el vidrio del lente, para no cambiar piezas de más.",
     whatsappText:
-      "Hola! Quiero un presupuesto para cambio de camara en CABA. Marca y modelo:",
+      "Hola! Quiero un presupuesto para cambio de cámara en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de cámara (CABA)",
     serviceName: "Cambio de cámara en CABA",
     serviceType: "Reemplazo de cámara frontal y trasera",
@@ -575,7 +582,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       },
     ],
     whatsappText:
-      "Hola! Quiero un presupuesto para reparacion de audio de celular en CABA. Marca y modelo:",
+      "Hola! Quiero un presupuesto para reparación de audio de celular en CABA. Marca y modelo:",
     breadcrumbLabel: "Reparación de audio (CABA)",
     serviceName: "Reparación de audio de celular en CABA",
     serviceType: "Reparación de micrófono, parlante y auricular",

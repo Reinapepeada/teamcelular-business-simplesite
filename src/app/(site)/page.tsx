@@ -36,7 +36,7 @@ export const metadata = buildWebsiteMetadata({
         "control y diagnostico de equipos",
     ],
     // hreflang reciproco con la version en ingles: sin el par, Google no
-    // relaciona las dos paginas y ninguna se muestra al publico correcto.
+    // relaciona las dos páginas y ninguna se muestra al público correcto.
     languages: { "es-AR": "/", en: "/en/phone-repair-buenos-aires", "x-default": "/" },
     openGraphTitle: "Reparación de Celulares en CABA | Team Celular",
     openGraphDescription:

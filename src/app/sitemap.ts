@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { FPC_GUIDE } from "@/lib/fpcGuide";
 import { REPAIR_CASE } from "@/lib/repairCase";
+import { EXTRA_REPAIR_CASES } from "@/lib/repairCases";
 
 // Revalidate sitemap every 24 hours
 export const revalidate = 86400;
@@ -204,6 +205,7 @@ const mainPages = [
   },
   { path: "sobrenosotros", priority: 0.7, changeFreq: "monthly" as const },
   { path: "devoluciones", priority: 0.3, changeFreq: "yearly" as const },
+  { path: "envios", priority: 0.3, changeFreq: "yearly" as const },
   { path: "terminos", priority: 0.3, changeFreq: "yearly" as const },
   { path: "privacidad", priority: 0.3, changeFreq: "yearly" as const },
 ];
@@ -212,6 +214,7 @@ const mainPages = [
 const guidePages = [
   { path: FPC_GUIDE.path.slice(1), priority: 0.7, changeFreq: "monthly" as const },
   { path: REPAIR_CASE.path.slice(1), priority: 0.7, changeFreq: "monthly" as const },
+  ...EXTRA_REPAIR_CASES.map((item) => ({ path: item.path.slice(1), priority: 0.7, changeFreq: "monthly" as const })),
   {
     path: "guias/reparar-celular-o-comprar-otro",
     priority: 0.78,

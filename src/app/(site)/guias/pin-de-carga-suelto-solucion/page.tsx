@@ -10,7 +10,7 @@ import RepairPriceInquiry from "@/components/repairs/RepairPriceInquiry";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 import { CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, PRICES_UPDATED_LABEL, formatArsPrice } from "@/lib/repairPrices";
 
-// SXO 2026-09: "cuanto sale cambiar el pin de carga" llegaba aca sin precio visible.
+// SXO 2026-09: "cuanto sale cambiar el pin de carga" llegaba acá sin precio visible.
 const PORT_FROM = formatArsPrice(CHARGING_PORT_PRICE.from);
 const PORT_TO = formatArsPrice(CHARGING_PORT_PRICE.to);
 const PLACA_REVISION = formatArsPrice(PLACA_REVISION_PRICE);

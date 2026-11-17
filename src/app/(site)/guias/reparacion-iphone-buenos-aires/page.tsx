@@ -18,7 +18,7 @@ import {
 } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 // Precio citable en el primer parrafo: sale de la misma fuente que la tabla.
-// Precio minimo publicado: sale de la misma tabla que la pagina, no se hardcodea.
+// Precio mínimo publicado: sale de la misma tabla que la página, no se hardcodea.
 const IPHONE_SCREEN_FROM = formatArsPrice(
   Math.min(...IPHONE_MODELS.map((m) => m.screen).filter((v): v is number => Boolean(v))),
 );
@@ -45,7 +45,8 @@ const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 export const metadata: Metadata = {
   title: "Reparación de iPhone en CABA | Precios por Modelo",
   description:
-    `Elegí tu iPhone y consultá precios de pantalla y batería. Reparación en Recoleta y Belgrano, sin turno. Confirmamos repuesto y stock antes de reparar.`,
+    // Con precio: las consultas de esta página son de arreglo y el snippet no decía cuánto sale (GSC nov 2026, CTR 0,88%).
+    `Arreglo de iPhone en Recoleta y Belgrano, sin turno. Pantalla desde ${IPHONE_SCREEN_FROM} y batería desde ${IPHONE_BATTERY_FROM}, en 2 a 4 horas con stock. Garantía 90 días.`,
   keywords: [
     "reparacion iphone buenos aires",
     "service iphone caba",
@@ -125,7 +126,7 @@ const quickSteps = [
   {
     step: "Aprobás el presupuesto y reparamos",
     detail:
-      "Antes de instalar, te explicamos qué repuesto está disponible y qué funciones conserva en tu modelo. Con tu aprobación hacemos el trabajo: pantalla en 2-4 h y batería en 1-2 h si hay stock. Si la falla requiere otro trabajo, confirmamos su plazo por escrito.",
+      "Antes de instalar, te explicamos qué repuesto está disponible y qué funciones conserva en tu modelo. Con tu aprobación hacemos el trabajo: pantalla y batería en 2-4 h si hay stock. Si la falla requiere otro trabajo, confirmamos su plazo por escrito.",
     duration: "según el trabajo",
     Icon: FaWrench,
   },
@@ -150,7 +151,7 @@ const frequentRepairs = [
     title: "Cambio de batería",
     description:
       "Para iPhone que se apagan con 20%, calientan o marcan salud por debajo del 80%. Medimos el consumo antes, por si el problema no es la batería.",
-    eta: "1-2 h",
+    eta: "2-4 h",
     Icon: FaBatteryFull,
   },
   {
@@ -193,7 +194,7 @@ const iphoneSymptomRows = [
   {
     symptom: "La batería dura poco, se apaga o calienta",
     urgency: "Media-alta si baja de golpe o se hincha",
-    typicalTime: "1-2 h según modelo",
+    typicalTime: "2-4 h según modelo",
     nextStep: "Fijate la salud en Ajustes > Batería y pasanos el número",
   },
   {
@@ -332,11 +333,11 @@ export default function IphoneRepairGuidePage() {
         publishedTime="2024-01-15T00:00:00Z"
         modifiedTime="2026-10-15T00:00:00Z"
         about={[
-          "reparacion de iPhone en Buenos Aires",
-          "service tecnico Apple en CABA",
+          "reparación de iPhone en Buenos Aires",
+          "service técnico Apple en CABA",
           "cambio de pantalla iPhone",
-          "cambio de bateria iPhone",
-          "microelectronica para iPhone",
+          "cambio de batería iPhone",
+          "microelectrónica para iPhone",
         ]}
         image="https://teamcelular.com/opengraph-image.png"
         url={PAGE_URL}
@@ -391,7 +392,7 @@ export default function IphoneRepairGuidePage() {
             <a href="#costos-reparacion-iphone" className="tc-btn tc-btn-ghost">Ver precio de mi modelo</a>
           </div>
           <p className="text-sm leading-6 text-[#a1a1a6]">
-            Pantalla en 2 a 4 horas y batería en 1 a 2 horas si hay stock.
+            Pantalla y batería en 2 a 4 horas si hay stock.
             Garantía escrita de 90 días sobre trabajo y repuesto.
           </p>
           <nav aria-label="Sucursales para reparar tu iPhone" className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
@@ -519,7 +520,7 @@ export default function IphoneRepairGuidePage() {
               revisión y antes de reparar te damos el presupuesto por escrito.
             </p>
             <p className="mt-4 text-base leading-7 text-slate-700 dark:text-slate-200">
-              Con repuesto en stock, la pantalla tarda 2 a 4 horas y la batería 1 a 2 horas.
+              Con repuesto en stock, la pantalla y la batería tardan 2 a 4 horas.
               Si la falla es de placa, la revisión cuesta $45.000 y el informe se entrega
               en hasta 72 horas hábiles. El arreglo de placa lleva semanas: confirmamos
               precio y plazo por escrito y descontamos la revisión si aceptás repararlo.
@@ -541,9 +542,9 @@ export default function IphoneRepairGuidePage() {
               <table className="min-w-full divide-y divide-slate-200 text-left text-sm dark:divide-slate-700">
                 <thead className="bg-black text-white">
                   <tr>
-                    <th scope="col" className="px-5 py-4 font-semibold">Sintoma</th>
+                    <th scope="col" className="px-5 py-4 font-semibold">Síntoma</th>
                     <th scope="col" className="px-5 py-4 font-semibold">Urgencia</th>
-                    <th scope="col" className="px-5 py-4 font-semibold">Tiempo tipico</th>
+                    <th scope="col" className="px-5 py-4 font-semibold">Tiempo típico</th>
                     <th scope="col" className="px-5 py-4 font-semibold">Siguiente paso</th>
                   </tr>
                 </thead>
