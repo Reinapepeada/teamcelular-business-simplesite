@@ -1,23 +1,27 @@
 /**
- * Precio de cambio de pantalla por modelo, para Samsung y Motorola.
+ * Precios por modelo de pantalla, batería y pin de carga para Samsung,
+ * Motorola y Xiaomi.
  *
  * Fuente: último precio cobrado por modelo en órdenes finalizadas de Fixbee,
  * exportación del 15/11/2026. Regla acordada con el negocio:
  *  - solo órdenes del 1/8/2026 en adelante;
  *  - se excluyen los registros observados (total histórico de orden, trabajo
- *    combinado, alcance a revisar o precio en $0) y las tablets;
+ *    combinado, alcance a revisar o precio en $0), las tablets y los modelos
+ *    cuyo nombre en la orden es ambiguo;
  *  - si un modelo figura dos veces, queda el valor más bajo.
  *
  * Es un valor "desde": cada dato sale de una sola orden y no registra la
- * calidad del módulo. No se publica como Offer en datos estructurados.
+ * calidad del repuesto. No se publica como Offer en datos estructurados.
  */
 export interface ModelScreenPrice {
   model: string;
   /** Último precio cobrado en ARS. */
   from: number;
-  /** Mes de la orden, AAAA-MM. */
+  /** Mes del dato, AAAA-MM. */
   month: string;
 }
+
+export type ModelPriceService = "pantalla" | "batería" | "pin de carga";
 
 export const MODEL_SCREEN_PRICES_PERIOD = "agosto a noviembre de 2026";
 
@@ -42,6 +46,9 @@ export const SAMSUNG_SCREEN_PRICES: ModelScreenPrice[] = [
   { model: "Galaxy A51", from: 129000, month: "2026-10" },
   { model: "Galaxy A52", from: 290000, month: "2026-10" },
   { model: "Galaxy A53 5G", from: 275000, month: "2026-10" },
+  // Sin orden reciente: el negocio fijó el 15/11/2026 el último valor cobrado
+  // ($250.000) más 10 %.
+  { model: "Galaxy A54", from: 275000, month: "2026-11" },
   { model: "Galaxy A56", from: 370600, month: "2026-09" },
   { model: "Galaxy A70", from: 150000, month: "2026-08" },
   { model: "Galaxy M12", from: 85000, month: "2026-09" },
@@ -49,6 +56,38 @@ export const SAMSUNG_SCREEN_PRICES: ModelScreenPrice[] = [
   { model: "Galaxy S20 FE", from: 214500, month: "2026-09" },
   { model: "Galaxy S22 Ultra", from: 517500, month: "2026-09" },
   { model: "Galaxy S24 FE", from: 315000, month: "2026-09" },
+];
+
+export const SAMSUNG_BATTERY_PRICES: ModelScreenPrice[] = [
+  { model: "Galaxy A21s", from: 40000, month: "2026-09" },
+  { model: "Galaxy A24", from: 70000, month: "2026-08" },
+  { model: "Galaxy A25", from: 92000, month: "2026-10" },
+  { model: "Galaxy A53 5G", from: 85000, month: "2026-10" },
+  { model: "Galaxy A54", from: 95000, month: "2026-11" },
+  { model: "Galaxy Note 20", from: 126000, month: "2026-09" },
+  { model: "Galaxy S20", from: 79000, month: "2026-11" },
+  { model: "Galaxy S20 FE", from: 165000, month: "2026-09" },
+  { model: "Galaxy S23", from: 150000, month: "2026-08" },
+  { model: "Galaxy S23 FE", from: 120000, month: "2026-09" },
+  { model: "Galaxy S23 Ultra", from: 149000, month: "2026-08" },
+  { model: "Galaxy S24", from: 165000, month: "2026-08" },
+];
+
+export const SAMSUNG_CHARGING_PORT_PRICES: ModelScreenPrice[] = [
+  { model: "Galaxy A03", from: 59000, month: "2026-11" },
+  { model: "Galaxy A05", from: 79000, month: "2026-08" },
+  { model: "Galaxy A12", from: 49000, month: "2026-10" },
+  { model: "Galaxy A13", from: 59000, month: "2026-10" },
+  { model: "Galaxy A14", from: 49000, month: "2026-09" },
+  { model: "Galaxy A21s", from: 49000, month: "2026-08" },
+  { model: "Galaxy A24", from: 69000, month: "2026-09" },
+  { model: "Galaxy A25", from: 49000, month: "2026-08" },
+  { model: "Galaxy A35", from: 69000, month: "2026-09" },
+  { model: "Galaxy A54", from: 69000, month: "2026-09" },
+  { model: "Galaxy A55", from: 85000, month: "2026-11" },
+  { model: "Galaxy A70", from: 75000, month: "2026-11" },
+  { model: "Galaxy S23 Ultra", from: 90000, month: "2026-09" },
+  { model: "Galaxy S24", from: 95000, month: "2026-09" },
 ];
 
 export const MOTOROLA_SCREEN_PRICES: ModelScreenPrice[] = [
@@ -70,6 +109,44 @@ export const MOTOROLA_SCREEN_PRICES: ModelScreenPrice[] = [
   { model: "Edge 50 Ultra", from: 399000, month: "2026-11" },
   { model: "Edge 60", from: 390000, month: "2026-09" },
   { model: "Razr 40 Ultra", from: 800000, month: "2026-09" },
+];
+
+export const MOTOROLA_BATTERY_PRICES: ModelScreenPrice[] = [
+  { model: "Moto G42", from: 147000, month: "2026-10" },
+  { model: "Moto G54 5G", from: 75000, month: "2026-10" },
+  { model: "Moto G56 5G", from: 69000, month: "2026-09" },
+  { model: "Moto G100", from: 69000, month: "2026-08" },
+  { model: "Edge 30 Pro", from: 120000, month: "2026-08" },
+];
+
+export const XIAOMI_SCREEN_PRICES: ModelScreenPrice[] = [
+  { model: "Redmi 15C", from: 75000, month: "2026-10" },
+  { model: "Redmi Note 9", from: 85000, month: "2026-10" },
+  { model: "Redmi Note 10S", from: 124500, month: "2026-10" },
+  { model: "Redmi Note 11", from: 161100, month: "2026-08" },
+  { model: "Redmi Note 13 4G", from: 95000, month: "2026-10" },
+  { model: "Redmi Note 13", from: 189000, month: "2026-10" },
+];
+
+export const XIAOMI_BATTERY_PRICES: ModelScreenPrice[] = [
+  { model: "Mi A2", from: 65000, month: "2026-09" },
+  { model: "Mi 9T", from: 102000, month: "2026-09" },
+  { model: "Mi 11", from: 153000, month: "2026-08" },
+  { model: "Redmi Note 13", from: 105000, month: "2026-11" },
+  { model: "Redmi Note 13 4G", from: 109000, month: "2026-11" },
+  { model: "Redmi Note 14 Pro", from: 155000, month: "2026-08" },
+  { model: "POCO C75", from: 75000, month: "2026-10" },
+  { model: "POCO M6 Pro", from: 155000, month: "2026-10" },
+];
+
+export const ALL_MODEL_PRICE_TABLES: ModelScreenPrice[][] = [
+  SAMSUNG_SCREEN_PRICES,
+  SAMSUNG_BATTERY_PRICES,
+  SAMSUNG_CHARGING_PORT_PRICES,
+  MOTOROLA_SCREEN_PRICES,
+  MOTOROLA_BATTERY_PRICES,
+  XIAOMI_SCREEN_PRICES,
+  XIAOMI_BATTERY_PRICES,
 ];
 
 const MONTHS = [

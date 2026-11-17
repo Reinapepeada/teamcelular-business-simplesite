@@ -5,7 +5,7 @@ import ProductStructuredData from '@/components/seo/ProductStructuredData';
 import { redirect, notFound, permanentRedirect } from 'next/navigation';
 import type { Metadata } from 'next';
 import { buildWebsiteMetadata, getSiteUrl } from '@/lib/seoMetadata';
-import { buildProductSeoDescription } from '@/lib/productSeo';
+import { buildProductSeoDescription, buildProductSeoTitle } from '@/lib/productSeo';
 import { verProducto } from '@/lib/storeCatalog';
 import { productoDeVidriera, type VidrieraProduct } from '@/lib/fixbeeCatalog';
 import { slugsAProbar } from '@/lib/legacySlug';
@@ -79,7 +79,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         const image = getPrimaryImage(product) || '/placeholder.jpg';
         const absoluteImage = image.startsWith('http') ? image : `${SITE_URL}${image.startsWith('/') ? '' : '/'}${image}`;
 
-        const title = `${product.name || 'Producto'} | Team Celular`;
+        const title = buildProductSeoTitle(product.name);
         const description = buildProductSeoDescription(product);
         // El canonico es el slug que devolvio el catalogo, no el que vino en
         // la URL: asi un link viejo apunta a la ficha nueva en vez de

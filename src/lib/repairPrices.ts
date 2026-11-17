@@ -27,24 +27,26 @@ export const CHARGING_PORT_PRICE = { from: 35000, to: 150000 };
  */
 export const PLACA_REVISION_PRICE = 45000;
 
+// El piso de cada rango es el menor precio cobrado en órdenes cerradas de
+// Fixbee entre agosto y noviembre de 2026 (ver modelScreenPrices.ts).
 export const BRAND_REPAIR_PRICES: Record<string, RepairPrice[]> = {
   samsung: [
     { name: "Cambio de pantalla Galaxy A / M", from: 69000, to: 399900 },
-    { name: "Cambio de pantalla Galaxy S / Ultra", from: 299900, to: 1199900 },
-    { name: "Cambio de bateria Galaxy A / M", from: 89900, to: 179900 },
-    { name: "Cambio de bateria Galaxy S / Ultra", from: 119900, to: 219900 },
+    { name: "Cambio de pantalla Galaxy S / Ultra", from: 214500, to: 1199900 },
+    { name: "Cambio de bateria Galaxy A / M", from: 40000, to: 179900 },
+    { name: "Cambio de bateria Galaxy S / Ultra", from: 79000, to: 219900 },
   ],
   xiaomi: [
-    { name: "Cambio de pantalla Redmi / Note / Poco", from: 99900, to: 349900 },
+    { name: "Cambio de pantalla Redmi / Note / Poco", from: 75000, to: 349900 },
     { name: "Cambio de pantalla OLED alta gama", from: 249900, to: 599900 },
-    { name: "Cambio de bateria Redmi / Note / Poco", from: 89900, to: 179900 },
+    { name: "Cambio de bateria Redmi / Note / Poco", from: 65000, to: 179900 },
     { name: "Cambio de bateria alta gama", from: 119900, to: 229900 },
   ],
   motorola: [
-    { name: "Cambio de pantalla Moto E / G", from: 99900, to: 199900 },
-    { name: "Cambio de pantalla Edge", from: 299900, to: 599900 },
-    { name: "Cambio de pantalla Razr", from: 999900, to: 1399900 },
-    { name: "Cambio de bateria Moto E / G", from: 89900, to: 169900 },
+    { name: "Cambio de pantalla Moto E / G", from: 69900, to: 199900 },
+    { name: "Cambio de pantalla Edge", from: 165500, to: 599900 },
+    { name: "Cambio de pantalla Razr", from: 800000, to: 1399900 },
+    { name: "Cambio de bateria Moto E / G", from: 69000, to: 169900 },
     { name: "Cambio de bateria Edge / Razr", from: 119900, to: 229900 },
   ],
 };
