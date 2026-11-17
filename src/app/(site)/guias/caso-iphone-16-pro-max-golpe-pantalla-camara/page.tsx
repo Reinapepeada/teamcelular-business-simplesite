@@ -47,7 +47,7 @@ export default function IphoneRepairCasePage() {
         <div className="space-y-4">
           <h2 className="tc-heading !text-2xl">¿Qué mostraba el iPhone durante el diagnóstico?</h2>
           <p className="leading-relaxed text-[#c7c7cc]">Con el equipo ya encendido, el historial de piezas del propio iPhone marcaba la cámara y la pantalla como desconocidas y Face ID con un problema. La foto es de ese momento, en medio del diagnóstico.</p>
-          <p className="leading-relaxed text-[#c7c7cc]">El trabajo siguió paso por paso hasta que esos avisos dejaron de aparecer.</p>
+          <p className="leading-relaxed text-[#c7c7cc]">El trabajo siguió paso por paso hasta que esos avisos dejaron de aparecer y Face ID volvió a funcionar.</p>
         </div>
       </section>
       <section className="space-y-4">
