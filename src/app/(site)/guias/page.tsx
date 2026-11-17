@@ -301,6 +301,7 @@ const MAIN_BRAND_HREFS = [
 ];
 
 const CASE_IMAGES: Record<string, string> = {
+  [REPAIR_CASE.path]: "/images/casos/iphone-16-pro-max-placa-microscopio.webp",
   [EDGE_50_ULTRA_CASE.path]: "/images/casos/edge-50-ultra-prueba-hardware.webp",
   [GALAXY_A50_SPEAKER_CASE.path]: "/images/casos/galaxy-a50-marco-parlante.webp",
 };

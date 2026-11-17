@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
@@ -8,6 +9,7 @@ import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 
 const SITE_URL = getSiteUrl();
 const PAGE_URL = `${SITE_URL}${REPAIR_CASE.path}`;
+const PHOTO = "/images/casos/iphone-16-pro-max-placa-microscopio.webp";
 
 export const metadata = buildWebsiteMetadata({
   path: REPAIR_CASE.path,
@@ -18,7 +20,7 @@ export const metadata = buildWebsiteMetadata({
 export default function IphoneRepairCasePage() {
   return (
     <article className="mx-auto w-full max-w-[1000px] space-y-10 bg-black px-4 py-8 text-[#f5f5f7] sm:px-6 sm:py-12">
-      <ArticleSchema title={REPAIR_CASE.title} description={REPAIR_CASE.description} publishedTime={REPAIR_CASE.publishedTime} modifiedTime={REPAIR_CASE.publishedTime} image={`${SITE_URL}/opengraph-image.png`} url={PAGE_URL} about={["Reparación de iPhone 16 Pro Max", "Pantalla en corto", "IC de imagen", "Cámara frontal"]} />
+      <ArticleSchema title={REPAIR_CASE.title} description={REPAIR_CASE.description} publishedTime={REPAIR_CASE.publishedTime} modifiedTime={REPAIR_CASE.publishedTime} image={`${SITE_URL}${PHOTO}`} url={PAGE_URL} about={["Reparación de iPhone 16 Pro Max", "Pantalla en corto", "IC de imagen", "Cámara frontal"]} />
       <BreadcrumbJsonLd items={[{ name: "Inicio", url: `${SITE_URL}/` }, { name: "Guías", url: `${SITE_URL}/guias` }, { name: "Caso de iPhone 16 Pro Max", url: PAGE_URL }]} />
       <nav aria-label="Ruta de navegación" className="flex flex-wrap items-center gap-2 text-sm text-[#a1a1a6]">
         <Link href="/guias" className="tc-link inline-flex min-h-11 items-center">Guías</Link>
@@ -31,6 +33,10 @@ export default function IphoneRepairCasePage() {
         <div className="mt-5"><GuideByline modifiedTime={REPAIR_CASE.publishedTime} /></div>
         <p className="mt-2 text-sm leading-6 text-[#a1a1a6]">Fecha de documentación del caso. Relato técnico aportado por Team Celular, sin datos del cliente.</p>
       </header>
+      <figure className="max-w-[520px]">
+        <Image src={PHOTO} alt="Placa de un iPhone 16 Pro Max vista por el microscopio, con un circuito integrado y sus componentes" width={1000} height={1000} sizes="(min-width: 640px) 520px, 100vw" className="w-full rounded-[28px]" />
+        <figcaption className="mt-2 text-sm text-[#a1a1a6]">La placa del iPhone 16 Pro Max de este caso, vista por el microscopio del laboratorio.</figcaption>
+      </figure>
       <section className="max-w-[70ch] space-y-4">
         <h2 className="tc-heading !text-2xl">¿Qué daños dejó el golpe?</h2>
         <p className="leading-relaxed text-[#c7c7cc]">La pantalla del iPhone 16 Pro Max quedó en cortocircuito después del golpe. En este equipo, el daño también alcanzó el IC de imagen: el circuito integrado relacionado con la imagen de la pantalla.</p>
