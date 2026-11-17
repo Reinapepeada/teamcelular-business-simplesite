@@ -42,6 +42,14 @@ export default function IphoneRepairCasePage() {
         <p className="leading-relaxed text-[#c7c7cc]">La pantalla del iPhone 16 Pro Max quedó en cortocircuito después del golpe. En este equipo, el daño también alcanzó el IC de imagen: el circuito integrado relacionado con la imagen de la pantalla.</p>
         <p className="leading-relaxed text-[#c7c7cc]">La cámara frontal tenía otra falla que se pudo detectar cuando el teléfono volvió a encender. Recuperar la imagen permitió continuar la revisión del equipo.</p>
       </section>
+      <section className="grid items-center gap-8 md:grid-cols-[0.8fr_1.2fr]">
+        <Image src="/images/casos/iphone-16-pro-max-historial-piezas-diagnostico.webp" alt="Pantalla Piezas y servicios del iPhone durante el diagnóstico: cámara y pantalla desconocidas, Face ID con problema" width={900} height={1168} sizes="(min-width: 768px) 360px, 100vw" className="w-full rounded-[28px]" />
+        <div className="space-y-4">
+          <h2 className="tc-heading !text-2xl">¿Qué mostraba el iPhone durante el diagnóstico?</h2>
+          <p className="leading-relaxed text-[#c7c7cc]">Con el equipo ya encendido, el historial de piezas del propio iPhone marcaba la cámara y la pantalla como desconocidas y Face ID con un problema. La foto es de ese momento, en medio del diagnóstico.</p>
+          <p className="leading-relaxed text-[#c7c7cc]">El trabajo siguió paso por paso hasta que esos avisos dejaron de aparecer.</p>
+        </div>
+      </section>
       <section className="space-y-4">
         <h2 className="tc-heading !text-2xl">¿Qué se reparó y qué repuestos se instalaron?</h2>
         <div className="overflow-x-auto">
