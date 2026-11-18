@@ -6,7 +6,7 @@
  * precio inventado en structured data es peor que no tenerlo.
  *
  * Lista de agosto de 2026, verificada como vigente el 15/11/2026. Galaxy A / M ajustado en noviembre de 2026 a
- * lo cobrado en órdenes cerradas de Fixbee (piso: Galaxy A04 a $69.000).
+ * lo cobrado en órdenes cerradas de Fixbee (A03s, A04, A13 y A21s desde $69.000).
  */
 import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
