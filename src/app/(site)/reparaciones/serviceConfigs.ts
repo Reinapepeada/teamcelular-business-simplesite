@@ -1,5 +1,5 @@
 import type { ServiceLandingConfig } from "./serviceLanding";
-import { BRAND_REPAIR_PRICES, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, formatArsPrice } from "@/lib/repairPrices";
+import { BATTERY_PRICE_FLOOR, BRAND_REPAIR_PRICES, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, formatArsPrice } from "@/lib/repairPrices";
 import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 // Precios del primer parrafo de cambio de pantalla: misma fuente que las tablas.
@@ -110,9 +110,9 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     slug: "cambio-bateria-caba",
     h1: "Cambio de batería en CABA",
     metaTitle:
-      "Cambio de Batería de Celular en CABA desde $89.900",
+      `Cambio de Batería de Celular en CABA desde ${formatArsPrice(BATTERY_PRICE_FLOOR)}`,
     metaDescription:
-      "Cambio de batería en CABA desde $89.900 (Samsung A y Moto G) y $99.900 en iPhone 11. En 1 a 2 horas en Paraguay 2451, Recoleta. Garantía escrita 90 días.",
+      `Cambio de batería en CABA desde ${formatArsPrice(BATTERY_PRICE_FLOOR)} (Samsung A, Moto G y Redmi) y desde ${formatArsPrice(IPHONE_BATTERY_FROM)} en iPhone. En 1 a 2 horas en Paraguay 2451, Recoleta. Garantía escrita 90 días.`,
     socialTitle: "Cambio de Batería en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Cambio de batería en CABA con diagnóstico previo y garantía escrita 90 días.",

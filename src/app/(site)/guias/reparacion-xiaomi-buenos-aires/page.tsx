@@ -17,7 +17,7 @@ import {
   FaWrench,
 } from "react-icons/fa";
 import GuideByline from "@/components/seo/GuideByline";
-import { BRAND_REPAIR_PRICES, buildPriceOffers, priceRangeOf } from "@/lib/repairPrices";
+import { BRAND_REPAIR_PRICES, buildPriceOffers, formatArsPrice, priceRangeOf } from "@/lib/repairPrices";
 import ModelScreenPriceTable from "@/components/seo/ModelScreenPriceTable";
 import { XIAOMI_BATTERY_PRICES, XIAOMI_SCREEN_PRICES } from "@/lib/modelScreenPrices";
 
@@ -32,7 +32,7 @@ const rango = (p: { from: number; to: number }) =>
 export const metadata: Metadata = {
   title: "Servicio Técnico Xiaomi, Redmi y POCO en CABA | Precios",
   description:
-    "Servicio técnico Xiaomi, Redmi y POCO en Recoleta y Belgrano. Pantalla desde $75.000 y batería desde $65.000, en 2-4 h. Garantía escrita 90 días.",
+    `Servicio técnico Xiaomi, Redmi y POCO en Recoleta y Belgrano. Pantalla desde ${formatArsPrice(BRAND_REPAIR_PRICES.xiaomi[0].from)} y batería desde ${formatArsPrice(BRAND_REPAIR_PRICES.xiaomi[2].from)}, en 2-4 h. Garantía escrita 90 días.`,
   keywords: [
     "reparacion xiaomi buenos aires",
     "service xiaomi caba",

@@ -8,7 +8,7 @@ import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards
 import GuideByline from "@/components/seo/GuideByline";
 import RepairPriceTable from "@/components/seo/RepairPriceTable";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
-import { BRAND_REPAIR_PRICES, PLACA_REVISION_PRICE, PRICES_UPDATED_LABEL, formatArsPrice, type RepairPrice } from "@/lib/repairPrices";
+import { BATTERY_PRICE_FLOOR, BRAND_REPAIR_PRICES, PLACA_REVISION_PRICE, PRICES_UPDATED_LABEL, formatArsPrice, type RepairPrice } from "@/lib/repairPrices";
 import { IPHONE_MODELS, IPHONE_MODELS_WITH_PAGE, priceLabel } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 // Precios citables: minimos reales de las mismas fuentes que las tablas.
@@ -61,7 +61,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelula
 export const metadata: Metadata = {
   title: "Cambio de batería de celular en CABA: en 1 a 2 horas",
   description:
-    "Cambio de batería de celular en Recoleta y Belgrano, CABA, desde $89.900. En 1 a 2 horas con repuesto en stock. Precio y plazo confirmados antes de reparar.",
+    `Cambio de batería de celular en Recoleta y Belgrano, CABA, desde ${formatArsPrice(BATTERY_PRICE_FLOOR)}. En 1 a 2 horas con repuesto en stock. Precio y plazo confirmados antes de reparar.`,
   keywords: [
     "cambio batería celular Buenos Aires",
     "batería iPhone original",
