@@ -10,6 +10,7 @@
  * precio cobrado en órdenes cerradas de Fixbee desde el 1/8/2026 (ajuste del
  * 18/11/2026; "14P" en la orden es 14 Pro). Se excluyeron solo mano de obra,
  * trabajos combinados y modelos ambiguos; el iPhone 11 y el 16 conservan la lista.
+ * El 13 Pro lo subió el negocio a $129.900 para quedar sobre el 13.
  */
 
 export const IPHONE_PRICES_UPDATED = "noviembre de 2026";
@@ -74,7 +75,7 @@ export const IPHONE_MODELS: IphoneModelPrice[] = [
       note: "no muestra el aviso de pieza desconocida",
     },
   },
-  { slug: "13-pro", name: "iPhone 13 Pro", screen: 269900, battery: 119900, screenAlternative: { quality: "Incell", price: 169900, referential: true } },
+  { slug: "13-pro", name: "iPhone 13 Pro", screen: 269900, battery: 129900, screenAlternative: { quality: "Incell", price: 169900, referential: true } },
   { slug: "13-pro-max", name: "iPhone 13 Pro Max", screen: 279900, battery: 189900, screenAlternative: { quality: "Incell", price: 176900, referential: true } },
   { slug: "14", name: "iPhone 14", screen: 249900, battery: 169900, screenAlternative: { quality: "Incell", price: 149900, referential: true } },
   { slug: "14-plus", name: "iPhone 14 Plus", screen: 259900, battery: 199900, screenAlternative: { quality: "Incell", price: 163900, referential: true } },
