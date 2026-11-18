@@ -167,6 +167,11 @@ const mainPages = [
     changeFreq: "monthly" as const,
   },
   {
+    path: "reparaciones/xiaomi/redmi-note-13",
+    priority: 0.84,
+    changeFreq: "monthly" as const,
+  },
+  {
     path: "reparaciones/iphone/14-pro-max",
     priority: 0.86,
     changeFreq: "monthly" as const,
