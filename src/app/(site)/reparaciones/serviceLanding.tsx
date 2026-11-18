@@ -28,6 +28,7 @@ const SERVICE_ILLUSTRATIONS: Record<string, string> = {
   "cambio-pin-carga-caba": "/images/landings/carga-concepto-20261023.webp",
   "reparacion-placa-caba": "/images/reparacion_placa.webp",
   "cambio-flex-caba": "/images/celuPorDentro.webp",
+  "reparacion-notebook-caba": "/images/dispositivoshdpro.webp",
 };
 
 const WORKFLOW = [
@@ -214,6 +215,23 @@ const SERVICE_RELATED_GUIDES: Record<string, RelatedGuide[]> = {
       description: "Protocolo útil cuando el audio falla después de humedad o líquidos.",
     },
   ],
+  "reparacion-notebook-caba": [
+    {
+      href: "/reparaciones/reparacion-placa-caba",
+      title: "Reparación de placa",
+      description: "Cómo trabajamos la microsoldadura cuando el equipo no enciende.",
+    },
+    {
+      href: "/guias/soporte-empresas-servicio-tecnico",
+      title: "Soporte para empresas",
+      description: "Mantenimiento y reparación de equipos de oficina con orden por escrito.",
+    },
+    {
+      href: "/presupuesto-reparacion",
+      title: "Revisión y presupuesto",
+      description: "Qué incluye la revisión y cómo te pasamos el precio antes de reparar.",
+    },
+  ],
   "recuperacion-celular-mojado-caba": [
     {
       href: "/guias/celular-mojado-que-hacer",
@@ -298,9 +316,12 @@ export function buildServiceMetadata(config: ServiceLandingConfig): Metadata {
 export default function ServiceLandingPage({
   config,
   children,
+  brands,
 }: {
   config: ServiceLandingConfig;
   children?: ReactNode;
+  /** Reemplaza los accesos a guías de marcas de celulares. */
+  brands?: ReactNode;
 }) {
   const serviceUrl = `${SITE_URL}/reparaciones/${config.slug}`;
   const whatsappUrl = `https://wa.me/5491151034595?text=${encodeURIComponent(
@@ -500,7 +521,7 @@ export default function ServiceLandingPage({
       {children}
 
       <section className="tc-section">
-        <div className="mb-8"><RepairBrandLinks /></div>
+        <div className="mb-8">{brands ?? <RepairBrandLinks />}</div>
         <div className="tc-reveal grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-baseline">
           <h2 className="tc-heading">¿Qué marcas reparan?</h2>
           <p className="text-[19px] leading-[1.42] text-[#a1a1a6] sm:text-[21px]">{config.brandsText}</p>

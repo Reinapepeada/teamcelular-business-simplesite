@@ -10,7 +10,102 @@ const IPHONE_BATTERY_FROM = Math.min(
   ...IPHONE_MODELS.map((m) => m.battery).filter((v): v is number => v !== null),
 );
 
+// Rangos cobrados en notebooks y PC de Team Celular (Fixbee, nov 2025 a nov 2026). Pocos casos por trabajo: revisar al actualizar.
+export const NOTEBOOK_PRICES = {
+  revision: { from: 20000, to: 45000 },
+  maintenance: { from: 60000, to: 150000 },
+  software: { from: 49000, to: 160000 },
+  boardFrom: 120000,
+};
+
 export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
+  "reparacion-notebook-caba": {
+    slug: "reparacion-notebook-caba",
+    h1: "Reparación de notebooks en CABA",
+    metaTitle: "Reparación de Notebooks y MacBook en CABA | Team Celular",
+    metaDescription: `Reparación de notebooks y MacBook en Recoleta, CABA. Revisión desde ${formatArsPrice(NOTEBOOK_PRICES.revision.from)} y presupuesto antes de reparar. HP, Lenovo, Dell, Asus y Acer.`,
+    socialTitle: "Reparación de Notebooks en CABA | Team Celular",
+    socialDescription:
+      "Team Celular, Paraguay 2451 Recoleta. Reparamos notebooks, MacBook y PC: limpieza, Windows, SSD, bisagras y placa.",
+    keywords: [
+      "reparacion notebook",
+      "reparacion de notebook CABA",
+      "arreglo de notebook",
+      "reparacion macbook",
+      "servicio tecnico notebook Recoleta",
+      "notebook no prende",
+      "notebook se calienta",
+    ],
+    intro: `Sí, reparamos notebooks y MacBook en nuestro laboratorio de Recoleta, CABA: HP, Lenovo, Dell, Asus, Acer y Apple. La revisión cuesta entre ${formatArsPrice(NOTEBOOK_PRICES.revision.from)} y ${formatArsPrice(NOTEBOOK_PRICES.revision.to)} y te pasamos el presupuesto antes de tocar nada. Los arreglos más pedidos son limpieza con cambio de pasta térmica, reinstalación de Windows con respaldo de archivos, cambio a disco SSD, bisagras y reparación de placa.`,
+    budgetCtaLabel: "Consultar por mi notebook",
+    quoteHint: "Mandanos marca, modelo y qué hace: si no prende, si se calienta, si está lenta o si se rompió la bisagra.",
+    priceNote: "Rangos de trabajos cobrados en 2026. El precio final depende del modelo y de lo que encontremos en la revisión, y lo confirmás antes de que reparemos.",
+    prices: [
+      { label: "Revisión y presupuesto", value: `${formatArsPrice(NOTEBOOK_PRICES.revision.from)} a ${formatArsPrice(NOTEBOOK_PRICES.revision.to)}` },
+      { label: "Limpieza y pasta térmica", value: `${formatArsPrice(NOTEBOOK_PRICES.maintenance.from)} a ${formatArsPrice(NOTEBOOK_PRICES.maintenance.to)}` },
+      { label: "Windows con respaldo", value: `${formatArsPrice(NOTEBOOK_PRICES.software.from)} a ${formatArsPrice(NOTEBOOK_PRICES.software.to)}` },
+      { label: "Reparación de placa", value: `desde ${formatArsPrice(NOTEBOOK_PRICES.boardFrom)}` },
+    ],
+    asideNotes: [
+      "Garantía escrita sobre el trabajo y el repuesto; el alcance figura en la orden que te llevás.",
+      "El plazo depende de la falla y del repuesto. Te lo confirmamos junto con el presupuesto.",
+    ],
+    workflow: [
+      { title: "La revisamos", desc: "La abrimos en el laboratorio, medimos temperatura, disco, batería y placa, y buscamos la causa de la falla." },
+      { title: "Te pasamos el presupuesto", desc: "Precio, plazo y repuesto por escrito. Si no te conviene reparar, te lo decimos y pagás solo la revisión." },
+      { title: "La reparamos", desc: "Si aparece otro daño al abrirla, te avisamos antes de seguir. Tus archivos no se tocan sin tu autorización." },
+      { title: "La probás y te la llevás", desc: "La encendemos con vos, probás teclado, pantalla y carga, y te llevás la garantía por escrito." },
+    ],
+    whatsappText: "Hola! Quiero un presupuesto para reparar mi notebook. Marca, modelo y falla:",
+    breadcrumbLabel: "Reparación de notebooks (CABA)",
+    serviceName: "Reparación de notebooks en CABA",
+    serviceType: "Reparación de notebooks, MacBook y PC",
+    serviceDescription:
+      "Revisión y reparación de notebooks, MacBook y PC de escritorio en Recoleta, CABA: limpieza y pasta térmica, software, discos SSD, bisagras y placa.",
+    closingDescription: "Mandanos marca, modelo y falla de tu notebook por WhatsApp y te decimos si hace falta revisarla.",
+    highlights: [
+      {
+        title: "Primero buscamos la causa",
+        desc: "Una notebook lenta puede ser el disco, la temperatura o Windows. Lo medimos antes de proponerte un arreglo, así no pagás por cambiar piezas a ver si era eso.",
+      },
+      {
+        title: "Tus archivos, primero",
+        desc: "Antes de reinstalar Windows o cambiar el disco hacemos el respaldo de tus documentos y fotos, si nos lo pedís y el disco lo permite.",
+      },
+      {
+        title: "Microsoldadura en placa",
+        desc: "Reparamos placas con el mismo instrumental que usamos en celulares: microscopio, estación de soldadura y fuente de laboratorio. No siempre hace falta cambiar la placa entera.",
+      },
+    ],
+    brandsText:
+      "Reparamos notebooks HP, Lenovo, Dell, Asus, Acer, Samsung y Sony, MacBook de Apple y PC de escritorio. No somos service oficial de ninguna marca.",
+    faqs: [
+      {
+        q: "¿Cuánto sale reparar una notebook?",
+        a: `La revisión cuesta entre ${formatArsPrice(NOTEBOOK_PRICES.revision.from)} y ${formatArsPrice(NOTEBOOK_PRICES.revision.to)}. Una limpieza con pasta térmica va de ${formatArsPrice(NOTEBOOK_PRICES.maintenance.from)} a ${formatArsPrice(NOTEBOOK_PRICES.maintenance.to)} y una reparación de placa arranca en ${formatArsPrice(NOTEBOOK_PRICES.boardFrom)}. El precio exacto te lo pasamos después de revisarla.`,
+      },
+      {
+        q: "¿Reparan MacBook?",
+        a: "Sí. Revisamos MacBook Air y MacBook Pro: limpieza, batería, teclado, software y placa. No somos service oficial de Apple.",
+      },
+      {
+        q: "¿Pierdo mis archivos si reparan la notebook?",
+        a: "No los tocamos sin tu autorización. Si hay que reinstalar Windows o cambiar el disco, primero te ofrecemos el respaldo. Si el disco está dañado, te decimos qué se puede recuperar antes de seguir.",
+      },
+      {
+        q: "Mi notebook está lenta, ¿conviene pasarla a SSD?",
+        a: "Si todavía tiene disco rígido mecánico, el cambio a SSD es el arreglo que más se nota: arranca y abre programas varias veces más rápido. Lo hacemos con el traspaso de Windows y de tus archivos.",
+      },
+      {
+        q: "¿Reparan PC de escritorio?",
+        a: "Sí. Revisamos PC de escritorio: limpieza, fuente, disco, memoria y armado. Traela al local de Recoleta.",
+      },
+      {
+        q: "¿Dónde dejo la notebook?",
+        a: "En Paraguay 2451, Recoleta, de lunes a viernes de 10:30 a 18:00, sin turno. Ahí está el laboratorio donde la reparamos.",
+      },
+    ],
+  },
   "cambio-bateria-caba": {
     slug: "cambio-bateria-caba",
     h1: "Cambio de batería en CABA",

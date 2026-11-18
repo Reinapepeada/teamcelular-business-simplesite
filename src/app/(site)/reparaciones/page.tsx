@@ -70,6 +70,12 @@ const REPAIR_SERVICES = [
       "Tapa de vidrio rota o levantada. Si se levantó sola, revisamos la batería antes de cerrar.",
     href: "/reparaciones/cambio-tapa-caba",
   },
+  {
+    title: "Notebooks y MacBook",
+    description:
+      "Se calienta, está lenta, no prende o se rompió la bisagra. Limpieza, SSD, Windows y placa en Recoleta.",
+    href: "/reparaciones/reparacion-notebook-caba",
+  },
 ];
 
 const ROUTE_SELECTOR = [
