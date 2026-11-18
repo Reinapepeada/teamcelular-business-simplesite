@@ -172,7 +172,7 @@ const faqBusiness = [
   {
     question: "¿Cuál es el volumen mínimo de dispositivos para planes corporativos?",
     answer:
-      "Trabajamos con organizaciones desde 5 dispositivos en adelante. Para flotas menores a 10 equipos, recomendamos nuestro servicio de reparación estándar con descuento por volumen. Los planes corporativos completos con SLA y logística incluida están diseñados para organizaciones con 10 o más dispositivos.",
+      "Trabajamos con organizaciones desde 5 dispositivos en adelante. El alcance del plan (SLA, logística y frecuencia de visitas) se arma según el tamaño de la flota y queda por escrito antes de empezar. Con menos de 5 equipos, cada reparación se cotiza por separado.",
   },
   {
     question: "¿Ofrecen servicio on-site o solo en taller?",

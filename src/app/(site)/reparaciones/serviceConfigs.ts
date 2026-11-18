@@ -1,10 +1,10 @@
 import type { ServiceLandingConfig } from "./serviceLanding";
-import { BRAND_REPAIR_PRICES, CHARGING_PORT_CLEANING_PRICE, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, SAMSUNG_CHARGING_PORT_PRICES, formatArsPrice } from "@/lib/repairPrices";
+import { BATTERY_PRICE_FLOOR, BRAND_REPAIR_PRICES, CHARGING_PORT_CLEANING_PRICE, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, SAMSUNG_CHARGING_PORT_PRICES, formatArsPrice } from "@/lib/repairPrices";
 import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 // Precios del primer parrafo de cambio de pantalla: misma fuente que las tablas.
 const IPHONE_13_SCREEN = IPHONE_MODELS.find((m) => m.slug === "13")?.screen ?? 249900;
-const IPHONE_13_BATTERY = IPHONE_MODELS.find((m) => m.slug === "13")?.battery ?? 159900;
+const IPHONE_13_BATTERY = IPHONE_MODELS.find((m) => m.slug === "13")?.battery ?? 125000;
 const PLACA_REVISION = formatArsPrice(PLACA_REVISION_PRICE);
 const IPHONE_BATTERY_FROM = Math.min(
   ...IPHONE_MODELS.map((m) => m.battery).filter((v): v is number => v !== null),
@@ -110,9 +110,9 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     slug: "cambio-bateria-caba",
     h1: "Cambio de batería en CABA",
     metaTitle:
-      "Cambio de Batería de Celular en CABA desde $89.900",
+      `Cambio de Batería de Celular en CABA desde ${formatArsPrice(BATTERY_PRICE_FLOOR)}`,
     metaDescription:
-      "Cambio de batería en CABA desde $89.900 (Samsung A y Moto G) y $99.900 en iPhone 11. En 1 a 2 horas en Paraguay 2451, Recoleta. Garantía escrita 90 días.",
+      `Cambio de batería en CABA desde ${formatArsPrice(BATTERY_PRICE_FLOOR)} (Samsung A, Moto G y Redmi) y desde ${formatArsPrice(IPHONE_BATTERY_FROM)} en iPhone. En 1 a 2 horas en Paraguay 2451, Recoleta. Garantía escrita 90 días.`,
     socialTitle: "Cambio de Batería en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Cambio de batería en CABA con diagnóstico previo y garantía escrita 90 días.",
