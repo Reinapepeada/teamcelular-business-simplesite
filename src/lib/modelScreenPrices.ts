@@ -58,8 +58,10 @@ export const SAMSUNG_SCREEN_PRICES: ModelScreenPrice[] = [
   { model: "Galaxy S24 FE", from: 315000, month: "2026-09" },
 ];
 
+// Baterías: el negocio fijó el 18/11/2026 un piso de $69.900 (BATTERY_PRICE_FLOOR).
+// Se quitaron las órdenes cobradas por debajo (Galaxy A21s $39.000, Mi A2
+// $65.000, Moto G56 5G y G100 $69.000): hoy no se repiten a ese precio.
 export const SAMSUNG_BATTERY_PRICES: ModelScreenPrice[] = [
-  { model: "Galaxy A21s", from: 40000, month: "2026-09" },
   { model: "Galaxy A24", from: 70000, month: "2026-08" },
   { model: "Galaxy A25", from: 92000, month: "2026-10" },
   { model: "Galaxy A53 5G", from: 85000, month: "2026-10" },
@@ -114,8 +116,6 @@ export const MOTOROLA_SCREEN_PRICES: ModelScreenPrice[] = [
 export const MOTOROLA_BATTERY_PRICES: ModelScreenPrice[] = [
   { model: "Moto G42", from: 147000, month: "2026-10" },
   { model: "Moto G54 5G", from: 75000, month: "2026-10" },
-  { model: "Moto G56 5G", from: 69000, month: "2026-09" },
-  { model: "Moto G100", from: 69000, month: "2026-08" },
   { model: "Edge 30 Pro", from: 120000, month: "2026-08" },
 ];
 
@@ -130,7 +130,6 @@ export const XIAOMI_SCREEN_PRICES: ModelScreenPrice[] = [
 ];
 
 export const XIAOMI_BATTERY_PRICES: ModelScreenPrice[] = [
-  { model: "Mi A2", from: 65000, month: "2026-09" },
   { model: "Mi 9T", from: 102000, month: "2026-09" },
   { model: "Mi 11", from: 153000, month: "2026-08" },
   { model: "Redmi Note 13", from: 105000, month: "2026-11" },

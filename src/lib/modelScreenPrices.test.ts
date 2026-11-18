@@ -1,10 +1,13 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { ALL_MODEL_PRICE_TABLES, formatPriceMonth } from "./modelScreenPrices.ts";
-import { BRAND_REPAIR_PRICES } from "./repairPrices.ts";
+import { BATTERY_PRICE_FLOOR, BRAND_REPAIR_PRICES } from "./repairPrices.ts";
 import {
+  MOTOROLA_BATTERY_PRICES,
   MOTOROLA_SCREEN_PRICES,
+  SAMSUNG_BATTERY_PRICES,
   SAMSUNG_SCREEN_PRICES,
+  XIAOMI_BATTERY_PRICES,
   XIAOMI_SCREEN_PRICES,
 } from "./modelScreenPrices.ts";
 
@@ -33,6 +36,14 @@ test("el piso de los rangos de pantalla por marca no supera lo cobrado por model
   assert.ok(lowestScreen("samsung") <= lowestCharged(SAMSUNG_SCREEN_PRICES));
   assert.ok(lowestScreen("motorola") <= lowestCharged(MOTOROLA_SCREEN_PRICES));
   assert.ok(lowestScreen("xiaomi") <= lowestCharged(XIAOMI_SCREEN_PRICES));
+});
+
+test("ninguna batería se publica por debajo del piso de $69.900", () => {
+  for (const table of [SAMSUNG_BATTERY_PRICES, MOTOROLA_BATTERY_PRICES, XIAOMI_BATTERY_PRICES]) {
+    for (const row of table) assert.ok(row.from >= BATTERY_PRICE_FLOOR, `${row.model} bajo el piso`);
+  }
+  const batteryFloors = Object.values(BRAND_REPAIR_PRICES).flat().filter((p) => p.name.includes("bateria")).map((p) => p.from);
+  assert.equal(Math.min(...batteryFloors), BATTERY_PRICE_FLOOR);
 });
 
 test("el mes se muestra en castellano", () => {

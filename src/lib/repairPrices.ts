@@ -6,7 +6,7 @@
  * precio inventado en structured data es peor que no tenerlo.
  *
  * Lista de agosto de 2026, verificada como vigente el 15/11/2026. Galaxy A / M ajustado en noviembre de 2026 a
- * lo cobrado en órdenes cerradas de Fixbee (A03s, A04, A13 y A21s desde $69.000).
+ * lo cobrado en órdenes cerradas de Fixbee (piso: Galaxy A04 a $69.000).
  */
 import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
@@ -42,26 +42,29 @@ export const CHARGING_PORT_CLEANING_PRICE = { from: 25000, to: 45000 };
  */
 export const PLACA_REVISION_PRICE = 45000;
 
+/** Cambio de batería más barato que se ofrece, cualquier marca (negocio, 18/11/2026). */
+export const BATTERY_PRICE_FLOOR = 69900;
+
 // El piso de cada rango es el menor precio cobrado en órdenes cerradas de
 // Fixbee entre agosto y noviembre de 2026 (ver modelScreenPrices.ts).
 export const BRAND_REPAIR_PRICES: Record<string, RepairPrice[]> = {
   samsung: [
     { name: "Cambio de pantalla Galaxy A / M", from: 69000, to: 399900 },
     { name: "Cambio de pantalla Galaxy S / Ultra", from: 214500, to: 1199900 },
-    { name: "Cambio de bateria Galaxy A / M", from: 40000, to: 179900 },
+    { name: "Cambio de bateria Galaxy A / M", from: BATTERY_PRICE_FLOOR, to: 179900 },
     { name: "Cambio de bateria Galaxy S / Ultra", from: 79000, to: 219900 },
   ],
   xiaomi: [
     { name: "Cambio de pantalla Redmi / Note / Poco", from: 75000, to: 349900 },
     { name: "Cambio de pantalla OLED alta gama", from: 249900, to: 599900 },
-    { name: "Cambio de bateria Redmi / Note / Poco", from: 65000, to: 179900 },
+    { name: "Cambio de bateria Redmi / Note / Poco", from: BATTERY_PRICE_FLOOR, to: 179900 },
     { name: "Cambio de bateria alta gama", from: 119900, to: 229900 },
   ],
   motorola: [
     { name: "Cambio de pantalla Moto E / G", from: 69900, to: 199900 },
     { name: "Cambio de pantalla Edge", from: 165500, to: 599900 },
     { name: "Cambio de pantalla Razr", from: 800000, to: 1399900 },
-    { name: "Cambio de bateria Moto E / G", from: 69000, to: 169900 },
+    { name: "Cambio de bateria Moto E / G", from: BATTERY_PRICE_FLOOR, to: 169900 },
     { name: "Cambio de bateria Edge / Razr", from: 119900, to: 229900 },
   ],
 };

@@ -20,6 +20,7 @@ import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import GuideByline from "@/components/seo/GuideByline";
+import { BUSINESS_PROFILE } from "@/lib/businessProfile";
 
 export const metadata: Metadata = {
   title: "Mantenimiento de Celular: Qué Incluye y Cada Cuánto Hacerlo",
@@ -142,17 +143,19 @@ const warningSignals = [
   },
 ];
 
+// Precios de lo que se cobra en el taller (Fixbee, agosto a noviembre de 2026):
+// no hay abonos mensuales, cada servicio se paga cuando se hace.
 const maintenancePlan = [
   {
-    title: "Plan Mensual - Cuidado Básico",
-    description: "Actualizaciones de software, backup automático y monitoreo remoto de salud del dispositivo.",
-    price: "Desde $5.000/mes",
+    title: "Revisión técnica",
+    description: "Medimos batería, carga, sensores y consumo, y te decimos qué conviene hacer antes de tocar nada.",
+    price: BUSINESS_PROFILE.reviewCostRange,
     Icon: FaCalendarAlt,
   },
   {
-    title: "Plan Semestral - Mantenimiento Completo",
-    description: "Incluye limpieza profesional, revisión de batería, diagnóstico de sensores y reporte técnico detallado.",
-    price: "Desde $18.000 c/3 meses",
+    title: "Limpieza y mantenimiento",
+    description: "Limpieza interna y del puerto de carga, control de batería y prueba completa. Precio según el equipo, confirmado antes de abrirlo.",
+    price: "Desde $25.000",
     Icon: FaTools,
   },
   {
@@ -393,7 +396,7 @@ export default function PreventiveMaintenanceGuide() {
               ¿Cuánto cuesta el mantenimiento preventivo de celulares en CABA?
             </h2>
             <p className="mt-3 text-lg text-slate-600 dark:text-slate-300">
-              Team Celular, en Recoleta y Belgrano, ofrece tres niveles según frecuencia y tipo de equipo
+              Team Celular, en Recoleta y Belgrano, cobra cada servicio cuando lo hace; para empresas, el plan se arma según la flota
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-3">

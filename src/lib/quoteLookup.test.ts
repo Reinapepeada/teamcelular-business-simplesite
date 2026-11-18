@@ -13,7 +13,7 @@ const proMax = lookupQuote("Apple", "iphone 13 pro max", ["Pantalla"]);
 assert.equal(proMax?.from, 279900);
 
 // Sin acentos ni mayusculas tiene que resolver igual.
-assert.equal(lookupQuote("", "IPHONE 14 PRO", ["Batería"])?.from, 209900);
+assert.equal(lookupQuote("", "IPHONE 14 PRO", ["Batería"])?.from, 125000);
 
 // Marca reconocida sin modelo cargado: rango de gama, no numero puntual.
 const galaxy = lookupQuote("Samsung", "Galaxy A54", ["Pantalla"]);

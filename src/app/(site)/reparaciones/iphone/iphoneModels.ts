@@ -6,6 +6,11 @@
  * publican ni se guardan acá.
  *
  * Lista de agosto de 2026, verificada como vigente en noviembre de 2026.
+ * Batería de 12 Mini, 12, 12 Pro, 13 Mini, 13, 13 Pro, 14 Pro y 15: menor
+ * precio cobrado en órdenes cerradas de Fixbee desde el 1/8/2026 (ajuste del
+ * 18/11/2026; "14P" en la orden es 14 Pro). Se excluyeron solo mano de obra,
+ * trabajos combinados y modelos ambiguos; el iPhone 11 y el 16 conservan la lista.
+ * El 13 Pro lo subió el negocio a $129.900 para quedar sobre el 13.
  */
 
 export const IPHONE_PRICES_UPDATED = "noviembre de 2026";
@@ -52,16 +57,16 @@ export const IPHONE_MODELS: IphoneModelPrice[] = [
   { slug: "11", name: "iPhone 11", screen: 129900, battery: 99900 },
   { slug: "11-pro", name: "iPhone 11 Pro", screen: 139900, battery: 114900 },
   { slug: "11-pro-max", name: "iPhone 11 Pro Max", screen: 199900, battery: 129900, screenAlternative: { quality: "Incell", price: 149900, referential: true } },
-  { slug: "12-mini", name: "iPhone 12 Mini", screen: 149900, battery: 99900 },
-  { slug: "12", name: "iPhone 12", screen: 209900, battery: 144900, screenAlternative: { quality: "Incell", price: 144900, referential: true } },
-  { slug: "12-pro", name: "iPhone 12 Pro", screen: 209900, battery: 144900, screenAlternative: { quality: "Incell", price: 144900, referential: true } },
+  { slug: "12-mini", name: "iPhone 12 Mini", screen: 149900, battery: 89000 },
+  { slug: "12", name: "iPhone 12", screen: 209900, battery: 115900, screenAlternative: { quality: "Incell", price: 144900, referential: true } },
+  { slug: "12-pro", name: "iPhone 12 Pro", screen: 209900, battery: 129000, screenAlternative: { quality: "Incell", price: 144900, referential: true } },
   { slug: "12-pro-max", name: "iPhone 12 Pro Max", screen: 219900, battery: 149900 },
-  { slug: "13-mini", name: "iPhone 13 Mini", screen: 149900, battery: 99900 },
+  { slug: "13-mini", name: "iPhone 13 Mini", screen: 149900, battery: 110000 },
   {
     slug: "13",
     name: "iPhone 13",
     screen: 249900,
-    battery: 159900,
+    battery: 125000,
     // Confirmado por el negocio el 15/11/2026.
     screenQuality: "Soft OLED",
     screenAlternative: {
@@ -70,13 +75,13 @@ export const IPHONE_MODELS: IphoneModelPrice[] = [
       note: "no muestra el aviso de pieza desconocida",
     },
   },
-  { slug: "13-pro", name: "iPhone 13 Pro", screen: 269900, battery: 179900, screenAlternative: { quality: "Incell", price: 169900, referential: true } },
+  { slug: "13-pro", name: "iPhone 13 Pro", screen: 269900, battery: 129900, screenAlternative: { quality: "Incell", price: 169900, referential: true } },
   { slug: "13-pro-max", name: "iPhone 13 Pro Max", screen: 279900, battery: 189900, screenAlternative: { quality: "Incell", price: 176900, referential: true } },
   { slug: "14", name: "iPhone 14", screen: 249900, battery: 169900, screenAlternative: { quality: "Incell", price: 149900, referential: true } },
   { slug: "14-plus", name: "iPhone 14 Plus", screen: 259900, battery: 199900, screenAlternative: { quality: "Incell", price: 163900, referential: true } },
-  { slug: "14-pro", name: "iPhone 14 Pro", screen: 279900, battery: 209900, screenAlternative: { quality: "Incell", price: 176900, referential: true } },
+  { slug: "14-pro", name: "iPhone 14 Pro", screen: 279900, battery: 125000, screenAlternative: { quality: "Incell", price: 176900, referential: true } },
   { slug: "14-pro-max", name: "iPhone 14 Pro Max", screen: 299900, battery: 229900, screenAlternative: { quality: "Incell", price: 258900, referential: true } },
-  { slug: "15", name: "iPhone 15", screen: 319900, battery: 189900, screenAlternative: { quality: "Incell", price: 172900, referential: true } },
+  { slug: "15", name: "iPhone 15", screen: 319900, battery: 143900, screenAlternative: { quality: "Incell", price: 172900, referential: true } },
   { slug: "15-plus", name: "iPhone 15 Plus", screen: 349900, battery: 219900, screenAlternative: { quality: "Incell", price: 217900, referential: true } },
   { slug: "15-pro", name: "iPhone 15 Pro", screen: 389900, battery: 229900, screenAlternative: { quality: "Incell", price: 176900, referential: true } },
   { slug: "15-pro-max", name: "iPhone 15 Pro Max", screen: 389900, battery: 229900, screenAlternative: { quality: "Incell", price: 299900, referential: true } },
