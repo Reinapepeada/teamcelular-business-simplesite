@@ -25,6 +25,9 @@ const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 const PAGE_PATH = "/guias/reparacion-xiaomi-buenos-aires";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
+// La tabla sale de repairPrices.ts, la misma fuente que el meta y el JSON-LD.
+const rango = (p: { from: number; to: number }) =>
+  `${p.from.toLocaleString("es-AR")} – ${p.to.toLocaleString("es-AR")}`;
 
 export const metadata: Metadata = {
   title: "Servicio Técnico Xiaomi, Redmi y POCO en CABA | Precios",
@@ -385,10 +388,10 @@ export default function XiaomiRepairGuidePage() {
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {[
                   { servicio: "Revisión técnica (sin placa)", modelos: "Según la falla", tiempo: "a confirmar al ingreso", precio: "15.000 – 25.000" },
-                  { servicio: "Cambio de pantalla OLED", modelos: "Xiaomi 13, 14, 15 y POCO alta gama", tiempo: "2–4 h", precio: "249.900 – 599.900" },
-                  { servicio: "Cambio de pantalla", modelos: "Redmi, Redmi Note, POCO", tiempo: "2–4 h", precio: "99.900 – 349.900" },
-                  { servicio: "Cambio de batería", modelos: "Alta gama", tiempo: "1–2 h", precio: "119.900 – 229.900" },
-                  { servicio: "Cambio de batería", modelos: "Redmi, Redmi Note, POCO", tiempo: "1–2 h", precio: "89.900 – 179.900" },
+                  { servicio: "Cambio de pantalla OLED", modelos: "Xiaomi 13, 14, 15 y POCO alta gama", tiempo: "2–4 h", precio: rango(BRAND_REPAIR_PRICES.xiaomi[1]) },
+                  { servicio: "Cambio de pantalla", modelos: "Redmi, Redmi Note, POCO", tiempo: "2–4 h", precio: rango(BRAND_REPAIR_PRICES.xiaomi[0]) },
+                  { servicio: "Cambio de batería", modelos: "Alta gama", tiempo: "1–2 h", precio: rango(BRAND_REPAIR_PRICES.xiaomi[3]) },
+                  { servicio: "Cambio de batería", modelos: "Redmi, Redmi Note, POCO", tiempo: "1–2 h", precio: rango(BRAND_REPAIR_PRICES.xiaomi[2]) },
                   { servicio: "Pin USB-C / turbo charge", modelos: "Todos", tiempo: "2–3 h", precio: "35.000 – 150.000" },
                   { servicio: "Revisión de placa (bootloop, PMIC)", modelos: "Todos", tiempo: "informe hasta 72 h hábiles", precio: "45.000" },
                 ].map((row) => (

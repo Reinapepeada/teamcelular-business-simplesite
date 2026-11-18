@@ -27,6 +27,9 @@ const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 const PAGE_PATH = "/guias/reparacion-motorola-buenos-aires";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
+// La tabla sale de repairPrices.ts, la misma fuente que el meta y el JSON-LD.
+const rango = (p: { from: number; to: number }) =>
+  `${p.from.toLocaleString("es-AR")} – ${p.to.toLocaleString("es-AR")}`;
 
 export const metadata: Metadata = {
   title: "Servicio Técnico Motorola en CABA | Precios",
@@ -404,11 +407,11 @@ export default function MotorolaRepairGuidePage() {
                 {[
                   ["Revisión técnica (sin placa)", "15.000 – 25.000"],
                   ["Revisión de placa (informe hasta 72 h hábiles)", "45.000"],
-                  ["Pantalla Moto E / G", "69.900 – 199.900"],
-                  ["Pantalla Edge (pOLED)", "165.500 – 599.900"],
-                  ["Pantalla Razr (plegable)", "800.000 – 1.399.900"],
-                  ["Batería Moto E / G", "69.000 – 169.900"],
-                  ["Batería Edge / Razr", "119.900 – 229.900"],
+                  ["Pantalla Moto E / G", rango(BRAND_REPAIR_PRICES.motorola[0])],
+                  ["Pantalla Edge (pOLED)", rango(BRAND_REPAIR_PRICES.motorola[1])],
+                  ["Pantalla Razr (plegable)", rango(BRAND_REPAIR_PRICES.motorola[2])],
+                  ["Batería Moto E / G", rango(BRAND_REPAIR_PRICES.motorola[3])],
+                  ["Batería Edge / Razr", rango(BRAND_REPAIR_PRICES.motorola[4])],
                   ["Pin de carga USB-C", "35.000 – 150.000"],
                   ["Reparación de placa", "Consultar"],
                 ].map(([service, price]) => (
