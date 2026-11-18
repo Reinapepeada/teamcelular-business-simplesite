@@ -163,6 +163,10 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
         a: `En Samsung Galaxy A va de ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[2].from)} a ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[2].to)}, en Motorola Moto G de ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[3].from)} a ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[3].to)} y en iPhone desde ${formatArsPrice(IPHONE_BATTERY_FROM)}. El precio exacto por modelo de iPhone está en la guía de reparación de iPhone.`,
       },
       {
+        q: "¿Cuánto sale cambiar la batería de un iPhone?",
+        a: `Depende del modelo: ${["11", "13", "14-pro", "16"].map((slug) => IPHONE_MODELS.find((m) => m.slug === slug)).filter((m) => m?.battery).map((m) => `${m!.name} ${formatArsPrice(m!.battery!)}`).join(", ")}. La tabla de esta página tiene el precio de cada modelo desde el iPhone 11 hasta el 16 Pro Max.`,
+      },
+      {
         q: "¿Trabajan con todas las marcas?",
         a: "Sí. Si el modelo es poco común, confirmamos disponibilidad de repuesto al cotizar.",
       },
