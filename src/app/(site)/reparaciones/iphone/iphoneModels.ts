@@ -8,8 +8,8 @@
  * Lista de agosto de 2026, verificada como vigente en noviembre de 2026.
  * Batería de 12 Mini, 12, 12 Pro, 13 Mini, 13, 13 Pro, 14 Pro y 15: menor
  * precio cobrado en órdenes cerradas de Fixbee desde el 1/8/2026 (ajuste del
- * 18/11/2026). Se excluyeron solo mano de obra, trabajos combinados y modelos
- * ambiguos; el iPhone 11 y el 16 conservan la lista.
+ * 18/11/2026; "14P" en la orden es 14 Pro). Se excluyeron solo mano de obra,
+ * trabajos combinados y modelos ambiguos; el iPhone 11 y el 16 conservan la lista.
  */
 
 export const IPHONE_PRICES_UPDATED = "noviembre de 2026";
@@ -78,7 +78,7 @@ export const IPHONE_MODELS: IphoneModelPrice[] = [
   { slug: "13-pro-max", name: "iPhone 13 Pro Max", screen: 279900, battery: 189900, screenAlternative: { quality: "Incell", price: 176900, referential: true } },
   { slug: "14", name: "iPhone 14", screen: 249900, battery: 169900, screenAlternative: { quality: "Incell", price: 149900, referential: true } },
   { slug: "14-plus", name: "iPhone 14 Plus", screen: 259900, battery: 199900, screenAlternative: { quality: "Incell", price: 163900, referential: true } },
-  { slug: "14-pro", name: "iPhone 14 Pro", screen: 279900, battery: 163900, screenAlternative: { quality: "Incell", price: 176900, referential: true } },
+  { slug: "14-pro", name: "iPhone 14 Pro", screen: 279900, battery: 125000, screenAlternative: { quality: "Incell", price: 176900, referential: true } },
   { slug: "14-pro-max", name: "iPhone 14 Pro Max", screen: 299900, battery: 229900, screenAlternative: { quality: "Incell", price: 258900, referential: true } },
   { slug: "15", name: "iPhone 15", screen: 319900, battery: 143900, screenAlternative: { quality: "Incell", price: 172900, referential: true } },
   { slug: "15-plus", name: "iPhone 15 Plus", screen: 349900, battery: 219900, screenAlternative: { quality: "Incell", price: 217900, referential: true } },
