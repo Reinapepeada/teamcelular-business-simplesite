@@ -1,5 +1,5 @@
 import type { ServiceLandingConfig } from "./serviceLanding";
-import { BRAND_REPAIR_PRICES, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, formatArsPrice } from "@/lib/repairPrices";
+import { BRAND_REPAIR_PRICES, CHARGING_PORT_CLEANING_PRICE, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, SAMSUNG_CHARGING_PORT_PRICES, formatArsPrice } from "@/lib/repairPrices";
 import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 // Precios del primer parrafo de cambio de pantalla: misma fuente que las tablas.
@@ -315,6 +315,10 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       {
         q: "¿Cuánto sale cambiar el pin de carga?",
         a: `Entre ${formatArsPrice(CHARGING_PORT_PRICE.from)} y ${formatArsPrice(CHARGING_PORT_PRICE.to)}, según el dispositivo. El diagnóstico cuesta entre ARS 15.000 y 25.000 y te confirmamos el número exacto antes de abrir el equipo.`,
+      },
+      {
+        q: "¿Cuánto sale cambiar el pin de carga de un Samsung?",
+        a: `${SAMSUNG_CHARGING_PORT_PRICES.map((p) => `${p.name}: ${formatArsPrice(p.from)} a ${formatArsPrice(p.to)}`).join("; ")}. Si alcanza con una limpieza técnica, cuesta entre ${formatArsPrice(CHARGING_PORT_CLEANING_PRICE.from)} y ${formatArsPrice(CHARGING_PORT_CLEANING_PRICE.to)}.`,
       },
       {
         q: "¿Cuánto tarda reparar la carga?",

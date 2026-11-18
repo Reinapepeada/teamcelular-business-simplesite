@@ -6,7 +6,7 @@
  * precio inventado en structured data es peor que no tenerlo.
  *
  * Lista de agosto de 2026, verificada como vigente el 15/11/2026. Galaxy A / M ajustado en noviembre de 2026 a
- * lo cobrado en órdenes cerradas de Fixbee (A03s, A04, A13 y A21s desde $69.000).
+ * lo cobrado en órdenes cerradas de Fixbee (piso: Galaxy A04 a $69.000).
  */
 import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
@@ -19,6 +19,21 @@ export type RepairPrice = { name: string; from: number; to: number; href?: strin
 
 /** Cambio de pin de carga, todas las marcas: el precio depende del dispositivo. */
 export const CHARGING_PORT_PRICE = { from: 35000, to: 150000 };
+
+/**
+ * Cambio de pin de carga en Samsung por línea: rango intercuartil de órdenes
+ * cerradas en Fixbee (nov 2025 a nov 2026, 45 cambios). El piso no baja de
+ * CHARGING_PORT_PRICE.from para no contradecir el rango general.
+ */
+export const SAMSUNG_CHARGING_PORT_PRICES: (RepairPrice & { models: string })[] = [
+  { name: "Galaxy A de entrada", models: "A03, A04, A05, A06, A10s", from: 35000, to: 55000 },
+  { name: "Galaxy A11 a A26", models: "A13, A14, A15, A21s, A24, A25", from: 45000, to: 65000 },
+  { name: "Galaxy A32 a A73", models: "A34, A35, A52, A54, A55, A70", from: 55000, to: 80000 },
+  { name: "Galaxy S y Note", models: "S21, S22, S23, S24, Note 10", from: 85000, to: 110000 },
+];
+
+/** Limpieza técnica del pin con microscopio, cuando no hace falta cambiarlo. */
+export const CHARGING_PORT_CLEANING_PRICE = { from: 25000, to: 45000 };
 
 /**
  * Revision de placa (celular o notebook): se cobra aunque no se repare y se
