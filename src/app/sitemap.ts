@@ -127,6 +127,11 @@ const mainPages = [
     changeFreq: "weekly" as const,
   },
   {
+    path: "reparaciones/reparacion-notebook-caba",
+    priority: 0.88,
+    changeFreq: "monthly" as const,
+  },
+  {
     path: "reparaciones/iphone/11",
     priority: 0.86,
     changeFreq: "monthly" as const,
