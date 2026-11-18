@@ -431,6 +431,13 @@ export default function XiaomiRepairGuidePage() {
           prices={XIAOMI_BATTERY_PRICES}
         />
 
+        <p className="text-center text-[15px] text-slate-600 dark:text-[#a1a1a6]">
+          ¿Tenés un Redmi Note 13?{" "}
+          <Link href="/reparaciones/xiaomi/redmi-note-13" className="font-semibold text-primary underline underline-offset-4 dark:text-secondary">
+            Precios y fallas frecuentes del Redmi Note 13
+          </Link>
+        </p>
+
         <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
           <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary dark:text-secondary">

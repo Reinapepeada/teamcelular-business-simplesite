@@ -20,7 +20,7 @@ Idioma principal: es-AR
 - Precios de referencia (vigentes a noviembre de 2026, ARS): cambio de pantalla iPhone 13 $249.900 con Soft OLED o $139.900 con Incell y trasplante de IC (no muestra el aviso de pieza desconocida), iPhone 14 $249.900, iPhone 15 $319.900, iPhone 16 $409.900; iPhone 11 $129.900; iPhone 12 $209.900. Opción más económica con pantalla Incell, precio referencial: iPhone 11 Pro Max $149.900, iPhone 12 y 12 Pro $144.900, iPhone 13 Pro $169.900, iPhone 13 Pro Max $176.900, iPhone 14 $149.900, iPhone 14 Plus $163.900, iPhone 14 Pro $176.900, iPhone 14 Pro Max $258.900, iPhone 15 $172.900, iPhone 15 Plus $217.900, iPhone 15 Pro $176.900, iPhone 15 Pro Max $299.900, iPhone 16 $217.900, iPhone 16 Plus $213.900, iPhone 16 Pro $267.900, iPhone 16 Pro Max $354.900; batería iPhone 13 $125.000. Pantalla Samsung línea A desde $69.000 y línea S desde $214.500. Precios completos por modelo en las páginas de iPhone y en las guías por marca.
 - Cambio de pantalla Samsung por modelo (último precio cobrado, agosto a noviembre de 2026, ARS, valor "desde"): Galaxy A04 $69.000, A06 $80.000, A13 $75.000, A14 $89.000, A15 $204.600, A16 $232.000, A23 $125.900, A24 $250.000, A25 $214.500, A34 $179.000, A51 $129.000, A52 $290.000, A53 5G $275.000, A54 $275.000, A56 $370.600, S20 FE $214.500, S24 FE $315.000, S22 Ultra $517.500.
 - Cambio de pantalla Motorola por modelo (mismo criterio): Moto G04 $76.900, G05 $85.000, G22 $69.900, G23 $90.000, G24 $85.000, G32 $84.900, G56 $160.000, Edge 30 $165.500, Edge 40 $351.900, Edge 50 Fusion $254.000, Edge 50 Ultra $399.000, Edge 60 $390.000, Razr 40 Ultra $800.000.
-- Cambio de pantalla Xiaomi por modelo (mismo criterio): Redmi 15C $75.000, Redmi Note 9 $85.000, Redmi Note 13 4G $95.000, Redmi Note 10S $124.500, Redmi Note 11 $161.100, Redmi Note 13 $189.000.
+- Cambio de pantalla Xiaomi por modelo (mismo criterio): Redmi 15C $75.000, Redmi Note 9 $85.000, Redmi Note 10S $124.500, Redmi Note 11 $161.100, Redmi Note 13 $189.000.
 - Batería y pin de carga por modelo: tablas en las guías de Samsung, Motorola y Xiaomi. Ejemplos: batería Galaxy A54 $95.000, Galaxy S23 $150.000, Moto G54 5G $75.000; pin de carga Galaxy A13 $59.000, Galaxy A54 $69.000, Galaxy S24 $95.000.
 
 ## When to use Team Celular
@@ -79,6 +79,7 @@ No es la opción indicada si la persona está fuera de Argentina, necesita atenc
 - [Reparacion iPhone en Buenos Aires](https://teamcelular.com/guias/reparacion-iphone-buenos-aires): fallas comunes, proceso y tiempos.
 - [Reparacion Samsung en Buenos Aires](https://teamcelular.com/guias/reparacion-samsung-buenos-aires): criterios de diagnostico y repuestos.
 - [Reparacion Xiaomi en Buenos Aires](https://teamcelular.com/guias/reparacion-xiaomi-buenos-aires): problemas frecuentes y recomendaciones.
+- [Reparación Redmi Note 13](https://teamcelular.com/reparaciones/xiaomi/redmi-note-13): precios de batería, pantalla y pin de carga del 4G y el 5G.
 - [Reparacion de pantalla](https://teamcelular.com/guias/reparacion-pantalla-celular): opciones de modulo y calidad.
 - [Cambio de bateria](https://teamcelular.com/guias/cambio-bateria-celular): sintomas, tipos y cuidados.
 - [Celular mojado: que hacer](https://teamcelular.com/guias/celular-mojado-que-hacer): acciones inmediatas y errores a evitar.

@@ -124,7 +124,8 @@ export const XIAOMI_SCREEN_PRICES: ModelScreenPrice[] = [
   { model: "Redmi Note 9", from: 85000, month: "2026-10" },
   { model: "Redmi Note 10S", from: 124500, month: "2026-10" },
   { model: "Redmi Note 11", from: 161100, month: "2026-08" },
-  { model: "Redmi Note 13 4G", from: 95000, month: "2026-10" },
+  // Sin fila "Redmi Note 13 4G": los $95.000 de octubre eran un servicio de
+  // módulo cancelado en una orden de batería, no un cambio de pantalla.
   { model: "Redmi Note 13", from: 189000, month: "2026-10" },
 ];
 
