@@ -1,5 +1,5 @@
 import type { ServiceLandingConfig } from "./serviceLanding";
-import { BATTERY_PRICE_FLOOR, BRAND_REPAIR_PRICES, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, formatArsPrice } from "@/lib/repairPrices";
+import { BATTERY_PRICE_FLOOR, BRAND_REPAIR_PRICES, CHARGING_PORT_CLEANING_PRICE, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, SAMSUNG_CHARGING_PORT_PRICES, formatArsPrice } from "@/lib/repairPrices";
 import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 // Precios del primer parrafo de cambio de pantalla: misma fuente que las tablas.
@@ -163,6 +163,10 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
         a: `En Samsung Galaxy A va de ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[2].from)} a ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[2].to)}, en Motorola Moto G de ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[3].from)} a ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[3].to)} y en iPhone desde ${formatArsPrice(IPHONE_BATTERY_FROM)}. El precio exacto por modelo de iPhone está en la guía de reparación de iPhone.`,
       },
       {
+        q: "¿Cuánto sale cambiar la batería de un iPhone?",
+        a: `Depende del modelo: ${["11", "13", "14-pro", "16"].map((slug) => IPHONE_MODELS.find((m) => m.slug === slug)).filter((m) => m?.battery).map((m) => `${m!.name} ${formatArsPrice(m!.battery!)}`).join(", ")}. La tabla de esta página tiene el precio de cada modelo desde el iPhone 11 hasta el 16 Pro Max.`,
+      },
+      {
         q: "¿Trabajan con todas las marcas?",
         a: "Sí. Si el modelo es poco común, confirmamos disponibilidad de repuesto al cotizar.",
       },
@@ -315,6 +319,10 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       {
         q: "¿Cuánto sale cambiar el pin de carga?",
         a: `Entre ${formatArsPrice(CHARGING_PORT_PRICE.from)} y ${formatArsPrice(CHARGING_PORT_PRICE.to)}, según el dispositivo. El diagnóstico cuesta entre ARS 15.000 y 25.000 y te confirmamos el número exacto antes de abrir el equipo.`,
+      },
+      {
+        q: "¿Cuánto sale cambiar el pin de carga de un Samsung?",
+        a: `${SAMSUNG_CHARGING_PORT_PRICES.map((p) => `${p.name}: ${formatArsPrice(p.from)} a ${formatArsPrice(p.to)}`).join("; ")}. Si alcanza con una limpieza técnica, cuesta entre ${formatArsPrice(CHARGING_PORT_CLEANING_PRICE.from)} y ${formatArsPrice(CHARGING_PORT_CLEANING_PRICE.to)}.`,
       },
       {
         q: "¿Cuánto tarda reparar la carga?",
