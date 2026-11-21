@@ -1,4 +1,4 @@
-import { TECHNICAL_AUTHOR } from "@/lib/businessProfile";
+import { TECHNICAL_AUTHOR, TECHNICAL_AUTHOR_PATH } from "@/lib/businessProfile";
 
 const DATE_FORMAT = new Intl.DateTimeFormat("es-AR", {
   day: "numeric",
@@ -25,7 +25,11 @@ export default function GuideByline({
       <time dateTime={modifiedTime}>
         {DATE_FORMAT.format(new Date(modifiedTime))}
       </time>{" "}
-      por {TECHNICAL_AUTHOR.name}, {TECHNICAL_AUTHOR.jobTitle.toLowerCase()}
+      por{" "}
+      <a href={TECHNICAL_AUTHOR_PATH} rel="author" className="underline underline-offset-2">
+        {TECHNICAL_AUTHOR.name}
+      </a>
+      , {TECHNICAL_AUTHOR.jobTitle.toLowerCase()}
     </p>
   );
 }

@@ -139,6 +139,49 @@ export const XIAOMI_BATTERY_PRICES: ModelScreenPrice[] = [
   { model: "POCO M6 Pro", from: 155000, month: "2026-10" },
 ];
 
+export interface BrandChargedPrice extends ModelScreenPrice {
+  service: ModelPriceService;
+}
+
+/**
+ * Marcas con pocas órdenes: una tabla por marca, con la reparación en cada fila.
+ * Misma exportación y misma regla que las tablas de arriba; cada fila se cotejó
+ * con el ítem de la orden. Quedaron afuera los equipos cargados solo con código
+ * interno (TCL T506A y T613P, Infinix X6833B, Tecno BG7) y el pin "Honor" sin
+ * modelo. Nombres normalizados: "50 NEW PAPER 5G" y "40 NEXPAPER" son NXTPAPER.
+ */
+export const BRAND_CHARGED_PRICES: Record<string, BrandChargedPrice[]> = {
+  "google pixel": [
+    { model: "Pixel 6", service: "pantalla", from: 520000, month: "2026-08" },
+    { model: "Pixel 7 Pro", service: "pantalla", from: 568000, month: "2026-09" },
+    { model: "Pixel 9 Pro", service: "pantalla", from: 399000, month: "2026-11" },
+    { model: "Pixel 7", service: "batería", from: 150000, month: "2026-08" },
+    { model: "Pixel 7a", service: "batería", from: 125000, month: "2026-11" },
+  ],
+  tcl: [
+    { model: "TCL 30 SE", service: "pantalla", from: 69000, month: "2026-08" },
+    { model: "TCL 40 SE", service: "pantalla", from: 120000, month: "2026-08" },
+    { model: "TCL 50 NXTPAPER 5G", service: "pantalla", from: 130000, month: "2026-08" },
+    { model: "TCL 50 Pro NXTPAPER", service: "pantalla", from: 192000, month: "2026-10" },
+    { model: "TCL 40 NXTPAPER", service: "batería", from: 89000, month: "2026-10" },
+    { model: "TCL 20 SE", service: "pin de carga", from: 55000, month: "2026-08" },
+  ],
+  infinix: [
+    { model: "Hot 10i", service: "pantalla", from: 99000, month: "2026-10" },
+    { model: "Hot 10i", service: "pin de carga", from: 45000, month: "2026-10" },
+    { model: "Hot 50 Pro", service: "batería", from: 125000, month: "2026-10" },
+  ],
+  honor: [{ model: "Magic 7 Lite", service: "pantalla", from: 249000, month: "2026-08" }],
+  zte: [{ model: "Blade A73", service: "pantalla", from: 95900, month: "2026-11" }],
+  oppo: [{ model: "A60", service: "pantalla", from: 90000, month: "2026-08" }],
+  oneplus: [{ model: "12R", service: "pantalla", from: 411900, month: "2026-09" }],
+  poco: [
+    { model: "POCO C75", service: "batería", from: 75000, month: "2026-10" },
+    { model: "POCO M6 Pro", service: "batería", from: 155000, month: "2026-10" },
+    { model: "POCO X6", service: "pin de carga", from: 95000, month: "2026-09" },
+  ],
+};
+
 export const ALL_MODEL_PRICE_TABLES: ModelScreenPrice[][] = [
   SAMSUNG_SCREEN_PRICES,
   SAMSUNG_BATTERY_PRICES,

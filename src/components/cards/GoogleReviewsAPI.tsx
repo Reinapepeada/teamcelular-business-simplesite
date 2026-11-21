@@ -14,16 +14,19 @@ function StarRating({ rating }: { rating: number }) {
     );
 }
 
-export default async function GoogleReviewsAPI() {
-    const placeData = await getGoogleReviews();
-    const branch = getBranch("recoleta");
+export default async function GoogleReviewsAPI({ branch: slug = "recoleta" }: { branch?: "recoleta" | "belgrano" }) {
+    const own = await getGoogleReviews(slug);
+    // Si la ficha de esta sede no responde, van las de Recoleta, rotuladas como de Recoleta.
+    const placeData = own ?? (slug === "recoleta" ? null : await getGoogleReviews("recoleta"));
+    const branch = getBranch(slug);
+    const source = !own && placeData ? getBranch("recoleta") : branch;
     const reviews = placeData?.reviews.filter(review => review.rating === 5).slice(0, 3) ?? [];
 
     return (
         <article className="space-y-6">
             <header className="space-y-3 text-center">
                 <h2 className="tc-heading text-white">Lo que dicen nuestros clientes</h2>
-                <p className="text-sm text-[#a1a1a6]">Opiniones de la sucursal Recoleta · Paraguay 2451</p>
+                <p className="text-sm text-[#a1a1a6]">Opiniones de la sucursal {source.shortName} · {source.street}</p>
                 {placeData && (
                     <p className="flex flex-wrap items-center justify-center gap-3 text-[#f5f5f7]">
                         <StarRating rating={placeData.rating} />
@@ -65,7 +68,7 @@ export default async function GoogleReviewsAPI() {
 
             <footer className="space-y-3 text-center">
                 <p translate="no" className="whitespace-nowrap text-sm font-normal not-italic tracking-normal text-white">Google Maps</p>
-                <a href={branch.mapUrl} target="_blank" rel="noopener noreferrer" className="tc-btn tc-btn-ghost">Ver reseñas de Recoleta en Google Maps</a>
+                <a href={branch.mapUrl} target="_blank" rel="noopener noreferrer" className="tc-btn tc-btn-ghost">Ver reseñas de {branch.shortName} en Google Maps</a>
             </footer>
         </article>
     );

@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { BsWhatsapp } from "react-icons/bs";
 import { FaMapMarkedAlt } from "react-icons/fa";
+import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 
 const quickZones = [
   { href: "/zonas/palermo", label: "Palermo" },
@@ -36,15 +37,16 @@ export default function ZonasLayout({
                 {zone.label}
               </Link>
             ))}
-            <Link
-              href="https://wa.me/5491151034595?text=Hola%20Team%20Celular,%20quiero%20presupuesto%20para%20mi%20zona"
-              target="_blank"
-              rel="noopener noreferrer"
+            {/* Selector de sede, como en /guias: Palermo queda entre las dos y el enlace iba fijo a Recoleta. */}
+            <BranchWhatsAppButton
+              ctaName="zone_nav_whatsapp"
+              ctaLocation="zone_nav"
+              message="Hola Team Celular, quiero presupuesto para mi zona"
               className="tc-link inline-flex min-h-11 items-center gap-2 px-2 text-[13px]"
             >
-              <BsWhatsapp className="text-base" />
+              <BsWhatsapp className="text-base" aria-hidden />
               WhatsApp
-            </Link>
+            </BranchWhatsAppButton>
           </div>
         </div>
       </section>

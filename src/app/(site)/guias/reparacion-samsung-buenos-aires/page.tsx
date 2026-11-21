@@ -41,7 +41,7 @@ const formatRange = (price: { from: number; to: number }) =>
 export const metadata: Metadata = {
   title: "Reparación Samsung en CABA | Precios de Pantalla",
   description:
-    `¿Cuánto sale cambiar la pantalla de un Samsung? Galaxy A/M desde ${formatArsPrice(SCREEN_A.from)} y S/Ultra desde ${formatArsPrice(SCREEN_S.from)}. Recoleta y Belgrano, CABA.`,
+    `¿Cuánto sale cambiar la pantalla de un Samsung? Galaxy A/M desde ${formatArsPrice(SCREEN_A.from)} y S/Ultra desde ${formatArsPrice(SCREEN_S.from)}. Recoleta y Belgrano, sin turno. Garantía 90 días`,
   keywords: [
     "reparacion samsung buenos aires",
     "service samsung caba",

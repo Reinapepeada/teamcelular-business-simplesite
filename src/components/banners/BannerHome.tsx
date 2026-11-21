@@ -1,6 +1,7 @@
 import Link from "next/link";
 import HeroTeardown from "@/components/banners/HeroTeardown";
-import { BsArrowRight, BsClipboardCheck, BsClock, BsGeoAlt, BsShieldCheck, BsWhatsapp } from "react-icons/bs";
+import { BsArrowRight, BsClipboardCheck, BsClock, BsGeoAlt, BsShieldCheck, BsStarFill, BsWhatsapp } from "react-icons/bs";
+import { getGoogleReviews } from "@/lib/googleReviews";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 import RepairBrandLinks from "@/components/repairs/RepairBrandLinks";
@@ -12,7 +13,9 @@ const rows = Object.values(BRAND_REPAIR_PRICES).flat();
 const fromOf = (kind: string) => Math.min(...rows.filter((row) => row.name.startsWith(kind)).map((row) => row.from));
 const HERO_PRICES = `Pantalla desde ${formatArsPrice(fromOf("Cambio de pantalla"))} · Batería desde ${formatArsPrice(fromOf("Cambio de bateria"))} · Revisión de placa ${formatArsPrice(PLACA_REVISION_PRICE)}`;
 
-export default function BannerHome() {
+export default async function BannerHome() {
+    // Misma lectura cacheada que la sección de opiniones: sin pedido extra.
+    const place = await getGoogleReviews();
     return (
         <section className="w-full bg-black text-[#f5f5f7]">
             <div className="mx-auto max-w-[1200px] px-4 pt-10 sm:px-6 sm:pt-16">
@@ -35,6 +38,13 @@ export default function BannerHome() {
                         <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm text-[#c7c7cc]">
                             <li className="flex items-center gap-2"><BsClipboardCheck aria-hidden className="text-[#6aa6ff]" /> Presupuesto antes de reparar</li>
                             <li className="flex items-center gap-2"><BsShieldCheck aria-hidden className="text-[#6aa6ff]" /> Garantía escrita de 90 días</li>
+                            {place && (
+                                <li>
+                                    <a href="#opiniones" className="tc-link flex items-center gap-2">
+                                        <BsStarFill aria-hidden className="text-yellow-400" /> {place.rating.toFixed(1).replace(".", ",")} en Google · {place.user_ratings_total} reseñas (Recoleta)
+                                    </a>
+                                </li>
+                            )}
                         </ul>
                         <p className="mt-5 text-[15px] text-[#c7c7cc] tabular-nums">{HERO_PRICES}</p>
                         <a href="#precios" className="tc-link mt-1 inline-flex min-h-11 items-center gap-2 text-[17px]">Ver precios por modelo <BsArrowRight aria-hidden /></a>

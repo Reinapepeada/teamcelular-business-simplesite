@@ -12,6 +12,7 @@ import {
   FaTools,
 } from "react-icons/fa";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import PriceDateJsonLd from "@/components/seo/PriceDateJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import { PRICES_UPDATED_LABEL } from "@/lib/repairPrices";
@@ -86,9 +87,9 @@ const SERVICE_RELATED_GUIDES: Record<string, RelatedGuide[]> = {
       description: "Diferencias entre módulo, vidrio y criterios de calidad post-reparación.",
     },
     {
-      href: "/guias/reparacion-iphone-buenos-aires",
-      title: "Guía iPhone",
-      description: "Buenas prácticas para conservar funciones delicadas en Apple.",
+      href: "/guias/pantalla-con-lineas-causas-reparacion",
+      title: "Pantalla con líneas",
+      description: "Cómo saber si las líneas o manchas vienen del display, del flex o de la placa.",
     },
     {
       href: "/guias/reparacion-samsung-buenos-aires",
@@ -142,9 +143,9 @@ const SERVICE_RELATED_GUIDES: Record<string, RelatedGuide[]> = {
       description: "Si el service oficial te dijo que hay que cambiar la placa entera.",
     },
     {
-      href: "/guias/reparacion-iphone-buenos-aires",
-      title: "Guía iPhone",
-      description: "Escenarios típicos de placa y recuperación en dispositivos Apple.",
+      href: "/guias/fallas-flex-interconexion-conectores-fpc",
+      title: "Flex y conectores FPC",
+      description: "Cómo distinguir una falla del flex entre placas de un conector dañado, con fotos del laboratorio.",
     },
   ],
   "cambio-flex-caba": [
@@ -159,9 +160,9 @@ const SERVICE_RELATED_GUIDES: Record<string, RelatedGuide[]> = {
       description: "Referencia para fallas de botones, cámara y módulos internos.",
     },
     {
-      href: "/guias/reparacion-samsung-buenos-aires",
-      title: "Guía Samsung",
-      description: "Checklist técnico para síntomas intermitentes en equipos Galaxy.",
+      href: "/guias/fallas-flex-interconexion-conectores-fpc",
+      title: "Flex y conectores FPC",
+      description: "Qué diferencia un flex dañado de un conector dañado y qué se comprueba antes de reparar.",
     },
   ],
   "cambio-tapa-caba": [
@@ -283,6 +284,8 @@ export interface ServiceLandingConfig {
   brandsText: string;
   /** Precios cortos para el hero (una fila por caso). Mejor que meterlos en el parrafo. */
   prices?: { label: string; value: string }[];
+  /** Piso del servicio según la fuente de precios: es el "desde" que ya se muestra y va al Offer. */
+  priceFrom?: number;
   /** Reemplaza las dos ultimas lineas de "¿Dónde reparamos?" cuando la garantia o el plazo general no aplican. */
   asideNotes?: [string, string];
   /** Reglas que el cliente tiene que leer antes de dejar el equipo. */
@@ -367,6 +370,9 @@ export default function ServiceLandingPage({
       url: `${SITE_URL}/presupuesto-reparacion`,
       priceCurrency: "ARS",
       availability: "https://schema.org/InStock",
+      ...(config.priceFrom
+        ? { priceSpecification: { "@type": "PriceSpecification", priceCurrency: "ARS", minPrice: config.priceFrom } }
+        : {}),
     },
   };
 
@@ -596,6 +602,7 @@ export default function ServiceLandingPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
+      {config.slug === "cambio-pantalla-caba" && <PriceDateJsonLd url={serviceUrl} name={config.h1} />}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

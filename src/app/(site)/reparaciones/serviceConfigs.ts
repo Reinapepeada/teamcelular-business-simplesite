@@ -112,7 +112,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       `Cambio de Batería de Celular en CABA desde ${formatArsPrice(BATTERY_PRICE_FLOOR)}`,
     metaDescription:
-      `Cambio de batería en CABA desde ${formatArsPrice(BATTERY_PRICE_FLOOR)} (Samsung A, Moto G y Redmi) y desde ${formatArsPrice(IPHONE_BATTERY_FROM)} en iPhone. En 1 a 2 horas en Paraguay 2451, Recoleta. Garantía escrita 90 días.`,
+      `Cambio de batería en CABA desde ${formatArsPrice(BATTERY_PRICE_FLOOR)} (Samsung A, Moto G y Redmi) y desde ${formatArsPrice(IPHONE_BATTERY_FROM)} en iPhone. En 1 a 2 horas en Recoleta. Garantía escrita 90 días.`,
     socialTitle: "Cambio de Batería en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Cambio de batería en CABA con diagnóstico previo y garantía escrita 90 días.",
@@ -130,6 +130,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       { label: "Samsung Galaxy A", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[2].from)}` },
       { label: "Motorola Moto G", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[3].from)}` },
     ],
+    priceFrom: BATTERY_PRICE_FLOOR,
     whatsappText:
       "Hola! Quiero un presupuesto para cambio de bateria en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de batería (CABA)",
@@ -186,7 +187,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Cambio de Pantalla y Módulo en CABA | Team Celular",
     metaDescription:
-      "Cambio de pantalla en CABA: 2 a 4 horas con módulo en stock, según diagnóstico. iPhone 13 $249.900, Samsung Galaxy A desde $69.000. Garantía escrita de 90 días.",
+      "Cambio de pantalla en CABA: 2 a 4 horas con módulo en stock, según diagnóstico. iPhone 13 $249.900, Galaxy A desde $69.000. Garantía escrita 90 días.",
     socialTitle: "Cambio de Pantalla en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Cambio de pantalla en CABA con test completo y garantía escrita 90 días.",
@@ -206,6 +207,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       { label: "Samsung Galaxy A", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[0].from)}` },
       { label: "Motorola Moto G", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[0].from)}` },
     ],
+    priceFrom: Math.min(BRAND_REPAIR_PRICES.samsung[0].from, BRAND_REPAIR_PRICES.motorola[0].from, BRAND_REPAIR_PRICES.xiaomi[0].from),
     whatsappText:
       "Hola! Quiero un presupuesto para cambio de pantalla en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de pantalla (CABA)",
@@ -284,6 +286,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       { label: "Cambio de pin de carga", value: `${formatArsPrice(CHARGING_PORT_PRICE.from)} a ${formatArsPrice(CHARGING_PORT_PRICE.to)}` },
       { label: "Diagnóstico", value: "$ 15.000 a $ 25.000" },
     ],
+    priceFrom: CHARGING_PORT_PRICE.from,
     whatsappText:
       "Hola! Quiero un presupuesto para cambio de pin de carga en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de pin de carga (CABA)",

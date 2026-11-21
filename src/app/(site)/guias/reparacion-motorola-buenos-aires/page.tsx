@@ -34,7 +34,7 @@ const rango = (p: { from: number; to: number }) =>
 export const metadata: Metadata = {
   title: "Servicio Técnico Motorola en CABA | Precios",
   description:
-    "Servicio técnico Motorola en CABA, sin ser service oficial: Moto G y Edge en Recoleta y Belgrano. Pantalla desde $69.900, en 2-4 h con stock. Garantía 90 días.",
+    "Servicio técnico Motorola en CABA, sin ser service oficial: Moto G y Edge en Recoleta y Belgrano. Pantalla desde $69.900 en 2-4 h. Garantía 90 días.",
   keywords: [
     "reparacion motorola buenos aires",
     "service motorola caba",

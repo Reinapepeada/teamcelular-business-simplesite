@@ -2,7 +2,9 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { ALL_MODEL_PRICE_TABLES, formatPriceMonth } from "./modelScreenPrices.ts";
 import { BATTERY_PRICE_FLOOR, BRAND_REPAIR_PRICES } from "./repairPrices.ts";
+import { getBrandGuideConfig } from "@/app/(site)/guias/brandGuideConfigs";
 import {
+  BRAND_CHARGED_PRICES,
   MOTOROLA_BATTERY_PRICES,
   MOTOROLA_SCREEN_PRICES,
   SAMSUNG_BATTERY_PRICES,
@@ -44,6 +46,26 @@ test("ninguna batería se publica por debajo del piso de $69.900", () => {
   }
   const batteryFloors = Object.values(BRAND_REPAIR_PRICES).flat().filter((p) => p.name.includes("bateria")).map((p) => p.from);
   assert.equal(Math.min(...batteryFloors), BATTERY_PRICE_FLOOR);
+});
+
+test("las marcas con pocas órdenes siguen la misma regla y no contradicen las tablas de Xiaomi", () => {
+  for (const [brand, rows] of Object.entries(BRAND_CHARGED_PRICES)) {
+    const keys = rows.map((row) => `${row.model}|${row.service}`);
+    assert.equal(new Set(keys).size, keys.length, `${brand} repite modelo y reparación`);
+    for (const row of rows) {
+      assert.ok(row.from > 0, `${row.model} sin importe`);
+      assert.match(row.month, /^2026-(08|09|10|11)$/, `${row.model} fuera del período`);
+      assert.equal(/tab/i.test(row.model), false, `${row.model} es una tablet`);
+      if (row.service === "batería") assert.ok(row.from >= BATTERY_PRICE_FLOOR, `${row.model} bajo el piso`);
+    }
+  }
+  // Mismo invariante que Samsung, Motorola y Xiaomi: el "desde" de la guía no supera lo cobrado.
+  const pixelBattery = BRAND_CHARGED_PRICES["google pixel"].filter((r) => r.service === "batería").map((r) => r.from);
+  const pixelGuide = getBrandGuideConfig("reparacion-google-pixel-buenos-aires").repairPrices ?? [];
+  assert.ok(pixelGuide.find((p) => p.name.includes("bateria"))!.from <= Math.min(...pixelBattery));
+  for (const row of BRAND_CHARGED_PRICES.poco.filter((r) => r.service === "batería")) {
+    assert.equal(XIAOMI_BATTERY_PRICES.find((x) => x.model === row.model)?.from, row.from, row.model);
+  }
 });
 
 test("el mes se muestra en castellano", () => {

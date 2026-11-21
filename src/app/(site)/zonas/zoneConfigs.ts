@@ -215,9 +215,9 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     // seguia valiendo). Ahora se apoya en lo que solo vale para Once: la linea H
     // deja a una cuadra de Recoleta y el Sarmiento combina en Plaza Miserere.
     branchSlug: "recoleta",
-    metaTitle: "Arreglo de Celulares en Once y Balvanera | A 2 Estaciones por la H",
+    metaTitle: "Arreglo de Celulares en Once y Balvanera | Sin Turno",
     metaDescription:
-      "Desde Once, la línea H te deja a una cuadra de Team Celular (Paraguay 2451, Recoleta). Pantalla y batería en 2 a 4 horas, sin turno, garantía escrita 90 días.",
+      "Desde Once, la línea H te deja a una cuadra de Team Celular (Paraguay 2451, Recoleta). Pantalla y batería en 2 a 4 horas, sin turno, garantía 90 días.",
     socialDescription:
       "Team Celular queda a dos estaciones de Once por la línea H. Pantalla, batería y carga en el día con garantía escrita 90 días.",
     heroBadge: "Once, Abasto y Balvanera",

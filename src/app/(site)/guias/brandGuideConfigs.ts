@@ -8,8 +8,15 @@ import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import { businessId } from "@/lib/businessProfile";
 import { PLACA_REVISION_PRICE, formatArsPrice } from "@/lib/repairPrices";
 import { INSTALLMENTS_MESSAGE, SCREEN_BATTERY_TIMING_MESSAGE } from "@/lib/copyStandards";
+import { BRAND_CHARGED_PRICES } from "@/lib/modelScreenPrices";
 
 const SITE_URL = getSiteUrl();
+
+// Día en que se publicó la tabla de precios cobrados en las guías de plantilla.
+const CHARGED_PRICES_PUBLISHED = "2026-11-21T00:00:00Z";
+const TCL_SCREENS = BRAND_CHARGED_PRICES.tcl.filter((row) => row.service === "pantalla").map((row) => row.from);
+const TCL_SCREEN_FROM = formatArsPrice(Math.min(...TCL_SCREENS));
+const TCL_SCREEN_TO = formatArsPrice(Math.max(...TCL_SCREENS));
 
 const REVISED_DIAGNOSIS = {
   modifiedTime: "2026-10-15T00:00:00Z",
@@ -108,13 +115,14 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ...REVISED_DIAGNOSIS,
     titleOverride: "Reparacion de Google Pixel en Buenos Aires",
     metaDescriptionOverride:
-      "Pantalla de Google Pixel desde $360.000 y batería desde $150.000 en CABA. Plazo según modelo y stock. Garantía escrita de 90 días.",
+      "Pantalla de Google Pixel desde $360.000 y batería desde $125.000 en CABA. Plazo según modelo y stock. Garantía escrita de 90 días.",
     repairPrices: [
       { name: "Cambio de pantalla", from: 360000, to: 590000 },
-      { name: "Cambio de bateria", from: 150000, to: 200000 },
+      // Piso: batería de Pixel 7a cobrada en noviembre de 2026 (modelScreenPrices.ts).
+      { name: "Cambio de bateria", from: 125000, to: 200000 },
     ],
     heroDescriptionOverride:
-      `Team Celular repara Google Pixel en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. El cambio de pantalla va de ARS 360.000 a 590.000 y el de batería de ARS 150.000 a 200.000, según el modelo: cubrimos desde Pixel 6 y 6a hasta Pixel 10 Pro, incluidas las variantes Pro y Pro XL. ${SCREEN_BATTERY_TIMING_MESSAGE} Si la falla requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)} y el informe se entrega en hasta 72 horas hábiles. El arreglo de placa lleva semanas; confirmamos precio y plazo por escrito antes de empezar. Garantía escrita de 90 días sobre trabajo y repuesto, y pago en 3 cuotas sin interés.`,
+      `Team Celular repara Google Pixel en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. El cambio de pantalla va de ARS 360.000 a 590.000 y el de batería de ARS 125.000 a 200.000, según el modelo: cubrimos desde Pixel 6 y 6a hasta Pixel 10 Pro, incluidas las variantes Pro y Pro XL. ${SCREEN_BATTERY_TIMING_MESSAGE} Si la falla requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)} y el informe se entrega en hasta 72 horas hábiles. El arreglo de placa lleva semanas; confirmamos precio y plazo por escrito antes de empezar. Garantía escrita de 90 días sobre trabajo y repuesto, y pago en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "Google tiene servicio tecnico de Pixel en Argentina?",
@@ -539,7 +547,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     slug: "reparacion-tcl-buenos-aires",
     seoTitleOverride: "Servicio técnico TCL celulares en CABA | Team Celular",
     metaDescriptionOverride:
-      "Taller independiente para celulares TCL en Recoleta y Belgrano, CABA. Presupuesto según modelo, falla y repuesto. Garantía escrita de 90 días.",
+      `Taller independiente para celulares TCL en Recoleta y Belgrano, CABA. Pantalla desde ${TCL_SCREEN_FROM}, según modelo y repuesto. Garantía escrita de 90 días.`,
     titleOverride:
       "Reparacion de celulares TCL en Buenos Aires: quien los arregla en CABA",
     heroDescriptionOverride:
@@ -562,7 +570,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
       {
         question: "¿Cuánto cuesta reparar un celular TCL?",
         answer:
-          `El precio de pantalla, batería o pin depende del modelo y del repuesto disponible; lo cotizamos antes de reparar. La revisión técnica sin placa va de $15.000 a $25.000. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles. Informamos el costo antes de abrir el equipo y se descuenta si aceptás la reparación. El arreglo de placa lleva semanas y se presupuesta por separado, con precio y plazo por escrito.`,
+          `Los últimos cambios de pantalla de TCL que cobramos fueron de ${TCL_SCREEN_FROM} a ${TCL_SCREEN_TO}, según el modelo; el detalle está en la tabla de esta guía. El precio de pantalla, batería o pin depende del modelo y del repuesto disponible; lo cotizamos antes de reparar. La revisión técnica sin placa va de $15.000 a $25.000. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles. Informamos el costo antes de abrir el equipo y se descuenta si aceptás la reparación. El arreglo de placa lleva semanas y se presupuesta por separado, con precio y plazo por escrito.`,
       },
     ],
     extraRelatedLinks: [
@@ -666,6 +674,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     `Reparacion de ${seed.brand} en Buenos Aires: fallas comunes, diagnostico y solucion`;
   const pageLabel = `Reparacion ${seed.brand}`;
   const modelList = seed.models.join(", ");
+  const baseModified = seed.modifiedTime ?? "2026-09-22T00:00:00Z";
 
   const symptoms: GuideItem[] = [
     ...seed.knownWeakPoints.map((point) => ({
@@ -770,7 +779,10 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     badge: seed.badge,
     readingTime: "5 min",
     publishedTime: "2026-04-20T00:00:00Z",
-    modifiedTime: seed.modifiedTime ?? "2026-09-22T00:00:00Z",
+    modifiedTime:
+      BRAND_CHARGED_PRICES[seed.brand.toLowerCase()] && baseModified < CHARGED_PRICES_PUBLISHED
+        ? CHARGED_PRICES_PUBLISHED
+        : baseModified,
     imagePath: seed.imagePath,
     articleAbout: [
       `Reparacion de ${seed.brand}`,

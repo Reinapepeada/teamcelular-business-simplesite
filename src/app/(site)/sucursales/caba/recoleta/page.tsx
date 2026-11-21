@@ -14,6 +14,7 @@ import RepairFaqList from "@/components/repairs/RepairFaqList";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import RepairPriceTable from "@/components/seo/RepairPriceTable";
+import PriceDateJsonLd from "@/components/seo/PriceDateJsonLd";
 import { POPULAR_REPAIR_PRICES, PRICES_UPDATED_LABEL } from "@/lib/repairPrices";
 
 const SITE_URL =
@@ -344,6 +345,7 @@ export default function SucursalRecoletaPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
       />
+      <PriceDateJsonLd url={PAGE_URL} name="Reparación de celulares en Recoleta CABA" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}

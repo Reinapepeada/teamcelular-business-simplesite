@@ -181,7 +181,7 @@ for (const failure of ["facets", "products", "second-page", "invalid-facets"]) {
   });
 }
 
-test("sitemap omits unknown modification dates and matches the HTML language alternatives", async () => {
+test("sitemap dates only pages with a real content date and matches the HTML language alternatives", async () => {
   const { default: sitemap } = await import("../src/app/sitemap.ts");
   const originalFetch = globalThis.fetch;
   globalThis.fetch = async (url) => new Response(JSON.stringify(
@@ -191,7 +191,22 @@ test("sitemap omits unknown modification dates and matches the HTML language alt
   ), { status: 200 });
   try {
     const entries = await sitemap();
-    assert.ok(entries.every((entry) => entry.lastModified === undefined));
+    // lastmod solo donde hay fecha real de contenido. Nunca la fecha del build en todas las URLs.
+    const dated = entries.filter((entry) => entry.lastModified !== undefined);
+    assert.ok(dated.length > 0 && dated.length < entries.length / 2);
+    for (const entry of dated) {
+      assert.match(entry.lastModified, /^\d{4}-\d{2}-\d{2}T/, entry.url);
+      assert.ok(new Date(entry.lastModified) <= new Date(), `${entry.url} con fecha futura`);
+    }
+    for (const path of ["", "/reparaciones", "/guias", "/tienda", "/tienda/categoria/cargadores", "/tienda/cargador-usb-c"]) {
+      const entry = entries.find((item) => item.url === `https://teamcelular.com${path}`);
+      assert.equal(entry?.lastModified, undefined, path || "/");
+    }
+    const { PRICES_UPDATED } = await import("../src/lib/repairPrices.ts");
+    const { getBrandGuideConfig } = await import("../src/app/(site)/guias/brandGuideConfigs.ts");
+    const dateOf = (path) => entries.find((item) => item.url === `https://teamcelular.com/${path}`)?.lastModified;
+    assert.equal(dateOf("sucursales/caba/belgrano"), PRICES_UPDATED);
+    assert.equal(dateOf("guias/reparacion-tcl-buenos-aires"), getBrandGuideConfig("reparacion-tcl-buenos-aires").modifiedTime);
     const expectedLanguages = {
       "es-AR": "https://teamcelular.com",
       en: "https://teamcelular.com/en/phone-repair-buenos-aires",

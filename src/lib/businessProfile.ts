@@ -48,7 +48,7 @@ export const BUSINESS_PROFILE = {
   sameAs: [
     "https://www.instagram.com/teamcelular.ar/",
     "https://www.facebook.com/TeamCelular/",
-    "https://www.linkedin.com/company/teamcelular/",
+    "https://www.linkedin.com/company/team-celular/",
     // Las fichas de Google Business Profile son de cada sucursal: van en su LocalBusiness.
   ],
   knowsAbout: [
@@ -85,10 +85,13 @@ export const ORGANIZATION_ADDRESS = {
  * both Google and AI search engines; a real person with verifiable credentials
  * and a linked profile is the strong one.
  */
+/** Sección del autor en el sitio: es su `url`; LinkedIn queda en `sameAs`. */
+export const TECHNICAL_AUTHOR_PATH = "/sobrenosotros#alejandro-biarrieta";
+
 export const TECHNICAL_AUTHOR = {
   name: "Alejandro Biarrieta",
   jobTitle: "Técnico en microelectrónica y socio fundador",
-  url: "https://www.linkedin.com/in/alejandro-biarrieta/",
+  url: `${SITE_URL}${TECHNICAL_AUTHOR_PATH}`,
   sameAs: ["https://www.linkedin.com/in/alejandro-biarrieta/"],
   description:
     "Repara celulares desde los 12 años y es socio fundador de Team Celular junto a su familia. Se especializa en microelectrónica, reballing BGA y recuperación de equipos por daño de líquido.",
@@ -170,12 +173,17 @@ export function branchLocalBusiness(branch: (typeof BRANCHES)[number]) {
   return {
     "@type": "LocalBusiness",
     "@id": branchId(branch),
+    // Mismas propiedades que el LocalBusiness de cada página de sucursal: la entidad no debe
+    // describirse distinto según la página.
+    additionalType: ["https://schema.org/ElectronicsStore", "https://schema.org/ProfessionalService"],
     name: branch.name,
     url: absoluteUrl(branch.url),
     telephone: branch.phone,
+    email: BUSINESS_PROFILE.email,
     image: `${SITE_URL}/opengraph-image.png`,
     priceRange: "$$",
     parentOrganization: { "@id": businessId("organization") },
+    areaServed: [{ "@type": "AdministrativeArea", name: "Ciudad Autonoma de Buenos Aires" }],
     address: {
       "@type": "PostalAddress",
       streetAddress: branch.street,

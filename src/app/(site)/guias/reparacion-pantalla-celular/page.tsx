@@ -63,7 +63,7 @@ const SCREEN_FROM = formatArsPrice(Math.min(...SCREEN_PRICE_GROUPS.flatMap((grou
 export const metadata: Metadata = {
   title: "Cambio de Pantalla de Celular: Precios por Marca en CABA",
   description:
-    `Cambio de pantalla desde ${SCREEN_FROM}, según modelo y repuesto. Compará precios por marca y consultá stock por WhatsApp en Recoleta o Belgrano.`,
+    `Cambio de pantalla desde ${SCREEN_FROM}, según modelo y repuesto. Compará precios por marca. Sin turno en Recoleta y Belgrano, garantía escrita 90 días.`,
   keywords: [
     "cambio pantalla celular Buenos Aires",
     "pantalla iPhone original",
