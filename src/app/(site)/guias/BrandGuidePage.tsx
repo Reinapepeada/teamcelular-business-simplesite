@@ -1,5 +1,7 @@
 import HighIntentGuidePage from "@/components/seo/HighIntentGuidePage";
 import RepairPriceTable from "@/components/seo/RepairPriceTable";
+import BrandChargedPriceTable from "@/components/seo/BrandChargedPriceTable";
+import { BRAND_CHARGED_PRICES } from "@/lib/modelScreenPrices";
 import { BUSINESS_PROFILE } from "@/lib/businessProfile";
 import { PLACA_REVISION_PRICE, PRICES_UPDATED_LABEL, formatArsPrice } from "@/lib/repairPrices";
 import {
@@ -10,6 +12,7 @@ import {
 
 export default function BrandGuidePage({ slug }: { slug: BrandGuideSlug }) {
   const config = getBrandGuideConfig(slug);
+  const charged = BRAND_CHARGED_PRICES[config.brand.toLowerCase()];
 
   return (
     <>
@@ -53,6 +56,8 @@ export default function BrandGuidePage({ slug }: { slug: BrandGuideSlug }) {
             prices={config.repairPrices}
             updatedLabel={PRICES_UPDATED_LABEL}
           />
+        ) : charged ? (
+          <BrandChargedPriceTable brand={config.brand} prices={charged} />
         ) : null
       }
       priceTablePosition="after-hero"
