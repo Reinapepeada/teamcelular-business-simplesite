@@ -15,6 +15,7 @@ import {
 } from "@/lib/analytics/budgetFunnel";
 import { recordLeadInteraction } from "@/lib/analytics/leadInteractions";
 import { BranchPreferencePicker } from "@/components/cro/BranchSelector";
+import { BRANCHES } from "@/lib/businessProfile";
 import {
     branchWhatsappUrl,
     saveBranchPreference,
@@ -106,17 +107,15 @@ export default function RepairsForm() {
         setErrorMessage("");
     }
 
-    function handleSend() {
+    // Sin sucursal elegida, cada boton de envio ya nombra una: elegir y enviar es
+    // un solo toque. Antes el aviso "Elegí la sucursal" frenaba sobre todo en mobile.
+    function handleSend(branch: BranchSlug) {
         if (repairTypes.length === 0) {
             measure("budget_validation_error", { field_name: "repair_type", form_name: "repair_budget_wizard" });
             setErrorMessage("Tocá qué le pasa al celular.");
             return;
         }
-        if (!preferredBranch) {
-            measure("budget_validation_error", { field_name: "preferred_branch", form_name: "repair_budget_wizard" });
-            setErrorMessage("Elegí la sucursal que te queda más cerca.");
-            return;
-        }
+        if (branch !== preferredBranch) selectBranch(branch, "manual");
 
         // ponytail: el backend de leads no esta operativo; el mensaje va armado
         // directo a WhatsApp. Si vuelve, recuperar el POST a /api/repair-lead.
@@ -125,7 +124,7 @@ export default function RepairsForm() {
             `Falla: ${repairTypeLabel}`,
             `Modelo: ${modelValue}`,
         ].join("\n");
-        const destination = branchWhatsappUrl(preferredBranch, message);
+        const destination = branchWhatsappUrl(branch, message);
         const step = BUDGET_WIZARD_STEPS[0];
         submittedRef.current = true;
 
@@ -143,7 +142,7 @@ export default function RepairsForm() {
             formName: "repair_budget_wizard",
             formLocation: "presupuesto_reparacion",
             formVersion: BUDGET_WIZARD_VERSION,
-            preferredBranch,
+            preferredBranch: branch,
             stepIndex: 1,
             stepId: step.id,
             stepLabel: step.label,
@@ -246,15 +245,32 @@ export default function RepairsForm() {
                 </p>
             ) : null}
 
-            <button
-                type="button"
-                onClick={handleSend}
-                aria-describedby="budget-whatsapp-next-step"
-                className="tc-btn tc-btn-primary w-full sm:w-auto"
-            >
-                <FaWhatsapp aria-hidden />
-                Pedir presupuesto por WhatsApp
-            </button>
+            {preferredBranch ? (
+                <button
+                    type="button"
+                    onClick={() => handleSend(preferredBranch)}
+                    aria-describedby="budget-whatsapp-next-step"
+                    className="tc-btn tc-btn-primary w-full sm:w-auto"
+                >
+                    <FaWhatsapp aria-hidden />
+                    Pedir presupuesto por WhatsApp
+                </button>
+            ) : (
+                <div className="grid gap-3 sm:grid-cols-2">
+                    {BRANCHES.map((branch) => (
+                        <button
+                            key={branch.slug}
+                            type="button"
+                            onClick={() => handleSend(branch.slug)}
+                            aria-describedby="budget-whatsapp-next-step"
+                            className="tc-btn tc-btn-primary w-full"
+                        >
+                            <FaWhatsapp aria-hidden />
+                            Pedir presupuesto en {branch.shortName}
+                        </button>
+                    ))}
+                </div>
+            )}
 
             <p id="budget-whatsapp-next-step" className="text-sm leading-6 text-slate-600 dark:text-slate-300">
                 Se abre WhatsApp con los datos que completaste. Revisá el mensaje y envialo para iniciar la consulta.
@@ -276,9 +292,20 @@ export default function RepairsForm() {
  * ganan cotizadores que devuelven un numero en el momento.
  */
 function QuoteEstimate({ model, repairTypes }: { model: string; repairTypes: string[] }) {
-    if (repairTypes.includes("Placa")) return <PlacaConditions />;
+    const isPlaca = repairTypes.includes("Placa");
+    const quote = isPlaca ? null : lookupQuote("", model, repairTypes);
+    const visible = isPlaca || quote !== null;
+    const quoteMeasured = useRef(false);
 
-    const quote = lookupQuote("", model, repairTypes);
+    // Mide si quien abandona vio un precio, una vez por visita. Ni falla, ni
+    // modelo, ni precio: el contrato de PostHog no admite respuestas del formulario.
+    useEffect(() => {
+        if (!visible || quoteMeasured.current) return;
+        quoteMeasured.current = true;
+        measure("budget_quote_shown", { form_name: "repair_budget_wizard" });
+    }, [visible]);
+
+    if (isPlaca) return <PlacaConditions />;
     if (!quote) return null;
 
     const price =
