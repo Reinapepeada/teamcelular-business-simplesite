@@ -186,7 +186,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <div className="tc-section !pt-0">
+            <div id="opiniones" className="tc-section scroll-mt-24 !pt-0">
                 <GoogleReviewsAPI />
             </div>
 
