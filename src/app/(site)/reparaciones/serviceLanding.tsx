@@ -86,9 +86,9 @@ const SERVICE_RELATED_GUIDES: Record<string, RelatedGuide[]> = {
       description: "Diferencias entre módulo, vidrio y criterios de calidad post-reparación.",
     },
     {
-      href: "/guias/reparacion-iphone-buenos-aires",
-      title: "Guía iPhone",
-      description: "Buenas prácticas para conservar funciones delicadas en Apple.",
+      href: "/guias/pantalla-con-lineas-causas-reparacion",
+      title: "Pantalla con líneas",
+      description: "Cómo saber si las líneas o manchas vienen del display, del flex o de la placa.",
     },
     {
       href: "/guias/reparacion-samsung-buenos-aires",
@@ -142,9 +142,9 @@ const SERVICE_RELATED_GUIDES: Record<string, RelatedGuide[]> = {
       description: "Si el service oficial te dijo que hay que cambiar la placa entera.",
     },
     {
-      href: "/guias/reparacion-iphone-buenos-aires",
-      title: "Guía iPhone",
-      description: "Escenarios típicos de placa y recuperación en dispositivos Apple.",
+      href: "/guias/fallas-flex-interconexion-conectores-fpc",
+      title: "Flex y conectores FPC",
+      description: "Cómo distinguir una falla del flex entre placas de un conector dañado, con fotos del laboratorio.",
     },
   ],
   "cambio-flex-caba": [
@@ -159,9 +159,9 @@ const SERVICE_RELATED_GUIDES: Record<string, RelatedGuide[]> = {
       description: "Referencia para fallas de botones, cámara y módulos internos.",
     },
     {
-      href: "/guias/reparacion-samsung-buenos-aires",
-      title: "Guía Samsung",
-      description: "Checklist técnico para síntomas intermitentes en equipos Galaxy.",
+      href: "/guias/fallas-flex-interconexion-conectores-fpc",
+      title: "Flex y conectores FPC",
+      description: "Qué diferencia un flex dañado de un conector dañado y qué se comprueba antes de reparar.",
     },
   ],
   "cambio-tapa-caba": [
