@@ -21,11 +21,13 @@ const LABELS = new Set([
   "item_id", "item_name", "item_variant", "page_type", "conversion_kind", "measurement_source",
   "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "referrer_domain",
   "entry_path", "content_path", "acquisition_channel", "first_source", "first_medium", "first_campaign", "first_landing_path",
+  "inp_load_state", "inp_interaction_type",
 ]);
 const NUMBERS = new Set([
   "value", "price", "quantity", "item_count", "step_index", "total_steps", "duration_ms", "engaged_seconds",
   "percent_scrolled", "result_count", "invalid_field_count", "faq_index", "page_number", "filter_count", "shipping", "order_total",
   "$web_vitals_LCP_value", "$web_vitals_INP_value", "$web_vitals_CLS_value", "$web_vitals_FCP_value",
+  "inp_input_delay", "inp_processing_duration", "inp_presentation_delay",
 ]);
 
 export function safeLabel(value: unknown): string | undefined {

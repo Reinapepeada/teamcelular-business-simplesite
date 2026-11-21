@@ -64,6 +64,20 @@ test("Web Vitals conserva valores numéricos y elimina objetos de atribución co
   assert.ok(!JSON.stringify(result).includes("private"));
 });
 
+test("Web Vitals conserva las fases del INP y descarta el selector de la interacción", () => {
+  const metric = event("$web_vitals", "https://teamcelular.com/");
+  metric.properties.$web_vitals_INP_value = 280;
+  metric.properties.$web_vitals_INP_event = { attribution: { inputDelay: 120, processingDuration: 90, presentationDelay: 70,
+    loadState: "dom-content-loaded", interactionType: "pointer", interactionTarget: "button#private-field" } };
+  const result = sanitizePostHogEvent(metric);
+  assert.deepEqual(
+    ["inp_input_delay", "inp_processing_duration", "inp_presentation_delay", "inp_load_state", "inp_interaction_type"]
+      .map(key => result?.properties[key]),
+    [120, 90, 70, "dom-content-loaded", "pointer"],
+  );
+  assert.ok(!JSON.stringify(result).includes("private"));
+});
+
 test("la navegación conserva user agent y métricas de salida sin texto, destinos ni rutas privadas", () => {
   const source = event("$pageleave");
   Object.assign(source.properties, {

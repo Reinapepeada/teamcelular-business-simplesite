@@ -66,8 +66,13 @@ export function sanitizePostHogEvent(event: CaptureResult | null): CaptureResult
     }
   }
   if (event.event === "$autocapture") metadata.$event_type = "click";
+  // Del INP sólo fases y estado de carga (números y enumerados): dicen si el retraso es de scripts,
+  // de nuestros manejadores o del render, sin selector ni contexto del DOM.
+  const inp = event.event === "$web_vitals" ? event.properties.$web_vitals_INP_event?.attribution : null;
+  const inpPhases = inp ? { inp_input_delay: inp.inputDelay, inp_processing_duration: inp.processingDuration,
+    inp_presentation_delay: inp.presentationDelay, inp_load_state: inp.loadState, inp_interaction_type: inp.interactionType } : {};
   event.properties = exception ? { ...metadata, ...exception } : { ...metadata, ...sanitizeMeasurementProperties({
-    ...browserAttribution(), ...event.properties,
+    ...browserAttribution(), ...event.properties, ...inpPhases,
   }), measurement_version: MEASUREMENT_VERSION, page_type: pageType(url.pathname) };
   event.properties.$current_url = `${url.origin}${url.pathname}`;
   event.properties.$pathname = url.pathname;
