@@ -22,6 +22,11 @@ test("un nombre largo se corta en una palabra completa y nunca supera 60 caracte
   assert.equal(long[title.length] === " " || long[title.length] === ",", true);
 });
 
+test("un corte no deja un '+' colgando", () => {
+  const title = buildProductSeoTitle("Power Bank CLD Fast 10000 mAh con Pantalla Digital, 2 USB + USB-C y Linterna");
+  assert.equal(title, "Power Bank CLD Fast 10000 mAh con Pantalla Digital, 2 USB");
+});
+
 test("sin nombre usa un genérico", () => {
   assert.equal(buildProductSeoTitle(undefined), "Producto | Team Celular");
   assert.equal(buildProductSeoTitle("   "), "Producto | Team Celular");

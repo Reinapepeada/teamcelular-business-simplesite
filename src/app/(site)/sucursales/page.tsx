@@ -13,7 +13,7 @@ const PAGE_URL = `${SITE_URL}/sucursales`;
 export const metadata: Metadata = {
   title: "Sucursales Team Celular en CABA | Recoleta y Belgrano",
   description:
-    "Sucursales Team Celular en CABA: Paraguay 2451, Recoleta, y Amenábar 2032, Belgrano. Consultá repuesto y plazo antes de acercarte.",
+    "Sucursales Team Celular en CABA: Paraguay 2451, Recoleta, y Amenábar 2032, Belgrano. Lunes a viernes de 10:30 a 18:00, sin turno.",
   alternates: {
     canonical: PAGE_URL,
     languages: {

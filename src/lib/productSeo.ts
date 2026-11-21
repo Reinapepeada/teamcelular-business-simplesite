@@ -27,7 +27,7 @@ export function buildProductSeoTitle(name: string | null | undefined): string {
   if (clean.length <= PRODUCT_TITLE_LIMIT) return clean;
   const cut = clean.slice(0, PRODUCT_TITLE_LIMIT + 1);
   const lastSpace = cut.lastIndexOf(" ");
-  return (lastSpace > 20 ? cut.slice(0, lastSpace) : cut.slice(0, PRODUCT_TITLE_LIMIT)).replace(/[\s,;:/-]+$/, "");
+  return (lastSpace > 20 ? cut.slice(0, lastSpace) : cut.slice(0, PRODUCT_TITLE_LIMIT)).replace(/[\s,;:/+-]+$/, "");
 }
 
 /** Solo datos publicados; sin deducir potencia, compatibilidad ni códigos. */

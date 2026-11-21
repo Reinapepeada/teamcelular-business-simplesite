@@ -13,7 +13,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
   title: "Pantalla con Líneas en Celular: Causas y Reparación",
   description:
-    "Líneas, parpadeo o manchas en la pantalla: cómo saber si es display, flex o placa. Team Celular, Recoleta y Belgrano CABA. Plazo según modelo, stock y diagnóstico.",
+    "Líneas, parpadeo o manchas en la pantalla: cómo saber si es display, flex o placa. Diagnóstico sin turno en Recoleta y Belgrano, CABA.",
   keywords: [
     "pantalla con lineas celular",
     "display con rayas verticales",

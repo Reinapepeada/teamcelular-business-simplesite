@@ -112,7 +112,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       `Cambio de Batería de Celular en CABA desde ${formatArsPrice(BATTERY_PRICE_FLOOR)}`,
     metaDescription:
-      `Cambio de batería en CABA desde ${formatArsPrice(BATTERY_PRICE_FLOOR)} (Samsung A, Moto G y Redmi) y desde ${formatArsPrice(IPHONE_BATTERY_FROM)} en iPhone. En 1 a 2 horas en Paraguay 2451, Recoleta. Garantía escrita 90 días.`,
+      `Cambio de batería en CABA desde ${formatArsPrice(BATTERY_PRICE_FLOOR)} (Samsung A, Moto G y Redmi) y desde ${formatArsPrice(IPHONE_BATTERY_FROM)} en iPhone. En 1 a 2 horas en Recoleta. Garantía escrita 90 días.`,
     socialTitle: "Cambio de Batería en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Cambio de batería en CABA con diagnóstico previo y garantía escrita 90 días.",
@@ -186,7 +186,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Cambio de Pantalla y Módulo en CABA | Team Celular",
     metaDescription:
-      "Cambio de pantalla en CABA: 2 a 4 horas con módulo en stock, según diagnóstico. iPhone 13 $249.900, Samsung Galaxy A desde $69.000. Garantía escrita de 90 días.",
+      "Cambio de pantalla en CABA: 2 a 4 horas con módulo en stock, según diagnóstico. iPhone 13 $249.900, Galaxy A desde $69.000. Garantía escrita 90 días.",
     socialTitle: "Cambio de Pantalla en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Cambio de pantalla en CABA con test completo y garantía escrita 90 días.",
