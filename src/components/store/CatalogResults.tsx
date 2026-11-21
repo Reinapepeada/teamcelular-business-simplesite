@@ -13,6 +13,7 @@ import {
 import { buildProductSlug, slugify } from "@/lib/productSlug";
 import { serializeJsonLd } from "@/lib/jsonLd";
 import TrackView from "@/components/analytics/TrackView";
+import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 
 interface CatalogResultsProps {
     basePath: string;
@@ -280,8 +281,17 @@ export default async function CatalogResults({
         return (
             <section className="rounded-3xl border border-slate-200 bg-white p-8 text-center dark:border-slate-700 dark:bg-slate-900">
                 <h2 className="text-xl font-semibold text-slate-950 dark:text-slate-50">No pudimos cargar la tienda</h2>
-                <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">Probá de nuevo en unos instantes.</p>
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">Probá de nuevo en unos instantes o consultanos el producto por WhatsApp.</p>
                 <CatalogRetryButton />
+                {/* La API del catálogo a veces vence el plazo: que la visita no termine acá. */}
+                <BranchWhatsAppButton
+                    ctaName="catalog_error_whatsapp"
+                    ctaLocation="catalog_error"
+                    message="Hola Team Celular, quiero consultar por un producto de la tienda."
+                    className="tc-btn tc-btn-ghost mt-3"
+                >
+                    Consultar por WhatsApp
+                </BranchWhatsAppButton>
                 <TrackView eventName="catalog_error" properties={{ error_code: "catalog_unavailable" }} />
             </section>
         );
@@ -343,13 +353,26 @@ export default async function CatalogResults({
                     <p className="text-lg font-semibold text-slate-900 dark:text-slate-100">
                         Sin resultados por ahora
                     </p>
-                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{emptyMessage}</p>
-                    <Link
-                        href={basePath}
-                        className="mt-5 inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-white transition hover:bg-primary/90"
-                    >
-                        Ver todo el catalogo
-                    </Link>
+                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{emptyMessage} Si no lo ves, preguntanos por WhatsApp.</p>
+                    <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                        <Link
+                            href={basePath}
+                            className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-white transition hover:bg-primary/90"
+                        >
+                            Ver todo el catalogo
+                        </Link>
+                        {/* 11 búsquedas sin resultado en 30 días: el pedido sigue por WhatsApp con lo que buscó. */}
+                        <BranchWhatsAppButton
+                            ctaName="catalog_no_results_whatsapp"
+                            ctaLocation="catalog_no_results"
+                            message={filters.search
+                                ? `Hola Team Celular, busqué "${filters.search.slice(0, 80)}" en la tienda y no lo encontré. ¿Lo pueden conseguir?`
+                                : "Hola Team Celular, no encontré en la tienda lo que busco. ¿Me ayudan?"}
+                            className="tc-btn tc-btn-ghost"
+                        >
+                            Preguntar por WhatsApp
+                        </BranchWhatsAppButton>
+                    </div>
                 </div>
             )}
         </section>

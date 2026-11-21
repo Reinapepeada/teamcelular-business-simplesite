@@ -376,6 +376,8 @@ const KNOWN_MODIFIED: Record<string, string> = {
   "sucursales/caba/recoleta": PRICES_UPDATED,
   "sucursales/caba/belgrano": PRICES_UPDATED,
   "presupuesto-reparacion": PRICES_UPDATED,
+  // Suma precio y consulta en el hero el 2026-11-21 (igual que su modifiedTime).
+  "guias/pantalla-con-lineas-causas-reparacion": "2026-11-21T00:00:00Z",
   [FPC_GUIDE.path.slice(1)]: FPC_GUIDE.publishedTime,
   [REPAIR_CASE.path.slice(1)]: REPAIR_CASE.publishedTime,
   ...Object.fromEntries(
