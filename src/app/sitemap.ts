@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { FPC_GUIDE } from "@/lib/fpcGuide";
 import { REPAIR_CASE } from "@/lib/repairCase";
+import { PRICES_UPDATED } from "@/lib/repairPrices";
+import { BRAND_GUIDE_LIST, getBrandGuideConfig } from "@/app/(site)/guias/brandGuideConfigs";
 
 // Revalidate sitemap every 24 hours
 export const revalidate = 86400;
@@ -365,10 +367,26 @@ const guidePages = [
   },
 ];
 
+// lastmod solo donde la página ya muestra una fecha real de contenido, tomada de la
+// misma constante que usa la página. El resto va sin fecha: una fecha de build
+// igual en todas las URLs hace que Google deje de confiar en el campo.
+const KNOWN_MODIFIED: Record<string, string> = {
+  // Muestran la fecha de la lista de precios.
+  "reparaciones/cambio-pantalla-caba": PRICES_UPDATED,
+  "sucursales/caba/recoleta": PRICES_UPDATED,
+  "sucursales/caba/belgrano": PRICES_UPDATED,
+  "presupuesto-reparacion": PRICES_UPDATED,
+  [FPC_GUIDE.path.slice(1)]: FPC_GUIDE.publishedTime,
+  [REPAIR_CASE.path.slice(1)]: REPAIR_CASE.publishedTime,
+  ...Object.fromEntries(
+    BRAND_GUIDE_LIST.map((guide) => [guide.path.slice(1), getBrandGuideConfig(guide.slug).modifiedTime]),
+  ),
+};
+const lastModifiedOf = (path: string) => (KNOWN_MODIFIED[path] ? { lastModified: KNOWN_MODIFIED[path] } : {});
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Un plazo para facetas y todas las páginas; una falla no publica un XML parcial.
   const signal = AbortSignal.timeout(8_000);
-  // Omit lastModified until each page has a reliable content modification date.
   const homeLanguages = {
     "es-AR": SITE_URL,
     en: `${SITE_URL}/en/phone-repair-buenos-aires`,
@@ -380,6 +398,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const mainSitemap = mainPages.map((page) => ({
     url: page.path ? `${SITE_URL}/${page.path}` : SITE_URL,
+    ...lastModifiedOf(page.path),
     changeFrequency: page.changeFreq,
     priority: page.priority,
     alternates: {
@@ -391,6 +410,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const guidesSitemap = guidePages.map((page) => ({
     url: `${SITE_URL}/${page.path}`,
+    ...lastModifiedOf(page.path),
     changeFrequency: page.changeFreq,
     priority: page.priority,
     alternates: {
