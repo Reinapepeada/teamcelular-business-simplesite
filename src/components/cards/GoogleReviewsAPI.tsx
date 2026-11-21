@@ -15,15 +15,18 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 export default async function GoogleReviewsAPI({ branch: slug = "recoleta" }: { branch?: "recoleta" | "belgrano" }) {
-    const placeData = await getGoogleReviews(slug);
+    const own = await getGoogleReviews(slug);
+    // Si la ficha de esta sede no responde, van las de Recoleta, rotuladas como de Recoleta.
+    const placeData = own ?? (slug === "recoleta" ? null : await getGoogleReviews("recoleta"));
     const branch = getBranch(slug);
+    const source = !own && placeData ? getBranch("recoleta") : branch;
     const reviews = placeData?.reviews.filter(review => review.rating === 5).slice(0, 3) ?? [];
 
     return (
         <article className="space-y-6">
             <header className="space-y-3 text-center">
                 <h2 className="tc-heading text-white">Lo que dicen nuestros clientes</h2>
-                <p className="text-sm text-[#a1a1a6]">Opiniones de la sucursal {branch.shortName} · {branch.street}</p>
+                <p className="text-sm text-[#a1a1a6]">Opiniones de la sucursal {source.shortName} · {source.street}</p>
                 {placeData && (
                     <p className="flex flex-wrap items-center justify-center gap-3 text-[#f5f5f7]">
                         <StarRating rating={placeData.rating} />
