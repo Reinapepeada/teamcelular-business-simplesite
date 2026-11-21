@@ -85,10 +85,13 @@ export const ORGANIZATION_ADDRESS = {
  * both Google and AI search engines; a real person with verifiable credentials
  * and a linked profile is the strong one.
  */
+/** Sección del autor en el sitio: es su `url`; LinkedIn queda en `sameAs`. */
+export const TECHNICAL_AUTHOR_PATH = "/sobrenosotros#alejandro-biarrieta";
+
 export const TECHNICAL_AUTHOR = {
   name: "Alejandro Biarrieta",
   jobTitle: "Técnico en microelectrónica y socio fundador",
-  url: "https://www.linkedin.com/in/alejandro-biarrieta/",
+  url: `${SITE_URL}${TECHNICAL_AUTHOR_PATH}`,
   sameAs: ["https://www.linkedin.com/in/alejandro-biarrieta/"],
   description:
     "Repara celulares desde los 12 años y es socio fundador de Team Celular junto a su familia. Se especializa en microelectrónica, reballing BGA y recuperación de equipos por daño de líquido.",

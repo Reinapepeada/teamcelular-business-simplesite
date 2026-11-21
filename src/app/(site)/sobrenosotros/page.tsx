@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import { getSiteUrl } from "@/lib/seoMetadata";
+import { TECHNICAL_AUTHOR } from "@/lib/businessProfile";
 import {
     FaAward,
     FaCertificate,
@@ -280,6 +281,36 @@ export default function SobreNosotrosPage() {
                             </article>
                         ))}
                     </div>
+                </section>
+
+                <section
+                    id="alejandro-biarrieta"
+                    className="scroll-mt-24 rounded-3xl border border-slate-200 bg-white p-8 shadow-md dark:border-slate-700/70 dark:bg-slate-900"
+                >
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
+                        Quién repara y escribe las guías
+                    </h2>
+                    <p className="mt-4 text-lg font-semibold text-slate-900 dark:text-slate-100">
+                        {TECHNICAL_AUTHOR.name}, {TECHNICAL_AUTHOR.jobTitle.toLowerCase()}
+                    </p>
+                    <p className="mt-3 leading-7 text-slate-600 dark:text-slate-400">
+                        {TECHNICAL_AUTHOR.description} Se formó con {TECHNICAL_AUTHOR.training.join(", ")}.
+                    </p>
+                    <p className="mt-3 leading-7 text-slate-600 dark:text-slate-400">
+                        Especialidades: {TECHNICAL_AUTHOR.knowsAbout.join(" · ")}. Escribe y revisa las{" "}
+                        <Link href="/guias" className="text-primary underline underline-offset-4 dark:text-secondary">
+                            guías técnicas
+                        </Link>{" "}
+                        del sitio.
+                    </p>
+                    <a
+                        href={TECHNICAL_AUTHOR.sameAs[0]}
+                        target="_blank"
+                        rel="noopener noreferrer me"
+                        className="mt-4 inline-flex min-h-11 items-center text-primary underline underline-offset-4 dark:text-secondary"
+                    >
+                        Perfil en LinkedIn
+                    </a>
                 </section>
 
                 <section className="space-y-6">

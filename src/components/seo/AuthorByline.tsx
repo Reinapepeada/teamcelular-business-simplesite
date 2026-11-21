@@ -1,4 +1,4 @@
-import { TECHNICAL_AUTHOR } from "@/lib/businessProfile";
+import { TECHNICAL_AUTHOR, TECHNICAL_AUTHOR_PATH } from "@/lib/businessProfile";
 
 interface AuthorBylineProps {
   /** ISO date already rendered elsewhere as dateModified in the Article schema. */
@@ -19,9 +19,8 @@ export default function AuthorByline({ updatedLabel, className = "" }: AuthorByl
       <span>
         Escrito y revisado por{" "}
         <a
-          href={TECHNICAL_AUTHOR.url}
-          target="_blank"
-          rel="noopener noreferrer author"
+          href={TECHNICAL_AUTHOR_PATH}
+          rel="author"
           className="font-semibold text-primary underline-offset-2 hover:underline"
         >
           {TECHNICAL_AUTHOR.name}
