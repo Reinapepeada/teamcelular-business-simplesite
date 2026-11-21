@@ -123,7 +123,7 @@ export default function FooterNUI() {
                 ariaLabel="Elegir sucursal y abrir WhatsApp"
                 className="inline-flex h-11 w-11 items-center justify-center rounded-full transition-colors hover:bg-white/10 hover:text-green-400"
               >
-                <BsWhatsapp size={22} />
+                <BsWhatsapp size={22} aria-hidden />
               </BranchWhatsAppButton>
               <TrackedCtaLink
                 href="https://www.instagram.com/teamcelular.ar/"
@@ -135,7 +135,7 @@ export default function FooterNUI() {
                 ariaLabel="Instagram"
                 className="inline-flex h-11 w-11 items-center justify-center rounded-full transition-colors hover:bg-white/10 hover:text-pink-400"
               >
-                <BsInstagram size={22} />
+                <BsInstagram size={22} aria-hidden />
               </TrackedCtaLink>
               <Link
                 aria-label="Facebook"
@@ -144,12 +144,12 @@ export default function FooterNUI() {
                 rel="noopener noreferrer"
                 className="inline-flex h-11 w-11 items-center justify-center rounded-full transition-colors hover:bg-white/10 hover:text-blue-400"
               >
-                <BsFacebook size={22} />
+                <BsFacebook size={22} aria-hidden />
               </Link>
             </div>
 
             <div className="flex items-start space-x-2 pt-2 text-sm">
-              <BsClock className="mt-1 flex-shrink-0 text-primary dark:text-secondary" />
+              <BsClock aria-hidden className="mt-1 flex-shrink-0 text-primary dark:text-secondary" />
               <div>
                 <p className="font-semibold">Horario de atención</p>
                 <p className="text-slate-200">Lunes a viernes</p>
@@ -209,7 +209,7 @@ export default function FooterNUI() {
             <h2 className="mb-2 text-lg font-bold text-primary dark:text-secondary">Contacto</h2>
 
             <div className="flex items-start space-x-3 text-sm">
-              <BsGeoAlt className="mt-1 flex-shrink-0 text-primary dark:text-secondary" />
+              <BsGeoAlt aria-hidden className="mt-1 flex-shrink-0 text-primary dark:text-secondary" />
               <div>
                 <p className="font-semibold">Sucursales</p>
                 {BRANCHES.map((branch) => (
@@ -221,7 +221,7 @@ export default function FooterNUI() {
             </div>
 
             <div className="flex items-start space-x-3 text-sm">
-              <BsTelephone className="mt-1 flex-shrink-0 text-primary dark:text-secondary" />
+              <BsTelephone aria-hidden className="mt-1 flex-shrink-0 text-primary dark:text-secondary" />
               <div>
                 <p className="font-semibold">Teléfonos por sucursal</p>
                 {BRANCHES.map((branch) => (
@@ -241,7 +241,7 @@ export default function FooterNUI() {
             </div>
 
             <div className="flex items-start space-x-3 text-sm">
-              <BsEnvelope className="mt-1 flex-shrink-0 text-primary dark:text-secondary" />
+              <BsEnvelope aria-hidden className="mt-1 flex-shrink-0 text-primary dark:text-secondary" />
               <div>
                 <p className="font-semibold">Email</p>
                 <TrackedCtaLink
