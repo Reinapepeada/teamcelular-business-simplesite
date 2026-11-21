@@ -149,10 +149,15 @@ export interface BrandChargedPrice extends ModelScreenPrice {
  * con el ítem de la orden. Quedaron afuera los equipos cargados solo con código
  * interno (TCL T506A y T613P, Infinix X6833B, Tecno BG7) y el pin "Honor" sin
  * modelo. Nombres normalizados: "50 NEW PAPER 5G" y "40 NEXPAPER" son NXTPAPER.
- * Google Pixel no figura: su batería cobrada más baja (Pixel 7a, $125.000) queda
- * bajo el "desde $150.000" que hoy publica la guía; lo define el negocio.
  */
 export const BRAND_CHARGED_PRICES: Record<string, BrandChargedPrice[]> = {
+  "google pixel": [
+    { model: "Pixel 6", service: "pantalla", from: 520000, month: "2026-08" },
+    { model: "Pixel 7 Pro", service: "pantalla", from: 568000, month: "2026-09" },
+    { model: "Pixel 9 Pro", service: "pantalla", from: 399000, month: "2026-11" },
+    { model: "Pixel 7", service: "batería", from: 150000, month: "2026-08" },
+    { model: "Pixel 7a", service: "batería", from: 125000, month: "2026-11" },
+  ],
   tcl: [
     { model: "TCL 30 SE", service: "pantalla", from: 69000, month: "2026-08" },
     { model: "TCL 40 SE", service: "pantalla", from: 120000, month: "2026-08" },

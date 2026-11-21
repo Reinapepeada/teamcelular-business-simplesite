@@ -115,13 +115,14 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ...REVISED_DIAGNOSIS,
     titleOverride: "Reparacion de Google Pixel en Buenos Aires",
     metaDescriptionOverride:
-      "Pantalla de Google Pixel desde $360.000 y batería desde $150.000 en CABA. Plazo según modelo y stock. Garantía escrita de 90 días.",
+      "Pantalla de Google Pixel desde $360.000 y batería desde $125.000 en CABA. Plazo según modelo y stock. Garantía escrita de 90 días.",
     repairPrices: [
       { name: "Cambio de pantalla", from: 360000, to: 590000 },
-      { name: "Cambio de bateria", from: 150000, to: 200000 },
+      // Piso: batería de Pixel 7a cobrada en noviembre de 2026 (modelScreenPrices.ts).
+      { name: "Cambio de bateria", from: 125000, to: 200000 },
     ],
     heroDescriptionOverride:
-      `Team Celular repara Google Pixel en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. El cambio de pantalla va de ARS 360.000 a 590.000 y el de batería de ARS 150.000 a 200.000, según el modelo: cubrimos desde Pixel 6 y 6a hasta Pixel 10 Pro, incluidas las variantes Pro y Pro XL. ${SCREEN_BATTERY_TIMING_MESSAGE} Si la falla requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)} y el informe se entrega en hasta 72 horas hábiles. El arreglo de placa lleva semanas; confirmamos precio y plazo por escrito antes de empezar. Garantía escrita de 90 días sobre trabajo y repuesto, y pago en 3 cuotas sin interés.`,
+      `Team Celular repara Google Pixel en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. El cambio de pantalla va de ARS 360.000 a 590.000 y el de batería de ARS 125.000 a 200.000, según el modelo: cubrimos desde Pixel 6 y 6a hasta Pixel 10 Pro, incluidas las variantes Pro y Pro XL. ${SCREEN_BATTERY_TIMING_MESSAGE} Si la falla requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)} y el informe se entrega en hasta 72 horas hábiles. El arreglo de placa lleva semanas; confirmamos precio y plazo por escrito antes de empezar. Garantía escrita de 90 días sobre trabajo y repuesto, y pago en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "Google tiene servicio tecnico de Pixel en Argentina?",

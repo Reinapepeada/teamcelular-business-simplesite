@@ -50,14 +50,17 @@ export default function BrandGuidePage({ slug }: { slug: BrandGuideSlug }) {
       relatedLinks={config.relatedLinks}
       whatsappText={config.whatsappText}
       priceTable={
-        config.repairPrices?.length ? (
-          <RepairPriceTable
-            brand={config.pageLabel}
-            prices={config.repairPrices}
-            updatedLabel={PRICES_UPDATED_LABEL}
-          />
-        ) : charged ? (
-          <BrandChargedPriceTable brand={config.brand} prices={charged} />
+        config.repairPrices?.length || charged ? (
+          <>
+            {config.repairPrices?.length ? (
+              <RepairPriceTable
+                brand={config.pageLabel}
+                prices={config.repairPrices}
+                updatedLabel={PRICES_UPDATED_LABEL}
+              />
+            ) : null}
+            {charged ? <BrandChargedPriceTable brand={config.brand} prices={charged} /> : null}
+          </>
         ) : null
       }
       priceTablePosition="after-hero"

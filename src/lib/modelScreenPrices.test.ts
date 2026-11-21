@@ -2,6 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { ALL_MODEL_PRICE_TABLES, formatPriceMonth } from "./modelScreenPrices.ts";
 import { BATTERY_PRICE_FLOOR, BRAND_REPAIR_PRICES } from "./repairPrices.ts";
+import { getBrandGuideConfig } from "@/app/(site)/guias/brandGuideConfigs";
 import {
   BRAND_CHARGED_PRICES,
   MOTOROLA_BATTERY_PRICES,
@@ -58,6 +59,10 @@ test("las marcas con pocas órdenes siguen la misma regla y no contradicen las t
       if (row.service === "batería") assert.ok(row.from >= BATTERY_PRICE_FLOOR, `${row.model} bajo el piso`);
     }
   }
+  // Mismo invariante que Samsung, Motorola y Xiaomi: el "desde" de la guía no supera lo cobrado.
+  const pixelBattery = BRAND_CHARGED_PRICES["google pixel"].filter((r) => r.service === "batería").map((r) => r.from);
+  const pixelGuide = getBrandGuideConfig("reparacion-google-pixel-buenos-aires").repairPrices ?? [];
+  assert.ok(pixelGuide.find((p) => p.name.includes("bateria"))!.from <= Math.min(...pixelBattery));
   for (const row of BRAND_CHARGED_PRICES.poco.filter((r) => r.service === "batería")) {
     assert.equal(XIAOMI_BATTERY_PRICES.find((x) => x.model === row.model)?.from, row.from, row.model);
   }
