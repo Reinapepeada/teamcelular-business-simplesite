@@ -51,7 +51,7 @@ brand-guides-emerging:
 
 trust-signals:
 - ubicacion-fisica: Paraguay 2451, Recoleta, CABA
-- ubicacion-fisica: Amenabar 2032, Belgrano, CABA
+- ubicacion-fisica: Amenábar 2032, Belgrano, CABA
 - horario: lunes a viernes de 10:30 a 18:00
 - contacto-whatsapp: https://wa.me/5491151034595
 

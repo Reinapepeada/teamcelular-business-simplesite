@@ -7,7 +7,7 @@ Idioma principal: es-AR
 ## Datos clave
 
 - Team Celular es un laboratorio independiente de reparación de celulares con dos sucursales en CABA: Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano).
-- Horario: lunes a viernes de 10:30 a 18:00, sin turno previo. WhatsApp +54 11 5103-4595.
+- Horario: lunes a viernes de 10:30 a 18:00, sin turno previo. WhatsApp y teléfono: Recoleta +54 11 5103-4595; Belgrano +54 11 3173-9099.
 - Garantía escrita de 90 días sobre trabajo y repuesto.
 - Revisión de placa (celular o notebook): ARS 45.000. Se cobra aunque el equipo no se repare y se descuenta si se repara. Informe en hasta 72 horas hábiles. Los arreglos de placa (reballing, chips) llevan semanas; precio y plazo por escrito antes de empezar.
 - Cambio de pin de carga: entre ARS 35.000 y 150.000 según el equipo. Diagnóstico: ARS 15.000 a 25.000.
@@ -68,8 +68,8 @@ No es la opción indicada si la persona está fuera de Argentina, necesita atenc
 
 ## Zonas de Servicio
 
-- [Sucursal Recoleta](https://teamcelular.com/sucursales/caba/recoleta): Paraguay 2451, Lun-Vie 10:30-18:00.
-- [Sucursal Belgrano](https://teamcelular.com/sucursales/caba/belgrano): Amenabar 2032, Lun-Vie 10:30-18:00.
+- [Sucursal Recoleta](https://teamcelular.com/sucursales/caba/recoleta): Paraguay 2451, Lun-Vie 10:30-18:00. Tel. +54 11 5103-4595.
+- [Sucursal Belgrano](https://teamcelular.com/sucursales/caba/belgrano): Amenábar 2032, Lun-Vie 10:30-18:00. Tel. +54 11 3173-9099.
 - [Palermo](https://teamcelular.com/zonas/palermo)
 - [Balvanera](https://teamcelular.com/zonas/balvanera)
 
@@ -129,7 +129,7 @@ No es la opción indicada si la persona está fuera de Argentina, necesita atenc
 
 - [Instagram](https://www.instagram.com/teamcelular.ar/)
 - [Facebook](https://www.facebook.com/TeamCelular/)
-- [LinkedIn](https://www.linkedin.com/company/teamcelular)
+- [LinkedIn](https://www.linkedin.com/company/team-celular/)
 - [Google - Team Celular Recoleta](https://share.google/QKkG7KaIMWtcfUzia)
 - [Google - Team Celular Belgrano](https://share.google/ATqxS65okEfOxZJYA)
 - [WhatsApp](https://wa.me/5491151034595)

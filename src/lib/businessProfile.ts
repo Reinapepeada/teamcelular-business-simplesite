@@ -48,7 +48,7 @@ export const BUSINESS_PROFILE = {
   sameAs: [
     "https://www.instagram.com/teamcelular.ar/",
     "https://www.facebook.com/TeamCelular/",
-    "https://www.linkedin.com/company/teamcelular/",
+    "https://www.linkedin.com/company/team-celular/",
     // Las fichas de Google Business Profile son de cada sucursal: van en su LocalBusiness.
   ],
   knowsAbout: [
