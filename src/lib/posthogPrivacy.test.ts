@@ -20,7 +20,7 @@ function event(name = "$pageview", url = "https://teamcelular.com/presupuesto-re
 }
 
 test("PostHog conserva visitas y pasos, sin respuestas ni parámetros o perfiles personales", () => {
-  for (const name of ["$pageview", "budget_wizard_view", "budget_wizard_step_view", "budget_wizard_abandon", "lead_form_submit"]) {
+  for (const name of ["$pageview", "budget_wizard_view", "budget_wizard_step_view", "budget_wizard_abandon", "budget_quote_shown", "lead_form_submit"]) {
     const result = sanitizePostHogEvent(event(name));
     assert.deepEqual(result?.properties, {
       distinct_id: "anonymous-test", $session_id: "session-test",

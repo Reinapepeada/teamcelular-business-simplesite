@@ -6,7 +6,7 @@ export const MEASUREMENT_EVENTS = new Set([
   "branch_selector_open", "branch_selector_close", "branch_preference_selected", "branch_whatsapp_redirect",
   "branch_location_request", "branch_location_success", "branch_location_denied", "branch_location_error",
   "budget_wizard_view", "budget_wizard_step_view", "budget_wizard_step_complete", "budget_wizard_step_back",
-  "budget_wizard_abandon", "budget_validation_error", "lead_form_submit",
+  "budget_wizard_abandon", "budget_validation_error", "budget_quote_shown", "lead_form_submit",
   "page_engagement", "faq_open", "navigation_click", "client_error",
   "view_item_list", "select_item", "view_item", "add_to_cart", "remove_from_cart", "view_cart",
   "begin_checkout", "checkout_step_view", "checkout_validation_error", "checkout_error",

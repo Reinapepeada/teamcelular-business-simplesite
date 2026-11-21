@@ -92,15 +92,15 @@ test('Navegación por teclado: saltar contenido, cerrar menú y recuperar foco',
 
 test('Presupuesto: valida la falla y conserva precio, revisión y sucursal', async ({ page }) => {
     await page.goto('/presupuesto-reparacion#solicitar-presupuesto');
-    const submit = page.getByRole('button', { name: 'Pedir presupuesto por WhatsApp', exact: true });
-    await submit.click();
+    // Sin sucursal elegida, cada botón de envío nombra una y no hay aviso de sucursal.
+    const sendToBelgrano = page.getByRole('button', { name: 'Pedir presupuesto en Belgrano', exact: true });
+    await expect(page.getByRole('button', { name: 'Pedir presupuesto en Recoleta', exact: true })).toBeVisible();
+    await sendToBelgrano.click();
     await expect(page.locator('main').getByRole('alert')).toContainText('Tocá qué le pasa');
     await page.getByRole('button', { name: 'Pantalla', exact: true }).click();
     await page.getByPlaceholder('Ej: iPhone 13, Galaxy A54, Moto G54').fill('iPhone 13');
     await expect(page.getByText('Precio de referencia', { exact: true })).toBeVisible();
     await expect(page.locator('main')).toContainText('249.900');
-    await submit.click();
-    await expect(page.locator('main').getByRole('alert')).toContainText('sucursal');
     await page.getByRole('button', { name: 'Placa', exact: true }).click();
     await expect(page.getByText('Revisión de placa', { exact: true })).toBeVisible();
     await expect(page.locator('main')).toContainText('45.000');
@@ -108,9 +108,8 @@ test('Presupuesto: valida la falla y conserva precio, revisión y sucursal', asy
     // WhatsApp is fulfilled locally: this never sends a real message or creates an order.
     await page.route('https://wa.me/**', route => route.fulfill({ contentType: 'text/html', body: '<p>WhatsApp ficticio de prueba</p>' }));
     await page.route('**/api/lead-interactions', route => route.fulfill({ json: { ok: true } }));
-    await page.getByRole('button', { name: /Belgrano.*Amenábar/ }).click();
     const destination = page.waitForRequest(request => request.url().startsWith('https://wa.me/'));
-    await submit.click();
+    await sendToBelgrano.click();
     const url = new URL((await destination).url());
     expect(url.pathname).toBe('/5491131739099');
     expect(url.searchParams.get('text')).toContain('iPhone 13');
