@@ -14,6 +14,7 @@ import BranchMap from "@/components/cards/BranchMap";
 import RepairFaqList from "@/components/repairs/RepairFaqList";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import RepairPriceTable from "@/components/seo/RepairPriceTable";
+import PriceDateJsonLd from "@/components/seo/PriceDateJsonLd";
 import { POPULAR_REPAIR_PRICES, PRICES_UPDATED_LABEL } from "@/lib/repairPrices";
 
 const SITE_URL =
@@ -339,6 +340,7 @@ export default function SucursalBelgranoPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
       />
+      <PriceDateJsonLd url={PAGE_URL} name="Reparación de celulares en Belgrano CABA" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}

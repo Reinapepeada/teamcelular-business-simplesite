@@ -12,6 +12,7 @@ import {
   FaTools,
 } from "react-icons/fa";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import PriceDateJsonLd from "@/components/seo/PriceDateJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import { PRICES_UPDATED_LABEL } from "@/lib/repairPrices";
@@ -283,6 +284,8 @@ export interface ServiceLandingConfig {
   brandsText: string;
   /** Precios cortos para el hero (una fila por caso). Mejor que meterlos en el parrafo. */
   prices?: { label: string; value: string }[];
+  /** Piso del servicio según la fuente de precios: es el "desde" que ya se muestra y va al Offer. */
+  priceFrom?: number;
   /** Reemplaza las dos ultimas lineas de "¿Dónde reparamos?" cuando la garantia o el plazo general no aplican. */
   asideNotes?: [string, string];
   /** Reglas que el cliente tiene que leer antes de dejar el equipo. */
@@ -367,6 +370,9 @@ export default function ServiceLandingPage({
       url: `${SITE_URL}/presupuesto-reparacion`,
       priceCurrency: "ARS",
       availability: "https://schema.org/InStock",
+      ...(config.priceFrom
+        ? { priceSpecification: { "@type": "PriceSpecification", priceCurrency: "ARS", minPrice: config.priceFrom } }
+        : {}),
     },
   };
 
@@ -596,6 +602,7 @@ export default function ServiceLandingPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
+      {config.slug === "cambio-pantalla-caba" && <PriceDateJsonLd url={serviceUrl} name={config.h1} />}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

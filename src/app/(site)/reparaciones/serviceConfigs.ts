@@ -130,6 +130,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       { label: "Samsung Galaxy A", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[2].from)}` },
       { label: "Motorola Moto G", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[3].from)}` },
     ],
+    priceFrom: BATTERY_PRICE_FLOOR,
     whatsappText:
       "Hola! Quiero un presupuesto para cambio de bateria en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de batería (CABA)",
@@ -206,6 +207,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       { label: "Samsung Galaxy A", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[0].from)}` },
       { label: "Motorola Moto G", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[0].from)}` },
     ],
+    priceFrom: Math.min(BRAND_REPAIR_PRICES.samsung[0].from, BRAND_REPAIR_PRICES.motorola[0].from, BRAND_REPAIR_PRICES.xiaomi[0].from),
     whatsappText:
       "Hola! Quiero un presupuesto para cambio de pantalla en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de pantalla (CABA)",
@@ -284,6 +286,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       { label: "Cambio de pin de carga", value: `${formatArsPrice(CHARGING_PORT_PRICE.from)} a ${formatArsPrice(CHARGING_PORT_PRICE.to)}` },
       { label: "Diagnóstico", value: "$ 15.000 a $ 25.000" },
     ],
+    priceFrom: CHARGING_PORT_PRICE.from,
     whatsappText:
       "Hola! Quiero un presupuesto para cambio de pin de carga en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de pin de carga (CABA)",

@@ -173,12 +173,17 @@ export function branchLocalBusiness(branch: (typeof BRANCHES)[number]) {
   return {
     "@type": "LocalBusiness",
     "@id": branchId(branch),
+    // Mismas propiedades que el LocalBusiness de cada página de sucursal: la entidad no debe
+    // describirse distinto según la página.
+    additionalType: ["https://schema.org/ElectronicsStore", "https://schema.org/ProfessionalService"],
     name: branch.name,
     url: absoluteUrl(branch.url),
     telephone: branch.phone,
+    email: BUSINESS_PROFILE.email,
     image: `${SITE_URL}/opengraph-image.png`,
     priceRange: "$$",
     parentOrganization: { "@id": businessId("organization") },
+    areaServed: [{ "@type": "AdministrativeArea", name: "Ciudad Autonoma de Buenos Aires" }],
     address: {
       "@type": "PostalAddress",
       streetAddress: branch.street,
