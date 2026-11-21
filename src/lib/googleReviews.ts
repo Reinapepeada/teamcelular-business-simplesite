@@ -53,9 +53,13 @@ export function normalizeGoogleReviews(data: unknown): PlaceDetails | null {
     return { rating: place.rating, user_ratings_total: place.userRatingCount, reviews };
 }
 
-export async function getGoogleReviews(): Promise<PlaceDetails | null> {
+// Recoleta sale de GOOGLE_PLACE_ID. El de Belgrano es el identificador público de su ficha
+// (/g/11zgvr4gnp, cid 15909603957918930500), no un secreto.
+const BELGRANO_PLACE_ID = "ChIJjfRDvhe1vJURRBbozIFEytw";
+
+export async function getGoogleReviews(branch: "recoleta" | "belgrano" = "recoleta"): Promise<PlaceDetails | null> {
     const apiKey = process.env.GOOGLE_PLACES_API_KEY;
-    const placeId = process.env.GOOGLE_PLACE_ID;
+    const placeId = branch === "belgrano" ? BELGRANO_PLACE_ID : process.env.GOOGLE_PLACE_ID;
 
     if (!apiKey || !placeId) {
         return null;
