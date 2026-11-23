@@ -1,6 +1,9 @@
 import { test, expect, type APIRequestContext } from '@playwright/test';
 
 const googlebot = { 'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', Accept: 'text/html' };
+// La espera de recuperación puede coincidir con el cierre de una conexión ociosa.
+// Playwright reintenta sólo ECONNRESET; los estados HTTP y el plazo SSR siguen verificándose.
+const recoveryRead = { headers: googlebot, maxRetries: 1 };
 const fixture = (failure = '') => `http://127.0.0.1:3101/__fixture/seo?failure=${failure}`;
 
 test.afterEach(async ({ request }) => { await request.get(fixture()); });
@@ -14,7 +17,7 @@ test('sitemap: falla temporal de facetas no publica una lista recortada con 200'
     await request.get(fixture('facets'));
     expect((await request.get('/sitemap.xml', { headers: googlebot })).status()).toBe(500);
     await request.get(fixture());
-    const recovered = await request.get('/sitemap.xml', { headers: googlebot });
+    const recovered = await request.get('/sitemap.xml', recoveryRead);
     expect(recovered.status()).toBe(200);
     expect(await recovered.text()).toContain('/tienda/funda-prueba');
 });
@@ -35,7 +38,7 @@ for (const [failure, path] of [
         await request.get(fixture(failure));
         expect((await request.get(path, { headers: googlebot })).status()).toBe(500);
         await recuperar(request);
-        const recovered = await request.get(path, { headers: googlebot });
+        const recovered = await request.get(path, recoveryRead);
         expect(recovered.status()).toBe(200);
         expect(await recovered.text()).toContain('rel="canonical"');
     });
@@ -107,7 +110,7 @@ for (const [failure, path, status] of [
         expect(elapsed).toBeLessThan(14_000);
         if (status === 200) expect(await response.text()).toContain('Funda de prueba');
         await recuperar(request);
-        const recovered = await request.get(path, { headers: googlebot });
+        const recovered = await request.get(path, recoveryRead);
         expect(recovered.status()).toBe(200);
         expect(await recovered.text()).toContain(path === '/feed/google.xml' ? '<rss' : 'rel="canonical"');
     });
