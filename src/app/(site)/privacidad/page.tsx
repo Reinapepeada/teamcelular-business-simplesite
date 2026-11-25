@@ -68,7 +68,7 @@ export default function PrivacidadPage() {
           Política de privacidad
         </h1>
         <p className="text-slate-600 dark:text-slate-300">
-          Última actualización: 28 de octubre de 2026.
+          Última actualización: 25 de noviembre de 2026.
         </p>
       </header>
 
@@ -123,33 +123,75 @@ export default function PrivacidadPage() {
           Los errores del servidor usan un identificador aleatorio por error.
         </p>
 
-        <h2>4. Cookies</h2>
+        <h2>4. Redes sociales e integraciones (TikTok, Instagram, Facebook, YouTube)</h2>
+        <p>
+          Team Celular usa una herramienta interna de programación de
+          publicaciones para gestionar sus propias cuentas oficiales en redes
+          sociales. Cuando conectamos una cuenta mediante el inicio de sesión
+          oficial de cada plataforma (por ejemplo, TikTok Login Kit o Meta), la
+          herramienta recibe solo los permisos que autorizamos explícitamente.
+        </p>
+        <ul>
+          <li>
+            <strong>Datos que recibimos:</strong> información básica del perfil
+            de nuestra propia cuenta (identificador, nombre visible, avatar,
+            enlace de perfil), estadísticas de la cuenta (seguidores, me gusta,
+            cantidad de videos) y la lista y métricas de nuestros propios videos
+            publicados.
+          </li>
+          <li>
+            <strong>Para qué los usamos:</strong> subir y publicar los videos que
+            producimos en nuestras cuentas, programar publicaciones y medir el
+            rendimiento de nuestro contenido. No usamos estos datos para
+            publicidad dirigida ni los vendemos o compartimos con terceros.
+          </li>
+          <li>
+            <strong>Datos de otros usuarios:</strong> no accedemos a perfiles,
+            mensajes ni contenido de otras personas a través de estas
+            integraciones.
+          </li>
+          <li>
+            <strong>Almacenamiento y seguridad:</strong> los tokens de acceso se
+            guardan cifrados en un servidor propio con acceso restringido y se
+            usan solo para las funciones descriptas.
+          </li>
+          <li>
+            <strong>Revocación y eliminación:</strong> el acceso puede revocarse
+            en cualquier momento desde la configuración de aplicaciones
+            autorizadas de cada plataforma. Al desconectar una cuenta, eliminamos
+            sus tokens y los datos asociados en un plazo máximo de 30 días. Para
+            solicitar la eliminación, escribí a{" "}
+            <a href="mailto:teamcelular.arg@gmail.com">teamcelular.arg@gmail.com</a>.
+          </li>
+        </ul>
+
+        <h2>5. Cookies</h2>
         <p>
           El sitio puede usar cookies/almacenamiento local para funcionalidades
           y medición. Podés administrar cookies desde tu navegador.
         </p>
 
-        <h2>5. Conservación</h2>
+        <h2>6. Conservación</h2>
         <p>
           Conservamos la información el tiempo necesario para gestionar
           consultas, presupuestos y servicios, o para cumplir obligaciones
           legales.
         </p>
 
-        <h2>6. Derechos</h2>
+        <h2>7. Derechos</h2>
         <p>
           Podés solicitar acceso, actualización o eliminación de tus datos
           escribiendo a{" "}
           <a href="mailto:teamcelular.arg@gmail.com">teamcelular.arg@gmail.com</a>.
         </p>
 
-        <h2>7. Cambios</h2>
+        <h2>8. Cambios</h2>
         <p>
           Podemos actualizar esta política. La versión vigente estará publicada
           en esta página.
         </p>
 
-        <h2>8. Contacto</h2>
+        <h2>9. Contacto</h2>
         <p>
           Para consultas sobre privacidad, escribinos a{" "}
           <a href="mailto:teamcelular.arg@gmail.com">teamcelular.arg@gmail.com</a>{" "}
