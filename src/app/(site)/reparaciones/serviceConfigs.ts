@@ -1,6 +1,8 @@
 import type { ServiceLandingConfig } from "./serviceLanding";
 import { BATTERY_PRICE_FLOOR, BRAND_REPAIR_PRICES, CHARGING_PORT_CLEANING_PRICE, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, SAMSUNG_CHARGING_PORT_PRICES, formatArsPrice } from "@/lib/repairPrices";
 import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
+import { BUSINESS_PROFILE } from "@/lib/businessProfile";
+import { INSTALLMENTS_MESSAGE } from "@/lib/copyStandards";
 
 // Precios del primer parrafo de cambio de pantalla: misma fuente que las tablas.
 const IPHONE_13_SCREEN = IPHONE_MODELS.find((m) => m.slug === "13")?.screen ?? 249900;
@@ -18,7 +20,115 @@ export const NOTEBOOK_PRICES = {
   boardFrom: 120000,
 };
 
+// Pisos cobrados en tablets de Team Celular (Fixbee, dic 2025 a nov 2026). Muy pocos casos: 4 de pin de carga y 2 de pantalla, ambos en iPad. Revisar al actualizar.
+export const TABLET_PRICES = {
+  chargingPortFrom: 40000,
+  screenFrom: 69000,
+};
+
 export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
+  "reparacion-tablets-caba": {
+    slug: "reparacion-tablets-caba",
+    h1: "Reparación de tablets e iPad en CABA",
+    metaTitle: "Reparación de Tablets e iPad en CABA | Team Celular",
+    metaDescription: `Reparación de tablets e iPad en Recoleta y Belgrano, CABA. Pin de carga desde ${formatArsPrice(TABLET_PRICES.chargingPortFrom)} y pantalla desde ${formatArsPrice(TABLET_PRICES.screenFrom)}. Revisión y presupuesto antes de reparar.`,
+    socialTitle: "Reparación de Tablets e iPad en CABA | Team Celular",
+    socialDescription:
+      "Team Celular, en Recoleta y Belgrano. Reparamos tablets e iPad: vidrio, pantalla, batería y pin de carga, con presupuesto antes de reparar.",
+    keywords: [
+      "reparacion de tablets",
+      "reparacion de tablets CABA",
+      "arreglo de tablet",
+      "reparacion de ipad",
+      "servicio tecnico tablet samsung",
+      "cambio de vidrio tablet",
+      "tablet no carga",
+    ],
+    intro: `Sí, reparamos tablets e iPad en CABA: las recibimos sin turno en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032). Revisamos vidrio o pantalla rota, batería que dura poco, pin de carga flojo y tablets que no encienden. La revisión cuesta ${BUSINESS_PROFILE.reviewCostRange} y te pasamos el presupuesto antes de reparar.`,
+    budgetCtaLabel: "Consultar por mi tablet",
+    quoteHint: "Mandanos marca, modelo y qué le pasa: si se rompió el vidrio, si no carga o si no prende. El modelo figura en la tapa trasera o en Ajustes.",
+    priceNote: "Los valores \"desde\" salen de trabajos cobrados en 2026 y son pocos casos. El precio de tu tablet depende del modelo y del repuesto, y lo confirmás por escrito antes de que reparemos.",
+    prices: [
+      { label: "Revisión técnica", value: BUSINESS_PROFILE.reviewCostRange },
+      { label: "Cambio de pin de carga", value: `desde ${formatArsPrice(TABLET_PRICES.chargingPortFrom)}` },
+      { label: "Cambio de pantalla o módulo", value: `desde ${formatArsPrice(TABLET_PRICES.screenFrom)}` },
+      { label: "Revisión de placa", value: PLACA_REVISION },
+    ],
+    priceFrom: TABLET_PRICES.chargingPortFrom,
+    asideNotes: [
+      "Garantía escrita sobre el trabajo y el repuesto; el alcance figura en la orden que te llevás.",
+      "El plazo depende de la falla y del repuesto. Te lo confirmamos junto con el presupuesto.",
+    ],
+    workflow: [
+      { title: "La revisamos", desc: "La abrimos en el laboratorio y medimos pantalla, táctil, batería, carga y placa para encontrar la causa." },
+      { title: "Te pasamos el presupuesto", desc: "Precio, plazo y repuesto por escrito. Si no te conviene reparar, te lo decimos y pagás solo la revisión." },
+      { title: "La reparamos", desc: "Si aparece otro daño al abrirla, te avisamos antes de seguir. Tus fotos y archivos no se tocan sin tu autorización." },
+      { title: "La probás y te la llevás", desc: "Probás táctil, carga, cámaras y sonido en el mostrador, y te llevás la garantía por escrito." },
+    ],
+    whatsappText: "Hola! Quiero un presupuesto para reparar mi tablet. Marca, modelo y falla:",
+    breadcrumbLabel: "Reparación de tablets e iPad (CABA)",
+    serviceName: "Reparación de tablets e iPad en CABA",
+    serviceType: "Reparación de tablets e iPad",
+    serviceDescription:
+      "Revisión y reparación de tablets Android e iPad en Recoleta y Belgrano, CABA: vidrio táctil, pantalla, batería, conector de carga y placa.",
+    closingDescription: "Mandanos marca, modelo y falla de tu tablet por WhatsApp y te decimos si hace falta revisarla.",
+    highlights: [
+      {
+        title: "En muchos iPad se cambia solo el vidrio",
+        desc: "En el iPad de 10,2 pulgadas y otros modelos de entrada, el vidrio táctil y la pantalla son dos piezas: si la imagen se ve bien y solo está rajado el vidrio, se cambia el vidrio. En iPad Air, iPad Pro y los iPad mini recientes vienen pegados de fábrica y se cambia el conjunto.",
+      },
+      {
+        title: "Abrir una tablet lleva más cuidado que un celular",
+        desc: "La pantalla va pegada al marco y hay que despegarla con calor para llegar a la batería o al pin de carga. Por eso el plazo no es el de un celular: te lo confirmamos con el presupuesto.",
+      },
+      {
+        title: "Tus datos quedan como están",
+        desc: "Para cambiar vidrio, batería o pin de carga no hace falta borrar la tablet. Si la falla obliga a restaurar el sistema, te avisamos antes para que decidas.",
+      },
+    ],
+    conditions: [
+      {
+        title: "Traé el modelo exacto",
+        desc: "Dos tablets que se ven iguales pueden usar repuestos distintos. El modelo figura en la tapa trasera o en Ajustes, dentro de la información del dispositivo.",
+      },
+      {
+        title: "iPad con Touch ID",
+        desc: "El botón de inicio original está vinculado a la placa. Si el botón se dañó, uno nuevo funciona como botón pero no recupera la huella.",
+      },
+      {
+        title: "Si la falla es de placa",
+        desc: `La revisión de placa cuesta ${PLACA_REVISION}, se cobra aunque no se repare y se descuenta si se repara. El informe está en hasta 72 horas hábiles.`,
+      },
+    ],
+    brandsText:
+      "Revisamos iPad de Apple y tablets Android de Samsung (Galaxy Tab), Lenovo y Xiaomi, entre otras. No somos service oficial de ninguna marca.",
+    faqs: [
+      {
+        q: "¿Cuánto sale arreglar una tablet?",
+        a: `Depende del modelo y de la pieza. En 2026 cobramos cambios de pin de carga desde ${formatArsPrice(TABLET_PRICES.chargingPortFrom)} y cambios de pantalla desde ${formatArsPrice(TABLET_PRICES.screenFrom)}. La revisión cuesta ${BUSINESS_PROFILE.reviewCostRange}; con el equipo abierto te pasamos el precio por escrito y decidís si seguimos. ${INSTALLMENTS_MESSAGE}`,
+      },
+      {
+        q: "¿Reparan iPad?",
+        a: "Sí. Revisamos iPad, iPad Air, iPad mini y iPad Pro: vidrio, pantalla, batería y conector de carga. No somos service oficial de Apple.",
+      },
+      {
+        q: "¿Se puede cambiar solo el vidrio de la tablet?",
+        a: "En los modelos donde el vidrio táctil y la pantalla son piezas separadas, sí, siempre que la imagen esté sana. Si vienen pegados de fábrica se cambia el conjunto. Lo confirmamos con el modelo exacto.",
+      },
+      {
+        q: "¿Pierdo mis fotos y archivos?",
+        a: "No para un cambio de vidrio, batería o pin de carga. Si hay que restaurar el sistema, te avisamos antes. Si podés, hacé una copia de seguridad antes de traerla.",
+      },
+      {
+        q: "¿Cuánto tarda la reparación de una tablet?",
+        a: "Depende de la falla y de si el repuesto está en stock. Te confirmamos el plazo junto con el presupuesto, antes de empezar.",
+      },
+      {
+        q: "¿Dónde dejo la tablet?",
+        a: "En Recoleta (Paraguay 2451) o en Belgrano (Amenábar 2032), de lunes a viernes de 10:30 a 18:00, sin turno.",
+      },
+    ],
+  },
   "reparacion-notebook-caba": {
     slug: "reparacion-notebook-caba",
     h1: "Reparación de notebooks en CABA",
