@@ -271,7 +271,6 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
       stats: [
         { value: "22", label: "POCO que entraron al taller" },
         { value: "4", label: "fueron POCO X3 Pro" },
-        { value: formatArsPrice(POCO_X3_PRO_REBALLING_PRICE), label: "reballing del procesador en el X3 Pro" },
       ],
       intro: `${WORKSHOP_TEAM} recibe POCO sobre todo por fallas de placa. El caso que más se repite es el POCO X3 Pro.`,
       notes: [
