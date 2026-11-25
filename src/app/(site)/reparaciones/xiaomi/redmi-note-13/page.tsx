@@ -1,3 +1,4 @@
+import { MULTIBRAND_WARRANTY_MESSAGE } from "@/lib/copyStandards";
 import type { Metadata } from "next";
 import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
@@ -42,7 +43,7 @@ const SPECS = {
 export const metadata: Metadata = buildWebsiteMetadata({
     path: PATH,
     title: `Reparación Redmi Note 13 en CABA: batería desde ${formatArsPrice(batteryFrom)}`,
-    description: `Batería del Redmi Note 13 desde ${formatArsPrice(batteryFrom)} y pantalla OLED desde ${screen ? formatArsPrice(screen.from) : "consultar"}. 4G y 5G en Recoleta y Belgrano, con garantía escrita de 90 días.`,
+    description: `Batería del Redmi Note 13 desde ${formatArsPrice(batteryFrom)} y pantalla OLED desde ${screen ? formatArsPrice(screen.from) : "consultar"}. 4G y 5G en Recoleta y Belgrano.`,
     keywords: [
       "reparacion redmi note 13 caba",
       "cambio de bateria redmi note 13",
@@ -94,7 +95,7 @@ export default function RedmiNote13Page() {
   const faqs = [
     {
       question: "¿Cuánto sale cambiar la batería del Redmi Note 13?",
-      answer: `Desde ${formatArsPrice(batteryFrom)} en Team Celular, en 1 a 2 horas si hay repuesto y con garantía escrita de 90 días. ${batteries.map((p) => `${p.model}: ${formatArsPrice(p.from)}`).join("; ")}. Antes medimos el consumo para confirmar que la falla es la batería.`,
+      answer: `Desde ${formatArsPrice(batteryFrom)} en Team Celular, en 1 a 2 horas si hay repuesto. ${batteries.map((p) => `${p.model}: ${formatArsPrice(p.from)}`).join("; ")}. Antes medimos el consumo para confirmar que la falla es la batería.`,
     },
     {
       question: "¿Por qué se levantó la tapa de mi Redmi Note 13?",
@@ -176,7 +177,7 @@ export default function RedmiNote13Page() {
           <strong>{screen ? formatArsPrice(screen.from) : "consultar"}</strong> en Team Celular,
           con sucursales en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA.
           Reparamos la versión 4G y la 5G. La batería se cambia en 1 a 2 horas y la pantalla
-          en 2 a 4, según stock, con garantía escrita de 90 días. Son los precios más bajos
+          en 2 a 4 horas, según stock. {MULTIBRAND_WARRANTY_MESSAGE} Son los precios más bajos
           que cobramos por este modelo
           {screen ? ` desde agosto de 2026 (pantalla: ${formatPriceMonth(screen.month)})` : ""}; el
           número exacto se confirma antes de abrir el equipo.

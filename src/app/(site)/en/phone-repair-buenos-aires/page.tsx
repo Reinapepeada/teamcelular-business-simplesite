@@ -25,7 +25,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
   title: "Phone Repair Buenos Aires | Same-Day, English Spoken",
   description:
-    "iPhone and Android repair in Buenos Aires: screen and battery in 2–4 hours, no appointment. Recoleta and Belgrano, English spoken, 90-day warranty.",
+    "iPhone and Android repair in Buenos Aires: screen and battery in 2–4 hours, no appointment. Recoleta and Belgrano, English spoken.",
   keywords: [
     "phone repair buenos aires",
     "iphone repair buenos aires",
@@ -40,7 +40,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   },
   openGraphTitle: "Phone Repair in Buenos Aires | Team Celular",
   openGraphDescription:
-    "Same-day screen and battery repair in Recoleta and Belgrano. English spoken. 90-day written warranty.",
+    "Same-day screen and battery repair in Recoleta and Belgrano. English spoken.",
 });
 
 const priced = ["11", "12", "13", "14-pro-max"] as const;
@@ -121,7 +121,7 @@ export default function PhoneRepairEnglishPage() {
           <summary className="tc-link min-h-11 cursor-pointer py-3">Repair times, parts and warranty</summary>
           <p className="mt-2 leading-relaxed text-slate-300">
             Screen replacements usually take 2–4 hours and batteries 1–2 hours when the part is in stock, subject to diagnosis.
-            Repairs carry a 90-day written warranty covering the work and installed part.
+            We offer a 90-day written commercial warranty on iPhone part replacements and charging port replacements for all brands. Screen and battery replacements for other brands fall outside that commercial warranty. Your statutory rights still apply. We confirm coverage in writing before you approve the repair.
             Alejandro Biarrieta, the founding technician, speaks English. We work on iPhone, Samsung, Motorola,
             Xiaomi and other brands, including phones bought abroad. We also clean water-damaged boards in-house.
           </p>
@@ -201,7 +201,7 @@ export default function PhoneRepairEnglishPage() {
           Yes. Where the phone was purchased does not change the technical work, only parts
           availability for some models, which we confirm before you leave the phone with us.
           If your phone is still under manufacturer warranty, check its coverage and service options
-          before authorizing an independent repair. Our own 90-day written warranty covers our work and the installed part.
+          before authorizing an independent repair. We confirm the coverage for your repair in writing before you approve the quote.
         </p>
       </section>
 

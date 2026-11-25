@@ -2,7 +2,22 @@ export const REVIEW_COST_MESSAGE =
   "La revisión técnica es arancelada y suele variar entre ARS 15.000 y ARS 25.000, según marca, modelo y tipo de falla.";
 
 export const WARRANTY_SCOPE_MESSAGE =
-  "La garantía escrita cubre 90 días sobre trabajo y repuesto instalado; el alcance exacto se informa por escrito antes de avanzar.";
+  "Ofrecemos garantía comercial escrita de 90 días en cambios de piezas de iPhone y de pin de carga de cualquier marca. El presupuesto detalla la cobertura aplicable antes de que autorices el trabajo. Los cambios de batería y módulo de pantalla de otras marcas quedan fuera de esa garantía comercial. Se mantienen tus derechos legales.";
+
+export const BATTERY_WARRANTY_MESSAGE =
+  "El cambio de batería de iPhone tiene garantía comercial escrita de 90 días. En otras marcas, este cambio queda fuera de esa garantía comercial. El presupuesto detalla la cobertura aplicable y se mantienen tus derechos legales.";
+
+export const SCREEN_WARRANTY_MESSAGE =
+  "El cambio de módulo de pantalla de iPhone tiene garantía comercial escrita de 90 días. En otras marcas, este cambio queda fuera de esa garantía comercial. El presupuesto detalla la cobertura aplicable y se mantienen tus derechos legales.";
+
+export const MULTIBRAND_WARRANTY_MESSAGE =
+  "El cambio de pin de carga tiene garantía escrita de 90 días sobre el trabajo y el repuesto instalado, en cualquier marca. Los cambios de batería y de módulo de pantalla quedan fuera de esa garantía comercial. Te detallamos la cobertura aplicable en el presupuesto. Se mantienen tus derechos legales.";
+
+export const IPHONE_PARTS_WARRANTY_MESSAGE =
+  "Los cambios de piezas de iPhone tienen garantía escrita de 90 días sobre el trabajo y el repuesto instalado.";
+
+export const CHARGING_PORT_WARRANTY_MESSAGE =
+  "El cambio de pin de carga tiene garantía escrita de 90 días sobre el trabajo y el repuesto instalado, en cualquier marca.";
 
 /**
  * Financiación. Los competidores que aparecen citados por motores de IA la

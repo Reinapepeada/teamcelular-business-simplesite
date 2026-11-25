@@ -5,7 +5,7 @@ import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
-import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
+import { MULTIBRAND_WARRANTY_MESSAGE } from "@/lib/copyStandards";
 import {
   FaBatteryFull,
   FaBolt,
@@ -34,7 +34,7 @@ const rango = (p: { from: number; to: number }) =>
 export const metadata: Metadata = {
   title: "Servicio Técnico Motorola en CABA | Precios",
   description:
-    "Servicio técnico Motorola en CABA, sin ser service oficial: Moto G y Edge en Recoleta y Belgrano. Pantalla desde $69.900 en 2-4 h. Garantía 90 días.",
+    "Servicio técnico Motorola en CABA, sin ser service oficial: Moto G y Edge en Recoleta y Belgrano. Pantalla desde $69.900 en 2-4 h.",
   keywords: [
     "reparacion motorola buenos aires",
     "service motorola caba",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Service Motorola en CABA: Recoleta y Belgrano | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla, batería y pin de carga de Motorola según modelo, stock y falla. Garantía escrita 90 días. Moto G, Edge y E.",
+      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla, batería y pin de carga de Motorola según modelo, stock y falla. Moto G, Edge y E.",
     type: "article",
     url: PAGE_URL,
     locale: "es_AR",
@@ -80,14 +80,14 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2026-05-08T00:00:00Z",
-    modifiedTime: "2026-10-15T00:00:00Z",
+    modifiedTime: "2026-11-25T00:00:00Z",
     section: "Guías Técnicas",
   },
   twitter: {
     card: "summary_large_image",
     title: "Reparación de Motorola en CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga de Motorola según modelo, stock y falla. Garantía escrita 90 días.",
+      "Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga de Motorola según modelo, stock y falla.",
     images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
@@ -124,7 +124,7 @@ const quickSteps = [
   },
   {
     step: "Control de calidad + garantía",
-    detail: `Hacemos pruebas funcionales, test de carga completa y estabilidad térmica. ${WARRANTY_SCOPE_MESSAGE}`,
+    detail: `Hacemos pruebas funcionales, test de carga completa y estabilidad térmica. ${MULTIBRAND_WARRANTY_MESSAGE}`,
     duration: "20 min",
     Icon: FaCheckCircle,
   },
@@ -277,7 +277,7 @@ const faq = [
   },
   {
     question: "¿La garantía cubre trabajo y repuesto?",
-    answer: `Sí. ${WARRANTY_SCOPE_MESSAGE}`,
+    answer: MULTIBRAND_WARRANTY_MESSAGE,
   },
   {
     question: "¿Reparan Motorola con daño por agua?",
@@ -316,9 +316,9 @@ export default function MotorolaRepairGuidePage() {
     <div className="flex w-full justify-center px-4 py-8 sm:py-12">
       <ArticleSchema
         title="Reparación de Motorola en Buenos Aires | Servicio Técnico Team Celular"
-        description="Guía completa para reparar Motorola en CABA con diagnóstico profesional, repuestos de calidad y garantía escrita 90 días."
+        description="Guía completa para reparar Motorola en CABA con diagnóstico profesional, repuestos de calidad."
         publishedTime="2026-05-08T00:00:00Z"
-        modifiedTime="2026-10-15T00:00:00Z"
+        modifiedTime="2026-11-25T00:00:00Z"
         about={[
           "reparacion de Motorola en Buenos Aires",
           "service tecnico Motorola en CABA",
@@ -359,8 +359,7 @@ export default function MotorolaRepairGuidePage() {
               Reparación de Motorola en Buenos Aires
             </h1>
             <p className="max-w-[65ch] text-lg leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
-              Team Celular repara Motorola en dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2032, Belgrano</strong>. Presupuesto antes de reparar. Pantalla en 2–4 h y batería en 1–2 h con stock, con garantía
-              escrita de 90 días sobre trabajo y repuesto. Moto G, Edge y E.
+              Team Celular repara Motorola en dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2032, Belgrano</strong>. Presupuesto antes de reparar. Pantalla en 2–4 h y batería en 1–2 h con stock. Moto G, Edge y E. {MULTIBRAND_WARRANTY_MESSAGE}
             </p>
           </div>
 
@@ -384,7 +383,7 @@ export default function MotorolaRepairGuidePage() {
           <p className="text-sm leading-6 text-[#a1a1a6]">Revisión de placa: informe en hasta 72 horas hábiles. El arreglo lleva semanas; confirmamos precio y plazo por escrito.</p>
 
             <div className="mt-4">
-              <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
+              <GuideByline modifiedTime="2026-11-25T00:00:00Z" tone="light" />
             </div>
         </header>
 
@@ -453,7 +452,7 @@ export default function MotorolaRepairGuidePage() {
               Para reparar un Motorola en Buenos Aires, Team Celular atiende en Paraguay
               2451, Recoleta, y Amenábar 2032, Belgrano. Con repuesto en stock, resolvemos pantalla, batería o carga USB-C en 1-4 h según el trabajo.
               Si requiere revisión de placa, el informe tarda hasta 72 horas hábiles; el arreglo lleva semanas y se confirma precio y plazo por escrito.
-              La reparación tiene garantía escrita sobre trabajo y repuesto instalado.
+              Te informamos la cobertura en el presupuesto antes de reparar.
             </p>
           </div>
 
@@ -527,7 +526,7 @@ export default function MotorolaRepairGuidePage() {
           <div className="text-center">
 
             <p className="mt-2 text-lg text-slate-600 dark:text-[#a1a1a6]">
-              Servicios para Moto G, Edge y E con diagnóstico previo y garantía escrita
+              Servicios para Moto G, Edge y E con diagnóstico previo y cobertura detallada en el presupuesto
             </p>
           </div>
           <div className="grid gap-5 md:grid-cols-3">
@@ -660,7 +659,7 @@ export default function MotorolaRepairGuidePage() {
               "@type": "Service",
               name: "Reparación de Motorola en Buenos Aires",
               description:
-                "Servicio técnico especializado en Motorola con diagnóstico profesional, repuestos de calidad y garantía escrita 90 días en CABA.",
+                "Servicio técnico especializado en Motorola con diagnóstico profesional, repuestos de calidad en CABA.",
               provider: { "@id": `${SITE_URL}#organization` },
               // Rango y catalogo salen de repairPrices: un unico lugar donde el precio
               // visible y el structured data no pueden divergir.

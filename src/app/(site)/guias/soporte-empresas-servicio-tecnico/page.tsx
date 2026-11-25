@@ -28,7 +28,7 @@ import {
 export const metadata: Metadata = {
   title: "Servicio Técnico de Celulares para Empresas en CABA",
   description:
-    "Celulares corporativos reparados en CABA con SLA, logística puerta a puerta y planes desde 5 equipos. Recoleta y Belgrano, garantía escrita 90 días.",
+    "Celulares corporativos reparados en CABA con SLA, logística puerta a puerta y planes desde 5 equipos. Recoleta y Belgrano.",
   keywords: [
     "servicio técnico empresas Buenos Aires",
     "reparación celulares corporativos",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Servicio Técnico de Celulares para Empresas en CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta y Amenábar 2032 Belgrano, presta soporte técnico de celulares para empresas. SLA, logística puerta a puerta, desde 5 dispositivos. Garantía escrita 90 días.",
+      "Team Celular, Paraguay 2451 Recoleta y Amenábar 2032 Belgrano, presta soporte técnico de celulares para empresas. SLA, logística puerta a puerta, desde 5 dispositivos.",
     type: "article",
     url: "https://teamcelular.com/guias/soporte-empresas-servicio-tecnico",
     locale: "es_AR",
@@ -72,13 +72,13 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2024-03-10T00:00:00Z",
-    modifiedTime: "2026-08-20T00:00:00Z",
+    modifiedTime: "2026-11-25T00:00:00Z",
     section: "Guías Técnicas",
   },
   twitter: {
     card: "summary_large_image",
     title: "Servicio Técnico de Celulares para Empresas en CABA | Team Celular",
-    description: "Team Celular, Recoleta y Belgrano CABA. Soporte de celulares para empresas: SLA, logística puerta a puerta y garantía escrita 90 días.",
+    description: "Team Celular, Recoleta y Belgrano CABA. Soporte de celulares para empresas: SLA, logística puerta a puerta.",
     images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
@@ -155,7 +155,7 @@ const slaFeatures = [
     Icon: FaClock,
   },
   {
-    title: "Garantia escrita corporativa",
+    title: "Cobertura de las reparaciones",
     description:
       `${WARRANTY_SCOPE_MESSAGE} En planes anuales, definimos cobertura y alcance en el SLA firmado.`,
     Icon: FaShieldAlt,
@@ -211,7 +211,7 @@ export default function BusinessSupportGuide() {
         title="Servicio Técnico de Celulares para Empresas y Organizaciones | Team Celular"
         description="Soporte técnico corporativo especializado en reparación de dispositivos móviles con SLA acordado por escrito, logística incluida y planes preventivos en CABA."
         publishedTime="2024-03-10T00:00:00Z"
-        modifiedTime="2026-08-20T00:00:00Z"
+        modifiedTime="2026-11-25T00:00:00Z"
         image="https://teamcelular.com/opengraph-image.png"
         url={PAGE_URL}
       />
@@ -230,7 +230,7 @@ export default function BusinessSupportGuide() {
           </h1>
           <p className="max-w-[65ch] text-lg leading-relaxed text-slate-300">
             Revisamos y reparamos celulares de empresas con flotas desde 5 dispositivos en Recoleta y Belgrano.
-            Definimos diagnóstico, repuestos, logística y plazos en la propuesta, con garantía escrita de 90 días sobre trabajo y repuesto.
+            Definimos diagnóstico, repuestos, logística y plazos en la propuesta.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
@@ -248,7 +248,7 @@ export default function BusinessSupportGuide() {
           </div>
 
           <div className="mt-4 flex justify-center">
-            <GuideByline modifiedTime="2026-08-20T00:00:00Z" tone="light" />
+            <GuideByline modifiedTime="2026-11-25T00:00:00Z" tone="light" />
           </div>
         </header>
 
@@ -281,7 +281,7 @@ export default function BusinessSupportGuide() {
               y Belgrano (Amenábar 2032), entrega diagnóstico y presupuesto por escrito, y trabaja con
               SLA firmado para que los tiempos de reparación sean predecibles, no una promesa verbal.
               Llevamos más de 15 años reparando dispositivos móviles con microscopio, instrumental de
-              laboratorio y garantía escrita.
+              laboratorio y cobertura en la propuesta.
             </p>
             <p>
               Coordinamos retiro y entrega en CABA, emitimos factura A o B, firmamos NDA sin cargo
@@ -401,7 +401,7 @@ export default function BusinessSupportGuide() {
               Documentamos cada intervención técnica con{" "}
               <strong>fotografías de alta resolución</strong>, registro de número de serie (IMEI),
               descripción detallada de la falla y componentes reemplazados. Toda reparación incluye
-              garantía escrita con firma y sello del técnico responsable.
+              la documentación del trabajo y su cobertura.
             </p>
             <p>
               Generamos <strong className="text-primary dark:text-secondary">reportes mensuales consolidados</strong>{" "}

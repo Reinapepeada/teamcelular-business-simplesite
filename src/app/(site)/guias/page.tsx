@@ -108,7 +108,7 @@ const ARTICLES = [
   {
     title: "Reparación de Motorola en Buenos Aires",
     description:
-      "Guía para Moto G, Edge y E: pantalla, batería, pin de carga y placa con diagnóstico el mismo día y garantía escrita 90 días.",
+      "Guía para Moto G, Edge y E: pantalla, batería, pin de carga y placa con diagnóstico el mismo día.",
     href: "/guias/reparacion-motorola-buenos-aires",
     category: "Landing por marca",
     readingTime: "6 min",

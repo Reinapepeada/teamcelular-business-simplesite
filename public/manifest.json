@@ -1,7 +1,7 @@
 {
   "name": "Team Celular - Servicio Técnico de Celulares",
   "short_name": "Team Celular",
-  "description": "Servicio técnico especializado en reparación de celulares en Buenos Aires. Repuestos originales, microelectrónica y garantía escrita.",
+  "description": "Servicio técnico especializado en reparación de celulares en Buenos Aires. Repuestos originales, microelectrónica y presupuesto previo.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

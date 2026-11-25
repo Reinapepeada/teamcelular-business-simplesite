@@ -37,7 +37,7 @@ export default async function BannerHome() {
                         </div>
                         <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm text-[#c7c7cc]">
                             <li className="flex items-center gap-2"><BsClipboardCheck aria-hidden className="text-[#6aa6ff]" /> Presupuesto antes de reparar</li>
-                            <li className="flex items-center gap-2"><BsShieldCheck aria-hidden className="text-[#6aa6ff]" /> Garantía escrita de 90 días</li>
+                            <li className="flex items-center gap-2"><BsShieldCheck aria-hidden className="text-[#6aa6ff]" /> Cobertura en el presupuesto</li>
                             {place && (
                                 <li>
                                     <a href="#opiniones" className="tc-link flex items-center gap-2">

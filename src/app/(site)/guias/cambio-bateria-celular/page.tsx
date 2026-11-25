@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
-import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
+import { REVIEW_COST_MESSAGE, BATTERY_WARRANTY_MESSAGE } from "@/lib/copyStandards";
 import GuideByline from "@/components/seo/GuideByline";
 import RepairPriceTable from "@/components/seo/RepairPriceTable";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Cambio de Batería Celular Buenos Aires | Service Certificado",
     description:
-      "Cambio de batería según modelo y repuesto disponible. En 1 a 2 horas con stock y garantía escrita de 90 días sobre trabajo y repuesto.",
+      "Cambio de batería según modelo y repuesto disponible. En 1 a 2 horas con stock.",
     type: "article",
     locale: "es_AR",
     url: "https://teamcelular.com/guias/cambio-bateria-celular",
@@ -106,7 +106,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Cambio de Batería Celular Buenos Aires",
-    description: "Cambio de batería con repuesto y plazo confirmados antes de empezar. En 1 a 2 horas con stock. Garantía escrita de 90 días.",
+    description: "Cambio de batería con repuesto y plazo confirmados antes de empezar. En 1 a 2 horas con stock.",
     images: ["https://teamcelular.com/opengraph-image.png"],
   },
   alternates: {
@@ -157,7 +157,7 @@ const batteryTypes = [
   {
     type: "Origen y documentación",
     description: "Antes de elegir, verificá qué pieza se ofrece para tu equipo. La procedencia informada debe respaldar cualquier afirmación de originalidad o certificación.",
-    pros: ["Repuesto identificado en el presupuesto", "Garantía escrita de 90 días"],
+    pros: ["Repuesto identificado en el presupuesto", "Cobertura informada en el presupuesto"],
   },
   {
     type: "Compatibilidad y capacidad",
@@ -206,7 +206,7 @@ const faqBattery = [
   },
   {
     question: "¿Cuánto dura una batería nueva de celular?",
-    answer: `La vida útil depende del modelo, del repuesto, del uso y de la temperatura; no corresponde prometer la misma cantidad de años o ciclos para todos. Como referencia de diseño de Apple en condiciones ideales, iPhone 14 y anteriores están diseñados para conservar el 80 % de capacidad tras 500 ciclos completos, e iPhone 15 y posteriores tras 1000. Esas cifras no garantizan la duración de cualquier batería de reemplazo. ${WARRANTY_SCOPE_MESSAGE}`,
+    answer: `La vida útil depende del modelo, del repuesto, del uso y de la temperatura; no corresponde prometer la misma cantidad de años o ciclos para todos. Como referencia de diseño de Apple en condiciones ideales, iPhone 14 y anteriores están diseñados para conservar el 80 % de capacidad tras 500 ciclos completos, e iPhone 15 y posteriores tras 1000. Esas cifras no garantizan la duración de cualquier batería de reemplazo.`,
   },
   {
     question: "¿Pierdo datos al cambiar la batería?",
@@ -214,7 +214,7 @@ const faqBattery = [
   },
   {
     question: "¿Qué diferencia hay entre una batería original y una compatible?",
-    answer: `Una pieza original debe tener un origen verificable; que un proveedor también fabrique para una marca no basta para identificarla como original. Una compatible es una alternativa fabricada para un modelo concreto: confirmamos procedencia, compatibilidad y condiciones antes de instalarla. ${WARRANTY_SCOPE_MESSAGE} En iPhone, los mensajes de pieza y la información de salud dependen del modelo, del repuesto y de su verificación o vinculación; te explicamos qué se puede conservar en tu caso.`,
+    answer: `Una pieza original debe tener un origen verificable; que un proveedor también fabrique para una marca no basta para identificarla como original. Una compatible es una alternativa fabricada para un modelo concreto: confirmamos procedencia, compatibilidad y condiciones antes de instalarla. En iPhone, los mensajes de pieza y la información de salud dependen del modelo, del repuesto y de su verificación o vinculación; te explicamos qué se puede conservar en tu caso.`,
   },
   {
     question: "¿Cuánto tiempo tarda el cambio de batería?",
@@ -222,7 +222,7 @@ const faqBattery = [
   },
   {
     question: "¿La batería nueva viene con garantía?",
-    answer: `Si. ${WARRANTY_SCOPE_MESSAGE} La cobertura exacta se detalla en la orden de trabajo y en el certificado de garantia de la bateria instalada.`,
+    answer: BATTERY_WARRANTY_MESSAGE,
   },
 ];
 
@@ -231,9 +231,9 @@ export default function BatteryReplacementGuide() {
     <div className="flex w-full justify-center px-4 py-8 sm:py-12">
       <ArticleSchema
         title="Cambio de batería celular en Buenos Aires | Service Certificado Team Celular"
-        description="Cambio de batería en CABA con repuesto y precio confirmados antes de reparar. Plazo de 1 a 2 horas con stock y garantía escrita de 90 días."
+        description="Cambio de batería en CABA con repuesto y precio confirmados antes de reparar. Plazo de 1 a 2 horas con stock."
         publishedTime="2024-11-30T00:00:00Z"
-        modifiedTime="2026-10-15T00:00:00Z"
+        modifiedTime="2026-11-25T00:00:00Z"
         image="https://teamcelular.com/opengraph-image.png"
         url="https://teamcelular.com/guias/cambio-bateria-celular"
       />
@@ -270,7 +270,7 @@ export default function BatteryReplacementGuide() {
             el consumo de aplicaciones y el puerto antes de decidir qué cambiar. Te atendemos en
             Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA. Con repuesto en stock,
             el cambio de batería lleva <strong>1 a 2 horas</strong>; confirmamos el plazo para tu modelo
-            antes de empezar. La reparación tiene garantía escrita de 90 días sobre trabajo y repuesto.
+            antes de empezar. {BATTERY_WARRANTY_MESSAGE}
           </p>
           <p className="mt-3 max-w-[65ch] text-lg font-semibold text-slate-800 dark:text-[#f5f5f7]">
             Cambio de batería de Samsung, Motorola y Xiaomi desde{" "}
@@ -307,7 +307,7 @@ export default function BatteryReplacementGuide() {
 
 
           <div className="mt-4 flex">
-            <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
+            <GuideByline modifiedTime="2026-11-25T00:00:00Z" tone="light" />
           </div>
         </header>
 
@@ -477,7 +477,7 @@ export default function BatteryReplacementGuide() {
             ¿Tu celular necesita batería nueva?
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-[#a1a1a6]">
-            {REVIEW_COST_MESSAGE} Si requiere revisión de placa, cuesta {formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; el arreglo lleva semanas y se confirma precio y plazo por escrito. Para el cambio de batería confirmamos modelo, repuesto, stock y plazo antes de empezar. {WARRANTY_SCOPE_MESSAGE}
+            {REVIEW_COST_MESSAGE} Si requiere revisión de placa, cuesta {formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; el arreglo lleva semanas y se confirma precio y plazo por escrito. Para el cambio de batería confirmamos modelo, repuesto, stock y plazo antes de empezar. {BATTERY_WARRANTY_MESSAGE}
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link

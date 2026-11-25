@@ -69,7 +69,7 @@ export async function generateMetadata({
           ? `Cambio de Pantalla ${model.name} desde ${formatArs(lowestScreenPrice(model) ?? model.screen)} en CABA`
           : `Cambio de Pantalla ${model.name}: ${formatArs(model.screen)} en CABA`
         : `Reparación de ${model.name} en CABA | Team Celular`,
-    description: `${priceHint} Team Celular repara ${model.name} en Recoleta y Belgrano, en 2-4 h y con garantía escrita de 90 días.`,
+    description: `${priceHint} Team Celular repara ${model.name} en Recoleta y Belgrano, con garantía escrita de 90 días en cambios de piezas.`,
     keywords: [
       `reparacion ${model.name} caba`,
       `cambio de pantalla ${model.name}`,
@@ -239,7 +239,7 @@ export default async function IphoneModelPage({
           Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA. La pantalla se
           resuelve en 2 a 4 horas y la batería en 1 a 2, según stock. El diagnóstico se
           hace el mismo día, el presupuesto se confirma antes de intervenir el equipo y
-          todo sale con garantía escrita de 90 días sobre el trabajo y el repuesto.
+          los cambios de piezas tienen garantía escrita de 90 días sobre el trabajo y el repuesto.
           Atendemos de lunes a viernes de 10:30 a 18:00, sin turno previo. Precios
           vigentes a {IPHONE_PRICES_UPDATED}.{screenNote ? ` ${screenNote}` : ""}
         </p>

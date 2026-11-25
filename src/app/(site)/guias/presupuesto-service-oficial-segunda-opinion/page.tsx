@@ -40,7 +40,7 @@ export default function SecondOpinionGuidePage() {
           { label: "Repuestos", values: ["Confirmá la pieza, el procedimiento y la disponibilidad con el centro autorizado.", "Informamos procedencia, condición y funciones de la opción disponible antes de presupuestar."] },
           { label: "Diagnóstico y plazo", values: ["Pedir plazo al centro para el modelo y la falla; no asignamos una demora general.", "Diagnóstico inicial dentro de 24 horas hábiles; placa puede requerir pruebas adicionales. Pantalla y batería suelen llevar 2–4 h con stock."] },
           { label: "Precio", values: ["Solicitar cotización vigente y confirmar si hay cobertura. Samsung publica precios sugeridos fuera de garantía.", `Revisión general orientativa ARS 15.000–25.000; revisión de placa ${formatArsPrice(PLACA_REVISION_PRICE)}. Reparación con presupuesto propio.`] },
-          { label: "Garantía del trabajo", values: ["Según marca, cobertura y reparación; pedir las condiciones del centro.", "90 días por escrito sobre trabajo y repuesto, con alcance informado antes de avanzar."] },
+          { label: "Garantía del trabajo", values: ["Según marca, cobertura y reparación; pedir las condiciones del centro.", WARRANTY_SCOPE_MESSAGE] },
           { label: "Datos", values: ["Preguntar qué procedimiento se hará y si exige borrar o reemplazar componentes.", "Informar si la prioridad es recuperar datos. No garantizamos recuperación ni preservación en todos los casos."] },
         ]} />
         <ComparisonCta guideKey="oficial_o_independiente" location="comparison_after_table" />
@@ -80,7 +80,7 @@ export default function SecondOpinionGuidePage() {
         <h2>¿Qué necesitás acordar sobre datos y garantía del trabajo?</h2>
         <p>Si el celular permite acceso, hacé una copia de seguridad antes de entregarlo. Si no enciende y la información es importante, dejalo asentado. No autorices una restauración, borrado o reemplazo de placa sin entender qué pasará con los datos. Reparar el equipo para usarlo y recuperar información pueden ser trabajos distintos.</p>
         <p>La recuperación no se puede garantizar por el síntoma ni por una reparación anterior. Pedí que te expliquen el objetivo del procedimiento y sus límites. Si no se puede asegurar la conservación, necesitás saberlo antes de aprobar. La prioridad de rescatar información debe quedar diferenciada del presupuesto para devolver el equipo al uso cotidiano.</p>
-        <p>{WARRANTY_SCOPE_MESSAGE} Esa garantía corresponde a nuestro trabajo y no reemplaza una cobertura del fabricante. Al retirar, probá las funciones relacionadas con lo reparado y conservá el comprobante. Preguntá cómo proceder si vuelve a aparecer el síntoma, en qué sucursal se recibe y qué exclusiones se informaron.</p>
+        <p>{WARRANTY_SCOPE_MESSAGE} Al retirar, probá las funciones relacionadas con lo reparado y conservá el comprobante. Preguntá cómo proceder si vuelve a aparecer el síntoma, en qué sucursal se recibe y qué exclusiones se informaron.</p>
       </section>
       <section>
         <h2>¿Qué fuentes usamos y cómo se hizo la comparación?</h2>

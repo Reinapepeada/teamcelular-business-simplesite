@@ -4,7 +4,7 @@ import ArticleSchema from "@/components/seo/ArticleSchema";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
-import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
+import { MULTIBRAND_WARRANTY_MESSAGE } from "@/lib/copyStandards";
 import {
   FaBatteryFull,
   FaBolt,
@@ -32,7 +32,7 @@ const rango = (p: { from: number; to: number }) =>
 export const metadata: Metadata = {
   title: "Servicio Técnico Xiaomi, Redmi y POCO en CABA | Precios",
   description:
-    `Servicio técnico Xiaomi, Redmi y POCO en Recoleta y Belgrano. Pantalla desde ${formatArsPrice(BRAND_REPAIR_PRICES.xiaomi[0].from)} y batería desde ${formatArsPrice(BRAND_REPAIR_PRICES.xiaomi[2].from)}, en 2-4 h. Garantía escrita 90 días.`,
+    `Servicio técnico Xiaomi, Redmi y POCO en Recoleta y Belgrano. Pantalla desde ${formatArsPrice(BRAND_REPAIR_PRICES.xiaomi[0].from)} y batería desde ${formatArsPrice(BRAND_REPAIR_PRICES.xiaomi[2].from)}, en 2-4 h.`,
   keywords: [
     "reparacion xiaomi buenos aires",
     "service xiaomi caba",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Reparación de Xiaomi, Redmi y POCO en Buenos Aires, CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga según modelo, stock y falla. Garantía escrita 90 días. Xiaomi, Redmi y POCO.",
+      "Team Celular, Paraguay 2451 Recoleta. Pantalla, batería y carga según modelo, stock y falla. Xiaomi, Redmi y POCO.",
     type: "article",
     url: PAGE_URL,
     locale: "es_AR",
@@ -78,14 +78,14 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2026-03-12T00:00:00Z",
-    modifiedTime: "2026-10-15T00:00:00Z",
+    modifiedTime: "2026-11-25T00:00:00Z",
     section: "Guias Tecnicas",
   },
   twitter: {
     card: "summary_large_image",
     title: "Servicio técnico Xiaomi, Redmi y POCO en CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta. Pantalla y batería según modelo y stock, garantía escrita 90 días. Xiaomi, Redmi y POCO.",
+      "Team Celular, Paraguay 2451 Recoleta. Pantalla y batería según modelo y stock. Xiaomi, Redmi y POCO.",
     images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
@@ -114,9 +114,9 @@ const processSteps = [
     Icon: FaWrench,
   },
   {
-    title: "Pruebas reales y garantia escrita",
+    title: "Pruebas y cobertura del trabajo",
     description:
-      `Verificamos carga rapida, consumo en reposo, red movil, camaras y audio para entregar un equipo utilizable y estable. ${WARRANTY_SCOPE_MESSAGE}`,
+      `Verificamos carga rápida, consumo en reposo, red móvil, cámaras y audio antes de entregarte el equipo. ${MULTIBRAND_WARRANTY_MESSAGE}`,
     duration: "20 min",
     Icon: FaCheckCircle,
   },
@@ -256,7 +256,7 @@ const faq = [
   },
   {
     question: "Que incluye la garantia?",
-    answer: WARRANTY_SCOPE_MESSAGE,
+    answer: MULTIBRAND_WARRANTY_MESSAGE,
   },
   {
     question: "Reparan Redmi Note 12, Note 13 y Note 14?",
@@ -290,9 +290,9 @@ export default function XiaomiRepairGuidePage() {
     <div className="flex w-full justify-center px-4 py-8 sm:py-12">
       <ArticleSchema
         title="Reparacion de Xiaomi en Buenos Aires | Servicio Tecnico Team Celular"
-        description="Reparación de Xiaomi, Redmi y POCO con informe de revisión de placa en hasta 72 horas hábiles, arreglo por presupuesto y garantía escrita."
+        description="Reparación de Xiaomi, Redmi y POCO con informe de revisión de placa en hasta 72 horas hábiles, arreglo por presupuesto."
         publishedTime="2026-03-12T00:00:00Z"
-        modifiedTime="2026-10-15T00:00:00Z"
+        modifiedTime="2026-11-25T00:00:00Z"
         about={[
           "reparacion de Xiaomi en Buenos Aires",
           "service tecnico Xiaomi en CABA",
@@ -335,7 +335,7 @@ export default function XiaomiRepairGuidePage() {
             <p className="max-w-[65ch] text-lg leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
               Team Celular, con sucursales en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032) CABA, repara Xiaomi,
               Redmi y POCO con presupuesto antes de reparar. Pantalla en 2–4 h y batería en
-              1–2 h con stock, con garantía escrita de 90 días sobre trabajo y repuesto.
+              1–2 h con stock.
               Xiaomi 13/14/15, Redmi Note y POCO.
             </p>
           </div>
@@ -358,7 +358,7 @@ export default function XiaomiRepairGuidePage() {
           <p className="text-sm leading-6 text-[#a1a1a6]">Revisión de placa: informe en hasta 72 horas hábiles. El arreglo lleva semanas; confirmamos precio y plazo por escrito.</p>
 
             <div className="mt-4">
-              <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
+              <GuideByline modifiedTime="2026-11-25T00:00:00Z" tone="light" />
             </div>
         </header>
 
@@ -449,7 +449,7 @@ export default function XiaomiRepairGuidePage() {
             <p className="mt-4 text-base leading-7 text-slate-700 dark:text-slate-200">
               Para reparar un Xiaomi, Redmi o POCO en Buenos Aires, Team Celular atiende
               en Paraguay 2451, Recoleta, y Amenábar 2032, Belgrano. Con repuesto en stock, resolvemos pantalla, batería o carga USB-C en 1-4 h según el trabajo.
-              Si requiere revisión de placa, el informe tarda hasta 72 horas hábiles; el arreglo lleva semanas y se confirma precio y plazo por escrito. La reparación tiene garantía escrita sobre trabajo y repuesto instalado.
+              Si requiere revisión de placa, el informe tarda hasta 72 horas hábiles; el arreglo lleva semanas y se confirma precio y plazo por escrito. Te informamos la cobertura en el presupuesto antes de reparar.
             </p>
           </div>
 
@@ -633,7 +633,7 @@ export default function XiaomiRepairGuidePage() {
               "@type": "Service",
               name: "Reparacion de Xiaomi en Buenos Aires",
               description:
-                "Servicio tecnico para Xiaomi, Redmi y POCO en CABA con repuestos premium y garantia escrita.",
+                "Servicio tecnico para Xiaomi, Redmi y POCO en CABA con repuestos identificados en el presupuesto.",
               provider: { "@id": `${SITE_URL}#organization` },
               // Rango y catalogo salen de repairPrices: un unico lugar donde el precio
               // visible y el structured data no pueden divergir.
