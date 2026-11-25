@@ -1,6 +1,7 @@
 import HighIntentGuidePage from "@/components/seo/HighIntentGuidePage";
 import RepairPriceTable from "@/components/seo/RepairPriceTable";
 import BrandChargedPriceTable from "@/components/seo/BrandChargedPriceTable";
+import BrandWorkshopNotes from "@/components/seo/BrandWorkshopNotes";
 import { BRAND_CHARGED_PRICES } from "@/lib/modelScreenPrices";
 import { BUSINESS_PROFILE } from "@/lib/businessProfile";
 import { PLACA_REVISION_PRICE, PRICES_UPDATED_LABEL, formatArsPrice } from "@/lib/repairPrices";
@@ -50,8 +51,9 @@ export default function BrandGuidePage({ slug }: { slug: BrandGuideSlug }) {
       relatedLinks={config.relatedLinks}
       whatsappText={config.whatsappText}
       priceTable={
-        config.repairPrices?.length || charged ? (
+        config.workshop || config.repairPrices?.length || charged ? (
           <>
+            {config.workshop ? <BrandWorkshopNotes brand={config.brand} workshop={config.workshop} /> : null}
             {config.repairPrices?.length ? (
               <RepairPriceTable
                 brand={config.pageLabel}
