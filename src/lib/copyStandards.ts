@@ -1,6 +1,9 @@
 export const REVIEW_COST_MESSAGE =
   "La revisión técnica es arancelada y suele variar entre ARS 15.000 y ARS 25.000, según marca, modelo y tipo de falla.";
 
+export const WARRANTY_SUMMARY_MESSAGE =
+  "Garantía escrita de hasta 90 días según la reparación";
+
 export const WARRANTY_SCOPE_MESSAGE =
   "Ofrecemos garantía comercial escrita de 90 días en cambios de piezas de iPhone y de pin de carga de cualquier marca. El presupuesto detalla la cobertura aplicable antes de que autorices el trabajo. Los cambios de batería y módulo de pantalla de otras marcas quedan fuera de esa garantía comercial. Se mantienen tus derechos legales.";
 

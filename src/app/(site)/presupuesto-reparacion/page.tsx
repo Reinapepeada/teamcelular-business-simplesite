@@ -2,7 +2,7 @@ import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import RepairsForm from "@/components/forms/RepairsForm";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
-import { BUDGET_RESPONSE_MESSAGE, REVIEW_COST_MESSAGE, SCREEN_BATTERY_TIMING_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
+import { BUDGET_RESPONSE_MESSAGE, REVIEW_COST_MESSAGE, SCREEN_BATTERY_TIMING_MESSAGE, WARRANTY_SCOPE_MESSAGE, WARRANTY_SUMMARY_MESSAGE } from "@/lib/copyStandards";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import GuideByline from "@/components/seo/GuideByline";
 import { PRICES_UPDATED } from "@/lib/repairPrices";
@@ -16,7 +16,7 @@ export const metadata = buildWebsiteMetadata({
     path: "/presupuesto-reparacion",
     title: "Presupuesto de Reparación de Celulares | Team Celular",
     description:
-        "Presupuesto sin compromiso. Respondemos en hasta 2 horas hábiles. Team Celular, Recoleta y Belgrano, CABA.",
+        `Pedí presupuesto de reparación en CABA. Respondemos por WhatsApp en hasta 2 horas hábiles. ${WARRANTY_SUMMARY_MESSAGE}.`,
     keywords: [
         "presupuesto reparación celulares",
         "servicio técnico celulares buenos aires",
@@ -31,7 +31,7 @@ export const metadata = buildWebsiteMetadata({
     openGraphTitle:
         "Presupuesto Reparación Celulares en CABA | Team Celular",
     openGraphDescription:
-        "Team Celular, dos sucursales en CABA: Recoleta y Belgrano. Respuesta en hasta 2 horas hábiles por WhatsApp.",
+        `Pedí presupuesto para reparar tu celular en Recoleta o Belgrano. ${WARRANTY_SUMMARY_MESSAGE}.`,
     openGraphImageAlt: "Laboratorio de Team Celular en CABA",
     twitterTitle: "Presupuesto Reparación Celulares CABA | Team Celular",
     twitterDescription:
@@ -116,7 +116,7 @@ export default function PresupuestoReparacionPage() {
                             Decinos qué le pasa a tu celular. Respondemos por WhatsApp en hasta 2 horas hábiles y confirmamos el precio según el diagnóstico.
                             Team Celular repara en{" "}
                             <strong className="text-slate-900 dark:text-[#f5f5f7]">Paraguay 2451, Recoleta</strong> y{" "}
-                            <strong className="text-slate-900 dark:text-[#f5f5f7]">Amenábar 2032, Belgrano</strong>. El presupuesto detalla la cobertura antes de reparar.
+                            <strong className="text-slate-900 dark:text-[#f5f5f7]">Amenábar 2032, Belgrano</strong>. {WARRANTY_SUMMARY_MESSAGE}. Te detallamos la cobertura en el presupuesto.
                         </p>
                     </div>
 

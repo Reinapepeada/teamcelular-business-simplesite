@@ -9,7 +9,7 @@ import BranchMap from "@/components/cards/BranchMap";
 import RepairFaqList from "@/components/repairs/RepairFaqList";
 import ScreenQuoteDetails from "@/components/repairs/ScreenQuoteDetails";
 import { BRANCHES, BUSINESS_PROFILE } from "@/lib/businessProfile";
-import { REVIEW_COST_MESSAGE, SCREEN_BATTERY_TIMING_MESSAGE } from "@/lib/copyStandards";
+import { REVIEW_COST_MESSAGE, SCREEN_BATTERY_TIMING_MESSAGE, WARRANTY_SUMMARY_MESSAGE } from "@/lib/copyStandards";
 import { HOME_FAQS as faqs } from "@/lib/homeFaqs";
 import { buildWebsiteMetadata } from "@/lib/seoMetadata";
 import { BRAND_REPAIR_PRICES, PLACA_REVISION_PRICE, PRICES_UPDATED_LABEL, formatArsPrice } from "@/lib/repairPrices";
@@ -24,7 +24,7 @@ export const metadata = buildWebsiteMetadata({
     path: "/",
     title: "Reparación de Celulares en CABA | Recoleta y Belgrano",
     description:
-        "Servicio técnico de celulares en Recoleta y Belgrano, CABA. Pantalla, batería, carga y placa. Sin turno, presupuesto con la cobertura antes de reparar.",
+        `Reparación de celulares en Recoleta y Belgrano, CABA. Pantalla, batería, carga y placa sin turno. ${WARRANTY_SUMMARY_MESSAGE}.`,
     keywords: [
         "reparacion de celulares Buenos Aires",
         "reparacion de celulares cerca de mi",
@@ -40,7 +40,7 @@ export const metadata = buildWebsiteMetadata({
     languages: { "es-AR": "/", en: "/en/phone-repair-buenos-aires", "x-default": "/" },
     openGraphTitle: "Reparación de Celulares en CABA | Team Celular",
     openGraphDescription:
-        "Team Celular tiene sucursales en Recoleta y Belgrano, CABA. Diagnóstico previo.",
+        `Reparación de celulares en Recoleta y Belgrano, CABA. ${WARRANTY_SUMMARY_MESSAGE}.`,
     openGraphImageAlt: "Team Celular — Reparación de celulares en CABA",
     twitterTitle: "Reparación de Celulares en CABA | Team Celular",
     twitterDescription:
