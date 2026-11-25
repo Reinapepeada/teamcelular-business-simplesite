@@ -14,6 +14,7 @@ import { BRANCHES } from "@/lib/businessProfile";
 import {
   IPHONE_MODELS,
   IPHONE_MODELS_WITH_PAGE,
+  screenPriceLabel,
   IPHONE_PRICES_UPDATED,
 } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
@@ -456,14 +457,17 @@ export default function IphoneRepairGuidePage() {
                         )}
                       </th>
                       <td className="py-2.5 pr-4 tabular-nums text-slate-700 dark:text-[#a1a1a6]">
-                        {model.screen ? formatArsPrice(model.screen) : "Consultar"}
+                        {model.screen ? screenPriceLabel(model) : "Consultar"}
                         {model.screenQuality || model.screenAlternative ? (
                           <span className="block text-xs font-normal text-[#86868b]">
                             {[
-                              model.screenQuality,
                               model.screenAlternative
                                 ? `${model.screenAlternative.quality}${model.screenAlternative.referential ? " (referencial)" : ""}: ${formatArsPrice(model.screenAlternative.price)}`
                                 : null,
+                              // Con dos opciones, la de mayor valor lleva su precio al lado.
+                              model.screenAlternative && model.screen
+                                ? `${model.screenQuality ?? "Otra opción"}: ${formatArsPrice(model.screen)}`
+                                : model.screenQuality,
                             ].filter(Boolean).join(" · ")}
                           </span>
                         ) : null}
