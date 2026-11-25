@@ -1,4 +1,5 @@
 import { BRANCHES, getBranch, whatsappUrl } from "@/lib/businessProfile";
+import { reelKeyword, withReelKeyword } from "@/lib/analytics/reelKeyword";
 
 export type BranchSlug = (typeof BRANCHES)[number]["slug"];
 export type BranchSelectionMethod = "manual" | "nearest" | "remembered" | "contextual";
@@ -38,7 +39,8 @@ export function saveBranchPreference(slug: BranchSlug, method: BranchSelectionMe
 
 export function branchWhatsappUrl(slug: BranchSlug, text?: string) {
   const branch = getBranch(slug);
-  return whatsappUrl(text || branch.whatsappText, branch.whatsapp);
+  // En el servidor reelKeyword() es null: la URL renderizada no cambia y no hay desajuste de hidratación.
+  return withReelKeyword(whatsappUrl(text || branch.whatsappText, branch.whatsapp), reelKeyword());
 }
 
 export function distanceKm(

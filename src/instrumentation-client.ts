@@ -1,11 +1,14 @@
 import posthog from "posthog-js";
 import { isPostHogPublicPage, measure, sanitizePostHogEvent } from "@/lib/analytics/posthog";
 import { isPerformanceDependencyUrl } from "@/lib/analytics/measurement";
+import { installReelWhatsappRewrite } from "@/lib/analytics/reelKeyword";
 
 const token = process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN;
 const host = process.env.NEXT_PUBLIC_POSTHOG_HOST;
 
 if (isPostHogPublicPage(window.location.hostname, window.location.pathname)) window.tcMeasure = measure;
+// Antes que el listener de GA4 (afterInteractive): el clic ya mide y navega con la palabra del reel.
+installReelWhatsappRewrite(document);
 
 if (token && host && isPostHogPublicPage(window.location.hostname, window.location.pathname)) {
   posthog.init(token, {

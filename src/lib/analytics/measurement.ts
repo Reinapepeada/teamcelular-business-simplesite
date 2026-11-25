@@ -20,7 +20,8 @@ const LABELS = new Set([
   "error_code", "field_name", "payment_result", "shipping_tier", "payment_type", "item_list_id",
   "item_id", "item_name", "item_variant", "page_type", "conversion_kind", "measurement_source",
   "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "referrer_domain",
-  "entry_path", "content_path", "acquisition_channel", "first_source", "first_medium", "first_campaign", "first_landing_path",
+  "entry_path", "content_path", "acquisition_channel", "first_source", "first_medium", "first_campaign", "first_content", "first_term",
+  "first_landing_path", "reel_keyword",
   "inp_load_state", "inp_interaction_type",
 ]);
 const NUMBERS = new Set([
