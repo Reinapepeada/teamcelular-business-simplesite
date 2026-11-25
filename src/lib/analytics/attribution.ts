@@ -4,7 +4,7 @@ const FIRST_TOUCH_KEYWORD_MS = 30 * 24 * 60 * 60 * 1000;
 
 export function sanitizeReelKeyword(value: unknown): string | null {
   if (typeof value !== "string") return null;
-  const keyword = value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 24);
+  const keyword = value.normalize("NFD").replace(/\p{M}/gu, "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 24);
   return keyword || null;
 }
 
@@ -59,7 +59,8 @@ export function browserAttribution(): Record<string, unknown> {
       first, session, created: first === current ? now : stored.created, updated: now,
     }));
     const created = first === current ? now : stored.created;
-    const keyword = reelKeywordOf(session, first, created, now);
+    // Un link de reel nuevo gana aunque la sesión anterior siga viva.
+    const keyword = reelKeywordOf(current, undefined, undefined, now) ?? reelKeywordOf(session, first, created, now);
     return { ...session, first_source: first.utm_source, first_medium: first.utm_medium,
       first_campaign: first.utm_campaign, first_content: first.utm_content, first_term: first.utm_term,
       first_landing_path: first.entry_path, ...(keyword ? { reel_keyword: keyword } : {}) };

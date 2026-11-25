@@ -30,6 +30,8 @@ test("la palabra del reel se limpia: sólo A-Z0-9, mayúsculas y 24 caracteres",
   assert.equal(sanitizeReelKeyword("pan-ta lla_2!"), "PANTALLA2");
   assert.equal(sanitizeReelKeyword("a".repeat(40)), "A".repeat(24));
   assert.equal(sanitizeReelKeyword("¡¿ !"), null);
+  assert.equal(sanitizeReelKeyword("cámara"), "CAMARA");
+  assert.equal(sanitizeReelKeyword("señal"), "SENAL");
   assert.equal(sanitizeReelKeyword(undefined), null);
 });
 
