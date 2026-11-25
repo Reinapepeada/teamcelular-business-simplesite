@@ -1,4 +1,4 @@
-import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
+import { WARRANTY_SCOPE_MESSAGE, WARRANTY_SUMMARY_MESSAGE } from "@/lib/copyStandards";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -66,7 +66,7 @@ const trustSignals = [
 export const metadata: Metadata = {
   title: "Reparación de Celulares en Belgrano CABA | Team Celular",
   description:
-    "Team Celular, Amenábar 2032, Belgrano. Reparación de celulares. Confirmamos repuesto y plazo antes de avanzar.",
+    `Reparación de celulares en Amenábar 2032, Belgrano. Atención sin turno. ${WARRANTY_SUMMARY_MESSAGE}.`,
   alternates: {
     canonical: PAGE_URL,
     languages: {
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Reparación de Celulares en Belgrano CABA | Team Celular",
     description:
-      "Team Celular, Amenábar 2032, Belgrano. Reparación de celulares. Confirmamos repuesto y plazo antes de avanzar.",
+      `Reparación de celulares en Amenábar 2032, Belgrano. Atención sin turno. ${WARRANTY_SUMMARY_MESSAGE}.`,
     url: PAGE_URL,
     type: "website",
     locale: "es_AR",
@@ -97,7 +97,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Reparación de Celulares en Belgrano CABA | Team Celular",
     description:
-      "Team Celular, Amenábar 2032, Belgrano. Reparación de celulares. Confirmamos repuesto y plazo antes de avanzar.",
+      `Reparación de celulares en Amenábar 2032, Belgrano. Atención sin turno. ${WARRANTY_SUMMARY_MESSAGE}.`,
     images: [`${SITE_URL}/opengraph-image.png`],
   },
 };

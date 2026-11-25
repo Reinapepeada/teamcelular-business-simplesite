@@ -124,7 +124,7 @@ const processSteps = [
   {
     title: "Prueba final y garantía",
     description:
-      `Probamos llamadas, cámaras, datos, carga rápida y temperatura antes de devolvértelo. ${MULTIBRAND_WARRANTY_MESSAGE}`,
+      "Probamos llamadas, cámaras, datos, carga rápida y temperatura antes de devolvértelo.",
     duration: "20 min",
     Icon: FaCheckCircle,
   },

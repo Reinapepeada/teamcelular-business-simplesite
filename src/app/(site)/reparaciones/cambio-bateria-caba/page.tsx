@@ -1,4 +1,3 @@
-import { BATTERY_WARRANTY_MESSAGE } from "@/lib/copyStandards";
 import Link from "next/link";
 import { SiApple } from "react-icons/si";
 import ServiceLandingPage, {
@@ -41,7 +40,7 @@ export default function CambioBateriaCabaPage() {
             </h2>
             <p className="tc-body mt-5">
               Desde {formatArsPrice(cheapest.battery)} en un {cheapest.name} hasta {formatArsPrice(priciest.battery)} en un{" "}
-              {priciest.name}. El cambio tarda 1 a 2 horas si la batería está en stock. {BATTERY_WARRANTY_MESSAGE}
+              {priciest.name}. El cambio tarda 1 a 2 horas con stock e incluye 90 días de garantía escrita.
             </p>
             <p className="mt-4 text-[15px] leading-6 text-[#86868b]">
               Precios publicados de {IPHONE_PRICES_UPDATED}. Antes de cambiarla medimos la salud y el consumo: si el problema es una app o la placa, te lo decimos.

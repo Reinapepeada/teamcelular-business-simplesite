@@ -116,7 +116,7 @@ const processSteps = [
   {
     title: "Pruebas y cobertura del trabajo",
     description:
-      `Verificamos carga rápida, consumo en reposo, red móvil, cámaras y audio antes de entregarte el equipo. ${MULTIBRAND_WARRANTY_MESSAGE}`,
+      "Verificamos carga rápida, consumo en reposo, red móvil, cámaras y audio antes de entregarte el equipo.",
     duration: "20 min",
     Icon: FaCheckCircle,
   },

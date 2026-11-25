@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { WARRANTY_SUMMARY_MESSAGE } from "@/lib/copyStandards";
 import HeroTeardown from "@/components/banners/HeroTeardown";
 import { BsArrowRight, BsClipboardCheck, BsClock, BsGeoAlt, BsShieldCheck, BsStarFill, BsWhatsapp } from "react-icons/bs";
 import { getGoogleReviews } from "@/lib/googleReviews";
@@ -37,7 +38,7 @@ export default async function BannerHome() {
                         </div>
                         <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm text-[#c7c7cc]">
                             <li className="flex items-center gap-2"><BsClipboardCheck aria-hidden className="text-[#6aa6ff]" /> Presupuesto antes de reparar</li>
-                            <li className="flex items-center gap-2"><BsShieldCheck aria-hidden className="text-[#6aa6ff]" /> Cobertura en el presupuesto</li>
+                            <li className="flex items-center gap-2"><BsShieldCheck aria-hidden className="text-[#6aa6ff]" /> <Link href="#faq-title" className="hover:underline">{WARRANTY_SUMMARY_MESSAGE}</Link></li>
                             {place && (
                                 <li>
                                     <a href="#opiniones" className="tc-link flex items-center gap-2">

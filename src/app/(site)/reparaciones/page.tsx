@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FaShieldAlt, FaStopwatch, FaTools } from "react-icons/fa";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
-import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
+import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE, WARRANTY_SUMMARY_MESSAGE } from "@/lib/copyStandards";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import { IPHONE_MODELS_WITH_PAGE, getIphoneModel } from "./iphone/iphoneModels";
 
@@ -112,7 +112,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: "/reparaciones",
   title: "Reparaciones de Celular por Tipo de Falla en CABA",
   description:
-    "Pantalla, batería, pin de carga, cámara, audio, mojado y placa. Qué incluye cada reparación, cuánto tarda en CABA.",
+    `Pantalla, batería, pin de carga y placa en CABA. Consultá tiempos y qué incluye cada reparación. ${WARRANTY_SUMMARY_MESSAGE}.`,
   robots: {
     index: true,
     follow: true,
@@ -122,7 +122,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   },
   openGraphTitle: "Reparaciones por Tipo de Falla en CABA | Team Celular",
   openGraphDescription:
-    "Buscá la falla de tu celular y mirá qué incluye la reparación, cuánto tarda y cómo pedir precio.",
+    `Buscá la falla de tu celular y mirá qué incluye la reparación. ${WARRANTY_SUMMARY_MESSAGE}.`,
   openGraphImageAlt: "Team Celular - Reparaciones en CABA",
   twitterTitle: "Reparaciones por Tipo de Falla en CABA | Team Celular",
   twitterDescription:
@@ -153,7 +153,7 @@ export default function ReparacionesPage() {
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-[#a1a1a6]">
             Team Celular tiene dos talleres en CABA: <strong>Recoleta (Paraguay 2451)</strong> y <strong>Belgrano (Amenábar 2032)</strong>. iPhone,
-            Samsung, Motorola, Xiaomi y más marcas con diagnóstico técnico. Te informamos la cobertura en el presupuesto antes de reparar.
+            Samsung, Motorola, Xiaomi y más marcas con diagnóstico técnico. {WARRANTY_SUMMARY_MESSAGE}. Te detallamos la cobertura en el presupuesto.
           </p>
           <p className="mt-3 text-sm text-[#a1a1a6]">
             Si buscás el servicio general, entrá por{" "}

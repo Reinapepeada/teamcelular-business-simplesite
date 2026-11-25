@@ -133,7 +133,7 @@ const quickSteps = [
   {
     step: "Prueba final y garantía",
     detail:
-      `Lo cargamos, lo calentamos un rato y probamos todo de nuevo antes de devolvértelo. ${IPHONE_PARTS_WARRANTY_MESSAGE}`,
+      "Lo cargamos, lo calentamos un rato y probamos todo de nuevo antes de devolvértelo.",
     duration: "20 min",
     Icon: FaCheckCircle,
   },
@@ -529,7 +529,6 @@ export default function IphoneRepairGuidePage() {
               Si la falla es de placa, la revisión cuesta $45.000 y el informe se entrega
               en hasta 72 horas hábiles. El arreglo de placa lleva semanas: confirmamos
               precio y plazo por escrito y descontamos la revisión si aceptás repararlo.
-              {" "}{IPHONE_PARTS_WARRANTY_MESSAGE}
             </p>
           </div>
 

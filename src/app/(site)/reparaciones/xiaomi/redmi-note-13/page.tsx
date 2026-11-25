@@ -177,10 +177,14 @@ export default function RedmiNote13Page() {
           <strong>{screen ? formatArsPrice(screen.from) : "consultar"}</strong> en Team Celular,
           con sucursales en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA.
           Reparamos la versión 4G y la 5G. La batería se cambia en 1 a 2 horas y la pantalla
-          en 2 a 4 horas, según stock. {MULTIBRAND_WARRANTY_MESSAGE} Son los precios más bajos
+          en 2 a 4 horas, según stock. Son los precios más bajos
           que cobramos por este modelo
           {screen ? ` desde agosto de 2026 (pantalla: ${formatPriceMonth(screen.month)})` : ""}; el
           número exacto se confirma antes de abrir el equipo.
+        </p>
+
+        <p className="mt-3 max-w-3xl text-base leading-relaxed text-slate-600 dark:text-[#a1a1a6]">
+          {MULTIBRAND_WARRANTY_MESSAGE}
         </p>
 
         <AuthorByline updatedLabel={REVIEWED} className="mt-6" />
