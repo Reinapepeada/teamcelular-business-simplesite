@@ -20,13 +20,18 @@ export const NOTEBOOK_PRICES = {
   boardFrom: 120000,
 };
 
+// Pisos cobrados en tablets de Team Celular (Fixbee, dic 2025 a nov 2026). Muy pocos casos: 4 de pin de carga y 2 de pantalla, ambos en iPad. Revisar al actualizar.
+export const TABLET_PRICES = {
+  chargingPortFrom: 40000,
+  screenFrom: 69000,
+};
+
 export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
-  // Sin precios por modelo: faltan los rangos cobrados de tablets en Fixbee. Solo las revisiones ya publicadas.
   "reparacion-tablets-caba": {
     slug: "reparacion-tablets-caba",
     h1: "Reparación de tablets e iPad en CABA",
     metaTitle: "Reparación de Tablets e iPad en CABA | Team Celular",
-    metaDescription: `Reparación de tablets e iPad en Recoleta y Belgrano, CABA. Vidrio, pantalla, batería y pin de carga. Revisión ${BUSINESS_PROFILE.reviewCostRange} y presupuesto previo.`,
+    metaDescription: `Reparación de tablets e iPad en Recoleta y Belgrano, CABA. Pin de carga desde ${formatArsPrice(TABLET_PRICES.chargingPortFrom)} y pantalla desde ${formatArsPrice(TABLET_PRICES.screenFrom)}. Revisión y presupuesto antes de reparar.`,
     socialTitle: "Reparación de Tablets e iPad en CABA | Team Celular",
     socialDescription:
       "Team Celular, en Recoleta y Belgrano. Reparamos tablets e iPad: vidrio, pantalla, batería y pin de carga, con presupuesto antes de reparar.",
@@ -42,11 +47,14 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     intro: `Sí, reparamos tablets e iPad en CABA: las recibimos sin turno en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032). Revisamos vidrio o pantalla rota, batería que dura poco, pin de carga flojo y tablets que no encienden. La revisión cuesta ${BUSINESS_PROFILE.reviewCostRange} y te pasamos el presupuesto antes de reparar.`,
     budgetCtaLabel: "Consultar por mi tablet",
     quoteHint: "Mandanos marca, modelo y qué le pasa: si se rompió el vidrio, si no carga o si no prende. El modelo figura en la tapa trasera o en Ajustes.",
-    priceNote: "Todavía no publicamos precios por modelo de tablet: el repuesto cambia mucho entre un iPad y una tablet Android. El valor del arreglo lo confirmás por escrito antes de que reparemos.",
+    priceNote: "Los valores \"desde\" salen de trabajos cobrados en 2026 y son pocos casos. El precio de tu tablet depende del modelo y del repuesto, y lo confirmás por escrito antes de que reparemos.",
     prices: [
       { label: "Revisión técnica", value: BUSINESS_PROFILE.reviewCostRange },
+      { label: "Cambio de pin de carga", value: `desde ${formatArsPrice(TABLET_PRICES.chargingPortFrom)}` },
+      { label: "Cambio de pantalla o módulo", value: `desde ${formatArsPrice(TABLET_PRICES.screenFrom)}` },
       { label: "Revisión de placa", value: PLACA_REVISION },
     ],
+    priceFrom: TABLET_PRICES.chargingPortFrom,
     asideNotes: [
       "Garantía escrita sobre el trabajo y el repuesto; el alcance figura en la orden que te llevás.",
       "El plazo depende de la falla y del repuesto. Te lo confirmamos junto con el presupuesto.",
@@ -97,7 +105,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     faqs: [
       {
         q: "¿Cuánto sale arreglar una tablet?",
-        a: `Depende del modelo y de la pieza. La revisión cuesta ${BUSINESS_PROFILE.reviewCostRange}; con el equipo abierto te pasamos el precio del arreglo por escrito y decidís si seguimos. ${INSTALLMENTS_MESSAGE}`,
+        a: `Depende del modelo y de la pieza. En 2026 cobramos cambios de pin de carga desde ${formatArsPrice(TABLET_PRICES.chargingPortFrom)} y cambios de pantalla desde ${formatArsPrice(TABLET_PRICES.screenFrom)}. La revisión cuesta ${BUSINESS_PROFILE.reviewCostRange}; con el equipo abierto te pasamos el precio por escrito y decidís si seguimos. ${INSTALLMENTS_MESSAGE}`,
       },
       {
         q: "¿Reparan iPad?",
