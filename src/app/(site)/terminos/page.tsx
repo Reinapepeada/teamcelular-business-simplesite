@@ -106,8 +106,8 @@ export default function TerminosPage() {
           {WARRANTY_SCOPE_MESSAGE}
         </p>
         <p>
-          Cuando otorgamos la garantía comercial, la constancia identifica el
-          trabajo, qué cubre, desde cuándo y hasta cuándo rige y quién responde.
+          Los 90 días de garantía comercial se suman a tus derechos legales.
+          La constancia indica qué trabajo cubren, desde cuándo rigen y quién responde.
         </p>
         <p>
           Si aparece una falla relacionada con la reparación, contactanos por

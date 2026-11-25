@@ -305,7 +305,7 @@ export default function ScreenReplacementGuide() {
             Con repuesto disponible, el cambio suele llevar de 2 a 4 horas.
           </p>
           <p className="text-sm leading-6 text-[#a1a1a6]">
-            Paraguay 2451, Recoleta · Amenábar 2032, Belgrano. {SCREEN_WARRANTY_MESSAGE}
+            Paraguay 2451, Recoleta · Amenábar 2032, Belgrano.
           </p>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
             <Link href="#precios-pantalla" className="inline-flex min-h-11 items-center font-semibold text-[#6aa6ff] underline underline-offset-4">Ver precios por marca y modelo</Link>

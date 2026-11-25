@@ -180,7 +180,7 @@ const faqMaintenance = [
   {
     question: "¿El mantenimiento preventivo anula la garantía del fabricante?",
     answer:
-      `Si tu equipo conserva garantía oficial, consultá primero las condiciones y opciones de servicio del fabricante antes de autorizar una intervención independiente. Team Celular es un servicio técnico independiente: no podemos asegurar que un mantenimiento conserve esa cobertura. ${WARRANTY_SCOPE_MESSAGE}`,
+      "Si tu equipo tiene garantía de fábrica, consultá sus condiciones antes de autorizar un mantenimiento en un taller independiente.",
   },
   {
     question: "¿Ofrecen planes de mantenimiento para empresas?",

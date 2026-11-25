@@ -124,7 +124,7 @@ const quickSteps = [
   },
   {
     step: "Control de calidad + garantía",
-    detail: `Hacemos pruebas funcionales, test de carga completa y estabilidad térmica. ${MULTIBRAND_WARRANTY_MESSAGE}`,
+    detail: "Hacemos pruebas funcionales, test de carga completa y estabilidad térmica.",
     duration: "20 min",
     Icon: FaCheckCircle,
   },
@@ -359,7 +359,7 @@ export default function MotorolaRepairGuidePage() {
               Reparación de Motorola en Buenos Aires
             </h1>
             <p className="max-w-[65ch] text-lg leading-relaxed text-slate-700 dark:text-[#a1a1a6]">
-              Team Celular repara Motorola en dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2032, Belgrano</strong>. Presupuesto antes de reparar. Pantalla en 2–4 h y batería en 1–2 h con stock. Moto G, Edge y E. {MULTIBRAND_WARRANTY_MESSAGE}
+              Team Celular repara Motorola en dos sucursales en CABA: <strong>Paraguay 2451, Recoleta</strong> y <strong>Amenábar 2032, Belgrano</strong>. Presupuesto antes de reparar. Pantalla en 2–4 h y batería en 1–2 h con stock. Moto G, Edge y E.
             </p>
           </div>
 

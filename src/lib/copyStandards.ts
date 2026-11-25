@@ -5,16 +5,16 @@ export const WARRANTY_SUMMARY_MESSAGE =
   "Garantía escrita de hasta 90 días según la reparación";
 
 export const WARRANTY_SCOPE_MESSAGE =
-  "Ofrecemos garantía comercial escrita de 90 días en cambios de piezas de iPhone y de pin de carga de cualquier marca. El presupuesto detalla la cobertura aplicable antes de que autorices el trabajo. Los cambios de batería y módulo de pantalla de otras marcas quedan fuera de esa garantía comercial. Se mantienen tus derechos legales.";
+  "Damos 90 días de garantía escrita en cambios de piezas de iPhone y de pin de carga de cualquier marca. Para batería y módulo de pantalla de otras marcas, el presupuesto detalla la cobertura legal aplicable.";
 
 export const BATTERY_WARRANTY_MESSAGE =
-  "El cambio de batería de iPhone tiene garantía comercial escrita de 90 días. En otras marcas, este cambio queda fuera de esa garantía comercial. El presupuesto detalla la cobertura aplicable y se mantienen tus derechos legales.";
+  "El cambio de batería de iPhone tiene 90 días de garantía escrita. Para otras marcas, el presupuesto detalla la cobertura legal aplicable.";
 
 export const SCREEN_WARRANTY_MESSAGE =
-  "El cambio de módulo de pantalla de iPhone tiene garantía comercial escrita de 90 días. En otras marcas, este cambio queda fuera de esa garantía comercial. El presupuesto detalla la cobertura aplicable y se mantienen tus derechos legales.";
+  "El cambio de módulo de pantalla de iPhone tiene 90 días de garantía escrita. Para otras marcas, el presupuesto detalla la cobertura legal aplicable.";
 
 export const MULTIBRAND_WARRANTY_MESSAGE =
-  "El cambio de pin de carga tiene garantía escrita de 90 días sobre el trabajo y el repuesto instalado, en cualquier marca. Los cambios de batería y de módulo de pantalla quedan fuera de esa garantía comercial. Te detallamos la cobertura aplicable en el presupuesto. Se mantienen tus derechos legales.";
+  "El cambio de pin de carga tiene 90 días de garantía escrita. Para batería y módulo de pantalla, el presupuesto detalla la cobertura legal aplicable.";
 
 export const IPHONE_PARTS_WARRANTY_MESSAGE =
   "Los cambios de piezas de iPhone tienen garantía escrita de 90 días sobre el trabajo y el repuesto instalado.";

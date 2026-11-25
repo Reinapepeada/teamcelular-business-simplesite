@@ -270,7 +270,7 @@ export default function BatteryReplacementGuide() {
             el consumo de aplicaciones y el puerto antes de decidir qué cambiar. Te atendemos en
             Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA. Con repuesto en stock,
             el cambio de batería lleva <strong>1 a 2 horas</strong>; confirmamos el plazo para tu modelo
-            antes de empezar. {BATTERY_WARRANTY_MESSAGE}
+            antes de empezar.
           </p>
           <p className="mt-3 max-w-[65ch] text-lg font-semibold text-slate-800 dark:text-[#f5f5f7]">
             Cambio de batería de Samsung, Motorola y Xiaomi desde{" "}
@@ -477,7 +477,7 @@ export default function BatteryReplacementGuide() {
             ¿Tu celular necesita batería nueva?
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-700 dark:text-[#a1a1a6]">
-            {REVIEW_COST_MESSAGE} Si requiere revisión de placa, cuesta {formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; el arreglo lleva semanas y se confirma precio y plazo por escrito. Para el cambio de batería confirmamos modelo, repuesto, stock y plazo antes de empezar. {BATTERY_WARRANTY_MESSAGE}
+            {REVIEW_COST_MESSAGE} Si requiere revisión de placa, cuesta {formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; el arreglo lleva semanas y se confirma precio y plazo por escrito. Para el cambio de batería confirmamos modelo, repuesto, stock y plazo antes de empezar.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link

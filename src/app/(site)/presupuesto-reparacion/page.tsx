@@ -116,8 +116,9 @@ export default function PresupuestoReparacionPage() {
                             Decinos qué le pasa a tu celular. Respondemos por WhatsApp en hasta 2 horas hábiles y confirmamos el precio según el diagnóstico.
                             Team Celular repara en{" "}
                             <strong className="text-slate-900 dark:text-[#f5f5f7]">Paraguay 2451, Recoleta</strong> y{" "}
-                            <strong className="text-slate-900 dark:text-[#f5f5f7]">Amenábar 2032, Belgrano</strong>. {WARRANTY_SUMMARY_MESSAGE}. Te detallamos la cobertura en el presupuesto.
+                            <strong className="text-slate-900 dark:text-[#f5f5f7]">Amenábar 2032, Belgrano</strong>.
                         </p>
+                        <p className="mt-2 text-slate-600 dark:text-[#86868b]">{WARRANTY_SUMMARY_MESSAGE}.</p>
                     </div>
 
                     <div className="order-last lg:order-none lg:col-start-1">
