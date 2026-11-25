@@ -39,15 +39,29 @@ export interface IphoneModelPrice {
  * la otra opción. Vacía cuando el negocio no confirmó la calidad del modelo.
  */
 export function screenOptionsText(model: IphoneModelPrice): string {
-  const main = model.screenQuality
-    ? `Ese precio corresponde a pantalla ${model.screenQuality}.`
-    : "";
   const alt = model.screenAlternative;
-  if (!alt) return main;
+  if (!alt) {
+    return model.screenQuality ? `Ese precio corresponde a pantalla ${model.screenQuality}.` : "";
+  }
+  // El precio que se muestra primero es el "desde": la frase nombra cada opción con su valor.
   const altPrice = alt.price.toLocaleString("es-AR");
   const priceText = alt.referential ? `con precio referencial de ARS ${altPrice}` : `a ARS ${altPrice}`;
-  const altText = `También hay una opción más económica con pantalla ${alt.quality} ${priceText}${alt.note ? `, que ${alt.note}` : ""}.`;
-  return main ? `${main} ${altText}` : altText;
+  const cheapest = `La opción más económica es pantalla ${alt.quality} ${priceText}${alt.note ? `, que ${alt.note}` : ""}.`;
+  if (model.screen === null) return cheapest;
+  const other = model.screenQuality ? `Con pantalla ${model.screenQuality}` : "La otra opción de pantalla";
+  return `${cheapest} ${other} sale ARS ${model.screen.toLocaleString("es-AR")}.`;
+}
+
+/** Menor precio de pantalla publicado del modelo, contando la opción más económica. */
+export function lowestScreenPrice(model: IphoneModelPrice): number | null {
+  const options = [model.screen, model.screenAlternative?.price ?? null].filter((v): v is number => v !== null);
+  return options.length ? Math.min(...options) : null;
+}
+
+/** "desde $ X" si el modelo tiene más de una opción de pantalla; si no, el precio. */
+export function screenPriceLabel(model: IphoneModelPrice): string {
+  const lowest = lowestScreenPrice(model);
+  return model.screenAlternative && lowest !== null ? `desde ${formatArs(lowest)}` : priceLabel(lowest);
 }
 
 // Opción Incell: precio referencial definido por el negocio el 16/11/2026.

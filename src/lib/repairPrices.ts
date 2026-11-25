@@ -8,7 +8,7 @@
  * Lista de agosto de 2026, verificada como vigente el 15/11/2026. Galaxy A / M ajustado en noviembre de 2026 a
  * lo cobrado en órdenes cerradas de Fixbee (piso: Galaxy A04 a $69.000).
  */
-import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
+import { IPHONE_MODELS, lowestScreenPrice } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 // Fecha de la última verificación de la lista: los valores de agosto siguen
 // vigentes, confirmados por el negocio el 15/11/2026.
@@ -128,7 +128,7 @@ function rangeOf(values: (number | null)[]) {
 export const POPULAR_REPAIR_PRICES: RepairPrice[] = [
   {
     name: "Cambio de pantalla iPhone 11 a 17",
-    ...rangeOf(IPHONE_MODELS.map((m) => m.screen)),
+    ...rangeOf(IPHONE_MODELS.flatMap((m) => [lowestScreenPrice(m), m.screen])),
     href: "/guias/reparacion-iphone-buenos-aires#costos-reparacion-iphone",
   },
   {

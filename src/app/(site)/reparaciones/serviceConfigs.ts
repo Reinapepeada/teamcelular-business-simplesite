@@ -1,11 +1,14 @@
 import type { ServiceLandingConfig } from "./serviceLanding";
+import { screenPriceLabel } from "./iphone/iphoneModels";
 import { BATTERY_PRICE_FLOOR, BRAND_REPAIR_PRICES, CHARGING_PORT_CLEANING_PRICE, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, SAMSUNG_CHARGING_PORT_PRICES, formatArsPrice } from "@/lib/repairPrices";
 import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 import { BUSINESS_PROFILE } from "@/lib/businessProfile";
 import { INSTALLMENTS_MESSAGE } from "@/lib/copyStandards";
 
 // Precios del primer parrafo de cambio de pantalla: misma fuente que las tablas.
-const IPHONE_13_SCREEN = IPHONE_MODELS.find((m) => m.slug === "13")?.screen ?? 249900;
+// "desde" el piso del modelo: el iPhone 13 tiene una opción de pantalla más económica.
+const IPHONE_13 = IPHONE_MODELS.find((m) => m.slug === "13");
+const IPHONE_13_SCREEN = IPHONE_13 ? screenPriceLabel(IPHONE_13) : "A consultar";
 const IPHONE_13_BATTERY = IPHONE_MODELS.find((m) => m.slug === "13")?.battery ?? 125000;
 const PLACA_REVISION = formatArsPrice(PLACA_REVISION_PRICE);
 const IPHONE_BATTERY_FROM = Math.min(
@@ -297,7 +300,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Cambio de Pantalla y Módulo en CABA | Team Celular",
     metaDescription:
-      "Cambio de pantalla en CABA: 2 a 4 horas con módulo en stock, según diagnóstico. iPhone 13 $249.900, Galaxy A desde $69.000. Garantía escrita 90 días.",
+      `Cambio de pantalla en CABA: 2-4 h con módulo en stock, según diagnóstico. iPhone 13 ${IPHONE_13_SCREEN}, Galaxy A desde $69.000. Garantía escrita 90 días.`,
     socialTitle: "Cambio de Pantalla en CABA | Team Celular",
     socialDescription:
       "Team Celular, Paraguay 2451 Recoleta. Cambio de pantalla en CABA con test completo y garantía escrita 90 días.",
@@ -313,7 +316,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     intro:
       "Vidrio roto, líneas o touch que no responde. Revisamos tu celular y te explicamos qué módulo hay para tu modelo, cuánto sale y cuándo podés retirarlo.",
     prices: [
-      { label: "iPhone 13", value: formatArsPrice(IPHONE_13_SCREEN) },
+      { label: "iPhone 13", value: IPHONE_13_SCREEN },
       { label: "Samsung Galaxy A", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[0].from)}` },
       { label: "Motorola Moto G", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.motorola[0].from)}` },
     ],
