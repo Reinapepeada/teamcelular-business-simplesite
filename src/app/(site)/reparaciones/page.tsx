@@ -76,6 +76,12 @@ const REPAIR_SERVICES = [
       "Se calienta, está lenta, no prende o se rompió la bisagra. Limpieza, SSD, Windows y placa en Recoleta.",
     href: "/reparaciones/reparacion-notebook-caba",
   },
+  {
+    title: "Tablets e iPad",
+    description:
+      "Vidrio o pantalla rota, batería que no dura o tablet que no carga. Revisión y presupuesto antes de reparar.",
+    href: "/reparaciones/reparacion-tablets-caba",
+  },
 ];
 
 const ROUTE_SELECTOR = [
