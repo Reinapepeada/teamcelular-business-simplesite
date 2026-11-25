@@ -9,9 +9,8 @@ test('La consulta de precio conserva el modelo y pide el alcance sin añadir pas
     await page.getByLabel('Elegí tu modelo de iPhone').selectOption('13');
     await expect(page.locator('#costos-reparacion-iphone')).toContainText('249.900');
     await page.getByRole('button', { name: 'Consultar precio y stock de mi iPhone 13', exact: true }).click();
-    const dialog = page.getByRole('dialog');
-    await dialog.getByRole('button', { name: /Belgrano.*Amenábar/ }).click();
-    const link = dialog.getByRole('link', { name: /Continuar/ });
+    // Cada sede ya es el enlace a WhatsApp: no hay un paso "Continuar".
+    const link = page.getByRole('dialog').getByRole('link', { name: /Belgrano.*Amenábar/ });
     const destination = new URL((await link.getAttribute('href'))!);
     expect(destination.pathname).toBe('/5491131739099');
     expect(destination.searchParams.get('text')).toContain('mi iPhone 13');

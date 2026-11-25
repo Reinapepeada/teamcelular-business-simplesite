@@ -18,9 +18,11 @@ interface PickerProps {
   value: BranchSlug | "";
   onChange: (slug: BranchSlug, method: BranchSelectionMethod) => void;
   compact?: boolean;
+  /** Con destino, cada sede es un enlace: elegirla ya abre WhatsApp. */
+  linkFor?: (slug: BranchSlug) => string;
 }
 
-export function BranchPreferencePicker({ value, onChange, compact = false }: PickerProps) {
+export function BranchPreferencePicker({ value, onChange, compact = false, linkFor }: PickerProps) {
   const [distances, setDistances] = useState<Partial<Record<BranchSlug, number>>>({});
   const [locationState, setLocationState] = useState<"idle" | "loading" | "denied" | "error">("idle");
 
@@ -79,24 +81,43 @@ export function BranchPreferencePicker({ value, onChange, compact = false }: Pic
       <div className={`grid gap-3 ${compact ? "sm:grid-cols-2" : "md:grid-cols-2"}`}>
         {BRANCHES.map((branch) => {
           const selected = value === branch.slug;
-          return (
+          const className = `min-h-16 rounded-2xl border px-4 py-3 text-left transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20 ${
+            selected
+              ? "border-primary bg-primary/10 text-primary dark:text-secondary"
+              : "border-slate-200 bg-white text-slate-700 hover:border-primary/40 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
+          }`;
+          const content = (
+            <>
+              <span className="flex items-center gap-2 font-semibold">
+                {linkFor ? <FaWhatsapp aria-hidden /> : <FaMapMarkerAlt aria-hidden />} {branch.shortName}
+                {linkFor && selected ? <span className="text-xs font-medium">· tu sucursal</span> : null}
+              </span>
+              <span className="mt-1 block text-sm text-slate-600 dark:text-slate-400">
+                {branch.street}{distances[branch.slug] != null ? ` · ${distances[branch.slug]!.toFixed(1)} km aprox.` : ""}
+              </span>
+            </>
+          );
+          return linkFor ? (
+            <a
+              key={branch.slug}
+              href={linkFor(branch.slug)}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-whatsapp-tracked="true"
+              onClick={() => onChange(branch.slug, "manual")}
+              className={className}
+            >
+              {content}
+            </a>
+          ) : (
             <button
               key={branch.slug}
               type="button"
               aria-pressed={selected}
               onClick={() => onChange(branch.slug, "manual")}
-              className={`min-h-16 rounded-2xl border px-4 py-3 text-left transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20 ${
-                selected
-                  ? "border-primary bg-primary/10 text-primary dark:text-secondary"
-                  : "border-slate-200 bg-white text-slate-700 hover:border-primary/40 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
-              }`}
+              className={className}
             >
-              <span className="flex items-center gap-2 font-semibold">
-                <FaMapMarkerAlt aria-hidden /> {branch.shortName}
-              </span>
-              <span className="mt-1 block text-sm text-slate-600 dark:text-slate-400">
-                {branch.street}{distances[branch.slug] != null ? ` · ${distances[branch.slug]!.toFixed(1)} km aprox.` : ""}
-              </span>
+              {content}
             </button>
           );
         })}
@@ -144,7 +165,6 @@ export default function BranchWhatsAppButton({
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<BranchSlug | "">("");
   const redirected = useRef(false);
-  const destination = selected ? branchWhatsappUrl(selected, message) : undefined;
 
   useLayoutEffect(() => {
     // Abrir con el contenido montado evita medir y enfocar un diálogo vacío.
@@ -167,22 +187,22 @@ export default function BranchWhatsAppButton({
     });
   }
 
+  // Cada sede es un enlace a WhatsApp: tocarla elige y abre en un paso. Antes
+  // habia que elegir y despues "Continuar", y 1 de cada 5 cerraba sin elegir.
+  // "nearest" llega desde la geolocalizacion (sin gesto del usuario): solo marca.
   function choose(slug: BranchSlug, method: BranchSelectionMethod) {
     measure("branch_preference_selected", { preferred_branch: slug, selection_method: method });
     setSelected(slug);
     saveBranchPreference(slug, method);
-  }
-
-  function continueToWhatsApp() {
-    if (!selected) return;
+    if (method !== "manual") return;
     redirected.current = true;
     recordLeadInteraction({
       eventName: "branch_whatsapp_redirect",
-      preferredBranch: selected,
-      ctaName: `${ctaName}_${selected}`,
+      preferredBranch: slug,
+      ctaName: `${ctaName}_${slug}`,
       ctaLocation,
       ctaVariant: "whatsapp",
-      destination,
+      destination: branchWhatsappUrl(slug, message),
     });
     dialogRef.current?.close();
   }
@@ -211,7 +231,7 @@ export default function BranchWhatsAppButton({
                   conserva su nombre accesible via aria-labelledby. */}
               <p id={`${ctaName}-branch-title`} className="text-xl font-bold">¿Con qué sucursal querés hablar?</p>
               <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
-                Ambas realizan todo tipo de reparaciones. La elección es una preferencia y podés cambiarla.
+                Tocá una y se abre WhatsApp. Ambas realizan todo tipo de reparaciones.
               </p>
             </div>
             <button
@@ -224,22 +244,8 @@ export default function BranchWhatsAppButton({
             </button>
           </div>
           <div className="mt-5">
-            <BranchPreferencePicker value={selected} onChange={choose} compact />
+            <BranchPreferencePicker value={selected} onChange={choose} compact linkFor={(slug) => branchWhatsappUrl(slug, message)} />
           </div>
-          <a
-            href={destination}
-            role="link"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-disabled={!selected}
-            tabIndex={selected ? 0 : -1}
-            data-whatsapp-tracked="true"
-            onClick={continueToWhatsApp}
-            className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-emerald-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-800 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-700/25 aria-disabled:cursor-not-allowed aria-disabled:opacity-50"
-          >
-            <FaWhatsapp aria-hidden />
-            {selected ? `Continuar con ${BRANCHES.find((branch) => branch.slug === selected)?.shortName}` : "Elegí una sucursal"}
-          </a>
         </div>}
       </dialog>
     </>

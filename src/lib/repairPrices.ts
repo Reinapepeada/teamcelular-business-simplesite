@@ -142,6 +142,12 @@ export const POPULAR_REPAIR_PRICES: RepairPrice[] = [
   { name: "Cambio de pin de carga (todas las marcas)", ...CHARGING_PORT_PRICE, href: "/reparaciones/cambio-pin-carga-caba" },
 ];
 
+/** Piso publicado del cambio de pantalla: marcas con precio cargado e iPhone. */
+export const SCREEN_PRICE_FLOOR = Math.min(
+  ...Object.values(BRAND_REPAIR_PRICES).flat().filter((p) => p.name.startsWith("Cambio de pantalla")).map((p) => p.from),
+  ...IPHONE_MODELS.map((m) => m.screen).filter((price): price is number => typeof price === "number"),
+);
+
 export const PRICES_UPDATED_LABEL = new Date(PRICES_UPDATED).toLocaleDateString("es-AR", {
   day: "numeric",
   month: "long",

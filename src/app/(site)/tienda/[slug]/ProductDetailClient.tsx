@@ -29,6 +29,8 @@ import TrackView from '@/components/analytics/TrackView';
 import ProductCondition from '@/components/store/ProductCondition';
 import { buildProductFacts } from '@/lib/productSeo';
 import { BUSINESS_PROFILE } from '@/lib/businessProfile';
+import BranchWhatsAppButton from '@/components/cro/BranchSelector';
+import { FaWhatsapp } from 'react-icons/fa';
 import {
     hayParaComprar,
     sePuedeRestar,
@@ -424,6 +426,19 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                             Agregar al carrito
                         </button>
                     </div>
+
+                    {/* 17 visitantes vieron productos en 30 días y ninguno agregó al
+                        carrito; WhatsApp es el canal que convierte. Sin stock, es la
+                        única salida que queda. */}
+                    <BranchWhatsAppButton
+                        ctaName="product_whatsapp"
+                        ctaLocation="product_detail"
+                        message={`Hola Team Celular, quiero consultar por este producto: ${product.name}.`}
+                        className="tc-btn tc-btn-ghost h-12 w-full"
+                    >
+                        <FaWhatsapp aria-hidden />
+                        {hayParaComprar(selectedVariant, totalStock) ? 'Consultar por WhatsApp' : 'Consultar reposición por WhatsApp'}
+                    </BranchWhatsAppButton>
 
                     {/* Quick Actions */}
                     <div className="flex gap-4">
