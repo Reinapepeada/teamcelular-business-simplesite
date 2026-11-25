@@ -30,6 +30,7 @@ const SERVICE_ILLUSTRATIONS: Record<string, string> = {
   "reparacion-placa-caba": "/images/reparacion_placa.webp",
   "cambio-flex-caba": "/images/celuPorDentro.webp",
   "reparacion-notebook-caba": "/images/dispositivoshdpro.webp",
+  "reparacion-tablets-caba": "/images/dispositivoshdpro.webp",
 };
 
 const WORKFLOW = [
@@ -214,6 +215,23 @@ const SERVICE_RELATED_GUIDES: Record<string, RelatedGuide[]> = {
       href: "/guias/celular-mojado-que-hacer",
       title: "Guía de celular mojado",
       description: "Protocolo útil cuando el audio falla después de humedad o líquidos.",
+    },
+  ],
+  "reparacion-tablets-caba": [
+    {
+      href: "/reparaciones/reparacion-notebook-caba",
+      title: "Reparación de notebooks",
+      description: "Limpieza, disco SSD, Windows, bisagras y placa en notebooks y MacBook.",
+    },
+    {
+      href: "/reparaciones/reparacion-placa-caba",
+      title: "Reparación de placa",
+      description: "Cómo trabajamos la revisión cuando el equipo no enciende.",
+    },
+    {
+      href: "/presupuesto-reparacion",
+      title: "Revisión y presupuesto",
+      description: "Qué incluye la revisión y cómo te pasamos el precio antes de reparar.",
     },
   ],
   "reparacion-notebook-caba": [
