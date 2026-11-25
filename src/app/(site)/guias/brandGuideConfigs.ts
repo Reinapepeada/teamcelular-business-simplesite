@@ -9,6 +9,7 @@ import { businessId } from "@/lib/businessProfile";
 import { PLACA_REVISION_PRICE, formatArsPrice } from "@/lib/repairPrices";
 import { INSTALLMENTS_MESSAGE, SCREEN_BATTERY_TIMING_MESSAGE } from "@/lib/copyStandards";
 import { BRAND_CHARGED_PRICES } from "@/lib/modelScreenPrices";
+import type { BrandWorkshop } from "@/components/seo/BrandWorkshopNotes";
 
 const SITE_URL = getSiteUrl();
 
@@ -17,6 +18,13 @@ const CHARGED_PRICES_PUBLISHED = "2026-11-21T00:00:00Z";
 const TCL_SCREENS = BRAND_CHARGED_PRICES.tcl.filter((row) => row.service === "pantalla").map((row) => row.from);
 const TCL_SCREEN_FROM = formatArsPrice(Math.min(...TCL_SCREENS));
 const TCL_SCREEN_TO = formatArsPrice(Math.max(...TCL_SCREENS));
+
+// Bloque "Desde el taller": cifras de órdenes de celulares en Fixbee y datos que dio el negocio el 25/11/2026.
+const WORKSHOP_PERIOD = "en los 12 meses previos al 25 de noviembre de 2026";
+const WORKSHOP_TEAM = "Nuestro equipo de técnicos, liderado por Alejandro Biarrieta,";
+const WORKSHOP_UPDATED = "2026-11-25T00:00:00Z";
+// Reballing del procesador en POCO X3 Pro: precio informado por el negocio.
+const POCO_X3_PRO_REBALLING_PRICE = 398000;
 
 const REVISED_DIAGNOSIS = {
   modifiedTime: "2026-10-15T00:00:00Z",
@@ -75,6 +83,8 @@ type BrandGuideSeed = {
   diagnosisAnswerOverride?: string;
   heroPointsOverride?: string[];
   extraRelatedLinks?: GuideRelatedLink[];
+  /** Solo las marcas con órdenes suficientes para contar algo propio. */
+  workshop?: BrandWorkshop;
 };
 
 export type BrandGuideConfig = {
@@ -106,6 +116,7 @@ export type BrandGuideConfig = {
   relatedLinks: GuideRelatedLink[];
   whatsappText: string;
   repairPrices: BrandGuideSeed["repairPrices"];
+  workshop?: BrandWorkshop;
   metadata: Metadata;
 };
 
@@ -113,7 +124,41 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   {
     slug: "reparacion-google-pixel-buenos-aires",
     ...REVISED_DIAGNOSIS,
-    titleOverride: "Reparacion de Google Pixel en Buenos Aires",
+    modifiedTime: WORKSHOP_UPDATED,
+    titleOverride: "Reparación de Google Pixel en Buenos Aires",
+    workshop: {
+      period: WORKSHOP_PERIOD,
+      stats: [
+        { value: "41", label: "Google Pixel recibidos" },
+        { value: "17", label: "cambios de batería" },
+        { value: "9", label: "cambios de pantalla" },
+      ],
+      intro: `${WORKSHOP_TEAM} es de los pocos de CABA que trabaja Google Pixel. Lo que más entra son Pixel 6, 7, 7a y 7 Pro, sobre todo por batería y pantalla.`,
+      notes: [
+        {
+          title: "Te avisamos antes de abrirlo",
+          description:
+            "En la mayoría de los Pixel hay que levantar la pantalla para llegar a la batería, y en ese paso la pantalla puede dañarse. Te lo decimos antes de empezar. El Pixel 7a es la excepción.",
+        },
+        {
+          title: "La pantalla llega en el día",
+          description:
+            "El repuesto de pantalla está en stock en nuestro depósito, no en el local. Lo traemos el mismo día en que confirmás el arreglo.",
+        },
+        {
+          title: "La batería es lo que más cambiamos",
+          description:
+            "17 de los 41 Pixel que entraron fueron por batería. Medimos el consumo antes de cambiarla, para no cobrarte una batería si la falla está en otro lado.",
+        },
+      ],
+      photo: {
+        src: "/images/taller/pixel-6-pro-cambio-bateria.webp",
+        alt: "Google Pixel 6 Pro abierto en la mesa del taller, con la pantalla levantada y la batería vieja retirada",
+        caption: "Cambio de batería de un Pixel 6 Pro en nuestro taller: la pantalla va levantada y la batería vieja ya está afuera.",
+        width: 1200,
+        height: 1296,
+      },
+    },
     metaDescriptionOverride:
       "Pantalla de Google Pixel desde $360.000 y batería desde $125.000 en CABA. Plazo según modelo y stock. Garantía escrita de 90 días.",
     repairPrices: [
@@ -125,14 +170,19 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
       `Team Celular repara Google Pixel en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. El cambio de pantalla va de ARS 360.000 a 590.000 y el de batería de ARS 125.000 a 200.000, según el modelo: cubrimos desde Pixel 6 y 6a hasta Pixel 10 Pro, incluidas las variantes Pro y Pro XL. ${SCREEN_BATTERY_TIMING_MESSAGE} Si la falla requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)} y el informe se entrega en hasta 72 horas hábiles. El arreglo de placa lleva semanas; confirmamos precio y plazo por escrito antes de empezar. Garantía escrita de 90 días sobre trabajo y repuesto, y pago en 3 cuotas sin interés.`,
     extraFaq: [
       {
-        question: "Google tiene servicio tecnico de Pixel en Argentina?",
+        question: "¿Se puede dañar la pantalla al cambiar la batería de un Google Pixel?",
         answer:
-          "Google no opera un centro de reparacion propio en Argentina: su soporte deriva a socios autorizados. Como ademas la mayoria de los Pixel entran al pais por importacion, la garantia de fabrica suele no aplicar localmente.",
+          "Puede pasar. En la mayoría de los Pixel hay que levantar la pantalla para llegar a la batería, y en ese paso la pantalla puede dañarse; te lo avisamos antes de empezar. El Pixel 7a es la excepción. Si hay que cambiar la pantalla, el repuesto está en nuestro depósito y llega a la sede el mismo día.",
       },
       {
-        question: "Reparan un Pixel comprado en el exterior?",
+        question: "¿Google tiene servicio técnico de Pixel en Argentina?",
         answer:
-          "Si. El origen del equipo no cambia el trabajo tecnico. Lo que si cambia es la disponibilidad del repuesto segun el modelo, y eso lo confirmamos antes de que lo dejes.",
+          "Google no opera un centro de reparación propio en Argentina: su soporte deriva a socios autorizados. Como además la mayoría de los Pixel entran al país por importación, la garantía de fábrica suele no aplicar localmente.",
+      },
+      {
+        question: "¿Reparan un Pixel comprado en el exterior?",
+        answer:
+          "Sí. El origen del equipo no cambia el trabajo técnico. Lo que sí cambia es la disponibilidad del repuesto según el modelo, y eso lo confirmamos antes de que lo dejes.",
       },
     ],
     brand: "Google Pixel",
@@ -214,20 +264,51 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   },
   {
     slug: "reparacion-poco-buenos-aires",
-    modifiedTime: "2026-10-15T00:00:00Z",
-    titleOverride: "Reparacion de POCO en Buenos Aires: temperatura, bateria y carga",
+    modifiedTime: WORKSHOP_UPDATED,
+    titleOverride: "Reparación de POCO en Buenos Aires: temperatura, batería y carga",
+    workshop: {
+      period: WORKSHOP_PERIOD,
+      stats: [
+        { value: "22", label: "POCO que entraron al taller" },
+        { value: "4", label: "fueron POCO X3 Pro" },
+        { value: formatArsPrice(POCO_X3_PRO_REBALLING_PRICE), label: "reballing del procesador en el X3 Pro" },
+      ],
+      intro: `${WORKSHOP_TEAM} recibe POCO sobre todo por fallas de placa. El caso que más se repite es el POCO X3 Pro.`,
+      notes: [
+        {
+          title: "POCO X3 Pro: reballing del procesador",
+          description:
+            `En el X3 Pro la falla casi siempre es la misma: hay que hacer reballing del procesador y la memoria en la placa. Lo hacemos nosotros, en nuestro taller, y cuesta ${formatArsPrice(POCO_X3_PRO_REBALLING_PRICE)}.`,
+        },
+        {
+          title: "Primero, la revisión de placa",
+          description:
+            `La revisión de placa cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, se cobra aunque no se repare y se descuenta si se repara. El arreglo de placa lleva semanas: precio y plazo van por escrito antes de empezar.`,
+        },
+        {
+          title: "Batería, carga y pantalla",
+          description:
+            "También cambiamos batería, pin de carga y pantalla de POCO. El precio depende del modelo y lo confirmás antes de que reparemos.",
+        },
+      ],
+    },
     metaDescriptionOverride:
       "POCO F6 Pro, F6, X6 Pro y M6 Pro: sobrecalentamiento, batería exigida y pin de carga gastado. Reparación en CABA con garantía escrita 90 días.",
     heroDescriptionOverride:
       `Team Celular repara POCO en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. En F6 Pro, F6, X6 Pro y M6 Pro revisamos sobrecalentamiento, pérdida de autonomía y carga intermitente. Medimos temperatura y consumo y probamos cable, cargador y puerto antes de cotizar una batería o un conector. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; la reparación lleva semanas, con precio y plazo por escrito antes de empezar. Para pantalla, batería y carga confirmamos repuesto y plazo según el modelo. Garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés.`,
     extraFaq: [
       {
-        question: "Es normal que mi POCO caliente tanto?",
+        question: "¿Hacen reballing del procesador en el POCO X3 Pro?",
         answer:
-          "Algo de calor en uso exigente es esperable por el tipo de procesador. Lo que no es normal es que caliente en uso liviano o que se apague: ahi hay algo que medir, y suele estar en la gestion de energia.",
+          `Sí. Es la reparación de placa que más hacemos en POCO X3 Pro: la hacemos en nuestro taller y cuesta ${formatArsPrice(POCO_X3_PRO_REBALLING_PRICE)}. Antes va la revisión de placa, que cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, se cobra aunque no se repare y se descuenta si se repara. El arreglo de placa lleva semanas, con precio y plazo por escrito antes de empezar.`,
       },
       {
-        question: "El sobrecalentamiento arruina la bateria?",
+        question: "¿Es normal que mi POCO caliente tanto?",
+        answer:
+          "Algo de calor en uso exigente es esperable por el tipo de procesador. Lo que no es normal es que caliente en uso liviano o que se apague: ahí hay algo que medir, y suele estar en la gestión de energía.",
+      },
+      {
+        question: "¿El sobrecalentamiento arruina la batería?",
         answer:
           "El calor sostenido puede acelerar el desgaste de la batería, pero no identifica por sí solo la causa de la falla. Revisamos el estado de la batería y medimos consumo y temperatura antes de cotizar; el presupuesto depende de lo que encontremos.",
       },
@@ -235,7 +316,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     brand: "POCO",
     badge: "Gaming y rendimiento",
     imagePath: "/opengraph-image.png",
-    models: ["POCO F6 Pro", "POCO F6", "POCO X6 Pro", "POCO M6 Pro"],
+    models: ["POCO F6 Pro", "POCO F6", "POCO X6 Pro", "POCO M6 Pro", "POCO X3 Pro"],
     specialtyFocus:
       "equipos de alto rendimiento con foco en temperatura, bateria y carga",
     knownWeakPoints: [
@@ -549,10 +630,35 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     metaDescriptionOverride:
       `Taller independiente para celulares TCL en Recoleta y Belgrano, CABA. Pantalla desde ${TCL_SCREEN_FROM}, según modelo y repuesto. Garantía escrita de 90 días.`,
     titleOverride:
-      "Reparacion de celulares TCL en Buenos Aires: quien los arregla en CABA",
+      "Reparación de celulares TCL en Buenos Aires: quién los arregla en CABA",
+    workshop: {
+      period: WORKSHOP_PERIOD,
+      stats: [
+        { value: "20", label: "celulares TCL recibidos" },
+        { value: "7", label: "cambios de pantalla" },
+      ],
+      intro: `${WORKSHOP_TEAM} repara TCL sobre todo por pantalla. Con los NxtPaper hay un cuidado extra.`,
+      notes: [
+        {
+          title: "NxtPaper: la pantalla tiene que ser mate",
+          description:
+            "La pantalla NxtPaper viene mate de fábrica. Tenemos el repuesto mate y lo probamos antes de instalarlo, para que quede como salió de fábrica.",
+        },
+        {
+          title: "La pantalla es lo que más cambiamos",
+          description:
+            `7 de los 20 TCL que entraron fueron por pantalla. Los últimos cambios costaron de ${TCL_SCREEN_FROM} a ${TCL_SCREEN_TO}, según el modelo.`,
+        },
+        {
+          title: "Pasanos el modelo exacto",
+          description:
+            "Un TCL 40 NxtPaper y un TCL 40 SE usan repuestos distintos. El modelo figura en Ajustes, dentro de la información del teléfono.",
+        },
+      ],
+    },
     heroDescriptionOverride:
       "Recibimos celulares TCL para revisar pantalla, batería y carga en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA. Somos un taller independiente. Pasanos el modelo exacto y qué le ocurre: confirmamos si la reparación es viable, si hay repuesto y cuánto cuesta antes de empezar. La reparación tiene garantía escrita de 90 días sobre trabajo y repuesto. Si tu consulta es por la garantía del fabricante, consultá primero los canales oficiales de TCL Argentina.",
-    modifiedTime: "2026-10-15T00:00:00Z",
+    modifiedTime: WORKSHOP_UPDATED,
     heroPointsOverride: [
       "Plazo de revisión según la falla; placa: informe hasta 72 horas hábiles.",
       "Garantía escrita de 90 días sobre trabajo y repuesto.",
@@ -562,6 +668,11 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     diagnosisAnswerOverride:
       "El plazo depende de la falla. Si requiere revisión de placa, el informe se entrega en hasta 72 horas hábiles. El arreglo de placa lleva semanas y confirmamos precio y plazo por escrito antes de empezar. Para cambios de pantalla, batería o puerto, el plazo depende del modelo y del repuesto disponible.",
     extraFaq: [
+      {
+        question: "¿Tienen pantalla para TCL NxtPaper?",
+        answer:
+          "Sí. La pantalla NxtPaper es mate de fábrica y el repuesto tiene que ser igual. Tenemos el repuesto mate y lo probamos antes de instalarlo. Pasanos el modelo exacto para confirmar stock y precio.",
+      },
       {
         question: "¿TCL tiene soporte oficial de celulares en Argentina?",
         answer:
@@ -806,6 +917,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     relatedLinks,
     serviceJsonLd: buildServiceJsonLd(seed, pagePath),
     repairPrices: seed.repairPrices,
+    workshop: seed.workshop,
     whatsappText: `Hola Team Celular, necesito presupuesto para reparar mi ${seed.brand}`,
     metadata: buildWebsiteMetadata({
       path: pagePath,
