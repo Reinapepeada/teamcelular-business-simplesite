@@ -7,13 +7,11 @@ import type {
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
 import { businessId } from "@/lib/businessProfile";
 import { PLACA_REVISION_PRICE, formatArsPrice } from "@/lib/repairPrices";
-import { INSTALLMENTS_MESSAGE, SCREEN_BATTERY_TIMING_MESSAGE } from "@/lib/copyStandards";
+import { INSTALLMENTS_MESSAGE, MULTIBRAND_WARRANTY_MESSAGE, SCREEN_BATTERY_TIMING_MESSAGE } from "@/lib/copyStandards";
 import { BRAND_CHARGED_PRICES } from "@/lib/modelScreenPrices";
 
 const SITE_URL = getSiteUrl();
 
-// Día en que se publicó la tabla de precios cobrados en las guías de plantilla.
-const CHARGED_PRICES_PUBLISHED = "2026-11-21T00:00:00Z";
 const TCL_SCREENS = BRAND_CHARGED_PRICES.tcl.filter((row) => row.service === "pantalla").map((row) => row.from);
 const TCL_SCREEN_FROM = formatArsPrice(Math.min(...TCL_SCREENS));
 const TCL_SCREEN_TO = formatArsPrice(Math.max(...TCL_SCREENS));
@@ -22,7 +20,7 @@ const REVISED_DIAGNOSIS = {
   modifiedTime: "2026-10-15T00:00:00Z",
   heroPointsOverride: [
     "Plazo de revisión según la falla; placa: informe hasta 72 horas hábiles.",
-    "Garantía escrita de 90 días sobre trabajo y repuesto.",
+    "Cobertura informada en el presupuesto.",
     "Opiniones de clientes en Google de la sucursal Recoleta.",
   ],
   diagnosisAnswerOverride:
@@ -115,14 +113,14 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ...REVISED_DIAGNOSIS,
     titleOverride: "Reparacion de Google Pixel en Buenos Aires",
     metaDescriptionOverride:
-      "Pantalla de Google Pixel desde $360.000 y batería desde $125.000 en CABA. Plazo según modelo y stock. Garantía escrita de 90 días.",
+      "Pantalla de Google Pixel desde $360.000 y batería desde $125.000 en CABA. Plazo según modelo y stock.",
     repairPrices: [
       { name: "Cambio de pantalla", from: 360000, to: 590000 },
       // Piso: batería de Pixel 7a cobrada en noviembre de 2026 (modelScreenPrices.ts).
       { name: "Cambio de bateria", from: 125000, to: 200000 },
     ],
     heroDescriptionOverride:
-      `Team Celular repara Google Pixel en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. El cambio de pantalla va de ARS 360.000 a 590.000 y el de batería de ARS 125.000 a 200.000, según el modelo: cubrimos desde Pixel 6 y 6a hasta Pixel 10 Pro, incluidas las variantes Pro y Pro XL. ${SCREEN_BATTERY_TIMING_MESSAGE} Si la falla requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)} y el informe se entrega en hasta 72 horas hábiles. El arreglo de placa lleva semanas; confirmamos precio y plazo por escrito antes de empezar. Garantía escrita de 90 días sobre trabajo y repuesto, y pago en 3 cuotas sin interés.`,
+      `Team Celular repara Google Pixel en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. El cambio de pantalla va de ARS 360.000 a 590.000 y el de batería de ARS 125.000 a 200.000, según el modelo: cubrimos desde Pixel 6 y 6a hasta Pixel 10 Pro, incluidas las variantes Pro y Pro XL. ${SCREEN_BATTERY_TIMING_MESSAGE} Si la falla requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)} y el informe se entrega en hasta 72 horas hábiles. El arreglo de placa lleva semanas; confirmamos precio y plazo por escrito antes de empezar. Podés pagar en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "Google tiene servicio tecnico de Pixel en Argentina?",
@@ -179,11 +177,11 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     slug: "reparacion-honor-buenos-aires",
     ...REVISED_DIAGNOSIS,
     metaDescriptionOverride:
-      "Reparación de Honor Magic y X en Recoleta y Belgrano, CABA. Diagnóstico y plazo según la falla, con presupuesto y garantía escrita de 90 días.",
+      "Reparación de Honor Magic y X en Recoleta y Belgrano, CABA. Diagnóstico y plazo según la falla, con presupuesto.",
     titleOverride:
       "Reparacion de Honor en Buenos Aires: alternativa presencial al canal oficial",
     heroDescriptionOverride:
-      `Team Celular repara Honor en CABA con atención presencial: somos un taller independiente de microelectrónica en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Revisamos pantalla, batería y módulo de carga de las líneas Magic y X; confirmamos disponibilidad del repuesto y plazo para tu modelo antes de que dejes el equipo. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles. La reparación de placa lleva semanas, con precio y plazo por escrito antes de empezar. Garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés. Si buscás cobertura de fábrica, consultá primero el canal de soporte de Honor.`,
+      `Team Celular repara Honor en CABA con atención presencial: somos un taller independiente de microelectrónica en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Revisamos pantalla, batería y módulo de carga de las líneas Magic y X; confirmamos disponibilidad del repuesto y plazo para tu modelo antes de que dejes el equipo. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles. La reparación de placa lleva semanas, con precio y plazo por escrito antes de empezar. Podés pagar en 3 cuotas sin interés. Si buscás cobertura de fábrica, consultá primero el canal de soporte de Honor.`,
     extraFaq: [
       {
         question: "Que diferencia hay entre el canal de Honor y Team Celular?",
@@ -217,9 +215,9 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     modifiedTime: "2026-10-15T00:00:00Z",
     titleOverride: "Reparacion de POCO en Buenos Aires: temperatura, bateria y carga",
     metaDescriptionOverride:
-      "POCO F6 Pro, F6, X6 Pro y M6 Pro: sobrecalentamiento, batería exigida y pin de carga gastado. Reparación en CABA con garantía escrita 90 días.",
+      "POCO F6 Pro, F6, X6 Pro y M6 Pro: sobrecalentamiento, batería exigida y pin de carga gastado. Reparación en CABA.",
     heroDescriptionOverride:
-      `Team Celular repara POCO en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. En F6 Pro, F6, X6 Pro y M6 Pro revisamos sobrecalentamiento, pérdida de autonomía y carga intermitente. Medimos temperatura y consumo y probamos cable, cargador y puerto antes de cotizar una batería o un conector. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; la reparación lleva semanas, con precio y plazo por escrito antes de empezar. Para pantalla, batería y carga confirmamos repuesto y plazo según el modelo. Garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés.`,
+      `Team Celular repara POCO en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. En F6 Pro, F6, X6 Pro y M6 Pro revisamos sobrecalentamiento, pérdida de autonomía y carga intermitente. Medimos temperatura y consumo y probamos cable, cargador y puerto antes de cotizar una batería o un conector. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; la reparación lleva semanas, con precio y plazo por escrito antes de empezar. Para pantalla, batería y carga confirmamos repuesto y plazo según el modelo. Podés pagar en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "Es normal que mi POCO caliente tanto?",
@@ -254,9 +252,9 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     modifiedTime: "2026-10-15T00:00:00Z",
     titleOverride: "Reparacion de OPPO en Buenos Aires: Reno y serie A",
     metaDescriptionOverride:
-      "OPPO Reno12, Reno11, A79 y A58: touch inestable, poca autonomía y puerto de carga gastado. Reparación en CABA con garantía escrita 90 días.",
+      "OPPO Reno12, Reno11, A79 y A58: touch inestable, poca autonomía y puerto de carga gastado. Reparación en CABA.",
     heroDescriptionOverride:
-      `Team Celular repara OPPO en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. En Reno y serie A, un touch que no responde puede requerir revisar el flex y su conector antes de cambiar la pantalla. También medimos batería y consumo cuando la autonomía cae, y probamos cable, cargador y puerto si la carga es inestable. ${SCREEN_BATTERY_TIMING_MESSAGE} Si la falla requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles. La reparación de placa lleva semanas, con precio y plazo por escrito antes de empezar. Garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés.`,
+      `Team Celular repara OPPO en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. En Reno y serie A, un touch que no responde puede requerir revisar el flex y su conector antes de cambiar la pantalla. También medimos batería y consumo cuando la autonomía cae, y probamos cable, cargador y puerto si la carga es inestable. ${SCREEN_BATTERY_TIMING_MESSAGE} Si la falla requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles. La reparación de placa lleva semanas, con precio y plazo por escrito antes de empezar. Podés pagar en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "El touch de mi OPPO falla pero la pantalla no esta rota",
@@ -290,11 +288,11 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     ...REVISED_DIAGNOSIS,
     seoTitleOverride: "Servicio técnico Infinix en CABA | Team Celular",
     metaDescriptionOverride:
-      "Reparación de Infinix Note, Hot y Zero en Recoleta y Belgrano. Plazo según falla y repuesto disponible, con garantía escrita de 90 días.",
+      "Reparación de Infinix Note, Hot y Zero en Recoleta y Belgrano. Plazo según falla y repuesto disponible.",
     titleOverride:
       "Reparacion de Infinix en Buenos Aires: donde arreglarlo sin red oficial",
     heroDescriptionOverride:
-      `Team Celular es un taller independiente de microelectrónica en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA. Revisamos pantalla, batería y pin de carga de las líneas Infinix Note, Hot y Zero, además de equipos mojados o que no encienden. La revisión técnica sin placa cuesta entre ARS 15.000 y 25.000. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles: se cobra aunque no se repare y se descuenta del total si aceptás el arreglo. La reparación de placa lleva semanas, con precio y plazo por escrito antes de empezar. Para pantalla, batería y carga confirmamos modelo, repuesto y plazo antes de que dejes el equipo. Atendemos de lunes a viernes de 10:30 a 18:00, sin turno, con garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés.`,
+      `Team Celular es un taller independiente de microelectrónica en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA. Revisamos pantalla, batería y pin de carga de las líneas Infinix Note, Hot y Zero, además de equipos mojados o que no encienden. La revisión técnica sin placa cuesta entre ARS 15.000 y 25.000. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles: se cobra aunque no se repare y se descuenta del total si aceptás el arreglo. La reparación de placa lleva semanas, con precio y plazo por escrito antes de empezar. Para pantalla, batería y carga confirmamos modelo, repuesto y plazo antes de que dejes el equipo. Atendemos de lunes a viernes de 10:30 a 18:00, sin turno. Podés pagar en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "Infinix tiene servicio tecnico oficial en Argentina?",
@@ -329,9 +327,9 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     seoTitleOverride: "Servicio técnico ZTE y Nubia en CABA | Team Celular",
     titleOverride: "Reparacion de ZTE en Buenos Aires: audio, carga y reinicios",
     metaDescriptionOverride:
-      "Reparación de ZTE Blade, Nubia y Axon en CABA: audio, carga y reinicios. Plazo según la falla y repuesto, con garantía escrita de 90 días.",
+      "Reparación de ZTE Blade, Nubia y Axon en CABA: audio, carga y reinicios. Plazo según la falla y repuesto.",
     heroDescriptionOverride:
-      `Team Celular repara ZTE en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. En las familias Blade, Nubia y Axon revisamos audio bajo o distorsionado, carga intermitente y reinicios. Probamos parlante, cable, cargador y conector antes de decidir qué pieza cambiar. Los reinicios también pueden requerir medir la placa: esa revisión cuesta ${formatArsPrice(PLACA_REVISION_PRICE)} y el informe se entrega en hasta 72 horas hábiles. Si hay que reparar la placa, el trabajo lleva semanas y confirmamos precio y plazo por escrito antes de empezar. Para otras reparaciones, el plazo depende del modelo y del repuesto disponible. Garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés.`,
+      `Team Celular repara ZTE en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. En las familias Blade, Nubia y Axon revisamos audio bajo o distorsionado, carga intermitente y reinicios. Probamos parlante, cable, cargador y conector antes de decidir qué pieza cambiar. Los reinicios también pueden requerir medir la placa: esa revisión cuesta ${formatArsPrice(PLACA_REVISION_PRICE)} y el informe se entrega en hasta 72 horas hábiles. Si hay que reparar la placa, el trabajo lleva semanas y confirmamos precio y plazo por escrito antes de empezar. Para otras reparaciones, el plazo depende del modelo y del repuesto disponible. Podés pagar en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "Por que mi ZTE se reinicia solo?",
@@ -366,9 +364,9 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     seoTitleOverride: "Tecno: reparación y servicio técnico en CABA | Team Celular",
     titleOverride: "Reparacion de Tecno en Buenos Aires: Camon, Pova y Spark",
     metaDescriptionOverride:
-      "Tecno Camon, Pova, Spark y Phantom: pantalla con rayas, cámara sin nitidez y batería que cae. Reparación en CABA con garantía escrita de 90 días.",
+      "Tecno Camon, Pova, Spark y Phantom: pantalla con rayas, cámara sin nitidez y batería que cae. Reparación en CABA.",
     heroDescriptionOverride:
-      `Team Celular repara Tecno en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Confirmamos disponibilidad de repuesto para tu modelo antes de que dejes el equipo. En las líneas Camon, Pova, Spark y Phantom revisamos pantalla con rayas o toque fantasma, cámara sin nitidez y batería que pierde autonomía. ${SCREEN_BATTERY_TIMING_MESSAGE} Para la cámara, primero revisamos el vidrio del lente y el módulo. Si la falla requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; el arreglo lleva semanas, con precio y plazo por escrito antes de empezar. Garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés.`,
+      `Team Celular repara Tecno en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Confirmamos disponibilidad de repuesto para tu modelo antes de que dejes el equipo. En las líneas Camon, Pova, Spark y Phantom revisamos pantalla con rayas o toque fantasma, cámara sin nitidez y batería que pierde autonomía. ${SCREEN_BATTERY_TIMING_MESSAGE} Para la cámara, primero revisamos el vidrio del lente y el módulo. Si la falla requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; el arreglo lleva semanas, con precio y plazo por escrito antes de empezar. Podés pagar en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "Consiguen repuestos para Tecno en Argentina?",
@@ -403,9 +401,9 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     seoTitleOverride: "Servicio técnico Alcatel en CABA | Team Celular",
     titleOverride: "Reparacion de Alcatel en Buenos Aires: conviene arreglarlo?",
     metaDescriptionOverride:
-      "Reparación de Alcatel 1, 3, 5 y T en CABA. Revisión arancelada y presupuesto antes de reparar, con plazo según falla y garantía escrita de 90 días.",
+      "Reparación de Alcatel 1, 3, 5 y T en CABA. Revisión arancelada y presupuesto antes de reparar, con plazo según falla.",
     heroDescriptionOverride:
-      `Team Celular repara Alcatel en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. En las series 1, 3, 5 y T conviene comparar el presupuesto con el valor y el estado del equipo antes de decidir. Revisamos batería, conector de carga y pantalla; confirmamos repuesto, costo y plazo para tu modelo. La revisión técnica es arancelada: sin placa va de ARS 15.000 a 25.000. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; el arreglo lleva semanas y se presupuesta por separado. Garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés.`,
+      `Team Celular repara Alcatel en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. En las series 1, 3, 5 y T conviene comparar el presupuesto con el valor y el estado del equipo antes de decidir. Revisamos batería, conector de carga y pantalla; confirmamos repuesto, costo y plazo para tu modelo. La revisión técnica es arancelada: sin placa va de ARS 15.000 a 25.000. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; el arreglo lleva semanas y se presupuesta por separado. Podés pagar en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "Conviene reparar un Alcatel o comprar otro?",
@@ -439,9 +437,9 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     modifiedTime: "2026-10-15T00:00:00Z",
     titleOverride: "Reparacion de Asus ROG y Zenfone en Buenos Aires",
     metaDescriptionOverride:
-      "Reparación de Asus ROG Phone y Zenfone en CABA: sobretemperatura, batería exigida y fallas por estrés térmico. Garantía escrita 90 días.",
+      "Reparación de Asus ROG Phone y Zenfone en CABA: sobretemperatura, batería exigida y fallas por estrés térmico.",
     heroDescriptionOverride:
-      `Team Celular repara Asus ROG Phone y Zenfone en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Si el equipo se apaga al jugar, se calienta o perdió autonomía, medimos consumo y alimentación antes de proponer una batería o un trabajo de placa. La revisión de placa cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; se cobra aunque no se repare y se descuenta del total si aceptás el arreglo. La reparación de placa lleva semanas, con precio y plazo por escrito. Para cambios de módulos confirmamos disponibilidad del repuesto y plazo para tu ROG o Zenfone antes de empezar. Garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés.`,
+      `Team Celular repara Asus ROG Phone y Zenfone en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Si el equipo se apaga al jugar, se calienta o perdió autonomía, medimos consumo y alimentación antes de proponer una batería o un trabajo de placa. La revisión de placa cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; se cobra aunque no se repare y se descuenta del total si aceptás el arreglo. La reparación de placa lleva semanas, con precio y plazo por escrito. Para cambios de módulos confirmamos disponibilidad del repuesto y plazo para tu ROG o Zenfone antes de empezar. Podés pagar en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "Mi ROG Phone se apaga cuando juego, es la bateria?",
@@ -475,9 +473,9 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     modifiedTime: "2026-10-15T00:00:00Z",
     titleOverride: "Reparacion de OnePlus en Buenos Aires: pantalla, bateria y carga",
     metaDescriptionOverride:
-      "OnePlus 12, 11, 10 Pro y Nord: pantalla, batería y fallas del puerto USB-C. Reparación en CABA con garantía escrita 90 días.",
+      "OnePlus 12, 11, 10 Pro y Nord: pantalla, batería y fallas del puerto USB-C. Reparación en CABA.",
     heroDescriptionOverride:
-      `Team Celular repara OnePlus en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Si tu OnePlus 12, 11, 10 Pro o Nord carga lento o solo en cierta posición, probamos cable, cargador compatible y puerto USB-C y medimos consumo antes de cotizar piezas. ${SCREEN_BATTERY_TIMING_MESSAGE} Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; el arreglo lleva semanas, con precio y plazo por escrito antes de empezar. Garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés.`,
+      `Team Celular repara OnePlus en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Si tu OnePlus 12, 11, 10 Pro o Nord carga lento o solo en cierta posición, probamos cable, cargador compatible y puerto USB-C y medimos consumo antes de cotizar piezas. ${SCREEN_BATTERY_TIMING_MESSAGE} Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; el arreglo lleva semanas, con precio y plazo por escrito antes de empezar. Podés pagar en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "Mi OnePlus carga lento, es la bateria o el cargador?",
@@ -512,9 +510,9 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     seoTitleOverride: "Servicio técnico Huawei en CABA | Team Celular",
     titleOverride: "Reparacion de Huawei en Buenos Aires: camara, sensores y placa",
     metaDescriptionOverride:
-      "Huawei P60, P50, Mate y Nova: cámara que no enfoca, sensores tras humedad o golpes y fallas de placa. Reparación en CABA, garantía 90 días.",
+      "Huawei P60, P50, Mate y Nova: cámara que no enfoca, sensores tras humedad o golpes y fallas de placa. Reparación en CABA.",
     heroDescriptionOverride:
-      `Team Celular repara Huawei en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. En P60, P50, Mate y Nova revisamos cámara sin enfoque y fallas de sensores después de golpes o humedad. Comprobamos módulo, flex, conectores y alimentación antes de decidir si hay que cambiar una pieza o revisar la placa. La revisión técnica sin placa cuesta entre ARS 15.000 y 25.000. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; el arreglo lleva semanas, con precio y plazo por escrito antes de empezar. Confirmamos disponibilidad de repuesto para tu modelo antes de que dejes el equipo. Garantía escrita de 90 días sobre trabajo y repuesto y pago en 3 cuotas sin interés.`,
+      `Team Celular repara Huawei en CABA, en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. En P60, P50, Mate y Nova revisamos cámara sin enfoque y fallas de sensores después de golpes o humedad. Comprobamos módulo, flex, conectores y alimentación antes de decidir si hay que cambiar una pieza o revisar la placa. La revisión técnica sin placa cuesta entre ARS 15.000 y 25.000. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles; el arreglo lleva semanas, con precio y plazo por escrito antes de empezar. Confirmamos disponibilidad de repuesto para tu modelo antes de que dejes el equipo. Podés pagar en 3 cuotas sin interés.`,
     extraFaq: [
       {
         question: "La camara de mi Huawei enfoca mal, tiene arreglo?",
@@ -547,15 +545,15 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     slug: "reparacion-tcl-buenos-aires",
     seoTitleOverride: "Servicio técnico TCL celulares en CABA | Team Celular",
     metaDescriptionOverride:
-      `Taller independiente para celulares TCL en Recoleta y Belgrano, CABA. Pantalla desde ${TCL_SCREEN_FROM}, según modelo y repuesto. Garantía escrita de 90 días.`,
+      `Taller independiente para celulares TCL en Recoleta y Belgrano, CABA. Pantalla desde ${TCL_SCREEN_FROM}, según modelo y repuesto.`,
     titleOverride:
       "Reparacion de celulares TCL en Buenos Aires: quien los arregla en CABA",
     heroDescriptionOverride:
-      "Recibimos celulares TCL para revisar pantalla, batería y carga en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA. Somos un taller independiente. Pasanos el modelo exacto y qué le ocurre: confirmamos si la reparación es viable, si hay repuesto y cuánto cuesta antes de empezar. La reparación tiene garantía escrita de 90 días sobre trabajo y repuesto. Si tu consulta es por la garantía del fabricante, consultá primero los canales oficiales de TCL Argentina.",
+      "Recibimos celulares TCL para revisar pantalla, batería y carga en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA. Somos un taller independiente. Pasanos el modelo exacto y qué le ocurre: confirmamos si la reparación es viable, si hay repuesto y cuánto cuesta antes de empezar. Te informamos la cobertura en el presupuesto antes de reparar. Si tu consulta es por la garantía del fabricante, consultá primero los canales oficiales de TCL Argentina.",
     modifiedTime: "2026-10-15T00:00:00Z",
     heroPointsOverride: [
       "Plazo de revisión según la falla; placa: informe hasta 72 horas hábiles.",
-      "Garantía escrita de 90 días sobre trabajo y repuesto.",
+      "Cobertura informada en el presupuesto.",
       "Opiniones de clientes en Google de la sucursal Recoleta.",
       `Atención sin turno de lunes a viernes de 10:30 a 18:00. ${INSTALLMENTS_MESSAGE}`,
     ],
@@ -674,7 +672,6 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     `Reparacion de ${seed.brand} en Buenos Aires: fallas comunes, diagnostico y solucion`;
   const pageLabel = `Reparacion ${seed.brand}`;
   const modelList = seed.models.join(", ");
-  const baseModified = seed.modifiedTime ?? "2026-09-22T00:00:00Z";
 
   const symptoms: GuideItem[] = [
     ...seed.knownWeakPoints.map((point) => ({
@@ -723,9 +720,9 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
         "Si aparece algo más durante la reparación, te lo consultamos antes de sumarlo al presupuesto.",
     },
     {
-      title: "Entrega con garantía escrita",
+      title: "Cobertura por tipo de reparación",
       description:
-        "90 días sobre el trabajo y el repuesto instalado, con el alcance detallado por escrito.",
+        MULTIBRAND_WARRANTY_MESSAGE,
     },
   ];
 
@@ -775,14 +772,11 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     title,
     heroDescription:
       seed.heroDescriptionOverride ??
-      `Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), repara ${seed.brand} con diagnóstico y plazo según la falla y garantía escrita de 90 días sobre trabajo y repuesto. Esta guía explica las fallas más comunes, cómo las diagnosticamos y el paso recomendado según el estado del equipo.`,
+      `Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), repara ${seed.brand} con diagnóstico y plazo según la falla. Esta guía explica las fallas más comunes, cómo las diagnosticamos y el paso recomendado según el estado del equipo.`,
     badge: seed.badge,
     readingTime: "5 min",
     publishedTime: "2026-04-20T00:00:00Z",
-    modifiedTime:
-      BRAND_CHARGED_PRICES[seed.brand.toLowerCase()] && baseModified < CHARGED_PRICES_PUBLISHED
-        ? CHARGED_PRICES_PUBLISHED
-        : baseModified,
+    modifiedTime: "2026-11-25T00:00:00Z",
     imagePath: seed.imagePath,
     articleAbout: [
       `Reparacion de ${seed.brand}`,
@@ -815,7 +809,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
       title: seed.seoTitleOverride ?? `Reparación de ${seed.brand} en CABA | Team Celular`,
       description:
         seed.metaDescriptionOverride ??
-        `Taller en Recoleta y Belgrano que repara ${seed.brand}: pantalla, batería y carga con plazo según la falla y el repuesto. Garantía escrita 90 días.`,
+        `Taller en Recoleta y Belgrano que repara ${seed.brand}: pantalla, batería y carga con plazo según la falla y el repuesto.`,
       keywords: [
         ...seed.keywords,
         `reparacion ${seed.brand.toLowerCase()} buenos aires`,

@@ -1,3 +1,4 @@
+import { CHARGING_PORT_WARRANTY_MESSAGE } from "@/lib/copyStandards";
 import type { Metadata } from "next";
 import HighIntentGuidePage, {
   type GuideFaqItem,
@@ -176,12 +177,12 @@ export default function ChargingPortGuidePage() {
       badge="Falla frecuente"
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
-      modifiedTime="2026-10-15T00:00:00Z"
+      modifiedTime="2026-11-25T00:00:00Z"
       imagePath="/images/reparacion_placa.webp"
       heroPoints={[
         "Confirmamos precio antes de reparar.",
         "Descartamos cable y suciedad antes de cambiar piezas.",
-        "Garantía escrita de 90 días sobre trabajo y repuesto.",
+        CHARGING_PORT_WARRANTY_MESSAGE,
       ]}
       heroActions={<RepairPriceInquiry
         repair="revisar el pin de carga de mi celular"

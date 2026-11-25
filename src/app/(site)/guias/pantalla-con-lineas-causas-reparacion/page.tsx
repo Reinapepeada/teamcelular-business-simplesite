@@ -140,11 +140,11 @@ export default function ScreenLinesGuidePage() {
       pagePath={PAGE_PATH}
       pageLabel="Pantalla con lineas"
       title="Pantalla con lineas en celular: causas y reparacion"
-      heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), diagnostica líneas en pantalla para identificar la causa real: display, flex o placa. Confirmamos el plazo según el modelo, el stock y el diagnóstico. Garantía escrita de 90 días."
+      heroDescription="Team Celular, en Paraguay 2451 Recoleta y Amenábar 2032 Belgrano (CABA), diagnostica líneas en pantalla para identificar la causa real: display, flex o placa. Confirmamos el plazo según el modelo, el stock y el diagnóstico."
       badge="Decision de reparacion"
       readingTime="5 min"
       publishedTime="2026-04-16T00:00:00Z"
-      modifiedTime="2026-08-20T00:00:00Z"
+      modifiedTime="2026-11-25T00:00:00Z"
       imagePath="/opengraph-image.png"
       heroPoints={[
         "Diferencia causa visual vs causa electrica.",

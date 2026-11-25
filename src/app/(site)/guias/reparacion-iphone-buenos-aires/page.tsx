@@ -5,7 +5,7 @@ import AuthorByline from "@/components/seo/AuthorByline";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
-import { INSTALLMENTS_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
+import { INSTALLMENTS_MESSAGE, IPHONE_PARTS_WARRANTY_MESSAGE } from "@/lib/copyStandards";
 import GuideByline from "@/components/seo/GuideByline";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import IphonePriceQuote from "@/components/repairs/IphonePriceQuote";
@@ -95,7 +95,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2024-01-15T00:00:00Z",
-    modifiedTime: "2026-10-15T00:00:00Z",
+    modifiedTime: "2026-11-25T00:00:00Z",
     section: "Guías técnicas",
   },
   twitter: {
@@ -133,7 +133,7 @@ const quickSteps = [
   {
     step: "Prueba final y garantía",
     detail:
-      `Lo cargamos, lo calentamos un rato y probamos todo de nuevo antes de devolvértelo. ${WARRANTY_SCOPE_MESSAGE}`,
+      `Lo cargamos, lo calentamos un rato y probamos todo de nuevo antes de devolvértelo. ${IPHONE_PARTS_WARRANTY_MESSAGE}`,
     duration: "20 min",
     Icon: FaCheckCircle,
   },
@@ -285,7 +285,7 @@ const faq = [
   },
   {
     question: "¿La garantía cubre mano de obra y repuesto?",
-    answer: `Sí. ${WARRANTY_SCOPE_MESSAGE}`,
+    answer: IPHONE_PARTS_WARRANTY_MESSAGE,
   },
   {
     question: "¿Qué pasa si no quiero reparar luego del diagnóstico?",
@@ -329,9 +329,9 @@ export default function IphoneRepairGuidePage() {
     <div className="flex w-full justify-center px-4 py-8 sm:py-12">
       <ArticleSchema
         title="Reparación de iPhone en CABA: precios por modelo"
-        description="Precios de pantalla y batería por modelo, opciones de repuesto y consultas en Recoleta y Belgrano, con garantía escrita de 90 días."
+        description="Precios de pantalla y batería por modelo, opciones de repuesto y consultas en Recoleta y Belgrano, con garantía escrita de 90 días en cambios de piezas."
         publishedTime="2024-01-15T00:00:00Z"
-        modifiedTime="2026-10-15T00:00:00Z"
+        modifiedTime="2026-11-25T00:00:00Z"
         about={[
           "reparacion de iPhone en Buenos Aires",
           "service tecnico Apple en CABA",
@@ -393,7 +393,7 @@ export default function IphoneRepairGuidePage() {
           </div>
           <p className="text-sm leading-6 text-[#a1a1a6]">
             Pantalla en 2 a 4 horas y batería en 1 a 2 horas si hay stock.
-            Garantía escrita de 90 días sobre trabajo y repuesto.
+            Los cambios de piezas de iPhone tienen garantía escrita de 90 días sobre el trabajo y el repuesto instalado.
           </p>
           <nav aria-label="Sucursales para reparar tu iPhone" className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
             {BRANCHES.map((branch) => <Link key={branch.slug} href={branch.url} className="tc-link inline-flex min-h-11 items-center">{branch.shortName}: {branch.street}</Link>)}
@@ -402,7 +402,7 @@ export default function IphoneRepairGuidePage() {
 
 
             <div className="mt-4">
-              <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
+              <GuideByline modifiedTime="2026-11-25T00:00:00Z" tone="light" />
             </div>
         </header>
 
@@ -529,7 +529,7 @@ export default function IphoneRepairGuidePage() {
               Si la falla es de placa, la revisión cuesta $45.000 y el informe se entrega
               en hasta 72 horas hábiles. El arreglo de placa lleva semanas: confirmamos
               precio y plazo por escrito y descontamos la revisión si aceptás repararlo.
-              {" "}{WARRANTY_SCOPE_MESSAGE}
+              {" "}{IPHONE_PARTS_WARRANTY_MESSAGE}
             </p>
           </div>
 
@@ -724,7 +724,7 @@ export default function IphoneRepairGuidePage() {
               "@type": "Service",
               name: "Reparación de iPhone en Buenos Aires",
               description:
-                "Servicio técnico independiente de iPhone en CABA: pantalla, batería, carga y placa, con repuesto, precio y plazo confirmados antes de reparar y garantía escrita de 90 días.",
+                "Servicio técnico independiente de iPhone en CABA: pantalla, batería, carga y placa, con repuesto, precio y plazo confirmados antes de reparar y garantía escrita de 90 días en cambios de piezas.",
               provider: { "@id": `${SITE_URL}#organization` },
               areaServed: {
                 "@type": "City",

@@ -5,7 +5,7 @@ import ArticleSchema from "@/components/seo/ArticleSchema";
 import { ComparisonTable } from "@/components/seo/ComparisonGuidePage";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
-import { REVIEW_COST_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
+import { REVIEW_COST_MESSAGE, SCREEN_WARRANTY_MESSAGE } from "@/lib/copyStandards";
 import GuideByline from "@/components/seo/GuideByline";
 import RepairPriceTable from "@/components/seo/RepairPriceTable";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
@@ -63,7 +63,7 @@ const SCREEN_FROM = formatArsPrice(Math.min(...SCREEN_PRICE_GROUPS.flatMap((grou
 export const metadata: Metadata = {
   title: "Cambio de Pantalla de Celular: Precios por Marca en CABA",
   description:
-    `Cambio de pantalla desde ${SCREEN_FROM}, según modelo y repuesto. Compará precios por marca. Sin turno en Recoleta y Belgrano, garantía escrita 90 días.`,
+    `Cambio de pantalla desde ${SCREEN_FROM}, según modelo y repuesto. Compará precios por marca. Sin turno en Recoleta y Belgrano.`,
   keywords: [
     "cambio pantalla celular Buenos Aires",
     "pantalla iPhone original",
@@ -194,7 +194,7 @@ const replacementProcess = [
   },
   {
     step: "5. Test de calidad",
-    detail: "Probamos touch en todas las zonas, Face ID/Touch ID, sensores, brillo y colores, y entregamos con garantía escrita.",
+    detail: "Probamos touch en todas las zonas, Face ID/Touch ID, sensores, brillo y colores, y te informamos la cobertura en el presupuesto.",
     duration: "15 min",
     Icon: FaShieldAlt,
   },
@@ -243,7 +243,7 @@ const faqScreen = [
   },
   {
     question: "¿La pantalla nueva viene con garantía?",
-    answer: `Sí. ${WARRANTY_SCOPE_MESSAGE} Cubre defectos de fabricación del repuesto y problemas vinculados al trabajo realizado. No cubre golpes nuevos, líquidos, presión excesiva, modificaciones por terceros ni uso inadecuado. Entregamos certificado con el detalle de cobertura.`,
+    answer: SCREEN_WARRANTY_MESSAGE,
   },
   {
     question: "¿Puedo usar el celular normalmente después del cambio?",
@@ -266,7 +266,7 @@ export default function ScreenReplacementGuide() {
         title="Cambio de pantalla de celular: precios por marca en CABA"
         description={`Precios de cambio de pantalla desde ${SCREEN_FROM}, según modelo y repuesto. Consulta por WhatsApp en Recoleta y Belgrano.`}
         publishedTime="2024-11-30T00:00:00Z"
-        modifiedTime="2026-10-15T00:00:00Z"
+        modifiedTime="2026-11-25T00:00:00Z"
         image="https://teamcelular.com/opengraph-image.png"
         url="https://teamcelular.com/guias/reparacion-pantalla-celular"
       />
@@ -305,11 +305,11 @@ export default function ScreenReplacementGuide() {
             Con repuesto disponible, el cambio suele llevar de 2 a 4 horas.
           </p>
           <p className="text-sm leading-6 text-[#a1a1a6]">
-            Paraguay 2451, Recoleta · Amenábar 2032, Belgrano. Garantía escrita de 90 días sobre trabajo y repuesto.
+            Paraguay 2451, Recoleta · Amenábar 2032, Belgrano. {SCREEN_WARRANTY_MESSAGE}
           </p>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
             <Link href="#precios-pantalla" className="inline-flex min-h-11 items-center font-semibold text-[#6aa6ff] underline underline-offset-4">Ver precios por marca y modelo</Link>
-            <GuideByline modifiedTime="2026-10-15T00:00:00Z" tone="light" />
+            <GuideByline modifiedTime="2026-11-25T00:00:00Z" tone="light" />
           </div>
           <RepairPriceInquiry
             repair="cambiar la pantalla de mi celular"

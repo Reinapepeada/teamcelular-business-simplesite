@@ -51,7 +51,7 @@ const WORKFLOW = [
   },
   {
     title: "4. Lo probás y te lo llevás",
-    desc: "Lo revisás con nosotros antes de irte y te llevás la garantía de 90 días por escrito. Cualquier cosa, nos escribís al mismo WhatsApp.",
+    desc: "Lo revisás con nosotros antes de irte y te llevás el comprobante del trabajo. Cualquier cosa, nos escribís al mismo WhatsApp.",
     Icon: FaShieldAlt,
   },
 ];
@@ -367,7 +367,7 @@ export default function ServiceLandingPage({
     </ol>
   );
   const [warrantyNote, timeNote] = config.asideNotes ?? [
-    "Garantía escrita de 90 días sobre trabajo y repuesto instalado.",
+    "Cobertura informada en el presupuesto.",
     "Confirmamos precio y plazo según modelo, falla y disponibilidad de repuesto.",
   ];
 

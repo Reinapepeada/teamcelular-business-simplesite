@@ -1,3 +1,4 @@
+import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -40,7 +41,7 @@ const faqs = [
   },
   {
     q: "¿Dan garantía escrita?",
-    a: "Sí. Cada reparación se entrega con garantía escrita de 90 días sobre trabajo y repuesto instalado.",
+    a: WARRANTY_SCOPE_MESSAGE,
   },
 ];
 
@@ -51,8 +52,8 @@ const trustSignals = [
     Icon: FaTools,
   },
   {
-    title: "Garantía escrita",
-    desc: "Cada trabajo sale con garantía escrita de 90 días sobre trabajo y repuesto instalado.",
+    title: "Cobertura en el presupuesto",
+    desc: "Te informamos la cobertura en el presupuesto antes de reparar.",
     Icon: FaShieldAlt,
   },
   {
@@ -65,7 +66,7 @@ const trustSignals = [
 export const metadata: Metadata = {
   title: "Reparación de Celulares en Recoleta CABA | Team Celular",
   description:
-    "Team Celular, Paraguay 2451, Recoleta. Reparación de celulares con garantía escrita de 90 días. Confirmamos repuesto y plazo antes de avanzar.",
+    "Team Celular, Paraguay 2451, Recoleta. Reparación de celulares. Confirmamos repuesto y plazo antes de avanzar.",
   alternates: {
     canonical: PAGE_URL,
     languages: {
@@ -79,7 +80,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Reparación de Celulares en Recoleta CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451, Recoleta. Reparación de celulares con garantía escrita de 90 días. Confirmamos repuesto y plazo antes de avanzar.",
+      "Team Celular, Paraguay 2451, Recoleta. Reparación de celulares. Confirmamos repuesto y plazo antes de avanzar.",
     url: PAGE_URL,
     type: "website",
     locale: "es_AR",
@@ -96,7 +97,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Reparación de Celulares en Recoleta CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451, Recoleta. Reparación de celulares con garantía escrita de 90 días. Confirmamos repuesto y plazo antes de avanzar.",
+      "Team Celular, Paraguay 2451, Recoleta. Reparación de celulares. Confirmamos repuesto y plazo antes de avanzar.",
     images: [`${SITE_URL}/opengraph-image.png`],
   },
 };
@@ -187,7 +188,7 @@ export default function SucursalRecoletaPage() {
             <h1 className="tc-display">
               Reparación de celulares en Recoleta CABA
             </h1>
-            <p className="max-w-[56ch] text-lg leading-relaxed text-[#a1a1a6]">Team Celular Recoleta está en Paraguay 2451, a unas cuadras de Santa Fe y Pueyrredón y de la estación Pueyrredón de la línea D. Atendemos sin turno de lunes a viernes de 10:30 a 18:00 y reparamos pantalla, batería, carga y placa de iPhone, Samsung, Motorola y Xiaomi. Te informamos el costo de revisión y el presupuesto antes de reparar, y cada trabajo sale con garantía escrita de 90 días.</p>
+            <p className="max-w-[56ch] text-lg leading-relaxed text-[#a1a1a6]">Team Celular Recoleta está en Paraguay 2451, a unas cuadras de Santa Fe y Pueyrredón y de la estación Pueyrredón de la línea D. Atendemos sin turno de lunes a viernes de 10:30 a 18:00 y reparamos pantalla, batería, carga y placa de iPhone, Samsung, Motorola y Xiaomi. Te informamos el costo de revisión y detallamos el trabajo y su cobertura en el presupuesto.</p>
             <div className="flex flex-wrap gap-3">
               <TrackedCtaLink href={whatsappUrl} external target="_blank" directBranch ctaName="branch_recoleta_whatsapp" ctaLocation="branch_recoleta_hero" ctaVariant="whatsapp" className="tc-btn tc-btn-primary">
                 WhatsApp de Recoleta

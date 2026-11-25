@@ -46,7 +46,6 @@ export default function ArticleSchema({
     },
     about,
     mentions: [
-      { "@type": "Thing", name: "Garantia escrita de 90 dias" },
       { "@type": "Thing", name: "Diagnostico tecnico de celulares" },
       { "@type": "Thing", name: "Microelectronica de celulares" },
     ],

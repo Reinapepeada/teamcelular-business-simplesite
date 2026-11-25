@@ -1,3 +1,4 @@
+import { BATTERY_WARRANTY_MESSAGE, SCREEN_WARRANTY_MESSAGE, CHARGING_PORT_WARRANTY_MESSAGE } from "@/lib/copyStandards";
 import type { ServiceLandingConfig } from "./serviceLanding";
 import { screenPriceLabel } from "./iphone/iphoneModels";
 import { BATTERY_PRICE_FLOOR, BRAND_REPAIR_PRICES, CHARGING_PORT_CLEANING_PRICE, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, SAMSUNG_CHARGING_PORT_PRICES, formatArsPrice } from "@/lib/repairPrices";
@@ -59,14 +60,14 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     ],
     priceFrom: TABLET_PRICES.chargingPortFrom,
     asideNotes: [
-      "Garantía escrita sobre el trabajo y el repuesto; el alcance figura en la orden que te llevás.",
+      "Te informamos la cobertura en el presupuesto antes de reparar.",
       "El plazo depende de la falla y del repuesto. Te lo confirmamos junto con el presupuesto.",
     ],
     workflow: [
       { title: "La revisamos", desc: "La abrimos en el laboratorio y medimos pantalla, táctil, batería, carga y placa para encontrar la causa." },
       { title: "Te pasamos el presupuesto", desc: "Precio, plazo y repuesto por escrito. Si no te conviene reparar, te lo decimos y pagás solo la revisión." },
       { title: "La reparamos", desc: "Si aparece otro daño al abrirla, te avisamos antes de seguir. Tus fotos y archivos no se tocan sin tu autorización." },
-      { title: "La probás y te la llevás", desc: "Probás táctil, carga, cámaras y sonido en el mostrador, y te llevás la garantía por escrito." },
+      { title: "La probás y te la llevás", desc: "Probás táctil, carga, cámaras y sonido en el mostrador, y te llevás el comprobante del trabajo." },
     ],
     whatsappText: "Hola! Quiero un presupuesto para reparar mi tablet. Marca, modelo y falla:",
     breadcrumbLabel: "Reparación de tablets e iPad (CABA)",
@@ -160,14 +161,14 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       { label: "Reparación de placa", value: `desde ${formatArsPrice(NOTEBOOK_PRICES.boardFrom)}` },
     ],
     asideNotes: [
-      "Garantía escrita sobre el trabajo y el repuesto; el alcance figura en la orden que te llevás.",
+      "Te informamos la cobertura en el presupuesto antes de reparar.",
       "El plazo depende de la falla y del repuesto. Te lo confirmamos junto con el presupuesto.",
     ],
     workflow: [
       { title: "La revisamos", desc: "La abrimos en el laboratorio, medimos temperatura, disco, batería y placa, y buscamos la causa de la falla." },
       { title: "Te pasamos el presupuesto", desc: "Precio, plazo y repuesto por escrito. Si no te conviene reparar, te lo decimos y pagás solo la revisión." },
       { title: "La reparamos", desc: "Si aparece otro daño al abrirla, te avisamos antes de seguir. Tus archivos no se tocan sin tu autorización." },
-      { title: "La probás y te la llevás", desc: "La encendemos con vos, probás teclado, pantalla y carga, y te llevás la garantía por escrito." },
+      { title: "La probás y te la llevás", desc: "La encendemos con vos, probás teclado, pantalla y carga, y te llevás el comprobante del trabajo." },
     ],
     whatsappText: "Hola! Quiero un presupuesto para reparar mi notebook. Marca, modelo y falla:",
     breadcrumbLabel: "Reparación de notebooks (CABA)",
@@ -225,10 +226,10 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       `Cambio de Batería de Celular en CABA desde ${formatArsPrice(BATTERY_PRICE_FLOOR)}`,
     metaDescription:
-      `Cambio de batería en CABA desde ${formatArsPrice(BATTERY_PRICE_FLOOR)} (Samsung A, Moto G y Redmi) y desde ${formatArsPrice(IPHONE_BATTERY_FROM)} en iPhone. En 1 a 2 horas en Recoleta. Garantía escrita 90 días.`,
+      `Cambio de batería en CABA desde ${formatArsPrice(BATTERY_PRICE_FLOOR)} (Samsung A, Moto G y Redmi) y desde ${formatArsPrice(IPHONE_BATTERY_FROM)} en iPhone. En 1 a 2 horas en Recoleta.`,
     socialTitle: "Cambio de Batería en CABA | Team Celular",
     socialDescription:
-      "Team Celular, Paraguay 2451 Recoleta. Cambio de batería en CABA con diagnóstico previo y garantía escrita 90 días.",
+      "Team Celular, Paraguay 2451 Recoleta. Cambio de batería en CABA con diagnóstico previo.",
     keywords: [
       "cambio de bateria CABA",
       "reemplazo bateria Capital Federal",
@@ -237,7 +238,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "bateria celular se descarga rapido",
     ],
     intro:
-      "Cambiamos la batería de tu celular en 1 a 2 horas si el repuesto está en stock, con garantía escrita de 90 días. Antes medimos el consumo: a veces el que se come la carga es una app o la placa, no la batería.",
+      "Cambiamos la batería de tu celular en 1 a 2 horas si el repuesto está en stock. Antes medimos el consumo: a veces el que se come la carga es una app o la placa, no la batería.",
     prices: [
       { label: "iPhone 13", value: formatArsPrice(IPHONE_13_BATTERY) },
       { label: "Samsung Galaxy A", value: `desde ${formatArsPrice(BRAND_REPAIR_PRICES.samsung[2].from)}` },
@@ -250,7 +251,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     serviceName: "Cambio de batería en CABA",
     serviceType: "Cambio de batería / reemplazo de batería",
     serviceDescription:
-      "Cambio de batería para celulares en CABA con garantía escrita de 90 días sobre trabajo y repuesto instalado.",
+      "Cambio de batería para celulares en CABA.",
     highlights: [
       {
         title: "Diagnóstico primero",
@@ -261,8 +262,8 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
         desc: "Según el modelo puede haber original o compatible. Te explicamos la diferencia de precio y de duración antes de elegir.",
       },
       {
-        title: "Garantía escrita 90 días",
-        desc: "Si la batería nueva falla dentro de los 90 días, la cambiamos. Está por escrito en la orden que te llevás.",
+        title: "Cobertura del cambio de batería",
+        desc: BATTERY_WARRANTY_MESSAGE,
       },
     ],
     brandsText:
@@ -286,7 +287,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       },
       {
         q: "¿Qué garantía tiene el cambio de batería?",
-        a: "Entregamos garantía escrita de 90 días sobre trabajo y repuesto instalado.",
+        a: BATTERY_WARRANTY_MESSAGE,
       },
       {
         q: "¿Si se descarga rápido pero carga bien, igual conviene cambiarla?",
@@ -300,10 +301,10 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Cambio de Pantalla y Módulo en CABA | Team Celular",
     metaDescription:
-      `Cambio de pantalla en CABA: 2-4 h con módulo en stock, según diagnóstico. iPhone 13 ${IPHONE_13_SCREEN}, Galaxy A desde $69.000. Garantía escrita 90 días.`,
+      `Cambio de pantalla en CABA: 2-4 h con módulo en stock, según diagnóstico. iPhone 13 ${IPHONE_13_SCREEN}, Galaxy A desde $69.000.`,
     socialTitle: "Cambio de Pantalla en CABA | Team Celular",
     socialDescription:
-      "Team Celular, Paraguay 2451 Recoleta. Cambio de pantalla en CABA con test completo y garantía escrita 90 días.",
+      "Team Celular, Paraguay 2451 Recoleta. Cambio de pantalla en CABA con test completo.",
     keywords: [
       "cambio de pantalla CABA",
       "cambio de modulo samsung",
@@ -327,7 +328,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     serviceName: "Cambio de pantalla en CABA",
     serviceType: "Cambio de pantalla / módulo display",
     serviceDescription:
-      "Servicio de reemplazo de pantalla para celulares en CABA siempre con módulo completo y garantía escrita de 90 días.",
+      "Servicio de reemplazo de pantalla para celulares en CABA siempre con módulo completo.",
     highlights: [
       {
         title: "Test funcional completo",
@@ -359,7 +360,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       },
       {
         q: "¿La pantalla nueva tiene garantía?",
-        a: "Sí, entregamos garantía escrita de 90 días sobre el módulo instalado y el trabajo realizado.",
+        a: SCREEN_WARRANTY_MESSAGE,
       },
     ],
   },
@@ -372,7 +373,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "¿El celular no carga o hace falso contacto? Cambio de pin de carga de $35.000 a $150.000 según el equipo, en Paraguay 2451, Recoleta. Garantía 90 días.",
     socialTitle: "Cambio de Pin de Carga en CABA | Team Celular",
     socialDescription:
-      "Team Celular, Paraguay 2451 Recoleta. Reparación de puerto de carga en CABA con diagnóstico y garantía escrita 90 días.",
+      "Team Celular, Paraguay 2451 Recoleta. Diagnóstico del puerto de carga en CABA. El cambio de pin tiene garantía escrita de 90 días.",
     keywords: [
       "cambio pin de carga CABA",
       "celular no carga CABA",
@@ -386,7 +387,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     quoteHint: "Mandanos marca, modelo y qué pasa al cargar: si no reconoce el cable, hace falso contacto o carga lento. Si requiere revisión física, te lo indicamos.",
     priceNote: "El valor depende del dispositivo. Te confirmamos el costo de revisión antes de abrir el equipo y el presupuesto de reparación antes de avanzar. Si alcanza con una limpieza, te lo informamos antes de indicar un cambio.",
     asideNotes: [
-      "Garantía escrita de 90 días sobre trabajo y repuesto instalado.",
+      CHARGING_PORT_WARRANTY_MESSAGE,
       "Si el repuesto está disponible, la reparación de carga suele resolverse en el día. Te confirmamos el plazo al cotizar, según el diagnóstico y la disponibilidad del repuesto.",
     ],
     workflow: [
@@ -406,7 +407,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     serviceName: "Cambio de pin de carga en CABA",
     serviceType: "Reparación de pin / ficha de carga",
     serviceDescription:
-      "Diagnóstico y reparación de puerto de carga para celulares en CABA con garantía escrita de 90 días.",
+      "Cambio de pin de carga para celulares de cualquier marca en CABA, con garantía escrita de 90 días.",
     highlights: [
       {
         title: "Primero lo miramos con microscopio",
@@ -450,7 +451,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       },
       {
         q: "¿Dan garantía por esta reparación?",
-        a: "Sí, garantía escrita de 90 días sobre trabajo y repuesto instalado.",
+        a: CHARGING_PORT_WARRANTY_MESSAGE,
       },
     ],
   },
@@ -572,10 +573,10 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Cambio de Flex en CABA | Carga y Botones | Team Celular",
     metaDescription:
-      "Cambio de flex en CABA — Team Celular, Paraguay 2451 Recoleta. Carga, botón power, volumen y cámara con diagnóstico preciso y garantía escrita 90 días.",
+      "Cambio de flex en CABA — Team Celular, Paraguay 2451 Recoleta. Carga, botón power, volumen y cámara con diagnóstico preciso.",
     socialTitle: "Cambio de Flex en CABA | Team Celular",
     socialDescription:
-      "Team Celular, Paraguay 2451 Recoleta. Reemplazo de flex en CABA con diagnóstico preciso y garantía escrita 90 días.",
+      "Team Celular, Paraguay 2451 Recoleta. Reemplazo de flex en CABA con diagnóstico preciso.",
     keywords: [
       "cambio flex celular CABA",
       "flex de carga iPhone",
@@ -584,14 +585,14 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "reparacion flex CABA",
     ],
     intro:
-      "Si el botón de encendido no responde, el volumen se traba o la carga anda a medias, lo más probable es un flex cortado. Lo cambiamos con garantía escrita de 90 días, pero antes probamos que no sea el conector, la placa o un tema de software.",
+      "Si el botón de encendido no responde, el volumen se traba o la carga anda a medias, lo más probable es un flex cortado. Antes de cambiarlo, probamos que no sea el conector, la placa o un tema de software.",
     whatsappText:
       "Hola! Quiero un presupuesto para cambio de flex en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de flex (CABA)",
     serviceName: "Cambio de flex en CABA",
     serviceType: "Reemplazo de flex de carga, botones y módulos internos",
     serviceDescription:
-      "Servicio de reemplazo de flex internos en celulares para clientes de CABA con diagnóstico previo y garantía escrita 90 días.",
+      "Servicio de reemplazo de flex internos en celulares para clientes de CABA con diagnóstico previo.",
     highlights: [
       {
         title: "Revisión por síntoma",
@@ -623,7 +624,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       },
       {
         q: "¿Tiene garantía?",
-        a: "Sí, cada trabajo se entrega con garantía escrita de 90 días sobre trabajo y repuesto.",
+        a: "Te informamos la cobertura en el presupuesto antes de reparar.",
       },
     ],
   },
@@ -633,10 +634,10 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Cambio de Tapa Trasera en CABA | Terminación Prolija",
     metaDescription:
-      "Vidrio trasero roto o tapa dañada: cambio de tapa trasera en Paraguay 2451, Recoleta (CABA), con terminación prolija y garantía escrita 90 días.",
+      "Vidrio trasero roto o tapa dañada: cambio de tapa trasera en Paraguay 2451, Recoleta (CABA), con terminación prolija.",
     socialTitle: "Cambio de Tapa Trasera en CABA | Team Celular",
     socialDescription:
-      "Team Celular, Paraguay 2451 Recoleta. Reemplazo de tapa trasera en CABA con terminación prolija y garantía escrita 90 días.",
+      "Team Celular, Paraguay 2451 Recoleta. Reemplazo de tapa trasera en CABA con terminación prolija.",
     keywords: [
       "cambio tapa trasera CABA",
       "vidrio trasero iPhone roto",
@@ -645,14 +646,14 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "cambio glass trasero",
     ],
     intro:
-      "Cambiamos la tapa trasera rota o levantada con adhesivo nuevo y garantía escrita de 90 días. Si la tapa se levantó sola, primero revisamos la batería: suele ser una batería hinchada empujando desde adentro.",
+      "Cambiamos la tapa trasera rota o levantada con adhesivo nuevo. Si la tapa se levantó sola, primero revisamos la batería: suele ser una batería hinchada empujando desde adentro.",
     whatsappText:
       "Hola! Quiero un presupuesto para cambio de tapa trasera en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de tapa trasera (CABA)",
     serviceName: "Cambio de tapa trasera en CABA",
     serviceType: "Reemplazo de tapa trasera / glass posterior",
     serviceDescription:
-      "Servicio de reemplazo de tapa trasera para celulares en CABA con terminación prolija y garantía escrita 90 días.",
+      "Servicio de reemplazo de tapa trasera para celulares en CABA con terminación prolija.",
     highlights: [
       {
         title: "Adhesivo nuevo",
@@ -684,7 +685,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       },
       {
         q: "¿Dan garantía por el cambio de tapa?",
-        a: "Sí, garantía escrita de 90 días sobre el trabajo y el repuesto instalado.",
+        a: "Te informamos la cobertura en el presupuesto antes de reparar.",
       },
     ],
   },
@@ -694,10 +695,10 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Cambio de Cámara en CABA | Frontal y Trasera | Team Celular",
     metaDescription:
-      "Cambio de cámara en CABA — Team Celular, Paraguay 2451 Recoleta. Cámara borrosa, sin enfoque o sin imagen. Frontal y trasera con garantía escrita 90 días.",
+      "Cambio de cámara en CABA — Team Celular, Paraguay 2451 Recoleta. Cámara borrosa, sin enfoque o sin imagen. Frontal y trasera.",
     socialTitle: "Cambio de Cámara en CABA | Team Celular",
     socialDescription:
-      "Team Celular, Paraguay 2451 Recoleta. Reparación y reemplazo de cámara frontal y trasera en CABA con garantía escrita 90 días.",
+      "Team Celular, Paraguay 2451 Recoleta. Reparación y reemplazo de cámara frontal y trasera en CABA.",
     keywords: [
       "cambio camara celular CABA",
       "camara celular borrosa",
@@ -706,14 +707,14 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "reparacion camara Samsung CABA",
     ],
     intro:
-      "Si la cámara saca fotos borrosas, no enfoca, vibra o queda en negro, la cambiamos con garantía escrita de 90 días. Antes revisamos si es el módulo, el flex o solo el vidrio del lente, para no cambiar piezas de más.",
+      "Si la cámara saca fotos borrosas, no enfoca, vibra o queda en negro, la cambiamos. Antes revisamos si es el módulo, el flex o solo el vidrio del lente, para no cambiar piezas de más.",
     whatsappText:
       "Hola! Quiero un presupuesto para cambio de camara en CABA. Marca y modelo:",
     breadcrumbLabel: "Cambio de cámara (CABA)",
     serviceName: "Cambio de cámara en CABA",
     serviceType: "Reemplazo de cámara frontal y trasera",
     serviceDescription:
-      "Servicio de reparación y reemplazo de cámara frontal o trasera para celulares en CABA con garantía escrita 90 días.",
+      "Servicio de reparación y reemplazo de cámara frontal o trasera para celulares en CABA.",
     highlights: [
       {
         title: "Diagnóstico por síntoma",
@@ -745,7 +746,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       },
       {
         q: "¿Tiene garantía por escrito?",
-        a: "Sí, cada trabajo se entrega con garantía escrita de 90 días sobre el módulo y el trabajo realizado.",
+        a: "Te informamos la cobertura en el presupuesto antes de reparar.",
       },
     ],
   },
@@ -755,10 +756,10 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     metaTitle:
       "Audio de Celular en CABA: Micrófono, Parlante y Auricular",
     metaDescription:
-      "Micrófono, parlante o auricular sin sonido: reparación de audio de celulares en Paraguay 2451, Recoleta (CABA). Garantía escrita 90 días.",
+      "Micrófono, parlante o auricular sin sonido: reparación de audio de celulares en Paraguay 2451, Recoleta (CABA).",
     socialTitle: "Reparación de Audio de Celular en CABA | Team Celular",
     socialDescription:
-      "Team Celular, Paraguay 2451 Recoleta. Micrófono, parlante y auricular de celular revisados bajo microscopio, con garantía escrita de 90 días.",
+      "Team Celular, Paraguay 2451 Recoleta. Micrófono, parlante y auricular de celular revisados bajo microscopio.",
     keywords: [
       "reparacion audio celular CABA",
       "microfono celular no funciona",
@@ -767,12 +768,12 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       "service audio celular recoleta",
     ],
     intro:
-      "Si no te escuchan en las llamadas, el parlante suena bajo o el audio sale con ruido, lo reparamos con garantía escrita de 90 días. Muchas veces es suciedad en la rejilla y se resuelve con una limpieza; otras, el flex o el módulo.",
+      "Si no te escuchan en las llamadas, el parlante suena bajo o el audio sale con ruido, lo reparamos. Muchas veces es suciedad en la rejilla y se resuelve con una limpieza; otras, el flex o el módulo.",
     budgetCtaLabel: "Consultar por una falla de audio",
     quoteHint:
       "Decinos marca y modelo y si falla el micrófono, el auricular de llamadas o el altavoz. Contanos si pasa al llamar, escuchar audios o grabarlos.",
     asideNotes: [
-      "Garantía escrita de 90 días sobre trabajo y repuesto instalado.",
+      "Cobertura informada en el presupuesto.",
       "Con repuesto disponible, la reparación de audio suele resolverse dentro del día hábil. Confirmamos el plazo según el diagnóstico.",
     ],
     workflow: [
@@ -790,7 +791,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       },
       {
         title: "Probamos llamadas y audios",
-        desc: "Hacemos una llamada, grabamos un audio y probamos el altavoz antes de devolvértelo. Revisás el resultado con nosotros y te llevás la garantía de 90 días por escrito.",
+        desc: "Hacemos una llamada, grabamos un audio y probamos el altavoz antes de devolvértelo. Revisás el resultado con nosotros y te llevás el comprobante del trabajo.",
       },
     ],
     whatsappText:
@@ -799,7 +800,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     serviceName: "Reparación de audio de celular en CABA",
     serviceType: "Reparación de micrófono, parlante y auricular",
     serviceDescription:
-      "Servicio técnico para resolver fallas de audio en celulares en CABA con diagnóstico preciso y garantía escrita 90 días.",
+      "Servicio técnico para resolver fallas de audio en celulares en CABA con diagnóstico preciso.",
     highlights: [
       {
         title: "No te escuchan al hablar",
@@ -831,7 +832,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
       },
       {
         q: "¿Qué garantía tiene?",
-        a: "Se entrega garantía escrita de 90 días sobre el componente reparado y el trabajo realizado.",
+        a: "Te informamos la cobertura en el presupuesto antes de reparar.",
       },
     ],
   },

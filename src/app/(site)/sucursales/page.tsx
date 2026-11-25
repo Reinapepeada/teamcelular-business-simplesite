@@ -98,8 +98,7 @@ export default function SucursalesPage() {
           </h1>
           <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-[#a1a1a6]">
             Team Celular tiene dos sucursales en CABA: Paraguay 2451 en Recoleta y
-            Amenábar 2032 en Belgrano. Presupuesto previo, garantía escrita de
-            90 días y atención de lunes a viernes 10:30–18:00.
+            Amenábar 2032 en Belgrano. Precio y cobertura en el presupuesto. Atención de lunes a viernes 10:30–18:00.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
@@ -171,7 +170,7 @@ export default function SucursalesPage() {
             Amenábar 2032 · Lun–Vie 10:30–18:00
           </p>
           <p className="mt-3 text-slate-600 dark:text-[#a1a1a6]">
-            Pantalla, batería, carga, placa y recuperación por agua. Consultá repuesto y plazo antes de acercarte. Garantía escrita de 90 días.
+            Pantalla, batería, carga, placa y recuperación por agua. Consultá repuesto y plazo antes de acercarte.
           </p>
           <a href={`tel:${belgrano.phone.replace(/[^\d+]/g, "")}`} aria-label={`${belgrano.shortName}: ${belgrano.phone}`} className="tc-link mt-3 inline-flex min-h-11 items-center gap-2">
             <FaPhoneAlt aria-hidden className="shrink-0" /> {belgrano.phone}

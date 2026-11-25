@@ -28,7 +28,7 @@ export const metadata: Metadata = {
         template: "%s",
     },
     description:
-        "Servicio técnico especializado en celulares en Recoleta, CABA. Repuestos originales, microelectrónica avanzada y garantía escrita. Revisión técnica entre ARS 15.000 y ARS 25.000.",
+        "Servicio técnico especializado en celulares en Recoleta, CABA. Repuestos originales, microelectrónica avanzada y presupuesto previo. Revisión técnica entre ARS 15.000 y ARS 25.000.",
     keywords: [
         "reparación celulares Buenos Aires",
         "servicio técnico celulares CABA",
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
         creator: "@teamcelular",
         title: "Team Celular | Servicio Técnico de Celulares en Buenos Aires",
         description:
-            "Reparación profesional de celulares con repuestos originales y garantía escrita. Revisión técnica entre ARS 15.000 y ARS 25.000.",
+            "Reparación profesional de celulares con repuestos originales y presupuesto previo. Revisión técnica entre ARS 15.000 y ARS 25.000.",
         images: {
             url: `${SITE_URL}/opengraph-image.png`,
             alt: "Team Celular - Servicio Técnico de Celulares en Buenos Aires",
@@ -92,7 +92,7 @@ export const metadata: Metadata = {
         siteName: "Team Celular",
         title: "Team Celular | Servicio Técnico Profesional de Celulares",
         description:
-            "Laboratorio especializado en reparación de smartphones, tablets y notebooks con microelectrónica avanzada, repuestos originales y garantía escrita en Buenos Aires.",
+            "Laboratorio especializado en reparación de smartphones, tablets y notebooks con microelectrónica avanzada, repuestos originales y presupuesto previo en Buenos Aires.",
         images: [
             {
                 url: `${SITE_URL}/opengraph-image.png`,
