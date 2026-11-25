@@ -11,7 +11,7 @@ import RepairPriceTable from "@/components/seo/RepairPriceTable";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 import RepairPriceInquiry from "@/components/repairs/RepairPriceInquiry";
 import { BRAND_REPAIR_PRICES, PRICES_UPDATED_LABEL, formatArsPrice } from "@/lib/repairPrices";
-import { IPHONE_MODELS, IPHONE_MODELS_WITH_PAGE, IPHONE_PRICES_UPDATED } from "@/app/(site)/reparaciones/iphone/iphoneModels";
+import { IPHONE_MODELS, IPHONE_MODELS_WITH_PAGE, IPHONE_PRICES_UPDATED, lowestScreenPrice } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 import {
   FaMobileAlt,
   FaTools,
@@ -50,7 +50,7 @@ const SCREEN_PRICE_GROUPS = [
     title: "Pantallas iPhone: precio por modelo",
     prices: IPHONE_MODELS.flatMap((model) => model.screen === null ? [] : [{
       name: model.name,
-      from: model.screen,
+      from: lowestScreenPrice(model) ?? model.screen,
       to: model.screen,
       href: IPHONE_MODELS_WITH_PAGE.some((slug) => slug === model.slug)
         ? `/reparaciones/iphone/${model.slug}`

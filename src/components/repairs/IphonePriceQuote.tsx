@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
+import { IPHONE_MODELS, screenPriceLabel } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 import { formatArsPrice } from "@/lib/repairPrices";
 
@@ -31,11 +31,11 @@ export default function IphonePriceQuote() {
       {model && (
         <div className="space-y-5" aria-live="polite">
           <dl className="grid max-w-2xl gap-4 sm:grid-cols-2">
-            {([["Cambio de pantalla", model.screen], ["Cambio de batería", model.battery]] as const).map(([label, price]) => (
+            {([["Cambio de pantalla", model.screen === null ? null : screenPriceLabel(model)], ["Cambio de batería", model.battery === null ? null : formatArsPrice(model.battery)]] as const).map(([label, price]) => (
               <div key={label} className="rounded-2xl bg-black/25 p-5">
                 <dt className="text-sm text-[#c7c7cc]">{label} · {model.name}</dt>
                 <dd className="mt-2 text-2xl font-semibold text-white tabular-nums">
-                  {typeof price === "number" ? formatArsPrice(price) : "Consultar"}
+                  {price ?? "Consultar"}
                 </dd>
               </div>
             ))}

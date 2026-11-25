@@ -13,7 +13,7 @@ import { REVIEW_COST_MESSAGE, SCREEN_BATTERY_TIMING_MESSAGE } from "@/lib/copySt
 import { HOME_FAQS as faqs } from "@/lib/homeFaqs";
 import { buildWebsiteMetadata } from "@/lib/seoMetadata";
 import { BRAND_REPAIR_PRICES, PLACA_REVISION_PRICE, PRICES_UPDATED_LABEL, formatArsPrice } from "@/lib/repairPrices";
-import { IPHONE_MODELS, IPHONE_PRICES_UPDATED } from "@/app/(site)/reparaciones/iphone/iphoneModels";
+import { IPHONE_MODELS, IPHONE_PRICES_UPDATED, screenPriceLabel } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 // Precios citables de la home: salen de las mismas fuentes que las tablas.
 const iphone13 = IPHONE_MODELS.find((m) => m.slug === "13");
@@ -76,7 +76,7 @@ const process = [
 
 export default function Home() {
     const prices = [
-        ["Pantalla iPhone 13", iphone13?.screen ? formatArsPrice(iphone13.screen) : "Consultar"],
+        ["Pantalla iPhone 13", iphone13?.screen ? screenPriceLabel(iphone13) : "Consultar"],
         ["Batería iPhone 13", iphone13?.battery ? formatArsPrice(iphone13.battery) : "Consultar"],
         ["Pantalla Samsung Galaxy A", `desde ${formatArsPrice(samsungA.from)}`],
         ["Pantalla Motorola Moto G", `desde ${formatArsPrice(motoG.from)}`],

@@ -11,7 +11,9 @@ import { INSTALLMENTS_MESSAGE } from "@/lib/copyStandards";
 import {
   IPHONE_MODELS_WITH_PAGE,
   IPHONE_PRICES_UPDATED,
+  lowestScreenPrice,
   screenOptionsText,
+  screenPriceLabel,
   IPHONE_CONTENT_REVIEWED,
   formatArs,
   getIphoneModel,
@@ -55,7 +57,7 @@ export async function generateMetadata({
   // La descripción conserva los precios de la misma fuente que la página.
   const priceHint =
     model.screen !== null
-      ? `Pantalla ${formatArs(model.screen)}, batería ${priceLabel(model.battery)}.`
+      ? `Pantalla ${screenPriceLabel(model)}, batería ${priceLabel(model.battery)}.`
       : "Presupuesto el mismo día.";
 
   return buildWebsiteMetadata({
@@ -63,7 +65,9 @@ export async function generateMetadata({
     // La consulta con demanda es "cambiar pantalla <modelo> precio": el precio va en el title.
     title:
       model.screen !== null
-        ? `Cambio de Pantalla ${model.name}: ${formatArs(model.screen)} en CABA`
+        ? model.screenAlternative
+          ? `Cambio de Pantalla ${model.name} desde ${formatArs(lowestScreenPrice(model) ?? model.screen)} en CABA`
+          : `Cambio de Pantalla ${model.name}: ${formatArs(model.screen)} en CABA`
         : `Reparación de ${model.name} en CABA | Team Celular`,
     description: `${priceHint} Team Celular repara ${model.name} en Recoleta y Belgrano, en 2-4 h y con garantía escrita de 90 días.`,
     keywords: [
@@ -97,6 +101,9 @@ export default async function IphoneModelPage({
     {
       name: "Cambio de pantalla",
       price: model.screen,
+      // Con dos opciones de pantalla se publica el piso: va a la tabla y al schema.
+      lowPrice: lowestScreenPrice(model),
+      priceText: screenPriceLabel(model),
       time: "2 a 4 horas",
       detail: modelNotes
         ? `Pantalla de fábrica: ${modelNotes.panel}. Confirmamos la tecnología del repuesto disponible, la calibración y qué funciones conserva antes de instalar.`
@@ -105,12 +112,16 @@ export default async function IphoneModelPage({
     {
       name: "Cambio de batería",
       price: model.battery,
+      lowPrice: null,
+      priceText: priceLabel(model.battery),
       time: "1 a 2 horas",
       detail: "Antes medimos el consumo: si la batería está bien y el problema es otro, te lo decimos.",
     },
     {
       name: "Puerto de carga",
       price: null,
+      lowPrice: null,
+      priceText: priceLabel(null),
       time: "2 a 3 horas",
       detail: modelNotes
         ? `Conector ${modelNotes.port}. Se presupuesta tras el diagnóstico: puede ser limpieza técnica, cambio de módulo o trabajo en placa.`
@@ -119,6 +130,8 @@ export default async function IphoneModelPage({
     {
       name: "Reparación de placa",
       price: null,
+      lowPrice: null,
+      priceText: priceLabel(null),
       time: "Revisión en hasta 72 h hábiles",
       detail: "Revisión de placa ARS 45.000, que se descuenta si se repara. Precio y plazo del arreglo por escrito.",
     },
@@ -131,7 +144,7 @@ export default async function IphoneModelPage({
       question: `¿Cuánto sale cambiar la pantalla del ${model.name}?`,
       answer:
         model.screen !== null
-          ? `${formatArs(model.screen)} en Team Celular, con módulo completo y garantía escrita de 90 días. Se cambia en 2 a 4 horas si hay repuesto en stock; antes te confirmamos la calidad del repuesto y qué funciones conserva.${screenNote ? ` ${screenNote}` : ""}`
+          ? `${model.screenAlternative ? `Desde ${formatArs(lowestScreenPrice(model) ?? model.screen)}` : formatArs(model.screen)} en Team Celular, con módulo completo y garantía escrita de 90 días. Se cambia en 2 a 4 horas si hay repuesto en stock; antes te confirmamos la calidad del repuesto y qué funciones conserva.${screenNote ? ` ${screenNote}` : ""}`
           : `Se cotiza según el repuesto disponible. Te confirmamos precio, calidad del repuesto y plazo antes de reparar, con garantía escrita de 90 días.`,
     },
     {
@@ -180,8 +193,9 @@ export default async function IphoneModelPage({
       itemListElement: repairs
         .filter((repair) => repair.price !== null)
         .map((repair) => ({
-          "@type": "Offer",
-          price: String(repair.price),
+          ...(repair.lowPrice !== null && repair.lowPrice !== repair.price
+            ? { "@type": "AggregateOffer", lowPrice: String(repair.lowPrice), highPrice: String(repair.price), offerCount: 2 }
+            : { "@type": "Offer", price: String(repair.price) }),
           priceCurrency: "ARS",
           itemOffered: {
             "@type": "Service",
@@ -220,7 +234,7 @@ export default async function IphoneModelPage({
             en el primer bloque de la página, que es de donde salen las citas. */}
         <p className="mt-5 max-w-3xl text-lg leading-relaxed text-slate-600 dark:text-[#a1a1a6]">
           El cambio de pantalla de {model.name} cuesta{" "}
-          <strong>{priceLabel(model.screen)}</strong> y el de batería{" "}
+          <strong>{screenPriceLabel(model)}</strong> y el de batería{" "}
           <strong>{priceLabel(model.battery)}</strong> en Team Celular, con sucursales en
           Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA. La pantalla se
           resuelve en 2 a 4 horas y la batería en 1 a 2, según stock. El diagnóstico se
@@ -269,7 +283,7 @@ export default async function IphoneModelPage({
                 <p className="mt-1 text-sm text-[#a1a1a6]">{repair.detail}</p>
               </div>
               <p className="text-sm text-[#a1a1a6]">{repair.time}</p>
-              <p className="font-semibold text-primary dark:text-secondary">{priceLabel(repair.price)}</p>
+              <p className="font-semibold text-primary dark:text-secondary">{repair.priceText}</p>
             </div>
           ))}
         </div>

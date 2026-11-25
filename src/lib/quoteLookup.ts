@@ -1,4 +1,4 @@
-import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
+import { IPHONE_MODELS, lowestScreenPrice } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 import { BRAND_REPAIR_PRICES, type RepairPrice } from "@/lib/repairPrices";
 
 /**
@@ -89,7 +89,9 @@ export function lookupQuote(
     const price = kind === "screen" ? iphone.screen : iphone.battery;
     if (price !== null) {
       const what = kind === "screen" ? "Cambio de pantalla" : "Cambio de batería";
-      return { precision: "exact", label: `${what} ${iphone.name}`, from: price, to: price };
+      // Con dos opciones de pantalla se informa el rango: del piso al precio de lista.
+      const from = kind === "screen" ? lowestScreenPrice(iphone) ?? price : price;
+      return { precision: from === price ? "exact" : "range", label: `${what} ${iphone.name}`, from, to: price };
     }
   }
 

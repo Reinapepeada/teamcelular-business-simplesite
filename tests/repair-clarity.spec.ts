@@ -29,7 +29,7 @@ for (const width of [320, 390, 1280]) {
     test(`Pantalla: precio antes de ilustración y comparación desplegable a ${width}px`, async ({ page }) => {
         await page.setViewportSize({ width, height: 900 });
         await page.goto('/reparaciones/cambio-pantalla-caba');
-        await expect(page.locator('main dl').first()).toContainText('249.900');
+        await expect(page.locator('main dl').first()).toContainText('139.900');
         const prices = await page.locator('main dl').first().boundingBox();
         const image = await page.locator('main figure img').first().boundingBox();
         if (width < 1024) expect(prices!.y + prices!.height).toBeLessThan(image!.y);

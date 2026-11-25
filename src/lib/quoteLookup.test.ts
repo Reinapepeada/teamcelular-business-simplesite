@@ -3,14 +3,21 @@ import { lookupQuote } from "./quoteLookup";
 
 // Ejecutar con: npx tsx src/lib/quoteLookup.test.ts
 
-// Modelo exacto de iPhone: precio puntual de lista.
+// iPhone con dos opciones de pantalla: rango del piso al precio de lista.
 const iphone13 = lookupQuote("iPhone", "iPhone 13", ["Pantalla"]);
-assert.equal(iphone13?.precision, "exact");
-assert.equal(iphone13?.from, 249900);
+assert.equal(iphone13?.precision, "range");
+assert.equal(iphone13?.from, 139900);
+assert.equal(iphone13?.to, 249900);
+
+// iPhone con una sola opción de pantalla: precio puntual de lista.
+const iphone11 = lookupQuote("iPhone", "iPhone 11", ["Pantalla"]);
+assert.equal(iphone11?.precision, "exact");
+assert.equal(iphone11?.from, 129900);
 
 // El modelo mas largo gana: "iPhone 13" tambien esta contenido en "13 Pro Max".
 const proMax = lookupQuote("Apple", "iphone 13 pro max", ["Pantalla"]);
-assert.equal(proMax?.from, 279900);
+assert.equal(proMax?.to, 279900);
+assert.equal(proMax?.from, 176900);
 
 // Sin acentos ni mayusculas tiene que resolver igual.
 assert.equal(lookupQuote("", "IPHONE 14 PRO", ["Batería"])?.from, 125000);

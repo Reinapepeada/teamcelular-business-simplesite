@@ -8,6 +8,7 @@ import {
   IPHONE_PRICES_UPDATED,
   formatArs,
   getIphoneModel,
+  lowestScreenPrice,
 } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 const SITE_URL = getSiteUrl();
@@ -177,7 +178,7 @@ export default function PhoneRepairEnglishPage() {
                   {model.name}
                 </span>
                 <span className="text-slate-500 dark:text-slate-400">
-                  Screen {model.screen ? formatArs(model.screen) : "on request"}
+                  Screen {model.screen ? `${model.screenAlternative ? "from " : ""}${formatArs(lowestScreenPrice(model) ?? model.screen)}` : "on request"}
                 </span>
                 <span className="text-slate-500 dark:text-slate-400">
                   Battery {model.battery ? formatArs(model.battery) : "on request"}
