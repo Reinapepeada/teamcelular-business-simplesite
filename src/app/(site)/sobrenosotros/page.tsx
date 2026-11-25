@@ -1,3 +1,4 @@
+import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,7 +25,7 @@ import {
 export const metadata: Metadata = {
     title: "Sobre Team Celular | Laboratorio en Recoleta, CABA",
     description:
-        "Team Celular, Paraguay 2451 Recoleta. Laboratorio familiar, 15+ años en reparación de celulares y microelectrónica con garantía escrita en cada trabajo.",
+        "Team Celular, Paraguay 2451 Recoleta. Laboratorio familiar, 15+ años en reparación de celulares y microelectrónica con presupuesto antes de reparar.",
     keywords: [
         "sobre team celular",
         "empresa familiar reparacion celulares",
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Sobre Team Celular | Laboratorio de Celulares en Recoleta",
         description:
-            "Team Celular, Paraguay 2451 Recoleta CABA. Laboratorio familiar con más de 15 años en reparación de celulares y microelectrónica con garantía escrita.",
+            "Team Celular, Paraguay 2451 Recoleta CABA. Laboratorio familiar con más de 15 años en reparación de celulares y microelectrónica con presupuesto previo.",
         type: "website",
         url: "https://teamcelular.com/sobrenosotros",
         locale: "es_AR",
@@ -55,7 +56,7 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "Sobre Team Celular | Laboratorio en Recoleta, CABA",
-        description: "Laboratorio familiar en Paraguay 2451 Recoleta. Más de 15 años en reparación de celulares y microelectrónica con garantía escrita.",
+        description: "Laboratorio familiar en Paraguay 2451 Recoleta. Más de 15 años en reparación de celulares y microelectrónica con presupuesto previo.",
         images: ["https://teamcelular.com/images/empresaFamiliar.webp"],
     },
 };
@@ -119,9 +120,9 @@ const values = [
     },
     {
         icon: FaShieldAlt,
-        title: "Garantía escrita en cada trabajo",
+        title: "Cobertura por tipo de reparación",
         description:
-            "90 días sobre trabajo y repuesto instalado, con alcance detallado por escrito al momento de entrega.",
+            WARRANTY_SCOPE_MESSAGE,
     },
 ];
 
@@ -194,13 +195,13 @@ export default function SobreNosotrosPage() {
                         </span>
                         <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-900 dark:text-slate-100 md:text-5xl">
                             Más de 15 años reparando celulares con criterio
-                            técnico y garantía escrita
+                            técnico y cobertura informada en el presupuesto
                         </h1>
                         <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-400">
                             Team Celular es un laboratorio familiar con más de 15 años reparando
                             celulares y microelectrónica, con sucursales en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032), CABA. La propuesta sigue siendo
                             la misma: diagnóstico honesto, repuestos de calidad y
-                            garantía escrita de 90 días sobre cada trabajo.
+                            cobertura informada en el presupuesto.
                         </p>
                     </div>
 

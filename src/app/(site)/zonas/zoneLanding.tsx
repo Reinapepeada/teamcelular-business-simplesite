@@ -322,7 +322,7 @@ export default function ZoneLandingPage({ config }: { config: ZoneLandingConfig 
               </li>
               <li className="flex items-start gap-2.5">
                 <FaShieldAlt className="mt-0.5 shrink-0 text-[#6aa6ff]" aria-hidden />
-                Garantía escrita de 90 días y explicación clara antes de reparar.
+                Precio y cobertura por escrito antes de reparar.
               </li>
               <li className="flex items-start gap-2.5">
                 <FaSubway className="mt-0.5 shrink-0 text-[#6aa6ff]" aria-hidden />

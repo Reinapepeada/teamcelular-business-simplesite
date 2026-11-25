@@ -1,3 +1,4 @@
+import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import type { Metadata } from "next";
 import Link from "next/link";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
@@ -20,7 +21,7 @@ import {
 export const metadata: Metadata = {
     title: "Contacto, horarios y WhatsApp | Team Celular",
     description:
-        "Dos sucursales en CABA: Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano). WhatsApp +54 11 5103-4595, lun–vie 10:30–18:00. Garantía 90 días.",
+        "Dos sucursales en CABA: Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano). WhatsApp +54 11 5103-4595, lun–vie 10:30–18:00.",
     keywords: [
         "contacto team celular",
         "reparación celulares recoleta",
@@ -148,7 +149,7 @@ const repairFaqs = [
     {
         question: "¿Ofrecen garantía?",
         answer:
-            "Sí. Todas las reparaciones se entregan con garantía escrita de 90 días sobre trabajo y repuesto instalado. El alcance exacto se informa por escrito antes de avanzar.",
+            WARRANTY_SCOPE_MESSAGE,
     },
 ];
 

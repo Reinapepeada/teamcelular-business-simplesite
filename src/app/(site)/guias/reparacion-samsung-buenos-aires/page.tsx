@@ -7,7 +7,7 @@ import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
-import { INSTALLMENTS_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
+import { INSTALLMENTS_MESSAGE, MULTIBRAND_WARRANTY_MESSAGE } from "@/lib/copyStandards";
 import {
   FaBolt,
   FaCamera,
@@ -41,7 +41,7 @@ const formatRange = (price: { from: number; to: number }) =>
 export const metadata: Metadata = {
   title: "Reparación Samsung en CABA | Precios de Pantalla",
   description:
-    `¿Cuánto sale cambiar la pantalla de un Samsung? Galaxy A/M desde ${formatArsPrice(SCREEN_A.from)} y S/Ultra desde ${formatArsPrice(SCREEN_S.from)}. Recoleta y Belgrano, sin turno. Garantía 90 días`,
+    `¿Cuánto sale cambiar la pantalla de un Samsung? Galaxy A/M desde ${formatArsPrice(SCREEN_A.from)} y S/Ultra desde ${formatArsPrice(SCREEN_S.from)}. Recoleta y Belgrano, sin turno`,
   keywords: [
     "reparacion samsung buenos aires",
     "service samsung caba",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Reparación de Samsung Galaxy en Buenos Aires, CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla, batería y USB-C según modelo y stock. Informe de placa en hasta 72 h hábiles y arreglo por presupuesto. Garantía escrita 90 días. Galaxy S, A y Z.",
+      "Team Celular, Paraguay 2451 Recoleta CABA. Pantalla, batería y USB-C según modelo y stock. Informe de placa en hasta 72 h hábiles y arreglo por presupuesto. Galaxy S, A y Z.",
     type: "article",
     url: PAGE_URL,
     locale: "es_AR",
@@ -87,14 +87,14 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2026-03-12T00:00:00Z",
-    modifiedTime: "2026-10-23T00:00:00Z",
+    modifiedTime: "2026-11-25T00:00:00Z",
     section: "Guías técnicas",
   },
   twitter: {
     card: "summary_large_image",
     title: "Reparación de Samsung Galaxy en CABA | Team Celular",
     description:
-      "Team Celular, Paraguay 2451 Recoleta. Pantalla y batería según modelo y stock, garantía escrita 90 días. Galaxy S, A, Note y Z Fold.",
+      "Team Celular, Paraguay 2451 Recoleta. Pantalla y batería según modelo y stock. Galaxy S, A, Note y Z Fold.",
     images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
@@ -124,7 +124,7 @@ const processSteps = [
   {
     title: "Prueba final y garantía",
     description:
-      `Probamos llamadas, cámaras, datos, carga rápida y temperatura antes de devolvértelo. ${WARRANTY_SCOPE_MESSAGE}`,
+      `Probamos llamadas, cámaras, datos, carga rápida y temperatura antes de devolvértelo. ${MULTIBRAND_WARRANTY_MESSAGE}`,
     duration: "20 min",
     Icon: FaCheckCircle,
   },
@@ -283,7 +283,7 @@ const faq = [
   },
   {
     question: "¿La reparación tiene garantía?",
-    answer: `Sí. ${WARRANTY_SCOPE_MESSAGE}`,
+    answer: MULTIBRAND_WARRANTY_MESSAGE,
   },
   {
     question: "¿Qué diferencia hay entre pantalla Service Pack, OLED compatible y alternativa económica?",
@@ -317,9 +317,9 @@ export default function SamsungRepairGuidePage() {
     <div className="flex w-full justify-center px-4 py-16">
       <ArticleSchema
         title="Reparación de Samsung en CABA: precios y opciones"
-        description="Precios, tiempos y fallas comunes de Samsung Galaxy. Informe de revisión de placa en hasta 72 horas hábiles y garantía escrita de 90 días en CABA."
+        description="Precios, tiempos y fallas comunes de Samsung Galaxy. Informe de revisión de placa en hasta 72 horas hábiles en CABA."
         publishedTime="2026-03-12T00:00:00Z"
-        modifiedTime="2026-10-23T00:00:00Z"
+        modifiedTime="2026-11-25T00:00:00Z"
         about={[
           "reparacion de Samsung en Buenos Aires",
           "service tecnico Samsung Galaxy en CABA",
@@ -365,7 +365,7 @@ export default function SamsungRepairGuidePage() {
               Pantalla Galaxy A / M desde {formatArsPrice(SCREEN_A.from)} y S / Ultra desde {formatArsPrice(SCREEN_S.from)}. Revisamos tu Galaxy en Recoleta o Belgrano y te confirmamos repuesto, precio y plazo antes de reparar.
             </p>
             <div className="mt-4">
-              <GuideByline modifiedTime="2026-10-23T00:00:00Z" tone="light" />
+              <GuideByline modifiedTime="2026-11-25T00:00:00Z" tone="light" />
             </div>
           </div>
 
@@ -407,7 +407,7 @@ export default function SamsungRepairGuidePage() {
             </dl>
             <p className="text-sm leading-6 text-[#a1a1a6]">
               Precios en pesos argentinos. El modelo y la calidad del módulo definen el valor exacto.
-              Pantalla en 2 a 4 horas si hay stock, con garantía escrita de 90 días.
+              Pantalla en 2 a 4 horas si hay stock.
             </p>
           </section>
           <ScreenQuoteDetails />
@@ -678,7 +678,7 @@ export default function SamsungRepairGuidePage() {
               "@type": "Service",
               name: "Reparación de Samsung en Buenos Aires",
               description:
-                "Reparación de Samsung Galaxy en CABA: pantalla, batería, carga y placa, con garantía escrita de 90 días.",
+                "Reparación de Samsung Galaxy en CABA: pantalla, batería, carga y placa.",
               provider: { "@id": `${SITE_URL}#organization` },
               // Rango y catalogo salen de repairPrices: un unico lugar donde el precio
               // visible y el structured data no pueden divergir.

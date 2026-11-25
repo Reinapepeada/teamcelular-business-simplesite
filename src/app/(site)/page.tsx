@@ -24,7 +24,7 @@ export const metadata = buildWebsiteMetadata({
     path: "/",
     title: "Reparación de Celulares en CABA | Recoleta y Belgrano",
     description:
-        "Servicio técnico de celulares en Recoleta y Belgrano, CABA. Pantalla, batería, carga y placa. Sin turno, presupuesto antes de reparar y garantía escrita.",
+        "Servicio técnico de celulares en Recoleta y Belgrano, CABA. Pantalla, batería, carga y placa. Sin turno, presupuesto con la cobertura antes de reparar.",
     keywords: [
         "reparacion de celulares Buenos Aires",
         "reparacion de celulares cerca de mi",
@@ -40,11 +40,11 @@ export const metadata = buildWebsiteMetadata({
     languages: { "es-AR": "/", en: "/en/phone-repair-buenos-aires", "x-default": "/" },
     openGraphTitle: "Reparación de Celulares en CABA | Team Celular",
     openGraphDescription:
-        "Team Celular tiene sucursales en Recoleta y Belgrano, CABA. Diagnóstico previo y garantía escrita de 90 días.",
+        "Team Celular tiene sucursales en Recoleta y Belgrano, CABA. Diagnóstico previo.",
     openGraphImageAlt: "Team Celular — Reparación de celulares en CABA",
     twitterTitle: "Reparación de Celulares en CABA | Team Celular",
     twitterDescription:
-        "Recoleta y Belgrano, CABA. Diagnóstico previo y garantía escrita de 90 días. Lun–Vie 10:30–18:00.",
+        "Recoleta y Belgrano, CABA. Diagnóstico previo. Lun–Vie 10:30–18:00.",
 });
 
 const priorityRepairs = [

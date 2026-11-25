@@ -1,3 +1,4 @@
+import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import type { Metadata } from "next";
 import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
@@ -68,7 +69,7 @@ export default function TerminosPage() {
           Términos y condiciones
         </h1>
         <p className="text-slate-600 dark:text-slate-300">
-          Última actualización: 6 de enero de 2026.
+          Última actualización: 25 de noviembre de 2026.
         </p>
         <p className="text-sm text-slate-500 dark:text-slate-400">
           Este texto es informativo y no constituye asesoramiento legal. Si
@@ -102,10 +103,16 @@ export default function TerminosPage() {
 
         <h2>4. Garantía</h2>
         <p>
-          La garantía aplica según lo indicado en la documentación entregada al
-          cliente y puede variar según el tipo de reparación y repuesto
-          utilizado. No cubre daños posteriores por golpes, líquidos, apertura
-          por terceros o uso indebido.
+          {WARRANTY_SCOPE_MESSAGE}
+        </p>
+        <p>
+          Cuando otorgamos la garantía comercial, la constancia identifica el
+          trabajo, qué cubre, desde cuándo y hasta cuándo rige y quién responde.
+        </p>
+        <p>
+          Si aparece una falla relacionada con la reparación, contactanos por
+          los canales indicados en tu comprobante o en la sección{" "}
+          <Link href="/contacto">Contacto</Link>.
         </p>
 
         <h2>5. Información del cliente</h2>

@@ -69,14 +69,14 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2024-04-05T00:00:00Z",
-    modifiedTime: "2026-08-20T00:00:00Z",
+    modifiedTime: "2026-11-25T00:00:00Z",
     section: "Guías Técnicas",
   },
   twitter: {
     card: "summary_large_image",
     title: "Mantenimiento de Celular: Qué Incluye y Cada Cuánto Hacerlo",
     description:
-      "Team Celular, Paraguay 2451 Recoleta CABA. Limpieza interna, revisión de batería y diagnóstico preventivo con garantía escrita 90 días.",
+      "Team Celular, Paraguay 2451 Recoleta CABA. Limpieza interna, revisión de batería y diagnóstico preventivo.",
     images: ["https://teamcelular.com/opengraph-image.png"],
   },
 };
@@ -180,7 +180,7 @@ const faqMaintenance = [
   {
     question: "¿El mantenimiento preventivo anula la garantía del fabricante?",
     answer:
-      `Si tu equipo conserva garantía oficial, consultá primero las condiciones y opciones de servicio del fabricante antes de autorizar una intervención independiente. Team Celular es un servicio técnico independiente: no podemos asegurar que un mantenimiento conserve esa cobertura. ${WARRANTY_SCOPE_MESSAGE} Esta garantía es distinta de la del fabricante.`,
+      `Si tu equipo conserva garantía oficial, consultá primero las condiciones y opciones de servicio del fabricante antes de autorizar una intervención independiente. Team Celular es un servicio técnico independiente: no podemos asegurar que un mantenimiento conserve esa cobertura. ${WARRANTY_SCOPE_MESSAGE}`,
   },
   {
     question: "¿Ofrecen planes de mantenimiento para empresas?",
@@ -201,7 +201,7 @@ export default function PreventiveMaintenanceGuide() {
         title="Mantenimiento Preventivo de Celulares | Team Celular"
         description="Guía completa de mantenimiento preventivo para smartphones: checklist profesional, cuidado de batería, actualización de software y limpieza especializada."
         publishedTime="2024-04-05T00:00:00Z"
-        modifiedTime="2026-08-20T00:00:00Z"
+        modifiedTime="2026-11-25T00:00:00Z"
         image="https://teamcelular.com/opengraph-image.png"
         url={PAGE_URL}
       />
@@ -237,7 +237,7 @@ export default function PreventiveMaintenanceGuide() {
             Team Celular, en Paraguay 2451 Recoleta CABA, realiza mantenimiento
             preventivo de celulares con limpieza interna por ultrasonido,
             diagnóstico técnico y revisión de batería cada 6 meses. Cada servicio
-            dura entre 2 y 4 horas y sale con garantía escrita de 90 días.
+            dura entre 2 y 4 horas.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
@@ -255,7 +255,7 @@ export default function PreventiveMaintenanceGuide() {
           </div>
 
           <div className="mt-4 flex justify-center">
-            <GuideByline modifiedTime="2026-08-20T00:00:00Z" tone="light" />
+            <GuideByline modifiedTime="2026-11-25T00:00:00Z" tone="light" />
           </div>
         </header>
 

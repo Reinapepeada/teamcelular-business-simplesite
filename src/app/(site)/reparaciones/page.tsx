@@ -112,7 +112,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: "/reparaciones",
   title: "Reparaciones de Celular por Tipo de Falla en CABA",
   description:
-    "Pantalla, batería, pin de carga, cámara, audio, mojado y placa. Qué incluye cada reparación, cuánto tarda y garantía escrita de 90 días en CABA.",
+    "Pantalla, batería, pin de carga, cámara, audio, mojado y placa. Qué incluye cada reparación, cuánto tarda en CABA.",
   robots: {
     index: true,
     follow: true,
@@ -126,7 +126,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   openGraphImageAlt: "Team Celular - Reparaciones en CABA",
   twitterTitle: "Reparaciones por Tipo de Falla en CABA | Team Celular",
   twitterDescription:
-    "Pantalla, batería, carga, cámara, audio, mojado y placa. Garantía escrita de 90 días.",
+    "Pantalla, batería, carga, cámara, audio, mojado y placa.",
 });
 
 export default function ReparacionesPage() {
@@ -153,8 +153,7 @@ export default function ReparacionesPage() {
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-[#a1a1a6]">
             Team Celular tiene dos talleres en CABA: <strong>Recoleta (Paraguay 2451)</strong> y <strong>Belgrano (Amenábar 2032)</strong>. iPhone,
-            Samsung, Motorola, Xiaomi y más marcas con diagnóstico técnico y garantía
-            escrita de 90 días sobre trabajo y repuesto.
+            Samsung, Motorola, Xiaomi y más marcas con diagnóstico técnico. Te informamos la cobertura en el presupuesto antes de reparar.
           </p>
           <p className="mt-3 text-sm text-[#a1a1a6]">
             Si buscás el servicio general, entrá por{" "}
@@ -214,7 +213,7 @@ export default function ReparacionesPage() {
         <div className="flex items-start gap-3 p-5">
           <FaShieldAlt className="mt-1 shrink-0 text-primary dark:text-secondary" />
           <p className="text-slate-700 dark:text-[#a1a1a6]">
-            <strong className="text-slate-900 dark:text-[#f5f5f7]">Garantía por escrito.</strong>{" "}
+            <strong className="text-slate-900 dark:text-[#f5f5f7]">Cobertura de la reparación.</strong>{" "}
             {WARRANTY_SCOPE_MESSAGE}
           </p>
         </div>

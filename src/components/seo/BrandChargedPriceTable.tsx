@@ -1,3 +1,4 @@
+import { CHARGING_PORT_WARRANTY_MESSAGE } from "@/lib/copyStandards";
 import {
   MODEL_SCREEN_PRICES_PERIOD,
   formatPriceMonth,
@@ -49,8 +50,7 @@ export default function BrandChargedPriceTable({ brand, prices }: { brand: strin
         </table>
       </div>
       <p className="px-8 pb-6 pt-2 text-sm leading-6 text-[#86868b]">
-        Si tu modelo no figura, pedinos el presupuesto por WhatsApp. Todas las
-        reparaciones salen con garantía escrita de 90 días.
+        Si tu modelo no figura, pedinos el presupuesto por WhatsApp. {CHARGING_PORT_WARRANTY_MESSAGE}
       </p>
     </section>
   );

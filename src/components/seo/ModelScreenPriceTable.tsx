@@ -66,7 +66,7 @@ export default function ModelScreenPriceTable({ id, brand, prices, service = "pa
       </div>
       <p className="px-8 pb-6 pt-2 text-sm leading-6 text-[#86868b]">
         Si tu modelo no figura, pedinos el presupuesto por WhatsApp. Todas las
-        reparaciones salen con garantía escrita de 90 días.
+        reparaciones tienen la cobertura detallada en el presupuesto.
       </p>
     </section>
   );
