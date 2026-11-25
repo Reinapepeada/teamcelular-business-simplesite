@@ -1,6 +1,7 @@
 import type { ServiceLandingConfig } from "./serviceLanding";
+import { screenPriceLabel } from "./iphone/iphoneModels";
 import { BATTERY_PRICE_FLOOR, BRAND_REPAIR_PRICES, CHARGING_PORT_CLEANING_PRICE, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, SAMSUNG_CHARGING_PORT_PRICES, formatArsPrice } from "@/lib/repairPrices";
-import { IPHONE_MODELS, screenPriceLabel } from "@/app/(site)/reparaciones/iphone/iphoneModels";
+import { IPHONE_MODELS } from "@/app/(site)/reparaciones/iphone/iphoneModels";
 
 // Precios del primer parrafo de cambio de pantalla: misma fuente que las tablas.
 // "desde" el piso del modelo: el iPhone 13 tiene una opción de pantalla más económica.
