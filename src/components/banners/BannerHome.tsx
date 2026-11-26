@@ -52,7 +52,6 @@ export default async function BannerHome() {
                     </div>
                     <figure className="min-w-0">
                         <HeroTeardown />
-                        <figcaption className="mt-2 text-right text-xs text-[#a1a1a6]">Ilustración 3D del despiece de un smartphone.</figcaption>
                     </figure>
                 </div>
                 <div className="mt-8 flex flex-col justify-between gap-3 border-t border-[#333336] py-4 text-sm text-[#a1a1a6] sm:flex-row sm:items-center">
