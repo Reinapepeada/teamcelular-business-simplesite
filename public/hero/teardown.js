@@ -450,11 +450,9 @@ export function mount(canvas, { accent = '#1766f2', poster = false, onReady } = 
   Object.assign(key.shadow.camera, { left: -17, right: 17, top: 17, bottom: -17, near: 1, far: 90 });
   const rim = new THREE.DirectionalLight(ACC, 5); rim.position.set(-8, 3, -10);
   const rim2 = new THREE.DirectionalLight(0xffffff, 1.6); rim2.position.set(9, -2, -8);
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(90, 60), new THREE.ShadowMaterial({ opacity: .4 }));
-  floor.rotation.x = -Math.PI / 2; floor.position.y = -8.32; floor.receiveShadow = true; floor.raycast = () => {};
   const rig = new THREE.Group(), stack = new THREE.Group(); // stack se desplaza para centrar lo que queda a la vista
   rig.add(stack);
-  scene.add(key, rim, rim2, floor, rig, new THREE.HemisphereLight(0xdfe8ff, 0x08080a, .55));
+  scene.add(key, rim, rim2, rig, new THREE.HemisphereLight(0xdfe8ff, 0x08080a, .55));
 
   const parts = PARTS.map((p, i) => {
     const cache = {}, group = p.build(n => cache[n] ??= MATS[n]()), node = new THREE.Group();
