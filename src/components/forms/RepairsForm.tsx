@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { useBranchPreference } from "@/hooks/use-branch-preference";
 import { track } from "@/lib/analytics/track";
 import { measure } from "@/lib/analytics/posthog";
@@ -338,9 +339,9 @@ function PlacaConditions() {
             <p className="mt-2 text-xs leading-5 text-slate-600 dark:text-[#86868b]">
                 La revisión se cobra aunque no se repare y se descuenta si aceptás el arreglo. Informe en hasta 72 horas hábiles. Si el arreglo es de un chip,
                 lleva semanas y te pasamos precio y plazo antes de empezar.{" "}
-                <a href="/reparaciones/reparacion-placa-caba" className="tc-link underline">
+                <Link href="/reparaciones/reparacion-placa-caba" className="tc-link underline">
                     Ver condiciones
-                </a>
+                </Link>
             </p>
         </div>
     );
