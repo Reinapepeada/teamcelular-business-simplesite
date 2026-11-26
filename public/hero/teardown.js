@@ -104,13 +104,20 @@ function makeTextures(accent) {
     for (let i = 0; i < 110; i++) c.fillText('RCULQ'[rnd() * 5 | 0] + (rnd() * 900 | 0), rand(0, w), rand(0, h));
   }, { repeat: [1 / 2.75, 1 / 10.7] });
   t.pcb.offset.set(3.2 / 2.75, 3.8 / 10.7);
-  t.chip = tex(256, 256, (c, w) => {
+  const chip = lines => tex(256, 256, (c, w) => { // encapsulado con serigrafía propia de cada integrado
     c.fillStyle = '#131416'; c.fillRect(0, 0, w, w);
     for (let i = 0; i < 2500; i++) { c.fillStyle = `rgba(255,255,255,${rnd() * .035})`; c.fillRect(rand(0, w), rand(0, w), 2, 2); }
-    c.fillStyle = '#8b8e94'; c.font = '600 30px monospace'; c.fillText('TC8 PRO', 30, 92);
-    c.font = '20px monospace'; c.fillText('339S00812', 30, 128); c.fillText('2646 KX4', 30, 156); c.fillText('F7PNX2', 30, 184);
+    c.fillStyle = '#8b8e94'; c.font = '600 30px monospace'; c.fillText(lines[0], 30, 92);
+    c.font = '20px monospace'; lines.slice(1).forEach((s, i) => c.fillText(s, 30, 128 + i * 28));
     c.beginPath(); c.arc(34, 222, 8, 0, 7); c.fill();
   });
+  t.chip = chip(['TC', '2646', 'F7PNX2']);
+  t.soc = chip(['TC8 PRO', '339S00812', '2646 KX4', 'F7PNX2']);
+  t.nand = chip(['NAND', '256 GB', 'TCN-5S12', '2639']);
+  t.pmic = chip(['PMU', '338S00946', '2644']);
+  t.rf = chip(['RF 5G', 'TCM-X70', '2641 A2']);
+  t.audio = chip(['AUD', '338S01087']);
+  t.wifi = chip(['WLAN', 'BT 5.3', 'TC-W63']);
   t.batt = tex(444, 800, (c, w, h) => {
     const g = c.createLinearGradient(0, 0, w, h); g.addColorStop(0, '#222327'); g.addColorStop(1, '#17181b'); c.fillStyle = g; c.fillRect(0, 0, w, h);
     c.fillStyle = '#e9e9ec'; c.font = '600 26px system-ui,sans-serif'; c.fillText('Batería recargable', 34, 86);
@@ -161,7 +168,11 @@ const MATS = {
   conn: () => new THREE.MeshStandardMaterial({ map: T.conn, metalness: .4, roughness: .45 }),
   pcb: () => new THREE.MeshStandardMaterial({ map: T.pcb, bumpMap: T.pcb, bumpScale: 1.5, roughness: .5, metalness: .25 }),
   pcbPlain: () => new THREE.MeshStandardMaterial({ color: 0x0f4a33, roughness: .55, metalness: .2 }),
-  chip: () => new THREE.MeshStandardMaterial({ map: T.chip, roughness: .45, metalness: .1 }),
+  ...Object.fromEntries(['chip', 'soc', 'nand', 'pmic', 'rf', 'audio', 'wifi'].map(k => [k, () => new THREE.MeshStandardMaterial({ map: T[k], roughness: .45, metalness: .1 })])),
+  bezel: () => new THREE.MeshStandardMaterial({ color: 0x0d0e11, roughness: .3, metalness: .35 }),
+  edge: () => new THREE.MeshPhysicalMaterial({ color: 0x6c7482, roughness: .12, metalness: .5, clearcoat: 1, envMapIntensity: 1.6 }),
+  sim: () => new THREE.MeshStandardMaterial({ color: 0xe9e9ec, roughness: .6 }),
+  simGold: () => new THREE.MeshStandardMaterial({ color: 0xd9b45c, metalness: .55, roughness: .35 }),
   smd: () => new THREE.MeshStandardMaterial({ roughness: .5, metalness: .25 }),
   foil: () => new THREE.MeshStandardMaterial({ color: 0x1b1c1f, metalness: .75, roughness: .36 }),
   label: () => new THREE.MeshStandardMaterial({ map: T.batt, roughness: .6, metalness: .15 }),
@@ -183,10 +194,11 @@ const MATS = {
 // ---- Piezas: una función por pieza. m('nombre') entrega el material de esa pieza ----
 function buildGlass(m) {
   const g = new THREE.Group();
-  g.add(face(ring(rrect(W - .1, H - .1, R - .05), rrect(W - .56, H - .56, R - .28)), m('black'), -.04)); // bisel
+  g.add(face(ring(rrect(W - .1, H - .1, R - .05), rrect(W - .56, H - .56, R - .28)), m('bezel'), -.04)); // bisel
   g.add(slab(rrect(2.05, .6, .3, 0, 6.45), .02, m('black'), -.04, 0));                                  // isla de sensores
   g.add(box(1.0, .05, .02, m('dark'), 0, 7.13, -.04));                                                   // auricular
   g.add(slab(rrect(W - .1, H - .1, R - .05), .07, m('glass'), 0, .02));
+  g.add(slab(ring(rrect(W - .1, H - .1, R - .05), rrect(W - .2, H - .2, R - .1)), .072, m('edge'), 0, .01)); // canto pulido: el vidrio se lee entero sobre fondo negro
   return g;
 }
 
@@ -224,7 +236,11 @@ function buildFrame(m) {
   [[-2.4, hh - .09], [2.4, hh - .09], [-2.4, -hh + .09], [2.4, -hh + .09]].forEach(([x, y]) => g.add(box(.1, .22, .765, band, x, y)));
   [[-hw + .09, 5.7], [hw - .09, 5.7], [-hw + .09, -5.7], [hw - .09, -5.7]].forEach(([x, y]) => g.add(box(.22, .1, .765, band, x, y)));
   [[-hw - .03, 4.7, .5], [-hw - .03, 3.5, .95], [-hw - .03, 2.35, .95], [hw + .03, 3.0, 1.6]].forEach(([x, y, h]) => g.add(box(.12, h, .28, m('alu'), x, y, 0, .05))); // botones
-  g.add(box(.02, 1.5, .32, m('aluDark'), hw + .002, -.6), cyl(.035, .03, m('black'), hw + .01, -.05, 0).rotateY(Math.PI / 2));                // bandeja SIM
+  g.add(box(.02, 1.5, .32, m('black'), hw + .002, -.6), cyl(.035, .03, m('black'), hw + .01, -.05, 0).rotateY(Math.PI / 2));                  // ranura SIM
+  const tray = new THREE.Group(); tray.position.set(hw + 1.25, -.6, 0);                                 // bandeja SIM a medio sacar
+  tray.add(box(.07, 1.5, .3, m('alu'), 0, 0, 0, .025), box(1.5, 1.2, .07, m('steel'), -.78, 0, 0, .02));
+  tray.add(box(.8, 1.1, .03, m('sim'), -.85, 0, .05, .01), box(.42, .5, .006, m('simGold'), -.8, .08, .068)); // nano-SIM con contactos
+  g.add(tray);
   g.add(box(.9, .03, .28, m('black'), 0, -hh - .001, 0, .012));                                          // boca USB-C
   g.add(inst(new THREE.CylinderGeometry(.05, .05, .03, 12), m('black'), [...Array(10)].map((_, i) => [(i < 5 ? -1 : 1) * (1.05 + i % 5 * .24), -hh - .001, 0])));
   g.add(inst(new THREE.CylinderGeometry(.06, .06, .03, 12), m('steel'), [[-.66, -hh - .002, 0], [.66, -hh - .002, 0]]));
@@ -262,8 +278,8 @@ function buildLogicBoard(m) {
   g.add(slab(s, .1, [m('pcb'), m('pcbPlain')], 0, 0));
   const comps = [ // x, y, ancho, alto, espesor, material
     [-2.55, 6.1, 1.0, 1.15, .17, 'steel'], [-1.03, 6.1, .92, 1.1, .17, 'steel'], [-1.03, 4.7, .9, 1.25, .15, 'steel'],
-    [-2.55, 4.8, .8, .8, .09, 'chip'], [-2.55, 3.25, 1.05, 1.5, .18, 'steel'], [-2.55, 1.35, 1.0, 1.0, .1, 'chip'],
-    [-2.55, -.35, .85, 1.2, .09, 'chip'], [-2.82, -1.7, .42, .42, .08, 'chip'], [-2.27, -1.7, .42, .42, .08, 'chip'],
+    [-2.55, 4.8, .8, .8, .09, 'pmic'], [-2.55, 3.25, 1.05, 1.5, .18, 'steel'], [-2.55, 1.35, 1.0, 1.0, .1, 'soc'],
+    [-2.55, -.35, .85, 1.2, .09, 'nand'], [-2.82, -1.7, .42, .42, .08, 'audio'], [-2.27, -1.7, .42, .42, .08, 'wifi'],
     [-2.55, -2.85, 1.0, .9, .15, 'steel'], [-1.83, 2.3, .26, .9, .09, 'conn'], [-1.83, .5, .26, .9, .09, 'conn'],
     [-1.83, -1.3, .26, .9, .09, 'conn'], [-1.83, -2.9, .26, .7, .09, 'conn'],
   ];
@@ -284,7 +300,7 @@ function buildLogicBoard(m) {
   }
   g.add(inst(new THREE.BoxGeometry(.09, .045, .036), m('smd'), smd, cols));
   holes.forEach(([x, y]) => g.add(cyl(.14, .1, m('gold'), x, y, top + .05), ...screw(m, x, y, top + .12, .1)));
-  g.add(box(1.0, 1.4, .14, m('steel'), -2.55, 2.4, -.12, .03), box(.9, .9, .12, m('steel'), -1.03, 5.4, -.11, .03), box(.8, 1.0, .09, m('chip'), -2.55, -1.2, -.095));
+  g.add(box(1.0, 1.4, .14, m('steel'), -2.55, 2.4, -.12, .03), box(.9, .9, .12, m('steel'), -1.03, 5.4, -.11, .03), box(.8, 1.0, .09, m('rf'), -2.55, -1.2, -.095));
   // detalle tipo teardown: grafito sobre blindajes, cowlings, coaxiales, clips y etiqueta
   g.add(box(.82, .96, .008, m('graphite'), -2.55, 6.1, top + .18), box(.72, 1.05, .008, m('graphite'), -1.03, 4.7, top + .16));
   [2.3, -1.3].forEach(y => g.add(...cowl(m, .4, 1.06, -1.83, y, top + .115)));
@@ -381,26 +397,30 @@ function buildBack(m) {
 }
 
 // ---- Config: el orden del array es el orden de adelante hacia atrás ----
-// explodeZ / offset [x,y] / anchor [x,y] en cm · rotation [x,y,z] en grados · baseZ: posición ensamblada · color: solo fallback SVG
+// explodeZ / offset [x,y] en cm · rotation [x,y,z] en grados · baseZ: posición ensamblada · label/dato: rótulo al señalar o tocar
 const EXPLODE = 1.2;    // multiplicador global de distancia
-const STAGGER = .35;    // desfase entre piezas
-const TILT = [9, -40]; // inclinación de cámara [x,y] en explosión máxima
+const TILT = [9, -40]; // inclinación de cámara [x,y] en grados
+const IDLE = [.03, .1], PARALLAX = [.08, .14]; // vaivén y seguimiento del puntero [x,y] en radianes
+const MARGIN = [.88, .86]; // fracción del canvas que puede ocupar el despiece en todo el rango de giro (deja libres las esquinas redondeadas)
+const LIFT = 4;         // cm que avanza una pieza al apartarse
 const FOV = 26;
 const PARTS = [
-  { name: 'glass',   label: 'Vidrio frontal',           dato: 'Templado, con isla de sensores', build: buildGlass,         explodeZ: 9.5,  baseZ: .36,  offset: [0, 0],    rotation: [0, 0, 0],   anchor: [3.4, 6.9],   color: '#3a3d44' },
-  { name: 'oled',    label: 'Panel OLED',               dato: '6,1" · 120 Hz',                  build: buildOled,          explodeZ: 7.6,  baseZ: .29,  offset: [0, .1],   rotation: [0, 0, 0],   anchor: [3.3, 4.0],   color: '#1766f2' },
-  { name: 'digi',    label: 'Táctil y sensor facial',   dato: 'Digitizer + cámara selfie',      build: buildDigitizer,     explodeZ: 5.7,  baseZ: .24,  offset: [0, -.1],  rotation: [0, 0, 0],   anchor: [1.0, 6.45],  color: '#56606e' },
-  { name: 'frame',   label: 'Marco de aluminio',        dato: 'Volumen, encendido y switch',    build: buildFrame,         explodeZ: 3.6,  baseZ: 0,    offset: [0, 0],    rotation: [0, 0, 0],   anchor: [3.57, 1.5],  color: '#a9abb1' },
-  { name: 'battery', label: 'Batería',                  dato: '3274 mAh',                       build: buildBattery,       explodeZ: 1.8,  baseZ: 0,    offset: [.5, -.3], rotation: [2, 0, -2],  anchor: [3.1, -.5],   color: '#222327' },
-  { name: 'logic',   label: 'Placa lógica',             dato: 'Procesador, memoria y carga',    build: buildLogicBoard,    explodeZ: 0,    baseZ: -.05, offset: [-.6, .4], rotation: [-2, 0, 2],  anchor: [-1.7, 2.6],  color: '#0c3a29' },
-  { name: 'taptic',  label: 'Motor háptico y parlante', dato: 'Vibración y audio',              build: buildTapticSpeaker, explodeZ: -1.8, baseZ: -.02, offset: [.3, -.5], rotation: [3, 0, 1],   anchor: [2.9, -5.4],  color: '#55575d' },
-  { name: 'port',    label: 'Puerto de carga',          dato: 'USB-C + micrófonos',             build: buildChargePort,    explodeZ: -3.6, baseZ: 0,    offset: [-.2, -.7], rotation: [4, 0, 0],  anchor: [.5, -6.85],  color: '#b9bbc1' },
-  { name: 'cameras', label: 'Cámaras traseras',         dato: '3 lentes, flash y LiDAR',        build: buildCameras,       explodeZ: -5.6, baseZ: -.1,  offset: [.3, .4],  rotation: [-3, 0, -2], anchor: [2.35, 5.5],  color: '#141416' },
-  { name: 'coil',    label: 'Bobina inalámbrica',       dato: 'Carga de 15 W',                  build: buildCoil,          explodeZ: -7.6, baseZ: -.27, offset: [0, -.2],  rotation: [0, 0, 0],   anchor: [2.3, -1.6],  color: '#c47d3a' },
-  { name: 'back',    label: 'Tapa trasera',             dato: 'Vidrio mate',                    build: buildBack,          explodeZ: -9.5, baseZ: -.36, offset: [0, 0],    rotation: [0, 0, 0],   anchor: [3.5, -3.2],  color: '#2a2d34' },
+  { label: 'Vidrio frontal',           dato: 'Templado, con canto pulido e isla de sensores', build: buildGlass,         explodeZ: 9.5,  baseZ: .36,  offset: [0, 0],    rotation: [0, 0, 0] },
+  { label: 'Panel OLED',               dato: '6,1" · 120 Hz · flex al conector de placa',     build: buildOled,          explodeZ: 7.6,  baseZ: .29,  offset: [0, .1],   rotation: [0, 0, 0] },
+  { label: 'Táctil y sensor facial',   dato: 'Malla táctil, cámara selfie, IR y auricular',    build: buildDigitizer,     explodeZ: 5.7,  baseZ: .24,  offset: [0, -.1],  rotation: [0, 0, 0] },
+  { label: 'Marco de aluminio',        dato: 'Botones, antenas y bandeja SIM',                 build: buildFrame,         explodeZ: 3.6,  baseZ: 0,    offset: [0, 0],    rotation: [0, 0, 0] },
+  { label: 'Batería',                  dato: 'Li-ion 3274 mAh · BMS y tiras adhesivas',        build: buildBattery,       explodeZ: 1.8,  baseZ: 0,    offset: [.5, -.3], rotation: [2, 0, -2] },
+  { label: 'Placa lógica',             dato: 'Procesador, memoria, energía, RF y Wi-Fi',       build: buildLogicBoard,    explodeZ: 0,    baseZ: -.05, offset: [-.6, .4], rotation: [-2, 0, 2] },
+  { label: 'Motor háptico y parlante', dato: 'Vibración y audio inferior',                     build: buildTapticSpeaker, explodeZ: -1.8, baseZ: -.02, offset: [.3, -.5], rotation: [3, 0, 1] },
+  { label: 'Puerto de carga',          dato: 'USB-C, flex y dos micrófonos',                   build: buildChargePort,    explodeZ: -3.6, baseZ: 0,    offset: [-.2, -.7], rotation: [4, 0, 0] },
+  { label: 'Cámaras traseras',         dato: '3 módulos con estabilizador, flash y LiDAR',     build: buildCameras,       explodeZ: -5.6, baseZ: -.1,  offset: [.3, .4],  rotation: [-3, 0, -2] },
+  { label: 'Bobina inalámbrica',       dato: 'Carga de 15 W, imanes y antena NFC',             build: buildCoil,          explodeZ: -7.6, baseZ: -.27, offset: [0, -.2],  rotation: [0, 0, 0] },
+  { label: 'Tapa trasera',             dato: 'Vidrio mate con lámina de grafito',              build: buildBack,          explodeZ: -9.5, baseZ: -.36, offset: [0, 0],    rotation: [0, 0, 0] },
 ];
+const HINT = 'Tocá una pieza para desarmar hasta ahí';
+const BACK_HINT = 'Tocá el fondo para volver a armarlo';
 
-// ---- Motor: despiece fijo con órbita suave, parallax y hover ----
+// ---- Motor: despiece con órbita suave, parallax, hover y desarme por toque ----
 let ACC;
 const AWAKE_MS = 12000; // sin interacción, el giro se detiene y deja de usar GPU
 
@@ -409,6 +429,7 @@ const AWAKE_MS = 12000; // sin interacción, el giro se detiene y deja de usar G
  * La pose inicial coincide con la imagen fija del hero, así el reemplazo no salta.
  */
 export function mount(canvas, { accent = '#1766f2', poster = false, onReady } = {}) {
+  seed = 7; // misma semilla en cada montaje: texturas y SMD idénticos a la imagen fija
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance', preserveDrawingBuffer: poster });
   renderer.setPixelRatio(Math.min(devicePixelRatio, poster ? 2 : 1.5));
   renderer.setClearColor(0x000000, 1);
@@ -429,16 +450,15 @@ export function mount(canvas, { accent = '#1766f2', poster = false, onReady } = 
   Object.assign(key.shadow.camera, { left: -17, right: 17, top: 17, bottom: -17, near: 1, far: 90 });
   const rim = new THREE.DirectionalLight(ACC, 5); rim.position.set(-8, 3, -10);
   const rim2 = new THREE.DirectionalLight(0xffffff, 1.6); rim2.position.set(9, -2, -8);
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(90, 60), new THREE.ShadowMaterial({ opacity: .4 }));
-  floor.rotation.x = -Math.PI / 2; floor.position.y = -8.32; floor.receiveShadow = true; floor.raycast = () => {};
-  const rig = new THREE.Group();
-  scene.add(key, rim, rim2, floor, rig, new THREE.HemisphereLight(0xdfe8ff, 0x08080a, .55));
+  const rig = new THREE.Group(), stack = new THREE.Group(); // stack se desplaza para centrar lo que queda a la vista
+  rig.add(stack);
+  scene.add(key, rim, rim2, rig, new THREE.HemisphereLight(0xdfe8ff, 0x08080a, .55));
 
-  const zs = PARTS.map(p => p.explodeZ), ZR = (Math.max(...zs) - Math.min(...zs)) * EXPLODE;
-  const parts = PARTS.map(p => {
+  const parts = PARTS.map((p, i) => {
     const cache = {}, group = p.build(n => cache[n] ??= MATS[n]()), node = new THREE.Group();
-    node.add(group); rig.add(node);
-    node.position.set(p.offset[0], p.offset[1], p.baseZ + p.explodeZ * EXPLODE);
+    node.add(group); stack.add(node);
+    const z = p.baseZ + p.explodeZ * EXPLODE;
+    node.position.set(p.offset[0], p.offset[1], z);
     node.rotation.set(rad(p.rotation[0]), rad(p.rotation[1]), rad(p.rotation[2]));
     group.userData.update?.(1);
     const mats = new Set();
@@ -448,11 +468,33 @@ export function mount(canvas, { accent = '#1766f2', poster = false, onReady } = 
       list.forEach(x => mats.add(x));
       if (o.isMesh && !list[0].transparent) o.castShadow = o.receiveShadow = true;
     });
-    mats.forEach(x => x.userData = { c: x.color.clone(), e: x.envMapIntensity, em: x.emissive?.clone() });
-    const part = { mats, dim: 1, dimT: 1, hl: 0, hlT: 0 };
+    mats.forEach(x => x.userData = { c: x.color.clone(), e: x.envMapIntensity, em: x.emissive?.clone(), o: x.opacity, t: x.transparent });
+    const part = { i, node, z, mats, label: p.label, dato: p.dato, dim: 1, dimT: 1, hl: 0, hlT: 0, off: 0, offT: 0 };
     node.userData.part = part;
     return part;
   });
+
+  // Encuadre: las cajas de todas las piezas, giradas a los extremos del vaivén y del parallax, entran en MARGIN.
+  rig.updateMatrixWorld(true);
+  const pts = [];
+  parts.forEach(p => {
+    const b = new THREE.Box3().setFromObject(p.node);
+    for (let k = 0; k < 8; k++) pts.push(new THREE.Vector3(k & 1 ? b.max.x : b.min.x, k & 2 ? b.max.y : b.min.y, k & 4 ? b.max.z : b.min.z));
+  });
+  const sway = [IDLE[0] + PARALLAX[0], IDLE[1] + PARALLAX[1]], poses = [];
+  for (const a of [-1, 1]) for (const b of [-1, -.5, 0, .5, 1]) poses.push(new THREE.Matrix4().makeRotationFromEuler(new THREE.Euler(rad(TILT[0]) + a * sway[0], rad(TILT[1]) + b * sway[1], 0)));
+  const probe = new THREE.PerspectiveCamera(FOV, 1, .5, 400), v = new THREE.Vector3();
+  const nearest = Math.max(...pts.map(p => p.length())) + 1; // más cerca, algún punto queda detrás de la cámara
+  function extent(d, aspect) { // [minX, maxX, minY, maxY] en NDC, unión de todas las poses
+    probe.aspect = aspect; probe.updateProjectionMatrix();
+    probe.position.set(0, d * .05, d); probe.lookAt(0, 0, 0); probe.updateMatrixWorld();
+    const e = [Infinity, -Infinity, Infinity, -Infinity];
+    poses.forEach(m => pts.forEach(p => {
+      v.copy(p).applyMatrix4(m).project(probe);
+      e[0] = Math.min(e[0], v.x); e[1] = Math.max(e[1], v.x); e[2] = Math.min(e[2], v.y); e[3] = Math.max(e[3], v.y);
+    }));
+    return e;
+  }
 
   let dist = 60, w = 0, h = 0;
   function layout() {
@@ -460,47 +502,100 @@ export function mount(canvas, { accent = '#1766f2', poster = false, onReady } = 
     if (!w || !h) return;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
-    camera.setViewOffset(w, h, -.07 * w, .065 * h, w, h); // las capas cercanas se agrandan por perspectiva: recentra el conjunto
-    const th = 2 * Math.tan(rad(FOV / 2)), yaw = Math.abs(rad(TILT[1]));
-    dist = Math.max((H + 3) / th, (W * Math.cos(yaw) + ZR * Math.sin(yaw)) / (th * camera.aspect)) / .7;
+    let lo = nearest, hi = 400;
+    for (let k = 0; k < 24; k++) { // distancia mínima a la que todo entra
+      const d = (lo + hi) / 2, e = extent(d, camera.aspect);
+      if ((e[1] - e[0]) / 2 > MARGIN[0] || (e[3] - e[2]) / 2 > MARGIN[1]) lo = d; else hi = d;
+    }
+    dist = hi;
+    const e = extent(dist, camera.aspect); // centra el conjunto: la perspectiva agranda las capas cercanas
+    camera.setViewOffset(w, h, (e[0] + e[1]) / 4 * w, -(e[2] + e[3]) / 4 * h, w, h);
   }
 
   let mx = 0, my = 0, sx = 0, sy = 0, visible = true, raf = 0, pointer = null, clock = 0, prev = 0, last = 0, awakeUntil = 0, fastUntil = 0, done = false;
+  let hover = null, selected = null, stackT = 0;
   const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(), tmp = new THREE.Color();
   const canHover = matchMedia('(hover:hover)').matches;
 
-  function pick() { // hover: resalta una pieza y atenúa el resto
-    let o = null;
-    if (pointer.x != null) {
-      const r = canvas.getBoundingClientRect();
-      ndc.set((pointer.x - r.left) / r.width * 2 - 1, -(pointer.y - r.top) / r.height * 2 + 1);
-      ray.setFromCamera(ndc, camera);
-      o = ray.intersectObject(rig, true)[0]?.object;
+  // Rótulo de la pieza señalada o elegida. Decorativo como el canvas: el contenido ya está en la página.
+  const tag = poster ? null : document.createElement('div');
+  let tagText = '';
+  if (tag) {
+    tag.setAttribute('aria-hidden', 'true');
+    tag.style.cssText = 'position:absolute;left:22px;top:18px;max-width:60%;pointer-events:none;font:400 13px/1.4 system-ui,sans-serif;color:#a1a1a6';
+    canvas.parentElement?.append(tag);
+  }
+  function caption(f) {
+    if (!tag) return;
+    const lines = f ? [f.label, f.dato, f === selected ? BACK_HINT : ''] : ['', '', selected ? BACK_HINT : HINT];
+    const text = lines.join('|');
+    if (text === tagText) return;
+    tagText = text;
+    tag.replaceChildren(...lines.filter(Boolean).map(s => {
+      const el = document.createElement('div'); el.textContent = s;
+      if (s === f?.label) el.style.cssText = 'font-weight:600;font-size:15px;color:#f5f5f7';
+      if (s === HINT || s === BACK_HINT) el.style.cssText = 'margin-top:2px;font-size:12px;color:#86868b';
+      return el;
+    }));
+  }
+
+  function hitAt(x, y) { // primera pieza bajo el puntero que no se esté apartando
+    const r = canvas.getBoundingClientRect();
+    ndc.set((x - r.left) / r.width * 2 - 1, -(y - r.top) / r.height * 2 + 1);
+    ray.setFromCamera(ndc, camera);
+    for (const hit of ray.intersectObject(rig, true)) {
+      let o = hit.object;
       while (o && !o.userData.part) o = o.parent;
+      if (o && !o.userData.part.offT) return o.userData.part;
     }
-    const hover = o ? o.userData.part : null;
+    return null;
+  }
+  function refocus() { // resalta la pieza señalada (o la elegida) y atenúa el resto
+    const f = hover || selected;
+    // con pieza elegida, lo de atrás sigue legible y la pieza conserva su color real (el tinte es solo del hover)
+    parts.forEach(p => { p.dimT = f && p !== f ? (hover ? .3 : .6) : 1; p.hlT = p === hover ? 1 : 0; });
+    canvas.style.cursor = hover ? 'pointer' : '';
+    caption(f);
+  }
+  function pick() {
+    hover = pointer.x != null ? hitAt(pointer.x, pointer.y) : null;
     pointer = null;
-    parts.forEach(p => { p.dimT = hover && p !== hover ? .3 : 1; p.hlT = p === hover ? 1 : 0; });
+    refocus();
+  }
+  function choose(part) { // deja a la vista la pieza tocada y todo lo que está detrás; tocarla otra vez o el fondo rearma
+    selected = part && part !== selected ? part : null;
+    const k = selected ? selected.i : -1;
+    parts.forEach(p => { p.offT = p.i < k ? 1 : 0; });
+    stackT = selected ? (parts[0].z - selected.z) / 2 : 0;
+    if (hover?.offT) hover = null;
+    refocus();
   }
 
   function render(now) {
     clock += Math.min(now - (prev || now), 100); prev = now; // reloj propio: al reanudar no salta
     const t = clock / 1000, idle = poster ? 0 : 1;
     sx += (mx - sx) * .06; sy += (my - sy) * .06;
-    rig.rotation.set(rad(TILT[0]) + idle * (Math.sin(t * .37) * .03 + sy * .08), rad(TILT[1]) + idle * (Math.sin(t * .45) * .1 + sx * .14), 0);
+    rig.rotation.set(rad(TILT[0]) + idle * (Math.sin(t * .37) * IDLE[0] + sy * PARALLAX[0]), rad(TILT[1]) + idle * (Math.sin(t * .45) * IDLE[1] + sx * PARALLAX[1]), 0);
     camera.position.set(0, dist * .05, dist); camera.lookAt(0, 0, 0);
+    stack.position.z += (stackT - stack.position.z) * .12;
     parts.forEach(p => {
-      if (Math.abs(p.dimT - p.dim) < .002 && Math.abs(p.hlT - p.hl) < .002) return;
-      p.dim += (p.dimT - p.dim) * .14; p.hl += (p.hlT - p.hl) * .14;
+      if (Math.abs(p.dimT - p.dim) < .002 && Math.abs(p.hlT - p.hl) < .002 && p.off === p.offT) return;
+      p.dim += (p.dimT - p.dim) * .14; p.hl += (p.hlT - p.hl) * .14; p.off += (p.offT - p.off) * .12;
+      if (Math.abs(p.offT - p.off) < .002) p.off = p.offT;                   // cierra exacto: vuelve a opaco o se oculta
+      p.node.position.z = p.z + p.off * LIFT;
+      p.node.visible = p.off < 1;
       p.mats.forEach(x => {
         x.color.copy(x.userData.c).multiplyScalar(p.dim);
         if (x.userData.e != null) x.envMapIntensity = x.userData.e * p.dim;
-        if (x.userData.em) x.emissive.copy(x.userData.em).add(tmp.copy(ACC).multiplyScalar(p.hl * .22));
+        if (x.userData.em) x.emissive.copy(x.userData.em).add(tmp.copy(ACC).multiplyScalar(p.hl * .1));
+        const fade = p.off > 0 || x.userData.t;
+        if (x.transparent !== fade) { x.transparent = fade; x.needsUpdate = true; }
+        x.opacity = x.userData.o * (1 - p.off);
       });
     });
     renderer.render(scene, camera);
     if (pointer && canHover) pick();
-    if (!done) { done = true; onReady?.(); }
+    if (!done) { done = true; caption(null); onReady?.(); }
   }
 
   function tick(now) {
@@ -514,11 +609,13 @@ export function mount(canvas, { accent = '#1766f2', poster = false, onReady } = 
   const onMove = ev => { mx = ev.clientX / innerWidth * 2 - 1; my = ev.clientY / innerHeight * 2 - 1; };
   const onOver = ev => { pointer = { x: ev.clientX, y: ev.clientY }; fastUntil = performance.now() + 1500; kick(); };
   const onLeave = () => { pointer = {}; };
+  const onClick = ev => { choose(hitAt(ev.clientX, ev.clientY)); fastUntil = performance.now() + 1500; kick(); };
   const ro = new ResizeObserver(() => { layout(); kick(); });
   const io = new IntersectionObserver(([en]) => { visible = en.isIntersecting; kick(); });
   addEventListener('pointermove', onMove, { passive: true });
   canvas.addEventListener('pointermove', onOver, { passive: true });
   canvas.addEventListener('pointerleave', onLeave);
+  canvas.addEventListener('click', onClick);
   ro.observe(canvas); io.observe(canvas);
   layout(); kick();
 
@@ -528,6 +625,9 @@ export function mount(canvas, { accent = '#1766f2', poster = false, onReady } = 
     removeEventListener('pointermove', onMove);
     canvas.removeEventListener('pointermove', onOver);
     canvas.removeEventListener('pointerleave', onLeave);
+    canvas.removeEventListener('click', onClick);
+    canvas.style.cursor = '';
+    tag?.remove();
     scene.traverse(o => { o.geometry?.dispose(); [].concat(o.material || []).forEach(x => x.dispose()); });
     Object.values(T).forEach(x => x.dispose());
     pmrem.dispose(); renderer.dispose();

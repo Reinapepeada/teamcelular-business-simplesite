@@ -65,7 +65,7 @@ export default function HeroTeardown() {
     return (
         <div className="relative aspect-[6/5] overflow-hidden rounded-[28px] bg-black">
             <Image
-                src="/images/landings/despiece-smartphone-v2.webp"
+                src="/images/landings/despiece-smartphone-v3.webp"
                 alt="Ilustración de un smartphone desarmado en capas: vidrio, pantalla, marco, batería, placa lógica, cámaras, bobina de carga y tapa trasera"
                 fill
                 loading="eager"
