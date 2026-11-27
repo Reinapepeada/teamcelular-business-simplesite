@@ -20,6 +20,8 @@ import GuideByline from "@/components/seo/GuideByline";
 import { BRAND_REPAIR_PRICES, buildPriceOffers, formatArsPrice, priceRangeOf } from "@/lib/repairPrices";
 import ModelScreenPriceTable from "@/components/seo/ModelScreenPriceTable";
 import { XIAOMI_BATTERY_PRICES, XIAOMI_SCREEN_PRICES } from "@/lib/modelScreenPrices";
+import BrandWorkshopNotes from "@/components/seo/BrandWorkshopNotes";
+import { BRAND_WORKSHOPS } from "@/lib/workshopStats";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
@@ -78,7 +80,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2026-03-12T00:00:00Z",
-    modifiedTime: "2026-11-25T00:00:00Z",
+    modifiedTime: "2026-11-27T00:00:00Z",
     section: "Guias Tecnicas",
   },
   twitter: {
@@ -292,7 +294,7 @@ export default function XiaomiRepairGuidePage() {
         title="Reparacion de Xiaomi en Buenos Aires | Servicio Tecnico Team Celular"
         description="Reparación de Xiaomi, Redmi y POCO con informe de revisión de placa en hasta 72 horas hábiles, arreglo por presupuesto."
         publishedTime="2026-03-12T00:00:00Z"
-        modifiedTime="2026-11-25T00:00:00Z"
+        modifiedTime="2026-11-27T00:00:00Z"
         about={[
           "reparacion de Xiaomi en Buenos Aires",
           "service tecnico Xiaomi en CABA",
@@ -358,7 +360,7 @@ export default function XiaomiRepairGuidePage() {
           <p className="text-sm leading-6 text-[#a1a1a6]">Revisión de placa: informe en hasta 72 horas hábiles. El arreglo lleva semanas; confirmamos precio y plazo por escrito.</p>
 
             <div className="mt-4">
-              <GuideByline modifiedTime="2026-11-25T00:00:00Z" tone="light" />
+              <GuideByline modifiedTime="2026-11-27T00:00:00Z" tone="light" />
             </div>
         </header>
 
@@ -430,6 +432,8 @@ export default function XiaomiRepairGuidePage() {
           service="batería"
           prices={XIAOMI_BATTERY_PRICES}
         />
+
+        <BrandWorkshopNotes brand="Xiaomi, Redmi y POCO" workshop={BRAND_WORKSHOPS.xiaomi} />
 
         <p className="text-center text-[15px] text-slate-600 dark:text-[#a1a1a6]">
           ¿Tenés un Redmi Note 13?{" "}
