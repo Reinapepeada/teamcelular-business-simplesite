@@ -1,5 +1,34 @@
 import { channel, safeLabel } from "./measurement";
 
+const FIRST_TOUCH_KEYWORD_MS = 30 * 24 * 60 * 60 * 1000;
+
+export function sanitizeReelKeyword(value: unknown): string | null {
+  if (typeof value !== "string") return null;
+  const keyword = value.normalize("NFD").replace(/\p{M}/gu, "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 24);
+  return keyword || null;
+}
+
+const isSocial = (medium: unknown) => typeof medium === "string" && medium.toLowerCase() === "social";
+
+/** Last-touch social de la sesión; si no, first-touch social de hasta 30 días. */
+export function reelKeywordOf(
+  session: Record<string, unknown> | undefined,
+  first: Record<string, unknown> | undefined,
+  firstCreatedAt: number | undefined,
+  now: number,
+): string | null {
+  if (session && isSocial(session.utm_medium)) {
+    const keyword = sanitizeReelKeyword(session.utm_content);
+    if (keyword) return keyword;
+  }
+  if (first && isSocial(first.utm_medium) && typeof firstCreatedAt === "number"
+    && now - firstCreatedAt < FIRST_TOUCH_KEYWORD_MS) {
+    return sanitizeReelKeyword(first.utm_content);
+  }
+  return null;
+}
+
+
 export function acquisition(url: string, referrer: string): Record<string, string> {
   const current = new URL(url);
   let domain = "";
@@ -29,9 +58,14 @@ export function browserAttribution(): Record<string, unknown> {
     window.localStorage.setItem("tc.analytics.attribution.v1", JSON.stringify({
       first, session, created: first === current ? now : stored.created, updated: now,
     }));
+    const created = first === current ? now : stored.created;
+    // Un link de reel nuevo gana aunque la sesión anterior siga viva.
+    const keyword = reelKeywordOf(current, undefined, undefined, now) ?? reelKeywordOf(session, first, created, now);
     return { ...session, first_source: first.utm_source, first_medium: first.utm_medium,
-      first_campaign: first.utm_campaign, first_landing_path: first.entry_path };
+      first_campaign: first.utm_campaign, first_content: first.utm_content, first_term: first.utm_term,
+      first_landing_path: first.entry_path, ...(keyword ? { reel_keyword: keyword } : {}) };
   } catch {
-    return current;
+    const keyword = reelKeywordOf(current, undefined, undefined, Date.now());
+    return keyword ? { ...current, reel_keyword: keyword } : current;
   }
 }
