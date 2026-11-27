@@ -38,6 +38,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
     "es-AR": "/",
     "x-default": "/",
   },
+  locale: "en_US",
   openGraphTitle: "Phone Repair in Buenos Aires | Team Celular",
   openGraphDescription:
     "Same-day screen and battery repair in Recoleta and Belgrano. English spoken.",

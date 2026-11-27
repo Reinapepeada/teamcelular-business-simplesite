@@ -232,7 +232,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     highlights: [
       {
         title: "Lo dejás a la mañana, lo retirás a la tarde",
-        desc: "Pantalla y batería salen en 2 a 4 horas. Si trabajás en Once, lo traés en el viaje y lo retirás a la vuelta.",
+        desc: "La pantalla sale en 2 a 4 horas y la batería en 1 a 2. Si trabajás en Once, lo traés en el viaje y lo retirás a la vuelta.",
         icon: "speed",
       },
       {

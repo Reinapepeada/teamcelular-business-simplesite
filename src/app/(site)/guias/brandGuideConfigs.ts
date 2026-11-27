@@ -227,7 +227,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     metaDescriptionOverride:
       "Reparación de Honor Magic y X en Recoleta y Belgrano, CABA. Diagnóstico y plazo según la falla, con presupuesto.",
     titleOverride:
-      "Reparacion de Honor en Buenos Aires: alternativa presencial al canal oficial",
+      "Reparación de Honor en Buenos Aires: alternativa presencial al canal oficial",
     heroDescriptionOverride:
       `Team Celular repara Honor en CABA con atención presencial: somos un taller independiente de microelectrónica en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Revisamos pantalla, batería y módulo de carga de las líneas Magic y X; confirmamos disponibilidad del repuesto y plazo para tu modelo antes de que dejes el equipo. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles. La reparación de placa lleva semanas, con precio y plazo por escrito antes de empezar. Podés pagar en 3 cuotas sin interés. Si buscás cobertura de fábrica, consultá primero el canal de soporte de Honor.`,
     extraFaq: [
@@ -403,7 +403,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     slug: "reparacion-zte-buenos-aires",
     ...REVISED_DIAGNOSIS,
     seoTitleOverride: "Servicio técnico ZTE y Nubia en CABA | Team Celular",
-    titleOverride: "Reparacion de ZTE en Buenos Aires: audio, carga y reinicios",
+    titleOverride: "Reparación de ZTE en Buenos Aires: audio, carga y reinicios",
     metaDescriptionOverride:
       "Reparación de ZTE Blade, Nubia y Axon en CABA: audio, carga y reinicios. Plazo según la falla y repuesto.",
     heroDescriptionOverride:
@@ -838,7 +838,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     {
       question: `¿Dónde reparar un ${seed.brand} en CABA si no es service oficial?`,
       answer:
-        `Sí. Reparamos ${seed.brand} en nuestros talleres en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032), CABA. Confirmamos viabilidad según modelo y repuesto disponible antes de intervenir.`,
+        `Reparamos ${seed.brand} en nuestros talleres en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032), CABA. Confirmamos viabilidad según modelo y repuesto disponible antes de intervenir.`,
     },
     {
       question: "¿Cuánto tarda el diagnóstico?",

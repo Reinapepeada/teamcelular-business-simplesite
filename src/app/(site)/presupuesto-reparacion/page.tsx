@@ -56,7 +56,7 @@ const processSteps = [
 
 const stats = [
     { value: "Hasta 2 h hábiles", label: "para responderte" },
-    { value: "2-4 h", label: "pantalla o batería con stock, según diagnóstico" },
+    { value: "2-4 h", label: "pantalla con stock; batería en 1-2 h, según diagnóstico" },
     { value: "Por escrito", label: "cobertura en el presupuesto" },
     { value: "15+ años", label: "de trayectoria" },
 ];

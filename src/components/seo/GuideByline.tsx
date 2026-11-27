@@ -7,6 +7,9 @@ const DATE_FORMAT = new Intl.DateTimeFormat("es-AR", {
   timeZone: "UTC",
 });
 
+/** Fecha larga en español, igual a la que muestra la guía. */
+export const formatGuideDate = (iso: string) => DATE_FORMAT.format(new Date(iso));
+
 // La fecha vivia solo en el JSON-LD. Los extractores de los motores de IA leen
 // el texto renderizado: sin fecha visible la guia no se puede fechar y pierde
 // elegibilidad por frescura.

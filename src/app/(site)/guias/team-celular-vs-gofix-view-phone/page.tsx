@@ -28,7 +28,7 @@ export default function RepairShopComparison() {
           { label: "Ubicación relevante", values: ["Paraguay 2451, Recoleta; Amenábar 2032, Belgrano.", "Red de locales; Belgrano en Arcos 1922, según su directorio.", "Monroe 2810, Belgrano."] },
           { label: "Marcas publicadas", values: ["iPhone, Samsung, Motorola, Xiaomi y otras según modelo.", "Apple, Samsung, Motorola, Xiaomi y otras.", "Especializado en Apple: iPhone, MacBook, iPad y Apple Watch."] },
           { label: "Garantía anunciada", values: [WARRANTY_SCOPE_MESSAGE, "Tres meses en reparaciones.", "90 días por escrito."] },
-          { label: "Plazo", values: ["Pantalla y batería: habitualmente 2–4 h con stock y según diagnóstico. Placa: plazo propio.", "Muchas reparaciones en el día, sujeto a repuesto y diagnóstico.", "Publica reparación express en el día con turno; confirmar caso."] },
+          { label: "Plazo", values: ["Pantalla: habitualmente 2–4 h; batería: 1–2 h, con stock y según diagnóstico. Placa: plazo propio.", "Muchas reparaciones en el día, sujeto a repuesto y diagnóstico.", "Publica reparación express en el día con turno; confirmar caso."] },
           { label: "Coordinación", values: ["Sin turno en horario de atención; consulta previa por WhatsApp.", "Consultar modalidad y horarios del local elegido.", "Cotización y reserva de turno."] },
           { label: "Costo de diagnóstico", values: [`Revisión general orientativa ARS 15.000–25.000. Placa: ${formatArsPrice(PLACA_REVISION_PRICE)}; se cobra aunque no se repare y se descuenta al reparar.`, "Importe no verificado en las páginas consultadas; pedirlo al local.", "Importe no verificado en las páginas consultadas; pedirlo al cotizar."] },
         ]} />

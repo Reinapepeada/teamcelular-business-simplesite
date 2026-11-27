@@ -14,6 +14,7 @@ const config = SERVICE_CONFIGS["cambio-pin-carga-caba"];
 export const metadata = buildServiceMetadata(config);
 
 const range = (p: { from: number; to: number }) => `${formatArsPrice(p.from)} a ${formatArsPrice(p.to)}`;
+const between = (p: { from: number; to: number }) => `${formatArsPrice(p.from)} y ${formatArsPrice(p.to)}`;
 
 export default function CambioPinCargaCabaPage() {
   return (
@@ -29,9 +30,9 @@ export default function CambioPinCargaCabaPage() {
               ¿Cuánto sale cambiar el pin de carga de un Samsung?
             </h2>
             <p className="tc-body mt-5">
-              En un Galaxy A de entrada sale entre {range(SAMSUNG_CHARGING_PORT_PRICES[0])} y en un Galaxy S o Note entre{" "}
-              {range(SAMSUNG_CHARGING_PORT_PRICES[3])}. Si alcanza con una limpieza técnica, cuesta entre{" "}
-              {range(CHARGING_PORT_CLEANING_PRICE)} y no se cambia nada.
+              En un Galaxy A de entrada sale entre {between(SAMSUNG_CHARGING_PORT_PRICES[0])}, y en un Galaxy S o Note entre{" "}
+              {between(SAMSUNG_CHARGING_PORT_PRICES[3])}. Si alcanza con una limpieza técnica, cuesta entre{" "}
+              {between(CHARGING_PORT_CLEANING_PRICE)} y no se cambia nada.
             </p>
             <p className="mt-4 text-[15px] leading-6 text-[#86868b]">
               Rangos de los cambios de pin que hicimos en Samsung durante el último año en Recoleta. El precio exacto te lo confirmamos con el modelo y la revisión.
