@@ -2,6 +2,7 @@ import { WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import type { Metadata } from "next";
 import Link from "next/link";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
+import BranchMap from "@/components/cards/BranchMap";
 import BranchWhatsAppButton from "@/components/cro/BranchSelector";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import { getBranch, whatsappUrl } from "@/lib/businessProfile";
@@ -326,16 +327,16 @@ export default function ContactoPage() {
                         </article>
                     </div>
 
-                    <details className="border-t border-[#333336] pt-3">
-                        <summary className="tc-link list-item min-h-11 cursor-pointer py-2 marker:text-[#a1a1a6]">Ver mapa de Recoleta</summary>
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.262305984237!2d-58.40523692350382!3d-34.59752805717274!2m3!1f0!2f0!3f0!2m3!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccb9f6e9910cb%3A0xb492115ba59bc4f2!2sTeam%20celular%20%7C%20Reparacion%20de%20celulares%20%7C%20Reparacion%20de%20computadoras!5e0!3m2!1ses!2sar!4v1712864201522!5m2!1ses!2sar"
-                            className="min-h-[400px] w-full"
-                            loading="lazy"
-                            referrerPolicy="no-referrer-when-downgrade"
-                            title="Mapa Team Celular Recoleta — Paraguay 2451"
-                        />
-                    </details>
+                    {[recoleta, belgrano].map((branch) => (
+                        <details key={branch.slug} className="border-t border-[#333336] pt-3">
+                            <summary className="tc-link list-item min-h-11 cursor-pointer py-2 marker:text-[#a1a1a6]">Ver mapa de {branch.shortName}</summary>
+                            <BranchMap
+                                address={`${branch.street}, ${branch.neighborhood}, CABA`}
+                                name={branch.shortName}
+                                className="mt-2"
+                            />
+                        </details>
+                    ))}
                 </section>
 
                 <section className="grid gap-6 md:grid-cols-3">
