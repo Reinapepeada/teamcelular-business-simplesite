@@ -218,12 +218,12 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     branchSlug: "recoleta",
     metaTitle: "Arreglo de Celulares en Once y Balvanera | Sin Turno",
     metaDescription:
-      "Desde Once, la línea H te deja a una cuadra de Team Celular (Paraguay 2451, Recoleta). Pantalla y batería en 2 a 4 horas, sin turno.",
+      "Desde Once, la línea H te deja a una cuadra de Team Celular (Paraguay 2451, Recoleta). Pantalla en 2 a 4 horas y batería en 1 a 2, sin turno.",
     socialDescription:
       "Team Celular queda a dos estaciones de Once por la línea H. Pantalla, batería y carga en el día.",
     heroBadge: "Once, Abasto y Balvanera",
     heroIntro:
-      "Si estás en Once, el taller más cerca es el de Recoleta: tomás la línea H en Plaza Miserere, bajás dos estaciones después en Córdoba y caminás una cuadra hasta Paraguay 2451. Pantalla y batería salen en 2 a 4 horas, sin turno.",
+      "Si estás en Once, el taller más cerca es el de Recoleta: tomás la línea H en Plaza Miserere, bajás dos estaciones después en Córdoba y caminás una cuadra hasta Paraguay 2451. La pantalla sale en 2 a 4 horas y la batería en 1 a 2, sin turno.",
     heroImage: "/images/reparacion_placa.webp",
     heroGlowClass:
       "bg-[radial-gradient(circle_at_84%_18%,rgba(245,158,11,0.32),transparent_44%)]",
@@ -232,7 +232,7 @@ export const ZONE_CONFIGS: Record<string, ZoneLandingConfig> = {
     highlights: [
       {
         title: "Lo dejás a la mañana, lo retirás a la tarde",
-        desc: "Pantalla y batería salen en 2 a 4 horas. Si trabajás en Once, lo traés en el viaje y lo retirás a la vuelta.",
+        desc: "La pantalla sale en 2 a 4 horas y la batería en 1 a 2. Si trabajás en Once, lo traés en el viaje y lo retirás a la vuelta.",
         icon: "speed",
       },
       {

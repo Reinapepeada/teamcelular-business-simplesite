@@ -19,7 +19,7 @@ import {
   FaWrench,
 } from "react-icons/fa";
 import { SiSamsung } from "react-icons/si";
-import GuideByline from "@/components/seo/GuideByline";
+import GuideByline, { formatGuideDate } from "@/components/seo/GuideByline";
 import RepairBrandLinks from "@/components/repairs/RepairBrandLinks";
 import ScreenQuoteDetails from "@/components/repairs/ScreenQuoteDetails";
 import ModelScreenPriceTable from "@/components/seo/ModelScreenPriceTable";
@@ -39,6 +39,9 @@ const BATTERY_A = BRAND_REPAIR_PRICES.samsung[2];
 const BATTERY_S = BRAND_REPAIR_PRICES.samsung[3];
 const formatRange = (price: { from: number; to: number }) =>
   `${formatArsPrice(price.from)} a ${formatArsPrice(price.to)}`;
+
+// Una sola fecha para metadata, schema y las dos firmas visibles.
+const MODIFIED_TIME = "2026-11-27T00:00:00Z";
 
 export const metadata: Metadata = {
   title: "Reparación Samsung en CABA | Precios de Pantalla",
@@ -89,7 +92,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2026-03-12T00:00:00Z",
-    modifiedTime: "2026-11-27T00:00:00Z",
+    modifiedTime: MODIFIED_TIME,
     section: "Guías técnicas",
   },
   twitter: {
@@ -321,7 +324,7 @@ export default function SamsungRepairGuidePage() {
         title="Reparación de Samsung en CABA: precios y opciones"
         description="Precios, tiempos y fallas comunes de Samsung Galaxy. Informe de revisión de placa en hasta 72 horas hábiles en CABA."
         publishedTime="2026-03-12T00:00:00Z"
-        modifiedTime="2026-11-27T00:00:00Z"
+        modifiedTime={MODIFIED_TIME}
         about={[
           "reparacion de Samsung en Buenos Aires",
           "service tecnico Samsung Galaxy en CABA",
@@ -367,7 +370,7 @@ export default function SamsungRepairGuidePage() {
               Pantalla Galaxy A / M desde {formatArsPrice(SCREEN_A.from)} y S / Ultra desde {formatArsPrice(SCREEN_S.from)}. Revisamos tu Galaxy en Recoleta o Belgrano y te confirmamos repuesto, precio y plazo antes de reparar.
             </p>
             <div className="mt-4">
-              <GuideByline modifiedTime="2026-11-27T00:00:00Z" tone="light" />
+              <GuideByline modifiedTime={MODIFIED_TIME} tone="light" />
             </div>
           </div>
 
@@ -498,7 +501,7 @@ export default function SamsungRepairGuidePage() {
 
         <BrandWorkshopNotes brand="Samsung" workshop={BRAND_WORKSHOPS.samsung} />
 
-        <AuthorByline updatedLabel="23 de octubre de 2026" className="mt-6" />
+        <AuthorByline updatedLabel={formatGuideDate(MODIFIED_TIME)} className="mt-6" />
 
         <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
           <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">

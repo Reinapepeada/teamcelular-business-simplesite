@@ -9,6 +9,7 @@
  * lo cobrado en órdenes cerradas de Fixbee (piso: Galaxy A04 a $69.000).
  */
 import { IPHONE_MODELS, lowestScreenPrice } from "@/app/(site)/reparaciones/iphone/iphoneModels";
+import { SAMSUNG_CHARGING_PORT_PRICES as SAMSUNG_PIN_CHARGED_BY_MODEL } from "@/lib/modelScreenPrices";
 
 // Fecha de la última verificación de la lista: los valores de agosto siguen
 // vigentes, confirmados por el negocio el 15/11/2026.
@@ -23,14 +24,23 @@ export const CHARGING_PORT_PRICE = { from: 35000, to: 150000 };
 /**
  * Cambio de pin de carga en Samsung por línea: rango intercuartil de órdenes
  * cerradas en Fixbee (nov 2025 a nov 2026, 45 cambios). El piso no baja de
- * CHARGING_PORT_PRICE.from para no contradecir el rango general.
+ * CHARGING_PORT_PRICE.from para no contradecir el rango general. El techo sube
+ * hasta cubrir el último precio cobrado de cada modelo de la línea
+ * (modelScreenPrices.ts): la página de servicio y la tabla por modelo de la
+ * guía de Samsung no pueden decir cosas distintas.
  */
 export const SAMSUNG_CHARGING_PORT_PRICES: (RepairPrice & { models: string })[] = [
   { name: "Galaxy A de entrada", models: "A03, A04, A05, A06, A10s", from: 35000, to: 55000 },
   { name: "Galaxy A11 a A26", models: "A13, A14, A15, A21s, A24, A25", from: 45000, to: 65000 },
   { name: "Galaxy A32 a A73", models: "A34, A35, A52, A54, A55, A70", from: 55000, to: 80000 },
   { name: "Galaxy S y Note", models: "S21, S22, S23, S24, Note 10", from: 85000, to: 110000 },
-];
+].map((line) => {
+  const models = line.models.split(", ");
+  const charged = SAMSUNG_PIN_CHARGED_BY_MODEL
+    .filter((row) => models.some((model) => row.model.replace("Galaxy ", "").startsWith(model)))
+    .map((row) => row.from);
+  return { ...line, to: Math.max(line.to, ...charged) };
+});
 
 /** Limpieza técnica del pin con microscopio, cuando no hace falta cambiarlo. */
 export const CHARGING_PORT_CLEANING_PRICE = { from: 25000, to: 45000 };

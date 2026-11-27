@@ -33,4 +33,4 @@ export const BUDGET_RESPONSE_MESSAGE =
   "Respondemos por WhatsApp en hasta 2 horas hábiles. Si el caso requiere revisión técnica, confirmamos diagnóstico inicial dentro de 24 horas hábiles.";
 
 export const SCREEN_BATTERY_TIMING_MESSAGE =
-  "Pantalla y batería suelen resolverse en 2 a 4 horas con repuesto en stock. Confirmamos el plazo según el diagnóstico.";
+  "La pantalla suele resolverse en 2 a 4 horas y la batería en 1 a 2 horas, con repuesto en stock. Confirmamos el plazo según el diagnóstico.";

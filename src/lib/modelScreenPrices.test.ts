@@ -1,17 +1,30 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { ALL_MODEL_PRICE_TABLES, formatPriceMonth } from "./modelScreenPrices.ts";
-import { BATTERY_PRICE_FLOOR, BRAND_REPAIR_PRICES } from "./repairPrices.ts";
+import { BATTERY_PRICE_FLOOR, BRAND_REPAIR_PRICES, SAMSUNG_CHARGING_PORT_PRICES as PIN_LINES } from "./repairPrices.ts";
 import { getBrandGuideConfig } from "@/app/(site)/guias/brandGuideConfigs";
 import {
   BRAND_CHARGED_PRICES,
   MOTOROLA_BATTERY_PRICES,
   MOTOROLA_SCREEN_PRICES,
   SAMSUNG_BATTERY_PRICES,
+  SAMSUNG_CHARGING_PORT_PRICES,
   SAMSUNG_SCREEN_PRICES,
   XIAOMI_BATTERY_PRICES,
   XIAOMI_SCREEN_PRICES,
 } from "./modelScreenPrices.ts";
+
+test("el rango de pin de carga por línea de Samsung contiene el precio cobrado de sus modelos", () => {
+  const lineOf = (model: string) =>
+    PIN_LINES.find((line) => line.models.split(", ").some((m) => model.replace("Galaxy ", "").startsWith(m)));
+  // La auditoría del 27/11/2026 encontró A03 a $59.000 y A05 a $79.000 fuera del rango "$35.000 a $55.000".
+  assert.equal(lineOf("Galaxy A05")?.to, 79000);
+  for (const row of SAMSUNG_CHARGING_PORT_PRICES) {
+    const line = lineOf(row.model);
+    if (!line) continue;
+    assert.ok(row.from >= line.from && row.from <= line.to, `${row.model} fuera de ${line.name}`);
+  }
+});
 
 test("los precios por modelo respetan la regla acordada: desde agosto de 2026 y con importe", () => {
   for (const table of ALL_MODEL_PRICE_TABLES) {

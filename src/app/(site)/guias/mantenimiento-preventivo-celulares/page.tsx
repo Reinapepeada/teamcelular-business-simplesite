@@ -541,32 +541,6 @@ export default function PreventiveMaintenanceGuide() {
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "HowTo",
-              "name": "Mantenimiento Preventivo de Celulares",
-              "description": "Guía completa de mantenimiento preventivo para smartphones con checklist profesional y consejos de expertos.",
-              "image": "https://teamcelular.com/opengraph-image.png",
-              "totalTime": "PT120M",
-              "supply": ["Smartphone", "Paño de microfibra", "Software de diagnóstico"],
-              "tool": ["Aire comprimido", "IPA 99%", "Microscopio (para servicio profesional)"],
-              "step": maintenanceTips.map((tip, index) => ({
-                "@type": "HowToStep",
-                "position": index + 1,
-                "name": tip.title,
-                "text": tip.detail,
-              })),
-              "author": {
-                "@type": "Organization",
-                "name": "Team Celular",
-              },
-            }),
-          }}
-        />
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
               "@type": "FAQPage",
               "mainEntity": faqMaintenance.map((faq) => ({
                 "@type": "Question",

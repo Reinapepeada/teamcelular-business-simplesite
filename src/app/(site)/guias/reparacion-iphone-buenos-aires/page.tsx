@@ -6,7 +6,7 @@ import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import GoogleReviewsAPI from "@/components/cards/GoogleReviewsAPI";
 import GuideInterlinkSection from "@/components/seo/GuideInterlinkSection";
 import { INSTALLMENTS_MESSAGE, IPHONE_PARTS_WARRANTY_MESSAGE } from "@/lib/copyStandards";
-import GuideByline from "@/components/seo/GuideByline";
+import GuideByline, { formatGuideDate } from "@/components/seo/GuideByline";
 import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import IphonePriceQuote from "@/components/repairs/IphonePriceQuote";
 import { formatArsPrice } from "@/lib/repairPrices";
@@ -44,6 +44,9 @@ const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
 const PAGE_PATH = "/guias/reparacion-iphone-buenos-aires";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
+
+// Una sola fecha para metadata, schema y las dos firmas visibles.
+const MODIFIED_TIME = "2026-11-27T00:00:00Z";
 
 export const metadata: Metadata = {
   title: "Reparación de iPhone en CABA | Precios por Modelo",
@@ -97,7 +100,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2024-01-15T00:00:00Z",
-    modifiedTime: "2026-11-27T00:00:00Z",
+    modifiedTime: MODIFIED_TIME,
     section: "Guías técnicas",
   },
   twitter: {
@@ -333,7 +336,7 @@ export default function IphoneRepairGuidePage() {
         title="Reparación de iPhone en CABA: precios por modelo"
         description="Precios de pantalla y batería por modelo, opciones de repuesto y consultas en Recoleta y Belgrano, con garantía escrita de 90 días en cambios de piezas."
         publishedTime="2024-01-15T00:00:00Z"
-        modifiedTime="2026-11-27T00:00:00Z"
+        modifiedTime={MODIFIED_TIME}
         about={[
           "reparacion de iPhone en Buenos Aires",
           "service tecnico Apple en CABA",
@@ -404,7 +407,7 @@ export default function IphoneRepairGuidePage() {
 
 
             <div className="mt-4">
-              <GuideByline modifiedTime="2026-11-27T00:00:00Z" tone="light" />
+              <GuideByline modifiedTime={MODIFIED_TIME} tone="light" />
             </div>
         </header>
 
@@ -508,7 +511,7 @@ export default function IphoneRepairGuidePage() {
 
         <BrandWorkshopNotes brand="iPhone" workshop={BRAND_WORKSHOPS.iphone} />
 
-        <AuthorByline updatedLabel="15 de octubre de 2026" className="mt-6" />
+        <AuthorByline updatedLabel={formatGuideDate(MODIFIED_TIME)} className="mt-6" />
 
         <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
           <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">

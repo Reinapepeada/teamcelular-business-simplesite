@@ -227,7 +227,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     metaDescriptionOverride:
       "Reparación de Honor Magic y X en Recoleta y Belgrano, CABA. Diagnóstico y plazo según la falla, con presupuesto.",
     titleOverride:
-      "Reparacion de Honor en Buenos Aires: alternativa presencial al canal oficial",
+      "Reparación de Honor en Buenos Aires: alternativa presencial al canal oficial",
     heroDescriptionOverride:
       `Team Celular repara Honor en CABA con atención presencial: somos un taller independiente de microelectrónica en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), sin turno previo, de lunes a viernes de 10:30 a 18:00. Revisamos pantalla, batería y módulo de carga de las líneas Magic y X; confirmamos disponibilidad del repuesto y plazo para tu modelo antes de que dejes el equipo. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles. La reparación de placa lleva semanas, con precio y plazo por escrito antes de empezar. Podés pagar en 3 cuotas sin interés. Si buscás cobertura de fábrica, consultá primero el canal de soporte de Honor.`,
     extraFaq: [
@@ -328,7 +328,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     slug: "reparacion-oppo-buenos-aires",
     seoTitleOverride: "Servicio técnico OPPO en CABA: Reno y A | Team Celular",
     modifiedTime: "2026-10-15T00:00:00Z",
-    titleOverride: "Reparacion de OPPO en Buenos Aires: Reno y serie A",
+    titleOverride: "Reparación de OPPO en Buenos Aires: Reno y serie A",
     metaDescriptionOverride:
       "OPPO Reno12, Reno11, A79 y A58: touch inestable, poca autonomía y puerto de carga gastado. Reparación en CABA.",
     heroDescriptionOverride:
@@ -368,7 +368,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     metaDescriptionOverride:
       "Reparación de Infinix Note, Hot y Zero en Recoleta y Belgrano. Plazo según falla y repuesto disponible.",
     titleOverride:
-      "Reparacion de Infinix en Buenos Aires: donde arreglarlo sin red oficial",
+      "Reparación de Infinix en Buenos Aires: dónde arreglarlo sin red oficial",
     heroDescriptionOverride:
       `Team Celular es un taller independiente de microelectrónica en Paraguay 2451 (Recoleta) y Amenábar 2032 (Belgrano), CABA. Revisamos pantalla, batería y pin de carga de las líneas Infinix Note, Hot y Zero, además de equipos mojados o que no encienden. La revisión técnica sin placa cuesta entre ARS 15.000 y 25.000. Si requiere revisión de placa, cuesta ${formatArsPrice(PLACA_REVISION_PRICE)}, con informe en hasta 72 horas hábiles: se cobra aunque no se repare y se descuenta del total si aceptás el arreglo. La reparación de placa lleva semanas, con precio y plazo por escrito antes de empezar. Para pantalla, batería y carga confirmamos modelo, repuesto y plazo antes de que dejes el equipo. Atendemos de lunes a viernes de 10:30 a 18:00, sin turno. Podés pagar en 3 cuotas sin interés.`,
     extraFaq: [
@@ -403,7 +403,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     slug: "reparacion-zte-buenos-aires",
     ...REVISED_DIAGNOSIS,
     seoTitleOverride: "Servicio técnico ZTE y Nubia en CABA | Team Celular",
-    titleOverride: "Reparacion de ZTE en Buenos Aires: audio, carga y reinicios",
+    titleOverride: "Reparación de ZTE en Buenos Aires: audio, carga y reinicios",
     metaDescriptionOverride:
       "Reparación de ZTE Blade, Nubia y Axon en CABA: audio, carga y reinicios. Plazo según la falla y repuesto.",
     heroDescriptionOverride:
@@ -440,7 +440,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     slug: "reparacion-tecno-buenos-aires",
     ...REVISED_DIAGNOSIS,
     seoTitleOverride: "Tecno: reparación y servicio técnico en CABA | Team Celular",
-    titleOverride: "Reparacion de Tecno en Buenos Aires: Camon, Pova y Spark",
+    titleOverride: "Reparación de Tecno en Buenos Aires: Camon, Pova y Spark",
     metaDescriptionOverride:
       "Tecno Camon, Pova, Spark y Phantom: pantalla con rayas, cámara sin nitidez y batería que cae. Reparación en CABA.",
     heroDescriptionOverride:
@@ -477,7 +477,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     slug: "reparacion-alcatel-buenos-aires",
     modifiedTime: "2026-10-15T00:00:00Z",
     seoTitleOverride: "Servicio técnico Alcatel en CABA | Team Celular",
-    titleOverride: "Reparacion de Alcatel en Buenos Aires: conviene arreglarlo?",
+    titleOverride: "Reparación de Alcatel en Buenos Aires: ¿conviene arreglarlo?",
     metaDescriptionOverride:
       "Reparación de Alcatel 1, 3, 5 y T en CABA. Revisión arancelada y presupuesto antes de reparar, con plazo según falla.",
     heroDescriptionOverride:
@@ -513,7 +513,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   {
     slug: "reparacion-asus-buenos-aires",
     modifiedTime: "2026-10-15T00:00:00Z",
-    titleOverride: "Reparacion de Asus ROG y Zenfone en Buenos Aires",
+    titleOverride: "Reparación de Asus ROG y Zenfone en Buenos Aires",
     metaDescriptionOverride:
       "Reparación de Asus ROG Phone y Zenfone en CABA: sobretemperatura, batería exigida y fallas por estrés térmico.",
     heroDescriptionOverride:
@@ -549,7 +549,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
   {
     slug: "reparacion-oneplus-buenos-aires",
     modifiedTime: "2026-10-15T00:00:00Z",
-    titleOverride: "Reparacion de OnePlus en Buenos Aires: pantalla, bateria y carga",
+    titleOverride: "Reparación de OnePlus en Buenos Aires: pantalla, batería y carga",
     metaDescriptionOverride:
       "OnePlus 12, 11, 10 Pro y Nord: pantalla, batería y fallas del puerto USB-C. Reparación en CABA.",
     heroDescriptionOverride:
@@ -586,7 +586,7 @@ const BRAND_GUIDE_SEEDS: BrandGuideSeed[] = [
     slug: "reparacion-huawei-buenos-aires",
     modifiedTime: "2026-10-15T00:00:00Z",
     seoTitleOverride: "Servicio técnico Huawei en CABA | Team Celular",
-    titleOverride: "Reparacion de Huawei en Buenos Aires: camara, sensores y placa",
+    titleOverride: "Reparación de Huawei en Buenos Aires: cámara, sensores y placa",
     metaDescriptionOverride:
       "Huawei P60, P50, Mate y Nova: cámara que no enfoca, sensores tras humedad o golpes y fallas de placa. Reparación en CABA.",
     heroDescriptionOverride:
@@ -714,8 +714,8 @@ function buildServiceJsonLd(seed: BrandGuideSeed, pagePath: string) {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${url}#service`,
-    name: `Reparacion de ${seed.brand} en CABA`,
-    serviceType: "Reparacion de celulares",
+    name: `Reparación de ${seed.brand} en CABA`,
+    serviceType: "Reparación de celulares",
     url,
     areaServed: [
       { "@type": "City", name: "CABA" },
@@ -777,8 +777,8 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
   const pagePath = `/guias/${seed.slug}`;
   const title =
     seed.titleOverride ??
-    `Reparacion de ${seed.brand} en Buenos Aires: fallas comunes, diagnostico y solucion`;
-  const pageLabel = `Reparacion ${seed.brand}`;
+    `Reparación de ${seed.brand} en Buenos Aires: fallas comunes, diagnóstico y solución`;
+  const pageLabel = `Reparación ${seed.brand}`;
   const modelList = seed.models.join(", ");
 
   const symptoms: GuideItem[] = [
@@ -838,7 +838,7 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     {
       question: `¿Dónde reparar un ${seed.brand} en CABA si no es service oficial?`,
       answer:
-        `Sí. Reparamos ${seed.brand} en nuestros talleres en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032), CABA. Confirmamos viabilidad según modelo y repuesto disponible antes de intervenir.`,
+        `Reparamos ${seed.brand} en nuestros talleres en Recoleta (Paraguay 2451) y Belgrano (Amenábar 2032), CABA. Confirmamos viabilidad según modelo y repuesto disponible antes de intervenir.`,
     },
     {
       question: "¿Cuánto tarda el diagnóstico?",
@@ -887,8 +887,8 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
     modifiedTime: "2026-11-25T00:00:00Z",
     imagePath: seed.imagePath,
     articleAbout: [
-      `Reparacion de ${seed.brand}`,
-      `Servicio tecnico ${seed.brand} en CABA`,
+      `Reparación de ${seed.brand}`,
+      `Servicio técnico ${seed.brand} en CABA`,
       ...seed.models,
     ],
     heroPoints: seed.heroPointsOverride ?? REVISED_DIAGNOSIS.heroPointsOverride,
@@ -924,14 +924,14 @@ function buildBrandGuide(seed: BrandGuideSeed): BrandGuideConfig {
         `reparacion ${seed.brand.toLowerCase()} buenos aires`,
         "service tecnico celulares caba",
       ],
-      openGraphTitle: `Reparacion de ${seed.brand} en Buenos Aires | Team Celular`,
+      openGraphTitle: `Reparación de ${seed.brand} en Buenos Aires | Team Celular`,
       openGraphDescription:
-        `Guia practica para reparar ${seed.brand} con diagnostico tecnico, tiempos estimados y siguiente paso recomendado.`,
+        `Guía práctica para reparar ${seed.brand} con diagnóstico técnico, tiempos estimados y siguiente paso recomendado.`,
       openGraphImagePath: seed.imagePath,
-      openGraphImageAlt: `Reparacion ${seed.brand} en Team Celular`,
+      openGraphImageAlt: `Reparación ${seed.brand} en Team Celular`,
       twitterTitle: `Service ${seed.brand} en CABA | Team Celular`,
       twitterDescription:
-        `Conoce sintomas, diagnostico y opciones para reparar ${seed.brand} sin gastar de mas.`,
+        `Conocé síntomas, diagnóstico y opciones para reparar ${seed.brand} sin gastar de más.`,
       languages: {
         "es-AR": pagePath,
       },

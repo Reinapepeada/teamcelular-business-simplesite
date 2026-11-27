@@ -25,7 +25,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
   path: PAGE_PATH,
   title: "Phone Repair Buenos Aires | Same-Day, English Spoken",
   description:
-    "iPhone and Android repair in Buenos Aires: screen and battery in 2–4 hours, no appointment. Recoleta and Belgrano, English spoken.",
+    "iPhone and Android repair in Buenos Aires: screens in 2–4 hours, batteries in 1–2, no appointment. Recoleta and Belgrano, English spoken.",
   keywords: [
     "phone repair buenos aires",
     "iphone repair buenos aires",
@@ -38,6 +38,7 @@ export const metadata: Metadata = buildWebsiteMetadata({
     "es-AR": "/",
     "x-default": "/",
   },
+  locale: "en_US",
   openGraphTitle: "Phone Repair in Buenos Aires | Team Celular",
   openGraphDescription:
     "Same-day screen and battery repair in Recoleta and Belgrano. English spoken.",
