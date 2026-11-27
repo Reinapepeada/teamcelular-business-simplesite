@@ -11,6 +11,8 @@ import TrackedCtaLink from "@/components/cro/TrackedCtaLink";
 import IphonePriceQuote from "@/components/repairs/IphonePriceQuote";
 import { formatArsPrice } from "@/lib/repairPrices";
 import { BRANCHES } from "@/lib/businessProfile";
+import BrandWorkshopNotes from "@/components/seo/BrandWorkshopNotes";
+import { BRAND_WORKSHOPS } from "@/lib/workshopStats";
 import {
   IPHONE_MODELS,
   IPHONE_MODELS_WITH_PAGE,
@@ -95,7 +97,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2024-01-15T00:00:00Z",
-    modifiedTime: "2026-11-25T00:00:00Z",
+    modifiedTime: "2026-11-27T00:00:00Z",
     section: "Guías técnicas",
   },
   twitter: {
@@ -331,7 +333,7 @@ export default function IphoneRepairGuidePage() {
         title="Reparación de iPhone en CABA: precios por modelo"
         description="Precios de pantalla y batería por modelo, opciones de repuesto y consultas en Recoleta y Belgrano, con garantía escrita de 90 días en cambios de piezas."
         publishedTime="2024-01-15T00:00:00Z"
-        modifiedTime="2026-11-25T00:00:00Z"
+        modifiedTime="2026-11-27T00:00:00Z"
         about={[
           "reparacion de iPhone en Buenos Aires",
           "service tecnico Apple en CABA",
@@ -402,7 +404,7 @@ export default function IphoneRepairGuidePage() {
 
 
             <div className="mt-4">
-              <GuideByline modifiedTime="2026-11-25T00:00:00Z" tone="light" />
+              <GuideByline modifiedTime="2026-11-27T00:00:00Z" tone="light" />
             </div>
         </header>
 
@@ -503,6 +505,8 @@ export default function IphoneRepairGuidePage() {
             </TrackedCtaLink>
           </div>
         </section>
+
+        <BrandWorkshopNotes brand="iPhone" workshop={BRAND_WORKSHOPS.iphone} />
 
         <AuthorByline updatedLabel="15 de octubre de 2026" className="mt-6" />
 

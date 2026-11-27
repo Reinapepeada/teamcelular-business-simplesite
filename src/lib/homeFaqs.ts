@@ -1,5 +1,6 @@
 import { BUDGET_RESPONSE_MESSAGE, REVIEW_COST_MESSAGE, SCREEN_BATTERY_TIMING_MESSAGE, WARRANTY_SCOPE_MESSAGE } from "@/lib/copyStandards";
 import { PLACA_REVISION_PRICE, formatArsPrice } from "@/lib/repairPrices";
+import { SAME_DAY_FAQ } from "@/lib/workshopStats";
 
 // Una sola fuente para el contenido visible de la home y la ficha para IA.
 export const HOME_FAQS = [
@@ -25,5 +26,6 @@ export const HOME_FAQS = [
         answer: `${REVIEW_COST_MESSAGE} La revisión de placa cuesta ${formatArsPrice(PLACA_REVISION_PRICE)} y se descuenta si se repara. Te informamos el costo antes de ingresar el equipo.`,
     },
     { question: "¿Cuánto tarda un cambio de pantalla o batería?", answer: SCREEN_BATTERY_TIMING_MESSAGE },
+    SAME_DAY_FAQ,
     { question: "¿Qué cubre la garantía?", answer: WARRANTY_SCOPE_MESSAGE },
 ];
