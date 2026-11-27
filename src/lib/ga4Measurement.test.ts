@@ -7,11 +7,18 @@ import { recordLeadInteraction } from "./analytics/leadInteractions";
 function boot(hostname: string) {
   const scripts: { src?: string }[] = [];
   const listeners: Record<string, (event: unknown) => void> = {};
-  const browser = { dataLayer: [] as Array<IArguments>, gtag: undefined };
+  const browser = {
+    dataLayer: [] as Array<IArguments>,
+    gtag: undefined as undefined | ((...args: unknown[]) => void),
+    // Sin requestIdleCallback el script usa setTimeout: acá corre en el acto.
+    setTimeout: (callback: () => void) => callback(),
+    addEventListener: (name: string, handler: (event: unknown) => void) => { listeners[`window:${name}`] = handler; },
+  };
   runInNewContext(GA4_INIT_SCRIPT, {
     window: browser,
     location: { hostname, pathname: "/guias/reparacion-iphone-buenos-aires" },
     document: {
+      readyState: "loading",
       createElement: () => ({}),
       head: { appendChild: (script: { src?: string }) => scripts.push(script) },
       addEventListener: (name: string, handler: (event: unknown) => void) => { listeners[name] = handler; },
@@ -29,17 +36,33 @@ test("GA4 no carga ni crea eventos en local, previews o dominios parecidos", () 
     assert.equal(result.browser.dataLayer.length, 0);
     assert.equal(result.browser.gtag, undefined);
     assert.equal(result.listeners.click, undefined);
+    assert.equal(result.listeners["window:load"], undefined);
   }
 });
 
-test("GA4 conserva carga y page view automático en ambos dominios públicos", () => {
+test("GA4 conserva page view automático y pide gtag.js recién con la página cargada", () => {
   for (const hostname of ["teamcelular.com", "www.teamcelular.com"]) {
     assert.equal(isGa4ProductionHost(hostname), true);
     const result = boot(hostname);
+    assert.equal(result.scripts.length, 0);
+    assert.deepEqual(Array.from(result.browser.dataLayer[1]), ["config", "G-1S64KMRF99"]);
+    result.listeners["window:load"]({});
     assert.equal(result.scripts.length, 1);
     assert.equal(result.scripts[0].src, "https://www.googletagmanager.com/gtag/js?id=G-1S64KMRF99");
-    assert.deepEqual(Array.from(result.browser.dataLayer[1]), ["config", "G-1S64KMRF99"]);
   }
+});
+
+test("un lead antes de la carga pide gtag.js en el acto y una sola vez; una vista no", () => {
+  const result = boot("teamcelular.com");
+  result.browser.gtag!("event", "cta_view", {});
+  result.browser.gtag!("event", "page_engagement", {});
+  assert.equal(result.scripts.length, 0);
+  result.browser.gtag!("event", "lead_form_submit", {});
+  assert.equal(result.scripts.length, 1);
+  result.browser.gtag!("event", "branch_whatsapp_redirect", {});
+  result.listeners["window:load"]({});
+  assert.equal(result.scripts.length, 1);
+  assert.equal(result.browser.dataLayer.length, 6);
 });
 
 test("los enlaces directos a WhatsApp identifican la sucursal por destino", () => {
