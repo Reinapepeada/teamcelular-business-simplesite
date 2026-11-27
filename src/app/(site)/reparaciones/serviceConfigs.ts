@@ -299,7 +299,7 @@ export const SERVICE_CONFIGS: Record<string, ServiceLandingConfig> = {
     slug: "cambio-pantalla-caba",
     h1: "Cambio de pantalla y módulo en CABA",
     metaTitle:
-      "Cambio de Pantalla y Módulo en CABA | Team Celular",
+      "Cambio de Módulo y Pantalla de Celular en CABA | Precios",
     metaDescription:
       `Cambio de pantalla en CABA: 2-4 h con módulo en stock, según diagnóstico. iPhone 13 ${IPHONE_13_SCREEN}, Galaxy A desde $69.000.`,
     socialTitle: "Cambio de Pantalla en CABA | Team Celular",
