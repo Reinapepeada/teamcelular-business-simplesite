@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import { getSiteUrl } from "@/lib/seoMetadata";
-import { TECHNICAL_AUTHOR } from "@/lib/businessProfile";
+import { TECHNICAL_AUTHOR, businessId } from "@/lib/businessProfile";
 import {
     FaAward,
     FaCertificate,
@@ -459,10 +459,12 @@ export default function SobreNosotrosPage() {
                             url: "https://teamcelular.com/sobrenosotros",
                             mainEntity: {
                                 "@type": "Organization",
+                                "@id": businessId("organization"),
                                 name: "Team Celular",
                                 foundingDate: "2009",
+                                // Venezuela y Panamá son historia de la empresa: hoy opera solo en Argentina.
                                 description:
-                                    "Empresa familiar especializada en reparación de celulares y microelectrónica con presencia en Venezuela, Panamá y Argentina",
+                                    "Empresa familiar especializada en reparación de celulares y microelectrónica, con dos talleres en CABA, Argentina",
                                 location: [
                                     {
                                         "@type": "Place",
@@ -487,11 +489,7 @@ export default function SobreNosotrosPage() {
                                         },
                                     },
                                 ],
-                                areaServed: [
-                                    { "@type": "Country", name: "Venezuela" },
-                                    { "@type": "Country", name: "Panamá" },
-                                    { "@type": "Country", name: "Argentina" },
-                                ],
+                                areaServed: [{ "@type": "Country", name: "Argentina" }],
                             },
                         }),
                     }}
