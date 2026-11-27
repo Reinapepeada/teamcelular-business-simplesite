@@ -14,6 +14,7 @@ import {
   type CatalogSearchParams,
 } from "@/lib/catalog";
 import { buildWebsiteMetadata, getSiteUrl } from "@/lib/seoMetadata";
+import { STORE_SHIPPING_MESSAGE } from "@/lib/storeShipping";
 
 const SITE_URL = getSiteUrl();
 const PAGE_URL = `${SITE_URL}/tienda`;
@@ -27,9 +28,8 @@ const storeFaqs = [
       "Nos escribis por WhatsApp con marca, modelo y producto que te interesa. Confirmamos compatibilidad antes de pagar para evitar compras equivocadas.",
   },
   {
-    question: "Hacen envios o solo retiro en sucursal?",
-    answer:
-      "Retiro en el local o envío a domicilio. Las opciones disponibles se confirman durante la compra según tu dirección.",
+    question: "¿Hacen envíos o solo retiro en sucursal?",
+    answer: `Retiro en el local o envío a domicilio. ${STORE_SHIPPING_MESSAGE}`,
   },
   {
     question: "Que pasa si no encuentro el repuesto exacto?",

@@ -4,6 +4,7 @@ import { buildProductSlug } from "./productSlug";
 import { absoluteUrl, businessId, getBranch } from "./businessProfile";
 import { condicionSchema, etiquetaCondicion } from "./fixbeeCatalog";
 import { getSiteUrl, toAbsoluteUrl } from "./seoMetadata";
+import { STORE_SHIPPING } from "./storeShipping";
 
 export function buildProductSchema(product: Product, images: string[] = [], siteUrl = getSiteUrl()) {
   const pickup = getBranch("recoleta");
@@ -37,6 +38,18 @@ export function buildProductSchema(product: Product, images: string[] = [], site
       seller: { "@id": businessId("organization") },
       itemCondition: etiquetaCondicion(product.storeCondition) ? condicionSchema(product.storeCondition) : undefined,
       availableAtOrFrom: { "@id": `${absoluteUrl(pickup.url)}#localbusiness` },
+      // Tope y plazo estimados por el negocio (storeShipping.ts). El reparto entre
+      // preparación y tránsito es una aproximación que suma el plazo informado.
+      shippingDetails: product.shipping_enabled === false ? undefined : {
+        "@type": "OfferShippingDetails",
+        shippingRate: { "@type": "MonetaryAmount", currency: "ARS", maxValue: STORE_SHIPPING.max },
+        shippingDestination: { "@type": "DefinedRegion", addressCountry: "AR" },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          handlingTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: 1, unitCode: "DAY" },
+          transitTime: { "@type": "QuantitativeValue", minValue: 1, maxValue: STORE_SHIPPING.days - 1, unitCode: "DAY" },
+        },
+      },
       hasMerchantReturnPolicy: {
         "@type": "MerchantReturnPolicy",
         applicableCountry: "AR",
