@@ -55,6 +55,16 @@ test("la ficha muestra los mismos datos del fabricante y garantía que el schema
   assert.equal(schema.offers.hasMerchantReturnPolicy.merchantReturnLink, "https://teamcelular.com/devoluciones");
 });
 
+test("el schema declara el envío con tope y plazo, y lo omite en productos de solo retiro", () => {
+  const shipping = buildProductSchema(product).offers.shippingDetails;
+  assert.equal(shipping?.shippingRate.maxValue, 20000);
+  assert.equal(shipping?.shippingRate.currency, "ARS");
+  assert.equal(shipping?.shippingDestination.addressCountry, "AR");
+  // Preparación más tránsito no superan el plazo que informa el negocio.
+  assert.equal(shipping!.deliveryTime.handlingTime.maxValue + shipping!.deliveryTime.transitTime.maxValue, 5);
+  assert.equal(buildProductSchema({ ...product, shipping_enabled: false }).offers.shippingDetails, undefined);
+});
+
 test("el schema omite identificadores y condición desconocidos; no transforma modelo en MPN", () => {
   const missing = { ...product, model: null, gtin: null, brand: null, storeCondition: "unknown", warranty_time: null, variants: [] };
   const schema = JSON.parse(serializeJsonLd(buildProductSchema(missing)));

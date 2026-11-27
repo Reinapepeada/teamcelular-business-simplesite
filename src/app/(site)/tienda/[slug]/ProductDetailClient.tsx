@@ -29,6 +29,7 @@ import TrackView from '@/components/analytics/TrackView';
 import ProductCondition from '@/components/store/ProductCondition';
 import { buildProductFacts } from '@/lib/productSeo';
 import { BUSINESS_PROFILE } from '@/lib/businessProfile';
+import { STORE_SHIPPING_MESSAGE, STORE_SHIPPING_SUMMARY } from '@/lib/storeShipping';
 import {
     hayParaComprar,
     sePuedeRestar,
@@ -447,8 +448,8 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                         <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
                             <Truck className="w-6 h-6 text-primary dark:text-secondary" />
                                 <div>
-                                    <p className="text-sm font-medium">Envío</p>
-                                    <p className="text-xs text-muted-foreground">Costo al confirmar la compra</p>
+                                    <p className="text-sm font-medium">{product.shipping_enabled === false ? "Retiro en el local" : "Envío a todo el país"}</p>
+                                    <p className="text-xs text-muted-foreground">{product.shipping_enabled === false ? "Este producto no tiene envío" : STORE_SHIPPING_SUMMARY}</p>
                                 </div>
                         </div>
                         <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
@@ -495,7 +496,7 @@ export default function ProductDetailClient({ productProp, storeSlugProp }: Prop
                     ¿Tenés dudas sobre compatibilidad? <a href={BUSINESS_PROFILE.whatsapp} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">Consultanos por WhatsApp</a> con el modelo de tu equipo.
                 </p>
                 <p className="mt-2 text-sm text-muted-foreground">
-                    {product.shipping_enabled === false ? "Solo retiro en el local" : "Retiro en el local o envío a domicilio. Las opciones disponibles se confirman al comprar."}
+                    {product.shipping_enabled === false ? "Solo retiro en el local" : `Retiro en el local o envío a domicilio. ${STORE_SHIPPING_MESSAGE}`}
                 </p>
             </section>
 
