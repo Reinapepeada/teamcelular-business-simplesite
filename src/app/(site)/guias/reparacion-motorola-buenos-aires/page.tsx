@@ -22,6 +22,8 @@ import GuideByline from "@/components/seo/GuideByline";
 import { BRAND_REPAIR_PRICES, buildPriceOffers, priceRangeOf } from "@/lib/repairPrices";
 import ModelScreenPriceTable from "@/components/seo/ModelScreenPriceTable";
 import { MOTOROLA_BATTERY_PRICES, MOTOROLA_SCREEN_PRICES } from "@/lib/modelScreenPrices";
+import BrandWorkshopNotes from "@/components/seo/BrandWorkshopNotes";
+import { BRAND_WORKSHOPS } from "@/lib/workshopStats";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL?.trim() || "https://teamcelular.com";
@@ -80,7 +82,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2026-05-08T00:00:00Z",
-    modifiedTime: "2026-11-25T00:00:00Z",
+    modifiedTime: "2026-11-27T00:00:00Z",
     section: "Guías Técnicas",
   },
   twitter: {
@@ -318,7 +320,7 @@ export default function MotorolaRepairGuidePage() {
         title="Reparación de Motorola en Buenos Aires | Servicio Técnico Team Celular"
         description="Guía completa para reparar Motorola en CABA con diagnóstico profesional, repuestos de calidad."
         publishedTime="2026-05-08T00:00:00Z"
-        modifiedTime="2026-11-25T00:00:00Z"
+        modifiedTime="2026-11-27T00:00:00Z"
         about={[
           "reparacion de Motorola en Buenos Aires",
           "service tecnico Motorola en CABA",
@@ -383,7 +385,7 @@ export default function MotorolaRepairGuidePage() {
           <p className="text-sm leading-6 text-[#a1a1a6]">Revisión de placa: informe en hasta 72 horas hábiles. El arreglo lleva semanas; confirmamos precio y plazo por escrito.</p>
 
             <div className="mt-4">
-              <GuideByline modifiedTime="2026-11-25T00:00:00Z" tone="light" />
+              <GuideByline modifiedTime="2026-11-27T00:00:00Z" tone="light" />
             </div>
         </header>
 
@@ -439,6 +441,8 @@ export default function MotorolaRepairGuidePage() {
           service="batería"
           prices={MOTOROLA_BATTERY_PRICES}
         />
+
+        <BrandWorkshopNotes brand="Motorola" workshop={BRAND_WORKSHOPS.motorola} />
 
         <section className="grid gap-5 lg:grid-cols-[0.9fr_1.4fr]">
           <div className="rounded-3xl border border-primary/20 bg-primary/10 p-7 dark:border-primary/30 dark:bg-primary/15">

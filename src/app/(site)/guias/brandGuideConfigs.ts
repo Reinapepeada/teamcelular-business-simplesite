@@ -10,6 +10,7 @@ import { PLACA_REVISION_PRICE, formatArsPrice } from "@/lib/repairPrices";
 import { INSTALLMENTS_MESSAGE, MULTIBRAND_WARRANTY_MESSAGE, SCREEN_BATTERY_TIMING_MESSAGE } from "@/lib/copyStandards";
 import { BRAND_CHARGED_PRICES } from "@/lib/modelScreenPrices";
 import type { BrandWorkshop } from "@/components/seo/BrandWorkshopNotes";
+import { WORKSHOP_PERIOD } from "@/lib/workshopStats";
 
 const SITE_URL = getSiteUrl();
 
@@ -18,7 +19,6 @@ const TCL_SCREEN_FROM = formatArsPrice(Math.min(...TCL_SCREENS));
 const TCL_SCREEN_TO = formatArsPrice(Math.max(...TCL_SCREENS));
 
 // Bloque "Desde el taller": cifras de órdenes de celulares en Fixbee y datos que dio el negocio el 25/11/2026.
-const WORKSHOP_PERIOD = "en los 12 meses previos al 25 de noviembre de 2026";
 const WORKSHOP_TEAM = "Nuestro equipo de técnicos, liderado por Alejandro Biarrieta,";
 // Reballing del procesador en POCO X3 Pro: precio informado por el negocio.
 const POCO_X3_PRO_REBALLING_PRICE = 398000;

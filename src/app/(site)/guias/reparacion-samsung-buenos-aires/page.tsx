@@ -24,6 +24,8 @@ import RepairBrandLinks from "@/components/repairs/RepairBrandLinks";
 import ScreenQuoteDetails from "@/components/repairs/ScreenQuoteDetails";
 import ModelScreenPriceTable from "@/components/seo/ModelScreenPriceTable";
 import { SAMSUNG_BATTERY_PRICES, SAMSUNG_CHARGING_PORT_PRICES, SAMSUNG_SCREEN_PRICES } from "@/lib/modelScreenPrices";
+import BrandWorkshopNotes from "@/components/seo/BrandWorkshopNotes";
+import { BRAND_WORKSHOPS } from "@/lib/workshopStats";
 import { BRAND_REPAIR_PRICES, CHARGING_PORT_PRICE, PLACA_REVISION_PRICE, PRICES_UPDATED_LABEL, buildPriceOffers, formatArsPrice, priceRangeOf } from "@/lib/repairPrices";
 
 const SITE_URL =
@@ -87,7 +89,7 @@ export const metadata: Metadata = {
       },
     ],
     publishedTime: "2026-03-12T00:00:00Z",
-    modifiedTime: "2026-11-25T00:00:00Z",
+    modifiedTime: "2026-11-27T00:00:00Z",
     section: "Guías técnicas",
   },
   twitter: {
@@ -319,7 +321,7 @@ export default function SamsungRepairGuidePage() {
         title="Reparación de Samsung en CABA: precios y opciones"
         description="Precios, tiempos y fallas comunes de Samsung Galaxy. Informe de revisión de placa en hasta 72 horas hábiles en CABA."
         publishedTime="2026-03-12T00:00:00Z"
-        modifiedTime="2026-11-25T00:00:00Z"
+        modifiedTime="2026-11-27T00:00:00Z"
         about={[
           "reparacion de Samsung en Buenos Aires",
           "service tecnico Samsung Galaxy en CABA",
@@ -365,7 +367,7 @@ export default function SamsungRepairGuidePage() {
               Pantalla Galaxy A / M desde {formatArsPrice(SCREEN_A.from)} y S / Ultra desde {formatArsPrice(SCREEN_S.from)}. Revisamos tu Galaxy en Recoleta o Belgrano y te confirmamos repuesto, precio y plazo antes de reparar.
             </p>
             <div className="mt-4">
-              <GuideByline modifiedTime="2026-11-25T00:00:00Z" tone="light" />
+              <GuideByline modifiedTime="2026-11-27T00:00:00Z" tone="light" />
             </div>
           </div>
 
@@ -493,6 +495,8 @@ export default function SamsungRepairGuidePage() {
           service="pin de carga"
           prices={SAMSUNG_CHARGING_PORT_PRICES}
         />
+
+        <BrandWorkshopNotes brand="Samsung" workshop={BRAND_WORKSHOPS.samsung} />
 
         <AuthorByline updatedLabel="23 de octubre de 2026" className="mt-6" />
 
