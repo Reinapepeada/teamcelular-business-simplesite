@@ -59,6 +59,13 @@ const SCREEN_PRICE_GROUPS = [
   },
 ];
 const SCREEN_FROM = formatArsPrice(Math.min(...SCREEN_PRICE_GROUPS.flatMap((group) => group.prices.map((price) => price.from))));
+// Respuesta con rangos para que un buscador o una IA la cite completa.
+// La primera fila de cada marca es la pantalla de su línea de mayor volumen.
+const screenRange = (brand: string) => {
+  const { from, to } = BRAND_REPAIR_PRICES[brand][0];
+  return `de ${formatArsPrice(from)} a ${formatArsPrice(to)}`;
+};
+const SCREEN_ANSWER = `En Team Celular (Recoleta y Belgrano, CABA), cambiar la pantalla de un celular cuesta ${screenRange("samsung")} en Samsung Galaxy A y M, ${screenRange("motorola")} en Motorola Moto E y G, y ${screenRange("xiaomi")} en Xiaomi Redmi, Note y POCO.`;
 
 export const metadata: Metadata = {
   title: "Cambio de Pantalla de Celular: Precios por Marca en CABA",
@@ -203,7 +210,7 @@ const replacementProcess = [
 const quickAnswers = [
   {
     question: "¿Cuánto cuesta cambiar la pantalla de un celular?",
-    answer: `Los precios publicados empiezan en ${SCREEN_FROM}. El importe depende de la marca, el modelo y el repuesto disponible. La tabla de esta guía muestra rangos por familia; por WhatsApp te confirmamos el precio para tu equipo, el stock y el plazo antes de avanzar.`,
+    answer: `${SCREEN_ANSWER} El importe depende del modelo y del repuesto disponible. La tabla de esta guía muestra rangos por familia; por WhatsApp te confirmamos el precio para tu equipo, el stock y el plazo antes de avanzar.`,
   },
   {
     question: "¿Se puede cambiar la pantalla de un celular?",
@@ -266,7 +273,7 @@ export default function ScreenReplacementGuide() {
         title="Cambio de pantalla de celular: precios por marca en CABA"
         description={`Precios de cambio de pantalla desde ${SCREEN_FROM}, según modelo y repuesto. Consulta por WhatsApp en Recoleta y Belgrano.`}
         publishedTime="2024-11-30T00:00:00Z"
-        modifiedTime="2026-11-25T00:00:00Z"
+        modifiedTime="2026-11-27T00:00:00Z"
         image="https://teamcelular.com/opengraph-image.png"
         url="https://teamcelular.com/guias/reparacion-pantalla-celular"
       />
@@ -299,7 +306,7 @@ export default function ScreenReplacementGuide() {
             Cambio de pantalla de celular: precios y opciones para tu modelo
           </h1>
           <p className="max-w-3xl text-lg leading-8 text-[#a1a1a6]">
-            Los cambios de pantalla publicados empiezan en <strong className="text-white">{SCREEN_FROM}</strong>.
+            {SCREEN_ANSWER}{" "}
             El precio depende del modelo y del repuesto; no todas las pantallas cuestan lo mismo.
             Te confirmamos el valor, las funciones del repuesto y el stock antes de reparar.
             Con repuesto disponible, el cambio suele llevar de 2 a 4 horas.
@@ -309,7 +316,7 @@ export default function ScreenReplacementGuide() {
           </p>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
             <Link href="#precios-pantalla" className="inline-flex min-h-11 items-center font-semibold text-[#6aa6ff] underline underline-offset-4">Ver precios por marca y modelo</Link>
-            <GuideByline modifiedTime="2026-11-25T00:00:00Z" tone="light" />
+            <GuideByline modifiedTime="2026-11-27T00:00:00Z" tone="light" />
           </div>
           <RepairPriceInquiry
             repair="cambiar la pantalla de mi celular"
